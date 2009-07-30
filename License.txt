@@ -1,6 +1,8 @@
 http://www.gnu.org/licenses/gpl-3.0.txt
 
-The contents below are just a temporary copy of the license, if there is an inconsistency with the license linked above, then the contents of the linked version overrule what is stated below this line.
+The contents below are just a temporary copy of the license, 
+if there is an inconsistency with the license linked above, 
+then the contents of the linked version overrule this file.
 
                     GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
