@@ -1,0 +1,84 @@
+################
+### LAGLAMIA ###
+################
+
+#### Mobs ####
+[Spawn 1]
+ID = 1
+CenterX = 7100
+CenterY = 4450
+Radius = 400
+RespawnTime = 10	#seconds - Mutant researched this and it turns out all mobs in laglamia have this spawn time. 3:20 = 10 seconds
+Type = 24
+
+[Spawn 2]
+ID = 2
+CenterX = 7050
+CenterY = 4427
+Radius = 400
+RespawnTime = 10	#seconds
+Type = 24
+
+[Spawn 3]
+ID = 3
+CenterX = 7070
+CenterY = 4407
+Radius = 400
+RespawnTime = 10	#seconds
+Type = 24
+
+[Spawn 4]
+ID = 4
+CenterX = 7060
+CenterY = 4417
+Radius = 400
+RespawnTime = 10	#seconds
+Type = 24
+
+[Spawn 5]
+ID = 5
+CenterX = 7030
+CenterY = 4457
+Radius = 400
+RespawnTime = 10	#seconds
+Type = 24
+
+[Spawn 6]
+ID = 6
+CenterX = 7030
+CenterY = 4457
+Radius = 400
+RespawnTime = 10	#seconds
+Type = 24
+
+[Spawn 7]
+ID = 7
+CenterX = 7120
+CenterY = 4457
+Radius = 400
+RespawnTime = 10	#seconds
+Type = 24
+
+[Spawn 8]
+ID = 8
+CenterX = 7140
+CenterY = 4457
+Radius = 400
+RespawnTime = 10	#seconds
+Type = 24
+
+[Spawn 9]
+ID = 9
+CenterX = 7160
+CenterY = 4457
+Radius = 400
+RespawnTime = 10	#seconds
+Type = 24
+
+[Spawn 10]
+ID = 10
+CenterX = 7180
+CenterY = 4457
+Radius = 400
+RespawnTime = 10	#seconds
+Type = 24

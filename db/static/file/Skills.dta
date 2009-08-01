@@ -1,0 +1,1105 @@
+[Basic Attacks]
+ID = 0
+Level = 1
+MaxLevel = 25
+MinConsumn = -1
+MaxConsumn = -1
+MinFirstRange = -1
+MaxFirstRange = -1
+MinSecondRange = -1
+MaxSecondRange = -1
+StatusUsed = -1
+Type = 0
+
+[Sword Master]
+ID = 1
+Level = 5
+MaxLevel = 25
+MinConsumn = -1
+MaxConsumn = -1
+MinFirstRange = 10
+MaxFirstRange = 200
+MinSecondRange = 0
+MaxSecondRange = 0
+StatusUsed = -1
+Type = 0
+
+[Axe Master]
+ID = 2
+Level = 5
+MaxLevel = 25
+MinConsumn = -1
+MaxConsumn = -1
+MinFirstRange = 10
+MaxFirstRange = 200
+MinSecondRange = 0
+MaxSecondRange = 0
+StatusUsed = -1
+Type = 0
+
+[Fireball]
+ID = 3
+Level = 1
+MaxLevel = 25
+MinConsumn = 5
+MaxConsumn = 25
+MinFirstRange = 15
+MaxFirstRange = 95
+MinSecondRange = 145
+MaxSecondRange = 170
+StatusUsed = 1
+Type = 2
+
+[Lightning Ball]
+ID = 4
+Level = 1
+MaxLevel = 25
+MinConsumn = 3
+MaxConsumn = 15
+MinFirstRange = 15
+MaxFirstRange = 95
+MinSecondRange = 145
+MaxSecondRange = 170
+StatusUsed = 1
+Type = 2
+
+[Lightning]
+ID = 5
+Level = 38
+MaxLevel = 25
+MinConsumn = 10
+MaxConsumn = 30
+MinFirstRange = 6
+MaxFirstRange = 150
+MinSecondRange = 145
+MaxSecondRange = 170
+StatusUsed = 1
+Type = 2
+
+[Recovery]
+ID = 6
+Level = 5
+MaxLevel = 25
+MinConsumn = 10
+MaxConsumn = 30
+MinFirstRange = 40
+MaxFirstRange = 100
+MinSecondRange = 0
+MaxSecondRange = 0
+StatusUsed = 1
+Type = 1
+
+[Mana Shield]
+ID = 7
+Level = 15
+MaxLevel = 25
+MinConsumn = 10
+MaxConsumn = 60
+MinFirstRange = 1
+MaxFirstRange = 20
+MinSecondRange = 10
+MaxSecondRange = 70
+StatusUsed = 1
+Type = 1
+
+[Fire Mastery]
+ID = 8
+Level = 25
+MaxLevel = 25
+MinConsumn = -1
+MaxConsumn = -1
+MinFirstRange = 10
+MaxFirstRange = 200
+MinSecondRange = 0
+MaxSecondRange = 0
+StatusUsed = -1
+Type = 0
+
+[Glow of Peace]
+ID = 9
+Level = 25
+MaxLevel = 25
+MinConsumn = 10
+MaxConsumn = 20
+MinFirstRange = 10
+MaxFirstRange = 100
+MinSecondRange = 0
+MaxSecondRange = 0
+StatusUsed = 1
+Type = 1
+
+[Fire Pillar]
+ID = 10
+Level = 38
+MaxLevel = 25
+MinConsumn = 22
+MaxConsumn = 66
+MinFirstRange = 6
+MaxFirstRange = 150
+MinSecondRange = 145
+MaxSecondRange = 170
+StatusUsed = 1
+Type = 2
+
+[Stone Mastery]
+ID = 11
+Level = 25
+MaxLevel = 25
+MinConsumn = -1
+MaxConsumn = -1
+MinFirstRange = 10
+MaxFirstRange = 200
+MinSecondRange = 0
+MaxSecondRange = 0
+StatusUsed = -1
+Type = 0
+
+[Pebble Shot]
+ID = 12
+Level = 1
+MaxLevel = 25
+MinConsumn = 3
+MaxConsumn = 15
+MinFirstRange = 15
+MaxFirstRange = 90
+MinSecondRange = 145
+MaxSecondRange = 170
+StatusUsed = 1
+Type = 2
+
+[Hail]
+ID = 13
+Level = 38
+MaxLevel = 25
+MinConsumn = 10
+MaxConsumn = 30
+MinFirstRange = 6
+MaxFirstRange = 145
+MinSecondRange = 145
+MaxSecondRange = 170
+StatusUsed = 1
+Type = 2
+
+[Lightning Mastery]
+ID = 14
+Level = 25
+MaxLevel = 25
+MinConsumn = -1
+MaxConsumn = -1
+MinFirstRange = 10
+MaxFirstRange = 200
+MinSecondRange = 0
+MaxSecondRange = 0
+StatusUsed = -1
+Type = 0
+
+[Return to Village]
+ID = 15
+Level = 35
+MaxLevel = 5
+MinConsumn = 10
+MaxConsumn = 10
+MinFirstRange = 20
+MaxFirstRange = 100
+MinSecondRange = 0
+MaxSecondRange = 0
+StatusUsed = 1
+Type = 1
+
+[Power-up Stamina]
+ID = 16
+Level = 10
+MaxLevel = 25
+MinConsumn = 10
+MaxConsumn = 20
+MinFirstRange = 10
+MaxFirstRange = 40
+MinSecondRange = 0
+MaxSecondRange = 0
+StatusUsed = 1
+Type = 1
+
+[Iron Skin]
+ID = 17
+Level = 80
+MaxLevel = 10
+MinConsumn = 10
+MaxConsumn = 20
+MinFirstRange = 1
+MaxFirstRange = 20
+MinSecondRange = 0
+MaxSecondRange = 0
+StatusUsed = 2
+Type = 1
+
+[Overhead Blow]
+ID = 18
+Level = 45
+MaxLevel = 25
+MinConsumn = 10
+MaxConsumn = 40
+MinFirstRange = 10
+MaxFirstRange = 200
+MinSecondRange = 140
+MaxSecondRange = 170
+StatusUsed = 2
+Type = 2
+
+[Recovery Boost]
+ID = 19
+Level = 25
+MaxLevel = 5
+MinConsumn = -1
+MaxConsumn = -1
+MinFirstRange = 5
+MaxFirstRange = 25
+MinSecondRange = 0
+MaxSecondRange = 0
+StatusUsed = -1
+Type = 0
+
+[Marksmanship]
+ID = 20
+Level = 5
+MaxLevel = 25
+MinConsumn = -1
+MaxConsumn = -1
+MinFirstRange = 10
+MaxFirstRange = 200
+MinSecondRange = 0
+MaxSecondRange = 0
+StatusUsed = -1
+Type = 0
+
+[Gem Cutting Skill]
+ID = 21
+Level = 21
+MaxLevel = 25
+MinConsumn = -1
+MaxConsumn = -1
+MinFirstRange = 5
+MaxFirstRange = 95
+MinSecondRange = 0
+MaxSecondRange = 0
+StatusUsed = -1
+Type = 0
+
+[Teleport]
+ID = 22
+Level = 55
+MaxLevel = 10
+MinConsumn = 50
+MaxConsumn = 100
+MinFirstRange = 50
+MaxFirstRange = 200
+MinSecondRange = 0
+MaxSecondRange = 0
+StatusUsed = 1
+Type = 1
+
+[Party Summon Skill]
+ID = 23
+Level = 40
+MaxLevel = 25
+MinConsumn = 10
+MaxConsumn = 20
+MinFirstRange = 3
+MaxFirstRange = 100
+MinSecondRange = 0
+MaxSecondRange = 0
+StatusUsed = 1
+Type = 1
+
+[Bug Summon Skill]
+ID = 24
+Level = 1
+MaxLevel = 25
+MinConsumn = -1
+MaxConsumn = -1
+MinFirstRange = 10
+MaxFirstRange = 100
+MinSecondRange = 0
+MaxSecondRange = 0
+StatusUsed = -1
+Type = 0
+
+[Healing]
+ID = 25
+Level = 1
+MaxLevel = 25
+MinConsumn = 10
+MaxConsumn = 20
+MinFirstRange = 10
+MaxFirstRange = 40
+MinSecondRange = 100
+MaxSecondRange = 120
+StatusUsed = 1
+Type = 1
+
+[Star Flare]
+ID = 26
+Level = 50
+MaxLevel = 25
+MinConsumn = 56
+MaxConsumn = 121
+MinFirstRange = 6
+MaxFirstRange = 160
+MinSecondRange = 145
+MaxSecondRange = 170
+StatusUsed = 1
+Type = 2
+
+[Shock Sphere]
+ID = 27
+Level = 50
+MaxLevel = 25
+MinConsumn = 21
+MaxConsumn = 45
+MinFirstRange = 6
+MaxFirstRange = 160
+MinSecondRange = 145
+MaxSecondRange = 170
+StatusUsed = 1
+Type = 2
+
+[Stone Lance]
+ID = 28
+Level = 50
+MaxLevel = 25
+MinConsumn = 21
+MaxConsumn = 45
+MinFirstRange = 6
+MaxFirstRange = 155
+MinSecondRange = 145
+MaxSecondRange = 170
+StatusUsed = 1
+Type = 2
+
+[Semi-automatic skill]
+ID = 29
+Level = 50
+MaxLevel = 25
+MinConsumn = -1
+MaxConsumn = -1
+MinFirstRange = 100
+MaxFirstRange = 100
+MinSecondRange = 5
+MaxSecondRange = 100
+StatusUsed = -1
+Type = 0
+
+[Electric Shield]
+ID = 30
+Level = 15
+MaxLevel = 25
+MinConsumn = 10
+MaxConsumn = 60
+MinFirstRange = 1
+MaxFirstRange = 30
+MinSecondRange = 5
+MaxSecondRange = 50
+StatusUsed = 3
+Type = 1
+
+[Whirlwind Slash]
+ID = 31
+Level = 45
+MaxLevel = 25
+MinConsumn = 7
+MaxConsumn = 30
+MinFirstRange = 10
+MaxFirstRange = 200
+MinSecondRange = 140
+MaxSecondRange = 170
+StatusUsed = 2
+Type = 2
+
+[Safety Shield]
+ID = 32
+Level = 15
+MaxLevel = 25
+MinConsumn = 10
+MaxConsumn = 60
+MinFirstRange = 1
+MaxFirstRange = 20
+MinSecondRange = 10
+MaxSecondRange = 70
+StatusUsed = 1
+Type = 1
+
+[Beast Summon Skill]
+ID = 33
+Level = 45
+MaxLevel = 25
+MinConsumn = -1
+MaxConsumn = -1
+MinFirstRange = 10
+MaxFirstRange = 100
+MinSecondRange = 0
+MaxSecondRange = 0
+StatusUsed = -1
+Type = 0
+
+[Phenomenon]
+ID = 34
+Level = 80
+MaxLevel = 25
+MinConsumn = -1
+MaxConsumn = -1
+MinFirstRange = 10
+MaxFirstRange = 100
+MinSecondRange = 0
+MaxSecondRange = 0
+StatusUsed = -1
+Type = 0
+
+[Sniper Skill]
+ID = 35
+Level = 70
+MaxLevel = 5
+MinConsumn = -1
+MaxConsumn = -1
+MinFirstRange = 12
+MaxFirstRange = 20
+MinSecondRange = 20
+MaxSecondRange = 90
+StatusUsed = -1
+Type = 0
+
+[Stealth Skill]
+ID = 36
+Level = 80
+MaxLevel = 5
+MinConsumn = 30
+MaxConsumn = 40
+MinFirstRange = 30
+MaxFirstRange = 40
+MinSecondRange = 20
+MaxSecondRange = 100
+StatusUsed = 3
+Type = 1
+
+[Body of Steel]
+ID = 37
+Level = 120
+MaxLevel = 5
+MinConsumn = 100
+MaxConsumn = 100
+MinFirstRange = 15
+MaxFirstRange = 15
+MinSecondRange = 15
+MaxSecondRange = 75
+StatusUsed = 2
+Type = 1
+
+[Exploding Rage]
+ID = 38
+Level = 140
+MaxLevel = 10
+MinConsumn = 100
+MaxConsumn = 100
+MinFirstRange = 3
+MaxFirstRange = 16
+MinSecondRange = 6
+MaxSecondRange = 60
+StatusUsed = 2
+Type = 1
+
+[Eye of Insight]
+ID = 39
+Level = 170
+MaxLevel = 10
+MinConsumn = -1
+MaxConsumn = -1
+MinFirstRange = 4
+MaxFirstRange = 13
+MinSecondRange = 4
+MaxSecondRange = 40
+StatusUsed = -1
+Type = 0
+
+[Second Attack]
+ID = 40
+Level = 150
+MaxLevel = 25
+MinConsumn = 30
+MaxConsumn = 30
+MinFirstRange = 20
+MaxFirstRange = 500
+MinSecondRange = 20
+MaxSecondRange = 500
+StatusUsed = 2
+Type = 2
+
+[Concentrated Attack]
+ID = 41
+Level = 180
+MaxLevel = 5
+MinConsumn = -1
+MaxConsumn = -1
+MinFirstRange = 2
+MaxFirstRange = 10
+MinSecondRange = 18
+MaxSecondRange = 90
+StatusUsed = -1
+Type = 0
+
+[Marksmanship Skill]
+ID = 42
+Level = 80
+MaxLevel = 10
+MinConsumn = 100
+MaxConsumn = 150
+MinFirstRange = 2
+MaxFirstRange = 10
+MinSecondRange = 15
+MaxSecondRange = 60
+StatusUsed = 3
+Type = 1
+
+[Pierce]
+ID = 43
+Level = 110
+MaxLevel = 5
+MinConsumn = -1
+MaxConsumn = -1
+MinFirstRange = 3
+MaxFirstRange = 15
+MinSecondRange = 3
+MaxSecondRange = 15
+StatusUsed = 3
+Type = 1
+
+[Machine Operation Skill]
+ID = 44
+Level = 150
+MaxLevel = 10
+MinConsumn = 0
+MaxConsumn = 0
+MinFirstRange = 40
+MaxFirstRange = 200
+MinSecondRange = 40
+MaxSecondRange = 200
+StatusUsed = 3
+Type = 1
+
+[Assembly Skill]
+ID = 45
+Level = 130
+MaxLevel = 10
+MinConsumn = -1
+MaxConsumn = -1
+MinFirstRange = -1
+MaxFirstRange = -1
+MinSecondRange = 0
+MaxSecondRange = 0
+StatusUsed = -1
+Type = 0
+
+[Absorb Magic]
+ID = 46
+Level = 170
+MaxLevel = 10
+MinConsumn = 30
+MaxConsumn = 40
+MinFirstRange = 6
+MaxFirstRange = 21
+MinSecondRange = 6
+MaxSecondRange = 60
+StatusUsed = 3
+Type = 1
+
+[Concentration]
+ID = 47
+Level = 110
+MaxLevel = 5
+MinConsumn = -1
+MaxConsumn = -1
+MinFirstRange = 4
+MaxFirstRange = 20
+MinSecondRange = 0
+MaxSecondRange = 0
+StatusUsed = -1
+Type = 0
+
+[Hurricane of Psychokinetic Energy]
+ID = 48
+Level = 130
+MaxLevel = 10
+MinConsumn = 100
+MaxConsumn = 200
+MinFirstRange = 4
+MaxFirstRange = 22
+MinSecondRange = 7
+MaxSecondRange = 70
+StatusUsed = 1
+Type = 1
+
+[Translate Ancient Languages]
+ID = 49
+Level = 150
+MaxLevel = 6
+MinConsumn = -1
+MaxConsumn = -1
+MinFirstRange = -1
+MaxFirstRange = -1
+MinSecondRange = 170
+MaxSecondRange = 170
+StatusUsed = -1
+Type = 0
+
+[Transfer Magical Power]
+ID = 50
+Level = 160
+MaxLevel = 4
+MinConsumn = 50
+MaxConsumn = 50
+MinFirstRange = 5
+MaxFirstRange = 200
+MinSecondRange = 5
+MaxSecondRange = 200
+StatusUsed = 1
+Type = 1
+
+[Confusion]
+ID = 51
+Level = 170
+MaxLevel = 10
+MinConsumn = -1
+MaxConsumn = -1
+MinFirstRange = 3
+MaxFirstRange = 17
+MinSecondRange = 3
+MaxSecondRange = 45
+StatusUsed = -1
+Type = 0
+
+[Regain]
+ID = 52
+Level = 180
+MaxLevel = 5
+MinConsumn = 50
+MaxConsumn = 100
+MinFirstRange = 16
+MaxFirstRange = 80
+MinSecondRange = 9
+MaxSecondRange = 90
+StatusUsed = 1
+Type = 1
+
+[Blessing from the Earth]
+ID = 53
+Level = 120
+MaxLevel = 10
+MinConsumn = 50
+MaxConsumn = 100
+MinFirstRange = 2
+MaxFirstRange = 11
+MinSecondRange = 4
+MaxSecondRange = 40
+StatusUsed = 1
+Type = 1
+
+[Share Vitality]
+ID = 54
+Level = 100
+MaxLevel = 10
+MinConsumn = 100
+MaxConsumn = 200
+MinFirstRange = 5
+MaxFirstRange = 50
+MinSecondRange = 180
+MaxSecondRange = 180
+StatusUsed = 1
+Type = 1
+
+[Wind of Enchantment]
+ID = 55
+Level = 65
+MaxLevel = 15
+MinConsumn = -1
+MaxConsumn = -1
+MinFirstRange = 10
+MaxFirstRange = 50
+MinSecondRange = 0
+MaxSecondRange = 0
+StatusUsed = -1
+Type = 0
+
+[Obedience]
+ID = 56
+Level = 140
+MaxLevel = 10
+MinConsumn = -1
+MaxConsumn = -1
+MinFirstRange = 5
+MaxFirstRange = 100
+MinSecondRange = 5
+MaxSecondRange = 100
+StatusUsed = -1
+Type = 0
+
+[Glow of Life]
+ID = 57
+Level = 160
+MaxLevel = 5
+MinConsumn = 50
+MaxConsumn = 100
+MinFirstRange = 10
+MaxFirstRange = 50
+MinSecondRange = 6
+MaxSecondRange = 30
+StatusUsed = 1
+Type = 1
+
+[Tranquility]
+ID = 58
+Level = 150
+MaxLevel = 10
+MinConsumn = 300
+MaxConsumn = 400
+MinFirstRange = 12
+MaxFirstRange = 120
+MinSecondRange = 0
+MaxSecondRange = 0
+StatusUsed = 1
+Type = 1
+
+[Sub Attack]
+ID = 59
+Level = 1
+MaxLevel = 25
+MinConsumn = -1
+MaxConsumn = -1
+MinFirstRange = -1
+MaxFirstRange = -1
+MinSecondRange = -1
+MaxSecondRange = -1
+StatusUsed = -1
+Type = 1
+
+[Force attack]
+ID = 60
+Level = 250
+MaxLevel = 20
+StartAmmount = 1	#value in %
+IncAmmount = 1		#value in %
+EndAmmount = 1		#value in %
+
+[Force control]
+ID = 61
+Level = 255
+MaxLevel = 20
+StartAmmount = 1	#value in %
+IncAmmount = 1		#value in %
+EndAmmount = 1		#value in %
+
+[Bloody Mana]
+ID = 62
+Level = 1
+MaxLevel = 25
+StartAmmount = 1	#value in %
+IncAmmount = 1		#value in %
+EndAmmount = 1		#value in %
+
+[Vampire's touch]
+ID = 63
+Level = 1
+MaxLevel = 25
+StartAmmount = 1	#value in %
+IncAmmount = 1		#value in %
+EndAmmount = 1		#value in %
+
+[Hell's touch]
+ID = 64
+Level = 1
+MaxLevel = 25
+StartAmmount = 1	#value in %
+IncAmmount = 1		#value in %
+EndAmmount = 1		#value in %
+
+[Deep attack]
+ID = 65
+Level = 1
+MaxLevel = 25
+StartAmmount = 1	#value in %
+IncAmmount = 1		#value in %
+EndAmmount = 1		#value in %
+
+[Chain attack]
+ID = 66
+Level = 1
+MaxLevel = 25
+StartAmmount = 1	#value in %
+IncAmmount = 1		#value in %
+EndAmmount = 1		#value in %
+
+[Scales of protection]
+ID = 67
+Level = 1
+MaxLevel = 25
+StartAmmount = 1	#value in %
+IncAmmount = 1		#value in %
+EndAmmount = 1		#value in %
+
+[Scales of guardian]
+ID = 68
+Level = 1
+MaxLevel = 25
+StartAmmount = 1	#value in %
+IncAmmount = 1		#value in %
+EndAmmount = 1		#value in %
+
+[Passion of Music]
+ID = 69
+Level = 1
+MaxLevel = 25
+StartAmmount = 1	#value in %
+IncAmmount = 1		#value in %
+EndAmmount = 1		#value in %
+
+[Scales of Fighting Spirit]
+ID = 70
+Level = 1
+MaxLevel = 25
+StartAmmount = 1	#value in %
+IncAmmount = 1		#value in %
+EndAmmount = 1		#value in %
+
+[Hell Cry]
+ID = 71
+Level = 1
+MaxLevel = 25
+StartAmmount = 1	#value in %
+IncAmmount = 1		#value in %
+EndAmmount = 1		#value in %
+
+[Tornado Ruin]
+ID = 72
+Level = 1
+MaxLevel = 25
+StartAmmount = 1	#value in %
+IncAmmount = 1		#value in %
+EndAmmount = 1		#value in %
+
+[Summon Fission]
+ID = 73
+Level = 1
+MaxLevel = 25
+StartAmmount = 1	#value in %
+IncAmmount = 1		#value in %
+EndAmmount = 1		#value in %
+
+[Air Raid]
+ID = 74
+Level = 1
+MaxLevel = 25
+StartAmmount = 1	#value in %
+IncAmmount = 1		#value in %
+EndAmmount = 1		#value in %
+
+[Hell Cry control]
+ID = 75
+Level = 1
+MaxLevel = 25
+StartAmmount = 1	#value in %
+IncAmmount = 1		#value in %
+EndAmmount = 1		#value in %
+
+[Tornado Operation]
+ID = 76
+Level = 1
+MaxLevel = 25
+StartAmmount = 1	#value in %
+IncAmmount = 1		#value in %
+EndAmmount = 1		#value in %
+
+[Air Raid Concent]
+ID = 77
+Level = 1
+MaxLevel = 25
+StartAmmount = 1	#value in %
+IncAmmount = 1		#value in %
+EndAmmount = 1		#value in %
+
+[Fission Control]
+ID = 78
+Level = 1
+MaxLevel = 25
+StartAmmount = 1	#value in %
+IncAmmount = 1		#value in %
+EndAmmount = 1		#value in %
+
+[Dual Sword Mastery]
+ID = 79
+Level = 1
+MaxLevel = 25
+StartAmmount = 1	#value in %
+IncAmmount = 1		#value in %
+EndAmmount = 1		#value in %
+
+[Recovery power increase]
+ID = 80
+Level = 1
+MaxLevel = 25
+StartAmmount = 1	#value in %
+IncAmmount = 1		#value in %
+EndAmmount = 1		#value in %
+
+[Haste]
+ID = 81
+Level = 1
+MaxLevel = 25
+StartAmmount = 1	#value in %
+IncAmmount = 1		#value in %
+EndAmmount = 1		#value in %
+
+[Double Slash]
+ID = 82
+Level = 1
+MaxLevel = 25
+StartAmmount = 1	#value in %
+IncAmmount = 1		#value in %
+EndAmmount = 1		#value in %
+
+[Evasion]
+ID = 83
+Level = 1
+MaxLevel = 25
+StartAmmount = 1	#value in %
+IncAmmount = 1		#value in %
+EndAmmount = 1		#value in %
+
+[Bleed]
+ID = 84
+Level = 1
+MaxLevel = 25
+StartAmmount = 1	#value in %
+IncAmmount = 1		#value in %
+EndAmmount = 1		#value in %
+
+[Dash]
+ID = 85
+Level = 1
+MaxLevel = 25
+StartAmmount = 1	#value in %
+IncAmmount = 1		#value in %
+EndAmmount = 1		#value in %
+
+[Assault]
+ID = 86
+Level = 1
+MaxLevel = 25
+StartAmmount = 1	#value in %
+IncAmmount = 1		#value in %
+EndAmmount = 1		#value in %
+
+[Dual Assault]
+ID = 87
+Level = 1
+MaxLevel = 25
+StartAmmount = 1	#value in %
+IncAmmount = 1		#value in %
+EndAmmount = 1		#value in %
+
+[Hide]
+ID = 88
+Level = 1
+MaxLevel = 25
+StartAmmount = 1	#value in %
+IncAmmount = 1		#value in %
+EndAmmount = 1		#value in %
+
+[Hammer Mastery]
+ID = 89
+Level = 1
+MaxLevel = 25
+StartAmmount = 1	#value in %
+IncAmmount = 1		#value in %
+EndAmmount = 1		#value in %
+
+[Vital Expansion]
+ID = 90
+Level = 1
+MaxLevel = 25
+StartAmmount = 1	#value in %
+IncAmmount = 1		#value in %
+EndAmmount = 1		#value in %
+
+[Heavy Mastery]
+ID = 91
+Level = 1
+MaxLevel = 25
+StartAmmount = 1	#value in %
+IncAmmount = 1		#value in %
+EndAmmount = 1		#value in %
+
+[Bash]
+ID = 92
+Level = 1
+MaxLevel = 25
+StartAmmount = 1	#value in %
+IncAmmount = 1		#value in %
+EndAmmount = 1		#value in %
+
+[Iron Skin Double?]
+ID = 93
+Level = 1
+MaxLevel = 25
+StartAmmount = 1	#value in %
+IncAmmount = 1		#value in %
+EndAmmount = 1		#value in %
+
+[Divine Stone]
+ID = 94
+Level = 1
+MaxLevel = 25
+StartAmmount = 1	#value in %
+IncAmmount = 1		#value in %
+EndAmmount = 1		#value in %
+
+[Stone Increase]
+ID = 95
+Level = 1
+MaxLevel = 25
+StartAmmount = 1	#value in %
+IncAmmount = 1		#value in %
+EndAmmount = 1		#value in %
+
+[Time Charge]
+ID = 96
+Level = 1
+MaxLevel = 25
+StartAmmount = 1	#value in %
+IncAmmount = 1		#value in %
+EndAmmount = 1		#value in %
+
+[Stone Brust]
+ID = 97
+Level = 1
+MaxLevel = 25
+StartAmmount = 1	#value in %
+IncAmmount = 1		#value in %
+EndAmmount = 1		#value in %
+
+[Reflection]
+ID = 98
+Level = 1
+MaxLevel = 25
+StartAmmount = 1	#value in %
+IncAmmount = 1		#value in %
+EndAmmount = 1		#value in %
+
+##########################
+###### SKILL TYPES #######
+##########################
+[Skill Types]
+permanent = 0
+activation = 1
+attack = 2
+
+[Status Used]
+None = -1
+Mana = 1
+Stamina = 2
+Electricity = 3

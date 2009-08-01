@@ -1,0 +1,7684 @@
+ ################################################################
+#								 #
+#			---- GENUMS -----			 #
+#								 #
+#  Speed: 0-Very Fast; 1-Fast; 2-Normal; 3-Slow; 4-Very Slow     #
+#								 #
+#  Race:  -1-Common; 0-Bulkan; 1-Kailipton; 2-Aidia; 3-Human     #
+#								 #
+#  Position:  0-Head; 1-Top; 2-Leg; 3-Shoulder Mount; 4-Feet     #
+#  	      5-Shield; 6-Necklace; 7-Ring; 8-Bracelet; 9-Weapon #
+#								 #
+ ################################################################
+
+
+#######################
+###### ARMOR SETS #####
+#######################
+
+######## HELMS ########
+[Hair Band]
+ID = 309
+Type = 0
+Level = 1
+Race = -1
+Def = 10
+ReqStr = 6
+Position = 0
+SizeX = 2
+SizeY = 2
+Price = 50
+Class = G_Armor
+
+[Warrior Helmet]
+ID = 310
+Type = 0
+Level = 13
+Race = -1
+Def = 14
+ReqStr = 14
+Position = 0
+SizeX = 2
+SizeY = 2
+Price = 630
+Class = G_Armor
+
+[Iron Helmet]
+ID = 311
+Type = 0
+Level = 31
+Race = -1
+Def = 20
+ReqStr = 22
+Position = 0
+SizeX = 2
+SizeY = 2
+Price = 2090
+Class = G_Armor
+
+[Xeno Helmet]
+ID = 312
+Type = 0
+Level = 47
+Race = 0
+Def = 26
+ReqStr = 40
+Position = 0
+SizeX = 2
+SizeY = 2
+Price = 3810
+Class = G_Armor
+
+[Hurricane Hat]
+ID = 317
+Type = 0
+Level = 47
+Race = 1
+Def = 22
+ReqStr = 16
+Position = 0
+SizeX = 2
+SizeY = 2
+Price = 4490
+Class = G_Armor
+
+[Purity Hair Band]
+ID = 411
+Type = 0
+Level = 47
+Race = 2
+Def = 20
+ReqStr = 15
+Position = 0
+SizeX = 2
+SizeY = 2
+Price = 3130
+Class = G_Armor
+
+[Marine Cap]
+ID = 322
+Type = 0
+Level = 47
+Race = 3
+Def = 29
+ReqStr = 20
+Position = 0
+SizeX = 2
+SizeY = 2
+Price = 4040
+Class = G_Armor
+
+[Brino Helmet]
+ID = 313
+Type = 0
+Level = 64
+Race = 0
+Def = 30
+ReqStr = 46
+Position = 0
+SizeX = 2
+SizeY = 2
+Price = 6100
+Class = G_Armor
+
+[Cloud Cap]
+ID = 318
+Type = 0
+Level = 64
+Race = 1
+Def = 25
+ReqStr = 18
+Position = 0
+SizeX = 2
+SizeY = 2
+Price = 6880
+Class = G_Armor
+
+[Prosperity Hat]
+ID = 412
+Type = 0
+Level = 64
+Race = 2
+Def = 23
+ReqStr = 17
+Position = 0
+SizeX = 2
+SizeY = 2
+Price = 4900
+Class = G_Armor
+
+[Scout Helmet]
+ID = 361
+Type = 0
+Level = 64
+Race = 3
+Def = 32
+ReqStr = 23
+Position = 0
+SizeX = 2
+SizeY = 2
+Price = 6400
+Class = G_Armor
+
+[Xeno Metal Helmet]
+ID = 314
+Type = 0
+Level = 81
+Race = 0
+Def = 40
+ReqStr = 62
+Position = 0
+SizeX = 2
+SizeY = 2
+Price = 10400
+Class = G_Armor
+
+[Tranquility Hat]
+ID = 319
+Type = 0
+Level = 81
+Race = 1
+Def = 32
+ReqStr = 24
+Position = 0
+SizeX = 2
+SizeY = 2
+Price = 11070
+Class = G_Armor
+
+[Mercy Hair Band]
+ID = 413
+Type = 0
+Level = 81
+Race = 2
+Def = 30
+ReqStr = 23
+Position = 0
+SizeX = 2
+SizeY = 2
+Price = 8100
+Class = G_Armor
+
+[BulleTyperoof Helmet]
+ID = 362
+Type = 0
+Level = 81
+Race = 3
+Def = 41
+ReqStr = 31
+Position = 0
+SizeX = 2
+SizeY = 2
+Price = 10690
+Class = G_Armor
+
+[Pahwang Helmet]
+ID = 315
+Type = 0
+Level = 98
+Race = 0
+Def = 47
+ReqStr = 72
+Position = 0
+SizeX = 2
+SizeY = 2
+Price = 14880
+Class = G_Armor
+
+[Marsh Turban]
+ID = 320
+Type = 0
+Level = 98
+Race = 1
+Def = 36
+ReqStr = 28
+Position = 0
+SizeX = 2
+SizeY = 2
+Price = 15000
+Class = G_Armor
+
+[Hope Hair Band]
+#ID = 
+Type = 0
+Level = 98
+Race = 2
+Def = 33
+ReqStr = 27
+Position = 0
+SizeX = 2
+SizeY = 2
+Price = 10780
+Class = G_Armor
+
+[Infantary Helmet]
+#ID = 
+Type = 0
+Level = 98
+Race = 3
+Def = 46
+ReqStr = 36
+Position = 0
+SizeX = 2
+SizeY = 2
+Price = 14790
+Class = G_Armor
+
+[Power Metal Helmet]
+ID = 316
+Type = 0
+Level = 115
+Race = 0
+Def = 54
+ReqStr = 84
+Position = 0
+SizeX = 2
+SizeY = 2
+Price = 20160
+Class = G_Armor
+
+[Flame Crown]
+ID = 321
+Type = 0
+Level = 115
+Race = 1
+Def = 41
+ReqStr = 33
+Position = 0
+SizeX = 2
+SizeY = 2
+Price = 19990
+Class = G_Armor
+
+[Passion Hair Band]
+#ID = 
+Type = 0
+Level = 115
+Race = 2
+Def = 37
+ReqStr = 31
+Position = 0
+SizeX = 2
+SizeY = 2
+Price = 14180
+Class = G_Armor
+
+[Heavy Infantary Helmet]
+#ID = 
+Type = 0
+Level = 115
+Race = 3
+Def = 52
+ReqStr = 42
+Position = 0
+SizeX = 2
+SizeY = 2
+Price = 19870
+Class = G_Armor
+
+[Black Knight Helmet]
+#ID = 
+Type = 0
+Level = 126
+Race = -1
+Def = 60
+ReqStr = 37
+Position = 0
+SizeX = 2
+SizeY = 2
+Price = 26200
+Class = G_Armor
+
+[Blood Helmet]
+#ID = 
+Type = 0
+Level = 145
+Race = 0
+Def = 63
+ReqStr = 90
+Position = 0
+SizeX = 2
+SizeY = 2
+Price = 36500
+Class = G_Armor
+
+[Blizzard Cap]
+#ID = 
+Type = 0
+Level = 145
+Race = 1
+Def = 48
+ReqStr = 38
+Position = 0
+SizeX = 2
+SizeY = 2
+Price = 36500
+Class = G_Armor
+
+[Shadow Helmet]
+#ID = 
+Type = 0
+Level = 145
+Race = 2
+Def = 44
+ReqStr = 33
+Position = 0
+SizeX = 2
+SizeY = 2
+Price = 36500
+Class = G_Armor
+
+[Bionic Helmet]
+#ID = 
+Type = 0
+Level = 145
+Race = 3
+Def = 55
+ReqStr = 46
+Position = 0
+SizeX = 2
+SizeY = 2
+Price = 36500
+Class = G_Armor
+
+[Duke Helmet]
+#ID = 
+Type = 0
+Level = 164
+Race = 0
+Def = 74
+ReqStr = 96
+Position = 0
+SizeX = 2
+SizeY = 2
+Price = 56000
+Class = G_Armor
+
+[Spell Cap]
+#ID = 
+Type = 0
+Level = 164
+Race = 1
+Def = 57
+ReqStr = 44
+Position = 0
+SizeX = 2
+SizeY = 2
+Price = 65990
+Class = G_Armor
+
+[Leopard Helmet]
+#ID = 
+Type = 0
+Level = 164
+Race = 2
+Def = 51
+ReqStr = 35
+Position = 0
+SizeX = 2
+SizeY = 2
+Price = 56000
+Class = G_Armor
+
+[Aquamarine Helmet]
+#ID = 
+Type = 0
+Level = 164
+Race = 3
+Def = 63
+ReqStr = 50
+Position = 0
+SizeX = 2
+SizeY = 2
+Price = 80100
+Class = G_Armor
+
+[Bulkan White Knight Helmet]
+#ID = 
+Type = 0
+Level = 193
+Race = 0
+Def = 90
+BoltMagicDef = 5   # value in %
+ReqStr = 104
+Position = 0
+SizeX = 2
+SizeY = 2
+Price = 60400
+Class = G_Armor
+
+[Kailipton White Knight Helmet]
+#ID = 
+Type = 0
+Level = 193
+Race = 1
+Def = 64
+BoltMagicDef = 10   # value in %
+ReqStr = 46
+Position = 0
+SizeX = 2
+SizeY = 2
+Price = 60400
+Class = G_Armor
+
+[Aidia White Knight Helmet]
+#ID = 
+Type = 0
+Level = 193
+Race = 2
+Def = 60
+BoltMagicDef = 10   # value in %
+ReqStr = 37
+Position = 0
+SizeX = 2
+SizeY = 2
+Price = 60400
+Class = G_Armor
+
+[Human White Knight Helmet]
+#ID = 
+Type = 0
+Level = 193
+Race = 3
+Def = 79
+BoltMagicDef = 12   # value in %
+ReqStr = 54
+Position = 0
+SizeX = 2
+SizeY = 2
+Price = 92000
+Class = G_Armor
+
+[Teurus Helmet]
+#ID = 
+Type = 0
+Level = 225
+Race = 0
+Def = 113
+StunMagicDef = 7   # value in %
+ReqStr = 113
+Position = 0
+SizeX = 2
+SizeY = 2
+Price = 113900
+Class = G_Armor
+
+[Star Soul Mask]
+#ID = 
+Type = 0
+Level = 225
+Race = 1
+Def = 82
+StunMagicDef = 13   # value in %
+ReqStr = 49
+Position = 0
+SizeX = 2
+SizeY = 2
+Price = 113900
+Class = G_Armor
+
+[Eagle Helmet]
+#ID = 
+Type = 0
+Level = 225
+Race = 2
+Def = 78
+StunMagicDef = 13   # value in %
+ReqStr = 39
+Position = 0
+SizeX = 2
+SizeY = 2
+Price = 113900
+Class = G_Armor
+
+[Fire Marine Helmet]
+#ID = 
+Type = 0
+Level = 225
+Race = 3
+Def = 101
+StunMagicDef = 15   # value in %
+ReqStr = 58
+Position = 0
+SizeX = 2
+SizeY = 2
+Price = 113900
+Class = G_Armor
+
+[Meruduke Helmet]
+ID = 881
+Type = 0
+Level = 254
+Race = 0
+Def = 125
+ColdMagicDef = 10   # value in %
+ReqStr = 125
+Position = 0
+SizeX = 2
+SizeY = 2
+Price = 125000
+Class = G_Armor
+
+[Magma Helmet]
+#ID = 
+Type = 0
+Level = 254
+Race = 1
+Def = 92
+ColdMagicDef = 15   # value in %
+ReqStr = 51
+Position = 0
+SizeX = 2
+SizeY = 2
+Price = 125000
+Class = G_Armor
+
+[Apollo Helmet]
+#ID = 
+Type = 0
+Level = 254
+Race = 2
+Def = 87
+ColdMagicDef = 15   # value in %
+ReqStr = 43
+Position = 0
+SizeX = 2
+SizeY = 2
+Price = 125000
+Class = G_Armor
+
+[Salvation Helmet]
+#ID = 
+Type = 0
+Level = 254
+Race = 3
+Def = 114
+ColdMagicDef = 10   # value in %
+ReqStr = 60
+Position = 0
+SizeX = 2
+SizeY = 2
+Price = 125000
+Class = G_Armor
+
+######## TOPS ########
+[Leather Jacket]
+ID = 326
+Type = 0
+Level = 1
+Race = -1
+Def = 5
+ReqStr = 7
+Position = 1
+SizeX = 2
+SizeY = 2
+Price = 6
+Class = G_Armor
+
+[Warrior Armor]
+ID = 325
+Type = 0
+Level = 15
+Race = -1
+Def = 16
+ReqStr = 16
+Position = 1
+SizeX = 2
+SizeY = 2
+Price = 820
+Class = G_Armor
+
+[Iron Armor]
+ID = 327
+Type = 0
+Level = 32
+Race = -1
+Def = 22
+ReqStr = 25
+Position = 1
+SizeX = 2
+SizeY = 2
+Price = 2370
+Class = G_Armor
+
+[Xeno Armor]
+ID = 328
+Type = 0
+Level = 49
+Race = 0
+Def = 29
+ReqStr = 45
+Position = 1
+SizeX = 2
+SizeY = 2
+Price = 4450
+Class = G_Armor
+
+[Hurricane Armor]
+ID = 333
+Type = 0
+Level = 49
+Race = 1
+Def = 24
+ReqStr = 18
+Position = 1
+SizeX = 2
+SizeY = 2
+Price = 5100
+Class = G_Armor
+
+[Purity Shirt]
+ID = 416
+Type = 0
+Level = 49
+Race = 2
+Def = 22
+ReqStr = 17
+Position = 1
+SizeX = 2
+SizeY = 2
+Price = 3590
+Class = G_Armor
+
+[Marine Suit]
+ID = 338
+Type = 0
+Level = 49
+Race = 3
+Def = 31
+ReqStr = 22
+Position = 1
+SizeX = 2
+SizeY = 2
+Price = 4540
+Class = G_Armor
+
+[Brino Armor]
+ID = 329
+Type = 0
+Level = 66
+Race = 0
+Def = 34
+ReqStr = 52
+Position = 1
+SizeX = 2
+SizeY = 2
+Price = 7140
+Class = G_Armor
+
+[Cloud Ware]
+ID = 334
+Type = 0
+Level = 66
+Race = 1
+Def = 27
+ReqStr = 20
+Position = 1
+SizeX = 2
+SizeY = 2
+Price = 7650
+Class = G_Armor
+
+[Prosperity Shirt]
+ID = 417
+Type = 0
+Level = 66
+Race = 2
+Def = 25
+ReqStr = 19
+Position = 1
+SizeX = 2
+SizeY = 2
+Price = 5500
+Class = G_Armor
+
+[Scout Suit]
+ID = 339
+Type = 0
+Level = 66
+Race = 3
+Def = 35
+ReqStr = 26
+Position = 1
+SizeX = 2
+SizeY = 2
+Price = 7250
+Class = G_Armor
+
+[Xeno Metal Armor]
+ID = 330
+Type = 0
+Level = 83
+Race = 0
+Def = 45
+ReqStr = 70
+Position = 1
+SizeX = 2
+SizeY = 2
+Price = 12000
+Class = G_Armor
+
+[Tranquility Shirt]
+ID = 335
+Type = 0
+Level = 83
+Race = 1
+Def = 35
+ReqStr = 27
+Position = 1
+SizeX = 2
+SizeY = 2
+Price = 12400
+Class = G_Armor
+
+[Mercy Shirt]
+ID = 418
+Type = 0
+Level = 83
+Race = 2
+Def = 33
+ReqStr = 26
+Position = 1
+SizeX = 2
+SizeY = 2
+Price = 9130
+Class = G_Armor
+
+[Bulletproof Suit]
+ID = 340
+Type = 0
+Level = 83
+Race = 3
+Def = 45
+ReqStr = 35
+Position = 1
+SizeX = 2
+SizeY = 2
+Price = 12050
+Class = G_Armor
+
+[Pahwang Armor]
+ID = 331
+Type = 0
+Level = 100
+Race = 0
+Def = 53
+ReqStr = 81
+Position = 1
+SizeX = 2
+SizeY = 2
+Price = 17140
+Class = G_Armor
+
+[Marsh Ware]
+ID = 336
+Type = 0
+Level = 100
+Race = 1
+Def = 41
+ReqStr = 32
+Position = 1
+SizeX = 2
+SizeY = 2
+Price = 17430
+Class = G_Armor
+
+[Hope Shirt]
+#ID = 
+Type = 0
+Level = 100
+Race = 2
+Def = 38
+ReqStr = 30
+Position = 1
+SizeX = 2
+SizeY = 2
+Price = 12660
+Class = G_Armor
+
+[Infantary Suit]
+ID = 341
+Type = 0
+Level = 100
+Race = 3
+Def = 52
+ReqStr = 40
+Position = 1
+SizeX = 2
+SizeY = 2
+Price = 17090
+Class = G_Armor
+
+[Power Metal Armor]
+ID = 332
+Type = 0
+Level = 117
+Race = 0
+Def = 61
+ReqStr = 65
+Position = 1
+SizeX = 2
+SizeY = 2
+Price = 23180
+Class = G_Armor
+
+[Flame Shirt]
+ID = 337
+Type = 0
+Level = 117
+Race = 1
+Def = 46
+ReqStr = 37
+Position = 1
+SizeX = 2
+SizeY = 2
+Price = 22810
+Class = G_Armor
+
+[Passion Shirt]
+#ID = 
+Type = 0
+Level = 117
+Race = 2
+Def = 42
+ReqStr = 35
+Position = 1
+SizeX = 2
+SizeY = 2
+Price = 16380
+Class = G_Armor
+
+[Heavy Infantary Suit]
+ID = 342
+Type = 0
+Level = 117
+Race = 3
+Def = 58
+ReqStr = 47
+Position = 1
+SizeX = 2
+SizeY = 2
+Price = 22580
+Class = G_Armor
+
+[Black Knight Armor]
+#ID = 
+Type = 0
+Level = 128
+Race = -1
+Def = 67
+ReqStr = 42
+Position = 1
+SizeX = 2
+SizeY = 2
+Price = 29920
+Class = G_Armor
+
+[Blood Armor]
+#ID = 
+Type = 0
+Level = 148
+Race = 0
+Def = 71
+ReqStr = 109
+Position = 1
+SizeX = 2
+SizeY = 2
+Price = 46150
+Class = G_Armor
+
+[Blizzard Shirt]
+#ID = 
+Type = 0
+Level = 148
+Race = 1
+Def = 48
+ReqStr = 38
+Position = 1
+SizeX = 2
+SizeY = 2
+Price = 46150
+Class = G_Armor
+
+[Shadow Armor]
+#ID = 
+Type = 0
+Level = 148
+Race = 2
+Def = 54
+ReqStr = 39
+Position = 1
+SizeX = 2
+SizeY = 2
+Price = 46150
+Class = G_Armor
+
+[Bionic Armor]
+#ID = 
+Type = 0
+Level = 148
+Race = 3
+Def = 63
+ReqStr = 48
+Position = 1
+SizeX = 2
+SizeY = 2
+Price = 46150
+Class = G_Armor
+
+[Duke Armor]
+#ID = 
+Type = 0
+Level = 167
+Race = 0
+Def = 72
+ReqStr = 116
+Position = 1
+SizeX = 2
+SizeY = 2
+Price = 47550
+Class = G_Armor
+
+[Spell Shirt]
+#ID = 
+Type = 0
+Level = 167
+Race = 1
+Def = 62
+ReqStr = 49
+Position = 1
+SizeX = 2
+SizeY = 2
+Price = 79880
+Class = G_Armor
+
+[Leopard Armor]
+#ID = 
+Type = 0
+Level = 167
+Race = 2
+Def = 62
+ReqStr = 41
+Position = 1
+SizeX = 2
+SizeY = 2
+Price = 47550
+Class = G_Armor
+
+[Aquamarine Armor]
+#ID = 
+Type = 0
+Level = 167
+Race = 3
+Def = 69
+ReqStr = 52
+Position = 1
+SizeX = 2
+SizeY = 2
+Price = 89000
+Class = G_Armor
+
+[Bulkan White Knight Armor]
+#ID = 
+Type = 0
+Level = 196
+Race = 0
+Def = 101
+VolcanicMagicDef = 5	# value in %
+ReqStr = 124
+Position = 1
+SizeX = 2
+SizeY = 2
+Price = 78400
+Class = G_Armor
+
+[Kailipton White Knight Armor]
+#ID = 
+Type = 0
+Level = 196
+Race = 1
+Def = 81
+VolcanicMagicDef = 10	# value in %
+ReqStr = 54
+Position = 1
+SizeX = 2
+SizeY = 2
+Price = 78400
+Class = G_Armor
+
+[Aidia White Knight Armor]
+#ID = 
+Type = 0
+Level = 196
+Race = 2
+Def = 74
+VolcanicMagicDef = 10	# value in %
+ReqStr = 43
+Position = 1
+SizeX = 2
+SizeY = 2
+Price = 78400
+Class = G_Armor
+
+[Human White Knight Armor]
+#ID = 
+Type = 0
+Level = 196
+Race = 3
+Def = 93
+VolcanicMagicDef = 5	# value in %
+ReqStr = 58
+Position = 1
+SizeX = 2
+SizeY = 2
+Price = 120000
+Class = G_Armor
+
+[Teurus Armor]
+#ID = 
+Type = 0
+Level = 228
+Race = 0
+Def = 141
+BoltMagicDef = 7	# value in %
+ReqStr = 133
+Position = 1
+SizeX = 2
+SizeY = 2
+Price = 147800
+Class = G_Armor
+
+[Star Soul Suit]
+#ID = 
+Type = 0
+Level = 228
+Race = 1
+Def = 102
+BoltMagicDef = 13	# value in %
+ReqStr = 57
+Position = 1
+SizeX = 2
+SizeY = 2
+Price = 147800
+Class = G_Armor
+
+[Eagle Armor]
+#ID = 
+Type = 0
+Level = 228
+Race = 2
+Def = 141
+BoltMagicDef = 13	# value in %
+ReqStr = 45
+Position = 1
+SizeX = 2
+SizeY = 2
+Price = 147800
+Class = G_Armor
+
+[Fire Marine Armor]
+#ID = 
+Type = 0
+Level = 228
+Race = 3
+Def = 126
+BoltMagicDef = 15	# value in %
+ReqStr = 63
+Position = 1
+SizeX = 2
+SizeY = 2
+Price = 147800
+Class = G_Armor
+
+[Meruduke Armor]
+ID = 884
+Type = 0
+Level = 256
+Race = 0
+Def = 157
+StunMagicDef = 10	# value in %
+ReqStr = 147
+Position = 1
+SizeX = 2
+SizeY = 2
+Price = 162000
+Class = G_Armor
+
+[Magma Armor]
+#ID = 
+Type = 0
+Level = 256
+Race = 1
+Def = 115
+StunMagicDef = 15	# value in %
+ReqStr = 59
+Position = 1
+SizeX = 2
+SizeY = 2
+Price = 162000
+Class = G_Armor
+
+[Apollo Armor]
+#ID = 
+Type = 0
+Level = 256
+Race = 2
+Def = 107
+StunMagicDef = 15	# value in %
+ReqStr = 48
+Position = 1
+SizeX = 2
+SizeY = 2
+Price = 162000
+Class = G_Armor
+
+[Salvation Armor]
+#ID = 
+Type = 0
+Level = 256
+Race = 3
+Def = 142
+StunMagicDef = 18	# value in %
+ReqStr = 65
+Position = 1
+SizeX = 2
+SizeY = 2
+Price = 162000
+Class = G_Armor
+
+######## PANTS ########
+[Leather Pants]
+ID = 343
+Type = 0
+Level = 1
+Race = -1
+Def = 6
+ReqStr = 8
+Position = 2
+SizeX = 2
+SizeY = 3
+Price = 7
+Class = G_Armor
+
+[Warrior Pants]
+ID = 344
+Type = 0
+Level = 17
+Race = -1
+Def = 18
+ReqStr = 18
+Position = 2
+SizeX = 2
+SizeY = 3
+Price = 1050
+Class = G_Armor
+
+[Iron Pants]
+ID = 345
+Type = 0
+Level = 34
+Race = -1
+Def = 25
+ReqStr = 28
+Position = 2
+SizeX = 2
+SizeY = 3
+Price = 2860
+Class = G_Armor
+
+[Xeno Pants]
+ID = 346
+Type = 0
+Level = 51
+Race = 0
+Def = 33
+ReqStr = 50
+Position = 2
+SizeX = 2
+SizeY = 3
+Price = 5280
+Class = G_Armor
+
+[Hurricane Skirt]
+ID = 351
+Type = 0
+Level = 51
+Race = 1
+Def = 27
+ReqStr = 20
+Position = 2
+SizeX = 2
+SizeY = 3
+Price = 5960
+Class = G_Armor
+
+[Purity Pants]
+ID = 421
+Type = 0
+Level = 51
+Race = 2
+Def = 25
+ReqStr = 19
+Position = 2
+SizeX = 2
+SizeY = 3
+Price = 4250
+Class = G_Armor
+
+[Marine Pants]
+ID = 356
+Type = 0
+Level = 51
+Race = 3
+Def = 35
+ReqStr = 25
+Position = 2
+SizeX = 2
+SizeY = 3
+Price = 5380
+Class = G_Armor
+
+[Brino Pants]
+ID = 347
+Type = 0
+Level = 61
+Race = 0
+Def = 38
+ReqStr = 58
+Position = 2
+SizeX = 2
+SizeY = 3
+Price = 7350
+Class = G_Armor
+
+[Cloud Pants]
+ID = 352
+Type = 0
+Level = 61
+Race = 1
+Def = 30
+ReqStr = 23
+Position = 2
+SizeX = 2
+SizeY = 3
+Price = 7880
+Class = G_Armor
+
+[Prosperity Pants]
+ID = 422
+Type = 0
+Level = 61
+Race = 2
+Def = 28
+ReqStr = 22
+Position = 2
+SizeX = 2
+SizeY = 3
+Price = 5690
+Class = G_Armor
+
+[Scout Pants]
+ID = 357
+Type = 0
+Level = 61
+Race = 3
+Def = 39
+ReqStr = 29
+Position = 2
+SizeX = 2
+SizeY = 3
+Price = 7380
+Class = G_Armor
+
+[Xeno Metal Pants]
+ID = 348
+Type = 0
+Level = 85
+Race = 0
+Def = 50
+ReqStr = 78
+Position = 2
+SizeX = 2
+SizeY = 3
+Price = 13670
+Class = G_Armor
+
+[Tranquility Skirt]
+ID = 353
+Type = 0
+Level = 85
+Race = 1
+Def = 39
+ReqStr = 31
+Position = 2
+SizeX = 2
+SizeY = 3
+Price = 14140
+Class = G_Armor
+
+[Mercy Pants]
+ID = 423
+Type = 0
+Level = 85
+Race = 2
+Def = 36
+ReqStr = 30
+Position = 2
+SizeX = 2
+SizeY = 3
+Price = 10200
+Class = G_Armor
+
+[Bulletproof Pants]
+ID = 358
+Type = 0
+Level = 85
+Race = 3
+Def = 49
+ReqStr = 39
+Position = 2
+SizeX = 2
+SizeY = 3
+Price = 13480
+Class = G_Armor
+
+[Pahwang Pants]
+ID = 349
+Type = 0
+Level = 102
+Race = 0
+Def = 59
+ReqStr = 91
+Position = 2
+SizeX = 2
+SizeY = 3
+Price = 19470
+Class = G_Armor
+
+[Marsh Skirt]
+ID = 354
+Type = 0
+Level = 102
+Race = 1
+Def = 45
+ReqStr = 36
+Position = 2
+SizeX = 2
+SizeY = 3
+Price = 19500
+Class = G_Armor
+
+[Hope Pants]
+#ID = 
+Type = 0
+Level = 102
+Race = 2
+Def = 42
+ReqStr = 34
+Position = 2
+SizeX = 2
+SizeY = 3
+Price = 14280
+Class = G_Armor
+
+[Infantary Pants]
+#ID = 
+Type = 0
+Level = 102
+Race = 3
+Def = 57
+ReqStr = 45
+Position = 2
+SizeX = 2
+SizeY = 3
+Price = 19140
+Class = G_Armor
+
+[Power Metal Pants]
+ID = 350
+Type = 0
+Level = 121
+Race = 0
+Def = 68
+ReqStr = 106
+Position = 2
+SizeX = 2
+SizeY = 3
+Price = 26750
+Class = G_Armor
+
+[Flame Skirt]
+ID = 355
+Type = 0
+Level = 121
+Race = 1
+Def = 51
+ReqStr = 42
+Position = 2
+SizeX = 2
+SizeY = 3
+Price = 26140
+Class = G_Armor
+
+[Passion Pants]
+#ID = 
+Type = 0
+Level = 121
+Race = 2
+Def = 47
+ReqStr = 40
+Position = 2
+SizeX = 2
+SizeY = 3
+Price = 18950
+Class = G_Armor
+
+[Heavy Infantary Pants]
+#ID = 
+Type = 0
+Level = 121
+Race = 3
+Def = 64
+ReqStr = 53
+Position = 2
+SizeX = 2
+SizeY = 3
+Price = 25830
+Class = G_Armor
+
+[Black Knight Pants]
+#ID = 
+Type = 0
+Level = 131
+Race = -1
+Def = 75
+ReqStr = 47
+Position = 2
+SizeX = 2
+SizeY = 3
+Price = 33750
+Class = G_Armor
+
+[Blood Pants]
+#ID = 
+Type = 0
+Level = 150
+Race = 0
+Def = 80
+ReqStr = 123
+Position = 2
+SizeX = 2
+SizeY = 3
+Price = 52000
+Class = G_Armor
+
+[Blizzard Pants]
+#ID = 
+Type = 0
+Level = 150
+Race = 1
+Def = 57
+ReqStr = 48
+Position = 2
+SizeX = 2
+SizeY = 3
+Price = 52000
+Class = G_Armor
+
+[Shadow Pants]
+#ID = 
+Type = 0
+Level = 150
+Race = 2
+Def = 58
+ReqStr = 42
+Position = 2
+SizeX = 2
+SizeY = 3
+Price = 52000
+Class = G_Armor
+
+[Bionic Pants]
+#ID = 
+Type = 0
+Level = 150
+Race = 3
+Def = 69
+ReqStr = 55
+Position = 2
+SizeX = 2
+SizeY = 3
+Price = 52000
+Class = G_Armor
+
+[Duke Pants]
+#ID = 
+Type = 0
+Level = 169
+Race = 0
+Def = 92
+ReqStr = 129
+Position = 2
+SizeX = 2
+SizeY = 3
+Price = 63520
+Class = G_Armor
+
+[Spell Pants]
+#ID = 
+Type = 0
+Level = 169
+Race = 1
+Def = 66
+ReqStr = 54
+Position = 2
+SizeX = 2
+SizeY = 3
+Price = 85090
+Class = G_Armor
+
+[Leopard Pants]
+#ID = 
+Type = 0
+Level = 169
+Race = 2
+Def = 68
+ReqStr = 144
+Position = 2
+SizeX = 2
+SizeY = 3
+Price = 63520
+Class = G_Armor
+
+[Aquamarine Pants]
+#ID = 
+Type = 0
+Level = 169
+Race = 3
+Def = 75
+ReqStr = 59
+Position = 2
+SizeX = 2
+SizeY = 3
+Price = 93000
+Class = G_Armor
+
+[Bulkan White Knight Pants]
+#ID = 
+Type = 0
+Level = 197
+Race = 0
+Def = 118
+ColdMagicDef = 5	# value in %
+ReqStr = 137
+Position = 2
+SizeX = 2
+SizeY = 3
+Price = 87200
+Class = G_Armor
+
+[Kailipton White Knight Pants]
+#ID = 
+Type = 0
+Level = 197
+Race = 1
+Def = 89
+ColdMagicDef = 10	# value in %
+ReqStr = 57
+Position = 2
+SizeX = 2
+SizeY = 3
+Price = 87200
+Class = G_Armor
+
+[Aidia White Knight Pants]
+#ID = 
+Type = 0
+Level = 197
+Race = 2
+Def = 81
+ColdMagicDef = 10	# value in %
+ReqStr = 46
+Position = 2
+SizeX = 2
+SizeY = 3
+Price = 87200
+Class = G_Armor
+
+[Human White Knight Pants]
+#ID = 
+Type = 0
+Level = 197
+Race = 3
+Def = 103
+ColdMagicDef = 5	# value in %
+ReqStr = 63
+Position = 2
+SizeX = 2
+SizeY = 3
+Price = 140000
+Class = G_Armor
+
+[Teurus Pants]
+#ID = 
+Type = 0
+Level = 229
+Race = 0
+Def = 155
+VolcanicMagicDef = 7	# value in %
+ReqStr = 146
+Position = 2
+SizeX = 2
+SizeY = 3
+Price = 164400
+Class = G_Armor
+
+[Star Soul Pants]
+#ID = 
+Type = 0
+Level = 229
+Race = 1
+Def = 112
+VolcanicMagicDef = 13	# value in %
+ReqStr = 60
+Position = 2
+SizeX = 2
+SizeY = 3
+Price = 164400
+Class = G_Armor
+
+[Eagle Pants]
+#ID = 
+Type = 0
+Level = 229
+Race = 2
+Def = 105
+VolcanicMagicDef = 13	# value in %
+ReqStr = 48
+Position = 2
+SizeX = 2
+SizeY = 3
+Price = 164400
+Class = G_Armor
+
+[Fire Marine Pants]
+#ID = 
+Type = 0
+Level = 229
+Race = 3
+Def = 138
+VolcanicMagicDef = 7	# value in %
+ReqStr = 67
+Position = 2
+SizeX = 2
+SizeY = 3
+Price = 164400
+Class = G_Armor
+
+[Meruduke Pants]
+ID = 887
+Type = 0
+Level = 259
+Race = 0
+Def = 172
+BoltMagicDef = 10	# value in %
+ReqStr = 161
+Position = 2
+SizeX = 2
+SizeY = 3
+Price = 180000
+Class = G_Armor
+
+[Magma Pants]
+#ID = 
+Type = 0
+Level = 259
+Race = 1
+Def = 126
+BoltMagicDef = 15	# value in %
+ReqStr = 61
+Position = 2
+SizeX = 2
+SizeY = 3
+Price = 180000
+Class = G_Armor
+
+[Apollo Pants]
+#ID = 
+Type = 0
+Level = 259
+Race = 2
+Def = 117
+BoltMagicDef = 15	# value in %
+ReqStr = 50
+Position = 2
+SizeX = 2
+SizeY = 3
+Price = 180000
+Class = G_Armor
+
+[Salvation Pants]
+#ID = 
+Type = 0
+Level = 259
+Race = 3
+Def = 155
+BoltMagicDef = 18	# value in %
+ReqStr = 69
+Position = 2
+SizeX = 2
+SizeY = 3
+Price = 180000
+Class = G_Armor
+
+######## BOOTS ########
+[Leather Boots]
+ID = 365
+Type = 0
+Level = 1
+Race = -1
+Def = 9
+ReqStr = 5
+Position = 4
+SizeX = 2
+SizeY = 2
+Price = 40
+Class = G_Armor
+
+[Warrior Boots]
+ID = 366
+Type = 0
+Level = 12
+Race = -1
+Def = 12
+ReqStr = 12
+Position = 4
+SizeX = 2
+SizeY = 2
+Price = 490
+Class = G_Armor
+
+[Iron Boots]
+ID = 367
+Type = 0
+Level = 31
+Race = -1
+Def = 17
+ReqStr = 19
+Position = 4
+SizeX = 2
+SizeY = 2
+Price = 1770
+Class = G_Armor
+
+[Xeno Shoes]
+ID = 368
+Type = 0
+Level = 46
+Race = 0
+Def = 23
+ReqStr = 35
+Position = 4
+SizeX = 2
+SizeY = 2
+Price = 3300
+Class = G_Armor
+
+[Hurricane Shoes]
+ID = 373
+Type = 0
+Level = 46
+Race = 1
+Def = 20
+ReqStr = 14
+Position = 4
+SizeX = 2
+SizeY = 2
+Price = 4000
+Class = G_Armor
+
+[Purity Shoes]
+ID = 426
+Type = 0
+Level = 46
+Race = 2
+Def = 18
+ReqStr = 13
+Position = 4
+SizeX = 2
+SizeY = 2
+Price = 2760
+Class = G_Armor
+
+[Marine Shoes]
+ID = 378
+Type = 0
+Level = 46
+Race = 3
+Def = 26
+ReqStr = 17
+Position = 4
+SizeX = 2
+SizeY = 2
+Price = 3530
+Class = G_Armor
+
+[Brino Shoes]
+ID = 369
+Type = 0
+Level = 63
+Race = 0
+Def = 26
+ReqStr = 40
+Position = 4
+SizeX = 2
+SizeY = 2
+Price = 5200
+Class = G_Armor
+
+[Cloud Shoes]
+ID = 374
+Type = 0
+Level = 63
+Race = 1
+Def = 22
+ReqStr = 16
+Position = 4
+SizeX = 2
+SizeY = 2
+Price = 5960
+Class = G_Armor
+
+[Prosperity Shoes]
+ID = 427
+Type = 0
+Level = 63
+Race = 2
+Def = 20
+ReqStr = 15
+Position = 4
+SizeX = 2
+SizeY = 2
+Price = 4200
+Class = G_Armor
+
+[Scout Shoes]
+ID = 379
+Type = 0
+Level = 63
+Race = 3
+Def = 29
+ReqStr = 20
+Position = 4
+SizeX = 2
+SizeY = 2
+Price = 5700
+Class = G_Armor
+
+[Xeno Metal Boots]
+ID = 370
+Type = 0
+Level = 80
+Race = 0
+Def = 35
+ReqStr = 54
+Position = 4
+SizeX = 2
+SizeY = 2
+Price = 8980
+Class = G_Armor
+
+[Tranquility Shoes]
+ID = 375
+Type = 0
+Level = 80
+Race = 1
+Def = 28
+ReqStr = 21
+Position = 4
+SizeX = 2
+SizeY = 2
+Price = 9570
+Class = G_Armor
+
+[Mercy Shoes]
+ID = 428
+Type = 0
+Level = 80
+Race = 2
+Def = 26
+ReqStr = 20
+Position = 4
+SizeX = 2
+SizeY = 2
+Price = 6930
+Class = G_Armor
+
+[BulleTyperoof Boots]
+ID = 380
+Type = 0
+Level = 80
+Race = 3
+Def = 36
+ReqStr = 27
+Position = 4
+SizeX = 2
+SizeY = 2
+Price = 9260
+Class = G_Armor
+
+[Pahwang Boots]
+#ID = 
+Type = 0
+Level = 97
+Race = 0
+Def = 41
+ReqStr = 63
+Position = 4
+SizeX = 2
+SizeY = 2
+Price = 12850
+Class = G_Armor
+
+[Marsh Shoes]
+#ID = 
+Type = 0
+Level = 97
+Race = 1
+Def = 32
+ReqStr = 25
+Position = 4
+SizeX = 2
+SizeY = 2
+Price = 13200
+Class = G_Armor
+
+[Hope Boots]
+#ID = 
+Type = 0
+Level = 97
+Race = 2
+Def = 29
+ReqStr = 24
+Position = 4
+SizeX = 2
+SizeY = 2
+Price = 9370
+Class = G_Armor
+
+[Infantary Boots]
+#ID = 
+Type = 0
+Level = 97
+Race = 3
+Def = 41
+ReqStr = 31
+Position = 4
+SizeX = 2
+SizeY = 2
+Price = 13030
+Class = G_Armor
+
+[Power Metal Boots]
+#ID = 
+Type = 0
+Level = 114
+Race = 0
+Def = 47
+ReqStr = 74
+Position = 4
+SizeX = 2
+SizeY = 2
+Price = 17390
+Class = G_Armor
+
+[Flame Shoes]
+#ID = 
+Type = 0
+Level = 114
+Race = 1
+Def = 36
+ReqStr = 29
+Position = 4
+SizeX = 2
+SizeY = 2
+Price = 17400
+Class = G_Armor
+
+[Passion Shoes]
+#ID = 
+Type = 0
+Level = 114
+Race = 2
+Def = 32
+ReqStr = 27
+Position = 4
+SizeX = 2
+SizeY = 2
+Price = 12160
+Class = G_Armor
+
+[Heavy Infantary Boots]
+#ID = 
+Type = 0
+Level = 114
+Race = 3
+Def = 46
+ReqStr = 37
+Position = 4
+SizeX = 2
+SizeY = 2
+Price = 17410
+Class = G_Armor
+
+[Black Knight Boots]
+#ID = 
+Type = 0
+Level = 124
+Race = -1
+Def = 52
+ReqStr = 32
+Position = 4
+SizeX = 2
+SizeY = 2
+Price = 22180
+Class = G_Armor
+
+[Blood Boots]
+#ID = 
+Type = 0
+Level = 143
+Race = 0
+Def = 55
+ReqStr = 80
+Position = 4
+SizeX = 2
+SizeY = 2
+Price = 36500
+Class = G_Armor
+
+[Blizzard Shoes]
+#ID = 
+Type = 0
+Level = 143
+Race = 1
+Def = 42
+ReqStr = 34
+Position = 4
+SizeX = 2
+SizeY = 2
+Price = 36500
+Class = G_Armor
+
+[Shadow Boots]
+#ID = 
+Type = 0
+Level = 143
+Race = 2
+Def = 39
+ReqStr = 29
+Position = 4
+SizeX = 2
+SizeY = 2
+Price = 36500
+Class = G_Armor
+
+[Bionic Boots]
+#ID = 
+Type = 0
+Level = 143
+Race = 3
+Def = 52
+ReqStr = 45
+Position = 4
+SizeX = 2
+SizeY = 2
+Price = 36500
+Class = G_Armor
+
+[Duke Shoes]
+#ID = 
+Type = 0
+Level = 162
+Race = 0
+Def = 65
+ReqStr = 86
+Position = 4
+SizeX = 2
+SizeY = 2
+Price = 46200
+Class = G_Armor
+
+[Spell Shoes]
+#ID = 
+Type = 0
+Level = 162
+Race = 1
+Def = 51
+ReqStr = 40
+Position = 4
+SizeX = 2
+SizeY = 2
+Price = 65790
+Class = G_Armor
+
+[Leopard Boots]
+#ID = 
+Type = 0
+Level = 162
+Race = 2
+Def = 44
+ReqStr = 31
+Position = 4
+SizeX = 2
+SizeY = 2
+Price = 46200
+Class = G_Armor
+
+[Aquamarine Boots]
+#ID = 
+Type = 0
+Level = 162
+Race = 3
+Def = 60
+ReqStr = 49
+Position = 4
+SizeX = 2
+SizeY = 2
+Price = 78040
+Class = G_Armor
+
+[Bulkan White Knight Boots]
+#ID = 
+Type = 0
+Level = 190
+Race = 0
+Def = 78
+StunMagicDef = 5	# value in %
+ReqStr = 94
+Position = 4
+SizeX = 2
+SizeY = 2
+Price = 50600
+Class = G_Armor
+
+[Kailipton White Knight Boots]
+#ID = 
+Type = 0
+Level = 190
+Race = 1
+Def = 56
+StunMagicDef = 10	# value in %
+ReqStr = 42
+Position = 4
+SizeX = 2
+SizeY = 2
+Price = 50600
+Class = G_Armor
+
+[Aidia White Knight Boots]
+#ID = 
+Type = 0
+Level = 190
+Race = 2
+Def = 52
+StunMagicDef = 10	# value in %
+ReqStr = 33
+Position = 4
+SizeX = 2
+SizeY = 2
+Price = 50600
+Class = G_Armor
+
+[Human White Knight Boots]
+#ID = 
+Type = 0
+Level = 190
+Race = 3
+Def = 71
+StunMagicDef = 12	# value in %
+ReqStr = 53
+Position = 4
+SizeX = 2
+SizeY = 2
+Price = 80000
+Class = G_Armor
+
+[Teurus Boots]
+#ID = 
+Type = 0
+Level = 221
+Race = 0
+Def = 97
+ColdMagicDef = 7	# value in %
+ReqStr = 103
+Position = 4
+SizeX = 2
+SizeY = 2
+Price = 93500
+Class = G_Armor
+
+[Star Soul Boots]
+#ID = 
+Type = 0
+Level = 221
+Race = 1
+Def = 71
+ColdMagicDef = 13	# value in %
+ReqStr = 46
+Position = 4
+SizeX = 2
+SizeY = 2
+Price = 93500
+Class = G_Armor
+
+[Eagle Boots]
+#ID = 
+Type = 0
+Level = 221
+Race = 2
+Def = 68
+ColdMagicDef = 13	# value in %
+ReqStr = 35
+Position = 4
+SizeX = 2
+SizeY = 2
+Price = 93500
+Class = G_Armor
+
+[Fire Marine Boots]
+#ID = 
+Type = 0
+Level = 221
+Race = 3
+Def = 87
+ColdMagicDef = 7	# value in %
+ReqStr = 57
+Position = 4
+SizeX = 2
+SizeY = 2
+Price = 93500
+Class = G_Armor
+
+[Meruduke Boots]
+ID = 890
+Type = 0
+Level = 252
+Race = 0
+Def = 108
+VolcanicMagicDef = 10	# value in %
+ReqStr = 114
+Position = 4
+SizeX = 2
+SizeY = 2
+Price = 102000
+Class = G_Armor
+
+[Magma Boots]
+#ID = 
+Type = 0
+Level = 252
+Race = 1
+Def = 80
+VolcanicMagicDef = 15	# value in %
+ReqStr = 48
+Position = 4
+SizeX = 2
+SizeY = 2
+Price = 102000
+Class = G_Armor
+
+[Apollo Boots]
+#ID = 
+Type = 0
+Level = 252
+Race = 2
+Def = 76
+VolcanicMagicDef = 15	# value in %
+ReqStr = 38
+Position = 4
+SizeX = 2
+SizeY = 2
+Price = 102000
+Class = G_Armor
+
+[Salvation Boots]
+#ID = 
+Type = 0
+Level = 252
+Race = 3
+Def = 98
+VolcanicMagicDef = 10	# value in %
+ReqStr = 59
+Position = 4
+SizeX = 2
+SizeY = 2
+Price = 102000
+Class = G_Armor
+
+#########################
+#### PRIMARY WEAPONS ####
+#########################
+
+######## GUNS #########
+[Shot Gun]
+ID = 204
+Type = 1
+Level = 1
+Race = -1
+MinDmg = 11
+MaxDmg = 14
+EeUsed = 3
+Speed = 1
+ReqStr = 12
+ReqDex = 25
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 2
+Price = 30
+Class = G_GunWeapon
+
+[Air Hand Gun]
+ID = 203
+Type = 1
+Level = 12
+Race = -1
+MinDmg = 20
+MaxDmg = 27
+EeUsed = 5
+Speed = 1
+ReqStr = 16
+ReqDex = 39
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 2
+Price = 650
+Class = G_GunWeapon
+
+[Power Gun]
+ID = 464
+Type = 1
+Level = 18
+Race = -1
+MinDmg = 27
+MaxDmg = 35
+EeUsed = 6
+Speed = 1
+ReqStr = 16
+ReqDex = 42
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 2
+Price = 1100
+Class = G_GunWeapon
+
+[Air Gun]
+ID = 55
+Type = 1
+Level = 25
+Race = -1
+MinDmg = 33
+MaxDmg = 43
+EeUsed = 7
+Speed = 1
+ReqStr = 23
+ReqDex = 45
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 2
+Price = 2000
+Class = G_GunWeapon
+
+[Ranger]
+ID = 465
+Type = 1
+Level = 31
+Race = -1
+MinDmg = 25
+MaxDmg = 37
+EeUsed = 7
+Speed = 0
+ReqStr = 24
+ReqDex = 48
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 2
+Price = 2950
+Class = G_GunWeapon
+
+[Blaster Pistol]
+ID = 60
+Type = 1
+Level = 38
+Race = -1
+MinDmg = 41
+MaxDmg = 53
+EeUsed = 9
+Speed = 1
+ReqStr = 26
+ReqDex = 52
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 2
+Price = 4030
+Class = G_GunWeapon
+
+[Laser Shot Gun]
+ID = 466
+Type = 1
+Level = 43
+Race = -1
+MinDmg = 45
+MaxDmg = 67
+EeUsed = 10
+Speed = 1
+ReqStr = 28
+ReqDex = 55
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 5000
+Class = G_GunWeapon
+
+[Blaster Rifle]
+ID = 467
+Type = 1
+Level = 50
+Race = -1
+MinDmg = 56
+MaxDmg = 73
+EeUsed = 11
+Speed = 1
+ReqStr = 32
+ReqDex = 58
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 6500
+Class = G_GunWeapon
+
+[Killer Rifle]
+ID = 286
+Type = 1
+Level = 55
+Race = -1
+MinDmg = 70
+MaxDmg = 78
+EeUsed = 13
+Speed = 1
+ReqStr = 33
+ReqDex = 61
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 7700
+Class = G_GunWeapon
+
+[Machine Gun]
+ID = 61
+Type = 1
+Level = 62
+Race = -1
+MinDmg = 51
+MaxDmg = 66
+EeUsed = 7
+Speed = 0
+ReqStr = 30
+ReqDex = 65
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 9550
+Class = G_GunWeapon
+
+[Bio Rifle]
+ID = 287
+Type = 1
+Level = 72
+Race = -1
+MinDmg = 75
+MaxDmg = 98
+EeUsed = 15
+Speed = 1
+ReqStr = 36
+ReqDex = 70
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 12530
+Class = G_GunWeapon
+
+[Plasma Rifle]
+ID = 305
+Type = 1
+Level = 84
+Race = -1
+MinDmg = 86
+MaxDmg = 112
+EeUsed = 20
+Speed = 1
+ReqStr = 40
+ReqDex = 76
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 16630
+Class = G_GunWeapon
+
+[Pascal Rifle]
+#ID = 
+Type = 1
+Level = 94
+#Race = 
+MinDmg = 95
+MaxDmg = 124
+EeUsed = 24
+Speed = 1
+ReqStr = 45
+ReqDex = 82
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 20490
+Class = G_GunWeapon
+
+[M-99 Gun]
+#ID = 
+Type = 1
+Level = 106
+#Race = 
+MinDmg = 79
+MaxDmg = 112
+EeUsed = 22
+Speed = 0
+ReqStr = 50
+ReqDex = 88
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 25650
+Class = G_GunWeapon
+
+[Xylo Gun]
+#ID = 
+Type = 1
+Level = 120
+#Race = 
+MinDmg = 123
+MaxDmg = 161
+EeUsed = 30
+Speed = 1
+ReqStr = 54
+ReqDex = 94
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 32400
+Class = G_GunWeapon
+
+[Sigma Rifle]
+#ID = 
+Type = 1
+Level = 134
+#Race = 
+MinDmg = 139
+MaxDmg = 181
+EeUsed = 32
+Speed = 1
+ReqStr = 59
+ReqDex = 100
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 39930
+Class = G_GunWeapon
+
+[Crypto Rifle]
+#ID = 
+Type = 1
+Level = 148
+#Race = 
+MinDmg = 154
+MaxDmg = 202
+EeUsed = 35
+Speed = 1
+ReqStr = 63
+ReqDex = 106
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 48250
+Class = G_GunWeapon
+
+[Tornado Rifle]
+#ID = 
+Type = 1
+Level = 175
+#Race = 
+MinDmg = 159
+MaxDmg = 163
+EeUsed = 29
+Speed = 0
+ReqStr = 65
+ReqDex = 113
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 68000
+Class = G_GunWeapon
+
+[Wave Rifle]
+#ID = 
+Type = 1
+Level = 195
+#Race = 
+MinDmg = 161
+MaxDmg = 169
+EeUsed = 31
+Speed = 0
+ReqStr = 67
+ReqDex = 115
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 50000
+Class = G_GunWeapon
+
+[Matrix Rifle]
+ID = 644
+Type = 1
+Level = 210
+Race = -1
+MinDmg = 178
+MaxDmg = 183
+EeUsed = 33
+Speed = 0
+ReqStr = 69
+ReqDex = 118
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 95000
+Class = G_GunWeapon
+
+[Crumble Gun]
+ID = 1066
+Type = 1
+Level = 261
+Race = -1
+MinDmg = 199
+MaxDmg = 204
+EeUsed = 33
+Speed = 0
+ReqStr = 73
+ReqDex = 123
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 10000000
+Class = G_GunWeapon
+
+####### Swords ########
+[Short Sword]
+ID = 168
+Type = 2
+Level = 1
+Race = -1
+MinDmg = 5
+MaxDmg = 7
+Speed = 0
+ReqStr = 10
+Position = 9
+Handed = 1
+SizeX = 1
+SizeY = 3
+Price = 30
+Class = G_Sword
+
+[Long Sword]
+ID = 37
+Type = 2
+Level = 3
+Race = -1
+MinDmg = 7
+MaxDmg = 9
+Speed = 1
+ReqStr = 19
+Position = 9
+Handed = 1
+SizeX = 1
+SizeY = 3
+Price = 110
+Class = G_Sword
+
+[Righteouseness Blade]
+ID = 154
+Type = 2
+Level = 7
+Race = -1
+MinDmg = 12
+MaxDmg = 16
+Speed = 1
+ReqStr = 39
+Position = 9
+Handed = 1
+SizeX = 1
+SizeY = 3
+Price = 310
+Class = G_Sword
+
+[Curved Blade]
+ID = 163
+Type = 2
+Level = 12
+Race = -1
+MinDmg = 15
+MaxDmg = 22
+Speed = 1
+ReqStr = 41
+Position = 9
+Handed = 1
+SizeX = 1
+SizeY = 3
+Price = 650
+Class = G_Sword
+
+[Victory Blade]
+ID = 459
+Type = 2
+Level = 20
+Race = -1
+MinDmg = 25
+MaxDmg = 29
+Speed = 1
+ReqStr = 44
+Position = 9
+Handed = 1
+SizeX = 2
+SizeY = 3
+Price = 1300
+Class = G_Sword
+
+[Blue Crystal Sword]
+ID = 152
+Type = 2
+Level = 23
+Race = -1
+MinDmg = 22
+MaxDmg = 28
+Speed = 0
+ReqStr = 45
+Position = 9
+Handed = 1
+SizeX = 1
+SizeY = 3
+Price = 1750
+Class = G_Sword
+
+[Golden Sword]
+ID = 150
+Type = 2
+Level = 30
+Race = -1
+MinDmg = 30
+MaxDmg = 42
+Speed = 1
+ReqStr = 52
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 2700
+Class = G_Sword
+
+[Wing Sword]
+ID = 460
+Type = 2
+Level = 35
+#Race = 
+MinDmg = 39
+MaxDmg = 47
+Speed = 1
+ReqStr = 58
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 3600
+Class = G_Sword
+
+[Sonic Sword]
+ID = 212
+Type = 2
+Level = 40
+#Race = 
+MinDmg = 31
+MaxDmg = 40
+Speed = 0
+ReqStr = 48
+Position = 9
+Handed = 1
+SizeX = 2
+SizeY = 3
+Price = 4400
+Class = G_Sword
+
+[Broad Sword]
+ID = 162
+Type = 2
+Level = 45
+Race = -1
+MinDmg = 45
+MaxDmg = 58
+Speed = 1
+ReqStr = 62
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 5400
+Class = G_Sword
+
+[Great Sword]
+ID = 151
+Type = 2
+Level = 55
+Race = -1
+MinDmg = 62
+MaxDmg = 81
+Speed = 2
+ReqStr = 75
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 7700
+Class = G_Sword
+
+[Green Crystal Sword]
+ID = 176
+Type = 2
+Level = 68
+Race = -1
+MinDmg = 48
+MaxDmg = 63
+Speed = 0
+ReqStr = 49
+Position = 9
+Handed = 1
+SizeX = 1
+SizeY = 3
+Price = 11290
+Class = G_Sword
+
+[Red Crystal Sword]
+ID = 177
+Type = 2
+Level = 75
+Race = -1
+MinDmg = 53
+MaxDmg = 69
+Speed = 0
+ReqStr = 54
+Position = 9
+Handed = 1
+SizeX = 2
+SizeY = 3
+Price = 13500
+Class = G_Sword
+
+[Darkness Sword]
+ID = 178
+Type = 2
+Level = 82
+Race = -1
+MinDmg = 90
+MaxDmg = 117
+Speed = 2
+ReqStr = 84
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 15910
+Class = G_Sword
+
+[Saber]
+#ID = 
+Type = 2
+Level = 95
+#Race = 
+MinDmg = 103
+MaxDmg = 134
+Speed = 2
+ReqStr = 89
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 20900
+Class = G_Sword
+
+[Oriental Sword]
+#ID = 
+Type = 2
+Level = 107
+#Race = 
+MinDmg = 99
+MaxDmg = 129
+Speed = 1
+ReqStr = 94
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 26110
+Class = G_Sword
+
+[Warrior Sword]
+#ID = 
+Type = 2
+Level = 120
+#Race = 
+MinDmg = 99
+MaxDmg = 129
+Speed = 1
+ReqStr = 97
+Position = 9
+Handed = 1
+SizeX = 2
+SizeY = 3
+Price = 32400
+Class = G_Sword
+
+[Karma Blade]
+#ID = 
+Type = 2
+Level = 135
+#Race = 
+MinDmg = 93
+MaxDmg = 121
+Speed = 0
+ReqStr = 102
+Position = 9
+Handed = 1
+SizeX = 2
+SizeY = 3
+Price = 40500
+Class = G_Sword
+
+[Explusion]
+#ID = 
+Type = 2
+Level = 150
+#Race = 
+MinDmg = 136
+MaxDmg = 177
+Speed = 1
+ReqStr = 109
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 49500
+Class = G_Sword
+
+[Cyclone Blade]
+#ID = 
+Type = 2
+Level = 180
+#Race = 
+MinDmg = 210
+MaxDmg = 235
+Speed = 1
+ReqStr = 133
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 70000
+Class = G_Sword
+
+[Twilight Sword]
+#ID = 
+Type = 2
+Level = 195
+#Race = 
+MinDmg = 216
+MaxDmg = 239
+Speed = 1
+ReqStr = 137
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 50000
+Class = G_Sword
+
+[Teurus Sword]
+ID = 641
+Type = 2
+Level = 210
+Race = -1
+MinDmg = 235
+MaxDmg = 263
+Speed = 1
+ReqStr = 140
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 100000
+Class = G_Sword
+
+[Defeat Sword]
+ID = 1062
+Type = 2
+Level = 261
+#Race = 
+MinDmg = 263
+MaxDmg = 294
+Speed = 1
+ReqStr = 150
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 10000000
+Class = G_Sword
+
+####### Axes ########
+[Stone Axe]
+ID = 48
+Type = 3
+Level = 1
+Race = -1
+MinDmg = 6
+MaxDmg = 8
+Speed = 1
+ReqStr = 15
+Position = 9
+Handed = 1
+SizeX = 1
+SizeY = 3
+Price = 30
+Class = G_Axe
+
+[Bulkan Axe]
+ID = 49
+Type = 3
+Level = 5
+Race = -1
+MinDmg = 9
+MaxDmg = 12
+Speed = 1
+ReqStr = 30
+Position = 9
+Handed = 1
+SizeX = 1
+SizeY = 3
+Price = 200
+Class = G_Axe
+
+[Big Bulkan Axe]
+ID = 155
+Type = 3
+Level = 10
+Race = -1
+MinDmg = 14
+MaxDmg = 18
+Speed = 1
+ReqStr = 49
+Position = 9
+Handed = 1
+SizeX = 1
+SizeY = 3
+Price = 500
+Class = G_Axe
+
+[Woodern Horn Axe]
+ID = 167
+Type = 3
+Level = 15
+Race = -1
+MinDmg = 25
+MaxDmg = 33
+Speed = 2
+ReqStr = 39
+Position = 9
+Handed = 1
+SizeX = 2
+SizeY = 3
+Price = 900
+Class = G_Axe
+
+[Blood Axe]
+ID = 461
+Type = 3
+Level = 20
+Race = -1
+MinDmg = 23
+MaxDmg = 31
+Speed = 1
+ReqStr = 44
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 1400
+Class = G_Axe
+
+[Double Edge Axe]
+ID = 156
+Type = 3
+Level = 23
+Race = -1
+MinDmg = 35
+MaxDmg = 48
+Speed = 2
+ReqStr = 58
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 1750
+Class = G_Axe
+
+[Half Moon Axe]
+ID = 462
+Type = 3
+Level = 28
+Race = -1
+MinDmg = 44
+MaxDmg = 53
+Speed = 2
+ReqStr = 64
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 2400
+Class = G_Axe
+
+[Warrior Axe]
+ID = 157
+Type = 3
+Level = 32
+Race = -1
+MinDmg = 48
+MaxDmg = 60
+Speed = 2
+ReqStr = 70
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 3010
+Class = G_Axe
+
+[Knife Edge Axe]
+ID = 463
+Type = 3
+Level = 43
+Race = -1
+MinDmg = 64
+MaxDmg = 70
+Speed = 2
+ReqStr = 74
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 5000
+Class = G_Axe
+
+[Darkness Axe]
+ID = 158
+Type = 3
+Level = 48
+Race = -1
+MinDmg = 80
+MaxDmg = 105
+Speed = 3
+ReqStr = 75
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 6050
+Class = G_Axe
+
+[Star Axe]
+ID = 213
+Type = 3
+Level = 54
+Race = -1
+MinDmg = 68
+MaxDmg = 90
+Speed = 2
+ReqStr = 78
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 7450
+Class = G_Axe
+
+[Brave Warrior Axe]
+ID = 179
+Type = 3
+Level = 60
+Race = -1
+MinDmg = 71
+MaxDmg = 97
+Speed = 2
+ReqStr = 80
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 9000
+Class = G_Axe
+
+[Power Axe]
+ID = 180
+Type = 3
+Level = 79
+Race = -1
+MinDmg = 99
+MaxDmg = 143
+Speed = 3
+ReqStr = 88
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 1450
+Class = G_Axe
+
+[Triple Horn Axe]
+#ID = 
+Type = 3
+Level = 92
+#Race = 
+MinDmg = 115
+MaxDmg = 158
+Speed = 3
+ReqStr = 92
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 19690
+Class = G_Axe
+
+[Heavy Axe]
+#ID = 
+Type = 3
+Level = 105
+#Race = 
+MinDmg = 130
+MaxDmg = 170
+Speed = 3
+ReqStr = 105
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 25200
+Class = G_Axe
+
+[Lion Axe]
+#ID = 
+Type = 3
+Level = 120
+#Race = 
+MinDmg = 125
+MaxDmg = 163
+Speed = 2
+ReqStr = 120
+Position = 9
+Handed = 1
+SizeX = 2
+SizeY = 3
+Price = 32400
+Class = G_Axe
+
+[Battle Axe]
+#ID = 
+Type = 3
+Level = 135
+#Race = 
+MinDmg = 162
+MaxDmg = 190
+Speed = 3
+ReqStr = 135
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 40500
+Class = G_Axe
+
+[Vampire Axe]
+#ID = 
+Type = 3
+Level = 150
+#Race = 
+MinDmg = 210
+MaxDmg = 250
+Speed = 3
+ReqStr = 150
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 49500
+Class = G_Axe
+
+[Scream Axe]
+#ID = 
+Type = 3
+Level = 180
+#Race = 
+MinDmg = 290
+MaxDmg = 330
+Speed = 3
+ReqStr = 165
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 70000
+Class = G_Axe
+
+[Glorious Axe]
+#ID = 
+Type = 3
+Level = 195
+#Race = 
+MinDmg = 301
+MaxDmg = 333
+Speed = 3
+ReqStr = 168
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 50000
+Class = G_Axe
+
+[Crash Axe]
+ID = 642
+Type = 3
+Level = 210
+Race = -1
+MinDmg = 325
+MaxDmg = 370
+Speed = 3
+ReqStr = 171
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 100000
+Class = G_Axe
+
+[Havoc Axe]
+ID = 1063
+Type = 3
+Level = 261
+Race = -1
+MinDmg = 364
+MaxDmg = 414
+Speed = 3
+ReqStr = 177
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 10000000
+Class = G_Axe
+
+####### Rings ########
+[Bee Swarm Ring]
+ID = 431
+Type = 4
+Level = 1
+Race = 2
+MinDmg = 6
+MaxDmg = 10
+ManaUsed = 3
+Speed = 0
+ReqStr = 8
+ReqInt = 15
+Position = 9
+Handed = 1
+SizeX = 2
+SizeY = 2
+Price = 30
+Class = G_RingWeapon
+
+[Butterfly Ring]
+ID = 432
+Type = 4
+Level = 12
+Race = 2
+MinDmg = 12
+MaxDmg = 19
+ManaUsed = 4
+Speed = 1
+ReqStr = 10
+ReqInt = 22
+Position = 9
+Handed = 1
+SizeX = 2
+SizeY = 2
+Price = 180
+Class = G_RingWeapon
+
+[Purple Ring]
+ID = 439
+Type = 4
+Level = 23
+Race = 2
+MinDmg = 23
+MaxDmg = 35
+ManaUsed = 8
+Speed = 1
+ReqStr = 12
+ReqInt = 32
+Position = 9
+Handed = 1
+SizeX = 2
+SizeY = 2
+Price = 1750
+Class = G_RingWeapon
+
+[Poisonous Moth Ring]
+ID = 440
+Type = 4
+Level = 37
+Race = 2
+MinDmg = 28
+MaxDmg = 40
+ManaUsed = 8
+Speed = 0
+ReqStr = 14
+ReqInt = 41
+Position = 9
+Handed = 1
+SizeX = 2
+SizeY = 2
+Price = 3800
+Class = G_RingWeapon
+
+[Horn Bug Ring]
+ID = 510
+Type = 4
+Level = 50
+Race = 2
+MinDmg = 52
+MaxDmg = 67
+#ManaUsed = 
+Speed = 1
+ReqStr = 17
+ReqInt = 53
+Position = 9
+Handed = 1
+SizeX = 2
+SizeY = 2
+Price = 6000
+Class = G_RingWeapon
+
+[Silver Fly Ring]
+ID = 544
+Type = 4
+Level = 62
+Race = 2
+MinDmg = 71
+MaxDmg = 84
+#ManaUsed = 
+Speed = 1
+ReqStr = 20
+ReqInt = 57
+Position = 9
+Handed = 1
+SizeX = 2
+SizeY = 2
+Price = 9200
+Class = G_RingWeapon
+
+[Raven Ring]
+ID = 545
+Type = 4
+Level = 72
+Race = 2
+MinDmg = 90
+MaxDmg = 115
+#ManaUsed = 
+Speed = 1
+ReqStr = 24
+ReqInt = 66
+Position = 9
+Handed = 1
+SizeX = 2
+SizeY = 2
+Price = 12500
+Class = G_RingWeapon
+
+[Kynes Ring]
+ID = 546
+Type = 4
+Level = 82
+Race = 2
+MinDmg = 75
+MaxDmg = 97
+#ManaUsed = 
+Speed = 0
+ReqStr = 27
+ReqInt = 72
+Position = 9
+Handed = 1
+SizeX = 2
+SizeY = 2
+Price = 15600
+Class = G_RingWeapon
+
+[Neosnake Ring]
+#ID = 
+Type = 4
+Level = 94
+Race = 2
+MinDmg = 120
+MaxDmg = 150
+#ManaUsed = 
+Speed = 1
+ReqStr = 30
+ReqInt = 81
+Position = 9
+Handed = 1
+SizeX = 2
+SizeY = 2
+Price = 18690
+Class = G_RingWeapon
+
+[Kaizen Ring]
+#ID = 
+Type = 4
+Level = 115
+Race = 2
+MinDmg = 135
+MaxDmg = 160
+#ManaUsed = 
+Speed = 1
+ReqStr = 36
+ReqInt = 99
+Position = 9
+Handed = 1
+SizeX = 2
+SizeY = 2
+Price = 30050
+Class = G_RingWeapon
+
+[Phoenix Ring]
+#ID = 
+Type = 4
+Level = 150
+Race = 2
+MinDmg = 174
+MaxDmg = 206
+#ManaUsed = 
+Speed = 1
+ReqStr = 43
+ReqInt = 112
+Position = 9
+Handed = 1
+SizeX = 2
+SizeY = 2
+Price = 42800
+Class = G_RingWeapon
+
+[Griffon Ring]
+#ID = 
+Type = 4
+Level = 180
+Race = 2
+MinDmg = 208
+MaxDmg = 247
+#ManaUsed = 
+Speed = 1
+ReqStr = 46
+ReqInt = 122
+Position = 9
+Handed = 1
+SizeX = 2
+SizeY = 2
+Price = 56000
+Class = G_RingWeapon
+
+[Sphinx Ring]
+#ID = 
+Type = 4
+Level = 195
+Race = 2
+MinDmg = 216
+MaxDmg = 248
+#ManaUsed = 
+Speed = 1
+ReqStr = 48
+ReqInt = 128
+Position = 9
+Handed = 1
+SizeX = 2
+SizeY = 2
+Price = 50000
+Class = G_RingWeapon
+
+[Dragon Ring]
+#ID = 
+Type = 4
+Level = 210
+Race = 2
+MinDmg = 233
+MaxDmg = 276
+#ManaUsed = 
+Speed = 1
+ReqStr = 50
+ReqInt = 135
+Position = 9
+Handed = 1
+SizeX = 2
+SizeY = 2
+Price = 70000
+Class = G_RingWeapon
+
+[Devil Ring]
+ID = 1065
+Type = 4
+Level = 261
+Race = 2
+MinDmg = 260
+MaxDmg = 309
+ManaUsed = 48
+Speed = 1
+ReqStr = 54
+ReqInt = 148
+Position = 9
+Handed = 1
+SizeX = 2
+SizeY = 2
+Price = 10000000
+Class = G_RingWeapon
+
+####### Staffs ########
+[Red Staff]
+ID = 171
+Type = 5
+Level = 1
+Race = -1
+MinDmg = 3
+MaxDmg = 5
+MagicDmg = 3	 # value in %
+MagicSpeed = 5	 # value in %
+Speed = 1
+ReqStr = 8
+ReqInt = 15
+Position = 9
+SizeX = 1
+SizeY = 3
+Price = 30
+Class = G_StaffWeapon
+
+[God Staff]
+ID = 170
+Type = 5
+Level = 5
+Race = -1
+MinDmg = 5
+MaxDmg = 8
+MagicDmg = 6	 # value in %
+MagicSpeed = 8	 # value in %
+Speed = 1
+ReqStr = 12
+ReqInt = 26
+Position = 9
+SizeX = 1
+SizeY = 3
+Price = 200
+Class = G_StaffWeapon
+
+[Eagle Staff]
+ID = 169
+Type = 5
+Level = 10
+Race = -1
+MinDmg = 10
+MaxDmg = 12
+MagicDmg = 10	 # value in %
+MagicSpeed = 12	 # value in %
+Speed = 1
+ReqStr = 16
+ReqInt = 32
+Position = 9
+SizeX = 1
+SizeY = 3
+Price = 500
+Class = G_StaffWeapon
+
+[King Staff]
+ID = 159
+Type = 5
+Level = 18
+Race = -1
+MinDmg = 15
+MaxDmg = 18
+MagicDmg = 15	 # value in %
+MagicSpeed = 16	 # value in %
+Speed = 2
+ReqStr = 19
+ReqInt = 41
+Position = 9
+SizeX = 2
+SizeY = 3
+Price = 1140
+Class = G_StaffWeapon
+
+[Skeleton Staff]
+ID = 161
+Type = 5
+Level = 23
+Race = -1
+MinDmg = 20
+MaxDmg = 25
+MagicDmg = 19	 # value in %
+MagicSpeed = 20	 # value in %
+Speed = 1
+ReqStr = 20
+ReqInt = 48
+Position = 9
+SizeX = 2
+SizeY = 3
+Price = 1750
+Class = G_StaffWeapon
+
+[Wiseman Staff]
+ID = 468
+Type = 5
+Level = 31
+Race = -1
+MinDmg = 25
+MaxDmg = 30
+MagicDmg = 22	 # value in %
+MagicSpeed = 22	 # value in %
+Speed = 1
+ReqStr = 21
+ReqInt = 51
+Position = 9
+SizeX = 2
+SizeY = 3
+Price = 1750
+Class = G_StaffWeapon
+
+[One-eyed Staff]
+ID = 160
+Type = 5
+Level = 35
+Race = -1
+MinDmg = 25
+MaxDmg = 30
+MagicDmg = 26	 # value in %
+MagicSpeed = 24	 # value in %
+Speed = 2
+ReqStr = 23
+ReqInt = 55
+Position = 9
+SizeX = 2
+SizeY = 3
+Price = 3500
+Class = G_StaffWeapon
+
+[Evil Wizard Staff]
+ID = 181
+Type = 5
+Level = 43
+Race = -1
+MinDmg = 31
+MaxDmg = 35
+MagicDmg = 31	 # value in %
+MagicSpeed = 28	 # value in %
+Speed = 2
+ReqStr = 26
+ReqInt = 62
+Position = 9
+SizeX = 2
+SizeY = 3
+Price = 4990
+Class = G_StaffWeapon
+
+[Crystal Staff]
+ID = 469
+Type = 5
+Level = 52
+Race = -1
+MinDmg = 32
+MaxDmg = 35
+MagicDmg = 35	 # value in %
+MagicSpeed = 30	 # value in %
+Speed = 2
+ReqStr = 28
+ReqInt = 67
+Position = 9
+SizeX = 2
+SizeY = 3
+Price = 4990
+Class = G_StaffWeapon
+
+[Emerald Staff]
+ID = 182
+Type = 5
+Level = 60
+Race = -1
+MinDmg = 34
+MaxDmg = 39
+MagicDmg = 41	 # value in %
+MagicSpeed = 30	 # value in %
+Speed = 2
+ReqStr = 29
+ReqInt = 71
+Position = 9
+SizeX = 2
+SizeY = 3
+Price = 9000
+Class = G_StaffWeapon
+
+[Mystery Staff]
+ID = 284
+Type = 5
+Level = 74
+Race = -1
+MinDmg = 37
+MaxDmg = 43
+MagicDmg = 50	 # value in %
+MagicSpeed = 30	 # value in %
+Speed = 2
+ReqStr = 32
+ReqInt = 76
+Position = 9
+SizeX = 2
+SizeY = 3
+Price = 13170
+Class = G_StaffWeapon
+
+[Fan Staff]
+ID = 285
+Type = 5
+Level = 85
+Race = -1
+MinDmg = 40
+MaxDmg = 46
+MagicDmg = 56	 # value in %
+MagicSpeed = 30	 # value in %
+Speed = 2
+ReqStr = 35
+ReqInt = 82
+Position = 9
+SizeX = 2
+SizeY = 3
+Price = 17000
+Class = G_StaffWeapon
+
+[Ancient Staff]
+#ID = 
+Type = 5
+Level = 97
+#Race = 
+MinDmg = 43
+MaxDmg = 49
+MagicDmg = 64	 # value in %
+MagicSpeed = 30	 # value in %
+Speed = 2
+ReqStr = 37
+ReqInt = 90
+Position = 9
+SizeX = 2
+SizeY = 3
+Price = 21730
+Class = G_StaffWeapon
+
+[Sharp Staff]
+#ID = 
+Type = 5
+Level = 115
+#Race = 
+MinDmg = 46
+MaxDmg = 52
+MagicDmg = 75	 # value in %
+MagicSpeed = 30	 # value in %
+Speed = 2
+ReqStr = 39
+ReqInt = 98
+Position = 9
+SizeX = 2
+SizeY = 3
+Price = 29900
+Class = G_StaffWeapon
+
+[Golden Jade Staff]
+#ID = 
+Type = 5
+Level = 130
+#Race = 
+MinDmg = 49
+MaxDmg = 55
+MagicDmg = 84	 # value in %
+MagicSpeed = 30	 # value in %
+Speed = 2
+ReqStr = 41
+ReqInt = 106
+Position = 9
+SizeX = 2
+SizeY = 3
+Price = 37700
+Class = G_StaffWeapon
+
+[Ring Staff]
+#ID = 
+Type = 5
+Level = 145
+#Race = 
+MinDmg = 52
+MaxDmg = 58
+MagicDmg = 95	 # value in %
+MagicSpeed = 30	 # value in %
+Speed = 2
+ReqStr = 43
+ReqInt = 114
+Position = 9
+SizeX = 2
+SizeY = 3
+Price = 46400
+Class = G_StaffWeapon
+
+[Mighty Staff]
+#ID = 
+Type = 5
+Level = 160
+#Race = 
+MinDmg = 55
+MaxDmg = 61
+MagicDmg = 113	 # value in %
+MagicSpeed = 30	 # value in %
+Speed = 2
+ReqStr = 45
+ReqInt = 122
+Position = 9
+SizeX = 2
+SizeY = 3
+Price = 56000
+Class = G_StaffWeapon
+
+[Falcon Staff]
+#ID = 
+Type = 5
+Level = 180
+#Race = 
+MinDmg = 58
+MaxDmg = 64
+MagicDmg = 120	 # value in %
+MagicSpeed = 30	 # value in %
+Speed = 2
+ReqStr = 48
+ReqInt = 130
+Position = 9
+SizeX = 2
+SizeY = 3
+Price = 72000
+Class = G_StaffWeapon
+
+[Silverwing Staff]
+#ID = 
+Type = 5
+Level = 195
+#Race = 
+MinDmg = 60
+MaxDmg = 66
+MagicDmg = 125	 # value in %
+MagicSpeed = 30	 # value in %
+Speed = 2
+ReqStr = 49
+ReqInt = 132
+Position = 9
+SizeX = 2
+SizeY = 3
+Price = 50000
+Class = G_StaffWeapon
+
+[Soul Staff]
+ID = 643
+Type = 5
+Level = 210
+Race = -1
+MinDmg = 64
+MaxDmg = 71
+MagicDmg = 134	 # value in %
+MagicSpeed = 30	 # value in %
+Speed = 2
+ReqStr = 51
+ReqInt = 135
+Position = 9
+SizeX = 2
+SizeY = 3
+Price = 94000
+Class = G_StaffWeapon
+
+[Ruin Staff]
+ID = 1064
+Type = 5
+Level = 261
+Race = -1
+MinDmg = 71
+MaxDmg = 79
+MagicDmg = 148	 # value in %
+MagicSpeed = 30	 # value in %
+Speed = 2
+ReqStr = 54
+ReqInt = 140
+Position = 9
+SizeX = 2
+SizeY = 3
+Price = 10000000
+Class = G_StaffWeapon
+
+##########################
+#### SECONDARY WEAPON ####
+##########################
+
+#### Heavy Weapons ####
+[Collecting Device]
+ID = 695
+Type = 6
+SkillLevel = 0
+Race = 3
+MinDmg = 0
+MaxDmg = 0
+EeUsed = 50
+Speed = 2
+ReqStr = 50
+ReqDex = 100
+Ammunition = 1
+Slot = 4
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 100000
+Class = G_HeavyWeapon
+
+[Charging Cannon]
+#ID = 
+Type = 6
+SkillLevel = 1
+Race = 3
+MinDmg = 100
+MaxDmg = 120
+#EeUsed = 
+Speed = 2
+ReqStr = 50
+ReqDex = 100
+Ammunition = 150
+Slot = 4
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 150000
+Class = G_HeavyWeapon
+
+[Flame Thrower]
+#ID = 
+Type = 6
+SkillLevel = 2
+Race = 3
+MinDmg = 200
+MaxDmg = 200
+#EeUsed = 
+Speed = 2
+ReqStr = 50
+ReqDex = 100
+Ammunition = 100
+Slot = 3
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 150000
+Class = G_HeavyWeapon
+
+[Laser Weapon]
+#ID = 
+Type = 6
+SkillLevel = 2
+Race = 3
+MinDmg = 100
+MaxDmg = 250
+#EeUsed = 
+Speed = 2
+ReqStr = 50
+ReqDex = 100
+Ammunition = 200
+Slot = 2
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 150000
+Class = G_HeavyWeapon
+
+[Mine Layer]
+#ID = 
+Type = 6
+SkillLevel = 3
+Race = 3
+MinDmg = 0
+MaxDmg = 0
+#EeUsed = 
+Speed = 2
+ReqStr = 50
+ReqDex = 100
+Ammunition = 8
+Slot = 5
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 150000
+Class = G_HeavyWeapon
+
+[Rocket Gun]
+#ID = 
+Type = 6
+SkillLevel = 3
+Race = 3
+MinDmg = 300
+MaxDmg = 350
+#EeUsed = 
+Speed = 2
+ReqStr = 50
+ReqDex = 100
+Ammunition = 20
+Slot = 1
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 150000
+Class = G_HeavyWeapon
+
+[Charging Cannon-MK1_1]
+#ID = 
+Type = 6
+SkillLevel = 4
+Race = 3
+MinDmg = 160
+MaxDmg = 180
+#EeUsed = 
+Speed = 2
+ReqStr = 50
+ReqDex = 100
+Ammunition = 200
+Slot = 5
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 250000
+Class = G_HeavyWeapon
+
+[Flame Thrower-MK1]
+#ID = 
+Type = 6
+SkillLevel = 5
+Race = 3
+MinDmg = 330
+MaxDmg = 330
+#EeUsed = 
+Speed = 2
+ReqStr = 50
+ReqDex = 100
+Ammunition = 150
+Slot = 4
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 250000
+Class = G_HeavyWeapon
+
+[Laser Weapon-MK1]
+#ID = 
+Type = 6
+SkillLevel = 5
+Race = 3
+MinDmg = 200
+MaxDmg = 300
+#EeUsed = 
+Speed = 2
+ReqStr = 50
+ReqDex = 100
+Ammunition = 300
+Slot = 3
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 250000
+Class = G_HeavyWeapon
+
+[Charging Cannon-MK1_2]
+#ID = 
+Type = 6
+SkillLevel = 5
+Race = 3
+MinDmg = 180
+MaxDmg = 200
+#EeUsed = 
+Speed = 2
+ReqStr = 50
+ReqDex = 100
+Ammunition = 250
+Slot = 4
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 270000
+Class = G_HeavyWeapon
+
+[Charging Cannon-MK2_1]
+#ID = 
+Type = 6
+SkillLevel = 5
+Race = 3
+MinDmg = 180
+MaxDmg = 200
+#EeUsed = 
+Speed = 2
+ReqStr = 50
+ReqDex = 100
+Ammunition = 150
+Slot = 6
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 270000
+Class = G_HeavyWeapon
+
+[Flame Thrower-MK1 BP]
+#ID = 
+Type = 6
+SkillLevel = 5
+Race = 3
+MinDmg = 360
+MaxDmg = 360
+#EeUsed = 
+Speed = 2
+ReqStr = 50
+ReqDex = 100
+Ammunition = 200
+Slot = 3
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 270000
+Class = G_HeavyWeapon
+
+[Flame Thrower-MK2 SP]
+#ID = 
+Type = 6
+SkillLevel = 5
+Race = 3
+MinDmg = 360
+MaxDmg = 360
+#EeUsed = 
+Speed = 2
+ReqStr = 50
+ReqDex = 100
+Ammunition = 100
+Slot = 5
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 270000
+Class = G_HeavyWeapon
+
+[Mine Layer-MK1]
+#ID = 
+Type = 6
+SkillLevel = 6
+Race = 3
+MinDmg = 0
+MaxDmg = 0
+#EeUsed = 
+Speed = 2
+ReqStr = 50
+ReqDex = 100
+Ammunition = 14
+Slot = 6
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 250000
+Class = G_HeavyWeapon
+
+[Rocket Gun-MK1]
+#ID = 
+Type = 6
+SkillLevel = 6
+Race = 3
+MinDmg = 400
+MaxDmg = 450
+#EeUsed = 
+Speed = 2
+ReqStr = 50
+ReqDex = 100
+Ammunition = 40
+Slot = 2
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 250000
+Class = G_HeavyWeapon
+
+[Laser Weapon-MK1 BP]
+#ID = 
+Type = 6
+SkillLevel = 6
+Race = 3
+MinDmg = 240
+MaxDmg = 330
+#EeUsed = 
+Speed = 2
+ReqStr = 50
+ReqDex = 100
+Ammunition = 400
+Slot = 2
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 270000
+Class = G_HeavyWeapon
+
+[Laser Weapon-MK2 SP]
+#ID = 
+Type = 6
+SkillLevel = 6
+Race = 3
+MinDmg = 240
+MaxDmg = 330
+#EeUsed = 
+Speed = 2
+ReqStr = 50
+ReqDex = 100
+Ammunition = 200
+Slot = 4
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 270000
+Class = G_HeavyWeapon
+
+[Charging Cannon-MK2_2]
+#ID = 
+Type = 6
+SkillLevel = 7
+Race = 3
+MinDmg = 210
+MaxDmg = 230
+#EeUsed = 
+Speed = 2
+ReqStr = 50
+ReqDex = 100
+Ammunition = 250
+Slot = 7
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 400000
+Class = G_HeavyWeapon
+
+[Flame Thrower-MK2]
+#ID = 
+Type = 6
+SkillLevel = 8
+Race = 3
+MinDmg = 440
+MaxDmg = 440
+#EeUsed = 
+Speed = 2
+ReqStr = 50
+ReqDex = 100
+Ammunition = 200
+Slot = 6
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 400000
+Class = G_HeavyWeapon
+
+[Laser Weapon-MK2]
+#ID = 
+Type = 6
+SkillLevel = 8
+Race = 3
+MinDmg = 330
+MaxDmg = 400
+#EeUsed = 
+Speed = 2
+ReqStr = 50
+ReqDex = 100
+Ammunition = 400
+Slot = 5
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 400000
+Class = G_HeavyWeapon
+
+[Mine Layer-MK2]
+#ID = 
+Type = 6
+SkillLevel = 9
+Race = 3
+MinDmg = 0
+MaxDmg = 0
+#EeUsed = 
+Speed = 2
+ReqStr = 50
+ReqDex = 100
+Ammunition = 18
+Slot = 8
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 400000
+Class = G_HeavyWeapon
+
+[Rocket Gun-MK2]
+#ID = 
+Type = 6
+SkillLevel = 9
+Race = 3
+MinDmg = 500
+MaxDmg = 550
+#EeUsed = 
+Speed = 2
+ReqStr = 50
+ReqDex = 100
+Ammunition = 60
+Slot = 3
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 400000
+Class = G_HeavyWeapon
+
+###### SLAYERS ######
+[Slayer]
+#ID = 
+Type = 7
+SkillLevel = 3
+Race = 0
+MinDmg = 200
+MaxDmg = 250
+#StmUsed = 
+Speed = 4
+ReqStr = 100
+Durability = 3000
+Demolition = 0		# value in %
+MemoryDmg = 60		# value in %
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 70000
+Class = G_SlayerWeapon
+
+[Demolition]
+#ID = 
+Type = 7
+SkillLevel = 5
+Race = 0
+MinDmg = 170
+MaxDmg = 220
+#StmUsed = 
+Speed = 4
+ReqStr = 100
+Durability = 2500
+Demolition = 10		# value in %
+MemoryDmg = 50		# value in %
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 70000
+Class = G_SlayerWeapon
+
+[Heavy Slayer]
+#ID = 
+Type = 7
+SkillLevel = 14
+Race = 0
+MinDmg = 250
+MaxDmg = 300
+#StmUsed = 
+Speed = 4
+ReqStr = 100
+Durability = 4500
+Demolition = 0		# value in %
+MemoryDmg = 90		# value in %
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 120000
+Class = G_SlayerWeapon
+
+[Heavy Demolition]
+#ID = 
+Type = 7
+SkillLevel = 16
+Race = 0
+MinDmg = 220
+MaxDmg = 270
+#StmUsed = 
+Speed = 4
+ReqStr = 100
+Durability = 3000
+Demolition = 25		# value in %
+MemoryDmg = 75		# value in %
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 120000
+Class = G_SlayerWeapon
+
+[Mammoth Slayer]
+#ID = 
+Type = 7
+SkillLevel = 17
+Race = 0
+MinDmg = 280
+MaxDmg = 320
+#StmUsed = 
+Speed = 4
+ReqStr = 100
+Durability = 4900
+Demolition = 0		# value in %
+MemoryDmg = 100		# value in %
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 150000
+Class = G_SlayerWeapon
+
+[Mammoth Demolition]
+#ID = 
+Type = 7
+SkillLevel = 19
+Race = 0
+MinDmg = 240
+MaxDmg = 290
+#StmUsed = 
+Speed = 4
+ReqStr = 100
+Durability = 3200
+Demolition = 30		# value in %
+MemoryDmg = 80		# value in %
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 150000
+Class = G_SlayerWeapon
+
+[Power Slayer]
+ID = 728
+Type = 7
+SkillLevel = 20
+Race = 0
+MinDmg = 300
+MaxDmg = 350
+#StmUsed = 
+Speed = 4
+ReqStr = 100
+Durability = 5500
+Demolition = 0		# value in %
+MemoryDmg = 120		# value in %
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 200000
+Class = G_SlayerWeapon
+
+[Power Demolition]
+#ID = 
+Type = 7
+SkillLevel = 22
+Race = 0
+MinDmg = 270
+MaxDmg = 320
+#StmUsed = 
+Speed = 4
+ReqStr = 100
+Durability = 3500
+Demolition = 40		# value in %
+MemoryDmg = 90		# value in %
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 200000
+Class = G_SlayerWeapon
+
+##### CHAKURAMS #####
+[Chakuram]
+#ID = 
+Type = 8
+SkillLevel = 1
+Race = 0
+MinDmg = 50
+MaxDmg = 150
+StmUsed = 20
+Speed = 2
+ReqStr = 100
+Durability = 3000
+Cold = 5		# value in %
+Stonization = 5		# value in %
+Position = 3
+Handed = 1
+SizeX = 2
+SizeY = 2
+Price = 70000
+Class = G_ChakuranWeapon
+
+[Chakuram Petrifaction]
+#ID = 
+Type = 8
+SkillLevel = 2
+Race = 0
+MinDmg = 50
+MaxDmg = 150
+#StmUsed = 
+Speed = 2
+ReqStr = 100
+Durability = 2000
+Cold = 1		# value in %
+Stonization = 15	# value in %
+Position = 3
+Handed = 1
+SizeX = 2
+SizeY = 2
+Price = 70000
+Class = G_ChakuranWeapon
+
+[Chakuram Paralysis]
+#ID = 
+Type = 8
+SkillLevel = 5
+Race = 0
+MinDmg = 50
+MaxDmg = 150
+#StmUsed = 
+Speed = 2
+ReqStr = 100
+Durability = 2000
+Cold = 15		# value in %
+Stonization = 1		# value in %
+Position = 3
+Handed = 1
+SizeX = 2
+SizeY = 2
+Price = 70000
+Class = G_ChakuranWeapon
+
+[Heavy Chakuram Petrifaction]
+#ID = 
+Type = 8
+SkillLevel = 8
+Race = 0
+MinDmg = 100
+MaxDmg = 250
+#StmUsed = 
+Speed = 2
+ReqStr = 100
+Durability = 3000
+Cold = 8		# value in %
+Stonization = 25	# value in %
+Position = 3
+Handed = 1
+SizeX = 2
+SizeY = 2
+Price = 120000
+Class = G_ChakuranWeapon
+
+[Heavy Chakuram Paralysis]
+#ID = 
+Type = 8
+SkillLevel = 15
+Race = 0
+MinDmg = 100
+MaxDmg = 250
+#StmUsed = 
+Speed = 2
+ReqStr = 100
+Durability = 3000
+Cold = 25		# value in %
+Stonization = 4		# value in %
+Position = 3
+Handed = 1
+SizeX = 2
+SizeY = 2
+Price = 120000
+Class = G_ChakuranWeapon
+
+[Power Chakuram Petrifaction]
+#ID = 
+Type = 8
+SkillLevel = 20
+Race = 0
+MinDmg = 150
+MaxDmg = 350
+#StmUsed = 
+Speed = 2
+ReqStr = 100
+Durability = 4000
+Cold = 12		# value in %
+Stonization = 35	# value in %
+Position = 3
+Handed = 1
+SizeX = 2
+SizeY = 2
+Price = 200000
+Class = G_ChakuranWeapon
+
+[Power Chakuram Paralysis]
+#ID = 
+Type = 8
+SkillLevel = 22
+Race = 0
+MinDmg = 150
+MaxDmg = 350
+#StmUsed = 
+Speed = 2
+ReqStr = 100
+Durability = 4000
+Cold = 35		# value in %
+Stonization = 8		# value in %
+Position = 3
+Handed = 1
+SizeX = 2
+SizeY = 2
+Price = 200000
+Class = G_ChakuranWeapon
+
+[Magic Chakuram]
+#ID = 
+Type = 8
+SkillLevel = 23
+Race = 0
+MinDmg = 150
+MaxDmg = 350
+#StmUsed = 
+Speed = 2
+ReqStr = 100
+Durability = 3000
+Cold = 35		# value in %
+Stonization = 35	# value in %
+Position = 3
+Handed = 1
+SizeX = 2
+SizeY = 2
+Price = 200000
+Class = G_ChakuranWeapon
+
+####### WANDS #######
+[Magic Arrow Wand]
+#ID = 
+Type = 9
+SkillLevel = 1
+Race = 1
+MinDmg = 200
+MaxDmg = 250
+MagicPower = 1		# value in %
+MagicSpeed = 150	# value in %
+#ManaUsed = 
+Speed = 1
+ReqInt = 100
+AccumulatedDmg = 1000
+MagicDmg = 20		# value in %
+StaffDmg = 20		# value in %
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 10000
+Class = G_WandWeapon
+
+[Magic Bullet Wand]
+#ID = 
+Type = 9
+SkillLevel = 1
+Race = 1
+MinDmg = 280
+MaxDmg = 320
+MagicPower = 0		# value in %
+MagicSpeed = 100	# value in %
+#ManaUsed = 
+Speed = 1
+ReqInt = 100
+MagicDmg = 20		# value in %
+StaffDmg = 20		# value in %
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 10000
+Class = G_WandWeapon
+
+[Chain Lightning Wand]
+#ID = 
+Type = 9
+SkillLevel = 2
+Race = 1
+MinDmg = 330
+MaxDmg = 370
+MagicPower = 1		# value in %
+MagicSpeed = 100	# value in %
+#ManaUsed = 
+Speed = 1
+ReqInt = 100
+AccumulatedDmg = 2000
+MagicDmg = 20		# value in %
+StaffDmg = 20		# value in %
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 20000
+Class = G_WandWeapon
+
+[Meteorite Wand]
+#ID = 
+Type = 9
+SkillLevel = 2
+Race = 1
+MinDmg = 450
+MaxDmg = 500
+MagicPower = 0		# value in %
+MagicSpeed = 70		# value in %
+#ManaUsed = 
+Speed = 2
+ReqInt = 100
+MagicDmg = 20		# value in %
+StaffDmg = 20		# value in %
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 20000
+Class = G_WandWeapon
+
+[Magic Sword Wand_1]
+#ID = 
+Type = 9
+SkillLevel = 2
+Race = 1
+MinDmg = 370
+MaxDmg = 420
+MagicPower = 1		# value in %
+MagicSpeed = 40		# value in %
+#ManaUsed = 
+Speed = 1
+ReqInt = 100
+AccumulatedDmg = 2500
+MagicDmg = 20		# value in %
+StaffDmg = 20		# value in %
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 25000
+Class = G_WandWeapon
+
+[Blizzard Wand]
+#ID = 
+Type = 9
+SkillLevel = 3
+Race = 1
+MinDmg = 550
+MaxDmg = 600
+MagicPower = 2		# value in %
+MagicSpeed = 60		# value in %
+#ManaUsed = 
+Speed = 2
+ReqInt = 100
+Cold = 80		# value in %
+MagicDmg = 20		# value in %
+StaffDmg = 20		# value in %
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 30000
+Class = G_WandWeapon
+
+[Magic Sword Wand_2]
+#ID = 
+Type = 9
+SkillLevel = 3
+Race = 1
+MinDmg = 450
+MaxDmg = 500
+MagicPower = 0		# value in %
+MagicSpeed = 150	# value in %
+#ManaUsed = 
+Speed = 0
+ReqInt = 100
+MagicDmg = 20		# value in %
+StaffDmg = 20		# value in %
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 30000
+Class = G_WandWeapon
+
+[Confusion Storm Wand]
+#ID = 
+Type = 9
+SkillLevel = 4
+Race = 1
+MinDmg = 750
+MaxDmg = 800
+MagicPower = 3		# value in %
+MagicSpeed = 40		# value in %
+#ManaUsed = 
+Speed = 3
+ReqInt = 100
+Chaos = 100		# value in %
+MagicDmg = 20		# value in %
+StaffDmg = 20		# value in %
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 50000
+Class = G_WandWeapon
+
+#######################
+####### SHIELDS #######
+#######################
+
+[Iron Shield]
+ID = 34
+Type = 10
+Level = 5
+Def = 8
+ReqStr = 19
+Position = 5
+SizeX = 2
+SizeY = 2
+Price = 320
+Class = G_Shield
+
+[Brince Shield]
+ID = 187
+Type = 10
+Level = 7
+Def = 12
+ReqStr = 27
+Position = 5
+SizeX = 2
+SizeY = 2
+Price = 660
+Class = G_Shield
+
+[Xeno Shield]
+ID = 188
+Type = 10
+Level = 14
+Def = 16
+ReqStr = 36
+Position = 5
+SizeX = 2
+SizeY = 2
+Price = 1730
+Class = G_Shield
+
+[Skull Shield]
+ID = 189
+Type = 10
+Level = 26
+Def = 21
+ReqStr = 28
+Position = 5
+SizeX = 2
+SizeY = 2
+Price = 4210
+Class = G_Shield
+
+[Hell Shield]
+ID = 190
+Type = 10
+Level = 39
+Def = 27
+ReqStr = 53
+Position = 5
+SizeX = 2
+SizeY = 2
+Price = 8110
+Class = G_Shield
+
+[Golden Shield]
+ID = 121
+Type = 10
+Level = 59
+Def = 35
+ReqStr = 59
+Position = 5
+SizeX = 2
+SizeY = 2
+Price = 15090
+Class = G_Shield
+
+[Bulkan Meta Shield]
+ID = 875
+Type = 10
+Level = 250
+Def = 99
+ReqStr = 59
+ResistenceAll = 5	# value in %
+BonusDef = 70
+Position = 5
+SizeX = 2
+SizeY = 2
+Price = 1000000
+Class = G_Shield
+
+[Human Meta Shield]
+ID = 876
+Type = 10
+Level = 250
+Def = 89
+ReqStr = 59
+ResistenceAll = 5	# value in %
+MagicDef = 10		# value in %
+Position = 5
+SizeX = 2
+SizeY = 2
+Price = 1000000
+Class = G_Shield
+
+[Bulkan Hi-Meta Shield]
+ID = 1027
+Type = 10
+Level = 300
+Def = 120
+ReqStr = 59
+ResistenceAll = 8	# value in %
+BonusDef = 70
+Position = 5
+SizeX = 2
+SizeY = 2
+Price = 10000000
+Class = G_Shield
+
+[Human Hi-Meta Shield]
+ID = 1028
+Type = 10
+Level = 300
+Def = 110
+ReqStr = 59
+ResistenceAll = 8	# value in %
+MagicDef = 10		# value in %
+Position = 5
+SizeX = 2
+SizeY = 2
+Price = 10000000
+Class = G_Shield
+
+#######################
+####### Mantles #######
+#######################
+
+[Tiger Mantle]
+ID = 191
+Type = 11
+Level = 8
+Race = -1
+Def = 2
+MagicDef = 2	# value in %
+ManaUsed = 0	# value in %
+ReqStr = 10
+ReqInt = 32
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 800
+Class = G_Mantle
+
+[Hurricane Mantle]
+ID = 192
+Type = 11
+Level = 20
+Race = -1
+Def = 4
+MagicDef = 4	# value in %
+ManaUsed = 0	# value in %
+ReqStr = 10
+ReqInt = 36
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 3000
+Class = G_Mantle
+
+[Peace Mantle]
+ID = 193
+Type = 11
+Level = 30
+Race = -1
+Def = 6
+MagicDef = 8	# value in %
+ManaUsed = 0	# value in %
+ReqStr = 10
+ReqInt = 39
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 4500
+Class = G_Mantle
+
+[Wiseman Mantle]
+ID = 194
+Type = 11
+Level = 39
+Race = -1
+Def = 8
+MagicDef = 10	# value in %
+ManaUsed = -3	# value in %
+ReqStr = 10
+ReqInt = 42
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 6000
+Class = G_Mantle
+
+[Darkness Mantle]
+ID = 195
+Type = 11
+Level = 47
+Race = -1
+Def = 10
+MagicDef = 12	# value in %
+ManaUsed = -6	# value in %
+ReqStr = 12
+ReqInt = 45
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 10000
+Class = G_Mantle
+
+[Ancient Mantle]
+ID = 196
+Type = 11
+Level = 58
+Race = -1
+Def = 12
+MagicDef = 14	# value in %
+ManaUsed = -9	# value in %
+ReqStr = 10
+ReqInt = 52
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 12000
+Class = G_Mantle
+
+[Blood Mantle]
+ID = 197
+Type = 11
+Level = 65
+Race = -1
+Def = 14
+MagicDef = 16	# value in %
+ManaUsed = -12	# value in %
+ReqStr = 12
+ReqInt = 58
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 15000
+Class = G_Mantle
+
+[Sun Mantle]
+ID = 198
+Type = 11
+Level = 75
+Race = -1
+Def = 16
+MagicDef = 18	# value in %
+ManaUsed = -15	# value in %
+ReqStr = 13
+ReqInt = 65
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 20000
+Class = G_Mantle
+
+[Veteran Mantle]
+ID = 199
+Type = 11
+Level = 88
+Race = -1
+Def = 18
+MagicDef = 20	# value in %
+ManaUsed = -18	# value in %
+ReqStr = 15
+ReqInt = 71
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 25000
+Class = G_Mantle
+
+[Golden Mantle]
+ID = 200
+Type = 11
+Level = 100
+Race = -1
+Def = 20
+MagicDef = 22	# value in %
+ManaUsed = -21	# value in %
+ReqStr = 19
+ReqInt = 78
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 30000
+Class = G_Mantle
+
+[Blizzard Cloak]
+#ID = 
+Type = 11
+Level = 152
+Race = 1
+Def = 22
+#MagicDef = 	# value in %
+#ManaUsed = 	# value in %
+ReqStr = 22
+ReqInt = 85
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 45000
+Class = G_Mantle
+
+[White Knight Cloak]
+#ID = 
+Type = 11
+Level = 200
+#Race = 
+Def = 24
+#MagicDef = 	# value in %
+#ManaUsed = 	# value in %
+ReqStr = 24
+ReqInt = 93
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 55000
+Class = G_Mantle
+
+[Kailipton Meta Cape]
+ID = 573
+Type = 11
+Level = 250
+Race = 1
+Def = 79
+ResistenceAll = 5	# value in %
+MagicDef = 25		# value in %
+ManaUsed = -25		# value in %
+ReqStr = 20
+ReqInt = 5
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 1000000
+Class = G_Mantle
+
+[Human Meta Cape]
+ID = 574
+Type = 11
+Level = 250
+Race = 1
+Def = 89
+ResistenceAll = 5	# value in %
+MagicDef = 10		# value in %
+ReqStr = 20
+ReqInt = 5
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 1000000
+Class = G_Mantle
+
+[Kailipton Hi-Meta Cape]
+ID = 1029
+Type = 11
+Level = 300
+Race = 1
+Def = 100
+ResistenceAll = 8	# value in %
+MagicDef = 25		# value in %
+ManaUsed = -25		# value in %
+ReqStr = 20
+ReqInt = 5
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 10000000
+Class = G_Mantle
+
+#######################
+######## Wings ########
+#######################
+
+[Spirit Wing]
+ID = 915
+Type = 12
+Level = 5
+Race = 2
+Def = 2
+ReqStr = 5
+ReqInt = 0
+Position = 5
+SizeX = 2
+SizeY = 2
+Price = 1000
+Class = G_Wing
+
+[Lake Wing]
+ID = 916
+Type = 12
+Level = 20
+Race = 2
+Def = 5
+ReqStr = 7
+ReqInt = 0
+Position = 5
+SizeX = 2
+SizeY = 2
+Price = 1400
+Class = G_Wing
+
+[Purity Wing]
+ID = 902
+Type = 12
+Level = 53
+Race = 2
+Def = 8
+ReqStr = 10
+ReqInt = 0
+Position = 5
+SizeX = 2
+SizeY = 2
+Price = 1800
+Class = G_Wing
+
+[Prosperity Wing]
+ID = 903
+Type = 12
+Level = 68
+Race = 2
+Def = 10
+DmgReflection = 10	# value in %
+ReqStr = 11
+ReqInt = 0
+Position = 5
+SizeX = 2
+SizeY = 2
+Price = 2000
+Class = G_Wing
+
+[Mercy Wing]
+ID = 904
+Type = 12
+Level = 87
+Race = 2
+Def = 12
+FisDmgShield = 3	# value in %
+DmgReflection = 20	# value in %
+ReqStr = 15
+ReqInt = 0
+Position = 5
+SizeX = 2
+SizeY = 2
+Price = 4000
+Class = G_Wing
+
+[Hope Wing]
+ID = 905
+Type = 12
+Level = 104
+Race = 2
+Def = 14
+#FisDmgShield = 	# value in %
+DmgReflection = 25	# value in %
+ReqStr = 17
+ReqInt = 0
+Position = 5
+SizeX = 2
+SizeY = 2
+Price = 5000
+Class = G_Wing
+
+[Passion Wing]
+ID = 906
+Type = 12
+Level = 123
+Race = 2
+Def = 16
+#FisDmgShield = 	# value in %
+DmgReflection = 40	# value in %
+ReqStr = 20
+ReqInt = 0
+Position = 5
+SizeX = 2
+SizeY = 2
+Price = 6600
+Class = G_Wing
+
+[Darkness Wing]
+ID = 907
+Type = 12
+Level = 152
+Race = 2
+Def = 19
+#FisDmgShield = 	# value in %
+DmgReflection = 60	# value in %
+ReqStr = 21
+ReqInt = 0
+Position = 5
+SizeX = 2
+SizeY = 2
+Price = 18000
+Class = G_Wing
+
+[Sky Wing]
+ID = 908
+Type = 12
+Level = 181
+Race = 2
+Def = 26
+#FisDmgShield = 	# value in %
+DmgReflection = 150	# value in %
+ReqStr = 23
+ReqInt = 0
+Position = 5
+SizeX = 2
+SizeY = 2
+Price = 29000
+Class = G_Wing
+
+[Haeven Wing]
+ID = 909
+Type = 12
+Level = 210
+Race = 2
+Def = 31
+#FisDmgShield = 	# value in %
+DmgReflection = 80	# value in %
+ReqStr = 24
+ReqInt = 0
+Position = 5
+SizeX = 2
+SizeY = 2
+Price = 55000
+Class = G_Wing
+
+[Aidia Meta Wing]
+ID = 575
+Type = 12
+Level = 250
+Race = 2
+Def = 79
+ResistenceAll = 5	# value in %
+FisDmgShield = 12	# value in %
+DmgReflection = 150	# value in %
+ReqStr = 20
+ReqInt = 5
+Position = 5
+SizeX = 2
+SizeY = 2
+Price = 1000000
+Class = G_Wing
+
+[Hi-Light Wing]
+ID = 1030
+Type = 12
+Level = 300
+Race = 2
+Def = 100
+ResistenceAll = 8	# value in %
+FisDmgShield = 12	# value in %
+DmgReflection = 150	# value in %
+ReqStr = 20
+ReqInt = 5
+Position = 5
+SizeX = 2
+SizeY = 2
+Price = 10000000
+Class = G_Wing
+
+#######################
+###### Necklaces ######
+#######################
+
+[Vitality Amulet]
+#ID = 
+Type = 13
+#Level = 
+#Def = 
+#ReqStr = 
+Position = 6
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_Necklace
+
+[Mana Amulet]
+#ID = 
+Type = 13
+#Level = 
+#Def = 
+#ReqStr = 
+Position = 6
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_Necklace
+
+[Stamina Amulet]
+ID = 447
+Type = 13
+Level = 1
+Def = 1
+ReqStr = 1
+Position = 6
+SizeX = 1
+SizeY = 1
+Price = 1000
+Class = G_Necklace
+
+[Electric Amulet]
+#ID = 
+Type = 13
+#Level = 
+#Def = 
+#ReqStr = 
+Position = 6
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_Necklace
+
+
+########################
+###### BRACELETS #######
+########################
+
+[Bracelet Of Alchemist]
+#ID = 
+Type = 14
+#Level = 
+#Def = 
+#ReqStr = 
+Position = 8
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_Bracelet
+
+[Bracelet Of Adventurer]
+#ID = 
+Type = 14
+#Level = 
+#Def = 
+#ReqStr = 
+Position = 8
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_Bracelet
+
+[Evolution Bracelet]
+ID = 1087
+Type = 14
+Level = 250
+Def = 1
+ReqStr = 1
+Position = 8
+SizeX = 1
+SizeY = 1
+Price = 1000
+Class = G_Bracelet
+
+########################
+#### ORNAMENT RINGS ####
+########################
+
+[Ring Of Hercules]
+#ID = 
+Type = 15
+#Level = 
+#ReqStr =
+Position = 8
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_Ring
+
+[Ring Of Athena]
+#ID = 
+Type = 15
+#Level = 
+#ReqStr = 
+Position = 8
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_Ring
+
+[Ring Of Artemis]
+#ID = 
+Type = 15
+#Level = 
+#ReqStr = 
+Position = 8
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_Ring
+
+[Ring Of Titan]
+#ID = 
+Type = 15
+#Level = 
+#ReqStr = 
+Position = 8
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_Ring
+
+[Ring Of Zeus]
+#ID = 
+Type = 15
+#Level = 
+#ReqStr = 
+Position = 8
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_Ring
+
+########################
+##### MAGIC STONES #####
+########################
+
+[Amiga Magic Stone]
+ID = 550
+Type = 16
+ReqStr = 5
+SizeX = 1
+SizeY = 1
+Price = 1200
+Class = G_MagicStone
+
+[Gnome Magic Stone]
+ID = 551
+Type = 16
+ReqStr = 5
+SizeX = 1
+SizeY = 1
+Price = 1200
+Class = G_MagicStone
+
+[Nymph Magic Stone]
+ID = 552
+Type = 16
+ReqStr = 5
+SizeX = 1
+SizeY = 1
+Price = 1200
+Class = G_MagicStone
+
+[Sylph Magic Stone]
+ID = 553
+Type = 16
+ReqStr = 5
+SizeX = 1
+SizeY = 1
+Price = 1200
+Class = G_MagicStone
+
+[Amiga Magic Stone Refiner]
+ID = 555
+Type = 16
+ReqStr = 5
+SizeX = 1
+SizeY = 1
+Price = 1200
+Class = G_MagicStone
+
+[Gnome Magic Stone Refiner]
+ID = 556
+Type = 16
+ReqStr = 5
+SizeX = 1
+SizeY = 1
+Price = 1200
+Class = G_MagicStone
+
+[Nymph Magic Stone Refiner]
+ID = 557
+Type = 16
+ReqStr = 5
+SizeX = 1
+SizeY = 1
+Price = 1200
+Class = G_MagicStone
+
+[Sylph Magic Stone Refiner]
+ID = 558
+Type = 16
+ReqStr = 5
+SizeX = 1
+SizeY = 1
+Price = 1200
+Class = G_MagicStone
+
+########################
+###### WHETSTONES ######
+########################
+
+[Grindstone 500]
+ID = 739
+Type = 17
+Race = 0
+ReqStr = 1
+SizeX = 1
+SizeY = 1
+Price = 7600
+Class = G_WhetStone
+
+[Grindstone 1000]
+ID = 807
+Type = 17
+Race = 0
+ReqStr = 1
+SizeX = 1
+SizeY = 1
+Price = 19000
+Class = G_WhetStone
+
+[Chakuram Grindstone 500]
+ID = 1006
+Type = 17
+Race = 0
+ReqStr = 1
+SizeX = 1
+SizeY = 1
+Price = 7600
+Class = G_WhetStone
+
+[Chakuram Grindstone 1000]
+ID = 1005
+Type = 17
+Race = 0
+ReqStr = 1
+SizeX = 1
+SizeY = 1
+Price = 19000
+Class = G_WhetStone
+
+#########################
+### STONES OF CALLING ###
+#########################
+
+[White Tiger Summon Stone]
+ID = 861
+Type = 18
+Race = 2
+ReqInt = 100
+SkillLevel = 1
+AtkPower = 80
+Time = 500	# seconds
+SizeX = 1
+SizeY = 1
+Price = 600
+Class = G_StoneOfCalling
+
+[Super White Tiger Summon Stone]
+#ID = 
+Type = 18
+Race = 2
+#ReqInt = 
+SkillLevel = 2
+AtkPower = 80
+Time = 1000	# seconds
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_StoneOfCalling
+
+[Chmero Summon Stone]
+ID = 808
+Type = 18
+Race = 2
+ReqInt = 100
+SkillLevel = 3
+AtkPower = 100
+Time = 400	# seconds
+SizeX = 1
+SizeY = 1
+Price = 1500
+Class = G_StoneOfCalling
+
+[Super Chmero Summon Stone]
+#ID = 
+Type = 18
+Race = 2
+#ReqInt = 
+SkillLevel = 4
+AtkPower = 100
+Time = 1000	# seconds
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_StoneOfCalling
+
+[Devil Summon Stone]
+#ID = 
+Type = 18
+Race = 2
+#ReqInt = 
+SkillLevel = 5
+AtkPower = 300
+Time = 300	# seconds
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_StoneOfCalling
+
+[Super Devil Summon Stone]
+#ID = 
+Type = 18
+Race = 2
+#ReqInt = 
+SkillLevel = 6
+AtkPower = 300
+Time = 1000	# seconds
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_StoneOfCalling
+
+[Jackal Summon Stone]
+#ID = 
+Type = 18
+Race = 2
+#ReqInt = 
+SkillLevel = 7
+AtkPower = 500
+Time = 1200	# seconds
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_StoneOfCalling
+
+[Super Jackal Summon Stone]
+#ID = 
+Type = 18
+Race = 2
+#ReqInt = 
+SkillLevel = 8
+AtkPower = 500
+Time = 1300	# seconds
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_StoneOfCalling
+
+[Shadow Summon Stone]
+#ID = 
+Type = 18
+Race = 2
+#ReqInt = 
+SkillLevel = 9
+AtkPower = 900
+Time = 3000	# seconds
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_StoneOfCalling
+
+[Super Shadow Summon Stone]
+#ID = 
+Type = 18
+Race = 2
+#ReqInt = 
+SkillLevel = 10
+AtkPower = 900
+Time = 3500	# seconds
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_StoneOfCalling
+
+[Dra Summon Stone]
+#ID = 
+Type = 18
+Race = 2
+#ReqInt = 
+SkillLevel = 11
+AtkPower = 800
+Time = 3000	# seconds
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_StoneOfCalling
+
+[Super Dra Summon Stone]
+#ID = 
+Type = 18
+Race = 2
+#ReqInt = 
+SkillLevel = 12
+AtkPower = 800
+Time = 3500	# seconds
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_StoneOfCalling
+
+#########################
+####### GEMSTONES #######
+#########################
+
+[Rough Amethyst]
+ID = 215
+Type = 19
+ReqStr = 5
+SkillLevel = 1
+CraftKits = 1
+SizeX = 1
+SizeY = 1
+Price = 5000
+Class = G_GemStones
+
+[Amethyst]
+ID = 222
+Type = 19
+ReqStr = 5
+SizeX = 1
+SizeY = 1
+Price = 6000
+Class = G_GemStones
+
+[Amethyst Chip Grade 1]
+ID = 521
+Type = 19
+ReqStr = 5
+SizeX = 1
+SizeY = 1
+Price = 1200
+Class = G_GemStones
+
+[Amethyst Chip Grade 2]
+ID = 528
+Type = 19
+ReqStr = 5
+SizeX = 1
+SizeY = 1
+Price = 240
+Class = G_GemStones
+
+[Amethyst Chip Grade 3]
+ID = 535
+Type = 19
+ReqStr = 5
+SizeX = 1
+SizeY = 1
+Price = 48
+Class = G_GemStones
+
+[Rough Topaz]
+ID = 216
+Type = 19
+ReqStr = 5
+SkillLevel = 31
+CraftKits = 2
+SizeX = 1
+SizeY = 1
+Price = 19000
+Class = G_GemStones
+
+[Topaz]
+ID = 223
+Type = 19
+ReqStr = 5
+SizeX = 1
+SizeY = 1
+Price = 22000
+Class = G_GemStones
+
+[Topaz Chip Grade 1]
+ID = 522
+Type = 19
+ReqStr = 5
+SizeX = 1
+SizeY = 1
+Price = 4400
+Class = G_GemStones
+
+[Topaz Chip Grade 2]
+ID = 529
+Type = 19
+ReqStr = 5
+SizeX = 1
+SizeY = 1
+Price = 880
+Class = G_GemStones
+
+[Topaz Chip Grade 3]
+ID = 536
+Type = 19
+ReqStr = 5
+SizeX = 1
+SizeY = 1
+Price = 176
+Class = G_GemStones
+
+[Rough Opal]
+ID = 217
+Type = 19
+ReqStr = 5
+SkillLevel = 61
+CraftKits = 3
+SizeX = 1
+SizeY = 1
+Price = 51000
+Class = G_GemStones
+
+[Opal]
+ID = 224
+Type = 19
+ReqStr = 5
+SizeX = 1
+SizeY = 1
+Price = 58000
+Class = G_GemStones
+
+[Opal Chip Grade 1]
+ID = 523
+Type = 19
+ReqStr = 5
+SizeX = 1
+SizeY = 1
+Price = 11600
+Class = G_GemStones
+
+[Opal Chip Grade 2]
+ID = 530
+Type = 19
+ReqStr = 5
+SizeX = 1
+SizeY = 1
+Price = 2320
+Class = G_GemStones
+
+[Opal Chip Grade 3]
+ID = 537
+Type = 19
+ReqStr = 5
+SizeX = 1
+SizeY = 1
+Price = 464
+Class = G_GemStones
+
+[Rough Sapphire]
+ID = 218
+Type = 19
+ReqStr = 5
+SkillLevel = 91
+CraftKits = 5
+SizeX = 1
+SizeY = 1
+Price = 101000
+Class = G_GemStones
+
+[Sapphire]
+ID = 225
+Type = 19
+ReqStr = 5
+SizeX = 1
+SizeY = 1
+Price = 113000
+Class = G_GemStones
+
+[Sapphire Chip Grade 1]
+ID = 524
+Type = 19
+ReqStr = 5
+SizeX = 1
+SizeY = 1
+Price = 22600
+Class = G_GemStones
+
+[Sapphire Chip Grade 2]
+ID = 531
+Type = 19
+ReqStr = 5
+SizeX = 1
+SizeY = 1
+Price = 4520
+Class = G_GemStones
+
+[Sapphire Chip Grade 3]
+ID = 538
+Type = 19
+ReqStr = 5
+SizeX = 1
+SizeY = 1
+Price = 904
+Class = G_GemStones
+
+[Rough Ruby]
+ID = 219
+Type = 19
+ReqStr = 5
+SkillLevel = 121
+CraftKits = 7
+SizeX = 1
+SizeY = 1
+Price = 170000
+Class = G_GemStones
+
+[Ruby]
+ID = 226
+Type = 19
+ReqStr = 5
+SizeX = 1
+SizeY = 1
+Price = 189000
+Class = G_GemStones
+
+[Ruby Chip Grade 1]
+ID = 525
+Type = 19
+ReqStr = 5
+SizeX = 1
+SizeY = 1
+Price = 37800
+Class = G_GemStones
+
+[Ruby Chip Grade 2]
+ID = 532
+Type = 19
+ReqStr = 5
+SizeX = 1
+SizeY = 1
+Price = 7560
+Class = G_GemStones
+
+[Ruby Chip Grade 3]
+ID = 539
+Type = 19
+ReqStr = 5
+SizeX = 1
+SizeY = 1
+Price = 1512
+Class = G_GemStones
+
+[Rough Emerald]
+ID = 220
+Type = 19
+ReqStr = 5
+SkillLevel = 151
+CraftKits = 12
+SizeX = 1
+SizeY = 1
+Price = 256
+Class = G_GemStones
+
+[Emerald]
+ID = 227
+Type = 19
+ReqStr = 5
+SizeX = 1
+SizeY = 1
+Price = 285000
+Class = G_GemStones
+
+[Emerald Chip Grade 1]
+ID = 526
+Type = 19
+ReqStr = 5
+SizeX = 1
+SizeY = 1
+Price = 57000
+Class = G_GemStones
+
+[Emerald Chip Grade 2]
+ID = 533
+Type = 19
+ReqStr = 5
+SizeX = 1
+SizeY = 1
+Price = 11400
+Class = G_GemStones
+
+[Emerald Chip Grade 3]
+ID = 540
+Type = 19
+ReqStr = 5
+SizeX = 1
+SizeY = 1
+Price = 2280
+Class = G_GemStones
+
+[Rough Diamond]
+ID = 221
+Type = 19
+ReqStr = 5
+SkillLevel = 181
+CraftKits = 20
+SizeX = 1
+SizeY = 1
+Price = 360000
+Class = G_GemStones
+
+[Diamond]
+ID = 228
+Type = 19
+ReqStr = 5
+SizeX = 1
+SizeY = 1
+Price = 400000
+Class = G_GemStones
+
+[Diamond Chip Grade 1]
+ID = 527
+Type = 19
+ReqStr = 5
+SizeX = 1
+SizeY = 1
+Price = 80000
+Class = G_GemStones
+
+[Diamond Chip Grade 2]
+ID = 534
+Type = 19
+ReqStr = 5
+SizeX = 1
+SizeY = 1
+Price = 16000
+Class = G_GemStones
+
+[Diamond Chip Grade 3]
+ID = 541
+Type = 19
+ReqStr = 5
+SizeX = 1
+SizeY = 1
+Price = 3200
+Class = G_GemStones
+
+[Rough Regent Diamond]
+ID = 1067
+Type = 19
+ReqStr = 5
+SkillLevel = 261
+CraftKits = 30
+SizeX = 1
+SizeY = 1
+Price = 10800000
+Class = G_GemStones
+
+[Regent Diamond]
+ID = 1068
+Type = 19
+ReqStr = 5
+SizeX = 1
+SizeY = 1
+Price = 12000000
+Class = G_GemStones
+
+#######################
+####### POTIONS #######
+#######################
+
+[Recovery Potion]
+ID = 145
+Type = 20
+ReqStr = 2
+HpRec = 40
+ManaRec = 0
+StmRec = 0
+ElectRec = 0
+SizeX = 1
+SizeY = 1
+Price = 6
+Class = G_Potion
+
+[Small Healing Potion]
+ID = 140
+Type = 20
+ReqStr = 3
+HpRec = 80
+ManaRec = 0
+StmRec = 0
+ElectRec = 0
+SizeX = 1
+SizeY = 1
+Price = 11
+Class = G_Potion
+
+[Healing Potion]
+ID = 133
+Type = 20
+ReqStr = 5
+HpRec = 300
+ManaRec = 0
+StmRec = 0
+ElectRec = 0
+SizeX = 1
+SizeY = 1
+Price = 38
+Class = G_Potion
+
+[Large Healing Potion]
+ID = 288
+Type = 20
+ReqStr = 5
+HpRec = 500
+ManaRec = 0
+StmRec = 0
+ElectRec = 0
+SizeX = 1
+SizeY = 1
+Price = 80
+Class = G_Potion
+
+[Mega Vitality Potion]
+ID = 470
+Type = 20
+ReqStr = 5
+HpRec = 800
+ManaRec = 0
+StmRec = 0
+ElectRec = 0
+SizeX = 1
+SizeY = 1
+Price = 114
+Class = G_Potion
+
+[Giga Vitality Potion]
+ID = 515
+Type = 20
+ReqStr = 5
+HpRec = 1000
+ManaRec = 0
+StmRec = 0
+ElectRec = 0
+SizeX = 1
+SizeY = 1
+Price = 140
+Class = G_Potion
+
+[Instant Vitality Increaser]
+ID = 1044
+Type = 20
+ReqStr = 5
+HpRec = 1000
+ManaRec = 0
+StmRec = 0
+ElectRec = 0
+SizeX = 1
+SizeY = 1
+Price = 420
+Class = G_Potion
+
+[Vitality Increaser]
+ID = 1040
+Type = 20
+ReqStr = 5
+HpRec = 1500
+ManaRec = 0
+StmRec = 0
+ElectRec = 0
+SizeX = 1
+SizeY = 1
+Price = 560
+Class = G_Potion
+
+[Mana Recovery Potion]
+ID = 1048
+Type = 20
+ReqStr = 2
+HpRec = 0
+ManaRec = 60
+StmRec = 0
+ElectRec = 0
+SizeX = 1
+SizeY = 1
+Price = 6
+Class = G_Potion
+
+[Small Mana Potion]
+ID = 146
+Type = 20
+ReqStr = 1
+HpRec = 0
+ManaRec = 120
+StmRec = 0
+ElectRec = 0
+SizeX = 1
+SizeY = 1
+Price = 11
+Class = G_Potion
+
+[Mana Potion]
+ID = 147
+Type = 20
+ReqStr = 2
+HpRec = 0
+ManaRec = 300
+StmRec = 0
+ElectRec = 0
+SizeX = 1
+SizeY = 1
+Price = 40
+Class = G_Potion
+
+[Large Mana Potion]
+ID = 289
+Type = 20
+ReqStr = 2
+HpRec = 0
+ManaRec = 500
+StmRec = 0
+ElectRec = 0
+SizeX = 1
+SizeY = 1
+Price = 80
+Class = G_Potion
+
+[Mega Mana Potion]
+ID = 512
+Type = 20
+ReqStr = 5
+HpRec = 0
+ManaRec = 800
+StmRec = 0
+ElectRec = 0
+SizeX = 1
+SizeY = 1
+Price = 114
+Class = G_Potion
+
+[Giga Mana Potion]
+ID = 568
+Type = 20
+ReqStr = 5
+HpRec = 1000
+ManaRec = 0
+StmRec = 0
+ElectRec = 0
+SizeX = 1
+SizeY = 1
+Price = 133
+Class = G_Potion
+
+[Instant Mana Increaser]
+ID = 1045
+Type = 20
+ReqStr = 5
+HpRec = 0
+ManaRec = 1000
+StmRec = 0
+ElectRec = 0
+SizeX = 1
+SizeY = 1
+Price = 420
+Class = G_Potion
+
+[Mana Increaser]
+ID = 1041
+Type = 20
+ReqStr = 5
+HpRec = 0
+ManaRec = 1500
+StmRec = 0
+ElectRec = 0
+SizeX = 1
+SizeY = 1
+Price = 560
+Class = G_Potion
+
+[Wolf Meat]
+ID = 142
+Type = 20
+ReqStr = 2
+HpRec = 0
+ManaRec = 0
+StmRec = 50
+ElectRec = 0
+SizeX = 1
+SizeY = 1
+Price = 4
+Class = G_Potion
+
+[Tiger Meat]
+ID = 143
+Type = 20
+ReqStr = 2
+HpRec = 0
+ManaRec = 0
+StmRec = 80
+ElectRec = 0
+SizeX = 1
+SizeY = 1
+Price = 9
+Class = G_Potion
+
+[Stamina Potion]
+ID = 144
+Type = 20
+ReqStr = 2
+HpRec = 0
+ManaRec = 0
+StmRec = 300
+ElectRec = 0
+SizeX = 1
+SizeY = 1
+Price = 40
+Class = G_Potion
+
+[Large Stamina Potion]
+ID = 290
+Type = 20
+ReqStr = 2
+HpRec = 0
+ManaRec = 0
+StmRec = 500
+ElectRec = 0
+SizeX = 1
+SizeY = 1
+Price = 80
+Class = G_Potion
+
+[Mega Stamina Potion]
+ID = 513
+Type = 20
+ReqStr = 5
+HpRec = 0
+ManaRec = 0
+StmRec = 800
+ElectRec = 0
+SizeX = 1
+SizeY = 1
+Price = 114
+Class = G_Potion
+
+[Giga Stamina Potion]
+ID = 1039
+Type = 20
+ReqStr = 5
+HpRec = 0
+ManaRec = 0
+StmRec = 1000
+ElectRec = 0
+SizeX = 1
+SizeY = 1
+Price = 140
+Class = G_Potion
+
+[Instant Stamina Increaser]
+ID = 1047
+Type = 20
+ReqStr = 5
+HpRec = 0
+ManaRec = 0
+StmRec = 1000
+ElectRec = 0
+SizeX = 1
+SizeY = 1
+Price = 420
+Class = G_Potion
+
+[Stamina Increaser]
+ID = 1043
+Type = 20
+ReqStr = 5
+HpRec = 0
+ManaRec = 0
+StmRec = 1500
+ElectRec = 0
+SizeX = 1
+SizeY = 1
+Price = 560
+Class = G_Potion
+
+[Mini Cell]
+ID = 209
+Type = 20
+ReqStr = 2
+HpRec = 0
+ManaRec = 0
+StmRec = 0
+ElectRec = 40
+SizeX = 1
+SizeY = 1
+Price = 6
+Class = G_Potion
+
+[Battery]
+ID = 210
+Type = 20
+ReqStr = 3
+HpRec = 0
+ManaRec = 0
+StmRec = 0
+ElectRec = 80
+SizeX = 1
+SizeY = 1
+Price = 11
+Class = G_Potion
+
+[Charging Pack]
+ID = 211
+Type = 20
+ReqStr = 5
+HpRec = 0
+ManaRec = 0
+StmRec = 0
+ElectRec = 300
+SizeX = 1
+SizeY = 1
+Price = 38
+Class = G_Potion
+
+[Large Electric Power Potion]
+ID = 291
+Type = 20
+ReqStr = 2
+HpRec = 0
+ManaRec = 0
+StmRec = 0
+ElectRec = 500
+SizeX = 1
+SizeY = 1
+Price = 80
+Class = G_Potion
+
+[Mega Electric Power Potion]
+ID = 514
+Type = 20
+ReqStr = 5
+HpRec = 0
+ManaRec = 0
+StmRec = 0
+ElectRec = 800
+SizeX = 1
+SizeY = 1
+Price = 114
+Class = G_Potion
+
+[Giga Electric Power Potion]
+ID = 569
+Type = 20
+ReqStr = 5
+HpRec = 0
+ManaRec = 0
+StmRec = 0
+ElectRec = 1000
+SizeX = 1
+SizeY = 1
+Price = 133
+Class = G_Potion
+
+[Instant Electricity Increaser]
+ID = 1046
+Type = 20
+ReqStr = 5
+HpRec = 0
+ManaRec = 0
+StmRec = 0
+ElectRec = 1000
+SizeX = 1
+SizeY = 1
+Price = 420
+Class = G_Potion
+
+[Electricity Increaser]
+ID = 1042
+Type = 20
+ReqStr = 5
+HpRec = 0
+ManaRec = 0
+StmRec = 0
+ElectRec = 1500
+SizeX = 1
+SizeY = 1
+Price = 560
+Class = G_Potion
+
+########################
+###### WARP GATES ######
+########################
+
+[Boldin Castle North Gate Warp Device]
+#ID = 
+Type = 21
+#ReqStr = 
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_WarpGate
+
+[Boldin Castle South Gate Warp Device]
+#ID = 
+Type = 21
+#ReqStr = 
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_WarpGate
+
+[Coliseum Warp Device]
+ID = 308
+Type = 21
+ReqStr = 2
+SizeX = 1
+SizeY = 1
+Price = 47
+Class = G_WarpGate
+
+[Giant Barrack Warp Device]
+#ID = 
+Type = 21
+#ReqStr = 
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_WarpGate
+
+[Hidden Square Warp Device]
+#ID = 
+Type = 21
+#ReqStr = 
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_WarpGate
+
+[Laglamia Square Warp Device]
+ID = 307
+Type = 21
+ReqStr = 2
+SizeX = 1
+SizeY = 1
+Price = 47
+Class = G_WarpGate
+
+[Paros Warp Device]
+#ID = 
+Type = 21
+#ReqStr = 
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_WarpGate
+
+[Return Warp Device]
+ID = 175
+Type = 21
+ReqStr = 2
+SizeX = 1
+SizeY = 1
+Price = 47
+Class = G_WarpGate
+
+[Time Lift Warp Device]
+#ID = 
+Type = 21
+#ReqStr = 
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_WarpGate
+
+[Transporting To The Selected Area]
+ID = 1015
+Type = 21
+ReqStr = 2
+SizeX = 1
+SizeY = 1
+Price = 19000
+Class = G_WarpGate
+
+[Zone Warp Device]
+ID = 894
+Type = 21
+ReqStr = 2
+SizeX = 1
+SizeY = 1
+Price = 9500
+Class = G_WarpGate
+
+#######################
+####### BULLETS #######
+#######################
+
+[Charging Shell]
+ID = 757
+Type = 22
+Race = 3
+ChargingAmount = 25
+SizeX = 1
+SizeY = 1
+Price = 600
+Class = G_Bullet
+
+[Charging Shell Set]
+ID = 758
+Type = 22
+Race = 3
+ChargingAmount = 50
+SizeX = 1
+SizeY = 1
+Price = 1300
+Class = G_Bullet
+
+[Flame Capsule]
+ID = 759
+Type = 22
+Race = 3
+ChargingAmount = 15
+SizeX = 1
+SizeY = 1
+Price = 600
+Class = G_Bullet
+
+[Flame Capsule Set]
+ID = 760
+Type = 22
+Race = 3
+ChargingAmount = 30
+SizeX = 1
+SizeY = 1
+Price = 1300
+Class = G_Bullet
+
+[Laser Capsule]
+ID = 761
+Type = 22
+Race = 3
+ChargingAmount = 30
+SizeX = 1
+SizeY = 1
+Price = 600
+Class = G_Bullet
+
+[Laser Capsule Set]
+ID = 762
+Type = 22
+Race = 3
+ChargingAmount = 60
+SizeX = 1
+SizeY = 1
+Price = 1600
+Class = G_Bullet
+
+[Mini Mine]
+ID = 763
+Type = 22
+Race = 3
+ChargingAmount = 1
+SizeX = 1
+SizeY = 1
+Price = 600
+Class = G_Bullet
+
+[Mini Mine Set]
+ID = 764
+Type = 22
+Race = 3
+ChargingAmount = 2
+SizeX = 1
+SizeY = 1
+Price = 1600
+Class = G_Bullet
+
+[Mini Rocket]
+#ID = 
+Type = 22
+Race = 3
+ChargingAmount = 1
+SizeX = 1
+SizeY = 1
+Price = 4800
+Class = G_Bullet
+
+########################
+### ASSEMBLING PARTS ###
+########################
+
+[Gem Cutting Kit]
+ID = 229
+Type = 23
+ReqStr = 5
+SizeX = 1
+SizeY = 1
+Price = 10
+Class = G_AssemblingParts
+
+[Processor Kit]
+ID = 845
+Type = 23
+Race = 3
+ReqStr = 2
+SizeX = 1
+SizeY = 1
+Price = 300
+Class = G_AssemblingParts
+
+[Control Kit]
+#ID = 
+Type = 23
+Race = 3
+#ReqStr = 
+SizeX = 1
+SizeY = 1
+Price = 500
+Class = G_AssemblingParts
+
+[Assembly Kit]
+ID = 855
+Type = 23
+Race = 3
+ReqStr = 1
+SizeX = 1
+SizeY = 1
+Price = 50000
+Class = G_AssemblingParts
+
+[Cell Capsule]
+#ID = 
+Type = 23
+Race = 3
+#ReqStr = 
+SizeX = 1
+SizeY = 1
+Price = 1000
+Class = G_AssemblingParts
+
+[Antibiotic Capsule]
+#ID = 
+Type = 23
+Race = 3
+#ReqStr = 
+SizeX = 1
+SizeY = 1
+Price = 1200
+Class = G_AssemblingParts
+
+[Genetic Capsule]
+#ID = 
+Type = 23
+Race = 3
+#ReqStr = 
+SizeX = 1
+SizeY = 1
+Price = 1500
+Class = G_AssemblingParts
+
+[Harpoon Capsule]
+#ID = 
+Type = 23
+Race = 3
+#ReqStr = 
+SizeX = 1
+SizeY = 1
+Price = 2000
+Class = G_AssemblingParts
+
+[Khan Capsule]
+#ID = 
+Type = 23
+Race = 3
+#ReqStr = 
+SizeX = 1
+SizeY = 1
+Price = 3000
+Class = G_AssemblingParts
+
+[Spirit Capsule]  ### NEW ###
+ID = 1076
+Type = 23
+Race = 3
+ReqStr = 1
+SizeX = 1
+SizeY = 1
+Price = 500000
+Class = G_AssemblingParts
+
+[Dragon Capsule] ### NEW ###
+ID = 1075
+Type = 23
+Race = 3
+ReqStr = 1
+SizeX = 1
+SizeY = 1
+Price = 560000
+Class = G_AssemblingParts
+
+########################
+### SMALL EQUIPMENTS ###
+########################
+
+[Radar]
+#ID = 
+Type = 24
+Race = -1
+#ReqStr = 
+AssemblyLevel = 1
+#SizeX = 
+#SizeY = 
+#Price = 
+Class = G_SmallEquipment
+
+[Hard Barrier Breaker]
+#ID = 
+Type = 24
+Race = -1
+#ReqStr = 
+AssemblyLevel = 1
+#SizeX = 
+#SizeY = 
+#Price = 
+Class = G_SmallEquipment
+
+[Fuzzy Field Remover]
+#ID = 
+Type = 24
+Race = -1
+#ReqStr = 
+AssemblyLevel = 1
+#SizeX = 
+#SizeY = 
+#Price = 
+Class = G_SmallEquipment
+
+[Volt Resistence Booster]
+#ID = 
+Type = 24
+Race = -1
+#ReqStr = 
+AssemblyLevel = 2
+#SizeX = 
+#SizeY = 
+#Price = 
+Class = G_SmallEquipment
+
+[Volcanic Resistence Booster]
+#ID = 
+Type = 24
+Race = -1
+#ReqStr = 
+AssemblyLevel = 2
+#SizeX = 
+#SizeY = 
+#Price = 
+Class = G_SmallEquipment
+
+[Petrifaction Resistance Booster]
+#ID = 
+Type = 24
+Race = -1
+#ReqStr = 
+AssemblyLevel = 2
+#SizeX = 
+#SizeY = 
+#Price = 
+Class = G_SmallEquipment
+
+[Cold Resistence Booster]
+#ID = 
+Type = 24
+Race = -1
+#ReqStr = 
+AssemblyLevel = 2
+#SizeX = 
+#SizeY = 
+#Price = 
+Class = G_SmallEquipment
+
+[Electric Shock]
+#ID = 
+Type = 24
+Race = 3
+#ReqStr = 
+AssemblyLevel = 3
+#SizeX = 
+#SizeY = 
+#Price = 
+Class = G_SmallEquipment
+
+[Electric Power Saver]
+#ID = 
+Type = 24
+Race = 3
+#ReqStr = 
+AssemblyLevel = 5
+#SizeX = 
+#SizeY = 
+#Price = 
+Class = G_SmallEquipment
+
+[Electric Power Amplifier]
+#ID = 
+Type = 24
+Race = 3
+#ReqStr = 
+AssemblyLevel = 7
+#SizeX = 
+#SizeY = 
+#Price = 
+Class = G_SmallEquipment
+
+[Resistence Booster]
+#ID = 
+Type = 24
+Race = -1
+#ReqStr = 
+AssemblyLevel = 10
+#SizeX = 
+#SizeY = 
+#Price = 
+Class = G_SmallEquipment
+
+[Space Controller]
+#ID = 
+Type = 24
+Race = 3
+#ReqStr = 
+AssemblyLevel = 10
+#SizeX = 
+#SizeY = 
+#Price = 
+Class = G_SmallEquipment
+
+[Condition Changer]
+#ID = 
+Type = 24
+Race = -1
+#ReqStr = 
+AssemblyLevel = 10
+#SizeX = 
+#SizeY = 
+#Price = 
+Class = G_SmallEquipment
+
+##############################
+### SCROLL AND SPELL BOOKS ###
+##############################
+
+[wand Charger 1]
+ID = 776
+Type = 25
+Race = 1
+ReqInt = 100
+SkillLevel = 1
+SizeX = 1
+SizeY = 1
+Price = 400
+Class = G_ScrollAndSpellBoock
+
+[wand Charger 2]
+ID = 777
+Type = 25
+Race = 1
+#ReqInt = 
+#SkillLevel = 
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_ScrollAndSpellBoock
+
+[wand Charger 3]
+ID = 778
+Type = 25
+Race = 1
+#ReqInt = 
+#SkillLevel = 
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_ScrollAndSpellBoock
+
+[wand Charger 4]
+ID = 779
+Type = 25
+Race = 1
+#ReqInt = 
+#SkillLevel = 
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_ScrollAndSpellBoock
+
+[Accumulated Damage 1]
+ID = 780
+Type = 25
+Race = 1
+ReqInt = 100
+SkillLevel = 1
+SizeX = 1
+SizeY = 1
+Price = 100
+Class = G_ScrollAndSpellBoock
+
+[Accumulated Damage 3]
+ID = 781
+Type = 25
+Race = 1
+#ReqInt = 
+#SkillLevel = 
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_ScrollAndSpellBoock
+
+[Accumulated Damage 5]
+ID = 782
+Type = 25
+Race = 1
+#ReqInt = 
+#SkillLevel = 
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_ScrollAndSpellBoock
+
+[Paralysis 1]
+ID = 783
+Type = 25
+Race = 1
+ReqInt = 100
+SkillLevel = 1
+SizeX = 1
+SizeY = 1
+Price = 100
+Class = G_ScrollAndSpellBoock
+
+[Paralysis 3]
+ID = 784
+Type = 25
+Race = 1
+#ReqInt = 
+#SkillLevel = 
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_ScrollAndSpellBoock
+
+[Paralysis 5]
+ID = 785
+Type = 25
+Race = 1
+#ReqInt = 
+#SkillLevel = 
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_ScrollAndSpellBoock
+
+[Confusion 1]
+ID = 786
+Type = 25
+Race = 1
+ReqInt = 100
+SkillLevel = 1
+SizeX = 1
+SizeY = 1
+Price = 100
+Class = G_ScrollAndSpellBoock
+
+[Confusion 3]
+ID = 787
+Type = 25
+Race = 1
+#ReqInt = 
+#SkillLevel = 
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_ScrollAndSpellBoock
+
+[Confusion 5]
+ID = 788
+Type = 25
+Race = 1
+#ReqInt = 
+#SkillLevel = 
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_ScrollAndSpellBoock
+
+[Blackhole 1]
+ID = 789
+Type = 25
+Race = 1
+ReqInt = 100
+SkillLevel = 1
+SizeX = 1
+SizeY = 1
+Price = 100
+Class = G_ScrollAndSpellBoock
+
+[Blackhole 3]
+ID = 790
+Type = 25
+Race = 1
+#ReqInt = 
+#SkillLevel = 
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_ScrollAndSpellBoock
+
+[Blackhole 5]
+ID = 791
+Type = 25
+Race = 1
+#ReqInt = 
+#SkillLevel = 
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_ScrollAndSpellBoock
+
+[Cold 2]
+ID = 792
+Type = 25
+Race = 1
+ReqInt = 100
+SkillLevel = 2
+SizeX = 1
+SizeY = 1
+Price = 200
+Class = G_ScrollAndSpellBoock
+
+[Cold 4]
+ID = 793
+Type = 25
+Race = 1
+#ReqInt = 
+#SkillLevel = 
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_ScrollAndSpellBoock
+
+[Cold 6]
+ID = 794
+Type = 25
+Race = 1
+#ReqInt = 
+#SkillLevel = 
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_ScrollAndSpellBoock
+
+[Petrifaction 2]
+ID = 795
+Type = 25
+Race = 1
+ReqInt = 100
+SkillLevel = 2
+SizeX = 1
+SizeY = 1
+Price = 200
+Class = G_ScrollAndSpellBoock
+
+[Petrifaction 4]
+ID = 796
+Type = 25
+Race = 1
+#ReqInt = 
+#SkillLevel = 
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_ScrollAndSpellBoock
+
+[Petrifaction 6]
+ID = 797
+Type = 25
+Race = 1
+#ReqInt = 
+#SkillLevel = 
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_ScrollAndSpellBoock
+
+[Protection 4]
+ID = 798
+Type = 25
+Race = 1
+#ReqInt = 
+#SkillLevel = 
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_ScrollAndSpellBoock
+
+[Protection 5]
+ID = 799
+Type = 25
+Race = 1
+#ReqInt = 
+#SkillLevel = 
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_ScrollAndSpellBoock
+
+[Protection 6]
+ID = 800
+Type = 25
+Race = 1
+#ReqInt = 
+#SkillLevel = 
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_ScrollAndSpellBoock
+
+[Normal Book 1-4]
+ID = 801
+Type = 25
+Race = 1
+ReqStr = 1
+SkillLevel = 1
+Capacity = 15
+SizeX = 1
+SizeY = 1
+Price = 2400
+Class = G_ScrollAndSpellBoock
+
+[Red Book 1-4]
+ID = 802
+Type = 25
+Race = 1
+#ReqStr = 
+#SkillLevel = 
+Capacity = 40
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_ScrollAndSpellBoock
+
+[Normal Book 5]
+ID = 803
+Type = 25
+Race = 1
+#ReqStr = 
+#SkillLevel = 
+Capacity = 35
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_ScrollAndSpellBoock
+
+[Red Book 5]
+ID = 804
+Type = 25
+Race = 1
+#ReqStr = 
+#SkillLevel = 
+Capacity = 50
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_ScrollAndSpellBoock
+
+[Normal Book 6]
+ID = 805
+Type = 25
+Race = 1
+#ReqStr = 
+#SkillLevel = 
+Capacity = 55
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_ScrollAndSpellBoock
+
+[Red Book 6]
+ID = 806
+Type = 25
+Race = 1
+#ReqStr = 
+#SkillLevel = 
+Capacity = 65
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_ScrollAndSpellBoock
+
+#######################
+###### ETC ITEMS ######
+#######################
+
+[Mission Reciver]
+ID = 926
+Type = 26
+#ReqStr = 
+SizeX = 1
+SizeY = 1
+#Price = 
+Class = G_Etc
+
+#######################
+###### PET ITEMS ######
+#######################
+
+[Apple]
+ID = 618
+Type = 27
+ReqStr = 0
+SizeX = 1
+SizeY = 1
+Price = 500
+Class = G_PetItem
+
+[Labiyoing recall device]
+ID = 968
+Type = 27
+ReqStr = 2
+SizeX = 1
+SizeY = 1
+Price = 50000
+Class = G_PetItem
+
+[Change Pet Name]
+ID = 620
+Type = 27
+ReqStr = 2
+SizeX = 1
+SizeY = 1
+Price = 500000
+Class = G_PetItem
+
+[Pet Transfer]
+ID = 969
+Type = 27
+ReqStr = 0
+SizeX = 1
+SizeY = 1
+Price = 500000
+Class = G_PetItem
+
+#######################
+###### TYPE LIST ######
+#######################
+
+[Type]
+Armor = 0
+Gun = 1
+Sword = 2
+Axe = 3
+Ring = 4
+Staff = 5
+HeavyWeapon = 6
+Slayer = 7
+Chakuram = 8
+Wand = 9
+Shield = 10
+Mantle = 11
+Wing = 12
+Necklace = 13
+Bracelet = 14
+OrnamentRing = 15
+MagicStone = 16
+Whetstone = 17
+StoneOfCalling = 18
+Gemstone = 19
+Potion = 20
+WarpGate = 21
+Bullet = 22
+AssemblingPart = 23
+SmallEquipment = 24
+ScrollAndSpellBook = 25
+Etc = 26
+Pet = 27

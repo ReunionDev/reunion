@@ -1,0 +1,1198 @@
+[Level 1]
+ID = 1
+Exp = 80
+
+[Level 2]
+ID = 2
+Exp = 318
+
+[Level 3]
+ID = 3
+Exp = 609
+
+[Level 4]
+ID = 4
+Exp = 1038
+
+[Level 5]
+ID = 5
+Exp = 1492
+
+[Level 6]
+ID = 6
+Exp = 1981
+
+[Level 7]
+ID = 7
+Exp = 2512
+
+[Level 8]
+ID = 8
+Exp = 3092
+
+[Level 9]
+ID = 9
+Exp = 3731
+
+[Level 10]
+ID = 10
+Exp = 4436
+
+[Level 11]
+ID = 11
+Exp = 5214
+
+[Level 12]
+ID = 12
+Exp = 6075
+
+[Level 13]
+ID = 13
+Exp = 7026
+
+[Level 14]
+ID = 14
+Exp = 8074
+
+[Level 15]
+ID = 15
+Exp = 9229
+
+[Level 16]
+ID = 16
+Exp = 10498
+
+[Level 17]
+ID = 17
+Exp = 11888
+
+[Level 18]
+ID = 18
+Exp = 13409
+
+[Level 19]
+ID = 19
+Exp = 15068
+
+[Level 20]
+ID = 20
+Exp = 16872
+
+[Level 21]
+ID = 21
+Exp = 18831
+
+[Level 22]
+ID = 22
+Exp =  20952
+
+[Level 23]
+ID = 23
+Exp = 23242
+
+[Level 24]
+ID = 24
+Exp = 25711
+
+[Level 25]
+ID = 25
+Exp = 28366
+
+[Level 26]
+ID = 26
+Exp = 31214
+
+[Level 27]
+ID = 27
+Exp = 34265
+
+
+[Level 28]
+ID = 28
+Exp = 37526
+
+[Level 29]
+ID = 29
+Exp = 41004
+
+[Level 30]
+ID = 30
+Exp = 44709
+
+[Level 31]
+ID = 31
+Exp = 48648
+
+[Level 32]
+ID = 32
+Exp = 52828
+
+[Level 33]
+ID = 33
+Exp = 57259
+
+[Level 34]
+ID = 34
+Exp = 61948
+
+[Level 35]
+ID = 35
+Exp = 66902
+
+[Level 36]
+ID = 36
+Exp = 72131
+
+[Level 37]
+ID = 37
+Exp = 77642
+
+[Level 38]
+ID = 38
+Exp = 83442
+
+[Level 39]
+ID = 39
+Exp = 89541
+
+[Level 40]
+ID = 40
+Exp = 95946
+
+[Level 41]
+ID = 41
+Exp = 102664
+
+[Level42]
+ID = 42
+Exp = 109705
+
+[Level 43]
+ID = 43
+Exp = 117076
+
+[Level 44]
+ID = 44
+Exp = 124784
+
+[Level 45]
+ID = 45
+Exp = 132839
+
+[Level 46]
+ID = 46
+Exp = 141248
+
+[Level 47]
+ID = 47
+Exp = 150018
+
+[Level 48]
+ID = 48
+Exp = 159159
+
+[Level 49]
+ID = 49
+Exp = 168678
+
+[Level 50]
+ID = 50
+Exp = 178582
+
+[Level 51]
+ID = 51
+Exp = 188881
+
+[Level 52]
+ID = 52
+Exp = 199582
+
+[Level 53]
+ID = 53
+Exp = 210692
+
+[Level 54]
+ID = 54
+Exp = 222221
+
+[Level 55]
+ID = 55
+Exp = 234176
+
+[Level 56]
+ID = 56
+Exp = 246564
+
+[Level 57]
+ID = 57
+Exp = 259395
+
+[Level 58]
+ID = 58
+Exp = 272676
+
+[Level 59]
+ID = 59
+Exp = 286414
+
+[Level 60]
+ID = 60
+Exp = 300619
+
+[Level 61]
+ID = 61
+Exp = 315298
+
+[Level 62]
+ID = 62
+Exp = 330458
+
+[Level 63]
+ID = 63
+Exp = 346109
+
+[Level 64]
+ID = 64
+Exp = 362258
+
+[Level 65]
+ID = 65
+Exp = 378912
+
+[Level 66]
+ID = 66
+Exp = 396081
+
+[Level 67]
+ID = 67
+Exp = 413772
+
+[Level 68]
+ID = 68
+Exp = 431992
+
+[Level 69]
+ID = 69
+Exp = 450751
+
+[Level 70]
+ID = 70
+Exp = 470056
+
+[Level 71]
+ID = 71
+Exp = 489914
+
+[Level 72]
+ID = 72
+Exp = 510335
+
+[Level 73]
+ID = 73
+Exp = 531326
+
+[Level 74]
+ID = 74
+Exp = 552894
+
+[Level 75]
+ID = 75
+Exp = 575049
+
+[Level 76]
+ID = 76
+Exp = 597798
+
+[Level 77]
+ID = 77
+Exp = 621148
+
+[Level 78]
+ID = 78
+Exp = 645109
+
+[Level 79]
+ID = 79
+Exp = 669688
+
+[Level 80]
+ID = 80
+Exp = 694892
+
+[Level 81]
+ID = 81
+Exp = 720731
+
+[Level 82]
+ID = 82
+Exp = 747212
+
+[Level 83]
+ID = 83
+Exp = 774342
+
+[Level 84]
+ID = 84
+Exp = 802131
+
+[Level 85]
+ID = 85
+Exp = 830586
+
+[Level 86]
+ID = 86
+Exp = 859714
+
+[Level 87]
+ID = 87
+Exp = 889525
+
+[Level 88]
+ID = 88
+Exp = 920026
+
+[Level 89]
+ID = 89
+Exp = 951224
+
+[Level 90]
+ID = 90
+Exp = 983129
+
+[Level 91]
+ID = 91
+Exp = 1015748
+
+[Level 92]
+ID = 92
+Exp = 1049088
+
+[Level 93]
+ID = 93
+Exp = 1083159
+
+[Level 94]
+ID = 94
+Exp = 1117968
+
+[Level 95]
+ID = 95
+Exp = 1153522
+
+[Level 96]
+ID = 96
+Exp = 1189831
+
+[Level 97]
+ID = 97
+Exp = 1226902
+
+[Level 98]
+ID = 98
+Exp = 1264742
+
+[Level 99]
+ID = 99
+Exp = 1303361
+
+[Level 100]
+ID = 100
+Exp = 1342766
+
+[Level 101]
+ID = 101
+Exp = 1382964
+
+[Level 102]
+ID = 102
+Exp = 1423965
+
+[Level 103]
+ID = 103
+Exp = 1465776
+
+[Level 104]
+ID = 104
+Exp = 1508404
+
+[Level 105]
+ID = 105
+Exp = 1551859
+
+[Level 106]
+ID = 106
+Exp = 1596148
+
+[Level 107]
+ID = 107
+Exp = 1641278
+
+[Level 108]
+ID = 108
+Exp = 1687259
+
+[Level 109]
+ID = 109
+Exp = 1734098
+
+[Level 110]
+ID = 110
+Exp = 1781802
+
+[Level 111]
+ID = 111
+Exp = 1830381
+
+[Level 112]
+ID = 112
+Exp = 1879842
+
+[Level 113]
+ID = 113
+Exp = 1930192
+
+[Level 114]
+ID = 114
+Exp = 1981441
+
+[Level 115]
+ID = 115
+Exp = 2033596
+
+[Level 116]
+ID = 116
+Exp = 2086664
+
+[Level 117]
+ID = 117
+Exp = 2140655
+
+[Level 118]
+ID = 118
+Exp = 2195576
+
+[Level 119]
+ID = 119
+Exp = 2251434
+
+[Level 120]
+ID = 120
+Exp = 2308239
+
+[Level 121]
+ID = 121
+Exp = 2365998
+
+[Level 122]
+ID = 122
+Exp = 2424718
+
+[Level 123]
+ID = 123
+Exp = 2484409
+
+[Level 124]
+ID = 124
+Exp = 2545078
+
+[Level 125]
+ID = 125
+Exp = 2606732
+
+[Level 126]
+ID = 126
+Exp = 2669381
+
+[Level 127]
+ID = 127
+Exp = 2733032
+
+[Level 128]
+ID = 128
+Exp = 2797692
+
+[Level 129]
+ID = 129
+Exp = 2863371
+
+[Level 130]
+ID = 130
+Exp = 2930076
+
+[Level 131]
+ID = 131
+Exp = 2997814
+
+[Level 132]
+ID = 132
+Exp = 3066595
+
+[Level 133]
+ID = 133
+Exp = 3136426
+
+[Level 134]
+ID = 134
+Exp = 3207314
+
+[Level 135]
+ID = 135
+Exp = 3279269
+
+[Level 136]
+ID = 136
+Exp = 3352298
+
+[Level 137]
+ID = 137
+Exp = 3426408
+
+[Level 138]
+ID = 138
+Exp = 3501609
+
+[Level 139]
+ID = 139
+Exp = 3577908
+
+[Level 140]
+ID = 140
+Exp = 3655312
+
+[Level 141]
+ID = 141
+Exp = 3733831
+
+[Level 142]
+ID = 142
+Exp = 3813472
+
+[Level 143]
+ID = 143
+Exp = 3894242
+
+[Level 144]
+ID = 144
+Exp = 3976151
+
+[Level 145]
+ID = 145
+Exp = 4059206
+
+[Level 146]
+ID = 146
+Exp = 4143414
+
+[Level 147]
+ID = 147
+Exp = 4228785
+
+[Level 148]
+ID = 148
+Exp = 4315326
+
+[Level 149]
+ID = 149
+Exp = 4403044
+
+[Level 150]
+ID = 150
+Exp = 4491949
+
+[Level 151]
+ID = 151
+Exp = 4582048
+
+[Level 152]
+ID = 152
+Exp = 4673348
+
+[Level 153]
+ID = 153
+Exp = 4765859
+
+[Level 154]
+ID = 154
+Exp = 4859588
+
+[Level 155]
+ID = 155
+Exp = 4954542
+
+[Level 156]
+ID = 156
+Exp = 5050731
+
+[Level 157]
+ID = 157
+Exp = 5148162
+
+[Level 158]
+ID = 158
+Exp = 5246842
+
+[Level 159]
+ID = 159
+Exp = 5346781
+
+[Level 160]
+ID = 160
+Exp = 5447986
+
+[Level 161]
+ID = 161
+Exp = 5550464
+[Level 162]
+ID = 162
+Exp = 5654225
+[Level 163]
+ID = 163
+Exp = 5759276
+
+[Level 164]
+ID = 164
+Exp = 5865624
+
+[Level 165]
+ID = 165
+Exp = 5973279
+
+[Level 166]
+ID = 166
+Exp = 6082248
+
+[Level 167]
+ID = 167
+Exp = 6192538
+
+[Level 168]
+ID = 168
+Exp = 6304159
+
+[Level 169]
+ID = 169
+Exp = 6417118
+
+[Level 170]
+ID = 170
+Exp = 6531422
+
+[Level 171]
+ID = 171
+Exp = 6647081
+
+[Level 172]
+ID = 172
+Exp = 6764102
+
+[Level 173]
+ID = 173
+Exp = 6882492
+
+[Level 174]
+ID = 174
+Exp = 7002261
+
+[Level 175]
+ID = 175
+Exp = 7123416
+
+[Level 176]
+ID = 176
+Exp = 7245964
+
+[Level 177]
+ID = 177
+Exp = 7369915
+
+[Level 178]
+ID = 178
+Exp = 7495276
+
+[Level 179]
+ID = 179
+Exp = 7622054
+
+[Level 180]
+ID = 180
+Exp = 7750259
+
+[Level 181]
+ID = 181
+Exp = 7879898
+
+[Level 182]
+ID = 182
+Exp = 8010978
+
+[Level 183]
+ID = 183
+Exp = 8143509
+
+[Level 184]
+ID = 184
+Exp = 8277498
+
+[Level 185]
+ID = 185
+Exp = 8412952
+
+[Level 186]
+ID = 186
+Exp = 8549881
+
+[Level 187]
+ID = 187
+Exp = 8688292
+
+[Level 188]
+ID = 188
+Exp = 8828192
+
+[Level 189]
+ID = 189
+Exp = 8969591
+
+[Level 190]
+ID = 190
+Exp = 9112496
+
+[Level 191]
+ID = 191
+Exp = 9256914
+
+[Level 192]
+ID = 192
+Exp = 9402855
+
+[Level 193]
+ID = 193
+Exp = 9550326
+
+[Level 194]
+ID = 194
+Exp = 9699334
+
+[Level 195]
+ID = 195
+Exp = 9849889
+
+[Level 196]
+ID = 196
+Exp = 10001998
+
+[Level 197]
+ID = 197
+Exp = 10155668
+
+[Level 198]
+ID = 198
+Exp = 10310909
+
+[Level 199]
+ID = 199
+Exp = 10467728
+
+[Level 200]
+ID = 200
+Exp = 10626132
+
+[Level 201]
+ID = 201
+Exp = 10786131
+
+[Level 202]
+ID = 202
+Exp = 10947732
+
+[Level 203]
+ID = 203
+Exp = 11110942
+
+[Level 204]
+ID = 204
+Exp = 11275771
+
+[Level 205]
+ID = 205
+Exp = 11442226
+
+[Level 206]
+ID = 206
+Exp = 11610314
+
+[Level 207]
+ID = 207
+Exp = 11780045
+
+[Level 208]
+ID = 208
+Exp = 11951426
+
+[Level 209]
+ID = 209
+Exp = 12124464
+
+[Level 210]
+ID = 210
+Exp = 12299169
+
+[Level 211]
+ID = 211
+Exp = 12475548
+
+[Level 212]
+ID = 212
+Exp = 12653608
+
+[Level 213]
+ID = 213
+Exp = 12833359
+
+[Level 214]
+ID = 214
+Exp = 13014808
+
+[Level 215]
+ID = 215
+Exp = 13197962
+
+[Level 216]
+ID = 216
+Exp = 13382831
+
+[Level 217]
+ID = 217
+Exp = 13569422
+
+[Level 218]
+ID = 218
+Exp = 13757742
+
+[Level 219]
+ID = 219
+Exp = 13947801
+
+[Level 220]
+ID = 220
+Exp = 14139606
+
+[Level 221]
+ID = 221
+Exp = 14333164
+
+[Level 222]
+ID = 222
+Exp = 14528485
+
+[Level 223]
+ID = 223
+Exp = 14725576
+
+[Level 224]
+ID = 224
+Exp = 14924444
+
+[Level 225]
+ID = 225
+Exp = 15125099
+
+[Level 226]
+ID = 226
+Exp = 15327548
+
+[Level 227]
+ID = 227
+Exp = 15531798
+
+[Level 228]
+ID = 228
+Exp = 15737859
+
+[Level 229]
+ID = 229
+Exp = 15945738
+
+[Level 230]
+ID = 230
+Exp = 16155442
+
+[Level 231]
+ID = 231
+Exp = 16366981
+
+[Level 232]
+ID = 232
+Exp = 16580362
+
+[Level 233]
+ID = 233
+Exp = 16795592
+
+[Level 234]
+ID = 234
+Exp = 17012681
+
+[Level 235]
+ID = 235
+Exp = 17231636
+
+[Level 236]
+ID = 236
+Exp = 17452464
+
+[Level 237]
+ID = 237
+Exp = 17675175
+
+[Level 238]
+ID = 238
+Exp = 17899776
+
+[Level 239]
+ID = 239
+Exp = 18126274
+
+[Level 240]
+ID = 240
+Exp = 18354679
+
+[Level 241]
+ID = 241
+Exp = 18584998
+
+[Level 242]
+ID = 242
+Exp = 18817238
+
+[Level 243]
+ID = 243
+Exp = 19051409
+
+[Level 244]
+ID = 244
+Exp = 19287518
+
+[Level 245]
+ID = 245
+Exp = 19525572
+
+[Level 246]
+ID = 246
+Exp = 19765581
+
+[Level 247]
+ID = 247
+Exp = 20007552
+
+[Level 248]
+ID = 248
+Exp = 20251492
+
+[Level 249]
+ID = 249
+Exp = 20497411
+
+[Level 250]
+ID = 250
+Exp = 100000000
+
+[Level 251]
+ID = 251
+Exp = 100000000
+
+[Level 252]
+ID = 252
+Exp = 100000000
+
+[Level 253]
+ID = 253
+Exp = 100000000
+
+[Level 254]
+ID = 254
+Exp = 100000000
+
+[Level 255]
+ID = 255
+Exp = 100000000
+
+[Level 256]
+ID = 256
+Exp = 100000000
+
+[Level 257]
+ID = 257
+Exp = 100000000
+
+[Level 258]
+ID = 258
+Exp = 100000000
+
+[Level 259]
+ID = 259
+Exp = 100000000
+
+[Level 260]
+ID = 260
+Exp = 200000000
+
+[Level 261]
+ID = 261
+Exp = 200000000
+
+[Level 262]
+ID = 262
+Exp = 200000000
+
+[Level 263]
+ID = 263
+Exp = 200000000
+
+[Level 264]
+ID = 264
+Exp = 200000000
+
+[Level 265]
+ID = 265
+Exp = 200000000
+
+[Level 266]
+ID = 266
+Exp = 200000000
+
+[Level 267]
+ID = 267
+Exp = 200000000
+
+[Level 268]
+ID = 268
+Exp = 200000000
+
+[Level 269]
+ID = 269
+Exp = 200000000
+
+[Level 270]
+ID = 270
+Exp = 400000000
+
+[Level 271]
+ID = 271
+Exp = 400000000
+
+[Level 272]
+ID = 272
+Exp = 400000000
+
+[Level 273]
+ID = 273
+Exp = 400000000
+
+[Level 274]
+ID = 274
+Exp = 400000000
+
+[Level 275]
+ID = 275
+Exp = 400000000
+
+[Level 276]
+ID = 276
+Exp = 400000000
+
+[Level 277]
+ID = 277
+Exp = 400000000
+
+[Level 278]
+ID = 278
+Exp = 400000000
+
+[Level 279]
+ID = 279
+Exp = 400000000
+
+[Level 280]
+ID = 280
+Exp = 800000000
+
+[Level 281]
+ID = 281
+Exp = 800000000
+
+[Level 282]
+ID = 282
+Exp = 800000000
+
+[Level 283]
+ID = 283
+Exp = 800000000
+
+[Level 284]
+ID = 284
+Exp = 800000000
+
+[Level 285]
+ID = 285
+Exp = 800000000
+
+[Level 286]
+ID = 286
+Exp = 800000000
+
+[Level 287]
+ID = 287
+Exp = 800000000
+
+[Level 288]
+ID = 288
+Exp = 800000000
+
+[Level 289]
+ID = 289
+Exp = 800000000
+
+[Level 290]
+ID = 290
+Exp = 1600000000
+
+[Level 291]
+ID = 291
+Exp = 1600000000
+
+[Level 292]
+ID = 292
+Exp = 1600000000
+
+[Level 293]
+ID = 293
+Exp = 1600000000
+
+[Level 294]
+ID = 294
+Exp = 1600000000
+
+[Level 295]
+ID = 295
+Exp = 1600000000
+
+[Level 296]
+ID = 296
+Exp = 1600000000
+
+[Level 297]
+ID = 297
+Exp = 1600000000
+
+[Level 298]
+ID = 298
+Exp = 1600000000
+
+[Level 299]
+ID = 299
+Exp = 1600000000
+
+[Level 300]
+ID = 300
+Exp = 3200000000

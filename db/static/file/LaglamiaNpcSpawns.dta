@@ -1,0 +1,271 @@
+##################
+#### LAGLAMIA ####
+##################
+
+#### Npcs ####
+[Assistant 1]
+ID = 1
+CenterX = 6841
+CenterY = 5349
+Rotation = 4.7123
+Type = 95
+BuyRate = 95	# Value in %
+SellRate = 30	# Value in %
+Shop = NpcItemList/Map4/npc1.dta
+
+[Assistant 2]
+ID = 2
+CenterX = 6833
+CenterY = 6800
+Rotation = 0.0
+Type = 95
+BuyRate = 95	# Value in %
+SellRate = 30	# Value in %
+Shop = NpcItemList/Map4/npc2.dta
+
+[Assistant 3]
+ID = 3
+CenterX = 10275
+CenterY = 5200
+Rotation = 0.0
+Type = 95
+BuyRate = 120	# Value in %
+SellRate = 30	# Value in %
+Shop = NpcItemList/Map4/npc3.dta
+
+[Barmaid 1]
+ID = 4
+CenterX = 8398
+CenterY = 5289
+Rotation = 3.1415
+Type = 92
+BuyRate = 95	# Value in %
+SellRate = 30	# Value in %
+Shop = NpcItemList/Map4/npc4.dta
+
+[Blacksmith 1]
+ID = 5
+CenterX = 6774
+CenterY = 5126
+Rotation = 1.4921
+Type = 90
+BuyRate = 100	# Value in %
+SellRate = 30	# Value in %
+Shop = NpcItemList/Map4/npc5.dta
+
+[Blacksmith 2]
+ID = 6
+CenterX = 6759
+CenterY = 5126
+Rotation = 1.4921
+Type = 90
+BuyRate = 100	# Value in %
+SellRate = 30	# Value in %
+Shop = NpcItemList/Map4/npc6.dta
+
+[Blacksmith 3]
+ID = 7
+CenterX = 6935
+CenterY = 5368
+Rotation = 4.7123
+Type = 90
+BuyRate = 90	# Value in %
+SellRate = 30	# Value in %
+Shop = NpcItemList/Map4/npc7.dta
+
+[Doctor 1]
+ID = 8
+CenterX = 6358
+CenterY = 5397
+Rotation = 4.7123
+Type = 93
+BuyRate = 90	# Value in %
+SellRate = 30	# Value in %
+Shop = NpcItemList/Map4/npc8.dta
+
+[Doctor 2]
+ID = 9
+CenterX = 8112
+CenterY = 6615
+Rotation = 0.0
+Type = 93
+BuyRate = 70	# Value in %
+SellRate = 30	# Value in %
+Shop = NpcItemList/Map4/npc9.dta
+
+[Machine Dealer 1]
+ID = 10
+CenterX = 6729
+CenterY = 5129
+Rotation = 1.4921
+Type = 91
+BuyRate = 100	# Value in %
+SellRate = 30	# Value in %
+Shop = NpcItemList/Map4/npc10.dta
+
+[Machine Dealer 2]
+ID = 11
+CenterX = 6629
+CenterY = 5126
+Rotation = 1.4921
+Type = 91
+BuyRate = 100	# Value in %
+SellRate = 30	# Value in %
+Shop = NpcItemList/Map4/npc11.dta
+
+[Machine Dealer 3]
+ID = 12
+CenterX = 6608
+CenterY = 5126
+Rotation = 1.4921
+Type = 91
+BuyRate = 100	# Value in %
+SellRate = 30	# Value in %
+Shop = NpcItemList/Map4/npc12.dta
+
+[Machine Dealer 4]
+ID = 13
+CenterX = 6141
+CenterY = 5287
+Rotation = 1.5707
+Type = 91
+BuyRate = 105	# Value in %
+SellRate = 30	# Value in %
+Shop = NpcItemList/Map4/npc13.dta
+
+[Machine Dealer 5]
+ID = 14
+CenterX = 6907
+CenterY = 5041
+Rotation = 0.0
+Type = 91
+BuyRate = 100	# Value in %
+SellRate = 30	# Value in %
+Shop = NpcItemList/Map4/npc14.dta
+
+[Magic Shopkeeper 1]
+ID = 15
+CenterX = 6500
+CenterY = 5126
+Rotation = 1.4921
+Type = 94
+BuyRate = 100	# Value in %
+SellRate = 30	# Value in %
+Shop = NpcItemList/Map4/npc15.dta
+
+[Magic Shopkeeper 2]
+ID = 16
+CenterX = 6485
+CenterY = 5126
+Rotation = 1.4921
+Type = 94
+BuyRate = 100	# Value in %
+SellRate = 30	# Value in %
+Shop = NpcItemList/Map4/npc16.dta
+
+[Magic Shopkeeper 3]
+ID = 17
+CenterX = 6744
+CenterY = 5129
+Rotation = 1.4921
+Type = 94
+BuyRate = 100	# Value in %
+SellRate = 30	# Value in %
+Shop = NpcItemList/Map4/npc17.dta
+
+[Magic Shopkeeper 4]
+ID = 18
+CenterX = 6195
+CenterY = 5215
+Rotation = 0.0
+Type = 94
+BuyRate = 100	# Value in %
+SellRate = 30	# Value in %
+Shop = NpcItemList/Map4/npc18.dta
+
+[Magic Shopkeeper 5]
+ID = 19
+CenterX = 7145
+CenterY = 5410
+Rotation = 3.1415
+Type = 94
+BuyRate = 100	# Value in %
+SellRate = 30	# Value in %
+Shop = NpcItemList/Map4/npc19.dta
+
+[Archeologist 1]
+ID = 20
+CenterX = 7190
+CenterY = 5096
+Rotation = 1.5707
+Type = 257
+
+[Aisian Bandor 1]
+ID = 21
+CenterX = 6198
+CenterY = 5090
+Rotation = 0.0
+Type = 139
+
+[Gem Shopkeeper A 1]
+ID = 22
+CenterX = 6195
+CenterY = 5235
+Rotation = 0.0
+Type = 166
+
+[Guard Captain 1]
+ID = 23
+CenterX = 6220
+CenterY = 5360
+Rotation = 5.5
+Type = 57
+
+[Guard Master 1]
+ID = 24
+CenterX = 6410
+CenterY = 5360
+Rotation = 3.6
+Type = 117
+
+[Machine Shop Owner 1]
+ID = 25
+CenterX = 6310
+CenterY = 5360
+Rotation = 4.7123
+Type = 51
+
+[Veterinary 1]
+ID = 26
+CenterX = 6372
+CenterY = 5044
+Rotation = 1.5707
+Type = 189
+
+[Gem Gambler]
+ID = 27
+CenterX = 6195
+CenterY = 5200
+Rotation = 0.0
+Type = 167
+
+#[Aidia Mixing Merchant 1]
+#ID = 27
+#CenterX = 6265
+#CenterY = 5400
+#Rotation = 4.7123
+#Type = 330
+
+#[Gem Shopkeeper B 1]
+#ID = 28
+#CenterX = 6195
+#CenterY = 5250
+#Rotation = 0.0
+#Type = 293
+
+#[Host]
+#ID = 29
+#CenterX = 7200
+#CenterY = 5330
+#Rotation = 4.7123
+#Type = 169

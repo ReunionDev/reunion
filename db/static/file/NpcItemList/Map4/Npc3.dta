@@ -1,0 +1,143 @@
+[Recovery Potion]
+Type = 145
+
+[Small Healing Potion]
+Type = 140
+
+[Healing Potion]
+Type = 133
+
+[Mega Vitality Potion]
+Type = 470
+
+[Giga Vitality Potion]
+Type = 515
+
+[Grindstone(500)]
+Type = 739
+
+[Grindstone(1000)]
+Type = 807
+
+[Chakuram Grindstone(500)]
+Type = 1006
+
+[Chakuram Grindstone(1000)]
+Type = 10005
+
+[Mana Recovery Potion]
+Type = 1048
+
+[Small Mana Potion]
+Type = 146
+
+[Mana Potion]
+Type = 147
+
+[Mega Mana Potion]
+Type = 512
+
+[Giga Mana Potion]
+Type = 568
+
+[Laglamia Square Warp Device]
+Type = 307
+
+[Coliseum Warp Device]
+Type = 308
+
+[Return Warp Device]
+Type = 175
+
+[Mission Reciver]
+Type = 926
+
+[Mini Cell]
+Type = 209
+
+[Battery]
+Type = 210
+
+[Charging Pack]
+Type = 211
+
+[Mega Electric Power Potion]
+Type = 514
+
+[Giga Electric Power Potion]
+Type = 569
+
+[Charging Shell]
+Type = 757
+
+[Charging Shell Set]
+Type = 758
+
+[Flame Capsule]
+Type = 759
+
+[Flame Capsule Set]
+Type = 760
+
+[Wolf Meat]
+Type = 142
+
+[Tiger Meat]
+Type = 143
+
+[Stamina Potion]
+Type = 144
+
+[Mega Stamina Potion]
+Type = 513
+
+[Giga Stamina Potion]
+Type = 1039
+
+[Laser Capsule]
+Type = 761
+
+[Laser Capsule Set]
+Type = 762
+
+[Mini Mine]
+Type = 763
+
+[Mini Mine Set]
+Type = 764
+
+[Normal Book(1~4)]
+Type = 801
+
+[wand charger lv.1]
+Type = 776
+
+[Accumulated Damage lv.1]
+Type = 780
+
+[Paralysis lv.1]
+Type = 783
+
+[Confusion lv.1]
+Type = 786
+
+[Petrifacaion lv.2]
+Type = 795
+
+[Cold lv.2]
+Type = 792
+
+[Apple]
+Type = 618
+
+[Labiyoing recall device]
+Type = 968
+
+[White Tiger Summon Stone]
+Type = 861
+
+[Chmero Summon Stone]
+Type = 808
+
+[Devil Summon Stone]
+Type = 812

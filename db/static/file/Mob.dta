@@ -1,0 +1,624 @@
+#########################################################
+#							#
+#			G_ENUMS				#
+#							#
+#  Mutant: 0-Normal; 1-Red; 2-Blue; 3-Green; 4-Yellow   #
+#							#
+#  Neo-Progmare: 0-Normal; 1-Shadow; 2-Hard Barrier;	#
+#		 3-Fuzzy; 4-Mental			#
+#							#
+#########################################################
+
+##################
+###### MOBS ######
+##################
+
+#### Laglamia ####
+[Armor Rat ot Contrition]
+ID = 226
+Level = 0
+Hp = 1
+Dmg = 1
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 1
+
+[Armored Mouse]
+ID = 97
+Level = 1
+Hp = 30
+Dmg = 2
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 10
+Lime = 1
+
+[Wolf]
+ID = 23
+Level = 3
+Hp = 50
+Dmg = 3
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 23
+Lime = 2
+
+[Lada]
+ID = 25
+Level = 5
+Hp = 71
+Dmg = 5
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 37
+Lime = 3
+
+[Armored Crab]
+ID = 98
+Level = 8
+Hp = 105
+Dmg = 5
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 57
+Lime = 5
+
+[Poison Crab]
+ID = 99
+Level = 10
+Hp = 130
+Dmg = 8
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 70
+Lime = 6
+
+[White Tiger]
+ID = 24
+Level = 12
+Hp = 157
+Dmg = 7
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 83
+Lime = 7
+
+[Sea Scorpion]
+ID = 100
+Level = 22
+Hp = 346
+Dmg = 21
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 141
+Lime = 11
+
+[Poison Scorpion]
+ID = 101
+Level = 30
+Hp = 590
+Dmg = 33
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 232
+Lime = 19
+
+[Chmero]
+ID = 102
+Level = 35
+Hp = 799
+Dmg = 44
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 311
+Lime = 25
+
+[Skewer Halfer]
+ID = 110
+Level = 65
+Hp = 7514
+Dmg = 318
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 1511
+Lime = 121
+
+[Mad Cyborg]
+ID = 109
+Level = 70
+Hp = 4150
+Dmg = 275
+Speed = 20
+AttackType = 1
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 1852
+Lime = 148
+
+[Mace Kabal]
+ID = 108
+Level = 105
+Hp = 29086
+Dmg = 880
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 6220
+Lime = 498
+
+[Drakion Magic]
+ID = 112
+Level = 120
+Hp = 127650
+Dmg = 1158
+Speed = 20
+AttackType = 2
+DmgType = 1
+Mutant = 0
+NeoProgmare = 0
+Exp = 27750
+Lime = 2220
+
+[Drakion Sword]
+ID = 111
+Level = 125
+Hp = 249610
+Dmg = 1283
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 54530
+Lime = 4362
+
+#### Shilon ####
+[Dark Soul]
+ID = 125
+Level = 0
+Hp = 1
+Dmg = 1
+Speed = 20
+AttackType = 0
+DmgType = 2
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 1
+
+[Uokepaloid]
+ID = 149
+Level = 0
+Hp = 1
+Dmg = 1
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 1
+
+[Karmaroid]
+ID = 152
+Level = 0
+Hp = 1
+Dmg = 1
+Speed = 20
+AttackType = 2
+DmgType = 2
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 1
+
+[1]
+ID = 160
+
+[2]
+ID = 150
+
+[4]
+ID = 148
+
+[5]
+ID = 140
+
+[6]
+ID = 141
+
+[7]
+ID = 139
+
+[War Giant]
+ID = 38
+Level = 190
+Hp = 1
+Dmg = 1
+Speed = 35
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 60000
+Lime = 10000
+
+#### Pharous ####
+[Wolf Wing]
+ID = 285
+Level = 92
+Hp = 1
+Dmg = 1
+Speed = 35
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 20000
+Lime = 330
+
+[Kapier Fencer]
+ID = 286
+Level = 103
+Hp = 1
+Dmg = 1
+Speed = 35
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 5802
+Lime = 300
+
+[Axe Wing]
+ID = 287
+Level = 158
+Hp = 1
+Dmg = 1
+Speed = 35
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 27671
+Lime = 415
+
+[Sorceress Wing]
+ID = 288
+Level = 125
+Hp = 1
+Dmg = 1
+Speed = 35
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 28563
+Lime = 350
+
+[Storm Fencer]
+ID = 289
+Level = 125
+Hp = 1
+Dmg = 1
+Speed = 35
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 28563
+Lime = 350
+
+[Hell Wing]
+ID = 290
+Level = 158
+Hp = 1
+Dmg = 1
+Speed = 35
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 27671
+Lime = 415
+
+[Battle Dragon]
+ID = 291
+Level = 158
+Hp = 1
+Dmg = 1
+Speed = 35
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 27671
+Lime = 415
+
+[Wolf Dragon]
+ID = 292
+Level = 158
+Hp = 1
+Dmg = 1
+Speed = 35
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 27671
+Lime = 415
+
+[Raven Mage]
+ID = 219
+Level = 158
+Hp = 1
+Dmg = 1
+Speed = 35
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 27671
+Lime = 415
+
+[Head Dragon]
+ID = 220
+Level = 158
+Hp = 1
+Dmg = 1
+Speed = 35
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 27671
+Lime = 415
+
+[Ghost Hydra]
+ID = 243
+Level = 158
+Hp = 1
+Dmg = 1
+Speed = 35
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 27671
+Lime = 415
+#in npc 11599 243 1891 1669 0 0.0 100 10 1 4 0 0 3
+
+[Raven Valkyrie]
+ID = 244
+Level = 158
+Hp = 1
+Dmg = 1
+Speed = 35
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 27671
+Lime = 415
+#in npc 11481 244 1896 1784 0 0.0 100 10 2 3 0 0 3
+
+[Flying Devil King]
+ID = 249
+Level = 158
+Hp = 1
+Dmg = 1
+Speed = 35
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 27671
+Lime = 415
+#in npc 9400 249 1056 2310 0 0.0 100 0 0 0 0 0 8
+
+[Bat Dragon]
+ID = 245
+Level = 158
+Hp = 1
+Dmg = 1
+Speed = 35
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 27671
+Lime = 415
+#in npc 11499 245 1064 1951 0 0.0 100 10 2 2 0 0 4
+
+[Iron Dragon]
+ID = 221
+Level = 158
+Hp = 1
+Dmg = 1
+Speed = 35
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 27671
+Lime = 415
+#in npc 11335 221 1383 2172 0 0.0 100 10 3 2 0 0 6
+
+#### Quests ####
+[King Chmero]
+ID = 228
+Level = 0
+Hp = 100
+Dmg = 100
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 2360
+Lime = 1
+
+[Devil Dyor]
+ID = 324
+Level = 0
+Hp = 100
+Dmg = 100
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 2360
+Lime = 1
+
+#### Water ####
+[Dark Blue Fish]
+ID = 231
+AttackType = 0
+DmgType = -1
+Speed = 20
+
+[Light Green Fish]
+ID = 232
+AttackType = 0
+DmgType = -1
+Speed = 20
+
+[Purple Fish]
+ID = 233
+AttackType = 0
+DmgType = -1
+Speed = 20
+
+[Light Blue Fish]
+ID = 234
+AttackType = 0
+DmgType = -1
+Speed = 20
+
+[Dolfin]
+ID = 235
+Hp = 1
+AttackType = 0
+DmgType = -1
+Speed = 20
+
+[Shark]
+ID = 236
+Hp = 1
+AttackType = 0
+DmgType = -1
+Speed = 20
+
+[Turtle]
+ID = 237
+Hp = 1
+AttackType = 0
+DmgType = -1
+Speed = 20
+
+#### Christmas ####
+[Perky Socks]
+ID = 324
+Level = 0
+Hp = 100
+Dmg = 100
+Speed = 20
+AttackType = 0
+DmgType = 0
+Exp = 2360
+Lime = 1
+
+#### Summon ####
+[Summon Devil Giant]
+ID = 213
+Level = 1
+Hp = 100
+Dmg = 100
+Speed = 20
+AttackType = 0
+DmgType = 0
+
+#### Other ####
+[Soccer Ball]
+ID = 173
+Hp = 1
+Speed = 20
+
+[Arbor Day_Tree]
+ID = 323
+
+[Monkey]
+ID = 315
+Level = 1
+Hp = 100
+Dmg = 100
+Speed = 20
+AttackType = 0
+DmgType = 0
+
+#### Unknown ####
+[Unknown 1]
+ID = 298
+
+[Unknown 2]
+ID = 301
+
+[Unknown 3]
+ID = 342
+
+#################
+#### Options ####
+#################
+
+[Attack Type]
+NoAttack = -1
+Close Melee Dmg = 0
+Range Melee Dmg = 1
+Range Magic Dmg = 2
+
+[Damage Type]
+NoDmg = -1
+Melee = 0
+FireBall = 1
+Lightning = 2
+LightningBall = 3
+StarFlare = 4
+

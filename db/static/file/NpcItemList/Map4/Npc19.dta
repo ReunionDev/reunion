@@ -1,0 +1,77 @@
+[Large Healing Potion]
+Type = 288
+
+[Stamina Potion]
+Type = 144
+
+[Large Stamina Potion]
+Type = 290
+
+[Mana Potion]
+Type = 147
+
+[Large Electic Power Potion]
+Type = 291
+
+[Large Mana Potion]
+Type = 289
+
+[Small Mana Potion]
+Type = 146
+
+[wand charger lv.1]
+Type = 776
+
+[Accumulated Damage lv.1]
+Type = 780
+
+[Paralysis lv.1]
+Type = 783
+
+[Confusion lv.1]
+Type = 786
+
+[Cold lv.2]
+Type = 792
+
+[Petrifacaion lv.2]
+Type = 795
+
+[Normal Book(1~4)]
+Type = 801
+
+[White Tiger Summon Stone]
+Type = 861
+
+[Chmero Summon Stone]
+Type = 808
+
+[Devil Summon Stone]
+Type = 812
+
+[Mission Reciver]
+Type = 171
+
+[Red Staff]
+Type = 170
+
+[God Staff]
+Type = 181
+
+[Evil Wizard Staff]
+Type = 182
+
+[Emerald Staff]
+Type = 159
+
+[King Staff]
+Type = 160
+
+[One-Eyed Staff]
+Type = 161
+
+[Eagle Staff]
+Type = 169
+
+[unknown]
+Type = 926

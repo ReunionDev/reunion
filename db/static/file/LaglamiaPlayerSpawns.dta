@@ -1,0 +1,19 @@
+################
+### LAGLAMIA ###
+################
+
+[Soccer Field]
+targetx = 7900
+targety = 3800
+targetwidth = 400
+targetheight = 800
+respawnx = 7900
+respawny = 4650
+respawnwidth = 400
+respawnheight = 130
+
+[Default]
+respawnx = 6270
+respawny = 5170
+respawnwidth = 970
+respawnheight = 100

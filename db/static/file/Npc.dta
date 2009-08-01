@@ -1,0 +1,103 @@
+##################
+###### NPCS ######
+##################
+
+[Aidia Mixing Merchant]
+ID = 330
+Hp = 100
+Class = G_Trader
+
+[Aisian Bandor]
+ID = 139
+Hp = 100
+Class = G_Warehouse
+
+[Archeologist]
+ID = 257
+Hp = 100
+Class = G_Trader
+
+[Assistant] ##
+ID = 95
+Hp = 100
+Class = G_Merchant
+
+[Barmaid] ##
+ID = 92
+Hp = 100
+Class = G_Merchant
+
+[Blacksmith] ##
+ID = 90
+Hp = 100
+Class = G_Merchant
+
+[Bunny Girl 1]
+ID = 322
+Hp = 100
+Class = G_Merchant
+
+[Bunny Girl 2]
+ID = 321
+Hp = 100
+Class = G_Merchant
+
+[Doctor] ##
+ID = 93
+Hp = 100
+Class = G_Merchant
+
+[Gem Gambler]
+ID = 167
+Hp = 100
+Class = G_Trader
+
+[Gem Shopkeeper A]
+ID = 166
+Hp = 100
+Class = G_Trader
+
+[Gem Shopkeeper B]
+ID = 293
+Hp = 100
+Class = G_Trader
+
+[Guard Captain]
+ID = 57
+Hp = 100
+Class = G_StatsRedistributor
+
+[Guard Master]
+ID = 117
+Hp = 100
+Class = G_Trader
+
+[Host]
+ID = 169
+Hp = 100
+Class = G_Trader
+
+[Machine Dealer] ##
+ID = 91
+Hp = 100
+Class = G_Merchant
+
+[Machine Shop Owner]
+ID = 51
+Hp = 100
+Class = G_Trader
+
+[Magic Shopkeeper] ##
+ID = 94
+Hp = 100
+Class = G_Merchant
+
+[Veterinary]
+ID = 189
+Hp = 100
+Class = G_PetAssistant
+
+[x_0 Trader]
+ID = 96
+Hp = 100
+Class = G_Merchant

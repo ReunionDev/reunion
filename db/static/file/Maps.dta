@@ -1,0 +1,65 @@
+[Laglamia]
+ID = 4
+Ip = 127.0.0.1
+Port = 4005
+PlayerSpawn = LaglamiaPlayerSpawns.dta
+MobSpawn = LaglamiaMobSpawns.dta
+NpcSpawn = LaglamiaNpcSpawns.dta
+PlayerArea = LaglamiaPlayerArea.bmp
+MobArea = LaglamiaMobArea.bmp
+PvpArea = LaglamiaPvpArea.bmp
+
+[Lost Realm Castle]
+ID = 0
+Ip = 127.0.0.1
+Port = 4001
+SpawnList = LRCSpawns.dta
+PlayerArea = LRCPlayerArea.bmp
+MobArea = LRCMobArea.bmp
+PvpArea = LRCPvpArea.bmp
+
+[Dekadun]
+ID = 0
+Ip = 127.0.0.1
+Port = 4003
+SpawnList = DunSpawns.dta
+PlayerArea = DunPlayerArea.bmp
+MobArea = DunMobArea.bmp
+PvpArea = DunPvpArea.bmp
+
+[Dekaran]
+ID = 0
+Ip = 127.0.0.1
+Port = 4002			##### Not Tested
+SpawnList = RanSpawns.dta
+PlayerArea = RanPlayerArea.bmp
+MobArea = RanMobArea.bmp
+PvpArea = RanPvpArea.bmp
+
+[Shilon]
+ID = 3
+Ip = 127.0.0.1
+Port = 4004
+SpawnList = ShilonSpawns.dta
+PlayerArea = ShilonPlayerArea.bmp
+MobArea = ShilonMobArea.bmp
+PvpArea = ShilonPvpArea.bmp
+
+[Pharous]
+ID = 6
+Ip = 127.0.0.1
+Port = 4007
+SpawnList = PharousSpawns.dta
+PlayerArea = PharousPlayerArea.bmp
+MobArea = PharousMobArea.bmp
+PvpArea =PharousPvpArea.bmp
+
+
+[Great White Horn]
+ID = 7
+Ip = 127.0.0.1
+Port = 4008
+SpawnList = GWHSpawns.dta
+PlayerArea = GWHPlayerArea.bmp
+MobArea = GWHMobArea.bmp
+PvpArea = GWHPvpArea.bmp
