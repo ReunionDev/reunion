@@ -1,0 +1,6 @@
+This project needs mysql-connector-java-5.1.8-bin.jar
+You can download it from http://dev.mysql.com/downloads/connector/j/5.1.html
+Put it in the root folder of the java project (same folder this file is in)
+
+
+Aidamina
