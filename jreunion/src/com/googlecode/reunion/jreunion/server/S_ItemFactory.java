@@ -32,7 +32,8 @@ public class S_ItemFactory {
 		
 			
 			try {
-				Class c = Class.forName("com.googlecode.reunion.jreunion."+classname);
+
+				Class c = Class.forName("com.googlecode.reunion.jreunion.game."+classname);
 				item =  (G_Item ) c.getConstructors()[0].newInstance(type);
 				
 			} catch (Exception e) {
