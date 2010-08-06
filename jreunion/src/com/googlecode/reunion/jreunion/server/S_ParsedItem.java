@@ -12,43 +12,45 @@ public class S_ParsedItem {
 
 	private String name;
 
+	private List<S_ParsedItemMember> memberList = new Vector<S_ParsedItemMember>();
+
 	public S_ParsedItem() {
 		super();
-		
+
 	}
 
 	public S_ParsedItem(String name) {
 		super();
 		setName(name);
-		
-	}
 
-	private List<S_ParsedItemMember> memberList = new Vector<S_ParsedItemMember>();
+	}
 
 	public void addMember(S_ParsedItemMember member) {
 		memberList.add(member);
 	}
 
 	public void addMember(String Name, String Value) {
-		memberList.add(new S_ParsedItemMember(Name,Value));
+		memberList.add(new S_ParsedItemMember(Name, Value));
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public boolean checkMembers(String[] memberNames) {
+		for (String memberName : memberNames) {
+			if (getMember(memberName) == null) {
+				return false;
+			}
+		}
+		return true;
 	}
 
-	public String getName() {
-		return name;
-	}
+	public void clear() {
+		memberList.clear();
 
-	public Iterator<S_ParsedItemMember> getMemberListIterator() {
-		return memberList.iterator();
 	}
 
 	public S_ParsedItemMember getMember(String name) {
 		Iterator<S_ParsedItemMember> iter = getMemberListIterator();
 		while (iter.hasNext()) {
-			S_ParsedItemMember member = (S_ParsedItemMember) iter.next();
+			S_ParsedItemMember member = iter.next();
 			if (name.toLowerCase().equals(member.getName().toLowerCase())) {
 				return member;
 			}
@@ -56,10 +58,14 @@ public class S_ParsedItem {
 		return null;
 	}
 
+	public Iterator<S_ParsedItemMember> getMemberListIterator() {
+		return memberList.iterator();
+	}
+
 	public String getMemberValue(String name) {
 		Iterator<S_ParsedItemMember> iter = getMemberListIterator();
 		while (iter.hasNext()) {
-			S_ParsedItemMember member = (S_ParsedItemMember) iter.next();
+			S_ParsedItemMember member = iter.next();
 			if (name.toLowerCase().equals(member.getName().toLowerCase())) {
 				return member.getValue();
 			}
@@ -67,16 +73,11 @@ public class S_ParsedItem {
 		return null;
 	}
 
-	public boolean checkMembers(String[] memberNames) {
-		for (int i = 0; i < memberNames.length; i++) {
-			if (getMember(memberNames[i]) == null)
-				return false;
-		}
-		return true;
+	public String getName() {
+		return name;
 	}
-	public void clear()
-	{
-		memberList.clear();
-	
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }

@@ -5,8 +5,9 @@ package com.googlecode.reunion.jreunion.game;
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
 public interface G_SkillTarget {
-	
-	//public void useSkill(G_Skill skill);
-	public void useSkill(G_LivingObject livingObject, int skillId);
+
 	public void levelUpSkill(G_Skill skill);
+
+	// public void useSkill(G_Skill skill);
+	public void useSkill(G_LivingObject livingObject, int skillId);
 }

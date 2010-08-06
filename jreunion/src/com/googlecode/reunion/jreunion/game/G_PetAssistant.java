@@ -8,6 +8,5 @@ public class G_PetAssistant extends G_Npc {
 	public G_PetAssistant(int id) {
 		super(id);
 	}
-	
-	
+
 }

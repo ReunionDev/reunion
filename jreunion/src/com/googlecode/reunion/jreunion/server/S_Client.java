@@ -1,6 +1,5 @@
 package com.googlecode.reunion.jreunion.server;
 
-
 import java.net.Socket;
 
 import com.googlecode.reunion.jreunion.game.G_Player;
@@ -23,7 +22,7 @@ public class S_Client {
 	private int clientState;
 
 	public G_Player playerObject;
-	
+
 	public int characterId;
 
 	public S_Client() {
@@ -32,27 +31,34 @@ public class S_Client {
 		networkId = -1;
 		clientState = -1;
 		characterId = -1;
-		
+
 	}
-	public void sendWrongVersion(int clientVersion)
-	{
-		S_Server.getInstance().getNetworkModule().SendPacket(networkId,S_PacketFactory.createPacket(S_PacketFactory.PT_VERSION_ERROR,clientVersion));
-		return;
+
+	public void disconnect() {
+		S_Server.getInstance().getNetworkModule().Disconnect(networkId);
+		if (clientState >= S_Enums.CS_INGAME) {
+			playerObject.logout();
+		}
+
 	}
-	public int getState()
-	{
+
+	public int getState() {
 		return clientState;
 	}
-	public void setState(int state)
-	{
-		clientState=state;
+
+	public void sendWrongVersion(int clientVersion) {
+		S_Server.getInstance()
+				.getNetworkModule()
+				.SendPacket(
+						networkId,
+						S_PacketFactory
+								.createPacket(S_PacketFactory.PT_VERSION_ERROR,
+										clientVersion));
+		return;
 	}
-	public void disconnect()
-	{
-		S_Server.getInstance().getNetworkModule().Disconnect(networkId);
-		if (clientState >= S_Enums.CS_INGAME)
-			playerObject.logout();
-		
+
+	public void setState(int state) {
+		clientState = state;
 	}
 
 }

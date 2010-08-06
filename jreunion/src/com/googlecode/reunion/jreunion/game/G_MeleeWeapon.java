@@ -8,8 +8,9 @@ public class G_MeleeWeapon extends G_Weapon {
 	public G_MeleeWeapon(int id) {
 		super(id);
 	}
-	public void loadFromReference(int id) 
-	{
+
+	@Override
+	public void loadFromReference(int id) {
 		super.loadFromReference(id);
 	}
 }

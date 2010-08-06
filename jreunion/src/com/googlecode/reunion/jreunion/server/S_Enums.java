@@ -8,7 +8,6 @@ package com.googlecode.reunion.jreunion.server;
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
 public class S_Enums {
-
 	static final int CS_DISCONNECTED = -1;
 
 	static final int CS_ACCEPTED = 0;

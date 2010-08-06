@@ -1,4 +1,5 @@
 package com.googlecode.reunion.jreunion.game;
+
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
@@ -53,7 +54,7 @@ public class G_Enums {
 	public final static int SLOT_NECKLACE = 6;
 
 	public final static int SLOT_RING = 7;
-	
+
 	public final static int SLOT_BRACELET = 8;
 
 	public final static int SLOT_FIRST_HAND = 9;
@@ -161,30 +162,30 @@ public class G_Enums {
 	public final static int STATUS_CHARISMA = 18;
 
 	public final static int STATUS_PENALTY = 19;
-	
+
 	public final static int MOB_MUTANT_NORMAL = 0;
-	
+
 	public final static int MOB_MUTANT_RED = 1;
 
 	public final static int MOB_MUTANT_BLUE = 2;
-	
+
 	public final static int MOB_MUTANT_GREEN = 3;
-	
+
 	public final static int MOB_MUTANT_YELLOW = 4;
-	
+
 	public final static int MOB_NEOPROGMARE_NORMAL = 0;
-	
+
 	public final static int MOB_NEOPROGMARE_SHADOW = 1;
-	
+
 	public final static int MOB_NEOPROGMARE_HARD_BARRIER = 2;
-	
+
 	public final static int MOB_NEOPROGMARE_FUZZY = 3;
-	
+
 	public final static int MOB_NEOPROGMARE_MENTAL = 4;
-	
+
 	public final static int CLOSE_MELEE_DMG = 0;
-	
+
 	public final static int RANGE_MELEE_DMG = 1;
-	
+
 	public final static int RANGE_MAGIC_DMG = 2;
 }

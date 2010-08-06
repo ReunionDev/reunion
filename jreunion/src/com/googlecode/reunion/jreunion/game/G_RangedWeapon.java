@@ -8,8 +8,9 @@ public class G_RangedWeapon extends G_Weapon {
 	public G_RangedWeapon(int type) {
 		super(type);
 	}
-	public void loadFromReference(int type) 
-	{
+
+	@Override
+	public void loadFromReference(int type) {
 		super.loadFromReference(type);
 	}
 }

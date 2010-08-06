@@ -1,6 +1,5 @@
 package com.googlecode.reunion.jreunion.server;
 
-
 import java.io.IOException;
 import java.net.BindException;
 import java.net.InetSocketAddress;
@@ -18,7 +17,8 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.Vector;
 
-import com.googlecode.reunion.jreunion.game.*;
+import com.googlecode.reunion.jreunion.game.G_Player;
+
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
@@ -28,7 +28,6 @@ public class S_Network extends S_ClassModule {
 
 	private final ByteBuffer buffer = ByteBuffer.allocate(16384);
 
-	
 	List<S_Client> clientList = new Vector<S_Client>();
 
 	private ServerSocketChannel serverChannel;
@@ -36,43 +35,9 @@ public class S_Network extends S_ClassModule {
 	private Selector selector;
 
 	private ServerSocket ss;
-				
+
 	public S_Network(S_Module parent) {
 		super(parent);
-	}
-
-	public void Start () throws Exception {
-		
-		int port = 4001;
-		try 
-		{			
-			serverChannel = ServerSocketChannel.open();
-			ss = serverChannel.socket();
-			InetSocketAddress address = new InetSocketAddress(port);
-			ss.bind(address);
-			serverChannel.configureBlocking(false);
-			selector = Selector.open();
-			serverChannel.register(selector, SelectionKey.OP_ACCEPT);
-		} catch(Exception e)
-		{
-			if (e instanceof BindException)
-			{
-				System.out.println( "Port "+port+" not available. Is the server already running?");
-				throw e;
-			}
-			
-		}
-
-	}
-
-	public void Stop() {
-		System.out.println("net stop");
-	}
-
-	public void Work() {
-		
-		CheckOutbound();
-		CheckInbound();
 	}
 
 	private void CheckInbound() {
@@ -99,7 +64,7 @@ public class S_Network extends S_ClassModule {
 				while (it.hasNext()) {
 					// Get a key representing one of bits of I/O
 					// activity
-					SelectionKey key = (SelectionKey) it.next();
+					SelectionKey key = it.next();
 
 					// What kind of activity is it?
 					if ((key.readyOps() & SelectionKey.OP_ACCEPT) == SelectionKey.OP_ACCEPT) {
@@ -118,8 +83,7 @@ public class S_Network extends S_ClassModule {
 						int j = 0;
 						while (true) {
 							for (int i = 0; i < clientList.size(); i++) {
-								if (client.networkId == (clientList
-										.get(i)).networkId) {
+								if (client.networkId == clientList.get(i).networkId) {
 									client.networkId++;
 								}
 
@@ -158,45 +122,44 @@ public class S_Network extends S_ClassModule {
 								key.cancel();
 
 								try {
-									System.out.println("Client Connection Lost");
-																		
+									System.out
+											.println("Client Connection Lost");
+
 									Socket s = sc.socket();
-									
+
 									Iterator<S_Client> iter = getClientIterator();
 									while (it.hasNext()) {
-										
+
 										S_Client client = iter.next();
-										if(client.clientSocket==s)
-										{											
-											System.out.println("Disconnecting: Client("	+ client.networkId + ")");
+										if (client.clientSocket == s) {
+											System.out
+													.println("Disconnecting: Client("
+															+ client.networkId
+															+ ")");
 											client.playerObject.logout();
-											clientList.remove(client);											
+											clientList.remove(client);
 										}
-										
-										
-										
+
 									}
 									sc.close();
 								} catch (IOException ie) {
-									//System.err.println("Error closing socket ");
-									//+ s + ": " + ie);
+									// System.err.println("Error closing socket ");
+									// + s + ": " + ie);
 								}
 							}
 
 						} catch (IOException ie) {
 
-							
 							// On exception, remove this channel from the
 							// selector
 							key.cancel();
-							
+
 							Socket s = sc.socket();
 							Iterator<S_Client> iter = getClientIterator();
-							while (it.hasNext()) {								
+							while (it.hasNext()) {
 								S_Client client = iter.next();
-								if(client.clientSocket==s)
-								{	
-							
+								if (client.clientSocket == s) {
+
 									System.out.println("Disconnecting: Client("
 											+ client.networkId + ")");
 									client.playerObject.logout();
@@ -224,23 +187,23 @@ public class S_Network extends S_ClassModule {
 
 	private void CheckOutbound() {
 
-		S_PacketQueueItem packet =  queue.poll();
+		S_PacketQueueItem packet = queue.poll();
 		while (packet != null) {
 
 			S_Client client = null;
 			Iterator<S_Client> iter = getClientIterator();
-			while(iter.hasNext())
-			{
+			while (iter.hasNext()) {
 				S_Client tempClient = iter.next();
-				if (tempClient.networkId == packet.networkId) 
-				{
+				if (tempClient.networkId == packet.networkId) {
 
 					client = tempClient;
 				}
 			}
-			if (client == null)
+			if (client == null) {
 				return;
-			S_PerformanceStats.getInstance().sentPacket(packet.getData().length());
+			}
+			S_PerformanceStats.getInstance().sentPacket(
+					packet.getData().length());
 			buffer.clear();
 			buffer.put(packet.getBytes());
 			buffer.flip();
@@ -251,13 +214,64 @@ public class S_Network extends S_ClassModule {
 				sc.write(buffer);
 			} catch (IOException e) {
 				client.disconnect();
-				//e.printStackTrace();
+				// e.printStackTrace();
 			}
 			packet = queue.poll();
 		}
 		return;
 	}
-	
+
+	public void Disconnect(int networkId) {
+
+		Iterator<S_Client> iter = getClientIterator();
+		while (iter.hasNext()) {
+			S_Client client = iter.next();
+
+			if (client.networkId == networkId) {
+				try {
+					client.clientSocket.close();
+				} catch (IOException e) {
+
+					// e.printStackTrace();
+				}
+				clientList.remove(client);
+				if (client.playerObject != null) {
+					S_Server.getInstance().getWorldModule().getPlayerManager()
+							.removePlayer(client.playerObject);
+				}
+
+			}
+		}
+	}
+
+	public S_Client getClient(G_Player player) {
+		Iterator<S_Client> iter = getClientIterator();
+		while (iter.hasNext()) {
+			S_Client client = iter.next();
+
+			if (client.playerObject == player) {
+				return client;
+			}
+		}
+
+		return null;
+	}
+
+	public S_Client getClient(int networkId) {
+		Iterator<S_Client> iter = getClientIterator();
+		while (iter.hasNext()) {
+			S_Client client = iter.next();
+			if (client.networkId == networkId) {
+				return client;
+			}
+		}
+		return null;
+	}
+
+	public Iterator<S_Client> getClientIterator() {
+		return clientList.iterator();
+	}
+
 	// Do some cheesy encryption on the incoming data,
 	// and send it back out
 	private boolean processInput(SocketChannel sc) throws IOException {
@@ -267,16 +281,17 @@ public class S_Network extends S_ClassModule {
 		buffer.flip();
 		S_Client client = null;
 		Iterator<S_Client> iter = getClientIterator();
-		while (iter.hasNext())
-		{
-			S_Client tempClient = (S_Client)iter.next();
-			if (tempClient.clientSocket==sc.socket())
-				client=tempClient;
-			
+		while (iter.hasNext()) {
+			S_Client tempClient = iter.next();
+			if (tempClient.clientSocket == sc.socket()) {
+				client = tempClient;
+			}
+
 		}
-		if (client==null)
+		if (client == null) {
 			return false;
-	
+		}
+
 		// If no data, close the connection
 		if (buffer.limit() == 0) {
 			return false;
@@ -287,7 +302,7 @@ public class S_Network extends S_ClassModule {
 		for (int j = 0; j < buffer.limit(); ++j) {
 			output[j] = buffer.get(j);
 		}
-		
+
 		System.out.print("Client(" + client.networkId + ")" + " sends: \n");
 
 		char[] decOutput = S_Crypt.getInstance().C2Sdecrypt(output);
@@ -312,54 +327,38 @@ public class S_Network extends S_ClassModule {
 
 	}
 
-	public void Disconnect(int networkId) {
-		
-		
-		Iterator<S_Client> iter = getClientIterator();
-		while(iter.hasNext())
-		{
-			S_Client client = iter.next();	
-		
-			if (client.networkId == networkId) {
-				try {
-					client.clientSocket.close();
-				} catch (IOException e) {
-					
-					//e.printStackTrace();
-				}
-				clientList.remove(client);
-				if (client.playerObject!=null)
-				S_Server.getInstance().getWorldModule().getPlayerManager().removePlayer(client.playerObject);
+	@Override
+	public void Start() throws Exception {
 
+		int port = 4001;
+		try {
+			serverChannel = ServerSocketChannel.open();
+			ss = serverChannel.socket();
+			InetSocketAddress address = new InetSocketAddress(port);
+			ss.bind(address);
+			serverChannel.configureBlocking(false);
+			selector = Selector.open();
+			serverChannel.register(selector, SelectionKey.OP_ACCEPT);
+		} catch (Exception e) {
+			if (e instanceof BindException) {
+				System.out.println("Port " + port
+						+ " not available. Is the server already running?");
+				throw e;
 			}
-		}
-	}
 
-	public S_Client getClient(int networkId) {
-		Iterator<S_Client> iter = getClientIterator();
-		while(iter.hasNext())
-		{
-			S_Client client = iter.next();
-			if (client.networkId == networkId)
-				return client;
-		}
-		return null;
-	}
-
-	public S_Client getClient(G_Player player) {
-		Iterator<S_Client> iter = getClientIterator();
-		while(iter.hasNext())
-		{
-			S_Client client = (S_Client) iter.next();
-
-			if (client.playerObject == player)
-				return client;
 		}
 
-		return null;
 	}
-		
-	public Iterator<S_Client> getClientIterator() {
-		return clientList.iterator();
+
+	@Override
+	public void Stop() {
+		System.out.println("net stop");
+	}
+
+	@Override
+	public void Work() {
+
+		CheckOutbound();
+		CheckInbound();
 	}
 }

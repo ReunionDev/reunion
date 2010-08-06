@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
+
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
@@ -13,20 +14,94 @@ import java.util.Vector;
 public class S_Parser {
 
 	private List<S_ParsedItem> itemList = new Vector<S_ParsedItem>();
-	
+
 	public S_Parser() {
 		super();
-		
+
+	}
+
+	public void addMember(S_ParsedItem item) {
+		itemList.add(item);
+	}
+
+	public boolean checkItems(String[] itemNames) {
+		for (String itemName : itemNames) {
+			if (getItem(itemName) == null) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public void clear() {
+
+		Iterator<S_ParsedItem> iter = getItemListIterator();
+		while (iter.hasNext()) {
+			S_ParsedItem item = iter.next();
+			item.clear();
+		}
+		itemList.clear();
+
+	}
+
+	public String dump() {
+		String dumpString = new String("");
+		Iterator<S_ParsedItem> itemIter = getItemListIterator();
+		while (itemIter.hasNext()) {
+			S_ParsedItem parsedItem = itemIter.next();
+			dumpString += "\n[" + parsedItem.getName() + "]\n";
+			Iterator<S_ParsedItemMember> memberIter = parsedItem
+					.getMemberListIterator();
+			while (memberIter.hasNext()) {
+				S_ParsedItemMember parsedItemMember = memberIter.next();
+				dumpString += parsedItemMember.getName() + " = "
+						+ parsedItemMember.getValue() + "\n";
+			}
+
+		}
+		return dumpString;
+
+	}
+
+	public S_ParsedItem find(String membername, String membervalue) {
+		Iterator<S_ParsedItem> itemIter = getItemListIterator();
+		while (itemIter.hasNext()) {
+			S_ParsedItem parsedItem = itemIter.next();
+			S_ParsedItemMember member = parsedItem.getMember(membername);
+			if (member == null) {
+				continue;
+			}
+			if (member.getValue().toLowerCase()
+					.equals(membervalue.toLowerCase())) {
+				return parsedItem;
+			}
+
+		}
+		return null;
 	}
 
 	public S_ParsedItem getItem(String name) {
 		Iterator<S_ParsedItem> itemIter = getItemListIterator();
 		while (itemIter.hasNext()) {
-			S_ParsedItem parsedItem = (S_ParsedItem) itemIter.next();
-			if (parsedItem.getName().toLowerCase().equals(name.toLowerCase()))
+			S_ParsedItem parsedItem = itemIter.next();
+			if (parsedItem.getName().toLowerCase().equals(name.toLowerCase())) {
 				return parsedItem;
+			}
 		}
 		return null;
+	}
+
+	public S_ParsedItem getItemById(int id) {
+
+		return find("id", String.valueOf(id));
+	}
+
+	public Iterator<S_ParsedItem> getItemListIterator() {
+		return itemList.iterator();
+	}
+
+	public int getItemListSize() {
+		return itemList.size();
 	}
 
 	public void Parse(String filename) {
@@ -49,16 +124,17 @@ public class S_Parser {
 			while ((line = input.readLine()) != null) {
 				linenr++;
 				line = line.trim();
-				if (line.startsWith("#") || line.length() == 0)
+				if (line.startsWith("#") || line.length() == 0) {
 					continue;
+				}
 				line = line.split("#")[0];
 				line = line.trim();
 				String[] object = line.split("=");
 				if (object.length == 1) {
 					String hobject = object[0];
 					if (hobject.startsWith("[") && hobject.endsWith("]")) {
-						String hobjectname = hobject.substring(1, hobject
-								.length() - 1);
+						String hobjectname = hobject.substring(1,
+								hobject.length() - 1);
 						hobjectname = hobjectname.trim();
 						if (getItem(hobjectname) != null) {
 							System.out.println(parseError(filename, linenr,
@@ -97,7 +173,7 @@ public class S_Parser {
 			}
 
 		} catch (Exception e) {
-			
+
 			e.printStackTrace();
 		}
 
@@ -111,75 +187,4 @@ public class S_Parser {
 		return parseErrorMessage;
 	}
 
-	public Iterator<S_ParsedItem> getItemListIterator() {
-		return itemList.iterator();
-	}
-
-	public String dump() {
-		String dumpString = new String("");
-		Iterator<S_ParsedItem> itemIter = getItemListIterator();
-		while (itemIter.hasNext()) {
-			S_ParsedItem parsedItem = (S_ParsedItem) itemIter.next();
-			dumpString += "\n[" + parsedItem.getName() + "]\n";
-			Iterator<S_ParsedItemMember> memberIter = parsedItem.getMemberListIterator();
-			while (memberIter.hasNext()) {
-				S_ParsedItemMember parsedItemMember = (S_ParsedItemMember) memberIter
-						.next();
-				dumpString += parsedItemMember.getName() + " = "
-						+ parsedItemMember.getValue() + "\n";
-			}
-
-		}
-		return dumpString;
-
-	}
-
-	public void addMember(S_ParsedItem item) {
-		itemList.add(item);
-	}
-
-	public boolean checkItems(String[] itemNames) {
-		for (int i = 0; i < itemNames.length; i++) {
-			if (getItem(itemNames[i]) == null)
-				return false;
-		}
-		return true;
-	}
-
-	public S_ParsedItem find(String membername, String membervalue) {
-		Iterator<S_ParsedItem> itemIter = getItemListIterator();
-		while (itemIter.hasNext()) {
-			S_ParsedItem parsedItem = itemIter.next();
-			S_ParsedItemMember member = parsedItem.getMember(membername);
-			if (member == null)
-				continue;
-			if (member.getValue().toLowerCase()
-					.equals(membervalue.toLowerCase()))
-				return parsedItem;
-
-		}
-		return null;
-	}
-	public S_ParsedItem getItemById(int id)
-	{
-		
-		return find ("id",String.valueOf(id));
-	}
-	public int getItemListSize()
-	{
-		return itemList.size();		
-	}
-	public void clear()
-	{
-		
-		Iterator<S_ParsedItem> iter = getItemListIterator();
-		while(iter.hasNext())
-		{
-			S_ParsedItem item = (S_ParsedItem) iter.next();			
-			item.clear();
-		}
-		itemList.clear();
-	
-	}
-	
 }

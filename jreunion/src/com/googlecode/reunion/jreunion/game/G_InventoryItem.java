@@ -27,22 +27,9 @@ public class G_InventoryItem {
 	public int getPosX() {
 		return posX;
 	}
-	public void setPosX(int posX){
-		this.posX = posX;
-	}
 
 	public int getPosY() {
 		return posY;
-	}
-	public void setPosY(int posY){
-		this.posY = posY;
-	}
-
-	public int getTab() {
-		return tab;
-	}
-	public void setTab(int tab){
-		this.tab = tab;
 	}
 
 	public int getSizeX() {
@@ -51,5 +38,21 @@ public class G_InventoryItem {
 
 	public int getSizeY() {
 		return item.getSizeY();
+	}
+
+	public int getTab() {
+		return tab;
+	}
+
+	public void setPosX(int posX) {
+		this.posX = posX;
+	}
+
+	public void setPosY(int posY) {
+		this.posY = posY;
+	}
+
+	public void setTab(int tab) {
+		this.tab = tab;
 	}
 }

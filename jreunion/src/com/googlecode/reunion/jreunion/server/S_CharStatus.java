@@ -46,11 +46,10 @@ public class S_CharStatus {
 	public S_CharStatus() {
 		super();
 
-		
 	}
 
 	public int getCharStatusStr() {
-		return this.str;
+		return str;
 	}
 
 }

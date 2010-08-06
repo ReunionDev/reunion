@@ -8,9 +8,9 @@ public class G_PlayerItem extends G_Item {
 	public G_PlayerItem(int id) {
 		super(id);
 	}
-	
-	public void loadFromReference(int id) 
-	{
+
+	@Override
+	public void loadFromReference(int id) {
 		super.loadFromReference(id);
 	}
 }

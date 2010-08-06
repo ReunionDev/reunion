@@ -31,95 +31,96 @@ public class G_PersonalOrnament extends G_EtcItem {
 		super(id);
 	}
 
-	public void setIncHp(int incHp) {
-		this.incHp = incHp;
-	}
-
-	public int getIncHp() {
-		return this.incHp;
-	}
-
-	public void setIncMana(int incMana) {
-		this.incMana = incMana;
-	}
-
-	public int getIncMana() {
-		return this.incMana;
-	}
-
-	public void setIncStm(int incStm) {
-		this.incStm = incStm;
-	}
-
-	public int getIncStm() {
-		return this.incStm;
-	}
-
-	public void setIncElect(int incElect) {
-		this.incElect = incElect;
-	}
-
-	public int getIncElect() {
-		return this.incElect;
-	}
-
-	public void setIncStr(int incStr) {
-		this.incStr = incStr;
-	}
-
-	public int getIncStr() {
-		return this.incStr;
-	}
-
-	public void setIncWis(int incWis) {
-		this.incWis = incWis;
-	}
-
-	public int getIncWis() {
-		return this.incWis;
-	}
-
-	public void setIncDex(int incDex) {
-		this.incDex = incDex;
+	public int getIncConst() {
+		return incConst;
 	}
 
 	public int getIncDex() {
-		return this.incDex;
+		return incDex;
+	}
+
+	public int getIncElect() {
+		return incElect;
+	}
+
+	public int getIncExp() {
+		return incExp;
+	}
+
+	public int getIncHp() {
+		return incHp;
+	}
+
+	public int getIncLeadership() {
+		return incLeadership;
+	}
+
+	public int getIncLime() {
+		return incLime;
+	}
+
+	public int getIncMana() {
+		return incMana;
+	}
+
+	public int getIncStm() {
+		return incStm;
+	}
+
+	public int getIncStr() {
+		return incStr;
+	}
+
+	public int getIncWis() {
+		return incWis;
+	}
+
+	@Override
+	public void loadFromReference(int id) {
+		super.loadFromReference(id);
 	}
 
 	public void setIncConst(int incConst) {
 		this.incConst = incConst;
 	}
 
-	public int getIncConst() {
-		return this.incConst;
+	public void setIncDex(int incDex) {
+		this.incDex = incDex;
 	}
 
-	public void setIncLeadership(int incLeadership) {
-		this.incLeadership = incLeadership;
-	}
-
-	public int getIncLeadership() {
-		return this.incLeadership;
-	}
-
-	public void setIncLime(int incLime) {
-		this.incLime = incLime;
-	}
-
-	public int getIncLime() {
-		return this.incLime;
+	public void setIncElect(int incElect) {
+		this.incElect = incElect;
 	}
 
 	public void setIncExp(int incExp) {
 		this.incExp = incExp;
 	}
 
-	public int getIncExp() {
-		return this.incExp;
+	public void setIncHp(int incHp) {
+		this.incHp = incHp;
 	}
-	public void loadFromReference(int id) 
-	{
-		super.loadFromReference(id);
+
+	public void setIncLeadership(int incLeadership) {
+		this.incLeadership = incLeadership;
+	}
+
+	public void setIncLime(int incLime) {
+		this.incLime = incLime;
+	}
+
+	public void setIncMana(int incMana) {
+		this.incMana = incMana;
+	}
+
+	public void setIncStm(int incStm) {
+		this.incStm = incStm;
+	}
+
+	public void setIncStr(int incStr) {
+		this.incStr = incStr;
+	}
+
+	public void setIncWis(int incWis) {
+		this.incWis = incWis;
 	}
 }

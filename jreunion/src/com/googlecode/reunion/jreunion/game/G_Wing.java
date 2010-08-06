@@ -12,8 +12,9 @@ public class G_Wing extends G_Armor {
 		super(id);
 		loadFromReference(id);
 	}
-	public void loadFromReference(int id) 
-	{
+
+	@Override
+	public void loadFromReference(int id) {
 		super.loadFromReference(id);
 	}
 }

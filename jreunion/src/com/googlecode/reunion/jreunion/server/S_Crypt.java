@@ -5,12 +5,7 @@ package com.googlecode.reunion.jreunion.server;
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
 public class S_Crypt {
-	public S_Crypt() {
-
-	}
-
 	private static S_Crypt _instance = null;
-
 
 	private synchronized static void createInstance() {
 		if (_instance == null) {
@@ -19,15 +14,20 @@ public class S_Crypt {
 	}
 
 	public static S_Crypt getInstance() {
-		if (_instance == null)
+		if (_instance == null) {
 			createInstance();
+		}
 		return _instance;
+	}
+
+	public S_Crypt() {
+
 	}
 
 	public char[] C2Sdecrypt(byte encdata[]) {
 		char decdata[] = new char[encdata.length];
 		for (int i = 0; i < encdata.length; i++) {
-			decdata[i]=(char) ((char)(((int)encdata[i])-15)%256);
+			decdata[i] = (char) ((char) (encdata[i] - 15) % 256);
 		}
 		return decdata;
 
@@ -38,8 +38,8 @@ public class S_Crypt {
 		byte encdata[] = new byte[decdata.length];
 
 		for (int i = 0; i < decdata.length; i++) {
-			encdata[i]=(byte)((decdata[i] ^ 0xc3) + 0x0f);
+			encdata[i] = (byte) ((decdata[i] ^ 0xc3) + 0x0f);
 		}
-		return (encdata);
+		return encdata;
 	}
 }

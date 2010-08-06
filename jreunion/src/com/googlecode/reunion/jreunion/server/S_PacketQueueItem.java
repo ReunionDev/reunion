@@ -21,30 +21,34 @@ public class S_PacketQueueItem {
 
 	}
 
+	public void addData(String append) {
+		if (packetString.length() == 0) {
+			packetString = new String(append);
+		}
+		if (!packetString.endsWith("\n")) {
+			packetString += "\n";
+		}
+		packetString += append;
+		if (!packetString.endsWith("\n")) {
+			packetString += "\n";
+		}
+
+	}
+
 	public void Encrypt() {
-		packetBytes = S_Crypt.getInstance()
-				.S2Cencrypt(packetString.toCharArray());
+		packetBytes = S_Crypt.getInstance().S2Cencrypt(
+				packetString.toCharArray());
 	}
 
 	public byte[] getBytes() {
-		if (packetBytes == null)
+		if (packetBytes == null) {
 			Encrypt();
+		}
 		return packetBytes;
 	}
 
 	public String getData() {
 		return packetString;
-	}
-
-	public void addData(String append) {
-		if (packetString.length() == 0)
-			packetString = new String(append);
-		if (!packetString.endsWith("\n"))
-			packetString += "\n";
-		packetString += append;
-		if (!packetString.endsWith("\n"))
-			packetString += "\n";
-
 	}
 
 	/**
