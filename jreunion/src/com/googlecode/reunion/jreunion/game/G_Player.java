@@ -532,14 +532,16 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 				.getQuickSlotIterator();
 		while (quickSlot.hasNext()) {
 			G_QuickSlotItem qsItem = quickSlot.next();
-
-			String packetData = "quick " + qsItem.getSlot() + " "
-					+ qsItem.getItem().getEntityId() + " "
-					+ qsItem.getItem().getType() + " "
-					+ qsItem.getItem().getGemNumber() + " "
-					+ qsItem.getItem().getExtraStats() + "\n";
-			S_Server.getInstance().getNetworkModule()
-					.SendPacket(client.networkId, packetData);
+			G_Item item = qsItem.getItem();
+			if(item!=null){
+				String packetData = "quick " + qsItem.getSlot() + " "
+						+ item.getEntityId() + " "
+						+ item.getType() + " "
+						+ item.getGemNumber() + " "
+						+ item.getExtraStats() + "\n";
+				S_Server.getInstance().getNetworkModule()
+						.SendPacket(client.networkId, packetData);
+			}
 		}
 	}
 
