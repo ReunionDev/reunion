@@ -613,12 +613,13 @@ public class S_DatabaseUtils {
 			
 			while(iter.hasNext())
 			{
-				G_InventoryItem invItem = iter.next();
-				updateItemInfo(invItem.getItem());
-				stmt.execute("INSERT INTO inventory (characterid, uniqueitemid, tab, x, y)" +
-						" VALUES ("+player.getEntityId()+ ",'"+invItem.getItem().getEntityId()+"',"+invItem.getTab()+
-						","+invItem.getPosX()+ ","+invItem.getPosY()+ ");");
+				G_InventoryItem invItem = iter.next();				
+				G_Item item = invItem.getItem();
+				updateItemInfo(item);				
 				
+				stmt.execute("INSERT INTO inventory (characterid, uniqueitemid, tab, x, y)" +
+						" VALUES ("+player.getEntityId()+ ",'"+item.getEntityId()+"',"+invItem.getTab()+
+						","+invItem.getPosX()+ ","+invItem.getPosY()+ ");");				
 			}
 			
 		} catch (SQLException e1) {

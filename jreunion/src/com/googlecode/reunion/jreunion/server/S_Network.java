@@ -126,20 +126,15 @@ public class S_Network extends S_ClassModule {
 											.println("Client Connection Lost");
 
 									Socket s = sc.socket();
-
+									
 									Iterator<S_Client> iter = getClientIterator();
 									while (it.hasNext()) {
 
 										S_Client client = iter.next();
 										if (client.clientSocket == s) {
-											System.out
-													.println("Disconnecting: Client("
-															+ client.networkId
-															+ ")");
-											client.playerObject.logout();
-											clientList.remove(client);
+										
+											Disconnect(client.networkId);
 										}
-
 									}
 									sc.close();
 								} catch (IOException ie) {
@@ -222,25 +217,23 @@ public class S_Network extends S_ClassModule {
 	}
 
 	public void Disconnect(int networkId) {
-
-		Iterator<S_Client> iter = getClientIterator();
-		S_Client disconnectedClient = null;
-		while (iter.hasNext()) {
-			S_Client client = iter.next();
-			if (client.networkId == networkId)
-				disconnectedClient = client;
-		}
-		if(disconnectedClient!=null) {
+		
+		S_Client client =getClient(networkId);		
+		if(client!=null) {
+			System.out
+			.println("Disconnecting: Client("
+					+ client.networkId
+					+ ")");
 			try {
-				disconnectedClient.clientSocket.close();
+				client.clientSocket.close();
 			} catch (IOException e) {
 				// e.printStackTrace();
 			}
-			clientList.remove(disconnectedClient);
-			if (disconnectedClient.playerObject != null) {
-				S_Server.getInstance().getWorldModule().getPlayerManager()
-						.removePlayer(disconnectedClient.playerObject);
+			if (client.playerObject != null) {
+				client.playerObject.logout();
+			
 			}
+			clientList.remove(client);
 		}
 	}
 
@@ -330,7 +323,7 @@ public class S_Network extends S_ClassModule {
 	@Override
 	public void Start() throws Exception {
 
-		int port = 4001;
+		int port = 4005;
 		try {
 			serverChannel = ServerSocketChannel.open();
 			ss = serverChannel.socket();

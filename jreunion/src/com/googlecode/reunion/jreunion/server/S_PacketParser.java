@@ -358,10 +358,15 @@ public class S_PacketParser {
 							Integer.parseInt(message[3]), 0);
 				}
 			} else if (message[0].equals("shop")) {
+				int npcId = Integer.parseInt(message[1]);
 				G_Merchant npc = (G_Merchant) S_Server.getInstance()
 						.getWorldModule().getNpcManager()
 						.getNpc(Integer.parseInt(message[1]));
-				npc.openShop(client.playerObject, Integer.parseInt(message[1]));
+				if (npc!=null) {
+					npc.openShop(client.playerObject, Integer.parseInt(message[1]));
+				} else {
+					System.err.println("Npc not found: " + npcId);				
+				}
 			} else if (message[0].equals("buy")) {
 				G_Merchant npc = (G_Merchant) S_Server.getInstance()
 						.getWorldModule().getNpcManager()
