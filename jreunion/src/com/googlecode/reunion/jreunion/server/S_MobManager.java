@@ -194,14 +194,16 @@ public class S_MobManager {
 		if (moveToPlayer == true) {
 			G_Spawn spawn = S_Server.getInstance().getWorldModule()
 					.getMapManager().getSpawnByMob(mob.getEntityId());
-			double radiusCompX = Math.pow(spawn.getCenterX() - newPosX, 2);
-			double radiusCompY = Math.pow(spawn.getCenterY() - newPosY, 2);
-			double radiusComp = Math.sqrt(radiusCompX + radiusCompY);
-
-			if ((int) radiusComp <= spawn.getRadius()) {
-				// System.out.print("Distance <= Radius\n");
-				mob.setPosX(newPosX);
-				mob.setPosY(newPosY);
+			if(spawn!=null){
+				double radiusCompX = Math.pow(spawn.getCenterX() - newPosX, 2);
+				double radiusCompY = Math.pow(spawn.getCenterY() - newPosY, 2);
+				double radiusComp = Math.sqrt(radiusCompX + radiusCompY);
+	
+				if ((int) radiusComp <= spawn.getRadius()) {
+					// System.out.print("Distance <= Radius\n");
+					mob.setPosX(newPosX);
+					mob.setPosY(newPosY);
+				}
 			}
 		}
 	}
