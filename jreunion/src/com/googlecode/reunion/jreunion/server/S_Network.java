@@ -224,22 +224,22 @@ public class S_Network extends S_ClassModule {
 	public void Disconnect(int networkId) {
 
 		Iterator<S_Client> iter = getClientIterator();
+		S_Client disconnectedClient = null;
 		while (iter.hasNext()) {
 			S_Client client = iter.next();
-
-			if (client.networkId == networkId) {
-				try {
-					client.clientSocket.close();
-				} catch (IOException e) {
-
-					// e.printStackTrace();
-				}
-				clientList.remove(client);
-				if (client.playerObject != null) {
-					S_Server.getInstance().getWorldModule().getPlayerManager()
-							.removePlayer(client.playerObject);
-				}
-
+			if (client.networkId == networkId)
+				disconnectedClient = client;
+		}
+		if(disconnectedClient!=null) {
+			try {
+				disconnectedClient.clientSocket.close();
+			} catch (IOException e) {
+				// e.printStackTrace();
+			}
+			clientList.remove(disconnectedClient);
+			if (disconnectedClient.playerObject != null) {
+				S_Server.getInstance().getWorldModule().getPlayerManager()
+						.removePlayer(disconnectedClient.playerObject);
 			}
 		}
 	}
