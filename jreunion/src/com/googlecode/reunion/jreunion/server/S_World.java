@@ -4,6 +4,7 @@ import java.util.Iterator;
 
 import com.googlecode.reunion.jreunion.game.G_Mob;
 import com.googlecode.reunion.jreunion.game.G_Player;
+import com.googlecode.reunion.jreunion.server.S_Enums.S_ClientState;
 
 /**
  * @author Autumn
@@ -157,10 +158,8 @@ public class S_World extends S_ClassModule {
 					continue;
 				}
 
-				if (client.getState() == S_Enums.CS_INGAME) {
-					S_Server.getInstance()
-							.getNetworkModule()
-							.SendPacket(client.networkId,
+				if (client.getState() == S_ClientState.INGAME) {
+							client.SendData(
 									"hour " + serverHour + "\n");
 				}
 			}

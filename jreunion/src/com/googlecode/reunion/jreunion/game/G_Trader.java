@@ -71,8 +71,7 @@ public class G_Trader extends G_Npc {
 			}
 		}
 
-		S_Server.getInstance().getNetworkModule()
-				.SendPacket(client.networkId, packetData);
+				client.SendData(packetData);
 	}
 
 	/******
@@ -119,8 +118,7 @@ public class G_Trader extends G_Npc {
 					+ newItem.getExtraStats() + "\n";
 		}
 
-		S_Server.getInstance().getNetworkModule()
-				.SendPacket(client.networkId, packetData);
+				client.SendData(packetData);
 
 	}
 

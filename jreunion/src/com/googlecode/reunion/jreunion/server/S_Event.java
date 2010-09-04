@@ -12,7 +12,6 @@ import com.googlecode.reunion.jreunion.game.G_Entity;
 public class S_Event {
 
 	private int callTimes;
-	private int asdf;
 	private List<G_Entity> targetList = new Vector<G_Entity>();
 	private G_Entity caller;
 

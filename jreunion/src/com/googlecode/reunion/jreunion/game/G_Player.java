@@ -129,8 +129,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 
 				String packetData = "combat " + getEntityId() + " " + combat
 						+ "\n";
-				S_Server.getInstance().getNetworkModule()
-						.SendPacket(client.networkId, packetData);
+						client.SendData( packetData);
 			}
 		}
 	}
@@ -164,8 +163,8 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 				+ getRotation() + " " + item.getGemNumber() + " "
 				+ item.getExtraStats() + "\n";
 
-		S_Server.getInstance().getNetworkModule()
-				.SendPacket(client.networkId, packetData);
+		
+				client.SendData( packetData);
 
 		if (getSession().getPlayerListSize() > 0) {
 			Iterator<G_Player> playerIter = getSession()
@@ -180,8 +179,8 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 					continue;
 				}
 
-				S_Server.getInstance().getNetworkModule()
-						.SendPacket(client.networkId, packetData);
+				
+						client.SendData( packetData);
 			}
 		}
 		// S> drop [ItemID] [ItemType] [PosX] [PosY] [Height] [Rotation]
@@ -467,8 +466,8 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 					+ " " + exchangeItem.getItem().getGemNumber() + " "
 					+ exchangeItem.getItem().getExtraStats() + "\n";
 			// inven [Tab] [UniqueId] [Type] [PosX] [PosY] [Gems] [Special]
-			S_Server.getInstance().getNetworkModule()
-					.SendPacket(client.networkId, packetData);
+			
+					client.SendData( packetData);
 		}
 	}
 
@@ -513,8 +512,8 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 					+ invItem.getItem().getGemNumber() + " "
 					+ invItem.getItem().getExtraStats() + "\n";
 			// inven [Tab] [UniqueId] [Type] [PosX] [PosY] [Gems] [Special]
-			S_Server.getInstance().getNetworkModule()
-					.SendPacket(client.networkId, packetData);
+			
+					client.SendData(packetData);
 
 		}
 	}
@@ -539,8 +538,8 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 						+ item.getType() + " "
 						+ item.getGemNumber() + " "
 						+ item.getExtraStats() + "\n";
-				S_Server.getInstance().getNetworkModule()
-						.SendPacket(client.networkId, packetData);
+				
+						client.SendData( packetData);
 			}
 		}
 	}
@@ -621,8 +620,8 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 			String packetData = "pick " + uniqueid + " " + item.getType()
 					+ " 0 0 0 " + item.getGemNumber() + " "
 					+ item.getExtraStats() + "\n";
-			S_Server.getInstance().getNetworkModule()
-					.SendPacket(client.networkId, packetData);
+			
+					client.SendData(packetData);
 			return;
 		}
 
@@ -630,8 +629,8 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 				+ invItem.getPosX() + " " + invItem.getPosY() + " "
 				+ invItem.getTab() + " " + item.getGemNumber() + " "
 				+ item.getExtraStats() + "\n";
-		S_Server.getInstance().getNetworkModule()
-				.SendPacket(client.networkId, packetData);
+		
+				client.SendData(packetData);
 		// S> pick [UniqueID] [Type] [Tab] [PosX] [PosY] [GemNumber] [Special]
 	}
 
@@ -645,8 +644,8 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 		}
 
 		String packetData = "pickup " + getEntityId() + "\n";
-		S_Server.getInstance().getNetworkModule()
-				.SendPacket(client.networkId, packetData);// send the message
+		
+				client.SendData(packetData);// send the message
 		// S> pickup [CharID]
 
 		S_Server.getInstance().getWorldModule().getWorldCommand()
@@ -688,8 +687,8 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 				String packetData = "place char " + getEntityId() + " " + posX
 						+ " " + posY + " " + posZ + " " + rotation + " "
 						+ unknown + " " + run + "\n";
-				S_Server.getInstance().getNetworkModule()
-						.SendPacket(client.networkId, packetData);
+				
+						client.SendData(packetData);
 			}
 		}
 	}
@@ -759,11 +758,10 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 				if (client == null) {
 					continue;
 				}
-				int networkId = client.networkId;
 				String packetData = "say " + getEntityId() + " " + getName()
 						+ " " + text + " " + admin + "\n";
-				S_Server.getInstance().getNetworkModule()
-						.SendPacket(networkId, packetData);
+				
+						client.SendData(packetData);
 				// serverSay(player.getPlayerName()+" says "+text);
 			}
 		}
@@ -956,8 +954,8 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 
 				String packetData = "social char " + getEntityId() + " "
 						+ emotionId + "\n";
-				S_Server.getInstance().getNetworkModule()
-						.SendPacket(client.networkId, packetData);
+				
+						client.SendData(packetData);
 			}
 		}
 	}
@@ -988,8 +986,8 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 
 				String packetData = "s char " + getEntityId() + " " + posX
 						+ " " + posY + " " + posZ + " " + rotation + "\n";
-				S_Server.getInstance().getNetworkModule()
-						.SendPacket(client.networkId, packetData);
+				
+						client.SendData(packetData);
 			}
 		}
 	}
@@ -1005,14 +1003,14 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 
 		if (targetPlayer == null) {
 			String packetData = "Player not online";
-			S_Server.getInstance().getNetworkModule()
-					.SendPacket(client.networkId, packetData);
+			
+					client.SendData(packetData);
 			return;
 		}
 
 		String packetData = "say 1 " + getName() + " (PM) " + text + " 0\n";
-		S_Server.getInstance().getNetworkModule()
-				.SendPacket(client.networkId, packetData);
+		
+				client.SendData(packetData);
 	}
 
 	/****** Handles all the Status Updates ******/
@@ -1034,8 +1032,8 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 			setMaxHp(max);
 			packetData = "status " + id + " " + getCurrHp() + " " + getMaxHp()
 					+ "\n";
-			S_Server.getInstance().getNetworkModule()
-					.SendPacket(client.networkId, packetData);
+			
+					client.SendData(packetData);
 			break;
 		}
 		case 1: { // Mana Status
@@ -1046,8 +1044,8 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 			setMaxMana(max);
 			packetData = "status " + id + " " + getCurrMana() + " "
 					+ getMaxMana() + "\n";
-			S_Server.getInstance().getNetworkModule()
-					.SendPacket(client.networkId, packetData);
+			
+					client.SendData(packetData);
 			break;
 		}
 		case 2: { // Stamina Status
@@ -1058,8 +1056,8 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 			setMaxStm(max);
 			packetData = "status " + id + " " + getCurrStm() + " "
 					+ getMaxStm() + "\n";
-			S_Server.getInstance().getNetworkModule()
-					.SendPacket(client.networkId, packetData);
+			
+					client.SendData(packetData);
 			break;
 		}
 		case 3: { // Electric Energy Status
@@ -1070,19 +1068,19 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 			setMaxElect(max);
 			packetData = "status " + id + " " + getCurrElect() + " "
 					+ getMaxElect() + "\n";
-			S_Server.getInstance().getNetworkModule()
-					.SendPacket(client.networkId, packetData);
+			
+					client.SendData(packetData);
 			break;
 		}
 		case 4: { // Player Level Status
 			setLevel(getLevel() + curr);
 			packetData = "status " + id + " " + getLevel() + " " + max + "\n";
-			S_Server.getInstance().getNetworkModule()
-					.SendPacket(client.networkId, packetData);
+			
+					client.SendData(packetData);
 
 			packetData = "levelup " + getEntityId() + "\n";
-			S_Server.getInstance().getNetworkModule()
-					.SendPacket(client.networkId, packetData);
+			
+					client.SendData(packetData);
 			S_DatabaseUtils.getInstance()
 					.updateCharStatus(this, id, getLevel());
 
@@ -1099,8 +1097,8 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 						continue;
 					}
 
-					S_Server.getInstance().getNetworkModule()
-							.SendPacket(client.networkId, packetData);
+					
+							client.SendData(packetData);
 				}
 			}
 			break;
@@ -1108,8 +1106,8 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 		case 10: { // Player Lime Status
 			setLime(getLime() + curr);
 			packetData = "status " + id + " " + getLime() + " " + max + "\n";
-			S_Server.getInstance().getNetworkModule()
-					.SendPacket(client.networkId, packetData);
+			
+					client.SendData(packetData);
 			S_DatabaseUtils.getInstance().updateCharStatus(this, id, getLime());
 			break;
 		}
@@ -1117,8 +1115,8 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 			setTotalExp(getTotalExp() + curr);
 			packetData = "status " + id + " " + getTotalExp() + " " + max
 					+ "\n";
-			S_Server.getInstance().getNetworkModule()
-					.SendPacket(client.networkId, packetData);
+			
+					client.SendData(packetData);
 			S_DatabaseUtils.getInstance().updateCharStatus(this, id,
 					getTotalExp());
 			break;
@@ -1135,16 +1133,16 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 				loadFromReference(getLevel());
 				packetData = "status " + id + " " + getLvlUpExp() + " " + max
 						+ "\n";
-				S_Server.getInstance().getNetworkModule()
-						.SendPacket(client.networkId, packetData);
+				
+						client.SendData(packetData);
 				S_DatabaseUtils.getInstance().updateCharStatus(this, id,
 						getLvlUpExp());
 			} else {
 				setLvlUpExp(curr);
 				packetData = "status " + id + " " + getLvlUpExp() + " " + max
 						+ "\n";
-				S_Server.getInstance().getNetworkModule()
-						.SendPacket(client.networkId, packetData);
+				
+						client.SendData(packetData);
 				S_DatabaseUtils.getInstance().updateCharStatus(this, id,
 						getLvlUpExp());
 			}
@@ -1154,8 +1152,8 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 			setStatusPoints(getStatusPoints() + curr);
 			packetData = "status " + id + " " + getStatusPoints() + " " + max
 					+ "\n";
-			S_Server.getInstance().getNetworkModule()
-					.SendPacket(client.networkId, packetData);
+			
+					client.SendData(packetData);
 			S_DatabaseUtils.getInstance().updateCharStatus(this, id,
 					getStatusPoints());
 			break;
@@ -1166,8 +1164,8 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 			}
 			setStr(getStr() + curr);
 			packetData = "status " + id + " " + getStr() + " " + max + "\n";
-			S_Server.getInstance().getNetworkModule()
-					.SendPacket(client.networkId, packetData);
+			
+					client.SendData(packetData);
 			S_DatabaseUtils.getInstance().updateCharStatus(this, id, getStr());
 
 			updateStatus(0, getCurrHp(), getMaxHp() + (getStr() / 50) + 1);
@@ -1181,8 +1179,8 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 			}
 			setWis(getWis() + curr);
 			packetData = "status " + id + " " + getWis() + " " + max + "\n";
-			S_Server.getInstance().getNetworkModule()
-					.SendPacket(client.networkId, packetData);
+			
+					client.SendData(packetData);
 			S_DatabaseUtils.getInstance().updateCharStatus(this, id, getWis());
 
 			updateStatus(1, getCurrMana(), getMaxMana() + (getWis() / 50) + 2);
@@ -1196,8 +1194,8 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 			}
 			setDex(getDex() + curr);
 			packetData = "status " + id + " " + getDex() + " " + max + "\n";
-			S_Server.getInstance().getNetworkModule()
-					.SendPacket(client.networkId, packetData);
+			
+					client.SendData(packetData);
 			S_DatabaseUtils.getInstance().updateCharStatus(this, id, getDex());
 
 			updateStatus(1, getCurrMana(), getMaxMana() + (getDex() / 50) + 1);
@@ -1211,8 +1209,8 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 			}
 			setCons(getCons() + curr);
 			packetData = "status " + id + " " + getCons() + " " + max + "\n";
-			S_Server.getInstance().getNetworkModule()
-					.SendPacket(client.networkId, packetData);
+			
+					client.SendData(packetData);
 			S_DatabaseUtils.getInstance().updateCharStatus(this, id, getCons());
 
 			updateStatus(0, getCurrHp(), getMaxHp() + (getCons() / 50) + 2);
@@ -1226,8 +1224,8 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 			}
 			setLead(getLead() + curr);
 			packetData = "status " + id + " " + getLead() + " " + max + "\n";
-			S_Server.getInstance().getNetworkModule()
-					.SendPacket(client.networkId, packetData);
+			
+					client.SendData(packetData);
 			S_DatabaseUtils.getInstance().updateCharStatus(this, id, getLead());
 
 			if (getLead() % 2 == 0) {
@@ -1242,8 +1240,8 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 		case 19: { // Player Penalty Points Status ([inGame=packet] -> 100=10;
 					// 1000=100; 10000=1000)
 			packetData = "status " + id + " " + curr + " " + max + "\n";
-			S_Server.getInstance().getNetworkModule()
-					.SendPacket(client.networkId, packetData);
+			
+					client.SendData(packetData);
 			S_DatabaseUtils.getInstance().updateCharStatus(this, id,
 					getPenaltyPoints());
 			break;
@@ -1285,8 +1283,8 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 
 				String packetData = "walk char " + getEntityId() + " " + posX
 						+ " " + posY + " " + posZ + " " + run + "\n";
-				S_Server.getInstance().getNetworkModule()
-						.SendPacket(client.networkId, packetData);
+				
+						client.SendData(packetData);
 			}
 		}
 	}
@@ -1354,11 +1352,11 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 					continue;
 				}
 				if (extraPacketData != null) {
-					S_Server.getInstance().getNetworkModule()
-							.SendPacket(client.networkId, extraPacketData);
+					
+							client.SendData(extraPacketData);
 				}
-				S_Server.getInstance().getNetworkModule()
-						.SendPacket(client.networkId, packetData);
+				
+						client.SendData(packetData);
 			}
 		}
 	}

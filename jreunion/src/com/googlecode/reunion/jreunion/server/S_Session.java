@@ -173,8 +173,7 @@ public class S_Session {
 					String packetData = "say 1 S_Server (NOTICE) "
 							+ player.getName()
 							+ "left your sesson (out of range)" + " 1\n";
-					S_Server.getInstance().getNetworkModule()
-							.SendPacket(client.networkId, packetData);// send
+							client.SendData( packetData);// send
 				}
 				removeList.add(player);
 				continue;
@@ -208,8 +207,7 @@ public class S_Session {
 					String packetData = "say 1 S_Server (NOTICE) "
 							+ player.getName()
 							+ "left your sesson (out of range)" + " 1\n";
-					S_Server.getInstance().getNetworkModule()
-							.SendPacket(client.networkId, packetData);// send
+							client.SendData( packetData);// send
 				}
 				removeList.add(player);
 				S_Server.getInstance()

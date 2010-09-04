@@ -12,6 +12,8 @@ import com.googlecode.reunion.jreunion.game.G_Player;
 import com.googlecode.reunion.jreunion.game.G_Skill;
 import com.googlecode.reunion.jreunion.game.G_SlayerWeapon;
 import com.googlecode.reunion.jreunion.game.G_Weapon;
+import com.googlecode.reunion.jreunion.server.S_Enums.S_ClientState;
+import com.googlecode.reunion.jreunion.server.S_PacketFactory.S_PacketType;
 
 /**
  * @author Aidamina
@@ -27,21 +29,20 @@ public class S_Command {
 		world = parent;
 	}
 
-	void authClient(int networkId, String username, String password) {
+	void authClient(S_Client client, String username, String password) {
 		int accountId = S_DatabaseUtils.getInstance().Auth(username, password);
 		if (accountId == -1) {
 			System.out.println("Invalid Login");
 			// S_Server.getInstance().networkModule.Disconnect(networkId);
-			S_Server.getInstance()
-					.getNetworkModule()
-					.SendPacket(networkId,
+		
+					client.SendData(
 							"fail Username and password combination is invalid\n");
 		} else {
 
-			System.out.println("Client(" + networkId + ") authed as account("
+			System.out.println("Client(" + client + ") authed as account("
 					+ accountId + ")");
-			S_Server.getInstance().getNetworkModule().getClient(networkId).accountId = accountId;
-			sendCharList(networkId, accountId);
+			client.accountId = accountId;
+			sendCharList(client, accountId);
 		}
 
 	}
@@ -121,8 +122,7 @@ public class S_Command {
 		// [Boots] [Shield] [Weapon] [Hp%] [CombatMode] 0 0 0 [Boosted] [PKMode]
 		// 0 [Guild]
 		// [MemberType] 1
-		S_Server.getInstance().getNetworkModule()
-				.SendPacket(client.networkId, packetData);
+				client.SendData( packetData);
 		// serverTell(player, "char in id "+ePlayer.getEntityId());
 	}
 
@@ -138,8 +138,7 @@ public class S_Command {
 		}
 
 		String packetData = "out char " + player2.getEntityId() + "\n";
-		S_Server.getInstance().getNetworkModule()
-				.SendPacket(client.networkId, packetData);
+				client.SendData( packetData);
 		// serverTell(player, "char out id "+enteringPlayer.getEntityId());
 	}
 
@@ -182,8 +181,7 @@ public class S_Command {
 				+ posX + " " + posY + " " + posZ + " 0.0 " + gems + " "
 				+ special + "\n";
 
-		S_Server.getInstance().getNetworkModule()
-				.SendPacket(client.networkId, packetData);
+				client.SendData( packetData);
 
 		if (player.getSession().getPlayerListSize() > 0) {
 			Iterator<G_Player> iter = world.getPlayerManager()
@@ -199,8 +197,7 @@ public class S_Command {
 					continue;
 				}
 
-				S_Server.getInstance().getNetworkModule()
-						.SendPacket(client.networkId, packetData);
+						client.SendData( packetData);
 			}
 		}
 
@@ -224,8 +221,7 @@ public class S_Command {
 
 		String packetData = "goto " + player.getPosX() + " " + player.getPosY()
 				+ " " + player.getPosZ() + " " + player.getRotation() + "\n";
-		S_Server.getInstance().getNetworkModule()
-				.SendPacket(client.networkId, packetData);
+				client.SendData( packetData);
 	}
 
 	/****** teleport player to position (posX,posY) in the current map ******/
@@ -242,8 +238,7 @@ public class S_Command {
 
 		String packetData = "goto " + posX + " " + posY + " 0 "
 				+ player.getRotation() + "\n";
-		S_Server.getInstance().getNetworkModule()
-				.SendPacket(client.networkId, packetData);
+				client.SendData( packetData);
 
 		Iterator<S_Session> sessionIter = S_Server.getInstance()
 				.getWorldModule().getSessionManager().getSessionListIterator();
@@ -286,15 +281,15 @@ public class S_Command {
 		// go_world 62.26.131.215 4001 0 0
 
 		String packetData = "jump 7024 5551 " + player.getEntityId() + "\n";
-		S_Server.getInstance().getNetworkModule()
-				.SendPacket(client.networkId, packetData);
+		
+				client.SendData( packetData);
 
 		player.setPosX(7024);
 		player.setPosY(5551);
 
 		packetData = "go_world 127.0.0.1 4001 " + map + " " + unknown + "\n";
-		S_Server.getInstance().getNetworkModule()
-				.SendPacket(client.networkId, packetData);
+		
+				client.SendData( packetData);
 
 		// client.setState(7);
 		// System.out.print("Removing Player...\n");
@@ -308,13 +303,11 @@ public class S_Command {
 			int posY, int posZ, double rotation, int gems, int special) {
 		S_Client client = S_Server.getInstance().getNetworkModule()
 				.getClient(owner);
-		int networkId = client.networkId;
 
 		String packetData = "in item " + uniqueid + " " + itemtype + " " + posX
 				+ " " + posY + " " + posZ + " 0.0 " + gems + " " + special
 				+ "\n";
-		S_Server.getInstance().getNetworkModule()
-				.SendPacket(networkId, packetData);
+				client.SendData( packetData);
 
 		serverTell(owner, "Item in itemid " + uniqueid + " type " + itemtype
 				+ "");
@@ -334,8 +327,7 @@ public class S_Command {
 
 		String packetData = "out item " + uniqueid + "\n";
 
-		S_Server.getInstance().getNetworkModule()
-				.SendPacket(client.networkId, packetData);
+				client.SendData( packetData);
 		serverTell(player, "out: id  " + uniqueid);
 
 		if (player.getSession().getPlayerListSize() > 0) {
@@ -353,19 +345,17 @@ public class S_Command {
 				}
 
 				packetData = "out item " + uniqueid + "\n";
-				S_Server.getInstance().getNetworkModule()
-						.SendPacket(client.networkId, packetData);
+						client.SendData( packetData);
 			}
 		}
 		// S> out item [UniqueID]
 	}
 
-	public void loginChar(int slotNumber, int accountId, int networkId) {
+	public void loginChar(int slotNumber, int accountId, S_Client client) {
 		G_Player player = S_DatabaseUtils.getInstance().loadChar(slotNumber,
-				accountId, networkId);
+				accountId, client);
 
-		S_Client client = S_Server.getInstance().getNetworkModule()
-				.getClient(player);
+		
 
 		if (client == null) {
 			return;
@@ -472,20 +462,16 @@ public class S_Command {
 		}
 		packetData = packetData + "\n";
 
-		S_Server.getInstance().getNetworkModule()
-				.SendPacket(networkId, packetData);
+				client.SendData( packetData);
 
 		packetData = "a_idx " + client.accountId + "\n";
-		S_Server.getInstance().getNetworkModule()
-				.SendPacket(networkId, packetData);
+				client.SendData( packetData);
 
 		packetData = "a_idn " + client.username + "\n";
-		S_Server.getInstance().getNetworkModule()
-				.SendPacket(networkId, packetData);
+				client.SendData( packetData);
 
 		packetData = "a_lev " + player.getAdminState() + "\n";
-		S_Server.getInstance().getNetworkModule()
-				.SendPacket(networkId, packetData);
+				client.SendData( packetData);
 
 		packetData = "wearing " + eqHelmetId + " " + eqHelmetType + " "
 				+ eqHelmetGem + " " + eqHelmetExtra + " " + eqArmorId + " "
@@ -504,17 +490,13 @@ public class S_Command {
 				+ eqWeaponType + " " + eqWeaponGem + " " + eqWeaponExtra + "\n";
 		// wearing [Helm] [Armor] [Pants] [ShoulderMount] [Boots] [Shield]
 		// [Necklace] [Bracelet] [Ring] [Weapon]
-		S_Server.getInstance().getNetworkModule()
-				.SendPacket(networkId, packetData);
+				client.SendData( packetData);
 
 		player.loadInventory();
 		player.loadExchange();
 		player.loadQuickSlot();
 
-		S_Server.getInstance()
-				.getNetworkModule()
-				.SendPacket(networkId,
-						S_PacketFactory.createPacket(S_PacketFactory.PT_OK));
+		client.SendPacket(S_PacketType.OK);	
 
 		return;
 	}
@@ -539,8 +521,7 @@ public class S_Command {
 				+ mob.getUnknown2() + "\n";
 		// in npc [UniqueID] [type] [XPos] [YPos] [ZPos] [Rotation] [HP]
 		// [MutantType] 0 [NeoProgmare] 0 0
-		S_Server.getInstance().getNetworkModule()
-				.SendPacket(client.networkId, packetData);
+				client.SendData( packetData);
 	}
 
 	/****** Manages the Mob Out ******/
@@ -553,12 +534,10 @@ public class S_Command {
 			return;
 		}
 
-		int networkId = client.networkId;
 
 		String packetData = "out npc " + mob.getEntityId() + "\n";
 		// S> out npc [UniqueID]
-		S_Server.getInstance().getNetworkModule()
-				.SendPacket(networkId, packetData);
+				client.SendData( packetData);
 	}
 
 	/****** player normal attacks ******/
@@ -604,8 +583,7 @@ public class S_Command {
 					+ " " + percentageHp + " 0 0\n";
 		}
 		// S> attack_vital npc [NpcID] [RemainHP%] 0 0
-		S_Server.getInstance().getNetworkModule()
-				.SendPacket(client.networkId, packetData);
+				client.SendData( packetData);
 
 		if (player.getSession().getPlayerListSize() > 0) {
 			Iterator<G_Player> playerIter = player.getSession()
@@ -632,8 +610,7 @@ public class S_Command {
 				}
 
 				// S> attack char [CharID] npc [NpcID] [RemainHP%] 0 0 0 0
-				S_Server.getInstance().getNetworkModule()
-						.SendPacket(client.networkId, packetData);
+						client.SendData( packetData);
 			}
 		}
 	}
@@ -689,8 +666,7 @@ public class S_Command {
 		default:
 			break;
 		}
-		S_Server.getInstance().getNetworkModule()
-				.SendPacket(client.networkId, packetData);
+				client.SendData( packetData);
 		// S> attack npc [NpcID] char [CharID] [RemainCharHP%] 0 0 0 0
 
 		if (player.getSession().getPlayerListSize() > 0) {
@@ -700,8 +676,7 @@ public class S_Command {
 				if (client == null) {
 					return;
 				}
-				S_Server.getInstance().getNetworkModule()
-						.SendPacket(client.networkId, packetData);
+						client.SendData( packetData);
 			}
 		}
 	}
@@ -719,16 +694,13 @@ public class S_Command {
 			return;
 		}
 
-		int networkId = client.networkId;
-
 		String packetData = "in npc " + npc.getEntityId() + " " + npc.getType()
 				+ " " + npc.getPosX() + " " + npc.getPosY() + " 0 "
 				+ npc.getRotation() + " 100 0 0 0 0 0 10\n";
 
 		// in npc [UniqueID] [type] [XPos] [YPos] [ZPos] [Rotation] [HP]
 		// [MutantType] 0 [NeoProgmare] 0 0
-		S_Server.getInstance().getNetworkModule()
-				.SendPacket(networkId, packetData);
+				client.SendData( packetData);
 	}
 
 	/****** Manages the Npc Out ******/
@@ -741,12 +713,10 @@ public class S_Command {
 			return;
 		}
 
-		int networkId = client.networkId;
 
 		String packetData = "out npc " + npc.getEntityId() + "\n";
 		// S> out npc [UniqueID]
-		S_Server.getInstance().getNetworkModule()
-				.SendPacket(networkId, packetData);
+				client.SendData( packetData);
 	}
 
 	/****** Manages the player wear Weapon ******/
@@ -774,28 +744,22 @@ public class S_Command {
 		weapon.removeEntity();
 	}
 
-	void sendCharList(int networkId, int accountId) {
-		S_Client client = S_Server.getInstance().getNetworkModule()
-				.getClient(networkId);
+	void sendCharList(S_Client client, int accountId) {		
 
-		S_Server.getInstance()
-				.getNetworkModule()
-				.SendPacket(networkId,
+				client.SendData(
 						S_DatabaseUtils.getInstance().getCharList(accountId));
 
-		client.setState(S_Enums.CS_CHAR_LIST);
+		client.setState(S_ClientState.CHAR_LIST);
 		return;
 	}
 
-	void sendFail(int networkId) {
-		S_Server.getInstance().getNetworkModule()
-				.SendPacket(networkId, "fail\n");
+	void sendFail(S_Client client) {
+				client.SendData( "fail\n");
 		return;
 	}
 
-	void sendSuccess(int networkId) {
-		S_Server.getInstance().getNetworkModule()
-				.SendPacket(networkId, "success\n");
+	void sendSuccess(S_Client client) {
+				client.SendData( "success\n");
 		return;
 	}
 
@@ -811,10 +775,8 @@ public class S_Command {
 			if (client == null) {
 				continue;
 			}
-			int networkId = client.networkId;
 			String packetData = "say -1 " + text + "\n";
-			S_Server.getInstance().getNetworkModule()
-					.SendPacket(networkId, packetData);
+					client.SendData( packetData);
 
 		}
 	}
@@ -831,8 +793,7 @@ public class S_Command {
 		}
 
 		String packetData = "say 1 Server " + text + " 1\n";
-		S_Server.getInstance().getNetworkModule()
-				.SendPacket(client.networkId, packetData);
+				client.SendData( packetData);
 	}
 
 	/****** player1 attacks player2 with Sub Attack ******/
@@ -844,8 +805,7 @@ public class S_Command {
 
 		String packetData = "attack_vital char " + player1.getEntityId()
 				+ " 100 0 0\n";
-		S_Server.getInstance().getNetworkModule()
-				.SendPacket(client.networkId, packetData);
+				client.SendData( packetData);
 
 		if (player1.getSession().getPlayerListSize() > 0) {
 			for (int i = 0; i < player1.getSession().getPlayerListSize(); i++) {
@@ -856,8 +816,7 @@ public class S_Command {
 				}
 				packetData = "effect 40 char " + player1.getEntityId()
 						+ " char " + uniqueId + " 100 0 0\n";
-				S_Server.getInstance().getNetworkModule()
-						.SendPacket(client.networkId, packetData);
+						client.SendData( packetData);
 			}
 		}
 
@@ -941,8 +900,7 @@ public class S_Command {
 
 		String packetData = "sav npc " + uniqueId + " " + percentageHp
 				+ " 1 0 " + item.getExtraStats() + "\n";
-		S_Server.getInstance().getNetworkModule()
-				.SendPacket(client.networkId, packetData);
+				client.SendData( packetData);
 
 		if (player.getSession().getPlayerListSize() > 0) {
 			for (int i = 0; i < player.getSession().getPlayerListSize(); i++) {
@@ -953,8 +911,7 @@ public class S_Command {
 				}
 				packetData = "sav npc " + uniqueId + " " + percentageHp
 						+ " 1 0 " + item.getExtraStats() + "\n";
-				S_Server.getInstance().getNetworkModule()
-						.SendPacket(client.networkId, packetData);
+						client.SendData( packetData);
 			}
 		}
 

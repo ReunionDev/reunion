@@ -61,8 +61,7 @@ public class G_BulkanPlayer extends G_Player {
 		getCharSkill().incSkill(this, skill);
 		packetData = "skilllevel " + skill.getId() + " " + skill.getCurrLevel()
 				+ "\n";
-		S_Server.getInstance().getNetworkModule()
-				.SendPacket(client.networkId, packetData);
+				client.SendData( packetData);
 	}
 
 	@Override
@@ -161,8 +160,7 @@ public class G_BulkanPlayer extends G_Player {
 				+ percentageHp + " 0 0\n";
 
 		// S> attack_vital npc [NpcID] [RemainHP%] 0 0
-		S_Server.getInstance().getNetworkModule()
-				.SendPacket(client.networkId, packetData);
+				client.SendData( packetData);
 
 		if (getSession().getPlayerListSize() > 0) {
 			Iterator<G_Player> playerIter = getSession()
@@ -184,8 +182,7 @@ public class G_BulkanPlayer extends G_Player {
 
 				// S> effect [SkillID] char [charID] npc [npcID] [RemainNpcHP%]
 				// 0 0
-				S_Server.getInstance().getNetworkModule()
-						.SendPacket(client.networkId, packetData);
+						client.SendData( packetData);
 			}
 		}
 	}

@@ -39,8 +39,7 @@ public class G_AidiaPlayer extends G_Player {
 		getCharSkill().incSkill(this, skill);
 		packetData = "skilllevel " + skill.getId() + " " + skill.getCurrLevel()
 				+ "\n";
-		S_Server.getInstance().getNetworkModule()
-				.SendPacket(client.networkId, packetData);
+				client.SendData( packetData);
 	}
 
 	@Override

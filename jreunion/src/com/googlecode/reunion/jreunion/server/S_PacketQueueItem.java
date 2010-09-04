@@ -5,7 +5,7 @@ package com.googlecode.reunion.jreunion.server;
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
 public class S_PacketQueueItem {
-	int networkId;
+	S_Client client;
 
 	char[] packetData;
 
@@ -13,9 +13,9 @@ public class S_PacketQueueItem {
 
 	String packetString;
 
-	public S_PacketQueueItem(int networkId, String data) {
+	public S_PacketQueueItem(S_Client client, String data) {
 		super();
-		this.networkId = networkId;
+		this.client = client;
 		packetString = data;
 		packetBytes = null;
 
@@ -55,8 +55,8 @@ public class S_PacketQueueItem {
 	 * @return Returns the networkId.
 	 * @uml.property name="networkId"
 	 */
-	public int getNetworkId() {
-		return networkId;
+	public S_Client getClient() {
+		return client;
 	}
 
 }

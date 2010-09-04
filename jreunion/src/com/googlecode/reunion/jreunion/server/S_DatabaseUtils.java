@@ -546,7 +546,7 @@ public class S_DatabaseUtils {
 		}
 	}
 	
-	public G_Player loadChar(int slotNumber, int accountId,int networkId) {
+	public G_Player loadChar(int slotNumber, int accountId,S_Client client) {
 		
 		G_Player player=null;
 		if (!checkDatabase())
@@ -568,8 +568,8 @@ public class S_DatabaseUtils {
 			
 			System.out.println("Loaded: " + player.getName());
 			
-			S_Server.getInstance().getNetworkModule().getClient(networkId).playerObject = player;
-			S_Server.getInstance().getNetworkModule().getClient(player).characterId=characterId;
+			client.playerObject = player;
+			client.characterId=characterId;
 			
 		} catch (SQLException e1) {
 			

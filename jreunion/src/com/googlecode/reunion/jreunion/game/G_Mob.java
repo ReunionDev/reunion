@@ -296,8 +296,7 @@ public class G_Mob extends G_LivingObject {
 				+ getPosY() + " 0 " + run + "\n";
 		// S> walk npc [UniqueId] [Xpos] [Ypos] [ZPos] [Running]
 
-		S_Server.getInstance().getNetworkModule()
-				.SendPacket(client.networkId, packetData);
+				client.SendData(packetData);
 
 		if (player.getSession().getPlayerListSize() > 0) {
 			Iterator<G_Player> playerIter = player.getSession()
@@ -313,8 +312,7 @@ public class G_Mob extends G_LivingObject {
 				}
 				if (getDistance(pl) < S_DatabaseUtils.getInstance()
 						.getSessionRadius()) {
-					S_Server.getInstance().getNetworkModule()
-							.SendPacket(client.networkId, packetData);
+							client.SendData(packetData);
 				}
 			}
 		}

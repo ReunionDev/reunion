@@ -38,8 +38,7 @@ public class G_Merchant extends G_Npc {
 
 		if (player.getLime() - item.getPrice() < 0) {
 			String packetData = "msg Not enough lime.\n";
-			S_Server.getInstance().getNetworkModule()
-					.SendPacket(client.networkId, packetData);
+					client.SendData(packetData);
 			return;
 		}
 
@@ -71,8 +70,7 @@ public class G_Merchant extends G_Npc {
 
 		String packetData = "shop_rate " + npc.getBuyRate() + " "
 				+ npc.getSellRate() + "\n";
-		S_Server.getInstance().getNetworkModule()
-				.SendPacket(client.networkId, packetData);
+				client.SendData(packetData);
 
 		Iterator<G_Item> itemListIter = npc.itemsListIterator();
 
@@ -80,8 +78,7 @@ public class G_Merchant extends G_Npc {
 			G_Item item = itemListIter.next();
 
 			packetData = "shop_item " + item.getType() + "\n";
-			S_Server.getInstance().getNetworkModule()
-					.SendPacket(client.networkId, packetData);
+					client.SendData(packetData);
 		}
 	}
 

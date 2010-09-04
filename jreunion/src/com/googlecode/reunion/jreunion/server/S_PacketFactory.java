@@ -6,12 +6,18 @@ package com.googlecode.reunion.jreunion.server;
  */
 public class S_PacketFactory {
 
-	public static final int PT_VERSION_ERROR = 1001;
-	public static final int PT_OK = 1002;
+	public enum S_PacketType{
+		VERSION_ERROR,
+		OK		
+		
+	}
+	
+	//public static final int PT_VERSION_ERROR = 1001;
+	//public static final int PT_OK = 1002;
 
-	public static String createPacket(int packettype, Object... arg) {
-		switch (packettype) {
-		case PT_VERSION_ERROR: {
+	public static String createPacket(S_PacketType packetType, Object... arg) {
+		switch (packetType) {
+		case VERSION_ERROR: {
 			if (arg.length == 1) {
 				String clientVersion = (String) arg[0];
 				String requiredVersion = String.valueOf(S_DatabaseUtils
@@ -24,7 +30,7 @@ public class S_PacketFactory {
 			return "fail Wrong clientversion.\n";
 
 		}
-		case PT_OK: {
+		case OK: {
 			return "OK\n";
 		}
 

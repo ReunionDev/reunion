@@ -30,8 +30,7 @@ public class G_Quest {
 
 		player.setQuest(null);
 		String packetData = "qt get -1\n";
-		S_Server.getInstance().getNetworkModule()
-				.SendPacket(client.networkId, packetData);
+				client.SendData(packetData);
 	}
 
 	/****** Update Quest Points Obtained ********/
@@ -46,8 +45,8 @@ public class G_Quest {
 
 		String packetData = "qt pt " + remainPoints + " " + obtainedPoints
 				+ "\n";
-		S_Server.getInstance().getNetworkModule()
-				.SendPacket(client.networkId, packetData);
+		
+				client.SendData(packetData);
 
 		/****** Quest Points Reached Zero ********/
 		if (remainPoints == 0) {
@@ -59,8 +58,8 @@ public class G_Quest {
 
 			// QuestSecondFase(player);
 			packetData = "qt nt\n";
-			S_Server.getInstance().getNetworkModule()
-					.SendPacket(client.networkId, packetData);
+			
+					client.SendData(packetData);
 			player.pickupItem(item.getEntityId());
 		}
 	}
@@ -75,8 +74,8 @@ public class G_Quest {
 		}
 
 		String packetData = "qt tp " + tp + "\n";
-		S_Server.getInstance().getNetworkModule()
-				.SendPacket(client.networkId, packetData);
+		
+				client.SendData(packetData);
 	}
 
 	/****** Quest Points Reached Zero ********/
@@ -112,8 +111,8 @@ public class G_Quest {
 
 		G_QuickSlotItem qsItem = player.getQuickSlot().getItem(slot);
 		String packetData = "qt get " + questId + "\n";
-		S_Server.getInstance().getNetworkModule()
-				.SendPacket(client.networkId, packetData);
+		
+				client.SendData(packetData);
 
 		if (questId == 669) {
 			double tp = Math.random() * 2000 + 300;
@@ -141,8 +140,8 @@ public class G_Quest {
 
 		String packetData = "qt eff " + player.getPosX() + " "
 				+ player.getPosY() + " " + player.getEntityId() + "\n";
-		S_Server.getInstance().getNetworkModule()
-				.SendPacket(client.networkId, packetData);
+		
+				client.SendData(packetData);
 	}
 
 	/****** Quest End ********/
@@ -156,8 +155,8 @@ public class G_Quest {
 
 		player.setQuest(null);
 		String packetData = "qt end " + questId + "\n";
-		S_Server.getInstance().getNetworkModule()
-				.SendPacket(client.networkId, packetData);
+		
+				client.SendData(packetData);
 	}
 
 	/****** Quest Kill ********/
@@ -173,8 +172,8 @@ public class G_Quest {
 		int ammount = 1;
 
 		String packetData = "qt kill " + pos + " " + ammount + "\n";
-		S_Server.getInstance().getNetworkModule()
-				.SendPacket(client.networkId, packetData);
+		
+				client.SendData(packetData);
 		// S> qt kill [Pos] [Ammount]
 	}
 
@@ -200,8 +199,7 @@ public class G_Quest {
 		}
 
 		String packetData = "usq succ " + slot + "\n";
-		S_Server.getInstance().getNetworkModule()
-				.SendPacket(client.networkId, packetData);
+				client.SendData(packetData);
 	}
 
 	/****** Update the Mission Receiver in the Quick Slot ********/
@@ -218,7 +216,7 @@ public class G_Quest {
 		qsItem.getItem().setExtraStats(missionsRemaining);
 
 		String packetData = "qt quick " + slot + " " + missionsRemaining + "\n";
-		S_Server.getInstance().getNetworkModule()
-				.SendPacket(client.networkId, packetData);
+
+				client.SendData(packetData);
 	}
 }

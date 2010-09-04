@@ -7,6 +7,7 @@ import com.googlecode.reunion.jreunion.game.G_EntityManager;
 import com.googlecode.reunion.jreunion.game.G_Mob;
 import com.googlecode.reunion.jreunion.game.G_Player;
 import com.googlecode.reunion.jreunion.game.G_Spawn;
+import com.googlecode.reunion.jreunion.server.S_Enums.S_ClientState;
 
 /**
  * @author Aidamina
@@ -138,7 +139,7 @@ public class S_MobManager {
 
 			if (client == null) {
 				continue;
-			} else if (client.getState() != S_Enums.CS_INGAME
+			} else if (client.getState() != S_ClientState.INGAME
 					|| mob.getMap() != player.getMap()) {
 				continue;
 			}
@@ -185,8 +186,7 @@ public class S_MobManager {
 							+ "\n";
 					// S> walk npc [UniqueId] [Xpos] [Ypos] [ZPos] [Running]
 
-					S_Server.getInstance().getNetworkModule()
-							.SendPacket(client.networkId, packetData);
+					client.SendData( packetData);
 				}
 			}
 		}

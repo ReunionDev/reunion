@@ -10,14 +10,15 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
+import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
-import java.util.Vector;
 
 import com.googlecode.reunion.jreunion.game.G_Player;
+import com.googlecode.reunion.jreunion.server.S_Enums.S_ClientState;
 
 /**
  * @author Aidamina
@@ -27,8 +28,9 @@ public class S_Network extends S_ClassModule {
 	Queue<S_PacketQueueItem> queue = new LinkedList<S_PacketQueueItem>();
 
 	private final ByteBuffer buffer = ByteBuffer.allocate(16384);
-
-	List<S_Client> clientList = new Vector<S_Client>();
+	
+	//List<S_Client> clientList = new Vector<S_Client>();
+	Map<Socket,S_Client> clientList = new Hashtable<Socket,S_Client>();
 
 	private ServerSocketChannel serverChannel;
 
@@ -52,10 +54,11 @@ public class S_Network extends S_ClassModule {
 
 				// If we don't have any activity, loop around and wait
 				// again
+			
 				if (num == 0) {
 					break;// continue;
 				}
-
+				
 				// Get the keys corresponding to the activity
 				// that has been detected, and process them
 				// one by one
@@ -68,41 +71,25 @@ public class S_Network extends S_ClassModule {
 
 					// What kind of activity is it?
 					if ((key.readyOps() & SelectionKey.OP_ACCEPT) == SelectionKey.OP_ACCEPT) {
-
-						// System.out.println( "acc" );
+						
 						// It's an incoming connection.
 						// Register this socket with the Selector
 						// so we can listen for input on it
 						S_Client client = new S_Client();
-
-						client.clientSocket = ss.accept();
+						
+						Socket socket = ss.accept();
+						client.clientSocket = socket;
 						System.out.print("Got connection from "
 								+ client.clientSocket);
-						client.networkId = 0;
-						// Start looking for a free networkId;
-						int j = 0;
-						while (true) {
-							for (int i = 0; i < clientList.size(); i++) {
-								if (client.networkId == clientList.get(i).networkId) {
-									client.networkId++;
-								}
-
-							}
-							if (client.networkId != j) {
-								j++;
-							} else {
-								break;
-							}
-						}
-						// End looking for a free networkId
-						System.out.println(" assigned to id: "
-								+ client.networkId);
-						client.setState(S_Enums.CS_ACCEPTED);
+				
+						client.setState(S_ClientState.ACCEPTED);
 						// Make sure to make it non-blocking, so we can
 						// use a selector on it.
 						SocketChannel sc = client.clientSocket.getChannel();
 						sc.configureBlocking(false);
-						clientList.add(client);
+						clientList.put(socket, client);
+						
+						
 						// Register it with the selector, for reading
 						sc.register(selector, SelectionKey.OP_READ);
 					} else if ((key.readyOps() & SelectionKey.OP_READ) == SelectionKey.OP_READ) {
@@ -119,28 +106,10 @@ public class S_Network extends S_ClassModule {
 							// If the connection is dead, then remove it
 							// from the selector and close it
 							if (!ok) {
-								key.cancel();
+								System.out
+								.println("Client Connection Lost");
+								throw new IOException("Connection Lost");
 
-								try {
-									System.out
-											.println("Client Connection Lost");
-
-									Socket s = sc.socket();
-									
-									Iterator<S_Client> iter = getClientIterator();
-									while (it.hasNext()) {
-
-										S_Client client = iter.next();
-										if (client.clientSocket == s) {
-										
-											Disconnect(client.networkId);
-										}
-									}
-									sc.close();
-								} catch (IOException ie) {
-									// System.err.println("Error closing socket ");
-									// + s + ": " + ie);
-								}
 							}
 
 						} catch (IOException ie) {
@@ -148,23 +117,14 @@ public class S_Network extends S_ClassModule {
 							// On exception, remove this channel from the
 							// selector
 							key.cancel();
-
-							Socket s = sc.socket();
-							Iterator<S_Client> iter = getClientIterator();
-							while (it.hasNext()) {
-								S_Client client = iter.next();
-								if (client.clientSocket == s) {
-
-									System.out.println("Disconnecting: Client("
-											+ client.networkId + ")");
-									client.playerObject.logout();
-									clientList.remove(client);
-								}
-							}
+							Socket socket = sc.socket();							
+							S_Client client = clientList.get(socket);
+							Disconnect(client);					
+							
 							try {
 								sc.close();
 							} catch (IOException ie2) {
-								System.out.println(ie2);
+								System.err.println(ie2);
 							}
 
 						}
@@ -184,16 +144,7 @@ public class S_Network extends S_ClassModule {
 
 		S_PacketQueueItem packet = queue.poll();
 		while (packet != null) {
-
-			S_Client client = null;
-			Iterator<S_Client> iter = getClientIterator();
-			while (iter.hasNext()) {
-				S_Client tempClient = iter.next();
-				if (tempClient.networkId == packet.networkId) {
-
-					client = tempClient;
-				}
-			}
+			S_Client client = packet.getClient();			
 			if (client == null) {
 				return;
 			}
@@ -205,24 +156,24 @@ public class S_Network extends S_ClassModule {
 			SocketChannel sc = client.clientSocket.getChannel();
 			try {
 				System.out.println("Sending (" + new String(packet.getData())
-						+ ") to Client(" + client.networkId + ")");
+						+ ") to Client(" + client + ")");
 				sc.write(buffer);
 			} catch (IOException e) {
-				client.disconnect();
-				// e.printStackTrace();
+				e.printStackTrace();
+				Disconnect(client);
+				
 			}
 			packet = queue.poll();
 		}
 		return;
 	}
 
-	public void Disconnect(int networkId) {
+	public void Disconnect(S_Client client) {
 		
-		S_Client client =getClient(networkId);		
 		if(client!=null) {
 			System.out
 			.println("Disconnecting: Client("
-					+ client.networkId
+					+ client.clientSocket
 					+ ")");
 			try {
 				client.clientSocket.close();
@@ -233,7 +184,7 @@ public class S_Network extends S_ClassModule {
 				client.playerObject.logout();
 			
 			}
-			clientList.remove(client);
+			clientList.remove(client.clientSocket);
 		}
 	}
 
@@ -250,19 +201,8 @@ public class S_Network extends S_ClassModule {
 		return null;
 	}
 
-	public S_Client getClient(int networkId) {
-		Iterator<S_Client> iter = getClientIterator();
-		while (iter.hasNext()) {
-			S_Client client = iter.next();
-			if (client.networkId == networkId) {
-				return client;
-			}
-		}
-		return null;
-	}
-
 	public Iterator<S_Client> getClientIterator() {
-		return clientList.iterator();
+		return clientList.values().iterator();
 	}
 
 	// Do some cheesy encryption on the incoming data,
@@ -272,15 +212,9 @@ public class S_Network extends S_ClassModule {
 		buffer.clear();
 		sc.read(buffer);
 		buffer.flip();
-		S_Client client = null;
-		Iterator<S_Client> iter = getClientIterator();
-		while (iter.hasNext()) {
-			S_Client tempClient = iter.next();
-			if (tempClient.clientSocket == sc.socket()) {
-				client = tempClient;
-			}
-
-		}
+		Socket socket = sc.socket();
+		S_Client client = clientList.get(socket);
+		
 		if (client == null) {
 			return false;
 		}
@@ -296,7 +230,7 @@ public class S_Network extends S_ClassModule {
 			output[j] = buffer.get(j);
 		}
 
-		System.out.print("Client(" + client.networkId + ")" + " sends: \n");
+		System.out.print("Client(" + client + ")" + " sends: \n");
 
 		char[] decOutput = S_Crypt.getInstance().C2Sdecrypt(output);
 
@@ -305,25 +239,23 @@ public class S_Network extends S_ClassModule {
 		return true;
 	}
 
-	public void SendPacket(int networkId, String packetData) {
+	public void SendData(S_Client client, String data) {
 		Iterator<S_PacketQueueItem> iter = queue.iterator();
 		while (iter.hasNext()) {
 			S_PacketQueueItem item = iter.next();
-			if (item.networkId == networkId) {
-
-				item.addData(packetData);
+			if (item.getClient() == client) {
+				item.addData(data);
 				return;
 
 			}
 		}
-		queue.offer(new S_PacketQueueItem(networkId, packetData));
-
+		queue.offer(new S_PacketQueueItem(client, data));
 	}
 
 	@Override
 	public void Start() throws Exception {
 
-		int port = 4005;
+		int port = 4001;
 		try {
 			serverChannel = ServerSocketChannel.open();
 			ss = serverChannel.socket();

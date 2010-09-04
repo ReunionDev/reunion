@@ -8,6 +8,7 @@ import com.googlecode.reunion.jreunion.game.G_Player;
 import com.googlecode.reunion.jreunion.game.G_Quest;
 import com.googlecode.reunion.jreunion.game.G_Trader;
 import com.googlecode.reunion.jreunion.game.G_Warehouse;
+import com.googlecode.reunion.jreunion.server.S_Enums.S_ClientState;
 
 /**
  * @author Aidamina
@@ -28,79 +29,79 @@ public class S_PacketParser {
 	private void HandleMessage(S_Client client, String message[]) {
 		S_Command com = server.getWorldModule().getWorldCommand();
 		System.out.println("Parsing " + message[0] + " command on Client("
-				+ client.networkId + ") with state: " + client.getState() + "");
+				+ client + ") with state: " + client.getState() + "");
 		switch (client.getState()) {
-		case S_Enums.CS_DISCONNECTED: {
+		case DISCONNECTED: {
 
 			break;
 		}
-		case S_Enums.CS_ACCEPTED: {
+		case ACCEPTED: {
 			if (Integer.parseInt(message[0]) == S_DatabaseUtils.getInstance()
 					.getVersion()) {
 				System.out.println("Got Version");
-				client.setState(S_Enums.CS_GOT_VERSION);
+				client.setState(S_ClientState.GOT_VERSION);
 
 				break;
 			} else {
 				System.out.println("Inconsistent version detected on: "
-						+ client.networkId);
+						+ client);
 				client.sendWrongVersion(Integer.parseInt(message[0]));
-				client.setState(S_Enums.CS_DISCONNECTED);
+				client.setState(S_ClientState.DISCONNECTED);
 				break;
 			}
 
 		}
-		case S_Enums.CS_GOT_VERSION: {
+		case GOT_VERSION: {
 			if (message[0].equals("login")) {
 				System.out.println("Got Login");
-				client.setState(S_Enums.CS_GOT_LOGIN);
+				client.setState(S_ClientState.GOT_LOGIN);
 
 				break;
 			} else {
 				System.out.println("Inconsistent protocol detected on: "
-						+ client.networkId);
-				client.setState(S_Enums.CS_DISCONNECTED);
+						+ client);
+				client.setState(S_ClientState.DISCONNECTED);
 				break;
 			}
 
 		}
-		case S_Enums.CS_GOT_LOGIN: {
+		case GOT_LOGIN: {
 			if (message[0].length() < 28) {
 				client.username = new String(message[0]);
 				System.out.println("Got Username");
-				client.setState(S_Enums.CS_GOT_USERNAME);
+				client.setState(S_ClientState.GOT_USERNAME);
 				break;
 			} else {
 				System.out.println("Inconsistent protocol detected on: "
-						+ client.networkId);
-				client.setState(S_Enums.CS_DISCONNECTED);
+						+ client);
+				client.setState(S_ClientState.DISCONNECTED);
 				break;
 
 			}
 		}
-		case S_Enums.CS_GOT_USERNAME: {
+		case GOT_USERNAME: {
 			if (message[0].length() < 28) {
 				client.password = new String(message[0]);
 				System.out.println("Got Password");
-				client.setState(S_Enums.CS_GOT_PASSWORD);
-				com.authClient(client.networkId, client.username,
+				client.setState(S_ClientState.GOT_PASSWORD);
+				com.authClient(client, client.username,
 						client.password);
 				break;
 			} else {
 				System.out.println("Inconsistent protocol detected on: "
-						+ client.networkId);
-				client.setState(S_Enums.CS_DISCONNECTED);
+						+ client);
+				client.setState(S_ClientState.DISCONNECTED);
 				break;
 
 			}
 		}
-		case S_Enums.CS_CHAR_LIST: {
+		case CHAR_LIST: {
 
 			if (message[0].equals("char_exist")) {
 				if (S_DatabaseUtils.getInstance().getCharNameFree(message[1])) {
-					com.sendSuccess(client.networkId);
+					com.sendSuccess(client);
 				} else {
-					com.sendFail(client.networkId);
+					com.sendFail(client);
 				}
 				break;
 			} else if (message[0].equals("char_new")) {
@@ -114,23 +115,23 @@ public class S_PacketParser {
 						Integer.parseInt(message[8]),
 						Integer.parseInt(message[9]),
 						Integer.parseInt(message[10]));
-				com.sendSuccess(client.networkId);
-				com.sendCharList(client.networkId, client.accountId);
+				com.sendSuccess(client);
+				com.sendCharList(client, client.accountId);
 			} else if (message[0].equals("char_del")) {
 
 				com.delChar(Integer.parseInt(message[1]), client.accountId);
-				com.sendSuccess(client.networkId);
+				com.sendSuccess(client);
 
-				com.sendCharList(client.networkId, client.accountId);
+				com.sendCharList(client, client.accountId);
 			} else if (message[0].equals("start")) {
-				client.setState(S_Enums.CS_CHAR_SELECTED);
+				client.setState(S_ClientState.CHAR_SELECTED);
 				com.loginChar(Integer.parseInt(message[1]), client.accountId,
-						client.networkId);
+						client);
 			}
 
 			break;
 		}
-		case S_Enums.CS_CHAR_SELECTED: {
+		case CHAR_SELECTED: {
 			if (message[0].equals("start_game")) {
 				G_Player pl = client.playerObject;
 
@@ -138,18 +139,17 @@ public class S_PacketParser {
 				pl.setPosY(5224);
 				pl.setPosZ(0);
 
-				server.getNetworkModule().SendPacket(client.networkId,
+				client.SendData(
 						"status 11 " + pl.getTotalExp() + " 0\n");
-				server.getNetworkModule().SendPacket(client.networkId,
+				client.SendData(
 						"status 12 " + pl.getLvlUpExp() + " 0\n");
-				server.getNetworkModule().SendPacket(client.networkId,
+				client.SendData(
 						"status 13 " + pl.getStatusPoints() + " 0\n");
-				server.getNetworkModule().SendPacket(client.networkId,
+				client.SendData(
 						"status 10 " + pl.getLime() + " 0\n");
-				server.getNetworkModule().SendPacket(client.networkId,
+				client.SendData(
 						"status 19 " + pl.getPenaltyPoints() + " 0\n");
-				server.getNetworkModule().SendPacket(
-						client.networkId,
+				client.SendData(
 						"at " + client.playerObject.getEntityId() + " "
 								+ pl.getPosX() + " " + pl.getPosY() + " "
 								+ pl.getPosZ() + " 0\n");
@@ -187,11 +187,11 @@ public class S_PacketParser {
 						+ pl.getCons() + pl.getLead() - 80;
 				pl.updateStatus(13, (pl.getLevel() - 1) * 3 - statusPoints, 0);
 
-				client.setState(S_Enums.CS_INGAME);
+				client.setState(S_ClientState.INGAME);
 			}
 			break;
 		}
-		case S_Enums.CS_INGAME: {
+		case INGAME: {
 			if (message[0].equals("walk")) {
 				client.playerObject.walk(Integer.parseInt(message[1]),
 						Integer.parseInt(message[2]),
@@ -425,7 +425,7 @@ public class S_PacketParser {
 		}
 		default: {
 			System.out.println("State Conflict");
-			client.setState(S_Enums.CS_DISCONNECTED);
+			client.setState(S_ClientState.DISCONNECTED);
 		}
 		}
 	}
@@ -433,10 +433,10 @@ public class S_PacketParser {
 	public void Parse(S_Client client, char[] packet) {
 
 		String[] messages = ParsePacket(packet);
-		if (client.getState() != S_Enums.CS_DISCONNECTED) {
+		if (client.getState() != S_ClientState.DISCONNECTED) {
 			for (String message2 : messages) {
 				String[] message = ParseMessage(message2);
-				if (client.getState() != S_Enums.CS_DISCONNECTED) {
+				if (client.getState() != S_ClientState.DISCONNECTED) {
 					HandleMessage(client, message);
 				}
 			}

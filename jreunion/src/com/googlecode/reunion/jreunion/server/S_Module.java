@@ -1,6 +1,7 @@
 package com.googlecode.reunion.jreunion.server;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author Aidamina
@@ -15,7 +16,7 @@ interface S_Module {
 
 	void DoWork() throws Exception;
 
-	ArrayList GetChildren();
+	List<S_Module> GetChildren();
 
 	S_Module GetParent();
 

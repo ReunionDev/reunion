@@ -78,7 +78,7 @@ abstract class S_ClassModule implements S_Module {
 	}
 
 	@Override
-	public ArrayList<S_Module> GetChildren() {
+	public List<S_Module> GetChildren() {
 		ArrayList<S_Module> children = new ArrayList<S_Module>();
 		Iterator<S_Module> iter = childModules.iterator();
 		while (iter.hasNext()) {

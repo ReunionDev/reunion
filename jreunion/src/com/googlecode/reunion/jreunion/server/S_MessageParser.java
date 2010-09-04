@@ -105,13 +105,10 @@ public class S_MessageParser {
 				}
 			} else if (word[0].equals("@worldgoto")) {
 				String map1 = word[1];
-				String map2 = word[2];
-				S_Server.getInstance()
-						.getNetworkModule()
-						.SendPacket(
-								client.networkId,
-								"go_world 127.0.0.1 4001 " + map1 + " " + map2
-										+ "\n");
+				String map2 = word[2];			
+				client.SendData(
+						"go_world 127.0.0.1 4001 " + map1 + " " + map2
+								+ "\n");
 			} else if (word[0].equals("@goto")) {
 				if (word[1].equals("pos")) {
 					com.GoToPos(player, Integer.parseInt(word[2]),
@@ -128,8 +125,7 @@ public class S_MessageParser {
 						packetData = packetData + " ";
 					}
 				}
-				S_Server.getInstance().getNetworkModule()
-						.SendPacket(client.networkId, packetData + "\n");
+				client.SendData( packetData + "\n");
 			} else if (word[0].equals("@spot")) {
 				com.serverSay("X:" + player.getPosX() + "; Y:"
 						+ player.getPosY());

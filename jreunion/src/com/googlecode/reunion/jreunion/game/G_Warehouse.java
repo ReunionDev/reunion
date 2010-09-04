@@ -36,11 +36,9 @@ public class G_Warehouse extends G_Npc {
 					+ stashItem.getItem().getGemNumber() + " "
 					+ stashItem.getItem().getExtraStats() + " "
 					+ player.getStash().getQuantity(stashItem.getPos()) + "\n";
-			S_Server.getInstance().getNetworkModule()
-					.SendPacket(client.networkId, packetData);
+					client.SendData( packetData);
 		}
-		S_Server.getInstance().getNetworkModule()
-				.SendPacket(client.networkId, "stash_end");
+				client.SendData( "stash_end");
 	}
 
 	/****** Add/Remove items from stash ******/
@@ -61,8 +59,7 @@ public class G_Warehouse extends G_Npc {
 		if (pos == 12) {
 			if (gems > player.getLime()) {
 				packetData = "msg WARNING: Lime cheating detected!\n";
-				S_Server.getInstance().getNetworkModule()
-						.SendPacket(client.networkId, packetData);
+						client.SendData( packetData);
 				return;
 			}
 			stashItem = stash.getItem(pos);
@@ -135,8 +132,7 @@ public class G_Warehouse extends G_Npc {
 
 		// S_DatabaseUtils.getInstance().saveStash(client);
 		if (packetData != null) {
-			S_Server.getInstance().getNetworkModule()
-					.SendPacket(client.networkId, packetData);
+					client.SendData( packetData);
 		}
 	}
 }
