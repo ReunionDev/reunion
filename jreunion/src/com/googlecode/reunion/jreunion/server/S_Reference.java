@@ -24,6 +24,7 @@ public class S_Reference {
 	private S_Parser skillReference;
 	private S_Parser expReference;
 	private S_Parser npcReference;
+	private S_Parser dropListReference;
 
 	private S_Parser mapReference;
 
@@ -39,6 +40,7 @@ public class S_Reference {
 		mapReference = new S_Parser();
 		npcReference = new S_Parser();
 		serverReference = new S_Parser();
+		dropListReference = new S_Parser();
 	}
 
 	public void clear() {
@@ -80,6 +82,10 @@ public class S_Reference {
 	public S_Parser getSkillReference() {
 		return skillReference;
 	}
+	public S_Parser getDropListReference() {
+		return dropListReference;
+	}
+
 
 	public void Load() {
 		clear();
@@ -90,6 +96,7 @@ public class S_Reference {
 		mapReference.Parse("Maps.dta");
 		npcReference.Parse("Npc.dta");
 		serverReference.Parse("ServerSetings.dta");
+		dropListReference.Parse("DropList.dta");
 	}
 
 }

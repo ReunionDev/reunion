@@ -255,7 +255,7 @@ public class S_Network extends S_ClassModule {
 	@Override
 	public void Start() throws Exception {
 
-		int port = 4001;
+		int port = 4005;
 		try {
 			serverChannel = ServerSocketChannel.open();
 			ss = serverChannel.socket();
@@ -264,6 +264,7 @@ public class S_Network extends S_ClassModule {
 			serverChannel.configureBlocking(false);
 			selector = Selector.open();
 			serverChannel.register(selector, SelectionKey.OP_ACCEPT);
+			System.out.println("\n>> Port " + port + " is currently used by the Server!\n");
 		} catch (Exception e) {
 			if (e instanceof BindException) {
 				System.out.println("Port " + port

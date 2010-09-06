@@ -1,10 +1,15 @@
 package com.googlecode.reunion.jreunion.game;
 
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
 
 import com.googlecode.reunion.jreunion.server.S_Client;
 import com.googlecode.reunion.jreunion.server.S_DatabaseUtils;
+import com.googlecode.reunion.jreunion.server.S_ItemFactory;
 import com.googlecode.reunion.jreunion.server.S_ParsedItem;
+import com.googlecode.reunion.jreunion.server.S_Parser;
 import com.googlecode.reunion.jreunion.server.S_Reference;
 import com.googlecode.reunion.jreunion.server.S_Server;
 import com.googlecode.reunion.jreunion.server.S_Timer;
@@ -330,7 +335,7 @@ public class G_Mob extends G_LivingObject {
 		this.attackType = attackType;
 	}
 
-	public void setDead() {
+	public void setDead(G_Player player) {
 		setCurrHp(0);
 
 		S_Server.getInstance().getWorldModule().getMobManager().removeMob(this);
@@ -339,7 +344,21 @@ public class G_Mob extends G_LivingObject {
 		if (spawn != null) {
 			spawn.setDead(true);
 		}
-
+		S_Parser dropList = S_Reference.getInstance().getDropListReference();
+		Iterator<S_ParsedItem> iter =dropList.getItemListIterator();
+		while(iter.hasNext()) {			
+			S_ParsedItem item = iter.next();
+			if(item.getMemberValue("Mob").equals(""+this.getType())){
+				Random r = new Random();
+				float rate = Float.parseFloat(item.getMemberValue("Rate"));
+				if( r.nextFloat()<rate){
+					System.out.println(item.getMemberValue("Item"));
+					int itemType = Integer.parseInt(item.getMemberValue("Item"));
+					S_Server.getInstance().getWorldModule()
+					.getWorldCommand().dropItem(player, itemType, this.getPosX(), this.getPosY(), this.getPosZ(), 0, 0, 0);
+				}
+			}			
+		}
 		S_Server.getInstance().getWorldModule().getWorldCommand()
 				.serverSay("Experience: " + getExp() + " Lime: " + getLime());
 

@@ -4,6 +4,9 @@ import java.util.Iterator;
 
 import com.googlecode.reunion.jreunion.server.S_Client;
 import com.googlecode.reunion.jreunion.server.S_Server;
+import com.googlecode.reunion.jreunion.server.S_Command;
+
+
 
 /**
  * @author Aidamina
@@ -81,22 +84,34 @@ public class G_BulkanPlayer extends G_Player {
 
 		if (newHp <= 0) {
 
-			mob.setDead();
+			mob.setDead(this);
 
 			updateStatus(12, getLvlUpExp() - mob.getExp(), 0);
 			updateStatus(11, mob.getExp(), 0);
 			updateStatus(10, mob.getLime(), 0);
 
-			if (mob.getType() == 324) {
+		/*	if (mob.getType() == 226) {
+				
 				G_Item item = com.googlecode.reunion.jreunion.server.S_ItemFactory
-						.createItem(1054);
+						.createItem(150);
+				
+				
+				
+				double random = Math.round(Math.random() * 10);	
 
-				item.setExtraStats((int) (Math.random() * 10000));
-
-				pickupItem(item.getEntityId());
-				getQuest().questEnd(this, 669);
-				getQuest().questEff(this);
-			}
+				if (random == 0) {
+					item.setGemNumber ((int) (Math.random() * 10000));
+					item.setExtraStats((int) (Math.random() * 10000));
+				}	
+				
+			//	dropItemMob(mob.getType(), item.getEntityId(),
+			//			mob.getPosX(), mob.getPosY(), 0, 0, 0, 0, this);
+				
+			//	dropItem(item.getEntityId());
+			  pickupItem(item.getEntityId());
+			//	getQuest().questEnd(this, 669);
+			//	getQuest().questEff(this);
+			}*/
 		} else {
 			mob.setCurrHp(newHp);
 		}
@@ -141,7 +156,7 @@ public class G_BulkanPlayer extends G_Player {
 
 		if (newHp <= 0) {
 
-			mob.setDead();
+			mob.setDead(this);
 
 			updateStatus(12, getLvlUpExp() - mob.getExp(), 0);
 			updateStatus(11, mob.getExp(), 0);

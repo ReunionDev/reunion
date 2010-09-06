@@ -143,6 +143,7 @@ public class G_Inventory {
 
 	/****** Manages the Items on the Inventory ******/
 	public void moveItem(G_Player player, int tab, int posX, int posY) {
+	try {
 		S_Client client = S_Server.getInstance().getNetworkModule()
 				.getClient(player);
 
@@ -199,21 +200,26 @@ public class G_Inventory {
 				return;
 			}
 
-			// System.out.print("Item Selected: "+newInvItem.getItem().getType()+"\n");
-
-			for (int x = 0; x < newInvItem.getItem().getSizeX(); x++) {
-				for (int y = 0; y < newInvItem.getItem().getSizeY(); y++) {
-					oldInvItem = player.getInventory().getItem(tab, posX + x,
-							posY + y);
-					if (auxItem != oldInvItem && oldInvItem != null) {
-						auxItem = oldInvItem;
-						count++;
-					}
-					if (count > 1) {
-						return;
+			 System.out.print("Item Selected: "+newInvItem.getItem().getType()+"\n");
+			if (newInvItem != null) {
+				for (int x = 0; x < newInvItem.getItem().getSizeX(); x++) {
+					for (int y = 0; y < newInvItem.getItem().getSizeY(); y++) {
+						
+						oldInvItem = player.getInventory().getItem(tab, posX + x,
+								posY + y);
+						if (auxItem != oldInvItem && oldInvItem != null) {
+							auxItem = oldInvItem;
+							count++;
+						}
+						if (count > 1) {
+							return;
+						}
+						
 					}
 				}
 			}
+				
+		
 
 			if (auxItem == null) {
 				player.getInventory().setItemSelected(null);
@@ -229,6 +235,9 @@ public class G_Inventory {
 			player.getInventory()
 					.addItem(posX, posY, newInvItem.getItem(), tab);
 		}
+	} catch (Exception e) {
+		System.out.println("moveitembug");
+	}
 	}
 
 	public boolean posEmpty(int tab, int posX, int posY) {

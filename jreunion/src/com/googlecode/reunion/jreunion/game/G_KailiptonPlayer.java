@@ -72,7 +72,7 @@ public class G_KailiptonPlayer extends G_Player {
 
 		if (newHp <= 0) {
 
-			mob.setDead();
+			mob.setDead(this);
 
 			updateStatus(12, getLvlUpExp() - mob.getExp(), 0);
 			updateStatus(11, mob.getExp(), 0);
@@ -116,7 +116,7 @@ public class G_KailiptonPlayer extends G_Player {
 
 		if (newHp <= 0) {
 
-			mob.setDead();
+			mob.setDead(this);
 
 			updateStatus(12, getLvlUpExp() - mob.getExp(), 0);
 			updateStatus(11, mob.getExp(), 0);

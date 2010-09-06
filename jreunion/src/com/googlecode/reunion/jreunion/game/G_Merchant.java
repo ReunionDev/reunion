@@ -47,11 +47,17 @@ public class G_Merchant extends G_Npc {
 				break;
 			}
 			item = S_ItemFactory.createItem(itemType);
+			
+			if (item != null) {
 			player.pickItem(item.getEntityId());
 			count++;
+			}
+			
 		}
+		if (item != null) {
 		player.updateStatus(10, item.getPrice() * npc.getBuyRate() / 100 * -1
 				* count, 0);
+		}
 
 	}
 
@@ -90,14 +96,19 @@ public class G_Merchant extends G_Npc {
 		if (client == null) {
 			return;
 		}
-
-		G_Npc npc = S_Server.getInstance().getWorldModule().getNpcManager()
-				.getNpc(npcUniqueid);
-		G_Item item = player.getInventory().getItemSelected().getItem();
-
-		player.updateStatus(10, (item.getPrice() * npc.getSellRate() / 100), 0);
-		player.getInventory().setItemSelected(null);
-		S_DatabaseUtils.getInstance().deleteItem(item);
+		try {
+			G_Item item = player.getInventory().getItemSelected().getItem();
+		
+			if (item != null) {
+			G_Npc npc = S_Server.getInstance().getWorldModule().getNpcManager()
+					.getNpc(npcUniqueid);
+				player.updateStatus(10, (item.getPrice() * npc.getSellRate() / 100), 0);
+				player.getInventory().setItemSelected(null);
+				S_DatabaseUtils.getInstance().deleteItem(item);
+			}
+		} catch (Exception e) {
+			System.err.println("Item Sell bug");
+		}
 	}
 
 }

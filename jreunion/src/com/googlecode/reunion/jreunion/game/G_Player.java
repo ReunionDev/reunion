@@ -142,50 +142,55 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 
 	/****** Manages the Item Drop ******/
 	public void dropItem(int uniqueId) {
-
-		G_Item item = getInventory().getItemSelected().getItem();
-
-		if (item == null) {
-			return;
-		}
-
-		S_Client client = S_Server.getInstance().getNetworkModule()
-				.getClient(this);
-
-		if (client == null) {
-			return;
-		}
-
-		getInventory().setItemSelected(null);
-
-		String packetData = "drop " + item.getEntityId() + " " + item.getType()
-				+ " " + getPosX() + " " + getPosY() + " " + getPosZ() + " "
-				+ getRotation() + " " + item.getGemNumber() + " "
-				+ item.getExtraStats() + "\n";
-
-		
-				client.SendData( packetData);
-
-		if (getSession().getPlayerListSize() > 0) {
-			Iterator<G_Player> playerIter = getSession()
-					.getPlayerListIterator();
-
-			while (playerIter.hasNext()) {
-				G_Player player = playerIter.next();
-				client = S_Server.getInstance().getNetworkModule()
-						.getClient(player);
-
-				if (client == null) {
-					continue;
-				}
-
-				
-						client.SendData( packetData);
+	
+		try {
+			G_Item item = getInventory().getItemSelected().getItem();
+	
+			if (item == null) {
+				return;
 			}
+		
+			S_Client client = S_Server.getInstance().getNetworkModule()
+					.getClient(this);
+			if (client == null) {
+				return;
+			}
+			getInventory().setItemSelected(null);
+			if (item != null) {
+				String packetData = "drop " + item.getEntityId() + " " + item.getType()
+						+ " " + getPosX() + " " + getPosY() + " " + getPosZ() + " "
+						+ getRotation() + " " + item.getGemNumber() + " "
+						+ item.getExtraStats() + "\n";
+				System.out.println(packetData);
+				client.SendData(packetData);
+	
+				if (getSession().getPlayerListSize() > 0) {
+					Iterator<G_Player> playerIter = getSession()
+							.getPlayerListIterator();
+	
+					while (playerIter.hasNext()) {
+						G_Player player = playerIter.next();
+						client = S_Server.getInstance().getNetworkModule()
+								.getClient(player);
+	
+						if (client == null) {
+							continue;
+						}
+	
+						client.SendData( packetData);
+					}
+				}
+			}
+			
+			// S> drop [ItemID] [ItemType] [PosX] [PosY] [Height] [Rotation]
+			// [GemNumber] [Special]
+		} catch (Exception e) {
+			System.out.println("Itembug not fixxed but server crash");
 		}
-		// S> drop [ItemID] [ItemType] [PosX] [PosY] [Height] [Rotation]
-		// [GemNumber] [Special]
+		
+		
 	}
+	
 
 	public int getAdminState() {
 		return adminState;
@@ -1290,6 +1295,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 	}
 
 	public void wearSlot(int slotid) {
+	try {
 		G_InventoryItem invItem = getInventory().getItemSelected();
 		String packetData = new String();
 		String extraPacketData = null;
@@ -1334,6 +1340,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 				G_Item item = getEquipment().getItem(slotid);
 				packetData = "char_wear " + getEntityId() + " " + slotid + " "
 						+ item.getType() + " " + item.getGemNumber() + "\n";
+				
 			}
 
 		}
@@ -1359,6 +1366,10 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 						client.SendData(packetData);
 			}
 		}
+	
+	} catch (Exception e) {
+		System.out.println("wearslot bug");
+	}
 	}
 
 }

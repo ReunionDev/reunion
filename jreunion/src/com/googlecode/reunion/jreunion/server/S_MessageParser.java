@@ -56,19 +56,30 @@ public class S_MessageParser {
 						+ ")" + "collision test: " + s1 + " " + s2 + " " + s3);
 			}
 
-			else if (word[0].equals("@drop")) {
+			else if (word[0].equals("@d")||word[0].equals("@drop")) { //Drop Item
 				if (word.length == 2) {
-					com.dropItem(player, Integer.parseInt(word[1]),
-							player.getPosX(), player.getPosY(), 0, 0, 0, 0);
+					try {
+						com.dropItem(player, Integer.parseInt(word[1]),
+								player.getPosX(), player.getPosY(), 0, 0, 0, 0);
+					} catch (Exception e) {
+						String packetData = "say 1 S_Server (NOTICE) @drop failed";
+						client.SendData(packetData);
+					}
+					
 				}
 
 				if (word.length == 4) {
+					try {
 					com.dropItem(player, Integer.parseInt(word[1]),
 							player.getPosX(), player.getPosY(), 0, 0,
 							Integer.parseInt(word[2]),
 							Integer.parseInt(word[3]));
+					} catch (Exception e) {
+						String packetData = "say 1 S_Server (NOTICE) @drop failed";
+						client.SendData(packetData);
+					}
 				}
-			} else if (word[0].equals("@addmob")) {
+			} else if (word[0].equals("@addmob")) { //Adds a NPC 
 				if (word.length == 2) {
 					G_Spawn spawn = new G_Spawn();
 					spawn.setCenterX(player.getPosX() + 10);
@@ -104,11 +115,17 @@ public class S_MessageParser {
 					com.npcIn(player, npc);
 				}
 			} else if (word[0].equals("@worldgoto")) {
+				try {
 				String map1 = word[1];
-				String map2 = word[2];			
+				String map2 = word[2];
+				String map3 = word[3];			
 				client.SendData(
-						"go_world 127.0.0.1 4001 " + map1 + " " + map2
+						"go_world 127.0.0.1 "+map1+" " + map2 + " " + map3
 								+ "\n");
+				} catch (Exception e) {
+					String packetData = "say 1 S_Server (NOTICE) @worldgoto failed > port map1 map2";
+					client.SendData(packetData);
+				}
 			} else if (word[0].equals("@goto")) {
 				if (word[1].equals("pos")) {
 					com.GoToPos(player, Integer.parseInt(word[2]),

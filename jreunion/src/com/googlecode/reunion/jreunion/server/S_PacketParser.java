@@ -43,7 +43,7 @@ public class S_PacketParser {
 
 				break;
 			} else {
-				System.out.println("Inconsistent version detected on: "
+				System.out.println("Inconsistent version (err 1) detected on: "
 						+ client);
 				client.sendWrongVersion(Integer.parseInt(message[0]));
 				client.setState(S_ClientState.DISCONNECTED);
@@ -58,7 +58,7 @@ public class S_PacketParser {
 
 				break;
 			} else {
-				System.out.println("Inconsistent protocol detected on: "
+				System.out.println("Inconsistent protocol (err 2) detected on: "
 						+ client);
 				client.setState(S_ClientState.DISCONNECTED);
 				break;
@@ -72,7 +72,7 @@ public class S_PacketParser {
 				client.setState(S_ClientState.GOT_USERNAME);
 				break;
 			} else {
-				System.out.println("Inconsistent protocol detected on: "
+				System.out.println("Inconsistent protocol (err 3) detected on: "
 						+ client);
 				client.setState(S_ClientState.DISCONNECTED);
 				break;
@@ -88,7 +88,7 @@ public class S_PacketParser {
 						client.password);
 				break;
 			} else {
-				System.out.println("Inconsistent protocol detected on: "
+				System.out.println("Inconsistent protocol (err 4) detected on: "
 						+ client);
 				client.setState(S_ClientState.DISCONNECTED);
 				break;
@@ -286,6 +286,7 @@ public class S_PacketParser {
 				client.playerObject.wearSlot(Integer.parseInt(message[1]));
 				// com.playerWear(client.playerObject,Integer.parseInt(message[1]));
 			} else if (message[0].equals("use_skill")) {
+				try {
 				// if (message.length > 2){
 				if (message[2].equals("npc")) {
 					G_Mob mob = S_Server.getInstance().getWorldModule()
@@ -300,7 +301,9 @@ public class S_PacketParser {
 					client.playerObject.useSkill(player,
 							Integer.parseInt(message[1]));
 				}
-
+				} catch (Exception e) {
+					System.out.println("oh skill bug");
+				}
 				// client.playerObject.useSkill(Integer.parseInt(message[1]));
 			} else if (message[0].equals("skillup")) {
 				client.playerObject.skillUp(Integer.parseInt(message[1]));
