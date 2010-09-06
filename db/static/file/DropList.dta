@@ -1,0 +1,14 @@
+#DropList
+
+
+[Armor Rat ot Contrition/Hair Band] 
+ID = 1
+Mob = 226
+Item = 309 
+Rate = .25
+
+[Armor Rat ot Contrition/Warrior Helmet] 
+ID = 2
+Mob = 226
+Item = 310
+Rate = .5
