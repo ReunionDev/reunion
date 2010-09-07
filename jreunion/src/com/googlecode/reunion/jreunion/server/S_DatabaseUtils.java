@@ -782,47 +782,29 @@ public class S_DatabaseUtils {
 			return;
 		
 		Statement stmt;
-		int currId=0;
 		
 		try {
 			stmt = database.conn.createStatement();
-			stmt.execute("DELETE FROM skills WHERE charid="+player.getEntityId()+";");
+			int playerId = player.getEntityId();
+			stmt.execute("DELETE FROM skills WHERE charid="+playerId+";");
+
+			String query = "INSERT INTO skills (charid,id,level) VALUES ";
 			
-			//stmt.execute("INSERT INTO equipment (charid, head, body, legs, feet, weapon, shield, shouldermount, bracelet, ring, necklace)VALUES ("+player.getEntityId()+","+eqHelmet+","+eqArmor+","+eqPants+","+eqBoots+ ","+eqFirstHand+","+eqSecondHand+","+eqShoulderMount+","+eqBracelet+","+eqRing+","+eqNecklace+"); ");
-			String firstString = "INSERT INTO skills (charid";
-			String secondString = ") VALUES (";
 			
 			Iterator<G_Skill> skillsIter = player.getCharSkill().getSkillListIterator();
 			
 			while(skillsIter.hasNext()){
 				G_Skill skill = (G_Skill)skillsIter.next();
 				
-				if(currId == skill.getId()){
-					firstString = firstString + ", " + skill.getId();
-					secondString = secondString + skill.getLevel();
-				}
-				else{
-					firstString = firstString + ", " + currId;
-					secondString = secondString + "0";
-				}
-				currId++;
 				
+				query+="("+playerId+","+skill.getId()+","+skill.getLevel()+")";			
 				if(skillsIter.hasNext())
-					secondString = secondString + ", ";
+					query+= ", ";
 			}
-			secondString = secondString + ");";			
 			
-			stmt.execute(firstString + secondString);
-			/*if (rs.next()) {
-				Iterator iter = player.getCharSkill().getSkillListIterator();
-				while(iter.hasNext()){
-					G_Skill skill = (G_Skill) iter.next();
-					player.getCharSkill().setSkill(player,skill.getId(),rs.getInt(""+skill.getId()));
-				}	
-				return player;
-			}
-			else 
-				return null;*/
+			System.out.println(query);
+			stmt.execute(query);//test to see what it says when you save your skills
+			
 			
 		} catch (SQLException e1) {
 			e1.printStackTrace();
@@ -830,29 +812,22 @@ public class S_DatabaseUtils {
 		}
 	}
 	
-	public  G_Player loadSkills(G_Player player) {
+	public  void loadSkills(G_Player player) {
 		if (!checkDatabase())
-			return null;
+			return;
 		Statement stmt;
 		try {
 			stmt = database.conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM skills WHERE charid="+player.getEntityId()+";");
-						
-			if (rs.next()) {
-				Iterator<G_Skill> iter = player.getCharSkill().getSkillListIterator();
-				while(iter.hasNext()){
-					G_Skill skill = iter.next();
-					skill.setCurrLevel(rs.getInt(""+skill.getId()));
-					player.getCharSkill().setSkill(player,skill);
-				}	
-				return player;
+			ResultSet rs = stmt.executeQuery("SELECT id,level FROM skills WHERE charid="+player.getEntityId()+";");			
+			while (rs.next()) {
+				int id = rs.getInt("id");
+				int level = rs.getInt("level");
+				player.getCharSkill().getSkill(id).setCurrLevel(level);//weird
 			}
-			else 
-				return null;
 			
 		} catch (SQLException e1) {
 			e1.printStackTrace();
-			return null;
+			return;
 		}
 	}
 	

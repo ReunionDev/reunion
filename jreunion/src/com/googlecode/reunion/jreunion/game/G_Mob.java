@@ -346,10 +346,10 @@ public class G_Mob extends G_LivingObject {
 		}
 		S_Parser dropList = S_Reference.getInstance().getDropListReference();
 		Iterator<S_ParsedItem> iter =dropList.getItemListIterator();
+		Random r = new Random();
 		while(iter.hasNext()) {			
 			S_ParsedItem item = iter.next();
 			if(item.getMemberValue("Mob").equals(""+this.getType())){
-				Random r = new Random();
 				float rate = Float.parseFloat(item.getMemberValue("Rate"));
 				if( r.nextFloat()<rate){
 					System.out.println(item.getMemberValue("Item"));

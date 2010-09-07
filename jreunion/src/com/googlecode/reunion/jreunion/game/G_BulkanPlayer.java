@@ -146,6 +146,11 @@ public class G_BulkanPlayer extends G_Player {
 				skillDmg = baseDmg + baseDmg
 						* (skill.getCurrFirstRange() / 100);
 			}
+		} else if (skill.getId() == 38) { // Exploding rage
+			if (getEquipment().getFirstHand() instanceof G_Axe) {
+				skillDmg = baseDmg + baseDmg
+						* (skill.getCurrFirstRange() / 100);
+			}
 		}
 
 		// S_Server.getInstance().getWorldModule().getWorldCommand().serverSay("SkillDmg:"+skillDmg);

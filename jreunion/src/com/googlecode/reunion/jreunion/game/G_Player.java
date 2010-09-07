@@ -561,6 +561,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 
 		System.out.print("Player " + getName() + " logging out...\n");
 
+		S_DatabaseUtils.getInstance().saveSkills(this);
 		S_DatabaseUtils.getInstance().saveInventory(this);
 		S_DatabaseUtils.getInstance().saveCharStatus(this);
 		S_DatabaseUtils.getInstance().saveEquipment(this);
