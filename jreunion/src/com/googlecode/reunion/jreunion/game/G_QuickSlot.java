@@ -64,10 +64,13 @@ public class G_QuickSlot {
 		if (player.getInventory().getItemSelected() == null) {
 			G_QuickSlotItem qsItem = getItem(slot);
 			removeItem(qsItem);
-
-			G_InventoryItem invItem = new G_InventoryItem(qsItem.getItem(), 0,
-					0, 0);
+			
+			G_InventoryItem invItem = new G_InventoryItem(qsItem.getItem(), -1,
+					-1, -1);
+			
 			player.getInventory().setItemSelected(invItem);
+			
+			
 		} else {
 			G_InventoryItem invItem = player.getInventory().getItemSelected();
 			G_QuickSlotItem newQuickSlotItem = new G_QuickSlotItem(

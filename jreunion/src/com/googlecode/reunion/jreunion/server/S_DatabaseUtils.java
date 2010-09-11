@@ -797,7 +797,7 @@ public class S_DatabaseUtils {
 				G_Skill skill = (G_Skill)skillsIter.next();
 				
 				
-				query+="("+playerId+","+skill.getId()+","+skill.getLevel()+")";			
+				query+="("+playerId+","+skill.getId()+","+skill.getCurrLevel()+")";			
 				if(skillsIter.hasNext())
 					query+= ", ";
 			}
@@ -818,7 +818,7 @@ public class S_DatabaseUtils {
 		Statement stmt;
 		try {
 			stmt = database.conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT id,level FROM skills WHERE charid="+player.getEntityId()+";");			
+			ResultSet rs = stmt.executeQuery("SELECT id, level FROM skills WHERE charid="+player.getEntityId()+";");			
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				int level = rs.getInt("level");
@@ -1041,7 +1041,6 @@ public class S_DatabaseUtils {
 			while(qsIter.hasNext())
 			{
 				G_QuickSlotItem qsItem = qsIter.next();
-				
 				stmt.execute("INSERT INTO quickslot (characterid, uniqueitemid, slot)" +
 						" VALUES ("+player.getEntityId()+ ","+qsItem.getItem().getEntityId()+","
 						+qsItem.getSlot()+");");

@@ -40,23 +40,6 @@ public class G_KailiptonPlayer extends G_Player {
 	}
 
 	@Override
-	public void levelUpSkill(G_Skill skill) {
-		S_Client client = S_Server.getInstance().getNetworkModule()
-				.getClient(this);
-
-		if (client == null) {
-			return;
-		}
-
-		String packetData = new String();
-
-		getCharSkill().incSkill(this, skill);
-		packetData = "skilllevel " + skill.getId() + " " + skill.getCurrLevel()
-				+ "\n";
-				client.SendData( packetData);
-	}
-
-	@Override
 	public void meleeAttack(G_LivingObject livingObject) {
 		if (livingObject instanceof G_Mob) {
 			meleeAttackMob((G_Mob) livingObject);

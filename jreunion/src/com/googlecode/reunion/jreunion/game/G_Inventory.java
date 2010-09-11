@@ -143,7 +143,7 @@ public class G_Inventory {
 
 	/****** Manages the Items on the Inventory ******/
 	public void moveItem(G_Player player, int tab, int posX, int posY) {
-	try {
+	
 		S_Client client = S_Server.getInstance().getNetworkModule()
 				.getClient(player);
 
@@ -235,9 +235,6 @@ public class G_Inventory {
 			player.getInventory()
 					.addItem(posX, posY, newInvItem.getItem(), tab);
 		}
-	} catch (Exception e) {
-		System.out.println("moveitembug");
-	}
 	}
 
 	public boolean posEmpty(int tab, int posX, int posY) {

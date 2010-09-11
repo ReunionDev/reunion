@@ -6,8 +6,6 @@ package com.googlecode.reunion.jreunion.game;
  */
 public interface G_SkillTarget {
 
-	public void levelUpSkill(G_Skill skill);
-
 	// public void useSkill(G_Skill skill);
 	public void useSkill(G_LivingObject livingObject, int skillId);
 }

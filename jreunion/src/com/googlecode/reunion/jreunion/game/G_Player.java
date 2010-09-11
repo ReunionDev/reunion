@@ -248,6 +248,22 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 	public G_Equipment getEquipment() {
 		return equipment;
 	}
+	
+	public void levelUpSkill(G_Skill skill) {
+		S_Client client = S_Server.getInstance().getNetworkModule()
+				.getClient(this);
+
+		if (client == null) {
+			return;
+		}
+
+		String packetData = new String();
+
+		getCharSkill().incSkill(this, skill);
+		packetData = "skilllevel " + skill.getId() + " " + skill.getCurrLevel()
+				+ "\n";
+				client.SendData( packetData);
+	}
 
 	public G_Exchange getExchange() {
 		return exchange;
