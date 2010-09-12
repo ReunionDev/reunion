@@ -239,7 +239,7 @@ Price = 15000
 Class = G_Armor
 
 [Hope Hair Band]
-#ID = 
+ID = 414
 Type = 0
 Level = 98
 Race = 2
@@ -251,8 +251,8 @@ SizeY = 2
 Price = 10780
 Class = G_Armor
 
-[Infantary Helmet]
-#ID = 
+[Infantry Helmet]
+ID = 363
 Type = 0
 Level = 98
 Race = 3
@@ -291,7 +291,7 @@ Price = 19990
 Class = G_Armor
 
 [Passion Hair Band]
-#ID = 
+ID = 415
 Type = 0
 Level = 115
 Race = 2
@@ -303,8 +303,8 @@ SizeY = 2
 Price = 14180
 Class = G_Armor
 
-[Heavy Infantary Helmet]
-#ID = 
+[Heavy Infantry Helmet]
+ID = 364
 Type = 0
 Level = 115
 Race = 3
@@ -317,7 +317,7 @@ Price = 19870
 Class = G_Armor
 
 [Black Knight Helmet]
-#ID = 
+ID = 234
 Type = 0
 Level = 126
 Race = -1
@@ -330,7 +330,7 @@ Price = 26200
 Class = G_Armor
 
 [Blood Helmet]
-#ID = 
+ID = 475
 Type = 0
 Level = 145
 Race = 0
@@ -343,7 +343,7 @@ Price = 36500
 Class = G_Armor
 
 [Blizzard Cap]
-#ID = 
+ID = 476
 Type = 0
 Level = 145
 Race = 1
@@ -356,7 +356,7 @@ Price = 36500
 Class = G_Armor
 
 [Shadow Helmet]
-#ID = 
+ID = 712
 Type = 0
 Level = 145
 Race = 2
@@ -369,7 +369,7 @@ Price = 36500
 Class = G_Armor
 
 [Bionic Helmet]
-#ID = 
+ID = 477
 Type = 0
 Level = 145
 Race = 3
@@ -382,7 +382,7 @@ Price = 36500
 Class = G_Armor
 
 [Duke Helmet]
-#ID = 
+ID = 498
 Type = 0
 Level = 164
 Race = 0
@@ -395,7 +395,7 @@ Price = 56000
 Class = G_Armor
 
 [Spell Cap]
-#ID = 
+ID = 499
 Type = 0
 Level = 164
 Race = 1
@@ -408,7 +408,7 @@ Price = 65990
 Class = G_Armor
 
 [Leopard Helmet]
-#ID = 
+ID = 856
 Type = 0
 Level = 164
 Race = 2
@@ -421,7 +421,7 @@ Price = 56000
 Class = G_Armor
 
 [Aquamarine Helmet]
-#ID = 
+ID = 500
 Type = 0
 Level = 164
 Race = 3
@@ -434,7 +434,7 @@ Price = 80100
 Class = G_Armor
 
 [Bulkan White Knight Helmet]
-#ID = 
+ID = 696
 Type = 0
 Level = 193
 Race = 0
@@ -448,7 +448,7 @@ Price = 60400
 Class = G_Armor
 
 [Kailipton White Knight Helmet]
-#ID = 
+ID = 697
 Type = 0
 Level = 193
 Race = 1
@@ -462,7 +462,7 @@ Price = 60400
 Class = G_Armor
 
 [Aidia White Knight Helmet]
-#ID = 
+ID = 698
 Type = 0
 Level = 193
 Race = 2
@@ -476,7 +476,7 @@ Price = 60400
 Class = G_Armor
 
 [Human White Knight Helmet]
-#ID = 
+ID = 699
 Type = 0
 Level = 193
 Race = 3
@@ -490,7 +490,7 @@ Price = 92000
 Class = G_Armor
 
 [Teurus Helmet]
-#ID = 
+ID = 624
 Type = 0
 Level = 225
 Race = 0
@@ -504,7 +504,7 @@ Price = 113900
 Class = G_Armor
 
 [Star Soul Mask]
-#ID = 
+ID = 625
 Type = 0
 Level = 225
 Race = 1
@@ -518,7 +518,7 @@ Price = 113900
 Class = G_Armor
 
 [Eagle Helmet]
-#ID = 
+ID = 877
 Type = 0
 Level = 225
 Race = 2
@@ -532,7 +532,7 @@ Price = 113900
 Class = G_Armor
 
 [Fire Marine Helmet]
-#ID = 
+ID = 626
 Type = 0
 Level = 225
 Race = 3
@@ -560,7 +560,7 @@ Price = 125000
 Class = G_Armor
 
 [Magma Helmet]
-#ID = 
+ID = 882
 Type = 0
 Level = 254
 Race = 1
@@ -574,7 +574,7 @@ Price = 125000
 Class = G_Armor
 
 [Apollo Helmet]
-#ID = 
+ID = 896
 Type = 0
 Level = 254
 Race = 2
@@ -588,7 +588,7 @@ Price = 125000
 Class = G_Armor
 
 [Salvation Helmet]
-#ID = 
+ID = 883
 Type = 0
 Level = 254
 Race = 3
@@ -824,7 +824,7 @@ Price = 17430
 Class = G_Armor
 
 [Hope Shirt]
-#ID = 
+ID = 419
 Type = 0
 Level = 100
 Race = 2
@@ -876,7 +876,7 @@ Price = 22810
 Class = G_Armor
 
 [Passion Shirt]
-#ID = 
+ID = 420
 Type = 0
 Level = 117
 Race = 2
@@ -902,7 +902,7 @@ Price = 22580
 Class = G_Armor
 
 [Black Knight Armor]
-#ID = 
+ID = 239
 Type = 0
 Level = 128
 Race = -1
@@ -915,7 +915,7 @@ Price = 29920
 Class = G_Armor
 
 [Blood Armor]
-#ID = 
+ID = 478
 Type = 0
 Level = 148
 Race = 0
@@ -928,7 +928,7 @@ Price = 46150
 Class = G_Armor
 
 [Blizzard Shirt]
-#ID = 
+ID = 479
 Type = 0
 Level = 148
 Race = 1
@@ -941,7 +941,7 @@ Price = 46150
 Class = G_Armor
 
 [Shadow Armor]
-#ID = 
+ID = 713
 Type = 0
 Level = 148
 Race = 2
@@ -954,7 +954,7 @@ Price = 46150
 Class = G_Armor
 
 [Bionic Armor]
-#ID = 
+ID = 480
 Type = 0
 Level = 148
 Race = 3
@@ -967,7 +967,7 @@ Price = 46150
 Class = G_Armor
 
 [Duke Armor]
-#ID = 
+ID = 501
 Type = 0
 Level = 167
 Race = 0
@@ -980,7 +980,7 @@ Price = 47550
 Class = G_Armor
 
 [Spell Shirt]
-#ID = 
+ID = 502
 Type = 0
 Level = 167
 Race = 1
@@ -993,7 +993,7 @@ Price = 79880
 Class = G_Armor
 
 [Leopard Armor]
-#ID = 
+ID = 857
 Type = 0
 Level = 167
 Race = 2
@@ -1006,7 +1006,7 @@ Price = 47550
 Class = G_Armor
 
 [Aquamarine Armor]
-#ID = 
+ID = 503
 Type = 0
 Level = 167
 Race = 3
@@ -1019,7 +1019,7 @@ Price = 89000
 Class = G_Armor
 
 [Bulkan White Knight Armor]
-#ID = 
+ID = 700
 Type = 0
 Level = 196
 Race = 0
@@ -1033,7 +1033,7 @@ Price = 78400
 Class = G_Armor
 
 [Kailipton White Knight Armor]
-#ID = 
+ID = 701
 Type = 0
 Level = 196
 Race = 1
@@ -1047,7 +1047,7 @@ Price = 78400
 Class = G_Armor
 
 [Aidia White Knight Armor]
-#ID = 
+ID = 702
 Type = 0
 Level = 196
 Race = 2
@@ -1061,7 +1061,7 @@ Price = 78400
 Class = G_Armor
 
 [Human White Knight Armor]
-#ID = 
+ID = 703
 Type = 0
 Level = 196
 Race = 3
@@ -1075,7 +1075,7 @@ Price = 120000
 Class = G_Armor
 
 [Teurus Armor]
-#ID = 
+ID = 228
 Type = 0
 Level = 228
 Race = 0
@@ -1089,7 +1089,7 @@ Price = 147800
 Class = G_Armor
 
 [Star Soul Suit]
-#ID = 
+ID = 629
 Type = 0
 Level = 228
 Race = 1
@@ -1103,7 +1103,7 @@ Price = 147800
 Class = G_Armor
 
 [Eagle Armor]
-#ID = 
+ID = 878
 Type = 0
 Level = 228
 Race = 2
@@ -1117,7 +1117,7 @@ Price = 147800
 Class = G_Armor
 
 [Fire Marine Armor]
-#ID = 
+ID = 630
 Type = 0
 Level = 228
 Race = 3
@@ -1145,7 +1145,7 @@ Price = 162000
 Class = G_Armor
 
 [Magma Armor]
-#ID = 
+ID = 885
 Type = 0
 Level = 256
 Race = 1
@@ -1159,7 +1159,7 @@ Price = 162000
 Class = G_Armor
 
 [Apollo Armor]
-#ID = 
+ID = 897
 Type = 0
 Level = 256
 Race = 2
@@ -1173,7 +1173,7 @@ Price = 162000
 Class = G_Armor
 
 [Salvation Armor]
-#ID = 
+ID = 886
 Type = 0
 Level = 256
 Race = 3
@@ -1409,7 +1409,7 @@ Price = 19500
 Class = G_Armor
 
 [Hope Pants]
-#ID = 
+ID = 424
 Type = 0
 Level = 102
 Race = 2
@@ -1421,8 +1421,8 @@ SizeY = 3
 Price = 14280
 Class = G_Armor
 
-[Infantary Pants]
-#ID = 
+[Infantry Pants]
+ID = 359
 Type = 0
 Level = 102
 Race = 3
@@ -1461,7 +1461,7 @@ Price = 26140
 Class = G_Armor
 
 [Passion Pants]
-#ID = 
+ID = 425
 Type = 0
 Level = 121
 Race = 2
@@ -1473,8 +1473,8 @@ SizeY = 3
 Price = 18950
 Class = G_Armor
 
-[Heavy Infantary Pants]
-#ID = 
+[Heavy Infantry Pants]
+ID = 360
 Type = 0
 Level = 121
 Race = 3
@@ -1487,7 +1487,7 @@ Price = 25830
 Class = G_Armor
 
 [Black Knight Pants]
-#ID = 
+ID = 244
 Type = 0
 Level = 131
 Race = -1
@@ -1500,7 +1500,7 @@ Price = 33750
 Class = G_Armor
 
 [Blood Pants]
-#ID = 
+ID = 481
 Type = 0
 Level = 150
 Race = 0
@@ -1513,7 +1513,7 @@ Price = 52000
 Class = G_Armor
 
 [Blizzard Pants]
-#ID = 
+ID = 482
 Type = 0
 Level = 150
 Race = 1
@@ -1526,7 +1526,7 @@ Price = 52000
 Class = G_Armor
 
 [Shadow Pants]
-#ID = 
+ID = 714
 Type = 0
 Level = 150
 Race = 2
@@ -1539,7 +1539,7 @@ Price = 52000
 Class = G_Armor
 
 [Bionic Pants]
-#ID = 
+ID = 483
 Type = 0
 Level = 150
 Race = 3
@@ -1552,7 +1552,7 @@ Price = 52000
 Class = G_Armor
 
 [Duke Pants]
-#ID = 
+ID = 504
 Type = 0
 Level = 169
 Race = 0
@@ -1565,7 +1565,7 @@ Price = 63520
 Class = G_Armor
 
 [Spell Pants]
-#ID = 
+ID = 505
 Type = 0
 Level = 169
 Race = 1
@@ -1578,7 +1578,7 @@ Price = 85090
 Class = G_Armor
 
 [Leopard Pants]
-#ID = 
+ID = 858
 Type = 0
 Level = 169
 Race = 2
@@ -1591,7 +1591,7 @@ Price = 63520
 Class = G_Armor
 
 [Aquamarine Pants]
-#ID = 
+ID = 506
 Type = 0
 Level = 169
 Race = 3
@@ -1604,7 +1604,7 @@ Price = 93000
 Class = G_Armor
 
 [Bulkan White Knight Pants]
-#ID = 
+ID = 704
 Type = 0
 Level = 197
 Race = 0
@@ -1618,7 +1618,7 @@ Price = 87200
 Class = G_Armor
 
 [Kailipton White Knight Pants]
-#ID = 
+ID = 705
 Type = 0
 Level = 197
 Race = 1
@@ -1632,7 +1632,7 @@ Price = 87200
 Class = G_Armor
 
 [Aidia White Knight Pants]
-#ID = 
+ID = 706
 Type = 0
 Level = 197
 Race = 2
@@ -1646,7 +1646,7 @@ Price = 87200
 Class = G_Armor
 
 [Human White Knight Pants]
-#ID = 
+ID = 707
 Type = 0
 Level = 197
 Race = 3
@@ -1660,7 +1660,7 @@ Price = 140000
 Class = G_Armor
 
 [Teurus Pants]
-#ID = 
+ID = 631
 Type = 0
 Level = 229
 Race = 0
@@ -1674,7 +1674,7 @@ Price = 164400
 Class = G_Armor
 
 [Star Soul Pants]
-#ID = 
+ID = 632
 Type = 0
 Level = 229
 Race = 1
@@ -1688,7 +1688,7 @@ Price = 164400
 Class = G_Armor
 
 [Eagle Pants]
-#ID = 
+ID = 879
 Type = 0
 Level = 229
 Race = 2
@@ -1702,7 +1702,7 @@ Price = 164400
 Class = G_Armor
 
 [Fire Marine Pants]
-#ID = 
+ID = 633
 Type = 0
 Level = 229
 Race = 3
@@ -1730,7 +1730,7 @@ Price = 180000
 Class = G_Armor
 
 [Magma Pants]
-#ID = 
+ID = 888
 Type = 0
 Level = 259
 Race = 1
@@ -1744,7 +1744,7 @@ Price = 180000
 Class = G_Armor
 
 [Apollo Pants]
-#ID = 
+ID = 898
 Type = 0
 Level = 259
 Race = 2
@@ -1758,7 +1758,7 @@ Price = 180000
 Class = G_Armor
 
 [Salvation Pants]
-#ID = 
+ID = 889
 Type = 0
 Level = 259
 Race = 3
@@ -1968,7 +1968,7 @@ Price = 9260
 Class = G_Armor
 
 [Pahwang Boots]
-#ID = 
+ID = 371
 Type = 0
 Level = 97
 Race = 0
@@ -1981,7 +1981,7 @@ Price = 12850
 Class = G_Armor
 
 [Marsh Shoes]
-#ID = 
+ID = 376
 Type = 0
 Level = 97
 Race = 1
@@ -1993,8 +1993,8 @@ SizeY = 2
 Price = 13200
 Class = G_Armor
 
-[Hope Boots]
-#ID = 
+[Hope Shoes]
+ID = 429
 Type = 0
 Level = 97
 Race = 2
@@ -2006,8 +2006,8 @@ SizeY = 2
 Price = 9370
 Class = G_Armor
 
-[Infantary Boots]
-#ID = 
+[Infantry Boots]
+ID = 381
 Type = 0
 Level = 97
 Race = 3
@@ -2020,7 +2020,7 @@ Price = 13030
 Class = G_Armor
 
 [Power Metal Boots]
-#ID = 
+ID = 372
 Type = 0
 Level = 114
 Race = 0
@@ -2033,7 +2033,7 @@ Price = 17390
 Class = G_Armor
 
 [Flame Shoes]
-#ID = 
+ID = 377
 Type = 0
 Level = 114
 Race = 1
@@ -2046,7 +2046,7 @@ Price = 17400
 Class = G_Armor
 
 [Passion Shoes]
-#ID = 
+ID = 430
 Type = 0
 Level = 114
 Race = 2
@@ -2058,8 +2058,8 @@ SizeY = 2
 Price = 12160
 Class = G_Armor
 
-[Heavy Infantary Boots]
-#ID = 
+[Heavy Infantry Boots]
+ID = 382
 Type = 0
 Level = 114
 Race = 3
@@ -2072,7 +2072,7 @@ Price = 17410
 Class = G_Armor
 
 [Black Knight Boots]
-#ID = 
+ID = 249
 Type = 0
 Level = 124
 Race = -1
@@ -2085,7 +2085,7 @@ Price = 22180
 Class = G_Armor
 
 [Blood Boots]
-#ID = 
+ID = 484
 Type = 0
 Level = 143
 Race = 0
@@ -2098,7 +2098,7 @@ Price = 36500
 Class = G_Armor
 
 [Blizzard Shoes]
-#ID = 
+ID = 485
 Type = 0
 Level = 143
 Race = 1
@@ -2111,7 +2111,7 @@ Price = 36500
 Class = G_Armor
 
 [Shadow Boots]
-#ID = 
+ID = 715
 Type = 0
 Level = 143
 Race = 2
@@ -2124,7 +2124,7 @@ Price = 36500
 Class = G_Armor
 
 [Bionic Boots]
-#ID = 
+ID = 486
 Type = 0
 Level = 143
 Race = 3
@@ -2137,7 +2137,7 @@ Price = 36500
 Class = G_Armor
 
 [Duke Shoes]
-#ID = 
+ID = 507
 Type = 0
 Level = 162
 Race = 0
@@ -2150,7 +2150,7 @@ Price = 46200
 Class = G_Armor
 
 [Spell Shoes]
-#ID = 
+ID = 508
 Type = 0
 Level = 162
 Race = 1
@@ -2163,7 +2163,7 @@ Price = 65790
 Class = G_Armor
 
 [Leopard Boots]
-#ID = 
+ID = 859
 Type = 0
 Level = 162
 Race = 2
@@ -2176,7 +2176,7 @@ Price = 46200
 Class = G_Armor
 
 [Aquamarine Boots]
-#ID = 
+ID = 509
 Type = 0
 Level = 162
 Race = 3
@@ -2189,7 +2189,7 @@ Price = 78040
 Class = G_Armor
 
 [Bulkan White Knight Boots]
-#ID = 
+ID = 708
 Type = 0
 Level = 190
 Race = 0
@@ -2203,7 +2203,7 @@ Price = 50600
 Class = G_Armor
 
 [Kailipton White Knight Boots]
-#ID = 
+ID = 709
 Type = 0
 Level = 190
 Race = 1
@@ -2217,7 +2217,7 @@ Price = 50600
 Class = G_Armor
 
 [Aidia White Knight Boots]
-#ID = 
+ID = 710
 Type = 0
 Level = 190
 Race = 2
@@ -2231,7 +2231,7 @@ Price = 50600
 Class = G_Armor
 
 [Human White Knight Boots]
-#ID = 
+ID = 711
 Type = 0
 Level = 190
 Race = 3
@@ -2245,7 +2245,7 @@ Price = 80000
 Class = G_Armor
 
 [Teurus Boots]
-#ID = 
+ID = 634
 Type = 0
 Level = 221
 Race = 0
@@ -2259,7 +2259,7 @@ Price = 93500
 Class = G_Armor
 
 [Star Soul Boots]
-#ID = 
+ID = 635
 Type = 0
 Level = 221
 Race = 1
@@ -2273,7 +2273,7 @@ Price = 93500
 Class = G_Armor
 
 [Eagle Boots]
-#ID = 
+ID = 880
 Type = 0
 Level = 221
 Race = 2
@@ -2287,7 +2287,7 @@ Price = 93500
 Class = G_Armor
 
 [Fire Marine Boots]
-#ID = 
+ID = 636
 Type = 0
 Level = 221
 Race = 3
@@ -2315,7 +2315,7 @@ Price = 102000
 Class = G_Armor
 
 [Magma Boots]
-#ID = 
+ID = 891
 Type = 0
 Level = 252
 Race = 1
@@ -2329,7 +2329,7 @@ Price = 102000
 Class = G_Armor
 
 [Apollo Boots]
-#ID = 
+ID = 899
 Type = 0
 Level = 252
 Race = 2
@@ -2343,7 +2343,7 @@ Price = 102000
 Class = G_Armor
 
 [Salvation Boots]
-#ID = 
+ID = 892
 Type = 0
 Level = 252
 Race = 3
@@ -2578,7 +2578,7 @@ Price = 16630
 Class = G_GunWeapon
 
 [Pascal Rifle]
-#ID = 
+ID = 306
 Type = 1
 Level = 94
 #Race = 
@@ -2596,7 +2596,7 @@ Price = 20490
 Class = G_GunWeapon
 
 [M-99 Gun]
-#ID = 
+ID = 407
 Type = 1
 Level = 106
 #Race = 
@@ -2614,7 +2614,7 @@ Price = 25650
 Class = G_GunWeapon
 
 [Xylo Gun]
-#ID = 
+ID = 408
 Type = 1
 Level = 120
 #Race = 
@@ -2632,7 +2632,7 @@ Price = 32400
 Class = G_GunWeapon
 
 [Sigma Rifle]
-#ID = 
+ID = 409
 Type = 1
 Level = 134
 #Race = 
@@ -2650,7 +2650,7 @@ Price = 39930
 Class = G_GunWeapon
 
 [Crypto Rifle]
-#ID = 
+ID = 410
 Type = 1
 Level = 148
 #Race = 
@@ -2668,7 +2668,7 @@ Price = 48250
 Class = G_GunWeapon
 
 [Tornado Rifle]
-#ID = 
+ID = 474
 Type = 1
 Level = 175
 #Race = 
@@ -2965,7 +2965,7 @@ Price = 15910
 Class = G_Sword
 
 [Saber]
-#ID = 
+ID = 250
 Type = 2
 Level = 95
 #Race = 
@@ -2981,7 +2981,7 @@ Price = 20900
 Class = G_Sword
 
 [Oriental Sword]
-#ID = 
+ID = 251
 Type = 2
 Level = 107
 #Race = 
@@ -2997,7 +2997,7 @@ Price = 26110
 Class = G_Sword
 
 [Warrior Sword]
-#ID = 
+ID = 252
 Type = 2
 Level = 120
 #Race = 
@@ -3013,7 +3013,7 @@ Price = 32400
 Class = G_Sword
 
 [Karma Blade]
-#ID = 
+ID = 253
 Type = 2
 Level = 135
 #Race = 
@@ -3029,7 +3029,7 @@ Price = 40500
 Class = G_Sword
 
 [Explusion]
-#ID = 
+ID = 254
 Type = 2
 Level = 150
 #Race = 
@@ -3045,7 +3045,7 @@ Price = 49500
 Class = G_Sword
 
 [Cyclone Blade]
-#ID = 
+ID = 471
 Type = 2
 Level = 180
 #Race = 
@@ -3318,7 +3318,7 @@ Price = 1450
 Class = G_Axe
 
 [Triple Horn Axe]
-#ID = 
+ID = 255
 Type = 3
 Level = 92
 #Race = 
@@ -3334,7 +3334,7 @@ Price = 19690
 Class = G_Axe
 
 [Heavy Axe]
-#ID = 
+ID = 256
 Type = 3
 Level = 105
 #Race = 
@@ -3350,7 +3350,7 @@ Price = 25200
 Class = G_Axe
 
 [Lion Axe]
-#ID = 
+ID = 257
 Type = 3
 Level = 120
 #Race = 
@@ -3366,7 +3366,7 @@ Price = 32400
 Class = G_Axe
 
 [Battle Axe]
-#ID = 
+ID = 258
 Type = 3
 Level = 135
 #Race = 
@@ -3382,7 +3382,7 @@ Price = 40500
 Class = G_Axe
 
 [Vampire Axe]
-#ID = 
+ID = 259
 Type = 3
 Level = 150
 #Race = 
@@ -3398,7 +3398,7 @@ Price = 49500
 Class = G_Axe
 
 [Scream Axe]
-#ID = 
+ID = 472
 Type = 3
 Level = 180
 #Race = 
@@ -3607,7 +3607,7 @@ Price = 15600
 Class = G_RingWeapon
 
 [Neosnake Ring]
-#ID = 
+ID = 547
 Type = 4
 Level = 94
 Race = 2
@@ -3625,7 +3625,7 @@ Price = 18690
 Class = G_RingWeapon
 
 [Kaizen Ring]
-#ID = 
+ID = 548
 Type = 4
 Level = 115
 Race = 2
@@ -3643,7 +3643,7 @@ Price = 30050
 Class = G_RingWeapon
 
 [Phoenix Ring]
-#ID = 
+ID = 860
 Type = 4
 Level = 150
 Race = 2
@@ -3661,7 +3661,7 @@ Price = 42800
 Class = G_RingWeapon
 
 [Griffon Ring]
-#ID = 
+ID = 929
 Type = 4
 Level = 180
 Race = 2
@@ -3697,7 +3697,7 @@ Price = 50000
 Class = G_RingWeapon
 
 [Dragon Ring]
-#ID = 
+ID = 930
 Type = 4
 Level = 210
 Race = 2
@@ -3950,7 +3950,7 @@ Price = 17000
 Class = G_StaffWeapon
 
 [Ancient Staff]
-#ID = 
+ID = 293
 Type = 5
 Level = 97
 #Race = 
@@ -3968,7 +3968,7 @@ Price = 21730
 Class = G_StaffWeapon
 
 [Sharp Staff]
-#ID = 
+ID = 292
 Type = 5
 Level = 115
 #Race = 
@@ -3986,7 +3986,7 @@ Price = 29900
 Class = G_StaffWeapon
 
 [Golden Jade Staff]
-#ID = 
+ID = 294
 Type = 5
 Level = 130
 #Race = 
@@ -4004,7 +4004,7 @@ Price = 37700
 Class = G_StaffWeapon
 
 [Ring Staff]
-#ID = 
+ID = 295
 Type = 5
 Level = 145
 #Race = 
@@ -4022,7 +4022,7 @@ Price = 46400
 Class = G_StaffWeapon
 
 [Mighty Staff]
-#ID = 
+ID = 296
 Type = 5
 Level = 160
 #Race = 
@@ -4040,7 +4040,7 @@ Price = 56000
 Class = G_StaffWeapon
 
 [Falcon Staff]
-#ID = 
+ID = 473
 Type = 5
 Level = 180
 #Race = 
@@ -4136,13 +4136,13 @@ Price = 100000
 Class = G_HeavyWeapon
 
 [Charging Cannon]
-#ID = 
+ID = 740
 Type = 6
 SkillLevel = 1
 Race = 3
 MinDmg = 100
 MaxDmg = 120
-#EeUsed = 
+EeUsed = 11
 Speed = 2
 ReqStr = 50
 ReqDex = 100
@@ -4155,13 +4155,13 @@ Price = 150000
 Class = G_HeavyWeapon
 
 [Flame Thrower]
-#ID = 
+ID = 741
 Type = 6
 SkillLevel = 2
 Race = 3
 MinDmg = 200
 MaxDmg = 200
-#EeUsed = 
+EeUsed = 8
 Speed = 2
 ReqStr = 50
 ReqDex = 100
@@ -4174,13 +4174,13 @@ Price = 150000
 Class = G_HeavyWeapon
 
 [Laser Weapon]
-#ID = 
+ID = 742
 Type = 6
 SkillLevel = 2
 Race = 3
 MinDmg = 100
 MaxDmg = 250
-#EeUsed = 
+EeUsed = 6
 Speed = 2
 ReqStr = 50
 ReqDex = 100
@@ -4193,13 +4193,13 @@ Price = 150000
 Class = G_HeavyWeapon
 
 [Mine Layer]
-#ID = 
+ID = 743
 Type = 6
 SkillLevel = 3
 Race = 3
-MinDmg = 0
-MaxDmg = 0
-#EeUsed = 
+MinDmg = 150
+MaxDmg = 200
+EeUsed = 100
 Speed = 2
 ReqStr = 50
 ReqDex = 100
@@ -4212,13 +4212,13 @@ Price = 150000
 Class = G_HeavyWeapon
 
 [Rocket Gun]
-#ID = 
+ID = 744
 Type = 6
 SkillLevel = 3
 Race = 3
 MinDmg = 300
 MaxDmg = 350
-#EeUsed = 
+EeUsed = 100
 Speed = 2
 ReqStr = 50
 ReqDex = 100
@@ -4231,13 +4231,13 @@ Price = 150000
 Class = G_HeavyWeapon
 
 [Charging Cannon-MK1_1]
-#ID = 
+ID = 745
 Type = 6
 SkillLevel = 4
 Race = 3
 MinDmg = 160
 MaxDmg = 180
-#EeUsed = 
+EeUsed = 10
 Speed = 2
 ReqStr = 50
 ReqDex = 100
@@ -4250,13 +4250,13 @@ Price = 250000
 Class = G_HeavyWeapon
 
 [Flame Thrower-MK1]
-#ID = 
+ID = 746
 Type = 6
 SkillLevel = 5
 Race = 3
 MinDmg = 330
 MaxDmg = 330
-#EeUsed = 
+EeUsed = 12
 Speed = 2
 ReqStr = 50
 ReqDex = 100
@@ -4269,13 +4269,13 @@ Price = 250000
 Class = G_HeavyWeapon
 
 [Laser Weapon-MK1]
-#ID = 
+ID = 747
 Type = 6
 SkillLevel = 5
 Race = 3
 MinDmg = 200
 MaxDmg = 300
-#EeUsed = 
+EeUsed = 8
 Speed = 2
 ReqStr = 50
 ReqDex = 100
@@ -4288,13 +4288,13 @@ Price = 250000
 Class = G_HeavyWeapon
 
 [Charging Cannon-MK1_2]
-#ID = 
+ID = 950
 Type = 6
 SkillLevel = 5
 Race = 3
 MinDmg = 180
 MaxDmg = 200
-#EeUsed = 
+#EeUsed = 11
 Speed = 2
 ReqStr = 50
 ReqDex = 100
@@ -4307,13 +4307,13 @@ Price = 270000
 Class = G_HeavyWeapon
 
 [Charging Cannon-MK2_1]
-#ID = 
+ID = 951
 Type = 6
 SkillLevel = 5
 Race = 3
 MinDmg = 180
 MaxDmg = 200
-#EeUsed = 
+EeUsed = 11
 Speed = 2
 ReqStr = 50
 ReqDex = 100
@@ -4326,13 +4326,13 @@ Price = 270000
 Class = G_HeavyWeapon
 
 [Flame Thrower-MK1 BP]
-#ID = 
+ID = 952
 Type = 6
 SkillLevel = 5
 Race = 3
 MinDmg = 360
 MaxDmg = 360
-#EeUsed = 
+EeUsed = 13
 Speed = 2
 ReqStr = 50
 ReqDex = 100
@@ -4345,13 +4345,13 @@ Price = 270000
 Class = G_HeavyWeapon
 
 [Flame Thrower-MK2 SP]
-#ID = 
+ID = 953
 Type = 6
 SkillLevel = 5
 Race = 3
 MinDmg = 360
 MaxDmg = 360
-#EeUsed = 
+EeUsed = 13
 Speed = 2
 ReqStr = 50
 ReqDex = 100
@@ -4364,13 +4364,13 @@ Price = 270000
 Class = G_HeavyWeapon
 
 [Mine Layer-MK1]
-#ID = 
+ID = 748
 Type = 6
 SkillLevel = 6
 Race = 3
-MinDmg = 0
-MaxDmg = 0
-#EeUsed = 
+MinDmg = 300
+MaxDmg = 350
+EeUsed = 75
 Speed = 2
 ReqStr = 50
 ReqDex = 100
@@ -4383,13 +4383,13 @@ Price = 250000
 Class = G_HeavyWeapon
 
 [Rocket Gun-MK1]
-#ID = 
+ID = 749
 Type = 6
 SkillLevel = 6
 Race = 3
 MinDmg = 400
 MaxDmg = 450
-#EeUsed = 
+EeUsed = 130
 Speed = 2
 ReqStr = 50
 ReqDex = 100
@@ -4402,13 +4402,13 @@ Price = 250000
 Class = G_HeavyWeapon
 
 [Laser Weapon-MK1 BP]
-#ID = 
+ID = 954
 Type = 6
 SkillLevel = 6
 Race = 3
 MinDmg = 240
 MaxDmg = 330
-#EeUsed = 
+EeUsed = 9
 Speed = 2
 ReqStr = 50
 ReqDex = 100
@@ -4421,13 +4421,13 @@ Price = 270000
 Class = G_HeavyWeapon
 
 [Laser Weapon-MK2 SP]
-#ID = 
+ID = 955
 Type = 6
 SkillLevel = 6
 Race = 3
 MinDmg = 240
 MaxDmg = 330
-#EeUsed = 
+EeUsed = 9
 Speed = 2
 ReqStr = 50
 ReqDex = 100
@@ -4440,13 +4440,13 @@ Price = 270000
 Class = G_HeavyWeapon
 
 [Charging Cannon-MK2_2]
-#ID = 
+ID = 750
 Type = 6
 SkillLevel = 7
 Race = 3
 MinDmg = 210
 MaxDmg = 230
-#EeUsed = 
+EeUsed = 14
 Speed = 2
 ReqStr = 50
 ReqDex = 100
@@ -4459,13 +4459,13 @@ Price = 400000
 Class = G_HeavyWeapon
 
 [Flame Thrower-MK2]
-#ID = 
+ID = 751
 Type = 6
 SkillLevel = 8
 Race = 3
 MinDmg = 440
 MaxDmg = 440
-#EeUsed = 
+EeUsed = 17
 Speed = 2
 ReqStr = 50
 ReqDex = 100
@@ -4478,13 +4478,13 @@ Price = 400000
 Class = G_HeavyWeapon
 
 [Laser Weapon-MK2]
-#ID = 
+ID = 752
 Type = 6
 SkillLevel = 8
 Race = 3
 MinDmg = 330
 MaxDmg = 400
-#EeUsed = 
+EeUsed = 12
 Speed = 2
 ReqStr = 50
 ReqDex = 100
@@ -4497,13 +4497,13 @@ Price = 400000
 Class = G_HeavyWeapon
 
 [Mine Layer-MK2]
-#ID = 
+ID = 753
 Type = 6
 SkillLevel = 9
 Race = 3
-MinDmg = 0
-MaxDmg = 0
-#EeUsed = 
+MinDmg = 700
+MaxDmg = 750
+EeUsed = 120
 Speed = 2
 ReqStr = 50
 ReqDex = 100
@@ -4516,13 +4516,13 @@ Price = 400000
 Class = G_HeavyWeapon
 
 [Rocket Gun-MK2]
-#ID = 
+ID = 754
 Type = 6
 SkillLevel = 9
 Race = 3
 MinDmg = 500
 MaxDmg = 550
-#EeUsed = 
+EeUsed = 170
 Speed = 2
 ReqStr = 50
 ReqDex = 100
@@ -4536,13 +4536,13 @@ Class = G_HeavyWeapon
 
 ###### SLAYERS ######
 [Slayer]
-#ID = 
+ID = 724
 Type = 7
 SkillLevel = 3
 Race = 0
 MinDmg = 200
 MaxDmg = 250
-#StmUsed = 
+StmUsed = 60
 Speed = 4
 ReqStr = 100
 Durability = 3000
@@ -4555,13 +4555,13 @@ Price = 70000
 Class = G_SlayerWeapon
 
 [Demolition]
-#ID = 
+ID = 725
 Type = 7
 SkillLevel = 5
 Race = 0
 MinDmg = 170
 MaxDmg = 220
-#StmUsed = 
+StmUsed = 60
 Speed = 4
 ReqStr = 100
 Durability = 2500
@@ -4574,13 +4574,13 @@ Price = 70000
 Class = G_SlayerWeapon
 
 [Heavy Slayer]
-#ID = 
+ID = 726
 Type = 7
 SkillLevel = 14
 Race = 0
 MinDmg = 250
 MaxDmg = 300
-#StmUsed = 
+StmUsed = 70
 Speed = 4
 ReqStr = 100
 Durability = 4500
@@ -4593,13 +4593,13 @@ Price = 120000
 Class = G_SlayerWeapon
 
 [Heavy Demolition]
-#ID = 
+ID = 727
 Type = 7
 SkillLevel = 16
 Race = 0
 MinDmg = 220
 MaxDmg = 270
-#StmUsed = 
+StmUsed = 70
 Speed = 4
 ReqStr = 100
 Durability = 3000
@@ -4612,13 +4612,13 @@ Price = 120000
 Class = G_SlayerWeapon
 
 [Mammoth Slayer]
-#ID = 
+ID = 947
 Type = 7
 SkillLevel = 17
 Race = 0
 MinDmg = 280
 MaxDmg = 320
-#StmUsed = 
+StmUsed = 75
 Speed = 4
 ReqStr = 100
 Durability = 4900
@@ -4631,13 +4631,13 @@ Price = 150000
 Class = G_SlayerWeapon
 
 [Mammoth Demolition]
-#ID = 
+ID = 948
 Type = 7
 SkillLevel = 19
 Race = 0
 MinDmg = 240
 MaxDmg = 290
-#StmUsed = 
+StmUsed = 75
 Speed = 4
 ReqStr = 100
 Durability = 3200
@@ -4656,7 +4656,7 @@ SkillLevel = 20
 Race = 0
 MinDmg = 300
 MaxDmg = 350
-#StmUsed = 
+StmUsed = 85
 Speed = 4
 ReqStr = 100
 Durability = 5500
@@ -4669,13 +4669,13 @@ Price = 200000
 Class = G_SlayerWeapon
 
 [Power Demolition]
-#ID = 
+ID = 729
 Type = 7
 SkillLevel = 22
 Race = 0
 MinDmg = 270
 MaxDmg = 320
-#StmUsed = 
+StmUsed = 85
 Speed = 4
 ReqStr = 100
 Durability = 3500
@@ -4689,7 +4689,7 @@ Class = G_SlayerWeapon
 
 ##### CHAKURAMS #####
 [Chakuram]
-#ID = 
+ID = 693
 Type = 8
 SkillLevel = 1
 Race = 0
@@ -4709,7 +4709,7 @@ Price = 70000
 Class = G_ChakuranWeapon
 
 [Chakuram Petrifaction]
-#ID = 
+ID = 731
 Type = 8
 SkillLevel = 2
 Race = 0
@@ -4729,7 +4729,7 @@ Price = 70000
 Class = G_ChakuranWeapon
 
 [Chakuram Paralysis]
-#ID = 
+ID = 732
 Type = 8
 SkillLevel = 5
 Race = 0
@@ -4749,7 +4749,7 @@ Price = 70000
 Class = G_ChakuranWeapon
 
 [Heavy Chakuram Petrifaction]
-#ID = 
+ID = 733
 Type = 8
 SkillLevel = 8
 Race = 0
@@ -4769,7 +4769,7 @@ Price = 120000
 Class = G_ChakuranWeapon
 
 [Heavy Chakuram Paralysis]
-#ID = 
+ID = 735
 Type = 8
 SkillLevel = 15
 Race = 0
@@ -4789,7 +4789,7 @@ Price = 120000
 Class = G_ChakuranWeapon
 
 [Power Chakuram Petrifaction]
-#ID = 
+ID = 734
 Type = 8
 SkillLevel = 20
 Race = 0
@@ -4809,7 +4809,7 @@ Price = 200000
 Class = G_ChakuranWeapon
 
 [Power Chakuram Paralysis]
-#ID = 
+ID = 736
 Type = 8
 SkillLevel = 22
 Race = 0
@@ -4829,7 +4829,7 @@ Price = 200000
 Class = G_ChakuranWeapon
 
 [Magic Chakuram]
-#ID = 
+ID = 737
 Type = 8
 SkillLevel = 23
 Race = 0
@@ -4850,7 +4850,7 @@ Class = G_ChakuranWeapon
 
 ####### WANDS #######
 [Magic Arrow Wand]
-#ID = 
+ID = 768
 Type = 9
 SkillLevel = 1
 Race = 1
@@ -4858,7 +4858,7 @@ MinDmg = 200
 MaxDmg = 250
 MagicPower = 1		# value in %
 MagicSpeed = 150	# value in %
-#ManaUsed = 
+ManaUsed = 25
 Speed = 1
 ReqInt = 100
 AccumulatedDmg = 1000
@@ -4871,7 +4871,7 @@ Price = 10000
 Class = G_WandWeapon
 
 [Magic Bullet Wand]
-#ID = 
+ID = 769
 Type = 9
 SkillLevel = 1
 Race = 1
@@ -4879,7 +4879,7 @@ MinDmg = 280
 MaxDmg = 320
 MagicPower = 0		# value in %
 MagicSpeed = 100	# value in %
-#ManaUsed = 
+ManaUsed = 35
 Speed = 1
 ReqInt = 100
 MagicDmg = 20		# value in %
@@ -4891,7 +4891,7 @@ Price = 10000
 Class = G_WandWeapon
 
 [Chain Lightning Wand]
-#ID = 
+ID = 770
 Type = 9
 SkillLevel = 2
 Race = 1
@@ -4899,7 +4899,7 @@ MinDmg = 330
 MaxDmg = 370
 MagicPower = 1		# value in %
 MagicSpeed = 100	# value in %
-#ManaUsed = 
+ManaUsed = 50
 Speed = 1
 ReqInt = 100
 AccumulatedDmg = 2000
@@ -4912,7 +4912,7 @@ Price = 20000
 Class = G_WandWeapon
 
 [Meteorite Wand]
-#ID = 
+ID = 771
 Type = 9
 SkillLevel = 2
 Race = 1
@@ -4920,7 +4920,7 @@ MinDmg = 450
 MaxDmg = 500
 MagicPower = 0		# value in %
 MagicSpeed = 70		# value in %
-#ManaUsed = 
+ManaUsed = 65
 Speed = 2
 ReqInt = 100
 MagicDmg = 20		# value in %
@@ -4932,7 +4932,7 @@ Price = 20000
 Class = G_WandWeapon
 
 [Magic Sword Wand_1]
-#ID = 
+ID = 949
 Type = 9
 SkillLevel = 2
 Race = 1
@@ -4940,7 +4940,7 @@ MinDmg = 370
 MaxDmg = 420
 MagicPower = 1		# value in %
 MagicSpeed = 40		# value in %
-#ManaUsed = 
+ManaUsed = 70
 Speed = 1
 ReqInt = 100
 AccumulatedDmg = 2500
@@ -4953,7 +4953,7 @@ Price = 25000
 Class = G_WandWeapon
 
 [Blizzard Wand]
-#ID = 
+ID = 772
 Type = 9
 SkillLevel = 3
 Race = 1
@@ -4961,7 +4961,7 @@ MinDmg = 550
 MaxDmg = 600
 MagicPower = 2		# value in %
 MagicSpeed = 60		# value in %
-#ManaUsed = 
+ManaUsed = 80
 Speed = 2
 ReqInt = 100
 Cold = 80		# value in %
@@ -4974,7 +4974,7 @@ Price = 30000
 Class = G_WandWeapon
 
 [Magic Sword Wand_2]
-#ID = 
+ID = 773
 Type = 9
 SkillLevel = 3
 Race = 1
@@ -4982,7 +4982,7 @@ MinDmg = 450
 MaxDmg = 500
 MagicPower = 0		# value in %
 MagicSpeed = 150	# value in %
-#ManaUsed = 
+ManaUsed = 10
 Speed = 0
 ReqInt = 100
 MagicDmg = 20		# value in %
@@ -4993,8 +4993,8 @@ SizeY = 3
 Price = 30000
 Class = G_WandWeapon
 
-[Confusion Storm Wand]
-#ID = 
+[Confusing Storm Wand]
+ID = 774
 Type = 9
 SkillLevel = 4
 Race = 1
@@ -5002,7 +5002,7 @@ MinDmg = 750
 MaxDmg = 800
 MagicPower = 3		# value in %
 MagicSpeed = 40		# value in %
-#ManaUsed = 
+ManaUsed = 150
 Speed = 3
 ReqInt = 100
 Chaos = 100		# value in %
@@ -5311,7 +5311,7 @@ Price = 30000
 Class = G_Mantle
 
 [Blizzard Cloak]
-#ID = 
+ID = 912
 Type = 11
 Level = 152
 Race = 1
@@ -5327,7 +5327,7 @@ Price = 45000
 Class = G_Mantle
 
 [White Knight Cloak]
-#ID = 
+ID = 913
 Type = 11
 Level = 200
 #Race = 
@@ -5587,28 +5587,28 @@ Class = G_Wing
 ###### Necklaces ######
 #######################
 
-[Vitality Amulet]
-#ID = 
+[Life Amulet]
+ID = 445
 Type = 13
-#Level = 
-#Def = 
-#ReqStr = 
+Level = 1
+Def = 1
+ReqStr = 1
 Position = 6
 SizeX = 1
 SizeY = 1
-#Price = 
+Price = 1000
 Class = G_Necklace
 
-[Mana Amulet]
-#ID = 
+[Magic Amulet]
+ID = 446
 Type = 13
-#Level = 
-#Def = 
-#ReqStr = 
+Level = 1
+Def = 1
+ReqStr = 1
 Position = 6
 SizeX = 1
 SizeY = 1
-#Price = 
+Price = 1000
 Class = G_Necklace
 
 [Stamina Amulet]
@@ -5624,15 +5624,15 @@ Price = 1000
 Class = G_Necklace
 
 [Electric Amulet]
-#ID = 
+ID = 448
 Type = 13
-#Level = 
-#Def = 
-#ReqStr = 
+Level = 1
+Def = 1
+ReqStr = 1
 Position = 6
 SizeX = 1
 SizeY = 1
-#Price = 
+Price = 1000
 Class = G_Necklace
 
 
@@ -5641,7 +5641,7 @@ Class = G_Necklace
 ########################
 
 [Bracelet Of Alchemist]
-#ID = 
+ID = 455
 Type = 14
 #Level = 
 #Def = 
@@ -5766,7 +5766,7 @@ SizeY = 1
 Price = 1200
 Class = G_MagicStone
 
-[Sylph Magic Stone]
+[Syloph Magic Stone]
 ID = 553
 Type = 16
 ReqStr = 5
@@ -5802,7 +5802,7 @@ SizeY = 1
 Price = 1200
 Class = G_MagicStone
 
-[Sylph Magic Stone Refiner]
+[Syloph Magic Stone Refiner]
 ID = 558
 Type = 16
 ReqStr = 5
@@ -5873,16 +5873,16 @@ Price = 600
 Class = G_StoneOfCalling
 
 [Super White Tiger Summon Stone]
-#ID = 
+ID = 862
 Type = 18
 Race = 2
-#ReqInt = 
+ReqInt = 100
 SkillLevel = 2
 AtkPower = 80
 Time = 1000	# seconds
 SizeX = 1
 SizeY = 1
-#Price = 
+Price = 1000
 Class = G_StoneOfCalling
 
 [Chmero Summon Stone]
@@ -5899,120 +5899,120 @@ Price = 1500
 Class = G_StoneOfCalling
 
 [Super Chmero Summon Stone]
-#ID = 
+ID = 809
 Type = 18
 Race = 2
-#ReqInt = 
+ReqInt = 100
 SkillLevel = 4
 AtkPower = 100
 Time = 1000	# seconds
 SizeX = 1
 SizeY = 1
-#Price = 
+Price = 2000
 Class = G_StoneOfCalling
 
 [Devil Summon Stone]
-#ID = 
+ID = 812
 Type = 18
 Race = 2
-#ReqInt = 
+ReqInt = 100
 SkillLevel = 5
 AtkPower = 300
 Time = 300	# seconds
 SizeX = 1
 SizeY = 1
-#Price = 
+Price = 5500
 Class = G_StoneOfCalling
 
 [Super Devil Summon Stone]
-#ID = 
+ID = 813
 Type = 18
 Race = 2
-#ReqInt = 
+ReqInt = 100
 SkillLevel = 6
 AtkPower = 300
 Time = 1000	# seconds
 SizeX = 1
 SizeY = 1
-#Price = 
+Price = 7000
 Class = G_StoneOfCalling
 
 [Jackal Summon Stone]
-#ID = 
+ID = 810
 Type = 18
 Race = 2
-#ReqInt = 
+ReqInt = 100
 SkillLevel = 7
 AtkPower = 500
 Time = 1200	# seconds
 SizeX = 1
 SizeY = 1
-#Price = 
+Price = 40000
 Class = G_StoneOfCalling
 
 [Super Jackal Summon Stone]
-#ID = 
+ID = 811
 Type = 18
 Race = 2
-#ReqInt = 
+ReqInt = 100
 SkillLevel = 8
 AtkPower = 500
 Time = 1300	# seconds
 SizeX = 1
 SizeY = 1
-#Price = 
+Price = 50000
 Class = G_StoneOfCalling
 
 [Shadow Summon Stone]
-#ID = 
+ID = 815
 Type = 18
 Race = 2
-#ReqInt = 
+ReqInt = 100
 SkillLevel = 9
 AtkPower = 900
 Time = 3000	# seconds
 SizeX = 1
 SizeY = 1
-#Price = 
+Price = 105000
 Class = G_StoneOfCalling
 
 [Super Shadow Summon Stone]
-#ID = 
+ID = 814
 Type = 18
 Race = 2
-#ReqInt = 
+ReqInt = 100
 SkillLevel = 10
 AtkPower = 900
 Time = 3500	# seconds
 SizeX = 1
 SizeY = 1
-#Price = 
+Price = 130000
 Class = G_StoneOfCalling
 
 [Dra Summon Stone]
-#ID = 
+ID = 816
 Type = 18
 Race = 2
-#ReqInt = 
+ReqInt = 100
 SkillLevel = 11
 AtkPower = 800
 Time = 3000	# seconds
 SizeX = 1
 SizeY = 1
-#Price = 
+Price = 512000
 Class = G_StoneOfCalling
 
 [Super Dra Summon Stone]
-#ID = 
+ID = 817
 Type = 18
 Race = 2
-#ReqInt = 
+ReqInt = 100
 SkillLevel = 12
 AtkPower = 800
 Time = 3500	# seconds
 SizeX = 1
 SizeY = 1
-#Price = 
+Price = 565000
 Class = G_StoneOfCalling
 
 #########################
@@ -6793,21 +6793,21 @@ Class = G_Potion
 ########################
 
 [Boldin Castle North Gate Warp Device]
-#ID = 
+ID = 611
 Type = 21
-#ReqStr = 
+ReqStr = 2
 SizeX = 1
 SizeY = 1
-#Price = 
+Price = 550
 Class = G_WarpGate
 
 [Boldin Castle South Gate Warp Device]
-#ID = 
+ID = 612
 Type = 21
-#ReqStr = 
+ReqStr = 2
 SizeX = 1
 SizeY = 1
-#Price = 
+Price = 550
 Class = G_WarpGate
 
 [Coliseum Warp Device]
@@ -6829,12 +6829,12 @@ SizeY = 1
 Class = G_WarpGate
 
 [Hidden Square Warp Device]
-#ID = 
+ID = 942
 Type = 21
-#ReqStr = 
+ReqStr = 2
 SizeX = 1
 SizeY = 1
-#Price = 
+Price = 300
 Class = G_WarpGate
 
 [Laglamia Square Warp Device]
@@ -6847,12 +6847,12 @@ Price = 47
 Class = G_WarpGate
 
 [Paros Warp Device]
-#ID = 
+ID = 944
 Type = 21
-#ReqStr = 
+ReqStr = 2
 SizeX = 1
 SizeY = 1
-#Price = 
+Price = 1000
 Class = G_WarpGate
 
 [Return Warp Device]
@@ -6865,12 +6865,12 @@ Price = 47
 Class = G_WarpGate
 
 [Time Lift Warp Device]
-#ID = 
+ID = 864
 Type = 21
-#ReqStr = 
+ReqStr = 2
 SizeX = 1
 SizeY = 1
-#Price = 
+Price = 500
 Class = G_WarpGate
 
 [Transporting To The Selected Area]
@@ -6976,7 +6976,7 @@ Price = 1600
 Class = G_Bullet
 
 [Mini Rocket]
-#ID = 
+ID = 765
 Type = 22
 Race = 3
 ChargingAmount = 1
@@ -7009,10 +7009,10 @@ Price = 300
 Class = G_AssemblingParts
 
 [Control Kit]
-#ID = 
+ID = 846
 Type = 23
 Race = 3
-#ReqStr = 
+ReqStr = 5
 SizeX = 1
 SizeY = 1
 Price = 500
@@ -7029,50 +7029,50 @@ Price = 50000
 Class = G_AssemblingParts
 
 [Cell Capsule]
-#ID = 
+ID = 848
 Type = 23
 Race = 3
-#ReqStr = 
+ReqStr = 5
 SizeX = 1
 SizeY = 1
 Price = 1000
 Class = G_AssemblingParts
 
 [Antibiotic Capsule]
-#ID = 
+ID = 849
 Type = 23
 Race = 3
-#ReqStr = 
+ReqStr = 5
 SizeX = 1
 SizeY = 1
 Price = 1200
 Class = G_AssemblingParts
 
 [Genetic Capsule]
-#ID = 
+ID = 850
 Type = 23
 Race = 3
-#ReqStr = 
+ReqStr = 5
 SizeX = 1
 SizeY = 1
 Price = 1500
 Class = G_AssemblingParts
 
 [Harpoon Capsule]
-#ID = 
+ID = 853
 Type = 23
 Race = 3
-#ReqStr = 
+ReqStr = 5
 SizeX = 1
 SizeY = 1
 Price = 2000
 Class = G_AssemblingParts
 
 [Khan Capsule]
-#ID = 
+ID = 854
 Type = 23
 Race = 3
-#ReqStr = 
+ReqStr = 5
 SizeX = 1
 SizeY = 1
 Price = 3000
@@ -7103,7 +7103,7 @@ Class = G_AssemblingParts
 ########################
 
 [Radar]
-#ID = 
+ID = 829
 Type = 24
 Race = -1
 #ReqStr = 
@@ -7114,7 +7114,7 @@ AssemblyLevel = 1
 Class = G_SmallEquipment
 
 [Hard Barrier Breaker]
-#ID = 
+ID = 830
 Type = 24
 Race = -1
 #ReqStr = 
@@ -7125,7 +7125,7 @@ AssemblyLevel = 1
 Class = G_SmallEquipment
 
 [Fuzzy Field Remover]
-#ID = 
+ID = 831
 Type = 24
 Race = -1
 #ReqStr = 
@@ -7136,7 +7136,7 @@ AssemblyLevel = 1
 Class = G_SmallEquipment
 
 [Volt Resistence Booster]
-#ID = 
+ID = 832
 Type = 24
 Race = -1
 #ReqStr = 
@@ -7147,7 +7147,7 @@ AssemblyLevel = 2
 Class = G_SmallEquipment
 
 [Volcanic Resistence Booster]
-#ID = 
+ID = 833
 Type = 24
 Race = -1
 #ReqStr = 
@@ -7158,7 +7158,7 @@ AssemblyLevel = 2
 Class = G_SmallEquipment
 
 [Petrifaction Resistance Booster]
-#ID = 
+ID = 834
 Type = 24
 Race = -1
 #ReqStr = 
@@ -7169,7 +7169,7 @@ AssemblyLevel = 2
 Class = G_SmallEquipment
 
 [Cold Resistence Booster]
-#ID = 
+ID = 835
 Type = 24
 Race = -1
 #ReqStr = 
@@ -7180,7 +7180,7 @@ AssemblyLevel = 2
 Class = G_SmallEquipment
 
 [Electric Shock]
-#ID = 
+ID = 836
 Type = 24
 Race = 3
 #ReqStr = 
@@ -7191,7 +7191,7 @@ AssemblyLevel = 3
 Class = G_SmallEquipment
 
 [Electric Power Saver]
-#ID = 
+ID = 837
 Type = 24
 Race = 3
 #ReqStr = 
@@ -7202,7 +7202,7 @@ AssemblyLevel = 5
 Class = G_SmallEquipment
 
 [Electric Power Amplifier]
-#ID = 
+ID = 838
 Type = 24
 Race = 3
 #ReqStr = 
@@ -7213,7 +7213,7 @@ AssemblyLevel = 7
 Class = G_SmallEquipment
 
 [Resistence Booster]
-#ID = 
+ID = 842
 Type = 24
 Race = -1
 #ReqStr = 
@@ -7224,7 +7224,7 @@ AssemblyLevel = 10
 Class = G_SmallEquipment
 
 [Space Controller]
-#ID = 
+ID = 841
 Type = 24
 Race = 3
 #ReqStr = 
@@ -7235,7 +7235,7 @@ AssemblyLevel = 10
 Class = G_SmallEquipment
 
 [Condition Changer]
-#ID = 
+ID = 844
 Type = 24
 Race = -1
 #ReqStr = 
@@ -7648,6 +7648,397 @@ SizeX = 1
 SizeY = 1
 Price = 500000
 Class = G_PetItem
+
+
+[Dragon Slayer]
+ID = 730
+Type = 7
+SkillLevel = 23
+Race = 0
+MinDmg = 480
+MaxDmg = 530
+StmUsed = 100
+Speed = 4
+ReqStr = 100
+Durability = 3000
+Demolition = 95 	# value in %
+MemoryDmg = 150		# value in %
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 10000000
+Class = G_SlayerWeapon
+
+[Rocket Cannon Launcher]
+ID = 755
+Type = 6
+SkillLevel = 10
+Race = 3
+MinDmg = 800
+MaxDmg = 850
+EeUsed = 200
+Speed = 2
+ReqStr = 50
+ReqDex = 100
+Ammunition = 30
+Slot = 2
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 10000000
+Class = G_HeavyWeapon
+
+[Mini Nuclear Launcher]
+ID = 756
+Type = 6
+SkillLevel = 10
+Race = 3
+MinDmg = 10000
+MaxDmg = 50000
+EeUsed = 700
+Speed = 0
+ReqStr = 75
+ReqDex = 200
+Ammunition = 100
+Slot = 0
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 10000000
+Class = G_HeavyWeapon
+
+[Slash Chakuram]
+ID = 738
+Type = 8
+SkillLevel = 24
+Race = 0
+MinDmg = 150
+MaxDmg = 350
+StmUsed = 0
+Speed = 2
+ReqStr = 100
+Durability = 1200
+Cold = 35		# value in %
+Stonization = 30	# value in %
+Position = 3
+Handed = 1
+SizeX = 2
+SizeY = 2
+Price = 7500000
+Class = G_ChakuranWeapon
+
+
+[Death Wave Wand]
+ID = 775
+Type = 9
+SkillLevel = 4
+Race = 1
+MinDmg = 2200
+MaxDmg = 2500
+MagicPower = 3		# value in %
+MagicSpeed = 40		# value in %
+ManaUsed = 700
+Speed = 4
+ReqInt = 100
+Chaos = 100		# value in %
+MagicDmg = 20		# value in %
+StaffDmg = 20		# value in %
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 50000
+Class = G_WandWeapon
+
+###########
+###QUEST###
+###########
+
+[Hercules Finger Ring]
+ID = 937
+Type = 15
+Level = 41 - 60
+ReqStr = 1
+Position = 8
+SizeX = 1
+SizeY = 1
+Price = 2000
+Class = G_Ring
+
+[Zeus Finger Ring]
+ID = 938
+Type = 15
+Level = 75 - 90
+ReqStr = 1
+Position = 8
+SizeX = 1
+SizeY = 1
+Price = 2000
+Class = G_Ring
+
+[Life Amulet Quest]
+ID = 939
+Type = 13
+Level = 26 - 40
+Def = 1
+ReqStr = 1
+Position = 6
+SizeX = 1
+SizeY = 1
+Price = 2000
+Class = G_Necklace
+
+[Stamina Amulet Quest]
+ID = 940
+Type = 13
+Level = 61 - 80
+Def = 1
+ReqStr = 1
+Position = 6
+SizeX = 1
+SizeY = 1
+Price = 2000
+Class = G_Necklace
+
+[Dekadun Bracelet]
+ID = 901
+Type = 14
+Level = 1
+Def = 1
+ReqStr = 1
+Position = 8
+SizeX = 1
+SizeY = 1
+Price = 1000
+Class = G_Bracelet
+
+#################################
+
+[Explorer Bracelet]
+ID = 456
+Type = 14
+Level = 1
+Def = 1
+ReqStr = 1
+Position = 8
+SizeX = 1
+SizeY = 1
+Price = 1000
+Class = G_Bracelet
+
+[Merchant Bracelet]
+ID = 457
+Type = 14
+Level = 1
+Def = 1
+ReqStr = 1
+Position = 8
+SizeX = 1
+SizeY = 1
+Price = 1000
+Class = G_Bracelet
+
+[Planner Bracelet]
+ID = 458
+Type = 14
+Level = 1
+Def = 1
+ReqStr = 1
+Position = 8
+SizeX = 1
+SizeY = 1
+Price = 1000
+Class = G_Bracelet
+
+[Salamander Magic Stone]
+ID = 554
+Type = 16
+ReqStr = 5
+SizeX = 1
+SizeY = 1
+Price = 1200
+Class = G_MagicStone
+
+[Airen Summon Stone]
+ID = 927
+Type = 18
+Race = 2
+ReqInt = 100
+SkillLevel = 11
+AtkPower = 900
+Time = 500	# seconds
+SizeX = 1
+SizeY = 1
+Price = 7200
+Class = G_StoneOfCalling
+
+[Greater Airen Summon Stone]
+ID = 928
+Type = 18
+Race = 2
+ReqInt = 100
+SkillLevel = 12
+AtkPower = 1000
+Time = 1000	# seconds
+SizeX = 1
+SizeY = 1
+Price = 15600
+Class = G_StoneOfCalling
+
+
+[BUF Agency Warp Device]
+ID = 173
+Type = 21
+ReqStr = 2
+SizeX = 1
+SizeY = 1
+Price = 50
+Class = G_WarpGate
+
+[KALLI Agency Warp Device]
+ID = 174
+Type = 21
+ReqStr = 2
+SizeX = 1
+SizeY = 1
+Price = 50
+Class = G_WarpGate
+
+[LostRealm Castle Warp Device]
+ID = 172
+Type = 21
+ReqStr = 2
+SizeX = 1
+SizeY = 1
+Price = 55
+Class = G_WarpGate
+
+[Underland Warp Device]
+ID = 863
+Type = 21
+ReqStr = 2
+SizeX = 1
+SizeY = 1
+Price = 650
+Class = G_WarpGate
+
+[Boldin Castle Warp Device]
+ID = 516
+Type = 21
+ReqStr = 2
+SizeX = 1
+SizeY = 1
+Price = 550
+Class = G_WarpGate
+
+[Niclear Missile]
+ID = 767
+Type = 22
+Race = 3
+ChargingAmount = 1
+SizeX = 1
+SizeY = 1
+Price = 275000
+Class = G_Bullet
+
+[Space Distortor]
+ID = 840
+Type = 24
+Race = -1
+ReqStr = 1
+AssemblyLevel = 9
+SizeX = 1
+SizeY = 1
+Price = 180000
+Class = G_SmallEquipment
+
+[Atomic Transfer]
+ID = 839
+Type = 24
+Race = -1
+ReqStr = 1
+AssemblyLevel = 8
+SizeX = 1
+SizeY = 1
+Price = 150000
+Class = G_SmallEquipment
+
+[Bulkan Meta Cape]
+ID = 549
+Type = 11
+Level = 250
+Race = 1
+Def = 99
+#ResistenceAll = 	# value in %
+#MagicDef = 		# value in %
+ReqStr = 20
+ReqInt = 5
+Position = 3
+SizeX = 2
+SizeY = 3
+Price = 950000
+Class = G_Mantle
+
+[Rocket Cannon]
+ID = 766
+Type = 22
+Race = 3
+ChargingAmount = 5
+SizeX = 1
+SizeY = 1
+Price = 57000
+Class = G_Bullet
+
+[Amplified Mission Receiver]
+ID = 936
+Type = 26
+#ReqStr = 
+SizeX = 1
+SizeY = 1
+Price = 50000
+Class = G_Etc
+
+[WhiteTiger Summon Stone]
+ID = 956
+Type = 18
+Race = -1
+#ReqInt = 
+#SkillLevel = 
+AtkPower = 80
+Time = 500	# seconds
+SizeX = 1
+SizeY = 1
+Price = 500000
+Class = G_StoneOfCalling
+
+[Special Kit 1]
+ID = 851
+Type = 23
+Race = 3
+ReqStr = 1
+SizeX = 1
+SizeY = 1
+Price = 1615
+Class = G_AssemblingParts
+
+[Special Kit 2]
+ID = 852
+Type = 23
+Race = 3
+ReqStr = 1
+SizeX = 1
+SizeY = 1
+Price = 1757
+Class = G_AssemblingParts
+
+[Machine Device]
+ID = 847
+Type = 23
+Race = 3
+ReqStr = 1
+SizeX = 1
+SizeY = 1
+Price = 760
+Class = G_AssemblingParts
 
 #######################
 ###### TYPE LIST ######
