@@ -3,6 +3,7 @@
 ################
 
 [Soccer Field]
+ID = 2
 targetx = 7900
 targety = 3800
 targetwidth = 400
@@ -13,6 +14,7 @@ respawnwidth = 400
 respawnheight = 130
 
 [Default]
+ID = 1
 respawnx = 6270
 respawny = 5170
 respawnwidth = 970
