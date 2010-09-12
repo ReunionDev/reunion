@@ -294,12 +294,8 @@ public class S_Command {
 		String packetData = "jump "+player.getPosX()+" "+player.getPosY()+" " + player.getEntityId() + "\n";
 		
 		client.SendData(packetData);
-
 		
 		S_Server.getInstance().getWorldModule().getTeleportManager().register(player, map);
-		
-		
-		player.setMap(map);
 		
 		
 		Iterator<S_Session> iter = S_Server.getInstance().getWorldModule().getSessionManager().getSessionListIterator();

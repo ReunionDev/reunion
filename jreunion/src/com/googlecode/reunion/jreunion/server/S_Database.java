@@ -19,7 +19,7 @@ public class S_Database extends S_ClassModule {
 
 	public void Connect() throws Exception {
 		S_Parser databaseConfigParser = new S_Parser();
-		databaseConfigParser.Parse("databaseconfig.dta");
+		databaseConfigParser.Parse("config/Database.dta");
 		String[] requiredMembers = { "address", "database", "username",
 				"password" };
 		S_ParsedItem databaseConfig = databaseConfigParser.getItem("Database");

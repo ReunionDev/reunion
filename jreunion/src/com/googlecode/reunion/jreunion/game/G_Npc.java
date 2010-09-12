@@ -1,5 +1,6 @@
 package com.googlecode.reunion.jreunion.game;
 
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
@@ -87,8 +88,12 @@ public class G_Npc extends G_LivingObject {
 	@Override
 	public void loadFromReference(int id) {
 		super.loadFromReference(id);
-
-		itemsReference.Parse(getShop());
+		
+		try {
+			itemsReference.Parse("data/"+getShop());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		S_ParsedItem npc = S_Reference.getInstance().getNpcReference()
 				.getItemById(id);
 

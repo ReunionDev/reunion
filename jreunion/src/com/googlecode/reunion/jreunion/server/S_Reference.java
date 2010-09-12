@@ -27,6 +27,7 @@ public class S_Reference {
 	private S_Parser dropListReference;
 
 	private S_Parser mapReference;
+	private S_Parser mapConfigReference;
 
 	private S_Parser serverReference;
 	private static S_Reference _instance = null;
@@ -38,6 +39,7 @@ public class S_Reference {
 		skillReference = new S_Parser();
 		expReference = new S_Parser();
 		mapReference = new S_Parser();
+		mapConfigReference = new S_Parser();
 		npcReference = new S_Parser();
 		serverReference = new S_Parser();
 		dropListReference = new S_Parser();
@@ -48,8 +50,11 @@ public class S_Reference {
 		itemReference.clear();
 		skillReference.clear();
 		mapReference.clear();
+		mapConfigReference.clear();
 		expReference.clear();
 		npcReference.clear();
+		serverReference.clear();
+		dropListReference.clear();
 	}
 
 	public S_Parser getExpReference() {
@@ -65,6 +70,10 @@ public class S_Reference {
 	 */
 	public S_Parser getMapReference() {
 		return mapReference;
+	}
+	
+	public S_Parser getMapConfigReference() {
+		return mapConfigReference;
 	}
 
 	public S_Parser getMobReference() {
@@ -86,17 +95,19 @@ public class S_Reference {
 		return dropListReference;
 	}
 
-
-	public void Load() {
+	public void Load() throws Exception {
 		clear();
-		itemReference.Parse("Items.dta");
-		mobReference.Parse("Mob.dta");
-		skillReference.Parse("Skills.dta");
-		expReference.Parse("ExpTable.dta");
-		mapReference.Parse("Maps.dta");
-		npcReference.Parse("Npc.dta");
-		serverReference.Parse("ServerSetings.dta");
-		dropListReference.Parse("DropList.dta");
+		
+		itemReference.Parse("data/Items.dta");
+		mobReference.Parse("data/Mob.dta");
+		skillReference.Parse("data/Skills.dta");
+		expReference.Parse("data/ExpTable.dta");
+		mapReference.Parse("data/Maps.dta");
+		mapConfigReference.Parse("config/Maps.dta");
+		npcReference.Parse("data/Npc.dta");
+		serverReference.Parse("config/Settings.dta");
+		dropListReference.Parse("data/DropList.dta");
+		
 	}
 
 }

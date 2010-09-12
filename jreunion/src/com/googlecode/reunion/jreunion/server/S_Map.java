@@ -45,7 +45,7 @@ public class S_Map {
 	public S_Map(int id) {
 		
 		this.id = id;
-
+		
 	}
 
 	public void addMobSpawn(G_Spawn spawn) {
@@ -175,16 +175,19 @@ public class S_Map {
 	}
 
 	public void load() {
+		S_ParsedItem map = S_Reference.getInstance().getMapReference().getItemById(id);
+		S_ParsedItem config = S_Reference.getInstance().getMapConfigReference().getItemById(id);
+		
+		System.out.println("Loading "+map.getName());
 		playerSpawnReference = new S_Parser();
 		mobSpawnReference = new S_Parser();
 		npcSpawnReference = new S_Parser();
 		loadFromReference(id);
 		
-		S_ParsedItem item = S_Reference.getInstance().getMapReference().getItemById(id);
 		
-		int port = Integer.parseInt(item.getMemberValue("Port"));
-		String ip= item.getMemberValue("Ip");
-		setName(item.getName());
+		String ip= config.getMemberValue("Ip");
+		int port = Integer.parseInt(config.getMemberValue("Port"));		
+		setName(map.getName());
 		address = new InetSocketAddress(ip,port);
 		S_Server.getInstance().getNetworkModule().register(getAddress());
 		
@@ -200,12 +203,17 @@ public class S_Map {
 	}
 
 	public void loadFromReference(int id) {
-		playerSpawnReference.Parse(S_Reference.getInstance().getMapReference()
+		try{
+		playerSpawnReference.Parse("data/"+S_Reference.getInstance().getMapReference()
 				.getItemById(id).getMemberValue("PlayerSpawn"));		
-		mobSpawnReference.Parse(S_Reference.getInstance().getMapReference()
+		mobSpawnReference.Parse("data/"+S_Reference.getInstance().getMapReference()
 				.getItemById(id).getMemberValue("MobSpawn"));
-		npcSpawnReference.Parse(S_Reference.getInstance().getMapReference()
+		npcSpawnReference.Parse("data/"+S_Reference.getInstance().getMapReference()
 				.getItemById(id).getMemberValue("NpcSpawn"));
+		
+		} catch(Exception e){			
+			e.printStackTrace();			
+		}
 
 		playerArea.load(S_Reference.getInstance().getMapReference()
 				.getItemById(id).getMemberValue("PlayerArea"));

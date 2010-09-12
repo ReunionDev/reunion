@@ -1,0 +1,14 @@
+[Laglamia]
+ID = 4
+Ip = 127.0.0.1
+Port = 4005
+
+[Lost Realm Castle]
+ID = 0
+Ip = 127.0.0.1
+Port = 4001
+
+[Shilon]
+ID = 3
+Ip = 127.0.0.1
+Port = 4004

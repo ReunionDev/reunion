@@ -42,37 +42,7 @@ public class S_Server extends S_ClassModule {
 								// Load a module by extending it from
 								// ClassModule
 								// And put the put the parent in the constructor
-			/*
-			 * int x= 120,y=1028;
-			 * System.out.println(server.getWorldModule().getMap
-			 * ().getPlayerArea(
-			 * ).get(x,y)+" "+server.getWorldModule().getMap().getMobArea
-			 * ().get(x
-			 * ,y)+" "+server.getWorldModule().getMap().getPvpArea().get(x,y));
-			 * System
-			 * .out.println(server.getWorldModule().getMap().getPvpArea().get
-			 * (800,400));
-			 * System.out.println(server.getWorldModule().getMap().getPvpArea
-			 * ().get(800,250));
-			 * System.out.println(server.getWorldModule().getMap
-			 * ().getPvpArea().get(800,500));
-			 */
-			/*
-			 * BufferedWriter filebuffer = new BufferedWriter(new
-			 * FileWriter("coltest1.txt", false)); for (int y = 0; y<1280;y++)
-			 * for (int x = 0; x<1280;x++) { if
-			 * (server.getWorldModule().getMapManager
-			 * ().getPlayerArea().get(x,y)==true) filebuffer.write("X"); else
-			 * filebuffer.write(" ");
-			 * 
-			 * if( x==1279)filebuffer.write("\n");
-			 * 
-			 * }
-			 * System.out.println(server.getWorldModule().getMapManager().getPvpArea
-			 * ().get(702,481)); filebuffer.close();
-			 */
 			while (true) {
-
 				server.DoWork();
 				Thread.sleep(1); // Sleep to make sure it doesnt use 100%
 									// cpu resources
@@ -80,10 +50,13 @@ public class S_Server extends S_ClassModule {
 			}
 
 		} catch (Exception e) {
-
-			server.DoStop();
-			S_PerformanceStats.getInstance().dumpPerformance();
+			
 			e.printStackTrace();
+			
+		}
+		finally {
+			S_PerformanceStats.getInstance().dumpPerformance();
+			server.DoStop();
 			System.exit(-1);
 		}
 	}

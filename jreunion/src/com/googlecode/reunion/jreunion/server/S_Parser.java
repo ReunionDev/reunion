@@ -2,7 +2,9 @@ package com.googlecode.reunion.jreunion.server;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
@@ -104,19 +106,20 @@ public class S_Parser {
 		return itemList.size();
 	}
 
-	public void Parse(String filename) {
-		if (!new File("data/" + filename).exists()) {
-			System.out.println("Parsing error: \"" + filename
+	public void Parse(String filename) throws IOException {
+		File file = new File(filename);
+		if (!file.exists()) {
+			System.out.println("Parsing error: \"" + file.getAbsolutePath()
 					+ "\" does not exist");
-			return;
+			throw new FileNotFoundException(file.getAbsolutePath());
+			
 		}
 		try {
 			S_ParsedItem parsedItem = null;
 
 			BufferedReader input = null;
 
-			input = new BufferedReader(new FileReader(new File("data/"
-					+ filename)));
+			input = new BufferedReader(new FileReader(file));
 
 			String line = null;
 			int linenr = 0;

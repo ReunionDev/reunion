@@ -11,7 +11,7 @@ Rotation = 4.7123
 Type = 95
 BuyRate = 95	# Value in %
 SellRate = 30	# Value in %
-Shop = NpcItemList/Map4/npc1.dta
+Shop = areas/laglamia/shop/npc1.dta
 
 [Assistant 2]
 ID = 2
@@ -21,7 +21,7 @@ Rotation = 0.0
 Type = 95
 BuyRate = 95	# Value in %
 SellRate = 30	# Value in %
-Shop = NpcItemList/Map4/npc2.dta
+Shop = areas/laglamia/shop/npc2.dta
 
 [Assistant 3]
 ID = 3
@@ -31,7 +31,7 @@ Rotation = 0.0
 Type = 95
 BuyRate = 120	# Value in %
 SellRate = 30	# Value in %
-Shop = NpcItemList/Map4/npc3.dta
+Shop = areas/laglamia/shop/npc3.dta
 
 [Barmaid 1]
 ID = 4
@@ -41,7 +41,7 @@ Rotation = 3.1415
 Type = 92
 BuyRate = 95	# Value in %
 SellRate = 30	# Value in %
-Shop = NpcItemList/Map4/npc4.dta
+Shop = areas/laglamia/shop/npc4.dta
 
 [Blacksmith 1]
 ID = 5
@@ -51,7 +51,7 @@ Rotation = 1.4921
 Type = 90
 BuyRate = 100	# Value in %
 SellRate = 30	# Value in %
-Shop = NpcItemList/Map4/npc5.dta
+Shop = areas/laglamia/shop/npc5.dta
 
 [Blacksmith 2]
 ID = 6
@@ -61,7 +61,7 @@ Rotation = 1.4921
 Type = 90
 BuyRate = 100	# Value in %
 SellRate = 30	# Value in %
-Shop = NpcItemList/Map4/npc6.dta
+Shop = areas/laglamia/shop/npc6.dta
 
 [Blacksmith 3]
 ID = 7
@@ -71,7 +71,7 @@ Rotation = 4.7123
 Type = 90
 BuyRate = 90	# Value in %
 SellRate = 30	# Value in %
-Shop = NpcItemList/Map4/npc7.dta
+Shop = areas/laglamia/shop/npc7.dta
 
 [Doctor 1]
 ID = 8
@@ -81,7 +81,7 @@ Rotation = 4.7123
 Type = 93
 BuyRate = 90	# Value in %
 SellRate = 30	# Value in %
-Shop = NpcItemList/Map4/npc8.dta
+Shop = areas/laglamia/shop/npc8.dta
 
 [Doctor 2]
 ID = 9
@@ -91,7 +91,7 @@ Rotation = 0.0
 Type = 93
 BuyRate = 70	# Value in %
 SellRate = 30	# Value in %
-Shop = NpcItemList/Map4/npc9.dta
+Shop = areas/laglamia/shop/npc9.dta
 
 [Machine Dealer 1]
 ID = 10
@@ -101,7 +101,7 @@ Rotation = 1.4921
 Type = 91
 BuyRate = 100	# Value in %
 SellRate = 30	# Value in %
-Shop = NpcItemList/Map4/npc10.dta
+Shop = areas/laglamia/shop/npc10.dta
 
 [Machine Dealer 2]
 ID = 11
@@ -111,7 +111,7 @@ Rotation = 1.4921
 Type = 91
 BuyRate = 100	# Value in %
 SellRate = 30	# Value in %
-Shop = NpcItemList/Map4/npc11.dta
+Shop = areas/laglamia/shop/npc11.dta
 
 [Machine Dealer 3]
 ID = 12
@@ -121,7 +121,7 @@ Rotation = 1.4921
 Type = 91
 BuyRate = 100	# Value in %
 SellRate = 30	# Value in %
-Shop = NpcItemList/Map4/npc12.dta
+Shop = areas/laglamia/shop/npc12.dta
 
 [Machine Dealer 4]
 ID = 13
@@ -131,7 +131,7 @@ Rotation = 1.5707
 Type = 91
 BuyRate = 105	# Value in %
 SellRate = 30	# Value in %
-Shop = NpcItemList/Map4/npc13.dta
+Shop = areas/laglamia/shop/npc13.dta
 
 [Machine Dealer 5]
 ID = 14
@@ -141,7 +141,7 @@ Rotation = 0.0
 Type = 91
 BuyRate = 100	# Value in %
 SellRate = 30	# Value in %
-Shop = NpcItemList/Map4/npc14.dta
+Shop = areas/laglamia/shop/npc14.dta
 
 [Magic Shopkeeper 1]
 ID = 15
@@ -151,7 +151,7 @@ Rotation = 1.4921
 Type = 94
 BuyRate = 100	# Value in %
 SellRate = 30	# Value in %
-Shop = NpcItemList/Map4/npc15.dta
+Shop = areas/laglamia/shop/npc15.dta
 
 [Magic Shopkeeper 2]
 ID = 16
@@ -161,7 +161,7 @@ Rotation = 1.4921
 Type = 94
 BuyRate = 100	# Value in %
 SellRate = 30	# Value in %
-Shop = NpcItemList/Map4/npc16.dta
+Shop = areas/laglamia/shop/npc16.dta
 
 [Magic Shopkeeper 3]
 ID = 17
@@ -171,7 +171,7 @@ Rotation = 1.4921
 Type = 94
 BuyRate = 100	# Value in %
 SellRate = 30	# Value in %
-Shop = NpcItemList/Map4/npc17.dta
+Shop = areas/laglamia/shop/npc17.dta
 
 [Magic Shopkeeper 4]
 ID = 18
@@ -181,7 +181,7 @@ Rotation = 0.0
 Type = 94
 BuyRate = 100	# Value in %
 SellRate = 30	# Value in %
-Shop = NpcItemList/Map4/npc18.dta
+Shop = areas/laglamia/shop/npc18.dta
 
 [Magic Shopkeeper 5]
 ID = 19
@@ -191,7 +191,7 @@ Rotation = 3.1415
 Type = 94
 BuyRate = 100	# Value in %
 SellRate = 30	# Value in %
-Shop = NpcItemList/Map4/npc19.dta
+Shop = areas/laglamia/shop/npc19.dta
 
 [Archeologist 1]
 ID = 20
