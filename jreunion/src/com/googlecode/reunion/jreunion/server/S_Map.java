@@ -201,8 +201,7 @@ public class S_Map {
 
 	public void loadFromReference(int id) {
 		playerSpawnReference.Parse(S_Reference.getInstance().getMapReference()
-				.getItemById(id).getMemberValue("PlayerSpawn"));
-		
+				.getItemById(id).getMemberValue("PlayerSpawn"));		
 		mobSpawnReference.Parse(S_Reference.getInstance().getMapReference()
 				.getItemById(id).getMemberValue("MobSpawn"));
 		npcSpawnReference.Parse(S_Reference.getInstance().getMapReference()

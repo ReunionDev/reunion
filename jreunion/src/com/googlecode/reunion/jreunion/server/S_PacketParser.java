@@ -1,6 +1,9 @@
 package com.googlecode.reunion.jreunion.server;
 
 //import java.util.*;
+import java.awt.geom.Rectangle2D;
+import java.util.Random;
+
 import com.googlecode.reunion.jreunion.game.G_Merchant;
 import com.googlecode.reunion.jreunion.game.G_Mob;
 import com.googlecode.reunion.jreunion.game.G_Npc;
@@ -159,10 +162,24 @@ public class S_PacketParser {
 				client.SendData(
 						"status 19 " + player.getPenaltyPoints() + " 0\n");
 				
-				/*
-				 * 
-				 */
-				player.getMap().getPlayerSpawnReference();
+				
+				int defaultSpawnId = Integer.parseInt(S_Reference.getInstance().getMapReference().getItemById(player.getMap().getId()).getMemberValue("DefaultSpawnId"));
+				S_ParsedItem spawn =player.getMap().getPlayerSpawnReference().getItemById(defaultSpawnId);
+				System.out.println(player.getMap());
+				System.out.println(defaultSpawnId);
+				System.out.println(spawn);				
+				
+				int x = Integer.parseInt(spawn.getMemberValue("X"));
+				int y = Integer.parseInt(spawn.getMemberValue("Y"));
+				int width = Integer.parseInt(spawn.getMemberValue("Width"));
+				int height = Integer.parseInt(spawn.getMemberValue("Height"));
+				
+				Random rand = new Random(System.currentTimeMillis());
+				int spawnX = x+(width>0?rand.nextInt(width):0);
+				int spawnY = y+(height>0?rand.nextInt(height):0);
+				
+				player.setPosX(spawnX);
+				player.setPosY(spawnY);				
 				
 				client.SendData(
 						"at " + client.getPlayer().getEntityId() + " "
