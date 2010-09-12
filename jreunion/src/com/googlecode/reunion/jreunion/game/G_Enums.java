@@ -172,16 +172,16 @@ public class G_Enums {
 	public enum G_EquipmentSlot
 	{
 		EMPTY(-1),
-		HELMET(1),
-		CHEST(2),
-		PANTS(3),
-		SHOULDER(4),
-		BOOTS(5),
-		OFFHAND(6),
-		RING(7),
-		NECKLACE(8),
-		MAINHAND(9),
-		BRACELET(10);
+		HELMET(0),
+		CHEST(1),
+		PANTS(2),
+		SHOULDER(3),
+		BOOTS(4),
+		OFFHAND(5),
+		NECKLACE(6),
+		RING(7),		
+		BRACELET(8),
+		MAINHAND(9);
 
 		int value;
 		G_EquipmentSlot(int value){

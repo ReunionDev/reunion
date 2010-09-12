@@ -44,7 +44,7 @@ public class S_PrintStream extends PrintStream {
 	 */
 	@Override
 	public PrintStream format(String arg0, Object... arg1) {
-
+		
 		return super.format(arg0, arg1);
 	}
 

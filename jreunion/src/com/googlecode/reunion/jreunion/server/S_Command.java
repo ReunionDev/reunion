@@ -530,9 +530,6 @@ public class S_Command {
 		S_Client client = S_Server.getInstance().getNetworkModule()
 				.getClient(player);
 		
-		System.out.println("Debug"+player.getMap().getId()+" "+mob.getMap().getId());
-		
-
 		if (client == null) {
 			return;
 		}
@@ -720,8 +717,6 @@ public class S_Command {
 			return;
 		}
 		
-		System.out.println("Debug"+player.getMap().getId()+" "+npc.getMap().getId());
-
 		String packetData = "in npc " + npc.getEntityId() + " " + npc.getType()
 				+ " " + npc.getPosX() + " " + npc.getPosY() + " 0 "
 				+ npc.getRotation() + " 100 0 0 0 0 0 10\n";

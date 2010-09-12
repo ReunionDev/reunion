@@ -115,17 +115,12 @@ public class S_World extends S_ClassModule {
 	public void Start() {
 		
 		Iterator<S_ParsedItem> iter = S_Reference.getInstance().getMapConfigReference().getItemListIterator();
-		//Iterator<S_ParsedItem> iter = S_Reference.getInstance().getMapReference().getItemListIterator();
 		while(iter.hasNext()){
-			S_ParsedItem item = iter.next();
-
-			
+			S_ParsedItem item = iter.next();			
 			int mapId = Integer.parseInt(item.getMemberValue("Id"));
-			
 			S_Map map = new S_Map(mapId);
 			map.load();
 			maps.put(mapId, map);
-			
 		}
 	}
 

@@ -98,7 +98,7 @@ public class S_MobManager {
 			return;
 		}
 
-		int run = 0;
+		int run = mob.getRunning()?1:0;
 		// int newPosX,newPosY;
 		// double directionX=0, directionY=0;
 
@@ -106,12 +106,7 @@ public class S_MobManager {
 			moveToPlayer = true;
 		}
 
-		if (mob.getRunning() == true) {
-			run = 1;
-		} else {
-			run = 0;
-		}
-
+	
 		// Members of the new position to where the mob should move
 		int newPosX = getMobDirectionX(mob);
 		int newPosY = getMobDirectionY(mob);

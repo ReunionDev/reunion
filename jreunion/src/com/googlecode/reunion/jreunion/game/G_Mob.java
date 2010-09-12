@@ -230,8 +230,7 @@ public class G_Mob extends G_LivingObject {
 	}
 
 	public void moveToPlayer(G_Player player, double distance) {
-		int run = 0;
-
+	
 		S_Client client = S_Server.getInstance().getNetworkModule()
 				.getClient(player);
 
@@ -265,11 +264,6 @@ public class G_Mob extends G_LivingObject {
 			}
 		}
 
-		if (getRunning() == true) {
-			run = 1;
-		} else {
-			run = 0;
-		}
 
 		double xcomp = player.getPosX() - getPosX();
 		double ycomp = player.getPosY() - getPosY();
@@ -292,12 +286,13 @@ public class G_Mob extends G_LivingObject {
 		} else {
 			return;
 		}
+		int run = getRunning()?1:0;
 
 		String packetData = "walk npc " + getEntityId() + " " + getPosX() + " "
 				+ getPosY() + " 0 " + run + "\n";
 		// S> walk npc [UniqueId] [Xpos] [Ypos] [ZPos] [Running]
 
-				client.SendData(packetData);
+		client.SendData(packetData);
 
 		if (player.getSession().getPlayerListSize() > 0) {
 			Iterator<G_Player> playerIter = player.getSession()
