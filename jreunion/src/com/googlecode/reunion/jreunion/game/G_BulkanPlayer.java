@@ -38,10 +38,10 @@ public class G_BulkanPlayer extends G_Player {
 
 		baseDmg = (randDmg + getLevel() / 6 + getStr() / 4 + getDex() / 4 + getCons() / 8);
 
-		if (getEquipment().getFirstHand() instanceof G_Sword) {
+		if (getEquipment().getMainHand() instanceof G_Sword) {
 			baseDmg = (int) (baseDmg + baseDmg
 					* (getCharSkill().getSkill(1).getCurrFirstRange() / 100));
-		} else if (getEquipment().getFirstHand() instanceof G_Axe) {
+		} else if (getEquipment().getMainHand() instanceof G_Axe) {
 			baseDmg = (int) (baseDmg + baseDmg
 					* (getCharSkill().getSkill(2).getCurrFirstRange() / 100));
 		}
@@ -120,17 +120,17 @@ public class G_BulkanPlayer extends G_Player {
 		float skillDmg = baseDmg;
 
 		if (skill.getId() == 31) { // Whirlwind Slash Skill
-			if (getEquipment().getFirstHand() instanceof G_Sword) {
+			if (getEquipment().getMainHand() instanceof G_Sword) {
 				skillDmg = baseDmg + baseDmg
 						* (skill.getCurrFirstRange() / 100);
 			}
 		} else if (skill.getId() == 18) { // Overhead Blow Skill
-			if (getEquipment().getFirstHand() instanceof G_Axe) {
+			if (getEquipment().getMainHand() instanceof G_Axe) {
 				skillDmg = baseDmg + baseDmg
 						* (skill.getCurrFirstRange() / 100);
 			}
 		} else if (skill.getId() == 38) { // Exploding rage
-			if (getEquipment().getFirstHand() instanceof G_Axe) {
+			if (getEquipment().getMainHand() instanceof G_Axe) {
 				skillDmg = baseDmg + baseDmg
 						* (skill.getCurrFirstRange() / 100);
 			}

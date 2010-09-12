@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
+import com.googlecode.reunion.jcommon.S_ParsedItem;
+import com.googlecode.reunion.jcommon.S_Parser;
 import com.googlecode.reunion.jreunion.game.G_Merchant;
 import com.googlecode.reunion.jreunion.game.G_Npc;
 import com.googlecode.reunion.jreunion.game.G_Player;
@@ -198,7 +200,7 @@ public class S_Map {
 			
 		} else if(location.equals("Remote")) {
 			
-			System.out.println("Remote server registered on "+address+" for "+this.getName());
+			System.out.println("Remote server registered on "+address.getHostName()+":"+address.getPort()+" for "+this.getName());
 			
 		} else {
 			
@@ -277,8 +279,7 @@ public class S_Map {
 							- spawn.getMob().getPosY(), 2);
 					double distance = Math.sqrt(xcomp + ycomp);
 
-					if (distance < S_Server.getInstance().getWorldModule()
-							.getSessionManager().getSessionRadius()) {
+					if (distance < player.getSessionRadius()) {
 						player.getSession().enterMob(spawn.getMob(), 1);
 					}
 				}

@@ -1,7 +1,7 @@
 package com.googlecode.reunion.jreunion.game;
 
+import com.googlecode.reunion.jcommon.S_ParsedItem;
 import com.googlecode.reunion.jreunion.server.S_Map;
-import com.googlecode.reunion.jreunion.server.S_ParsedItem;
 import com.googlecode.reunion.jreunion.server.S_Reference;
 
 /**
@@ -10,6 +10,8 @@ import com.googlecode.reunion.jreunion.server.S_Reference;
  */
 public class G_LivingObject extends G_Entity {
 
+	
+	
 	private int team;
 
 	private int posX;
@@ -244,4 +246,5 @@ public class G_LivingObject extends G_Entity {
 	public void setTargetPosZ(int targetPosZ) {
 		this.targetPosZ = targetPosZ;
 	}
+	
 }

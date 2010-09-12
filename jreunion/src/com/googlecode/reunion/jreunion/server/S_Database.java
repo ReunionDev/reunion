@@ -3,6 +3,9 @@ package com.googlecode.reunion.jreunion.server;
 import java.sql.Connection;
 import java.sql.DriverManager;
 
+import com.googlecode.reunion.jcommon.S_ParsedItem;
+import com.googlecode.reunion.jcommon.S_Parser;
+
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
@@ -38,7 +41,7 @@ public class S_Database extends S_ClassModule {
 				+ "?autoReconnect=true";
 		Class.forName("com.mysql.jdbc.Driver").newInstance();
 		conn = DriverManager.getConnection(url, userName, password);
-		System.out.println(getClass().getName() + " connection established");
+		System.out.println(getClass().getSimpleName() + " connection established");
 
 	}
 

@@ -38,28 +38,6 @@ public class G_Enums {
 
 	public final static int SPEED_VERY_SLOW = 4;
 
-	public final static int SLOT_EMPTY = -1;
-
-	public final static int SLOT_HEAD = 0;
-
-	public final static int SLOT_TOP = 1;
-
-	public final static int SLOT_LEG = 2;
-
-	public final static int SLOT_SHOULDER_MOUNT = 3;
-
-	public final static int SLOT_FEET = 4;
-
-	public final static int SLOT_SECOND_HAND = 5;
-
-	public final static int SLOT_NECKLACE = 6;
-
-	public final static int SLOT_RING = 7;
-
-	public final static int SLOT_BRACELET = 8;
-
-	public final static int SLOT_FIRST_HAND = 9;
-
 	public final static int QUICK_SLOT_1 = 0;
 
 	public final static int QUICK_SLOT_2 = 1;
@@ -189,4 +167,45 @@ public class G_Enums {
 	public final static int RANGE_MELEE_DMG = 1;
 
 	public final static int RANGE_MAGIC_DMG = 2;
+	
+	
+	public enum G_EquipmentSlot
+	{
+		EMPTY(-1),
+		HELMET(1),
+		CHEST(2),
+		PANTS(3),
+		SHOULDER(4),
+		BOOTS(5),
+		OFFHAND(6),
+		RING(7),
+		NECKLACE(8),
+		MAINHAND(9),
+		BRACELET(10);
+
+		int value;
+		G_EquipmentSlot(int value){
+			this.value = value;
+			
+		}
+		public int value(){
+			return value;			
+		
+		}
+		
+		public static G_EquipmentSlot byValue(int slotId){
+			
+			for(G_EquipmentSlot slot:G_EquipmentSlot.values())
+			{
+				if(slot.value()==slotId){					
+					return slot;
+				}
+			}
+			return null;
+		}
+		
+		
+	}
+	
+	
 }

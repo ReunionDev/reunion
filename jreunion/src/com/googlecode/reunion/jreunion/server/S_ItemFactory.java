@@ -1,5 +1,6 @@
 package com.googlecode.reunion.jreunion.server;
 
+import com.googlecode.reunion.jcommon.S_ParsedItem;
 import com.googlecode.reunion.jreunion.game.G_Item;
 
 /**

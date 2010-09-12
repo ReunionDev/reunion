@@ -3,6 +3,7 @@ package com.googlecode.reunion.jreunion.server;
 import java.util.Iterator;
 import java.util.Vector;
 
+import com.googlecode.reunion.jcommon.S_ParsedItem;
 import com.googlecode.reunion.jreunion.game.G_EntityManager;
 import com.googlecode.reunion.jreunion.game.G_Npc;
 

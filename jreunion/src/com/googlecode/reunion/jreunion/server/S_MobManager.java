@@ -171,13 +171,11 @@ public class S_MobManager {
 
 			// Condition that detects that the mob its out of player session
 			// range
-			if (distance >= S_Server.getInstance().getWorldModule()
-					.getSessionManager().getSessionRadius()) {
+			if (distance >= player.getSessionRadius()) {
 				player.getSession().exitMob(mob);
 			}
 
-			if (distance < S_Server.getInstance().getWorldModule()
-					.getSessionManager().getSessionRadius()) {
+			if (distance < player.getSessionRadius()) {
 				if (mob.getIsAttacking() == 0) {
 					String packetData = "walk npc " + mob.getEntityId() + " "
 							+ mob.getPosX() + " " + mob.getPosY() + " 0 " + run

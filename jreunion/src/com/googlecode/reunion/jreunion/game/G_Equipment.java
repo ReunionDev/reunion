@@ -1,5 +1,7 @@
 package com.googlecode.reunion.jreunion.game;
 
+import com.googlecode.reunion.jreunion.game.G_Enums.G_EquipmentSlot;
+
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
@@ -18,8 +20,6 @@ public class G_Equipment {
 	private G_Shield shield;
 
 	private G_WandWeapon wand;
-
-	// private G_Armor shoulderMount;
 
 	private G_SpecialWeapon specialWeapon;
 
@@ -44,7 +44,6 @@ public class G_Equipment {
 		wings = null;
 		mantle = null;
 		specialWeapon = null;
-		// shoulderMount = null;
 		ring = null;
 		necklace = null;
 		bracelet = null;
@@ -62,10 +61,8 @@ public class G_Equipment {
 		return bracelet;
 	}
 
-	public G_Weapon getFirstHand() {
-		// if(this.weapon == null)
-		// return -1;
-		// else
+	public G_Weapon getMainHand() {
+		
 		return weapon;
 	}
 
@@ -73,29 +70,29 @@ public class G_Equipment {
 		return helmet;
 	}
 
-	public G_Item getItem(int slotid) {
+	public G_Item getItem(G_EquipmentSlot slot) {
 
-		switch (slotid) {
+		switch (slot) {
 
-		case G_Enums.SLOT_BRACELET:
+		case BRACELET:
 			return getBracelet();
-		case G_Enums.SLOT_FEET:
+		case BOOTS:
 			return getBoots();
-		case G_Enums.SLOT_FIRST_HAND:
-			return getFirstHand();
-		case G_Enums.SLOT_HEAD:
+		case MAINHAND:
+			return getMainHand();
+		case HELMET:
 			return getHelmet();
-		case G_Enums.SLOT_LEG:
+		case PANTS:
 			return getPants();
-		case G_Enums.SLOT_NECKLACE:
+		case NECKLACE:
 			return getNecklace();
-		case G_Enums.SLOT_RING:
+		case RING:
 			return getRing();
-		case G_Enums.SLOT_SECOND_HAND:
-			return getSecondHand();
-		case G_Enums.SLOT_SHOULDER_MOUNT:
+		case OFFHAND:
+			return getOffHand();
+		case SHOULDER:
 			return getShoulderMount();
-		case G_Enums.SLOT_TOP:
+		case CHEST:
 			return getArmor();
 		}
 
@@ -118,7 +115,7 @@ public class G_Equipment {
 		return ring;
 	}
 
-	public G_Item getSecondHand() {
+	public G_Item getOffHand() {
 
 		if (getShield() != null) {
 			return getShield();
@@ -169,7 +166,7 @@ public class G_Equipment {
 		this.bracelet = bracelet;
 	}
 
-	public void setFirstHand(G_Weapon weapon) {
+	public void setMainhand(G_Weapon weapon) {
 		this.weapon = weapon;
 	}
 
@@ -177,9 +174,9 @@ public class G_Equipment {
 		this.helmet = helmet;
 	}
 
-	public boolean setItem(int slotid, G_Item item) {
-		switch (slotid) {
-		case G_Enums.SLOT_HEAD: {
+	public boolean setItem(G_EquipmentSlot slot, G_Item item) {
+		switch (slot) {
+		case HELMET: {
 			if (item instanceof G_Armor || item == null) {
 				setHelmet((G_Armor) item);
 				return true;
@@ -187,7 +184,7 @@ public class G_Equipment {
 				return false;
 			}
 		}
-		case G_Enums.SLOT_TOP: {
+		case CHEST: {
 			if (item instanceof G_Armor || item == null) {
 				setArmor((G_Armor) item);
 				return true;
@@ -195,7 +192,7 @@ public class G_Equipment {
 				return false;
 			}
 		}
-		case G_Enums.SLOT_LEG: {
+		case PANTS: {
 			if (item instanceof G_Armor || item == null) {
 				setPants((G_Armor) item);
 				return true;
@@ -203,7 +200,7 @@ public class G_Equipment {
 				return false;
 			}
 		}
-		case G_Enums.SLOT_SHOULDER_MOUNT: {
+		case SHOULDER: {
 			if (item instanceof G_SpecialWeapon || item instanceof G_Mantle
 					|| item instanceof G_Wing || item == null) {
 				if (item instanceof G_SpecialWeapon) {
@@ -220,7 +217,7 @@ public class G_Equipment {
 				return false;
 			}
 		}
-		case G_Enums.SLOT_FEET: {
+		case BOOTS: {
 			if (item instanceof G_Armor || item == null) {
 				setBoots((G_Armor) item);
 				return true;
@@ -228,22 +225,22 @@ public class G_Equipment {
 				return false;
 			}
 		}
-		case G_Enums.SLOT_SECOND_HAND: {
+		case OFFHAND: {
 			if (item instanceof G_Shield || item instanceof G_WandWeapon
 					|| item == null) {
 				if (item instanceof G_Shield) {
-					setSecondHand(item);
+					setOffhand(item);
 				} else if (item instanceof G_WandWeapon) {
-					setSecondHand(item);
+					setOffhand(item);
 				} else {
-					setSecondHand(item);
+					setOffhand(item);
 				}
 				return true;
 			} else {
 				return false;
 			}
 		}
-		case G_Enums.SLOT_NECKLACE: {
+		case NECKLACE: {
 			if (item instanceof G_Necklace || item == null) {
 				setNecklace((G_Necklace) item);
 				return true;
@@ -251,7 +248,7 @@ public class G_Equipment {
 				return false;
 			}
 		}
-		case G_Enums.SLOT_RING: {
+		case RING: {
 			if (item instanceof G_Ring || item == null) {
 				setRing((G_Ring) item);
 				return true;
@@ -259,7 +256,7 @@ public class G_Equipment {
 				return false;
 			}
 		}
-		case G_Enums.SLOT_BRACELET: {
+		case BRACELET: {
 			if (item instanceof G_Bracelet || item == null) {
 				setBracelet((G_Bracelet) item);
 				return true;
@@ -267,9 +264,9 @@ public class G_Equipment {
 				return false;
 			}
 		}
-		case G_Enums.SLOT_FIRST_HAND: {
+		case MAINHAND: {
 			if (item instanceof G_Weapon || item == null) {
-				setFirstHand((G_Weapon) item);
+				setMainhand((G_Weapon) item);
 				return true;
 			} else {
 				return false;
@@ -296,7 +293,7 @@ public class G_Equipment {
 		this.ring = ring;
 	}
 
-	public void setSecondHand(G_Item secondHand) {
+	public void setOffhand(G_Item secondHand) {
 
 		if (secondHand instanceof G_Shield) {
 			setShield((G_Shield) secondHand);
@@ -341,7 +338,6 @@ public class G_Equipment {
 	}
 
 	private void setSpecialWeapon(G_SpecialWeapon specialWeapon) {
-		// specialWeapon.loadFromReference(specialWeapon.getType());
 		this.specialWeapon = specialWeapon;
 	}
 
@@ -352,4 +348,6 @@ public class G_Equipment {
 	private void setWings(G_Wing wings) {
 		this.wings = wings;
 	}
+		
+	
 }

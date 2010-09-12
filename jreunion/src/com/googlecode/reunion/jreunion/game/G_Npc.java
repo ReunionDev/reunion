@@ -5,8 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
-import com.googlecode.reunion.jreunion.server.S_ParsedItem;
-import com.googlecode.reunion.jreunion.server.S_Parser;
+import com.googlecode.reunion.jcommon.S_ParsedItem;
+import com.googlecode.reunion.jcommon.S_Parser;
 import com.googlecode.reunion.jreunion.server.S_Reference;
 
 /**

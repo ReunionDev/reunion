@@ -41,13 +41,7 @@ public class S_SessionManager {
 		return sessionList.iterator();
 	}
 
-	public float getSessionRadius() {
-		if (sessionRadius < 0) {
-			sessionRadius = S_DatabaseUtils.getInstance().getSessionRadius();
-		}
-		return sessionRadius;
-	}
-
+	
 	public S_Session newSession(G_Player player) {
 		S_Session s = new S_Session(player);
 		addSession(s);
@@ -121,11 +115,11 @@ public class S_SessionManager {
 						2);
 				double distance = Math.sqrt(xcomp + ycomp);
 
-				if (distance <= getSessionRadius()) {
+				if (distance <= player1.getSessionRadius()) {
 					player1.getSession().enterPlayer(player2, 0);
 				}
 
-				if (distance > getSessionRadius()) {
+				if (distance > player1.getSessionRadius()) {
 					player1.getSession().exitPlayer(player2);
 				}
 			}
@@ -145,7 +139,7 @@ public class S_SessionManager {
 
 				int distance = mob.getDistance(player1);
 
-				if (distance > getSessionRadius()) {
+				if (distance > player1.getSessionRadius()) {
 					player1.getSession().exitMob(mob);
 				} else {
 					player1.getSession().enterMob(mob, 0);
@@ -175,7 +169,7 @@ public class S_SessionManager {
 
 				int distance = npc.getDistance(player1);
 
-				if (distance > getSessionRadius()) {
+				if (distance > player1.getSessionRadius()) {
 					player1.getSession().exitNpc(npc);
 				} else {
 					player1.getSession().enterNpc(npc);

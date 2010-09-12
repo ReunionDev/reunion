@@ -5,11 +5,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+import com.googlecode.reunion.jcommon.S_ParsedItem;
+import com.googlecode.reunion.jcommon.S_Parser;
 import com.googlecode.reunion.jreunion.server.S_Client;
 import com.googlecode.reunion.jreunion.server.S_DatabaseUtils;
 import com.googlecode.reunion.jreunion.server.S_ItemFactory;
-import com.googlecode.reunion.jreunion.server.S_ParsedItem;
-import com.googlecode.reunion.jreunion.server.S_Parser;
 import com.googlecode.reunion.jreunion.server.S_Reference;
 import com.googlecode.reunion.jreunion.server.S_Server;
 import com.googlecode.reunion.jreunion.server.S_Timer;
@@ -315,8 +315,7 @@ public class G_Mob extends G_LivingObject {
 				if (client == null) {
 					continue;
 				}
-				if (getDistance(pl) < S_DatabaseUtils.getInstance()
-						.getSessionRadius()) {
+				if (getDistance(pl) < pl.getSessionRadius()) {
 							client.SendData(packetData);
 				}
 			}

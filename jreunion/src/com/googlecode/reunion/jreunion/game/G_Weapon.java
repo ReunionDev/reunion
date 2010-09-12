@@ -1,6 +1,6 @@
 package com.googlecode.reunion.jreunion.game;
 
-import com.googlecode.reunion.jreunion.server.S_ParsedItem;
+import com.googlecode.reunion.jcommon.S_ParsedItem;
 import com.googlecode.reunion.jreunion.server.S_Reference;
 
 /**
@@ -45,11 +45,11 @@ public class G_Weapon extends G_PlayerItem {
 	public void consumn(G_Player player) {
 		if (getEeUsed() != 0) {
 			player.updateStatus(3, player.getCurrElect()
-					- player.getEquipment().getFirstHand().getEeUsed(),
+					- player.getEquipment().getMainHand().getEeUsed(),
 					player.getMaxElect());
 		} else if (getManaUsed() != 0) {
 			player.updateStatus(1, player.getCurrMana()
-					- player.getEquipment().getFirstHand().getManaUsed(),
+					- player.getEquipment().getMainHand().getManaUsed(),
 					player.getMaxMana());
 		}
 	}

@@ -5,11 +5,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
+import com.googlecode.reunion.jcommon.S_ParsedItem;
+import com.googlecode.reunion.jcommon.S_Parser;
+import com.googlecode.reunion.jreunion.game.G_Enums.G_EquipmentSlot;
 import com.googlecode.reunion.jreunion.server.S_CharSkill;
 import com.googlecode.reunion.jreunion.server.S_Client;
 import com.googlecode.reunion.jreunion.server.S_DatabaseUtils;
-import com.googlecode.reunion.jreunion.server.S_ParsedItem;
-import com.googlecode.reunion.jreunion.server.S_Parser;
 import com.googlecode.reunion.jreunion.server.S_Reference;
 import com.googlecode.reunion.jreunion.server.S_Server;
 import com.googlecode.reunion.jreunion.server.S_Session;
@@ -81,6 +82,8 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 	private int guildId;
 
 	private int guildLvl;
+	
+	private static Integer sessionRadius;
 
 	public G_Player() {
 		super();
@@ -773,7 +776,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 
 			int distance = player.getDistance(this);
 
-			if (distance <= S_DatabaseUtils.getInstance().getSessionRadius()) {
+			if (distance <= this.getSessionRadius()) {
 				session.enterPlayer(this, 1);
 				getSession().enterPlayer(player, 0);
 			}
@@ -1326,51 +1329,51 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 		}
 	}
 
-	public void wearSlot(int slotid) {
-	try {
+	public void wearSlot(G_EquipmentSlot slot) {
+	
 		G_InventoryItem invItem = getInventory().getItemSelected();
 		String packetData = new String();
 		String extraPacketData = null;
 
 		if (invItem == null) {
-			if (getEquipment().getItem(slotid) instanceof G_Weapon) {
+			if (getEquipment().getItem(slot) instanceof G_Weapon) {
 				setMinDmg(1);
 				setMaxDmg(2);
 			}
 
 			getInventory()
 					.setItemSelected(
-							new G_InventoryItem(getEquipment().getItem(slotid),
+							new G_InventoryItem(getEquipment().getItem(slot),
 									0, 0, 0));
-			getEquipment().setItem(slotid, null);
+			getEquipment().setItem(slot, null);
 
-			packetData = "char_remove " + getEntityId() + " " + slotid + "\n";
+			packetData = "char_remove " + getEntityId() + " " + slot + "\n";
 		} else {
-			if (getEquipment().getItem(slotid) == null) {
+			if (getEquipment().getItem(slot) == null) {
 				G_Item item = invItem.getItem();
-				packetData = "char_wear " + getEntityId() + " " + slotid + " "
+				packetData = "char_wear " + getEntityId() + " " + slot + " "
 						+ item.getType() + " " + item.getGemNumber() + "\n";
-				getEquipment().setItem(slotid, item);
+				getEquipment().setItem(slot, item);
 				getInventory().setItemSelected(null);
-				if (getEquipment().getItem(slotid) instanceof G_Weapon) {
-					G_Weapon weapon = (G_Weapon) getEquipment().getItem(slotid);
+				if (getEquipment().getItem(slot) instanceof G_Weapon) {
+					G_Weapon weapon = (G_Weapon) getEquipment().getItem(slot);
 					setMinDmg(weapon.getMinDamage());
 					setMaxDmg(weapon.getMaxDamage());
 				}
 			} else {
-				G_Item currentItem = getEquipment().getItem(slotid);
-				extraPacketData = "char_remove " + getEntityId() + " " + slotid
+				G_Item currentItem = getEquipment().getItem(slot);
+				extraPacketData = "char_remove " + getEntityId() + " " + slot
 						+ "\n";
-				getEquipment().setItem(slotid, invItem.getItem());
+				getEquipment().setItem(slot, invItem.getItem());
 				getInventory().setItemSelected(
 						new G_InventoryItem(currentItem, 0, 0, 0));
-				if (getEquipment().getItem(slotid) instanceof G_Weapon) {
-					G_Weapon weapon = (G_Weapon) getEquipment().getItem(slotid);
+				if (getEquipment().getItem(slot) instanceof G_Weapon) {
+					G_Weapon weapon = (G_Weapon) getEquipment().getItem(slot);
 					setMinDmg(weapon.getMinDamage());
 					setMaxDmg(weapon.getMaxDamage());
 				}
-				G_Item item = getEquipment().getItem(slotid);
-				packetData = "char_wear " + getEntityId() + " " + slotid + " "
+				G_Item item = getEquipment().getItem(slot);
+				packetData = "char_wear " + getEntityId() + " " + slot + " "
 						+ item.getType() + " " + item.getGemNumber() + "\n";
 				
 			}
@@ -1398,10 +1401,22 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 						client.SendData(packetData);
 			}
 		}
-	
-	} catch (Exception e) {
-		System.out.println("wearslot bug");
 	}
+	/**
+	 * @param sessionRadius the sessionRadius to set
+	 */
+	public void setSessionRadius(int sessionRadius) {
+		G_Player.sessionRadius = sessionRadius;
+	}
+
+	/**
+	 * @return the sessionRadius
+	 */
+	public int getSessionRadius() {
+		if(G_Player.sessionRadius==null){
+			setSessionRadius(Integer.parseInt(S_Reference.getInstance().getServerReference().getItem("Server").getMemberValue("SessionRadius")));
+		}
+		return G_Player.sessionRadius;
 	}
 
 }

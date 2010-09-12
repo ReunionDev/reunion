@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.*;
 
 import com.googlecode.reunion.jreunion.game.*;
+import com.googlecode.reunion.jreunion.game.G_Enums.G_EquipmentSlot;
 
 
 /**
@@ -37,12 +38,7 @@ public class S_DatabaseUtils {
 	}
 	
 	private static S_DatabaseUtils _instance = null;
-	
-	// Private constructor vervangt de standaard public constructor
-	
-	// gesynchroniseerde creator om muti-threading problemen te voorkomen
-	// nog een controle om te voorkomen dat er meer dan 1 object wordt
-	// geinstantieerd
+
 	private synchronized static void createInstance() {
 		if (_instance == null) {
 			_instance = new S_DatabaseUtils();
@@ -78,45 +74,6 @@ public class S_DatabaseUtils {
 		
 	}
 	
-	public int getVersion() {
-		if (!checkDatabase())
-			return -1;
-		Statement stmt;
-		try {
-			stmt = database.conn.createStatement();
-			ResultSet rs = stmt
-			.executeQuery("SELECT data FROM settings WHERE id='clientversion'");
-			if (rs.next()) {
-				String s = rs.getString("data");
-				
-				return Integer.parseInt(s);
-			} else
-				return -2;
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-			return -3;
-		}
-		
-	}
-	
-	public float getSessionRadius() {
-		if (!checkDatabase())
-			return -1;
-		Statement stmt;
-		try {
-			stmt = database.conn.createStatement();
-			ResultSet rs = stmt
-			.executeQuery("SELECT data FROM settings WHERE id='sessionradius'");
-			if (rs.next())
-				return rs.getFloat("data");
-			return -1;
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-			return -1;
-		}
-		
-	}
-	
 	public String getCharList(int accountId) {
 		if (!checkDatabase())
 			return null;
@@ -128,12 +85,12 @@ public class S_DatabaseUtils {
 		try {
 			stmt = database.conn.createStatement();
 			ResultSet rs = stmt
-			.executeQuery("SELECT slotnumber,characterid FROM slots WHERE accountid="
+			.executeQuery("SELECT slot, charid FROM slots WHERE accountid="
 					+ accountId + " ;");
 			int chars=0;
 			while (rs.next()) {
 				
-				slotlist[rs.getInt("slotnumber")]=rs.getInt("characterid");
+				slotlist[rs.getInt("slot")]=rs.getInt("charid");
 				chars++;
 				
 			}
@@ -151,8 +108,6 @@ public class S_DatabaseUtils {
 				
 				if (rs.next()) {
 					
-					
-					
 					G_Equipment eq = getEquipment(slotlist[slotnr]);
 					
 					int eqHelmet = -1;
@@ -166,7 +121,7 @@ public class S_DatabaseUtils {
 					if (eq.getPants()!=null) eqPants = eq.getPants().getType();
 					if (eq.getShoulderMount()!=null) eqShoulderMount = eq.getShoulderMount().getType();
 					if (eq.getBoots()!=null) eqBoots = eq.getBoots().getType();
-					if (eq.getSecondHand()!=null) eqShield = eq.getSecondHand().getType();
+					if (eq.getOffHand()!=null) eqShield = eq.getOffHand().getType();
 					
 					charlist += "chars_exist " + slotnr + " "
 					+ rs.getString("name") + " " + rs.getString("race")
@@ -211,19 +166,12 @@ public class S_DatabaseUtils {
 		try {
 			stmt = database.conn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM equipment WHERE charid="+ charId + ";");
-			if (rs.next()) 
+			while(rs.next()) 
 			{
+				int slotId = rs.getInt("slot");
 				
-				eq.setHelmet((G_Armor)S_ItemFactory.loadItem(rs.getInt("head")));
-				eq.setArmor((G_Armor)S_ItemFactory.loadItem(rs.getInt("body")));
-				eq.setPants((G_Armor)S_ItemFactory.loadItem(rs.getInt("legs")));
-				eq.setBoots((G_Armor)S_ItemFactory.loadItem(rs.getInt("feet")));
-				eq.setFirstHand((G_Weapon)S_ItemFactory.loadItem(rs.getInt("weapon")));
-				eq.setShoulderMount(S_ItemFactory.loadItem(rs.getInt("shouldermount")));
-				eq.setBracelet((G_Bracelet)S_ItemFactory.loadItem(rs.getInt("bracelet")));
-				eq.setRing((G_Ring)S_ItemFactory.loadItem(rs.getInt("ring")));
-				eq.setNecklace((G_Necklace)S_ItemFactory.loadItem(rs.getInt("necklace")));
-				eq.setSecondHand(S_ItemFactory.loadItem(rs.getInt("shield")));
+				G_EquipmentSlot slot = G_EquipmentSlot.byValue(slotId);
+				eq.setItem(slot,S_ItemFactory.loadItem(rs.getInt("itemid")));
 			}
 			
 			
@@ -234,38 +182,6 @@ public class S_DatabaseUtils {
 		return eq;
 	}
 	
-	public void setCharWear(S_Client client, int slot, int itemType) {
-		if (!checkDatabase())
-			return;
-		String field="";
-		
-		switch(slot){
-		case 0: {field="head";break;}
-		case 1: {field="body";break;}
-		case 2: {field="legs";break;}
-		case 3: {field="shouldermount";break;}
-		case 4: {field="feet";break;}
-		case 5: {field="shield";break;}
-		case 6: {field="necklace";break;}
-		case 7: {field="ring";break;}
-		case 8: {field="bracelet";break;}
-		case 9: {field="weapon";break;}
-		default: break;
-		}
-		
-		Statement stmt;
-		try {
-			stmt = database.conn.createStatement();
-			
-			//ResultSet rs = stmt.executeQuery("SELECT * FROM equipment WHERE charid="+client.accountId+";");
-			
-			stmt.execute("INSERT INTO equipment ("+field+")VALUES ("+itemType+")WHERE charid="+client.getPlayer().getEntityId()+";");
-			
-		}catch (SQLException e1) {
-			e1.printStackTrace();
-			return;
-		}
-	}
 	
 	public G_Player loadCharStatus(int characterId){
 		G_Player player = null;
@@ -470,13 +386,17 @@ public class S_DatabaseUtils {
 		
 			saveCharStatus(player);
 			
-			stmt.execute("INSERT INTO slots (characterid, slotnumber, accountid) VALUES ("
+			stmt.execute("INSERT INTO slots (charid, slot, accountid) VALUES ("
 					+ characterId + ","
 					+ slotNumber + ","
 					+ client.getAccountId() + "); ");
 			
 			G_Armor top = (G_Armor)S_ItemFactory.createItem(326);
 			G_Armor legs = (G_Armor)S_ItemFactory.createItem(343);
+			
+			G_Equipment equipment = new G_Equipment();
+			
+			
 			G_Potion hpPot1 = (G_Potion)S_ItemFactory.createItem(145);
 			G_Potion hpPot2 = (G_Potion)S_ItemFactory.createItem(145);
 			G_Potion hpPot3 = (G_Potion)S_ItemFactory.createItem(145);
@@ -494,7 +414,7 @@ public class S_DatabaseUtils {
 				default: break;
 			}
 						
-			stmt.execute("INSERT INTO equipment (charid, head, body, legs, feet, weapon, shield, shouldermount, bracelet, ring, necklace) VALUES ("+characterId+",-1,"+top.getEntityId()+","+legs.getEntityId()+",-1,-1,-1,-1,-1,-1,-1);");
+			//stmt.execute("INSERT INTO equipment (charid, head, body, legs, feet, weapon, shield, shouldermount, bracelet, ring, necklace) VALUES ("+characterId+",-1,"+top.getEntityId()+","+legs.getEntityId()+",-1,-1,-1,-1,-1,-1,-1);");
 			
 			player.getQuickSlot().addItem(new G_QuickSlotItem(hpPot1,0));
 			saveQuickSlot(player);
@@ -520,7 +440,7 @@ public class S_DatabaseUtils {
 		try {
 			stmt = database.conn.createStatement();
 			stmt
-			.execute("DELETE FROM slots WHERE slotnumber = "
+			.execute("DELETE FROM slots WHERE slot = "
 					+ slotNumber
 					+ " and accountid = "
 					+ accountId
@@ -541,12 +461,12 @@ public class S_DatabaseUtils {
 		try {
 			stmt = database.conn.createStatement();
 			ResultSet rs = stmt
-			.executeQuery("(SELECT characterid FROM slots WHERE accountid ="
+			.executeQuery("(SELECT charid FROM slots WHERE accountid ="
 					+ accountId
-					+ " and slotnumber = "
+					+ " and slot = "
 					+ slotNumber + ");");
 			if (rs.next()) {
-				characterId = rs.getInt("characterid");
+				characterId = rs.getInt("charid");
 			}
 			
 			player = loadCharStatus(characterId);
@@ -572,11 +492,11 @@ public class S_DatabaseUtils {
 		try {
 			invStmt = database.conn.createStatement();
 			
-			ResultSet invTable = invStmt.executeQuery("SELECT * FROM inventory WHERE characterid="+player.getEntityId()+";");
+			ResultSet invTable = invStmt.executeQuery("SELECT * FROM inventory WHERE charid="+player.getEntityId()+";");
 			
 			while (invTable.next()) 
 			{
-				G_Item item = S_ItemFactory.loadItem(invTable.getInt("uniqueitemid"));
+				G_Item item = S_ItemFactory.loadItem(invTable.getInt("itemid"));
 				if (item!=null)
 				player.getInventory().addItem(invTable.getInt("x"),invTable.getInt("y"),item,invTable.getInt("tab"));
 			}
@@ -593,19 +513,26 @@ public class S_DatabaseUtils {
 		Statement stmt;
 		try {
 			stmt = database.conn.createStatement();
-			stmt.execute("DELETE FROM inventory WHERE characterid="+player.getEntityId()+";");
+			stmt.execute("DELETE FROM inventory WHERE charid="+player.getEntityId()+";");
+		
+			String query = "INSERT INTO inventory (charid, itemid, tab, x, y) VALUES ";
+			String data = "";
 			Iterator<G_InventoryItem> iter = player.getInventory().getInventoryIterator();
 			
 			while(iter.hasNext())
 			{
-				G_InventoryItem invItem = iter.next();				
+				G_InventoryItem invItem = iter.next();
 				G_Item item = invItem.getItem();
-				updateItemInfo(item);				
+				updateItemInfo(item);
 				
-				stmt.execute("INSERT INTO inventory (characterid, uniqueitemid, tab, x, y)" +
-						" VALUES ("+player.getEntityId()+ ",'"+item.getEntityId()+"',"+invItem.getTab()+
-						","+invItem.getPosX()+ ","+invItem.getPosY()+ ");");				
+				data+="("+player.getEntityId()+ ",'"+item.getEntityId()+"',"+invItem.getTab()+
+					","+invItem.getPosX()+ ","+invItem.getPosY()+ ")";			
+				if(iter.hasNext())
+					data+= ", ";
+			
 			}
+			if(!data.isEmpty())
+				stmt.execute(query+data);
 			
 		} catch (SQLException e1) {
 			e1.printStackTrace();
@@ -825,30 +752,20 @@ public class S_DatabaseUtils {
 			stmt.execute("DELETE FROM equipment WHERE charid="+player.getEntityId()+";");
 			G_Equipment eq = player.getEquipment();
 			
-			int eqHelmet = -1;
-			int eqArmor = -1;
-			int eqPants = -1;
-			int eqShoulderMount = -1;
-			int eqBoots = -1;
-			int eqFirstHand = -1;
-			int eqSecondHand = -1;
-			int eqRing = -1;
-			int eqNecklace = -1;
-			int eqBracelet = -1;
-									
-			if (eq.getHelmet()!=null) {eqHelmet = eq.getHelmet().getEntityId();updateItemInfo(eq.getHelmet());}
-			if (eq.getArmor()!=null) {eqArmor = eq.getArmor().getEntityId();updateItemInfo(eq.getArmor());}
-			if (eq.getPants()!=null) {eqPants = eq.getPants().getEntityId();updateItemInfo(eq.getPants());}
-			if (eq.getShoulderMount()!=null) {eqShoulderMount = eq.getShoulderMount().getEntityId();updateItemInfo(eq.getShoulderMount());}
-			if (eq.getBoots()!=null) {eqBoots = eq.getBoots().getEntityId();updateItemInfo(eq.getBoots());}
-			if (eq.getFirstHand()!=null) {eqFirstHand = eq.getFirstHand().getEntityId();updateItemInfo(eq.getFirstHand());}
-			if (eq.getSecondHand()!=null) {eqSecondHand = eq.getSecondHand().getEntityId();updateItemInfo(eq.getSecondHand());}
-			if (eq.getRing()!=null) {eqRing = eq.getRing().getEntityId();updateItemInfo(eq.getRing());}
-			if (eq.getNecklace()!=null) {eqNecklace = eq.getRing().getEntityId();updateItemInfo(eq.getNecklace());}
-			if (eq.getBracelet()!=null) {eqBracelet = eq.getBracelet().getEntityId();updateItemInfo(eq.getBracelet());}
-						
-			stmt.execute("INSERT INTO equipment (charid, head, body, legs, feet, weapon, shield, shouldermount, bracelet, ring, necklace)VALUES ("+player.getEntityId()+","+eqHelmet+","+eqArmor+","+eqPants+","+eqBoots+ ","+eqFirstHand+","+eqSecondHand+","+eqShoulderMount+","+eqBracelet+","+eqRing+","+eqNecklace+"); ");
-			
+			String query = "INSERT INTO equipment (charid, slot, itemid) VALUES ";
+			String data = "";
+			int playerId = player.getEntityId();
+			for(G_EquipmentSlot slot:G_EquipmentSlot.values())
+			{
+				G_Item item = eq.getItem(slot);
+				if(item!=null){
+					if(!data.isEmpty())
+						data+= ", ";
+					data+="("+playerId+","+slot.value()+","+item.getEntityId()+")";		
+				}
+			}							
+			if(!data.isEmpty())
+				stmt.execute(query+data);
 			
 		} catch (SQLException e1) {
 			e1.printStackTrace();
@@ -864,7 +781,7 @@ public class S_DatabaseUtils {
 		try {
 			Statement invStmt = database.conn.createStatement();
 			
-			ResultSet stashTable = invStmt.executeQuery("SELECT * FROM stash WHERE accountid="+client.getAccountId()+";");
+			ResultSet stashTable = invStmt.executeQuery("SELECT * FROM warehouse WHERE accountid="+client.getAccountId()+";");
 			client.getPlayer().getStash().clearStash();
 			G_Item item;
 						
@@ -876,7 +793,7 @@ public class S_DatabaseUtils {
 					S_DatabaseUtils.getInstance().loadItemInfo(item);
 				}
 				else{ 
-					item = S_ItemFactory.loadItem(stashTable.getInt("uniqueitemid"));
+					item = S_ItemFactory.loadItem(stashTable.getInt("itemid"));
 				}
 				G_StashItem stashItem =	new G_StashItem(stashTable.getInt("pos"), item);
 				client.getPlayer().getStash().addItem(stashItem);
@@ -895,14 +812,14 @@ public class S_DatabaseUtils {
 		
 		try {
 			Statement stmt = database.conn.createStatement();
-			stmt.execute("DELETE FROM stash WHERE accountid="+client.getAccountId()+";");
+			stmt.execute("DELETE FROM warehouse WHERE accountid="+client.getAccountId()+";");
 			Iterator<G_StashItem> stashIter = client.getPlayer().getStash().itemListIterator();
 			
 			while(stashIter.hasNext())
 			{
 				G_StashItem stashItem = stashIter.next();
 				
-				stmt.execute("INSERT INTO stash (accountid, pos, uniqueitemid)" +
+				stmt.execute("INSERT INTO stash (accountid, pos, itemid)" +
 						" VALUES ("+client.getAccountId()+ ","
 						+stashItem.getPos()+ ","
 						+stashItem.getItem().getEntityId()+ ");");
@@ -922,11 +839,11 @@ public class S_DatabaseUtils {
 		try {
 			Statement invStmt = database.conn.createStatement();
 			
-			ResultSet exchangeTable = invStmt.executeQuery("SELECT * FROM exchange WHERE characterid="+player.getEntityId()+";");
+			ResultSet exchangeTable = invStmt.executeQuery("SELECT * FROM exchange WHERE charid="+player.getEntityId()+";");
 						
 			while (exchangeTable.next()) 
 			{
-				G_Item item = S_ItemFactory.loadItem(exchangeTable.getInt("uniqueitemid"));
+				G_Item item = S_ItemFactory.loadItem(exchangeTable.getInt("itemid"));
 				G_ExchangeItem exchangeItem = new G_ExchangeItem(item,
 						exchangeTable.getInt("x"), exchangeTable.getInt("y"));
 				
@@ -946,7 +863,7 @@ public class S_DatabaseUtils {
 		
 		try {
 			Statement stmt = database.conn.createStatement();
-			stmt.execute("DELETE FROM exchange WHERE characterid="+player.getEntityId()+";");
+			stmt.execute("DELETE FROM exchange WHERE charid="+player.getEntityId()+";");
 			
 			Iterator<G_ExchangeItem> exchangeIter = player.getExchange().itemListIterator();
 			
@@ -954,7 +871,7 @@ public class S_DatabaseUtils {
 			{
 				G_ExchangeItem exchangeItem = exchangeIter.next();
 				
-				stmt.execute("INSERT INTO exchange (characterid, uniqueitemid, x, y)" +
+				stmt.execute("INSERT INTO exchange (charid, itemid, x, y)" +
 						" VALUES ("+player.getEntityId()+ ","
 								   +exchangeItem.getItem().getEntityId()+","
 								   +exchangeItem.getPosX()+","
@@ -994,11 +911,11 @@ public class S_DatabaseUtils {
 		try {
 			Statement invStmt = database.conn.createStatement();
 			
-			ResultSet quickSlotTable = invStmt.executeQuery("SELECT * FROM quickslot WHERE characterid="+player.getEntityId()+";");
+			ResultSet quickSlotTable = invStmt.executeQuery("SELECT * FROM quickslot WHERE charid="+player.getEntityId()+";");
 						
 			while (quickSlotTable.next()) 
 			{
-				G_Item item = S_ItemFactory.loadItem(quickSlotTable.getInt("uniqueitemid"));
+				G_Item item = S_ItemFactory.loadItem(quickSlotTable.getInt("itemid"));
 				G_QuickSlotItem quickSlotItem = new G_QuickSlotItem(item,quickSlotTable.getInt("slot"));
 				
 				player.getQuickSlot().addItem(quickSlotItem);
@@ -1017,7 +934,7 @@ public class S_DatabaseUtils {
 		
 		try {
 			Statement stmt = database.conn.createStatement();
-			stmt.execute("DELETE FROM quickslot WHERE characterid="+player.getEntityId()+";");
+			stmt.execute("DELETE FROM quickslot WHERE charid="+player.getEntityId()+";");
 			
 			Iterator<G_QuickSlotItem> qsIter = player.getQuickSlot().getQuickSlotIterator();
 			
@@ -1025,7 +942,7 @@ public class S_DatabaseUtils {
 			{
 				G_QuickSlotItem qsItem = qsIter.next();
 				
-				stmt.execute("INSERT INTO quickslot (characterid, uniqueitemid, slot)" +
+				stmt.execute("INSERT INTO quickslot (charid, itemid, slot)" +
 						" VALUES ("+player.getEntityId()+ ","+qsItem.getItem().getEntityId()+","
 						+qsItem.getSlot()+");");
 			}

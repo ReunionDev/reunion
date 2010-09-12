@@ -29,7 +29,6 @@ public class S_Command {
 
 	public S_Command(S_World parent) {
 		super();
-
 		world = parent;
 	}
 
@@ -97,11 +96,11 @@ public class S_Command {
 		if (eq.getBoots() != null) {
 			eqBoots = eq.getBoots().getType();
 		}
-		if (eq.getFirstHand() != null) {
-			eqFirstHand = eq.getFirstHand().getType();
+		if (eq.getMainHand() != null) {
+			eqFirstHand = eq.getMainHand().getType();
 		}
-		if (eq.getSecondHand() != null) {
-			eqSecondHand = eq.getSecondHand().getType();
+		if (eq.getOffHand() != null) {
+			eqSecondHand = eq.getOffHand().getType();
 		}
 
 		int percentageHp = player2.getCurrHp() * 100 / player2.getMaxHp();
@@ -268,7 +267,7 @@ public class S_Command {
 
 			int distance = pl.getDistance(player);
 
-			if (distance <= S_DatabaseUtils.getInstance().getSessionRadius()) {
+			if (distance <= session.getSessionOwner().getSessionRadius()) {
 				session.enterPlayer(player, 1);
 				player.getSession().enterPlayer(pl, 0);
 			}
@@ -289,24 +288,12 @@ public class S_Command {
 		client.SendData(packetData);
 		
 		S_Server.getInstance().getWorldModule().getTeleportManager().register(player, map);
+	
+	
+		S_Session session = player.getSession();
 		
-		
-		Iterator<S_Session> iter = S_Server.getInstance().getWorldModule().getSessionManager().getSessionListIterator();
-		while(iter.hasNext()){
-			S_Session session = iter.next();
-			if(player==session.getSessionOwner()){
-				
-				Iterator<G_Npc> npcIter = session.getNpcListIterator();
-				List<G_Npc> npcs = new ArrayList<G_Npc>();
-				while(npcIter.hasNext()){
-					npcs.add(npcIter.next());
-				}	
-				for(G_Npc npc: npcs){
-					session.exitNpc(npc);						
-				}
-			}
-		}
-		
+		//flush the session
+		session.empty();
 		
 		InetSocketAddress address = map.getAddress();
 				
@@ -428,11 +415,11 @@ public class S_Command {
 			eqBootsGem = eq.getBoots().getGemNumber();
 			eqBootsExtra = eq.getBoots().getExtraStats();
 		}
-		if (eq.getSecondHand() != null) {
-			eqShieldType = eq.getSecondHand().getType();
-			eqShieldId = eq.getSecondHand().getEntityId();
-			eqShieldGem = eq.getSecondHand().getGemNumber();
-			eqShieldExtra = eq.getSecondHand().getExtraStats();
+		if (eq.getOffHand() != null) {
+			eqShieldType = eq.getOffHand().getType();
+			eqShieldId = eq.getOffHand().getEntityId();
+			eqShieldGem = eq.getOffHand().getGemNumber();
+			eqShieldExtra = eq.getOffHand().getExtraStats();
 		}
 		if (eq.getRing() != null) {
 			eqRingType = eq.getRing().getType();
@@ -452,11 +439,11 @@ public class S_Command {
 			eqBraceletGem = eq.getBracelet().getGemNumber();
 			eqBraceletExtra = eq.getBracelet().getExtraStats();
 		}
-		if (eq.getFirstHand() != null) {
-			eqWeaponType = eq.getFirstHand().getType();
-			eqWeaponId = eq.getFirstHand().getEntityId();
-			eqWeaponGem = eq.getFirstHand().getGemNumber();
-			eqWeaponExtra = eq.getFirstHand().getExtraStats();
+		if (eq.getMainHand() != null) {
+			eqWeaponType = eq.getMainHand().getType();
+			eqWeaponId = eq.getMainHand().getEntityId();
+			eqWeaponGem = eq.getMainHand().getGemNumber();
+			eqWeaponExtra = eq.getMainHand().getExtraStats();
 		}
 
 		player.getCharSkill().loadSkillList(player.getRace());

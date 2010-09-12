@@ -39,8 +39,8 @@ public class G_HumanPlayer extends G_Player {
 
 		newHp = mob.getCurrHp() - getBaseDmg(this);
 
-		if (getEquipment().getFirstHand() != null) {
-			getEquipment().getFirstHand().consumn(this);
+		if (getEquipment().getMainHand() != null) {
+			getEquipment().getMainHand().consumn(this);
 		}
 
 		if (newHp <= 0) {

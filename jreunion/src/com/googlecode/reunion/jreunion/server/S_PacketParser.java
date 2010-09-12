@@ -4,6 +4,8 @@ package com.googlecode.reunion.jreunion.server;
 import java.awt.geom.Rectangle2D;
 import java.util.Random;
 
+import com.googlecode.reunion.jcommon.S_ParsedItem;
+import com.googlecode.reunion.jreunion.game.G_Enums.G_EquipmentSlot;
 import com.googlecode.reunion.jreunion.game.G_Merchant;
 import com.googlecode.reunion.jreunion.game.G_Mob;
 import com.googlecode.reunion.jreunion.game.G_Npc;
@@ -36,15 +38,13 @@ public class S_PacketParser {
 				+ client + " with state: " + client.getState() + "");
 		switch (client.getState()) {
 		case DISCONNECTED: {
-
 			break;
 		}
 		case ACCEPTED: {
-			if (Integer.parseInt(message[0]) == S_DatabaseUtils.getInstance()
-					.getVersion()) {
+			try{
+			if (message[0].equals(S_Reference.getInstance().getServerReference().getItem("Server").getMemberValue("Version"))) {
 				System.out.println("Got Version");
 				client.setState(S_ClientState.GOT_VERSION);
-
 				break;
 			} else {
 				System.out.println("Inconsistent version (err 1) detected on: "
@@ -52,6 +52,11 @@ public class S_PacketParser {
 				client.sendWrongVersion(Integer.parseInt(message[0]));
 				client.setState(S_ClientState.DISCONNECTED);
 				break;
+			}
+			}catch(Exception e)
+			{
+				e.printStackTrace();
+				S_Server.getInstance().getNetworkModule().Disconnect(client);
 			}
 
 		}
@@ -317,7 +322,9 @@ public class S_PacketParser {
 									message[3].length() - 1)));
 				}
 			} else if (message[0].equals("wear")) {
-				client.getPlayer().wearSlot(Integer.parseInt(message[1]));
+				int slotId = Integer.parseInt(message[1]);
+				G_EquipmentSlot slot =G_EquipmentSlot.byValue(slotId);
+				client.getPlayer().wearSlot(slot);
 				// com.getPlayer()Wear(client.getPlayer()Object,Integer.parseInt(message[1]));
 			} else if (message[0].equals("use_skill")) {
 				try {

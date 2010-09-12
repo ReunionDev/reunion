@@ -1,5 +1,7 @@
 package com.googlecode.reunion.jreunion.server;
 
+import com.googlecode.reunion.jcommon.S_Parser;
+
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt

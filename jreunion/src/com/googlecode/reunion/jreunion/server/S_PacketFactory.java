@@ -20,8 +20,7 @@ public class S_PacketFactory {
 		case VERSION_ERROR: {
 			if (arg.length == 1) {
 				String clientVersion = (String) arg[0];
-				String requiredVersion = String.valueOf(S_DatabaseUtils
-						.getInstance().getVersion());
+				String requiredVersion = S_Reference.getInstance().getServerReference().getItem("Server").getMemberValue("Version");
 				return "fail Wrong clientversion: current version "
 						+ clientVersion + " required version "
 						+ requiredVersion + "\n";

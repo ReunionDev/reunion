@@ -1,5 +1,8 @@
 package com.googlecode.reunion.jreunion.server;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
@@ -14,11 +17,11 @@ import com.googlecode.reunion.jreunion.game.G_Player;
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
 public class S_Session {
-	private List<G_Player> playerList = new Vector<G_Player>();
+	private List<G_Player> playerList = new ArrayList<G_Player>();
 
-	private List<G_Npc> npcList = new Vector<G_Npc>();
+	private List<G_Npc> npcList = new ArrayList<G_Npc>();
 
-	private List<G_Mob> mobList = new Vector<G_Mob>();
+	private List<G_Mob> mobList = new ArrayList<G_Mob>();
 
 	private boolean sessionActive = false;
 
@@ -236,6 +239,30 @@ public class S_Session {
 			// exitPlayer((Player)removeList.get(i));
 
 		}
+	}
 
+	public void empty() {
+		
+		List<G_Npc> npcs = new ArrayList<G_Npc>();
+		Collections.copy(this.npcList, npcs);	
+		for(G_Npc npc: npcs){
+			this.exitNpc(npc);						
+		}
+		npcs.clear();
+		
+		List<G_Mob> mobs = new ArrayList<G_Mob>();
+		Collections.copy(this.mobList, mobs);	
+		for(G_Mob mob: mobs){
+			this.exitMob(mob);						
+		}
+		mobs.clear();
+		
+		List<G_Player> players = new ArrayList<G_Player>();
+		Collections.copy(this.playerList, players);	
+		for(G_Player player: players){
+			this.exitPlayer(player);
+		}
+		players.clear();
+		
 	}
 }

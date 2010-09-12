@@ -72,6 +72,10 @@ public class S_Server extends S_ClassModule {
 	public S_Server() throws Exception {
 
 		super();
+		byte [] buffer = new byte[1];
+		buffer[0]=(byte)0x72;
+		System.out.println(S_Crypt.getInstance().C2Sdecrypt(buffer));
+		
 		S_RemoteAdmin.enableRemoteAdmin();
 		S_PrintStream.useFileLogging();
 		S_PerformanceStats.createPerformanceStats(this);

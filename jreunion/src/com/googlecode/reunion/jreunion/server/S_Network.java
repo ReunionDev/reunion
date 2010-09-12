@@ -179,16 +179,14 @@ public class S_Network extends S_ClassModule {
 		
 		if(client!=null) {
 			System.out
-			.println("Disconnecting "
-					+ client.getClientSocket());
+			.println("Disconnecting " + client);
 			try {
 				client.getClientSocket().close();
 			} catch (IOException e) {
 				// e.printStackTrace();
 			}
 			if (client.getPlayer() != null) {
-				client.getPlayer().logout();
-			
+				client.getPlayer().logout();			
 			}
 			clientList.remove(client.getClientSocket());
 		}
