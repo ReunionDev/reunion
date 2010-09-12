@@ -35,7 +35,7 @@ public class G_BulkanPlayer extends G_Player {
 		randDmg = getMinDmg()
 				+ (int) (Math.random() * (getMaxDmg() - getMinDmg()));
 
-		baseDmg = (randDmg + getLevel() / 6 + getStr() / 4 + getDex() / 4 + getCons() / 8);
+		baseDmg = (randDmg + getLevel() / 6 + getStr() / 4 + getDexterity() / 4 + getConstitution() / 8);
 
 		if (getEquipment().getMainHand() instanceof G_Sword) {
 			baseDmg = (int) (baseDmg + baseDmg

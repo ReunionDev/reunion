@@ -143,6 +143,10 @@ public class S_Client {
 		
 		return value;
 	}
+
+	public void disconnect() {
+		S_Server.getInstance().getNetworkModule().disconnect(this);		
+	}
 	
 
 }

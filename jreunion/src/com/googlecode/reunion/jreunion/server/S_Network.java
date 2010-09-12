@@ -27,20 +27,16 @@ import com.googlecode.reunion.jreunion.server.S_Enums.S_ClientState;
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
 public class S_Network extends S_ClassModule {
+	
 	Queue<S_PacketQueueItem> queue = new LinkedList<S_PacketQueueItem>();
 
 	private final ByteBuffer buffer = ByteBuffer.allocate(16384);
 	
-	//List<S_Client> clientList = new Vector<S_Client>();
-	Map<Socket,S_Client> clientList = new Hashtable<Socket,S_Client>();
-	
+	Map<Socket,S_Client> clients = new Hashtable<Socket,S_Client>();
 	
 	public List<ServerSocketChannel> channels = new Vector<ServerSocketChannel>();
 
-	//private ServerSocketChannel serverChannel;
-
 	private Selector selector;
-
 
 	public S_Network(S_Module parent) {
 		super(parent);
@@ -60,7 +56,7 @@ public class S_Network extends S_ClassModule {
 				// again
 			
 				if (num == 0) {
-					break;// continue;
+					return;
 				}
 				
 				// Get the keys corresponding to the activity
@@ -96,8 +92,7 @@ public class S_Network extends S_ClassModule {
 						// use a selector on it.
 						SocketChannel sc = client.getClientSocket().getChannel();
 						sc.configureBlocking(false);
-						clientList.put(socket, client);
-						
+						clients.put(socket, client);						
 						
 						// Register it with the selector, for reading
 						sc.register(selector, SelectionKey.OP_READ);
@@ -127,15 +122,8 @@ public class S_Network extends S_ClassModule {
 							// selector
 							key.cancel();
 							Socket socket = sc.socket();							
-							S_Client client = clientList.get(socket);
-							Disconnect(client);					
-							
-							try {
-								sc.close();
-							} catch (IOException ie2) {
-								System.err.println(ie2);
-							}
-
+							S_Client client = clients.get(socket);
+							disconnect(client);
 						}
 					}
 				}
@@ -168,27 +156,28 @@ public class S_Network extends S_ClassModule {
 				sc.write(buffer);
 			} catch (IOException e) {
 				e.printStackTrace();
-				Disconnect(client);				
+				disconnect(client);				
 			}
 			packet = queue.poll();
 		}
 		return;
 	}
 
-	public void Disconnect(S_Client client) {
+	public void disconnect(S_Client client) {
 		
 		if(client!=null) {
+			Socket socket= client.getClientSocket();
 			System.out
 			.println("Disconnecting " + client);
 			try {
-				client.getClientSocket().close();
+				socket.close();
 			} catch (IOException e) {
 				// e.printStackTrace();
 			}
 			if (client.getPlayer() != null) {
 				client.getPlayer().logout();			
 			}
-			clientList.remove(client.getClientSocket());
+			clients.remove(socket);
 		}
 	}
 
@@ -206,7 +195,7 @@ public class S_Network extends S_ClassModule {
 	}
 
 	public Iterator<S_Client> getClientIterator() {
-		return clientList.values().iterator();
+		return clients.values().iterator();
 	}
 
 	// Do some cheesy encryption on the incoming data,
@@ -217,7 +206,7 @@ public class S_Network extends S_ClassModule {
 		sc.read(buffer);
 		buffer.flip();
 		Socket socket = sc.socket();
-		S_Client client = clientList.get(socket);
+		S_Client client = clients.get(socket);
 		
 		if (client == null) {
 			return false;
@@ -280,23 +269,15 @@ public class S_Network extends S_ClassModule {
 						+ " not available. Is the server already running?");
 				throw new RuntimeException(e);
 			}
-
 		}
 	}
-	
 
 	@Override
 	public void Stop() {
 		System.out.println("net stop");
-		try {
-			for(ServerSocketChannel channel : channels){				
-					channel.close();				
-			}
-			for(S_Client client : clientList.values()){				
-				Disconnect(client);			
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
+		
+		for(ServerSocketChannel channel : channels){				
+			disconnect(clients.get(channel.socket()));			
 		}
 	}
 

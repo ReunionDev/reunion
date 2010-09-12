@@ -55,7 +55,7 @@ public class S_PacketParser {
 			}catch(Exception e)
 			{
 				e.printStackTrace();
-				S_Server.getInstance().getNetworkModule().Disconnect(client);
+				client.disconnect();
 			}
 
 		}
@@ -169,9 +169,6 @@ public class S_PacketParser {
 				
 				int defaultSpawnId = Integer.parseInt(S_Reference.getInstance().getMapReference().getItemById(player.getMap().getId()).getMemberValue("DefaultSpawnId"));
 				S_ParsedItem spawn =player.getMap().getPlayerSpawnReference().getItemById(defaultSpawnId);
-				System.out.println(player.getMap());
-				System.out.println(defaultSpawnId);
-				System.out.println(spawn);				
 				
 				int x = Integer.parseInt(spawn.getMemberValue("X"));
 				int y = Integer.parseInt(spawn.getMemberValue("Y"));
@@ -210,17 +207,17 @@ public class S_PacketParser {
 				// "pstatus 13 2 0 0\n");
 
 				player.updateStatus(0, player.getCurrHp(),
-						player.getStr() * 1 + player.getCons() * 2);
+						player.getStr() * 1 + player.getConstitution() * 2);
 				player.updateStatus(1, player.getCurrMana(),
-						player.getWis() * 2 + player.getDex() * 1);
+						player.getWis() * 2 + player.getDexterity() * 1);
 				player.updateStatus(2, player.getCurrStm(),
-						player.getStr() * 2 + player.getCons() * 1);
+						player.getStr() * 2 + player.getConstitution() * 1);
 				player.updateStatus(3, player.getCurrElect(),
-						player.getWis() * 1 + player.getDex() * 2);
+						player.getWis() * 1 + player.getDexterity() * 2);
 				player.updateStatus(13, -player.getStatusPoints(), 0);
 
-				int statusPoints = player.getStr() + player.getWis() + player.getDex()
-						+ player.getCons() + player.getLead() - 80;
+				int statusPoints = player.getStr() + player.getWis() + player.getDexterity()
+						+ player.getConstitution() + player.getLeadership() - 80;
 				player.updateStatus(13, (player.getLevel() - 1) * 3 - statusPoints, 0);
 
 				S_Server.getInstance().getWorldModule().getTeleportManager().remove(player);

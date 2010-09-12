@@ -18,7 +18,7 @@ public class G_HumanPlayer extends G_Player {
 				+ (int) (Math.random() * (player.getMaxDmg() - player
 						.getMinDmg()));
 
-		baseDmg = (randDmg + getLevel() / 6 + getStr() + getDex() / 4);
+		baseDmg = (randDmg + getLevel() / 6 + getStr() + getDexterity() / 4);
 
 		return baseDmg;
 	}

@@ -35,9 +35,7 @@ public class S_Command {
 		if (accountId == -1) {
 			System.out.println("Invalid Login");
 			// S_Server.getInstance().networkModule.Disconnect(networkId);
-		
-					client.SendData(
-							"fail Username and password combination is invalid\n");
+			client.SendData("fail Username and password combination is invalid\n");
 		} else {
 
 			System.out.println("" + client + " authed as account("
@@ -69,7 +67,7 @@ public class S_Command {
 			combat = 1;
 		}
 
-		G_Equipment eq = S_DatabaseUtils.getInstance().getEquipment(
+		G_Equipment eq = S_DatabaseUtils.getInstance().loadEquipment(
 				player2.getEntityId());
 
 		int eqHelmet = -1;
@@ -123,7 +121,7 @@ public class S_Command {
 		// [Boots] [Shield] [Weapon] [Hp%] [CombatMode] 0 0 0 [Boosted] [PKMode]
 		// 0 [Guild]
 		// [MemberType] 1
-				client.SendData( packetData);
+		client.SendData( packetData);
 		// serverTell(player, "char in id "+ePlayer.getEntityId());
 	}
 
@@ -147,7 +145,7 @@ public class S_Command {
 			int race, int sex, int hair, int str, int intel, int dex, int con,
 			int lea) {
 		if (S_DatabaseUtils.getInstance().getCharNameFree(charName)) {
-			S_DatabaseUtils.getInstance().CreateChar(client, slotNumber,
+			S_DatabaseUtils.getInstance().createChar(client, slotNumber,
 					charName, race, sex, hair, str, intel, dex, con, lea);
 		}
 
@@ -369,8 +367,8 @@ public class S_Command {
 			return null;
 		}
 
-		G_Equipment eq = S_DatabaseUtils.getInstance().getEquipment(
-				player.getEntityId());
+		S_DatabaseUtils.getInstance().loadEquipment(player);
+		G_Equipment eq = player.getEquipment();
 
 		int eqHelmetType = -1, eqHelmetId = -1, eqHelmetGem = 0, eqHelmetExtra = 0;
 		int eqArmorType = -1, eqArmorId = -1, eqArmorGem = 0, eqArmorExtra = 0;
@@ -452,7 +450,7 @@ public class S_Command {
 		S_DatabaseUtils.getInstance().loadQuickSlot(player);
 
 		world.getSessionManager().newSession(player);
-		player.setEquipment(eq);
+		
 		
 		
 		S_Map map = S_Server.getInstance().getWorldModule().getTeleportManager().getDestination(player);
@@ -460,7 +458,8 @@ public class S_Command {
 		{
 			if(client.getLoginType()==S_LoginType.PLAY) {
 				System.err.println("Got a play login while no teleport for this player was pending"+client.getPlayer());
-				S_Server.getInstance().getNetworkModule().Disconnect(client);	
+				client.disconnect();
+				
 				return null;
 			}
 			int mapId = Integer.parseInt(S_Reference.getInstance().getServerReference().getItem("Server").getMemberValue("DefaultMap"));			

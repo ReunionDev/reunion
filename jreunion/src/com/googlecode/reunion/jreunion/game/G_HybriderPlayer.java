@@ -19,7 +19,7 @@ public class G_HybriderPlayer extends G_Player {
 				+ (int) (Math.random() * (player.getMaxDmg() - player
 						.getMinDmg()));
 
-		baseDmg = (randDmg + getLevel() / 6 + getStr() / 4 + getDex() / 4 + getCons() / 8);
+		baseDmg = (randDmg + getLevel() / 6 + getStr() / 4 + getDexterity() / 4 + getConstitution() / 8);
 
 		return baseDmg;
 	}

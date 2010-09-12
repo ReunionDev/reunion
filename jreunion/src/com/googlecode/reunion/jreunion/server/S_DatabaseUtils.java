@@ -129,7 +129,7 @@ public class S_DatabaseUtils {
 				
 				if (rs.next()) {
 					
-					G_Equipment eq = getEquipment(slotlist[slotnr]);
+					G_Equipment eq = loadEquipment(slotlist[slotnr]);
 					
 					int eqHelmet = -1;
 					int eqArmor = -1;
@@ -179,20 +179,21 @@ public class S_DatabaseUtils {
 		return charlist;
 	}
 	
-	public G_Equipment getEquipment(int charId) {
-		G_Equipment eq = new G_Equipment();
+	public G_Equipment loadEquipment(int charid) {
+		
+		G_Equipment equipment = new G_Equipment();
 		if (!checkDatabase())
 			return null;
 		Statement stmt;
 		try {
 			stmt = database.conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT * FROM equipment WHERE charid="+ charId + ";");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM equipment WHERE charid="+ charid + ";");
 			while(rs.next()) 
 			{
 				int slotId = rs.getInt("slot");
 				
 				G_EquipmentSlot slot = G_EquipmentSlot.byValue(slotId);
-				eq.setItem(slot,S_ItemFactory.loadItem(rs.getInt("itemid")));
+				equipment.setItem(slot,S_ItemFactory.loadItem(rs.getInt("itemid")));
 			}
 			
 			
@@ -200,7 +201,13 @@ public class S_DatabaseUtils {
 			e1.printStackTrace();
 			
 		}
-		return eq;
+		return equipment;
+		
+	}
+
+	public void loadEquipment(G_Player player) {
+		G_Equipment equipment = loadEquipment(player.getEntityId());
+		player.setEquipment(equipment);
 	}
 	
 	
@@ -278,9 +285,9 @@ public class S_DatabaseUtils {
 								    +player.getLevel()+ ","
 								    +player.getStr()+ ","
 								    +player.getWis()+ ","
-								    +player.getDex()+ ","
-								    +player.getCons()+ ","
-								    +player.getLead()+ ","
+								    +player.getDexterity()+ ","
+								    +player.getConstitution()+ ","
+								    +player.getLeadership()+ ","
 								    +player.getRace()+ ","
 								    +player.getSex()+ ","
 								    +player.getHairStyle()+ ","
@@ -363,7 +370,7 @@ public class S_DatabaseUtils {
 		}
 	}
 	
-	public void CreateChar(S_Client client, int slotNumber, String charName,
+	public void createChar(S_Client client, int slot, String charName,
 			int race, int sex, int hairStyle, int str, int wis, int dex, int con,
 			int lead) {
 		if (!checkDatabase())
@@ -409,14 +416,8 @@ public class S_DatabaseUtils {
 			
 			stmt.execute("INSERT INTO slots (charid, slot, accountid) VALUES ("
 					+ characterId + ","
-					+ slotNumber + ","
+					+ slot + ","
 					+ client.getAccountId() + "); ");
-			
-			G_Armor top = (G_Armor)S_ItemFactory.createItem(326);
-			G_Armor legs = (G_Armor)S_ItemFactory.createItem(343);
-			
-			G_Equipment equipment = new G_Equipment();
-			
 			
 			G_Potion hpPot1 = (G_Potion)S_ItemFactory.createItem(145);
 			G_Potion hpPot2 = (G_Potion)S_ItemFactory.createItem(145);
@@ -434,8 +435,13 @@ public class S_DatabaseUtils {
 				case 4: {weapon = (G_Sword)S_ItemFactory.createItem(168); break;}
 				default: break;
 			}
-						
-			//stmt.execute("INSERT INTO equipment (charid, head, body, legs, feet, weapon, shield, shouldermount, bracelet, ring, necklace) VALUES ("+characterId+",-1,"+top.getEntityId()+","+legs.getEntityId()+",-1,-1,-1,-1,-1,-1,-1);");
+			G_Equipment equipment = player.getEquipment();
+			G_Armor chest = (G_Armor)S_ItemFactory.createItem(326);
+			G_Armor pants = (G_Armor)S_ItemFactory.createItem(343);
+			
+			equipment.setItem(G_EquipmentSlot.CHEST, chest);
+			equipment.setItem(G_EquipmentSlot.PANTS, pants);
+			saveEquipment(player);
 			
 			player.getQuickSlot().addItem(new G_QuickSlotItem(hpPot1,0));
 			saveQuickSlot(player);

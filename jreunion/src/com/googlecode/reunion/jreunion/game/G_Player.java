@@ -3,6 +3,7 @@ package com.googlecode.reunion.jreunion.game;
 import java.awt.Rectangle;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 import java.util.Vector;
 
 import com.googlecode.reunion.jcommon.S_ParsedItem;
@@ -104,7 +105,6 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 		attackQueue.add(attack);
 	}
 
-	// public abstract int getBaseDmg(G_LivingObject livingObject);
 
 	public void charCombat(int combat) {
 
@@ -224,7 +224,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 		return combatMode;
 	}
 
-	public int getCons() {
+	public int getConstitution() {
 		return cons;
 	}
 
@@ -232,7 +232,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 		return def;
 	}
 
-	public int getDex() {
+	public int getDexterity() {
 		return dex;
 	}
 
@@ -285,7 +285,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 		return inventory;
 	}
 
-	public int getLead() {
+	public int getLeadership() {
 		return lead;
 	}
 
@@ -335,34 +335,23 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 		throw new RuntimeException("Unknown race: "+this);
 	}
 
-	public void getRespawnCoords(int mapId) {
+	public void spawn() {
+		
+		int defaultSpawnId = Integer.parseInt(S_Reference.getInstance().getMapReference().getItemById(getMap().getId()).getMemberValue("DefaultSpawnId"));
+		S_ParsedItem defaultSpawn =getMap().getPlayerSpawnReference().getItemById(defaultSpawnId);
+				
 		S_Parser playerSpawns = getMap().getPlayerSpawnReference();
 		Iterator<S_ParsedItem> iter = playerSpawns.getItemListIterator();
 
 		while (iter.hasNext()) {
-			S_ParsedItem i = iter.next();
+			S_ParsedItem item = iter.next();
 
-			if (i.getName().equals("Default")) {
-				S_Server.getInstance()
-						.getWorldModule()
-						.getWorldCommand()
-						.GoToPos(
-								this,
-								Integer.parseInt(i.getMemberValue("respawnx"))
-										+ (int) (Integer.parseInt(i
-												.getMemberValue("respawnwidth")) * Math
-												.random()),
-								Integer.parseInt(i.getMemberValue("respawny"))
-										+ (int) (Integer.parseInt(i
-												.getMemberValue("respawnheight")) * Math
-												.random()));
-				return;
-			} else {
-				Rectangle rectangle = new Rectangle(Integer.parseInt(i
-						.getMemberValue("targetx")), Integer.parseInt(i
-						.getMemberValue("targety")), Integer.parseInt(i
-						.getMemberValue("targetwidth")), Integer.parseInt(i
-						.getMemberValue("targetheight")));
+			if (Integer.parseInt(item.getMemberValue("Id"))!=defaultSpawnId) {
+				Rectangle rectangle = new Rectangle(Integer.parseInt(item
+						.getMemberValue("TargetX")), Integer.parseInt(item
+						.getMemberValue("TargetY")), Integer.parseInt(item
+						.getMemberValue("TargetWidth")), Integer.parseInt(item
+						.getMemberValue("TargetHeight")));
 
 				if (rectangle.contains(getPosX(), getPosY())) {
 					S_Server.getInstance()
@@ -370,20 +359,34 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 							.getWorldCommand()
 							.GoToPos(
 									this,
-									Integer.parseInt(i
-											.getMemberValue("respawnx"))
-											+ (int) (Integer.parseInt(i
-													.getMemberValue("respawnwidth")) * Math
+									Integer.parseInt(item
+											.getMemberValue("X"))
+											+ (int) (Integer.parseInt(item
+													.getMemberValue("Width")) * Math
 													.random()),
-									Integer.parseInt(i
-											.getMemberValue("respawny"))
-											+ (int) (Integer.parseInt(i
-													.getMemberValue("respawnheight")) * Math
+									Integer.parseInt(item
+											.getMemberValue("Y"))
+											+ (int) (Integer.parseInt(item
+													.getMemberValue("Height")) * Math
 													.random()));
 					return;
 				}
 			}
 		}
+		
+		int x = Integer.parseInt(defaultSpawn.getMemberValue("X"));
+		int y = Integer.parseInt(defaultSpawn.getMemberValue("Y"));
+		int width = Integer.parseInt(defaultSpawn.getMemberValue("Width"));
+		int height = Integer.parseInt(defaultSpawn.getMemberValue("Height"));
+		
+		Random rand = new Random(System.currentTimeMillis());
+		int spawnX = x+(width>0?rand.nextInt(width):0);
+		int spawnY = y+(height>0?rand.nextInt(height):0);
+		
+		S_Server.getInstance()
+		.getWorldModule()
+		.getWorldCommand()
+		.GoToPos(this,spawnX,spawnY);
 	}
 
 	public boolean getRunMode() {
@@ -740,16 +743,9 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 	public void revive() {
 
 		updateStatus(0, getMaxHp(), getMaxHp());
-		switch (getMap().getId()) {
-		case 4: {
-			getRespawnCoords(4);
-			break;
-		}
-		default: {
-			getRespawnCoords(-1);
-			break;
-		}
-		}
+		
+		spawn();
+		
 
 		Iterator<S_Session> sessionIter = S_Server.getInstance()
 				.getWorldModule().getSessionManager().getSessionListIterator();
@@ -1232,14 +1228,14 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 			if (getStatusPoints() <= 0) {
 				return;
 			}
-			setDexterity(getDex() + curr);
-			packetData = "status " + id + " " + getDex() + " " + max + "\n";
+			setDexterity(getDexterity() + curr);
+			packetData = "status " + id + " " + getDexterity() + " " + max + "\n";
 			
 					client.SendData(packetData);
-			S_DatabaseUtils.getInstance().updateCharStatus(this, id, getDex());
+			S_DatabaseUtils.getInstance().updateCharStatus(this, id, getDexterity());
 
-			updateStatus(1, getCurrMana(), getMaxMana() + (getDex() / 50) + 1);
-			updateStatus(3, getCurrElect(), getMaxElect() + (getDex() / 50) + 2);
+			updateStatus(1, getCurrMana(), getMaxMana() + (getDexterity() / 50) + 1);
+			updateStatus(3, getCurrElect(), getMaxElect() + (getDexterity() / 50) + 2);
 			updateStatus(13, -1, 0);
 			break;
 		}
@@ -1247,14 +1243,14 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 			if (getStatusPoints() <= 0) {
 				return;
 			}
-			setConstitution(getCons() + curr);
-			packetData = "status " + id + " " + getCons() + " " + max + "\n";
+			setConstitution(getConstitution() + curr);
+			packetData = "status " + id + " " + getConstitution() + " " + max + "\n";
 			
 					client.SendData(packetData);
-			S_DatabaseUtils.getInstance().updateCharStatus(this, id, getCons());
+			S_DatabaseUtils.getInstance().updateCharStatus(this, id, getConstitution());
 
-			updateStatus(0, getCurrHp(), getMaxHp() + (getCons() / 50) + 2);
-			updateStatus(2, getCurrStm(), getMaxStm() + (getCons() / 50) + 1);
+			updateStatus(0, getCurrHp(), getMaxHp() + (getConstitution() / 50) + 2);
+			updateStatus(2, getCurrStm(), getMaxStm() + (getConstitution() / 50) + 1);
 			updateStatus(13, -1, 0);
 			break;
 		}
@@ -1262,13 +1258,13 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 			if (getStatusPoints() <= 0) {
 				return;
 			}
-			setLeadership(getLead() + curr);
-			packetData = "status " + id + " " + getLead() + " " + max + "\n";
+			setLeadership(getLeadership() + curr);
+			packetData = "status " + id + " " + getLeadership() + " " + max + "\n";
 			
 					client.SendData(packetData);
-			S_DatabaseUtils.getInstance().updateCharStatus(this, id, getLead());
+			S_DatabaseUtils.getInstance().updateCharStatus(this, id, getLeadership());
 
-			if (getLead() % 2 == 0) {
+			if (getLeadership() % 2 == 0) {
 				updateStatus(0, getCurrHp(), getMaxHp() + 1);
 				updateStatus(1, getCurrMana(), getMaxMana() + 1);
 				updateStatus(2, getCurrStm(), getMaxStm() + 1);

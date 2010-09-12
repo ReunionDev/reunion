@@ -18,7 +18,7 @@ public class G_AidiaPlayer extends G_Player {
 				+ (int) (Math.random() * (player.getMaxDmg() - player
 						.getMinDmg()));
 
-		baseDmg = (randDmg + getLevel() / 5 + getWis() / 3 + getLead());
+		baseDmg = (randDmg + getLevel() / 5 + getWis() / 3 + getLeadership());
 
 		return baseDmg;
 	}
