@@ -1,6 +1,5 @@
 package com.googlecode.reunion.jreunion.server;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

@@ -1,11 +1,9 @@
 package com.googlecode.reunion.jreunion.server;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.Vector;
 
 import com.googlecode.reunion.jreunion.game.G_Player;
 
@@ -15,7 +13,7 @@ import com.googlecode.reunion.jreunion.game.G_Player;
  */
 public class S_TeleportManager {
 	static final float timeout = 30;
-	List<S_TeleportBucket> teleports = new ArrayList<S_TeleportBucket>();
+	List<S_TeleportBucket> teleports = new Vector<S_TeleportBucket>();
 	public S_TeleportManager(){
 	}
 	

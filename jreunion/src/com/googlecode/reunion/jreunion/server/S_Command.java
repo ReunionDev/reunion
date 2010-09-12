@@ -1,9 +1,7 @@
 package com.googlecode.reunion.jreunion.server;
 
 import java.net.InetSocketAddress;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 import com.googlecode.reunion.jreunion.game.G_EntityManager;
 import com.googlecode.reunion.jreunion.game.G_Equipment;

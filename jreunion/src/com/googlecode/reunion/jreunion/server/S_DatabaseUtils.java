@@ -1,10 +1,31 @@
 package com.googlecode.reunion.jreunion.server;
 
-import java.sql.*;
-import java.util.*;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Vector;
 
-import com.googlecode.reunion.jreunion.game.*;
+import com.googlecode.reunion.jreunion.game.G_Armor;
+import com.googlecode.reunion.jreunion.game.G_Axe;
+import com.googlecode.reunion.jreunion.game.G_Entity;
+import com.googlecode.reunion.jreunion.game.G_EntityManager;
 import com.googlecode.reunion.jreunion.game.G_Enums.G_EquipmentSlot;
+import com.googlecode.reunion.jreunion.game.G_Equipment;
+import com.googlecode.reunion.jreunion.game.G_ExchangeItem;
+import com.googlecode.reunion.jreunion.game.G_GunWeapon;
+import com.googlecode.reunion.jreunion.game.G_InventoryItem;
+import com.googlecode.reunion.jreunion.game.G_Item;
+import com.googlecode.reunion.jreunion.game.G_Player;
+import com.googlecode.reunion.jreunion.game.G_Potion;
+import com.googlecode.reunion.jreunion.game.G_QuickSlotItem;
+import com.googlecode.reunion.jreunion.game.G_RingWeapon;
+import com.googlecode.reunion.jreunion.game.G_Skill;
+import com.googlecode.reunion.jreunion.game.G_StaffWeapon;
+import com.googlecode.reunion.jreunion.game.G_StashItem;
+import com.googlecode.reunion.jreunion.game.G_Sword;
+import com.googlecode.reunion.jreunion.game.G_Weapon;
 
 
 /**

@@ -1,6 +1,5 @@
 package com.googlecode.reunion.jreunion.server;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
@@ -79,7 +78,7 @@ abstract class S_ClassModule implements S_Module {
 
 	@Override
 	public List<S_Module> GetChildren() {
-		ArrayList<S_Module> children = new ArrayList<S_Module>();
+		List<S_Module> children = new Vector<S_Module>();		
 		Iterator<S_Module> iter = childModules.iterator();
 		while (iter.hasNext()) {
 			children.add(iter.next());

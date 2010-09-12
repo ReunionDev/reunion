@@ -1,7 +1,5 @@
 package com.googlecode.reunion.jreunion.server;
 
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Aidamina
@@ -10,9 +8,6 @@ import java.util.List;
 public class S_Server extends S_ClassModule {
 
 	private static S_Server _instance = null;
-	
-	
-	List<S_World> worlds = new ArrayList<S_World>();
 
 	public synchronized static S_Server getInstance() {
 		if (_instance == null) {

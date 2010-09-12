@@ -10,7 +10,6 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
-import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -18,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
+import java.util.Vector;
 
 import com.googlecode.reunion.jreunion.game.G_Player;
 import com.googlecode.reunion.jreunion.server.S_Enums.S_ClientState;
@@ -35,7 +35,7 @@ public class S_Network extends S_ClassModule {
 	Map<Socket,S_Client> clientList = new Hashtable<Socket,S_Client>();
 	
 	
-	public List<ServerSocketChannel> channels = new ArrayList<ServerSocketChannel>();
+	public List<ServerSocketChannel> channels = new Vector<ServerSocketChannel>();
 
 	//private ServerSocketChannel serverChannel;
 

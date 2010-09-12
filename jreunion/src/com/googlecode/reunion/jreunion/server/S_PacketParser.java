@@ -1,7 +1,6 @@
 package com.googlecode.reunion.jreunion.server;
 
 //import java.util.*;
-import java.awt.geom.Rectangle2D;
 import java.util.Random;
 
 import com.googlecode.reunion.jcommon.S_ParsedItem;

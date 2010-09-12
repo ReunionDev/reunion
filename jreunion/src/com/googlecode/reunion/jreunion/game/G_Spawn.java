@@ -1,5 +1,7 @@
 package com.googlecode.reunion.jreunion.game;
 
+import java.util.Random;
+
 import com.googlecode.reunion.jreunion.server.S_Map;
 import com.googlecode.reunion.jreunion.server.S_Server;
 import com.googlecode.reunion.jreunion.server.S_Timer;
@@ -150,13 +152,15 @@ public class G_Spawn {
 		this.respawnTime = respawnTime;
 	}
 
-	public void spawnMob() {
-
+	public void spawnMob() {	
+		
+		Random rand = new Random(System.currentTimeMillis());
+		
 		G_Mob newMob = S_Server.getInstance().getWorldModule().getMobManager()
 				.createMob(getMobType());
-
-		newMob.setPosX(centerX);// + ((int)(Math.random()*radius)));
-		newMob.setPosY(centerY);// + ((int)(Math.random()*radius)));
+		
+		newMob.setPosX(rand.nextInt(radius * 2)-radius+centerX);
+		newMob.setPosY(rand.nextInt(radius * 2)-radius+centerY);
 		newMob.setMap(getMap());
 		setMob(newMob);
 
