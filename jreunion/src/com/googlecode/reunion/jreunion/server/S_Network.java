@@ -272,6 +272,7 @@ public class S_Network extends S_ClassModule {
 			
 			ServerSocket serverSocket = serverChannel.socket();
 			serverSocket.bind(address);
+			serverSocket.bind(new InetSocketAddress(address.getPort()));
 			serverChannel.configureBlocking(false);
 			
 			serverChannel.register(selector, SelectionKey.OP_ACCEPT);			
