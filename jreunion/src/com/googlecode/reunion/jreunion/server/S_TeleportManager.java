@@ -28,6 +28,18 @@ public class S_TeleportManager {
 			teleports.add(bucket);
 		}
 	}
+	public void remove(G_Player player){
+		synchronized(teleports){
+			S_TeleportBucket remove= null;
+			for(S_TeleportBucket bucket:teleports){
+				if(bucket.player.getEntityId() == player.getEntityId())
+					remove = bucket;
+			}
+			if(remove!=null)
+				teleports.remove(remove);		
+		}
+	}
+	
 	public S_Map getDestination(G_Player player){
 		synchronized(teleports){			
 			for(S_TeleportBucket bucket:teleports){

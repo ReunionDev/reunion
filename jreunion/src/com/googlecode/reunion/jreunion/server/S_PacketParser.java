@@ -219,7 +219,9 @@ public class S_PacketParser {
 						+ player.getCons() + player.getLead() - 80;
 				player.updateStatus(13, (player.getLevel() - 1) * 3 - statusPoints, 0);
 
+				S_Server.getInstance().getWorldModule().getTeleportManager().remove(player);
 				client.setState(S_ClientState.INGAME);
+				
 			}
 			break;
 		}
