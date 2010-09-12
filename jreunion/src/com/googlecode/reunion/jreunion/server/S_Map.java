@@ -175,26 +175,36 @@ public class S_Map {
 	}
 
 	public void load() {
-		S_ParsedItem map = S_Reference.getInstance().getMapReference().getItemById(id);
+		
 		S_ParsedItem config = S_Reference.getInstance().getMapConfigReference().getItemById(id);
-		
-		System.out.println("Loading "+map.getName());
-		playerSpawnReference = new S_Parser();
-		mobSpawnReference = new S_Parser();
-		npcSpawnReference = new S_Parser();
-		loadFromReference(id);
-		
-		
+		S_ParsedItem map = S_Reference.getInstance().getMapReference().getItemById(id);
+		String location = config.getMemberValue("Location");
 		String ip= config.getMemberValue("Ip");
 		int port = Integer.parseInt(config.getMemberValue("Port"));		
 		setName(map.getName());
 		address = new InetSocketAddress(ip,port);
 		S_Server.getInstance().getNetworkModule().register(getAddress());
 		
-		System.out.println(getName()+" running on "+getAddress());
-		
-		createMobSpawns();
-		createNpcSpawns();
+		if(location.equals("Local")) {
+			System.out.println("Loading "+this.getName());
+			playerSpawnReference = new S_Parser();
+			mobSpawnReference = new S_Parser();
+			npcSpawnReference = new S_Parser();
+			loadFromReference(id);
+			
+			createMobSpawns();
+			createNpcSpawns();
+			System.out.println(getName()+" running on "+getAddress());
+			
+		} else if(location.equals("Remote")) {
+			
+			System.out.println("Remote server registered on "+address+" for "+this.getName());
+			
+		} else {
+			
+			throw new RuntimeException("Invalid Location("+location+") for"+this);
+			
+		}
 	}
 	
 	@Override

@@ -265,11 +265,10 @@ public class S_Network extends S_ClassModule {
 		selector = Selector.open();	
 	}
 
-	public void register(InetSocketAddress address){
+	public void register(InetSocketAddress address) {
 
 		try {
 			ServerSocketChannel serverChannel = ServerSocketChannel.open();
-			
 			ServerSocket serverSocket = serverChannel.socket();
 			serverSocket.bind(new InetSocketAddress(address.getPort()));
 			serverChannel.configureBlocking(false);

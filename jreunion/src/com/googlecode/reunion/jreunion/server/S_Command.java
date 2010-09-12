@@ -283,14 +283,7 @@ public class S_Command {
 		// jump 7024 5551 227505
 		// party disband
 		// go_world 62.26.131.215 4001 0 0
-
-		
-		player.setPosX(7024);
-		player.setPosY(5551);
-		
-		player.setPosX(6500);
-		player.setPosY(6500);
-		
+	
 		String packetData = "jump "+player.getPosX()+" "+player.getPosY()+" " + player.getEntityId() + "\n";
 		
 		client.SendData(packetData);
@@ -315,7 +308,7 @@ public class S_Command {
 		}
 		
 		
-		InetSocketAddress address= map.getAddress();
+		InetSocketAddress address = map.getAddress();
 				
 		packetData = "go_world "+address.getAddress().getHostAddress()+" "+address.getPort()+" " + mapId + " " + unknown + "\n";
 		
