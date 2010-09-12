@@ -774,19 +774,20 @@ public class S_DatabaseUtils {
 			stmt.execute("DELETE FROM skills WHERE charid="+playerId+";");
 
 			String query = "INSERT INTO skills (charid,id,level) VALUES ";
-			
+			String data = "";
 			Iterator<G_Skill> skillsIter = player.getCharSkill().getSkillListIterator();
 			
 			while(skillsIter.hasNext()){
 				G_Skill skill = (G_Skill)skillsIter.next();
 				
 				if(skill.getCurrLevel()>0){
-					query+="("+playerId+","+skill.getId()+","+skill.getCurrLevel()+")";			
+					data+="("+playerId+","+skill.getId()+","+skill.getCurrLevel()+")";			
 					if(skillsIter.hasNext())
-						query+= ", ";
+						data+= ", ";
 				}
-			}			
-			stmt.execute(query);
+			}
+			if(!data.isEmpty())
+				stmt.execute(query+data);
 			
 		} catch (SQLException e1) {
 			e1.printStackTrace();
