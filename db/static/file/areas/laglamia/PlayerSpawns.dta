@@ -1,21 +1,17 @@
-################
-### LAGLAMIA ###
-################
-
 [Soccer Field]
 ID = 2
-targetx = 7900
-targety = 3800
-targetwidth = 400
-targetheight = 800
-respawnx = 7900
-respawny = 4650
-respawnwidth = 400
-respawnheight = 130
+TargetX = 7900
+TargetY = 3800
+TargetWidth = 400
+TargetHeight = 800
+X = 7900
+Y = 4650
+Width = 400
+Height = 130
 
 [Default]
 ID = 1
-respawnx = 6270
-respawny = 5170
-respawnwidth = 970
-respawnheight = 100
+X = 6950
+Y = 5150
+Width = 150
+Height = 150

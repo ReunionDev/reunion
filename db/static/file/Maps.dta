@@ -8,65 +8,69 @@ NpcSpawn = areas/laglamia/NpcSpawns.dta
 PlayerArea = areas/laglamia/PlayerArea.bmp
 MobArea = areas/laglamia/MobArea.bmp
 PvpArea = areas/laglamia/PvpArea.bmp
-DefaultSpawn = 1
+DefaultSpawnId = 1
 
 [Lost Realm Castle]
 ID = 0
 Ip = 127.0.0.1
 Port = 4001
-SpawnList = LRCSpawns.dta
-PlayerArea = LRCPlayerArea.bmp
-MobArea = LRCMobArea.bmp
-PvpArea = LRCPvpArea.bmp
-DefaultSpawn = 1
+PlayerSpawn = areas/lostrealmcastle/PlayerSpawns.dta
+MobSpawn = areas/lostrealmcastle/MobSpawns.dta
+NpcSpawn = areas/lostrealmcastle/NpcSpawns.dta
+PlayerArea = areas/lostrealmcastle/PlayerArea.bmp
+MobArea = areas/lostrealmcastle/MobArea.bmp
+PvpArea = areas/lostrealmcastle/PvpArea.bmp
+DefaultSpawnId = 1
 
 [Dekadun]
 ID = 1
 Ip = 127.0.0.1
 Port = 4003
-SpawnList = DunSpawns.dta
+PlayerSpawn = DunSpawns.dta
 PlayerArea = DunPlayerArea.bmp
 MobArea = DunMobArea.bmp
 PvpArea = DunPvpArea.bmp
-DefaultSpawn = 1
+DefaultSpawnId = 1
 
 [Dekaran]
 ID = 2
 Ip = 127.0.0.1
 Port = 4002			##### Not Tested
-SpawnList = RanSpawns.dta
+PlayerSpawn = RanSpawns.dta
 PlayerArea = RanPlayerArea.bmp
 MobArea = RanMobArea.bmp
 PvpArea = RanPvpArea.bmp
-DefaultSpawn = 1
+DefaultSpawnId = 1
 
 [Shilon]
 ID = 3
 Ip = 127.0.0.1
 Port = 4004
-SpawnList = ShilonSpawns.dta
-PlayerArea = ShilonPlayerArea.bmp
-MobArea = ShilonMobArea.bmp
-PvpArea = ShilonPvpArea.bmp
-DefaultSpawn = 1
+PlayerSpawn = areas/shilon/PlayerSpawns.dta
+MobSpawn = areas/shilon/MobSpawns.dta
+NpcSpawn = areas/shilon/NpcSpawns.dta
+PlayerArea = areas/shilon/PlayerArea.bmp
+MobArea = areas/shilon/MobArea.bmp
+PvpArea = areas/shilon/PvpArea.bmp
+DefaultSpawnId = 1
 
 [Pharous]
 ID = 6
 Ip = 127.0.0.1
 Port = 4007
-SpawnList = PharousSpawns.dta
+PlayerSpawn = PharousSpawns.dta
 PlayerArea = PharousPlayerArea.bmp
 MobArea = PharousMobArea.bmp
 PvpArea =PharousPvpArea.bmp
-DefaultSpawn = 1
+DefaultSpawnId = 1
 
 
 [Great White Horn]
 ID = 7
 Ip = 127.0.0.1
 Port = 4008
-SpawnList = GWHSpawns.dta
+PlayerSpawn = GWHSpawns.dta
 PlayerArea = GWHPlayerArea.bmp
 MobArea = GWHMobArea.bmp
 PvpArea = GWHPvpArea.bmp
-DefaultSpawn = 1
+DefaultSpawnId = 1
