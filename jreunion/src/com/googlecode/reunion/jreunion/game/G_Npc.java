@@ -29,14 +29,14 @@ public class G_Npc extends G_LivingObject {
 
 	private String shop;
 
-	private S_Parser itemsReference;
+	private S_Parser shopReference;
 
 	private List<G_Item> itemsList = new Vector<G_Item>();
 
 	public G_Npc(int type) {
 		super();
 		this.type = type;
-		itemsReference = new S_Parser();
+		shopReference = new S_Parser();
 		shop = null;
 	}
 
@@ -90,7 +90,7 @@ public class G_Npc extends G_LivingObject {
 		super.loadFromReference(id);
 		
 		try {
-			itemsReference.Parse("data/"+getShop());
+			shopReference.Parse("data/"+getShop());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -113,25 +113,24 @@ public class G_Npc extends G_LivingObject {
 
 		// System.out.println("Loading list...");
 
-		if (itemsReference == null) {
-			return;
-		}
-
-		itemsList.clear();
-
-		Iterator<S_ParsedItem> iter = itemsReference.getItemListIterator();
-
-		while (iter.hasNext()) {
-
-			S_ParsedItem i = iter.next();
-
-			if (!i.checkMembers(new String[] { "Type" })) {
-				System.out.println("Error loading a Npc Shop Item on map: "
-						+ getMap());
-				continue;
+		if (shopReference != null) {
+	
+			itemsList.clear();
+	
+			Iterator<S_ParsedItem> iter = shopReference.getItemListIterator();
+	
+			while (iter.hasNext()) {
+	
+				S_ParsedItem i = iter.next();
+	
+				if (!i.checkMembers(new String[] { "Type" })) {
+					System.out.println("Error loading a Npc Shop Item on map: "
+							+ getMap());
+					continue;
+				}
+				G_Item item = new G_Item(Integer.parseInt(i.getMemberValue("Type")));
+				addItem(item);
 			}
-			G_Item item = new G_Item(Integer.parseInt(i.getMemberValue("Type")));
-			addItem(item);
 		}
 	}
 
