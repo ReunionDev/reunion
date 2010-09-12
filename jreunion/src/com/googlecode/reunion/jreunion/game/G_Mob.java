@@ -289,7 +289,7 @@ public class G_Mob extends G_LivingObject {
 		int newPosX = (int) (getPosX() + xcomp);
 		int newPosY = (int) (getPosY() + ycomp);
 
-		if (S_Server.getInstance().getWorldModule().getMapManager()
+		if (getMap()
 				.getMobArea().get((newPosX / 10 - 300), (newPosY / 10)) == true) {
 			setPosX(newPosX);
 			setPosY(newPosY);
@@ -339,7 +339,7 @@ public class G_Mob extends G_LivingObject {
 		setCurrHp(0);
 
 		S_Server.getInstance().getWorldModule().getMobManager().removeMob(this);
-		G_Spawn spawn = S_Server.getInstance().getWorldModule().getMapManager()
+		G_Spawn spawn =getMap()
 				.getSpawnByMob(getEntityId());
 		if (spawn != null) {
 			spawn.setDead(true);

@@ -9,6 +9,7 @@ import com.googlecode.reunion.jreunion.game.G_Quest;
 import com.googlecode.reunion.jreunion.game.G_Trader;
 import com.googlecode.reunion.jreunion.game.G_Warehouse;
 import com.googlecode.reunion.jreunion.server.S_Enums.S_ClientState;
+import com.googlecode.reunion.jreunion.server.S_Enums.S_LoginType;
 
 /**
  * @author Aidamina
@@ -28,8 +29,8 @@ public class S_PacketParser {
 
 	private void HandleMessage(S_Client client, String message[]) {
 		S_Command com = server.getWorldModule().getWorldCommand();
-		System.out.println("Parsing " + message[0] + " command on Client("
-				+ client + ") with state: " + client.getState() + "");
+		System.out.println("Parsing " + message[0] + " command on "
+				+ client + " with state: " + client.getState() + "");
 		switch (client.getState()) {
 		case DISCONNECTED: {
 
@@ -53,9 +54,14 @@ public class S_PacketParser {
 		}
 		case GOT_VERSION: {
 			if (message[0].equals("login")) {
-				System.out.println("Got Login");
+				System.out.println("Got login");
 				client.setState(S_ClientState.GOT_LOGIN);
-
+				client.setLoginType(S_LoginType.LOGIN);
+				break;
+			} else if(message[0].equals("play")) {
+				System.out.println("Got play");
+				client.setState(S_ClientState.GOT_LOGIN);
+				client.setLoginType(S_LoginType.PLAY);
 				break;
 			} else {
 				System.out.println("Inconsistent protocol (err 2) detected on: "
@@ -67,7 +73,7 @@ public class S_PacketParser {
 		}
 		case GOT_LOGIN: {
 			if (message[0].length() < 28) {
-				client.username = new String(message[0]);
+				client.setUsername(new String(message[0]));
 				System.out.println("Got Username");
 				client.setState(S_ClientState.GOT_USERNAME);
 				break;
@@ -81,11 +87,11 @@ public class S_PacketParser {
 		}
 		case GOT_USERNAME: {
 			if (message[0].length() < 28) {
-				client.password = new String(message[0]);
+				client.setPassword(new String(message[0]));
 				System.out.println("Got Password");
 				client.setState(S_ClientState.GOT_PASSWORD);
-				com.authClient(client, client.username,
-						client.password);
+				com.authClient(client, client.getUsername(),
+						client.getPassword());
 				break;
 			} else {
 				System.out.println("Inconsistent protocol (err 4) detected on: "
@@ -116,43 +122,52 @@ public class S_PacketParser {
 						Integer.parseInt(message[9]),
 						Integer.parseInt(message[10]));
 				com.sendSuccess(client);
-				com.sendCharList(client, client.accountId);
+				com.sendCharList(client, client.getAccountId());
 			} else if (message[0].equals("char_del")) {
 
-				com.delChar(Integer.parseInt(message[1]), client.accountId);
+				com.delChar(Integer.parseInt(message[1]), client.getAccountId());
 				com.sendSuccess(client);
 
-				com.sendCharList(client, client.accountId);
+				com.sendCharList(client, client.getAccountId());
 			} else if (message[0].equals("start")) {
 				client.setState(S_ClientState.CHAR_SELECTED);
-				com.loginChar(Integer.parseInt(message[1]), client.accountId,
+				G_Player player = com.loginChar(Integer.parseInt(message[1]), client.getAccountId(),
 						client);
+				
+				
 			}
 
 			break;
 		}
+		
 		case CHAR_SELECTED: {
 			if (message[0].equals("start_game")) {
-				G_Player pl = client.playerObject;
+				G_Player player = client.getPlayer();
 
-				pl.setPosX(6655);
-				pl.setPosY(5224);
-				pl.setPosZ(0);
+				player.setPosX(6655);
+				player.setPosY(5224);//we need to implement spawnpoints here
+				player.setPosZ(0);
 
 				client.SendData(
-						"status 11 " + pl.getTotalExp() + " 0\n");
+						"status 11 " + player.getTotalExp() + " 0\n");
 				client.SendData(
-						"status 12 " + pl.getLvlUpExp() + " 0\n");
+						"status 12 " + player.getLvlUpExp() + " 0\n");
 				client.SendData(
-						"status 13 " + pl.getStatusPoints() + " 0\n");
+						"status 13 " + player.getStatusPoints() + " 0\n");
 				client.SendData(
-						"status 10 " + pl.getLime() + " 0\n");
+						"status 10 " + player.getLime() + " 0\n");
 				client.SendData(
-						"status 19 " + pl.getPenaltyPoints() + " 0\n");
+						"status 19 " + player.getPenaltyPoints() + " 0\n");
+				
+				/*
+				 * 
+				 */
+				player.getMap().getPlayerSpawnReference();
+				
 				client.SendData(
-						"at " + client.playerObject.getEntityId() + " "
-								+ pl.getPosX() + " " + pl.getPosY() + " "
-								+ pl.getPosZ() + " 0\n");
+						"at " + client.getPlayer().getEntityId() + " "
+								+ player.getPosX() + " " + player.getPosY() + " "
+								+ player.getPosZ() + " 0\n");
 
 				/*
 				 * server.getNetworkModule().SendPacket(client.networkId,
@@ -173,19 +188,19 @@ public class S_PacketParser {
 				 */
 				// "pstatus 13 2 0 0\n");
 
-				pl.updateStatus(0, pl.getCurrHp(),
-						pl.getStr() * 1 + pl.getCons() * 2);
-				pl.updateStatus(1, pl.getCurrMana(),
-						pl.getWis() * 2 + pl.getDex() * 1);
-				pl.updateStatus(2, pl.getCurrStm(),
-						pl.getStr() * 2 + pl.getCons() * 1);
-				pl.updateStatus(3, pl.getCurrElect(),
-						pl.getWis() * 1 + pl.getDex() * 2);
-				pl.updateStatus(13, -pl.getStatusPoints(), 0);
+				player.updateStatus(0, player.getCurrHp(),
+						player.getStr() * 1 + player.getCons() * 2);
+				player.updateStatus(1, player.getCurrMana(),
+						player.getWis() * 2 + player.getDex() * 1);
+				player.updateStatus(2, player.getCurrStm(),
+						player.getStr() * 2 + player.getCons() * 1);
+				player.updateStatus(3, player.getCurrElect(),
+						player.getWis() * 1 + player.getDex() * 2);
+				player.updateStatus(13, -player.getStatusPoints(), 0);
 
-				int statusPoints = pl.getStr() + pl.getWis() + pl.getDex()
-						+ pl.getCons() + pl.getLead() - 80;
-				pl.updateStatus(13, (pl.getLevel() - 1) * 3 - statusPoints, 0);
+				int statusPoints = player.getStr() + player.getWis() + player.getDex()
+						+ player.getCons() + player.getLead() - 80;
+				player.updateStatus(13, (player.getLevel() - 1) * 3 - statusPoints, 0);
 
 				client.setState(S_ClientState.INGAME);
 			}
@@ -193,7 +208,7 @@ public class S_PacketParser {
 		}
 		case INGAME: {
 			if (message[0].equals("walk")) {
-				client.playerObject.walk(Integer.parseInt(message[1]),
+				client.getPlayer().walk(Integer.parseInt(message[1]),
 						Integer.parseInt(message[2]),
 						Integer.parseInt(message[3]),
 						Integer.parseInt(message[4]));
@@ -201,7 +216,7 @@ public class S_PacketParser {
 
 				double rotation = Double.parseDouble(message[4]);
 
-				client.playerObject.place(Integer.parseInt(message[1]),
+				client.getPlayer().place(Integer.parseInt(message[1]),
 						Integer.parseInt(message[2]),
 						Integer.parseInt(message[3]), rotation / 1000,
 						Integer.parseInt(message[5]),
@@ -210,11 +225,11 @@ public class S_PacketParser {
 
 				double rotation = Double.parseDouble(message[4]);
 
-				client.playerObject.stop(Integer.parseInt(message[1]),
+				client.getPlayer().stop(Integer.parseInt(message[1]),
 						Integer.parseInt(message[2]),
 						Integer.parseInt(message[3]), rotation / 1000);
 			} else if (message[0].equals("stamina")) {
-				client.playerObject.loseStamina(Integer.parseInt(message[1]));
+				client.getPlayer().loseStamina(Integer.parseInt(message[1]));
 			}
 
 			else if (message[0].equals("say")) {
@@ -225,10 +240,10 @@ public class S_PacketParser {
 					text += " " + message[i];
 				}
 
-				text = messageParser.parse(client.playerObject, text);
+				text = messageParser.parse(client.getPlayer(), text);
 
 				if (text != null && text.length() > 0) {
-					client.playerObject.say(text);
+					client.getPlayer().say(text);
 				}
 
 			}
@@ -241,50 +256,50 @@ public class S_PacketParser {
 					text += " " + message[i];
 				}
 
-				// client.playerObject.tell(message[1], text);
+				// client.getPlayer()Object.tell(message[1], text);
 			} else if (message[0].equals("combat")) {
-				client.playerObject.charCombat(Integer.parseInt(message[1]));
+				client.getPlayer().charCombat(Integer.parseInt(message[1]));
 			} else if (message[0].equals("social")) {
-				client.playerObject.social(Integer.parseInt(message[1]));
+				client.getPlayer().social(Integer.parseInt(message[1]));
 			} else if (message[0].equals("levelup")) {
-				client.playerObject.updateStatus(
+				client.getPlayer().updateStatus(
 						Integer.parseInt(message[1]) + 10, 1, 0);
 			} else if (message[0].equals("pick")) {
-				client.playerObject.pickupItem(Integer.parseInt(message[1]));
+				client.getPlayer().pickupItem(Integer.parseInt(message[1]));
 			} else if (message[0].equals("inven")) {
-				client.playerObject.getInventory().moveItem(
-						client.playerObject, Integer.parseInt(message[1]),
+				client.getPlayer().getInventory().moveItem(
+						client.getPlayer(), Integer.parseInt(message[1]),
 						Integer.parseInt(message[2]),
 						Integer.parseInt(message[3]));
-				// S_DatabaseUtils.getInstance().saveInventory(client.playerObject);
+				// S_DatabaseUtils.getInstance().saveInventory(client.getPlayer()Object);
 			} else if (message[0].equals("drop")) {
-				client.playerObject.dropItem(Integer.parseInt(message[1]));
+				client.getPlayer().dropItem(Integer.parseInt(message[1]));
 			} else if (message[0].equals("attack")) {
-				com.normalAttack(client.playerObject,
+				com.normalAttack(client.getPlayer(),
 						Integer.parseInt(message[2]));
 			} else if (message[0].equals("subat")) {
 				if (message[1].equals("char")) {
-					com.subAttackChar(client.playerObject,
+					com.subAttackChar(client.getPlayer(),
 							Integer.parseInt(message[2]));
 				}
 				if (message[1].equals("npc")) {
-					com.subAttackNpc(client.playerObject,
+					com.subAttackNpc(client.getPlayer(),
 							Integer.parseInt(message[2]));
 				}
 			} else if (message[0].equals("pulse")) {
 				if (Integer.parseInt(message[2].substring(0,
 						message[2].length() - 1)) == -1) {
-					client.playerObject.setMinDmg(1);
-					client.playerObject.setMaxDmg(2);
+					client.getPlayer().setMinDmg(1);
+					client.getPlayer().setMaxDmg(2);
 				} else {
 					com.playerWeapon(
-							client.playerObject,
+							client.getPlayer(),
 							Integer.parseInt(message[3].substring(0,
 									message[3].length() - 1)));
 				}
 			} else if (message[0].equals("wear")) {
-				client.playerObject.wearSlot(Integer.parseInt(message[1]));
-				// com.playerWear(client.playerObject,Integer.parseInt(message[1]));
+				client.getPlayer().wearSlot(Integer.parseInt(message[1]));
+				// com.getPlayer()Wear(client.getPlayer()Object,Integer.parseInt(message[1]));
 			} else if (message[0].equals("use_skill")) {
 				try {
 				// if (message.length > 2){
@@ -292,48 +307,48 @@ public class S_PacketParser {
 					G_Mob mob = S_Server.getInstance().getWorldModule()
 							.getMobManager()
 							.getMob(Integer.parseInt(message[3]));
-					client.playerObject.useSkill(mob,
+					client.getPlayer().useSkill(mob,
 							Integer.parseInt(message[1]));
 				} else if (message[2].equals("char")) {
 					G_Player player = S_Server.getInstance().getWorldModule()
 							.getPlayerManager()
 							.getPlayer(Integer.parseInt(message[3]));
-					client.playerObject.useSkill(player,
+					client.getPlayer().useSkill(player,
 							Integer.parseInt(message[1]));
 				}
 				} catch (Exception e) {
 					System.out.println("oh skill bug");
 				}
-				// client.playerObject.useSkill(Integer.parseInt(message[1]));
+				// client.getPlayer()Object.useSkill(Integer.parseInt(message[1]));
 			} else if (message[0].equals("skillup")) {
-				client.playerObject.skillUp(Integer.parseInt(message[1]));
+				client.getPlayer().skillUp(Integer.parseInt(message[1]));
 			} else if (message[0].equals("revival")) {
-				client.playerObject.revive();
+				client.getPlayer().revive();
 			} else if (message[0].equals("quick")) {
-				client.playerObject.getQuickSlot().quickSlot(
-						client.playerObject, Integer.parseInt(message[1]));
+				client.getPlayer().getQuickSlot().quickSlot(
+						client.getPlayer(), Integer.parseInt(message[1]));
 			} else if (message[0].equals("go_world")) {
-				com.GoWorld(client.playerObject, Integer.parseInt(message[1]),
+				com.GoWorld(client.getPlayer(), Integer.parseInt(message[1]),
 						Integer.parseInt(message[2]));
 			} else if (message[0].equals("use_quick")) {
-				client.playerObject.getQuickSlot().useQuickSlot(
-						client.playerObject, Integer.parseInt(message[1]));
+				client.getPlayer().getQuickSlot().useQuickSlot(
+						client.getPlayer(), Integer.parseInt(message[1]));
 			} else if (message[0].equals("move_to_quick")) {
-				client.playerObject.getQuickSlot().MoveToQuick(
-						client.playerObject, Integer.parseInt(message[1]),
+				client.getPlayer().getQuickSlot().MoveToQuick(
+						client.getPlayer(), Integer.parseInt(message[1]),
 						Integer.parseInt(message[2]),
 						Integer.parseInt(message[3]));
 			} else if (message[0].equals("quest")) {
 				if (message[1].equals("cancel")) {
-					client.playerObject.getQuest().cancelQuest(
-							client.playerObject);
+					client.getPlayer().getQuest().cancelQuest(
+							client.getPlayer());
 				} else {
-					if (client.playerObject.getQuest() == null) {
-						client.playerObject.setQuest(new G_Quest(
-								client.playerObject, Integer
+					if (client.getPlayer().getQuest() == null) {
+						client.getPlayer().setQuest(new G_Quest(
+								client.getPlayer(), Integer
 										.parseInt(message[1])));
 					} else {
-						com.serverTell(client.playerObject,
+						com.serverTell(client.getPlayer(),
 								"Impossible to receive a quest");
 					}
 				}
@@ -341,21 +356,21 @@ public class S_PacketParser {
 				G_Npc[] npc = S_Server.getInstance().getWorldModule()
 						.getNpcManager().getNpcList(139);
 				G_Warehouse warehouse = (G_Warehouse) npc[0];
-				warehouse.openStash(client.playerObject);
+				warehouse.openStash(client.getPlayer());
 			} else if (message[0].equals("stash_click")) {
 				G_Npc[] npc = S_Server.getInstance().getWorldModule()
 						.getNpcManager().getNpcList(139);
 				G_Warehouse warehouse = (G_Warehouse) npc[0];
 
 				if (message.length == 5) {
-					warehouse.stashClick(client.playerObject,
+					warehouse.stashClick(client.getPlayer(),
 							Integer.parseInt(message[1]),
 							Integer.parseInt(message[2]),
 							Integer.parseInt(message[3]),
 							Integer.parseInt(message[4]));
 				}
 				if (message.length == 4) {
-					warehouse.stashClick(client.playerObject,
+					warehouse.stashClick(client.getPlayer(),
 							Integer.parseInt(message[1]),
 							Integer.parseInt(message[2]),
 							Integer.parseInt(message[3]), 0);
@@ -366,7 +381,7 @@ public class S_PacketParser {
 						.getWorldModule().getNpcManager()
 						.getNpc(Integer.parseInt(message[1]));
 				if (npc!=null) {
-					npc.openShop(client.playerObject, Integer.parseInt(message[1]));
+					npc.openShop(client.getPlayer(), Integer.parseInt(message[1]));
 				} else {
 					System.err.println("Npc not found: " + npcId);				
 				}
@@ -374,19 +389,19 @@ public class S_PacketParser {
 				G_Merchant npc = (G_Merchant) S_Server.getInstance()
 						.getWorldModule().getNpcManager()
 						.getNpc(Integer.parseInt(message[1]));
-				npc.buyItem(client.playerObject, Integer.parseInt(message[1]),
+				npc.buyItem(client.getPlayer(), Integer.parseInt(message[1]),
 						Integer.parseInt(message[4]),
 						Integer.parseInt(message[5]), 1);
 			} else if (message[0].equals("sell")) {
 				G_Merchant npc = (G_Merchant) S_Server.getInstance()
 						.getWorldModule().getNpcManager()
 						.getNpc(Integer.parseInt(message[1]));
-				npc.sellItem(client.playerObject, Integer.parseInt(message[1]));
+				npc.sellItem(client.getPlayer(), Integer.parseInt(message[1]));
 			} else if (message[0].equals("pbuy")) {
 				G_Merchant npc = (G_Merchant) S_Server.getInstance()
 						.getWorldModule().getNpcManager()
 						.getNpc(Integer.parseInt(message[1]));
-				npc.buyItem(client.playerObject, Integer.parseInt(message[1]),
+				npc.buyItem(client.getPlayer(), Integer.parseInt(message[1]),
 						Integer.parseInt(message[2]),
 						Integer.parseInt(message[3]), 10);
 			} else if (message[0].equals("chip_exchange")) {
@@ -396,20 +411,20 @@ public class S_PacketParser {
 					npc = S_Server.getInstance().getWorldModule()
 							.getNpcManager().getNpcList(166);
 					G_Trader trader = (G_Trader) npc[0];
-					trader.chipExchange(client.playerObject,
+					trader.chipExchange(client.getPlayer(),
 							Integer.parseInt(message[1]),
 							Integer.parseInt(message[2]), 0);
 				} else {
 					npc = S_Server.getInstance().getWorldModule()
 							.getNpcManager().getNpcList(167);
 					G_Trader trader = (G_Trader) npc[0];
-					trader.chipExchange(client.playerObject,
+					trader.chipExchange(client.getPlayer(),
 							Integer.parseInt(message[1]),
 							Integer.parseInt(message[2]),
 							Integer.parseInt(message[3]));
 				}
 			} else if (message[0].equals("exch")) {
-				client.playerObject.itemExchange(Integer.parseInt(message[2]),
+				client.getPlayer().itemExchange(Integer.parseInt(message[2]),
 						Integer.parseInt(message[3]));
 			} else if (message[0].equals("ichange")) {
 				G_Npc[] npc = S_Server.getInstance().getWorldModule()
@@ -417,9 +432,9 @@ public class S_PacketParser {
 				G_Trader trader = (G_Trader) npc[0];
 
 				if (message.length == 1) {
-					trader.exchangeArmor(client.playerObject, 0);
+					trader.exchangeArmor(client.getPlayer(), 0);
 				} else {
-					trader.exchangeArmor(client.playerObject,
+					trader.exchangeArmor(client.getPlayer(),
 							Integer.parseInt(message[1]));
 				}
 			}

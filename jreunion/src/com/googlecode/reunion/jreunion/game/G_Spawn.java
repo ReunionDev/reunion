@@ -157,7 +157,7 @@ public class G_Spawn {
 
 		newMob.setPosX(centerX);// + ((int)(Math.random()*radius)));
 		newMob.setPosY(centerY);// + ((int)(Math.random()*radius)));
-		newMob.setMap(map);
+		newMob.setMap(getMap());
 		setMob(newMob);
 
 		setDead(false);

@@ -1,5 +1,8 @@
 package com.googlecode.reunion.jreunion.server;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
@@ -7,6 +10,9 @@ package com.googlecode.reunion.jreunion.server;
 public class S_Server extends S_ClassModule {
 
 	private static S_Server _instance = null;
+	
+	
+	List<S_World> worlds = new ArrayList<S_World>();
 
 	public synchronized static S_Server getInstance() {
 		if (_instance == null) {
@@ -70,6 +76,7 @@ public class S_Server extends S_ClassModule {
 				server.DoWork();
 				Thread.sleep(1); // Sleep to make sure it doesnt use 100%
 									// cpu resources
+				
 			}
 
 		} catch (Exception e) {

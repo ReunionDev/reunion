@@ -158,12 +158,10 @@ public class S_MobManager {
 			// direction)
 			// and if the player position is a walkable position for mob then
 			// the
-			// mob will chase the player, else the mob will mob freely.
+			// mob will chase the player, else the mob will move freely.
+			
 			if (distance <= 150) {
-				if (S_Server
-						.getInstance()
-						.getWorldModule()
-						.getMapManager()
+				if (mob.getMap()
 						.getMobArea()
 						.get((player.getPosX() / 10 - 300),
 								(player.getPosY() / 10)) == true) {
@@ -192,8 +190,7 @@ public class S_MobManager {
 		}
 
 		if (moveToPlayer == true) {
-			G_Spawn spawn = S_Server.getInstance().getWorldModule()
-					.getMapManager().getSpawnByMob(mob.getEntityId());
+			G_Spawn spawn = mob.getMap().getSpawnByMob(mob.getEntityId());
 			if(spawn!=null){
 				double radiusCompX = Math.pow(spawn.getCenterX() - newPosX, 2);
 				double radiusCompY = Math.pow(spawn.getCenterY() - newPosY, 2);

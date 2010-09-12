@@ -1,6 +1,12 @@
 package com.googlecode.reunion.jreunion.server;
 
+import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 import com.googlecode.reunion.jreunion.game.G_Mob;
 import com.googlecode.reunion.jreunion.game.G_Player;
@@ -20,6 +26,11 @@ public class S_World extends S_ClassModule {
 	private S_MobManager mobManager;
 
 	private S_Map mapManager;
+	
+	private S_TeleportManager teleportManager;
+	
+	Map<Integer,S_Map> maps = new Hashtable<Integer,S_Map>();
+	
 
 	private S_NpcManager npcManager;
 
@@ -40,14 +51,24 @@ public class S_World extends S_ClassModule {
 		mapManager = new S_Map(4);
 		npcManager = new S_NpcManager();
 		serverHour = 4;
+		teleportManager = new S_TeleportManager();
 		serverSetings = new S_ServerSetings();
 	}
 
 	/**
 	 * @return Returns the mapManager.
 	 */
-	public S_Map getMapManager() {
-		return mapManager;
+	public Collection<S_Map> getMaps() {
+		return maps.values();
+	}
+	public S_Map getMap(int mapId){		
+		return maps.get(mapId);	
+	}
+	
+
+	
+	public S_TeleportManager getTeleportManager() {
+		return teleportManager;
 	}
 
 	/**
@@ -94,8 +115,20 @@ public class S_World extends S_ClassModule {
 
 	@Override
 	public void Start() {
-
-		mapManager.load();
+		
+		Iterator<S_ParsedItem> iter = S_Reference.getInstance().getMapReference().getItemListIterator();
+		
+		while(iter.hasNext()){
+			S_ParsedItem item = iter.next();
+			System.out.println("Loading "+item.getName());
+			
+			int mapId = Integer.parseInt(item.getMemberValue("Id"));
+			
+			S_Map map = new S_Map(mapId);
+			map.load();
+			maps.put(mapId, map);
+			
+		}
 	}
 
 	@Override

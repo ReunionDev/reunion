@@ -1,6 +1,9 @@
 package com.googlecode.reunion.jreunion.server;
 
+import java.net.InetSocketAddress;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import com.googlecode.reunion.jreunion.game.G_EntityManager;
 import com.googlecode.reunion.jreunion.game.G_Equipment;
@@ -13,6 +16,7 @@ import com.googlecode.reunion.jreunion.game.G_Skill;
 import com.googlecode.reunion.jreunion.game.G_SlayerWeapon;
 import com.googlecode.reunion.jreunion.game.G_Weapon;
 import com.googlecode.reunion.jreunion.server.S_Enums.S_ClientState;
+import com.googlecode.reunion.jreunion.server.S_Enums.S_LoginType;
 import com.googlecode.reunion.jreunion.server.S_PacketFactory.S_PacketType;
 
 /**
@@ -39,9 +43,9 @@ public class S_Command {
 							"fail Username and password combination is invalid\n");
 		} else {
 
-			System.out.println("Client(" + client + ") authed as account("
+			System.out.println("" + client + " authed as account("
 					+ accountId + ")");
-			client.accountId = accountId;
+			client.setAccountId(accountId);
 			sendCharList(client, accountId);
 		}
 
@@ -272,24 +276,54 @@ public class S_Command {
 	}
 
 	/****** change map ******/
-	public void GoWorld(G_Player player, int map, int unknown) {
+	public void GoWorld(G_Player player, int mapId, int unknown) {
 		S_Client client = S_Server.getInstance().getNetworkModule()
 				.getClient(player);
-
+		S_Map map = S_Server.getInstance().getWorldModule().getMap(mapId);
 		// jump 7024 5551 227505
 		// party disband
 		// go_world 62.26.131.215 4001 0 0
 
-		String packetData = "jump 7024 5551 " + player.getEntityId() + "\n";
 		
-				client.SendData( packetData);
-
 		player.setPosX(7024);
 		player.setPosY(5551);
-
-		packetData = "go_world 127.0.0.1 4001 " + map + " " + unknown + "\n";
 		
-				client.SendData( packetData);
+		player.setPosX(6500);
+		player.setPosY(6500);
+		
+		String packetData = "jump "+player.getPosX()+" "+player.getPosY()+" " + player.getEntityId() + "\n";
+		
+		client.SendData(packetData);
+
+		
+		S_Server.getInstance().getWorldModule().getTeleportManager().register(player, map);
+		
+		
+		player.setMap(map);
+		
+		
+		Iterator<S_Session> iter = S_Server.getInstance().getWorldModule().getSessionManager().getSessionListIterator();
+		while(iter.hasNext()){
+			S_Session session = iter.next();
+			if(player==session.getSessionOwner()){
+				
+				Iterator<G_Npc> npcIter = session.getNpcListIterator();
+				List<G_Npc> npcs = new ArrayList<G_Npc>();
+				while(npcIter.hasNext()){
+					npcs.add(npcIter.next());
+				}	
+				for(G_Npc npc: npcs){
+					session.exitNpc(npc);						
+				}
+			}
+		}
+		
+		
+		InetSocketAddress address= map.getAddress();
+				
+		packetData = "go_world "+address.getAddress().getHostAddress()+" "+address.getPort()+" " + mapId + " " + unknown + "\n";
+		
+		client.SendData( packetData);
 
 		// client.setState(7);
 		// System.out.print("Removing Player...\n");
@@ -351,14 +385,14 @@ public class S_Command {
 		// S> out item [UniqueID]
 	}
 
-	public void loginChar(int slotNumber, int accountId, S_Client client) {
+	public G_Player loginChar(int slotNumber, int accountId, S_Client client) {
 		G_Player player = S_DatabaseUtils.getInstance().loadChar(slotNumber,
 				accountId, client);
 
 		
 
 		if (client == null) {
-			return;
+			return null;
 		}
 
 		G_Equipment eq = S_DatabaseUtils.getInstance().getEquipment(
@@ -445,7 +479,23 @@ public class S_Command {
 
 		world.getSessionManager().newSession(player);
 		player.setEquipment(eq);
-		player.setMap(world.getMapManager());
+		
+		
+		S_Map map = S_Server.getInstance().getWorldModule().getTeleportManager().getDestination(player);
+		if (map==null)
+		{
+			if(client.getLoginType()==S_LoginType.PLAY) {
+				System.err.println("Got a play login while no teleport for this player was pending"+client.getPlayer());
+				S_Server.getInstance().getNetworkModule().Disconnect(client);	
+				return null;
+			}
+			int mapId = Integer.parseInt(S_Reference.getInstance().getServerReference().getItem("Server").getMemberValue("DefaultMap"));			
+			map = S_Server.getInstance().getWorldModule().getMap(mapId);
+			System.out.println("Loading default map "+ map);
+		}
+		
+		player.setMap(map);
+		
 		world.getPlayerManager().addPlayer(player);
 
 		serverSay(player.getName() + " is logging in (ID: "
@@ -464,10 +514,10 @@ public class S_Command {
 
 				client.SendData( packetData);
 
-		packetData = "a_idx " + client.accountId + "\n";
+		packetData = "a_idx " + client.getAccountId() + "\n";
 				client.SendData( packetData);
 
-		packetData = "a_idn " + client.username + "\n";
+		packetData = "a_idn " + client.getUsername() + "\n";
 				client.SendData( packetData);
 
 		packetData = "a_lev " + player.getAdminState() + "\n";
@@ -498,7 +548,7 @@ public class S_Command {
 
 		client.SendPacket(S_PacketType.OK);	
 
-		return;
+		return player;
 	}
 
 	/****** Manages the Mob In ******/
@@ -506,6 +556,9 @@ public class S_Command {
 
 		S_Client client = S_Server.getInstance().getNetworkModule()
 				.getClient(player);
+		
+		System.out.println("Debug"+player.getMap().getId()+" "+mob.getMap().getId());
+		
 
 		if (client == null) {
 			return;
@@ -693,6 +746,8 @@ public class S_Command {
 		if (client == null) {
 			return;
 		}
+		
+		System.out.println("Debug"+player.getMap().getId()+" "+npc.getMap().getId());
 
 		String packetData = "in npc " + npc.getEntityId() + " " + npc.getType()
 				+ " " + npc.getPosX() + " " + npc.getPosY() + " 0 "

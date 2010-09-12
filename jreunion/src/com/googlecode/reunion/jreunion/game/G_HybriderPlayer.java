@@ -11,6 +11,7 @@ public class G_HybriderPlayer extends G_Player {
 
 	public G_HybriderPlayer() {
 		super();
+		
 	}
 
 	public int getBaseDmg(G_Player player) {

@@ -259,7 +259,7 @@ public class S_DatabaseUtils {
 			
 			//ResultSet rs = stmt.executeQuery("SELECT * FROM equipment WHERE charid="+client.accountId+";");
 			
-			stmt.execute("INSERT INTO equipment ("+field+")VALUES ("+itemType+")WHERE charid="+client.playerObject.getEntityId()+";");
+			stmt.execute("INSERT INTO equipment ("+field+")VALUES ("+itemType+")WHERE charid="+client.getPlayer().getEntityId()+";");
 			
 		}catch (SQLException e1) {
 			e1.printStackTrace();
@@ -278,21 +278,16 @@ public class S_DatabaseUtils {
 			.executeQuery("SELECT * FROM characters WHERE id="
 					+ characterId + ";");
 			if (rs.next()) {
-				int race = rs.getInt("race");
+				int race = rs.getInt("race");				
+				player = G_Player.createPlayer(race);
 				
-				if (race == G_Enums.RACE_BULKAN) player = new G_BulkanPlayer();
-				else if (race == G_Enums.RACE_KAILIPTON) player = new G_KailiptonPlayer();
-				else if (race == G_Enums.RACE_AIDIA) player = new G_AidiaPlayer();
-				else if (race == G_Enums.RACE_HUMAN) player = new G_HumanPlayer();
-				else if (race == G_Enums.RACE_HYBRIDER)	player = new G_HybriderPlayer();
+				G_EntityManager.getEntityManager().loadEntity(player,characterId);
 				
-				com.googlecode.reunion.jreunion.game.G_EntityManager.getEntityManager().loadEntity(player,characterId);
-				
-				player.setStr(rs.getInt("str"));
-				player.setWis(rs.getInt("wis"));
-				player.setDex(rs.getInt("dex"));
-				player.setCons(rs.getInt("con"));
-				player.setLead(rs.getInt("lea"));
+				player.setStrength(rs.getInt("str"));
+				player.setWisdom(rs.getInt("wis"));
+				player.setDexterity(rs.getInt("dex"));
+				player.setConstitution(rs.getInt("con"));
+				player.setLeadership(rs.getInt("lea"));
 				player.setLevel(rs.getInt("level"));
 				player.setCurrHp(rs.getInt("currHp"));
 				player.setMaxHp(rs.getInt("maxHp"));
@@ -307,7 +302,6 @@ public class S_DatabaseUtils {
 				player.setLime(rs.getInt("lime"));
 				player.setStatusPoints(rs.getInt("statusPoints"));
 				player.setPenaltyPoints(rs.getInt("penaltyPoints"));
-				player.setRace(rs.getInt("race"));
 				player.setSex(rs.getInt("sex"));
 				player.setName(rs.getString("name"));
 				player.setGuildId(rs.getInt("guildid"));
@@ -342,7 +336,7 @@ public class S_DatabaseUtils {
 												  "maxStm,totalExp,lvlUpExp,lime,statusPoints,penaltyPoints," +
 												  "guildid,guildlvl)" +
 						 " VALUES ("+player.getEntityId()+ ","
-								    +client.accountId+ ",'"
+								    +client.getAccountId()+ ",'"
 								    +player.getName()+ "',"
 								    +player.getLevel()+ ","
 								    +player.getStr()+ ","
@@ -433,8 +427,8 @@ public class S_DatabaseUtils {
 	}
 	
 	public void CreateChar(S_Client client, int slotNumber, String charName,
-			int race, int sex, int hair, int str, int wis, int dex, int con,
-			int lea) {
+			int race, int sex, int hairStyle, int str, int wis, int dex, int con,
+			int lead) {
 		if (!checkDatabase())
 			return;
 		Statement stmt;
@@ -447,48 +441,39 @@ public class S_DatabaseUtils {
 
 			G_EntityManager.getEntityManager().removeEntity(entity);
 						
-			G_Player player = null;
+			G_Player player = G_Player.createPlayer(race);			
 			
-			if (race == G_Enums.RACE_BULKAN)
-				player = new G_BulkanPlayer();
-			else if (race == G_Enums.RACE_KAILIPTON) 
-					player = new G_KailiptonPlayer();
-			else if (race == G_Enums.RACE_AIDIA) 
-					player = new G_AidiaPlayer();
-			else if (race == G_Enums.RACE_HUMAN) 
-					player = new G_HumanPlayer();
-			else if (race == G_Enums.RACE_HYBRIDER) 
-				player = new G_HybriderPlayer();
+			player.setLevel(1);
+			player.setName(charName);
+			player.setSex(sex);
+			player.setHairStyle(hairStyle);
+			player.setStrength(str);
+			player.setWisdom(wis);
+			player.setDexterity(dex);
+			player.setConstitution(con);
+			player.setLeadership(lead);
+			
+			player.setMaxHp(((str*1)+(con*2)));
+			player.setCurrHp(player.getMaxHp());
+			player.setMaxMana(((wis*2)+(dex*1)));
+			player.setCurrMana(player.getMaxMana());
+			player.setMaxElect(((wis*1)+(dex*2)));
+			player.setCurrElect(player.getMaxElect());
+			
+			player.setMaxStm(((str*2)+(con*1)));
+			player.setCurrStm(player.getMaxStm());
+			
+			player.setLime(Integer.parseInt(S_Reference.getInstance().getServerReference().getItem("Server").getMemberValue("StartLime")));
 			
 			G_EntityManager.getEntityManager().loadEntity(player,characterId);
-			client.playerObject = player;
-			
-			stmt.execute("INSERT INTO characters (id,accountid, name, race, sex, hair, str, wis , dex, con, lea, currHp, MaxHp, currMana, maxMana, currElect, maxElect, currStm, maxStm, lime) VALUES ("
-					+ characterId + ","
-					+ client.accountId + ",'"
-					+ charName + "',"
-					+ race + ","
-					+ sex + ","
-					+ hair + ","
-					+ str + ","
-					+ wis + ","
-					+ dex + ","
-					+ con + ","
-					+ lea + ","
-					+ ((str*1)+(con*2)) + ","	// current Hp
-					+ ((str*1)+(con*2)) + ","	// max Hp
-					+ ((wis*2)+(dex*1)) + ","	// current Mana
-					+ ((wis*2)+(dex*1)) + ","	// max Mana
-					+ ((wis*1)+(dex*2)) + ","	// current Elect
-					+ ((wis*1)+(dex*2)) + ","	// max Elect
-					+ ((str*2)+(con*1)) + ","	// current Stamina
-					+ ((str*2)+(con*1)) + 		// max Stamina
-					",100);");
+			client.setPlayer(player);
+		
+			saveCharStatus(player);
 			
 			stmt.execute("INSERT INTO slots (characterid, slotnumber, accountid) VALUES ("
 					+ characterId + ","
 					+ slotNumber + ","
-					+ client.accountId + "); ");
+					+ client.getAccountId() + "); ");
 			
 			G_Armor top = (G_Armor)S_ItemFactory.createItem(326);
 			G_Armor legs = (G_Armor)S_ItemFactory.createItem(343);
@@ -568,7 +553,7 @@ public class S_DatabaseUtils {
 			
 			System.out.println("Loaded: " + player.getName());
 			
-			client.playerObject = player;
+			client.setPlayer(player);
 			client.characterId=characterId;
 			
 		} catch (SQLException e1) {
@@ -790,21 +775,18 @@ public class S_DatabaseUtils {
 
 			String query = "INSERT INTO skills (charid,id,level) VALUES ";
 			
-			
 			Iterator<G_Skill> skillsIter = player.getCharSkill().getSkillListIterator();
 			
 			while(skillsIter.hasNext()){
 				G_Skill skill = (G_Skill)skillsIter.next();
 				
-				
-				query+="("+playerId+","+skill.getId()+","+skill.getCurrLevel()+")";			
-				if(skillsIter.hasNext())
-					query+= ", ";
-			}
-			
-			System.out.println(query);
-			stmt.execute(query);//test to see what it says when you save your skills
-			
+				if(skill.getCurrLevel()>0){
+					query+="("+playerId+","+skill.getId()+","+skill.getCurrLevel()+")";			
+					if(skillsIter.hasNext())
+						query+= ", ";
+				}
+			}			
+			stmt.execute(query);
 			
 		} catch (SQLException e1) {
 			e1.printStackTrace();
@@ -818,11 +800,11 @@ public class S_DatabaseUtils {
 		Statement stmt;
 		try {
 			stmt = database.conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT id, level FROM skills WHERE charid="+player.getEntityId()+";");			
+			ResultSet rs = stmt.executeQuery("SELECT id,level FROM skills WHERE charid="+player.getEntityId()+";");			
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				int level = rs.getInt("level");
-				player.getCharSkill().getSkill(id).setCurrLevel(level);//weird
+				player.getCharSkill().getSkill(id).setCurrLevel(level);
 			}
 			
 		} catch (SQLException e1) {
@@ -881,8 +863,8 @@ public class S_DatabaseUtils {
 		try {
 			Statement invStmt = database.conn.createStatement();
 			
-			ResultSet stashTable = invStmt.executeQuery("SELECT * FROM stash WHERE accountid="+client.accountId+";");
-			client.playerObject.getStash().clearStash();
+			ResultSet stashTable = invStmt.executeQuery("SELECT * FROM stash WHERE accountid="+client.getAccountId()+";");
+			client.getPlayer().getStash().clearStash();
 			G_Item item;
 						
 			while (stashTable.next()) 
@@ -896,7 +878,7 @@ public class S_DatabaseUtils {
 					item = S_ItemFactory.loadItem(stashTable.getInt("uniqueitemid"));
 				}
 				G_StashItem stashItem =	new G_StashItem(stashTable.getInt("pos"), item);
-				client.playerObject.getStash().addItem(stashItem);
+				client.getPlayer().getStash().addItem(stashItem);
 			}
 						
 		} catch (SQLException e1) {
@@ -912,15 +894,15 @@ public class S_DatabaseUtils {
 		
 		try {
 			Statement stmt = database.conn.createStatement();
-			stmt.execute("DELETE FROM stash WHERE accountid="+client.accountId+";");
-			Iterator<G_StashItem> stashIter = client.playerObject.getStash().itemListIterator();
+			stmt.execute("DELETE FROM stash WHERE accountid="+client.getAccountId()+";");
+			Iterator<G_StashItem> stashIter = client.getPlayer().getStash().itemListIterator();
 			
 			while(stashIter.hasNext())
 			{
 				G_StashItem stashItem = stashIter.next();
 				
 				stmt.execute("INSERT INTO stash (accountid, pos, uniqueitemid)" +
-						" VALUES ("+client.accountId+ ","
+						" VALUES ("+client.getAccountId()+ ","
 						+stashItem.getPos()+ ","
 						+stashItem.getItem().getEntityId()+ ");");
 			}
@@ -1041,6 +1023,7 @@ public class S_DatabaseUtils {
 			while(qsIter.hasNext())
 			{
 				G_QuickSlotItem qsItem = qsIter.next();
+				
 				stmt.execute("INSERT INTO quickslot (characterid, uniqueitemid, slot)" +
 						" VALUES ("+player.getEntityId()+ ","+qsItem.getItem().getEntityId()+","
 						+qsItem.getSlot()+");");

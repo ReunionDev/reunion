@@ -10,9 +10,11 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
@@ -31,12 +33,14 @@ public class S_Network extends S_ClassModule {
 	
 	//List<S_Client> clientList = new Vector<S_Client>();
 	Map<Socket,S_Client> clientList = new Hashtable<Socket,S_Client>();
+	
+	
+	public List<ServerSocketChannel> channels = new ArrayList<ServerSocketChannel>();
 
-	private ServerSocketChannel serverChannel;
+	//private ServerSocketChannel serverChannel;
 
 	private Selector selector;
 
-	private ServerSocket ss;
 
 	public S_Network(S_Module parent) {
 		super(parent);
@@ -77,15 +81,20 @@ public class S_Network extends S_ClassModule {
 						// so we can listen for input on it
 						S_Client client = new S_Client();
 						
-						Socket socket = ss.accept();
-						client.clientSocket = socket;
+						ServerSocketChannel channel = (ServerSocketChannel)key.channel();
+						//Socket socket = ss.accept();
+						//ServerSocketChannel channel = ((ServerSocketChannel) key.channel());
+						SocketChannel socketChannel = channel.accept();
+						Socket socket= socketChannel.socket();						
+						
+						client.setClientSocket(socket);
 						System.out.print("Got connection from "
-								+ client.clientSocket);
+								+ client.getClientSocket()+"\n");
 				
 						client.setState(S_ClientState.ACCEPTED);
 						// Make sure to make it non-blocking, so we can
 						// use a selector on it.
-						SocketChannel sc = client.clientSocket.getChannel();
+						SocketChannel sc = client.getClientSocket().getChannel();
 						sc.configureBlocking(false);
 						clientList.put(socket, client);
 						
@@ -153,15 +162,13 @@ public class S_Network extends S_ClassModule {
 			buffer.clear();
 			buffer.put(packet.getBytes());
 			buffer.flip();
-			SocketChannel sc = client.clientSocket.getChannel();
+			SocketChannel sc = client.getClientSocket().getChannel();
 			try {
-				System.out.println("Sending (" + new String(packet.getData())
-						+ ") to Client(" + client + ")");
+				System.out.print("Sending to "+client+"\n" + new String(packet.getData()));
 				sc.write(buffer);
 			} catch (IOException e) {
 				e.printStackTrace();
-				Disconnect(client);
-				
+				Disconnect(client);				
 			}
 			packet = queue.poll();
 		}
@@ -172,19 +179,18 @@ public class S_Network extends S_ClassModule {
 		
 		if(client!=null) {
 			System.out
-			.println("Disconnecting: Client("
-					+ client.clientSocket
-					+ ")");
+			.println("Disconnecting "
+					+ client.getClientSocket());
 			try {
-				client.clientSocket.close();
+				client.getClientSocket().close();
 			} catch (IOException e) {
 				// e.printStackTrace();
 			}
-			if (client.playerObject != null) {
-				client.playerObject.logout();
+			if (client.getPlayer() != null) {
+				client.getPlayer().logout();
 			
 			}
-			clientList.remove(client.clientSocket);
+			clientList.remove(client.getClientSocket());
 		}
 	}
 
@@ -193,7 +199,7 @@ public class S_Network extends S_ClassModule {
 		while (iter.hasNext()) {
 			S_Client client = iter.next();
 
-			if (client.playerObject == player) {
+			if (client.getPlayer() == player) {
 				return client;
 			}
 		}
@@ -230,7 +236,7 @@ public class S_Network extends S_ClassModule {
 			output[j] = buffer.get(j);
 		}
 
-		System.out.print("Client(" + client + ")" + " sends: \n");
+		System.out.print(client + " sends: \n");
 
 		char[] decOutput = S_Crypt.getInstance().C2Sdecrypt(output);
 
@@ -255,30 +261,46 @@ public class S_Network extends S_ClassModule {
 	@Override
 	public void Start() throws Exception {
 
-		int port = 4005;
+		
+		selector = Selector.open();	
+	}
+
+	public void register(InetSocketAddress address){
+
 		try {
-			serverChannel = ServerSocketChannel.open();
-			ss = serverChannel.socket();
-			InetSocketAddress address = new InetSocketAddress(port);
-			ss.bind(address);
+			ServerSocketChannel serverChannel = ServerSocketChannel.open();
+			
+			ServerSocket serverSocket = serverChannel.socket();
+			serverSocket.bind(address);
 			serverChannel.configureBlocking(false);
-			selector = Selector.open();
-			serverChannel.register(selector, SelectionKey.OP_ACCEPT);
-			System.out.println("\n>> Port " + port + " is currently used by the Server!\n");
+			
+			serverChannel.register(selector, SelectionKey.OP_ACCEPT);			
+			channels.add(serverChannel);
+			
 		} catch (Exception e) {
 			if (e instanceof BindException) {
-				System.out.println("Port " + port
+				System.out.println("Port " + address.getPort()
 						+ " not available. Is the server already running?");
-				throw e;
+				throw new RuntimeException(e);
 			}
 
 		}
-
 	}
+	
 
 	@Override
 	public void Stop() {
 		System.out.println("net stop");
+		try {
+			for(ServerSocketChannel channel : channels){				
+					channel.close();				
+			}
+			for(S_Client client : clientList.values()){				
+				Disconnect(client);			
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override

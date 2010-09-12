@@ -44,9 +44,6 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 
 	private int lead;
 
-	private int race; // 0 - Bulkan; 1 - Kailipton; 2 - Aidia; 3 - Human;
-						// 4 - Hybrider
-
 	private int sex; // 0 - Male; 1 - Female
 
 	private int speed;
@@ -322,7 +319,17 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 	}
 
 	public int getRace() {
-		return race;
+		if(this instanceof G_BulkanPlayer)
+			return G_Enums.RACE_BULKAN;
+		if(this instanceof G_AidiaPlayer)
+			return G_Enums.RACE_AIDIA;
+		if(this instanceof G_KailiptonPlayer)
+			return G_Enums.RACE_KAILIPTON;
+		if(this instanceof G_HumanPlayer)
+			return G_Enums.RACE_HUMAN;
+		if(this instanceof G_HybriderPlayer)
+			return G_Enums.RACE_HYBRIDER;		
+		throw new RuntimeException("Unknown race: "+this);
 	}
 
 	public void getRespawnCoords(int mapId) {
@@ -416,6 +423,17 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 		return wis;
 	}
 
+	public static G_Player createPlayer(int race){
+		
+		if (race == G_Enums.RACE_BULKAN) return new G_BulkanPlayer();
+		else if (race == G_Enums.RACE_KAILIPTON) return new G_KailiptonPlayer();
+		else if (race == G_Enums.RACE_AIDIA) return  new G_AidiaPlayer();
+		else if (race == G_Enums.RACE_HUMAN) return new G_HumanPlayer();
+		else if (race == G_Enums.RACE_HYBRIDER)	return new G_HybriderPlayer();
+		
+		throw new RuntimeException("Invalid race: "+race);
+		
+	}
 	/*** Manages the Items add/Remove from Trade Box ***/
 	public void itemExchange(int posX, int posY) {
 
@@ -635,7 +653,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 				uniqueid);
 		getInventory().addItem(item);
 		G_InventoryItem invItem = getInventory().getItem(item);
-		// S_DatabaseUtils.getInstance().saveInventory(client.playerObject);
+		// S_DatabaseUtils.getInstance().saveInventory(client.getPlayer()Object);
 
 		if (invItem == null) {
 			getInventory().setItemSelected(new G_InventoryItem(item, 0, 0, 0));
@@ -719,7 +737,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 	public void revive() {
 
 		updateStatus(0, getMaxHp(), getMaxHp());
-		switch (getMap().getMapId()) {
+		switch (getMap().getId()) {
 		case 4: {
 			getRespawnCoords(4);
 			break;
@@ -801,7 +819,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 		this.combatMode = combatMode;
 	}
 
-	public void setCons(int cons) {
+	public void setConstitution(int cons) {
 		this.cons = cons;
 	}
 
@@ -809,7 +827,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 		this.def = def;
 	}
 
-	public void setDex(int dex) {
+	public void setDexterity(int dex) {
 		this.dex = dex;
 	}
 
@@ -837,7 +855,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 		this.inventory = inventory;
 	}
 
-	public void setLead(int lead) {
+	public void setLeadership(int lead) {
 		this.lead = lead;
 	}
 
@@ -873,9 +891,6 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 		this.quickSlot = quickSlot;
 	}
 
-	public void setRace(int race) {
-		this.race = race;
-	}
 
 	public void setRunMode(boolean runMode) {
 		this.runMode = runMode;
@@ -906,7 +921,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 		this.statusPoints = statusPoints;
 	}
 
-	public void setStr(int str) {
+	public void setStrength(int str) {
 		this.str = str;
 	}
 
@@ -914,7 +929,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 		this.totalExp = totalExp;
 	}
 
-	public void setWis(int wis) {
+	public void setWisdom(int wis) {
 		this.wis = wis;
 	}
 
@@ -1184,7 +1199,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 			if (getStatusPoints() <= 0) {
 				return;
 			}
-			setStr(getStr() + curr);
+			setStrength(getStr() + curr);
 			packetData = "status " + id + " " + getStr() + " " + max + "\n";
 			
 					client.SendData(packetData);
@@ -1199,7 +1214,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 			if (getStatusPoints() <= 0) {
 				return;
 			}
-			setWis(getWis() + curr);
+			setWisdom(getWis() + curr);
 			packetData = "status " + id + " " + getWis() + " " + max + "\n";
 			
 					client.SendData(packetData);
@@ -1214,7 +1229,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 			if (getStatusPoints() <= 0) {
 				return;
 			}
-			setDex(getDex() + curr);
+			setDexterity(getDex() + curr);
 			packetData = "status " + id + " " + getDex() + " " + max + "\n";
 			
 					client.SendData(packetData);
@@ -1229,7 +1244,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 			if (getStatusPoints() <= 0) {
 				return;
 			}
-			setCons(getCons() + curr);
+			setConstitution(getCons() + curr);
 			packetData = "status " + id + " " + getCons() + " " + max + "\n";
 			
 					client.SendData(packetData);
@@ -1244,7 +1259,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 			if (getStatusPoints() <= 0) {
 				return;
 			}
-			setLead(getLead() + curr);
+			setLeadership(getLead() + curr);
 			packetData = "status " + id + " " + getLead() + " " + max + "\n";
 			
 					client.SendData(packetData);

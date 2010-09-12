@@ -1,5 +1,6 @@
 package com.googlecode.reunion.jreunion.server;
 
+import java.net.InetSocketAddress;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
@@ -15,7 +16,9 @@ import com.googlecode.reunion.jreunion.game.G_Spawn;
  */
 public class S_Map {
 
-	private int mapId;
+	private int id;
+	
+	private String name;
 
 	private List<G_Spawn> mobSpawnList = new Vector<G_Spawn>();
 
@@ -33,9 +36,15 @@ public class S_Map {
 
 	private S_Parser npcSpawnReference;
 
-	public S_Map(int mapId) {
-		super();
-		this.mapId = mapId;
+	private InetSocketAddress address;
+
+	public InetSocketAddress getAddress() {
+		return address;
+	}
+
+	public S_Map(int id) {
+		
+		this.id = id;
 
 	}
 
@@ -71,7 +80,7 @@ public class S_Map {
 			if (!item.checkMembers(new String[] { "ID", "CenterX", "CenterY",
 					"Radius", "RespawnTime", "Type" })) {
 				System.out.println("Error loading a mob spawn on map: "
-						+ getMapId());
+						+ getId());
 				continue;
 			}
 
@@ -107,7 +116,7 @@ public class S_Map {
 			if (!i.checkMembers(new String[] { "ID", "CenterX", "CenterY",
 					"Rotation", "Type" })) {
 				System.out.println("Error loading a npc spawn on map: "
-						+ getMapId());
+						+ getId());
 				continue;
 			}
 			G_Npc newNpc = S_Server.getInstance().getWorldModule()
@@ -133,8 +142,8 @@ public class S_Map {
 	/**
 	 * @return Returns the mapid.
 	 */
-	public int getMapId() {
-		return mapId;
+	public int getId() {
+		return id;
 	}
 
 	public S_Area getMobArea() {
@@ -169,14 +178,31 @@ public class S_Map {
 		playerSpawnReference = new S_Parser();
 		mobSpawnReference = new S_Parser();
 		npcSpawnReference = new S_Parser();
-		loadFromReference(mapId);
+		loadFromReference(id);
+		
+		S_ParsedItem item = S_Reference.getInstance().getMapReference().getItemById(id);
+		
+		int port = Integer.parseInt(item.getMemberValue("Port"));
+		String ip= item.getMemberValue("Ip");
+		setName(item.getName());
+		address = new InetSocketAddress(ip,port);
+		S_Server.getInstance().getNetworkModule().register(getAddress());
+		
+		System.out.println(getName()+" running on "+getAddress());
+		
 		createMobSpawns();
 		createNpcSpawns();
+	}
+	
+	@Override
+	public String toString() {
+		return "S_Map [id=" + id + ", name=" + name + "]";
 	}
 
 	public void loadFromReference(int id) {
 		playerSpawnReference.Parse(S_Reference.getInstance().getMapReference()
 				.getItemById(id).getMemberValue("PlayerSpawn"));
+		
 		mobSpawnReference.Parse(S_Reference.getInstance().getMapReference()
 				.getItemById(id).getMemberValue("MobSpawn"));
 		npcSpawnReference.Parse(S_Reference.getInstance().getMapReference()
@@ -188,7 +214,6 @@ public class S_Map {
 				.getItemById(id).getMemberValue("MobArea"));
 		pvpArea.load(S_Reference.getInstance().getMapReference()
 				.getItemById(id).getMemberValue("PvpArea"));
-
 	}
 
 	public Iterator<G_Spawn> mobSpawnListIterator() {
@@ -242,5 +267,19 @@ public class S_Map {
 				}
 			}
 		}
+	}
+
+	/**
+	 * @param name the name to set
+	 */
+	private void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
 	}
 }

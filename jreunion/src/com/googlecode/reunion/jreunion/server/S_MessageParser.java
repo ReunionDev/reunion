@@ -38,18 +38,16 @@ public class S_MessageParser {
 
 			} else if (word[0].equals("@testcol")) {
 				G_Player p = player;
-
+				
+				S_Map map = p.getMap();
 				String s1 = ""
-						+ S_Server.getInstance().getWorldModule()
-								.getMapManager().getPlayerArea()
+						+ map.getPlayerArea()
 								.get(p.getPosX() / 10 - 300, p.getPosY() / 10);
 				String s2 = ""
-						+ S_Server.getInstance().getWorldModule()
-								.getMapManager().getMobArea()
+						+ map.getMobArea()
 								.get(p.getPosX() / 10 - 300, p.getPosY() / 10);
 				String s3 = ""
-						+ S_Server.getInstance().getWorldModule()
-								.getMapManager().getPvpArea()
+						+ map.getPvpArea()
 								.get(p.getPosX() / 10 - 300, p.getPosY() / 10);
 
 				com.serverSay("(" + p.getPosX() / 10 + "," + p.getPosY() / 10

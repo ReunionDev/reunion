@@ -5,7 +5,8 @@ package com.googlecode.reunion.jreunion.game;
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
 public class G_Enums {
-	public final static int RACE_COMMON = -1;
+	
+	
 
 	public final static int RACE_BULKAN = 0;
 

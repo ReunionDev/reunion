@@ -122,9 +122,9 @@ public class G_QuickSlot {
 			case 1053: {
 				player.getQuest().spawnOfRuin(player, slot);
 				G_Mob mob = new G_Mob(324);
-				mob.setPosX(client.playerObject.getPosX() + 20);
-				mob.setPosY(client.playerObject.getPosY() + 20);
-				mob.setPosZ(client.playerObject.getPosZ());
+				mob.setPosX(client.getPlayer().getPosX() + 20);
+				mob.setPosY(client.getPlayer().getPosY() + 20);
+				mob.setPosZ(client.getPlayer().getPosZ());
 				mob.setRunning(true);
 				S_Server.getInstance().getWorldModule().getMobManager()
 						.addMob(mob);

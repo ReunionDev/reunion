@@ -27,6 +27,8 @@ public class S_Enums {
 		CHAR_LIST( 6),
 	
 		CHAR_SELECTED(7),
+		
+		PORTING(9),
 	
 		INGAME( 10);
 		
@@ -40,5 +42,13 @@ public class S_Enums {
 			return value;			
 		
 		}
+	}
+	
+	
+	
+	public enum S_LoginType{
+		PLAY,
+		LOGIN
+		
 	}
 }

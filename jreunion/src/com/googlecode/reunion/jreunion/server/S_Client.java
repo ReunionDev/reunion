@@ -4,6 +4,7 @@ import java.net.Socket;
 
 import com.googlecode.reunion.jreunion.game.G_Player;
 import com.googlecode.reunion.jreunion.server.S_Enums.S_ClientState;
+import com.googlecode.reunion.jreunion.server.S_Enums.S_LoginType;
 import com.googlecode.reunion.jreunion.server.S_PacketFactory.S_PacketType;
 
 /**
@@ -15,19 +16,84 @@ public class S_Client {
 	
 	
 	
-	public String username;
+	private String username;
 
-	public String password;
+	private String password;
 
-	public Socket clientSocket;
+	private Socket clientSocket;
 
-	public int accountId;
+	private int accountId;
 
 	private S_ClientState clientState;
 
-	public G_Player playerObject;
+	private G_Player player;
 
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public Socket getClientSocket() {
+		return clientSocket;
+	}
+
+	public void setClientSocket(Socket clientSocket) {
+		this.clientSocket = clientSocket;
+	}
+
+	public int getAccountId() {
+		return accountId;
+	}
+
+	public void setAccountId(int accountId) {
+		this.accountId = accountId;
+	}
+
+	public S_ClientState getClientState() {
+		return clientState;
+	}
+
+	public void setClientState(S_ClientState clientState) {
+		this.clientState = clientState;
+	}
+
+	public G_Player getPlayer() {
+		return player;
+	}
+
+	public void setPlayer(G_Player player) {
+		this.player = player;
+	}
+
+	public int getCharacterId() {
+		return characterId;
+	}
+
+	public void setCharacterId(int characterId) {
+		this.characterId = characterId;
+	}
 	public int characterId;
+	
+	public S_LoginType loginType;
+
+	public S_LoginType getLoginType() {
+		return loginType;
+	}
+
+	public void setLoginType(S_LoginType loginType) {
+		this.loginType = loginType;
+	}
 
 	public S_Client() {
 		super();
@@ -72,8 +138,8 @@ public class S_Client {
 		String value = "Client";
 		if(clientSocket!=null)
 			value+="("+clientSocket+")";
-		if(playerObject!=null)
-			value+="("+playerObject.getName()+")";
+		if(player!=null)
+			value+="("+player.getName()+")";
 		
 		return value;
 	}

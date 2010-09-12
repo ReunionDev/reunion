@@ -133,6 +133,10 @@ public class S_Session {
 	public Iterator<G_Player> getPlayerListIterator() {
 		return playerList.iterator();
 	}
+	
+	public Iterator<G_Npc> getNpcListIterator() {
+		return npcList.iterator();
+	}
 
 	public int getPlayerListSize() {
 		return playerList.size();

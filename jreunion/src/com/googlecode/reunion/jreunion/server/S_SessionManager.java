@@ -80,7 +80,8 @@ public class S_SessionManager {
 				}
 				statusUpdateTime.Stop();
 				statusUpdateTime.Reset();
-				// if(client.getState() == S_Enums.CS_INGAME){
+				
+				//TODO: Move this somewhere sane!
 				player1.updateStatus(0,
 						player1.getCurrHp() + (int) (player1.getMaxHp() * 0.1),
 						player1.getMaxHp());
@@ -96,7 +97,7 @@ public class S_SessionManager {
 						player1.getCurrElect()
 								+ (int) (player1.getMaxElect() * 0.08),
 						player1.getMaxElect());
-				// }
+				
 			}
 			if (!statusUpdateTime.isRunning()) {
 				statusUpdateTime.Start();
@@ -149,10 +150,7 @@ public class S_SessionManager {
 				} else {
 					player1.getSession().enterMob(mob, 0);
 					if (distance <= 150 && mob.getAttackType() != -1) {
-						if (S_Server
-								.getInstance()
-								.getWorldModule()
-								.getMapManager()
+						if (player1.getMap()
 								.getMobArea()
 								.get((player1.getPosX() / 10 - 300),
 										(player1.getPosY() / 10)) == true) {
