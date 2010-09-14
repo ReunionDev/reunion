@@ -1,38 +1,29 @@
 package com.googlecode.reunion.jcommon;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.DataInputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.net.InetAddress;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 public class ServerList 
 {
-	private List<ServerListItem> items = new ArrayList<ServerListItem>();
+	private List<ServerListItem> items = new Vector<ServerListItem>();
 	public void Save(String filename) throws IOException{		
 		File file = new File(filename);
 		RandomAccessFile output = new RandomAccessFile(file,"rw");
 		int e0,d4,a4;
-		byte fb,ef;
-	   
+		byte fb,ef;	   
 	    output.write(new byte[6]);
 	    e0=30779;
 	    fb=75;
-	    d4=e0+getItems().size();
-	    
+	    d4=e0+getItems().size();	    
 	    output.write(getShort((short)e0));
 	    output.write(new byte[2]);
 	    output.writeByte(fb);
 	    output.write(getShort((short)d4));
 	    output.write(new byte[2]);
-	    // data
 	    for(ServerListItem item:getItems()) {
 	    	String line = item.getName()+" "+item.getAddress().getHostAddress()+" "+item.getPort();
 	      a4=line.length();
@@ -52,11 +43,8 @@ public class ServerList
 	public byte[] getShort(short input){
 		
 	    byte high = (byte)(input >>> 8);
-
-	    byte low = (byte)input;/* cast implies & 0xff */
-	    
-	    return new byte[] {low,high};
-		
+	    byte low = (byte)input;
+	    return new byte[] {low,high};		
 	}
 	
 	public void Load(String filename) throws IOException{
@@ -72,12 +60,10 @@ public class ServerList
 	    input.seek(10);
 	    int last = input.readByte();
 	    input.seek(11);
-	    //d4 = blockread(input,2);
 	    d4 = input.readByte();
 	    input.skipBytes(3);
 	  	int lines=d4-e0;
-	  	for (int i=0; i< lines;i++) {
-		
+	  	for (int i=0; i< lines;i++) {		
 		    e0=d4;
 		    line="";
 		    d4 = input.readByte();
@@ -89,7 +75,6 @@ public class ServerList
 		    	last=ef;
 		    }
 		    
-		    System.out.println(line);
 		    String [] parsed = line.split(" ");
 		    
 		    getItems().add(new ServerListItem(parsed[0],InetAddress.getByName(parsed[1]),Integer.parseInt(parsed[2])));		    
