@@ -18,10 +18,7 @@ import com.googlecode.reunion.jcommon.ServerList.ServerListItem;
 
 
 public class LauncherFrame extends JFrame {
-	
-	S_Parser launcher = new S_Parser();
-	S_Parser servers = new S_Parser();
-	
+		
 	/**
 	 * 
 	 */
@@ -33,30 +30,7 @@ public class LauncherFrame extends JFrame {
 		JLabel label = new JLabel("Hello biosfear!");
 		getContentPane().add(label, BorderLayout.CENTER);
 		pack();
-		setVisible(true);
-		
-		ServerList serverList = new ServerList();
-		try {
-			launcher.Parse("Launcher.dta");		
-			servers.Parse("Servers.dta");
-			
-			Iterator<S_ParsedItem> iter = servers.getItemListIterator();
-			
-			while(iter.hasNext()) {
-				S_ParsedItem server = iter.next();
-				serverList.getItems().add(serverList.new ServerListItem(server.getName(), InetAddress.getByName(server.getMemberValue("Address")), Integer.parseInt(server.getMemberValue("Port"))));
-				
-			}
-			serverList.Save("SvrList.dta");
-			
-			
-			String version = launcher.getItem("Launcher").getMemberValue("Version");
-			Runtime.getRuntime().exec("Game.exe "+version);
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
+		setVisible(true);		
 	}
 
 	/**
