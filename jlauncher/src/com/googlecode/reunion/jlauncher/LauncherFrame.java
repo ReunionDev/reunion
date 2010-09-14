@@ -1,20 +1,9 @@
 package com.googlecode.reunion.jlauncher;
 
 import java.awt.BorderLayout;
-import java.io.IOException;
-import java.io.RandomAccessFile;
-import java.net.InetAddress;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Iterator;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-
-import com.googlecode.reunion.jcommon.S_ParsedItem;
-import com.googlecode.reunion.jcommon.S_Parser;
-import com.googlecode.reunion.jcommon.ServerList;
-import com.googlecode.reunion.jcommon.ServerList.ServerListItem;
 
 
 public class LauncherFrame extends JFrame {
