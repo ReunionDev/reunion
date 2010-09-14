@@ -6,6 +6,7 @@ import java.io.RandomAccessFile;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Iterator;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -18,6 +19,9 @@ import com.googlecode.reunion.jcommon.ServerList.ServerListItem;
 
 public class LauncherFrame extends JFrame {
 	
+	S_Parser launcher = new S_Parser();
+	S_Parser servers = new S_Parser();
+	
 	/**
 	 * 
 	 */
@@ -29,8 +33,29 @@ public class LauncherFrame extends JFrame {
 		JLabel label = new JLabel("Hello biosfear!");
 		getContentPane().add(label, BorderLayout.CENTER);
 		pack();
-
 		setVisible(true);
+		
+		ServerList serverList = new ServerList();
+		try {
+			launcher.Parse("Launcher.dta");		
+			servers.Parse("Servers.dta");
+			
+			Iterator<S_ParsedItem> iter = servers.getItemListIterator();
+			
+			while(iter.hasNext()) {
+				S_ParsedItem server = iter.next();
+				serverList.getItems().add(serverList.new ServerListItem(server.getName(), InetAddress.getByName(server.getMemberValue("Address")), Integer.parseInt(server.getMemberValue("Port"))));
+				
+			}
+			serverList.Save("SvrList.dta");
+			
+			
+			String version = launcher.getItem("Launcher").getMemberValue("Version");
+			Runtime.getRuntime().exec("Game.exe "+version);
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 	}
 
@@ -39,34 +64,6 @@ public class LauncherFrame extends JFrame {
 	 */
 	public static void main(String[] args) {
 		
-		ServerList serverList = new ServerList();
-		try {
-			
-			InetAddress.getByName("localhost");
-			 S_Parser parser = new  S_Parser();
-			//parser.Parse("launcher.dta");
-			serverList.getItems().add(serverList.new ServerListItem("test", InetAddress.getByName("127.0.0.1"), 1234));
-			serverList.Save("SvrList.dta");
-			
-			serverList.Load("C:\\Users\\Aidamina\\Documents\\SvrList.dta");
-			
-			RandomAccessFile r1 = new RandomAccessFile("test.dta", "r");
-			RandomAccessFile r2 = new RandomAccessFile("test2.dta", "r");
-			for(int i =0 ;i<r1.length();i++){
-				
-				//System.out.println(String.format("%x %x",r1.read(),r2.read()));
-				
-			}
-			
-			System.out.println(serverList.getItems().size());
-			for(ServerListItem item:serverList.getItems()) {
-				System.out.println(item.getName());
-				
-			}
-		} catch (IOException e) {
-
-			e.printStackTrace();
-		}
 		JFrame frame = new LauncherFrame();
 
 	}

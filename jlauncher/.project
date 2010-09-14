@@ -3,6 +3,7 @@
 	<name>jlauncher</name>
 	<comment></comment>
 	<projects>
+		<project>jcommon</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
@@ -14,4 +15,15 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
+	<filteredResources>
+		<filter>
+			<id>1284479793745</id>
+			<name></name>
+			<type>30</type>
+			<matcher>
+				<id>org.eclipse.ui.ide.multiFilter</id>
+				<arguments>1.0-name-matches-false-false-.*</arguments>
+			</matcher>
+		</filter>
+	</filteredResources>
 </projectDescription>
