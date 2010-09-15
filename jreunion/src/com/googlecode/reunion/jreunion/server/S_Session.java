@@ -25,15 +25,12 @@ public class S_Session {
 
 	private G_Player owner;
 
-	// private double currDistance = 0;
-
 	public S_Session(G_Player player) {
 
 		super();
 		player.setSession(this);
 		owner = player;
 		setActive(true);
-
 	}
 
 	public void close() {
@@ -74,8 +71,6 @@ public class S_Session {
 			entities.remove(entity);
 		}
 		entity.exit(this);
-		
-		
 	}
 	
 	
@@ -83,28 +78,23 @@ public class S_Session {
 		if(this.contains(entity))
 			return;
 		entities.add(entity);
-		
 		entity.enter(this);
 		
 	}
 
 	public void empty() {
 		
-		
 		List<G_WorldObject> tmpEntities = new Vector<G_WorldObject>();
 		Collections.copy(tmpEntities, entities);
-		
 		for(G_WorldObject object:tmpEntities)
 		{		
 			exit(object);			
 		}
 		entities.clear();
 		
-		
 	}
 
 	public Iterator<G_WorldObject> getPlayerListIterator() {
-		
 		
 		List<G_WorldObject> players = new ArrayList<G_WorldObject>(entities);
 		Iterator<G_WorldObject> iter = players.iterator();

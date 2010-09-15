@@ -1,5 +1,8 @@
 package com.googlecode.reunion.jreunion.server;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+
 import com.googlecode.reunion.jreunion.game.G_Mob;
 import com.googlecode.reunion.jreunion.game.G_Npc;
 import com.googlecode.reunion.jreunion.game.G_Player;
@@ -11,6 +14,8 @@ import com.googlecode.reunion.jreunion.game.G_Spawn;
  */
 public class S_MessageParser {
 
+	static int spawnCounter = 0;
+	
 	public S_MessageParser() {
 		super();
 
@@ -132,6 +137,32 @@ public class S_MessageParser {
 				if (word[1].equals("char")) {
 					com.GoToChar(player, word[2]);
 				}
+			} else if (word[0].equals("@spawn")||word[0].equals("@s")) {
+				BufferedWriter bw = null;
+			      try {
+			         bw = new BufferedWriter(new FileWriter("OutSpawns.dta", true));
+			         bw.write("["+word[2]+"]");			         
+			         bw.newLine();
+			         bw.write("ID = "+ ++spawnCounter);
+			         bw.newLine();
+			         bw.write("X = "+player.getPosition().getX());
+			         bw.newLine();
+			         bw.write("Y = "+player.getPosition().getY());
+			         bw.newLine();
+			         bw.write("Radius = "+word[3]);
+			         bw.newLine();
+			         bw.write("RespawnTime = 10");
+			         bw.newLine();
+			         bw.write("Type = "+word[1]);
+			         bw.newLine();			      
+			    	 bw.newLine();
+			    	 bw.flush();
+			      }catch(Exception e){
+			    	  com.serverTell(player,e.getMessage());
+			    	  e.printStackTrace();
+			      }
+				
+			
 			} else if (word[0].equals("@com")) {
 				String packetData = "";
 				for (int i = 1; i < word.length; i++) {
