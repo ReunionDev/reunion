@@ -1,5 +1,7 @@
 package com.googlecode.reunion.jreunion.game;
 
+import com.googlecode.reunion.jreunion.server.S_Session;
+
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
@@ -128,5 +130,17 @@ public class G_Pet extends G_LivingObject {
 
 	public void setSpeed(int speed) {
 		this.speed = speed;
+	}
+
+	@Override
+	public void enter(S_Session session) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void exit(S_Session session) {
+		// TODO Auto-generated method stub
+		
 	}
 }

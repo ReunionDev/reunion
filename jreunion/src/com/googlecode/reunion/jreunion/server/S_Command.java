@@ -10,6 +10,7 @@ import com.googlecode.reunion.jreunion.game.G_LivingObject;
 import com.googlecode.reunion.jreunion.game.G_Mob;
 import com.googlecode.reunion.jreunion.game.G_Npc;
 import com.googlecode.reunion.jreunion.game.G_Player;
+import com.googlecode.reunion.jreunion.game.G_RoamingItem;
 import com.googlecode.reunion.jreunion.game.G_Skill;
 import com.googlecode.reunion.jreunion.game.G_SlayerWeapon;
 import com.googlecode.reunion.jreunion.game.G_Weapon;
@@ -45,9 +46,15 @@ public class S_Command {
 		}
 
 	}
+	
+
+	public void charIn(G_Player sessionOwner, G_Player player) {
+		charIn(sessionOwner,player, false);
+		
+	}
 
 	/****** Manages the Char In ******/
-	public void charIn(G_Player player1, G_Player player2, int warping) {
+	public void charIn(G_Player player1, G_Player player2, boolean warping) {
 		int combat = 0;
 
 		if (player1 == null || player2 == null) {
@@ -102,7 +109,7 @@ public class S_Command {
 		int percentageHp = player2.getCurrHp() * 100 / player2.getMaxHp();
 		String packetData = new String();
 
-		if (warping == 0) {
+		if (!warping) {
 			packetData = "in ";
 		} else {
 			packetData = "appear ";
@@ -110,9 +117,9 @@ public class S_Command {
 
 		packetData += "char " + player2.getEntityId() + " " + player2.getName()
 				+ " " + player2.getRace() + " " + player2.getSex() + " "
-				+ player2.getHairStyle() + " " + player2.getPosX() + " "
-				+ player2.getPosY() + " " + player2.getPosZ() + " "
-				+ player2.getRotation() + " " + eqHelmet + " " + eqArmor + " "
+				+ player2.getHairStyle() + " " + player2.getPosition().getX() + " "
+				+ player2.getPosition().getY() + " " + player2.getPosition().getZ() + " "
+				+ player2.getPosition().getRotation() + " " + eqHelmet + " " + eqArmor + " "
 				+ eqPants + " " + eqShoulderMount + " " + eqBoots + " "
 				+ eqSecondHand + " " + eqFirstHand + " " + percentageHp + " "
 				+ combat + " 0 0 0 0 0 0\n";
@@ -169,7 +176,7 @@ public class S_Command {
 		G_Item item = new G_Item(itemtype);
 		item.setGemNumber(gems);
 		item.setExtraStats(special);
-		com.googlecode.reunion.jreunion.game.G_EntityManager.getEntityManager()
+		G_EntityManager.getEntityManager()
 				.createEntity(item);
 		S_DatabaseUtils.getInstance().updateItemInfo(item);
 		S_DatabaseUtils.getInstance().addItem(item);
@@ -180,8 +187,15 @@ public class S_Command {
 				+ posX + " " + posY + " " + posZ + " 0.0 " + gems + " "
 				+ special + "\n";
 
-				client.SendData( packetData);
-
+		client.SendData(packetData);
+				
+				
+		G_RoamingItem roamingItem = new G_RoamingItem(item);
+		player.getSession().enter(roamingItem);
+		
+		//send to all near //TODO: fix
+		//client.SendData( packetData);
+		/*
 		if (player.getSession().getPlayerListSize() > 0) {
 			Iterator<G_Player> iter = world.getPlayerManager()
 					.getPlayerListIterator();
@@ -196,9 +210,10 @@ public class S_Command {
 					continue;
 				}
 
-						client.SendData( packetData);
+						
 			}
 		}
+		*/
 
 		// S> drop [ItemID] [ItemType] [PosX] [PosY] 0 0.0 0 0
 	}
@@ -214,12 +229,12 @@ public class S_Command {
 			return;
 		}
 
-		player.setPosX(player2.getPosX() + 10);
-		player.setPosY(player2.getPosY() + 10);
-		player.setPosZ(player2.getPosZ());
+		player.getPosition().setX(player2.getPosition().getX() + 10);
+		player.getPosition().setY(player2.getPosition().getY() + 10);
+		player.getPosition().setZ(player2.getPosition().getZ());
 
-		String packetData = "goto " + player.getPosX() + " " + player.getPosY()
-				+ " " + player.getPosZ() + " " + player.getRotation() + "\n";
+		String packetData = "goto " + player.getPosition().getX() + " " + player.getPosition().getY()
+				+ " " + player.getPosition().getZ() + " " + player.getPosition().getRotation() + "\n";
 				client.SendData( packetData);
 	}
 
@@ -232,11 +247,11 @@ public class S_Command {
 			return;
 		}
 
-		player.setPosX(posX);
-		player.setPosY(posY);
+		player.getPosition().setX(posX);
+		player.getPosition().setY(posY);
 
 		String packetData = "goto " + posX + " " + posY + " 0 "
-				+ player.getRotation() + "\n";
+				+ player.getPosition().getRotation() + "\n";
 				client.SendData( packetData);
 
 		Iterator<S_Session> sessionIter = S_Server.getInstance()
@@ -244,14 +259,14 @@ public class S_Command {
 
 		while (sessionIter.hasNext()) {
 			S_Session session = sessionIter.next();
-			G_Player pl = session.getSessionOwner();
+			G_Player pl = session.getOwner();
 
 			if (session.contains(player)) {
-				session.exitPlayer(player);
-				player.getSession().exitPlayer(pl);
+				session.enter(player);
+				player.getSession().exit(pl);
 			}
 
-			if (pl.getMap() != player.getMap() || pl == player) {
+			if (pl.getPosition().getMap() != player.getPosition().getMap() || pl == player) {
 				continue;
 			}
 
@@ -263,9 +278,9 @@ public class S_Command {
 
 			int distance = pl.getDistance(player);
 
-			if (distance <= session.getSessionOwner().getSessionRadius()) {
-				session.enterPlayer(player, 1);
-				player.getSession().enterPlayer(pl, 0);
+			if (distance <= session.getOwner().getSessionRadius()) {
+				session.enter(player); //TODO: fix warp
+				player.getSession().enter(pl);
 			}
 		}
 	}
@@ -279,7 +294,7 @@ public class S_Command {
 		// party disband
 		// go_world 62.26.131.215 4001 0 0
 	
-		String packetData = "jump "+player.getPosX()+" "+player.getPosY()+" " + player.getEntityId() + "\n";
+		String packetData = "jump "+player.getPosition().getX()+" "+player.getPosition().getY()+" " + player.getEntityId() + "\n";
 		
 		client.SendData(packetData);
 		
@@ -303,6 +318,12 @@ public class S_Command {
 		// System.out.print("Removing Client...\n");
 		// S_Server.getInstance().getNetworkModule().clientList.remove(client);
 	}
+	
+	public void itemIn(G_Player sessionOwner, G_RoamingItem roamingItem) {
+		G_Item item = roamingItem.getItem();
+		this.itemIn(sessionOwner, item.getUniqueId(), item.getType(), roamingItem.getPosition().getX() , roamingItem.getPosition().getY(), roamingItem.getPosition().getZ(), roamingItem.getPosition().getRotation(), item.getGemNumber(), item.getExtraStats());
+		
+	}
 
 	/****** Manages the Item In ******/
 	public void itemIn(G_Player owner, int uniqueid, int itemtype, int posX,
@@ -311,7 +332,7 @@ public class S_Command {
 				.getClient(owner);
 
 		String packetData = "in item " + uniqueid + " " + itemtype + " " + posX
-				+ " " + posY + " " + posZ + " 0.0 " + gems + " " + special
+				+ " " + posY + " " + posZ + " "+rotation+" " + gems + " " + special
 				+ "\n";
 				client.SendData( packetData);
 
@@ -321,6 +342,12 @@ public class S_Command {
 		// [gemNumber] [Special]
 	}
 
+	
+	public void itemOut(G_Player sessionOwner, G_RoamingItem roamingItem) {
+		this.itemOut(sessionOwner, roamingItem.getItem().getUniqueId());
+		
+	}
+	
 	/****** Manages the Item Out ******/
 	public void itemOut(G_Player player, int uniqueid) {
 
@@ -336,24 +363,6 @@ public class S_Command {
 				client.SendData( packetData);
 		serverTell(player, "out: id  " + uniqueid);
 
-		if (player.getSession().getPlayerListSize() > 0) {
-			Iterator<G_Player> playerIter = player.getSession()
-					.getPlayerListIterator();
-
-			while (playerIter.hasNext()) {
-				G_Player pl = playerIter.next();
-
-				client = S_Server.getInstance().getNetworkModule()
-						.getClient(pl);
-
-				if (client == null) {
-					continue;
-				}
-
-				packetData = "out item " + uniqueid + "\n";
-						client.SendData( packetData);
-			}
-		}
 		// S> out item [UniqueID]
 	}
 
@@ -361,6 +370,27 @@ public class S_Command {
 		G_Player player = S_DatabaseUtils.getInstance().loadChar(slotNumber,
 				accountId, client);
 
+		
+		S_Map map = S_Server.getInstance().getWorldModule().getTeleportManager().getDestination(player);
+		if (map==null)
+		{
+			if(client.getLoginType()==S_LoginType.PLAY) {
+				System.err.println("Got a play login while no teleport for this player was pending"+client.getPlayer());
+				client.disconnect();
+				
+				return null;
+			}
+			int mapId = Integer.parseInt(S_Reference.getInstance().getServerReference().getItem("Server").getMemberValue("DefaultMap"));			
+			map = S_Server.getInstance().getWorldModule().getMap(mapId);
+			System.out.println("Loading default map "+ map);
+		}
+		
+		
+		if(!map.isLocal()){
+			return null;
+		}
+		
+		
 		
 
 		if (client == null) {
@@ -453,21 +483,8 @@ public class S_Command {
 		
 		
 		
-		S_Map map = S_Server.getInstance().getWorldModule().getTeleportManager().getDestination(player);
-		if (map==null)
-		{
-			if(client.getLoginType()==S_LoginType.PLAY) {
-				System.err.println("Got a play login while no teleport for this player was pending"+client.getPlayer());
-				client.disconnect();
-				
-				return null;
-			}
-			int mapId = Integer.parseInt(S_Reference.getInstance().getServerReference().getItem("Server").getMemberValue("DefaultMap"));			
-			map = S_Server.getInstance().getWorldModule().getMap(mapId);
-			System.out.println("Loading default map "+ map);
-		}
-		
-		player.setMap(map);
+
+		player.getPosition().setMap(map);
 		
 		world.getPlayerManager().addPlayer(player);
 
@@ -525,7 +542,7 @@ public class S_Command {
 	}
 
 	/****** Manages the Mob In ******/
-	public void mobIn(G_Player player, G_Mob mob, int spawn) {
+	public void mobIn(G_Player player, G_Mob mob, boolean spawn) {
 
 		S_Client client = S_Server.getInstance().getNetworkModule()
 				.getClient(player);
@@ -537,10 +554,10 @@ public class S_Command {
 		int percentageHp = mob.getCurrHp() * 100 / mob.getMaxHp();
 
 		String packetData = "in npc " + mob.getEntityId() + " " + mob.getType()
-				+ " " + mob.getPosX() + " " + mob.getPosY() + " 0 "
-				+ mob.getRotation() + " " + percentageHp + " "
+				+ " " + mob.getPosition().getX() + " " + mob.getPosition().getY() + " 0 "
+				+ mob.getPosition().getRotation() + " " + percentageHp + " "
 				+ mob.getMutant() + " " + mob.getUnknown1() + " "
-				+ mob.getNeoProgmare() + " 0 " + spawn + " "
+				+ mob.getNeoProgmare() + " 0 " + (spawn?1:0) + " "
 				+ mob.getUnknown2() + "\n";
 		// in npc [UniqueID] [type] [XPos] [YPos] [ZPos] [Rotation] [HP]
 		// [MutantType] 0 [NeoProgmare] 0 0
@@ -606,8 +623,9 @@ public class S_Command {
 					+ " " + percentageHp + " 0 0\n";
 		}
 		// S> attack_vital npc [NpcID] [RemainHP%] 0 0
-				client.SendData( packetData);
-
+		client.SendData( packetData);
+//TODO: Fix attack
+				/*
 		if (player.getSession().getPlayerListSize() > 0) {
 			Iterator<G_Player> playerIter = player.getSession()
 					.getPlayerListIterator();
@@ -636,6 +654,7 @@ public class S_Command {
 						client.SendData( packetData);
 			}
 		}
+		*/
 	}
 
 	/****** mob attacks player with normal attack ******/
@@ -691,7 +710,8 @@ public class S_Command {
 		}
 				client.SendData( packetData);
 		// S> attack npc [NpcID] char [CharID] [RemainCharHP%] 0 0 0 0
-
+		//TODO: Fix attack from mob
+		/*
 		if (player.getSession().getPlayerListSize() > 0) {
 			for (int i = 0; i < player.getSession().getPlayerListSize(); i++) {
 				client = S_Server.getInstance().getNetworkModule()
@@ -702,6 +722,7 @@ public class S_Command {
 						client.SendData( packetData);
 			}
 		}
+		*/
 	}
 
 	/****** Manages the Npc In ******/
@@ -718,8 +739,8 @@ public class S_Command {
 		}
 		
 		String packetData = "in npc " + npc.getEntityId() + " " + npc.getType()
-				+ " " + npc.getPosX() + " " + npc.getPosY() + " 0 "
-				+ npc.getRotation() + " 100 0 0 0 0 0 10\n";
+				+ " " + npc.getPosition().getX() + " " + npc.getPosition().getY() + " 0 "
+				+ npc.getPosition().getRotation() + " 100 0 0 0 0 0 10\n";
 
 		// in npc [UniqueID] [type] [XPos] [YPos] [ZPos] [Rotation] [HP]
 		// [MutantType] 0 [NeoProgmare] 0 0
@@ -829,7 +850,9 @@ public class S_Command {
 		String packetData = "attack_vital char " + player1.getEntityId()
 				+ " 100 0 0\n";
 				client.SendData( packetData);
-
+			
+		//TODO: fix sub attack
+		/*
 		if (player1.getSession().getPlayerListSize() > 0) {
 			for (int i = 0; i < player1.getSession().getPlayerListSize(); i++) {
 				client = S_Server.getInstance().getNetworkModule()
@@ -841,7 +864,7 @@ public class S_Command {
 						+ " char " + uniqueId + " 100 0 0\n";
 						client.SendData( packetData);
 			}
-		}
+		}*/
 
 	}
 
@@ -924,7 +947,8 @@ public class S_Command {
 		String packetData = "sav npc " + uniqueId + " " + percentageHp
 				+ " 1 0 " + item.getExtraStats() + "\n";
 				client.SendData( packetData);
-
+		//TODO: player attacks mob with Sub Attack
+				/*
 		if (player.getSession().getPlayerListSize() > 0) {
 			for (int i = 0; i < player.getSession().getPlayerListSize(); i++) {
 				client = S_Server.getInstance().getNetworkModule()
@@ -937,10 +961,16 @@ public class S_Command {
 						client.SendData( packetData);
 			}
 		}
+		*/
 
 		if (percentageHp == 0) {
 			S_Server.getInstance().getWorldModule().getMobManager()
 					.removeMob(mob);
 		}
 	}
+
+
+
+
+	
 }

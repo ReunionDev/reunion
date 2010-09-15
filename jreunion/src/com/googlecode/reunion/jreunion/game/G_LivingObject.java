@@ -3,34 +3,23 @@ package com.googlecode.reunion.jreunion.game;
 import com.googlecode.reunion.jcommon.S_ParsedItem;
 import com.googlecode.reunion.jreunion.server.S_Map;
 import com.googlecode.reunion.jreunion.server.S_Reference;
+import com.googlecode.reunion.jreunion.server.S_Session;
 
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-public class G_LivingObject extends G_Entity {
-
-	
+public abstract class G_LivingObject extends G_WorldObject {	
 	
 	private int team;
 
-	private int posX;
-
-	private int posY;
-
-	private int posZ;
-
 	private G_LivingObject target;
-
-	private S_Map map;
 
 	private int targetPosX;
 
 	private int targetPosY;
 
 	private int targetPosZ;
-
-	private double rotation;
 
 	private int currHp;
 
@@ -49,6 +38,8 @@ public class G_LivingObject extends G_Entity {
 	private int maxStm;
 
 	private int level;
+	
+	
 
 	public G_LivingObject() {
 		super();
@@ -75,10 +66,6 @@ public class G_LivingObject extends G_Entity {
 		return level;
 	}
 
-	public S_Map getMap() {
-		return map;
-	}
-
 	public int getMaxElect() {
 		return maxElect;
 	}
@@ -93,22 +80,6 @@ public class G_LivingObject extends G_Entity {
 
 	public int getMaxStm() {
 		return maxStm;
-	}
-
-	public int getPosX() {
-		return posX;
-	}
-
-	public int getPosY() {
-		return posY;
-	}
-
-	public int getPosZ() {
-		return posZ;
-	}
-
-	public double getRotation() {
-		return rotation;
 	}
 
 	public G_LivingObject getTarget() {
@@ -189,10 +160,6 @@ public class G_LivingObject extends G_Entity {
 		this.level = level;
 	}
 
-	public void setMap(S_Map map) {
-		this.map = map;
-	}
-
 	public void setMaxElect(int maxElect) {
 		this.maxElect = maxElect;
 	}
@@ -207,28 +174,6 @@ public class G_LivingObject extends G_Entity {
 
 	public void setMaxStm(int maxStm) {
 		this.maxStm = maxStm;
-	}
-
-	public void setPosX(int posX) {
-		/*
-		 * server.S_Server.getInstance().worldModule.worldCommand
-		 * .serverSay(((G_Player) this).getPlayerName() + " new position " +
-		 * this.getPlayerPosX() + " " + this.getPlayerPosY() + " " +
-		 * this.getPlayerPosZ() + " " + ((G_Player) this).getPlayerRotation());
-		 */
-		this.posX = posX;
-	}
-
-	public void setPosY(int posY) {
-		this.posY = posY;
-	}
-
-	public void setPosZ(int posZ) {
-		this.posZ = posZ;
-	}
-
-	public void setRotation(double rotation) {
-		this.rotation = rotation;
 	}
 
 	public void setTarget(G_LivingObject target) {
@@ -246,5 +191,7 @@ public class G_LivingObject extends G_Entity {
 	public void setTargetPosZ(int targetPosZ) {
 		this.targetPosZ = targetPosZ;
 	}
+
+
 	
 }

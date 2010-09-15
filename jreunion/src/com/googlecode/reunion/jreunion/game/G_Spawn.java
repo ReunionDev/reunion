@@ -159,9 +159,9 @@ public class G_Spawn {
 		G_Mob newMob = S_Server.getInstance().getWorldModule().getMobManager()
 				.createMob(getMobType());
 		
-		newMob.setPosX(rand.nextInt(radius * 2)-radius+centerX);
-		newMob.setPosY(rand.nextInt(radius * 2)-radius+centerY);
-		newMob.setMap(getMap());
+		newMob.getPosition().setX(rand.nextInt(radius * 2)-radius+centerX);
+		newMob.getPosition().setY(rand.nextInt(radius * 2)-radius+centerY);
+		newMob.getPosition().setMap(getMap());
 		setMob(newMob);
 
 		setDead(false);

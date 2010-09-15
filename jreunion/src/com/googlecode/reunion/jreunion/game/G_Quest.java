@@ -138,8 +138,8 @@ public class G_Quest {
 			return;
 		}
 
-		String packetData = "qt eff " + player.getPosX() + " "
-				+ player.getPosY() + " " + player.getEntityId() + "\n";
+		String packetData = "qt eff " + player.getPosition().getX() + " "
+				+ player.getPosition().getY() + " " + player.getEntityId() + "\n";
 		
 				client.SendData(packetData);
 	}

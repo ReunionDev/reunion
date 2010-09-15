@@ -8,6 +8,8 @@ import java.util.Vector;
 import com.googlecode.reunion.jcommon.S_ParsedItem;
 import com.googlecode.reunion.jcommon.S_Parser;
 import com.googlecode.reunion.jreunion.server.S_Reference;
+import com.googlecode.reunion.jreunion.server.S_Server;
+import com.googlecode.reunion.jreunion.server.S_Session;
 
 /**
  * @author Aidamina
@@ -50,8 +52,8 @@ public class G_Npc extends G_LivingObject {
 
 	/*** Return the distance between the npc and the living object ***/
 	public int getDistance(G_LivingObject livingObject) {
-		double xcomp = Math.pow(livingObject.getPosX() - getPosX(), 2);
-		double ycomp = Math.pow(livingObject.getPosY() - getPosY(), 2);
+		double xcomp = Math.pow(livingObject.getPosition().getX() - getPosition().getX(), 2);
+		double ycomp = Math.pow(livingObject.getPosition().getY() - getPosition().getY(), 2);
 		double distance = Math.sqrt(xcomp + ycomp);
 
 		return (int) distance;
@@ -125,7 +127,7 @@ public class G_Npc extends G_LivingObject {
 	
 				if (!i.checkMembers(new String[] { "Type" })) {
 					System.out.println("Error loading a Npc Shop Item on map: "
-							+ getMap());
+							+ getPosition().getMap());
 					continue;
 				}
 				G_Item item = new G_Item(Integer.parseInt(i.getMemberValue("Type")));
@@ -157,5 +159,19 @@ public class G_Npc extends G_LivingObject {
 
 	public void setSpawnId(int spawnId) {
 		this.spawnId = spawnId;
+	}
+
+	@Override
+	public void enter(S_Session session) {
+		S_Server.getInstance().getWorldModule().getWorldCommand()
+		.npcIn(session.getOwner(), this);
+		
+	}
+
+	@Override
+	public void exit(S_Session session) {
+		S_Server.getInstance().getWorldModule().getWorldCommand()
+		.npcOut(session.getOwner(), this);
+		
 	}
 }

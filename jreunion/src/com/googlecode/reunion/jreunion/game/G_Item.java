@@ -22,12 +22,6 @@ public class G_Item extends G_Entity {
 
 	private int type;
 
-	private int posX;
-
-	private int posY;
-
-	private int posZ;
-
 	private int rotation;
 
 	private int description;
@@ -48,18 +42,6 @@ public class G_Item extends G_Entity {
 
 	public int getGemNumber() {
 		return gemNumber;
-	}
-
-	public int getPosX() {
-		return posX;
-	}
-
-	public int getPosY() {
-		return posY;
-	}
-
-	public int getPosZ() {
-		return posZ;
 	}
 
 	public int getPrice() {
@@ -89,7 +71,7 @@ public class G_Item extends G_Entity {
 	public void loadFromReference(int id) {
 		S_ParsedItem item = S_Reference.getInstance().getItemReference()
 				.getItemById(id);
-
+		
 		if (item == null) {
 			// cant find Item in the reference continue to load defaults:
 			setSizeX(1);
@@ -141,18 +123,6 @@ public class G_Item extends G_Entity {
 
 	public void setGemNumber(int gemNumber) {
 		this.gemNumber = gemNumber;
-	}
-
-	public void setPosX(int posX) {
-		this.posX = posX;
-	}
-
-	public void setPosY(int posY) {
-		this.posY = posY;
-	}
-
-	public void setPosZ(int posZ) {
-		this.posZ = posZ;
 	}
 
 	public void setPrice(int price) {

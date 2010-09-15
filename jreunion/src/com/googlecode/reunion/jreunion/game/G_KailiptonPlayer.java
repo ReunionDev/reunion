@@ -120,12 +120,11 @@ public class G_KailiptonPlayer extends G_Player {
 		// S> attack_vital npc [NpcID] [RemainHP%] 0 0
 				client.SendData( packetData);
 
-		if (getSession().getPlayerListSize() > 0) {
-			Iterator<G_Player> playerIter = getSession()
+			Iterator<G_WorldObject> playerIter = getSession()
 					.getPlayerListIterator();
 
 			while (playerIter.hasNext()) {
-				G_Player pl = playerIter.next();
+				G_Player pl =(G_Player) playerIter.next();
 
 				client = S_Server.getInstance().getNetworkModule()
 						.getClient(pl);
@@ -142,7 +141,7 @@ public class G_KailiptonPlayer extends G_Player {
 				// 0 0
 						client.SendData( packetData);
 			}
-		}
+		
 	}
 
 	public void skillAttackPlayer(G_Player player, G_Skill skill) {

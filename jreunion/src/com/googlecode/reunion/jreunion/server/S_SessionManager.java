@@ -75,7 +75,7 @@ public class S_SessionManager {
 				statusUpdateTime.Stop();
 				statusUpdateTime.Reset();
 				
-				//TODO: Move this somewhere sane!
+				//TODO: Move regen somewhere sane!
 				player1.updateStatus(0,
 						player1.getCurrHp() + (int) (player1.getMaxHp() * 0.1),
 						player1.getMaxHp());
@@ -99,28 +99,32 @@ public class S_SessionManager {
 
 			Iterator<G_Player> player2Iter = world.getPlayerManager()
 					.getPlayerListIterator();
+			
 			while (player2Iter.hasNext()) {
 				G_Player player2 = player2Iter.next();
 
 				if (player1 == player2) {
 					continue;
 				}
-				if (player1.getMap() != player2.getMap()) {
+				if (player1.getPosition().getMap() != player2.getPosition().getMap()) {
 					continue;
 				}
 
-				double xcomp = Math.pow(player1.getPosX() - player2.getPosX(),
+				double xcomp = Math.pow(player1.getPosition().getX() - player2.getPosition().getX(),
 						2);
-				double ycomp = Math.pow(player1.getPosY() - player2.getPosY(),
+				double ycomp = Math.pow(player1.getPosition().getY() - player2.getPosition().getY(),
 						2);
-				double distance = Math.sqrt(xcomp + ycomp);
+				double zcomp = Math.pow(player1.getPosition().getZ() - player2.getPosition().getZ(),
+						2);
+				
+				double distance = Math.sqrt((xcomp * xcomp) + (ycomp * ycomp)  + (zcomp * zcomp));
 
 				if (distance <= player1.getSessionRadius()) {
-					player1.getSession().enterPlayer(player2, 0);
+					player1.getSession().enter(player2);
 				}
 
 				if (distance > player1.getSessionRadius()) {
-					player1.getSession().exitPlayer(player2);
+					player1.getSession().exit(player2);
 				}
 			}
 
@@ -133,21 +137,21 @@ public class S_SessionManager {
 					continue;
 				}
 
-				if (mob.getMap() != player1.getMap()) {
+				if (mob.getPosition().getMap() != player1.getPosition().getMap()) {
 					continue;
 				}
 
 				int distance = mob.getDistance(player1);
 
 				if (distance > player1.getSessionRadius()) {
-					player1.getSession().exitMob(mob);
+					player1.getSession().exit(mob);
 				} else {
-					player1.getSession().enterMob(mob, 0);
+					player1.getSession().enter(mob);
 					if (distance <= 150 && mob.getAttackType() != -1) {
-						if (player1.getMap()
+						if (player1.getPosition().getMap()
 								.getMobArea()
-								.get((player1.getPosX() / 10 - 300),
-										(player1.getPosY() / 10)) == true) {
+								.get((player1.getPosition().getX() / 10 - 300),
+										(player1.getPosition().getY() / 10)) == true) {
 							mob.moveToPlayer(player1, distance);
 						}
 					}
@@ -163,16 +167,16 @@ public class S_SessionManager {
 					continue;
 				}
 
-				if (npc.getMap() != player1.getMap()) {
+				if (npc.getPosition().getMap() != player1.getPosition().getMap()) {
 					continue;
 				}
 
 				int distance = npc.getDistance(player1);
 
 				if (distance > player1.getSessionRadius()) {
-					player1.getSession().exitNpc(npc);
+					player1.getSession().exit(npc);
 				} else {
-					player1.getSession().enterNpc(npc);
+					player1.getSession().enter(npc);
 				}
 			}
 

@@ -140,8 +140,10 @@ public class S_PacketParser {
 				client.setState(S_ClientState.CHAR_SELECTED);
 				G_Player player = com.loginChar(Integer.parseInt(message[1]), client.getAccountId(),
 						client);
-				
-				
+				if(player==null){
+					client.SendData("fail Cannot log in");
+					client.disconnect();
+				}
 			}
 
 			break;
@@ -151,9 +153,9 @@ public class S_PacketParser {
 			if (message[0].equals("start_game")) {
 				G_Player player = client.getPlayer();
 
-				player.setPosX(6655);
-				player.setPosY(5224);//we need to implement spawnpoints here
-				player.setPosZ(0);
+				player.getPosition().setX(6655);
+				player.getPosition().setY(5224);//we need to implement spawnpoints here
+				player.getPosition().setZ(0);
 
 				client.SendData(
 						"status 11 " + player.getTotalExp() + " 0\n");
@@ -167,8 +169,10 @@ public class S_PacketParser {
 						"status 19 " + player.getPenaltyPoints() + " 0\n");
 				
 				
-				int defaultSpawnId = Integer.parseInt(S_Reference.getInstance().getMapReference().getItemById(player.getMap().getId()).getMemberValue("DefaultSpawnId"));
-				S_ParsedItem spawn =player.getMap().getPlayerSpawnReference().getItemById(defaultSpawnId);
+				
+				
+				int defaultSpawnId = Integer.parseInt(S_Reference.getInstance().getMapReference().getItemById(player.getPosition().getMap().getId()).getMemberValue("DefaultSpawnId"));
+				S_ParsedItem spawn =player.getPosition().getMap().getPlayerSpawnReference().getItemById(defaultSpawnId);
 				
 				int x = Integer.parseInt(spawn.getMemberValue("X"));
 				int y = Integer.parseInt(spawn.getMemberValue("Y"));
@@ -179,13 +183,13 @@ public class S_PacketParser {
 				int spawnX = x+(width>0?rand.nextInt(width):0);
 				int spawnY = y+(height>0?rand.nextInt(height):0);
 				
-				player.setPosX(spawnX);
-				player.setPosY(spawnY);				
+				player.getPosition().setX(spawnX);
+				player.getPosition().setY(spawnY);				
 				
 				client.SendData(
 						"at " + client.getPlayer().getEntityId() + " "
-								+ player.getPosX() + " " + player.getPosY() + " "
-								+ player.getPosZ() + " 0\n");
+								+ player.getPosition().getX() + " " + player.getPosition().getY() + " "
+								+ player.getPosition().getZ() + " 0\n");
 
 				/*
 				 * server.getNetworkModule().SendPacket(client.networkId,

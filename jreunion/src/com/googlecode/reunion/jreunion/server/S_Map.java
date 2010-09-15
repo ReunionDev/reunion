@@ -29,10 +29,22 @@ public class S_Map {
 	private S_Area playerArea = new S_Area();
 
 	private S_Area mobArea = new S_Area();
+	
+	private boolean local = false;
+	
+	
 
 	private S_Area pvpArea = new S_Area();
 
 	private S_Parser playerSpawnReference;
+
+	public boolean isLocal() {
+		return local;
+	}
+
+	private void setLocal(boolean local) {
+		this.local = local;
+	}
 
 	private S_Parser mobSpawnReference;
 
@@ -125,11 +137,11 @@ public class S_Map {
 					.getNpcManager()
 					.createNpc(Integer.parseInt(i.getMemberValue("Type")));
 
-			newNpc.setPosX(Integer.parseInt(i.getMemberValue("CenterX")));
-			newNpc.setPosY(Integer.parseInt(i.getMemberValue("CenterY")));
-			newNpc.setRotation(Double.parseDouble(i.getMemberValue("Rotation")));
+			newNpc.getPosition().setX(Integer.parseInt(i.getMemberValue("CenterX")));
+			newNpc.getPosition().setY(Integer.parseInt(i.getMemberValue("CenterY")));
+			newNpc.getPosition().setRotation(Double.parseDouble(i.getMemberValue("Rotation")));
 			newNpc.setSpawnId(Integer.parseInt(i.getMemberValue("ID")));
-			newNpc.setMap(this);
+			newNpc.getPosition().setMap(this);
 
 			if (newNpc instanceof G_Merchant) {
 				newNpc.setSellRate(Integer.parseInt(i
@@ -188,6 +200,7 @@ public class S_Map {
 		S_Server.getInstance().getNetworkModule().register(getAddress());
 		
 		if(location.equals("Local")) {
+			setLocal(true);
 			System.out.println("Loading "+this.getName());
 			playerSpawnReference = new S_Parser();
 			mobSpawnReference = new S_Parser();
@@ -199,7 +212,7 @@ public class S_Map {
 			System.out.println(getName()+" running on "+getAddress());
 			
 		} else if(location.equals("Remote")) {
-			
+			setLocal(false);
 			System.out.println("Remote server registered on "+address.getHostName()+":"+address.getPort()+" for "+this.getName());
 			
 		} else {
@@ -262,7 +275,7 @@ public class S_Map {
 				while (playerIter.hasNext()) {
 					G_Player player = playerIter.next();
 
-					if (player.getMap() != spawn.getMob().getMap()) {
+					if (player.getPosition().getMap() != spawn.getMob().getPosition().getMap()) {
 						continue;
 					}
 
@@ -273,14 +286,14 @@ public class S_Map {
 						continue;
 					}
 
-					double xcomp = Math.pow(player.getPosX()
-							- spawn.getMob().getPosX(), 2);
-					double ycomp = Math.pow(player.getPosY()
-							- spawn.getMob().getPosY(), 2);
+					double xcomp = Math.pow(player.getPosition().getX()
+							- spawn.getMob().getPosition().getX(), 2);
+					double ycomp = Math.pow(player.getPosition().getY()
+							- spawn.getMob().getPosition().getY(), 2);
 					double distance = Math.sqrt(xcomp + ycomp);
 
 					if (distance < player.getSessionRadius()) {
-						player.getSession().enterMob(spawn.getMob(), 1);
+						player.getSession().enter(spawn.getMob()); //TODO: fix spawn
 					}
 				}
 			}

@@ -163,7 +163,7 @@ public class G_BulkanPlayer extends G_Player {
 
 		// S> attack_vital npc [NpcID] [RemainHP%] 0 0
 				client.SendData( packetData);
-
+		/*
 		if (getSession().getPlayerListSize() > 0) {
 			Iterator<G_Player> playerIter = getSession()
 					.getPlayerListIterator();
@@ -187,6 +187,7 @@ public class G_BulkanPlayer extends G_Player {
 						client.SendData( packetData);
 			}
 		}
+		*/
 	}
 
 	public void skillAttackPlayer(G_Player player, G_Skill skill) {

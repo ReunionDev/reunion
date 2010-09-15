@@ -8,6 +8,7 @@ import com.googlecode.reunion.jcommon.S_Parser;
 import com.googlecode.reunion.jreunion.server.S_Client;
 import com.googlecode.reunion.jreunion.server.S_Reference;
 import com.googlecode.reunion.jreunion.server.S_Server;
+import com.googlecode.reunion.jreunion.server.S_Session;
 import com.googlecode.reunion.jreunion.server.S_Timer;
 
 /**
@@ -79,8 +80,8 @@ public class G_Mob extends G_LivingObject {
 	}
 
 	public int getDistance(G_LivingObject livingObject) {
-		double xcomp = Math.pow(livingObject.getPosX() - getPosX(), 2);
-		double ycomp = Math.pow(livingObject.getPosY() - getPosY(), 2);
+		double xcomp = Math.pow(livingObject.getPosition().getX() - getPosition().getX(), 2);
+		double ycomp = Math.pow(livingObject.getPosition().getY() - getPosition().getY(), 2);
 		double distance = Math.sqrt(xcomp + ycomp);
 
 		return (int) distance;
@@ -265,8 +266,8 @@ public class G_Mob extends G_LivingObject {
 		}
 
 
-		double xcomp = player.getPosX() - getPosX();
-		double ycomp = player.getPosY() - getPosY();
+		double xcomp = player.getPosition().getX() - getPosition().getX();
+		double ycomp = player.getPosition().getY() - getPosition().getY();
 
 		if (xcomp >= 0 && ycomp >= 0) {
 			xcomp = Math.pow(xcomp, 1.1);
@@ -276,30 +277,29 @@ public class G_Mob extends G_LivingObject {
 		xcomp = xcomp / (distance / getSpeed());
 		ycomp = ycomp / (distance / getSpeed());
 
-		int newPosX = (int) (getPosX() + xcomp);
-		int newPosY = (int) (getPosY() + ycomp);
+		int newPosX = (int) (getPosition().getX() + xcomp);
+		int newPosY = (int) (getPosition().getY() + ycomp);
 
-		if (getMap()
+		if (getPosition().getMap()
 				.getMobArea().get((newPosX / 10 - 300), (newPosY / 10)) == true) {
-			setPosX(newPosX);
-			setPosY(newPosY);
+			getPosition().setX(newPosX);
+			getPosition().setY(newPosY);
 		} else {
 			return;
 		}
 		int run = getRunning()?1:0;
 
-		String packetData = "walk npc " + getEntityId() + " " + getPosX() + " "
-				+ getPosY() + " 0 " + run + "\n";
+		String packetData = "walk npc " + getEntityId() + " " + getPosition().getX() + " "
+				+ getPosition().getY() + " 0 " + run + "\n";
 		// S> walk npc [UniqueId] [Xpos] [Ypos] [ZPos] [Running]
 
 		client.SendData(packetData);
 
-		if (player.getSession().getPlayerListSize() > 0) {
-			Iterator<G_Player> playerIter = player.getSession()
+			Iterator<G_WorldObject> playerIter = player.getSession()
 					.getPlayerListIterator();
 
 			while (playerIter.hasNext()) {
-				G_Player pl = playerIter.next();
+				G_Player pl =  (G_Player) playerIter.next();
 
 				client = S_Server.getInstance().getNetworkModule()
 						.getClient(pl);
@@ -310,7 +310,7 @@ public class G_Mob extends G_LivingObject {
 							client.SendData(packetData);
 				}
 			}
-		}
+		
 	}
 
 	private void rangeMagicAttackPlayer(G_Player player) {
@@ -329,7 +329,7 @@ public class G_Mob extends G_LivingObject {
 		setCurrHp(0);
 
 		S_Server.getInstance().getWorldModule().getMobManager().removeMob(this);
-		G_Spawn spawn =getMap()
+		G_Spawn spawn =getPosition().getMap()
 				.getSpawnByMob(getEntityId());
 		if (spawn != null) {
 			spawn.setDead(true);
@@ -345,7 +345,7 @@ public class G_Mob extends G_LivingObject {
 					System.out.println(item.getMemberValue("Item"));
 					int itemType = Integer.parseInt(item.getMemberValue("Item"));
 					S_Server.getInstance().getWorldModule()
-					.getWorldCommand().dropItem(player, itemType, this.getPosX(), this.getPosY(), this.getPosZ(), 0, 0, 0);
+					.getWorldCommand().dropItem(player, itemType, this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), 0, 0, 0);
 				}
 			}			
 		}
@@ -400,5 +400,18 @@ public class G_Mob extends G_LivingObject {
 
 	public void setUnknown2(int unknown2) {
 		this.unknown2 = unknown2;
+	}
+
+	@Override
+	public void enter(S_Session session) {
+		S_Server.getInstance().getWorldModule().getWorldCommand()
+		.mobIn(session.getOwner(), this, false);		
+	}
+
+	@Override
+	public void exit(S_Session session) {
+		S_Server.getInstance().getWorldModule().getWorldCommand()
+		.mobOut(session.getOwner(), this);
+		
 	}
 }

@@ -114,24 +114,23 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 			setCombatMode(false);
 		}
 
-		if (getSession().getPlayerListSize() > 0) {
-			Iterator<G_Player> playerIter = getSession()
-					.getPlayerListIterator();
+		Iterator<G_WorldObject> playerIter = getSession()
+				.getPlayerListIterator();
 
-			while (playerIter.hasNext()) {
-				G_Player player = playerIter.next();
-				S_Client client = S_Server.getInstance().getNetworkModule()
-						.getClient(player);
+		while (playerIter.hasNext()) {
+			G_Player player = (G_Player) playerIter.next();
+			S_Client client = S_Server.getInstance().getNetworkModule()
+					.getClient(player);
 
-				if (client == null) {
-					continue;
-				}
-
-				String packetData = "combat " + getEntityId() + " " + combat
-						+ "\n";
-						client.SendData( packetData);
+			if (client == null) {
+				continue;
 			}
+
+			String packetData = "combat " + getEntityId() + " " + combat
+					+ "\n";
+					client.SendData( packetData);
 		}
+		
 	}
 
 	public void clearAttackQueue() {
@@ -158,28 +157,27 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 			getInventory().setItemSelected(null);
 			if (item != null) {
 				String packetData = "drop " + item.getEntityId() + " " + item.getType()
-						+ " " + getPosX() + " " + getPosY() + " " + getPosZ() + " "
-						+ getRotation() + " " + item.getGemNumber() + " "
+						+ " " + getPosition().getX() + " " + getPosition().getY() + " " + getPosition().getZ() + " "
+						+ getPosition().getRotation() + " " + item.getGemNumber() + " "
 						+ item.getExtraStats() + "\n";
 				System.out.println(packetData);
 				client.SendData(packetData);
 	
-				if (getSession().getPlayerListSize() > 0) {
-					Iterator<G_Player> playerIter = getSession()
-							.getPlayerListIterator();
-	
-					while (playerIter.hasNext()) {
-						G_Player player = playerIter.next();
-						client = S_Server.getInstance().getNetworkModule()
-								.getClient(player);
-	
-						if (client == null) {
-							continue;
-						}
-	
-						client.SendData( packetData);
+				Iterator<G_WorldObject> playerIter = getSession()
+						.getPlayerListIterator();
+
+				while (playerIter.hasNext()) {
+					G_Player player = (G_Player) playerIter.next();
+					client = S_Server.getInstance().getNetworkModule()
+							.getClient(player);
+
+					if (client == null) {
+						continue;
 					}
+
+					client.SendData( packetData);
 				}
+				
 			}
 			
 			// S> drop [ItemID] [ItemType] [PosX] [PosY] [Height] [Rotation]
@@ -238,8 +236,8 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 
 	/*** Return the distance between the player and the living object ***/
 	public int getDistance(G_LivingObject livingObject) {
-		double xcomp = Math.pow(livingObject.getPosX() - getPosX(), 2);
-		double ycomp = Math.pow(livingObject.getPosY() - getPosY(), 2);
+		double xcomp = Math.pow(livingObject.getPosition().getX() - getPosition().getX(), 2);
+		double ycomp = Math.pow(livingObject.getPosition().getY() - getPosition().getY(), 2);
 		double distance = Math.sqrt(xcomp + ycomp);
 
 		return (int) distance;
@@ -337,10 +335,10 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 
 	public void spawn() {
 		
-		int defaultSpawnId = Integer.parseInt(S_Reference.getInstance().getMapReference().getItemById(getMap().getId()).getMemberValue("DefaultSpawnId"));
-		S_ParsedItem defaultSpawn =getMap().getPlayerSpawnReference().getItemById(defaultSpawnId);
+		int defaultSpawnId = Integer.parseInt(S_Reference.getInstance().getMapReference().getItemById(getPosition().getMap().getId()).getMemberValue("DefaultSpawnId"));
+		S_ParsedItem defaultSpawn =getPosition().getMap().getPlayerSpawnReference().getItemById(defaultSpawnId);
 				
-		S_Parser playerSpawns = getMap().getPlayerSpawnReference();
+		S_Parser playerSpawns = getPosition().getMap().getPlayerSpawnReference();
 		Iterator<S_ParsedItem> iter = playerSpawns.getItemListIterator();
 
 		while (iter.hasNext()) {
@@ -353,7 +351,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 						.getMemberValue("TargetWidth")), Integer.parseInt(item
 						.getMemberValue("TargetHeight")));
 
-				if (rectangle.contains(getPosX(), getPosY())) {
+				if (rectangle.contains(getPosition().getX(), getPosition().getY())) {
 					S_Server.getInstance()
 							.getWorldModule()
 							.getWorldCommand()
@@ -616,7 +614,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 			S_Session session = iter.next();
 
 			if (session.contains(this)) {
-				session.exitPlayer(this);
+				session.exit(this);
 			}
 		}
 
@@ -708,35 +706,34 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 			setRunMode(false);
 		}
 
-		setPosX(posX);
-		setPosY(posY);
-		setPosZ(posZ);
-		setRotation(rotation);
+		getPosition().setX(posX);
+		getPosition().setY(posY);
+		getPosition().setZ(posZ);
+		getPosition().setRotation(rotation);
 
 		setTargetPosX(posX);
 		setTargetPosY(posY);
 		setTargetPosZ(posZ);
 
-		if (getSession().getPlayerListSize() > 0) {
-			Iterator<G_Player> playerIter = getSession()
-					.getPlayerListIterator();
+		Iterator<G_WorldObject> playerIter = getSession()
+				.getPlayerListIterator();
 
-			while (playerIter.hasNext()) {
-				G_Player player = playerIter.next();
-				S_Client client = S_Server.getInstance().getNetworkModule()
-						.getClient(player);
+		while (playerIter.hasNext()) {
+			G_Player player = (G_Player) playerIter.next();
+			S_Client client = S_Server.getInstance().getNetworkModule()
+					.getClient(player);
 
-				if (client == null) {
-					continue;
-				}
-
-				String packetData = "place char " + getEntityId() + " " + posX
-						+ " " + posY + " " + posZ + " " + rotation + " "
-						+ unknown + " " + run + "\n";
-				
-						client.SendData(packetData);
+			if (client == null) {
+				continue;
 			}
+
+			String packetData = "place char " + getEntityId() + " " + posX
+					+ " " + posY + " " + posZ + " " + rotation + " "
+					+ unknown + " " + run + "\n";
+			
+					client.SendData(packetData);
 		}
+		
 	}
 
 	/****** revive player when he dies ******/
@@ -752,14 +749,14 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 
 		while (sessionIter.hasNext()) {
 			S_Session session = sessionIter.next();
-			G_Player player = session.getSessionOwner();
+			G_Player player = session.getOwner();
 
 			if (session.contains(this)) {
-				session.exitPlayer(this);
-				getSession().exitPlayer(player);
+				session.exit(this);
+				getSession().exit(player);
 			}
 
-			if (player.getMap() != getMap() || player == this) {
+			if (player.getPosition().getMap() != getPosition().getMap() || player == this) {
 				continue;
 			}
 
@@ -773,8 +770,8 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 			int distance = player.getDistance(this);
 
 			if (distance <= this.getSessionRadius()) {
-				session.enterPlayer(this, 1);
-				getSession().enterPlayer(player, 0);
+				session.enter(this);//TODO: This looks weird
+				getSession().enter(player);
 			}
 		}
 	}
@@ -977,55 +974,53 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 
 	public void social(int emotionId) {
 
-		if (getSession().getPlayerListSize() > 0) {
-			Iterator<G_Player> iter = getSession().getPlayerListIterator();
-			while (iter.hasNext()) {
-				G_Player player = iter.next();
-				S_Client client = S_Server.getInstance().getNetworkModule()
-						.getClient(player);
+		Iterator<G_WorldObject> iter = getSession().getPlayerListIterator();
+		while (iter.hasNext()) {
+			G_Player player = (G_Player) iter.next();
+			S_Client client = S_Server.getInstance().getNetworkModule()
+					.getClient(player);
 
-				if (client == null) {
-					continue;
-				}
-
-				String packetData = "social char " + getEntityId() + " "
-						+ emotionId + "\n";
-				
-						client.SendData(packetData);
+			if (client == null) {
+				continue;
 			}
+
+			String packetData = "social char " + getEntityId() + " "
+					+ emotionId + "\n";
+			
+					client.SendData(packetData);
 		}
+		
 	}
 
 	public void stop(int posX, int posY, int posZ, double rotation) {
 
-		setPosX(posX);
-		setPosY(posY);
-		setPosZ(posZ);
-		setRotation(rotation);
+		getPosition().setX(posX);
+		getPosition().setY(posY);
+		getPosition().setZ(posZ);
+		getPosition().setRotation(rotation);
 
 		setTargetPosX(posX);
 		setTargetPosY(posY);
 		setTargetPosZ(posZ);
 
-		if (getSession().getPlayerListSize() > 0) {
-			Iterator<G_Player> playerIter = getSession()
-					.getPlayerListIterator();
+		Iterator<G_WorldObject> playerIter = getSession()
+				.getPlayerListIterator();
 
-			while (playerIter.hasNext()) {
-				G_Player player = playerIter.next();
-				S_Client client = S_Server.getInstance().getNetworkModule()
-						.getClient(player);
+		while (playerIter.hasNext()) {
+			G_Player player = (G_Player) playerIter.next();
+			S_Client client = S_Server.getInstance().getNetworkModule()
+					.getClient(player);
 
-				if (client == null) {
-					continue;
-				}
-
-				String packetData = "s char " + getEntityId() + " " + posX
-						+ " " + posY + " " + posZ + " " + rotation + "\n";
-				
-						client.SendData(packetData);
+			if (client == null) {
+				continue;
 			}
+
+			String packetData = "s char " + getEntityId() + " " + posX
+					+ " " + posY + " " + posZ + " " + rotation + "\n";
+			
+					client.SendData(packetData);
 		}
+	
 	}
 
 	public void tell(G_Player targetPlayer, String text) {
@@ -1120,22 +1115,20 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 			S_DatabaseUtils.getInstance()
 					.updateCharStatus(this, id, getLevel());
 
-			if (getSession().getPlayerListSize() > 0) {
-				Iterator<G_Player> playerIter = getSession()
-						.getPlayerListIterator();
+			Iterator<G_WorldObject> playerIter = getSession()
+					.getPlayerListIterator();
 
-				while (playerIter.hasNext()) {
-					G_Player pl = playerIter.next();
-					client = S_Server.getInstance().getNetworkModule()
-							.getClient(pl);
+			while (playerIter.hasNext()) {
+				G_Player pl = (G_Player) playerIter.next();
+				client = S_Server.getInstance().getNetworkModule()
+						.getClient(pl);
 
-					if (client == null) {
-						continue;
-					}
-
-					
-							client.SendData(packetData);
+				if (client == null) {
+					continue;
 				}
+
+				
+						client.SendData(packetData);
 			}
 			break;
 		}
@@ -1296,33 +1289,32 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 			setRunMode(false);
 		}
 
-		setPosX(posX);
-		setPosY(posY);
-		setPosZ(posZ);
+		getPosition().setX(posX);
+		getPosition().setY(posY);
+		getPosition().setZ(posZ);
 
 		setTargetPosX(posX);
 		setTargetPosY(posY);
 		setTargetPosZ(posZ);
 
-		if (getSession().getPlayerListSize() > 0) {
-			Iterator<G_Player> playerIter = getSession()
-					.getPlayerListIterator();
+		Iterator<G_WorldObject> playerIter = getSession()
+				.getPlayerListIterator();
 
-			while (playerIter.hasNext()) {
-				G_Player player = playerIter.next();
-				S_Client client = S_Server.getInstance().getNetworkModule()
-						.getClient(player);
+		while (playerIter.hasNext()) {
+			G_Player player = (G_Player) playerIter.next();
+			S_Client client = S_Server.getInstance().getNetworkModule()
+					.getClient(player);
 
-				if (client == null) {
-					continue;
-				}
-
-				String packetData = "walk char " + getEntityId() + " " + posX
-						+ " " + posY + " " + posZ + " " + run + "\n";
-				
-						client.SendData(packetData);
+			if (client == null) {
+				continue;
 			}
+
+			String packetData = "walk char " + getEntityId() + " " + posX
+					+ " " + posY + " " + posZ + " " + run + "\n";
+			
+					client.SendData(packetData);
 		}
+		
 	}
 
 	public void wearSlot(G_EquipmentSlot slot) {
@@ -1377,26 +1369,25 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 		}
 		// S_DatabaseUtils.getInstance().saveEquipment(this);
 
-		if (getSession().getPlayerListSize() > 0) {
-			Iterator<G_Player> playerIter = getSession()
-					.getPlayerListIterator();
+		Iterator<G_WorldObject> playerIter = getSession()
+				.getPlayerListIterator();
 
-			while (playerIter.hasNext()) {
-				G_Player player = playerIter.next();
-				S_Client client = S_Server.getInstance().getNetworkModule()
-						.getClient(player);
+		while (playerIter.hasNext()) {
+			G_Player player = (G_Player) playerIter.next();
+			S_Client client = S_Server.getInstance().getNetworkModule()
+					.getClient(player);
 
-				if (client == null) {
-					continue;
-				}
-				if (extraPacketData != null) {
-					
-							client.SendData(extraPacketData);
-				}
-				
-						client.SendData(packetData);
+			if (client == null) {
+				continue;
 			}
+			if (extraPacketData != null) {
+				
+						client.SendData(extraPacketData);
+			}
+			
+					client.SendData(packetData);
 		}
+		
 	}
 	/**
 	 * @param sessionRadius the sessionRadius to set
@@ -1414,5 +1405,20 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 		}
 		return G_Player.sessionRadius;
 	}
+	
+	@Override
+	public void enter(S_Session session){
+		S_Server.getInstance().getWorldModule().getWorldCommand()
+		.charIn(session.getOwner(), this);
+	}
+		
+
+	@Override
+	public void exit(S_Session session){
+		S_Server.getInstance().getWorldModule().getWorldCommand()
+		.charOut(session.getOwner(), this);
+	}
+	
+	
 
 }

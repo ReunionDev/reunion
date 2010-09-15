@@ -39,18 +39,18 @@ public class S_MessageParser {
 			} else if (word[0].equals("@testcol")) {
 				G_Player p = player;
 				
-				S_Map map = p.getMap();
+				S_Map map = p.getPosition().getMap();
 				String s1 = ""
 						+ map.getPlayerArea()
-								.get(p.getPosX() / 10 - 300, p.getPosY() / 10);
+								.get(p.getPosition().getX() / 10 - 300, p.getPosition().getY() / 10);
 				String s2 = ""
 						+ map.getMobArea()
-								.get(p.getPosX() / 10 - 300, p.getPosY() / 10);
+								.get(p.getPosition().getX() / 10 - 300, p.getPosition().getY() / 10);
 				String s3 = ""
 						+ map.getPvpArea()
-								.get(p.getPosX() / 10 - 300, p.getPosY() / 10);
+								.get(p.getPosition().getX() / 10 - 300, p.getPosition().getY() / 10);
 
-				com.serverSay("(" + p.getPosX() / 10 + "," + p.getPosY() / 10
+				com.serverSay("(" + p.getPosition().getX() / 10 + "," + p.getPosition().getY() / 10
 						+ ")" + "collision test: " + s1 + " " + s2 + " " + s3);
 			}
 
@@ -58,7 +58,7 @@ public class S_MessageParser {
 				if (word.length == 2) {
 					try {
 						com.dropItem(player, Integer.parseInt(word[1]),
-								player.getPosX(), player.getPosY(), 0, 0, 0, 0);
+								player.getPosition().getX(), player.getPosition().getY(), 0, 0, 0, 0);
 					} catch (Exception e) {
 						String packetData = "say 1 S_Server (NOTICE) @drop failed";
 						client.SendData(packetData);
@@ -69,7 +69,7 @@ public class S_MessageParser {
 				if (word.length == 4) {
 					try {
 					com.dropItem(player, Integer.parseInt(word[1]),
-							player.getPosX(), player.getPosY(), 0, 0,
+							player.getPosition().getX(), player.getPosition().getY(), 0, 0,
 							Integer.parseInt(word[2]),
 							Integer.parseInt(word[3]));
 					} catch (Exception e) {
@@ -80,9 +80,9 @@ public class S_MessageParser {
 			} else if (word[0].equals("@addmob")) { //Adds a NPC 
 				if (word.length == 2) {
 					G_Spawn spawn = new G_Spawn();
-					spawn.setCenterX(player.getPosX() + 10);
-					spawn.setCenterY(player.getPosY() + 10);
-					spawn.setMap(player.getMap());
+					spawn.setCenterX(player.getPosition().getX() + 10);
+					spawn.setCenterY(player.getPosition().getY() + 10);
+					spawn.setMap(player.getPosition().getMap());
 					spawn.setMobType(Integer.parseInt(word[1]));
 					spawn.setRadius(300);
 					spawn.setRespawnTime(10);
@@ -92,8 +92,8 @@ public class S_MessageParser {
 					G_Mob mob = S_Server.getInstance().getWorldModule()
 							.getMobManager()
 							.createMob(Integer.parseInt(word[1]));
-					mob.setPosX(player.getPosX() + 10);
-					mob.setPosY(player.getPosY() + 10);
+					mob.getPosition().setX(player.getPosition().getX() + 10);
+					mob.getPosition().setY(player.getPosition().getY() + 10);
 					mob.setRunning(true);
 					mob.setMutant(Integer.parseInt(word[2]));
 					mob.setUnknown1(Integer.parseInt(word[3]));
@@ -107,9 +107,9 @@ public class S_MessageParser {
 					G_Npc npc = S_Server.getInstance().getWorldModule()
 							.getNpcManager()
 							.createNpc(Integer.parseInt(word[1]));
-					npc.setPosX(player.getPosX() + 10);
-					npc.setPosY(player.getPosY() + 10);
-					npc.setRotation(0.0);
+					npc.getPosition().setX(player.getPosition().getX() + 10);
+					npc.getPosition().setY(player.getPosition().getY() + 10);
+					npc.getPosition().setRotation(0.0);
 					com.npcIn(player, npc);
 				}
 			} else if (word[0].equals("@worldgoto")) {
@@ -142,8 +142,8 @@ public class S_MessageParser {
 				}
 				client.SendData( packetData + "\n");
 			} else if (word[0].equals("@spot")) {
-				com.serverSay("X:" + player.getPosX() + "; Y:"
-						+ player.getPosY());
+				com.serverSay("X:" + player.getPosition().getX() + "; Y:"
+						+ player.getPosition().getY());
 			}
 		}
 

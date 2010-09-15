@@ -139,8 +139,8 @@ public class S_Network extends S_ClassModule {
 
 	private void CheckOutbound() {
 
-		S_PacketQueueItem packet = queue.poll();
-		while (packet != null) {
+		S_PacketQueueItem packet;
+		while ((packet  = queue.poll())!= null) {
 			S_Client client = packet.getClient();			
 			if (client == null) {
 				return;
@@ -158,7 +158,6 @@ public class S_Network extends S_ClassModule {
 				e.printStackTrace();
 				disconnect(client);				
 			}
-			packet = queue.poll();
 		}
 		return;
 	}

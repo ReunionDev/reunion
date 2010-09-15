@@ -57,9 +57,9 @@ public class S_MobManager {
 		double directionX = Math.random() * 2;
 
 		if (directionX >= 1.5) {
-			return mob.getPosX() + (int) (directionX * mob.getSpeed());
+			return mob.getPosition().getX() + (int) (directionX * mob.getSpeed());
 		} else {
-			return mob.getPosX() + (int) (-directionX * mob.getSpeed());
+			return mob.getPosition().getX() + (int) (-directionX * mob.getSpeed());
 		}
 	}
 
@@ -68,9 +68,9 @@ public class S_MobManager {
 		double directionY = Math.random() * 2;
 
 		if (directionY >= 1.5) {
-			return mob.getPosY() + (int) (directionY * mob.getSpeed());
+			return mob.getPosition().getY() + (int) (directionY * mob.getSpeed());
 		} else {
-			return mob.getPosY() + (int) (-directionY * mob.getSpeed());
+			return mob.getPosition().getY() + (int) (-directionY * mob.getSpeed());
 		}
 	}
 
@@ -135,7 +135,7 @@ public class S_MobManager {
 			if (client == null) {
 				continue;
 			} else if (client.getState() != S_ClientState.INGAME
-					|| mob.getMap() != player.getMap()) {
+					|| mob.getPosition().getMap() != player.getPosition().getMap()) {
 				continue;
 			}
 
@@ -156,10 +156,10 @@ public class S_MobManager {
 			// mob will chase the player, else the mob will move freely.
 			
 			if (distance <= 150) {
-				if (mob.getMap()
+				if (mob.getPosition().getMap()
 						.getMobArea()
-						.get((player.getPosX() / 10 - 300),
-								(player.getPosY() / 10)) == true) {
+						.get((player.getPosition().getX() / 10 - 300),
+								(player.getPosition().getY() / 10)) == true) {
 					moveToPlayer = false;
 				}
 			}
@@ -167,13 +167,13 @@ public class S_MobManager {
 			// Condition that detects that the mob its out of player session
 			// range
 			if (distance >= player.getSessionRadius()) {
-				player.getSession().exitMob(mob);
+				player.getSession().exit(mob);
 			}
 
 			if (distance < player.getSessionRadius()) {
 				if (mob.getIsAttacking() == 0) {
 					String packetData = "walk npc " + mob.getEntityId() + " "
-							+ mob.getPosX() + " " + mob.getPosY() + " 0 " + run
+							+ mob.getPosition().getX() + " " + mob.getPosition().getY() + " 0 " + run
 							+ "\n";
 					// S> walk npc [UniqueId] [Xpos] [Ypos] [ZPos] [Running]
 
@@ -183,7 +183,7 @@ public class S_MobManager {
 		}
 
 		if (moveToPlayer == true) {
-			G_Spawn spawn = mob.getMap().getSpawnByMob(mob.getEntityId());
+			G_Spawn spawn = mob.getPosition().getMap().getSpawnByMob(mob.getEntityId());
 			if(spawn!=null){
 				double radiusCompX = Math.pow(spawn.getCenterX() - newPosX, 2);
 				double radiusCompY = Math.pow(spawn.getCenterY() - newPosY, 2);
@@ -191,8 +191,8 @@ public class S_MobManager {
 	
 				if ((int) radiusComp <= spawn.getRadius()) {
 					// System.out.print("Distance <= Radius\n");
-					mob.setPosX(newPosX);
-					mob.setPosY(newPosY);
+					mob.getPosition().setX(newPosX);
+					mob.getPosition().setY(newPosY);
 				}
 			}
 		}
