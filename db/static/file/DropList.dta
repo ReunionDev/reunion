@@ -1,14 +1,426 @@
 #DropList
 
+#Panzermaus Lag--------------------------------------------------------------------------
+#Kurzschwert, Steinaxt, Bienenschwarmring, Haarreif, Lederhose, Lederstiefel
 
-[Armor Rat ot Contrition/Hair Band] 
+[Panzermaus Kurzschwert]
 ID = 1
-Mob = 226
-Item = 309 
-Rate = .25
+Mob = 97
+Item = 168
+Rate = .06
 
-[Armor Rat ot Contrition/Warrior Helmet] 
+[Panzermaus Steinaxt]
 ID = 2
-Mob = 226
+Mob = 97
+Item = 48
+Rate = .04
+
+[Panzermaus Bienenschwarmring]
+ID = 3
+Mob = 97
+Item = 431
+Rate = .02
+
+[Panzermaus Haarreif]
+ID = 4
+Mob = 97
+Item = 309
+Rate = .12
+
+[Panzermaus Lederhose]
+ID = 5
+Mob = 97
+Item = 343
+Rate = .10
+
+[Panzermaus Lederstiefel]
+ID = 6
+Mob = 97
+Item = 365
+Rate = .08
+
+#Wolf Lag--------------------------------------------------------------------------
+
+[Wolf Short Sword]
+ID = 7
+Mob = 23
+Item = 168
+Rate = .06
+
+[Wolf Long Sword]
+ID = 8
+Mob = 23
+Item = 37
+Rate = .04
+
+[Wolf Bee Swarm Ring]
+ID = 9
+Mob = 23
+Item = 431
+Rate = .02
+
+[Wolf Hair Band]
+ID = 10
+Mob = 23
+Item = 309
+Rate = .12
+
+[Wolf Leather Jacket]
+ID = 11
+Mob = 23
+Item = 326
+Rate = .10
+
+[Wolf Leather Pants]
+ID = 12
+Mob = 23
+Item = 343
+Rate = .11
+
+[Wolf Leather Boots]
+ID = 13
+Mob = 23
+Item = 365
+Rate = .04
+
+#Lada -------------------------------------------------------------------
+[Lada Long Sword]
+ID = 14
+Mob = 25
+Item = 37
+Rate = .08
+
+[Lada Righteouseness Blade]
+ID = 15
+Mob = 25
+Item = 154
+Rate = .07
+
+[Lada Bulkan Axe]
+ID = 16
+Mob = 25
+Item = 49
+Rate = .05
+
+[Lada God Staff]
+ID = 17
+Mob = 25
+Item = 170
+Rate = .04
+
+[Lada Eagle Staff]
+ID = 18
+Mob = 25
+Item = 169
+Rate = .02
+
+[Lada Air Hand Gun]
+ID = 19
+Mob = 25
+Item = 204
+Rate = .01
+
+[Lada Tiger Mantle]
+ID = 20
+Mob = 25
+Item = 191
+Rate = .05
+
+[Lada Brince Shield]
+ID = 21
+Mob = 25
+Item = 187
+Rate = .03
+
+#[Lada ]
+#ID = 22
+#Mob = 25
+#Item = 
+#Rate = .07
+
+#[Lada ]
+#ID = 23
+#Mob = 25
+#Item = 
+#Rate = .06
+
+#[Lada ]
+#ID = 24
+#Mob = 25
+#Item = 
+#Rate = .10
+
+#[Lada ]
+#ID = 25
+#Mob = 25
+#Item = 
+#Rate = .10
+
+#--Panzerkrabbe------------------------------------------------------
+
+[Panzerkrabbe Bulkan Axe]
+ID = 26
+Mob = 98
+Item = 49
+Rate = .05
+
+[Panzerkrabbe Big Bulkan Axe]
+ID = 27
+Mob = 98
+Item = 155
+Rate = .01
+
+[Panzerkrabbe God Staff]
+ID = 28
+Mob = 98
+Item = 170
+Rate = .02
+
+[Panzerkrabbe Eagle Staff]
+ID = 29
+Mob = 98
+Item = 169
+Rate = .03
+
+[Panzerkrabbe Air Hand Gun]
+ID = 30
+Mob = 98
+Item = 204
+Rate = .04
+
+[Panzerkrabbe Tiger Mantle]
+ID = 31
+Mob = 98
+Item = 191
+Rate = .06
+
+[Panzerkrabbe Brince Shield]
+ID = 32
+Mob = 98
+Item = 187
+Rate = .09
+
+#[Panzerkrabbe ]
+#ID = 33
+#Mob = 98
+#Item = 
+#Rate = .07
+
+#[Panzerkrabbe ]
+#ID = 34
+#Mob = 98
+#Item = 
+#Rate = .10
+
+#[Panzerkrabbe ]
+#ID = 35
+#Mob = 98
+#Item = 
+#Rate = .10
+
+#[Panzerkrabbe ]
+#ID = 36
+#Mob = 98
+#Item = 
+#Rate = .10
+
+#[Panzerkrabbe ]
+#ID = 37
+#Mob = 98
+#Item = 
+#Rate = .10
+
+#[Panzerkrabbe ]
+#ID = 38
+#Mob = 98
+#Item = 
+#Rate = .10
+
+#[Panzerkrabbe ]
+#ID = 39
+#Mob = 98
+#Item = 
+#Rate = .10
+
+#[Panzerkrabbe ]
+#ID = 40
+#Mob = 98
+#Item = 
+#Rate = .10
+
+#--- Giftkrabbe ------------------------------------------------------------
+[Poison Crab Righteouseness Blade]
+ID = 41
+Mob = 99
+Item = 154
+Rate = .03
+
+[Poison Crab Curved Blade]
+ID = 42
+Mob = 99
+Item = 163
+Rate = .01
+
+[Poison Crab Big Bulkan Axe]
+ID = 43
+Mob = 99
+Item = 155
+Rate = .02
+
+[Poison Crab Air Hand Gun]
+ID = 44
+Mob = 99
+Item = 204
+Rate = .08
+
+[Poison Crab Tiger Mantle]
+ID = 45
+Mob = 99
+Item = 191
+Rate = .06
+
+[Poison Crab Brince Shield]
+ID = 46
+Mob = 99
+Item = 187
+Rate = .05
+
+#[Poison Crab ]
+#ID = 47
+#Mob = 99
+#Item = 
+#Rate = .10
+
+#[Poison Crab ]
+#ID = 48
+#Mob = 99
+#Item = 
+#Rate = .10
+
+#[Poison Crab ]
+#ID = 49
+#Mob = 99
+#Item = 
+#Rate = .10
+
+#[Poison Crab ]
+#ID = 50
+#Mob = 99
+#Item = 
+#Rate = .10
+
+#[Poison Crab ]
+#ID = 51
+#Mob = 99
+#Item = 
+#Rate = .10
+
+#[Poison Crab ]
+#ID = 52
+#Mob = 99
+#Item = 
+#Rate = .10
+
+#---- White Tiger-----------------------------------------
+
+[White Tiger Woodern Horn Axe]
+ID = 53
+Mob = 24
+Item = 167
+Rate = .01
+
+[White Tiger Air Hand Gun]
+ID = 54
+Mob = 24
+Item = 204
+Rate = .02
+
+[White Tiger Butterfly Ring]
+ID = 55
+Mob = 24
+Item = 432
+Rate = .04
+
+[White Tiger Warrior Helmet]
+ID = 56
+Mob = 24
 Item = 310
-Rate = .5
+Rate = .06
+
+[White Tiger Warrior Armor]
+ID = 57
+Mob = 24
+Item = 325
+Rate = .08
+
+[White Tiger Warrior Boots]
+ID = 58
+Mob = 24
+Item = 366
+Rate = .07
+
+#[White Tiger Geisterflügel]
+#ID = 59
+#Mob = 24
+#Item = 
+#Rate = .10
+
+[White Tiger Iron Shield]
+ID = 60
+Mob = 24
+Item = 34
+Rate = .05
+
+[White Tiger Xeno Shield]
+ID = 61
+Mob = 24
+Item = 188
+Rate = .03
+
+#[White Tiger ]
+#ID = 62
+#Mob = 24
+#Item = 
+#Rate = .10
+
+#[White Tiger ]
+#ID = 63
+#Mob = 24
+#Item = 
+#Rate = .10
+
+#[White Tiger ]
+#ID = 64
+#Mob = 24
+#Item = 
+#Rate = .10
+
+#[White Tiger ]
+#ID = 65
+#Mob = 24
+#Item = 
+#Rate = .10
+
+#[White Tiger ]
+#ID = 66
+#Mob = 24
+#Item = 
+#Rate = .10
+
+#[White Tiger ]
+#ID = 67
+#Mob = 24
+#Item = 
+#Rate = .10
+
+#[White Tiger ]
+#ID = 68
+#Mob = 24
+#Item = 
+#Rate = .10
+
+#[White Tiger ]
+#ID = 69
+#Mob = 24
+#Item = 
+#Rate = .10

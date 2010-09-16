@@ -5,8 +5,8 @@
 #### Npcs ####
 [Assistant 1]
 ID = 1
-CenterX = 6841
-CenterY = 5349
+X = 6841
+Y = 5349
 Rotation = 4.7123
 Type = 95
 BuyRate = 95	# Value in %
@@ -15,8 +15,8 @@ Shop = areas/laglamia/shop/npc1.dta
 
 [Assistant 2]
 ID = 2
-CenterX = 6833
-CenterY = 6800
+X = 6833
+Y = 6800
 Rotation = 0.0
 Type = 95
 BuyRate = 95	# Value in %
@@ -25,8 +25,8 @@ Shop = areas/laglamia/shop/npc2.dta
 
 [Assistant 3]
 ID = 3
-CenterX = 10275
-CenterY = 5200
+X = 10275
+Y = 5200
 Rotation = 0.0
 Type = 95
 BuyRate = 120	# Value in %
@@ -35,8 +35,8 @@ Shop = areas/laglamia/shop/npc3.dta
 
 [Barmaid 1]
 ID = 4
-CenterX = 8398
-CenterY = 5289
+X = 8398
+Y = 5289
 Rotation = 3.1415
 Type = 92
 BuyRate = 95	# Value in %
@@ -45,8 +45,8 @@ Shop = areas/laglamia/shop/npc4.dta
 
 [Blacksmith 1]
 ID = 5
-CenterX = 6774
-CenterY = 5126
+X = 6774
+Y = 5126
 Rotation = 1.4921
 Type = 90
 BuyRate = 100	# Value in %
@@ -55,8 +55,8 @@ Shop = areas/laglamia/shop/npc5.dta
 
 [Blacksmith 2]
 ID = 6
-CenterX = 6759
-CenterY = 5126
+X = 6759
+Y = 5126
 Rotation = 1.4921
 Type = 90
 BuyRate = 100	# Value in %
@@ -65,8 +65,8 @@ Shop = areas/laglamia/shop/npc6.dta
 
 [Blacksmith 3]
 ID = 7
-CenterX = 6935
-CenterY = 5368
+X = 6935
+Y = 5368
 Rotation = 4.7123
 Type = 90
 BuyRate = 90	# Value in %
@@ -75,8 +75,8 @@ Shop = areas/laglamia/shop/npc7.dta
 
 [Doctor 1]
 ID = 8
-CenterX = 6358
-CenterY = 5397
+X = 6358
+Y = 5397
 Rotation = 4.7123
 Type = 93
 BuyRate = 90	# Value in %
@@ -85,8 +85,8 @@ Shop = areas/laglamia/shop/npc8.dta
 
 [Doctor 2]
 ID = 9
-CenterX = 8112
-CenterY = 6615
+X = 8112
+Y = 6615
 Rotation = 0.0
 Type = 93
 BuyRate = 70	# Value in %
@@ -95,8 +95,8 @@ Shop = areas/laglamia/shop/npc9.dta
 
 [Machine Dealer 1]
 ID = 10
-CenterX = 6729
-CenterY = 5129
+X = 6729
+Y = 5129
 Rotation = 1.4921
 Type = 91
 BuyRate = 100	# Value in %
@@ -105,8 +105,8 @@ Shop = areas/laglamia/shop/npc10.dta
 
 [Machine Dealer 2]
 ID = 11
-CenterX = 6629
-CenterY = 5126
+X = 6629
+Y = 5126
 Rotation = 1.4921
 Type = 91
 BuyRate = 100	# Value in %
@@ -115,8 +115,8 @@ Shop = areas/laglamia/shop/npc11.dta
 
 [Machine Dealer 3]
 ID = 12
-CenterX = 6608
-CenterY = 5126
+X = 6608
+Y = 5126
 Rotation = 1.4921
 Type = 91
 BuyRate = 100	# Value in %
@@ -125,8 +125,8 @@ Shop = areas/laglamia/shop/npc12.dta
 
 [Machine Dealer 4]
 ID = 13
-CenterX = 6141
-CenterY = 5287
+X = 6141
+Y = 5287
 Rotation = 1.5707
 Type = 91
 BuyRate = 105	# Value in %
@@ -135,8 +135,8 @@ Shop = areas/laglamia/shop/npc13.dta
 
 [Machine Dealer 5]
 ID = 14
-CenterX = 6907
-CenterY = 5041
+X = 6907
+Y = 5041
 Rotation = 0.0
 Type = 91
 BuyRate = 100	# Value in %
@@ -145,8 +145,8 @@ Shop = areas/laglamia/shop/npc14.dta
 
 [Magic Shopkeeper 1]
 ID = 15
-CenterX = 6500
-CenterY = 5126
+X = 6500
+Y = 5126
 Rotation = 1.4921
 Type = 94
 BuyRate = 100	# Value in %
@@ -155,8 +155,8 @@ Shop = areas/laglamia/shop/npc15.dta
 
 [Magic Shopkeeper 2]
 ID = 16
-CenterX = 6485
-CenterY = 5126
+X = 6485
+Y = 5126
 Rotation = 1.4921
 Type = 94
 BuyRate = 100	# Value in %
@@ -165,8 +165,8 @@ Shop = areas/laglamia/shop/npc16.dta
 
 [Magic Shopkeeper 3]
 ID = 17
-CenterX = 6744
-CenterY = 5129
+X = 6744
+Y = 5129
 Rotation = 1.4921
 Type = 94
 BuyRate = 100	# Value in %
@@ -175,8 +175,8 @@ Shop = areas/laglamia/shop/npc17.dta
 
 [Magic Shopkeeper 4]
 ID = 18
-CenterX = 6195
-CenterY = 5215
+X = 6195
+Y = 5215
 Rotation = 0.0
 Type = 94
 BuyRate = 100	# Value in %
@@ -185,8 +185,8 @@ Shop = areas/laglamia/shop/npc18.dta
 
 [Magic Shopkeeper 5]
 ID = 19
-CenterX = 7145
-CenterY = 5410
+X = 7145
+Y = 5410
 Rotation = 3.1415
 Type = 94
 BuyRate = 100	# Value in %
@@ -195,77 +195,227 @@ Shop = areas/laglamia/shop/npc19.dta
 
 [Archeologist 1]
 ID = 20
-CenterX = 7190
-CenterY = 5096
+X = 7190
+Y = 5096
 Rotation = 1.5707
 Type = 257
 
 [Aisian Bandor 1]
 ID = 21
-CenterX = 6198
-CenterY = 5090
+X = 6198
+Y = 5090
 Rotation = 0.0
 Type = 139
 
 [Gem Shopkeeper A 1]
 ID = 22
-CenterX = 6195
-CenterY = 5235
+X = 6195
+Y = 5235
 Rotation = 0.0
 Type = 166
 
 [Guard Captain 1]
 ID = 23
-CenterX = 6220
-CenterY = 5360
+X = 6220
+Y = 5360
 Rotation = 5.5
 Type = 57
 
 [Guard Master 1]
 ID = 24
-CenterX = 6410
-CenterY = 5360
+X = 6410
+Y = 5360
 Rotation = 3.6
 Type = 117
 
 [Machine Shop Owner 1]
 ID = 25
-CenterX = 6310
-CenterY = 5360
+X = 6310
+Y = 5360
 Rotation = 4.7123
 Type = 51
 
 [Veterinary 1]
 ID = 26
-CenterX = 6372
-CenterY = 5044
+X = 6372
+Y = 5044
 Rotation = 1.5707
 Type = 189
 
 [Gem Gambler]
 ID = 27
-CenterX = 6195
-CenterY = 5200
+X = 6195
+Y = 5200
 Rotation = 0.0
 Type = 167
 
 #[Aidia Mixing Merchant 1]
 #ID = 27
-#CenterX = 6265
-#CenterY = 5400
+#X = 6265
+#Y = 5400
 #Rotation = 4.7123
 #Type = 330
 
 #[Gem Shopkeeper B 1]
 #ID = 28
-#CenterX = 6195
-#CenterY = 5250
+#X = 6195
+#Y = 5250
 #Rotation = 0.0
 #Type = 293
 
 #[Host]
 #ID = 29
-#CenterX = 7200
-#CenterY = 5330
+#X = 7200
+#Y = 5330
 #Rotation = 4.7123
 #Type = 169
+
+[Magic Shopkeeper 6]
+ID = 30
+X = 7022
+Y = 5224
+Rotation = 3.1415
+Type = 94
+BuyRate = 100	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/laglamia/shop/npc20.dta
+
+[Doctor 3] #bug
+ID = 31
+X = 7023
+Y = 5252
+Rotation = 3.1415
+Type = 93
+BuyRate = 70	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/laglamia/shop/npc21.dta
+
+[Assistant 4]
+ID = 32
+X = 7024
+Y = 5183
+Rotation = 3.1415
+Type = 95
+BuyRate = 95	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/laglamia/shop/npc22.dta
+
+[Barmaid 2]
+ID = 33
+X = 7024
+Y = 5203
+Rotation = 3.1415
+Type = 92
+BuyRate = 95	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/laglamia/shop/npc23.dta
+
+[Barmaid 3]
+ID = 34
+X = 7225
+Y = 5333
+Rotation = 1.57075
+Type = 92
+BuyRate = 95	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/laglamia/shop/npc24.dta
+
+[Barmaid 4]
+ID = 35
+X = 7195
+Y = 5331
+Rotation = 1.57075
+Type = 92
+BuyRate = 95	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/laglamia/shop/npc25.dta
+
+[Barmaid 5]
+ID = 36
+X = 7154
+Y = 5337
+Rotation = 1.57075
+Type = 92
+BuyRate = 95	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/laglamia/shop/npc26.dta
+
+[Barmaid 6]
+ID = 37
+X = 7126
+Y = 5336
+Rotation = 1.57075
+Type = 92
+BuyRate = 95	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/laglamia/shop/npc27.dta
+
+[Barmaid 7]  #BUG
+ID = 38
+X = 7228
+Y = 5311
+Rotation = 3.1415
+Type = 92
+BuyRate = 95	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/laglamia/shop/npc28.dta
+
+[Barmaid 8]
+ID = 39
+X = 7256
+Y = 5275
+Rotation = 1.57075
+Type = 92
+BuyRate = 95	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/laglamia/shop/npc29.dta
+
+[Barmaid 9]
+ID = 40
+X = 7229
+Y = 5126
+Rotation = 3.1415
+Type = 92
+BuyRate = 95	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/laglamia/shop/npc30.dta
+
+[Barmaid 10]
+ID = 41
+X = 7228
+Y = 5275
+Rotation = 1.57075
+Type = 92
+BuyRate = 95	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/laglamia/shop/npc31.dta
+
+[Barmaid 11]
+ID = 42
+X = 7325
+Y = 5275
+Rotation = 1.57075
+Type = 92
+BuyRate = 95	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/laglamia/shop/npc32.dta
+
+[Barmaid 12]
+ID = 43
+X = 7349
+Y = 5275
+Rotation = 1.57075
+Type = 92
+BuyRate = 95	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/laglamia/shop/npc33.dta
+
+[Barmaid 13]
+ID = 44
+X = 7399
+Y = 5275
+Rotation = 1.57075
+Type = 92
+BuyRate = 95	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/laglamia/shop/npc34.dta

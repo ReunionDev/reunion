@@ -1,0 +1,184 @@
+[Raptoroid]
+ID = 1
+X = 8015
+Y = 11755
+Radius = 200
+RespawnTime = 10
+Type = 150
+
+[Raptoroid1]
+ID = 2
+X = 8125
+Y = 11825
+Radius = 200
+RespawnTime = 10
+Type = 150
+
+[Raptoroid2]
+ID = 3
+X = 8085
+Y = 11606
+Radius = 200
+RespawnTime = 10
+Type = 150
+
+[Raptoroid3]
+ID = 4
+X = 8986
+Y = 10866
+Radius = 200
+RespawnTime = 10
+Type = 150
+
+[Raptoroid4]
+ID = 5
+X = 8285
+Y = 11935
+Radius = 200
+RespawnTime = 10
+Type = 150
+
+[Raptoroid5]
+ID = 6
+X = 8515
+Y = 11645
+Radius = 200
+RespawnTime = 10
+Type = 150
+
+[Parkikepaloid0]
+ID = 7
+X = 9065
+Y = 10875
+Radius = 200
+RespawnTime = 10
+Type = 148
+
+[Parkikepaloid1]
+ID = 8
+X = 8995
+Y = 10905
+Radius = 200
+RespawnTime = 10
+Type = 148
+
+[Parkikepaloid2]
+ID = 9
+X = 8805
+Y = 10785
+Radius = 200
+RespawnTime = 10
+Type = 148
+
+[Parkikepaloid3]
+ID = 10
+X = 8965
+Y = 10535
+Radius = 200
+RespawnTime = 10
+Type = 148
+
+[Parkikepaloid4]
+ID = 11
+X = 9129
+Y = 10490
+Radius = 200
+RespawnTime = 10
+Type = 148
+
+[Parkikepaloid5]
+ID = 12
+X = 9385
+Y = 10405
+Radius = 200
+RespawnTime = 10
+Type = 148
+
+[Parkikepaloid6]
+ID = 13
+X = 9755
+Y = 10545
+Radius = 200
+RespawnTime = 10
+Type = 148
+
+[Parkikepaloid7]
+ID = 14
+X = 9765
+Y = 10774
+Radius = 200
+RespawnTime = 10
+Type = 148
+
+[Parkikepaloid8]
+ID = 15
+X = 10025
+Y = 10815
+Radius = 200
+RespawnTime = 10
+Type = 148
+
+[Parkikepaloid9]
+ID = 16
+X = 10324
+Y = 10655
+Radius = 200
+RespawnTime = 10
+Type = 148
+
+[Parkikepaloid10]
+ID = 17
+X = 10785
+Y = 10695
+Radius = 200
+RespawnTime = 10
+Type = 148
+
+[Parkikepaloid11]
+ID = 18
+X = 11134
+Y = 11245
+Radius = 200
+RespawnTime = 10
+Type = 148
+
+[Parkikepaloid13]
+ID = 19
+X = 11125
+Y = 10056
+Radius = 200
+RespawnTime = 10
+Type = 148
+
+[Parkikepaloid14]
+ID = 20
+X = 9705
+Y = 9775
+Radius = 200
+RespawnTime = 10
+Type = 148
+
+[Parkikepaloid15]
+ID = 21
+X = 8206
+Y = 10474
+Radius = 200
+RespawnTime = 10
+Type = 148
+
+[Parkikepaloid16]
+ID = 22
+X = 7816
+Y = 10614
+Radius = 200
+RespawnTime = 10
+Type = 148
+
+[Parkikepaloid17]
+ID = 24
+X = 7535
+Y = 10735
+Radius = 200
+RespawnTime = 10
+Type = 148
+
