@@ -91,7 +91,7 @@ public class S_Map {
 
 			S_ParsedItem item = iter.next();
 
-			if (!item.checkMembers(new String[] { "ID", "CenterX", "CenterY",
+			if (!item.checkMembers(new String[] { "ID", "X", "Y",
 					"Radius", "RespawnTime", "Type" })) {
 				System.out.println("Error loading a mob spawn on map: "
 						+ getId());
@@ -100,8 +100,8 @@ public class S_Map {
 
 			G_Spawn g = new G_Spawn();
 
-			g.setCenterX(Integer.parseInt(item.getMemberValue("CenterX")));
-			g.setCenterY(Integer.parseInt(item.getMemberValue("CenterY")));
+			g.setCenterX(Integer.parseInt(item.getMemberValue("X")));
+			g.setCenterY(Integer.parseInt(item.getMemberValue("Y")));
 			g.setRadius(Integer.parseInt(item.getMemberValue("Radius")));
 			g.setMobType(Integer.parseInt(item.getMemberValue("Type")));
 			g.setRespawnTime(Integer.parseInt(item
@@ -127,7 +127,7 @@ public class S_Map {
 
 			S_ParsedItem i = iter.next();
 
-			if (!i.checkMembers(new String[] { "ID", "CenterX", "CenterY",
+			if (!i.checkMembers(new String[] { "ID", "X", "Y",
 					"Rotation", "Type" })) {
 				System.out.println("Error loading a npc spawn on map: "
 						+ getId());
@@ -137,8 +137,8 @@ public class S_Map {
 					.getNpcManager()
 					.createNpc(Integer.parseInt(i.getMemberValue("Type")));
 
-			newNpc.getPosition().setX(Integer.parseInt(i.getMemberValue("CenterX")));
-			newNpc.getPosition().setY(Integer.parseInt(i.getMemberValue("CenterY")));
+			newNpc.getPosition().setX(Integer.parseInt(i.getMemberValue("X")));
+			newNpc.getPosition().setY(Integer.parseInt(i.getMemberValue("Y")));
 			newNpc.getPosition().setRotation(Double.parseDouble(i.getMemberValue("Rotation")));
 			newNpc.setSpawnId(Integer.parseInt(i.getMemberValue("ID")));
 			newNpc.getPosition().setMap(this);
@@ -197,12 +197,11 @@ public class S_Map {
 		int port = Integer.parseInt(config.getMemberValue("Port"));		
 		setName(map.getName());
 		address = new InetSocketAddress(ip,port);
-		
+		S_Server.getInstance().getNetworkModule().register(getAddress());
 		
 		if(location.equals("Local")) {
-			setLocal(true);			
+			setLocal(true);
 			System.out.println("Loading "+this.getName());
-			S_Server.getInstance().getNetworkModule().register(getAddress());
 			playerSpawnReference = new S_Parser();
 			mobSpawnReference = new S_Parser();
 			npcSpawnReference = new S_Parser();
