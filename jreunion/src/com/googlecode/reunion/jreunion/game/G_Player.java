@@ -183,6 +183,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 			// S> drop [ItemID] [ItemType] [PosX] [PosY] [Height] [Rotation]
 			// [GemNumber] [Special]
 		} catch (Exception e) {
+			//TODO: look at this
 			System.out.println("Itembug not fixxed but server crash");
 		}
 		

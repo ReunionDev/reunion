@@ -1,6 +1,7 @@
 package com.googlecode.reunion.jreunion.server;
 
 import java.net.InetSocketAddress;
+import java.net.Socket;
 import java.util.Iterator;
 
 import com.googlecode.reunion.jreunion.game.G_EntityManager;
@@ -370,7 +371,8 @@ public class S_Command {
 		G_Player player = S_DatabaseUtils.getInstance().loadChar(slotNumber,
 				accountId, client);
 
-		
+		Socket socket = client.getClientSocket();
+		/*
 		S_Map map = S_Server.getInstance().getWorldModule().getTeleportManager().getDestination(player);
 		if (map==null)
 		{
@@ -384,11 +386,23 @@ public class S_Command {
 			map = S_Server.getInstance().getWorldModule().getMap(mapId);
 			System.out.println("Loading default map "+ map);
 		}
+		*/
+		//TODO: Fix hack and prevent teleport hack
+		S_Map map = null;
+		System.out.println(socket.getLocalSocketAddress());
+		 for(S_Map m : S_Server.getInstance().getWorldModule().getMaps()){
+			 System.out.println(m.getAddress());
+			 if(m.getAddress().equals(socket.getLocalSocketAddress())){
+				 map = m;
+				 break;
+			 }
+		 }
 		
-		
-		if(!map.isLocal()){
-			return null;
-		}
+		 //TODO: do we really need this here?
+		 if(map==null||!map.isLocal()){
+			 System.err.println("Invalid Map: "+map);
+			 return null;
+		 }
 		
 		
 		

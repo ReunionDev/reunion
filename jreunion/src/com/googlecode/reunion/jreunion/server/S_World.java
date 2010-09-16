@@ -63,8 +63,6 @@ public class S_World extends S_ClassModule {
 		return maps.get(mapId);	
 	}
 	
-
-	
 	public S_TeleportManager getTeleportManager() {
 		return teleportManager;
 	}
