@@ -77,25 +77,24 @@ public class S_Network extends S_ClassModule {
 						// so we can listen for input on it
 						S_Client client = new S_Client();
 						
-						ServerSocketChannel channel = (ServerSocketChannel)key.channel();
-						//Socket socket = ss.accept();
-						//ServerSocketChannel channel = ((ServerSocketChannel) key.channel());
-						SocketChannel socketChannel = channel.accept();
-						Socket socket= socketChannel.socket();						
+						ServerSocketChannel serverChannel = (ServerSocketChannel)key.channel();
+						
+						SocketChannel socketChannel = serverChannel.accept();
+						Socket socket = socketChannel.socket();						
 						
 						client.setClientSocket(socket);
 						System.out.print("Got connection from "
-								+ client.getClientSocket()+"\n");
+								+ socket+"\n");
 				
 						client.setState(S_ClientState.ACCEPTED);
 						// Make sure to make it non-blocking, so we can
 						// use a selector on it.
-						SocketChannel sc = client.getClientSocket().getChannel();
-						sc.configureBlocking(false);
+						
+						socketChannel.configureBlocking(false);
 						clients.put(socket, client);						
 						
 						// Register it with the selector, for reading
-						sc.register(selector, SelectionKey.OP_READ);
+						socketChannel.register(selector, SelectionKey.OP_READ);
 					} else if ((key.readyOps() & SelectionKey.OP_READ) == SelectionKey.OP_READ) {
 
 						SocketChannel sc = null;

@@ -197,11 +197,12 @@ public class S_Map {
 		int port = Integer.parseInt(config.getMemberValue("Port"));		
 		setName(map.getName());
 		address = new InetSocketAddress(ip,port);
-		S_Server.getInstance().getNetworkModule().register(getAddress());
+		
 		
 		if(location.equals("Local")) {
-			setLocal(true);
+			setLocal(true);			
 			System.out.println("Loading "+this.getName());
+			S_Server.getInstance().getNetworkModule().register(getAddress());
 			playerSpawnReference = new S_Parser();
 			mobSpawnReference = new S_Parser();
 			npcSpawnReference = new S_Parser();
