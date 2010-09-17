@@ -2,7 +2,10 @@ package com.googlecode.reunion.jreunion.server.database;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-
+/**
+ * @author Aidamina
+ * @license http://reunion.googlecode.com/svn/trunk/license.txt
+ */
 public abstract class DatabaseAction {
 	
 	Connection connection;

@@ -2,10 +2,10 @@ package com.googlecode.reunion.jreunion.game;
 
 import java.util.Iterator;
 
-import com.googlecode.reunion.jreunion.server.S_Client;
-import com.googlecode.reunion.jreunion.server.S_DatabaseUtils;
-import com.googlecode.reunion.jreunion.server.S_ItemFactory;
-import com.googlecode.reunion.jreunion.server.S_Server;
+import com.googlecode.reunion.jreunion.server.Client;
+import com.googlecode.reunion.jreunion.server.DatabaseUtils;
+import com.googlecode.reunion.jreunion.server.ItemFactory;
+import com.googlecode.reunion.jreunion.server.Server;
 
 /**
  * @author Aidamina
@@ -22,7 +22,7 @@ public class G_Trader extends G_Npc {
 	public void chipExchange(G_Player player, int gemTraderType, int chipType,
 			int playerBet) {
 
-		S_Client client = S_Server.getInstance().getNetworkModule()
+		Client client = Server.getInstance().getNetworkModule()
 				.getClient(player);
 
 		if (client == null) {
@@ -37,7 +37,7 @@ public class G_Trader extends G_Npc {
 		while (exchangeIter.hasNext()) {
 			G_ExchangeItem exchangeItem = exchangeIter.next();
 			G_Item item = exchangeItem.getItem();
-			S_DatabaseUtils.getInstance().deleteItem(item);
+			DatabaseUtils.getInstance().deleteItem(item);
 		}
 
 		player.getExchange().clearExchange();
@@ -46,7 +46,7 @@ public class G_Trader extends G_Npc {
 
 		if (gemTraderType == 0) {
 			int newChipType = getNewChipTypeUp(chipType);
-			G_Item item = S_ItemFactory.createItem(newChipType);
+			G_Item item = ItemFactory.createItem(newChipType);
 			G_ExchangeItem exchangeItem = new G_ExchangeItem(item, 0, 0);
 			player.getExchange().addItem(exchangeItem);
 			packetData = "chip_exchange 0 ok " + item.getType() + " "
@@ -54,7 +54,7 @@ public class G_Trader extends G_Npc {
 		} else {
 			if (playerBet == serverBetResult) {
 				int newChipType = getNewChipTypeUp(chipType);
-				G_Item item = S_ItemFactory.createItem(newChipType);
+				G_Item item = ItemFactory.createItem(newChipType);
 				G_ExchangeItem exchangeItem = new G_ExchangeItem(item, 0, 0);
 				player.getExchange().addItem(exchangeItem);
 				packetData = "chip_exchange 1 ok win " + item.getType() + " "
@@ -62,7 +62,7 @@ public class G_Trader extends G_Npc {
 			} else {
 				int newChipType = getNewChipTypeDown(chipType);
 				if (newChipType != -1) {
-					G_Item item = S_ItemFactory.createItem(newChipType);
+					G_Item item = ItemFactory.createItem(newChipType);
 					G_ExchangeItem exchangeItem = new G_ExchangeItem(item, 0, 0);
 					player.getExchange().addItem(exchangeItem);
 				}
@@ -80,7 +80,7 @@ public class G_Trader extends G_Npc {
 	 ******/
 	public void exchangeArmor(G_Player player, int armorType) {
 
-		S_Client client = S_Server.getInstance().getNetworkModule()
+		Client client = Server.getInstance().getNetworkModule()
 				.getClient(player);
 
 		if (client == null) {
@@ -95,8 +95,8 @@ public class G_Trader extends G_Npc {
 			Iterator<G_ExchangeItem> exchangeIter = player.getExchange()
 					.itemListIterator();
 			G_ExchangeItem oldExchangeItem = exchangeIter.next();
-			G_Armor newItem = (G_Armor) S_ItemFactory.createItem(armorType);
-			G_Armor oldItem = (G_Armor) S_ItemFactory.loadItem(oldExchangeItem
+			G_Armor newItem = (G_Armor) ItemFactory.createItem(armorType);
+			G_Armor oldItem = (G_Armor) ItemFactory.loadItem(oldExchangeItem
 					.getItem().getEntityId());
 
 			if (newItem instanceof G_Armor == false
@@ -104,7 +104,7 @@ public class G_Trader extends G_Npc {
 				return;
 			}
 
-			S_DatabaseUtils.getInstance().deleteItem(oldItem);
+			DatabaseUtils.getInstance().deleteItem(oldItem);
 			G_ExchangeItem newExchangeItem = new G_ExchangeItem(newItem, 0, 0);
 
 			player.getExchange().clearExchange();

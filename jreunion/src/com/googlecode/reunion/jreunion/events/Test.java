@@ -2,7 +2,10 @@ package com.googlecode.reunion.jreunion.events;
 
 import java.util.LinkedList;
 import java.util.List;
-
+/**
+ * @author Aidamina
+ * @license http://reunion.googlecode.com/svn/trunk/license.txt
+ */
 public class Test extends EventBroadcaster implements EventListener {
 
 	public Test() {

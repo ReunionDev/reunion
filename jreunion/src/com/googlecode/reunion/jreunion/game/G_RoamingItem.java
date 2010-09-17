@@ -1,7 +1,7 @@
 package com.googlecode.reunion.jreunion.game;
 
-import com.googlecode.reunion.jreunion.server.S_Server;
-import com.googlecode.reunion.jreunion.server.S_Session;
+import com.googlecode.reunion.jreunion.server.Server;
+import com.googlecode.reunion.jreunion.server.Session;
 
 public class G_RoamingItem extends G_WorldObject{
 
@@ -16,13 +16,13 @@ public class G_RoamingItem extends G_WorldObject{
 		return item;
 	}
 	@Override
-	public void enter(S_Session session) {
-		S_Server.getInstance().getWorldModule().getWorldCommand().itemIn(session.getOwner(), this);
+	public void enter(Session session) {
+		Server.getInstance().getWorldModule().getWorldCommand().itemIn(session.getOwner(), this);
 		
 	}
 	@Override
-	public void exit(S_Session session) {
-		S_Server.getInstance().getWorldModule().getWorldCommand().itemOut(session.getOwner(), this);
+	public void exit(Session session) {
+		Server.getInstance().getWorldModule().getWorldCommand().itemOut(session.getOwner(), this);
 		
 	}
 	

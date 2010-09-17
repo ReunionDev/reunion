@@ -2,9 +2,9 @@ package com.googlecode.reunion.jreunion.game;
 
 import java.util.Random;
 
-import com.googlecode.reunion.jreunion.server.S_Map;
-import com.googlecode.reunion.jreunion.server.S_Server;
-import com.googlecode.reunion.jreunion.server.S_Timer;
+import com.googlecode.reunion.jreunion.server.Map;
+import com.googlecode.reunion.jreunion.server.Server;
+import com.googlecode.reunion.jreunion.server.Timer;
 
 /**
  * @author Aidamina
@@ -17,7 +17,7 @@ public class G_Spawn {
 
 	private int respawnTime; // seconds
 
-	private S_Timer diedTime = new S_Timer(); // seconds
+	private Timer diedTime = new Timer(); // seconds
 
 	private boolean dead;
 
@@ -29,7 +29,7 @@ public class G_Spawn {
 
 	private int radius;
 
-	private S_Map map;
+	private Map map;
 
 	public G_Spawn() {
 		// spawnMob();
@@ -53,11 +53,11 @@ public class G_Spawn {
 	/**
 	 * @return Returns the diedTime.
 	 */
-	public S_Timer getDiedTime() {
+	public Timer getDiedTime() {
 		return diedTime;
 	}
 
-	public S_Map getMap() {
+	public Map getMap() {
 		return map;
 	}
 
@@ -123,7 +123,7 @@ public class G_Spawn {
 	 * @param map
 	 *            The map to set.
 	 */
-	public void setMap(S_Map map) {
+	public void setMap(Map map) {
 		this.map = map;
 	}
 
@@ -156,7 +156,7 @@ public class G_Spawn {
 		
 		Random rand = new Random(System.currentTimeMillis());
 		
-		G_Mob newMob = S_Server.getInstance().getWorldModule().getMobManager()
+		G_Mob newMob = Server.getInstance().getWorldModule().getMobManager()
 				.createMob(getMobType());
 		
 		newMob.getPosition().setX(rand.nextInt(radius * 2)-radius+centerX);

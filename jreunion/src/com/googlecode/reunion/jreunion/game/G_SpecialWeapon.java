@@ -1,7 +1,7 @@
 package com.googlecode.reunion.jreunion.game;
 
 import com.googlecode.reunion.jcommon.S_ParsedItem;
-import com.googlecode.reunion.jreunion.server.S_Reference;
+import com.googlecode.reunion.jreunion.server.Reference;
 
 /**
  * @author Aidamina
@@ -111,7 +111,7 @@ public class G_SpecialWeapon extends G_PlayerItem {
 	public void loadFromReference(int id) {
 		super.loadFromReference(id);
 
-		S_ParsedItem item = S_Reference.getInstance().getItemReference()
+		S_ParsedItem item = Reference.getInstance().getItemReference()
 				.getItemById(id);
 
 		if (item == null) {

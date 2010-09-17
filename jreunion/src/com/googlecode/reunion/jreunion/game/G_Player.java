@@ -9,12 +9,12 @@ import java.util.Vector;
 import com.googlecode.reunion.jcommon.S_ParsedItem;
 import com.googlecode.reunion.jcommon.S_Parser;
 import com.googlecode.reunion.jreunion.game.G_Enums.G_EquipmentSlot;
-import com.googlecode.reunion.jreunion.server.S_CharSkill;
-import com.googlecode.reunion.jreunion.server.S_Client;
-import com.googlecode.reunion.jreunion.server.S_DatabaseUtils;
-import com.googlecode.reunion.jreunion.server.S_Reference;
-import com.googlecode.reunion.jreunion.server.S_Server;
-import com.googlecode.reunion.jreunion.server.S_Session;
+import com.googlecode.reunion.jreunion.server.CharSkill;
+import com.googlecode.reunion.jreunion.server.Client;
+import com.googlecode.reunion.jreunion.server.DatabaseUtils;
+import com.googlecode.reunion.jreunion.server.Reference;
+import com.googlecode.reunion.jreunion.server.Server;
+import com.googlecode.reunion.jreunion.server.Session;
 
 /**
  * @author Aidamina
@@ -62,7 +62,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 
 	private int adminState; // 0 - normal user; 255 - SuperGM
 
-	private S_Session playerSession;
+	private Session playerSession;
 
 	private int hairStyle;
 
@@ -70,7 +70,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 
 	private List<Integer> attackQueue = new Vector<Integer>();
 
-	private S_CharSkill charSkill;
+	private CharSkill charSkill;
 
 	private G_QuickSlot quickSlot;
 
@@ -90,7 +90,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 		super();
 		inventory = new G_Inventory();
 		equipment = new G_Equipment();
-		charSkill = new S_CharSkill();
+		charSkill = new CharSkill();
 		quickSlot = new G_QuickSlot();
 		stash = new G_Stash();
 		exchange = new G_Exchange();
@@ -119,7 +119,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 
 		while (playerIter.hasNext()) {
 			G_Player player = (G_Player) playerIter.next();
-			S_Client client = S_Server.getInstance().getNetworkModule()
+			Client client = Server.getInstance().getNetworkModule()
 					.getClient(player);
 
 			if (client == null) {
@@ -149,7 +149,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 				return;
 			}
 		
-			S_Client client = S_Server.getInstance().getNetworkModule()
+			Client client = Server.getInstance().getNetworkModule()
 					.getClient(this);
 			if (client == null) {
 				return;
@@ -168,7 +168,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 
 				while (playerIter.hasNext()) {
 					G_Player player = (G_Player) playerIter.next();
-					client = S_Server.getInstance().getNetworkModule()
+					client = Server.getInstance().getNetworkModule()
 							.getClient(player);
 
 					if (client == null) {
@@ -215,7 +215,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 		return bestAttack;
 	}
 
-	public S_CharSkill getCharSkill() {
+	public CharSkill getCharSkill() {
 		return charSkill;
 	}
 
@@ -249,7 +249,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 	}
 	
 	public void levelUpSkill(G_Skill skill) {
-		S_Client client = S_Server.getInstance().getNetworkModule()
+		Client client = Server.getInstance().getNetworkModule()
 				.getClient(this);
 
 		if (client == null) {
@@ -336,7 +336,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 
 	public void spawn() {
 		
-		int defaultSpawnId = Integer.parseInt(S_Reference.getInstance().getMapReference().getItemById(getPosition().getMap().getId()).getMemberValue("DefaultSpawnId"));
+		int defaultSpawnId = Integer.parseInt(Reference.getInstance().getMapReference().getItemById(getPosition().getMap().getId()).getMemberValue("DefaultSpawnId"));
 		S_ParsedItem defaultSpawn =getPosition().getMap().getPlayerSpawnReference().getItemById(defaultSpawnId);
 				
 		S_Parser playerSpawns = getPosition().getMap().getPlayerSpawnReference();
@@ -353,7 +353,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 						.getMemberValue("TargetHeight")));
 
 				if (rectangle.contains(getPosition().getX(), getPosition().getY())) {
-					S_Server.getInstance()
+					Server.getInstance()
 							.getWorldModule()
 							.getWorldCommand()
 							.GoToPos(
@@ -382,7 +382,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 		int spawnX = x+(width>0?rand.nextInt(width):0);
 		int spawnY = y+(height>0?rand.nextInt(height):0);
 		
-		S_Server.getInstance()
+		Server.getInstance()
 		.getWorldModule()
 		.getWorldCommand()
 		.GoToPos(this,spawnX,spawnY);
@@ -396,7 +396,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 	 * @return Returns the playerSession.
 	 * @uml.property name="playerSession"
 	 */
-	public S_Session getSession() {
+	public Session getSession() {
 		return playerSession;
 	}
 
@@ -442,7 +442,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 	/*** Manages the Items add/Remove from Trade Box ***/
 	public void itemExchange(int posX, int posY) {
 
-		S_Client client = S_Server.getInstance().getNetworkModule()
+		Client client = Server.getInstance().getNetworkModule()
 				.getClient(this);
 
 		if (client == null) {
@@ -491,7 +491,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 
 	/****** Load Items at Trade Box ******/
 	public void loadExchange() {
-		S_Client client = S_Server.getInstance().getNetworkModule()
+		Client client = Server.getInstance().getNetworkModule()
 				.getClient(this);
 
 		if (client == null) {
@@ -517,7 +517,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 
 	@Override
 	public void loadFromReference(int id) {
-		S_ParsedItem exp = S_Reference.getInstance().getExpReference()
+		S_ParsedItem exp = Reference.getInstance().getExpReference()
 				.getItemById(id);
 
 		if (exp == null) {
@@ -537,7 +537,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 
 	/****** load Quick Slot Items ******/
 	public void loadInventory() {
-		S_Client client = S_Server.getInstance().getNetworkModule()
+		Client client = Server.getInstance().getNetworkModule()
 				.getClient(this);
 
 		if (client == null) {
@@ -564,7 +564,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 
 	/****** load Quick Slot Items ******/
 	public void loadQuickSlot() {
-		S_Client client = S_Server.getInstance().getNetworkModule()
+		Client client = Server.getInstance().getNetworkModule()
 				.getClient(this);
 
 		if (client == null) {
@@ -591,7 +591,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 	/****** Manages the char Logout ******/
 	public void logout() {
 
-		S_Client client = S_Server.getInstance().getNetworkModule()
+		Client client = Server.getInstance().getNetworkModule()
 				.getClient(this);
 
 		if (client == null) {
@@ -600,32 +600,32 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 
 		System.out.print("Player " + getName() + " logging out...\n");
 
-		S_DatabaseUtils.getInstance().saveSkills(this);
-		S_DatabaseUtils.getInstance().saveInventory(this);
-		S_DatabaseUtils.getInstance().saveCharStatus(this);
-		S_DatabaseUtils.getInstance().saveEquipment(this);
-		S_DatabaseUtils.getInstance().saveStash(client);
-		S_DatabaseUtils.getInstance().saveExchange(this);
-		S_DatabaseUtils.getInstance().saveQuickSlot(this);
+		DatabaseUtils.getInstance().saveSkills(this);
+		DatabaseUtils.getInstance().saveInventory(this);
+		DatabaseUtils.getInstance().saveCharStatus(this);
+		DatabaseUtils.getInstance().saveEquipment(this);
+		DatabaseUtils.getInstance().saveStash(client);
+		DatabaseUtils.getInstance().saveExchange(this);
+		DatabaseUtils.getInstance().saveQuickSlot(this);
 
-		Iterator<S_Session> iter = S_Server.getInstance().getWorldModule()
+		Iterator<Session> iter = Server.getInstance().getWorldModule()
 				.getSessionManager().getSessionListIterator();
 
 		while (iter.hasNext()) {
-			S_Session session = iter.next();
+			Session session = iter.next();
 
 			if (session.contains(this)) {
 				session.exit(this);
 			}
 		}
 
-		if (S_Server.getInstance().getWorldModule().getPlayerManager()
+		if (Server.getInstance().getWorldModule().getPlayerManager()
 				.containsPlayer(this)) {
-			S_Server.getInstance().getWorldModule().getPlayerManager()
+			Server.getInstance().getWorldModule().getPlayerManager()
 					.removePlayer(this);
 		}
 
-		S_Server.getInstance().getWorldModule().getSessionManager()
+		Server.getInstance().getWorldModule().getSessionManager()
 				.removeSession(getSession());
 		setSession(null);
 	}
@@ -647,7 +647,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 
 	/****** Manages the Pick command ******/
 	public void pickItem(int uniqueid) {
-		S_Client client = S_Server.getInstance().getNetworkModule()
+		Client client = Server.getInstance().getNetworkModule()
 				.getClient(this);
 
 		if (client == null) {
@@ -681,7 +681,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 
 	/****** Manages the Pickup command ******/
 	public void pickupItem(int uniqueid) {
-		S_Client client = S_Server.getInstance().getNetworkModule()
+		Client client = Server.getInstance().getNetworkModule()
 				.getClient(this);
 
 		if (client == null) {
@@ -693,7 +693,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 				client.SendData(packetData);// send the message
 		// S> pickup [CharID]
 
-		S_Server.getInstance().getWorldModule().getWorldCommand()
+		Server.getInstance().getWorldModule().getWorldCommand()
 				.itemOut(this, uniqueid);
 		pickItem(uniqueid);
 	}
@@ -721,7 +721,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 
 		while (playerIter.hasNext()) {
 			G_Player player = (G_Player) playerIter.next();
-			S_Client client = S_Server.getInstance().getNetworkModule()
+			Client client = Server.getInstance().getNetworkModule()
 					.getClient(player);
 
 			if (client == null) {
@@ -745,11 +745,11 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 		spawn();
 		
 
-		Iterator<S_Session> sessionIter = S_Server.getInstance()
+		Iterator<Session> sessionIter = Server.getInstance()
 				.getWorldModule().getSessionManager().getSessionListIterator();
 
 		while (sessionIter.hasNext()) {
-			S_Session session = sessionIter.next();
+			Session session = sessionIter.next();
 			G_Player player = session.getOwner();
 
 			if (session.contains(this)) {
@@ -761,7 +761,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 				continue;
 			}
 
-			S_Client client = S_Server.getInstance().getNetworkModule()
+			Client client = Server.getInstance().getNetworkModule()
 					.getClient(player);
 
 			if (client == null) {
@@ -784,13 +784,13 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 		} else {
 			admin = 0;
 		}
-		Iterator<G_Player> iter = S_Server.getInstance().getWorldModule()
+		Iterator<G_Player> iter = Server.getInstance().getWorldModule()
 				.getPlayerManager().getPlayerListIterator();
 		while (iter.hasNext()) {
 			G_Player pl = iter.next();
 			// if (player.getPlayerSession().contains(pl)||player==pl)
 			if (true) {
-				S_Client client = S_Server.getInstance().getNetworkModule()
+				Client client = Server.getInstance().getNetworkModule()
 						.getClient(pl);
 				if (client == null) {
 					continue;
@@ -808,7 +808,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 		this.adminState = adminState;
 	}
 
-	public void setCharSkill(S_CharSkill charSkill) {
+	public void setCharSkill(CharSkill charSkill) {
 		this.charSkill = charSkill;
 	}
 
@@ -898,7 +898,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 	 *            The playerSession to set.
 	 * @uml.property name="playerSession"
 	 */
-	public void setSession(S_Session session) {
+	public void setSession(Session session) {
 		playerSession = session;
 	}
 
@@ -978,7 +978,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 		Iterator<G_WorldObject> iter = getSession().getPlayerListIterator();
 		while (iter.hasNext()) {
 			G_Player player = (G_Player) iter.next();
-			S_Client client = S_Server.getInstance().getNetworkModule()
+			Client client = Server.getInstance().getNetworkModule()
 					.getClient(player);
 
 			if (client == null) {
@@ -1009,7 +1009,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 
 		while (playerIter.hasNext()) {
 			G_Player player = (G_Player) playerIter.next();
-			S_Client client = S_Server.getInstance().getNetworkModule()
+			Client client = Server.getInstance().getNetworkModule()
 					.getClient(player);
 
 			if (client == null) {
@@ -1026,7 +1026,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 
 	public void tell(G_Player targetPlayer, String text) {
 
-		S_Client client = S_Server.getInstance().getNetworkModule()
+		Client client = Server.getInstance().getNetworkModule()
 				.getClient(this);
 
 		if (client == null) {
@@ -1048,7 +1048,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 	/****** Handles all the Status Updates ******/
 	public void updateStatus(int id, int curr, int max) {
 		String packetData = new String();
-		S_Client client = S_Server.getInstance().getNetworkModule()
+		Client client = Server.getInstance().getNetworkModule()
 				.getClient(this);
 
 		if (client == null) {
@@ -1113,7 +1113,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 			packetData = "levelup " + getEntityId() + "\n";
 			
 					client.SendData(packetData);
-			S_DatabaseUtils.getInstance()
+			DatabaseUtils.getInstance()
 					.updateCharStatus(this, id, getLevel());
 
 			Iterator<G_WorldObject> playerIter = getSession()
@@ -1121,7 +1121,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 
 			while (playerIter.hasNext()) {
 				G_Player pl = (G_Player) playerIter.next();
-				client = S_Server.getInstance().getNetworkModule()
+				client = Server.getInstance().getNetworkModule()
 						.getClient(pl);
 
 				if (client == null) {
@@ -1138,7 +1138,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 			packetData = "status " + id + " " + getLime() + " " + max + "\n";
 			
 					client.SendData(packetData);
-			S_DatabaseUtils.getInstance().updateCharStatus(this, id, getLime());
+			DatabaseUtils.getInstance().updateCharStatus(this, id, getLime());
 			break;
 		}
 		case 11: { // Player Total Exp Status
@@ -1147,7 +1147,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 					+ "\n";
 			
 					client.SendData(packetData);
-			S_DatabaseUtils.getInstance().updateCharStatus(this, id,
+			DatabaseUtils.getInstance().updateCharStatus(this, id,
 					getTotalExp());
 			break;
 		}
@@ -1165,7 +1165,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 						+ "\n";
 				
 						client.SendData(packetData);
-				S_DatabaseUtils.getInstance().updateCharStatus(this, id,
+				DatabaseUtils.getInstance().updateCharStatus(this, id,
 						getLvlUpExp());
 			} else {
 				setLvlUpExp(curr);
@@ -1173,7 +1173,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 						+ "\n";
 				
 						client.SendData(packetData);
-				S_DatabaseUtils.getInstance().updateCharStatus(this, id,
+				DatabaseUtils.getInstance().updateCharStatus(this, id,
 						getLvlUpExp());
 			}
 			break;
@@ -1184,7 +1184,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 					+ "\n";
 			
 					client.SendData(packetData);
-			S_DatabaseUtils.getInstance().updateCharStatus(this, id,
+			DatabaseUtils.getInstance().updateCharStatus(this, id,
 					getStatusPoints());
 			break;
 		}
@@ -1196,7 +1196,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 			packetData = "status " + id + " " + getStr() + " " + max + "\n";
 			
 					client.SendData(packetData);
-			S_DatabaseUtils.getInstance().updateCharStatus(this, id, getStr());
+			DatabaseUtils.getInstance().updateCharStatus(this, id, getStr());
 
 			updateStatus(0, getCurrHp(), getMaxHp() + (getStr() / 50) + 1);
 			updateStatus(2, getCurrStm(), getMaxStm() + (getStr() / 60) + 1);
@@ -1211,7 +1211,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 			packetData = "status " + id + " " + getWis() + " " + max + "\n";
 			
 					client.SendData(packetData);
-			S_DatabaseUtils.getInstance().updateCharStatus(this, id, getWis());
+			DatabaseUtils.getInstance().updateCharStatus(this, id, getWis());
 
 			updateStatus(1, getCurrMana(), getMaxMana() + (getWis() / 50) + 2);
 			updateStatus(3, getCurrElect(), getMaxElect() + (getWis() / 50) + 1);
@@ -1226,7 +1226,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 			packetData = "status " + id + " " + getDexterity() + " " + max + "\n";
 			
 					client.SendData(packetData);
-			S_DatabaseUtils.getInstance().updateCharStatus(this, id, getDexterity());
+			DatabaseUtils.getInstance().updateCharStatus(this, id, getDexterity());
 
 			updateStatus(1, getCurrMana(), getMaxMana() + (getDexterity() / 50) + 1);
 			updateStatus(3, getCurrElect(), getMaxElect() + (getDexterity() / 50) + 2);
@@ -1241,7 +1241,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 			packetData = "status " + id + " " + getConstitution() + " " + max + "\n";
 			
 					client.SendData(packetData);
-			S_DatabaseUtils.getInstance().updateCharStatus(this, id, getConstitution());
+			DatabaseUtils.getInstance().updateCharStatus(this, id, getConstitution());
 
 			updateStatus(0, getCurrHp(), getMaxHp() + (getConstitution() / 50) + 2);
 			updateStatus(2, getCurrStm(), getMaxStm() + (getConstitution() / 50) + 1);
@@ -1256,7 +1256,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 			packetData = "status " + id + " " + getLeadership() + " " + max + "\n";
 			
 					client.SendData(packetData);
-			S_DatabaseUtils.getInstance().updateCharStatus(this, id, getLeadership());
+			DatabaseUtils.getInstance().updateCharStatus(this, id, getLeadership());
 
 			if (getLeadership() % 2 == 0) {
 				updateStatus(0, getCurrHp(), getMaxHp() + 1);
@@ -1272,7 +1272,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 			packetData = "status " + id + " " + curr + " " + max + "\n";
 			
 					client.SendData(packetData);
-			S_DatabaseUtils.getInstance().updateCharStatus(this, id,
+			DatabaseUtils.getInstance().updateCharStatus(this, id,
 					getPenaltyPoints());
 			break;
 		}
@@ -1303,7 +1303,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 
 		while (playerIter.hasNext()) {
 			G_Player player = (G_Player) playerIter.next();
-			S_Client client = S_Server.getInstance().getNetworkModule()
+			Client client = Server.getInstance().getNetworkModule()
 					.getClient(player);
 
 			if (client == null) {
@@ -1375,7 +1375,7 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 
 		while (playerIter.hasNext()) {
 			G_Player player = (G_Player) playerIter.next();
-			S_Client client = S_Server.getInstance().getNetworkModule()
+			Client client = Server.getInstance().getNetworkModule()
 					.getClient(player);
 
 			if (client == null) {
@@ -1402,21 +1402,21 @@ public abstract class G_Player extends G_LivingObject implements G_SkillTarget {
 	 */
 	public int getSessionRadius() {
 		if(G_Player.sessionRadius==null){
-			setSessionRadius(Integer.parseInt(S_Reference.getInstance().getServerReference().getItem("Server").getMemberValue("SessionRadius")));
+			setSessionRadius(Integer.parseInt(Reference.getInstance().getServerReference().getItem("Server").getMemberValue("SessionRadius")));
 		}
 		return G_Player.sessionRadius;
 	}
 	
 	@Override
-	public void enter(S_Session session){
-		S_Server.getInstance().getWorldModule().getWorldCommand()
+	public void enter(Session session){
+		Server.getInstance().getWorldModule().getWorldCommand()
 		.charIn(session.getOwner(), this);
 	}
 		
 
 	@Override
-	public void exit(S_Session session){
-		S_Server.getInstance().getWorldModule().getWorldCommand()
+	public void exit(Session session){
+		Server.getInstance().getWorldModule().getWorldCommand()
 		.charOut(session.getOwner(), this);
 	}
 	

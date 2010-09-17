@@ -1,7 +1,7 @@
 package com.googlecode.reunion.jreunion.game;
 
-import com.googlecode.reunion.jreunion.server.S_Client;
-import com.googlecode.reunion.jreunion.server.S_Server;
+import com.googlecode.reunion.jreunion.server.Client;
+import com.googlecode.reunion.jreunion.server.Server;
 
 /**
  * @author Aidamina
@@ -21,7 +21,7 @@ public class G_Quest {
 
 	/****** Cancel the current player Quest ********/
 	public void cancelQuest(G_Player player) {
-		S_Client client = S_Server.getInstance().getNetworkModule()
+		Client client = Server.getInstance().getNetworkModule()
 				.getClient(player);
 
 		if (client == null) {
@@ -36,7 +36,7 @@ public class G_Quest {
 	/****** Update Quest Points Obtained ********/
 	public void changeQuestPT(G_Player player, int remainPoints,
 			int obtainedPoints) {
-		S_Client client = S_Server.getInstance().getNetworkModule()
+		Client client = Server.getInstance().getNetworkModule()
 				.getClient(player);
 
 		if (client == null) {
@@ -66,7 +66,7 @@ public class G_Quest {
 
 	/****** Update Quest Total points ********/
 	public void changeQuestTP(G_Player player, int tp) {
-		S_Client client = S_Server.getInstance().getNetworkModule()
+		Client client = Server.getInstance().getNetworkModule()
 				.getClient(player);
 
 		if (client == null) {
@@ -100,7 +100,7 @@ public class G_Quest {
 
 	/****** Get quest ********/
 	public void getQuest(G_Player player, int slot) {
-		S_Client client = S_Server.getInstance().getNetworkModule()
+		Client client = Server.getInstance().getNetworkModule()
 				.getClient(player);
 
 		if (client == null) {
@@ -131,7 +131,7 @@ public class G_Quest {
 
 	/****** Quest Eff ********/
 	public void questEff(G_Player player) {
-		S_Client client = S_Server.getInstance().getNetworkModule()
+		Client client = Server.getInstance().getNetworkModule()
 				.getClient(player);
 
 		if (client == null) {
@@ -146,7 +146,7 @@ public class G_Quest {
 
 	/****** Quest End ********/
 	public void questEnd(G_Player player, int questId) {
-		S_Client client = S_Server.getInstance().getNetworkModule()
+		Client client = Server.getInstance().getNetworkModule()
 				.getClient(player);
 
 		if (client == null) {
@@ -161,7 +161,7 @@ public class G_Quest {
 
 	/****** Quest Kill ********/
 	public void questKill(G_Player player) {
-		S_Client client = S_Server.getInstance().getNetworkModule()
+		Client client = Server.getInstance().getNetworkModule()
 				.getClient(player);
 
 		if (client == null) {
@@ -191,7 +191,7 @@ public class G_Quest {
 
 	/****** Quest Spawn Of Ruin ********/
 	public void spawnOfRuin(G_Player player, int slot) {
-		S_Client client = S_Server.getInstance().getNetworkModule()
+		Client client = Server.getInstance().getNetworkModule()
 				.getClient(player);
 
 		if (client == null) {
@@ -205,7 +205,7 @@ public class G_Quest {
 	/****** Update the Mission Receiver in the Quick Slot ********/
 	public void updateMissionReceiver(G_Player player, int slot,
 			int missionsRemaining) {
-		S_Client client = S_Server.getInstance().getNetworkModule()
+		Client client = Server.getInstance().getNetworkModule()
 				.getClient(player);
 
 		if (client == null) {

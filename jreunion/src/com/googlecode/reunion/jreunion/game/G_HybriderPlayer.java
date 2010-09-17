@@ -46,7 +46,7 @@ public class G_HybriderPlayer extends G_Player {
 			updateStatus(10, mob.getLime(), 0);
 
 			if (mob.getType() == 324) {
-				G_Item item = com.googlecode.reunion.jreunion.server.S_ItemFactory
+				G_Item item = com.googlecode.reunion.jreunion.server.ItemFactory
 						.createItem(1054);
 
 				item.setExtraStats((int) (Math.random() * 10000));

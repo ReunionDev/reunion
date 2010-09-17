@@ -5,11 +5,11 @@ import java.util.Random;
 
 import com.googlecode.reunion.jcommon.S_ParsedItem;
 import com.googlecode.reunion.jcommon.S_Parser;
-import com.googlecode.reunion.jreunion.server.S_Client;
-import com.googlecode.reunion.jreunion.server.S_Reference;
-import com.googlecode.reunion.jreunion.server.S_Server;
-import com.googlecode.reunion.jreunion.server.S_Session;
-import com.googlecode.reunion.jreunion.server.S_Timer;
+import com.googlecode.reunion.jreunion.server.Client;
+import com.googlecode.reunion.jreunion.server.Reference;
+import com.googlecode.reunion.jreunion.server.Server;
+import com.googlecode.reunion.jreunion.server.Session;
+import com.googlecode.reunion.jreunion.server.Timer;
 
 /**
  * @author Aidamina
@@ -47,7 +47,7 @@ public class G_Mob extends G_LivingObject {
 
 	private int isAttacking;
 
-	private S_Timer time = new S_Timer();
+	private Timer time = new Timer();
 
 	public G_Mob(int type) {
 		super();
@@ -127,7 +127,7 @@ public class G_Mob extends G_LivingObject {
 		return speed;
 	}
 
-	public S_Timer getTimer() {
+	public Timer getTimer() {
 		return time;
 	}
 
@@ -151,7 +151,7 @@ public class G_Mob extends G_LivingObject {
 	public void loadFromReference(int id) {
 		super.loadFromReference(id);
 
-		S_ParsedItem mob = S_Reference.getInstance().getMobReference()
+		S_ParsedItem mob = Reference.getInstance().getMobReference()
 				.getItemById(id);
 
 		if (mob == null) {
@@ -167,7 +167,7 @@ public class G_Mob extends G_LivingObject {
 
 			if (mob.checkMembers(new String[] { "Exp" })) {
 				// use member from file
-				setExp((int) (Integer.parseInt(mob.getMemberValue("Exp")) * S_Server
+				setExp((int) (Integer.parseInt(mob.getMemberValue("Exp")) * Server
 						.getInstance().getWorldModule().getServerSetings()
 						.getXp()));
 			} else {
@@ -176,7 +176,7 @@ public class G_Mob extends G_LivingObject {
 			}
 			if (mob.checkMembers(new String[] { "Lime" })) {
 				// use member from file
-				setLime((int) (Integer.parseInt(mob.getMemberValue("Lime")) * S_Server
+				setLime((int) (Integer.parseInt(mob.getMemberValue("Lime")) * Server
 						.getInstance().getWorldModule().getServerSetings()
 						.getLime()));
 			} else {
@@ -232,7 +232,7 @@ public class G_Mob extends G_LivingObject {
 
 	public void moveToPlayer(G_Player player, double distance) {
 	
-		S_Client client = S_Server.getInstance().getNetworkModule()
+		Client client = Server.getInstance().getNetworkModule()
 				.getClient(player);
 
 		if (client == null) {
@@ -254,12 +254,12 @@ public class G_Mob extends G_LivingObject {
 		if (distance < 100) {
 			if (getAttackType() == 1 || getAttackType() == 2) {
 				setIsAttacking(1);
-				S_Server.getInstance().getWorldModule().getWorldCommand()
+				Server.getInstance().getWorldModule().getWorldCommand()
 						.NpcAttackChar(player, this);
 				return;
 			} else if (distance < 20) {
 				setIsAttacking(1);
-				S_Server.getInstance().getWorldModule().getWorldCommand()
+				Server.getInstance().getWorldModule().getWorldCommand()
 						.NpcAttackChar(player, this);
 				return;
 			}
@@ -301,7 +301,7 @@ public class G_Mob extends G_LivingObject {
 			while (playerIter.hasNext()) {
 				G_Player pl =  (G_Player) playerIter.next();
 
-				client = S_Server.getInstance().getNetworkModule()
+				client = Server.getInstance().getNetworkModule()
 						.getClient(pl);
 				if (client == null) {
 					continue;
@@ -328,13 +328,13 @@ public class G_Mob extends G_LivingObject {
 	public void setDead(G_Player player) {
 		setCurrHp(0);
 
-		S_Server.getInstance().getWorldModule().getMobManager().removeMob(this);
+		Server.getInstance().getWorldModule().getMobManager().removeMob(this);
 		G_Spawn spawn =getPosition().getMap()
 				.getSpawnByMob(getEntityId());
 		if (spawn != null) {
 			spawn.setDead(true);
 		}
-		S_Parser dropList = S_Reference.getInstance().getDropListReference();
+		S_Parser dropList = Reference.getInstance().getDropListReference();
 		Iterator<S_ParsedItem> iter =dropList.getItemListIterator();
 		Random r = new Random();
 		while(iter.hasNext()) {			
@@ -344,12 +344,12 @@ public class G_Mob extends G_LivingObject {
 				if( r.nextFloat()<rate){
 					System.out.println(item.getMemberValue("Item"));
 					int itemType = Integer.parseInt(item.getMemberValue("Item"));
-					S_Server.getInstance().getWorldModule()
+					Server.getInstance().getWorldModule()
 					.getWorldCommand().dropItem(player, itemType, this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), 0, 0, 0);
 				}
 			}			
 		}
-		S_Server.getInstance().getWorldModule().getWorldCommand()
+		Server.getInstance().getWorldModule().getWorldCommand()
 				.serverSay("Experience: " + getExp() + " Lime: " + getLime());
 
 	}
@@ -403,14 +403,14 @@ public class G_Mob extends G_LivingObject {
 	}
 
 	@Override
-	public void enter(S_Session session) {
-		S_Server.getInstance().getWorldModule().getWorldCommand()
+	public void enter(Session session) {
+		Server.getInstance().getWorldModule().getWorldCommand()
 		.mobIn(session.getOwner(), this, false);		
 	}
 
 	@Override
-	public void exit(S_Session session) {
-		S_Server.getInstance().getWorldModule().getWorldCommand()
+	public void exit(Session session) {
+		Server.getInstance().getWorldModule().getWorldCommand()
 		.mobOut(session.getOwner(), this);
 		
 	}

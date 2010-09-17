@@ -2,10 +2,10 @@ package com.googlecode.reunion.jreunion.game;
 
 import java.util.Iterator;
 
-import com.googlecode.reunion.jreunion.server.S_Client;
-import com.googlecode.reunion.jreunion.server.S_DatabaseUtils;
-import com.googlecode.reunion.jreunion.server.S_ItemFactory;
-import com.googlecode.reunion.jreunion.server.S_Server;
+import com.googlecode.reunion.jreunion.server.Client;
+import com.googlecode.reunion.jreunion.server.DatabaseUtils;
+import com.googlecode.reunion.jreunion.server.ItemFactory;
+import com.googlecode.reunion.jreunion.server.Server;
 
 /**
  * @author Aidamina
@@ -21,7 +21,7 @@ public class G_Merchant extends G_Npc {
 	public void buyItem(G_Player player, int npcUniqueid, int itemType,
 			int tab, int qnt) {
 
-		S_Client client = S_Server.getInstance().getNetworkModule()
+		Client client = Server.getInstance().getNetworkModule()
 				.getClient(player);
 
 		if (client == null) {
@@ -31,7 +31,7 @@ public class G_Merchant extends G_Npc {
 		// if(player.getInventory().freeSlots(tab) == false)
 		// return;
 
-		G_Npc npc = S_Server.getInstance().getWorldModule().getNpcManager()
+		G_Npc npc = Server.getInstance().getWorldModule().getNpcManager()
 				.getNpc(npcUniqueid);
 		G_Item item = new G_Item(itemType);
 		int count = 0;
@@ -46,7 +46,7 @@ public class G_Merchant extends G_Npc {
 			if (player.getInventory().freeSlots(tab, item) == false) {
 				break;
 			}
-			item = S_ItemFactory.createItem(itemType);
+			item = ItemFactory.createItem(itemType);
 			
 			if (item != null) {
 			player.pickItem(item.getEntityId());
@@ -64,14 +64,14 @@ public class G_Merchant extends G_Npc {
 	/****** Open Merchant Shop ******/
 	public void openShop(G_Player player, int uniqueid) {
 
-		S_Client client = S_Server.getInstance().getNetworkModule()
+		Client client = Server.getInstance().getNetworkModule()
 				.getClient(player);
 
 		if (client == null) {
 			return;
 		}
 
-		G_Npc npc = S_Server.getInstance().getWorldModule().getNpcManager()
+		G_Npc npc = Server.getInstance().getWorldModule().getNpcManager()
 				.getNpc(uniqueid);
 
 		String packetData = "shop_rate " + npc.getBuyRate() + " "
@@ -90,7 +90,7 @@ public class G_Merchant extends G_Npc {
 
 	/****** Sell items to merchant shop ******/
 	public void sellItem(G_Player player, int npcUniqueid) {
-		S_Client client = S_Server.getInstance().getNetworkModule()
+		Client client = Server.getInstance().getNetworkModule()
 				.getClient(player);
 
 		if (client == null) {
@@ -100,11 +100,11 @@ public class G_Merchant extends G_Npc {
 			G_Item item = player.getInventory().getItemSelected().getItem();
 		
 			if (item != null) {
-			G_Npc npc = S_Server.getInstance().getWorldModule().getNpcManager()
+			G_Npc npc = Server.getInstance().getWorldModule().getNpcManager()
 					.getNpc(npcUniqueid);
 				player.updateStatus(10, (item.getPrice() * npc.getSellRate() / 100), 0);
 				player.getInventory().setItemSelected(null);
-				S_DatabaseUtils.getInstance().deleteItem(item);
+				DatabaseUtils.getInstance().deleteItem(item);
 			}
 		} catch (Exception e) {
 			System.err.println("Item Sell bug");

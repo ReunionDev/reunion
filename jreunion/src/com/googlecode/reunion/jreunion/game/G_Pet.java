@@ -1,6 +1,6 @@
 package com.googlecode.reunion.jreunion.game;
 
-import com.googlecode.reunion.jreunion.server.S_Session;
+import com.googlecode.reunion.jreunion.server.Session;
 
 /**
  * @author Aidamina
@@ -133,13 +133,13 @@ public class G_Pet extends G_LivingObject {
 	}
 
 	@Override
-	public void enter(S_Session session) {
+	public void enter(Session session) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void exit(S_Session session) {
+	public void exit(Session session) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -6,6 +6,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.LinkedBlockingQueue;
+/**
+ * @author Aidamina
+ * @license http://reunion.googlecode.com/svn/trunk/license.txt
+ */
 public class EventBroadcaster{
 	static LinkedBlockingQueue<EventWorker> workers;
 	static Thread [] threads = new Thread[25];

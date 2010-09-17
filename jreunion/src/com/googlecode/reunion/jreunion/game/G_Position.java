@@ -1,6 +1,6 @@
 package com.googlecode.reunion.jreunion.game;
 
-import com.googlecode.reunion.jreunion.server.S_Map;
+import com.googlecode.reunion.jreunion.server.Map;
 
 public class G_Position {
 	
@@ -8,7 +8,7 @@ public class G_Position {
 	private int y;
 	private int z;
 	
-	private S_Map map;
+	private Map map;
 
 	public int getX() {
 		return x;
@@ -34,11 +34,11 @@ public class G_Position {
 		this.z = z;
 	}
 
-	public S_Map getMap() {
+	public Map getMap() {
 		return map;
 	}
 
-	public void setMap(S_Map map) {
+	public void setMap(Map map) {
 		this.map = map;
 	}
 	

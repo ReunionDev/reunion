@@ -2,8 +2,8 @@ package com.googlecode.reunion.jreunion.game;
 
 import java.util.Iterator;
 
-import com.googlecode.reunion.jreunion.server.S_Client;
-import com.googlecode.reunion.jreunion.server.S_Server;
+import com.googlecode.reunion.jreunion.server.Client;
+import com.googlecode.reunion.jreunion.server.Server;
 
 /**
  * @author Aidamina
@@ -62,7 +62,7 @@ public class G_KailiptonPlayer extends G_Player {
 			updateStatus(10, mob.getLime(), 0);
 
 			if (mob.getType() == 324) {
-				G_Item item = com.googlecode.reunion.jreunion.server.S_ItemFactory
+				G_Item item = com.googlecode.reunion.jreunion.server.ItemFactory
 						.createItem(1054);
 
 				item.setExtraStats((int) (Math.random() * 10000));
@@ -85,7 +85,7 @@ public class G_KailiptonPlayer extends G_Player {
 	}
 
 	public void skillAttackMob(G_Mob mob, G_Skill skill) {
-		S_Client client = S_Server.getInstance().getNetworkModule()
+		Client client = Server.getInstance().getNetworkModule()
 				.getClient(this);
 
 		if (client == null) {
@@ -126,7 +126,7 @@ public class G_KailiptonPlayer extends G_Player {
 			while (playerIter.hasNext()) {
 				G_Player pl =(G_Player) playerIter.next();
 
-				client = S_Server.getInstance().getNetworkModule()
+				client = Server.getInstance().getNetworkModule()
 						.getClient(pl);
 
 				if (client == null) {

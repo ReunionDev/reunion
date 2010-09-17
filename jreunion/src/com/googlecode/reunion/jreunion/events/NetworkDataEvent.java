@@ -1,13 +1,16 @@
 package com.googlecode.reunion.jreunion.events;
 
-import com.googlecode.reunion.jreunion.server.S_Client;
-
+import com.googlecode.reunion.jreunion.server.Client;
+/**
+ * @author Aidamina
+ * @license http://reunion.googlecode.com/svn/trunk/license.txt
+ */
 public class NetworkDataEvent extends NetworkEvent
 {
-	S_Client client;
+	Client client;
 	String data;
 	
-	public NetworkDataEvent(S_Client client, String data) {
+	public NetworkDataEvent(Client client, String data) {
 		super(client);
 		this.client = client;
 		this.data = data;

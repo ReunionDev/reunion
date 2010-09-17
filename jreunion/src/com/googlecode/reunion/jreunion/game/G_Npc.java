@@ -7,9 +7,9 @@ import java.util.Vector;
 
 import com.googlecode.reunion.jcommon.S_ParsedItem;
 import com.googlecode.reunion.jcommon.S_Parser;
-import com.googlecode.reunion.jreunion.server.S_Reference;
-import com.googlecode.reunion.jreunion.server.S_Server;
-import com.googlecode.reunion.jreunion.server.S_Session;
+import com.googlecode.reunion.jreunion.server.Reference;
+import com.googlecode.reunion.jreunion.server.Server;
+import com.googlecode.reunion.jreunion.server.Session;
 
 /**
  * @author Aidamina
@@ -96,7 +96,7 @@ public class G_Npc extends G_LivingObject {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		S_ParsedItem npc = S_Reference.getInstance().getNpcReference()
+		S_ParsedItem npc = Reference.getInstance().getNpcReference()
 				.getItemById(id);
 
 		if (npc == null) {
@@ -162,15 +162,15 @@ public class G_Npc extends G_LivingObject {
 	}
 
 	@Override
-	public void enter(S_Session session) {
-		S_Server.getInstance().getWorldModule().getWorldCommand()
+	public void enter(Session session) {
+		Server.getInstance().getWorldModule().getWorldCommand()
 		.npcIn(session.getOwner(), this);
 		
 	}
 
 	@Override
-	public void exit(S_Session session) {
-		S_Server.getInstance().getWorldModule().getWorldCommand()
+	public void exit(Session session) {
+		Server.getInstance().getWorldModule().getWorldCommand()
 		.npcOut(session.getOwner(), this);
 		
 	}

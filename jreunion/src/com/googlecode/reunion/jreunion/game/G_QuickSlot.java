@@ -4,9 +4,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
-import com.googlecode.reunion.jreunion.server.S_Client;
-import com.googlecode.reunion.jreunion.server.S_DatabaseUtils;
-import com.googlecode.reunion.jreunion.server.S_Server;
+import com.googlecode.reunion.jreunion.server.Client;
+import com.googlecode.reunion.jreunion.server.DatabaseUtils;
+import com.googlecode.reunion.jreunion.server.Server;
 
 /**
  * @author Aidamina
@@ -44,7 +44,7 @@ public class G_QuickSlot {
 
 	/******* Place a item in the quick slot *********/
 	public void MoveToQuick(G_Player player, int tab, int itemId, int slot) {
-		S_Client client = S_Server.getInstance().getNetworkModule()
+		Client client = Server.getInstance().getNetworkModule()
 				.getClient(player);
 
 		if (client == null) {
@@ -102,7 +102,7 @@ public class G_QuickSlot {
 		// newHp = newHp + newRate/i;
 		// newRate = newRate - newRate/i;
 		// }
-		S_Client client = S_Server.getInstance().getNetworkModule()
+		Client client = Server.getInstance().getNetworkModule()
 				.getClient(player);
 
 		if (client == null) {
@@ -115,7 +115,7 @@ public class G_QuickSlot {
 				|| qsItem.getItem().getType() == 1053) {
 			switch (qsItem.getItem().getType()) {
 			case 175: {
-				S_Server.getInstance().getWorldModule().getWorldCommand()
+				Server.getInstance().getWorldModule().getWorldCommand()
 						.GoToPos(player, 6655, 5224);
 				break;
 			}
@@ -126,7 +126,7 @@ public class G_QuickSlot {
 				mob.getPosition().setY(client.getPlayer().getPosition().getY() + 20);
 				mob.getPosition().setZ(client.getPlayer().getPosition().getZ());
 				mob.setRunning(true);
-				S_Server.getInstance().getWorldModule().getMobManager()
+				Server.getInstance().getWorldModule().getMobManager()
 						.addMob(mob);
 				break;
 			}
@@ -177,6 +177,6 @@ public class G_QuickSlot {
 			}
 		}
 		removeItem(qsItem);
-		S_DatabaseUtils.getInstance().deleteItem(qsItem.getItem());
+		DatabaseUtils.getInstance().deleteItem(qsItem.getItem());
 	}
 }

@@ -2,10 +2,10 @@ package com.googlecode.reunion.jreunion.game;
 
 import java.util.Iterator;
 
-import com.googlecode.reunion.jreunion.server.S_Client;
-import com.googlecode.reunion.jreunion.server.S_DatabaseUtils;
-import com.googlecode.reunion.jreunion.server.S_ItemFactory;
-import com.googlecode.reunion.jreunion.server.S_Server;
+import com.googlecode.reunion.jreunion.server.Client;
+import com.googlecode.reunion.jreunion.server.DatabaseUtils;
+import com.googlecode.reunion.jreunion.server.ItemFactory;
+import com.googlecode.reunion.jreunion.server.Server;
 
 /**
  * @author Aidamina
@@ -20,7 +20,7 @@ public class G_Warehouse extends G_Npc {
 	/****** Open stash ******/
 	public void openStash(G_Player player) {
 
-		S_Client client = S_Server.getInstance().getNetworkModule()
+		Client client = Server.getInstance().getNetworkModule()
 				.getClient(player);
 
 		if (client == null) {
@@ -45,7 +45,7 @@ public class G_Warehouse extends G_Npc {
 	public void stashClick(G_Player player, int pos, int type, int gems,
 			int special) {
 
-		S_Client client = S_Server.getInstance().getNetworkModule()
+		Client client = Server.getInstance().getNetworkModule()
 				.getClient(player);
 
 		if (client == null) {
@@ -66,7 +66,7 @@ public class G_Warehouse extends G_Npc {
 			stashItem.getItem().setGemNumber(
 					stashItem.getItem().getGemNumber() + gems / 100);
 			player.updateStatus(10, gems * -1, 0);
-			S_DatabaseUtils.getInstance().updateItemInfo(stashItem.getItem());
+			DatabaseUtils.getInstance().updateItemInfo(stashItem.getItem());
 			if (gems >= 0) {
 				packetData = "stash_to " + stashItem.getPos() + " "
 						+ stashItem.getItem().getType() + " "
@@ -81,9 +81,9 @@ public class G_Warehouse extends G_Npc {
 		} else {
 			if (player.getInventory().getItemSelected() == null) {
 				stashItem = stash.getItem(pos);
-				G_Item item = S_ItemFactory.loadItem(stashItem.getItem()
+				G_Item item = ItemFactory.loadItem(stashItem.getItem()
 						.getEntityId());
-				S_DatabaseUtils.getInstance().loadItemInfo(item);
+				DatabaseUtils.getInstance().loadItemInfo(item);
 				stash.removeItem(stashItem);
 				player.getInventory().setItemSelected(
 						new G_InventoryItem(item, 0, 0, 0));

@@ -2,8 +2,8 @@ package com.googlecode.reunion.jreunion.game;
 
 import java.util.Iterator;
 
-import com.googlecode.reunion.jreunion.server.S_Client;
-import com.googlecode.reunion.jreunion.server.S_Server;
+import com.googlecode.reunion.jreunion.server.Client;
+import com.googlecode.reunion.jreunion.server.Server;
 
 
 
@@ -108,7 +108,7 @@ public class G_BulkanPlayer extends G_Player {
 	}
 
 	public void skillAttackMob(G_Mob mob, G_Skill skill) {
-		S_Client client = S_Server.getInstance().getNetworkModule()
+		Client client = Server.getInstance().getNetworkModule()
 				.getClient(this);
 
 		if (client == null) {

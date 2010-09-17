@@ -4,8 +4,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
-import com.googlecode.reunion.jreunion.server.S_Client;
-import com.googlecode.reunion.jreunion.server.S_Server;
+import com.googlecode.reunion.jreunion.server.Client;
+import com.googlecode.reunion.jreunion.server.Server;
 
 /**
  * @author Aidamina
@@ -144,7 +144,7 @@ public class G_Inventory {
 	/****** Manages the Items on the Inventory ******/
 	public void moveItem(G_Player player, int tab, int posX, int posY) {
 	
-		S_Client client = S_Server.getInstance().getNetworkModule()
+		Client client = Server.getInstance().getNetworkModule()
 				.getClient(player);
 
 		if (client == null) {

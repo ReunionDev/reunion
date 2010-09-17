@@ -1,9 +1,9 @@
 package com.googlecode.reunion.jreunion.game;
 
 import com.googlecode.reunion.jcommon.S_ParsedItem;
-import com.googlecode.reunion.jreunion.server.S_Map;
-import com.googlecode.reunion.jreunion.server.S_Reference;
-import com.googlecode.reunion.jreunion.server.S_Session;
+import com.googlecode.reunion.jreunion.server.Map;
+import com.googlecode.reunion.jreunion.server.Reference;
+import com.googlecode.reunion.jreunion.server.Session;
 
 /**
  * @author Aidamina
@@ -100,7 +100,7 @@ public abstract class G_LivingObject extends G_WorldObject {
 
 	public void loadFromReference(int id) {
 
-		S_ParsedItem mob = S_Reference.getInstance().getMobReference()
+		S_ParsedItem mob = Reference.getInstance().getMobReference()
 				.getItemById(id);
 
 		if (mob == null) {

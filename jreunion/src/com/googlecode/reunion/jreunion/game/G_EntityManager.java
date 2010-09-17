@@ -4,7 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
-import com.googlecode.reunion.jreunion.server.S_DatabaseUtils;
+import com.googlecode.reunion.jreunion.server.DatabaseUtils;
 
 /**
  * @author Aidamina
@@ -29,10 +29,10 @@ public class G_EntityManager {
 	private List<Integer> entityIdPool = new Vector<Integer>();
 
 	private G_EntityManager() throws Exception {
-		if (!S_DatabaseUtils.getInstance().checkDatabase()) {
+		if (!DatabaseUtils.getInstance().checkDatabase()) {
 			throw new Exception();
 		}
-		entityIdPool = S_DatabaseUtils.getInstance().getUsedIds();
+		entityIdPool = DatabaseUtils.getInstance().getUsedIds();
 	}
 
 	public void addEntity(G_Entity ent) {

@@ -1,6 +1,6 @@
 package com.googlecode.reunion.jreunion.game;
 
-import com.googlecode.reunion.jreunion.server.S_Session;
+import com.googlecode.reunion.jreunion.server.Session;
 
 public abstract class G_WorldObject extends G_Entity{
 	
@@ -13,8 +13,8 @@ public abstract class G_WorldObject extends G_Entity{
 		this.position = position;
 	}
 	
-	public abstract void enter(S_Session session);
+	public abstract void enter(Session session);
 	
-	public abstract void exit(S_Session session);
+	public abstract void exit(Session session);
 
 }
