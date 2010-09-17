@@ -5,99 +5,99 @@
 [Aidia Mixing Merchant]
 ID = 330
 Hp = 100
-Class = G_Trader
+Class = Trader
 
 [Aisian Bandor]
 ID = 139
 Hp = 100
-Class = G_Warehouse
+Class = Warehouse
 
 [Archeologist]
 ID = 257
 Hp = 100
-Class = G_Trader
+Class = Trader
 
 [Assistant] ##
 ID = 95
 Hp = 100
-Class = G_Merchant
+Class = Merchant
 
 [Barmaid] ##
 ID = 92
 Hp = 100
-Class = G_Merchant
+Class = Merchant
 
 [Blacksmith] ##
 ID = 90
 Hp = 100
-Class = G_Merchant
+Class = Merchant
 
 [Bunny Girl 1]
 ID = 322
 Hp = 100
-Class = G_Merchant
+Class = Merchant
 
 [Bunny Girl 2]
 ID = 321
 Hp = 100
-Class = G_Merchant
+Class = Merchant
 
 [Doctor] ##
 ID = 93
 Hp = 100
-Class = G_Merchant
+Class = Merchant
 
 [Gem Gambler]
 ID = 167
 Hp = 100
-Class = G_Trader
+Class = Trader
 
 [Gem Shopkeeper A]
 ID = 166
 Hp = 100
-Class = G_Trader
+Class = Trader
 
 [Gem Shopkeeper B]
 ID = 293
 Hp = 100
-Class = G_Trader
+Class = Trader
 
 [Guard Captain]
 ID = 57
 Hp = 100
-Class = G_StatsRedistributor
+Class = StatsRedistributor
 
 [Guard Master]
 ID = 117
 Hp = 100
-Class = G_Trader
+Class = Trader
 
 [Host]
 ID = 169
 Hp = 100
-Class = G_Trader
+Class = Trader
 
 [Machine Dealer] ##
 ID = 91
 Hp = 100
-Class = G_Merchant
+Class = Merchant
 
 [Machine Shop Owner]
 ID = 51
 Hp = 100
-Class = G_Trader
+Class = Trader
 
 [Magic Shopkeeper] ##
 ID = 94
 Hp = 100
-Class = G_Merchant
+Class = Merchant
 
 [Veterinary]
 ID = 189
 Hp = 100
-Class = G_PetAssistant
+Class = PetAssistant
 
 [x_0 Trader]
 ID = 96
 Hp = 100
-Class = G_Merchant
+Class = Merchant
