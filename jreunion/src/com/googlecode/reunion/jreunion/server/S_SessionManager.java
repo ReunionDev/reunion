@@ -147,6 +147,7 @@ public class S_SessionManager {
 					player1.getSession().exit(mob);
 				} else {
 					player1.getSession().enter(mob);
+					/*
 					if (distance <= 150 && mob.getAttackType() != -1) {
 						if (player1.getPosition().getMap()
 								.getMobArea()
@@ -155,6 +156,7 @@ public class S_SessionManager {
 							mob.moveToPlayer(player1, distance);
 						}
 					}
+					*///TODO: Crashes server because of the broken session implementation
 				}
 			}
 
