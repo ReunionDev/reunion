@@ -108,6 +108,7 @@ public class S_MessageParser {
 							.addMob(mob);
 				}
 			} else if (word[0].equals("@addnpc")) {
+				try {
 				if (word.length == 2) {
 					G_Npc npc = S_Server.getInstance().getWorldModule()
 							.getNpcManager()
@@ -116,6 +117,10 @@ public class S_MessageParser {
 					npc.getPosition().setY(player.getPosition().getY() + 10);
 					npc.getPosition().setRotation(0.0);
 					com.npcIn(player, npc);
+				}
+				} catch (Exception e) {
+					//TODO: Fix the Mob id error server crash
+					System.out.println("Mob id error detected");
 				}
 			} else if (word[0].equals("@worldgoto")) {
 				try {
@@ -157,12 +162,24 @@ public class S_MessageParser {
 			         bw.newLine();			      
 			    	 bw.newLine();
 			    	 bw.flush();
+			    	 
+				G_Spawn spawn = new G_Spawn();
+				spawn.setCenterX(player.getPosition().getX() + 10);
+				spawn.setCenterY(player.getPosition().getY() + 10);
+				spawn.setMap(player.getPosition().getMap());
+				spawn.setMobType(Integer.parseInt(word[1]));
+				spawn.setRadius(Integer.parseInt(word[3]));
+				spawn.setRespawnTime(10);
+				spawn.spawnMob();
+				String packetData = "say 1 S_Server Spawnpoint succesfully added";
+				client.SendData(packetData);
 			      }catch(Exception e){
 			    	  com.serverTell(player,e.getMessage());
 			    	  e.printStackTrace();
+			    	  String packetData = "say 1 S_Server Spawnpoint cannot be added";
+			    	  client.SendData(packetData);
 			      }
 				
-			
 			} else if (word[0].equals("@com")) {
 				String packetData = "";
 				for (int i = 1; i < word.length; i++) {
