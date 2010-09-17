@@ -156,11 +156,16 @@ public class S_MobManager {
 			// mob will chase the player, else the mob will move freely.
 			
 			if (distance <= 150) {
+				try {
 				if (mob.getPosition().getMap()
 						.getMobArea()
 						.get((player.getPosition().getX() / 10 - 300),
 								(player.getPosition().getY() / 10)) == true) {
 					moveToPlayer = false;
+				}
+				} catch (Exception e) {
+					System.out.println("Mob Bug");
+					//TODO: Fix Mob move bug
 				}
 			}
 
