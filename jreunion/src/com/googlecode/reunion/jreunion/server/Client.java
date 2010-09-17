@@ -2,7 +2,7 @@ package com.googlecode.reunion.jreunion.server;
 
 import java.net.Socket;
 
-import com.googlecode.reunion.jreunion.game.G_Player;
+import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.server.Enums.S_LoginType;
 import com.googlecode.reunion.jreunion.server.PacketFactory.S_PacketType;
 
@@ -28,7 +28,7 @@ public class Client {
 
 	private State clientState;
 
-	private G_Player player;
+	private Player player;
 	
 	private StringBuffer outputBuffer = new StringBuffer();
 
@@ -72,11 +72,11 @@ public class Client {
 		this.clientState = clientState;
 	}
 
-	public G_Player getPlayer() {
+	public Player getPlayer() {
 		return player;
 	}
 
-	public void setPlayer(G_Player player) {
+	public void setPlayer(Player player) {
 		this.player = player;
 	}
 

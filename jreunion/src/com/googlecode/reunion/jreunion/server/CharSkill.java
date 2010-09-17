@@ -4,8 +4,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
-import com.googlecode.reunion.jreunion.game.G_Player;
-import com.googlecode.reunion.jreunion.game.G_Skill;
+import com.googlecode.reunion.jreunion.game.Player;
+import com.googlecode.reunion.jreunion.game.Skill;
 
 /**
  * @author Aidamina
@@ -13,7 +13,7 @@ import com.googlecode.reunion.jreunion.game.G_Skill;
  */
 public class CharSkill {
 
-	List<G_Skill> skillList = new Vector<G_Skill>();
+	List<Skill> skillList = new Vector<Skill>();
 
 	public CharSkill() {
 		super();
@@ -21,18 +21,18 @@ public class CharSkill {
 
 	}
 
-	public void addSkill(G_Skill skill) {
+	public void addSkill(Skill skill) {
 		if (skillList.contains(skill)) {
 			return;
 		}
 		skillList.add(skill);
 	}
 
-	public G_Skill getSkill(int id) {
-		Iterator<G_Skill> iter = getSkillListIterator();
+	public Skill getSkill(int id) {
+		Iterator<Skill> iter = getSkillListIterator();
 
 		while (iter.hasNext()) {
-			G_Skill skill = iter.next();
+			Skill skill = iter.next();
 			if (skill.getId() == id) {
 				return skill;
 			}
@@ -41,11 +41,11 @@ public class CharSkill {
 	}
 
 	public int getSkillIndex(int id) {
-		Iterator<G_Skill> iter = getSkillListIterator();
+		Iterator<Skill> iter = getSkillListIterator();
 		int count = 0;
 
 		while (iter.hasNext()) {
-			G_Skill skill = iter.next();
+			Skill skill = iter.next();
 			if (skill.getId() == id) {
 				return count;
 			}
@@ -54,11 +54,11 @@ public class CharSkill {
 		return 0;
 	}
 
-	public Iterator<G_Skill> getSkillListIterator() {
+	public Iterator<Skill> getSkillListIterator() {
 		return skillList.iterator();
 	}
 
-	public void incSkill(G_Player player, G_Skill skill) {
+	public void incSkill(Player player, Skill skill) {
 		// G_Skill skill = getSkill(id);
 
 		// if(skill.getCurrLevel()==0){
@@ -76,111 +76,111 @@ public class CharSkill {
 	public void loadSkillList(int race) {
 		switch (race) {
 		case 0: {
-			addSkill(new G_Skill(1));
-			addSkill(new G_Skill(2));
-			addSkill(new G_Skill(17));
-			addSkill(new G_Skill(18));
-			addSkill(new G_Skill(19));
-			addSkill(new G_Skill(31));
-			addSkill(new G_Skill(37));
-			addSkill(new G_Skill(38));
-			addSkill(new G_Skill(39));
-			addSkill(new G_Skill(40));
-			addSkill(new G_Skill(41));
-			addSkill(new G_Skill(60));
-			addSkill(new G_Skill(61));
-			addSkill(new G_Skill(71));
-			addSkill(new G_Skill(75));
+			addSkill(new Skill(1));
+			addSkill(new Skill(2));
+			addSkill(new Skill(17));
+			addSkill(new Skill(18));
+			addSkill(new Skill(19));
+			addSkill(new Skill(31));
+			addSkill(new Skill(37));
+			addSkill(new Skill(38));
+			addSkill(new Skill(39));
+			addSkill(new Skill(40));
+			addSkill(new Skill(41));
+			addSkill(new Skill(60));
+			addSkill(new Skill(61));
+			addSkill(new Skill(71));
+			addSkill(new Skill(75));
 			break;
 		}
 		case 1: {
-			addSkill(new G_Skill(3));
-			addSkill(new G_Skill(4));
-			addSkill(new G_Skill(5));
-			addSkill(new G_Skill(7));
-			addSkill(new G_Skill(8));
-			addSkill(new G_Skill(10));
-			addSkill(new G_Skill(11));
-			addSkill(new G_Skill(12));
-			addSkill(new G_Skill(13));
-			addSkill(new G_Skill(14));
-			addSkill(new G_Skill(15));
-			addSkill(new G_Skill(26));
-			addSkill(new G_Skill(27));
-			addSkill(new G_Skill(28));
-			addSkill(new G_Skill(47));
-			addSkill(new G_Skill(48));
-			addSkill(new G_Skill(49));
-			addSkill(new G_Skill(50));
-			addSkill(new G_Skill(51));
-			addSkill(new G_Skill(52));
-			addSkill(new G_Skill(62));
-			addSkill(new G_Skill(63));
-			addSkill(new G_Skill(64));
-			addSkill(new G_Skill(72));
-			addSkill(new G_Skill(76));
+			addSkill(new Skill(3));
+			addSkill(new Skill(4));
+			addSkill(new Skill(5));
+			addSkill(new Skill(7));
+			addSkill(new Skill(8));
+			addSkill(new Skill(10));
+			addSkill(new Skill(11));
+			addSkill(new Skill(12));
+			addSkill(new Skill(13));
+			addSkill(new Skill(14));
+			addSkill(new Skill(15));
+			addSkill(new Skill(26));
+			addSkill(new Skill(27));
+			addSkill(new Skill(28));
+			addSkill(new Skill(47));
+			addSkill(new Skill(48));
+			addSkill(new Skill(49));
+			addSkill(new Skill(50));
+			addSkill(new Skill(51));
+			addSkill(new Skill(52));
+			addSkill(new Skill(62));
+			addSkill(new Skill(63));
+			addSkill(new Skill(64));
+			addSkill(new Skill(72));
+			addSkill(new Skill(76));
 			break;
 		}
 		case 2: {
-			addSkill(new G_Skill(6));
-			addSkill(new G_Skill(22));
-			addSkill(new G_Skill(24));
-			addSkill(new G_Skill(32));
-			addSkill(new G_Skill(33));
-			addSkill(new G_Skill(34));
-			addSkill(new G_Skill(53));
-			addSkill(new G_Skill(54));
-			addSkill(new G_Skill(55));
-			addSkill(new G_Skill(56));
-			addSkill(new G_Skill(57));
-			addSkill(new G_Skill(58));
-			addSkill(new G_Skill(67));
-			addSkill(new G_Skill(68));
-			addSkill(new G_Skill(69));
-			addSkill(new G_Skill(70));
-			addSkill(new G_Skill(73));
-			addSkill(new G_Skill(78));
+			addSkill(new Skill(6));
+			addSkill(new Skill(22));
+			addSkill(new Skill(24));
+			addSkill(new Skill(32));
+			addSkill(new Skill(33));
+			addSkill(new Skill(34));
+			addSkill(new Skill(53));
+			addSkill(new Skill(54));
+			addSkill(new Skill(55));
+			addSkill(new Skill(56));
+			addSkill(new Skill(57));
+			addSkill(new Skill(58));
+			addSkill(new Skill(67));
+			addSkill(new Skill(68));
+			addSkill(new Skill(69));
+			addSkill(new Skill(70));
+			addSkill(new Skill(73));
+			addSkill(new Skill(78));
 			break;
 		}
 		case 3: {
-			addSkill(new G_Skill(20));
-			addSkill(new G_Skill(21));
-			addSkill(new G_Skill(29));
-			addSkill(new G_Skill(30));
-			addSkill(new G_Skill(35));
-			addSkill(new G_Skill(36));
-			addSkill(new G_Skill(42));
-			addSkill(new G_Skill(43));
-			addSkill(new G_Skill(44));
-			addSkill(new G_Skill(45));
-			addSkill(new G_Skill(46));
-			addSkill(new G_Skill(65));
-			addSkill(new G_Skill(66));
-			addSkill(new G_Skill(74));
-			addSkill(new G_Skill(77));
+			addSkill(new Skill(20));
+			addSkill(new Skill(21));
+			addSkill(new Skill(29));
+			addSkill(new Skill(30));
+			addSkill(new Skill(35));
+			addSkill(new Skill(36));
+			addSkill(new Skill(42));
+			addSkill(new Skill(43));
+			addSkill(new Skill(44));
+			addSkill(new Skill(45));
+			addSkill(new Skill(46));
+			addSkill(new Skill(65));
+			addSkill(new Skill(66));
+			addSkill(new Skill(74));
+			addSkill(new Skill(77));
 			break;
 		}
 		case 4: {
-			addSkill(new G_Skill(79));
-			addSkill(new G_Skill(80));
-			addSkill(new G_Skill(81));
-			addSkill(new G_Skill(82));
-			addSkill(new G_Skill(83));
-			addSkill(new G_Skill(84));
-			addSkill(new G_Skill(85));
-			addSkill(new G_Skill(86));
-			addSkill(new G_Skill(87));
-			addSkill(new G_Skill(88));
-			addSkill(new G_Skill(89));
-			addSkill(new G_Skill(90));
-			addSkill(new G_Skill(91));
-			addSkill(new G_Skill(92));
-			addSkill(new G_Skill(93));
-			addSkill(new G_Skill(94));
-			addSkill(new G_Skill(95));
-			addSkill(new G_Skill(96));
-			addSkill(new G_Skill(97));
-			addSkill(new G_Skill(98));
+			addSkill(new Skill(79));
+			addSkill(new Skill(80));
+			addSkill(new Skill(81));
+			addSkill(new Skill(82));
+			addSkill(new Skill(83));
+			addSkill(new Skill(84));
+			addSkill(new Skill(85));
+			addSkill(new Skill(86));
+			addSkill(new Skill(87));
+			addSkill(new Skill(88));
+			addSkill(new Skill(89));
+			addSkill(new Skill(90));
+			addSkill(new Skill(91));
+			addSkill(new Skill(92));
+			addSkill(new Skill(93));
+			addSkill(new Skill(94));
+			addSkill(new Skill(95));
+			addSkill(new Skill(96));
+			addSkill(new Skill(97));
+			addSkill(new Skill(98));
 			break;
 		}
 		default:
@@ -188,13 +188,13 @@ public class CharSkill {
 		}
 	}
 
-	public void removeSkill(G_Skill skill) {
+	public void removeSkill(Skill skill) {
 		while (skillList.contains(skill)) {
 			skillList.remove(skill);
 		}
 	}
 
-	public void setSkill(G_Player player, G_Skill skill) {
+	public void setSkill(Player player, Skill skill) {
 
 		int index = getSkillIndex(skill.getId());
 		// G_Skill skill = getSkill(id);

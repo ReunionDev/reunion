@@ -3,24 +3,24 @@ package com.googlecode.reunion.jreunion.server;
 import java.util.Iterator;
 import java.util.Vector;
 
-import com.googlecode.reunion.jreunion.game.G_Player;
+import com.googlecode.reunion.jreunion.game.Player;
 
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
 public class PlayerManager {
-	private final java.util.List<G_Player> playerList = new Vector<G_Player>();
+	private final java.util.List<Player> playerList = new Vector<Player>();
 
 	public PlayerManager() {
 
 	}
 
-	public void addPlayer(G_Player player) {
+	public void addPlayer(Player player) {
 		playerList.add(player);
 	}
 
-	public boolean containsPlayer(G_Player player) {
+	public boolean containsPlayer(Player player) {
 		return playerList.contains(player);
 	}
 
@@ -28,10 +28,10 @@ public class PlayerManager {
 		return playerList.size();
 	}
 
-	public G_Player getPlayer(int id) {
-		Iterator<G_Player> iter = getPlayerListIterator();
+	public Player getPlayer(int id) {
+		Iterator<Player> iter = getPlayerListIterator();
 		while (iter.hasNext()) {
-			G_Player player = iter.next();
+			Player player = iter.next();
 			if (player.getEntityId() == id) {
 				return player;
 			}
@@ -40,10 +40,10 @@ public class PlayerManager {
 		return null;
 	}
 
-	public G_Player getPlayer(String charName) {
-		Iterator<G_Player> iter = getPlayerListIterator();
+	public Player getPlayer(String charName) {
+		Iterator<Player> iter = getPlayerListIterator();
 		while (iter.hasNext()) {
-			G_Player player = iter.next();
+			Player player = iter.next();
 			if (player.getName().equals(charName)) {
 				return player;
 			}
@@ -52,11 +52,11 @@ public class PlayerManager {
 		return null;
 	}
 
-	public Iterator<G_Player> getPlayerListIterator() {
+	public Iterator<Player> getPlayerListIterator() {
 		return playerList.iterator();
 	}
 
-	public void removePlayer(G_Player player) {
+	public void removePlayer(Player player) {
 		playerList.remove(player);
 	}
 }

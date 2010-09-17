@@ -4,17 +4,17 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.Iterator;
 
-import com.googlecode.reunion.jreunion.game.G_EntityManager;
-import com.googlecode.reunion.jreunion.game.G_Equipment;
-import com.googlecode.reunion.jreunion.game.G_Item;
-import com.googlecode.reunion.jreunion.game.G_LivingObject;
-import com.googlecode.reunion.jreunion.game.G_Mob;
-import com.googlecode.reunion.jreunion.game.G_Npc;
-import com.googlecode.reunion.jreunion.game.G_Player;
-import com.googlecode.reunion.jreunion.game.G_RoamingItem;
-import com.googlecode.reunion.jreunion.game.G_Skill;
-import com.googlecode.reunion.jreunion.game.G_SlayerWeapon;
-import com.googlecode.reunion.jreunion.game.G_Weapon;
+import com.googlecode.reunion.jreunion.game.EntityManager;
+import com.googlecode.reunion.jreunion.game.Equipment;
+import com.googlecode.reunion.jreunion.game.Item;
+import com.googlecode.reunion.jreunion.game.LivingObject;
+import com.googlecode.reunion.jreunion.game.Mob;
+import com.googlecode.reunion.jreunion.game.Npc;
+import com.googlecode.reunion.jreunion.game.Player;
+import com.googlecode.reunion.jreunion.game.RoamingItem;
+import com.googlecode.reunion.jreunion.game.Skill;
+import com.googlecode.reunion.jreunion.game.SlayerWeapon;
+import com.googlecode.reunion.jreunion.game.Weapon;
 import com.googlecode.reunion.jreunion.server.Enums.S_LoginType;
 import com.googlecode.reunion.jreunion.server.PacketFactory.S_PacketType;
 
@@ -47,13 +47,13 @@ public class Command {
 
 	}
 
-	public void charIn(G_Player sessionOwner, G_Player player) {
+	public void charIn(Player sessionOwner, Player player) {
 		charIn(sessionOwner, player, false);
 
 	}
 
 	/****** Manages the Char In ******/
-	public void charIn(G_Player player1, G_Player player2, boolean warping) {
+	public void charIn(Player player1, Player player2, boolean warping) {
 		int combat = 0;
 
 		if (player1 == null || player2 == null) {
@@ -73,7 +73,7 @@ public class Command {
 			combat = 1;
 		}
 
-		G_Equipment eq = DatabaseUtils.getInstance().loadEquipment(
+		Equipment eq = DatabaseUtils.getInstance().loadEquipment(
 				player2.getEntityId());
 
 		int eqHelmet = -1;
@@ -133,7 +133,7 @@ public class Command {
 	}
 
 	/****** Manages the Char Out ******/
-	public void charOut(G_Player player1, G_Player player2) {
+	public void charOut(Player player1, Player player2) {
 		if (player1 == null) {
 			return;
 		}
@@ -163,7 +163,7 @@ public class Command {
 	}
 
 	// debug command
-	public void dropItem(G_Player player, int itemtype, int posX, int posY,
+	public void dropItem(Player player, int itemtype, int posX, int posY,
 			int posZ, int rotation, int gems, int special) {
 
 		Client client = Server.getInstance().getNetworkModule()
@@ -173,10 +173,10 @@ public class Command {
 			return;
 		}
 
-		G_Item item = new G_Item(itemtype);
+		Item item = new Item(itemtype);
 		item.setGemNumber(gems);
 		item.setExtraStats(special);
-		G_EntityManager.getEntityManager().createEntity(item);
+		EntityManager.getEntityManager().createEntity(item);
 		DatabaseUtils.getInstance().updateItemInfo(item);
 		DatabaseUtils.getInstance().addItem(item);
 
@@ -188,7 +188,7 @@ public class Command {
 
 		client.SendData(packetData);
 
-		G_RoamingItem roamingItem = new G_RoamingItem(item);
+		RoamingItem roamingItem = new RoamingItem(item);
 		player.getSession().enter(roamingItem);
 
 		// send to all near //TODO: fix
@@ -211,10 +211,10 @@ public class Command {
 	}
 
 	/****** teleport player to player2 position ******/
-	public void GoToChar(G_Player player, String charName) {
+	public void GoToChar(Player player, String charName) {
 		Client client = Server.getInstance().getNetworkModule()
 				.getClient(player);
-		G_Player player2 = Server.getInstance().getWorldModule()
+		Player player2 = Server.getInstance().getWorldModule()
 				.getPlayerManager().getPlayer(charName);
 
 		if (client == null) {
@@ -233,7 +233,7 @@ public class Command {
 	}
 
 	/****** teleport player to position (posX,posY) in the current map ******/
-	public void GoToPos(G_Player player, int posX, int posY) {
+	public void GoToPos(Player player, int posX, int posY) {
 		Client client = Server.getInstance().getNetworkModule()
 				.getClient(player);
 
@@ -253,7 +253,7 @@ public class Command {
 
 		while (sessionIter.hasNext()) {
 			Session session = sessionIter.next();
-			G_Player pl = session.getOwner();
+			Player pl = session.getOwner();
 
 			if (session.contains(player)) {
 				session.enter(player);
@@ -281,7 +281,7 @@ public class Command {
 	}
 
 	/****** change map ******/
-	public void GoWorld(G_Player player, int mapId, int unknown) {
+	public void GoWorld(Player player, int mapId, int unknown) {
 		Client client = Server.getInstance().getNetworkModule()
 				.getClient(player);
 		Map map = Server.getInstance().getWorldModule().getMap(mapId);
@@ -317,8 +317,8 @@ public class Command {
 		// S_Server.getInstance().getNetworkModule().clientList.remove(client);
 	}
 
-	public void itemIn(G_Player sessionOwner, G_RoamingItem roamingItem) {
-		G_Item item = roamingItem.getItem();
+	public void itemIn(Player sessionOwner, RoamingItem roamingItem) {
+		Item item = roamingItem.getItem();
 		this.itemIn(sessionOwner, item.getUniqueId(), item.getType(),
 				roamingItem.getPosition().getX(), roamingItem.getPosition()
 						.getY(), roamingItem.getPosition().getZ(), roamingItem
@@ -328,7 +328,7 @@ public class Command {
 	}
 
 	/****** Manages the Item In ******/
-	public void itemIn(G_Player owner, int uniqueid, int itemtype, int posX,
+	public void itemIn(Player owner, int uniqueid, int itemtype, int posX,
 			int posY, int posZ, double rotation, int gems, int special) {
 		Client client = Server.getInstance().getNetworkModule()
 				.getClient(owner);
@@ -344,13 +344,13 @@ public class Command {
 		// [gemNumber] [Special]
 	}
 
-	public void itemOut(G_Player sessionOwner, G_RoamingItem roamingItem) {
+	public void itemOut(Player sessionOwner, RoamingItem roamingItem) {
 		this.itemOut(sessionOwner, roamingItem.getItem().getUniqueId());
 
 	}
 
 	/****** Manages the Item Out ******/
-	public void itemOut(G_Player player, int uniqueid) {
+	public void itemOut(Player player, int uniqueid) {
 
 		Client client = Server.getInstance().getNetworkModule()
 				.getClient(player);
@@ -367,8 +367,8 @@ public class Command {
 		// S> out item [UniqueID]
 	}
 
-	public G_Player loginChar(int slotNumber, int accountId, Client client) {
-		G_Player player = DatabaseUtils.getInstance().loadChar(slotNumber,
+	public Player loginChar(int slotNumber, int accountId, Client client) {
+		Player player = DatabaseUtils.getInstance().loadChar(slotNumber,
 				accountId, client);
 		
 		if (client == null) {
@@ -409,7 +409,7 @@ public class Command {
 		
 
 		DatabaseUtils.getInstance().loadEquipment(player);
-		G_Equipment eq = player.getEquipment();
+		Equipment eq = player.getEquipment();
 
 		int eqHelmetType = -1, eqHelmetId = -1, eqHelmetGem = 0, eqHelmetExtra = 0;
 		int eqArmorType = -1, eqArmorId = -1, eqArmorGem = 0, eqArmorExtra = 0;
@@ -500,10 +500,10 @@ public class Command {
 				+ player.getEntityId() + ")\n");
 
 		String packetData = "skilllevel_all";
-		Iterator<G_Skill> skillIter = player.getCharSkill()
+		Iterator<Skill> skillIter = player.getCharSkill()
 				.getSkillListIterator();
 		while (skillIter.hasNext()) {
-			G_Skill skill = skillIter.next();
+			Skill skill = skillIter.next();
 			packetData = packetData + " " + skill.getId() + " "
 					+ skill.getCurrLevel();
 			// "skilllevel_all 1 25 2 25 17 0 18 25 19 0 31 0 37 0 38 0 39 0 40 25 41 0 60 0 61 0 71 0 75 0\n");
@@ -550,7 +550,7 @@ public class Command {
 	}
 
 	/****** Manages the Mob In ******/
-	public void mobIn(G_Player player, G_Mob mob, boolean spawn) {
+	public void mobIn(Player player, Mob mob, boolean spawn) {
 
 		Client client = Server.getInstance().getNetworkModule()
 				.getClient(player);
@@ -574,7 +574,7 @@ public class Command {
 	}
 
 	/****** Manages the Mob Out ******/
-	public void mobOut(G_Player player, G_Mob mob) {
+	public void mobOut(Player player, Mob mob) {
 		// if (player == null)
 		// return;
 		Client client = Server.getInstance().getNetworkModule()
@@ -589,7 +589,7 @@ public class Command {
 	}
 
 	/****** player normal attacks ******/
-	public void normalAttack(G_Player player, int uniqueId) {
+	public void normalAttack(Player player, int uniqueId) {
 
 		Client client = Server.getInstance().getNetworkModule()
 				.getClient(player);
@@ -598,7 +598,7 @@ public class Command {
 			return;
 		}
 
-		G_LivingObject livingObject = Server.getInstance().getWorldModule()
+		LivingObject livingObject = Server.getInstance().getWorldModule()
 				.getMobManager().getMob(uniqueId);
 
 		if (livingObject == null) {
@@ -623,7 +623,7 @@ public class Command {
 		// percentageHp = 1;
 		String packetData = new String();
 
-		if (livingObject instanceof G_Mob) {
+		if (livingObject instanceof Mob) {
 			packetData = "attack_vital npc " + livingObject.getEntityId() + " "
 					+ percentageHp + " 0 0\n";
 		} else {
@@ -655,7 +655,7 @@ public class Command {
 	}
 
 	/****** mob attacks player with normal attack ******/
-	public void NpcAttackChar(G_Player player, G_Mob mob) { // mob attacks
+	public void NpcAttackChar(Player player, Mob mob) { // mob attacks
 															// player
 		Client client = Server.getInstance().getNetworkModule()
 				.getClient(player);
@@ -718,7 +718,7 @@ public class Command {
 	}
 
 	/****** Manages the Npc In ******/
-	public void npcIn(G_Player player, G_Npc npc) {
+	public void npcIn(Player player, Npc npc) {
 
 		if (player == null) {
 			return;
@@ -741,7 +741,7 @@ public class Command {
 	}
 
 	/****** Manages the Npc Out ******/
-	public void npcOut(G_Player player, G_Npc npc) {
+	public void npcOut(Player player, Npc npc) {
 		// if (player == null)
 		// return;
 		Client client = Server.getInstance().getNetworkModule()
@@ -756,7 +756,7 @@ public class Command {
 	}
 
 	/****** Manages the player wear Weapon ******/
-	public void playerWeapon(G_Player player, int uniqueId) {
+	public void playerWeapon(Player player, int uniqueId) {
 		Client client = Server.getInstance().getNetworkModule()
 				.getClient(player);
 
@@ -764,12 +764,12 @@ public class Command {
 			return;
 		}
 		System.out.println(uniqueId);
-		G_Item item = (G_Item) G_EntityManager.getEntityManager().getEnt(
+		Item item = (Item) EntityManager.getEntityManager().getEnt(
 				uniqueId);
 		if (item == null) {
 			return;
 		}
-		G_Weapon weapon = new G_Weapon(item.getType());
+		Weapon weapon = new Weapon(item.getType());
 		weapon.loadFromReference(item.getType());
 
 		player.setMinDmg(weapon.getMinDamage());
@@ -799,11 +799,11 @@ public class Command {
 	}
 
 	public void serverSay(String text) {
-		Iterator<G_Player> iter = world.getPlayerManager()
+		Iterator<Player> iter = world.getPlayerManager()
 				.getPlayerListIterator();
 
 		while (iter.hasNext()) {
-			G_Player pl = iter.next();
+			Player pl = iter.next();
 
 			Client client = Server.getInstance().getNetworkModule()
 					.getClient(pl);
@@ -816,7 +816,7 @@ public class Command {
 		}
 	}
 
-	public void serverTell(G_Player player, String text) {
+	public void serverTell(Player player, String text) {
 
 		if (player == null) {
 			return;
@@ -832,7 +832,7 @@ public class Command {
 	}
 
 	/****** player1 attacks player2 with Sub Attack ******/
-	public void subAttackChar(G_Player player1, int uniqueId) {
+	public void subAttackChar(Player player1, int uniqueId) {
 		Client client = Server.getInstance().getNetworkModule()
 				.getClient(player1);
 		// G_Player player2 =
@@ -855,7 +855,7 @@ public class Command {
 	}
 
 	/****** player attacks mob with Sub Attack ******/
-	public void subAttackNpc(G_Player player, int uniqueId) {
+	public void subAttackNpc(Player player, int uniqueId) {
 		Client client = Server.getInstance().getNetworkModule()
 				.getClient(player);
 
@@ -863,10 +863,10 @@ public class Command {
 			return;
 		}
 
-		G_Mob mob = Server.getInstance().getWorldModule().getMobManager()
+		Mob mob = Server.getInstance().getWorldModule().getMobManager()
 				.getMob(uniqueId);
-		G_Item item = player.getEquipment().getShoulderMount();
-		G_SlayerWeapon spWeapon = new G_SlayerWeapon(item.getType());
+		Item item = player.getEquipment().getShoulderMount();
+		SlayerWeapon spWeapon = new SlayerWeapon(item.getType());
 
 		item.setExtraStats(spWeapon.getExtraStats() - 20);
 		spWeapon.loadFromReference(item.getType());
@@ -910,7 +910,7 @@ public class Command {
 			// S_Server.getInstance().getWorldModule().getMobManager().removeMob(mob);
 
 			if (mob.getType() == 324) {
-				G_Item item2 = new G_Item(1054);
+				Item item2 = new Item(1054);
 
 				item2.loadFromReference(1054);
 				item2.setExtraStats(1080);

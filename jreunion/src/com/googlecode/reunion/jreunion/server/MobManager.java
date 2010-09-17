@@ -3,17 +3,17 @@ package com.googlecode.reunion.jreunion.server;
 import java.util.Iterator;
 import java.util.Vector;
 
-import com.googlecode.reunion.jreunion.game.G_EntityManager;
-import com.googlecode.reunion.jreunion.game.G_Mob;
-import com.googlecode.reunion.jreunion.game.G_Player;
-import com.googlecode.reunion.jreunion.game.G_Spawn;
+import com.googlecode.reunion.jreunion.game.EntityManager;
+import com.googlecode.reunion.jreunion.game.Mob;
+import com.googlecode.reunion.jreunion.game.Player;
+import com.googlecode.reunion.jreunion.game.Spawn;
 
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
 public class MobManager {
-	private java.util.List<G_Mob> mobList = new Vector<G_Mob>();
+	private java.util.List<Mob> mobList = new Vector<Mob>();
 
 	private boolean moveToPlayer = true;
 
@@ -21,29 +21,29 @@ public class MobManager {
 
 	}
 
-	public void addMob(G_Mob mob) {
+	public void addMob(Mob mob) {
 		if (containsMob(mob)) {
 			return;
 		}
 		mobList.add(mob);
 	}
 
-	public boolean containsMob(G_Mob mob) {
+	public boolean containsMob(Mob mob) {
 		return mobList.contains(mob);
 	}
 
-	public G_Mob createMob(int type) {
-		G_Mob mob = new G_Mob(type);
-		G_EntityManager.getEntityManager().createEntity(mob);
+	public Mob createMob(int type) {
+		Mob mob = new Mob(type);
+		EntityManager.getEntityManager().createEntity(mob);
 		addMob(mob);
 
 		return mob;
 	}
 
-	public G_Mob getMob(int uniqueid) {
-		Iterator<G_Mob> iter = getMobListIterator();
+	public Mob getMob(int uniqueid) {
+		Iterator<Mob> iter = getMobListIterator();
 		while (iter.hasNext()) {
-			G_Mob mob = iter.next();
+			Mob mob = iter.next();
 			if (mob.getEntityId() == uniqueid) {
 				return mob;
 			}
@@ -51,7 +51,7 @@ public class MobManager {
 		return null;
 	}
 
-	public int getMobDirectionX(G_Mob mob) {
+	public int getMobDirectionX(Mob mob) {
 
 		double directionX = Math.random() * 2;
 
@@ -62,7 +62,7 @@ public class MobManager {
 		}
 	}
 
-	public int getMobDirectionY(G_Mob mob) {
+	public int getMobDirectionY(Mob mob) {
 
 		double directionY = Math.random() * 2;
 
@@ -73,7 +73,7 @@ public class MobManager {
 		}
 	}
 
-	public Iterator<G_Mob> getMobListIterator() {
+	public Iterator<Mob> getMobListIterator() {
 		return mobList.iterator();
 	}
 
@@ -81,17 +81,17 @@ public class MobManager {
 		return mobList.size();
 	}
 
-	public void removeMob(G_Mob mob) {
+	public void removeMob(Mob mob) {
 		if (!containsMob(mob)) {
 			return;
 		}
 		while (containsMob(mob)) {
 			mobList.remove(mob);
 		}
-		G_EntityManager.getEntityManager().destroyEntity(mob);
+		EntityManager.getEntityManager().destroyEntity(mob);
 	}
 
-	public void workMob(G_Mob mob) {
+	public void workMob(Mob mob) {
 
 		if (mobList.size() == 0) {
 			return;
@@ -123,11 +123,11 @@ public class MobManager {
 		 * mob.getPosY()+(int)(-directionY*mob.getSpeed());
 		 */
 
-		Iterator<G_Player> iterPlayer = Server.getInstance().getWorldModule()
+		Iterator<Player> iterPlayer = Server.getInstance().getWorldModule()
 				.getPlayerManager().getPlayerListIterator();
 
 		while (iterPlayer.hasNext()) {
-			G_Player player = iterPlayer.next();
+			Player player = iterPlayer.next();
 			Client client = Server.getInstance().getNetworkModule()
 					.getClient(player);
 
@@ -187,7 +187,7 @@ public class MobManager {
 		}
 
 		if (moveToPlayer == true) {
-			G_Spawn spawn = mob.getPosition().getMap().getSpawnByMob(mob.getEntityId());
+			Spawn spawn = mob.getPosition().getMap().getSpawnByMob(mob.getEntityId());
 			if(spawn!=null){
 				double radiusCompX = Math.pow(spawn.getCenterX() - newPosX, 2);
 				double radiusCompY = Math.pow(spawn.getCenterY() - newPosY, 2);

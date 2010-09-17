@@ -11,25 +11,25 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Vector;
 
-import com.googlecode.reunion.jreunion.game.G_Armor;
-import com.googlecode.reunion.jreunion.game.G_Axe;
-import com.googlecode.reunion.jreunion.game.G_Entity;
-import com.googlecode.reunion.jreunion.game.G_EntityManager;
-import com.googlecode.reunion.jreunion.game.G_Enums.G_EquipmentSlot;
-import com.googlecode.reunion.jreunion.game.G_Equipment;
-import com.googlecode.reunion.jreunion.game.G_ExchangeItem;
-import com.googlecode.reunion.jreunion.game.G_GunWeapon;
-import com.googlecode.reunion.jreunion.game.G_InventoryItem;
-import com.googlecode.reunion.jreunion.game.G_Item;
-import com.googlecode.reunion.jreunion.game.G_Player;
-import com.googlecode.reunion.jreunion.game.G_Potion;
-import com.googlecode.reunion.jreunion.game.G_QuickSlotItem;
-import com.googlecode.reunion.jreunion.game.G_RingWeapon;
-import com.googlecode.reunion.jreunion.game.G_Skill;
-import com.googlecode.reunion.jreunion.game.G_StaffWeapon;
-import com.googlecode.reunion.jreunion.game.G_StashItem;
-import com.googlecode.reunion.jreunion.game.G_Sword;
-import com.googlecode.reunion.jreunion.game.G_Weapon;
+import com.googlecode.reunion.jreunion.game.Armor;
+import com.googlecode.reunion.jreunion.game.Axe;
+import com.googlecode.reunion.jreunion.game.Entity;
+import com.googlecode.reunion.jreunion.game.EntityManager;
+import com.googlecode.reunion.jreunion.game.Enums.G_EquipmentSlot;
+import com.googlecode.reunion.jreunion.game.Equipment;
+import com.googlecode.reunion.jreunion.game.ExchangeItem;
+import com.googlecode.reunion.jreunion.game.GunWeapon;
+import com.googlecode.reunion.jreunion.game.InventoryItem;
+import com.googlecode.reunion.jreunion.game.Item;
+import com.googlecode.reunion.jreunion.game.Player;
+import com.googlecode.reunion.jreunion.game.Potion;
+import com.googlecode.reunion.jreunion.game.QuickSlotItem;
+import com.googlecode.reunion.jreunion.game.RingWeapon;
+import com.googlecode.reunion.jreunion.game.Skill;
+import com.googlecode.reunion.jreunion.game.StaffWeapon;
+import com.googlecode.reunion.jreunion.game.StashItem;
+import com.googlecode.reunion.jreunion.game.Sword;
+import com.googlecode.reunion.jreunion.game.Weapon;
 import com.googlecode.reunion.jreunion.server.database.DatabaseAction;
 import com.googlecode.reunion.jreunion.server.database.SaveInventory;
 import com.mysql.jdbc.MySQLConnection;
@@ -138,7 +138,7 @@ public class DatabaseUtils {
 				
 				if (rs.next()) {
 					
-					G_Equipment eq = loadEquipment(slotlist[slotnr]);
+					Equipment eq = loadEquipment(slotlist[slotnr]);
 					
 					int eqHelmet = -1;
 					int eqArmor = -1;
@@ -188,9 +188,9 @@ public class DatabaseUtils {
 		return charlist;
 	}
 	
-	public G_Equipment loadEquipment(int charid) {
+	public Equipment loadEquipment(int charid) {
 		
-		G_Equipment equipment = new G_Equipment();
+		Equipment equipment = new Equipment();
 		if (!checkDatabase())
 			return null;
 		Statement stmt;
@@ -214,14 +214,14 @@ public class DatabaseUtils {
 		
 	}
 
-	public void loadEquipment(G_Player player) {
-		G_Equipment equipment = loadEquipment(player.getEntityId());
+	public void loadEquipment(Player player) {
+		Equipment equipment = loadEquipment(player.getEntityId());
 		player.setEquipment(equipment);
 	}
 	
 	
-	public G_Player loadCharStatus(int characterId){
-		G_Player player = null;
+	public Player loadCharStatus(int characterId){
+		Player player = null;
 		if (!checkDatabase())
 			return null;
 		Statement stmt;		
@@ -232,9 +232,9 @@ public class DatabaseUtils {
 					+ characterId + ";");
 			if (rs.next()) {
 				int race = rs.getInt("race");				
-				player = G_Player.createPlayer(race);
+				player = Player.createPlayer(race);
 				
-				G_EntityManager.getEntityManager().loadEntity(player,characterId);
+				EntityManager.getEntityManager().loadEntity(player,characterId);
 				
 				player.setStrength(rs.getInt("str"));
 				player.setWisdom(rs.getInt("wis"));
@@ -270,7 +270,7 @@ public class DatabaseUtils {
 		}
 	}
 	
-	public void saveCharStatus(G_Player player){
+	public void saveCharStatus(Player player){
 		
 		Client client = Server.getInstance().getNetworkModule().getClient(player);
 		
@@ -322,7 +322,7 @@ public class DatabaseUtils {
 		  }
 	}
 	
-	public void updateCharStatus(G_Player player, int id, int value)
+	public void updateCharStatus(Player player, int id, int value)
 	{
 			if (!checkDatabase())
 			return ;
@@ -388,13 +388,13 @@ public class DatabaseUtils {
 		try {
 						
 			stmt = database.conn.createStatement();
-			G_Entity entity  = new G_Entity();
-			G_EntityManager.getEntityManager().createEntity(entity);
+			Entity entity  = new Entity();
+			EntityManager.getEntityManager().createEntity(entity);
 			int characterId = entity.getEntityId();
 
-			G_EntityManager.getEntityManager().removeEntity(entity);
+			EntityManager.getEntityManager().removeEntity(entity);
 						
-			G_Player player = G_Player.createPlayer(race);			
+			Player player = Player.createPlayer(race);			
 			
 			player.setLevel(1);
 			player.setName(charName);
@@ -418,7 +418,7 @@ public class DatabaseUtils {
 			
 			player.setLime(Integer.parseInt(Reference.getInstance().getServerReference().getItem("Server").getMemberValue("StartLime")));
 			
-			G_EntityManager.getEntityManager().loadEntity(player,characterId);
+			EntityManager.getEntityManager().loadEntity(player,characterId);
 			client.setPlayer(player);
 		
 			saveCharStatus(player);
@@ -428,31 +428,31 @@ public class DatabaseUtils {
 					+ slot + ","
 					+ client.getAccountId() + "); ");
 			
-			G_Potion hpPot1 = (G_Potion)ItemFactory.createItem(145);
-			G_Potion hpPot2 = (G_Potion)ItemFactory.createItem(145);
-			G_Potion hpPot3 = (G_Potion)ItemFactory.createItem(145);
-			G_Potion hpPot4 = (G_Potion)ItemFactory.createItem(145);
-			G_Potion hpPot5 = (G_Potion)ItemFactory.createItem(145);
-			G_Potion hpPot6 = (G_Potion)ItemFactory.createItem(145);
-			G_Weapon weapon = null;
+			Potion hpPot1 = (Potion)ItemFactory.createItem(145);
+			Potion hpPot2 = (Potion)ItemFactory.createItem(145);
+			Potion hpPot3 = (Potion)ItemFactory.createItem(145);
+			Potion hpPot4 = (Potion)ItemFactory.createItem(145);
+			Potion hpPot5 = (Potion)ItemFactory.createItem(145);
+			Potion hpPot6 = (Potion)ItemFactory.createItem(145);
+			Weapon weapon = null;
 			
 			switch(race){
-				case 0: {weapon = (G_Axe)ItemFactory.createItem(48); break;}
-				case 1: {weapon = (G_StaffWeapon)ItemFactory.createItem(171); break;}
-				case 2: {weapon = (G_RingWeapon)ItemFactory.createItem(431); break;}
-				case 3: {weapon = (G_GunWeapon)ItemFactory.createItem(204); break;}
-				case 4: {weapon = (G_Sword)ItemFactory.createItem(168); break;}
+				case 0: {weapon = (Axe)ItemFactory.createItem(48); break;}
+				case 1: {weapon = (StaffWeapon)ItemFactory.createItem(171); break;}
+				case 2: {weapon = (RingWeapon)ItemFactory.createItem(431); break;}
+				case 3: {weapon = (GunWeapon)ItemFactory.createItem(204); break;}
+				case 4: {weapon = (Sword)ItemFactory.createItem(168); break;}
 				default: break;
 			}
-			G_Equipment equipment = player.getEquipment();
-			G_Armor chest = (G_Armor)ItemFactory.createItem(326);
-			G_Armor pants = (G_Armor)ItemFactory.createItem(343);
+			Equipment equipment = player.getEquipment();
+			Armor chest = (Armor)ItemFactory.createItem(326);
+			Armor pants = (Armor)ItemFactory.createItem(343);
 			
 			equipment.setItem(G_EquipmentSlot.CHEST, chest);
 			equipment.setItem(G_EquipmentSlot.PANTS, pants);
 			saveEquipment(player);
 			
-			player.getQuickSlot().addItem(new G_QuickSlotItem(hpPot1,0));
+			player.getQuickSlot().addItem(new QuickSlotItem(hpPot1,0));
 			saveQuickSlot(player);
 			
 			player.getInventory().addItem(weapon);
@@ -487,9 +487,9 @@ public class DatabaseUtils {
 		}
 	}
 	
-	public G_Player loadChar(int slotNumber, int accountId,Client client) {
+	public Player loadChar(int slotNumber, int accountId,Client client) {
 		
-		G_Player player=null;
+		Player player=null;
 		if (!checkDatabase())
 			return null;
 		int characterId = -1;
@@ -521,7 +521,7 @@ public class DatabaseUtils {
 		return player;
 	}
 	
-	public G_Player loadInventory(G_Player player){
+	public Player loadInventory(Player player){
 		if (!checkDatabase())
 			return null;
 		Statement invStmt;
@@ -532,7 +532,7 @@ public class DatabaseUtils {
 			
 			while (invTable.next()) 
 			{
-				G_Item item = ItemFactory.loadItem(invTable.getInt("itemid"));
+				Item item = ItemFactory.loadItem(invTable.getInt("itemid"));
 				if (item!=null)
 				player.getInventory().addItem(invTable.getInt("x"),invTable.getInt("y"),item,invTable.getInt("tab"));
 			}
@@ -544,7 +544,7 @@ public class DatabaseUtils {
 		return player;
 	}
 		
-	public void saveInventory(G_Player player){
+	public void saveInventory(Player player){
 		if (!checkDatabase())
 			return;
 		
@@ -567,12 +567,12 @@ public class DatabaseUtils {
 			String query = "INSERT INTO inventory (charid, itemid, tab, x, y) VALUES ";
 			String data = "";
 			
-			Iterator<G_InventoryItem> iter = player.getInventory().getInventoryIterator();
+			Iterator<InventoryItem> iter = player.getInventory().getInventoryIterator();
 			
 			while(iter.hasNext())
 			{
-				G_InventoryItem invItem = iter.next();
-				G_Item item = invItem.getItem();
+				InventoryItem invItem = iter.next();
+				Item item = invItem.getItem();
 				updateItemInfo(item);
 				/*
 				
@@ -663,7 +663,7 @@ public class DatabaseUtils {
 		return -1;
 	}
 	
-	public void loadItemInfo(G_Item item )
+	public void loadItemInfo(Item item )
 	{
 		if (item==null)return;
 		if (!checkDatabase())return ;
@@ -689,7 +689,7 @@ public class DatabaseUtils {
 		}
 	}
 	
-	public void addItem(G_Item item)
+	public void addItem(Item item)
 	{
 		if (!checkDatabase())
 			return ;
@@ -708,12 +708,12 @@ public class DatabaseUtils {
 		}
 	}
 	
-	public void deleteItem(G_Item item)
+	public void deleteItem(Item item)
 	{
 		if (item==null)return;
 		if (!checkDatabase())return ;
 		
-		G_EntityManager.getEntityManager().removeEntity(item);
+		EntityManager.getEntityManager().removeEntity(item);
 		Statement stmt;
 		
 		try {
@@ -730,7 +730,7 @@ public class DatabaseUtils {
 		}
 	}
 	
-	public void updateItemInfo(G_Item item)
+	public void updateItemInfo(Item item)
 	{
 		if (item==null)return;
 		if (!checkDatabase())return ;
@@ -750,7 +750,7 @@ public class DatabaseUtils {
 		}
 	}
 	
-	public  void saveSkills(G_Player player) {
+	public  void saveSkills(Player player) {
 		
 		if (!checkDatabase())
 			return;
@@ -764,10 +764,10 @@ public class DatabaseUtils {
 
 			String query = "INSERT INTO skills (charid,id,level) VALUES ";
 			String data = "";
-			Iterator<G_Skill> skillsIter = player.getCharSkill().getSkillListIterator();
+			Iterator<Skill> skillsIter = player.getCharSkill().getSkillListIterator();
 			
 			while(skillsIter.hasNext()){
-				G_Skill skill = (G_Skill)skillsIter.next();
+				Skill skill = (Skill)skillsIter.next();
 				
 				if(skill.getCurrLevel()>0){
 					data+="("+playerId+","+skill.getId()+","+skill.getCurrLevel()+")";			
@@ -784,7 +784,7 @@ public class DatabaseUtils {
 		}
 	}
 	
-	public  void loadSkills(G_Player player) {
+	public  void loadSkills(Player player) {
 		if (!checkDatabase())
 			return;
 		Statement stmt;
@@ -803,7 +803,7 @@ public class DatabaseUtils {
 		}
 	}
 	
-	public void saveEquipment(G_Player player){
+	public void saveEquipment(Player player){
 		if (!checkDatabase())
 			return;
 		if (player.getEquipment()==null)return;
@@ -812,14 +812,14 @@ public class DatabaseUtils {
 		try {
 			stmt = database.conn.createStatement();
 			stmt.execute("DELETE FROM equipment WHERE charid="+player.getEntityId()+";");
-			G_Equipment eq = player.getEquipment();
+			Equipment eq = player.getEquipment();
 			
 			String query = "INSERT INTO equipment (charid, slot, itemid) VALUES ";
 			String data = "";
 			int playerId = player.getEntityId();
 			for(G_EquipmentSlot slot:G_EquipmentSlot.values())
 			{
-				G_Item item = eq.getItem(slot);
+				Item item = eq.getItem(slot);
 				if(item!=null){
 					if(!data.isEmpty())
 						data+= ", ";
@@ -845,19 +845,19 @@ public class DatabaseUtils {
 			
 			ResultSet stashTable = invStmt.executeQuery("SELECT * FROM warehouse WHERE accountid="+client.getAccountId()+";");
 			client.getPlayer().getStash().clearStash();
-			G_Item item;
+			Item item;
 						
 			while (stashTable.next()) 
 			{
 				if(stashTable.getInt("pos") == 12){
-					item = new G_Item(0);
-					com.googlecode.reunion.jreunion.game.G_EntityManager.getEntityManager().loadEntity(item,stashTable.getInt("uniqueitemid"));
+					item = new Item(0);
+					com.googlecode.reunion.jreunion.game.EntityManager.getEntityManager().loadEntity(item,stashTable.getInt("uniqueitemid"));
 					DatabaseUtils.getInstance().loadItemInfo(item);
 				}
 				else{ 
 					item = ItemFactory.loadItem(stashTable.getInt("itemid"));
 				}
-				G_StashItem stashItem =	new G_StashItem(stashTable.getInt("pos"), item);
+				StashItem stashItem =	new StashItem(stashTable.getInt("pos"), item);
 				client.getPlayer().getStash().addItem(stashItem);
 			}
 						
@@ -875,11 +875,11 @@ public class DatabaseUtils {
 		try {
 			Statement stmt = database.conn.createStatement();
 			stmt.execute("DELETE FROM warehouse WHERE accountid="+client.getAccountId()+";");
-			Iterator<G_StashItem> stashIter = client.getPlayer().getStash().itemListIterator();
+			Iterator<StashItem> stashIter = client.getPlayer().getStash().itemListIterator();
 			
 			while(stashIter.hasNext())
 			{
-				G_StashItem stashItem = stashIter.next();
+				StashItem stashItem = stashIter.next();
 				
 				stmt.execute("INSERT INTO stash (accountid, pos, itemid)" +
 						" VALUES ("+client.getAccountId()+ ","
@@ -893,7 +893,7 @@ public class DatabaseUtils {
 		  }
 	}
 	
-	public void loadExchange(G_Player player){
+	public void loadExchange(Player player){
 		
 		if (!checkDatabase())
 			return;
@@ -905,8 +905,8 @@ public class DatabaseUtils {
 						
 			while (exchangeTable.next()) 
 			{
-				G_Item item = ItemFactory.loadItem(exchangeTable.getInt("itemid"));
-				G_ExchangeItem exchangeItem = new G_ExchangeItem(item,
+				Item item = ItemFactory.loadItem(exchangeTable.getInt("itemid"));
+				ExchangeItem exchangeItem = new ExchangeItem(item,
 						exchangeTable.getInt("x"), exchangeTable.getInt("y"));
 				
 				player.getExchange().addItem(exchangeItem);
@@ -918,7 +918,7 @@ public class DatabaseUtils {
 		}
 	}
 	
-	public void saveExchange(G_Player player){
+	public void saveExchange(Player player){
 		
 		if (!checkDatabase())
 			return;
@@ -927,11 +927,11 @@ public class DatabaseUtils {
 			Statement stmt = database.conn.createStatement();
 			stmt.execute("DELETE FROM exchange WHERE charid="+player.getEntityId()+";");
 			
-			Iterator<G_ExchangeItem> exchangeIter = player.getExchange().itemListIterator();
+			Iterator<ExchangeItem> exchangeIter = player.getExchange().itemListIterator();
 			
 			while(exchangeIter.hasNext())
 			{
-				G_ExchangeItem exchangeItem = exchangeIter.next();
+				ExchangeItem exchangeItem = exchangeIter.next();
 				
 				stmt.execute("INSERT INTO exchange (charid, itemid, x, y)" +
 						" VALUES ("+player.getEntityId()+ ","
@@ -965,7 +965,7 @@ public class DatabaseUtils {
 		}
 	}
 	
-	public void loadQuickSlot(G_Player player){
+	public void loadQuickSlot(Player player){
 		
 		if (!checkDatabase())
 			return;
@@ -977,8 +977,8 @@ public class DatabaseUtils {
 						
 			while (quickSlotTable.next()) 
 			{
-				G_Item item = ItemFactory.loadItem(quickSlotTable.getInt("itemid"));
-				G_QuickSlotItem quickSlotItem = new G_QuickSlotItem(item,quickSlotTable.getInt("slot"));
+				Item item = ItemFactory.loadItem(quickSlotTable.getInt("itemid"));
+				QuickSlotItem quickSlotItem = new QuickSlotItem(item,quickSlotTable.getInt("slot"));
 				
 				player.getQuickSlot().addItem(quickSlotItem);
 			}
@@ -989,7 +989,7 @@ public class DatabaseUtils {
 		}
 	}
 	
-	public void saveQuickSlot(G_Player player){
+	public void saveQuickSlot(Player player){
 		
 		if (!checkDatabase())
 			return;
@@ -998,11 +998,11 @@ public class DatabaseUtils {
 			Statement stmt = database.conn.createStatement();
 			stmt.execute("DELETE FROM quickslot WHERE charid="+player.getEntityId()+";");
 			
-			Iterator<G_QuickSlotItem> qsIter = player.getQuickSlot().getQuickSlotIterator();
+			Iterator<QuickSlotItem> qsIter = player.getQuickSlot().getQuickSlotIterator();
 			
 			while(qsIter.hasNext())
 			{
-				G_QuickSlotItem qsItem = qsIter.next();
+				QuickSlotItem qsItem = qsIter.next();
 				
 				stmt.execute("INSERT INTO quickslot (charid, itemid, slot)" +
 						" VALUES ("+player.getEntityId()+ ","+qsItem.getItem().getEntityId()+","

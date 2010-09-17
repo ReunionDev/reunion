@@ -6,12 +6,12 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
-import com.googlecode.reunion.jreunion.game.G_Entity;
-import com.googlecode.reunion.jreunion.game.G_LivingObject;
-import com.googlecode.reunion.jreunion.game.G_Mob;
-import com.googlecode.reunion.jreunion.game.G_Npc;
-import com.googlecode.reunion.jreunion.game.G_Player;
-import com.googlecode.reunion.jreunion.game.G_WorldObject;
+import com.googlecode.reunion.jreunion.game.Entity;
+import com.googlecode.reunion.jreunion.game.LivingObject;
+import com.googlecode.reunion.jreunion.game.Mob;
+import com.googlecode.reunion.jreunion.game.Npc;
+import com.googlecode.reunion.jreunion.game.Player;
+import com.googlecode.reunion.jreunion.game.WorldObject;
 
 /**
  * @author Aidamina
@@ -19,13 +19,13 @@ import com.googlecode.reunion.jreunion.game.G_WorldObject;
  */
 public class Session {
 	
-	private List<G_WorldObject> entities = new Vector<G_WorldObject>();
+	private List<WorldObject> entities = new Vector<WorldObject>();
 
 	private boolean sessionActive = false;
 
-	private G_Player owner;
+	private Player owner;
 
-	public Session(G_Player player) {
+	public Session(Player player) {
 
 		super();
 		player.setSession(this);
@@ -38,7 +38,7 @@ public class Session {
 		setActive(false);
 	}
 
-	public boolean contains(G_WorldObject entity) {
+	public boolean contains(WorldObject entity) {
 		
 		return entities.contains(entity);
 			
@@ -54,7 +54,7 @@ public class Session {
 	 * @return Returns the sessionOwner.
 	 * @uml.property name="sessionOwner"
 	 */
-	public G_Player getOwner() {
+	public Player getOwner() {
 		return owner;
 	}
 
@@ -62,7 +62,7 @@ public class Session {
 		this.sessionActive = sessionActive;
 	}
 	
-	public void exit(G_WorldObject entity){
+	public void exit(WorldObject entity){
 		
 		if (!entities.contains(entity)) {
 			return;
@@ -74,7 +74,7 @@ public class Session {
 	}
 	
 	
-	public void enter(G_WorldObject entity){
+	public void enter(WorldObject entity){
 		if(this.contains(entity))
 			return;
 		entities.add(entity);
@@ -84,9 +84,9 @@ public class Session {
 
 	public void empty() {
 		
-		List<G_WorldObject> tmpEntities = new Vector<G_WorldObject>();
+		List<WorldObject> tmpEntities = new Vector<WorldObject>();
 		Collections.copy(tmpEntities, entities);
-		for(G_WorldObject object:tmpEntities)
+		for(WorldObject object:tmpEntities)
 		{		
 			exit(object);			
 		}
@@ -94,13 +94,13 @@ public class Session {
 		
 	}
 
-	public Iterator<G_WorldObject> getPlayerListIterator() {
+	public Iterator<WorldObject> getPlayerListIterator() {
 		
-		List<G_WorldObject> players = new ArrayList<G_WorldObject>(entities);
-		Iterator<G_WorldObject> iter = players.iterator();
+		List<WorldObject> players = new ArrayList<WorldObject>(entities);
+		Iterator<WorldObject> iter = players.iterator();
 		while (iter.hasNext()) {
-		G_WorldObject player = iter.next(); 
-			if(!(player instanceof G_Player))
+		WorldObject player = iter.next(); 
+			if(!(player instanceof Player))
 				iter.remove();
 		}
 		return players.iterator();

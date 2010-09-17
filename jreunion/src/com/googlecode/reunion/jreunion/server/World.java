@@ -5,8 +5,8 @@ import java.util.Hashtable;
 import java.util.Iterator;
 
 import com.googlecode.reunion.jcommon.S_ParsedItem;
-import com.googlecode.reunion.jreunion.game.G_Mob;
-import com.googlecode.reunion.jreunion.game.G_Player;
+import com.googlecode.reunion.jreunion.game.Mob;
+import com.googlecode.reunion.jreunion.game.Player;
 
 /**
  * @author Autumn
@@ -149,7 +149,7 @@ public class World extends ClassModule {
 
 		if ((int) (serverTime.getTimeElapsedSeconds() % 2) == 0
 				&& mobMoving == false) {
-			Iterator<G_Mob> mobsIter = Server.getInstance().getWorldModule()
+			Iterator<Mob> mobsIter = Server.getInstance().getWorldModule()
 					.getMobManager().getMobListIterator();
 			while (mobsIter.hasNext()) {
 				Server.getInstance().getWorldModule().getMobManager()
@@ -169,9 +169,9 @@ public class World extends ClassModule {
 
 			serverHour = (serverHour + 1) % 5;
 
-			Iterator<G_Player> iter = playerManager.getPlayerListIterator();
+			Iterator<Player> iter = playerManager.getPlayerListIterator();
 			while (iter.hasNext()) {
-				G_Player player = iter.next();
+				Player player = iter.next();
 				Client client = Server.getInstance().getNetworkModule()
 						.getClient(player);
 

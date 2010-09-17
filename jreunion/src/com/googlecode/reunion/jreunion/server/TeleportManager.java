@@ -5,7 +5,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Vector;
 
-import com.googlecode.reunion.jreunion.game.G_Player;
+import com.googlecode.reunion.jreunion.game.Player;
 
 /**
  * @author Aidamina
@@ -17,7 +17,7 @@ public class TeleportManager {
 	public TeleportManager(){
 	}
 	
-	public void register(G_Player player, Map target){
+	public void register(Player player, Map target){
 		synchronized(teleports){
 			S_TeleportBucket bucket = new S_TeleportBucket();
 			bucket.from = player.getPosition().getMap();
@@ -26,7 +26,7 @@ public class TeleportManager {
 			teleports.add(bucket);
 		}
 	}
-	public void remove(G_Player player){
+	public void remove(Player player){
 		synchronized(teleports){
 			S_TeleportBucket remove= null;
 			for(S_TeleportBucket bucket:teleports){
@@ -38,7 +38,7 @@ public class TeleportManager {
 		}
 	}
 	
-	public Map getDestination(G_Player player){
+	public Map getDestination(Player player){
 		synchronized(teleports){			
 			for(S_TeleportBucket bucket:teleports){
 				if(bucket.player.getEntityId() == player.getEntityId())
@@ -59,7 +59,7 @@ public class TeleportManager {
 		Timer timer;
 		public Map from;
 		public Map to;
-		public G_Player player;
+		public Player player;
 		
 		@Override
 		public void run() {

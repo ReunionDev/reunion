@@ -1,7 +1,7 @@
 package com.googlecode.reunion.jreunion.server;
 
 import com.googlecode.reunion.jcommon.S_ParsedItem;
-import com.googlecode.reunion.jreunion.game.G_Item;
+import com.googlecode.reunion.jreunion.game.Item;
 
 /**
  * @author Aidamina
@@ -9,11 +9,11 @@ import com.googlecode.reunion.jreunion.game.G_Item;
  */
 public class ItemFactory {
 
-	public static G_Item createItem(int type) {
-		G_Item item = null;
+	public static Item createItem(int type) {
+		Item item = null;
 		if (type == 0) {
-			item = new G_Item(type);
-			com.googlecode.reunion.jreunion.game.G_EntityManager
+			item = new Item(type);
+			com.googlecode.reunion.jreunion.game.EntityManager
 					.getEntityManager().createEntity(item);
 			DatabaseUtils.getInstance().addItem(item);
 			return item;
@@ -31,7 +31,7 @@ public class ItemFactory {
 
 			Class c = Class.forName("com.googlecode.reunion.jreunion.game."
 					+ classname);
-			item = (G_Item) c.getConstructors()[0].newInstance(type);
+			item = (Item) c.getConstructors()[0].newInstance(type);
 
 		} catch (Exception e) {
 
@@ -39,13 +39,13 @@ public class ItemFactory {
 			e.printStackTrace();
 			return null;
 		}
-		com.googlecode.reunion.jreunion.game.G_EntityManager.getEntityManager()
+		com.googlecode.reunion.jreunion.game.EntityManager.getEntityManager()
 				.createEntity(item);
 		DatabaseUtils.getInstance().addItem(item);
 		return item;
 	}
 
-	public static G_Item loadItem(int id) {
+	public static Item loadItem(int id) {
 
 		int type = DatabaseUtils.getInstance().getItemType(id);
 		if (type < 0) {
@@ -61,11 +61,11 @@ public class ItemFactory {
 
 		String classname = parseditem.getMemberValue("Class");
 
-		G_Item item = null;
+		Item item = null;
 
 		try {
 			Class c = Class.forName("com.googlecode.reunion.jreunion.game." + classname);
-			item = (G_Item) c.getConstructors()[0].newInstance(type);
+			item = (Item) c.getConstructors()[0].newInstance(type);
 
 		} catch (Exception e) {
 
@@ -73,7 +73,7 @@ public class ItemFactory {
 			e.printStackTrace();
 			return null;
 		}
-		com.googlecode.reunion.jreunion.game.G_EntityManager.getEntityManager()
+		com.googlecode.reunion.jreunion.game.EntityManager.getEntityManager()
 				.loadEntity(item, id);
 		DatabaseUtils.getInstance().loadItemInfo(item);
 

@@ -21,7 +21,7 @@ import java.util.Vector;
 
 import com.googlecode.reunion.jreunion.events.EventBroadcaster;
 import com.googlecode.reunion.jreunion.events.NetworkDataEvent;
-import com.googlecode.reunion.jreunion.game.G_Player;
+import com.googlecode.reunion.jreunion.game.Player;
 
 /**
  * @author Aidamina
@@ -215,7 +215,7 @@ public class Network extends EventBroadcaster implements Runnable{
 		}
 	}
 
-	public Client getClient(G_Player player) {
+	public Client getClient(Player player) {
 		Iterator<Client> iter = getClientIterator();
 		while (iter.hasNext()) {
 			Client client = iter.next();

@@ -3,9 +3,9 @@ package com.googlecode.reunion.jreunion.server;
 import java.util.Iterator;
 import java.util.Vector;
 
-import com.googlecode.reunion.jreunion.game.G_Mob;
-import com.googlecode.reunion.jreunion.game.G_Npc;
-import com.googlecode.reunion.jreunion.game.G_Player;
+import com.googlecode.reunion.jreunion.game.Mob;
+import com.googlecode.reunion.jreunion.game.Npc;
+import com.googlecode.reunion.jreunion.game.Player;
 
 /**
  * @author Aidamina
@@ -42,7 +42,7 @@ public class SessionManager {
 	}
 
 	
-	public Session newSession(G_Player player) {
+	public Session newSession(Player player) {
 		Session s = new Session(player);
 		addSession(s);
 		return s;
@@ -60,11 +60,11 @@ public class SessionManager {
 		 * session.WorkSession(getSessionRadius()); }
 		 */
 
-		Iterator<G_Player> player1Iter = Server.getInstance()
+		Iterator<Player> player1Iter = Server.getInstance()
 				.getWorldModule().getPlayerManager().getPlayerListIterator();
 
 		while (player1Iter.hasNext()) {
-			G_Player player1 = player1Iter.next();
+			Player player1 = player1Iter.next();
 
 			if (statusUpdateTime.getTimeElapsedSeconds() >= 10) {
 				Client client = Server.getInstance().getNetworkModule()
@@ -97,11 +97,11 @@ public class SessionManager {
 				statusUpdateTime.Start();
 			}
 
-			Iterator<G_Player> player2Iter = world.getPlayerManager()
+			Iterator<Player> player2Iter = world.getPlayerManager()
 					.getPlayerListIterator();
 			
 			while (player2Iter.hasNext()) {
-				G_Player player2 = player2Iter.next();
+				Player player2 = player2Iter.next();
 
 				if (player1 == player2) {
 					continue;
@@ -128,10 +128,10 @@ public class SessionManager {
 				}
 			}
 
-			Iterator<G_Mob> mobIter = world.getMobManager()
+			Iterator<Mob> mobIter = world.getMobManager()
 					.getMobListIterator();
 			while (mobIter.hasNext()) {
-				G_Mob mob = mobIter.next();
+				Mob mob = mobIter.next();
 
 				if (mob == null) {
 					continue;
@@ -160,10 +160,10 @@ public class SessionManager {
 				}
 			}
 
-			Iterator<G_Npc> npcIter = world.getNpcManager()
+			Iterator<Npc> npcIter = world.getNpcManager()
 					.getNpcListIterator();
 			while (npcIter.hasNext()) {
-				G_Npc npc = npcIter.next();
+				Npc npc = npcIter.next();
 
 				if (npc == null) {
 					continue;

@@ -7,10 +7,10 @@ import java.util.Vector;
 
 import com.googlecode.reunion.jcommon.S_ParsedItem;
 import com.googlecode.reunion.jcommon.S_Parser;
-import com.googlecode.reunion.jreunion.game.G_Merchant;
-import com.googlecode.reunion.jreunion.game.G_Npc;
-import com.googlecode.reunion.jreunion.game.G_Player;
-import com.googlecode.reunion.jreunion.game.G_Spawn;
+import com.googlecode.reunion.jreunion.game.Merchant;
+import com.googlecode.reunion.jreunion.game.Npc;
+import com.googlecode.reunion.jreunion.game.Player;
+import com.googlecode.reunion.jreunion.game.Spawn;
 
 /**
  * @author Aidamina
@@ -22,9 +22,9 @@ public class Map {
 	
 	private String name;
 
-	private List<G_Spawn> mobSpawnList = new Vector<G_Spawn>();
+	private List<Spawn> mobSpawnList = new Vector<Spawn>();
 
-	private List<G_Npc> npcSpawnList = new Vector<G_Npc>();
+	private List<Npc> npcSpawnList = new Vector<Npc>();
 
 	private Area playerArea = new Area();
 
@@ -62,7 +62,7 @@ public class Map {
 		
 	}
 
-	public void addMobSpawn(G_Spawn spawn) {
+	public void addMobSpawn(Spawn spawn) {
 		if (spawn == null) {
 			return;
 		}
@@ -70,7 +70,7 @@ public class Map {
 
 	}
 
-	public void addNpcSpawn(G_Npc npc) {
+	public void addNpcSpawn(Npc npc) {
 		if (npc == null) {
 			return;
 		}
@@ -98,7 +98,7 @@ public class Map {
 				continue;
 			}
 
-			G_Spawn g = new G_Spawn();
+			Spawn g = new Spawn();
 
 			g.setCenterX(Integer.parseInt(item.getMemberValue("X")));
 			g.setCenterY(Integer.parseInt(item.getMemberValue("Y")));
@@ -133,7 +133,7 @@ public class Map {
 						+ getId());
 				continue;
 			}
-			G_Npc newNpc = Server.getInstance().getWorldModule()
+			Npc newNpc = Server.getInstance().getWorldModule()
 					.getNpcManager()
 					.createNpc(Integer.parseInt(i.getMemberValue("Type")));
 
@@ -143,7 +143,7 @@ public class Map {
 			newNpc.setSpawnId(Integer.parseInt(i.getMemberValue("ID")));
 			newNpc.getPosition().setMap(this);
 
-			if (newNpc instanceof G_Merchant) {
+			if (newNpc instanceof Merchant) {
 				newNpc.setSellRate(Integer.parseInt(i
 						.getMemberValue("SellRate")));
 				newNpc.setBuyRate(Integer.parseInt(i.getMemberValue("BuyRate")));
@@ -176,11 +176,11 @@ public class Map {
 		return pvpArea;
 	}
 
-	public G_Spawn getSpawnByMob(int entityID) {
-		Iterator<G_Spawn> mobSpawnIter = mobSpawnListIterator();
+	public Spawn getSpawnByMob(int entityID) {
+		Iterator<Spawn> mobSpawnIter = mobSpawnListIterator();
 
 		while (mobSpawnIter.hasNext()) {
-			G_Spawn spawn = mobSpawnIter.next();
+			Spawn spawn = mobSpawnIter.next();
 			if (spawn.getMob().getEntityId() == entityID) {
 				return spawn;
 			}
@@ -242,19 +242,19 @@ public class Map {
 				.getItemById(id).getMemberValue("PvpArea"));
 	}
 
-	public Iterator<G_Spawn> mobSpawnListIterator() {
+	public Iterator<Spawn> mobSpawnListIterator() {
 		return mobSpawnList.iterator();
 	}
 
-	public Iterator<G_Npc> npcSpawnListIterator() {
+	public Iterator<Npc> npcSpawnListIterator() {
 		return npcSpawnList.iterator();
 	}
 
 	public void workSpawns() {
-		Iterator<G_Spawn> mobSpawnIter = mobSpawnListIterator();
+		Iterator<Spawn> mobSpawnIter = mobSpawnListIterator();
 
 		while (mobSpawnIter.hasNext()) {
-			G_Spawn spawn = mobSpawnIter.next();
+			Spawn spawn = mobSpawnIter.next();
 			if (spawn == null) {
 				continue;
 			}
@@ -262,12 +262,12 @@ public class Map {
 			if (spawn.readyToSpawn()) {
 				spawn.spawnMob();
 
-				Iterator<G_Player> playerIter = Server.getInstance()
+				Iterator<Player> playerIter = Server.getInstance()
 						.getWorldModule().getPlayerManager()
 						.getPlayerListIterator();
 
 				while (playerIter.hasNext()) {
-					G_Player player = playerIter.next();
+					Player player = playerIter.next();
 
 					if (player.getPosition().getMap() != spawn.getMob().getPosition().getMap()) {
 						continue;

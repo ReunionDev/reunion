@@ -3,10 +3,10 @@ package com.googlecode.reunion.jreunion.server;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 
-import com.googlecode.reunion.jreunion.game.G_Mob;
-import com.googlecode.reunion.jreunion.game.G_Npc;
-import com.googlecode.reunion.jreunion.game.G_Player;
-import com.googlecode.reunion.jreunion.game.G_Spawn;
+import com.googlecode.reunion.jreunion.game.Mob;
+import com.googlecode.reunion.jreunion.game.Npc;
+import com.googlecode.reunion.jreunion.game.Player;
+import com.googlecode.reunion.jreunion.game.Spawn;
 
 /**
  * @author Aidamina
@@ -21,7 +21,7 @@ public class MessageParser {
 
 	}
 
-	String parse(G_Player player, String text) {
+	String parse(Player player, String text) {
 		int userlvl = player.getAdminState();
 		text = text.trim();
 		String word[] = text.split(" ");
@@ -42,7 +42,7 @@ public class MessageParser {
 				}
 
 			} else if (word[0].equals("@testcol")) {
-				G_Player p = player;
+				Player p = player;
 				
 				Map map = p.getPosition().getMap();
 				String s1 = ""
@@ -84,7 +84,7 @@ public class MessageParser {
 				}
 			} else if (word[0].equals("@addmob")) { //Adds a NPC 
 				if (word.length == 2) {
-					G_Spawn spawn = new G_Spawn();
+					Spawn spawn = new Spawn();
 					spawn.setCenterX(player.getPosition().getX() + 10);
 					spawn.setCenterY(player.getPosition().getY() + 10);
 					spawn.setMap(player.getPosition().getMap());
@@ -94,7 +94,7 @@ public class MessageParser {
 					spawn.spawnMob();
 
 				} else if (word.length == 6) {
-					G_Mob mob = Server.getInstance().getWorldModule()
+					Mob mob = Server.getInstance().getWorldModule()
 							.getMobManager()
 							.createMob(Integer.parseInt(word[1]));
 					mob.getPosition().setX(player.getPosition().getX() + 10);
@@ -110,7 +110,7 @@ public class MessageParser {
 			} else if (word[0].equals("@addnpc")) {
 				try {
 				if (word.length == 2) {
-					G_Npc npc = Server.getInstance().getWorldModule()
+					Npc npc = Server.getInstance().getWorldModule()
 							.getNpcManager()
 							.createNpc(Integer.parseInt(word[1]));
 					npc.getPosition().setX(player.getPosition().getX() + 10);
@@ -163,7 +163,7 @@ public class MessageParser {
 			    	 bw.newLine();
 			    	 bw.flush();
 			    	 
-				G_Spawn spawn = new G_Spawn();
+				Spawn spawn = new Spawn();
 				spawn.setCenterX(player.getPosition().getX() + 10);
 				spawn.setCenterY(player.getPosition().getY() + 10);
 				spawn.setMap(player.getPosition().getMap());

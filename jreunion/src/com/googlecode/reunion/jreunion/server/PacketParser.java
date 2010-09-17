@@ -8,14 +8,14 @@ import com.googlecode.reunion.jreunion.events.Event;
 import com.googlecode.reunion.jreunion.events.EventBroadcaster;
 import com.googlecode.reunion.jreunion.events.EventListener;
 import com.googlecode.reunion.jreunion.events.NetworkDataEvent;
-import com.googlecode.reunion.jreunion.game.G_Enums.G_EquipmentSlot;
-import com.googlecode.reunion.jreunion.game.G_Merchant;
-import com.googlecode.reunion.jreunion.game.G_Mob;
-import com.googlecode.reunion.jreunion.game.G_Npc;
-import com.googlecode.reunion.jreunion.game.G_Player;
-import com.googlecode.reunion.jreunion.game.G_Quest;
-import com.googlecode.reunion.jreunion.game.G_Trader;
-import com.googlecode.reunion.jreunion.game.G_Warehouse;
+import com.googlecode.reunion.jreunion.game.Enums.G_EquipmentSlot;
+import com.googlecode.reunion.jreunion.game.Merchant;
+import com.googlecode.reunion.jreunion.game.Mob;
+import com.googlecode.reunion.jreunion.game.Npc;
+import com.googlecode.reunion.jreunion.game.Player;
+import com.googlecode.reunion.jreunion.game.Quest;
+import com.googlecode.reunion.jreunion.game.Trader;
+import com.googlecode.reunion.jreunion.game.Warehouse;
 import com.googlecode.reunion.jreunion.server.Enums.S_LoginType;
 
 /**
@@ -144,7 +144,7 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 				com.sendCharList(client, client.getAccountId());
 			} else if (message[0].equals("start")) {
 				client.setState(Client.State.CHAR_SELECTED);
-				G_Player player = com.loginChar(Integer.parseInt(message[1]), client.getAccountId(),
+				Player player = com.loginChar(Integer.parseInt(message[1]), client.getAccountId(),
 						client);
 				if(player==null){
 					client.SendData("fail Cannot log in");
@@ -157,7 +157,7 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 		
 		case CHAR_SELECTED: {
 			if (message[0].equals("start_game")) {
-				G_Player player = client.getPlayer();
+				Player player = client.getPlayer();
 
 				player.getPosition().setX(6655);
 				player.getPosition().setY(5224);//we need to implement spawnpoints here
@@ -336,13 +336,13 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 				try {
 				// if (message.length > 2){
 				if (message[2].equals("npc")) {
-					G_Mob mob = Server.getInstance().getWorldModule()
+					Mob mob = Server.getInstance().getWorldModule()
 							.getMobManager()
 							.getMob(Integer.parseInt(message[3]));
 					client.getPlayer().useSkill(mob,
 							Integer.parseInt(message[1]));
 				} else if (message[2].equals("char")) {
-					G_Player player = Server.getInstance().getWorldModule()
+					Player player = Server.getInstance().getWorldModule()
 							.getPlayerManager()
 							.getPlayer(Integer.parseInt(message[3]));
 					client.getPlayer().useSkill(player,
@@ -376,7 +376,7 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 							client.getPlayer());
 				} else {
 					if (client.getPlayer().getQuest() == null) {
-						client.getPlayer().setQuest(new G_Quest(
+						client.getPlayer().setQuest(new Quest(
 								client.getPlayer(), Integer
 										.parseInt(message[1])));
 					} else {
@@ -385,14 +385,14 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 					}
 				}
 			} else if (message[0].equals("stash_open")) {
-				G_Npc[] npc = Server.getInstance().getWorldModule()
+				Npc[] npc = Server.getInstance().getWorldModule()
 						.getNpcManager().getNpcList(139);
-				G_Warehouse warehouse = (G_Warehouse) npc[0];
+				Warehouse warehouse = (Warehouse) npc[0];
 				warehouse.openStash(client.getPlayer());
 			} else if (message[0].equals("stash_click")) {
-				G_Npc[] npc = Server.getInstance().getWorldModule()
+				Npc[] npc = Server.getInstance().getWorldModule()
 						.getNpcManager().getNpcList(139);
-				G_Warehouse warehouse = (G_Warehouse) npc[0];
+				Warehouse warehouse = (Warehouse) npc[0];
 
 				if (message.length == 5) {
 					warehouse.stashClick(client.getPlayer(),
@@ -409,7 +409,7 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 				}
 			} else if (message[0].equals("shop")) {
 				int npcId = Integer.parseInt(message[1]);
-				G_Merchant npc = (G_Merchant) Server.getInstance()
+				Merchant npc = (Merchant) Server.getInstance()
 						.getWorldModule().getNpcManager()
 						.getNpc(Integer.parseInt(message[1]));
 				if (npc!=null) {
@@ -418,38 +418,38 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 					System.err.println("Npc not found: " + npcId);				
 				}
 			} else if (message[0].equals("buy")) {
-				G_Merchant npc = (G_Merchant) Server.getInstance()
+				Merchant npc = (Merchant) Server.getInstance()
 						.getWorldModule().getNpcManager()
 						.getNpc(Integer.parseInt(message[1]));
 				npc.buyItem(client.getPlayer(), Integer.parseInt(message[1]),
 						Integer.parseInt(message[4]),
 						Integer.parseInt(message[5]), 1);
 			} else if (message[0].equals("sell")) {
-				G_Merchant npc = (G_Merchant) Server.getInstance()
+				Merchant npc = (Merchant) Server.getInstance()
 						.getWorldModule().getNpcManager()
 						.getNpc(Integer.parseInt(message[1]));
 				npc.sellItem(client.getPlayer(), Integer.parseInt(message[1]));
 			} else if (message[0].equals("pbuy")) {
-				G_Merchant npc = (G_Merchant) Server.getInstance()
+				Merchant npc = (Merchant) Server.getInstance()
 						.getWorldModule().getNpcManager()
 						.getNpc(Integer.parseInt(message[1]));
 				npc.buyItem(client.getPlayer(), Integer.parseInt(message[1]),
 						Integer.parseInt(message[2]),
 						Integer.parseInt(message[3]), 10);
 			} else if (message[0].equals("chip_exchange")) {
-				G_Npc[] npc;
+				Npc[] npc;
 
 				if (Integer.parseInt(message[1]) == 0) {
 					npc = Server.getInstance().getWorldModule()
 							.getNpcManager().getNpcList(166);
-					G_Trader trader = (G_Trader) npc[0];
+					Trader trader = (Trader) npc[0];
 					trader.chipExchange(client.getPlayer(),
 							Integer.parseInt(message[1]),
 							Integer.parseInt(message[2]), 0);
 				} else {
 					npc = Server.getInstance().getWorldModule()
 							.getNpcManager().getNpcList(167);
-					G_Trader trader = (G_Trader) npc[0];
+					Trader trader = (Trader) npc[0];
 					trader.chipExchange(client.getPlayer(),
 							Integer.parseInt(message[1]),
 							Integer.parseInt(message[2]),
@@ -459,9 +459,9 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 				client.getPlayer().itemExchange(Integer.parseInt(message[2]),
 						Integer.parseInt(message[3]));
 			} else if (message[0].equals("ichange")) {
-				G_Npc[] npc = Server.getInstance().getWorldModule()
+				Npc[] npc = Server.getInstance().getWorldModule()
 						.getNpcManager().getNpcList(117);
-				G_Trader trader = (G_Trader) npc[0];
+				Trader trader = (Trader) npc[0];
 
 				if (message.length == 1) {
 					trader.exchangeArmor(client.getPlayer(), 0);
