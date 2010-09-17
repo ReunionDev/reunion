@@ -15,7 +15,6 @@ import com.googlecode.reunion.jreunion.game.G_RoamingItem;
 import com.googlecode.reunion.jreunion.game.G_Skill;
 import com.googlecode.reunion.jreunion.game.G_SlayerWeapon;
 import com.googlecode.reunion.jreunion.game.G_Weapon;
-import com.googlecode.reunion.jreunion.server.S_Enums.S_ClientState;
 import com.googlecode.reunion.jreunion.server.S_Enums.S_LoginType;
 import com.googlecode.reunion.jreunion.server.S_PacketFactory.S_PacketType;
 
@@ -375,7 +374,7 @@ public class S_Command {
 		if (client == null) {
 			return null;
 		}
-		Socket socket = client.getClientSocket();
+		Socket socket = client.getSocket();
 		/*
 		 * S_Map map =
 		 * S_Server.getInstance().getWorldModule().getTeleportManager
@@ -785,7 +784,7 @@ public class S_Command {
 
 		client.SendData(S_DatabaseUtils.getInstance().getCharList(accountId));
 
-		client.setState(S_ClientState.CHAR_LIST);
+		client.setState(S_Client.State.CHAR_LIST);
 		return;
 	}
 

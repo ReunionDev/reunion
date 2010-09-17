@@ -3,7 +3,6 @@ package com.googlecode.reunion.jreunion.server;
 import java.net.Socket;
 
 import com.googlecode.reunion.jreunion.game.G_Player;
-import com.googlecode.reunion.jreunion.server.S_Enums.S_ClientState;
 import com.googlecode.reunion.jreunion.server.S_Enums.S_LoginType;
 import com.googlecode.reunion.jreunion.server.S_PacketFactory.S_PacketType;
 
@@ -16,17 +15,22 @@ public class S_Client {
 	
 	
 	
+	public StringBuffer getOutputBuffer() {
+		return outputBuffer;
+	}
 	private String username;
 
 	private String password;
 
-	private Socket clientSocket;
+	private Socket socket;
 
 	private int accountId;
 
-	private S_ClientState clientState;
+	private State clientState;
 
 	private G_Player player;
+	
+	private StringBuffer outputBuffer = new StringBuffer();
 
 	public String getUsername() {
 		return username;
@@ -44,12 +48,12 @@ public class S_Client {
 		this.password = password;
 	}
 
-	public Socket getClientSocket() {
-		return clientSocket;
+	public Socket getSocket() {
+		return socket;
 	}
 
-	public void setClientSocket(Socket clientSocket) {
-		this.clientSocket = clientSocket;
+	public void setSocket(Socket socket) {
+		this.socket = socket;
 	}
 
 	public int getAccountId() {
@@ -60,11 +64,11 @@ public class S_Client {
 		this.accountId = accountId;
 	}
 
-	public S_ClientState getClientState() {
+	public State getClientState() {
 		return clientState;
 	}
 
-	public void setClientState(S_ClientState clientState) {
+	public void setClientState(State clientState) {
 		this.clientState = clientState;
 	}
 
@@ -98,20 +102,12 @@ public class S_Client {
 	public S_Client() {
 		super();
 		accountId = -1;
-		clientState = S_ClientState.DISCONNECTED;
+		clientState = State.DISCONNECTED;
 		characterId = -1;
 
 	}
-/*
-	public void disconnect() {
-		S_Server.getInstance().getNetworkModule().Disconnect(S_Server.getInstance().getNetworkModule().getClient(networkId));
-		if (clientState >= S_Enums.CS_INGAME) {
-			playerObject.logout();
-		}
 
-	}*/
-
-	public S_ClientState getState() {
+	public State getState() {
 		return clientState;
 	}
 
@@ -121,26 +117,32 @@ public class S_Client {
 	}
 	
 	public void SendData(String data) {
-		S_Server.getInstance()
-		.getNetworkModule()
-		.SendData(this,data);		
+		synchronized(this){
+			this.outputBuffer.append(data);
+			if(!data.endsWith("\n")){
+				this.outputBuffer.append("\n");
+			}
+			
+			S_Server.getInstance()
+			.getNetworkModule().notifySend(this);
+		}
+		
 	}
 	public void SendPacket(S_PacketType packetType, Object ...arg){
 		
 		SendData(S_PacketFactory.createPacket(packetType, arg));
 	}
 
-	public void setState(S_ClientState state) {
+	public void setState(State state) {
 		clientState = state;
 	}
 	public String toString(){
 		
 		String value = "Client";
-		if(clientSocket!=null)
-			value+="("+clientSocket+")";
+		if(socket!=null)
+			value+="("+socket+")";
 		if(player!=null)
-			value+="("+player.getName()+")";
-		
+			value+="("+player.getName()+")";		
 		return value;
 	}
 
@@ -148,5 +150,40 @@ public class S_Client {
 		S_Server.getInstance().getNetworkModule().disconnect(this);		
 	}
 	
-
+	public enum State {
+		
+		DISCONNECTED(-1),
+	
+		ACCEPTED( 0),
+	
+		GOT_VERSION (1),
+	
+		GOT_LOGIN ( 2),
+	
+		GOT_USERNAME( 3),
+	
+		GOT_PASSWORD( 4),
+	
+		GOT_AUTH( 5),
+	
+		CHAR_LIST( 6),
+	
+		CHAR_SELECTED(7),
+		
+		PORTING(9),
+	
+		INGAME( 10);
+		
+		int value;
+		
+		State(int value){
+			this.value = value;
+			
+		}
+		public int value(){
+			return value;			
+		
+		}
+	}
+	
 }

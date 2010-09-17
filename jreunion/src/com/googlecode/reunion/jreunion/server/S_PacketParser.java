@@ -1,9 +1,13 @@
 package com.googlecode.reunion.jreunion.server;
 
-//import java.util.*;
 import java.util.Random;
+import java.util.regex.Pattern;
 
 import com.googlecode.reunion.jcommon.S_ParsedItem;
+import com.googlecode.reunion.jreunion.events.Event;
+import com.googlecode.reunion.jreunion.events.EventBroadcaster;
+import com.googlecode.reunion.jreunion.events.EventListener;
+import com.googlecode.reunion.jreunion.events.NetworkDataEvent;
 import com.googlecode.reunion.jreunion.game.G_Enums.G_EquipmentSlot;
 import com.googlecode.reunion.jreunion.game.G_Merchant;
 import com.googlecode.reunion.jreunion.game.G_Mob;
@@ -12,14 +16,13 @@ import com.googlecode.reunion.jreunion.game.G_Player;
 import com.googlecode.reunion.jreunion.game.G_Quest;
 import com.googlecode.reunion.jreunion.game.G_Trader;
 import com.googlecode.reunion.jreunion.game.G_Warehouse;
-import com.googlecode.reunion.jreunion.server.S_Enums.S_ClientState;
 import com.googlecode.reunion.jreunion.server.S_Enums.S_LoginType;
 
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-public class S_PacketParser {
+public class S_PacketParser extends EventBroadcaster implements EventListener{
 
 	private S_Server server;
 
@@ -29,6 +32,9 @@ public class S_PacketParser {
 		super();
 		this.server = server;
 		messageParser = new S_MessageParser();
+		//add a listener for the event type NetworkDataEvent
+		server.getNetworkModule().addEventListener(NetworkDataEvent.class, this);
+		
 	}
 
 	private void HandleMessage(S_Client client, String message[]) {
@@ -43,13 +49,13 @@ public class S_PacketParser {
 			try{
 			if (message[0].equals(S_Reference.getInstance().getServerReference().getItem("Server").getMemberValue("Version"))) {
 				System.out.println("Got Version");
-				client.setState(S_ClientState.GOT_VERSION);
+				client.setState(S_Client.State.GOT_VERSION);
 				break;
 			} else {
 				System.out.println("Inconsistent version (err 1) detected on: "
 						+ client);
 				client.sendWrongVersion(Integer.parseInt(message[0]));
-				client.setState(S_ClientState.DISCONNECTED);
+				client.setState(S_Client.State.DISCONNECTED);
 				break;
 			}
 			}catch(Exception e)
@@ -62,18 +68,18 @@ public class S_PacketParser {
 		case GOT_VERSION: {
 			if (message[0].equals("login")) {
 				System.out.println("Got login");
-				client.setState(S_ClientState.GOT_LOGIN);
+				client.setState(S_Client.State.GOT_LOGIN);
 				client.setLoginType(S_LoginType.LOGIN);
 				break;
 			} else if(message[0].equals("play")) {
 				System.out.println("Got play");
-				client.setState(S_ClientState.GOT_LOGIN);
+				client.setState(S_Client.State.GOT_LOGIN);
 				client.setLoginType(S_LoginType.PLAY);
 				break;
 			} else {
 				System.out.println("Inconsistent protocol (err 2) detected on: "
 						+ client);
-				client.setState(S_ClientState.DISCONNECTED);
+				client.setState(S_Client.State.DISCONNECTED);
 				break;
 			}
 
@@ -82,12 +88,12 @@ public class S_PacketParser {
 			if (message[0].length() < 28) {
 				client.setUsername(new String(message[0]));
 				System.out.println("Got Username");
-				client.setState(S_ClientState.GOT_USERNAME);
+				client.setState(S_Client.State.GOT_USERNAME);
 				break;
 			} else {
 				System.out.println("Inconsistent protocol (err 3) detected on: "
 						+ client);
-				client.setState(S_ClientState.DISCONNECTED);
+				client.setState(S_Client.State.DISCONNECTED);
 				break;
 
 			}
@@ -96,14 +102,14 @@ public class S_PacketParser {
 			if (message[0].length() < 28) {
 				client.setPassword(new String(message[0]));
 				System.out.println("Got Password");
-				client.setState(S_ClientState.GOT_PASSWORD);
+				client.setState(S_Client.State.GOT_PASSWORD);
 				com.authClient(client, client.getUsername(),
 						client.getPassword());
 				break;
 			} else {
 				System.out.println("Inconsistent protocol (err 4) detected on: "
 						+ client);
-				client.setState(S_ClientState.DISCONNECTED);
+				client.setState(S_Client.State.DISCONNECTED);
 				break;
 
 			}
@@ -137,7 +143,7 @@ public class S_PacketParser {
 
 				com.sendCharList(client, client.getAccountId());
 			} else if (message[0].equals("start")) {
-				client.setState(S_ClientState.CHAR_SELECTED);
+				client.setState(S_Client.State.CHAR_SELECTED);
 				G_Player player = com.loginChar(Integer.parseInt(message[1]), client.getAccountId(),
 						client);
 				if(player==null){
@@ -225,7 +231,7 @@ public class S_PacketParser {
 				player.updateStatus(13, (player.getLevel() - 1) * 3 - statusPoints, 0);
 
 				S_Server.getInstance().getWorldModule().getTeleportManager().remove(player);
-				client.setState(S_ClientState.INGAME);
+				client.setState(S_Client.State.INGAME);
 				
 			}
 			break;
@@ -469,30 +475,40 @@ public class S_PacketParser {
 		}
 		default: {
 			System.out.println("State Conflict");
-			client.setState(S_ClientState.DISCONNECTED);
+			client.setState(S_Client.State.DISCONNECTED);
 		}
 		}
 	}
 
-	public void Parse(S_Client client, char[] packet) {
+	public void Parse(S_Client client, String packet) {
 
 		String[] messages = ParsePacket(packet);
-		if (client.getState() != S_ClientState.DISCONNECTED) {
+		if (client.getState() != S_Client.State.DISCONNECTED) {
 			for (String message2 : messages) {
 				String[] message = ParseMessage(message2);
-				if (client.getState() != S_ClientState.DISCONNECTED) {
+				if (client.getState() != S_Client.State.DISCONNECTED) {
 					HandleMessage(client, message);
 				}
 			}
 		}
-
 	}
-
+	static Pattern regexParseMessage = Pattern.compile(" ");
 	private String[] ParseMessage(String message) {
-		return message.split(" ");
+		return regexParseMessage.split(message);
 	}
 
-	private String[] ParsePacket(char[] packet) {
-		return new String(packet).split("\n");
+	static Pattern regexParsePacket = Pattern.compile("\n");
+	private String[] ParsePacket(String packet) {
+		return regexParsePacket.split(packet);
+	}
+
+	@Override
+	public void handleEvent(Event event) {
+		System.out.println(event);
+		if(event instanceof NetworkDataEvent){
+			NetworkDataEvent e = (NetworkDataEvent)event; 
+			Parse(e.getClient(),e.getData());
+		}
+		
 	}
 }

@@ -2,9 +2,12 @@ package com.googlecode.reunion.jreunion.server;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.util.Random;
 
 import com.googlecode.reunion.jcommon.S_ParsedItem;
 import com.googlecode.reunion.jcommon.S_Parser;
+import com.mysql.jdbc.MySQLConnection;
+import java.sql.PreparedStatement;
 
 /**
  * @author Aidamina
@@ -13,6 +16,8 @@ import com.googlecode.reunion.jcommon.S_Parser;
 public class S_Database extends S_ClassModule {
 
 	public Connection conn = null;
+	
+	private PreparedStatement statement;
 
 	public S_Database(S_Module parent) {
 
@@ -20,7 +25,7 @@ public class S_Database extends S_ClassModule {
 
 	}
 
-	public void Connect() throws Exception {
+	public void connect() throws Exception {
 		S_Parser databaseConfigParser = new S_Parser();
 		databaseConfigParser.Parse("config/Database.dta");
 		String[] requiredMembers = { "address", "database", "username",
@@ -46,14 +51,14 @@ public class S_Database extends S_ClassModule {
 	}
 
 	@Override
-	public void Start() throws Exception {
+	public void start() throws Exception {
 
-		Connect();
-
+		connect();
+	
 	}
 
 	@Override
-	public void Stop() {
+	public void stop() {
 
 		if (conn != null) {
 			try {
@@ -67,7 +72,7 @@ public class S_Database extends S_ClassModule {
 
 	@Override
 	public void Work() {
-
+		S_DatabaseUtils.getInstance().work();
 	}
 
 }

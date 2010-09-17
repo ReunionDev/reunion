@@ -1,10 +1,14 @@
 package com.googlecode.reunion.jreunion.server;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 import java.util.Vector;
 
 import com.googlecode.reunion.jreunion.game.G_Armor;
@@ -26,6 +30,9 @@ import com.googlecode.reunion.jreunion.game.G_StaffWeapon;
 import com.googlecode.reunion.jreunion.game.G_StashItem;
 import com.googlecode.reunion.jreunion.game.G_Sword;
 import com.googlecode.reunion.jreunion.game.G_Weapon;
+import com.googlecode.reunion.jreunion.server.database.DatabaseAction;
+import com.googlecode.reunion.jreunion.server.database.SaveInventory;
+import com.mysql.jdbc.MySQLConnection;
 
 
 /**
@@ -39,6 +46,8 @@ public class S_DatabaseUtils {
 		database = null;
 		
 	}
+	
+	private Queue<DatabaseAction> queue = new LinkedList<DatabaseAction>();
 	
 	private S_Database database;
 	
@@ -534,9 +543,22 @@ public class S_DatabaseUtils {
 		}
 		return player;
 	}
+		
 	public void saveInventory(G_Player player){
 		if (!checkDatabase())
 			return;
+		
+		//SaveInventory saveInventory = new SaveInventory(database.conn);
+		/*
+		try {
+			saveInventory.getDeleteStatement().setInt(1, player.getEntityId());
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		*/
+	
+		
 		Statement stmt;
 		try {
 			stmt = database.conn.createStatement();
@@ -544,6 +566,7 @@ public class S_DatabaseUtils {
 		
 			String query = "INSERT INTO inventory (charid, itemid, tab, x, y) VALUES ";
 			String data = "";
+			
 			Iterator<G_InventoryItem> iter = player.getInventory().getInventoryIterator();
 			
 			while(iter.hasNext())
@@ -551,6 +574,16 @@ public class S_DatabaseUtils {
 				G_InventoryItem invItem = iter.next();
 				G_Item item = invItem.getItem();
 				updateItemInfo(item);
+				/*
+				
+				PreparedStatement statement = saveInventory.getInsertStatement();
+				statement.setInt(1,player.getEntityId());
+				statement.setInt(2,item.getEntityId());
+				statement.setInt(3,invItem.getTab());
+				statement.setInt(4,invItem.getPosX());
+				statement.setInt(5,invItem.getPosY());
+				statement.addBatch();				
+				*/
 				
 				data+="("+player.getEntityId()+ ",'"+item.getEntityId()+"',"+invItem.getTab()+
 					","+invItem.getPosX()+ ","+invItem.getPosY()+ ")";			
@@ -560,6 +593,8 @@ public class S_DatabaseUtils {
 			}
 			if(!data.isEmpty())
 				stmt.execute(query+data);
+			
+			//queue.add(saveInventory);
 			
 		} catch (SQLException e1) {
 			e1.printStackTrace();
@@ -978,6 +1013,22 @@ public class S_DatabaseUtils {
 			e1.printStackTrace();
 			return;
 		  }
+	}
+	
+	
+	public void work(){
+		
+		DatabaseAction action = null;
+		
+		while((action=queue.poll())!=null) {
+			try{
+				action.perform();
+			}catch(Exception e){
+				
+				e.printStackTrace();
+			}
+		}
+		
 	}
 	
 }

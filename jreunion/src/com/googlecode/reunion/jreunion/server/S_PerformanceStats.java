@@ -114,7 +114,7 @@ public class S_PerformanceStats extends S_ClassModule {
 	}
 
 	@Override
-	public void Start() {
+	public void start() {
 		serverTimer.Start();
 
 		startServer = new PerformanceEvent();
@@ -122,7 +122,7 @@ public class S_PerformanceStats extends S_ClassModule {
 	}
 
 	@Override
-	public void Stop() {
+	public void stop() {
 		serverTimer.Stop();
 
 	}

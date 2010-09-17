@@ -32,13 +32,13 @@ public class S_Server extends S_ClassModule {
 
 		try {
 
-			server.DoStart(); // Call the start functions in all the loaded
+			server.doStart(); // Call the start functions in all the loaded
 								// modules
 								// Load a module by extending it from
 								// ClassModule
 								// And put the put the parent in the constructor
 			while (true) {
-				server.DoWork();
+				server.doWork();
 				Thread.sleep(1); // Sleep to make sure it doesnt use 100%
 									// cpu resources
 				
@@ -51,7 +51,7 @@ public class S_Server extends S_ClassModule {
 		}
 		finally {
 			S_PerformanceStats.getInstance().dumpPerformance();
-			server.DoStop();
+			server.doStop();
 			System.exit(-1);
 		}
 	}
@@ -73,7 +73,7 @@ public class S_Server extends S_ClassModule {
 		S_Reference.getInstance().Load();
 
 		databaseModule = new S_Database(this);
-		networkModule = new S_Network(this);
+		networkModule = new S_Network();
 		worldModule = new S_World(this);
 		packetParser = new S_PacketParser(this);
 	}
@@ -114,19 +114,19 @@ public class S_Server extends S_ClassModule {
 		this.databaseModule = databaseModule;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see server.Module#Start()
-	 */
+
 	@Override
-	public void Start() {
+	public void start() {
 		System.out.println("S_Server start");
+		
+		networkModule.start();
+		
 	}
 
 	@Override
-	public void Stop() {
+	public void stop() {
 		System.out.println("S_Server stop");
+		networkModule.stop();
 	}
 
 	@Override

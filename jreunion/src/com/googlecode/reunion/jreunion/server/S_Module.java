@@ -7,21 +7,21 @@ import java.util.List;
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
 interface S_Module {
-	void AddChild(S_Module childModule);
+	void addChild(S_Module childModule);
 
-	void DoStart() throws Exception;
+	void doStart() throws Exception;
 
-	void DoStop() throws Exception;
+	void doStop() throws Exception;
 
-	void DoWork() throws Exception;
+	void doWork() throws Exception;
 
-	List<S_Module> GetChildren();
+	List<S_Module> getChildren();
 
-	S_Module GetParent();
+	S_Module getParent();
 
-	void Start() throws Exception;
+	void start() throws Exception;
 
-	void Stop() throws Exception;
+	void stop() throws Exception;
 
 	void Work() throws Exception;
 }

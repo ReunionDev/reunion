@@ -8,7 +8,6 @@ import java.util.Map;
 import com.googlecode.reunion.jcommon.S_ParsedItem;
 import com.googlecode.reunion.jreunion.game.G_Mob;
 import com.googlecode.reunion.jreunion.game.G_Player;
-import com.googlecode.reunion.jreunion.server.S_Enums.S_ClientState;
 
 /**
  * @author Autumn
@@ -27,8 +26,7 @@ public class S_World extends S_ClassModule {
 	
 	private S_TeleportManager teleportManager;
 	
-	Map<Integer,S_Map> maps = new Hashtable<Integer,S_Map>();
-	
+	Map<Integer,S_Map> maps = new Hashtable<Integer,S_Map>();	
 
 	private S_NpcManager npcManager;
 
@@ -110,7 +108,7 @@ public class S_World extends S_ClassModule {
 	}
 
 	@Override
-	public void Start() {
+	public void start() {
 		
 		Iterator<S_ParsedItem> iter = S_Reference.getInstance().getMapConfigReference().getItemListIterator();
 		while(iter.hasNext()){
@@ -123,7 +121,7 @@ public class S_World extends S_ClassModule {
 	}
 
 	@Override
-	public void Stop() {
+	public void stop() {
 
 	}
 
@@ -182,7 +180,7 @@ public class S_World extends S_ClassModule {
 					continue;
 				}
 
-				if (client.getState() == S_ClientState.INGAME) {
+				if (client.getState() == S_Client.State.INGAME) {
 							client.SendData(
 									"hour " + serverHour + "\n");
 				}

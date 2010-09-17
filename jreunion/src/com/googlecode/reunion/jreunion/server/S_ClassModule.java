@@ -25,22 +25,22 @@ abstract class S_ClassModule implements S_Module {
 		activeModule = false;
 
 		parentModule = parent;
-		parentModule.AddChild(this);
+		parentModule.addChild(this);
 
 	}
 
 	@Override
-	public void AddChild(S_Module childModule) {
+	public void addChild(S_Module childModule) {
 		childModules.add(childModule);
 	}
 
 	@Override
-	public void DoStart() throws Exception {
+	public void doStart() throws Exception {
 		try {
 			activeModule = true;
-			Start();
+			start();
 			for (int i = 0; i < childModules.size(); i++) {
-				childModules.get(i).DoStart();
+				childModules.get(i).doStart();
 			}
 		} catch (Exception e) {
 
@@ -50,12 +50,12 @@ abstract class S_ClassModule implements S_Module {
 	}
 
 	@Override
-	public void DoStop() throws Exception {
+	public void doStop() throws Exception {
 		try {
 			activeModule = false;
-			Stop();
+			stop();
 			for (int i = 0; i < childModules.size(); i++) {
-				childModules.get(i).DoStop();
+				childModules.get(i).doStop();
 			}
 		} catch (Exception e) {
 
@@ -64,11 +64,11 @@ abstract class S_ClassModule implements S_Module {
 	}
 
 	@Override
-	public void DoWork() throws Exception {
+	public void doWork() throws Exception {
 		try {
 			Work();
 			for (int i = 0; i < childModules.size(); i++) {
-				childModules.get(i).DoWork();
+				childModules.get(i).doWork();
 			}
 		} catch (Exception e) {
 
@@ -77,7 +77,7 @@ abstract class S_ClassModule implements S_Module {
 	}
 
 	@Override
-	public List<S_Module> GetChildren() {
+	public List<S_Module> getChildren() {
 		List<S_Module> children = new Vector<S_Module>();		
 		Iterator<S_Module> iter = childModules.iterator();
 		while (iter.hasNext()) {
@@ -87,7 +87,7 @@ abstract class S_ClassModule implements S_Module {
 	}
 
 	@Override
-	public S_Module GetParent() {
+	public S_Module getParent() {
 		return parentModule;
 	}
 }
