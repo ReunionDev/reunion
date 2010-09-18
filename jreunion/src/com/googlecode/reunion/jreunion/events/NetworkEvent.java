@@ -1,5 +1,7 @@
 package com.googlecode.reunion.jreunion.events;
 
+import java.net.Socket;
+
 import com.googlecode.reunion.jreunion.server.Client;
 /**
  * @author Aidamina
@@ -7,14 +9,14 @@ import com.googlecode.reunion.jreunion.server.Client;
  */
 public class NetworkEvent extends Event {
 	
-	Client client;
+	Socket socket;
 	
-	protected NetworkEvent(Client client) {
-		this.client = client;
+	protected NetworkEvent(Socket socket) {
+		this.socket = socket;
 	}
 	
-	public Client getClient() {
-		return client;
+	public Socket getSocket() {
+		return socket;
 	}
 	
 }

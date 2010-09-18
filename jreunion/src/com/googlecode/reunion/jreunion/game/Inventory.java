@@ -144,8 +144,7 @@ public class Inventory {
 	/****** Manages the Items on the Inventory ******/
 	public void moveItem(Player player, int tab, int posX, int posY) {
 	
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(player);
+		Client client = player.getClient();
 
 		if (client == null) {
 			return;

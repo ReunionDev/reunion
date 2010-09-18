@@ -232,8 +232,7 @@ public class Mob extends LivingObject {
 
 	public void moveToPlayer(Player player, double distance) {
 	
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(player);
+		Client client = player.getClient();
 
 		if (client == null) {
 			return;
@@ -301,8 +300,7 @@ public class Mob extends LivingObject {
 			while (playerIter.hasNext()) {
 				Player pl =  (Player) playerIter.next();
 
-				client = Server.getInstance().getNetworkModule()
-						.getClient(pl);
+				client = pl.getClient();
 				if (client == null) {
 					continue;
 				}

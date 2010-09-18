@@ -1,10 +1,23 @@
 package com.googlecode.reunion.jreunion.server;
 
+import java.net.Socket;
 import java.util.Collection;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Vector;
 
 import com.googlecode.reunion.jcommon.ParsedItem;
+import com.googlecode.reunion.jreunion.events.ClientConnectEvent;
+import com.googlecode.reunion.jreunion.events.ClientDisconnectEvent;
+import com.googlecode.reunion.jreunion.events.ClientSendEvent;
+import com.googlecode.reunion.jreunion.events.Event;
+import com.googlecode.reunion.jreunion.events.EventListener;
+import com.googlecode.reunion.jreunion.events.NetworkAcceptEvent;
+import com.googlecode.reunion.jreunion.events.NetworkDataEvent;
+import com.googlecode.reunion.jreunion.events.NetworkDisconnectEvent;
+import com.googlecode.reunion.jreunion.events.NetworkEvent;
+import com.googlecode.reunion.jreunion.events.NetworkSendEvent;
 import com.googlecode.reunion.jreunion.game.Mob;
 import com.googlecode.reunion.jreunion.game.Player;
 
@@ -12,7 +25,7 @@ import com.googlecode.reunion.jreunion.game.Player;
  * @author Autumn
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-public class World extends ClassModule {
+public class World extends ClassModule implements EventListener{
 	private Command worldCommand;
 
 	private PlayerManager playerManager;
@@ -27,9 +40,12 @@ public class World extends ClassModule {
 	
 	java.util.Map<Integer,Map> maps = new Hashtable<Integer,Map>();	
 
+	java.util.Map<Socket,Client> clients = new Hashtable<Socket, Client>();
+
 	private NpcManager npcManager;
 
 	private Timer serverTime = new Timer();
+	
 
 	private int serverHour;
 
@@ -43,11 +59,13 @@ public class World extends ClassModule {
 		playerManager = new PlayerManager();
 		sessionManager = new SessionManager(this);
 		mobManager = new MobManager();
-		mapManager = new Map(4);
+		
 		npcManager = new NpcManager();
 		serverHour = 4;
 		teleportManager = new TeleportManager();
 		serverSetings = new ServerSetings();
+		
+		
 	}
 
 	/**
@@ -108,6 +126,9 @@ public class World extends ClassModule {
 
 	@Override
 	public void start() {
+
+		Server.getInstance().getNetworkModule().addEventListener(NetworkAcceptEvent.class, this);
+		Server.getInstance().getNetworkModule().addEventListener(NetworkDisconnectEvent.class, this);
 		
 		Iterator<ParsedItem> iter = Reference.getInstance().getMapConfigReference().getItemListIterator();
 		while(iter.hasNext()){
@@ -121,14 +142,14 @@ public class World extends ClassModule {
 
 	@Override
 	public void stop() {
-
+		Server.getInstance().getNetworkModule().removeEventListener(NetworkAcceptEvent.class, this);
 	}
 
 	@Override
 	public void Work() {
 
 		sessionManager.workSessions();
-		mapManager.workSpawns();
+		//mapManager.workSpawns();
 
 		/*
 		 * Iterator mobsIter =
@@ -172,8 +193,7 @@ public class World extends ClassModule {
 			Iterator<Player> iter = playerManager.getPlayerListIterator();
 			while (iter.hasNext()) {
 				Player player = iter.next();
-				Client client = Server.getInstance().getNetworkModule()
-						.getClient(player);
+				Client client = player.getClient();
 
 				if (client == null) {
 					continue;
@@ -189,6 +209,42 @@ public class World extends ClassModule {
 		if (!serverTime.isRunning()) {
 			serverTime.Start();
 		}
+	}
+
+	@Override
+	public void handleEvent(Event event) {
+		if(event instanceof NetworkEvent){
+			
+			Socket socket = ((NetworkEvent)event).getSocket();
+			
+			if(event instanceof NetworkAcceptEvent){
+				NetworkAcceptEvent networkAcceptEvent = (NetworkAcceptEvent) event;
+				Network network = (Network) networkAcceptEvent.getSource();
+				Client client = new Client();
+				
+				client.addEventListener(NetworkSendEvent.class, network);
+							
+				client.setSocket(socket);			
+				
+				network.addEventListener(NetworkDataEvent.class, client);				
+				
+				System.out.print("Got connection from " + socket+"\n");		
+				
+				client.setState(Client.State.ACCEPTED);
+				
+				clients.put(socket, client);
+				
+				fireEvent(createEvent(ClientConnectEvent.class,client));
+			}
+			if(event instanceof NetworkDisconnectEvent){
+				Client client = clients.remove(socket);
+				
+			}
+		}
+	}
+
+	public java.util.Map<Socket, Client> getClients() {
+		return clients;
 	}
 
 }

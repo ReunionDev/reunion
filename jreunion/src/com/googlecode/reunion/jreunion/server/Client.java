@@ -2,8 +2,17 @@ package com.googlecode.reunion.jreunion.server;
 
 import java.net.Socket;
 
+import com.googlecode.reunion.jreunion.events.ClientDisconnectEvent;
+import com.googlecode.reunion.jreunion.events.ClientReceiveEvent;
 import com.googlecode.reunion.jreunion.events.ClientSendEvent;
+import com.googlecode.reunion.jreunion.events.Event;
 import com.googlecode.reunion.jreunion.events.EventBroadcaster;
+import com.googlecode.reunion.jreunion.events.EventListener;
+import com.googlecode.reunion.jreunion.events.NetworkAcceptEvent;
+import com.googlecode.reunion.jreunion.events.NetworkDataEvent;
+import com.googlecode.reunion.jreunion.events.NetworkDisconnectEvent;
+import com.googlecode.reunion.jreunion.events.NetworkEvent;
+import com.googlecode.reunion.jreunion.events.NetworkSendEvent;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.server.PacketFactory.S_PacketType;
 
@@ -11,14 +20,16 @@ import com.googlecode.reunion.jreunion.server.PacketFactory.S_PacketType;
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-public class Client extends EventBroadcaster {
+public class Client extends EventBroadcaster implements EventListener {
 	
-	
-	
-	
+	public StringBuffer getInputBuffer() {
+		return inputBuffer;
+	}
 	public StringBuffer getOutputBuffer() {
 		return outputBuffer;
 	}
+	
+		
 	private String username;
 
 	private String password;
@@ -30,6 +41,8 @@ public class Client extends EventBroadcaster {
 	private State clientState;
 
 	private Player player;
+	
+	private StringBuffer inputBuffer = new StringBuffer();
 	
 	private StringBuffer outputBuffer = new StringBuffer();
 
@@ -105,7 +118,9 @@ public class Client extends EventBroadcaster {
 		accountId = -1;
 		clientState = State.DISCONNECTED;
 		characterId = -1;
-
+		
+		Server.getInstance().getWorldModule().addEventListener(ClientSendEvent.class, this);
+		Server.getInstance().getNetworkModule().addEventListener(NetworkDisconnectEvent.class, this);
 	}
 
 	public State getState() {
@@ -123,7 +138,7 @@ public class Client extends EventBroadcaster {
 			if(!data.endsWith("\n")){
 				this.outputBuffer.append("\n");
 			}
-			this.fireEvent(this.createEvent(ClientSendEvent.class, this));
+			this.fireEvent(NetworkSendEvent.class, this.getSocket());
 			/*
 			Server.getInstance()
 			.getNetworkModule().notifySend(this);
@@ -150,7 +165,7 @@ public class Client extends EventBroadcaster {
 	}
 
 	public void disconnect() {
-		Server.getInstance().getNetworkModule().disconnect(this);		
+		Server.getInstance().getNetworkModule().disconnect(this.getSocket());		
 	}
 	
 	public enum State {
@@ -191,8 +206,30 @@ public class Client extends EventBroadcaster {
 	
 	public enum LoginType{
 		PLAY,
-		LOGIN
-		
+		LOGIN		
 	}
-	
+
+	@Override
+	public void handleEvent(Event event) {
+		if(event instanceof NetworkEvent){
+			Socket socket =((NetworkEvent) event).getSocket();
+			if(socket!=getSocket())return;
+			if(event instanceof NetworkDataEvent) {
+				synchronized(this){
+					NetworkDataEvent networkDataEvent = (NetworkDataEvent) event;
+					String data = networkDataEvent.getData();
+					
+					this.inputBuffer.append(networkDataEvent.getData());
+					if(!data.endsWith("\n"))
+						inputBuffer.append("\n");
+					
+					fireEvent(ClientReceiveEvent.class,this);			
+				}
+			}
+			
+			if(event instanceof NetworkDisconnectEvent){				
+				fireEvent(ClientDisconnectEvent.class,this);
+			}
+		}
+	}	
 }

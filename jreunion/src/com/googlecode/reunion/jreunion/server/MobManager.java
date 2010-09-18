@@ -129,8 +129,7 @@ public class MobManager {
 
 		while (iterPlayer.hasNext()) {
 			Player player = iterPlayer.next();
-			Client client = Server.getInstance().getNetworkModule()
-					.getClient(player);
+			Client client = player.getClient();
 
 			if (client == null) {
 				continue;

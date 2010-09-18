@@ -6,9 +6,9 @@ import com.googlecode.reunion.jreunion.server.Client;
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-public class ClientSendEvent extends ClientEvent {
+public class ClientConnectEvent extends ClientEvent {
 
-	public ClientSendEvent(Client client) {
+	public ClientConnectEvent(Client client) {
 		super(client);
 	}
 

@@ -10,6 +10,7 @@ import com.googlecode.reunion.jcommon.Parser;
 import com.googlecode.reunion.jreunion.game.Merchant;
 import com.googlecode.reunion.jreunion.game.Npc;
 import com.googlecode.reunion.jreunion.game.Player;
+import com.googlecode.reunion.jreunion.game.RoamingItem;
 import com.googlecode.reunion.jreunion.game.Spawn;
 
 /**
@@ -32,6 +33,7 @@ public class Map {
 	
 	private boolean local = false;
 	
+	public List<RoamingItem> roamingItems = new Vector<RoamingItem>();
 	
 
 	private Area pvpArea = new Area();
@@ -273,8 +275,7 @@ public class Map {
 						continue;
 					}
 
-					Client client = Server.getInstance().getNetworkModule()
-							.getClient(player);
+					Client client = player.getClient();
 
 					if (client == null) {
 						continue;

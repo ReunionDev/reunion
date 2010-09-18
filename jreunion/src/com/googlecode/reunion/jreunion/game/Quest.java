@@ -21,8 +21,7 @@ public class Quest {
 
 	/****** Cancel the current player Quest ********/
 	public void cancelQuest(Player player) {
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(player);
+		Client client = player.getClient();
 
 		if (client == null) {
 			return;
@@ -36,8 +35,7 @@ public class Quest {
 	/****** Update Quest Points Obtained ********/
 	public void changeQuestPT(Player player, int remainPoints,
 			int obtainedPoints) {
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(player);
+		Client client = player.getClient();
 
 		if (client == null) {
 			return;
@@ -66,8 +64,7 @@ public class Quest {
 
 	/****** Update Quest Total points ********/
 	public void changeQuestTP(Player player, int tp) {
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(player);
+		Client client = player.getClient();
 
 		if (client == null) {
 			return;
@@ -100,8 +97,7 @@ public class Quest {
 
 	/****** Get quest ********/
 	public void getQuest(Player player, int slot) {
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(player);
+		Client client = player.getClient();
 
 		if (client == null) {
 			return;
@@ -131,8 +127,7 @@ public class Quest {
 
 	/****** Quest Eff ********/
 	public void questEff(Player player) {
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(player);
+		Client client = player.getClient();
 
 		if (client == null) {
 			return;
@@ -146,8 +141,7 @@ public class Quest {
 
 	/****** Quest End ********/
 	public void questEnd(Player player, int questId) {
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(player);
+		Client client = player.getClient();
 
 		if (client == null) {
 			return;
@@ -161,8 +155,7 @@ public class Quest {
 
 	/****** Quest Kill ********/
 	public void questKill(Player player) {
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(player);
+		Client client = player.getClient();
 
 		if (client == null) {
 			return;
@@ -191,8 +184,7 @@ public class Quest {
 
 	/****** Quest Spawn Of Ruin ********/
 	public void spawnOfRuin(Player player, int slot) {
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(player);
+		Client client = player.getClient();
 
 		if (client == null) {
 			return;
@@ -205,8 +197,7 @@ public class Quest {
 	/****** Update the Mission Receiver in the Quick Slot ********/
 	public void updateMissionReceiver(Player player, int slot,
 			int missionsRemaining) {
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(player);
+		Client client = player.getClient();
 
 		if (client == null) {
 			return;

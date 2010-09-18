@@ -4,6 +4,10 @@ import java.util.Random;
 import java.util.regex.Pattern;
 
 import com.googlecode.reunion.jcommon.ParsedItem;
+import com.googlecode.reunion.jreunion.events.ClientConnectEvent;
+import com.googlecode.reunion.jreunion.events.ClientDisconnectEvent;
+import com.googlecode.reunion.jreunion.events.ClientEvent;
+import com.googlecode.reunion.jreunion.events.ClientReceiveEvent;
 import com.googlecode.reunion.jreunion.events.Event;
 import com.googlecode.reunion.jreunion.events.EventBroadcaster;
 import com.googlecode.reunion.jreunion.events.EventListener;
@@ -24,20 +28,25 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 
 	private Server server;
 	private Command com;
+	private World world;
 
 	private MessageParser messageParser;
 
 	public PacketParser(Server server) {
 		super();
 		this.server = server;
-		com = server.getWorldModule().getWorldCommand();
+		world = server.getWorldModule();
+		com = world.getWorldCommand();
 		messageParser = new MessageParser();
+		world.addEventListener(ClientConnectEvent.class, this);
 		//add a listener for the event type NetworkDataEvent
 		server.getNetworkModule().addEventListener(NetworkDataEvent.class, this);
 		
 	}
 
 	private void HandleMessage(Client client, String message[]) {
+		
+		synchronized(client){
 		System.out.println("Parsing " + message[0] + " command on "
 				+ client + " with state: " + client.getState() + "");
 		switch (client.getState()) {
@@ -477,6 +486,7 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 			client.setState(Client.State.DISCONNECTED);
 		}
 		}
+		}
 	}
 
 	public void Parse(Client client, String packet) {
@@ -503,9 +513,29 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 
 	@Override
 	public void handleEvent(Event event) {
-		if(event instanceof NetworkDataEvent){
-			NetworkDataEvent e = (NetworkDataEvent)event; 
-			Parse(e.getClient(),e.getData());
+		if (event instanceof ClientEvent){
+			Client client =((ClientEvent) event).getClient();
+			if(event instanceof ClientReceiveEvent){
+				ClientReceiveEvent e = (ClientReceiveEvent)event;
+				String data = null;
+				synchronized(client){
+					StringBuffer inputBuffer = client.getInputBuffer();
+					data = inputBuffer.toString();
+					inputBuffer.setLength(0);				
+				}
+				
+				if(data!=null&&!data.isEmpty())
+					Parse(client,data);
+			}else
+			if(event instanceof ClientConnectEvent){
+				ClientConnectEvent e = (ClientConnectEvent)event;
+				
+				client.addEventListener(ClientReceiveEvent.class, this);
+			}else
+			if(event instanceof ClientDisconnectEvent){
+				
+				client.removeEventListener(ClientReceiveEvent.class, this);
+			}
 		}
 		
 	}

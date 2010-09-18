@@ -23,7 +23,12 @@ public class EventBroadcaster{
 	}
 	
 	public <T extends Event> T createEvent(Class<T> eventClass, Object... args){
-		return Event.<T>Create(eventClass, this, args);		
+		return Event.<T>Create(eventClass, this, args);
+	}
+	
+	public <T extends Event> int fireEvent(Class<T> eventClass,Object... args){
+		return this.fireEvent(this.createEvent(eventClass, args));
+		
 	}
 	
 	public  Map<Class,List<EventListener>> listeners;
@@ -86,12 +91,14 @@ public class EventBroadcaster{
 		}		
 	}	
 	
-	protected void fireEvent(Event event){
+	protected int fireEvent(Event event){
 		Map<Class,List<EventListener>> listeners = this.getListeners();
+		int counter =0;
 		synchronized(listeners){
 			for(Class c :listeners.keySet()){
 				if(c.isInstance(event)){
-					for(EventListener listener:listeners.get(c)){						
+					for(EventListener listener:listeners.get(c)){
+						counter++;
 						try{					
 							EventWorker worker = workers.take();
 								synchronized(worker){
@@ -107,6 +114,7 @@ public class EventBroadcaster{
 				}
 			}		
 		}
+		return counter;
 	}
 	public static class EventWorker implements Runnable{
 		

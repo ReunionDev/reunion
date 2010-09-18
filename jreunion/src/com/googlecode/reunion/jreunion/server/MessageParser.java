@@ -28,8 +28,7 @@ public class MessageParser {
 		String word[] = text.split(" ");
 		Command com = Server.getInstance().getWorldModule()
 				.getWorldCommand();
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(player);
+		Client client = player.getClient();
 
 		if (userlvl > -1) {
 			if (word[0].equals("@stats")) {

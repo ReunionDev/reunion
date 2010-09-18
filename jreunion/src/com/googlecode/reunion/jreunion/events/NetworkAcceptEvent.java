@@ -7,16 +7,10 @@ import com.googlecode.reunion.jreunion.server.Client;
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-public class NetworkDataEvent extends NetworkEvent
+public class NetworkAcceptEvent extends NetworkEvent
 {
-	String data;
-	
-	public NetworkDataEvent(Socket socket, String data) {
+	public NetworkAcceptEvent(Socket socket) {
 		super(socket);
-		this.data = data;
 	}
 
-	public String getData() {
-		return data;
-	}
 }

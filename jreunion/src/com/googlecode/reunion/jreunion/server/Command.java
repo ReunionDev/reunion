@@ -58,8 +58,7 @@ public class Command {
 			return;
 		}
 
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(player1);
+		Client client = player1.getClient();
 
 		if (client == null) {
 			return;
@@ -135,8 +134,7 @@ public class Command {
 		if (player1 == null) {
 			return;
 		}
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(player1);
+		Client client = player1.getClient();
 		if (client == null) {
 			return;
 		}
@@ -164,9 +162,7 @@ public class Command {
 	public void dropItem(Player player, int itemtype, int posX, int posY,
 			int posZ, int rotation, int gems, int special) {
 
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(player);
-
+		Client client = player.getClient();
 		if (client == null) {
 			return;
 		}
@@ -208,8 +204,7 @@ public class Command {
 
 	/****** teleport player to player2 position ******/
 	public void GoToChar(Player player, String charName) {
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(player);
+		Client client = player.getClient();
 		Player player2 = Server.getInstance().getWorldModule()
 				.getPlayerManager().getPlayer(charName);
 
@@ -230,8 +225,7 @@ public class Command {
 
 	/****** teleport player to position (posX,posY) in the current map ******/
 	public void GoToPos(Player player, int posX, int posY) {
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(player);
+		Client client = player.getClient();
 
 		if (client == null) {
 			return;
@@ -261,7 +255,7 @@ public class Command {
 				continue;
 			}
 
-			client = Server.getInstance().getNetworkModule().getClient(pl);
+			client = pl.getClient();
 
 			if (client == null) {
 				continue;
@@ -278,8 +272,7 @@ public class Command {
 
 	/****** change map ******/
 	public void GoWorld(Player player, int mapId, int unknown) {
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(player);
+		Client client = player.getClient();
 		Map map = Server.getInstance().getWorldModule().getMap(mapId);
 		// jump 7024 5551 227505
 		// party disband
@@ -331,8 +324,7 @@ public class Command {
 	/****** Manages the Item In ******/
 	public void itemIn(Player owner, int uniqueid, int itemtype, int posX,
 			int posY, int posZ, double rotation, int gems, int special) {
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(owner);
+		Client client = owner.getClient();
 
 		String packetData = "in item " + uniqueid + " " + itemtype + " " + posX
 				+ " " + posY + " " + posZ + " " + rotation + " " + gems + " "
@@ -353,8 +345,7 @@ public class Command {
 	/****** Manages the Item Out ******/
 	public void itemOut(Player player, int uniqueid) {
 
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(player);
+		Client client = player.getClient();
 
 		if (client == null) {
 			return;
@@ -553,8 +544,7 @@ public class Command {
 	/****** Manages the Mob In ******/
 	public void mobIn(Player player, Mob mob, boolean spawn) {
 
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(player);
+		Client client = player.getClient();
 
 		if (client == null) {
 			return;
@@ -578,8 +568,7 @@ public class Command {
 	public void mobOut(Player player, Mob mob) {
 		// if (player == null)
 		// return;
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(player);
+		Client client = player.getClient();
 		if (client == null) {
 			return;
 		}
@@ -592,8 +581,7 @@ public class Command {
 	/****** player normal attacks ******/
 	public void normalAttack(Player player, int uniqueId) {
 
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(player);
+		Client client = player.getClient();
 
 		if (client == null) {
 			return;
@@ -658,8 +646,7 @@ public class Command {
 	/****** mob attacks player with normal attack ******/
 	public void NpcAttackChar(Player player, Mob mob) { // mob attacks
 															// player
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(player);
+		Client client = player.getClient();
 		String packetData = "";
 		int newHp = player.getCurrHp();
 
@@ -725,8 +712,7 @@ public class Command {
 			return;
 		}
 
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(player);
+		Client client = player.getClient();
 		if (client == null) {
 			return;
 		}
@@ -745,8 +731,7 @@ public class Command {
 	public void npcOut(Player player, Npc npc) {
 		// if (player == null)
 		// return;
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(player);
+		Client client = player.getClient();
 		if (client == null) {
 			return;
 		}
@@ -758,8 +743,7 @@ public class Command {
 
 	/****** Manages the player wear Weapon ******/
 	public void playerWeapon(Player player, int uniqueId) {
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(player);
+		Client client = player.getClient();
 
 		if (client == null) {
 			return;
@@ -807,8 +791,7 @@ public class Command {
 		while (iter.hasNext()) {
 			Player pl = iter.next();
 
-			Client client = Server.getInstance().getNetworkModule()
-					.getClient(pl);
+			Client client = pl.getClient();
 			if (client == null) {
 				continue;
 			}
@@ -823,8 +806,7 @@ public class Command {
 		if (player == null) {
 			return;
 		}
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(player);
+		Client client = player.getClient();
 		if (client == null) {
 			return;
 		}
@@ -835,8 +817,7 @@ public class Command {
 
 	/****** player1 attacks player2 with Sub Attack ******/
 	public void subAttackChar(Player player1, int uniqueId) {
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(player1);
+		Client client = player1.getClient();
 		// G_Player player2 =
 		// (G_Player)G_EntityManager.getEntityManager().getEnt(uniqueId);
 
@@ -858,8 +839,7 @@ public class Command {
 
 	/****** player attacks mob with Sub Attack ******/
 	public void subAttackNpc(Player player, int uniqueId) {
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(player);
+		Client client = player.getClient();
 
 		if (client == null) {
 			return;

@@ -44,8 +44,7 @@ public class QuickSlot {
 
 	/******* Place a item in the quick slot *********/
 	public void MoveToQuick(Player player, int tab, int itemId, int slot) {
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(player);
+		Client client = player.getClient();
 
 		if (client == null) {
 			return;
@@ -102,8 +101,7 @@ public class QuickSlot {
 		// newHp = newHp + newRate/i;
 		// newRate = newRate - newRate/i;
 		// }
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(player);
+		Client client = player.getClient();
 
 		if (client == null) {
 			return;

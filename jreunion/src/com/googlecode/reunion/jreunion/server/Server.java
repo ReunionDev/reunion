@@ -80,7 +80,7 @@ public class Server extends ClassModule {
 
 	private Database databaseModule;
 
-	public Server() throws Exception {
+	private Server() throws Exception {
 
 		super();
 		RemoteAdmin.enableRemoteAdmin();

@@ -11,8 +11,8 @@ import com.googlecode.reunion.jreunion.server.Server;
  */
 public class KailiptonPlayer extends Player {
 
-	public KailiptonPlayer() {
-		super();
+	public KailiptonPlayer(Client client) {
+		super(client);
 	}
 
 	public void activationSkill(Skill skill) {
@@ -85,8 +85,7 @@ public class KailiptonPlayer extends Player {
 	}
 
 	public void skillAttackMob(Mob mob, Skill skill) {
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(this);
+		Client client = this.getClient();
 
 		if (client == null) {
 			return;
@@ -126,8 +125,7 @@ public class KailiptonPlayer extends Player {
 			while (playerIter.hasNext()) {
 				Player pl =(Player) playerIter.next();
 
-				client = Server.getInstance().getNetworkModule()
-						.getClient(pl);
+				client = pl.getClient();
 
 				if (client == null) {
 					continue;

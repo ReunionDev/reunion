@@ -22,8 +22,7 @@ public class Trader extends Npc {
 	public void chipExchange(Player player, int gemTraderType, int chipType,
 			int playerBet) {
 
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(player);
+		Client client = player.getClient();
 
 		if (client == null) {
 			return;
@@ -80,8 +79,7 @@ public class Trader extends Npc {
 	 ******/
 	public void exchangeArmor(Player player, int armorType) {
 
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(player);
+		Client client = player.getClient();
 
 		if (client == null) {
 			return;

@@ -219,7 +219,7 @@ public class DatabaseUtils extends Service {
 	}
 	
 	
-	public Player loadCharStatus(int characterId){
+	public Player loadCharStatus(Client client, int characterId){
 		Player player = null;
 		if (!checkDatabase())
 			return null;
@@ -231,7 +231,7 @@ public class DatabaseUtils extends Service {
 					+ characterId + ";");
 			if (rs.next()) {
 				int race = rs.getInt("race");				
-				player = Player.createPlayer(race);
+				player = Player.createPlayer(client,race);
 				
 				player.setEntityId(characterId);
 				
@@ -271,7 +271,7 @@ public class DatabaseUtils extends Service {
 	
 	public void saveCharacter(Player player){
 		
-		Client client = Server.getInstance().getNetworkModule().getClient(player);
+		Client client = player.getClient();
 		
 		if(client == null)
 			return;
@@ -406,7 +406,7 @@ public class DatabaseUtils extends Service {
 						
 			stmt = database.conn.createStatement();
 						
-			Player player = Player.createPlayer(race);			
+			Player player = Player.createPlayer(client, race);			
 			
 			player.setEntityId(-1);
 			
@@ -522,11 +522,10 @@ public class DatabaseUtils extends Service {
 				characterId = rs.getInt("charid");
 			}
 			
-			player = loadCharStatus(characterId);
+			player = loadCharStatus(client,characterId);
 			
 			System.out.println("Loaded: " + player.getName());
-			
-			client.setPlayer(player);
+						
 			client.characterId=characterId;
 			
 		} catch (SQLException e1) {

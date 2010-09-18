@@ -21,8 +21,7 @@ public class Merchant extends Npc {
 	public void buyItem(Player player, int npcUniqueid, int itemType,
 			int tab, int qnt) {
 
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(player);
+		Client client = player.getClient();
 
 		if (client == null) {
 			return;
@@ -64,8 +63,7 @@ public class Merchant extends Npc {
 	/****** Open Merchant Shop ******/
 	public void openShop(Player player, int uniqueid) {
 
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(player);
+		Client client = player.getClient();
 
 		if (client == null) {
 			return;
@@ -90,8 +88,7 @@ public class Merchant extends Npc {
 
 	/****** Sell items to merchant shop ******/
 	public void sellItem(Player player, int npcUniqueid) {
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(player);
+		Client client = player.getClient();
 
 		if (client == null) {
 			return;

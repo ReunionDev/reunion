@@ -20,8 +20,7 @@ public class Warehouse extends Npc {
 	/****** Open stash ******/
 	public void openStash(Player player) {
 
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(player);
+		Client client = player.getClient();
 
 		if (client == null) {
 			return;
@@ -45,8 +44,7 @@ public class Warehouse extends Npc {
 	public void stashClick(Player player, int pos, int type, int gems,
 			int special) {
 
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(player);
+		Client client = player.getClient();
 
 		if (client == null) {
 			return;

@@ -1,5 +1,7 @@
 package com.googlecode.reunion.jreunion.game;
 
+import com.googlecode.reunion.jreunion.server.Client;
+
 
 /**
  * @author Aidamina
@@ -7,8 +9,8 @@ package com.googlecode.reunion.jreunion.game;
  */
 public class AidiaPlayer extends Player {
 
-	public AidiaPlayer() {
-		super();
+	public AidiaPlayer(Client client) {
+		super(client);
 	}
 
 	public int getBaseDmg(Player player) {

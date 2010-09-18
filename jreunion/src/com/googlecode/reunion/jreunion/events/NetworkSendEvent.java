@@ -4,9 +4,9 @@ import java.net.Socket;
 
 import com.googlecode.reunion.jreunion.server.Client;
 
-public class NetworkDisconnectEvent extends NetworkEvent{
+public class NetworkSendEvent extends NetworkEvent{
 
-	public NetworkDisconnectEvent(Socket socket) {
+	public NetworkSendEvent(Socket socket) {
 		super(socket);
 	}
 

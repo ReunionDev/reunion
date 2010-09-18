@@ -8,6 +8,10 @@ import java.util.Vector;
 
 import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jcommon.Parser;
+import com.googlecode.reunion.jreunion.events.ClientDisconnectEvent;
+import com.googlecode.reunion.jreunion.events.Event;
+import com.googlecode.reunion.jreunion.events.EventListener;
+import com.googlecode.reunion.jreunion.events.NetworkAcceptEvent;
 import com.googlecode.reunion.jreunion.server.CharSkill;
 import com.googlecode.reunion.jreunion.server.Client;
 import com.googlecode.reunion.jreunion.server.DatabaseUtils;
@@ -19,7 +23,7 @@ import com.googlecode.reunion.jreunion.server.Session;
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-public abstract class Player extends LivingObject implements SkillTarget {
+public abstract class Player extends LivingObject implements SkillTarget, EventListener {
 
 	private int def = 0;
 
@@ -83,16 +87,31 @@ public abstract class Player extends LivingObject implements SkillTarget {
 
 	private int guildLvl;
 	
+	private Client client;
+	
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
+
 	private static Integer sessionRadius;
 
-	public Player() {
+	public Player(Client client) {
 		super();
+		this.setClient(client);
+		client.setPlayer(this);
 		inventory = new Inventory();
 		equipment = new Equipment();
 		charSkill = new CharSkill();
 		quickSlot = new QuickSlot();
 		stash = new Stash();
 		exchange = new Exchange();
+		
+		client.addEventListener(ClientDisconnectEvent.class, this);
 		// setPlayerMinDmg(325);
 		// setPlayerMaxDmg(370);
 	}
@@ -118,8 +137,7 @@ public abstract class Player extends LivingObject implements SkillTarget {
 
 		while (playerIter.hasNext()) {
 			Player player = (Player) playerIter.next();
-			Client client = Server.getInstance().getNetworkModule()
-					.getClient(player);
+			Client client = player.getClient();
 
 			if (client == null) {
 				continue;
@@ -148,8 +166,7 @@ public abstract class Player extends LivingObject implements SkillTarget {
 				return;
 			}
 		
-			Client client = Server.getInstance().getNetworkModule()
-					.getClient(this);
+			Client client = this.getClient();
 			if (client == null) {
 				return;
 			}
@@ -167,8 +184,7 @@ public abstract class Player extends LivingObject implements SkillTarget {
 
 				while (playerIter.hasNext()) {
 					Player player = (Player) playerIter.next();
-					client = Server.getInstance().getNetworkModule()
-							.getClient(player);
+					client = player.getClient();
 
 					if (client == null) {
 						continue;
@@ -248,8 +264,7 @@ public abstract class Player extends LivingObject implements SkillTarget {
 	}
 	
 	public void levelUpSkill(Skill skill) {
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(this);
+		Client client = getClient();
 
 		if (client == null) {
 			return;
@@ -427,13 +442,13 @@ public abstract class Player extends LivingObject implements SkillTarget {
 		return wis;
 	}
 
-	public static Player createPlayer(int race){
+	public static Player createPlayer(Client client, int race){
 		
-		if (race == Enums.RACE_BULKAN) return new BulkanPlayer();
-		else if (race == Enums.RACE_KAILIPTON) return new KailiptonPlayer();
-		else if (race == Enums.RACE_AIDIA) return  new AidiaPlayer();
-		else if (race == Enums.RACE_HUMAN) return new HumanPlayer();
-		else if (race == Enums.RACE_HYBRIDER)	return new HybriderPlayer();
+		if (race == Enums.RACE_BULKAN) return new BulkanPlayer(client);
+		else if (race == Enums.RACE_KAILIPTON) return new KailiptonPlayer(client);
+		else if (race == Enums.RACE_AIDIA) return  new AidiaPlayer(client);
+		else if (race == Enums.RACE_HUMAN) return new HumanPlayer(client);
+		else if (race == Enums.RACE_HYBRIDER)	return new HybriderPlayer(client);
 		
 		throw new RuntimeException("Invalid race: "+race);
 		
@@ -441,8 +456,7 @@ public abstract class Player extends LivingObject implements SkillTarget {
 	/*** Manages the Items add/Remove from Trade Box ***/
 	public void itemExchange(int posX, int posY) {
 
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(this);
+		Client client = getClient();
 
 		if (client == null) {
 			return;
@@ -490,8 +504,7 @@ public abstract class Player extends LivingObject implements SkillTarget {
 
 	/****** Load Items at Trade Box ******/
 	public void loadExchange() {
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(this);
+		Client client = getClient();
 
 		if (client == null) {
 			return;
@@ -536,8 +549,7 @@ public abstract class Player extends LivingObject implements SkillTarget {
 
 	/****** load Quick Slot Items ******/
 	public void loadInventory() {
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(this);
+		Client client = getClient();
 
 		if (client == null) {
 			return;
@@ -563,8 +575,7 @@ public abstract class Player extends LivingObject implements SkillTarget {
 
 	/****** load Quick Slot Items ******/
 	public void loadQuickSlot() {
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(this);
+		Client client = getClient();
 
 		if (client == null) {
 			return;
@@ -590,8 +601,7 @@ public abstract class Player extends LivingObject implements SkillTarget {
 	/****** Manages the char Logout ******/
 	public void logout() {
 
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(this);
+		Client client = getClient();
 
 		if (client == null) {
 			return;
@@ -646,8 +656,7 @@ public abstract class Player extends LivingObject implements SkillTarget {
 
 	/****** Manages the Pick command ******/
 	public void pickItem(int uniqueid) {
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(this);
+		Client client = getClient();
 
 		if (client == null) {
 			return;
@@ -680,8 +689,7 @@ public abstract class Player extends LivingObject implements SkillTarget {
 
 	/****** Manages the Pickup command ******/
 	public void pickupItem(int uniqueid) {
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(this);
+		Client client = getClient();
 
 		if (client == null) {
 			return;
@@ -689,7 +697,7 @@ public abstract class Player extends LivingObject implements SkillTarget {
 
 		String packetData = "pickup " + getEntityId() + "\n";
 		
-				client.SendData(packetData);// send the message
+		client.SendData(packetData);// send the message
 		// S> pickup [CharID]
 
 		Server.getInstance().getWorldModule().getWorldCommand()
@@ -720,8 +728,7 @@ public abstract class Player extends LivingObject implements SkillTarget {
 
 		while (playerIter.hasNext()) {
 			Player player = (Player) playerIter.next();
-			Client client = Server.getInstance().getNetworkModule()
-					.getClient(player);
+			Client client = player.getClient();
 
 			if (client == null) {
 				continue;
@@ -760,8 +767,7 @@ public abstract class Player extends LivingObject implements SkillTarget {
 				continue;
 			}
 
-			Client client = Server.getInstance().getNetworkModule()
-					.getClient(player);
+			Client client = player.getClient();
 
 			if (client == null) {
 				continue;
@@ -789,8 +795,7 @@ public abstract class Player extends LivingObject implements SkillTarget {
 			Player pl = iter.next();
 			// if (player.getPlayerSession().contains(pl)||player==pl)
 			if (true) {
-				Client client = Server.getInstance().getNetworkModule()
-						.getClient(pl);
+				Client client = pl.getClient();
 				if (client == null) {
 					continue;
 				}
@@ -977,8 +982,7 @@ public abstract class Player extends LivingObject implements SkillTarget {
 		Iterator<WorldObject> iter = getSession().getPlayerListIterator();
 		while (iter.hasNext()) {
 			Player player = (Player) iter.next();
-			Client client = Server.getInstance().getNetworkModule()
-					.getClient(player);
+			Client client = player.getClient();
 
 			if (client == null) {
 				continue;
@@ -1008,8 +1012,7 @@ public abstract class Player extends LivingObject implements SkillTarget {
 
 		while (playerIter.hasNext()) {
 			Player player = (Player) playerIter.next();
-			Client client = Server.getInstance().getNetworkModule()
-					.getClient(player);
+			Client client = player.getClient();
 
 			if (client == null) {
 				continue;
@@ -1025,8 +1028,7 @@ public abstract class Player extends LivingObject implements SkillTarget {
 
 	public void tell(Player targetPlayer, String text) {
 
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(this);
+		Client client = this.getClient();
 
 		if (client == null) {
 			return;
@@ -1047,8 +1049,7 @@ public abstract class Player extends LivingObject implements SkillTarget {
 	/****** Handles all the Status Updates ******/
 	public void updateStatus(int id, int curr, int max) {
 		String packetData = new String();
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(this);
+		Client client = this.getClient();
 
 		if (client == null) {
 			return;
@@ -1120,8 +1121,7 @@ public abstract class Player extends LivingObject implements SkillTarget {
 
 			while (playerIter.hasNext()) {
 				Player pl = (Player) playerIter.next();
-				client = Server.getInstance().getNetworkModule()
-						.getClient(pl);
+				client = pl.getClient();
 
 				if (client == null) {
 					continue;
@@ -1302,8 +1302,7 @@ public abstract class Player extends LivingObject implements SkillTarget {
 
 		while (playerIter.hasNext()) {
 			Player player = (Player) playerIter.next();
-			Client client = Server.getInstance().getNetworkModule()
-					.getClient(player);
+			Client client = player.getClient();
 
 			if (client == null) {
 				continue;
@@ -1374,8 +1373,7 @@ public abstract class Player extends LivingObject implements SkillTarget {
 
 		while (playerIter.hasNext()) {
 			Player player = (Player) playerIter.next();
-			Client client = Server.getInstance().getNetworkModule()
-					.getClient(player);
+			Client client = player.getClient();
 
 			if (client == null) {
 				continue;
@@ -1419,6 +1417,15 @@ public abstract class Player extends LivingObject implements SkillTarget {
 		.charOut(session.getOwner(), this);
 	}
 	
-	
+	public void handleEvent(Event event){
+		Server.getInstance().getNetworkModule().addEventListener(NetworkAcceptEvent.class, this);
+		if(event instanceof ClientDisconnectEvent){
+			ClientDisconnectEvent clientDisconnectEvent = (ClientDisconnectEvent) event;
+			if(clientDisconnectEvent.getClient()!=getClient())return;
+			logout();
+		}
+		
+		
+	}
 
 }

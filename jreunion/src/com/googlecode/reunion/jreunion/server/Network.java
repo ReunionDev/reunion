@@ -23,7 +23,10 @@ import com.googlecode.reunion.jreunion.events.ClientSendEvent;
 import com.googlecode.reunion.jreunion.events.Event;
 import com.googlecode.reunion.jreunion.events.EventBroadcaster;
 import com.googlecode.reunion.jreunion.events.EventListener;
+import com.googlecode.reunion.jreunion.events.NetworkAcceptEvent;
 import com.googlecode.reunion.jreunion.events.NetworkDataEvent;
+import com.googlecode.reunion.jreunion.events.NetworkDisconnectEvent;
+import com.googlecode.reunion.jreunion.events.NetworkSendEvent;
 import com.googlecode.reunion.jreunion.events.ServerEvent;
 import com.googlecode.reunion.jreunion.events.ServerStartEvent;
 import com.googlecode.reunion.jreunion.events.ServerStopEvent;
@@ -37,12 +40,12 @@ public class Network extends Service implements Runnable, EventListener{
 	
 	private final ByteBuffer buffer = ByteBuffer.allocate(16384);
 	
-	Map<Socket,Client> clients = new Hashtable<Socket, Client>();
-
 	private Selector selector;
 	
 	private Thread thread;
 
+	List<Socket> sockets = new Vector<Socket>();
+	
 	public Network(Server server) {
 		super();
 		try {
@@ -85,21 +88,35 @@ public class Network extends Service implements Runnable, EventListener{
 						
 						// It's an incoming connection.
 						// Register this socket with the Selector
-						// so we can listen for input on it
+						// so we can listen for input on it					
+						
+						
+						SocketChannel clientSocketChannel = ((ServerSocketChannel)socketChannel).accept();
+						clientSocketChannel.configureBlocking(false);
+						Socket socket = clientSocketChannel.socket();		
+						/*
 						Client client = new Client();
 						
 						client.addEventListener(ClientSendEvent.class, this);
 						
-						SocketChannel clientSocketChannel = ((ServerSocketChannel)socketChannel).accept();
-						Socket socket = clientSocketChannel.socket();						
+						
+										
 						
 						client.setSocket(socket);
+						*/
+						
+						
+						
 						System.out.print("Got connection from " + socket+"\n");
-				
+						
+						fireEvent(NetworkAcceptEvent.class,socket);
+						
+						/*
 						client.setState(Client.State.ACCEPTED);
 						// Make sure to make it non-blocking, so we can use a selector on it.
 						clientSocketChannel.configureBlocking(false);
-						clients.put(socket, client);						
+						clients.put(socket, client);
+						*/						
 						
 						// Register it with the selector, for reading
 						clientSocketChannel.register(selector, SelectionKey.OP_READ);
@@ -123,8 +140,8 @@ public class Network extends Service implements Runnable, EventListener{
 							// On exception, remove this channel from the selector
 							key.cancel();
 							Socket socket = ((SocketChannel) socketChannel).socket();
-							Client client = clients.get(socket);
-							disconnect(client);
+							
+							disconnect(socket);
 						}
 					} else if ((key.readyOps() & SelectionKey.OP_WRITE) == SelectionKey.OP_WRITE) {
 						
@@ -148,7 +165,7 @@ public class Network extends Service implements Runnable, EventListener{
 		socketChannel.read(buffer);
 		buffer.flip();
 		Socket socket = socketChannel.socket();
-		Client client = clients.get(socket);
+		Client client = Server.getInstance().getWorldModule().getClients().get(socket);
 		
 		if (client == null) {
 			return false;
@@ -171,7 +188,7 @@ public class Network extends Service implements Runnable, EventListener{
 		
 		System.out.print(data);
 		
-		fireEvent(this.createEvent(NetworkDataEvent.class, client, data));
+		fireEvent(NetworkDataEvent.class, socket, data);
 		
 		//S_Server.getInstance().getPacketParser().Parse(client,data);
 		return true;
@@ -179,7 +196,9 @@ public class Network extends Service implements Runnable, EventListener{
 	
 	private boolean processOutput(SocketChannel socketChannel) throws IOException {
 		
-		Client client = clients.get(socketChannel.socket());		
+		
+		Socket socket = socketChannel.socket();
+		Client client = Server.getInstance().getWorldModule().getClients().get(socket);
 		if (client == null) {
 			return false;
 		}
@@ -201,50 +220,30 @@ public class Network extends Service implements Runnable, EventListener{
 			socketChannel.write(buffer);
 		} catch (IOException e) {
 			e.printStackTrace();
-			disconnect(client);				
+			disconnect(socket);				
 		}
 		return true;
 	}
-	
-	public void disconnect(Client client) {
+	public void disconnect(Socket socket) {
 		
-		if(client!=null) {
-			Socket socket= client.getSocket();
-			System.out
-			.println("Disconnecting " + client);
-			try {
-				socket.close();
-			} catch (IOException e) {
-				// e.printStackTrace();
-			}
-			
-			if (client.getPlayer() != null) {
-				client.getPlayer().logout();			
-			}
-			clients.remove(socket);
-		}
+		System.out
+		.println("Disconnecting " + socket);
+		fireEvent(NetworkDisconnectEvent.class, socket);
+		try {
+			socket.close();
+		} catch (IOException e) {
+			// e.printStackTrace();
+		}		
+	
 	}
-
-	public Client getClient(Player player) {
-		Iterator<Client> iter = getClientIterator();
-		while (iter.hasNext()) {
-			Client client = iter.next();
-			if (client.getPlayer() == player) {
-				return client;
-			}
-		}
-		return null;
-	}
-
-	public Iterator<Client> getClientIterator() {
-		return clients.values().iterator();
-	}
-
-	public void notifySend(Client client) {
+	
+	public void notifySend(Socket socket) {
 		try {
 			synchronized(this){
-				selector.wakeup();
-				client.getSocket().getChannel().register(selector, SelectionKey.OP_READ | SelectionKey.OP_WRITE);
+				if(socket.getChannel().isOpen()){
+					selector.wakeup();					
+					socket.getChannel().register(selector, SelectionKey.OP_READ | SelectionKey.OP_WRITE);
+				}
 			}
 		} catch (ClosedChannelException e) {
 			e.printStackTrace();
@@ -279,12 +278,12 @@ public class Network extends Service implements Runnable, EventListener{
 
 	public void stop() {
 		try {
-		System.out.println("net stop");
-		List<Client> tmp =  new Vector<Client>(clients.values());
+			System.out.println("net stop");
 		
-		for(Client client : tmp){				
-			disconnect(client);			
-		}
+			for(Socket socket : sockets){				
+				disconnect(socket);
+			}
+			sockets.clear();
 			selector.close();
 			thread.interrupt();
 		} catch (IOException e) {
@@ -295,9 +294,9 @@ public class Network extends Service implements Runnable, EventListener{
 	@Override
 	public void handleEvent(Event event) {
 		super.handleEvent(event);
-		if(event instanceof ClientSendEvent){
-			ClientSendEvent clientSendEvent = (ClientSendEvent) event;
-			this.notifySend(clientSendEvent.getClient());
+		if(event instanceof NetworkSendEvent){
+			NetworkSendEvent networkSendEvent = (NetworkSendEvent) event;
+			this.notifySend(networkSendEvent.getSocket());
 		}else if(event instanceof ServerStartEvent){
 			start();
 		}else if(event instanceof ServerStopEvent){

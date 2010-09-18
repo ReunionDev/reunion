@@ -13,8 +13,8 @@ import com.googlecode.reunion.jreunion.server.Server;
  */
 public class BulkanPlayer extends Player {
 
-	public BulkanPlayer() {
-		super();
+	public BulkanPlayer(Client client) {
+		super(client);
 	}
 
 	public void activationSkill(Skill skill) {
@@ -108,8 +108,7 @@ public class BulkanPlayer extends Player {
 	}
 
 	public void skillAttackMob(Mob mob, Skill skill) {
-		Client client = Server.getInstance().getNetworkModule()
-				.getClient(this);
+		Client client = this.getClient();
 
 		if (client == null) {
 			return;

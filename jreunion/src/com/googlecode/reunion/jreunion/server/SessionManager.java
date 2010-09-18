@@ -67,8 +67,7 @@ public class SessionManager {
 			Player player1 = player1Iter.next();
 
 			if (statusUpdateTime.getTimeElapsedSeconds() >= 10) {
-				Client client = Server.getInstance().getNetworkModule()
-						.getClient(player1);
+				Client client = player1.getClient();
 				if (client == null) {
 					continue;
 				}
