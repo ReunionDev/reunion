@@ -4,5 +4,10 @@ package com.googlecode.reunion.jreunion.events;
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
 public class SubEvent extends Event {
+
+	public SubEvent() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	
 }

@@ -21,6 +21,11 @@ public class EventBroadcaster{
 			worker.thread.start();
 		}
 	}
+	
+	public <T extends Event> T createEvent(Class<T> c, Object... args){
+		return Event.<T>Create(c, this, args);		
+	}
+	
 	public  Map<Class,List<EventListener>> listeners;
 	public Map<Class, List<EventListener>> getListeners() {
 		synchronized (this){
@@ -156,4 +161,8 @@ public class EventBroadcaster{
 		}
 		
 	}
+	
+	
+	
+	
 }

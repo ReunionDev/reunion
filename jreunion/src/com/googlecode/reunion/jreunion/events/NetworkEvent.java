@@ -9,7 +9,7 @@ public class NetworkEvent extends Event {
 	
 	Client client;
 	
-	public NetworkEvent(Client client) {
+	protected NetworkEvent(Client client) {
 		this.client = client;
 	}
 	

@@ -25,22 +25,15 @@ public class Test extends EventBroadcaster implements EventListener {
 	 */
 	public static void main(String[] args) throws InterruptedException {
 		Test t = new Test();
-		Event event = new Event();
-		SubEvent subEvent = new SubEvent();
-		//t.fire(event);
-		//t.fire(subEvent);
-		//t.fire(networkEvent);
+		
+		
+		SubEvent subEvent = t.createEvent(SubEvent.class);
 		{
 			long start = System.currentTimeMillis();
 			for(int i =0;i<10000;i++){
-				t.fireEvent(subEvent);
+				t.fireEvent(t.createEvent(SubEvent.class));
 			}
-			
-
 			System.out.println(System.currentTimeMillis()-start);
-			
-			
-			
 		}
 		//Thread.sleep(150);
 		System.out.println(count);

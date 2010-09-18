@@ -162,7 +162,7 @@ public class Network extends EventBroadcaster implements Runnable{
 		
 		System.out.print(data);
 		System.out.print(listeners.size());
-		fireEvent(new NetworkDataEvent(client, data));
+		fireEvent(this.createEvent(NetworkDataEvent.class, client, data));
 		
 		//S_Server.getInstance().getPacketParser().Parse(client,data);
 		return true;
