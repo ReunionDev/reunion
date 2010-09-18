@@ -97,6 +97,16 @@ ID = 189
 Hp = 100
 Class = PetAssistant
 
+[Magican] ##
+ID = 140
+Hp = 100
+Class = Merchant
+
+[Gypsy] ##
+ID = 141
+Hp = 100
+Class = Merchant
+
 [x_0 Trader]
 ID = 96
 Hp = 100

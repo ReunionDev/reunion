@@ -1,0 +1,71 @@
+[Magican 1]
+ID = 1
+X = 7845
+Y = 11845
+Rotation = 0.0
+Type = 140
+BuyRate = 95	# Value in %
+SellRate = 30	# Value in %
+
+[Magican 2]
+ID = 2
+X = 7475
+Y = 11715
+Rotation = 0.0
+Type = 140
+BuyRate = 95	# Value in %
+SellRate = 30	# Value in %
+
+[Magican 3]
+ID = 3
+X = 6955
+Y = 11865
+Rotation = 0.0
+Type = 140
+BuyRate = 95	# Value in %
+SellRate = 30	# Value in %
+
+[Magican 4]
+ID = 4
+X = 7725
+Y = 11365
+Rotation = 0.0
+Type = 140
+BuyRate = 95	# Value in %
+SellRate = 30	# Value in %
+
+[Gypsy 1]
+ID = 5
+X = 7846
+Y = 11575
+Rotation = 0.0
+Type = 141
+BuyRate = 95	# Value in %
+SellRate = 30	# Value in %
+
+[Gypsy 2]
+ID = 6
+X = 7275
+Y = 11295
+Rotation = 0.0
+Type = 141
+BuyRate = 95	# Value in %
+SellRate = 30	# Value in %
+
+[Gypsy 3]
+ID = 7
+X = 6958
+Y = 11285
+Rotation = 0.0
+Type = 141
+BuyRate = 95	# Value in %
+SellRate = 30	# Value in %
+
+[Gypsy 4]
+ID = 8
+X = 6965
+Y = 11645
+Rotation = 0.0
+Type = 141
+BuyRate = 95	# Value in %
+SellRate = 30	# Value in %
