@@ -7,6 +7,7 @@ import com.googlecode.reunion.jreunion.game.Mob;
 import com.googlecode.reunion.jreunion.game.Npc;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Spawn;
+import com.googlecode.reunion.jcommon.S_ParsedItem;
 
 /**
  * @author Aidamina
@@ -93,6 +94,23 @@ public class MessageParser {
 					spawn.setRespawnTime(10);
 					spawn.spawnMob();
 
+				} else if (word.length == 3) {
+					try {
+						int count = Integer.parseInt(word[2]);
+						for (int x = 1; x < count; x++) {
+							Spawn spawn = new Spawn();
+							spawn.setCenterX(player.getPosition().getX() + 10);
+							spawn.setCenterY(player.getPosition().getY() + 10);
+							spawn.setMap(player.getPosition().getMap());
+							spawn.setMobType(Integer.parseInt(word[1]));
+							spawn.setRadius(300);
+							spawn.setRespawnTime(10);
+							spawn.spawnMob();
+						}
+					} catch (Exception NumberFormatException) {
+						String packetData = "say 1 S_Server (NOTICE) @addmob with more than 1 mob failed";
+						client.SendData(packetData);
+					}
 				} else if (word.length == 6) {
 					Mob mob = Server.getInstance().getWorldModule()
 							.getMobManager()
@@ -143,36 +161,44 @@ public class MessageParser {
 					com.GoToChar(player, word[2]);
 				}
 			} else if (word[0].equals("@spawn")||word[0].equals("@s")) {
+				//@spawn mobid mobtypecount radius
 				BufferedWriter bw = null;
-			      try {
-			         bw = new BufferedWriter(new FileWriter("OutSpawns.dta", true));
-			         bw.write("["+word[2]+"]");			         
-			         bw.newLine();
-			         bw.write("ID = "+ ++spawnCounter);
-			         bw.newLine();
-			         bw.write("X = "+player.getPosition().getX());
-			         bw.newLine();
-			         bw.write("Y = "+player.getPosition().getY());
-			         bw.newLine();
-			         bw.write("Radius = "+word[3]);
-			         bw.newLine();
-			         bw.write("RespawnTime = 10");
-			         bw.newLine();
-			         bw.write("Type = "+word[1]);
-			         bw.newLine();			      
-			    	 bw.newLine();
-			    	 bw.flush();
+			      try {	    	  
+					bw = new BufferedWriter(new FileWriter("OutSpawns.dta", true));
+					int mobid = Integer.parseInt(word[1]);
+					S_ParsedItem mob = Reference.getInstance().getMobReference()
+							.getItemById(mobid);
+					
+					String mobname = mob.getName();
+					int typecount = Integer.parseInt(word[2]);
+					
+					bw.write("["+mobname+" "+typecount+"]");			         
+					bw.newLine();
+					bw.write("ID = "+ ++spawnCounter);
+					bw.newLine();
+					bw.write("X = "+player.getPosition().getX());
+					bw.newLine();
+					bw.write("Y = "+player.getPosition().getY());
+					bw.newLine();
+					bw.write("Radius = "+word[3]);
+					bw.newLine();
+					bw.write("RespawnTime = 10");
+					bw.newLine();
+					bw.write("Type = "+word[1]);
+					bw.newLine();			      
+					bw.newLine();
+					bw.flush();
 			    	 
-				Spawn spawn = new Spawn();
-				spawn.setCenterX(player.getPosition().getX() + 10);
-				spawn.setCenterY(player.getPosition().getY() + 10);
-				spawn.setMap(player.getPosition().getMap());
-				spawn.setMobType(Integer.parseInt(word[1]));
-				spawn.setRadius(Integer.parseInt(word[3]));
-				spawn.setRespawnTime(10);
-				spawn.spawnMob();
-				String packetData = "say 1 S_Server Spawnpoint succesfully added";
-				client.SendData(packetData);
+					Spawn spawn = new Spawn();
+					spawn.setCenterX(player.getPosition().getX() + 10);
+					spawn.setCenterY(player.getPosition().getY() + 10);
+					spawn.setMap(player.getPosition().getMap());
+					spawn.setMobType(Integer.parseInt(word[1]));
+					spawn.setRadius(Integer.parseInt(word[3]));
+					spawn.setRespawnTime(10);
+					spawn.spawnMob();
+					String packetData = "say 1 S_Server Spawnpoint succesfully added";
+					client.SendData(packetData);
 			      }catch(Exception e){
 			    	  com.serverTell(player,e.getMessage());
 			    	  e.printStackTrace();

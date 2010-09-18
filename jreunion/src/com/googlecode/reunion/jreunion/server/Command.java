@@ -301,7 +301,12 @@ public class Command {
 		Session session = player.getSession();
 
 		// flush the session
+		try {
 		session.empty();
+		} catch (Exception e) {
+			//TODO: Fix Teleporting
+			System.out.println("teleportbug");
+		}
 
 		InetSocketAddress address = map.getAddress();
 
