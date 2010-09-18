@@ -1,6 +1,5 @@
 package com.googlecode.reunion.jreunion.game;
 
-import com.googlecode.reunion.jreunion.game.Enums.G_EquipmentSlot;
 
 /**
  * @author Aidamina
@@ -70,7 +69,7 @@ public class Equipment {
 		return helmet;
 	}
 
-	public Item getItem(G_EquipmentSlot slot) {
+	public Item getItem(Slot slot) {
 
 		switch (slot) {
 
@@ -174,7 +173,7 @@ public class Equipment {
 		this.helmet = helmet;
 	}
 
-	public boolean setItem(G_EquipmentSlot slot, Item item) {
+	public boolean setItem(Slot slot, Item item) {
 		switch (slot) {
 		case HELMET: {
 			if (item instanceof Armor || item == null) {
@@ -347,6 +346,43 @@ public class Equipment {
 
 	private void setWings(Wing wings) {
 		this.wings = wings;
+	}
+	public enum Slot
+	{
+		EMPTY(-1),
+		HELMET(0),
+		CHEST(1),
+		PANTS(2),
+		SHOULDER(3),
+		BOOTS(4),
+		OFFHAND(5),
+		NECKLACE(6),
+		RING(7),		
+		BRACELET(8),
+		MAINHAND(9);
+
+		int value;
+		Slot(int value){
+			this.value = value;
+			
+		}
+		public int value(){
+			return value;			
+		
+		}
+		
+		public static Slot byValue(int slotId){
+			
+			for(Slot slot:Slot.values())
+			{
+				if(slot.value()==slotId){					
+					return slot;
+				}
+			}
+			return null;
+		}
+		
+		
 	}
 		
 	

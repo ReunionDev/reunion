@@ -3,7 +3,7 @@ package com.googlecode.reunion.jreunion.server;
 import java.util.Iterator;
 import java.util.Vector;
 
-import com.googlecode.reunion.jcommon.S_ParsedItem;
+import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jreunion.game.EntityManager;
 import com.googlecode.reunion.jreunion.game.Npc;
 
@@ -31,7 +31,7 @@ public class NpcManager {
 	}
 
 	public Npc createNpc(int type) {
-		S_ParsedItem parsednpc = Reference.getInstance().getNpcReference()
+		ParsedItem parsednpc = Reference.getInstance().getNpcReference()
 				.getItemById(type);
 		if (parsednpc == null) {
 			return null;

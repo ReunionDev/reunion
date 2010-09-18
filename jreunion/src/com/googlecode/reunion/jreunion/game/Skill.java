@@ -1,6 +1,6 @@
 package com.googlecode.reunion.jreunion.game;
 
-import com.googlecode.reunion.jcommon.S_ParsedItem;
+import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jreunion.server.Reference;
 
 /**
@@ -110,7 +110,7 @@ public class Skill {
 	}
 
 	public void loadFromReference(int id) {
-		S_ParsedItem skill = Reference.getInstance().getSkillReference()
+		ParsedItem skill = Reference.getInstance().getSkillReference()
 				.getItemById(id);
 
 		if (skill == null) {

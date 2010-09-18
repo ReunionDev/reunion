@@ -23,8 +23,8 @@ public class Entity {
 	public void setEntityId(int id) throws Exception {
 		Exception e = new Exception();
 		if (!(Class
-				.forName("com.googlecode.reunion.jreunion.game.G_EntityManager") == Class
-				.forName(e.getStackTrace()[1].getClassName()))) {
+				.forName("com.googlecode.reunion.jreunion.server.EntityManager") == 
+				e.getStackTrace()[1].getClass())) {
 			throw new Exception("Cannot set the entity id no permission");
 		}
 

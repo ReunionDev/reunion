@@ -3,12 +3,12 @@ package com.googlecode.reunion.jreunion.server;
 import java.util.Random;
 import java.util.regex.Pattern;
 
-import com.googlecode.reunion.jcommon.S_ParsedItem;
+import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jreunion.events.Event;
 import com.googlecode.reunion.jreunion.events.EventBroadcaster;
 import com.googlecode.reunion.jreunion.events.EventListener;
 import com.googlecode.reunion.jreunion.events.NetworkDataEvent;
-import com.googlecode.reunion.jreunion.game.Enums.G_EquipmentSlot;
+import com.googlecode.reunion.jreunion.game.Equipment;
 import com.googlecode.reunion.jreunion.game.Merchant;
 import com.googlecode.reunion.jreunion.game.Mob;
 import com.googlecode.reunion.jreunion.game.Npc;
@@ -16,8 +16,6 @@ import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Quest;
 import com.googlecode.reunion.jreunion.game.Trader;
 import com.googlecode.reunion.jreunion.game.Warehouse;
-import com.googlecode.reunion.jreunion.server.Enums.S_LoginType;
-
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
@@ -25,12 +23,14 @@ import com.googlecode.reunion.jreunion.server.Enums.S_LoginType;
 public class PacketParser extends EventBroadcaster implements EventListener{
 
 	private Server server;
+	private Command com;
 
 	private MessageParser messageParser;
 
 	public PacketParser(Server server) {
 		super();
 		this.server = server;
+		com = server.getWorldModule().getWorldCommand();
 		messageParser = new MessageParser();
 		//add a listener for the event type NetworkDataEvent
 		server.getNetworkModule().addEventListener(NetworkDataEvent.class, this);
@@ -38,7 +38,6 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 	}
 
 	private void HandleMessage(Client client, String message[]) {
-		Command com = server.getWorldModule().getWorldCommand();
 		System.out.println("Parsing " + message[0] + " command on "
 				+ client + " with state: " + client.getState() + "");
 		switch (client.getState()) {
@@ -69,12 +68,12 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 			if (message[0].equals("login")) {
 				System.out.println("Got login");
 				client.setState(Client.State.GOT_LOGIN);
-				client.setLoginType(S_LoginType.LOGIN);
+				client.setLoginType(Client.LoginType.LOGIN);
 				break;
 			} else if(message[0].equals("play")) {
 				System.out.println("Got play");
 				client.setState(Client.State.GOT_LOGIN);
-				client.setLoginType(S_LoginType.PLAY);
+				client.setLoginType(Client.LoginType.PLAY);
 				break;
 			} else {
 				System.out.println("Inconsistent protocol (err 2) detected on: "
@@ -178,7 +177,7 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 				
 				
 				int defaultSpawnId = Integer.parseInt(Reference.getInstance().getMapReference().getItemById(player.getPosition().getMap().getId()).getMemberValue("DefaultSpawnId"));
-				S_ParsedItem spawn =player.getPosition().getMap().getPlayerSpawnReference().getItemById(defaultSpawnId);
+				ParsedItem spawn =player.getPosition().getMap().getPlayerSpawnReference().getItemById(defaultSpawnId);
 				
 				int x = Integer.parseInt(spawn.getMemberValue("X"));
 				int y = Integer.parseInt(spawn.getMemberValue("Y"));
@@ -329,7 +328,7 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 				}
 			} else if (message[0].equals("wear")) {
 				int slotId = Integer.parseInt(message[1]);
-				G_EquipmentSlot slot =G_EquipmentSlot.byValue(slotId);
+				Equipment.Slot slot =Equipment.Slot.byValue(slotId);
 				client.getPlayer().wearSlot(slot);
 				// com.getPlayer()Wear(client.getPlayer()Object,Integer.parseInt(message[1]));
 			} else if (message[0].equals("use_skill")) {

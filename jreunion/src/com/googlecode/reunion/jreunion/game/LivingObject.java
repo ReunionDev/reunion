@@ -1,6 +1,6 @@
 package com.googlecode.reunion.jreunion.game;
 
-import com.googlecode.reunion.jcommon.S_ParsedItem;
+import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jreunion.server.Map;
 import com.googlecode.reunion.jreunion.server.Reference;
 import com.googlecode.reunion.jreunion.server.Session;
@@ -100,7 +100,7 @@ public abstract class LivingObject extends WorldObject {
 
 	public void loadFromReference(int id) {
 
-		S_ParsedItem mob = Reference.getInstance().getMobReference()
+		ParsedItem mob = Reference.getInstance().getMobReference()
 				.getItemById(id);
 
 		if (mob == null) {
@@ -150,9 +150,9 @@ public abstract class LivingObject extends WorldObject {
 		this.currStm = currStm;
 
 		// Client client =
-		// S_Server.getInstance().networkModule.getClient(this.getPlayerSession().getPlayer(this.getEntityId()));
+		// Server.getInstance().networkModule.getClient(this.getPlayerSession().getPlayer(this.getEntityId()));
 		// if(client.clientState == 10)
-		// S_Server.getInstance().networkModule.SendPacket(client.networkId,"status
+		// Server.getInstance().networkModule.SendPacket(client.networkId,"status
 		// 2 "+this.getPlayerCurrStm()+" "+this.getPlayerMaxStm());
 	}
 

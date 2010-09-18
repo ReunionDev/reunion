@@ -5,8 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
-import com.googlecode.reunion.jcommon.S_ParsedItem;
-import com.googlecode.reunion.jcommon.S_Parser;
+import com.googlecode.reunion.jcommon.ParsedItem;
+import com.googlecode.reunion.jcommon.Parser;
 import com.googlecode.reunion.jreunion.server.Reference;
 import com.googlecode.reunion.jreunion.server.Server;
 import com.googlecode.reunion.jreunion.server.Session;
@@ -31,14 +31,14 @@ public class Npc extends LivingObject {
 
 	private String shop;
 
-	private S_Parser shopReference;
+	private Parser shopReference;
 
 	private List<Item> itemsList = new Vector<Item>();
 
 	public Npc(int type) {
 		super();
 		this.type = type;
-		shopReference = new S_Parser();
+		shopReference = new Parser();
 		shop = null;
 	}
 
@@ -96,7 +96,7 @@ public class Npc extends LivingObject {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		S_ParsedItem npc = Reference.getInstance().getNpcReference()
+		ParsedItem npc = Reference.getInstance().getNpcReference()
 				.getItemById(id);
 
 		if (npc == null) {
@@ -119,11 +119,11 @@ public class Npc extends LivingObject {
 	
 			itemsList.clear();
 	
-			Iterator<S_ParsedItem> iter = shopReference.getItemListIterator();
+			Iterator<ParsedItem> iter = shopReference.getItemListIterator();
 	
 			while (iter.hasNext()) {
 	
-				S_ParsedItem i = iter.next();
+				ParsedItem i = iter.next();
 	
 				if (!i.checkMembers(new String[] { "Type" })) {
 					System.out.println("Error loading a Npc Shop Item on map: "

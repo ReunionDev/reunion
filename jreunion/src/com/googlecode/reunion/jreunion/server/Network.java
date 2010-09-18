@@ -235,7 +235,6 @@ public class Network extends EventBroadcaster implements Runnable{
 	public void notifySend(Client client) {
 		try {
 			synchronized(this){
-				System.out.println("sync selector notify");
 				selector.wakeup();
 				client.getSocket().getChannel().register(selector, SelectionKey.OP_READ | SelectionKey.OP_WRITE);
 			}

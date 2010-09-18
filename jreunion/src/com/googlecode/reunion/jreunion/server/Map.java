@@ -5,8 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
-import com.googlecode.reunion.jcommon.S_ParsedItem;
-import com.googlecode.reunion.jcommon.S_Parser;
+import com.googlecode.reunion.jcommon.ParsedItem;
+import com.googlecode.reunion.jcommon.Parser;
 import com.googlecode.reunion.jreunion.game.Merchant;
 import com.googlecode.reunion.jreunion.game.Npc;
 import com.googlecode.reunion.jreunion.game.Player;
@@ -36,7 +36,7 @@ public class Map {
 
 	private Area pvpArea = new Area();
 
-	private S_Parser playerSpawnReference;
+	private Parser playerSpawnReference;
 
 	public boolean isLocal() {
 		return local;
@@ -46,9 +46,9 @@ public class Map {
 		this.local = local;
 	}
 
-	private S_Parser mobSpawnReference;
+	private Parser mobSpawnReference;
 
-	private S_Parser npcSpawnReference;
+	private Parser npcSpawnReference;
 
 	private InetSocketAddress address;
 
@@ -85,11 +85,11 @@ public class Map {
 		}
 
 		mobSpawnList.clear();
-		Iterator<S_ParsedItem> iter = mobSpawnReference.getItemListIterator();
+		Iterator<ParsedItem> iter = mobSpawnReference.getItemListIterator();
 
 		while (iter.hasNext()) {
 
-			S_ParsedItem item = iter.next();
+			ParsedItem item = iter.next();
 
 			if (!item.checkMembers(new String[] { "ID", "X", "Y",
 					"Radius", "RespawnTime", "Type" })) {
@@ -121,11 +121,11 @@ public class Map {
 
 		npcSpawnList.clear();
 
-		Iterator<S_ParsedItem> iter = npcSpawnReference.getItemListIterator();
+		Iterator<ParsedItem> iter = npcSpawnReference.getItemListIterator();
 
 		while (iter.hasNext()) {
 
-			S_ParsedItem i = iter.next();
+			ParsedItem i = iter.next();
 
 			if (!i.checkMembers(new String[] { "ID", "X", "Y",
 					"Rotation", "Type" })) {
@@ -168,7 +168,7 @@ public class Map {
 		return playerArea;
 	}
 
-	public S_Parser getPlayerSpawnReference() {
+	public Parser getPlayerSpawnReference() {
 		return playerSpawnReference;
 	}
 
@@ -190,8 +190,8 @@ public class Map {
 
 	public void load() {
 		
-		S_ParsedItem config = Reference.getInstance().getMapConfigReference().getItemById(id);
-		S_ParsedItem map = Reference.getInstance().getMapReference().getItemById(id);
+		ParsedItem config = Reference.getInstance().getMapConfigReference().getItemById(id);
+		ParsedItem map = Reference.getInstance().getMapReference().getItemById(id);
 		String location = config.getMemberValue("Location");
 		String ip= config.getMemberValue("Ip");
 		int port = Integer.parseInt(config.getMemberValue("Port"));		
@@ -203,9 +203,9 @@ public class Map {
 			
 			System.out.println("Loading "+this.getName());
 			Server.getInstance().getNetworkModule().register(getAddress());
-			playerSpawnReference = new S_Parser();
-			mobSpawnReference = new S_Parser();
-			npcSpawnReference = new S_Parser();
+			playerSpawnReference = new Parser();
+			mobSpawnReference = new Parser();
+			npcSpawnReference = new Parser();
 			loadFromReference(id);
 			createMobSpawns();
 			createNpcSpawns();
@@ -218,7 +218,7 @@ public class Map {
 	
 	@Override
 	public String toString() {
-		return "S_Map [id=" + id + ", name=" + name + "]";
+		return "Map [id=" + id + ", name=" + name + "]";
 	}
 
 	public void loadFromReference(int id) {

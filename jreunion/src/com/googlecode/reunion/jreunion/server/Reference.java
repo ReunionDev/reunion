@@ -1,6 +1,7 @@
 package com.googlecode.reunion.jreunion.server;
 
-import com.googlecode.reunion.jcommon.S_Parser;
+import com.googlecode.reunion.jcommon.Parser;
+
 
 /**
  * @author Aidamina
@@ -21,30 +22,30 @@ public class Reference {
 		return _instance;
 	}
 
-	private S_Parser itemReference;
-	private S_Parser mobReference;
-	private S_Parser skillReference;
-	private S_Parser expReference;
-	private S_Parser npcReference;
-	private S_Parser dropListReference;
+	private Parser itemReference;
+	private Parser mobReference;
+	private Parser skillReference;
+	private Parser expReference;
+	private Parser npcReference;
+	private Parser dropListReference;
 
-	private S_Parser mapReference;
-	private S_Parser mapConfigReference;
+	private Parser mapReference;
+	private Parser mapConfigReference;
 
-	private S_Parser serverReference;
+	private Parser serverReference;
 	private static Reference _instance = null;
 
 	public Reference() {
 		super();
-		itemReference = new S_Parser();
-		mobReference = new S_Parser();
-		skillReference = new S_Parser();
-		expReference = new S_Parser();
-		mapReference = new S_Parser();
-		mapConfigReference = new S_Parser();
-		npcReference = new S_Parser();
-		serverReference = new S_Parser();
-		dropListReference = new S_Parser();
+		itemReference = new Parser();
+		mobReference = new Parser();
+		skillReference = new Parser();
+		expReference = new Parser();
+		mapReference = new Parser();
+		mapConfigReference = new Parser();
+		npcReference = new Parser();
+		serverReference = new Parser();
+		dropListReference = new Parser();
 	}
 
 	public void clear() {
@@ -59,41 +60,41 @@ public class Reference {
 		dropListReference.clear();
 	}
 
-	public S_Parser getExpReference() {
+	public Parser getExpReference() {
 		return expReference;
 	}
 
-	public S_Parser getItemReference() {
+	public Parser getItemReference() {
 		return itemReference;
 	}
 
 	/**
 	 * @return Returns the mapReference.
 	 */
-	public S_Parser getMapReference() {
+	public Parser getMapReference() {
 		return mapReference;
 	}
 	
-	public S_Parser getMapConfigReference() {
+	public Parser getMapConfigReference() {
 		return mapConfigReference;
 	}
 
-	public S_Parser getMobReference() {
+	public Parser getMobReference() {
 		return mobReference;
 	}
 
-	public S_Parser getNpcReference() {
+	public Parser getNpcReference() {
 		return npcReference;
 	}
 
-	public S_Parser getServerReference() {
+	public Parser getServerReference() {
 		return serverReference;
 	}
 
-	public S_Parser getSkillReference() {
+	public Parser getSkillReference() {
 		return skillReference;
 	}
-	public S_Parser getDropListReference() {
+	public Parser getDropListReference() {
 		return dropListReference;
 	}
 

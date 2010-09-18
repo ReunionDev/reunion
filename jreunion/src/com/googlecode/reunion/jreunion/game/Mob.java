@@ -3,8 +3,8 @@ package com.googlecode.reunion.jreunion.game;
 import java.util.Iterator;
 import java.util.Random;
 
-import com.googlecode.reunion.jcommon.S_ParsedItem;
-import com.googlecode.reunion.jcommon.S_Parser;
+import com.googlecode.reunion.jcommon.ParsedItem;
+import com.googlecode.reunion.jcommon.Parser;
 import com.googlecode.reunion.jreunion.server.Client;
 import com.googlecode.reunion.jreunion.server.Reference;
 import com.googlecode.reunion.jreunion.server.Server;
@@ -151,7 +151,7 @@ public class Mob extends LivingObject {
 	public void loadFromReference(int id) {
 		super.loadFromReference(id);
 
-		S_ParsedItem mob = Reference.getInstance().getMobReference()
+		ParsedItem mob = Reference.getInstance().getMobReference()
 				.getItemById(id);
 
 		if (mob == null) {
@@ -334,11 +334,11 @@ public class Mob extends LivingObject {
 		if (spawn != null) {
 			spawn.setDead(true);
 		}
-		S_Parser dropList = Reference.getInstance().getDropListReference();
-		Iterator<S_ParsedItem> iter =dropList.getItemListIterator();
+		Parser dropList = Reference.getInstance().getDropListReference();
+		Iterator<ParsedItem> iter =dropList.getItemListIterator();
 		Random r = new Random();
 		while(iter.hasNext()) {			
-			S_ParsedItem item = iter.next();
+			ParsedItem item = iter.next();
 			if(item.getMemberValue("Mob").equals(""+this.getType())){
 				float rate = Float.parseFloat(item.getMemberValue("Rate"));
 				if( r.nextFloat()<rate){

@@ -12,9 +12,5 @@ public class Enums {
 	
 	
 	
-	public enum S_LoginType{
-		PLAY,
-		LOGIN
-		
-	}
+	
 }

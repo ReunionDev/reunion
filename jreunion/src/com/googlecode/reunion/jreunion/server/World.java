@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.Hashtable;
 import java.util.Iterator;
 
-import com.googlecode.reunion.jcommon.S_ParsedItem;
+import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jreunion.game.Mob;
 import com.googlecode.reunion.jreunion.game.Player;
 
@@ -109,9 +109,9 @@ public class World extends ClassModule {
 	@Override
 	public void start() {
 		
-		Iterator<S_ParsedItem> iter = Reference.getInstance().getMapConfigReference().getItemListIterator();
+		Iterator<ParsedItem> iter = Reference.getInstance().getMapConfigReference().getItemListIterator();
 		while(iter.hasNext()){
-			S_ParsedItem item = iter.next();			
+			ParsedItem item = iter.next();			
 			int mapId = Integer.parseInt(item.getMemberValue("Id"));
 			Map map = new Map(mapId);
 			map.load();

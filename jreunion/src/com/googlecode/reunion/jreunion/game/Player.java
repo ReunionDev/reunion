@@ -6,9 +6,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.Vector;
 
-import com.googlecode.reunion.jcommon.S_ParsedItem;
-import com.googlecode.reunion.jcommon.S_Parser;
-import com.googlecode.reunion.jreunion.game.Enums.G_EquipmentSlot;
+import com.googlecode.reunion.jcommon.ParsedItem;
+import com.googlecode.reunion.jcommon.Parser;
 import com.googlecode.reunion.jreunion.server.CharSkill;
 import com.googlecode.reunion.jreunion.server.Client;
 import com.googlecode.reunion.jreunion.server.DatabaseUtils;
@@ -337,13 +336,13 @@ public abstract class Player extends LivingObject implements SkillTarget {
 	public void spawn() {
 		
 		int defaultSpawnId = Integer.parseInt(Reference.getInstance().getMapReference().getItemById(getPosition().getMap().getId()).getMemberValue("DefaultSpawnId"));
-		S_ParsedItem defaultSpawn =getPosition().getMap().getPlayerSpawnReference().getItemById(defaultSpawnId);
+		ParsedItem defaultSpawn =getPosition().getMap().getPlayerSpawnReference().getItemById(defaultSpawnId);
 				
-		S_Parser playerSpawns = getPosition().getMap().getPlayerSpawnReference();
-		Iterator<S_ParsedItem> iter = playerSpawns.getItemListIterator();
+		Parser playerSpawns = getPosition().getMap().getPlayerSpawnReference();
+		Iterator<ParsedItem> iter = playerSpawns.getItemListIterator();
 
 		while (iter.hasNext()) {
-			S_ParsedItem item = iter.next();
+			ParsedItem item = iter.next();
 
 			if (Integer.parseInt(item.getMemberValue("Id"))!=defaultSpawnId) {
 				Rectangle rectangle = new Rectangle(Integer.parseInt(item
@@ -517,7 +516,7 @@ public abstract class Player extends LivingObject implements SkillTarget {
 
 	@Override
 	public void loadFromReference(int id) {
-		S_ParsedItem exp = Reference.getInstance().getExpReference()
+		ParsedItem exp = Reference.getInstance().getExpReference()
 				.getItemById(id);
 
 		if (exp == null) {
@@ -638,8 +637,8 @@ public abstract class Player extends LivingObject implements SkillTarget {
 		updateStatus(2, newStamina, getMaxStm());
 		// setCurrStm(newStamina);
 		// Client client =
-		// S_Server.getInstance().getNetworkModule().getClient(player);
-		// S_Server.getInstance().getNetworkModule().SendPacket(client.networkId,"status
+		// Server.getInstance().getNetworkModule().getClient(player);
+		// Server.getInstance().getNetworkModule().SendPacket(client.networkId,"status
 		// 2 "+player.getPlayerCurrStm()+" "+player.getPlayerMaxStm());
 	}
 
@@ -658,7 +657,7 @@ public abstract class Player extends LivingObject implements SkillTarget {
 				uniqueid);
 		getInventory().addItem(item);
 		InventoryItem invItem = getInventory().getItem(item);
-		// S_DatabaseUtils.getInstance().saveInventory(client.getPlayer()Object);
+		// DatabaseUtils.getInstance().saveInventory(client.getPlayer()Object);
 
 		if (invItem == null) {
 			getInventory().setItemSelected(new InventoryItem(item, 0, 0, 0));
@@ -932,8 +931,8 @@ public abstract class Player extends LivingObject implements SkillTarget {
 
 	/****** player activates skill ******/
 	/*
-	 * public void useSkill(int skillId) { S_Client client =
-	 * S_Server.getInstance().getNetworkModule().getClient(this);
+	 * public void useSkill(int skillId) { Client client =
+	 * Server.getInstance().getNetworkModule().getClient(this);
 	 * 
 	 * if(client==null) return;
 	 * 
@@ -941,7 +940,7 @@ public abstract class Player extends LivingObject implements SkillTarget {
 	 * 
 	 * String packetData =
 	 * "skill "+skill.getCurrLevel()+" char "+getEntityId()+" "+skillId+"\n";
-	 * S_Server.getInstance().getNetworkModule() .SendPacket(client.networkId,
+	 * Server.getInstance().getNetworkModule() .SendPacket(client.networkId,
 	 * packetData); // S> skill [SkillLevel] char [CharID] [SkillID] }
 	 */
 	/****** increase skill level ******/
@@ -1279,7 +1278,7 @@ public abstract class Player extends LivingObject implements SkillTarget {
 		}
 		// S> status [StatusConstant] [Current] [Max]
 
-		// S_DatabaseUtils.getInstance().saveCharStatus(this);
+		// DatabaseUtils.getInstance().saveCharStatus(this);
 	}
 
 	public void walk(int posX, int posY, int posZ, int run) {
@@ -1318,7 +1317,7 @@ public abstract class Player extends LivingObject implements SkillTarget {
 		
 	}
 
-	public void wearSlot(G_EquipmentSlot slot) {
+	public void wearSlot(Equipment.Slot slot) {
 	
 		InventoryItem invItem = getInventory().getItemSelected();
 		String packetData = new String();
@@ -1368,7 +1367,7 @@ public abstract class Player extends LivingObject implements SkillTarget {
 			}
 
 		}
-		// S_DatabaseUtils.getInstance().saveEquipment(this);
+		// DatabaseUtils.getInstance().saveEquipment(this);
 
 		Iterator<WorldObject> playerIter = getSession()
 				.getPlayerListIterator();

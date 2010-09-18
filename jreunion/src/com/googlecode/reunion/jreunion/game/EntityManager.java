@@ -13,17 +13,17 @@ import com.googlecode.reunion.jreunion.server.DatabaseUtils;
 public class EntityManager {
 	private java.util.List<Entity> entityList = new Vector<Entity>();
 
-	private static EntityManager ref;
+	private static EntityManager _instance;
 
 	public static synchronized EntityManager getEntityManager() {
-		if (ref == null) {
+		if (_instance == null) {
 			try {
-				ref = new EntityManager();
+				_instance = new EntityManager();
 			} catch (Exception e) {
 				return null;
 			}
 		}
-		return ref;
+		return _instance;
 	}
 
 	private List<Integer> entityIdPool = new Vector<Integer>();

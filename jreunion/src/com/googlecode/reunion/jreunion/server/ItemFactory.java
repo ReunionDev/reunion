@@ -1,6 +1,6 @@
 package com.googlecode.reunion.jreunion.server;
 
-import com.googlecode.reunion.jcommon.S_ParsedItem;
+import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jreunion.game.Item;
 
 /**
@@ -11,15 +11,9 @@ public class ItemFactory {
 
 	public static Item createItem(int type) {
 		Item item = null;
-		if (type == 0) {
-			item = new Item(type);
-			com.googlecode.reunion.jreunion.game.EntityManager
-					.getEntityManager().createEntity(item);
-			DatabaseUtils.getInstance().addItem(item);
-			return item;
-		}
+		
 
-		S_ParsedItem parseditem = Reference.getInstance().getItemReference()
+		ParsedItem parseditem = Reference.getInstance().getItemReference()
 				.getItemById(type);
 		if (parseditem == null) {
 			return null;
@@ -52,7 +46,7 @@ public class ItemFactory {
 			return null;
 		}
 
-		S_ParsedItem parseditem = Reference.getInstance().getItemReference()
+		ParsedItem parseditem = Reference.getInstance().getItemReference()
 				.getItemById(type);
 		if (parseditem == null) {
 			System.out.println("Item loaded failed, no such item type!");

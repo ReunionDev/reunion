@@ -1,6 +1,7 @@
 package com.googlecode.reunion.jreunion.server;
 
-import com.googlecode.reunion.jcommon.S_ParsedItem;
+import com.googlecode.reunion.jcommon.ParsedItem;
+
 
 /**
  * @author Aidamina
@@ -25,7 +26,7 @@ public class ServerSetings {
 	}
 
 	public void loadFromReference() {
-		S_ParsedItem server = Reference.getInstance().getServerReference()
+		ParsedItem server = Reference.getInstance().getServerReference()
 				.getItem("Server");
 
 		if (server == null) {

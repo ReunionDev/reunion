@@ -7,7 +7,7 @@ import com.googlecode.reunion.jreunion.game.Mob;
 import com.googlecode.reunion.jreunion.game.Npc;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Spawn;
-import com.googlecode.reunion.jcommon.S_ParsedItem;
+import com.googlecode.reunion.jcommon.ParsedItem;
 
 /**
  * @author Aidamina
@@ -166,7 +166,7 @@ public class MessageParser {
 			      try {	    	  
 					bw = new BufferedWriter(new FileWriter("OutSpawns.dta", true));
 					int mobid = Integer.parseInt(word[1]);
-					S_ParsedItem mob = Reference.getInstance().getMobReference()
+					ParsedItem mob = Reference.getInstance().getMobReference()
 							.getItemById(mobid);
 					
 					String mobname = mob.getName();

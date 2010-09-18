@@ -3,7 +3,6 @@ package com.googlecode.reunion.jreunion.server;
 import java.net.Socket;
 
 import com.googlecode.reunion.jreunion.game.Player;
-import com.googlecode.reunion.jreunion.server.Enums.S_LoginType;
 import com.googlecode.reunion.jreunion.server.PacketFactory.S_PacketType;
 
 /**
@@ -89,13 +88,13 @@ public class Client {
 	}
 	public int characterId;
 	
-	public S_LoginType loginType;
+	public LoginType loginType;
 
-	public S_LoginType getLoginType() {
+	public LoginType getLoginType() {
 		return loginType;
 	}
 
-	public void setLoginType(S_LoginType loginType) {
+	public void setLoginType(LoginType loginType) {
 		this.loginType = loginType;
 	}
 
@@ -184,6 +183,12 @@ public class Client {
 			return value;			
 		
 		}
+	}
+	
+	public enum LoginType{
+		PLAY,
+		LOGIN
+		
 	}
 	
 }

@@ -169,43 +169,7 @@ public class Enums {
 	public final static int RANGE_MAGIC_DMG = 2;
 	
 	
-	public enum G_EquipmentSlot
-	{
-		EMPTY(-1),
-		HELMET(0),
-		CHEST(1),
-		PANTS(2),
-		SHOULDER(3),
-		BOOTS(4),
-		OFFHAND(5),
-		NECKLACE(6),
-		RING(7),		
-		BRACELET(8),
-		MAINHAND(9);
-
-		int value;
-		G_EquipmentSlot(int value){
-			this.value = value;
-			
-		}
-		public int value(){
-			return value;			
-		
-		}
-		
-		public static G_EquipmentSlot byValue(int slotId){
-			
-			for(G_EquipmentSlot slot:G_EquipmentSlot.values())
-			{
-				if(slot.value()==slotId){					
-					return slot;
-				}
-			}
-			return null;
-		}
-		
-		
-	}
+	
 	
 	
 }

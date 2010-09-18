@@ -15,7 +15,6 @@ import com.googlecode.reunion.jreunion.game.RoamingItem;
 import com.googlecode.reunion.jreunion.game.Skill;
 import com.googlecode.reunion.jreunion.game.SlayerWeapon;
 import com.googlecode.reunion.jreunion.game.Weapon;
-import com.googlecode.reunion.jreunion.server.Enums.S_LoginType;
 import com.googlecode.reunion.jreunion.server.PacketFactory.S_PacketType;
 
 /**

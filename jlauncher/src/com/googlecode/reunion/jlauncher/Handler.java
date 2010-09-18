@@ -32,21 +32,20 @@ public class Handler extends java.net.URLStreamHandler {
 		
 		return DEFAULT_PORT;
 	}
-	 public static void register() {
-	      final String packageName =
-	    	  Handler.class.getPackage().getName();
-	      final String pkg = packageName.substring(
-    		  0, packageName.lastIndexOf(  '.' ) );
-	      final String protocolPathProp = "java.protocol.handler.pkgs";
-
-	      String uriHandlers = System.getProperty(protocolPathProp, "");
-	      if ( uriHandlers.indexOf( pkg ) == -1 ) {
-	    	  if ( uriHandlers.length() != 0 )
-	    		  uriHandlers += "|";
-	    	  uriHandlers += pkg;
-	    	  System.setProperty( protocolPathProp,uriHandlers );
-	      }
-	 }
 	
-	 
+	public static void register() {
+		
+		final String packageName =
+			Handler.class.getPackage().getName();
+	    final String pkg = packageName.substring(0, packageName.lastIndexOf( '.' ) );
+	    final String protocolPathProp = "java.protocol.handler.pkgs";
+
+	    String uriHandlers = System.getProperty(protocolPathProp, "");
+	    if ( uriHandlers.indexOf( pkg ) == -1 ) {
+	    	if ( uriHandlers.length() != 0 )
+	    		uriHandlers += "|";
+	    	uriHandlers += pkg;
+	    	System.setProperty( protocolPathProp,uriHandlers );
+	    }
+	} 
 }

@@ -4,8 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.util.Random;
 
-import com.googlecode.reunion.jcommon.S_ParsedItem;
-import com.googlecode.reunion.jcommon.S_Parser;
+import com.googlecode.reunion.jcommon.ParsedItem;
+import com.googlecode.reunion.jcommon.Parser;
 import com.mysql.jdbc.MySQLConnection;
 import java.sql.PreparedStatement;
 
@@ -26,11 +26,11 @@ public class Database extends ClassModule {
 	}
 
 	public void connect() throws Exception {
-		S_Parser databaseConfigParser = new S_Parser();
+		Parser databaseConfigParser = new Parser();
 		databaseConfigParser.Parse("config/Database.dta");
 		String[] requiredMembers = { "address", "database", "username",
 				"password" };
-		S_ParsedItem databaseConfig = databaseConfigParser.getItem("Database");
+		ParsedItem databaseConfig = databaseConfigParser.getItem("Database");
 
 		if (databaseConfig == null
 				|| !databaseConfig.checkMembers(requiredMembers)) {

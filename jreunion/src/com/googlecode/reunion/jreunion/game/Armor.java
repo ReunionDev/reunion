@@ -1,6 +1,6 @@
 package com.googlecode.reunion.jreunion.game;
 
-import com.googlecode.reunion.jcommon.S_ParsedItem;
+import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jreunion.server.Reference;
 
 /**
@@ -99,7 +99,7 @@ public class Armor extends PlayerItem {
 	public void loadFromReference(int id) {
 		super.loadFromReference(id);
 
-		S_ParsedItem item = Reference.getInstance().getItemReference()
+		ParsedItem item = Reference.getInstance().getItemReference()
 				.getItemById(id);
 
 		if (item == null) {
