@@ -1,0 +1,13 @@
+[Default]
+ID = 1
+X = 235
+Y = 126
+Width = 20
+Height = 20
+
+[Entry Searost]
+ID = 2
+X = 3825
+Y = 2690
+Width = 20
+Height = 20

@@ -1,0 +1,30 @@
+#Green Portals
+
+[Default 1 F]
+ID = 1
+X = 215
+Y = 571
+Width = 50
+Height = 50
+
+[Default 2 F]
+ID = 2
+X = 1814
+Y = 4956
+Width = 50
+Height = 50
+
+[Default 3 F]
+ID = 3
+X = 3152
+Y = 1773
+Width = 50
+Height = 50
+
+[Default 4 F]
+ID = 4
+X = 4797
+Y = 3918
+Width = 50
+Height = 50
+
