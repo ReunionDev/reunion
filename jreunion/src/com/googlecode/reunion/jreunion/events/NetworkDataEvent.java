@@ -10,7 +10,7 @@ public class NetworkDataEvent extends NetworkEvent
 	Client client;
 	String data;
 	
-	protected NetworkDataEvent(Client client, String data) {
+	public NetworkDataEvent(Client client, String data) {
 		super(client);
 		this.client = client;
 		this.data = data;

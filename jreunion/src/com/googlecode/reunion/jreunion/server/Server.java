@@ -1,5 +1,10 @@
 package com.googlecode.reunion.jreunion.server;
 
+import java.util.HashMap;
+
+import com.googlecode.reunion.jreunion.events.ServerStartEvent;
+import com.googlecode.reunion.jreunion.events.ServerStopEvent;
+
 
 /**
  * @author Aidamina
@@ -8,6 +13,12 @@ package com.googlecode.reunion.jreunion.server;
 public class Server extends ClassModule {
 
 	private static Server _instance = null;
+	
+	private HashMap<String,Service> services = new HashMap<String,Service>();
+
+	public HashMap<String, Service> getServices() {
+		return services;
+	}
 
 	public synchronized static Server getInstance() {
 		if (_instance == null) {
@@ -32,11 +43,15 @@ public class Server extends ClassModule {
 
 		try {
 
+			server.fireEvent(server.createEvent(ServerStartEvent.class, server));
 			server.doStart(); // Call the start functions in all the loaded
 								// modules
 								// Load a module by extending it from
 								// ClassModule
 								// And put the put the parent in the constructor
+			
+			
+			
 			while (true) {
 				server.doWork();
 				Thread.sleep(1); // Sleep to make sure it doesnt use 100%
@@ -51,6 +66,7 @@ public class Server extends ClassModule {
 		}
 		finally {
 			PerformanceStats.getInstance().dumpPerformance();
+			server.fireEvent(server.createEvent(ServerStopEvent.class, server));
 			server.doStop();
 			System.exit(-1);
 		}
@@ -73,10 +89,12 @@ public class Server extends ClassModule {
 		Reference.getInstance().Load();
 
 		databaseModule = new Database(this);
-		networkModule = new Network();
+		networkModule = new Network(this);
 		worldModule = new World(this);
 		packetParser = new PacketParser(this);
 	}
+	
+	
 
 	/**
 	 * @return Returns the databaseModule.
@@ -117,16 +135,14 @@ public class Server extends ClassModule {
 
 	@Override
 	public void start() {
-		System.out.println("S_Server start");
+		System.out.println("Server start");
 		
-		networkModule.start();
 		
 	}
 
 	@Override
 	public void stop() {
-		System.out.println("S_Server stop");
-		networkModule.stop();
+		System.out.println("Server stop");
 	}
 
 	@Override

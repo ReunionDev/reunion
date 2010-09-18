@@ -24,7 +24,8 @@ public class Event {
 	{
 		Event event;
 		try {
-			event = (Event)c.getConstructors()[0].newInstance(args);
+			//System.out.println(c.getName());			
+			event = (Event)c.getConstructors()[0].newInstance(args);		
 			event.setSource(source);
 			return (T) event;
 		} catch (Exception e) {

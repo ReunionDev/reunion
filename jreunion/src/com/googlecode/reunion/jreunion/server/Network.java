@@ -19,15 +19,21 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 
+import com.googlecode.reunion.jreunion.events.ClientSendEvent;
+import com.googlecode.reunion.jreunion.events.Event;
 import com.googlecode.reunion.jreunion.events.EventBroadcaster;
+import com.googlecode.reunion.jreunion.events.EventListener;
 import com.googlecode.reunion.jreunion.events.NetworkDataEvent;
+import com.googlecode.reunion.jreunion.events.ServerEvent;
+import com.googlecode.reunion.jreunion.events.ServerStartEvent;
+import com.googlecode.reunion.jreunion.events.ServerStopEvent;
 import com.googlecode.reunion.jreunion.game.Player;
 
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-public class Network extends EventBroadcaster implements Runnable{
+public class Network extends Service implements Runnable, EventListener{
 	
 	private final ByteBuffer buffer = ByteBuffer.allocate(16384);
 	
@@ -37,13 +43,14 @@ public class Network extends EventBroadcaster implements Runnable{
 	
 	private Thread thread;
 
-	public Network() {
-		
+	public Network(Server server) {
+		super();
 		try {
+			server.addEventListener(ServerEvent.class, this);		
 			selector = Selector.open();
 			thread = new Thread(this);
 		} catch (IOException e) {
-			e.printStackTrace();
+			throw new RuntimeException(e);
 		}	
 	}
 
@@ -80,6 +87,8 @@ public class Network extends EventBroadcaster implements Runnable{
 						// Register this socket with the Selector
 						// so we can listen for input on it
 						Client client = new Client();
+						
+						client.addEventListener(ClientSendEvent.class, this);
 						
 						SocketChannel clientSocketChannel = ((ServerSocketChannel)socketChannel).accept();
 						Socket socket = clientSocketChannel.socket();						
@@ -161,7 +170,6 @@ public class Network extends EventBroadcaster implements Runnable{
 		String data = new String(decOutput);
 		
 		System.out.print(data);
-		System.out.print(listeners.size());
 		fireEvent(this.createEvent(NetworkDataEvent.class, client, data));
 		
 		//S_Server.getInstance().getPacketParser().Parse(client,data);
@@ -208,6 +216,7 @@ public class Network extends EventBroadcaster implements Runnable{
 			} catch (IOException e) {
 				// e.printStackTrace();
 			}
+			
 			if (client.getPlayer() != null) {
 				client.getPlayer().logout();			
 			}
@@ -284,4 +293,17 @@ public class Network extends EventBroadcaster implements Runnable{
 		}
 	}
 
+	@Override
+	public void handleEvent(Event event) {
+		System.out.println(event);
+		super.handleEvent(event);
+		if(event instanceof ClientSendEvent){
+			ClientSendEvent clientSendEvent = (ClientSendEvent) event;
+			this.notifySend(clientSendEvent.getClient());
+		}else if(event instanceof ServerStartEvent){
+			start();
+		}else if(event instanceof ServerStopEvent){
+			stop();
+		}				
+	}
 }

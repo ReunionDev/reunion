@@ -2,6 +2,8 @@ package com.googlecode.reunion.jreunion.server;
 
 import java.net.Socket;
 
+import com.googlecode.reunion.jreunion.events.ClientSendEvent;
+import com.googlecode.reunion.jreunion.events.EventBroadcaster;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.server.PacketFactory.S_PacketType;
 
@@ -9,7 +11,7 @@ import com.googlecode.reunion.jreunion.server.PacketFactory.S_PacketType;
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-public class Client {
+public class Client extends EventBroadcaster {
 	
 	
 	
@@ -121,9 +123,11 @@ public class Client {
 			if(!data.endsWith("\n")){
 				this.outputBuffer.append("\n");
 			}
-			
+			this.fireEvent(this.createEvent(ClientSendEvent.class, this));
+			/*
 			Server.getInstance()
 			.getNetworkModule().notifySend(this);
+			*/
 		}
 		
 	}

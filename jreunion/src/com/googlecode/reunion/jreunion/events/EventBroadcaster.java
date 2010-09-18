@@ -22,8 +22,8 @@ public class EventBroadcaster{
 		}
 	}
 	
-	public <T extends Event> T createEvent(Class<T> c, Object... args){
-		return Event.<T>Create(c, this, args);		
+	public <T extends Event> T createEvent(Class<T> eventClass, Object... args){
+		return Event.<T>Create(eventClass, this, args);		
 	}
 	
 	public  Map<Class,List<EventListener>> listeners;
@@ -36,6 +36,10 @@ public class EventBroadcaster{
 	}
 
 	public void addEventListener(Class c, EventListener listener){
+		addEventListener(c, listener, null);
+	}
+	
+	public void addEventListener(Class c, EventListener listener, Filter filter){
 		Map<Class,List<EventListener>> listeners = this.getListeners();
 		synchronized(listeners){
 			List<EventListener> list = null;
@@ -70,7 +74,6 @@ public class EventBroadcaster{
 					List<EventListener> list = listeners.get(c);
 					if(list.contains(listener)){
 						list.remove(listener);
-						list.remove(c);
 						if(list.isEmpty())
 							listeners.remove(c);
 					}
@@ -109,6 +112,7 @@ public class EventBroadcaster{
 		
 		EventListener listener;
 		Event event;
+		Filter filter;
 		boolean waiting = false;
 		Thread thread;
 		
@@ -124,8 +128,9 @@ public class EventBroadcaster{
 							this.waiting = false;
 						}
 					}
-					try{				
-						listener.handleEvent(event);						
+					try{
+						if(filter==null||filter.filter(event))
+							listener.handleEvent(event);						
 						
 					}catch(Exception e){
 						e.printStackTrace();

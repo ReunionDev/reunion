@@ -20,6 +20,7 @@ public class EntityManager {
 			try {
 				_instance = new EntityManager();
 			} catch (Exception e) {
+				e.printStackTrace();
 				return null;
 			}
 		}
@@ -32,7 +33,7 @@ public class EntityManager {
 		if (!DatabaseUtils.getInstance().checkDatabase()) {
 			throw new Exception();
 		}
-		entityIdPool = DatabaseUtils.getInstance().getUsedIds();
+		//entityIdPool = DatabaseUtils.getInstance().getUsedIds();
 	}
 
 	public void addEntity(Entity ent) {

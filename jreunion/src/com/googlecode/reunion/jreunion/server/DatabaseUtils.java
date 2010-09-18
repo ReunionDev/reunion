@@ -38,7 +38,7 @@ import com.mysql.jdbc.MySQLConnection;
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-public class DatabaseUtils {
+public class DatabaseUtils extends Service {
 	
 	private DatabaseUtils() {
 		super();
@@ -1015,19 +1015,5 @@ public class DatabaseUtils {
 	}
 	
 	
-	public void work(){
-		
-		DatabaseAction action = null;
-		
-		while((action=queue.poll())!=null) {
-			try{
-				action.perform();
-			}catch(Exception e){
-				
-				e.printStackTrace();
-			}
-		}
-		
-	}
 	
 }

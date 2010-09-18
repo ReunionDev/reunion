@@ -6,6 +6,12 @@ import java.util.Random;
 
 import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jcommon.Parser;
+import com.googlecode.reunion.jreunion.events.ClientSendEvent;
+import com.googlecode.reunion.jreunion.events.Event;
+import com.googlecode.reunion.jreunion.events.EventListener;
+import com.googlecode.reunion.jreunion.events.ServerEvent;
+import com.googlecode.reunion.jreunion.events.ServerStartEvent;
+import com.googlecode.reunion.jreunion.events.ServerStopEvent;
 import com.mysql.jdbc.MySQLConnection;
 import java.sql.PreparedStatement;
 
@@ -13,16 +19,15 @@ import java.sql.PreparedStatement;
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-public class Database extends ClassModule {
+public class Database implements EventListener {
 
 	public Connection conn = null;
 	
 	private PreparedStatement statement;
 
-	public Database(Module parent) {
-
-		super(parent);
-
+	public Database(Server server) {
+		server.addEventListener(ServerEvent.class, this);
+		
 	}
 
 	public void connect() throws Exception {
@@ -50,14 +55,16 @@ public class Database extends ClassModule {
 
 	}
 
-	@Override
-	public void start() throws Exception {
+	public void start(){
 
-		connect();
+		try {
+			connect();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	
 	}
 
-	@Override
 	public void stop() {
 
 		if (conn != null) {
@@ -71,8 +78,13 @@ public class Database extends ClassModule {
 	}
 
 	@Override
-	public void Work() {
-		DatabaseUtils.getInstance().work();
+	public void handleEvent(Event event) {
+		System.out.println(event);
+		 if(event instanceof ServerStartEvent){
+			start();
+		}else if(event instanceof ServerStopEvent){
+			stop();
+		}				
 	}
 
 }
