@@ -1,23 +1,44 @@
+### LRC
+
 [Laglamia]
 ID = 4
-Ip = 127.0.0.1
+Ip = 5.195.143.23
 Port = 4005
-Location = Local
+Location = Remote
 
 [Lost Realm Castle]
 ID = 0
-Ip = 127.0.0.1
+Ip = 5.195.143.23
 Port = 4001
 Location = Local
 
 [Shilon]
 ID = 3
-Ip = 127.0.0.1
+Ip = 5.195.143.23
 Port = 4004
-Location = Local
+Location = Remote
 
-[Dekaran]
-ID = 2
-Ip = 127.0.0.1
+[Searost]
+ID = 5
+Ip = 5.195.143.23
 Port = 4002
 Location = Remote
+
+[Paros]
+ID = 6
+Ip = 5.195.143.23
+Port = 4003
+Location = Remote
+
+[Deckadun]
+ID = 2
+Ip = 5.195.143.23
+Port = 4006
+Location = Remote
+
+[Dekaran]
+ID = 1
+Ip = 5.195.143.23
+Port = 4007
+Location = Remote
+
