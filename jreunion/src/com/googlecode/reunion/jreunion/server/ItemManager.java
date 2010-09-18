@@ -1,16 +1,16 @@
-package com.googlecode.reunion.jreunion.game;
+package com.googlecode.reunion.jreunion.server;
 
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
-import com.googlecode.reunion.jreunion.server.DatabaseUtils;
 
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-public class EntityManager {
+public class ItemManager {
+	/*
 	private java.util.List<Entity> entityList = new Vector<Entity>();
 
 	private static EntityManager _instance;
@@ -44,7 +44,7 @@ public class EntityManager {
 	public Object clone() throws CloneNotSupportedException {
 		throw new CloneNotSupportedException();
 	}
-
+/*
 	public void createEntity(Entity entity) {
 		if (entity == null) {
 			return;
@@ -83,7 +83,8 @@ public class EntityManager {
 
 		return;
 	}
-
+	*/
+/*
 	public void destroyEntity(Entity entity) {
 		entityList.remove(entity);
 
@@ -134,5 +135,6 @@ public class EntityManager {
 		entityList.remove(entity);
 
 	}
+	*/
 
 }

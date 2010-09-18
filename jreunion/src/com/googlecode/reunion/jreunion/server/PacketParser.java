@@ -503,7 +503,6 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 
 	@Override
 	public void handleEvent(Event event) {
-		//System.out.println(event);
 		if(event instanceof NetworkDataEvent){
 			NetworkDataEvent e = (NetworkDataEvent)event; 
 			Parse(e.getClient(),e.getData());

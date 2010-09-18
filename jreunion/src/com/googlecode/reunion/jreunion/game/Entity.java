@@ -5,30 +5,20 @@ package com.googlecode.reunion.jreunion.game;
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
 public class Entity {
-	private int e_id;
+	private int id;
 
 	public Entity() {
-		e_id = -1;
+		id = -1;
 
 	}
 
 	public int getEntityId() {
-		return e_id;
+		return id;
 	}
 
-	public void removeEntity() {
-		EntityManager.getEntityManager().removeEntity(this);
-	}
-
-	public void setEntityId(int id) throws Exception {
-		Exception e = new Exception();
-		if (!(Class
-				.forName("com.googlecode.reunion.jreunion.server.EntityManager") == 
-				e.getStackTrace()[1].getClass())) {
-			throw new Exception("Cannot set the entity id no permission");
-		}
-
-		e_id = id;
+	public void setEntityId(int id) {
+		this.id = id;
+		
 	}
 
 }

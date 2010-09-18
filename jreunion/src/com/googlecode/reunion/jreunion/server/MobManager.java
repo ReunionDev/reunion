@@ -3,7 +3,6 @@ package com.googlecode.reunion.jreunion.server;
 import java.util.Iterator;
 import java.util.Vector;
 
-import com.googlecode.reunion.jreunion.game.EntityManager;
 import com.googlecode.reunion.jreunion.game.Mob;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Spawn;
@@ -16,6 +15,7 @@ public class MobManager {
 	private java.util.List<Mob> mobList = new Vector<Mob>();
 
 	private boolean moveToPlayer = true;
+	int mobIdCounter = 0;
 
 	public MobManager() {
 
@@ -33,11 +33,12 @@ public class MobManager {
 	}
 
 	public Mob createMob(int type) {
-		Mob mob = new Mob(type);
-		EntityManager.getEntityManager().createEntity(mob);
-		addMob(mob);
-
-		return mob;
+		synchronized(this){
+			Mob mob = new Mob(type);
+			mob.setEntityId(mobIdCounter++);
+			addMob(mob);
+			return mob;
+		}
 	}
 
 	public Mob getMob(int uniqueid) {
@@ -88,7 +89,7 @@ public class MobManager {
 		while (containsMob(mob)) {
 			mobList.remove(mob);
 		}
-		EntityManager.getEntityManager().destroyEntity(mob);
+		//ItemManager.getEntityManager().destroyEntity(mob);
 	}
 
 	public void workMob(Mob mob) {

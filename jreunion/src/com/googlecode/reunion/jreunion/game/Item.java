@@ -8,8 +8,7 @@ import com.googlecode.reunion.jreunion.server.Reference;
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
 public class Item extends Entity {
-	private int uniqueId;
-
+	
 	private int price;
 
 	private int sizeX; // number of cols
@@ -62,10 +61,6 @@ public class Item extends Entity {
 
 	public int getType() {
 		return type;
-	}
-
-	public int getUniqueId() {
-		return uniqueId;
 	}
 
 	public void loadFromReference(int id) {

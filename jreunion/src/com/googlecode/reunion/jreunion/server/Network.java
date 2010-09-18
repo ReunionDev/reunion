@@ -170,6 +170,7 @@ public class Network extends Service implements Runnable, EventListener{
 		String data = new String(decOutput);
 		
 		System.out.print(data);
+		
 		fireEvent(this.createEvent(NetworkDataEvent.class, client, data));
 		
 		//S_Server.getInstance().getPacketParser().Parse(client,data);
@@ -239,8 +240,6 @@ public class Network extends Service implements Runnable, EventListener{
 		return clients.values().iterator();
 	}
 
-
-	
 	public void notifySend(Client client) {
 		try {
 			synchronized(this){
@@ -295,7 +294,6 @@ public class Network extends Service implements Runnable, EventListener{
 
 	@Override
 	public void handleEvent(Event event) {
-		System.out.println(event);
 		super.handleEvent(event);
 		if(event instanceof ClientSendEvent){
 			ClientSendEvent clientSendEvent = (ClientSendEvent) event;

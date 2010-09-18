@@ -601,7 +601,7 @@ public abstract class Player extends LivingObject implements SkillTarget {
 
 		DatabaseUtils.getInstance().saveSkills(this);
 		DatabaseUtils.getInstance().saveInventory(this);
-		DatabaseUtils.getInstance().saveCharStatus(this);
+		DatabaseUtils.getInstance().saveCharacter(this);
 		DatabaseUtils.getInstance().saveEquipment(this);
 		DatabaseUtils.getInstance().saveStash(client);
 		DatabaseUtils.getInstance().saveExchange(this);
@@ -652,9 +652,8 @@ public abstract class Player extends LivingObject implements SkillTarget {
 		if (client == null) {
 			return;
 		}
-
-		Item item = (Item) EntityManager.getEntityManager().getEnt(
-				uniqueid);
+		//TODO: Fix item pickup
+		/*Item item = (Item) EntityManager.getEntityManager().getEnt(uniqueid);
 		getInventory().addItem(item);
 		InventoryItem invItem = getInventory().getItem(item);
 		// DatabaseUtils.getInstance().saveInventory(client.getPlayer()Object);
@@ -675,6 +674,7 @@ public abstract class Player extends LivingObject implements SkillTarget {
 				+ item.getExtraStats() + "\n";
 		
 				client.SendData(packetData);
+		*/
 		// S> pick [UniqueID] [Type] [Tab] [PosX] [PosY] [GemNumber] [Special]
 	}
 

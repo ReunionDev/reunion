@@ -11,10 +11,10 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Vector;
 
+import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jreunion.game.Armor;
 import com.googlecode.reunion.jreunion.game.Axe;
 import com.googlecode.reunion.jreunion.game.Entity;
-import com.googlecode.reunion.jreunion.game.EntityManager;
 import com.googlecode.reunion.jreunion.game.Equipment;
 import com.googlecode.reunion.jreunion.game.ExchangeItem;
 import com.googlecode.reunion.jreunion.game.GunWeapon;
@@ -233,7 +233,7 @@ public class DatabaseUtils extends Service {
 				int race = rs.getInt("race");				
 				player = Player.createPlayer(race);
 				
-				EntityManager.getEntityManager().loadEntity(player,characterId);
+				player.setEntityId(characterId);
 				
 				player.setStrength(rs.getInt("str"));
 				player.setWisdom(rs.getInt("wis"));
@@ -269,7 +269,7 @@ public class DatabaseUtils extends Service {
 		}
 	}
 	
-	public void saveCharStatus(Player player){
+	public void saveCharacter(Player player){
 		
 		Client client = Server.getInstance().getNetworkModule().getClient(player);
 		
@@ -278,16 +278,20 @@ public class DatabaseUtils extends Service {
 		
 		if (!checkDatabase())
 			return;
-		
+			
 		try {
+			
+			int charid = player.getEntityId();
 			Statement stmt = database.conn.createStatement();
-			stmt.execute("DELETE FROM characters WHERE id="+player.getEntityId()+";");
+			if(charid!=-1)
+				stmt.execute("DELETE FROM characters WHERE id="+charid+";");		
+			
 						
-			stmt.execute("INSERT INTO characters (id,accountid,name,level,str,wis,dex,con,lea,race,sex,hair," +
+			stmt.execute("INSERT INTO characters ("+(charid==-1?"":"id,")+"accountid,name,level,str,wis,dex,con,lea,race,sex,hair," +
 												  "currHp,MaxHp,currMana,maxMana,currElect,maxElect,currStm," +
 												  "maxStm,totalExp,lvlUpExp,lime,statusPoints,penaltyPoints," +
 												  "guildid,guildlvl)" +
-						 " VALUES ("+player.getEntityId()+ ","
+						 " VALUES ("+(charid==-1?"":player.getEntityId()+ ",")
 								    +client.getAccountId()+ ",'"
 								    +player.getName()+ "',"
 								    +player.getLevel()+ ","
@@ -313,9 +317,21 @@ public class DatabaseUtils extends Service {
 								    +player.getStatusPoints()+ ","
 								    +player.getPenaltyPoints()+ ","
 								    +player.getGuildId()+ ","
-								    +player.getGuildLvl()+ ");");
+								    +player.getGuildLvl()+ ");",
+								    Statement.RETURN_GENERATED_KEYS);
+			if(charid==-1){
+				
+				ResultSet rs = stmt.getGeneratedKeys();
+				rs.beforeFirst();
+				rs.next();
+				charid = rs.getInt(1);
+				if(charid==-1)
+					throw new Exception("key is -1!");
+				player.setEntityId(charid);
+			}
+			
 						
-		} catch (SQLException e1) {
+		} catch (Exception e1) {
 			e1.printStackTrace();
 			return;
 		  }
@@ -378,6 +394,8 @@ public class DatabaseUtils extends Service {
 		}
 	}
 	
+
+	
 	public void createChar(Client client, int slot, String charName,
 			int race, int sex, int hairStyle, int str, int wis, int dex, int con,
 			int lead) {
@@ -387,13 +405,10 @@ public class DatabaseUtils extends Service {
 		try {
 						
 			stmt = database.conn.createStatement();
-			Entity entity  = new Entity();
-			EntityManager.getEntityManager().createEntity(entity);
-			int characterId = entity.getEntityId();
-
-			EntityManager.getEntityManager().removeEntity(entity);
 						
 			Player player = Player.createPlayer(race);			
+			
+			player.setEntityId(-1);
 			
 			player.setLevel(1);
 			player.setName(charName);
@@ -417,10 +432,13 @@ public class DatabaseUtils extends Service {
 			
 			player.setLime(Integer.parseInt(Reference.getInstance().getServerReference().getItem("Server").getMemberValue("StartLime")));
 			
-			EntityManager.getEntityManager().loadEntity(player,characterId);
+			
 			client.setPlayer(player);
 		
-			saveCharStatus(player);
+			saveCharacter(player);
+			int characterId = player.getEntityId();
+			
+			System.out.println(characterId);
 			
 			stmt.execute("INSERT INTO slots (charid, slot, accountid) VALUES ("
 					+ characterId + ","
@@ -557,7 +575,6 @@ public class DatabaseUtils extends Service {
 		}
 		*/
 	
-		
 		Statement stmt;
 		try {
 			stmt = database.conn.createStatement();
@@ -572,7 +589,7 @@ public class DatabaseUtils extends Service {
 			{
 				InventoryItem invItem = iter.next();
 				Item item = invItem.getItem();
-				updateItemInfo(item);
+				saveItem(item);
 				/*
 				
 				PreparedStatement statement = saveInventory.getInsertStatement();
@@ -587,11 +604,12 @@ public class DatabaseUtils extends Service {
 				data+="("+player.getEntityId()+ ",'"+item.getEntityId()+"',"+invItem.getTab()+
 					","+invItem.getPosX()+ ","+invItem.getPosY()+ ")";			
 				if(iter.hasNext())
-					data+= ", ";
-			
+					data+= ", ";			
 			}
-			if(!data.isEmpty())
+			if(!data.isEmpty()){
 				stmt.execute(query+data);
+				
+			}
 			
 			//queue.add(saveInventory);
 			
@@ -662,23 +680,53 @@ public class DatabaseUtils extends Service {
 		return -1;
 	}
 	
-	public void loadItemInfo(Item item )
+	public Item loadItem(int itemId )
 	{
-		if (item==null)return;
-		if (!checkDatabase())return ;
+		if (itemId==-1)return null;
+		if (!checkDatabase())return null;
+		
+		
 		
 		Statement stmt;
 		try {
 			stmt  = database.conn.createStatement();
 			
-			ResultSet rs = stmt.executeQuery("SELECT * FROM items WHERE id='"+item.getEntityId()+"';");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM items WHERE id='"+itemId+"';");
 			
 			if (rs.next())
 			{
+				
+				int type = rs.getInt("type");
+				ParsedItem parseditem = Reference.getInstance().getItemReference()
+				.getItemById(type);
+				
+				if (parseditem == null) {
+					System.out.println("Item loaded failed, no such item type!");
+					return null;
+				}
+				
+				String classname = parseditem.getMemberValue("Class");
+				
+				Item item = null;
+				
+				try {
+					Class c = Class.forName("com.googlecode.reunion.jreunion.game." + classname);
+					item = (Item) c.getConstructors()[0].newInstance(type);
+
+				} catch (Exception e) {
+
+					System.out.println("Cannot create class:" + classname);
+					e.printStackTrace();
+					return null;
+				}
+				
+				item.setEntityId(itemId);
+				
 				item.setGemNumber(rs.getInt("gemnumber"));
 				item.setExtraStats(rs.getInt("extrastats"));
+				
+				return item;
 			}
-			
 		} 
 		catch (SQLException e) 
 		{
@@ -686,10 +734,9 @@ public class DatabaseUtils extends Service {
 			e.printStackTrace();
 			
 		}
+		return null;
 	}
-	
-	public void addItem(Item item)
-	{
+	public void saveItem(Item item){
 		if (!checkDatabase())
 			return ;
 			
@@ -697,14 +744,31 @@ public class DatabaseUtils extends Service {
 		try {
 			stmt  = database.conn.createStatement();
 			
-			stmt.execute("INSERT INTO items (id, type, gemnumber, extrastats)" +
-					" VALUES ("+item.getEntityId()+ ","+item.getType()+","
-					+item.getGemNumber()+","+item.getExtraStats()+");");
-				
+			int itemId = item.getEntityId();
+			if(itemId!=-1){
+				stmt.execute("DELETE FROM items WHERE id="+itemId+";");
+			}
+			
+			stmt.execute("INSERT INTO items ("+(itemId==-1?"":"id,")+" type, gemnumber, extrastats)" +
+					" VALUES ("+(itemId==-1?"":item.getEntityId()+ ",")+item.getType()+","
+					+item.getGemNumber()+","+item.getExtraStats()+");",Statement.RETURN_GENERATED_KEYS);
+						
+			if(itemId==-1){
+				ResultSet rs = stmt.getGeneratedKeys();
+				rs.beforeFirst();
+				rs.next();
+				itemId = rs.getInt(1);
+				if(itemId==-1)
+					throw new Exception("key is -1!");
+				item.setEntityId(itemId);
+			}
+			
 		} 
-		catch (SQLException e) {
+		catch (Exception e) {
 			e.printStackTrace();
 		}
+		
+		
 	}
 	
 	public void deleteItem(Item item)
@@ -712,7 +776,6 @@ public class DatabaseUtils extends Service {
 		if (item==null)return;
 		if (!checkDatabase())return ;
 		
-		EntityManager.getEntityManager().removeEntity(item);
 		Statement stmt;
 		
 		try {
@@ -720,26 +783,6 @@ public class DatabaseUtils extends Service {
 			
 			stmt.execute("DELETE FROM items WHERE id='"+item.getEntityId()+"';");
 				
-		} 
-		catch (SQLException e) 
-		{
-			
-			e.printStackTrace();
-			
-		}
-	}
-	
-	public void updateItemInfo(Item item)
-	{
-		if (item==null)return;
-		if (!checkDatabase())return ;
-				
-		Statement stmt;
-		try {
-			stmt  = database.conn.createStatement();
-			
-			stmt.execute("UPDATE items SET gemnumber = '"+item.getGemNumber()+"',extrastats = '"+item.getExtraStats()+"' WHERE id='"+item.getEntityId()+"';");
-
 		} 
 		catch (SQLException e) 
 		{
@@ -844,14 +887,16 @@ public class DatabaseUtils extends Service {
 			
 			ResultSet stashTable = invStmt.executeQuery("SELECT * FROM warehouse WHERE accountid="+client.getAccountId()+";");
 			client.getPlayer().getStash().clearStash();
-			Item item;
+			Item item = null;
 						
 			while (stashTable.next()) 
 			{
 				if(stashTable.getInt("pos") == 12){
+					/*
 					item = new Item(0);
-					com.googlecode.reunion.jreunion.game.EntityManager.getEntityManager().loadEntity(item,stashTable.getInt("uniqueitemid"));
+					com.googlecode.reunion.jreunion.server.ItemManager.getEntityManager().loadEntity(item,stashTable.getInt("uniqueitemid"));
 					DatabaseUtils.getInstance().loadItemInfo(item);
+					*/
 				}
 				else{ 
 					item = ItemFactory.loadItem(stashTable.getInt("itemid"));

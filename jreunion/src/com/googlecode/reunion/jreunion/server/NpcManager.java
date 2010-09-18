@@ -4,7 +4,6 @@ import java.util.Iterator;
 import java.util.Vector;
 
 import com.googlecode.reunion.jcommon.ParsedItem;
-import com.googlecode.reunion.jreunion.game.EntityManager;
 import com.googlecode.reunion.jreunion.game.Npc;
 
 /**
@@ -14,6 +13,7 @@ import com.googlecode.reunion.jreunion.game.Npc;
 public class NpcManager {
 
 	private java.util.List<Npc> npcList = new Vector<Npc>();
+	int npcIdCounter = 0;
 
 	public NpcManager() {
 
@@ -52,9 +52,7 @@ public class NpcManager {
 			e.printStackTrace();
 			return null;
 		}
-
-		com.googlecode.reunion.jreunion.game.EntityManager.getEntityManager()
-				.createEntity(npc);
+		npc.setEntityId(++npcIdCounter);
 		addNpc(npc);
 
 		return npc;
@@ -115,7 +113,7 @@ public class NpcManager {
 		while (containsNpc(npc)) {
 			npcList.remove(npc);
 		}
-		EntityManager.getEntityManager().destroyEntity(npc);
+		//ItemManager.getEntityManager().destroyEntity(npc);
 	}
 
 }

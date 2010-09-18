@@ -4,7 +4,6 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.Iterator;
 
-import com.googlecode.reunion.jreunion.game.EntityManager;
 import com.googlecode.reunion.jreunion.game.Equipment;
 import com.googlecode.reunion.jreunion.game.Item;
 import com.googlecode.reunion.jreunion.game.LivingObject;
@@ -175,9 +174,7 @@ public class Command {
 		Item item = new Item(itemtype);
 		item.setGemNumber(gems);
 		item.setExtraStats(special);
-		EntityManager.getEntityManager().createEntity(item);
-		DatabaseUtils.getInstance().updateItemInfo(item);
-		DatabaseUtils.getInstance().addItem(item);
+		DatabaseUtils.getInstance().saveItem(item);
 
 		// G_Item item = S_ItemFactory.createItem(itemtype);
 
@@ -323,7 +320,7 @@ public class Command {
 
 	public void itemIn(Player sessionOwner, RoamingItem roamingItem) {
 		Item item = roamingItem.getItem();
-		this.itemIn(sessionOwner, item.getUniqueId(), item.getType(),
+		this.itemIn(sessionOwner, item.getEntityId(), item.getType(),
 				roamingItem.getPosition().getX(), roamingItem.getPosition()
 						.getY(), roamingItem.getPosition().getZ(), roamingItem
 						.getPosition().getRotation(), item.getGemNumber(), item
@@ -349,7 +346,7 @@ public class Command {
 	}
 
 	public void itemOut(Player sessionOwner, RoamingItem roamingItem) {
-		this.itemOut(sessionOwner, roamingItem.getItem().getUniqueId());
+		this.itemOut(sessionOwner, roamingItem.getItem().getEntityId());
 
 	}
 
@@ -768,8 +765,10 @@ public class Command {
 			return;
 		}
 		System.out.println(uniqueId);
-		Item item = (Item) EntityManager.getEntityManager().getEnt(
-				uniqueId);
+
+		Item item = null;
+		//TODO: FIX
+		//item = (Item) ItemManager.getEntityManager().getEnt(uniqueId);
 		if (item == null) {
 			return;
 		}
@@ -781,7 +780,6 @@ public class Command {
 		// C> pulse [SystemTime], [WeaponType], [WeaponUniqueID], [WeaponSpeed],
 		// 120
 
-		weapon.removeEntity();
 	}
 
 	void sendCharList(Client client, int accountId) {
