@@ -18,22 +18,6 @@ MobArea = areas/lostrealmcastle/MobArea.bmp
 PvpArea = areas/lostrealmcastle/PvpArea.bmp
 DefaultSpawnId = 1
 
-[Dekadun]
-ID = 1
-PlayerSpawn = DunSpawns.dta
-PlayerArea = DunPlayerArea.bmp
-MobArea = DunMobArea.bmp
-PvpArea = DunPvpArea.bmp
-DefaultSpawnId = 1
-
-[Dekaran]
-ID = 2
-PlayerSpawn = RanSpawns.dta
-PlayerArea = RanPlayerArea.bmp
-MobArea = RanMobArea.bmp
-PvpArea = RanPvpArea.bmp
-DefaultSpawnId = 1
-
 [Shilon]
 ID = 3
 PlayerSpawn = areas/shilon/PlayerSpawns.dta
@@ -44,14 +28,47 @@ MobArea = areas/shilon/MobArea.bmp
 PvpArea = areas/shilon/PvpArea.bmp
 DefaultSpawnId = 1
 
-[Pharous]
-ID = 6
-PlayerSpawn = PharousSpawns.dta
-PlayerArea = PharousPlayerArea.bmp
-MobArea = PharousMobArea.bmp
-PvpArea =PharousPvpArea.bmp
+[Searost]
+ID = 5
+PlayerSpawn = areas/searost/PlayerSpawns.dta
+MobSpawn = areas/searost/MobSpawns.dta
+NpcSpawn = areas/searost/NpcSpawns.dta
+PlayerArea = areas/searost/PlayerArea.bmp
+MobArea = areas/searost/MobArea.bmp
+PvpArea = areas/searost/PvpArea.bmp
 DefaultSpawnId = 1
 
+[Paros]
+ID = 6
+PlayerSpawn = areas/paros/PlayerSpawns.dta
+MobSpawn = areas/paros/MobSpawns.dta
+NpcSpawn = areas/paros/NpcSpawns.dta
+PlayerArea = areas/paros/PlayerArea.bmp
+MobArea = areas/paros/MobArea.bmp
+PvpArea = areas/paros/PvpArea.bmp
+DefaultSpawnId = 1
+
+[Deckadun]
+ID = 2
+PlayerSpawn = areas/deckadun/PlayerSpawns.dta
+MobSpawn = areas/deckadun/MobSpawns.dta
+NpcSpawn = areas/deckadun/NpcSpawns.dta
+PlayerArea = areas/deckadun/PlayerArea.bmp
+MobArea = areas/deckadun/MobArea.bmp
+PvpArea = areas/deckadun/PvpArea.bmp
+DefaultSpawnId = 1
+
+[Deckaran]
+ID = 1
+PlayerSpawn = areas/deckaran/PlayerSpawns.dta
+MobSpawn = areas/deckaran/MobSpawns.dta
+NpcSpawn = areas/deckaran/NpcSpawns.dta
+PlayerArea = areas/deckaran/PlayerArea.bmp
+MobArea = areas/deckaran/MobArea.bmp
+PvpArea = areas/deckaran/PvpArea.bmp
+DefaultSpawnId = 1
+
+####################### OLD ############################
 
 [Great White Horn]
 ID = 7
