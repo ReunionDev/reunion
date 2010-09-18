@@ -18,7 +18,7 @@ USE `reunion`;
 DROP TABLE IF EXISTS `accounts`;
 
 CREATE TABLE `accounts` (
-  `id` int(11) NOT NULL auto_increment,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(28) NOT NULL,
   `password` varchar(28) NOT NULL,
   `email` varchar(256) NOT NULL,
@@ -30,7 +30,7 @@ CREATE TABLE `accounts` (
 DROP TABLE IF EXISTS `characters`;
 
 CREATE TABLE `characters` (
-  `id` int(11) unsigned NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `accountid` int(11) NOT NULL,
   `name` varchar(32) NOT NULL,
   `level` int(11) NOT NULL default '1',
@@ -82,7 +82,7 @@ CREATE TABLE `exchange` (
 DROP TABLE IF EXISTS `guilds`;
 
 CREATE TABLE `guilds` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(50) NOT NULL,
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -102,7 +102,7 @@ CREATE TABLE `inventory` (
 DROP TABLE IF EXISTS `items`;
 
 CREATE TABLE `items` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `type` int(11) NOT NULL,
   `gemnumber` int(11) NOT NULL default '0',
   `extrastats` int(11) NOT NULL default '0',
@@ -159,6 +159,6 @@ CREATE TABLE `warehouse` (
 
 INSERT INTO `accounts` (`id`, `username`, `password`, `email`, `realname`,`level`) VALUES 
   (1,'test','test','test@example.com','Test User',0),
-  (2,'admin','admin','admin@example.com','Test Admin',256);
+  (2,'admin','admin','admin@example.com','Test Admin',255);
 
 COMMIT;
