@@ -157,7 +157,7 @@ NeoProgmare = 0
 Exp = 1511
 Lime = 121
 
-[Mad Cyborg]
+[Mad Cyborg 2]
 ID = 109
 Level = 70
 Hp = 4150
@@ -280,6 +280,101 @@ NeoProgmare = 0
 Exp = 60000
 Lime = 10000
 
+###### Update Shilon Mobs start ##########
+
+[Cutter Lizard]
+ID = 153
+Level = 0
+Hp = 1
+Dmg = 1
+Speed = 20
+AttackType = 2
+DmgType = 2
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 1
+
+[Horror Lizard]
+ID = 154
+Level = 0
+Hp = 1
+Dmg = 1
+Speed = 20
+AttackType = 2
+DmgType = 2
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 1
+
+[Torres]
+ID = 155
+Level = 0
+Hp = 1
+Dmg = 1
+Speed = 20
+AttackType = 2
+DmgType = 2
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 1
+
+[Minot]
+ID = 156
+Level = 0
+Hp = 1
+Dmg = 1
+Speed = 20
+AttackType = 2
+DmgType = 2
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 1
+
+[X-Lizard]
+ID = 157
+Level = 0
+Hp = 1
+Dmg = 1
+Speed = 20
+AttackType = 2
+DmgType = 2
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 1
+
+[Sauron]
+ID = 158
+Level = 0
+Hp = 1
+Dmg = 1
+Speed = 20
+AttackType = 2
+DmgType = 2
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 1
+
+[Tauron]
+ID = 159
+Level = 0
+Hp = 1
+Dmg = 1
+Speed = 20
+AttackType = 2
+DmgType = 2
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 1
+
+
+######## Update Shilon Mobs end ############
 #### Pharous ####
 [Wolf Wing]
 ID = 285
@@ -593,6 +688,89 @@ Dmg = 100
 Speed = 20
 AttackType = 0
 DmgType = 0
+
+##########LostrealmCastle##############
+
+
+[Grem]
+ID = 40
+Level = 0
+Hp = 1
+Dmg = 1
+Speed = 20
+AttackType = 2
+DmgType = 2
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 1
+
+[Pro Giant]
+ID = 41
+Level = 0
+Hp = 1
+Dmg = 1
+Speed = 20
+AttackType = 2
+DmgType = 2
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 1
+
+[Dark Soldier]
+ID = 104
+Level = 0
+Hp = 1
+Dmg = 1
+Speed = 20
+AttackType = 2
+DmgType = 2
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 1
+
+[Devil Giant]
+ID = 105
+Level = 0
+Hp = 1
+Dmg = 1
+Speed = 20
+AttackType = 2
+DmgType = 2
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 1
+
+[Battle Giant]
+ID = 106
+Level = 0
+Hp = 1
+Dmg = 1
+Speed = 20
+AttackType = 2
+DmgType = 2
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 1
+
+[Mad Cyborg]
+ID = 107
+Level = 0
+Hp = 1
+Dmg = 1
+Speed = 20
+AttackType = 2
+DmgType = 2
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 1
+
+
 
 #### Unknown ####
 [Unknown 1]
