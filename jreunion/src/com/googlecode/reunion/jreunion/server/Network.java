@@ -7,6 +7,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.nio.channels.ClosedChannelException;
+import java.nio.channels.ClosedSelectorException;
 import java.nio.channels.SelectableChannel;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
@@ -88,35 +89,15 @@ public class Network extends Service implements Runnable, EventListener{
 						
 						// It's an incoming connection.
 						// Register this socket with the Selector
-						// so we can listen for input on it					
-						
+						// so we can listen for input on it						
 						
 						SocketChannel clientSocketChannel = ((ServerSocketChannel)socketChannel).accept();
 						clientSocketChannel.configureBlocking(false);
 						Socket socket = clientSocketChannel.socket();		
-						/*
-						Client client = new Client();
-						
-						client.addEventListener(ClientSendEvent.class, this);
-						
-						
 										
-						
-						client.setSocket(socket);
-						*/
-						
-						
-						
 						System.out.print("Got connection from " + socket+"\n");
 						
 						fireEvent(NetworkAcceptEvent.class,socket);
-						
-						/*
-						client.setState(Client.State.ACCEPTED);
-						// Make sure to make it non-blocking, so we can use a selector on it.
-						clientSocketChannel.configureBlocking(false);
-						clients.put(socket, client);
-						*/						
 						
 						// Register it with the selector, for reading
 						clientSocketChannel.register(selector, SelectionKey.OP_READ);
@@ -142,6 +123,7 @@ public class Network extends Service implements Runnable, EventListener{
 							Socket socket = ((SocketChannel) socketChannel).socket();
 							
 							disconnect(socket);
+							
 						}
 					} else if ((key.readyOps() & SelectionKey.OP_WRITE) == SelectionKey.OP_WRITE) {
 						
@@ -154,7 +136,9 @@ public class Network extends Service implements Runnable, EventListener{
 				// We remove the selected keys, because we've dealt with them.
 				keys.clear();
 			}
-		} catch (IOException ie) {
+		} catch (Exception ie) {
+			if(ie instanceof ClosedSelectorException)
+				return;
 			System.err.println(ie);
 		}
 	}
@@ -233,8 +217,7 @@ public class Network extends Service implements Runnable, EventListener{
 			socket.close();
 		} catch (IOException e) {
 			// e.printStackTrace();
-		}		
-	
+		}
 	}
 	
 	public void notifySend(Socket socket) {

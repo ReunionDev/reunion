@@ -7,7 +7,6 @@ public class SubEvent extends Event {
 
 	public SubEvent() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 }

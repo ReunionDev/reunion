@@ -1,6 +1,7 @@
 package com.googlecode.reunion.jreunion.server;
 
 import java.net.InetSocketAddress;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
@@ -33,7 +34,7 @@ public class Map {
 	
 	private boolean local = false;
 	
-	public List<RoamingItem> roamingItems = new Vector<RoamingItem>();
+	public java.util.Map<Integer,RoamingItem> roamingItems = new HashMap<Integer,RoamingItem>();
 	
 
 	private Area pvpArea = new Area();
@@ -138,7 +139,6 @@ public class Map {
 			Npc newNpc = Server.getInstance().getWorldModule()
 					.getNpcManager()
 					.createNpc(Integer.parseInt(i.getMemberValue("Type")));
-
 			newNpc.getPosition().setX(Integer.parseInt(i.getMemberValue("X")));
 			newNpc.getPosition().setY(Integer.parseInt(i.getMemberValue("Y")));
 			newNpc.getPosition().setRotation(Double.parseDouble(i.getMemberValue("Rotation")));
