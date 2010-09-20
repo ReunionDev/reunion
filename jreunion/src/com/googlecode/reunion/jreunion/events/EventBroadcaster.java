@@ -31,11 +31,11 @@ public class EventBroadcaster{
 		
 	}
 	
-	public  Map<Class,List<EventListener>> listeners;
-	public Map<Class, List<EventListener>> getListeners() {
+	public  Map<Class,Map<EventListener,Filter>> listeners;
+	public Map<Class, Map<EventListener,Filter>> getListeners() {
 		synchronized (this){
 			if(listeners==null)
-				listeners = new HashMap<Class,List<EventListener>>();			
+				listeners = new HashMap<Class,Map<EventListener,Filter>>();			
 		}
 		return listeners;
 	}
@@ -45,30 +45,30 @@ public class EventBroadcaster{
 	}
 	
 	public void addEventListener(Class c, EventListener listener, Filter filter){
-		Map<Class,List<EventListener>> listeners = this.getListeners();
+		Map<Class,Map<EventListener,Filter>> listeners = this.getListeners();
 		synchronized(listeners){
-			List<EventListener> list = null;
+			Map<EventListener, Filter> list = null;
 			if(listeners.containsKey(c)){
 				list = listeners.get(c);
 			}
 			else{
-				list = new LinkedList<EventListener>();
+				list = new HashMap<EventListener,Filter>();
 				listeners.put(c, list);		
 			}
-			if(!list.contains(listener))
-				list.add(listener);
+			if(!list.containsKey(listener))
+				list.put(listener,filter);
 		}
 	}
 	
 	public void removeEventListener(Class c, EventListener listener){
-		Map<Class,List<EventListener>> listeners = this.getListeners();
+		Map<Class,Map<EventListener,Filter>> listeners = this.getListeners();
 		synchronized(listeners){
 			if(c==null){
-				Iterator<Entry<Class, List<EventListener>>> iter = listeners.entrySet().iterator();
+				Iterator<Entry<Class, Map<EventListener,Filter>>> iter = listeners.entrySet().iterator();
 				while(iter.hasNext()){
-					Entry<Class, List<EventListener>> entry = iter.next();
-					List<EventListener> list = entry.getValue();
-					if(list.contains(listener)){
+					Entry<Class, Map<EventListener,Filter>> entry = iter.next();
+					Map<EventListener,Filter> list = entry.getValue();
+					if(list.containsKey(listener)){
 						list.remove(listener);
 						if(list.isEmpty())
 							iter.remove();							
@@ -76,8 +76,8 @@ public class EventBroadcaster{
 				}
 			} else {				
 				if(listeners.containsKey(c)){
-					List<EventListener> list = listeners.get(c);
-					if(list.contains(listener)){
+					Map<EventListener,Filter> list = listeners.get(c);
+					if(list.containsKey(listener)){
 						list.remove(listener);
 						if(list.isEmpty())
 							listeners.remove(c);
@@ -92,18 +92,19 @@ public class EventBroadcaster{
 	}	
 	
 	protected int fireEvent(Event event){
-		Map<Class,List<EventListener>> listeners = this.getListeners();
+		Map<Class,Map<EventListener,Filter>> listeners = this.getListeners();
 		int counter =0;
 		synchronized(listeners){
 			for(Class c :listeners.keySet()){
 				if(c.isInstance(event)){
-					for(EventListener listener:listeners.get(c)){
+					for(Entry<EventListener,Filter> entry: listeners.get(c).entrySet()){
 						counter++;
 						try{					
 							EventWorker worker = workers.take();
 								synchronized(worker){
 									worker.event = event;
-									worker.listener = listener;
+									worker.listener = entry.getKey();
+									worker.filter = entry.getValue();
 									worker.notify();
 								}
 						}catch(Exception e){

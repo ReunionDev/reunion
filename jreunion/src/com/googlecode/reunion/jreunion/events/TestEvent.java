@@ -1,23 +1,20 @@
 package com.googlecode.reunion.jreunion.events;
-import com.googlecode.reunion.jreunion.server.*;
-import com.googlecode.reunion.jreunion.events.Event;
+
+import com.googlecode.reunion.jreunion.server.Client;
+
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-public class ClientEvent extends Event {
-	Client client;
-	public ClientEvent(Client client){
-		this.client = client;
-		
+public class TestEvent extends Event {
+
+	public TestEvent() {
+		super();
 	}
-	public Client getClient() {
-		return client;
-	}
-	static class ClientFilter implements Filter{
+	static class TestFilter implements Filter{
 		
 		Client client;
-		public ClientFilter(Client client){
+		public TestFilter(Client client){
 			this.client = client;
 			
 		}

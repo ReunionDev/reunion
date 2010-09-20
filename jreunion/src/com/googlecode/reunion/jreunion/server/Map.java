@@ -36,7 +36,6 @@ public class Map {
 	
 	public java.util.Map<Integer,RoamingItem> roamingItems = new HashMap<Integer,RoamingItem>();
 	
-
 	private Area pvpArea = new Area();
 
 	private Parser playerSpawnReference;
