@@ -19,4 +19,21 @@ public class NetworkEvent extends Event {
 		return socket;
 	}
 	
+	public static class NetworkFilter implements Filter{
+		
+		Socket socket;
+		public NetworkFilter(Socket socket){
+			this.socket = socket;
+			
+		}
+		
+		@Override
+		public boolean filter(Event event) {
+			if(!(event instanceof NetworkEvent)){
+				throw new InvalidEventException(event,NetworkEvent.class);
+			}
+			return ((NetworkEvent)event).getSocket().equals(this.socket);			
+		}
+	}
+	
 }

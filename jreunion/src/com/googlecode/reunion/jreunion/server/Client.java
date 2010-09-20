@@ -3,6 +3,7 @@ package com.googlecode.reunion.jreunion.server;
 import java.net.Socket;
 
 import com.googlecode.reunion.jreunion.events.ClientDisconnectEvent;
+import com.googlecode.reunion.jreunion.events.ClientEvent;
 import com.googlecode.reunion.jreunion.events.ClientReceiveEvent;
 import com.googlecode.reunion.jreunion.events.ClientSendEvent;
 import com.googlecode.reunion.jreunion.events.Event;
@@ -119,8 +120,8 @@ public class Client extends EventBroadcaster implements EventListener {
 		clientState = State.DISCONNECTED;
 		characterId = -1;
 		
-		Server.getInstance().getWorldModule().addEventListener(ClientSendEvent.class, this);
-		Server.getInstance().getNetworkModule().addEventListener(NetworkDisconnectEvent.class, this);
+		Server.getInstance().getWorldModule().addEventListener(ClientSendEvent.class, this, new ClientEvent.ClientFilter(this));
+		Server.getInstance().getNetworkModule().addEventListener(NetworkDisconnectEvent.class, this, new NetworkEvent.NetworkFilter(this.socket));
 	}
 
 	public State getState() {
@@ -139,10 +140,6 @@ public class Client extends EventBroadcaster implements EventListener {
 				this.outputBuffer.append("\n");
 			}
 			this.fireEvent(NetworkSendEvent.class, this.getSocket());
-			/*
-			Server.getInstance()
-			.getNetworkModule().notifySend(this);
-			*/
 		}
 		
 	}
@@ -213,22 +210,18 @@ public class Client extends EventBroadcaster implements EventListener {
 	public void handleEvent(Event event) {
 		if(event instanceof NetworkEvent){
 			Socket socket =((NetworkEvent) event).getSocket();
-			if(socket!=getSocket())return;
 			if(event instanceof NetworkDataEvent) {
 				synchronized(this){
 					NetworkDataEvent networkDataEvent = (NetworkDataEvent) event;
 					String data = networkDataEvent.getData();
-					
 					this.inputBuffer.append(networkDataEvent.getData());
 					if(!data.endsWith("\n"))
 						inputBuffer.append("\n");
-					
 					fireEvent(ClientReceiveEvent.class,this);			
 				}
 			}
-			
 			if(event instanceof NetworkDisconnectEvent){				
-				fireEvent(ClientDisconnectEvent.class,this);
+				fireEvent(ClientDisconnectEvent.class, this);
 			}
 		}
 	}	

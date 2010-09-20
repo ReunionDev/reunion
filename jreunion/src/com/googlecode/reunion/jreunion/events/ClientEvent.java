@@ -14,7 +14,7 @@ public class ClientEvent extends Event {
 	public Client getClient() {
 		return client;
 	}
-	static class ClientFilter implements Filter{
+	public static class ClientFilter implements Filter{
 		
 		Client client;
 		public ClientFilter(Client client){

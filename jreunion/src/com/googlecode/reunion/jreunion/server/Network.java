@@ -210,8 +210,7 @@ public class Network extends Service implements Runnable, EventListener{
 	}
 	public void disconnect(Socket socket) {
 		
-		System.out
-		.println("Disconnecting " + socket);
+		System.out.println("Disconnecting " + socket);
 		fireEvent(NetworkDisconnectEvent.class, socket);
 		try {
 			socket.close();

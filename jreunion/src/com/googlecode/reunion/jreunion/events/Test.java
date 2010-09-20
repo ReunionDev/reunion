@@ -13,11 +13,8 @@ import com.googlecode.reunion.jreunion.events.ClientEvent.ClientFilter;
 public class Test extends EventBroadcaster implements EventListener {
 
 	public Test() {
-		List<EventListener> list = new LinkedList<EventListener>();
-		list.add(this);
 		this.addEventListener(Event.class,this, new ClientFilter(null));
 		
-		//this.removeEventListener(Event.class, this);
 		System.out.println(this.listeners==null);
 		
 	}
@@ -29,17 +26,7 @@ public class Test extends EventBroadcaster implements EventListener {
 	 */
 	public static void main(String[] args) throws InterruptedException {
 		Test t = new Test();
-		
-		Map<EventListener,Filter> test = new HashMap<EventListener,Filter>();
-		
-		test.put(t, null);
-		
-		System.out.println(test.size());
-		System.out.println(test.get(t));
-		System.out.println(test.get(new Object()));
-		
-		
-		TestEvent subEvent = t.createEvent(TestEvent.class);
+				
 		{
 			long start = System.currentTimeMillis();
 			for(int i =0;i<10000;i++){
@@ -47,7 +34,6 @@ public class Test extends EventBroadcaster implements EventListener {
 			}
 			System.out.println(System.currentTimeMillis()-start);
 		}
-		//Thread.sleep(150);
 		System.out.println(count);
 		
 		EventBroadcaster.shutdown();
@@ -60,7 +46,6 @@ public class Test extends EventBroadcaster implements EventListener {
 		synchronized(this){
 			count++;
 		}
-		//throw new RuntimeException("!");
 	}
 
 }

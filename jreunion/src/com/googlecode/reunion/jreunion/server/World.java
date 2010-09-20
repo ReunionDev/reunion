@@ -226,7 +226,7 @@ public class World extends ClassModule implements EventListener{
 							
 				client.setSocket(socket);			
 				
-				network.addEventListener(NetworkDataEvent.class, client);				
+				network.addEventListener(NetworkDataEvent.class, client, new NetworkEvent.NetworkFilter(socket));				
 				
 				System.out.print("Got connection from " + socket+"\n");		
 				
@@ -234,7 +234,7 @@ public class World extends ClassModule implements EventListener{
 				
 				clients.put(socket, client);
 				
-				fireEvent(createEvent(ClientConnectEvent.class,client));
+				fireEvent(createEvent(ClientConnectEvent.class, client));
 			}
 			if(event instanceof NetworkDisconnectEvent){
 				Client client = clients.remove(socket);
