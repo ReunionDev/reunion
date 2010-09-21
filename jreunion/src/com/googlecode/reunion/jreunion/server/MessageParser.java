@@ -93,23 +93,23 @@ public class MessageParser {
 					spawn.setRespawnTime(10);
 					spawn.spawnMob();
 
-				} else if (word.length == 3) {
-					try {
-						int count = Integer.parseInt(word[2]);
-						for (int x = 1; x < count; x++) {
-							Spawn spawn = new Spawn();
-							spawn.setCenterX(player.getPosition().getX() + 10);
-							spawn.setCenterY(player.getPosition().getY() + 10);
-							spawn.setMap(player.getPosition().getMap());
-							spawn.setMobType(Integer.parseInt(word[1]));
-							spawn.setRadius(300);
-							spawn.setRespawnTime(10);
-							spawn.spawnMob();
-						}
-					} catch (Exception NumberFormatException) {
-						String packetData = "say 1 S_Server (NOTICE) @addmob with more than 1 mob failed";
-						client.SendData(packetData);
+			} else if (word.length == 3) {
+				try {
+					int count = Integer.parseInt(word[2]);
+					for (int x = 1; x < count; x++) {
+						Spawn spawn = new Spawn();
+						spawn.setCenterX(player.getPosition().getX() + 10);
+						spawn.setCenterY(player.getPosition().getY() + 10);
+						spawn.setMap(player.getPosition().getMap());
+						spawn.setMobType(Integer.parseInt(word[1]));
+						spawn.setRadius(300);
+						spawn.setRespawnTime(10);
+						spawn.spawnMob();
 					}
+				} catch (Exception NumberFormatException) {
+					String packetData = "say 1 S_Server (NOTICE) @addmob with more than 1 mob failed";
+					client.SendData(packetData);
+				}
 				} else if (word.length == 6) {
 					Mob mob = Server.getInstance().getWorldModule()
 							.getMobManager()
@@ -139,27 +139,32 @@ public class MessageParser {
 					//TODO: Fix the Mob id error server crash
 					System.out.println("Mob id error detected");
 				}
-			} else if (word[0].equals("@worldgoto")) {
-				try {
-				String map1 = word[1];
-				String map2 = word[2];
-				String map3 = word[3];			
-				client.SendData(
-						"go_world 127.0.0.1 "+map1+" " + map2 + " " + map3
-								+ "\n");
-				} catch (Exception e) {
-					String packetData = "say 1 S_Server (NOTICE) @worldgoto failed > port map1 map2";
-					client.SendData(packetData);
+			} else if (word[0].equals("@tele")) {
+			try {
+				String worldname = word[1];	
+				ParsedItem mapref = Reference.getInstance().getMapConfigReference().getItem(worldname);
+				String mapid   = mapref.getMemberValue("ID");
+				String mapport = mapref.getMemberValue("Port");
+				String mapip   = mapref.getMemberValue("Ip");
+				
+				if (mapid != null || mapport != null || mapid != null) {
+					client.SendData(
+							"go_world "+mapip+" "+mapport+" " + mapid
+									+ "\n");
 				}
-			} else if (word[0].equals("@goto")) {
-				if (word[1].equals("pos")) {
-					com.GoToPos(player, Integer.parseInt(word[2]),
-							Integer.parseInt(word[3]));
-				}
-				if (word[1].equals("char")) {
-					com.GoToChar(player, word[2]);
-				}
-			} else if (word[0].equals("@spawn")||word[0].equals("@s")) {
+			} catch (Exception e) {
+				String packetData = "say 1 S_Server (NOTICE) @tele failed -> @tele worldname";
+				client.SendData(packetData);
+			}
+		}  else if (word[0].equals("@goto")) {
+			if (word[1].equals("pos")) {
+				com.GoToPos(player, Integer.parseInt(word[2]),
+						Integer.parseInt(word[3]));
+			}
+			if (word[1].equals("char")) {
+				com.GoToChar(player, word[2]);
+			}
+		} else if (word[0].equals("@spawn")||word[0].equals("@s")) {
 				//@spawn mobid mobtypecount radius
 				BufferedWriter bw = null;
 			      try {	    	  
