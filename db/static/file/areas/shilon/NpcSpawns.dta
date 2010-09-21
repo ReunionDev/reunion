@@ -2,19 +2,21 @@
 ID = 1
 X = 7845
 Y = 11845
-Rotation = 0.0
+Rotation = 1.57075
 Type = 140
 BuyRate = 95	# Value in %
 SellRate = 30	# Value in %
+Shop = areas/shilon/shop/npc1.dta
 
 [Magican 2]
 ID = 2
 X = 7475
 Y = 11715
-Rotation = 0.0
+Rotation = 1.57075
 Type = 140
 BuyRate = 95	# Value in %
 SellRate = 30	# Value in %
+Shop = areas/shilon/shop/npc1.dta
 
 [Magican 3]
 ID = 3
@@ -24,6 +26,7 @@ Rotation = 0.0
 Type = 140
 BuyRate = 95	# Value in %
 SellRate = 30	# Value in %
+Shop = areas/shilon/shop/npc1.dta
 
 [Magican 4]
 ID = 4
@@ -33,6 +36,7 @@ Rotation = 0.0
 Type = 140
 BuyRate = 95	# Value in %
 SellRate = 30	# Value in %
+Shop = areas/shilon/shop/npc1.dta
 
 [Gypsy 1]
 ID = 5
@@ -42,6 +46,7 @@ Rotation = 0.0
 Type = 141
 BuyRate = 95	# Value in %
 SellRate = 30	# Value in %
+Shop = areas/shilon/shop/npc2.dta
 
 [Gypsy 2]
 ID = 6
@@ -51,6 +56,7 @@ Rotation = 0.0
 Type = 141
 BuyRate = 95	# Value in %
 SellRate = 30	# Value in %
+Shop = areas/shilon/shop/npc2.dta
 
 [Gypsy 3]
 ID = 7
@@ -60,6 +66,7 @@ Rotation = 0.0
 Type = 141
 BuyRate = 95	# Value in %
 SellRate = 30	# Value in %
+Shop = areas/shilon/shop/npc2.dta
 
 [Gypsy 4]
 ID = 8
@@ -69,3 +76,4 @@ Rotation = 0.0
 Type = 141
 BuyRate = 95	# Value in %
 SellRate = 30	# Value in %
+Shop = areas/shilon/shop/npc2.dta
