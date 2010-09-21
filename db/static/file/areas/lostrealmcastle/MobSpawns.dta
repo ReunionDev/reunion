@@ -1,0 +1,3497 @@
+[Grem85]
+ID = 1
+X = 10088
+Y = 3401
+Radius = 100
+RespawnTime = 10
+Type = 40
+
+[DevilGiant1]
+ID = 2
+X = 3219
+Y = 7676
+Radius = 100
+RespawnTime = 10
+Type = 105
+
+[DevilGiant2]
+ID = 3
+X = 3086
+Y = 7677
+Radius = 100
+RespawnTime = 10
+Type = 105
+
+[DevilGiant3]
+ID = 4
+X = 2948
+Y = 7669
+Radius = 100
+RespawnTime = 10
+Type = 105
+
+[DevilGiant4]
+ID = 5
+X = 2750
+Y = 7677
+Radius = 100
+RespawnTime = 10
+Type = 105
+
+[DevilGiant5]
+ID = 6
+X = 2725
+Y = 7701
+Radius = 100
+RespawnTime = 10
+Type = 105
+
+[DevilGiant6]
+ID = 7
+X = 2607
+Y = 7678
+Radius = 100
+RespawnTime = 10
+Type = 105
+
+[DevilGaint7]
+ID = 8
+X = 2442
+Y = 7568
+Radius = 100
+RespawnTime = 10
+Type = 105
+
+[DevilGiant8]
+ID = 9
+X = 2404
+Y = 7453
+Radius = 100
+RespawnTime = 10
+Type = 105
+
+[DevilGiant9]
+ID = 10
+X = 2347
+Y = 7260
+Radius = 100
+RespawnTime = 10
+Type = 105
+
+[DevilGiant10]
+ID = 11
+X = 2325
+Y = 7130
+Radius = 100
+RespawnTime = 10
+Type = 105
+
+[DevilGiant11]
+ID = 12
+X = 2184
+Y = 7042
+Radius = 100
+RespawnTime = 10
+Type = 105
+
+[DevilGiant12]
+ID = 13
+X = 1935
+Y = 7140
+Radius = 100
+RespawnTime = 10
+Type = 105
+
+[DevilGiant13]
+ID = 14
+X = 1856
+Y = 7371
+Radius = 100
+RespawnTime = 10
+Type = 105
+
+[DevilGiant14]
+ID = 15
+X = 1714
+Y = 7489
+Radius = 100
+RespawnTime = 10
+Type = 105
+
+[DevilGiant15]
+ID = 16
+X = 1691
+Y = 7683
+Radius = 100
+RespawnTime = 10
+Type = 105
+
+[DevilGiant16]
+ID = 17
+X = 1600
+Y = 7865
+Radius = 100
+RespawnTime = 10
+Type = 105
+
+[DevilGiant17]
+ID = 18
+X = 1588
+Y = 8066
+Radius = 100
+RespawnTime = 10
+Type = 105
+
+[DevilGiant18]
+ID = 19
+X = 1770
+Y = 8235
+Radius = 100
+RespawnTime = 10
+Type = 105
+
+[DevilGiant19]
+ID = 20
+X = 1977
+Y = 8253
+Radius = 100
+RespawnTime = 10
+Type = 105
+
+[DevilGiant20]
+ID = 21
+X = 2176
+Y = 8234
+Radius = 100
+RespawnTime = 10
+Type = 105
+
+[DevilGiant21]
+ID = 22
+X = 2433
+Y = 8131
+Radius = 100
+RespawnTime = 10
+Type = 105
+
+[DevilGiant22]
+ID = 23
+X = 2615
+Y = 7983
+Radius = 100
+RespawnTime = 10
+Type = 105
+
+[DevilGiant23]
+ID = 24
+X = 2355
+Y = 7834
+Radius = 100
+RespawnTime = 10
+Type = 105
+
+[DevilGiant24]
+ID = 25
+X = 2136
+Y = 7695
+Radius = 100
+RespawnTime = 10
+Type = 105
+
+[BattleGiant1]
+ID = 26
+X = 2120
+Y = 7451
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant2]
+ID = 27
+X = 2049
+Y = 7385
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant3]
+ID = 28
+X = 1928
+Y = 7380
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant4]
+ID = 29
+X = 1909
+Y = 7187
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant5]
+ID = 30
+X = 1663
+Y = 7404
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant6]
+ID = 31
+X = 1739
+Y = 7520
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant7]
+ID = 32
+X = 1643
+Y = 7764
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant8]
+ID = 33
+X = 1563
+Y = 7884
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant9]
+ID = 34
+X = 1623
+Y = 7891
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant10]
+ID = 35
+X = 1810
+Y = 7874
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant11]
+ID = 36
+X = 1927
+Y = 7816
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant12]
+ID = 37
+X = 2194
+Y = 7743
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant13]
+ID = 38
+X = 2380
+Y = 7740
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant14]
+ID = 39
+X = 2419
+Y = 7852
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant15]
+ID = 40
+X = 2307
+Y = 8017
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant16]
+ID = 41
+X = 2126
+Y = 8052
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant17]
+ID = 42
+X = 1998
+Y = 8043
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant18]
+ID = 43
+X = 1907
+Y = 8146
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant19]
+ID = 44
+X = 1716
+Y = 8189
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant20]
+ID = 45
+X = 1951
+Y = 8336
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant21]
+ID = 46
+X = 2126
+Y = 8394
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant22]
+ID = 47
+X = 2355
+Y = 8432
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant23]
+ID = 48
+X = 2530
+Y = 8314
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant24]
+ID = 49
+X = 2479
+Y = 8205
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant25]
+ID = 50
+X = 2309
+Y = 8120
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant26]
+ID = 51
+X = 2696
+Y = 8438
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant27]
+ID = 52
+X = 2934
+Y = 8379
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant28]
+ID = 53
+X = 3017
+Y = 8191
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant29]
+ID = 54
+X = 2838
+Y = 7974
+Radius = 50
+RespawnTime = 10
+Type = 106
+
+[BattleGiant30]
+ID = 55
+X = 2754
+Y = 7697
+Radius = 50
+RespawnTime = 10
+Type = 106
+
+[BattleGiant31]
+ID = 56
+X = 2418
+Y = 7409
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant32]
+ID = 57
+X = 2209
+Y = 7410
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant33]
+ID = 58
+X = 2330
+Y = 7156
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant34]
+ID = 59
+X = 2080
+Y = 7079
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant35]
+ID = 60
+X = 1522
+Y = 7273
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant36]
+ID = 61
+X = 1844
+Y = 7528
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant37]
+ID = 62
+X = 1740
+Y = 7870
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant38]
+ID = 63
+X = 1925
+Y = 8079
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant39]
+ID = 64
+X = 2250
+Y = 8200
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant40]
+ID = 65
+X = 2607
+Y = 8772
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant41]
+ID = 66
+X = 2660
+Y = 9150
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant42]
+ID = 67
+X = 2834
+Y = 9489
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[MadCyborg1]
+ID = 68
+X = 2527
+Y = 9505
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[MadCyborg2]
+ID = 69
+X = 2499
+Y = 9603
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[MadCyborg3]
+ID = 70
+X = 2439
+Y = 9583
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[MadCyborg4]
+ID = 71
+X = 2312
+Y = 9584
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[MadCyborg5]
+ID = 72
+X = 2304
+Y = 9675
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[MadCyborg6]
+ID = 73
+X = 2407
+Y = 9758
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[MadCyborg7]
+ID = 74
+X = 2434
+Y = 9876
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[MadCyborg8]
+ID = 76
+X = 2483
+Y = 9903
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[MadCyborg9]
+ID = 77
+X = 2634
+Y = 9818
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[MadCyborg10]
+ID = 78
+X = 2771
+Y = 9723
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[MadCyborg11]
+ID = 79
+X = 2914
+Y = 9697
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[MadCyborg12]
+ID = 80
+X = 2854
+Y = 9630
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[MadCyborg13]
+ID = 81
+X = 2995
+Y = 9664
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[MadCyborg14]
+ID = 82
+X = 3096
+Y = 9679
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[MadCyborg15]
+ID = 83
+X = 3204
+Y = 9671
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[MadCyborg16]
+ID = 84
+X = 3312
+Y = 9673
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[MadCyborg17]
+ID = 85
+X = 3359
+Y = 9565
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[MadCyborg18]
+ID = 86
+X = 3423
+Y = 9494
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[MadCyborg19]
+ID = 87
+X = 3317
+Y = 9450
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[MadCyborg20]
+ID = 88
+X = 3262
+Y = 9309
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[MadCyborg21]
+ID = 89
+X = 3088
+Y = 9361
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[MadCyborg22]
+ID = 90
+X = 2969
+Y = 9379
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[MadCyborg23]
+ID = 91
+X = 2866
+Y = 9299
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[Madcyborg24]
+ID = 92
+X = 2765
+Y = 9225
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[MadCyborg25]
+ID = 93
+X = 2674
+Y = 9251
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[MadCyborg26]
+ID = 94
+X = 2529
+Y = 9476
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[MadCyborg27]
+ID = 95
+X = 2488
+Y = 9610
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[MadCyborg28]
+ID = 96
+X = 2687
+Y = 9606
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[MadCyborg29]
+ID = 97
+X = 2798
+Y = 9640
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[MadCyborg30]
+ID = 98
+X = 2957
+Y = 9588
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[MadCyborg31]
+ID = 99
+X = 2805
+Y = 9207
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[MadCyborg32]
+ID = 100
+X = 2758
+Y = 9017
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[MadCyborg33]
+ID = 101
+X = 2811
+Y = 8877
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[MadCyborg34]
+ID = 102
+X = 2823
+Y = 8763
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[MadCyborg35]
+ID = 103
+X = 2804
+Y = 8631
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[MadCyborg36]
+ID = 104
+X = 2746
+Y = 8468
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[MadCyborg37]
+ID = 105
+X = 2546
+Y = 8391
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[MadCyborg38]
+ID = 106
+X = 2409
+Y = 8363
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[MadCyborg39]
+ID = 107
+X = 2413
+Y = 8620
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[MadCyborg40]
+ID = 108
+X = 2599
+Y = 8733
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[BattleGiant43]
+ID = 109
+X = 2988
+Y = 7680
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant44]
+ID = 110
+X = 2518
+Y = 7597
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant45]
+ID = 111
+X = 2278
+Y = 7674
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant46]
+ID = 112
+X = 2001
+Y = 7643
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant47]
+ID = 113
+X = 1986
+Y = 7922
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[MadCyborg41]
+ID = 114
+X = 2665
+Y = 8485
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[MadCyborg42]
+ID = 115
+X = 2815
+Y = 8469
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[MadCyborg43]
+ID = 116
+X = 2699
+Y = 8761
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[MadCyborg44]
+ID = 117
+X = 2611
+Y = 8923
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[MadCyborg45]
+ID = 118
+X = 2619
+Y = 9099
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[MadCyborg46]
+ID = 119
+X = 2833
+Y = 9207
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[MadCyborg47]
+ID = 120
+X = 2845
+Y = 9412
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[MadCyborg48]
+ID = 121
+X = 2393
+Y = 9991
+Radius = 100
+RespawnTime = 10
+Type = 107
+
+[MadCyborg49]
+ID = 122
+X = 2797
+Y = 10210
+Radius = 50
+RespawnTime = 10
+Type = 107
+
+[DarkSoldier1]
+ID = 123
+X = 8548
+Y = 3883
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier2]
+ID = 124
+X = 8656
+Y = 3926
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier3]
+ID = 125
+X = 8831
+Y = 3923
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier4]
+ID = 126
+X = 9014
+Y = 3990
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier5]
+ID = 127
+X = 9149
+Y = 4082
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier6]
+ID = 128
+X = 9326
+Y = 4268
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier7]
+ID = 129
+X = 9463
+Y = 4233
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier8]
+ID = 130
+X = 9446
+Y = 4069
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier9]
+ID = 131
+X = 9401
+Y = 3797
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier10]
+ID = 132
+X = 9337
+Y = 3645
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier11]
+ID = 133
+X = 9184
+Y = 3584
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier12]
+ID = 134
+X = 9318
+Y = 3415
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier13]
+ID = 135
+X = 9286
+Y = 3197
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DArkSoldier14]
+ID = 136
+X = 9250
+Y = 2966
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier15]
+ID = 137
+X = 9300
+Y = 2762
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier16]
+ID = 138
+X = 9430
+Y = 2485
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier17]
+ID = 139
+X = 9606
+Y = 2361
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier18]
+ID = 140
+X = 9801
+Y = 2525
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier19]
+ID = 141
+X = 9940
+Y = 2681
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier20]
+ID = 142
+X = 9809
+Y = 2930
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier21]
+ID = 143
+X = 9703
+Y = 3151
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier22]
+ID = 144
+X = 9908
+Y = 3192
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier23]
+ID = 145
+X = 10169
+Y = 3174
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier24]
+ID = 146
+X = 10268
+Y = 3174
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier25]
+ID = 147
+X = 9999
+Y = 3527
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier26]
+ID = 148
+X = 9701
+Y = 3646
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier27]
+ID = 149
+X = 9613
+Y = 3472
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier28]
+ID = 150
+X = 9476
+Y = 3165
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier29]
+ID = 151
+X = 9553
+Y = 2879
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier30]
+ID = 152
+X = 9575
+Y = 2646
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier31]
+ID = 153
+X = 9289
+Y = 2554
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier32]
+ID = 154
+X = 9038
+Y = 2608
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier33]
+ID = 155
+X = 8847
+Y = 2618
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier34]
+ID = 156
+X = 8689
+Y = 2685
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier35]
+ID = 157
+X = 8542
+Y = 2744
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier36]
+ID = 158
+X = 8367
+Y = 2777
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier37]
+ID = 159
+X = 8340
+Y = 2972
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier38]
+ID = 160
+X = 8453
+Y = 3162
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier39]
+ID = 161
+X = 8209
+Y = 3262
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier40]
+ID = 162
+X = 8454
+Y = 3384
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier41]
+ID = 163
+X = 8799
+Y = 3400
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier42]
+ID = 164
+X = 8979
+Y = 3472
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier43]
+ID = 165
+X = 9263
+Y = 3859
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier44]
+ID = 166
+X = 10000
+Y = 4541
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier46]
+ID = 167
+X = 9986
+Y = 4288
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier47]
+ID = 168
+X = 9785
+Y = 4113
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier48]
+ID = 169
+X = 10362
+Y = 3799
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier49]
+ID = 170
+X = 10377
+Y = 3598
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier50]
+ID = 171
+X = 10391
+Y = 3401
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier51]
+ID = 172
+X = 10034
+Y = 3049
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier52]
+ID = 173
+X = 9733
+Y = 2786
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier53]
+ID = 174
+X = 9253
+Y = 2403
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier54]
+ID = 175
+X = 9107
+Y = 2331
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier55]
+ID = 176
+X = 8920
+Y = 2404
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier56]
+ID = 177
+X = 8547
+Y = 2277
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier57]
+ID = 178
+X = 8437
+Y = 2130
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier58]
+ID = 179
+X = 8468
+Y = 1947
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSolder59]
+ID = 180
+X = 8438
+Y = 1888
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSolder60]
+ID = 181
+X = 8544
+Y = 1737
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier61]
+ID = 182
+X = 8792
+Y = 1772
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier62]
+ID = 183
+X = 8778
+Y = 1957
+Radius = 100
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier63]
+ID = 184
+X = 8912
+Y = 1821
+Radius = 50
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier64]
+ID = 185
+X = 9048
+Y = 1762
+Radius = 50
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier65]
+ID = 186
+X = 9211
+Y = 1777
+Radius = 50
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier66]
+ID = 187
+X = 9329
+Y = 1824
+Radius = 50
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier67]
+ID = 188
+X = 9455
+Y = 1878
+Radius = 50
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier68]
+ID = 189
+X = 9598
+Y = 1926
+Radius = 50
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier69]
+ID = 190
+X = 9665
+Y = 1921
+Radius = 50
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier70]
+ID = 191
+X = 9820
+Y = 2047
+Radius = 50
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier71]
+ID = 192
+X = 9914
+Y = 2136
+Radius = 50
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier72]
+ID = 193
+X = 10028
+Y = 2252
+Radius = 50
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier73]
+ID = 194
+X = 10128
+Y = 2322
+Radius = 50
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier74]
+ID = 195
+X = 10286
+Y = 2422
+Radius = 50
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier75]
+ID = 196
+X = 10464
+Y = 2514
+Radius = 50
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier76]
+ID = 197
+X = 10682
+Y = 2634
+Radius = 50
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier77]
+ID = 198
+X = 10843
+Y = 2880
+Radius = 50
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier78]
+ID = 199
+X = 10877
+Y = 3067
+Radius = 50
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier79]
+ID = 200
+X = 11144
+Y = 3120
+Radius = 50
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier80]
+ID = 201
+X = 11188
+Y = 3354
+Radius = 50
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier81]
+ID = 202
+X = 11343
+Y = 3507
+Radius = 50
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier82]
+ID = 203
+X = 11611
+Y = 3455
+Radius = 50
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier83]
+ID = 204
+X = 11790
+Y = 3626
+Radius = 50
+RespawnTime = 10
+Type = 104
+
+[DarkSoldier84]
+ID = 205
+X = 11853
+Y = 3748
+Radius = 50
+RespawnTime = 10
+Type = 104
+
+[Grem1]
+ID = 206
+X = 11875
+Y = 3688
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem2]
+ID = 207
+X = 11924
+Y = 3640
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem3]
+ID = 208
+X = 11788
+Y = 3774
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem4]
+ID = 209
+X = 11698
+Y = 3666
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem5]
+ID = 210
+X = 11612
+Y = 3731
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem6]
+ID = 211
+X = 11492
+Y = 3688
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem7]
+ID = 212
+X = 11449
+Y = 3551
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem8]
+ID = 213
+X = 11434
+Y = 3377
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem9]
+ID = 214
+X = 11303
+Y = 3295
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem10]
+ID = 215
+X = 11188
+Y = 3355
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem11]
+ID = 216
+X = 11047
+Y = 3291
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem12]
+ID = 217
+X = 11071
+Y = 3154
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem13]
+ID = 218
+X = 10992
+Y = 3045
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem14]
+ID = 219
+X = 10895
+Y = 2962
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem15]
+ID = 220
+X = 10860
+Y = 3058
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem16]
+ID = 221
+X = 10816
+Y = 2846
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem17]
+ID = 222
+X = 10724
+Y = 2747
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem18]
+ID = 223
+X = 10656
+Y = 2622
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem19]
+ID = 224
+X = 10563
+Y = 2539
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem20]
+ID = 225
+X = 10432
+Y = 2523
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem21]
+ID = 226
+X = 10294
+Y = 2429
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem22]
+ID = 227
+X = 10179
+Y = 2367
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem23]
+ID = 228
+X = 10076
+Y = 2292
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem24]
+ID = 229
+X = 9978
+Y = 2197
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem25]
+ID = 230
+X = 9888
+Y = 2112
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem26]
+ID = 231
+X = 9798
+Y = 2036
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem27]
+ID = 232
+X = 9684
+Y = 1955
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem28]
+ID = 233
+X = 9492
+Y = 1966
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem29]
+ID = 234
+X = 9459
+Y = 1863
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem30]
+ID = 235
+X = 9349
+Y = 1817
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem31]
+ID = 236
+X = 9252
+Y = 1826
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem32]
+ID = 237
+X = 9130
+Y = 1768
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem33]
+ID = 238
+X = 8982
+Y = 1768
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem34]
+ID = 239
+X = 8844
+Y = 1760
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem35]
+ID = 240
+X = 8699
+Y = 1740
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem36]
+ID = 241
+X = 8632
+Y = 1677
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem37]
+ID = 242
+X = 8551
+Y = 1623
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem38]
+ID = 243
+X = 8427
+Y = 1594
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem39]
+ID = 244
+X = 8386
+Y = 1764
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem40]
+ID = 245
+X = 8484
+Y = 1821
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem41]
+ID = 246
+X = 8487
+Y = 1974
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem42]
+ID = 247
+X = 8706
+Y = 1967
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem43]
+ID = 248
+X = 8626
+Y = 2147
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem44]
+ID = 249
+X = 8497
+Y = 2273
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem45]
+ID = 250
+X = 8643
+Y = 2374
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem46]
+ID = 251
+X = 8692
+Y = 2513
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem47]
+ID = 252
+X = 8714
+Y = 2653
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem48]
+ID = 253
+X = 8589
+Y = 2667
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem49]
+ID = 254
+X = 8501
+Y = 2803
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem50]
+ID = 255
+X = 8345
+Y = 2879
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem51]
+ID = 256
+X = 8285
+Y = 2765
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem52]
+ID = 257
+X = 8371
+Y = 3098
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem53]
+ID = 258
+X = 8504
+Y = 3321
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem54]
+ID = 259
+X = 8565
+Y = 3499
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem55]
+ID = 260
+X = 8603
+Y = 3618
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem57]
+ID = 262
+X = 8919
+Y = 3717
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem58]
+ID = 263
+X = 9058
+Y = 3820
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem59]
+ID = 264
+X = 9258
+Y = 3756
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem60]
+ID = 265
+X = 9465
+Y = 3600
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem61]
+ID = 266
+X = 9600
+Y = 3467
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem62]
+ID = 267
+X = 9537
+Y = 3265
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem63]
+ID = 268
+X = 9752
+Y = 3213
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem64]
+ID = 269
+X = 9897
+Y = 3220
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem65]
+ID = 270
+X = 10045
+Y = 3131
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem66]
+ID = 271
+X = 10281
+Y = 3182
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem67]
+ID = 272
+X = 10406
+Y = 3033
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem68]
+ID = 273
+X = 10222
+Y = 2868
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem69]
+ID = 274
+X = 10035
+Y = 2748
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem70]
+ID = 275
+X = 9890
+Y = 2634
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Gren71]
+ID = 276
+X = 9712
+Y = 2458
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem72]
+ID = 277
+X = 9513
+Y = 2423
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem73]
+ID = 278
+X = 9294
+Y = 2279
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem74]
+ID = 279
+X = 9066
+Y = 2374
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem75]
+ID = 280
+X = 8926
+Y = 2441
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem76]
+ID = 281
+X = 9022
+Y = 2712
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem77]
+ID = 282
+X = 9032
+Y = 2897
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem78]
+ID = 283
+X = 9028
+Y = 3158
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem79]
+ID = 284
+X = 9088
+Y = 3367
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem80]
+ID = 285
+X = 9283
+Y = 3402
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem81]
+ID = 286
+X = 9367
+Y = 3167
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem82]
+ID = 287
+X = 9551
+Y = 2988
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem83]
+ID = 288
+X = 9552
+Y = 2737
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Grem84]
+ID = 289
+X = 9807
+Y = 2868
+Radius = 50
+RespawnTime = 10
+Type = 40
+
+[Moke1]
+ID = 290
+X = 6609
+Y = 5012
+Radius = 50
+RespawnTime = 10
+Type = 39
+
+[Moke2]
+ID = 291
+X = 6656
+Y = 4438
+Radius = 50
+RespawnTime = 10
+Type = 39
+
+[Moke3]
+ID = 292
+X = 7580
+Y = 3414
+Radius = 50
+RespawnTime = 10
+Type = 39
+
+[Moke4]
+ID = 293
+X = 6479
+Y = 3308
+Radius = 50
+RespawnTime = 10
+Type = 39
+
+[Moke5]
+ID = 294
+X = 4537
+Y = 3296
+Radius = 50
+RespawnTime = 10
+Type = 39
+
+[Moke6]
+ID = 295
+X = 4014
+Y = 3456
+Radius = 50
+RespawnTime = 10
+Type = 39
+
+[Moke7]
+ID = 296
+X = 4186
+Y = 2605
+Radius = 50
+RespawnTime = 10
+Type = 39
+
+[Moke8]
+ID = 297
+X = 4238
+Y = 2219
+Radius = 50
+RespawnTime = 10
+Type = 39
+
+[DevilGiant25]
+ID = 298
+X = 4171
+Y = 3334
+Radius = 50
+RespawnTime = 10
+Type = 105
+
+[DevilGiant26]
+ID = 300
+X = 3834
+Y = 3434
+Radius = 50
+RespawnTime = 10
+Type = 105
+
+[DevilGiant27]
+ID = 301
+X = 3743
+Y = 3572
+Radius = 50
+RespawnTime = 10
+Type = 105
+
+[DevilGiant28]
+ID = 302
+X = 3558
+Y = 3647
+Radius = 50
+RespawnTime = 10
+Type = 105
+
+[DevilGiant29]
+ID = 303
+X = 3430
+Y = 3803
+Radius = 100
+RespawnTime = 10
+Type = 105
+
+[DevilGiant30]
+ID = 304
+X = 3272
+Y = 3627
+Radius = 100
+RespawnTime = 10
+Type = 105
+
+[DevilGiant31]
+ID = 305
+X = 3241
+Y = 3392
+Radius = 100
+RespawnTime = 10
+Type = 105
+
+[DevilGiant33]
+ID = 307
+X = 3316
+Y = 3180
+Radius = 100
+RespawnTime = 10
+Type = 105
+
+[DevilGiant34]
+ID = 308
+X = 3183
+Y = 3447
+Radius = 100
+RespawnTime = 10
+Type = 105
+
+[DevilGiant35]
+ID = 309
+X = 3214
+Y = 3714
+Radius = 100
+RespawnTime = 10
+Type = 105
+
+[x]
+ID = 310
+X = 3144
+Y = 3833
+Radius = 100
+RespawnTime = 10
+Type = 105
+
+[DevilGiant37]
+ID = 311
+X = 3304
+Y = 3939
+Radius = 100
+RespawnTime = 10
+Type = 105
+
+[DevilGiant38]
+ID = 312
+X = 3431
+Y = 4048
+Radius = 100
+RespawnTime = 10
+Type = 105
+
+[DevilGiant39]
+ID = 313
+X = 3638
+Y = 3987
+Radius = 100
+RespawnTime = 10
+Type = 105
+
+[DevilGiant40]
+ID = 314
+X = 3860
+Y = 3960
+Radius = 100
+RespawnTime = 10
+Type = 105
+
+[DevilGiant41]
+ID = 315
+X = 4104
+Y = 3999
+Radius = 100
+RespawnTime = 10
+Type = 105
+
+[DevilGiant42]
+ID = 299
+X = 3974
+Y = 3428
+Radius = 50
+RespawnTime = 10
+Type = 105
+
+####
+[Grem86]
+ID = 300
+X = 10207
+Y = 3525
+Radius = 100
+RespawnTime = 10
+Type = 40
+
+[Grem87]
+ID = 301
+X = 10448
+Y = 3493
+Radius = 100
+RespawnTime = 10
+Type = 40
+
+[Grem88]
+ID = 302
+X = 10657
+Y = 3413
+Radius = 100
+RespawnTime = 10
+Type = 40
+
+[Grem89]
+ID = 303
+X = 10781
+Y = 3563
+Radius = 100
+RespawnTime = 10
+Type = 40
+
+[Grem90]
+ID = 304
+X = 10676
+Y = 3707
+Radius = 100
+RespawnTime = 10
+Type = 40
+
+[Grem91]
+ID = 305
+X = 10483
+Y = 3675
+Radius = 100
+RespawnTime = 10
+Type = 40
+
+[Grem92]
+ID = 306
+X = 10485
+Y = 3904
+Radius = 100
+RespawnTime = 10
+Type = 40
+
+[Grem93]
+ID = 307
+X = 10631
+Y = 4045
+Radius = 100
+RespawnTime = 10
+Type = 40
+
+[Grem94]
+ID = 308
+X = 10752
+Y = 3967
+Radius = 100
+RespawnTime = 10
+Type = 40
+
+[Grem95]
+ID = 309
+X = 10958
+Y = 3869
+Radius = 100
+RespawnTime = 10
+Type = 40
+
+[ProGiant1]
+ID = 310
+X = 10454
+Y = 4527
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant2]
+ID = 311
+X = 10515
+Y = 4773
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant3]
+ID = 312
+X = 10754
+Y = 4862
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant4]
+ID = 313
+X = 10974
+Y = 4746
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant5]
+ID = 314
+X = 11203
+Y = 4845
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant6]
+ID = 315
+X = 11325
+Y = 5059
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant7]
+ID = 316
+X = 11508
+Y = 5296
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant8]
+ID = 317
+X = 11532
+Y = 5503
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant9]
+ID = 318
+X = 11515
+Y = 5705
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant10]
+ID = 319
+X = 11573
+Y = 5867
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant11]
+ID = 320
+X = 11786
+Y = 5823
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant12]
+ID = 321
+X = 11855
+Y = 6049
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant13]
+ID = 322
+X = 11665
+Y = 6183
+Radius = 100
+RespawnTime = 10
+Type = 323
+
+[ProGiant14]
+ID = 324
+X = 11534
+Y = 6318
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant15]
+ID = 325
+X = 11367
+Y = 6416
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant16]
+ID = 326
+X = 11319
+Y = 6595
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant17]
+ID = 327
+X = 11487
+Y = 6807
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant18]
+ID = 328
+X = 11249
+Y = 6972
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant19]
+ID = 329
+X = 11013
+Y = 7025
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant20]
+ID = 330
+X = 10798
+Y = 6875
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant21]
+ID = 331
+X = 10612
+Y = 6737
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant22]
+ID = 332
+X = 10611
+Y = 6530
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant23]
+ID = 333
+X = 10543
+Y = 6328
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant24]
+ID = 334
+X = 10423
+Y = 6215
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant25]
+ID = 335
+X = 10278
+Y = 6365
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant26]
+ID = 336
+X = 10338
+Y = 6526
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant27]
+ID = 337
+X = 10752
+Y = 6687
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant28]
+ID = 338
+X = 11059
+Y = 6754
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant29]
+ID = 339
+X = 10968
+Y = 6998
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant30]
+ID = 340
+X = 10838
+Y = 7081
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant31]
+ID = 341
+X = 10814
+Y = 7091
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant32]
+ID = 342
+X = 10559
+Y = 7073
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant33]
+ID = 343
+X = 10625
+Y = 6953
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant34]
+ID = 344
+X = 10424
+Y = 6737
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant35]
+ID = 345
+X = 10302
+Y = 6671
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant36]
+ID = 346
+X = 10182
+Y = 6607
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant37]
+ID = 347
+X = 10132
+Y = 6482
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant38]
+ID = 348
+X = 10267
+Y = 6454
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant39]
+ID = 349
+X = 10495
+Y = 6251
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant40]
+ID = 350
+X = 10673
+Y = 6127
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant41]
+ID = 351
+X = 10816
+Y = 6272
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant42]
+ID = 352
+X = 10918
+Y = 6445
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant43]
+ID = 353
+X = 11145
+Y = 6425
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant44]
+ID = 354
+X = 11327
+Y = 6161
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant45]
+ID = 355
+X = 11314
+Y = 5915
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant46]
+ID = 356
+X = 11218
+Y = 5626
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant47]
+ID = 357
+X = 11328
+Y = 5411
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant48]
+ID = 358
+X = 11103
+Y = 5206
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant49]
+ID = 389
+X = 10843
+Y = 5145
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant50]
+ID = 390
+X = 10625
+Y = 5258
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant51]
+ID = 391
+X = 10498
+Y = 5443
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant52]
+ID = 392
+X = 10570
+Y = 5653
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant53]
+ID = 393
+X = 10807
+Y = 5818
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant54]
+ID = 394
+X = 10881
+Y = 6022
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant55]
+ID = 395
+X = 10677
+Y = 7201
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant56]
+ID = 396
+X = 10888
+Y = 7441
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[ProGiant57]
+ID = 397
+X = 11169
+Y = 7372
+Radius = 100
+RespawnTime = 10
+Type = 41
+
+[BattleGiant48]
+ID = 398
+X = 3924
+Y = 3715
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant49]
+ID = 399
+X = 3738
+Y = 3752
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant50]
+ID = 400
+X = 3663
+Y = 3620
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant51]
+ID = 401
+X = 3547
+Y = 3607
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant52]
+ID = 402
+X = 3421
+Y = 3522
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant53]
+ID = 403
+X = 3182
+Y = 3508
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant54]
+ID = 404
+X = 3175
+Y = 3717
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant55]
+ID = 405
+X = 3113
+Y = 3843
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant56]
+ID = 406
+X = 3250
+Y = 3926
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant57]
+ID = 407
+X = 3360
+Y = 4059
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant58]
+ID = 408
+X = 3544
+Y = 4124
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant59]
+ID = 409
+X = 3594
+Y = 4287
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant60]
+ID = 410
+X = 3392
+Y = 4380
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant61]
+ID = 411
+X = 3781
+Y = 4215
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant62]
+ID = 412
+X = 3883
+Y = 4023
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant63]
+ID = 413
+X = 4078
+Y = 3942
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[BattleGiant64]
+ID = 414
+X = 3970
+Y = 3605
+Radius = 50
+RespawnTime = 10
+Type = 106
+
+[BattleGiant65]
+ID = 415
+X = 4057
+Y = 3499
+Radius = 50
+RespawnTime = 10
+Type = 106
+
+[BattleGiant66]
+ID = 416
+X = 3952
+Y = 3378
+Radius = 50
+RespawnTime = 10
+Type = 106
+
+[BattleGiant67]
+ID = 417
+X = 3546
+Y = 3786
+Radius = 100
+RespawnTime = 10
+Type = 106
+
+[DevilGiant43]
+ID = 418
+X = 2919
+Y = 3847
+Radius = 100
+RespawnTime = 10
+Type = 105
+
+[DevilGiant44]
+ID = 419
+X = 2835
+Y = 3922
+Radius = 50
+RespawnTime = 10
+Type = 105
+
+[ProGiant58]
+ID = 420
+X = 2894
+Y = 3879
+Radius = 50
+RespawnTime = 10
+Type = 41
+
+[ProGiant59]
+ID = 421
+X = 2742
+Y = 3807
+Radius = 50
+RespawnTime = 10
+Type = 41
+
+[ProGiant60]
+ID = 422
+X = 2549
+Y = 3772
+Radius = 50
+RespawnTime = 10
+Type = 41
+
+[ProGiant61]
+ID = 423
+X = 2316
+Y = 3803
+Radius = 50
+RespawnTime = 10
+Type = 41
+
+[ProGiant62]
+ID = 424
+X = 2101
+Y = 3774
+Radius = 50
+RespawnTime = 10
+Type = 41
+
+[ProGiant63]
+ID = 425
+X = 2144
+Y = 3625
+Radius = 50
+RespawnTime = 10
+Type = 41
+
+[ProGiant64]
+ID = 426
+X = 2380
+Y = 3557
+Radius = 50
+RespawnTime = 10
+Type = 41
+
+[ProGiant65]
+ID = 427
+X = 2543
+Y = 3271
+Radius = 50
+RespawnTime = 10
+Type = 41
+
+[ProGiant66]
+ID = 428
+X = 2588
+Y = 3086
+Radius = 50
+RespawnTime = 10
+Type = 41
+
+[ProGiant67]
+ID = 429
+X = 2674
+Y = 2950
+Radius = 50
+RespawnTime = 10
+Type = 41
+
+[ProGiant68]
+ID = 430
+X = 2795
+Y = 2888
+Radius = 50
+RespawnTime = 10
+Type = 41
+
+[ProGiant69]
+ID = 431
+X = 2954
+Y = 2697
+Radius = 50
+RespawnTime = 10
+Type = 41
+
+[ProGiant70]
+ID = 432
+X = 2892
+Y = 2558
+Radius = 50
+RespawnTime = 10
+Type = 41
+
+[ProGiant71]
+ID = 433
+X = 2691
+Y = 2553
+Radius = 50
+RespawnTime = 10
+Type = 41
+
+[ProGiant72]
+ID = 434
+X = 2605
+Y = 2444
+Radius = 50
+RespawnTime = 10
+Type = 41
+
+[ProGiant73]
+ID = 435
+X = 2516
+Y = 2289
+Radius = 50
+RespawnTime = 10
+Type = 41
+
+[ProGiant74]
+ID = 436
+X = 2354
+Y = 2292
+Radius = 50
+RespawnTime = 10
+Type = 41
+
+[ProGiant75]
+ID = 437
+X = 2227
+Y = 2427
+Radius = 50
+RespawnTime = 10
+Type = 41
+
+[ProGiant76]
+ID = 438
+X = 2189
+Y = 2611
+Radius = 50
+RespawnTime = 10
+Type = 41
+
+[ProGiant77]
+ID = 439
+X = 2145
+Y = 2751
+Radius = 50
+RespawnTime = 10
+Type = 41
+
+[ProGiant78]
+ID = 440
+X = 2173
+Y = 2858
+Radius = 50
+RespawnTime = 10
+Type = 41
+
+[ProGiant79]
+ID = 441
+X = 2431
+Y = 2939
+Radius = 50
+RespawnTime = 10
+Type = 41
+
+[ProGiant80]
+ID = 442
+X = 2816
+Y = 2766
+Radius = 50
+RespawnTime = 10
+Type = 41
+
+[ProGiant81]
+ID = 443
+X = 3032
+Y = 3038
+Radius = 50
+RespawnTime = 10
+Type = 41
+
+[ProGiant82]
+ID = 444
+X = 3181
+Y = 3065
+Radius = 50
+RespawnTime = 10
+Type = 41
+
+[ProGiant83]
+ID = 445
+X = 3461
+Y = 2984
+Radius = 50
+RespawnTime = 10
+Type = 41
+
+[ProGiant84]
+ID = 446
+X = 3572
+Y = 2782
+Radius = 50
+RespawnTime = 10
+Type = 41
+
+[ProGiant85]
+ID = 447
+X = 3407
+Y = 2683
+Radius = 50
+RespawnTime = 10
+Type = 41
+
+[ProGiant86]
+ID = 448
+X = 3230
+Y = 2540
+Radius = 50
+RespawnTime = 10
+Type = 41
+
+[ProGiant87]
+ID = 449
+X = 3112
+Y = 2554
+Radius = 50
+RespawnTime = 10
+Type = 41
+
+[ProGaint88]
+ID = 450
+X = 3228
+Y = 2372
+Radius = 50
+RespawnTime = 10
+Type = 41
+
+[ProGiant89]
+ID = 451
+X = 3438
+Y = 2219
+Radius = 50
+RespawnTime = 10
+Type = 41
+
+[DevilGiant45]
+ID = 452
+X = 4056
+Y = 1293
+Radius = 50
+RespawnTime = 10
+Type = 105
+
+[DevilGiant46]
+ID = 453
+X = 3972
+Y = 1371
+Radius = 50
+RespawnTime = 10
+Type = 105
+
+[DevilGiant47]
+ID = 454
+X = 3915
+Y = 1507
+Radius = 50
+RespawnTime = 10
+Type = 105
+
+[DevilGiant48]
+ID = 455
+X = 4137
+Y = 1279
+Radius = 50
+RespawnTime = 10
+Type = 105
+
