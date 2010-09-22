@@ -357,7 +357,8 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 							Integer.parseInt(message[1]));
 				}
 				} catch (Exception e) {
-					System.out.println("oh skill bug");
+					System.out.println("Skill bug");
+					//TODO: Fix Skill bug
 				}
 				// client.getPlayer()Object.useSkill(Integer.parseInt(message[1]));
 			} else if (message[0].equals("skillup")) {
@@ -370,6 +371,10 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 			} else if (message[0].equals("go_world")) {
 				com.GoWorld(client.getPlayer(), Integer.parseInt(message[1]),
 						Integer.parseInt(message[2]));
+			} else if (message[0].equals("trans")) {
+				int corx = (int) Float.parseFloat(message[1]);
+				int cory = (int) Float.parseFloat(message[2]);
+				com.GoToPos(client.getPlayer(), corx,cory);	
 			} else if (message[0].equals("use_quick")) {
 				client.getPlayer().getQuickSlot().useQuickSlot(
 						client.getPlayer(), Integer.parseInt(message[1]));
