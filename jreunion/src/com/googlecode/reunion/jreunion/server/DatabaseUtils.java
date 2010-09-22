@@ -1,5 +1,6 @@
 package com.googlecode.reunion.jreunion.server;
 
+import java.net.Socket;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,6 +30,7 @@ import com.googlecode.reunion.jreunion.game.StaffWeapon;
 import com.googlecode.reunion.jreunion.game.StashItem;
 import com.googlecode.reunion.jreunion.game.Sword;
 import com.googlecode.reunion.jreunion.game.Weapon;
+import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 import com.googlecode.reunion.jreunion.server.database.DatabaseAction;
 import com.googlecode.reunion.jreunion.server.database.SaveInventory;
 import com.mysql.jdbc.MySQLConnection;
@@ -103,85 +105,89 @@ public class DatabaseUtils extends Service {
 		
 	}
 	
-	public String getCharList(int accountId) {
+	public String getCharList(Client client) {
 		if (!checkDatabase())
 			return null;
-		String charlist = new String();
-		int slotlist[] = new int[5];
-		for (int i=0;i<5;i++) slotlist[i]=-1;
 		
-		Statement stmt;
+		int accountId = client.getAccountId();
+		String charlist ="";
+		int chars = 0;
 		try {
-			stmt = database.conn.createStatement();
-			ResultSet rs = stmt
-			.executeQuery("SELECT slot, charid FROM slots WHERE accountid="
-					+ accountId + " ;");
-			int chars=0;
+			Statement stmt = database.conn.createStatement();
+			
+			ResultSet rs = stmt.executeQuery("SELECT * FROM `characters`,`slots` WHERE `characters`.`accountid`="+accountId+" AND `characters`.`id`=`slots`.`charid` ORDER BY `slot` ASC");
+		
 			while (rs.next()) {
 				
-				slotlist[rs.getInt("slot")]=rs.getInt("charid");
-				chars++;
-				
-			}
-			System.out.println("found " + chars
-					+ " char(s) for Account(" + accountId + ")");
-			
-			
-			for (int slotnr=0;slotnr<5;slotnr++)
-			{
-				
-				if (slotlist[slotnr]==-1) continue;
-				
-				rs = stmt.executeQuery("SELECT * FROM characters WHERE id="
-						+ slotlist[slotnr] + ";");
-				
-				if (rs.next()) {
-					
-					Equipment eq = loadEquipment(slotlist[slotnr]);
-					
-					int eqHelmet = -1;
-					int eqArmor = -1;
-					int eqPants = -1;
-					int eqShoulderMount = -1;
-					int eqBoots = -1;
-					int eqShield = -1;
-					if (eq.getHelmet()!=null) eqHelmet = eq.getHelmet().getType();
-					if (eq.getArmor()!=null) eqArmor = eq.getArmor().getType();
-					if (eq.getPants()!=null) eqPants = eq.getPants().getType();
-					if (eq.getShoulderMount()!=null) eqShoulderMount = eq.getShoulderMount().getType();
-					if (eq.getBoots()!=null) eqBoots = eq.getBoots().getType();
-					if (eq.getOffHand()!=null) eqShield = eq.getOffHand().getType();
-					
-					charlist += "chars_exist " + slotnr + " "
-					+ rs.getString("name") + " " + rs.getString("race")
-					+ " " + rs.getString("sex") + " "
-					+ rs.getString("hair") + " "
-					+ rs.getString("level") + " "
-					+ rs.getString("currHp") + " "
-					+ rs.getString("currStm") + " "
-					+ rs.getString("currMana") + " "
-					+ rs.getString("currElect") + " "
-					+ rs.getString("maxHp") + " "
-					+ rs.getString("maxStm") + " "
-					+ rs.getString("maxMana") + " "
-					+ rs.getString("maxElect") + " "
-					+ rs.getString("str") + " " + rs.getString("wis")
-					+ " " + rs.getString("dex") + " "
-					+ rs.getString("con") + " " + rs.getString("lea")
-					+ " " + eqHelmet + " " + eqArmor
-					+ " " + eqPants	+ " " + eqShoulderMount
-					+ " " + eqBoots + " " + eqShield + " 1\n";
-					// chars_exist [SlotNumber] [Name] [Race] [Sex] [HairStyle]
-					// [Level] [Vitality] [Stamina] [Magic] [Energy] [Vitality]
-					// [Stamina] [Magic] [Energy] [Strength] [Wisdom]
-					// [Dexterity] [Constitution] [Leadership] [HeadGear]
-					// [Chest] [Pants] [SoulderMount] [Feet] [Shield] 0
+				int slot = rs.getInt("slot");
+				boolean alreadyLogged = false;
+				java.util.Map<Socket,Client> clients = Server.getInstance().getWorldModule().getClients();			
+				synchronized(clients){
+					for(Client cl: clients.values()){
+						if(cl.equals(client))
+							continue;
+						if(cl.getAccountId()==client.getAccountId()){
+							Player p1 = cl.getPlayer();
+							
+							if(p1!=null&&p1.getSlot()==slot){								
+								
+								alreadyLogged = true;
+							}							
+						}	
+					}
 				}
+				if(alreadyLogged)
+					continue;
+				
+				Equipment eq = loadEquipment(rs.getInt("id"));
+				
+				int eqHelmet = -1;
+				int eqArmor = -1;
+				int eqPants = -1;
+				int eqShoulderMount = -1;
+				int eqBoots = -1;
+				int eqShield = -1;
+				if (eq.getHelmet()!=null) eqHelmet = eq.getHelmet().getType();
+				if (eq.getArmor()!=null) eqArmor = eq.getArmor().getType();
+				if (eq.getPants()!=null) eqPants = eq.getPants().getType();
+				if (eq.getShoulderMount()!=null) eqShoulderMount = eq.getShoulderMount().getType();
+				if (eq.getBoots()!=null) eqBoots = eq.getBoots().getType();
+				if (eq.getOffHand()!=null) eqShield = eq.getOffHand().getType();
+				
+				charlist += "chars_exist " + slot + " "
+				+ rs.getString("name") + " " + rs.getString("race")
+				+ " " + rs.getString("sex") + " "
+				+ rs.getString("hair") + " "
+				+ rs.getString("level") + " "
+				+ rs.getString("currHp") + " "
+				+ rs.getString("currStm") + " "
+				+ rs.getString("currMana") + " "
+				+ rs.getString("currElect") + " "
+				+ rs.getString("maxHp") + " "
+				+ rs.getString("maxStm") + " "
+				+ rs.getString("maxMana") + " "
+				+ rs.getString("maxElect") + " "
+				+ rs.getString("str") + " " + rs.getString("wis")
+				+ " " + rs.getString("dex") + " "
+				+ rs.getString("con") + " " + rs.getString("lea")
+				+ " " + eqHelmet + " " + eqArmor
+				+ " " + eqPants	+ " " + eqShoulderMount
+				+ " " + eqBoots + " " + eqShield + " 1\n";
+				// chars_exist [SlotNumber] [Name] [Race] [Sex] [HairStyle]
+				// [Level] [Vitality] [Stamina] [Magic] [Energy] [Vitality]
+				// [Stamina] [Magic] [Energy] [Strength] [Wisdom]
+				// [Dexterity] [Constitution] [Leadership] [HeadGear]
+				// [Chest] [Pants] [SoulderMount] [Feet] [Shield] 0
+				chars++;
 			}
-		} catch (SQLException e1) {
-			e1.printStackTrace();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
 			return null;
 		}
+		
+		System.out.println("found " + chars
+				+ " char(s) for Account(" + accountId + ")");		
 		
 		charlist += "chars_end\n";
 		return charlist;
@@ -233,8 +239,7 @@ public class DatabaseUtils extends Service {
 				int race = rs.getInt("race");				
 				player = Player.createPlayer(client,race);
 				
-				player.setEntityId(characterId);
-				
+				player.setEntityId(characterId);				
 				player.setStrength(rs.getInt("str"));
 				player.setWisdom(rs.getInt("wis"));
 				player.setDexterity(rs.getInt("dex"));
@@ -504,7 +509,7 @@ public class DatabaseUtils extends Service {
 		}
 	}
 	
-	public Player loadChar(int slotNumber, int accountId,Client client) {
+	public Player loadChar(int slot, int accountId, Client client) {
 		
 		Player player=null;
 		if (!checkDatabase())
@@ -517,16 +522,15 @@ public class DatabaseUtils extends Service {
 			.executeQuery("(SELECT charid FROM slots WHERE accountid ="
 					+ accountId
 					+ " and slot = "
-					+ slotNumber + ");");
+					+ slot + ");");
 			if (rs.next()) {
 				characterId = rs.getInt("charid");
 			}
 			
-			player = loadCharStatus(client,characterId);
+			player = loadCharStatus(client, characterId);
+			player.setSlot(slot);
 			
 			System.out.println("Loaded: " + player.getName());
-						
-			client.characterId=characterId;
 			
 		} catch (SQLException e1) {
 			

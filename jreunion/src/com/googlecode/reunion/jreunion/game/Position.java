@@ -9,6 +9,25 @@ public class Position {
 	private int z;
 	
 	private Map map;
+	
+	public Position(){
+		
+	}
+
+	public Position(int x, int y, int z, Map map, double rotation) {
+		super();
+		this.x = x;
+		this.y = y;
+		this.z = z;
+		this.map = map;
+		this.rotation = rotation;
+	}
+	
+	public Position clone()
+	{		
+		return this.clone();
+		
+	}
 
 	public int getX() {
 		return x;

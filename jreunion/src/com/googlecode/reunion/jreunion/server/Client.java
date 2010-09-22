@@ -15,7 +15,6 @@ import com.googlecode.reunion.jreunion.events.NetworkDisconnectEvent;
 import com.googlecode.reunion.jreunion.events.NetworkEvent;
 import com.googlecode.reunion.jreunion.events.NetworkSendEvent;
 import com.googlecode.reunion.jreunion.game.Player;
-import com.googlecode.reunion.jreunion.server.PacketFactory.S_PacketType;
 
 /**
  * @author Aidamina
@@ -29,7 +28,6 @@ public class Client extends EventBroadcaster implements EventListener {
 	public StringBuffer getOutputBuffer() {
 		return outputBuffer;
 	}
-	
 		
 	private String username;
 
@@ -94,15 +92,6 @@ public class Client extends EventBroadcaster implements EventListener {
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
-
-	public int getCharacterId() {
-		return characterId;
-	}
-
-	public void setCharacterId(int characterId) {
-		this.characterId = characterId;
-	}
-	public int characterId;
 	
 	public LoginType loginType;
 
@@ -118,7 +107,6 @@ public class Client extends EventBroadcaster implements EventListener {
 		super();
 		accountId = -1;
 		clientState = State.DISCONNECTED;
-		characterId = -1;
 		
 		Server.getInstance().getWorldModule().addEventListener(ClientSendEvent.class, this, new ClientEvent.ClientFilter(this));
 		Server.getInstance().getNetworkModule().addEventListener(NetworkDisconnectEvent.class, this, new NetworkEvent.NetworkFilter(this.socket));
@@ -130,7 +118,7 @@ public class Client extends EventBroadcaster implements EventListener {
 
 	public void sendWrongVersion(int clientVersion) {
 		
-		SendPacket(S_PacketType.VERSION_ERROR,clientVersion);
+		SendPacket(PacketFactory.Type.VERSION_ERROR,clientVersion);
 	}
 	
 	public void SendData(String data) {
@@ -139,12 +127,13 @@ public class Client extends EventBroadcaster implements EventListener {
 			if(!data.endsWith("\n")){
 				this.outputBuffer.append("\n");
 			}
+			
 			this.fireEvent(NetworkSendEvent.class, this.getSocket());
+			
 		}
 		
 	}
-	public void SendPacket(S_PacketType packetType, Object ...arg){
-		
+	public void SendPacket(PacketFactory.Type packetType, Object ...arg){		
 		SendData(PacketFactory.createPacket(packetType, arg));
 	}
 
@@ -165,7 +154,7 @@ public class Client extends EventBroadcaster implements EventListener {
 		Server.getInstance().getNetworkModule().disconnect(this.getSocket());		
 	}
 	
-	public enum State {
+	public static enum State {
 		
 		DISCONNECTED(-1),
 	

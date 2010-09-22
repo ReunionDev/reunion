@@ -53,15 +53,16 @@ public class SessionManager {
 		sessionList.remove(session);
 	}
 
-	public void workSessions() {
+	public synchronized void workSessions() {
 		/*
 		 * Iterator iter = sessionList.iterator(); while (iter.hasNext()) {
 		 * Session session = (Session) iter.next();
 		 * session.WorkSession(getSessionRadius()); }
 		 */
-
-		Iterator<Player> player1Iter = Server.getInstance()
-				.getWorldModule().getPlayerManager().getPlayerListIterator();
+		
+		PlayerManager manager = Server.getInstance()
+		.getWorldModule().getPlayerManager();
+		Iterator<Player> player1Iter = manager.getPlayerListIterator();
 
 		while (player1Iter.hasNext()) {
 			Player player1 = player1Iter.next();

@@ -10,11 +10,13 @@ import com.googlecode.reunion.jreunion.game.LivingObject;
 import com.googlecode.reunion.jreunion.game.Mob;
 import com.googlecode.reunion.jreunion.game.Npc;
 import com.googlecode.reunion.jreunion.game.Player;
+import com.googlecode.reunion.jreunion.game.Position;
 import com.googlecode.reunion.jreunion.game.RoamingItem;
 import com.googlecode.reunion.jreunion.game.Skill;
 import com.googlecode.reunion.jreunion.game.SlayerWeapon;
 import com.googlecode.reunion.jreunion.game.Weapon;
-import com.googlecode.reunion.jreunion.server.PacketFactory.S_PacketType;
+import com.googlecode.reunion.jreunion.server.Client.State;
+import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 
 /**
  * @author Aidamina
@@ -37,10 +39,27 @@ public class Command {
 			client.SendData("fail Username and password combination is invalid\n");
 		} else {
 
-			System.out.println("" + client + " authed as account(" + accountId
-					+ ")");
+			
+			System.out.println("" + client + " authed as account(" + accountId + ")");
 			client.setAccountId(accountId);
-			sendCharList(client, accountId);
+			
+			java.util.Map<Socket,Client> clients = world.getClients();
+			synchronized(clients){
+				for(Client cl: clients.values()){
+					if(cl.equals(client))
+						continue;					
+					if(cl.getAccountId()==client.getAccountId()){
+						
+						if(cl.getState()==State.CHAR_LIST) {
+							client.SendPacket(Type.FAIL, "Only one client can use the charlist at the same time.");
+							return;
+						}									
+					}	
+				}
+			}
+			
+			;
+			sendCharList(client);
 		}
 
 	}
@@ -222,15 +241,24 @@ public class Command {
 				+ player.getPosition().getRotation() + "\n";
 		client.SendData(packetData);
 	}
+	
+	
+	public void GoToPos(Player player, Position position){
+		
+		Client client = player.getClient();
+		
+		player.setPosition(position);
+		
+		client.SendPacket(Type.GOTO, position);
+		
+		
+	}
 
 	/****** teleport player to position (posX,posY) in the current map ******/
 	public void GoToPos(Player player, int posX, int posY) {
 		Client client = player.getClient();
 
-		if (client == null) {
-			return;
-		}
-
+		
 		player.getPosition().setX(posX);
 		player.getPosition().setY(posY);
 
@@ -271,11 +299,14 @@ public class Command {
 	}
 
 	/****** change map ******/
-	public void GoWorld(Player player, int mapId, int unknown) {
+	public void GoToWorld(Player player, Map map, int unknown) {
 		Client client = player.getClient();
-		Map map = Server.getInstance().getWorldModule().getMap(mapId);
 		// jump 7024 5551 227505
-		// party disband
+		
+		
+		//Disband party
+		client.SendPacket(Type.PARTY_DISBAND);
+		
 		// go_world 62.26.131.215 4001 0 0
 
 		String packetData = "jump " + player.getPosition().getX() + " "
@@ -283,7 +314,9 @@ public class Command {
 				+ "\n";
 
 		client.SendData(packetData);
-
+		
+		
+		//TODO: Cross server implementation
 		Server.getInstance().getWorldModule().getTeleportManager()
 				.register(player, map);
 
@@ -296,19 +329,10 @@ public class Command {
 			//TODO: Fix Teleporting
 			System.out.println("teleportbug");
 		}
+		
+		client.SendPacket(Type.GO_WORLD, map, unknown);
 
-		InetSocketAddress address = map.getAddress();
 
-		packetData = "go_world " + address.getAddress().getHostAddress() + " "
-				+ address.getPort() + " " + mapId + " " + unknown + "\n";
-
-		client.SendData(packetData);
-
-		// client.setState(7);
-		// System.out.print("Removing Player...\n");
-		// charLogout(player);
-		// System.out.print("Removing Client...\n");
-		// S_Server.getInstance().getNetworkModule().clientList.remove(client);
 	}
 
 	public void itemIn(Player sessionOwner, RoamingItem roamingItem) {
@@ -360,12 +384,13 @@ public class Command {
 	}
 
 	public Player loginChar(int slotNumber, int accountId, Client client) {
+		
+		
+		
 		Player player = DatabaseUtils.getInstance().loadChar(slotNumber,
 				accountId, client);
 		
-		if (client == null) {
-			return null;
-		}
+		
 		Socket socket = client.getSocket();
 		/*
 		 * S_Map map =
@@ -536,7 +561,7 @@ public class Command {
 		player.loadExchange();
 		player.loadQuickSlot();
 
-		client.SendPacket(S_PacketType.OK);
+		client.SendPacket(PacketFactory.Type.OK);
 
 		return player;
 	}
@@ -766,9 +791,9 @@ public class Command {
 
 	}
 
-	void sendCharList(Client client, int accountId) {
+	void sendCharList(Client client) {
 
-		client.SendData(DatabaseUtils.getInstance().getCharList(accountId));
+		client.SendData(DatabaseUtils.getInstance().getCharList(client));
 
 		client.setState(Client.State.CHAR_LIST);
 		return;

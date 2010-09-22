@@ -36,6 +36,17 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 	private int lvlUpExp;
 
 	private int lime; // Gold
+	
+	private int slot;
+
+	public int getSlot() {
+		return slot;
+	}
+
+	public void setSlot(int slot) {
+		this.slot = slot;
+	}
+
 
 	private boolean combatMode; // 0 - Peace Mode; 1 - Attack Mode
 

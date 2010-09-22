@@ -143,18 +143,21 @@ public class MessageParser {
 			try {
 				String worldname = word[1];	
 				ParsedItem mapref = Reference.getInstance().getMapConfigReference().getItem(worldname);
-				String mapid   = mapref.getMemberValue("ID");
-				String mapport = mapref.getMemberValue("Port");
-				String mapip   = mapref.getMemberValue("Ip");
 				
-				if (mapid != null || mapport != null || mapid != null) {
-					client.SendData(
-							"go_world "+mapip+" "+mapport+" " + mapid
-									+ "\n");
+				if(mapref!=null){
+					int mapId   =Integer.parseInt(mapref.getMemberValue("Id"));
+					Map map = Server.getInstance().getWorldModule().getMap(mapId);
+					
+					if (map != null) {
+						com.GoToWorld(player, map, 0);
+					}
+				}
+				else{
+					String packetData = "say 1 S_Server (NOTICE) @tele failed -> @tele worldname";
+					client.SendData(packetData);					
 				}
 			} catch (Exception e) {
-				String packetData = "say 1 S_Server (NOTICE) @tele failed -> @tele worldname";
-				client.SendData(packetData);
+				
 			}
 		}  else if (word[0].equals("@goto")) {
 			if (word[1].equals("pos")) {

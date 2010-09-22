@@ -18,7 +18,6 @@ class PerformanceEvent {
 	Date getTime() {
 		return moment;
 	}
-
 }
 
 /**

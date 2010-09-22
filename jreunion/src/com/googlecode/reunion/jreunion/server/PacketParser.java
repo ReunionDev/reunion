@@ -1,5 +1,6 @@
 package com.googlecode.reunion.jreunion.server;
 
+import java.net.Socket;
 import java.util.Random;
 import java.util.regex.Pattern;
 
@@ -17,9 +18,11 @@ import com.googlecode.reunion.jreunion.game.Merchant;
 import com.googlecode.reunion.jreunion.game.Mob;
 import com.googlecode.reunion.jreunion.game.Npc;
 import com.googlecode.reunion.jreunion.game.Player;
+import com.googlecode.reunion.jreunion.game.Position;
 import com.googlecode.reunion.jreunion.game.Quest;
 import com.googlecode.reunion.jreunion.game.Trader;
 import com.googlecode.reunion.jreunion.game.Warehouse;
+import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
@@ -47,6 +50,7 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 	private void HandleMessage(Client client, String message[]) {
 		
 		synchronized(client){
+			Player player = client.getPlayer();
 		System.out.println("Parsing " + message[0] + " command on "
 				+ client + " with state: " + client.getState() + "");
 		switch (client.getState()) {
@@ -131,9 +135,29 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 					com.sendFail(client);
 				}
 				break;
+				
 			} else if (message[0].equals("char_new")) {
-
-				com.createChar(client, Integer.parseInt(message[1]),
+				int slot = Integer.parseInt(message[1]);
+				
+				java.util.Map<Socket,Client> clients = world.getClients();
+				synchronized(clients){
+					for(Client cl: clients.values()){
+						if(cl.equals(client))
+							continue;
+						if(cl.getAccountId()==client.getAccountId()){
+							Player p1 = cl.getPlayer();
+							
+							if(p1!=null&&p1.getSlot()==slot){								
+								//return because we've reserved this slot for a logged in user
+								//TODO:find out if we can do some feedback here to the client
+								client.SendPacket(Type.FAIL);
+								return;
+							}							
+						}	
+					}
+				}
+				
+				com.createChar(client, slot,
 						message[2], Integer.parseInt(message[3]),
 						Integer.parseInt(message[4]),
 						Integer.parseInt(message[5]),
@@ -142,30 +166,30 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 						Integer.parseInt(message[8]),
 						Integer.parseInt(message[9]),
 						Integer.parseInt(message[10]));
+				
+				
 				com.sendSuccess(client);
-				com.sendCharList(client, client.getAccountId());
+				com.sendCharList(client);
 			} else if (message[0].equals("char_del")) {
 
 				com.delChar(Integer.parseInt(message[1]), client.getAccountId());
 				com.sendSuccess(client);
 
-				com.sendCharList(client, client.getAccountId());
+				com.sendCharList(client);
 			} else if (message[0].equals("start")) {
 				client.setState(Client.State.CHAR_SELECTED);
-				Player player = com.loginChar(Integer.parseInt(message[1]), client.getAccountId(),
-						client);
+				int slot = Integer.parseInt(message[1]);
+				player = com.loginChar(slot, client.getAccountId(),	client);
 				if(player==null){
-					client.SendData("fail Cannot log in");
+					client.SendPacket(Type.FAIL, "Cannot log in");
 					client.disconnect();
 				}
 			}
-
 			break;
 		}
 		
 		case CHAR_SELECTED: {
 			if (message[0].equals("start_game")) {
-				Player player = client.getPlayer();
 
 				player.getPosition().setX(6655);
 				player.getPosition().setY(5224);//we need to implement spawnpoints here
@@ -181,9 +205,6 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 						"status 10 " + player.getLime() + " 0\n");
 				client.SendData(
 						"status 19 " + player.getPenaltyPoints() + " 0\n");
-				
-				
-				
 				
 				int defaultSpawnId = Integer.parseInt(Reference.getInstance().getMapReference().getItemById(player.getPosition().getMap().getId()).getMemberValue("DefaultSpawnId"));
 				ParsedItem spawn =player.getPosition().getMap().getPlayerSpawnReference().getItemById(defaultSpawnId);
@@ -211,8 +232,8 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 				 * "guild_level 0\n" +
 				 * "on_battle 0 3 BlackSouls 7 SlAcKeRs 0 DELTA 700 pSyKo 701 SlAcKeRs 702 Iron_Fist 703 pSyKo\n"
 				 * +
-				 * "mypet 99935 PHOENIX 7049 5297 0.0 585 591 595 597 602 605 7219 6181\n"
-				 * + "pstatus 0 20790 20000 0\n" + "pstatus 1 10000 0 0\n" +
+				 * "mypet 99935 PHOENIX 7049 5297 0.0 585 591 595 597 602 605 7219 6181\n" +
+				 * "pstatus 0 20790 20000 0\n" + "pstatus 1 10000 0 0\n" +
 				 * "pstatus 2 10000 0 0\n" + "pstatus 3 10000 0 0\n" +
 				 * "pstatus 4 10000 0 0\n" + "pstatus 5 15 0 0\n" +
 				 * "pstatus 6 39 0 0\n" + "pstatus 7 4 0 0\n" +
@@ -350,10 +371,10 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 					client.getPlayer().useSkill(mob,
 							Integer.parseInt(message[1]));
 				} else if (message[2].equals("char")) {
-					Player player = Server.getInstance().getWorldModule()
+					Player player1 = Server.getInstance().getWorldModule()
 							.getPlayerManager()
 							.getPlayer(Integer.parseInt(message[3]));
-					client.getPlayer().useSkill(player,
+					client.getPlayer().useSkill(player1,
 							Integer.parseInt(message[1]));
 				}
 				} catch (Exception e) {
@@ -369,12 +390,22 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 				client.getPlayer().getQuickSlot().quickSlot(
 						client.getPlayer(), Integer.parseInt(message[1]));
 			} else if (message[0].equals("go_world")) {
-				com.GoWorld(client.getPlayer(), Integer.parseInt(message[1]),
+				
+				int mapId = Integer.parseInt(message[1]);
+				Map map = world.getMap(mapId);
+				com.GoToWorld(client.getPlayer(), map,
 						Integer.parseInt(message[2]));
+				
 			} else if (message[0].equals("trans")) {
 				int corx = (int) Float.parseFloat(message[1]);
 				int cory = (int) Float.parseFloat(message[2]);
-				com.GoToPos(client.getPlayer(), corx,cory);	
+
+				Position position = player.getPosition().clone();
+				position.setX(corx);
+				position.setY(cory);
+				com.GoToPos(player, position);
+				//com.GoToPos(client.getPlayer(), corx, cory);
+				
 			} else if (message[0].equals("use_quick")) {
 				client.getPlayer().getQuickSlot().useQuickSlot(
 						client.getPlayer(), Integer.parseInt(message[1]));

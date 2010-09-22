@@ -234,7 +234,7 @@ public class World extends ClassModule implements EventListener{
 				
 				clients.put(socket, client);
 				
-				fireEvent(createEvent(ClientConnectEvent.class, client));
+				fireEvent(ClientConnectEvent.class, client);
 			}
 			if(event instanceof NetworkDisconnectEvent){
 				Client client = clients.remove(socket);
