@@ -450,25 +450,25 @@ public class DatabaseUtils extends Service {
 					+ slot + ","
 					+ client.getAccountId() + "); ");
 			
-			Potion hpPot1 = (Potion)ItemFactory.createItem(145);
-			Potion hpPot2 = (Potion)ItemFactory.createItem(145);
-			Potion hpPot3 = (Potion)ItemFactory.createItem(145);
-			Potion hpPot4 = (Potion)ItemFactory.createItem(145);
-			Potion hpPot5 = (Potion)ItemFactory.createItem(145);
-			Potion hpPot6 = (Potion)ItemFactory.createItem(145);
+			Potion hpPot1 = (Potion)ItemFactory.create(145);
+			Potion hpPot2 = (Potion)ItemFactory.create(145);
+			Potion hpPot3 = (Potion)ItemFactory.create(145);
+			Potion hpPot4 = (Potion)ItemFactory.create(145);
+			Potion hpPot5 = (Potion)ItemFactory.create(145);
+			Potion hpPot6 = (Potion)ItemFactory.create(145);
 			Weapon weapon = null;
 			
 			switch(race){
-				case 0: {weapon = (Axe)ItemFactory.createItem(48); break;}
-				case 1: {weapon = (StaffWeapon)ItemFactory.createItem(171); break;}
-				case 2: {weapon = (RingWeapon)ItemFactory.createItem(431); break;}
-				case 3: {weapon = (GunWeapon)ItemFactory.createItem(204); break;}
-				case 4: {weapon = (Sword)ItemFactory.createItem(168); break;}
+				case 0: {weapon = (Axe)ItemFactory.create(48); break;}
+				case 1: {weapon = (StaffWeapon)ItemFactory.create(171); break;}
+				case 2: {weapon = (RingWeapon)ItemFactory.create(431); break;}
+				case 3: {weapon = (GunWeapon)ItemFactory.create(204); break;}
+				case 4: {weapon = (Sword)ItemFactory.create(168); break;}
 				default: break;
 			}
 			Equipment equipment = player.getEquipment();
-			Armor chest = (Armor)ItemFactory.createItem(326);
-			Armor pants = (Armor)ItemFactory.createItem(343);
+			Armor chest = (Armor)ItemFactory.create(326);
+			Armor pants = (Armor)ItemFactory.create(343);
 			
 			equipment.setItem(Equipment.Slot.CHEST, chest);
 			equipment.setItem(Equipment.Slot.PANTS, pants);

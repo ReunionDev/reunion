@@ -8,16 +8,16 @@ import java.util.List;
 import java.util.Vector;
 
 import com.googlecode.reunion.jcommon.ParsedItem;
-import com.googlecode.reunion.jreunion.events.ClientConnectEvent;
-import com.googlecode.reunion.jreunion.events.ClientDisconnectEvent;
-import com.googlecode.reunion.jreunion.events.ClientSendEvent;
 import com.googlecode.reunion.jreunion.events.Event;
 import com.googlecode.reunion.jreunion.events.EventListener;
-import com.googlecode.reunion.jreunion.events.NetworkAcceptEvent;
-import com.googlecode.reunion.jreunion.events.NetworkDataEvent;
-import com.googlecode.reunion.jreunion.events.NetworkDisconnectEvent;
-import com.googlecode.reunion.jreunion.events.NetworkEvent;
-import com.googlecode.reunion.jreunion.events.NetworkSendEvent;
+import com.googlecode.reunion.jreunion.events.client.ClientConnectEvent;
+import com.googlecode.reunion.jreunion.events.client.ClientDisconnectEvent;
+import com.googlecode.reunion.jreunion.events.client.ClientSendEvent;
+import com.googlecode.reunion.jreunion.events.network.NetworkAcceptEvent;
+import com.googlecode.reunion.jreunion.events.network.NetworkDataEvent;
+import com.googlecode.reunion.jreunion.events.network.NetworkDisconnectEvent;
+import com.googlecode.reunion.jreunion.events.network.NetworkEvent;
+import com.googlecode.reunion.jreunion.events.network.NetworkSendEvent;
 import com.googlecode.reunion.jreunion.game.Mob;
 import com.googlecode.reunion.jreunion.game.Player;
 
@@ -33,8 +33,6 @@ public class World extends ClassModule implements EventListener{
 	private SessionManager sessionManager;
 
 	private MobManager mobManager;
-
-	private Map mapManager;
 	
 	private TeleportManager teleportManager;
 	
@@ -134,7 +132,14 @@ public class World extends ClassModule implements EventListener{
 		while(iter.hasNext()){
 			ParsedItem item = iter.next();			
 			int mapId = Integer.parseInt(item.getMemberValue("Id"));
-			Map map = new Map(mapId);
+			boolean isLocal = item.getMemberValue("Location").equalsIgnoreCase("Local");
+			Map map = null;
+			if(isLocal){
+				map = new LocalMap(mapId);
+			}
+			else {
+				map = new RemoteMap(mapId);				
+			}
 			map.load();
 			maps.put(mapId, map);
 		}

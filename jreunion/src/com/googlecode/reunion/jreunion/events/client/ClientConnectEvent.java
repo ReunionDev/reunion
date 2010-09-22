@@ -1,4 +1,4 @@
-package com.googlecode.reunion.jreunion.events;
+package com.googlecode.reunion.jreunion.events.client;
 
 import com.googlecode.reunion.jreunion.server.Client;
 
@@ -6,9 +6,9 @@ import com.googlecode.reunion.jreunion.server.Client;
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-public class ClientReceiveEvent extends ClientEvent {
+public class ClientConnectEvent extends ClientEvent {
 
-	public ClientReceiveEvent(Client client) {
+	public ClientConnectEvent(Client client) {
 		super(client);
 	}
 

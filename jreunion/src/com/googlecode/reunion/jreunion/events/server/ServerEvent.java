@@ -1,5 +1,6 @@
-package com.googlecode.reunion.jreunion.events;
+package com.googlecode.reunion.jreunion.events.server;
 
+import com.googlecode.reunion.jreunion.events.Event;
 import com.googlecode.reunion.jreunion.server.Server;
 
 public class ServerEvent extends Event {

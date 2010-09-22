@@ -1,6 +1,8 @@
-package com.googlecode.reunion.jreunion.events;
+package com.googlecode.reunion.jreunion.events.client;
 import com.googlecode.reunion.jreunion.server.*;
 import com.googlecode.reunion.jreunion.events.Event;
+import com.googlecode.reunion.jreunion.events.Filter;
+import com.googlecode.reunion.jreunion.events.InvalidEventException;
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
@@ -9,11 +11,12 @@ public class ClientEvent extends Event {
 	Client client;
 	public ClientEvent(Client client){
 		this.client = client;
-		
 	}
+	
 	public Client getClient() {
 		return client;
 	}
+	
 	public static class ClientFilter implements Filter{
 		
 		Client client;
@@ -29,8 +32,5 @@ public class ClientEvent extends Event {
 			}
 			return ((ClientEvent)event).getClient()==this.client;			
 		}
-		
-		
-		
 	}
 }

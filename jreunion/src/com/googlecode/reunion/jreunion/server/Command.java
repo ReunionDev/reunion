@@ -4,6 +4,7 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.Iterator;
 
+import com.googlecode.reunion.jreunion.events.map.ItemDropEvent;
 import com.googlecode.reunion.jreunion.game.Equipment;
 import com.googlecode.reunion.jreunion.game.Item;
 import com.googlecode.reunion.jreunion.game.LivingObject;
@@ -178,29 +179,34 @@ public class Command {
 	}
 
 	// debug command
-	public void dropItem(Player player, int itemtype, int posX, int posY,
-			int posZ, int rotation, int gems, int special) {
-
+	public void dropItem(Position position, Item item) {
+		/*
 		Client client = player.getClient();
 		if (client == null) {
 			return;
 		}
-
-		Item item = new Item(itemtype);
-		item.setGemNumber(gems);
-		item.setExtraStats(special);
-		DatabaseUtils.getInstance().saveItem(item);
+		*/
+		
+		
 
 		// G_Item item = S_ItemFactory.createItem(itemtype);
 
-		String packetData = "drop " + item.getEntityId() + " " + itemtype + " "
-				+ posX + " " + posY + " " + posZ + " 0.0 " + gems + " "
-				+ special + "\n";
+		String packetData = "drop " + item.getEntityId() + " " + item.getType() + " "
+				+ position.getX() + " " + position.getY() + " " + position.getZ() + " "+position.getRotation()+" " + item.getGemNumber() + " "
+				+ item.getExtraStats() + "\n";
 
-		client.SendData(packetData);
+//		client.SendData(packetData);
 
 		RoamingItem roamingItem = new RoamingItem(item);
-		player.getSession().enter(roamingItem);
+		
+		
+		LocalMap map = position.getMap();
+		
+		map.fireEvent(ItemDropEvent.class, roamingItem);
+		
+		
+		
+		//player.getSession().enter(roamingItem);
 
 		// send to all near //TODO: fix
 		// client.SendData( packetData);
@@ -508,8 +514,16 @@ public class Command {
 		DatabaseUtils.getInstance().loadQuickSlot(player);
 
 		world.getSessionManager().newSession(player);
-
-		player.getPosition().setMap(map);
+		
+		
+		if(!(map instanceof LocalMap)){
+			
+			player.getClient().disconnect();
+			System.err.println("not a local map");
+			
+		}
+		else
+			player.getPosition().setMap((LocalMap)map);
 
 		world.getPlayerManager().addPlayer(player);
 

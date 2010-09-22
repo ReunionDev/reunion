@@ -49,7 +49,7 @@ public class HybriderPlayer extends Player {
 
 			if (mob.getType() == 324) {
 				Item item = com.googlecode.reunion.jreunion.server.ItemFactory
-						.createItem(1054);
+						.create(1054);
 
 				item.setExtraStats((int) (Math.random() * 10000));
 

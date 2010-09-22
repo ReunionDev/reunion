@@ -59,7 +59,7 @@ public class PacketFactory {
 		case GO_WORLD:{
 			
 			if(args.length>0){				
-				Map map = (Map)args[0];
+				LocalMap map = (LocalMap)args[0];
 				int unknown =  args.length>1?(Integer)args[1]:0;
 				InetSocketAddress address = map.getAddress();
 				return "go_world "+address.getAddress().getHostAddress()+" "+address.getPort()+" " + map.getId()+" "+unknown;

@@ -2,7 +2,7 @@ package com.googlecode.reunion.jreunion.game;
 
 import java.util.Random;
 
-import com.googlecode.reunion.jreunion.server.Map;
+import com.googlecode.reunion.jreunion.server.LocalMap;
 import com.googlecode.reunion.jreunion.server.Server;
 import com.googlecode.reunion.jreunion.server.Timer;
 
@@ -29,7 +29,7 @@ public class Spawn {
 
 	private int radius;
 
-	private Map map;
+	private LocalMap map;
 
 	public Spawn() {
 		// spawnMob();
@@ -57,7 +57,7 @@ public class Spawn {
 		return diedTime;
 	}
 
-	public Map getMap() {
+	public LocalMap getMap() {
 		return map;
 	}
 
@@ -123,7 +123,7 @@ public class Spawn {
 	 * @param map
 	 *            The map to set.
 	 */
-	public void setMap(Map map) {
+	public void setMap(LocalMap map) {
 		this.map = map;
 	}
 

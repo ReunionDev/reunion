@@ -17,11 +17,11 @@ public class TeleportManager {
 	public TeleportManager(){
 	}
 	
-	public void register(Player player, Map target){
+	public void register(Player player, Map map){
 		synchronized(teleports){
 			S_TeleportBucket bucket = new S_TeleportBucket();
 			bucket.from = player.getPosition().getMap();
-			bucket.to = target;
+			bucket.to = map;
 			bucket.player = player;
 			teleports.add(bucket);
 		}

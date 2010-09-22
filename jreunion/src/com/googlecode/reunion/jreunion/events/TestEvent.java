@@ -1,5 +1,6 @@
 package com.googlecode.reunion.jreunion.events;
 
+import com.googlecode.reunion.jreunion.events.client.ClientEvent;
 import com.googlecode.reunion.jreunion.server.Client;
 
 /**
@@ -8,7 +9,7 @@ import com.googlecode.reunion.jreunion.server.Client;
  */
 public class TestEvent extends Event {
 
-	public TestEvent() {
+	TestEvent() {
 		super();
 	}
 	static class TestFilter implements Filter{

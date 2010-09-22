@@ -6,6 +6,7 @@ import java.util.Random;
 import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jcommon.Parser;
 import com.googlecode.reunion.jreunion.server.Client;
+import com.googlecode.reunion.jreunion.server.ItemFactory;
 import com.googlecode.reunion.jreunion.server.Reference;
 import com.googlecode.reunion.jreunion.server.Server;
 import com.googlecode.reunion.jreunion.server.Session;
@@ -336,14 +337,20 @@ public class Mob extends LivingObject {
 		Iterator<ParsedItem> iter =dropList.getItemListIterator();
 		Random r = new Random();
 		while(iter.hasNext()) {			
-			ParsedItem item = iter.next();
-			if(item.getMemberValue("Mob").equals(""+this.getType())){
-				float rate = Float.parseFloat(item.getMemberValue("Rate"));
+			ParsedItem parsedItem = iter.next();
+			if(parsedItem.getMemberValue("Mob").equals(""+this.getType())){
+				float rate = Float.parseFloat(parsedItem.getMemberValue("Rate"));
 				if( r.nextFloat()<rate){
-					System.out.println(item.getMemberValue("Item"));
-					int itemType = Integer.parseInt(item.getMemberValue("Item"));
-					Server.getInstance().getWorldModule()
-					.getWorldCommand().dropItem(player, itemType, this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(), 0, 0, 0);
+					System.out.println(parsedItem.getMemberValue("Item"));
+					int itemType = Integer.parseInt(parsedItem.getMemberValue("Item"));
+					;
+					
+					Item item = ItemFactory.create(itemType);
+					item.setExtraStats(0);
+					item.setGemNumber(0);
+					
+					Server.getInstance().getWorldModule().getWorldCommand().dropItem(this.getPosition(), item);
+					
 				}
 			}			
 		}

@@ -1,7 +1,10 @@
-package com.googlecode.reunion.jreunion.events;
+package com.googlecode.reunion.jreunion.events.network;
 
 import java.net.Socket;
 
+import com.googlecode.reunion.jreunion.events.Event;
+import com.googlecode.reunion.jreunion.events.Filter;
+import com.googlecode.reunion.jreunion.events.InvalidEventException;
 import com.googlecode.reunion.jreunion.server.Client;
 /**
  * @author Aidamina
@@ -11,7 +14,7 @@ public class NetworkEvent extends Event {
 	
 	Socket socket;
 	
-	protected NetworkEvent(Socket socket) {
+	public NetworkEvent(Socket socket) {
 		this.socket = socket;
 	}
 	
@@ -35,5 +38,4 @@ public class NetworkEvent extends Event {
 			return ((NetworkEvent)event).getSocket().equals(this.socket);			
 		}
 	}
-	
 }

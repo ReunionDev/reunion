@@ -6,12 +6,12 @@ import java.util.Random;
 
 import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jcommon.Parser;
-import com.googlecode.reunion.jreunion.events.ClientSendEvent;
 import com.googlecode.reunion.jreunion.events.Event;
 import com.googlecode.reunion.jreunion.events.EventListener;
-import com.googlecode.reunion.jreunion.events.ServerEvent;
-import com.googlecode.reunion.jreunion.events.ServerStartEvent;
-import com.googlecode.reunion.jreunion.events.ServerStopEvent;
+import com.googlecode.reunion.jreunion.events.client.ClientSendEvent;
+import com.googlecode.reunion.jreunion.events.server.ServerEvent;
+import com.googlecode.reunion.jreunion.events.server.ServerStartEvent;
+import com.googlecode.reunion.jreunion.events.server.ServerStopEvent;
 import com.mysql.jdbc.MySQLConnection;
 import java.sql.PreparedStatement;
 

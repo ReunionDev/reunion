@@ -1,6 +1,7 @@
 package com.googlecode.reunion.jreunion.game;
 
 import com.googlecode.reunion.jreunion.server.Client;
+import com.googlecode.reunion.jreunion.server.ItemFactory;
 import com.googlecode.reunion.jreunion.server.Server;
 
 /**
@@ -48,9 +49,8 @@ public class Quest {
 
 		/****** Quest Points Reached Zero ********/
 		if (remainPoints == 0) {
-			Item item = new Item(1053);
+			Item item = ItemFactory.create(1053);
 
-			item.loadFromReference(1053);
 			item.setExtraStats(0);
 			item.setGemNumber(0);
 

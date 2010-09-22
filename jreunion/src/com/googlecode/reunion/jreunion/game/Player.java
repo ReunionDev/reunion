@@ -8,10 +8,10 @@ import java.util.Vector;
 
 import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jcommon.Parser;
-import com.googlecode.reunion.jreunion.events.ClientDisconnectEvent;
 import com.googlecode.reunion.jreunion.events.Event;
 import com.googlecode.reunion.jreunion.events.EventListener;
-import com.googlecode.reunion.jreunion.events.NetworkAcceptEvent;
+import com.googlecode.reunion.jreunion.events.client.ClientDisconnectEvent;
+import com.googlecode.reunion.jreunion.events.network.NetworkAcceptEvent;
 import com.googlecode.reunion.jreunion.server.CharSkill;
 import com.googlecode.reunion.jreunion.server.Client;
 import com.googlecode.reunion.jreunion.server.DatabaseUtils;

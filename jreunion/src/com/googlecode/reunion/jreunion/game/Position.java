@@ -1,5 +1,6 @@
 package com.googlecode.reunion.jreunion.game;
 
+import com.googlecode.reunion.jreunion.server.LocalMap;
 import com.googlecode.reunion.jreunion.server.Map;
 
 public class Position {
@@ -8,13 +9,13 @@ public class Position {
 	private int y;
 	private int z;
 	
-	private Map map;
+	private LocalMap map;
 	
 	public Position(){
 		
 	}
 
-	public Position(int x, int y, int z, Map map, double rotation) {
+	public Position(int x, int y, int z, LocalMap map, double rotation) {
 		super();
 		this.x = x;
 		this.y = y;
@@ -53,11 +54,11 @@ public class Position {
 		this.z = z;
 	}
 
-	public Map getMap() {
+	public LocalMap getMap() {
 		return map;
 	}
 
-	public void setMap(Map map) {
+	public void setMap(LocalMap map) {
 		this.map = map;
 	}
 	

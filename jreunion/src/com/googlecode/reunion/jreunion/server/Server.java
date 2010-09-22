@@ -2,8 +2,8 @@ package com.googlecode.reunion.jreunion.server;
 
 import java.util.HashMap;
 
-import com.googlecode.reunion.jreunion.events.ServerStartEvent;
-import com.googlecode.reunion.jreunion.events.ServerStopEvent;
+import com.googlecode.reunion.jreunion.events.server.ServerStartEvent;
+import com.googlecode.reunion.jreunion.events.server.ServerStopEvent;
 
 
 /**

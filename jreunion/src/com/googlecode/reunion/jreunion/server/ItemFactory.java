@@ -9,7 +9,7 @@ import com.googlecode.reunion.jreunion.game.Item;
  */
 public class ItemFactory {
 
-	public static Item createItem(int type) {
+	public static Item create(int type) {
 		Item item = null;
 		
 

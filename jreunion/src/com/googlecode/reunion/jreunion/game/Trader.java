@@ -45,7 +45,7 @@ public class Trader extends Npc {
 
 		if (gemTraderType == 0) {
 			int newChipType = getNewChipTypeUp(chipType);
-			Item item = ItemFactory.createItem(newChipType);
+			Item item = ItemFactory.create(newChipType);
 			ExchangeItem exchangeItem = new ExchangeItem(item, 0, 0);
 			player.getExchange().addItem(exchangeItem);
 			packetData = "chip_exchange 0 ok " + item.getType() + " "
@@ -53,7 +53,7 @@ public class Trader extends Npc {
 		} else {
 			if (playerBet == serverBetResult) {
 				int newChipType = getNewChipTypeUp(chipType);
-				Item item = ItemFactory.createItem(newChipType);
+				Item item = ItemFactory.create(newChipType);
 				ExchangeItem exchangeItem = new ExchangeItem(item, 0, 0);
 				player.getExchange().addItem(exchangeItem);
 				packetData = "chip_exchange 1 ok win " + item.getType() + " "
@@ -61,7 +61,7 @@ public class Trader extends Npc {
 			} else {
 				int newChipType = getNewChipTypeDown(chipType);
 				if (newChipType != -1) {
-					Item item = ItemFactory.createItem(newChipType);
+					Item item = ItemFactory.create(newChipType);
 					ExchangeItem exchangeItem = new ExchangeItem(item, 0, 0);
 					player.getExchange().addItem(exchangeItem);
 				}
@@ -93,7 +93,7 @@ public class Trader extends Npc {
 			Iterator<ExchangeItem> exchangeIter = player.getExchange()
 					.itemListIterator();
 			ExchangeItem oldExchangeItem = exchangeIter.next();
-			Armor newItem = (Armor) ItemFactory.createItem(armorType);
+			Armor newItem = (Armor) ItemFactory.create(armorType);
 			Armor oldItem = (Armor) ItemFactory.loadItem(oldExchangeItem
 					.getItem().getEntityId());
 

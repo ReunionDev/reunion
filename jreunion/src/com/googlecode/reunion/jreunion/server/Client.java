@@ -2,18 +2,18 @@ package com.googlecode.reunion.jreunion.server;
 
 import java.net.Socket;
 
-import com.googlecode.reunion.jreunion.events.ClientDisconnectEvent;
-import com.googlecode.reunion.jreunion.events.ClientEvent;
-import com.googlecode.reunion.jreunion.events.ClientReceiveEvent;
-import com.googlecode.reunion.jreunion.events.ClientSendEvent;
 import com.googlecode.reunion.jreunion.events.Event;
 import com.googlecode.reunion.jreunion.events.EventBroadcaster;
 import com.googlecode.reunion.jreunion.events.EventListener;
-import com.googlecode.reunion.jreunion.events.NetworkAcceptEvent;
-import com.googlecode.reunion.jreunion.events.NetworkDataEvent;
-import com.googlecode.reunion.jreunion.events.NetworkDisconnectEvent;
-import com.googlecode.reunion.jreunion.events.NetworkEvent;
-import com.googlecode.reunion.jreunion.events.NetworkSendEvent;
+import com.googlecode.reunion.jreunion.events.client.ClientDisconnectEvent;
+import com.googlecode.reunion.jreunion.events.client.ClientEvent;
+import com.googlecode.reunion.jreunion.events.client.ClientReceiveEvent;
+import com.googlecode.reunion.jreunion.events.client.ClientSendEvent;
+import com.googlecode.reunion.jreunion.events.network.NetworkAcceptEvent;
+import com.googlecode.reunion.jreunion.events.network.NetworkDataEvent;
+import com.googlecode.reunion.jreunion.events.network.NetworkDisconnectEvent;
+import com.googlecode.reunion.jreunion.events.network.NetworkEvent;
+import com.googlecode.reunion.jreunion.events.network.NetworkSendEvent;
 import com.googlecode.reunion.jreunion.game.Player;
 
 /**

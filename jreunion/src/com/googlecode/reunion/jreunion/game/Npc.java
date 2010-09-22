@@ -33,7 +33,7 @@ public class Npc extends LivingObject {
 
 	private Parser shopReference;
 
-	private List<Item> itemsList = new Vector<Item>();
+	private List<VendorItem> itemsList = new Vector<VendorItem>();
 
 	public Npc(int type) {
 		super();
@@ -42,7 +42,7 @@ public class Npc extends LivingObject {
 		shop = null;
 	}
 
-	public void addItem(Item item) {
+	public void addItem(VendorItem item) {
 		itemsList.add(item);
 	}
 
@@ -83,7 +83,7 @@ public class Npc extends LivingObject {
 		return uniqueId;
 	}
 
-	public Iterator<Item> itemsListIterator() {
+	public Iterator<VendorItem> itemsListIterator() {
 		return itemsList.iterator();
 	}
 
@@ -130,7 +130,7 @@ public class Npc extends LivingObject {
 							+ getPosition().getMap());
 					continue;
 				}
-				Item item = new Item(Integer.parseInt(i.getMemberValue("Type")));
+				VendorItem item = new VendorItem(Integer.parseInt(i.getMemberValue("Type")));
 				addItem(item);
 			}
 		}

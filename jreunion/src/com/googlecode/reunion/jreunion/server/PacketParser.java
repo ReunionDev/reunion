@@ -5,14 +5,14 @@ import java.util.Random;
 import java.util.regex.Pattern;
 
 import com.googlecode.reunion.jcommon.ParsedItem;
-import com.googlecode.reunion.jreunion.events.ClientConnectEvent;
-import com.googlecode.reunion.jreunion.events.ClientDisconnectEvent;
-import com.googlecode.reunion.jreunion.events.ClientEvent;
-import com.googlecode.reunion.jreunion.events.ClientReceiveEvent;
 import com.googlecode.reunion.jreunion.events.Event;
 import com.googlecode.reunion.jreunion.events.EventBroadcaster;
 import com.googlecode.reunion.jreunion.events.EventListener;
-import com.googlecode.reunion.jreunion.events.NetworkDataEvent;
+import com.googlecode.reunion.jreunion.events.client.ClientConnectEvent;
+import com.googlecode.reunion.jreunion.events.client.ClientDisconnectEvent;
+import com.googlecode.reunion.jreunion.events.client.ClientEvent;
+import com.googlecode.reunion.jreunion.events.client.ClientReceiveEvent;
+import com.googlecode.reunion.jreunion.events.network.NetworkDataEvent;
 import com.googlecode.reunion.jreunion.game.Equipment;
 import com.googlecode.reunion.jreunion.game.Merchant;
 import com.googlecode.reunion.jreunion.game.Mob;
@@ -457,7 +457,7 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 						.getWorldModule().getNpcManager()
 						.getNpc(Integer.parseInt(message[1]));
 				if (npc!=null) {
-					npc.openShop(client.getPlayer(), Integer.parseInt(message[1]));
+					npc.openShop(client.getPlayer());
 				} else {
 					System.err.println("Npc not found: " + npcId);				
 				}
@@ -465,21 +465,21 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 				Merchant npc = (Merchant) Server.getInstance()
 						.getWorldModule().getNpcManager()
 						.getNpc(Integer.parseInt(message[1]));
-				npc.buyItem(client.getPlayer(), Integer.parseInt(message[1]),
-						Integer.parseInt(message[4]),
-						Integer.parseInt(message[5]), 1);
+				npc.buyItem(client.getPlayer(), Integer.parseInt(message[4]),
+						Integer.parseInt(message[5]),
+						1);
 			} else if (message[0].equals("sell")) {
 				Merchant npc = (Merchant) Server.getInstance()
 						.getWorldModule().getNpcManager()
 						.getNpc(Integer.parseInt(message[1]));
-				npc.sellItem(client.getPlayer(), Integer.parseInt(message[1]));
+				npc.sellItem(client.getPlayer());
 			} else if (message[0].equals("pbuy")) {
 				Merchant npc = (Merchant) Server.getInstance()
 						.getWorldModule().getNpcManager()
 						.getNpc(Integer.parseInt(message[1]));
-				npc.buyItem(client.getPlayer(), Integer.parseInt(message[1]),
-						Integer.parseInt(message[2]),
-						Integer.parseInt(message[3]), 10);
+				npc.buyItem(client.getPlayer(), Integer.parseInt(message[2]),
+						Integer.parseInt(message[3]),
+						10);
 			} else if (message[0].equals("chip_exchange")) {
 				Npc[] npc;
 

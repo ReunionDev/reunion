@@ -18,8 +18,8 @@ public class Merchant extends Npc {
 	}
 
 	/****** Buy items from merchant shop ******/
-	public void buyItem(Player player, int npcUniqueid, int itemType,
-			int tab, int qnt) {
+	public void buyItem(Player player, int itemType, int tab,
+			int quantity) {
 
 		Client client = player.getClient();
 
@@ -30,9 +30,8 @@ public class Merchant extends Npc {
 		// if(player.getInventory().freeSlots(tab) == false)
 		// return;
 
-		Npc npc = Server.getInstance().getWorldModule().getNpcManager()
-				.getNpc(npcUniqueid);
-		Item item = new Item(itemType);
+		Item item = ItemFactory.create(itemType);
+		
 		int count = 0;
 
 		if (player.getLime() - item.getPrice() < 0) {
@@ -41,11 +40,11 @@ public class Merchant extends Npc {
 			return;
 		}
 
-		for (int i = 0; i < qnt; i++) {
+		for (int i = 0; i < quantity; i++) {
 			if (player.getInventory().freeSlots(tab, item) == false) {
 				break;
 			}
-			item = ItemFactory.createItem(itemType);
+			item = ItemFactory.create(itemType);
 			
 			if (item != null) {
 			player.pickItem(item.getEntityId());
@@ -54,32 +53,27 @@ public class Merchant extends Npc {
 			
 		}
 		if (item != null) {
-		player.updateStatus(10, item.getPrice() * npc.getBuyRate() / 100 * -1
-				* count, 0);
+		player.updateStatus(10, item.getPrice() * this.getBuyRate() / 100 * -1 * count, 0);
+		
+		
 		}
 
 	}
 
 	/****** Open Merchant Shop ******/
-	public void openShop(Player player, int uniqueid) {
+	public void openShop(Player player) {
 
 		Client client = player.getClient();
 
-		if (client == null) {
-			return;
-		}
 
-		Npc npc = Server.getInstance().getWorldModule().getNpcManager()
-				.getNpc(uniqueid);
-
-		String packetData = "shop_rate " + npc.getBuyRate() + " "
-				+ npc.getSellRate() + "\n";
+		String packetData = "shop_rate " + this.getBuyRate() + " "
+				+ this.getSellRate() + "\n";
 				client.SendData(packetData);
 
-		Iterator<Item> itemListIter = npc.itemsListIterator();
+		Iterator<VendorItem> itemListIter = this.itemsListIterator();
 
 		while (itemListIter.hasNext()) {
-			Item item = itemListIter.next();
+			VendorItem item = itemListIter.next();
 
 			packetData = "shop_item " + item.getType() + "\n";
 					client.SendData(packetData);
@@ -87,25 +81,19 @@ public class Merchant extends Npc {
 	}
 
 	/****** Sell items to merchant shop ******/
-	public void sellItem(Player player, int npcUniqueid) {
-		Client client = player.getClient();
-
-		if (client == null) {
-			return;
-		}
+	public void sellItem(Player player) {
+		
 		try {
 			Item item = player.getInventory().getItemSelected().getItem();
 		
 			if (item != null) {
-			Npc npc = Server.getInstance().getWorldModule().getNpcManager()
-					.getNpc(npcUniqueid);
-				player.updateStatus(10, (item.getPrice() * npc.getSellRate() / 100), 0);
+				player.updateStatus(10, (item.getPrice() * (this.getSellRate() / 100)), 0);
 				player.getInventory().setItemSelected(null);
 				DatabaseUtils.getInstance().deleteItem(item);
 			}
+			
 		} catch (Exception e) {
 			System.err.println("Item Sell bug");
 		}
 	}
-
 }

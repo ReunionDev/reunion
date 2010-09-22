@@ -1,4 +1,4 @@
-package com.googlecode.reunion.jreunion.events;
+package com.googlecode.reunion.jreunion.events.client;
 
 import com.googlecode.reunion.jreunion.server.Client;
 

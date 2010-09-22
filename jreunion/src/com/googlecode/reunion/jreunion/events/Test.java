@@ -11,7 +11,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import com.googlecode.reunion.jreunion.events.ClientEvent.ClientFilter;
+import com.googlecode.reunion.jreunion.events.client.ClientEvent.ClientFilter;
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt

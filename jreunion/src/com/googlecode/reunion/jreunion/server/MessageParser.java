@@ -3,6 +3,7 @@ package com.googlecode.reunion.jreunion.server;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 
+import com.googlecode.reunion.jreunion.game.Item;
 import com.googlecode.reunion.jreunion.game.Mob;
 import com.googlecode.reunion.jreunion.game.Npc;
 import com.googlecode.reunion.jreunion.game.Player;
@@ -44,7 +45,7 @@ public class MessageParser {
 			} else if (word[0].equals("@testcol")) {
 				Player p = player;
 				
-				Map map = p.getPosition().getMap();
+				LocalMap map = p.getPosition().getMap();
 				String s1 = ""
 						+ map.getPlayerArea()
 								.get(p.getPosition().getX() / 10 - 300, p.getPosition().getY() / 10);
@@ -60,28 +61,30 @@ public class MessageParser {
 			}
 
 			else if (word[0].equals("@d")||word[0].equals("@drop")) { //Drop Item
-				if (word.length == 2) {
+				if (word.length >= 2) {
 					try {
-						com.dropItem(player, Integer.parseInt(word[1]),
-								player.getPosition().getX(), player.getPosition().getY(), 0, 0, 0, 0);
+						
+						int itemType = Integer.parseInt(word[1]);
+						Item item = ItemFactory.create(itemType);
+						if (word.length >= 4) {							
+							int gemNumber = Integer.parseInt(word[2]);
+							int extraStats = Integer.parseInt(word[3]);
+							
+							item.setGemNumber(gemNumber);
+							item.setExtraStats(extraStats);
+						}else{
+							item.setGemNumber(0);
+							item.setExtraStats(0);
+						}
+						DatabaseUtils.getInstance().saveItem(item);
+						com.dropItem(player.getPosition(), item);
+						
 					} catch (Exception e) {
 						String packetData = "say 1 S_Server (NOTICE) @drop failed";
 						client.SendData(packetData);
 					}
-					
 				}
 
-				if (word.length == 4) {
-					try {
-					com.dropItem(player, Integer.parseInt(word[1]),
-							player.getPosition().getX(), player.getPosition().getY(), 0, 0,
-							Integer.parseInt(word[2]),
-							Integer.parseInt(word[3]));
-					} catch (Exception e) {
-						String packetData = "say 1 S_Server (NOTICE) @drop failed";
-						client.SendData(packetData);
-					}
-				}
 			} else if (word[0].equals("@addmob")) { //Adds a NPC 
 				if (word.length == 2) {
 					Spawn spawn = new Spawn();
