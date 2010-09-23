@@ -175,7 +175,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 				continue;
 			}
 
-			String packetData = "combat " + getEntityId() + " " + combat
+			String packetData = "combat " + getId() + " " + combat
 					+ "\n";
 					client.SendData( packetData);
 		}
@@ -204,7 +204,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 			}
 			getInventory().setItemSelected(null);
 			if (item != null) {
-				String packetData = "drop " + item.getEntityId() + " " + item.getType()
+				String packetData = "drop " + item.getId() + " " + item.getType()
 						+ " " + getPosition().getX() + " " + getPosition().getY() + " " + getPosition().getZ() + " "
 						+ getPosition().getRotation() + " " + item.getGemNumber() + " "
 						+ item.getExtraStats() + "\n";
@@ -287,7 +287,6 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		double xcomp = Math.pow(livingObject.getPosition().getX() - getPosition().getX(), 2);
 		double ycomp = Math.pow(livingObject.getPosition().getY() - getPosition().getY(), 2);
 		double distance = Math.sqrt(xcomp + ycomp);
-
 		return (int) distance;
 	}
 
@@ -548,7 +547,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 			ExchangeItem exchangeItem = exchangeIter.next();
 
 			String packetData = "inven 3 "
-					+ exchangeItem.getItem().getEntityId() + " "
+					+ exchangeItem.getItem().getId() + " "
 					+ exchangeItem.getItem().getType() + " "
 					+ exchangeItem.getPosX() + " " + exchangeItem.getPosY()
 					+ " " + exchangeItem.getItem().getGemNumber() + " "
@@ -593,7 +592,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 			InventoryItem invItem = invIter.next();
 
 			String packetData = "inven " + invItem.getTab() + " "
-					+ invItem.getItem().getEntityId() + " "
+					+ invItem.getItem().getId() + " "
 					+ invItem.getItem().getType() + " " + invItem.getPosX()
 					+ " " + invItem.getPosY() + " "
 					+ invItem.getItem().getGemNumber() + " "
@@ -620,7 +619,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 			Item item = qsItem.getItem();
 			if(item!=null){
 				String packetData = "quick " + qsItem.getSlot() + " "
-						+ item.getEntityId() + " "
+						+ item.getId() + " "
 						+ item.getType() + " "
 						+ item.getGemNumber() + " "
 						+ item.getExtraStats() + "\n";
@@ -633,11 +632,6 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 	/****** Manages the char Logout ******/
 	public void logout() {
 
-		Client client = getClient();
-
-		if (client == null) {
-			return;
-		}
 
 		System.out.print("Player " + getName() + " logging out...\n");
 
@@ -686,7 +680,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 	public abstract void meleeAttack(LivingObject livingObject);
 
 	/****** Manages the Pick command ******/
-	public void pickItem(int uniqueid) {
+	public void pickItem(Item item) {
 		Client client = getClient();
 
 		if (client == null) {
@@ -719,21 +713,21 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 	}
 
 	/****** Manages the Pickup command ******/
-	public void pickupItem(int uniqueid) {
+	public void pickupItem(Item item) {
 		Client client = getClient();
 
 		if (client == null) {
 			return;
 		}
 
-		String packetData = "pickup " + getEntityId() + "\n";
+		String packetData = "pickup " + getId() + "\n";
 		
 		client.SendData(packetData);// send the message
 		// S> pickup [CharID]
 
 		this.getPosition().getMap().getWorld().getCommand()
-				.itemOut(this, uniqueid);
-		pickItem(uniqueid);
+				.itemOut(this.getClient(), item);
+		pickItem(item);
 	}
 
 	public void place(int posX, int posY, int posZ, double rotation,
@@ -765,7 +759,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 				continue;
 			}
 
-			String packetData = "place char " + getEntityId() + " " + posX
+			String packetData = "place char " + getId() + " " + posX
 					+ " " + posY + " " + posZ + " " + rotation + " "
 					+ unknown + " " + run + "\n";
 			
@@ -814,29 +808,8 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 	}
 
 	public void say(String text) {
-		int admin;
-		if (getAdminState() > 0) {
-			admin = 1;
-		} else {
-			admin = 0;
-		}
-		Iterator<Player> iter = this.getPosition().getMap().getWorld()
-				.getPlayerManager().getPlayerListIterator();
-		while (iter.hasNext()) {
-			Player pl = iter.next();
-			// if (player.getPlayerSession().contains(pl)||player==pl)
-			if (true) {
-				Client client = pl.getClient();
-				if (client == null) {
-					continue;
-				}
-				String packetData = "say " + getEntityId() + " " + getName()
-						+ " " + text + " " + admin + "\n";
-				
-						client.SendData(packetData);
-				// serverSay(player.getPlayerName()+" says "+text);
-			}
-		}
+	
+		getPosition().getMap().getWorld().getCommand().playerSay(this, text);
 	}
 
 	public void setAdminState(int adminState) {
@@ -1019,7 +992,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 				continue;
 			}
 
-			String packetData = "social char " + getEntityId() + " "
+			String packetData = "social char " + getId() + " "
 					+ emotionId + "\n";
 			
 					client.SendData(packetData);
@@ -1049,7 +1022,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 				continue;
 			}
 
-			String packetData = "s char " + getEntityId() + " " + posX
+			String packetData = "s char " + getId() + " " + posX
 					+ " " + posY + " " + posZ + " " + rotation + "\n";
 			
 					client.SendData(packetData);
@@ -1141,7 +1114,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 			
 					client.SendData(packetData);
 
-			packetData = "levelup " + getEntityId() + "\n";
+			packetData = "levelup " + getId() + "\n";
 			
 					client.SendData(packetData);
 			DatabaseUtils.getInstance()
@@ -1339,7 +1312,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 				continue;
 			}
 
-			String packetData = "walk char " + getEntityId() + " " + posX
+			String packetData = "walk char " + getId() + " " + posX
 					+ " " + posY + " " + posZ + " " + run + "\n";
 			
 					client.SendData(packetData);
@@ -1365,11 +1338,11 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 									0, 0, 0));
 			getEquipment().setItem(slot, null);
 
-			packetData = "char_remove " + getEntityId() + " " + slot + "\n";
+			packetData = "char_remove " + getId() + " " + slot + "\n";
 		} else {
 			if (getEquipment().getItem(slot) == null) {
 				Item item = invItem.getItem();
-				packetData = "char_wear " + getEntityId() + " " + slot + " "
+				packetData = "char_wear " + getId() + " " + slot + " "
 						+ item.getType() + " " + item.getGemNumber() + "\n";
 				getEquipment().setItem(slot, item);
 				getInventory().setItemSelected(null);
@@ -1380,7 +1353,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 				}
 			} else {
 				Item currentItem = getEquipment().getItem(slot);
-				extraPacketData = "char_remove " + getEntityId() + " " + slot
+				extraPacketData = "char_remove " + getId() + " " + slot
 						+ "\n";
 				getEquipment().setItem(slot, invItem.getItem());
 				getInventory().setItemSelected(
@@ -1391,7 +1364,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 					setMaxDmg(weapon.getMaxDamage());
 				}
 				Item item = getEquipment().getItem(slot);
-				packetData = "char_wear " + getEntityId() + " " + slot + " "
+				packetData = "char_wear " + getId() + " " + slot + " "
 						+ item.getType() + " " + item.getGemNumber() + "\n";
 				
 			}
@@ -1445,7 +1418,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 	@Override
 	public void exit(Session session){
 		this.getPosition().getMap().getWorld().getCommand()
-		.charOut(session.getOwner(), this);
+		.charOut(session.getOwner().getClient(), this);
 	}
 	
 	public void handleEvent(Event event){
@@ -1455,8 +1428,30 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 			if(clientDisconnectEvent.getClient()!=getClient())return;
 			logout();
 		}
-		
-		
 	}
+	
+	public String toString(){
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("{");
 
+		buffer.append("id: ");
+		buffer.append(getId());
+		buffer.append(", ");
+		
+		buffer.append("name: ");
+		buffer.append(getName());
+		buffer.append(", ");
+		
+		buffer.append("race: ");
+		buffer.append(getRace());
+		buffer.append(", ");
+		
+		buffer.append("level: ");
+		buffer.append(getLevel());		
+				
+		buffer.append("}");
+		return buffer.toString();
+	}
+	
+	
 }

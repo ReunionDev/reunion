@@ -53,7 +53,7 @@ public class HybriderPlayer extends Player {
 
 				item.setExtraStats((int) (Math.random() * 10000));
 
-				pickupItem(item.getEntityId());
+				pickupItem(item);
 				getQuest().questEnd(this, 669);
 				getQuest().questEff(this);
 			}

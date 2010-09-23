@@ -67,7 +67,7 @@ public class KailiptonPlayer extends Player {
 
 				item.setExtraStats((int) (Math.random() * 10000));
 
-				pickupItem(item.getEntityId());
+				pickupItem(item);
 				getQuest().questEnd(this, 669);
 				getQuest().questEff(this);
 			}
@@ -113,7 +113,7 @@ public class KailiptonPlayer extends Player {
 			percentageHp = 1;
 		}
 
-		String packetData = "attack_vital npc " + mob.getEntityId() + " "
+		String packetData = "attack_vital npc " + mob.getId() + " "
 				+ percentageHp + " 0 0\n";
 
 		// S> attack_vital npc [NpcID] [RemainHP%] 0 0
@@ -132,7 +132,7 @@ public class KailiptonPlayer extends Player {
 				}
 
 				packetData = "effect " + skill.getId() + " char "
-						+ getEntityId() + " npc " + mob.getEntityId() + " "
+						+ getId() + " npc " + mob.getId() + " "
 						+ percentageHp + " 0 0\n";
 
 				// S> effect [SkillID] char [charID] npc [npcID] [RemainNpcHP%]

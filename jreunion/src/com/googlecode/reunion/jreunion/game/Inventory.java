@@ -90,7 +90,7 @@ public class Inventory {
 		while (iter.hasNext()) {
 			InventoryItem invItem = iter.next();
 
-			if (invItem.getItem().getEntityId() == itemId) {
+			if (invItem.getItem().getId() == itemId) {
 				return invItem;
 			}
 		}

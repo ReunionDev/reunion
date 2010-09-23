@@ -8,6 +8,7 @@ import com.googlecode.reunion.jreunion.game.Mob;
 import com.googlecode.reunion.jreunion.game.Npc;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Spawn;
+import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 import com.googlecode.reunion.jcommon.ParsedItem;
 
 /**
@@ -20,29 +21,28 @@ public class MessageParser {
 	
 	public MessageParser() {
 		super();
-
 	}
 
 	String parse(Player player, String text) {
 		int userlvl = player.getAdminState();
 		text = text.trim();
-		String word[] = text.split(" ");
+		String words[] = text.split(" ");
 		Command com = Server.getInstance().getWorld()
 				.getCommand();
 		Client client = player.getClient();
 
 		if (userlvl > -1) {
-			if (word[0].equals("@stats")) {
-				if (word.length >= 2 && word[1].equals("dump")) {
-					if (word.length >= 3) {
+			if (words[0].equals("@stats")) {
+				if (words.length >= 2 && words[1].equals("dump")) {
+					if (words.length >= 3) {
 						PerformanceStats.getInstance().dumpPerformance(
-								word[2]);
+								words[2]);
 					} else {
 						PerformanceStats.getInstance().dumpPerformance();
 					}
 				}
 
-			} else if (word[0].equals("@testcol")) {
+			} else if (words[0].equals("@testcol")) {
 				Player p = player;
 				
 				LocalMap map = p.getPosition().getMap();
@@ -60,15 +60,15 @@ public class MessageParser {
 						+ ")" + "collision test: " + s1 + " " + s2 + " " + s3);
 			}
 
-			else if (word[0].equals("@d")||word[0].equals("@drop")) { //Drop Item
-				if (word.length >= 2) {
+			else if (words[0].equals("@d")||words[0].equals("@drop")) { //Drop Item
+				if (words.length >= 2) {
 					try {
 						
-						int itemType = Integer.parseInt(word[1]);
+						int itemType = Integer.parseInt(words[1]);
 						Item item = ItemFactory.create(itemType);
-						if (word.length >= 4) {							
-							int gemNumber = Integer.parseInt(word[2]);
-							int extraStats = Integer.parseInt(word[3]);
+						if (words.length >= 4) {							
+							int gemNumber = Integer.parseInt(words[2]);
+							int extraStats = Integer.parseInt(words[3]);
 							
 							item.setGemNumber(gemNumber);
 							item.setExtraStats(extraStats);
@@ -84,55 +84,60 @@ public class MessageParser {
 						client.SendData(packetData);
 					}
 				}
+				
+			} else if (words[0].equals("@say")) {
+				String data = "";
+				for(String word: words){
+					data+=" "+word;					
+				}
+				client.SendData(data.substring(2));				
+				return null;
+				//client.SendPacket(Type.SAY, words[3],Integer.parseInt(words[2]),Integer.parseInt(words[1]));
 
-			} else if (word[0].equals("@addmob")) { //Adds a NPC 
-				if (word.length == 2) {
+			} else if (words[0].equals("@addmob")) { //Adds a NPC 
+				if (words.length == 2) {
 					Spawn spawn = new Spawn();
-					spawn.setCenterX(player.getPosition().getX() + 10);
-					spawn.setCenterY(player.getPosition().getY() + 10);
-					spawn.setMap(player.getPosition().getMap());
-					spawn.setMobType(Integer.parseInt(word[1]));
+					spawn.setPosition(player.getPosition().clone());
+					spawn.setMobType(Integer.parseInt(words[1]));
 					spawn.setRadius(300);
 					spawn.setRespawnTime(10);
 					spawn.spawnMob();
 
-			} else if (word.length == 3) {
-				try {
-					int count = Integer.parseInt(word[2]);
-					for (int x = 1; x < count; x++) {
-						Spawn spawn = new Spawn();
-						spawn.setCenterX(player.getPosition().getX() + 10);
-						spawn.setCenterY(player.getPosition().getY() + 10);
-						spawn.setMap(player.getPosition().getMap());
-						spawn.setMobType(Integer.parseInt(word[1]));
-						spawn.setRadius(300);
-						spawn.setRespawnTime(10);
-						spawn.spawnMob();
+				} else if (words.length == 3) {
+					try {
+						int count = Integer.parseInt(words[2]);
+						for (int x = 1; x < count; x++) {
+							Spawn spawn = new Spawn();
+							spawn.setMobType(Integer.parseInt(words[1]));
+							spawn.setPosition(player.getPosition().clone());
+							spawn.setRadius(300);
+							spawn.setRespawnTime(10);
+							spawn.spawnMob();
+						}
+					} catch (Exception NumberFormatException) {
+						String packetData = "say 1 S_Server (NOTICE) @addmob with more than 1 mob failed";
+						client.SendData(packetData);
 					}
-				} catch (Exception NumberFormatException) {
-					String packetData = "say 1 S_Server (NOTICE) @addmob with more than 1 mob failed";
-					client.SendData(packetData);
-				}
-				} else if (word.length == 6) {
+				} else if (words.length == 6) {
 					Mob mob = Server.getInstance().getWorld()
 							.getMobManager()
-							.createMob(Integer.parseInt(word[1]));
+							.createMob(Integer.parseInt(words[1]));
 					mob.getPosition().setX(player.getPosition().getX() + 10);
 					mob.getPosition().setY(player.getPosition().getY() + 10);
 					mob.setRunning(true);
-					mob.setMutant(Integer.parseInt(word[2]));
-					mob.setUnknown1(Integer.parseInt(word[3]));
-					mob.setNeoProgmare(Integer.parseInt(word[4]));
-					mob.setUnknown2(Integer.parseInt(word[5]));
+					mob.setMutant(Integer.parseInt(words[2]));
+					mob.setUnknown1(Integer.parseInt(words[3]));
+					mob.setNeoProgmare(Integer.parseInt(words[4]));
+					mob.setUnknown2(Integer.parseInt(words[5]));
 					Server.getInstance().getWorld().getMobManager()
 							.addMob(mob);
 				}
-			} else if (word[0].equals("@addnpc")) {
+			} else if (words[0].equals("@addnpc")) {
 				try {
-				if (word.length == 2) {
+				if (words.length == 2) {
 					Npc npc = Server.getInstance().getWorld()
 							.getNpcManager()
-							.createNpc(Integer.parseInt(word[1]));
+							.createNpc(Integer.parseInt(words[1]));
 					npc.getPosition().setX(player.getPosition().getX() + 10);
 					npc.getPosition().setY(player.getPosition().getY() + 10);
 					npc.getPosition().setRotation(0.0);
@@ -142,9 +147,9 @@ public class MessageParser {
 					//TODO: Fix the Mob id error server crash
 					System.out.println("Mob id error detected");
 				}
-			} else if (word[0].equals("@tele")) {
+			} else if (words[0].equals("@tele")) {
 			try {
-				String worldname = word[1];	
+				String worldname = words[1];	
 				ParsedItem mapref = Reference.getInstance().getMapConfigReference().getItem(worldname);
 				
 				if(mapref!=null){
@@ -162,25 +167,25 @@ public class MessageParser {
 			} catch (Exception e) {
 				
 			}
-		}  else if (word[0].equals("@goto")) {
-			if (word[1].equals("pos")) {
-				com.GoToPos(player, Integer.parseInt(word[2]),
-						Integer.parseInt(word[3]));
+		}  else if (words[0].equals("@goto")) {
+			if (words[1].equals("pos")) {
+				com.GoToPos(player, Integer.parseInt(words[2]),
+						Integer.parseInt(words[3]));
 			}
-			if (word[1].equals("char")) {
-				com.GoToChar(player, word[2]);
+			if (words[1].equals("char")) {
+				com.GoToChar(player, words[2]);
 			}
-		} else if (word[0].equals("@spawn")||word[0].equals("@s")) {
+		} else if (words[0].equals("@spawn")||words[0].equals("@s")) {
 				//@spawn mobid mobtypecount radius
 				BufferedWriter bw = null;
 			      try {	    	  
 					bw = new BufferedWriter(new FileWriter("OutSpawns.dta", true));
-					int mobid = Integer.parseInt(word[1]);
+					int mobid = Integer.parseInt(words[1]);
 					ParsedItem mob = Reference.getInstance().getMobReference()
 							.getItemById(mobid);
 					
 					String mobname = mob.getName();
-					int typecount = Integer.parseInt(word[2]);
+					int typecount = Integer.parseInt(words[2]);
 					
 					bw.write("["+mobname+" "+typecount+"]");			         
 					bw.newLine();
@@ -190,44 +195,46 @@ public class MessageParser {
 					bw.newLine();
 					bw.write("Y = "+player.getPosition().getY());
 					bw.newLine();
-					bw.write("Radius = "+word[3]);
+					bw.write("Z = "+player.getPosition().getZ());
+					bw.newLine();
+					bw.write("Radius = "+words[3]);
+					bw.newLine();
+					bw.write("Rotation = "+player.getPosition().getRotation());
 					bw.newLine();
 					bw.write("RespawnTime = 10");
 					bw.newLine();
-					bw.write("Type = "+word[1]);
+					bw.write("Type = "+words[1]);
 					bw.newLine();			      
 					bw.newLine();
 					bw.flush();
 			    	 
 					Spawn spawn = new Spawn();
-					spawn.setCenterX(player.getPosition().getX() + 10);
-					spawn.setCenterY(player.getPosition().getY() + 10);
-					spawn.setMap(player.getPosition().getMap());
-					spawn.setMobType(Integer.parseInt(word[1]));
-					spawn.setRadius(Integer.parseInt(word[3]));
+					spawn.setPosition(player.getPosition().clone());
+					spawn.setMobType(Integer.parseInt(words[1]));
+					spawn.setRadius(Integer.parseInt(words[3]));
 					spawn.setRespawnTime(10);
 					spawn.spawnMob();
 					String packetData = "say 1 S_Server Spawnpoint succesfully added";
 					client.SendData(packetData);
 			      }catch(Exception e){
-			    	  com.serverTell(player,e.getMessage());
+			    	  com.serverTell(player.getClient(),e.getMessage());
 			    	  e.printStackTrace();
 			    	  String packetData = "say 1 S_Server Spawnpoint cannot be added";
 			    	  client.SendData(packetData);
 			      }
 				
-			} else if (word[0].equals("@com")) {
+			} else if (words[0].equals("@com")) {
 				String packetData = "";
-				for (int i = 1; i < word.length; i++) {
-					packetData = packetData + word[i];
-					if (i < word.length - 1) {
+				for (int i = 1; i < words.length; i++) {
+					packetData = packetData + words[i];
+					if (i < words.length - 1) {
 						packetData = packetData + " ";
 					}
 				}
 				client.SendData( packetData + "\n");
-			} else if (word[0].equals("@spot")) {
-				com.serverSay("X:" + player.getPosition().getX() + "; Y:"
-						+ player.getPosition().getY());
+			} else if (words[0].equals("@spot")) {
+				com.serverSay("{ X:" + player.getPosition().getX() + ", Y:"
+						+ player.getPosition().getY()+", Z:"+player.getPosition().getZ()+"}");
 			}
 		}
 

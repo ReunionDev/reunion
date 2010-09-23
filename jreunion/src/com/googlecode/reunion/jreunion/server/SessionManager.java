@@ -109,15 +109,8 @@ public class SessionManager {
 				if (player1.getPosition().getMap() != player2.getPosition().getMap()) {
 					continue;
 				}
-
-				double xcomp = Math.pow(player1.getPosition().getX() - player2.getPosition().getX(),
-						2);
-				double ycomp = Math.pow(player1.getPosition().getY() - player2.getPosition().getY(),
-						2);
-				double zcomp = Math.pow(player1.getPosition().getZ() - player2.getPosition().getZ(),
-						2);
-				
-				double distance = Math.sqrt((xcomp * xcomp) + (ycomp * ycomp)  + (zcomp * zcomp));
+			
+				double distance = player1.getPosition().distance(player2.getPosition());
 
 				if (distance <= player1.getSessionRadius()) {
 					player1.getSession().enter(player2);
@@ -141,7 +134,7 @@ public class SessionManager {
 					continue;
 				}
 
-				int distance = mob.getDistance(player1);
+				double distance = mob.getPosition().distance(player1.getPosition());
 
 				if (distance > player1.getSessionRadius()) {
 					player1.getSession().exit(mob);
@@ -173,7 +166,7 @@ public class SessionManager {
 					continue;
 				}
 
-				int distance = npc.getDistance(player1);
+				double distance = npc.getPosition().distance(player1.getPosition());
 
 				if (distance > player1.getSessionRadius()) {
 					player1.getSession().exit(npc);

@@ -17,7 +17,6 @@ import com.googlecode.reunion.jreunion.server.Session;
  */
 public class Npc extends LivingObject {
 
-	private int uniqueId;
 
 	private int type;
 
@@ -26,8 +25,6 @@ public class Npc extends LivingObject {
 	private int sellRate;
 
 	private int buyRate;
-
-	private int spawnId;
 
 	private String shop;
 
@@ -50,15 +47,6 @@ public class Npc extends LivingObject {
 		return buyRate;
 	}
 
-	/*** Return the distance between the npc and the living object ***/
-	public int getDistance(LivingObject livingObject) {
-		double xcomp = Math.pow(livingObject.getPosition().getX() - getPosition().getX(), 2);
-		double ycomp = Math.pow(livingObject.getPosition().getY() - getPosition().getY(), 2);
-		double distance = Math.sqrt(xcomp + ycomp);
-
-		return (int) distance;
-	}
-
 	public int getHp() {
 		return hp;
 	}
@@ -71,16 +59,8 @@ public class Npc extends LivingObject {
 		return shop;
 	}
 
-	public int getSpawnId() {
-		return spawnId;
-	}
-
 	public int getType() {
 		return type;
-	}
-
-	public int getUniqueId() {
-		return uniqueId;
 	}
 
 	public Iterator<VendorItem> itemsListIterator() {
@@ -113,7 +93,6 @@ public class Npc extends LivingObject {
 
 	public void loadItemList() {
 
-		// System.out.println("Loading list...");
 
 		if (shopReference != null) {
 	
@@ -157,15 +136,10 @@ public class Npc extends LivingObject {
 		this.shop = shop;
 	}
 
-	public void setSpawnId(int spawnId) {
-		this.spawnId = spawnId;
-	}
-
 	@Override
 	public void enter(Session session) {
 		this.getPosition().getMap().getWorld().getCommand()
-		.npcIn(session.getOwner(), this);
-		
+		.npcIn(session.getOwner(), this);		
 	}
 
 	@Override

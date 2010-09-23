@@ -15,6 +15,7 @@ import com.googlecode.reunion.jreunion.game.LivingObject;
 import com.googlecode.reunion.jreunion.game.Mob;
 import com.googlecode.reunion.jreunion.game.Npc;
 import com.googlecode.reunion.jreunion.game.Player;
+import com.googlecode.reunion.jreunion.game.Position;
 import com.googlecode.reunion.jreunion.game.WorldObject;
 
 /**
@@ -41,18 +42,22 @@ public class Session extends EventBroadcaster implements EventListener{
 		this.empty();
 		setActive(false);
 	}
+	
+	public boolean contains(Position position) {		
+		
+		Player owner = getOwner();
+		return owner.getPosition().distance(position)<owner.getSessionRadius();
+
+	}
 
 	public boolean contains(WorldObject entity) {
 		
-		return entities.contains(entity);
-			
+		return entities.contains(entity);			
 	}
-
 
 	public boolean getActive() {
 		return sessionActive;
 	}
-
 
 	/**
 	 * @return Returns the sessionOwner.

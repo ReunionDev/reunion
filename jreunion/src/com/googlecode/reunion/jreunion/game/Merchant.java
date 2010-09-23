@@ -47,7 +47,7 @@ public class Merchant extends Npc {
 			item = ItemFactory.create(itemType);
 			
 			if (item != null) {
-			player.pickItem(item.getEntityId());
+			player.pickItem(item);
 			count++;
 			}
 			

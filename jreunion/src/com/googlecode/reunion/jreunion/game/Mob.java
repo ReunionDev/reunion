@@ -19,8 +19,6 @@ import com.googlecode.reunion.jreunion.server.Timer;
  */
 public class Mob extends LivingObject {
 
-	private int uniqueId;
-
 	private int type;
 
 	private int dmg;
@@ -91,13 +89,6 @@ public class Mob extends LivingObject {
 		return attackType;
 	}
 
-	public int getDistance(LivingObject livingObject) {
-		double xcomp = Math.pow(livingObject.getPosition().getX() - getPosition().getX(), 2);
-		double ycomp = Math.pow(livingObject.getPosition().getY() - getPosition().getY(), 2);
-		double distance = Math.sqrt(xcomp + ycomp);
-
-		return (int) distance;
-	}
 
 	public int getDmg() {
 		return dmg;
@@ -145,10 +136,6 @@ public class Mob extends LivingObject {
 
 	public int getType() {
 		return type;
-	}
-
-	public int getUniqueId() {
-		return uniqueId;
 	}
 
 	public int getUnknown1() {
@@ -302,7 +289,7 @@ public class Mob extends LivingObject {
 		}
 		int run = getRunning()?1:0;
 
-		String packetData = "walk npc " + getEntityId() + " " + getPosition().getX() + " "
+		String packetData = "walk npc " + getId() + " " + getPosition().getX() + " "
 				+ getPosition().getY() + " 0 " + run + "\n";
 		// S> walk npc [UniqueId] [Xpos] [Ypos] [ZPos] [Running]
 
@@ -318,8 +305,8 @@ public class Mob extends LivingObject {
 				if (client == null) {
 					continue;
 				}
-				if (getDistance(pl) < pl.getSessionRadius()) {
-							client.SendData(packetData);
+				if (getPosition().distance(pl.getPosition()) < pl.getSessionRadius()) {
+					client.SendData(packetData);
 				}
 			}
 		

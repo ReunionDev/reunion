@@ -1,11 +1,14 @@
 package com.googlecode.reunion.jreunion.server;
 
 import java.net.InetSocketAddress;
+import java.util.List;
+import java.util.Vector;
 
 import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jreunion.events.Event;
 import com.googlecode.reunion.jreunion.events.EventBroadcaster;
 import com.googlecode.reunion.jreunion.events.EventListener;
+import com.googlecode.reunion.jreunion.game.Position;
 
 public abstract class Map extends EventBroadcaster implements EventListener {
 	
@@ -60,8 +63,8 @@ public abstract class Map extends EventBroadcaster implements EventListener {
 	}
 	@Override
 	public String toString() {
-		return "{id:" + getId() + ", name:" + getName() + "}";
+		return "{id: " + getId() + ", name: '" + getName() + "'}";
 	}
-
+	
 	
 }

@@ -5,6 +5,7 @@ import java.util.Vector;
 
 import com.googlecode.reunion.jreunion.game.Mob;
 import com.googlecode.reunion.jreunion.game.Player;
+import com.googlecode.reunion.jreunion.game.Position;
 import com.googlecode.reunion.jreunion.game.Spawn;
 
 /**
@@ -35,7 +36,7 @@ public class MobManager {
 	public Mob createMob(int type) {
 		synchronized(this){
 			Mob mob = new Mob(type);
-			mob.setEntityId(mobIdCounter++);
+			mob.setId(mobIdCounter++);
 			addMob(mob);
 			return mob;
 		}
@@ -45,7 +46,7 @@ public class MobManager {
 		Iterator<Mob> iter = getMobListIterator();
 		while (iter.hasNext()) {
 			Mob mob = iter.next();
-			if (mob.getEntityId() == uniqueid) {
+			if (mob.getId() == uniqueid) {
 				return mob;
 			}
 		}
@@ -106,10 +107,10 @@ public class MobManager {
 			moveToPlayer = true;
 		}
 
-	
+		Position newPos = mob.getPosition().clone();
 		// Members of the new position to where the mob should move
-		int newPosX = getMobDirectionX(mob);
-		int newPosY = getMobDirectionY(mob);
+		newPos.setX(getMobDirectionX(mob));
+		newPos.setY(getMobDirectionY(mob));
 
 		// Members for the random direction of mob
 		/*
@@ -138,7 +139,7 @@ public class MobManager {
 				continue;
 			}
 
-			int distance = mob.getDistance(player);
+			double distance = mob.getPosition().distance(player.getPosition());
 
 			/*
 			 * double xcomp = Math.pow(player.getPosX() - mob.getPosX(), 2);
@@ -176,7 +177,7 @@ public class MobManager {
 
 			if (distance < player.getSessionRadius()) {
 				if (mob.getIsAttacking() == 0) {
-					String packetData = "walk npc " + mob.getEntityId() + " "
+					String packetData = "walk npc " + mob.getId() + " "
 							+ mob.getPosition().getX() + " " + mob.getPosition().getY() + " 0 " + run
 							+ "\n";
 					// S> walk npc [UniqueId] [Xpos] [Ypos] [ZPos] [Running]
@@ -189,14 +190,12 @@ public class MobManager {
 		if (moveToPlayer == true) {
 			Spawn spawn = mob.getSpawn();
 			if(spawn!=null){
-				double radiusCompX = Math.pow(spawn.getCenterX() - newPosX, 2);
-				double radiusCompY = Math.pow(spawn.getCenterY() - newPosY, 2);
-				double radiusComp = Math.sqrt(radiusCompX + radiusCompY);
-	
-				if ((int) radiusComp <= spawn.getRadius()) {
-					// System.out.print("Distance <= Radius\n");
-					mob.getPosition().setX(newPosX);
-					mob.getPosition().setY(newPosY);
+				
+				double distance = spawn.getPosition().distance(newPos);
+			
+				if ((int) distance <= spawn.getRadius()) {
+					// System.out.print("Distance <= Radius\n");					
+					mob.setPosition(newPos);
 				}
 			}
 		}

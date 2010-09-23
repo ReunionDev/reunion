@@ -1,6 +1,7 @@
 package com.googlecode.reunion.jreunion.server;
 
 import java.util.HashMap;
+import java.util.Random;
 
 import com.googlecode.reunion.jreunion.events.EventBroadcaster;
 import com.googlecode.reunion.jreunion.events.network.NetworkDataEvent;
@@ -16,6 +17,12 @@ public class Server extends ClassModule {
 
 	private static Server _instance = null;
 	
+	private static Random rand = new Random(System.currentTimeMillis());
+	
+	public static Random getRand() {
+		return rand;
+	}
+
 	private HashMap<String,Service> services = new HashMap<String,Service>();
 
 	public HashMap<String, Service> getServices() {

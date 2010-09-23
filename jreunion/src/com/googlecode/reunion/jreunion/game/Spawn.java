@@ -3,7 +3,9 @@ package com.googlecode.reunion.jreunion.game;
 import java.util.Random;
 import java.util.TimerTask;
 
+import com.googlecode.reunion.jreunion.events.map.MobSpawnEvent;
 import com.googlecode.reunion.jreunion.server.LocalMap;
+import com.googlecode.reunion.jreunion.server.Map;
 import com.googlecode.reunion.jreunion.server.Server;
 import com.googlecode.reunion.jreunion.server.Timer;
 
@@ -12,7 +14,6 @@ import com.googlecode.reunion.jreunion.server.Timer;
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
 public class Spawn {
-	private int spawnId;
 
 	private int mobType;
 
@@ -23,29 +24,22 @@ public class Spawn {
 	private int centerY;
 
 	private int radius;
-
-	private LocalMap map;
+	
+	private Position position;
 
 	public Spawn() {
+	}	
+	
+	public Position getPosition() {
+		return position;
 	}
 
-	public int getCenterX() {
-		return centerX;
+	public void setPosition(Position position) {
+		this.position = position;
 	}
-
-	public int getCenterY() {
-		return centerY;
-	}
-
-
-	public LocalMap getMap() {
-		return map;
-	}
-
 
 	/**
 	 * @return Returns the mobType.
-	 * @uml.property name="mobType"
 	 */
 	public int getMobType() {
 		return mobType;
@@ -61,36 +55,15 @@ public class Spawn {
 	public float getRespawnTime() {
 		return respawnTime;
 	}
-
-	/**
-	 * @return Returns the spawnId.
-	 */
-	public int getSpawnId() {
-		return spawnId;
-	}
 	
-	public void setCenterX(int centerX) {
-		this.centerX = centerX;
-	}
-
-	public void setCenterY(int centerY) {
-		this.centerY = centerY;
-	}
-
 	/**
 	 * @param map
 	 *            The map to set.
 	 */
-	public void setMap(LocalMap map) {
-		this.map = map;
-	}
-
-	
 
 	/**
 	 * @param mobType
 	 *            The mobType to set.
-	 * @uml.property name="mobType"
 	 */
 	public void setMobType(int mobType) {
 		this.mobType = mobType;
@@ -112,15 +85,23 @@ public class Spawn {
 
 	public void spawnMob() {		
 		
-		Mob newMob = getMap().getWorld().getMobManager()
-				.createMob(getMobType());
-		newMob.setSpawn(this);
 		
-		int posX = rand.nextInt(radius * 2)-radius+centerX;
-		int posY = rand.nextInt(radius * 2)-radius+centerY;
-		double rotation = rand.nextDouble() *Math.PI*2;
-		Position position = new Position(posX, posY, 0, getMap(), rotation);
-		newMob.setPosition(position);
+		Position position = getPosition();
+		
+		LocalMap map = position.getMap();
+		
+		Mob mob = map.getWorld().getMobManager()
+				.createMob(getMobType());
+		mob.setSpawn(this);
+		
+		int posX = rand.nextInt(radius * 2) - radius + centerX;
+		int posY = rand.nextInt(radius * 2) - radius + centerY;
+		double rotation = rand.nextDouble() * Math.PI * 2;
+		
+		
+		Position mobPosition = new Position(posX, posY, 0, map, rotation);
+		mob.setPosition(mobPosition);
+		map.fireEvent(MobSpawnEvent.class, mob);
 		
 	}
 
@@ -128,7 +109,6 @@ public class Spawn {
 		
 		java.util.Timer timer = new java.util.Timer();
 		timer.schedule(new TimerTask() {
-			
 			@Override
 			public void run() {
 				spawnMob();				

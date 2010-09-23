@@ -27,7 +27,7 @@ import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
  * @author Autumn
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-public class World extends ClassModule implements EventListener{
+public class World extends ClassModule implements EventListener,Sendable{
 	private Command worldCommand;
 
 	private PlayerManager playerManager;
@@ -157,7 +157,7 @@ public class World extends ClassModule implements EventListener{
 					while (iter.hasNext()) {
 						Player player = iter.next();
 						Client client = player.getClient();
-						client.SendPacket(Type.HOUR, serverHour);
+						client.sendPacket(Type.HOUR, serverHour);
 					}
 				}				
 			}
@@ -227,12 +227,10 @@ public class World extends ClassModule implements EventListener{
 			if(event instanceof NetworkAcceptEvent){
 				NetworkAcceptEvent networkAcceptEvent = (NetworkAcceptEvent) event;
 				Network network = (Network) networkAcceptEvent.getSource();
-				Client client = new Client(this);
+				Client client = new Client(this, socket);
 				
 				client.addEventListener(NetworkSendEvent.class, network);
-							
-				client.setSocket(socket);
-				
+															
 				network.addEventListener(NetworkDataEvent.class, client, new NetworkEvent.NetworkFilter(socket));
 				
 				System.out.print("Got connection from " + socket+"\n");
@@ -252,6 +250,23 @@ public class World extends ClassModule implements EventListener{
 
 	public java.util.Map<Socket, Client> getClients() {
 		return clients;
+	}
+
+	@Override
+	public void sendPacket(Type packetType, Object... args) {
+		synchronized(playerManager){
+			
+			Iterator<Player> playerIter =  playerManager.getPlayerListIterator();
+			while(playerIter.hasNext()){
+				Player player = playerIter.next();
+				player.getClient().sendPacket(packetType, args);
+				
+				
+			}
+			
+			
+		}
+		
 	}
 
 }

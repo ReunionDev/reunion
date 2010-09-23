@@ -20,7 +20,7 @@ import com.googlecode.reunion.jreunion.game.Player;
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-public class Client extends EventBroadcaster implements EventListener {
+public class Client extends EventBroadcaster implements EventListener,Sendable {
 	
 	public StringBuffer getInputBuffer() {
 		return inputBuffer;
@@ -37,7 +37,7 @@ public class Client extends EventBroadcaster implements EventListener {
 
 	private int accountId;
 
-	private State clientState;
+	private State state;
 
 	private Player player;
 
@@ -87,14 +87,6 @@ public class Client extends EventBroadcaster implements EventListener {
 		this.accountId = accountId;
 	}
 
-	public State getClientState() {
-		return clientState;
-	}
-
-	public void setClientState(State clientState) {
-		this.clientState = clientState;
-	}
-
 	public Player getPlayer() {
 		return player;
 	}
@@ -113,23 +105,23 @@ public class Client extends EventBroadcaster implements EventListener {
 		this.loginType = loginType;
 	}
 
-	public Client(World world) {
+	public Client(World world,Socket socket) {
 		super();
 		setWorld(world);
 		accountId = -1;
-		clientState = State.DISCONNECTED;
-		
+		state = State.DISCONNECTED;
+		setSocket(socket);
 		world.addEventListener(ClientSendEvent.class, this, new ClientEvent.ClientFilter(this));
 		Server.getInstance().getNetwork().addEventListener(NetworkDisconnectEvent.class, this, new NetworkEvent.NetworkFilter(this.socket));
 	}
 
 	public State getState() {
-		return clientState;
+		return state;
 	}
 
 	public void sendWrongVersion(int clientVersion) {
 		
-		SendPacket(PacketFactory.Type.VERSION_ERROR,clientVersion);
+		sendPacket(PacketFactory.Type.VERSION_ERROR,clientVersion);
 	}
 	
 	public void SendData(String data) {
@@ -144,21 +136,34 @@ public class Client extends EventBroadcaster implements EventListener {
 		}
 		
 	}
-	public void SendPacket(PacketFactory.Type packetType, Object ...arg){		
-		SendData(PacketFactory.createPacket(packetType, arg));
+	public void sendPacket(PacketFactory.Type packetType, Object ...args){		
+		SendData(PacketFactory.createPacket(packetType, args));
 	}
 
 	public void setState(State state) {
-		clientState = state;
+		this.state = state;
 	}
 	public String toString(){
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("{");
+
+		if(player!=null) {
+			buffer.append("player: ");
+			buffer.append(player);
+			buffer.append(", ");
+		}
+		if(socket!=null){
+			buffer.append("socket: ");
+			buffer.append(socket);
+			buffer.append(", ");
+		}
 		
-		String value = "Client";
-		if(socket!=null)
-			value+="("+socket+")";
-		if(player!=null)
-			value+="("+player.getName()+")";		
-		return value;
+				
+		buffer.append("state: ");
+		buffer.append(getState());
+		
+		buffer.append("}");
+		return buffer.toString();
 	}
 
 	public void disconnect() {
@@ -201,6 +206,7 @@ public class Client extends EventBroadcaster implements EventListener {
 				}
 			}
 			if(event instanceof NetworkDisconnectEvent){				
+				
 				fireEvent(ClientDisconnectEvent.class, this);
 			}
 		}

@@ -49,7 +49,7 @@ public class Trader extends Npc {
 			ExchangeItem exchangeItem = new ExchangeItem(item, 0, 0);
 			player.getExchange().addItem(exchangeItem);
 			packetData = "chip_exchange 0 ok " + item.getType() + " "
-					+ item.getEntityId() + "\n";
+					+ item.getId() + "\n";
 		} else {
 			if (playerBet == serverBetResult) {
 				int newChipType = getNewChipTypeUp(chipType);
@@ -57,7 +57,7 @@ public class Trader extends Npc {
 				ExchangeItem exchangeItem = new ExchangeItem(item, 0, 0);
 				player.getExchange().addItem(exchangeItem);
 				packetData = "chip_exchange 1 ok win " + item.getType() + " "
-						+ playerBet + " " + item.getEntityId() + "\n";
+						+ playerBet + " " + item.getId() + "\n";
 			} else {
 				int newChipType = getNewChipTypeDown(chipType);
 				if (newChipType != -1) {
@@ -95,7 +95,7 @@ public class Trader extends Npc {
 			ExchangeItem oldExchangeItem = exchangeIter.next();
 			Armor newItem = (Armor) ItemFactory.create(armorType);
 			Armor oldItem = (Armor) ItemFactory.loadItem(oldExchangeItem
-					.getItem().getEntityId());
+					.getItem().getId());
 
 			if (newItem instanceof Armor == false
 					|| newItem.getLevel() != oldItem.getLevel()) {
@@ -110,8 +110,8 @@ public class Trader extends Npc {
 			player.updateStatus(10, (int) (newItem.getPrice() * 0.333328) * -1,
 					0);
 
-			packetData = "ichange " + oldExchangeItem.getItem().getEntityId()
-					+ " " + newItem.getEntityId() + " " + newItem.getType()
+			packetData = "ichange " + oldExchangeItem.getItem().getId()
+					+ " " + newItem.getId() + " " + newItem.getType()
 					+ " " + newItem.getGemNumber() + " "
 					+ newItem.getExtraStats() + "\n";
 		}

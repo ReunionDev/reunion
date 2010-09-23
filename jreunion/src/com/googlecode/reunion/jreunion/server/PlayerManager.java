@@ -32,7 +32,7 @@ public class PlayerManager {
 		Iterator<Player> iter = getPlayerListIterator();
 		while (iter.hasNext()) {
 			Player player = iter.next();
-			if (player.getEntityId() == id) {
+			if (player.getId() == id) {
 				return player;
 			}
 

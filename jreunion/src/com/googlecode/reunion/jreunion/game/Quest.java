@@ -58,7 +58,7 @@ public class Quest {
 			packetData = "qt nt\n";
 			
 					client.SendData(packetData);
-			player.pickupItem(item.getEntityId());
+			player.pickupItem(item);
 		}
 	}
 
@@ -134,7 +134,7 @@ public class Quest {
 		}
 
 		String packetData = "qt eff " + player.getPosition().getX() + " "
-				+ player.getPosition().getY() + " " + player.getEntityId() + "\n";
+				+ player.getPosition().getY() + " " + player.getId() + "\n";
 		
 				client.SendData(packetData);
 	}

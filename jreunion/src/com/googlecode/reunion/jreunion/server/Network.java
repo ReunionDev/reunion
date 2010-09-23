@@ -207,6 +207,15 @@ public class Network extends Service implements Runnable, EventListener{
 	}
 	public void disconnect(Socket socket) {
 		
+		if(socket.getChannel().isConnected()&&socket.getChannel().isOpen()){						
+			try {
+				processOutput(socket.getChannel());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
 		System.out.println("Disconnecting " + socket);
 		fireEvent(NetworkDisconnectEvent.class, socket);
 		try {

@@ -13,6 +13,7 @@ import com.googlecode.reunion.jreunion.events.client.ClientDisconnectEvent;
 import com.googlecode.reunion.jreunion.events.client.ClientEvent;
 import com.googlecode.reunion.jreunion.events.client.ClientReceiveEvent;
 import com.googlecode.reunion.jreunion.events.network.NetworkDataEvent;
+import com.googlecode.reunion.jreunion.events.session.NewSessionEvent;
 import com.googlecode.reunion.jreunion.game.Equipment;
 import com.googlecode.reunion.jreunion.game.Merchant;
 import com.googlecode.reunion.jreunion.game.Mob;
@@ -31,14 +32,12 @@ import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
  */
 public class PacketParser extends EventBroadcaster implements EventListener{
 
-	//private Server server;
-	private Command com;
+
 
 	private MessageParser messageParser;
 
 	public PacketParser() {
 		super();
-	//	this.server = server;
 		messageParser = new MessageParser();
 		
 		//add a listener for the event type NetworkDataEvent
@@ -53,8 +52,8 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 			World world = client.getWorld();
 			Command com = world.getCommand();			
 			
-		System.out.println("Parsing " + message[0] + " command on "
-				+ client + " with state: " + client.getState() + "");
+		System.out.println("Parsing " + message[0] + " command on client: "
+				+ client);
 		switch (client.getState()) {
 		case DISCONNECTED: {
 			break;
@@ -151,7 +150,7 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 							if(p1!=null&&p1.getSlot()==slot){								
 								//return because we've reserved this slot for a logged in user
 								//TODO:find out if we can do some feedback here to the client
-								client.SendPacket(Type.FAIL);
+								client.sendPacket(Type.FAIL);
 								return;
 							}							
 						}	
@@ -183,7 +182,7 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 				int slot = Integer.parseInt(message[1]);
 				player = com.loginChar(slot, client.getAccountId(),	client);
 				if(player==null){
-					client.SendPacket(Type.FAIL, "Cannot log in");
+					client.sendPacket(Type.FAIL, "Cannot log in");
 					client.disconnect();
 				}
 			}
@@ -192,10 +191,6 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 		
 		case CHAR_SELECTED: {
 			if (message[0].equals("start_game")) {
-
-				player.getPosition().setX(6655);
-				player.getPosition().setY(5224);//we need to implement spawnpoints here
-				player.getPosition().setZ(0);
 
 				client.SendData(
 						"status 11 " + player.getTotalExp() + " 0\n");
@@ -213,6 +208,7 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 				
 				int x = Integer.parseInt(spawn.getMemberValue("X"));
 				int y = Integer.parseInt(spawn.getMemberValue("Y"));
+				int z = spawn.getMemberValue("Z")==null?0:Integer.parseInt(spawn.getMemberValue("Z"));
 				int width = Integer.parseInt(spawn.getMemberValue("Width"));
 				int height = Integer.parseInt(spawn.getMemberValue("Height"));
 				
@@ -221,10 +217,20 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 				int spawnY = y+(height>0?rand.nextInt(height):0);
 				
 				player.getPosition().setX(spawnX);
-				player.getPosition().setY(spawnY);				
+				player.getPosition().setY(spawnY);
+				player.getPosition().setZ(z);
+				
+				
+				
+				Session session = new Session(player);				
+
+				world.getPlayerManager().addPlayer(player);
+				
+				player.getPosition().getMap().fireEvent(NewSessionEvent.class, session);
+				//world.getSessionManager().newSession(player);
 				
 				client.SendData(
-						"at " + client.getPlayer().getEntityId() + " "
+						"at " + client.getPlayer().getId() + " "
 								+ player.getPosition().getX() + " " + player.getPosition().getY() + " "
 								+ player.getPosition().getZ() + " 0\n");
 
@@ -263,6 +269,8 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 
 				world.getTeleportManager().remove(player);
 				client.setState(Client.State.INGAME);
+				
+				
 				
 			}
 			break;
@@ -303,7 +311,8 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 
 				text = messageParser.parse(client.getPlayer(), text);
 
-				if (text != null && text.length() > 0) {
+				if (text != null && text.length() > 0) {					
+					
 					client.getPlayer().say(text);
 				}
 
@@ -326,7 +335,10 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 				client.getPlayer().updateStatus(
 						Integer.parseInt(message[1]) + 10, 1, 0);
 			} else if (message[0].equals("pick")) {
-				client.getPlayer().pickupItem(Integer.parseInt(message[1]));
+				
+				//TODO: implement roaming items				
+				//client.getPlayer().pickupItem(Integer.parseInt(message[1]));
+				
 			} else if (message[0].equals("inven")) {
 				client.getPlayer().getInventory().moveItem(
 						client.getPlayer(), Integer.parseInt(message[1]),
@@ -426,7 +438,7 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 								client.getPlayer(), Integer
 										.parseInt(message[1])));
 					} else {
-						com.serverTell(client.getPlayer(),
+						com.serverTell(client,
 								"Impossible to receive a quest");
 					}
 				}

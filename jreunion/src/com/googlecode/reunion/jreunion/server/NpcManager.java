@@ -52,7 +52,7 @@ public class NpcManager {
 			e.printStackTrace();
 			return null;
 		}
-		npc.setEntityId(++npcIdCounter);
+		npc.setId(++npcIdCounter);
 		addNpc(npc);
 
 		return npc;
@@ -65,7 +65,7 @@ public class NpcManager {
 		while (iter.hasNext()) {
 			Npc npc = iter.next();
 
-			if (npc.getEntityId() == uniqueId) {
+			if (npc.getId() == uniqueId) {
 				return npc;
 			}
 		}

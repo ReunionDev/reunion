@@ -29,6 +29,24 @@ public class Position {
 		return new Position(x,y,z,map,rotation);
 	
 	}
+	
+	public double distance(Position position){
+		
+		if(!this.getMap().equals(position.getMap())){
+			throw new RuntimeException("Can not calculate distance between two positions on different maps: "+this.getMap()+", "+position.getMap());			
+		}
+		
+		double xcomp = Math.pow(this.getX() - position.getX(),
+				2);
+		double ycomp = Math.pow(this.getY() - position.getY(),
+				2);
+		double zcomp = Math.pow(this.getZ() - position.getZ(),
+				2);
+		
+		return  Math.sqrt((xcomp * xcomp) + (ycomp * ycomp)  + (zcomp * zcomp));
+		
+			
+	}
 
 	@Override
 	public String toString() {

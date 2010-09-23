@@ -30,7 +30,7 @@ public class TeleportManager {
 		synchronized(teleports){
 			S_TeleportBucket remove= null;
 			for(S_TeleportBucket bucket:teleports){
-				if(bucket.player.getEntityId() == player.getEntityId())
+				if(bucket.player.getId() == player.getId())
 					remove = bucket;
 			}
 			if(remove!=null)
@@ -41,7 +41,7 @@ public class TeleportManager {
 	public Map getDestination(Player player){
 		synchronized(teleports){			
 			for(S_TeleportBucket bucket:teleports){
-				if(bucket.player.getEntityId() == player.getEntityId())
+				if(bucket.player.getId() == player.getId())
 					return bucket.to;			
 			}
 		}

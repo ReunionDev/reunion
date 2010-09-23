@@ -157,7 +157,7 @@ public class BulkanPlayer extends Player {
 			percentageHp = 1;
 		}
 
-		String packetData = "attack_vital npc " + mob.getEntityId() + " "
+		String packetData = "attack_vital npc " + mob.getId() + " "
 				+ percentageHp + " 0 0\n";
 
 		// S> attack_vital npc [NpcID] [RemainHP%] 0 0

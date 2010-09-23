@@ -30,8 +30,8 @@ public class RoamingItem extends WorldObject{
 	}
 	
 	@Override
-	public int getEntityId() {		
-		return item.getEntityId();
+	public int getId() {		
+		return item.getId();
 	}
 	public void setOwner(Player owner) {
 		this.owner = owner;
