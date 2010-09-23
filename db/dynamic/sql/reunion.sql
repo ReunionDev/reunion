@@ -57,7 +57,6 @@ CREATE TABLE `characters` (
   `penaltyPoints` int(11) NOT NULL,
   `guildid` int(11) NOT NULL default '-1',
   `guildlvl` int(11) NOT NULL default '0',
-  `userlevel` int(11) NOT NULL default '0',
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
