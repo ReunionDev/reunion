@@ -347,7 +347,7 @@ public class Equipment {
 	private void setWings(Wing wings) {
 		this.wings = wings;
 	}
-	public enum Slot
+	public static enum Slot
 	{
 		EMPTY(-1),
 		HELMET(0),

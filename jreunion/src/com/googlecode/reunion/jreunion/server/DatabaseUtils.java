@@ -17,6 +17,7 @@ import com.googlecode.reunion.jreunion.game.Armor;
 import com.googlecode.reunion.jreunion.game.Axe;
 import com.googlecode.reunion.jreunion.game.Entity;
 import com.googlecode.reunion.jreunion.game.Equipment;
+import com.googlecode.reunion.jreunion.game.Equipment.Slot;
 import com.googlecode.reunion.jreunion.game.ExchangeItem;
 import com.googlecode.reunion.jreunion.game.GunWeapon;
 import com.googlecode.reunion.jreunion.game.InventoryItem;
@@ -207,7 +208,7 @@ public class DatabaseUtils extends Service {
 			{
 				int slotId = rs.getInt("slot");
 				
-				Equipment.Slot slot = Equipment.Slot.byValue(slotId);
+				Slot slot = Slot.byValue(slotId);
 				equipment.setItem(slot,ItemFactory.loadItem(rs.getInt("itemid")));
 			}
 			
@@ -474,8 +475,8 @@ public class DatabaseUtils extends Service {
 			Armor chest = (Armor)ItemFactory.create(326);
 			Armor pants = (Armor)ItemFactory.create(343);
 			
-			equipment.setItem(Equipment.Slot.CHEST, chest);
-			equipment.setItem(Equipment.Slot.PANTS, pants);
+			equipment.setItem(Slot.CHEST, chest);
+			equipment.setItem(Slot.PANTS, pants);
 			saveEquipment(player);
 			
 			player.getQuickSlot().addItem(new QuickSlotItem(hpPot1,0));
@@ -866,7 +867,7 @@ public class DatabaseUtils extends Service {
 			String query = "INSERT INTO equipment (charid, slot, itemid) VALUES ";
 			String data = "";
 			int playerId = player.getEntityId();
-			for(Equipment.Slot slot:Equipment.Slot.values())
+			for(Slot slot: Slot.values())
 			{
 				Item item = eq.getItem(slot);
 				if(item!=null){

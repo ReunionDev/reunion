@@ -1363,7 +1363,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		
 	}
 
-	public void wearSlot(Equipment.Slot slot) {
+	public void wearSlot(Slot slot) {
 	
 		InventoryItem invItem = getInventory().getItemSelected();
 		String packetData = new String();
