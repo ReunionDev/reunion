@@ -27,22 +27,20 @@ public class Test extends EventBroadcaster implements EventListener,Runnable {
 		
 	}
 	static int count = 0;
-
 	/**
 	 * @param args
 	 * @throws InterruptedException 
 	 */
 	public static void main(String[] args) throws Exception {
-		
+		Test t = new Test();
 		
 		Position pos1 = new Position(1,2,3, null ,Math.PI/2);
 		Position pos2 = pos1.clone();
 		pos1.setZ(5);
 		
 		
-		System.out.println(pos1);
 		System.out.println(pos2);
-		Test t = new Test();
+		
 		/*
 		int port = 4009;
 		ServerSocket socket = new ServerSocket();

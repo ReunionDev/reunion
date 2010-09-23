@@ -30,7 +30,6 @@ public class Timer {
 
 	public double getTimeElapsedSeconds() {
 		double elapsed = getTimeElapsed();
-
 		return elapsed / 1000000000;
 
 	}

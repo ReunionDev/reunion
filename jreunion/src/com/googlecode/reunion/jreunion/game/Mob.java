@@ -2,6 +2,7 @@ package com.googlecode.reunion.jreunion.game;
 
 import java.util.Iterator;
 import java.util.Random;
+import java.util.TimerTask;
 
 import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jcommon.Parser;
@@ -47,6 +48,16 @@ public class Mob extends LivingObject {
 	private int isMoving;
 
 	private int isAttacking;
+	
+	private Spawn spawn;
+
+	public Spawn getSpawn() {
+		return spawn;
+	}
+
+	public void setSpawn(Spawn spawn) {
+		this.spawn = spawn;
+	}
 
 	private Timer time = new Timer();
 
@@ -230,6 +241,8 @@ public class Mob extends LivingObject {
 			}
 		}
 	}
+	
+	
 
 	public void moveToPlayer(Player player, double distance) {
 	
@@ -324,14 +337,13 @@ public class Mob extends LivingObject {
 		this.attackType = attackType;
 	}
 
-	public void setDead(Player player) {
+	public void kill(Player player) {
 		setCurrHp(0);
 
 		this.getPosition().getMap().getWorld().getMobManager().removeMob(this);
-		Spawn spawn =getPosition().getMap()
-				.getSpawnByMob(getEntityId());
+		Spawn spawn = this.getSpawn();
 		if (spawn != null) {
-			spawn.setDead(true);
+			spawn.kill();
 		}
 		Parser dropList = Reference.getInstance().getDropListReference();
 		Iterator<ParsedItem> iter =dropList.getItemListIterator();
@@ -343,13 +355,22 @@ public class Mob extends LivingObject {
 				if( r.nextFloat()<rate){
 					System.out.println(parsedItem.getMemberValue("Item"));
 					int itemType = Integer.parseInt(parsedItem.getMemberValue("Item"));
-					;
 					
 					Item item = ItemFactory.create(itemType);
 					item.setExtraStats(0);
-					item.setGemNumber(0);
+					item.setGemNumber(0);					
+					final RoamingItem roamingItem = getPosition().getMap().getWorld().getCommand().dropItem(this.getPosition(), item);
+					roamingItem.setOwner(player);
 					
-					this.getPosition().getMap().getWorld().getCommand().dropItem(this.getPosition(), item);
+					java.util.Timer timer = new java.util.Timer();
+					float dropExclusivity = Float.parseFloat(Reference.getInstance().getServerReference().getItem("Server").getMemberValue("DropExclusivity"));
+					timer.schedule(new TimerTask() {
+						@Override
+						public void run() {
+							roamingItem.setOwner(null);
+							
+						}
+					},(long)(dropExclusivity*1000));
 					
 				}
 			}			

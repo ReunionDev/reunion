@@ -66,7 +66,7 @@ public class BulkanPlayer extends Player {
 
 		if (newHp <= 0) {
 
-			mob.setDead(this);
+			mob.kill(this);
 
 			updateStatus(12, getLvlUpExp() - mob.getExp(), 0);
 			updateStatus(11, mob.getExp(), 0);
@@ -142,7 +142,7 @@ public class BulkanPlayer extends Player {
 
 		if (newHp <= 0) {
 
-			mob.setDead(this);
+			mob.kill(this);
 
 			updateStatus(12, getLvlUpExp() - mob.getExp(), 0);
 			updateStatus(11, mob.getExp(), 0);

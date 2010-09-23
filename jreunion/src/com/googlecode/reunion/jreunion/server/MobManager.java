@@ -187,7 +187,7 @@ public class MobManager {
 		}
 
 		if (moveToPlayer == true) {
-			Spawn spawn = mob.getPosition().getMap().getSpawnByMob(mob.getEntityId());
+			Spawn spawn = mob.getSpawn();
 			if(spawn!=null){
 				double radiusCompX = Math.pow(spawn.getCenterX() - newPosX, 2);
 				double radiusCompY = Math.pow(spawn.getCenterY() - newPosY, 2);

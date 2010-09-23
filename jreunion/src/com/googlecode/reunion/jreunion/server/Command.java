@@ -178,7 +178,7 @@ public class Command {
 	}
 
 	// debug command
-	public void dropItem(Position position, Item item) {
+	public RoamingItem dropItem(Position position, Item item) {
 		/*
 		Client client = player.getClient();
 		if (client == null) {
@@ -203,7 +203,7 @@ public class Command {
 		
 		map.fireEvent(ItemDropEvent.class, roamingItem);
 		
-		
+		return roamingItem;
 		
 		//player.getSession().enter(roamingItem);
 

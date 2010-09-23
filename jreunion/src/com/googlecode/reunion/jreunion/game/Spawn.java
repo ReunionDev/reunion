@@ -1,6 +1,7 @@
 package com.googlecode.reunion.jreunion.game;
 
 import java.util.Random;
+import java.util.TimerTask;
 
 import com.googlecode.reunion.jreunion.server.LocalMap;
 import com.googlecode.reunion.jreunion.server.Server;
@@ -15,13 +16,7 @@ public class Spawn {
 
 	private int mobType;
 
-	private int respawnTime; // seconds
-
-	private Timer diedTime = new Timer(); // seconds
-
-	private boolean dead;
-
-	private Mob mob;
+	private float respawnTime; // seconds
 
 	private int centerX;
 
@@ -32,7 +27,6 @@ public class Spawn {
 	private LocalMap map;
 
 	public Spawn() {
-		// spawnMob();
 	}
 
 	public int getCenterX() {
@@ -43,27 +37,11 @@ public class Spawn {
 		return centerY;
 	}
 
-	/**
-	 * @return Returns the dead.
-	 */
-	public boolean getDead() {
-		return dead;
-	}
-
-	/**
-	 * @return Returns the diedTime.
-	 */
-	public Timer getDiedTime() {
-		return diedTime;
-	}
 
 	public LocalMap getMap() {
 		return map;
 	}
 
-	public Mob getMob() {
-		return mob;
-	}
 
 	/**
 	 * @return Returns the mobType.
@@ -80,7 +58,7 @@ public class Spawn {
 	/**
 	 * @return Returns the respawnTime.
 	 */
-	public int getRespawnTime() {
+	public float getRespawnTime() {
 		return respawnTime;
 	}
 
@@ -90,33 +68,13 @@ public class Spawn {
 	public int getSpawnId() {
 		return spawnId;
 	}
-
-	public boolean readyToSpawn() {
-		if (getDead() == true) {
-			if (diedTime.isRunning() == false) {
-				diedTime.Start();
-				return false;
-			} else if (diedTime.getTimeElapsedSeconds() >= getRespawnTime()) {
-				return true;
-			}
-		}
-		return false;
-	}
-
+	
 	public void setCenterX(int centerX) {
 		this.centerX = centerX;
 	}
 
 	public void setCenterY(int centerY) {
 		this.centerY = centerY;
-	}
-
-	/**
-	 * @param dead
-	 *            The dead to set.
-	 */
-	public void setDead(boolean dead) {
-		this.dead = dead;
 	}
 
 	/**
@@ -127,9 +85,7 @@ public class Spawn {
 		this.map = map;
 	}
 
-	public void setMob(Mob mob) {
-		this.mob = mob;
-	}
+	
 
 	/**
 	 * @param mobType
@@ -148,25 +104,36 @@ public class Spawn {
 	 * @param respawnTime
 	 *            The respawnTime to set.
 	 */
-	public void setRespawnTime(int respawnTime) {
+	public void setRespawnTime(float respawnTime) {
 		this.respawnTime = respawnTime;
 	}
+	
+	private Random rand = new Random(System.currentTimeMillis());
 
-	public void spawnMob() {	
-		
-		Random rand = new Random(System.currentTimeMillis());
+	public void spawnMob() {		
 		
 		Mob newMob = getMap().getWorld().getMobManager()
 				.createMob(getMobType());
+		newMob.setSpawn(this);
 		
-		newMob.getPosition().setX(rand.nextInt(radius * 2)-radius+centerX);
-		newMob.getPosition().setY(rand.nextInt(radius * 2)-radius+centerY);
-		newMob.getPosition().setMap(getMap());
-		setMob(newMob);
-
-		setDead(false);
-		diedTime.Stop();
-
+		int posX = rand.nextInt(radius * 2)-radius+centerX;
+		int posY = rand.nextInt(radius * 2)-radius+centerY;
+		double rotation = rand.nextDouble() *Math.PI*2;
+		Position position = new Position(posX, posY, 0, getMap(), rotation);
+		newMob.setPosition(position);
+		
 	}
 
+	public void kill() {
+		
+		java.util.Timer timer = new java.util.Timer();
+		timer.schedule(new TimerTask() {
+			
+			@Override
+			public void run() {
+				spawnMob();				
+			}
+			
+		}, (long) (respawnTime*1000));
+	}
 }

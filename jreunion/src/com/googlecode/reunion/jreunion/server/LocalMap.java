@@ -33,7 +33,6 @@ public class LocalMap extends Map{
 
 	private Area mobArea = new Area();
 	
-	
 	private java.util.List<Session> sessions = new Vector<Session>();	
 	
 	//<ItemID,ItemContainer>
@@ -95,18 +94,18 @@ public class LocalMap extends Map{
 				continue;
 			}
 
-			Spawn g = new Spawn();
+			Spawn spawn = new Spawn();
 
-			g.setCenterX(Integer.parseInt(item.getMemberValue("X")));
-			g.setCenterY(Integer.parseInt(item.getMemberValue("Y")));
-			g.setRadius(Integer.parseInt(item.getMemberValue("Radius")));
-			g.setMobType(Integer.parseInt(item.getMemberValue("Type")));
-			g.setRespawnTime(Integer.parseInt(item
+			spawn.setCenterX(Integer.parseInt(item.getMemberValue("X")));
+			spawn.setCenterY(Integer.parseInt(item.getMemberValue("Y")));
+			spawn.setRadius(Integer.parseInt(item.getMemberValue("Radius")));
+			spawn.setMobType(Integer.parseInt(item.getMemberValue("Type")));
+			spawn.setRespawnTime(Integer.parseInt(item
 					.getMemberValue("RespawnTime")));
-			g.setMap(this);
+			spawn.setMap(this);
 			
-			addMobSpawn(g);
-			g.spawnMob();
+			addMobSpawn(spawn);
+			spawn.spawnMob();
 		}
 	}
 
@@ -169,37 +168,20 @@ public class LocalMap extends Map{
 		return pvpArea;
 	}
 
-	public Spawn getSpawnByMob(int entityID) {
-		Iterator<Spawn> mobSpawnIter = mobSpawnListIterator();
-
-		while (mobSpawnIter.hasNext()) {
-			Spawn spawn = mobSpawnIter.next();
-			if (spawn.getMob().getEntityId() == entityID) {
-				return spawn;
-			}
-		}
-		return null;
-	}
-
 	public void load() {
 		super.load();
-
 		
-			
-			System.out.println("Loading "+this.getName());
-			Server.getInstance().getNetwork().register(getAddress());
-			playerSpawnReference = new Parser();
-			mobSpawnReference = new Parser();
-			npcSpawnReference = new Parser();
-			loadFromReference(getId());
-			createMobSpawns();
-			createNpcSpawns();
-			System.out.println(getName()+" running on "+getAddress());
-			
+		System.out.println("Loading "+this.getName());
+		Server.getInstance().getNetwork().register(getAddress());
+		playerSpawnReference = new Parser();
+		mobSpawnReference = new Parser();
+		npcSpawnReference = new Parser();
+		loadFromReference(getId());
+		createMobSpawns();
+		createNpcSpawns();
+		System.out.println(getName()+" running on "+getAddress());
 		
 	}
-	
-
 
 	public void loadFromReference(int id) {
 		try{
@@ -228,61 +210,14 @@ public class LocalMap extends Map{
 
 	public Iterator<Npc> npcSpawnListIterator() {
 		return npcSpawnList.iterator();
-	}
-
-	public void workSpawns() {
-		Iterator<Spawn> mobSpawnIter = mobSpawnListIterator();
-
-		while (mobSpawnIter.hasNext()) {
-			Spawn spawn = mobSpawnIter.next();
-			if (spawn == null) {
-				continue;
-			}
-
-			if (spawn.readyToSpawn()) {
-				spawn.spawnMob();
-
-				Iterator<Player> playerIter = Server.getInstance()
-						.getWorld().getPlayerManager()
-						.getPlayerListIterator();
-
-				while (playerIter.hasNext()) {
-					Player player = playerIter.next();
-
-					if (player.getPosition().getMap() != spawn.getMob().getPosition().getMap()) {
-						continue;
-					}
-
-					Client client = player.getClient();
-
-					if (client == null) {
-						continue;
-					}
-
-					double xcomp = Math.pow(player.getPosition().getX()
-							- spawn.getMob().getPosition().getX(), 2);
-					double ycomp = Math.pow(player.getPosition().getY()
-							- spawn.getMob().getPosition().getY(), 2);
-					double distance = Math.sqrt(xcomp + ycomp);
-
-					if (distance < player.getSessionRadius()) {
-						player.getSession().enter(spawn.getMob()); //TODO: fix spawn
-					}
-				}
-			}
-		}
-	}
-
-
-
+	}	
+	
 	@Override
 	public void handleEvent(Event event) {
 		
 		
 		if(event instanceof MapEvent){
 			LocalMap map = ((MapEvent)event).getMap();
-			
-			
 			
 			
 			

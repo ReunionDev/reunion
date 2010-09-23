@@ -42,8 +42,7 @@ public abstract class Map extends EventBroadcaster implements EventListener {
 		String ip= config.getMemberValue("Ip");
 		int port = Integer.parseInt(config.getMemberValue("Port"));		
 		setName(map.getName());
-		setAddress(new InetSocketAddress(ip, port));
-		
+		setAddress(new InetSocketAddress(ip, port));		
 	}
 	
 	/**

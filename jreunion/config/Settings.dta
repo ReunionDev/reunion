@@ -6,3 +6,4 @@ DefaultMap = 4
 StartLime = 100
 Version = 100
 SessionRadius = 300
+DropExclusivity = 10
