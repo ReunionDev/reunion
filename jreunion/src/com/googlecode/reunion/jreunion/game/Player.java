@@ -48,39 +48,23 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		this.slot = slot;
 	}
 	
+	public static enum Sex{
+		MALE, //0
+		FEMALE	//1
+	}
+	
 	public static enum Race{
-		BULKAN(0),
+		BULKAN, //0
 
-		KAILIPTON(1),
+		KAILIPTON, //1
 
-		AIDIA(2),
+		AIDIA, //2
 
-		HUMAN(3),
+		HUMAN, //3
 
-		HYBRIDER(4),
+		HYBRIDER, //4
 		
-		RACE_PET(5);
-		
-		int value;
-		Race(int value){
-			this.value = value;
-			
-		}
-		public int value(){
-			return value;			
-		
-		}
-		
-		public static Race byValue(int raceId){
-			
-			for(Race race:Race.values())
-			{
-				if(race.value()==raceId){					
-					return race;
-				}
-			}
-			return null;
-		}
+		RACE_PET; //5
 		
 	}
 
@@ -97,7 +81,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 
 	private int lead;
 
-	private int sex; // 0 - Male; 1 - Female
+	private Sex sex; // 0 - Male; 1 - Female
 
 	private int speed;
 
@@ -462,7 +446,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		return playerSession;
 	}
 
-	public int getSex() {
+	public Sex getSex() {
 		return sex;
 	}
 
@@ -953,7 +937,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		playerSession = session;
 	}
 
-	public void setSex(int sex) {
+	public void setSex(Sex sex) {
 		this.sex = sex;
 	}
 

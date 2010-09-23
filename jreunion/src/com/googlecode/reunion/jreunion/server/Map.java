@@ -61,7 +61,7 @@ public abstract class Map extends EventBroadcaster implements EventListener {
 	}
 	@Override
 	public String toString() {
-		return "Map [id=" + getId() + ", name=" + getName() + "]";
+		return "{id:" + getId() + ", name:" + getName() + "}";
 	}
 
 	

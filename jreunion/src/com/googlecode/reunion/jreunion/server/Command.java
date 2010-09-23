@@ -11,6 +11,8 @@ import com.googlecode.reunion.jreunion.game.LivingObject;
 import com.googlecode.reunion.jreunion.game.Mob;
 import com.googlecode.reunion.jreunion.game.Npc;
 import com.googlecode.reunion.jreunion.game.Player;
+import com.googlecode.reunion.jreunion.game.Player.Race;
+import com.googlecode.reunion.jreunion.game.Player.Sex;
 import com.googlecode.reunion.jreunion.game.Position;
 import com.googlecode.reunion.jreunion.game.RoamingItem;
 import com.googlecode.reunion.jreunion.game.Skill;
@@ -162,7 +164,7 @@ public class Command {
 	}
 
 	public void createChar(Client client, int slotNumber, String charName,
-			int race, int sex, int hair, int str, int intel, int dex, int con,
+			Race race, Sex sex, int hair, int str, int intel, int dex, int con,
 			int lea) {
 		if (DatabaseUtils.getInstance().getCharNameFree(charName)) {
 			DatabaseUtils.getInstance().createChar(client, slotNumber,

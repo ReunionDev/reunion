@@ -18,6 +18,8 @@ import com.googlecode.reunion.jreunion.game.Merchant;
 import com.googlecode.reunion.jreunion.game.Mob;
 import com.googlecode.reunion.jreunion.game.Npc;
 import com.googlecode.reunion.jreunion.game.Player;
+import com.googlecode.reunion.jreunion.game.Player.Race;
+import com.googlecode.reunion.jreunion.game.Player.Sex;
 import com.googlecode.reunion.jreunion.game.Position;
 import com.googlecode.reunion.jreunion.game.Quest;
 import com.googlecode.reunion.jreunion.game.Trader;
@@ -155,10 +157,11 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 						}	
 					}
 				}
-				
+				Race race = Race.values()[Integer.parseInt(message[3])];
+				Sex sex = Sex.values()[Integer.parseInt(message[4])];
 				com.createChar(client, slot,
-						message[2], Integer.parseInt(message[3]),
-						Integer.parseInt(message[4]),
+						message[2], race,
+						sex,
 						Integer.parseInt(message[5]),
 						Integer.parseInt(message[6]),
 						Integer.parseInt(message[7]),

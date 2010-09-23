@@ -9,7 +9,7 @@ import com.googlecode.reunion.jreunion.server.Client;
  */
 public class TestEvent extends Event {
 
-	TestEvent() {
+	public TestEvent() {
 		super();
 	}
 	static class TestFilter implements Filter{

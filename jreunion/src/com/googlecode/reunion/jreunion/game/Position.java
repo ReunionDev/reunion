@@ -25,9 +25,34 @@ public class Position {
 	}
 	
 	public Position clone()
-	{		
-		return this.clone();
-		
+	{				
+		return new Position(x,y,z,map,rotation);
+	
+	}
+
+	@Override
+	public String toString() {
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("{");
+		if(map!=null){
+			
+			buffer.append("map: ");
+			buffer.append(map);
+			buffer.append(", ");
+		}
+		buffer.append("x: ");
+		buffer.append(x);
+		buffer.append(", ");
+		buffer.append("y: ");
+		buffer.append(y);
+		buffer.append(", ");
+		buffer.append("z: ");
+		buffer.append(z);
+		buffer.append(", ");
+		buffer.append("rotation: ");
+		buffer.append(rotation);
+		buffer.append("}");
+		return buffer.toString();
 	}
 
 	public int getX() {

@@ -93,9 +93,7 @@ public class Network extends Service implements Runnable, EventListener{
 						
 						SocketChannel clientSocketChannel = ((ServerSocketChannel)socketChannel).accept();
 						clientSocketChannel.configureBlocking(false);
-						Socket socket = clientSocketChannel.socket();		
-										
-						System.out.print("Got connection from " + socket+"\n");
+						Socket socket = clientSocketChannel.socket();
 						
 						fireEvent(NetworkAcceptEvent.class,socket);
 						
@@ -174,7 +172,6 @@ public class Network extends Service implements Runnable, EventListener{
 		
 		fireEvent(NetworkDataEvent.class, socket, data);
 		
-		//S_Server.getInstance().getPacketParser().Parse(client,data);
 		return true;
 	}
 	

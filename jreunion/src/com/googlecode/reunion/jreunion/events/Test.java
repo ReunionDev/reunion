@@ -12,6 +12,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.googlecode.reunion.jreunion.events.client.ClientEvent.ClientFilter;
+import com.googlecode.reunion.jreunion.game.Player;
+import com.googlecode.reunion.jreunion.game.Player.Sex;
+import com.googlecode.reunion.jreunion.game.Position;
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
@@ -30,6 +33,15 @@ public class Test extends EventBroadcaster implements EventListener,Runnable {
 	 * @throws InterruptedException 
 	 */
 	public static void main(String[] args) throws Exception {
+		
+		
+		Position pos1 = new Position(1,2,3, null ,Math.PI/2);
+		Position pos2 = pos1.clone();
+		pos1.setZ(5);
+		
+		
+		System.out.println(pos1);
+		System.out.println(pos2);
 		Test t = new Test();
 		/*
 		int port = 4009;

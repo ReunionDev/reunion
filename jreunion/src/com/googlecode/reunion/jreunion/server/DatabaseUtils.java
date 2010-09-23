@@ -24,6 +24,7 @@ import com.googlecode.reunion.jreunion.game.InventoryItem;
 import com.googlecode.reunion.jreunion.game.Item;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Player.Race;
+import com.googlecode.reunion.jreunion.game.Player.Sex;
 import com.googlecode.reunion.jreunion.game.Potion;
 import com.googlecode.reunion.jreunion.game.QuickSlotItem;
 import com.googlecode.reunion.jreunion.game.RingWeapon;
@@ -239,7 +240,7 @@ public class DatabaseUtils extends Service {
 					+ characterId + ";");
 			if (rs.next()) {
 				int raceId = rs.getInt("race");
-				Race race = Race.byValue(raceId);
+				Race race = Race.values()[raceId];
 				player = Player.createPlayer(client,race);
 				
 				player.setEntityId(characterId);				
@@ -262,7 +263,7 @@ public class DatabaseUtils extends Service {
 				player.setLime(rs.getInt("lime"));
 				player.setStatusPoints(rs.getInt("statusPoints"));
 				player.setPenaltyPoints(rs.getInt("penaltyPoints"));
-				player.setSex(rs.getInt("sex"));
+				player.setSex(Sex.values()[rs.getInt("sex")]);
 				player.setName(rs.getString("name"));
 				player.setGuildId(rs.getInt("guildid"));
 				player.setGuildLvl(rs.getInt("guildlvl"));
@@ -308,8 +309,8 @@ public class DatabaseUtils extends Service {
 								    +player.getDexterity()+ ","
 								    +player.getConstitution()+ ","
 								    +player.getLeadership()+ ","
-								    +player.getRace()+ ","
-								    +player.getSex()+ ","
+								    +player.getRace().ordinal()+ ","
+								    +player.getSex().ordinal()+ ","
 								    +player.getHairStyle()+ ","
 								    +player.getCurrHp()+ ","
 								    +player.getMaxHp()+ ","
@@ -405,7 +406,7 @@ public class DatabaseUtils extends Service {
 
 	
 	public void createChar(Client client, int slot, String charName,
-			int raceId, int sex, int hairStyle, int str, int wis, int dex, int con,
+			Race race, Sex sex, int hairStyle, int str, int wis, int dex, int con,
 			int lead) {
 		if (!checkDatabase())
 			return;
@@ -414,8 +415,7 @@ public class DatabaseUtils extends Service {
 						
 			stmt = database.conn.createStatement();
 			
-			
-			Race race = Race.byValue(raceId);						
+								
 			Player player = Player.createPlayer(client, race);			
 			
 			player.setEntityId(-1);

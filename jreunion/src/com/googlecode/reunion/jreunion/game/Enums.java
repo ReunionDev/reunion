@@ -21,9 +21,7 @@ public class Enums {
 	public final static int RACE_PET = 5;
 
 	*/
-	public final static int SEX_MALE = 0;
-
-	public final static int SEX_FEMALE = 1;
+	
 
 	public final static int MODE_PEACE = 0;
 
