@@ -21,7 +21,6 @@ public class Test extends EventBroadcaster implements EventListener,Runnable {
 	public Test() {
 		this.addEventListener(Event.class,this, null);
 		
-		System.out.println(this.listeners==null);
 		
 	}
 	static int count = 0;

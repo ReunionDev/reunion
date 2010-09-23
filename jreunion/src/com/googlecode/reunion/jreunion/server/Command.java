@@ -36,10 +36,9 @@ public class Command {
 		int accountId = DatabaseUtils.getInstance().Auth(username, password);
 		if (accountId == -1) {
 			System.out.println("Invalid Login");
-			// S_Server.getInstance().networkModule.Disconnect(networkId);
-			client.SendData("fail Username and password combination is invalid\n");
+			client.SendPacket(Type.FAIL,"Username and password combination is invalid");
+			client.disconnect();
 		} else {
-
 			
 			System.out.println("" + client + " authed as account(" + accountId + ")");
 			client.setAccountId(accountId);
@@ -58,8 +57,6 @@ public class Command {
 					}	
 				}
 			}
-			
-			;
 			sendCharList(client);
 		}
 
@@ -230,7 +227,7 @@ public class Command {
 	/****** teleport player to player2 position ******/
 	public void GoToChar(Player player, String charName) {
 		Client client = player.getClient();
-		Player player2 = Server.getInstance().getWorldModule()
+		Player player2 = Server.getInstance().getWorld()
 				.getPlayerManager().getPlayer(charName);
 
 		if (client == null) {
@@ -273,7 +270,7 @@ public class Command {
 		client.SendData(packetData);
 
 		Iterator<Session> sessionIter = Server.getInstance()
-				.getWorldModule().getSessionManager().getSessionListIterator();
+				.getWorld().getSessionManager().getSessionListIterator();
 
 		while (sessionIter.hasNext()) {
 			Session session = sessionIter.next();
@@ -323,7 +320,7 @@ public class Command {
 		
 		
 		//TODO: Cross server implementation
-		Server.getInstance().getWorldModule().getTeleportManager()
+		Server.getInstance().getWorld().getTeleportManager()
 				.register(player, map);
 
 		Session session = player.getSession();
@@ -415,7 +412,7 @@ public class Command {
 		// TODO: Fix hack and prevent teleport hack
 		Map map = null;
 		System.out.println(socket.getLocalSocketAddress());
-		for (Map m : Server.getInstance().getWorldModule().getMaps()) {
+		for (Map m : Server.getInstance().getWorld().getMaps()) {
 			System.out.println(m.getAddress());
 			if (m.getAddress().equals(socket.getLocalSocketAddress())) {
 				map = m;
@@ -626,11 +623,11 @@ public class Command {
 			return;
 		}
 
-		LivingObject livingObject = Server.getInstance().getWorldModule()
+		LivingObject livingObject = Server.getInstance().getWorld()
 				.getMobManager().getMob(uniqueId);
 
 		if (livingObject == null) {
-			livingObject = Server.getInstance().getWorldModule()
+			livingObject = Server.getInstance().getWorld()
 					.getPlayerManager().getPlayer(uniqueId);
 
 			if (livingObject == null) {
@@ -884,7 +881,7 @@ public class Command {
 			return;
 		}
 
-		Mob mob = Server.getInstance().getWorldModule().getMobManager()
+		Mob mob = Server.getInstance().getWorld().getMobManager()
 				.getMob(uniqueId);
 		Item item = player.getEquipment().getShoulderMount();
 		SlayerWeapon spWeapon = new SlayerWeapon(item.getType());
@@ -966,7 +963,7 @@ public class Command {
 		 */
 
 		if (percentageHp == 0) {
-			Server.getInstance().getWorldModule().getMobManager()
+			Server.getInstance().getWorld().getMobManager()
 					.removeMob(mob);
 		}
 	}

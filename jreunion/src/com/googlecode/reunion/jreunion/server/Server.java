@@ -2,6 +2,8 @@ package com.googlecode.reunion.jreunion.server;
 
 import java.util.HashMap;
 
+import com.googlecode.reunion.jreunion.events.EventBroadcaster;
+import com.googlecode.reunion.jreunion.events.network.NetworkDataEvent;
 import com.googlecode.reunion.jreunion.events.server.ServerStartEvent;
 import com.googlecode.reunion.jreunion.events.server.ServerStopEvent;
 
@@ -68,17 +70,20 @@ public class Server extends ClassModule {
 			PerformanceStats.getInstance().dumpPerformance();
 			server.fireEvent(server.createEvent(ServerStopEvent.class, server));
 			server.doStop();
+			
+			EventBroadcaster.shutdown();
+			
 			System.exit(-1);
 		}
 	}
 
-	private Network networkModule;
+	private Network network;
 
 	private PacketParser packetParser;
 
-	private World worldModule;
+	private World world;
 
-	private Database databaseModule;
+	private Database database;
 
 	private Server() throws Exception {
 
@@ -88,10 +93,12 @@ public class Server extends ClassModule {
 		PerformanceStats.createPerformanceStats(this);
 		Reference.getInstance().Load();
 
-		databaseModule = new Database(this);
-		networkModule = new Network(this);
-		worldModule = new World(this);
-		packetParser = new PacketParser(this);
+		database = new Database(this);
+		network = new Network(this);
+		world = new World(this);
+		packetParser = new PacketParser();
+		
+		network.addEventListener(NetworkDataEvent.class, packetParser);
 	}
 	
 	
@@ -99,15 +106,15 @@ public class Server extends ClassModule {
 	/**
 	 * @return Returns the databaseModule.
 	 */
-	public Database getDatabaseModule() {
-		return databaseModule;
+	public Database getDatabase() {
+		return database;
 	}
 
 	/**
 	 * @return Returns the networkModule.
 	 */
-	public Network getNetworkModule() {
-		return networkModule;
+	public Network getNetwork() {
+		return network;
 	}
 
 	/**
@@ -120,8 +127,8 @@ public class Server extends ClassModule {
 	/**
 	 * @return Returns the worldModule.
 	 */
-	public World getWorldModule() {
-		return worldModule;
+	public World getWorld() {
+		return world;
 	}
 
 	/**
@@ -129,7 +136,7 @@ public class Server extends ClassModule {
 	 *            The databaseModule to set.
 	 */
 	public void setDatabaseModule(Database databaseModule) {
-		this.databaseModule = databaseModule;
+		this.database = databaseModule;
 	}
 
 

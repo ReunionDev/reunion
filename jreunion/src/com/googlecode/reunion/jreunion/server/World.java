@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
+import java.util.TimerTask;
 import java.util.Vector;
 
 import com.googlecode.reunion.jcommon.ParsedItem;
@@ -20,6 +21,7 @@ import com.googlecode.reunion.jreunion.events.network.NetworkEvent;
 import com.googlecode.reunion.jreunion.events.network.NetworkSendEvent;
 import com.googlecode.reunion.jreunion.game.Mob;
 import com.googlecode.reunion.jreunion.game.Player;
+import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 
 /**
  * @author Autumn
@@ -56,8 +58,7 @@ public class World extends ClassModule implements EventListener{
 		worldCommand = new Command(this);
 		playerManager = new PlayerManager();
 		sessionManager = new SessionManager(this);
-		mobManager = new MobManager();
-		
+		mobManager = new MobManager();		
 		npcManager = new NpcManager();
 		serverHour = 4;
 		teleportManager = new TeleportManager();
@@ -118,15 +119,16 @@ public class World extends ClassModule implements EventListener{
 	/**
 	 * @return Returns the worldCommand.
 	 */
-	public Command getWorldCommand() {
+	public Command getCommand() {
 		return worldCommand;
 	}
 
 	@Override
 	public void start() {
 
-		Server.getInstance().getNetworkModule().addEventListener(NetworkAcceptEvent.class, this);
-		Server.getInstance().getNetworkModule().addEventListener(NetworkDisconnectEvent.class, this);
+		Server.getInstance().getNetwork().addEventListener(NetworkAcceptEvent.class, this);
+		Server.getInstance().getNetwork().addEventListener(NetworkDisconnectEvent.class, this);
+		this.addEventListener(ClientConnectEvent.class, Server.getInstance().getPacketParser());
 		
 		Iterator<ParsedItem> iter = Reference.getInstance().getMapConfigReference().getItemListIterator();
 		while(iter.hasNext()){
@@ -135,7 +137,7 @@ public class World extends ClassModule implements EventListener{
 			boolean isLocal = item.getMemberValue("Location").equalsIgnoreCase("Local");
 			Map map = null;
 			if(isLocal){
-				map = new LocalMap(mapId);
+				map = new LocalMap(this, mapId);
 			}
 			else {
 				map = new RemoteMap(mapId);				
@@ -143,11 +145,28 @@ public class World extends ClassModule implements EventListener{
 			map.load();
 			maps.put(mapId, map);
 		}
+		java.util.Timer timer = new java.util.Timer();
+		timer.schedule(new TimerTask() {
+			
+			@Override
+			public void run() {
+				serverHour = (serverHour + 1) % 5;
+				
+				synchronized(playerManager){
+					Iterator<Player> iter = playerManager.getPlayerListIterator();
+					while (iter.hasNext()) {
+						Player player = iter.next();
+						Client client = player.getClient();
+						client.SendPacket(Type.HOUR, serverHour);
+					}
+				}				
+			}
+		}, 0, 60 * 1000);
 	}
 
 	@Override
 	public void stop() {
-		Server.getInstance().getNetworkModule().removeEventListener(NetworkAcceptEvent.class, this);
+		Server.getInstance().getNetwork().removeEventListener(NetworkAcceptEvent.class, this);
 	}
 
 	@Override
@@ -169,16 +188,15 @@ public class World extends ClassModule implements EventListener{
 		 * == 0){ mob.setIsMoving(1); mob.getTimer().Start();
 		 * S_Server.getInstance().getWorldModule().getMobManager().workMob(mob);
 		 * }
-		 * 
 		 * }
 		 */
 
 		if ((int) (serverTime.getTimeElapsedSeconds() % 2) == 0
 				&& mobMoving == false) {
-			Iterator<Mob> mobsIter = Server.getInstance().getWorldModule()
+			Iterator<Mob> mobsIter = Server.getInstance().getWorld()
 					.getMobManager().getMobListIterator();
 			while (mobsIter.hasNext()) {
-				Server.getInstance().getWorldModule().getMobManager()
+				Server.getInstance().getWorld().getMobManager()
 						.workMob(mobsIter.next());
 			}
 			mobMoving = true;
@@ -192,23 +210,7 @@ public class World extends ClassModule implements EventListener{
 		if ((int) serverTime.getTimeElapsedSeconds() >= 60) {
 			serverTime.Stop();
 			serverTime.Reset();
-
-			serverHour = (serverHour + 1) % 5;
-
-			Iterator<Player> iter = playerManager.getPlayerListIterator();
-			while (iter.hasNext()) {
-				Player player = iter.next();
-				Client client = player.getClient();
-
-				if (client == null) {
-					continue;
-				}
-
-				if (client.getState() == Client.State.INGAME) {
-							client.SendData(
-									"hour " + serverHour + "\n");
-				}
-			}
+	
 		}
 
 		if (!serverTime.isRunning()) {
@@ -225,15 +227,15 @@ public class World extends ClassModule implements EventListener{
 			if(event instanceof NetworkAcceptEvent){
 				NetworkAcceptEvent networkAcceptEvent = (NetworkAcceptEvent) event;
 				Network network = (Network) networkAcceptEvent.getSource();
-				Client client = new Client();
+				Client client = new Client(this);
 				
 				client.addEventListener(NetworkSendEvent.class, network);
 							
-				client.setSocket(socket);			
+				client.setSocket(socket);
 				
-				network.addEventListener(NetworkDataEvent.class, client, new NetworkEvent.NetworkFilter(socket));				
+				network.addEventListener(NetworkDataEvent.class, client, new NetworkEvent.NetworkFilter(socket));
 				
-				System.out.print("Got connection from " + socket+"\n");		
+				System.out.print("Got connection from " + socket+"\n");
 				
 				client.setState(Client.State.ACCEPTED);
 				

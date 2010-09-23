@@ -163,14 +163,14 @@ public class Npc extends LivingObject {
 
 	@Override
 	public void enter(Session session) {
-		Server.getInstance().getWorldModule().getWorldCommand()
+		this.getPosition().getMap().getWorld().getCommand()
 		.npcIn(session.getOwner(), this);
 		
 	}
 
 	@Override
 	public void exit(Session session) {
-		Server.getInstance().getWorldModule().getWorldCommand()
+		this.getPosition().getMap().getWorld().getCommand()
 		.npcOut(session.getOwner(), this);
 		
 	}

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Vector;
 
 import com.googlecode.reunion.jreunion.game.Player;
+import com.googlecode.reunion.jreunion.game.Player.Race;
 import com.googlecode.reunion.jreunion.game.Skill;
 
 /**
@@ -73,9 +74,9 @@ public class CharSkill {
 		// skill.setDmg(skill.getCurrLevel()*skill.getIncAmmount());
 	}
 
-	public void loadSkillList(int race) {
+	public void loadSkillList(Race race) {
 		switch (race) {
-		case 0: {
+		case BULKAN: {
 			addSkill(new Skill(1));
 			addSkill(new Skill(2));
 			addSkill(new Skill(17));
@@ -93,7 +94,7 @@ public class CharSkill {
 			addSkill(new Skill(75));
 			break;
 		}
-		case 1: {
+		case KAILIPTON: {
 			addSkill(new Skill(3));
 			addSkill(new Skill(4));
 			addSkill(new Skill(5));
@@ -121,7 +122,7 @@ public class CharSkill {
 			addSkill(new Skill(76));
 			break;
 		}
-		case 2: {
+		case AIDIA: {
 			addSkill(new Skill(6));
 			addSkill(new Skill(22));
 			addSkill(new Skill(24));
@@ -142,7 +143,7 @@ public class CharSkill {
 			addSkill(new Skill(78));
 			break;
 		}
-		case 3: {
+		case HUMAN: {
 			addSkill(new Skill(20));
 			addSkill(new Skill(21));
 			addSkill(new Skill(29));
@@ -160,7 +161,7 @@ public class CharSkill {
 			addSkill(new Skill(77));
 			break;
 		}
-		case 4: {
+		case HYBRIDER: {
 			addSkill(new Skill(79));
 			addSkill(new Skill(80));
 			addSkill(new Skill(81));
@@ -184,7 +185,8 @@ public class CharSkill {
 			break;
 		}
 		default:
-			break;
+			throw new RuntimeException("Invalid Race: "+race);
+			
 		}
 	}
 

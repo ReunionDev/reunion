@@ -11,8 +11,8 @@ import java.util.concurrent.LinkedBlockingQueue;
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
 public class EventBroadcaster{
-	static LinkedBlockingQueue<EventWorker> workers;
-	static Thread [] threads = new Thread[25];
+	private static LinkedBlockingQueue<EventWorker> workers;
+	private static Thread [] threads = new Thread[25];
 	static {
 		workers = new LinkedBlockingQueue<EventWorker>(threads.length);
 		for(int i=0; i<threads.length;i++) {
@@ -31,7 +31,7 @@ public class EventBroadcaster{
 		
 	}
 	
-	public  Map<Class,Map<EventListener,Filter>> listeners;
+	private  Map<Class,Map<EventListener,Filter>> listeners;
 	public Map<Class, Map<EventListener,Filter>> getListeners() {
 		synchronized (this){
 			if(listeners==null)

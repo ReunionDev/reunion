@@ -17,7 +17,8 @@ public class PacketFactory {
 		OK,
 		GO_WORLD,
 		GOTO,
-		PARTY_DISBAND
+		PARTY_DISBAND, 
+		HOUR
 		
 	}
 	
@@ -77,10 +78,16 @@ public class PacketFactory {
 			
 		}
 		case PARTY_DISBAND:{
-			
-			
 			return "party disband";
 			
+		}
+		case HOUR:{
+			
+			if(args.length>0){
+				int hour = (Integer)args[0];
+				return "hour " + hour;
+			}
+			break;
 		}
 
 		}

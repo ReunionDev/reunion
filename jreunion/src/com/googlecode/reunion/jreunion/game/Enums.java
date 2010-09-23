@@ -7,7 +7,7 @@ package com.googlecode.reunion.jreunion.game;
 public class Enums {
 	
 	
-
+/*
 	public final static int RACE_BULKAN = 0;
 
 	public final static int RACE_KAILIPTON = 1;
@@ -20,6 +20,7 @@ public class Enums {
 
 	public final static int RACE_PET = 5;
 
+	*/
 	public final static int SEX_MALE = 0;
 
 	public final static int SEX_FEMALE = 1;

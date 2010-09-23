@@ -113,7 +113,7 @@ public class QuickSlot {
 				|| qsItem.getItem().getType() == 1053) {
 			switch (qsItem.getItem().getType()) {
 			case 175: {
-				Server.getInstance().getWorldModule().getWorldCommand()
+				Server.getInstance().getWorld().getCommand()
 						.GoToPos(player, 6655, 5224);
 				break;
 			}
@@ -124,7 +124,7 @@ public class QuickSlot {
 				mob.getPosition().setY(client.getPlayer().getPosition().getY() + 20);
 				mob.getPosition().setZ(client.getPlayer().getPosition().getZ());
 				mob.setRunning(true);
-				Server.getInstance().getWorldModule().getMobManager()
+				Server.getInstance().getWorld().getMobManager()
 						.addMob(mob);
 				break;
 			}

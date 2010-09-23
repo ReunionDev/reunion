@@ -17,12 +17,12 @@ public class RoamingItem extends WorldObject{
 	}
 	@Override
 	public void enter(Session session) {
-		Server.getInstance().getWorldModule().getWorldCommand().itemIn(session.getOwner(), this);
+		this.getPosition().getMap().getWorld().getCommand().itemIn(session.getOwner(), this);
 		
 	}
 	@Override
 	public void exit(Session session) {
-		Server.getInstance().getWorldModule().getWorldCommand().itemOut(session.getOwner(), this);
+		this.getPosition().getMap().getWorld().getCommand().itemOut(session.getOwner(), this);
 		
 	}
 	

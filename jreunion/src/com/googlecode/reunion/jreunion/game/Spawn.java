@@ -156,7 +156,7 @@ public class Spawn {
 		
 		Random rand = new Random(System.currentTimeMillis());
 		
-		Mob newMob = Server.getInstance().getWorldModule().getMobManager()
+		Mob newMob = getMap().getWorld().getMobManager()
 				.createMob(getMobType());
 		
 		newMob.getPosition().setX(rand.nextInt(radius * 2)-radius+centerX);

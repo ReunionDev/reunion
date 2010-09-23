@@ -48,11 +48,15 @@ public class LocalMap extends Map{
 
 	private Parser npcSpawnReference;
 
+	World world;
 
+	public World getWorld() {
+		return world;
+	}
 
-	public LocalMap(int id) {
+	public LocalMap(World world, int id) {
 		super(id);
-		
+		this.world = world;
 	}
 
 	public void addMobSpawn(Spawn spawn) {
@@ -100,7 +104,7 @@ public class LocalMap extends Map{
 			g.setRespawnTime(Integer.parseInt(item
 					.getMemberValue("RespawnTime")));
 			g.setMap(this);
-
+			
 			addMobSpawn(g);
 			g.spawnMob();
 		}
@@ -126,7 +130,7 @@ public class LocalMap extends Map{
 						+ getId());
 				continue;
 			}
-			Npc newNpc = Server.getInstance().getWorldModule()
+			Npc newNpc = Server.getInstance().getWorld()
 					.getNpcManager()
 					.createNpc(Integer.parseInt(i.getMemberValue("Type")));
 			newNpc.getPosition().setX(Integer.parseInt(i.getMemberValue("X")));
@@ -183,7 +187,7 @@ public class LocalMap extends Map{
 		
 			
 			System.out.println("Loading "+this.getName());
-			Server.getInstance().getNetworkModule().register(getAddress());
+			Server.getInstance().getNetwork().register(getAddress());
 			playerSpawnReference = new Parser();
 			mobSpawnReference = new Parser();
 			npcSpawnReference = new Parser();
@@ -239,7 +243,7 @@ public class LocalMap extends Map{
 				spawn.spawnMob();
 
 				Iterator<Player> playerIter = Server.getInstance()
-						.getWorldModule().getPlayerManager()
+						.getWorld().getPlayerManager()
 						.getPlayerListIterator();
 
 				while (playerIter.hasNext()) {
@@ -277,6 +281,7 @@ public class LocalMap extends Map{
 		
 		if(event instanceof MapEvent){
 			LocalMap map = ((MapEvent)event).getMap();
+			
 			
 			
 			

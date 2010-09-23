@@ -124,7 +124,7 @@ public class MobManager {
 		 * mob.getPosY()+(int)(-directionY*mob.getSpeed());
 		 */
 
-		Iterator<Player> iterPlayer = Server.getInstance().getWorldModule()
+		Iterator<Player> iterPlayer = Server.getInstance().getWorld()
 				.getPlayerManager().getPlayerListIterator();
 
 		while (iterPlayer.hasNext()) {

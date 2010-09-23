@@ -22,6 +22,7 @@ import com.googlecode.reunion.jreunion.game.GunWeapon;
 import com.googlecode.reunion.jreunion.game.InventoryItem;
 import com.googlecode.reunion.jreunion.game.Item;
 import com.googlecode.reunion.jreunion.game.Player;
+import com.googlecode.reunion.jreunion.game.Player.Race;
 import com.googlecode.reunion.jreunion.game.Potion;
 import com.googlecode.reunion.jreunion.game.QuickSlotItem;
 import com.googlecode.reunion.jreunion.game.RingWeapon;
@@ -121,7 +122,7 @@ public class DatabaseUtils extends Service {
 				
 				int slot = rs.getInt("slot");
 				boolean alreadyLogged = false;
-				java.util.Map<Socket,Client> clients = Server.getInstance().getWorldModule().getClients();			
+				java.util.Map<Socket,Client> clients = Server.getInstance().getWorld().getClients();			
 				synchronized(clients){
 					for(Client cl: clients.values()){
 						if(cl.equals(client))
@@ -236,7 +237,8 @@ public class DatabaseUtils extends Service {
 			.executeQuery("SELECT * FROM characters WHERE id="
 					+ characterId + ";");
 			if (rs.next()) {
-				int race = rs.getInt("race");				
+				int raceId = rs.getInt("race");
+				Race race = Race.byValue(raceId);
 				player = Player.createPlayer(client,race);
 				
 				player.setEntityId(characterId);				
@@ -402,7 +404,7 @@ public class DatabaseUtils extends Service {
 
 	
 	public void createChar(Client client, int slot, String charName,
-			int race, int sex, int hairStyle, int str, int wis, int dex, int con,
+			int raceId, int sex, int hairStyle, int str, int wis, int dex, int con,
 			int lead) {
 		if (!checkDatabase())
 			return;
@@ -410,7 +412,9 @@ public class DatabaseUtils extends Service {
 		try {
 						
 			stmt = database.conn.createStatement();
-						
+			
+			
+			Race race = Race.byValue(raceId);						
 			Player player = Player.createPlayer(client, race);			
 			
 			player.setEntityId(-1);
@@ -459,11 +463,11 @@ public class DatabaseUtils extends Service {
 			Weapon weapon = null;
 			
 			switch(race){
-				case 0: {weapon = (Axe)ItemFactory.create(48); break;}
-				case 1: {weapon = (StaffWeapon)ItemFactory.create(171); break;}
-				case 2: {weapon = (RingWeapon)ItemFactory.create(431); break;}
-				case 3: {weapon = (GunWeapon)ItemFactory.create(204); break;}
-				case 4: {weapon = (Sword)ItemFactory.create(168); break;}
+				case BULKAN: {weapon = (Axe)ItemFactory.create(48); break;}
+				case KAILIPTON: {weapon = (StaffWeapon)ItemFactory.create(171); break;}
+				case AIDIA: {weapon = (RingWeapon)ItemFactory.create(431); break;}
+				case HUMAN: {weapon = (GunWeapon)ItemFactory.create(204); break;}
+				case HYBRIDER: {weapon = (Sword)ItemFactory.create(168); break;}
 				default: break;
 			}
 			Equipment equipment = player.getEquipment();

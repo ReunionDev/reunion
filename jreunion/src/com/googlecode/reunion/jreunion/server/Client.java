@@ -40,7 +40,7 @@ public class Client extends EventBroadcaster implements EventListener {
 	private State clientState;
 
 	private Player player;
-	
+
 	private StringBuffer inputBuffer = new StringBuffer();
 	
 	private StringBuffer outputBuffer = new StringBuffer();
@@ -64,6 +64,16 @@ public class Client extends EventBroadcaster implements EventListener {
 	public Socket getSocket() {
 		return socket;
 	}
+	
+	private World world;
+	
+	public World getWorld() {
+		return world;
+	}
+	private void setWorld(World world) {
+		this.world = world;
+	}
+
 
 	public void setSocket(Socket socket) {
 		this.socket = socket;
@@ -103,13 +113,14 @@ public class Client extends EventBroadcaster implements EventListener {
 		this.loginType = loginType;
 	}
 
-	public Client() {
+	public Client(World world) {
 		super();
+		setWorld(world);
 		accountId = -1;
 		clientState = State.DISCONNECTED;
 		
-		Server.getInstance().getWorldModule().addEventListener(ClientSendEvent.class, this, new ClientEvent.ClientFilter(this));
-		Server.getInstance().getNetworkModule().addEventListener(NetworkDisconnectEvent.class, this, new NetworkEvent.NetworkFilter(this.socket));
+		world.addEventListener(ClientSendEvent.class, this, new ClientEvent.ClientFilter(this));
+		Server.getInstance().getNetwork().addEventListener(NetworkDisconnectEvent.class, this, new NetworkEvent.NetworkFilter(this.socket));
 	}
 
 	public State getState() {
@@ -151,43 +162,23 @@ public class Client extends EventBroadcaster implements EventListener {
 	}
 
 	public void disconnect() {
-		Server.getInstance().getNetworkModule().disconnect(this.getSocket());		
+		Server.getInstance().getNetwork().disconnect(this.getSocket());		
 	}
 	
 	public static enum State {
 		
-		DISCONNECTED(-1),
+		DISCONNECTED,	
+		ACCEPTED,	
+		GOT_VERSION ,	
+		GOT_LOGIN ,	
+		GOT_USERNAME,	
+		GOT_PASSWORD,
+		GOT_AUTH,	
+		CHAR_LIST,	
+		CHAR_SELECTED,		
+		PORTING,	
+		INGAME;
 	
-		ACCEPTED( 0),
-	
-		GOT_VERSION (1),
-	
-		GOT_LOGIN ( 2),
-	
-		GOT_USERNAME( 3),
-	
-		GOT_PASSWORD( 4),
-	
-		GOT_AUTH( 5),
-	
-		CHAR_LIST( 6),
-	
-		CHAR_SELECTED(7),
-		
-		PORTING(9),
-	
-		INGAME( 10);
-		
-		int value;
-		
-		State(int value){
-			this.value = value;
-			
-		}
-		public int value(){
-			return value;			
-		
-		}
 	}
 	
 	public enum LoginType{

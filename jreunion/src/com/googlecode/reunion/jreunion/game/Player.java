@@ -12,6 +12,7 @@ import com.googlecode.reunion.jreunion.events.Event;
 import com.googlecode.reunion.jreunion.events.EventListener;
 import com.googlecode.reunion.jreunion.events.client.ClientDisconnectEvent;
 import com.googlecode.reunion.jreunion.events.network.NetworkAcceptEvent;
+import com.googlecode.reunion.jreunion.game.Equipment.Slot;
 import com.googlecode.reunion.jreunion.server.CharSkill;
 import com.googlecode.reunion.jreunion.server.Client;
 import com.googlecode.reunion.jreunion.server.DatabaseUtils;
@@ -45,6 +46,42 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 
 	public void setSlot(int slot) {
 		this.slot = slot;
+	}
+	
+	public static enum Race{
+		BULKAN(0),
+
+		KAILIPTON(1),
+
+		AIDIA(2),
+
+		HUMAN(3),
+
+		HYBRIDER(4),
+		
+		RACE_PET(5);
+		
+		int value;
+		Race(int value){
+			this.value = value;
+			
+		}
+		public int value(){
+			return value;			
+		
+		}
+		
+		public static Race byValue(int raceId){
+			
+			for(Race race:Race.values())
+			{
+				if(race.value()==raceId){					
+					return race;
+				}
+			}
+			return null;
+		}
+		
 	}
 
 
@@ -345,17 +382,17 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		return quickSlot;
 	}
 
-	public int getRace() {
+	public Race getRace() {
 		if(this instanceof BulkanPlayer)
-			return Enums.RACE_BULKAN;
+			return Race.BULKAN;
 		if(this instanceof AidiaPlayer)
-			return Enums.RACE_AIDIA;
+			return Race.AIDIA;
 		if(this instanceof KailiptonPlayer)
-			return Enums.RACE_KAILIPTON;
+			return Race.KAILIPTON;
 		if(this instanceof HumanPlayer)
-			return Enums.RACE_HUMAN;
+			return Race.HUMAN;
 		if(this instanceof HybriderPlayer)
-			return Enums.RACE_HYBRIDER;		
+			return Race.HYBRIDER;		
 		throw new RuntimeException("Unknown race: "+this);
 	}
 
@@ -379,8 +416,8 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 
 				if (rectangle.contains(getPosition().getX(), getPosition().getY())) {
 					Server.getInstance()
-							.getWorldModule()
-							.getWorldCommand()
+							.getWorld()
+							.getCommand()
 							.GoToPos(
 									this,
 									Integer.parseInt(item
@@ -408,8 +445,8 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		int spawnY = y+(height>0?rand.nextInt(height):0);
 		
 		Server.getInstance()
-		.getWorldModule()
-		.getWorldCommand()
+		.getWorld()
+		.getCommand()
 		.GoToPos(this,spawnX,spawnY);
 	}
 
@@ -453,13 +490,13 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		return wis;
 	}
 
-	public static Player createPlayer(Client client, int race){
+	public static Player createPlayer(Client client, Race race){
 		
-		if (race == Enums.RACE_BULKAN) return new BulkanPlayer(client);
-		else if (race == Enums.RACE_KAILIPTON) return new KailiptonPlayer(client);
-		else if (race == Enums.RACE_AIDIA) return  new AidiaPlayer(client);
-		else if (race == Enums.RACE_HUMAN) return new HumanPlayer(client);
-		else if (race == Enums.RACE_HYBRIDER)	return new HybriderPlayer(client);
+		if (race == Race.BULKAN) return new BulkanPlayer(client);
+		else if (race == Race.KAILIPTON) return new KailiptonPlayer(client);
+		else if (race == Race.AIDIA) return  new AidiaPlayer(client);
+		else if (race == Race.HUMAN) return new HumanPlayer(client);
+		else if (race == Race.HYBRIDER)	return new HybriderPlayer(client);
 		
 		throw new RuntimeException("Invalid race: "+race);
 		
@@ -628,8 +665,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		DatabaseUtils.getInstance().saveExchange(this);
 		DatabaseUtils.getInstance().saveQuickSlot(this);
 
-		Iterator<Session> iter = Server.getInstance().getWorldModule()
-				.getSessionManager().getSessionListIterator();
+		Iterator<Session> iter = this.getPosition().getMap().getWorld().getSessionManager().getSessionListIterator();
 
 		while (iter.hasNext()) {
 			Session session = iter.next();
@@ -639,13 +675,13 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 			}
 		}
 
-		if (Server.getInstance().getWorldModule().getPlayerManager()
+		if (this.getPosition().getMap().getWorld().getPlayerManager()
 				.containsPlayer(this)) {
-			Server.getInstance().getWorldModule().getPlayerManager()
+			this.getPosition().getMap().getWorld().getPlayerManager()
 					.removePlayer(this);
 		}
 
-		Server.getInstance().getWorldModule().getSessionManager()
+		this.getPosition().getMap().getWorld().getSessionManager()
 				.removeSession(getSession());
 		setSession(null);
 	}
@@ -711,7 +747,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		client.SendData(packetData);// send the message
 		// S> pickup [CharID]
 
-		Server.getInstance().getWorldModule().getWorldCommand()
+		this.getPosition().getMap().getWorld().getCommand()
 				.itemOut(this, uniqueid);
 		pickItem(uniqueid);
 	}
@@ -763,7 +799,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		
 
 		Iterator<Session> sessionIter = Server.getInstance()
-				.getWorldModule().getSessionManager().getSessionListIterator();
+				.getWorld().getSessionManager().getSessionListIterator();
 
 		while (sessionIter.hasNext()) {
 			Session session = sessionIter.next();
@@ -800,7 +836,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		} else {
 			admin = 0;
 		}
-		Iterator<Player> iter = Server.getInstance().getWorldModule()
+		Iterator<Player> iter = this.getPosition().getMap().getWorld()
 				.getPlayerManager().getPlayerListIterator();
 		while (iter.hasNext()) {
 			Player pl = iter.next();
@@ -1417,19 +1453,19 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 	
 	@Override
 	public void enter(Session session){
-		Server.getInstance().getWorldModule().getWorldCommand()
+		this.getPosition().getMap().getWorld().getCommand()
 		.charIn(session.getOwner(), this);
 	}
 		
 
 	@Override
 	public void exit(Session session){
-		Server.getInstance().getWorldModule().getWorldCommand()
+		this.getPosition().getMap().getWorld().getCommand()
 		.charOut(session.getOwner(), this);
 	}
 	
 	public void handleEvent(Event event){
-		Server.getInstance().getNetworkModule().addEventListener(NetworkAcceptEvent.class, this);
+		Server.getInstance().getNetwork().addEventListener(NetworkAcceptEvent.class, this);
 		if(event instanceof ClientDisconnectEvent){
 			ClientDisconnectEvent clientDisconnectEvent = (ClientDisconnectEvent) event;
 			if(clientDisconnectEvent.getClient()!=getClient())return;

@@ -6,6 +6,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
+import com.googlecode.reunion.jreunion.events.Event;
+import com.googlecode.reunion.jreunion.events.EventBroadcaster;
+import com.googlecode.reunion.jreunion.events.EventListener;
+import com.googlecode.reunion.jreunion.events.map.MapEvent;
 import com.googlecode.reunion.jreunion.game.Entity;
 import com.googlecode.reunion.jreunion.game.LivingObject;
 import com.googlecode.reunion.jreunion.game.Mob;
@@ -17,7 +21,7 @@ import com.googlecode.reunion.jreunion.game.WorldObject;
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-public class Session {
+public class Session extends EventBroadcaster implements EventListener{
 	
 	private List<WorldObject> entities = new Vector<WorldObject>();
 
@@ -104,5 +108,17 @@ public class Session {
 				iter.remove();
 		}
 		return players.iterator();
+	}
+
+	@Override
+	public void handleEvent(Event event) {
+		
+		if(event instanceof MapEvent){
+			LocalMap map = ((MapEvent)event).getMap();
+			
+			
+			
+			
+		}		
 	}
 }

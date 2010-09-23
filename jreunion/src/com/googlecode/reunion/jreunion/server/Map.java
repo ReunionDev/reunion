@@ -18,36 +18,27 @@ public abstract class Map extends EventBroadcaster implements EventListener {
 		
 		
 		this.id = id;
-	}
-	
+	}	
 	
 	public boolean isLocal() {
 		return this instanceof LocalMap;
-	}
-	
+	}	
 	
 	public int getId() {
 		return id;
 	}
-	
-	
-	
+		
 	public void setAddress(InetSocketAddress address) {
 		this.address = address;
 	}
-
-
-
 
 	public InetSocketAddress getAddress() {
 		return address;
 	}
 
-
 	public void load() {
 		ParsedItem config = Reference.getInstance().getMapConfigReference().getItemById(id);
 		ParsedItem map = Reference.getInstance().getMapReference().getItemById(id);
-		String location = config.getMemberValue("Location");
 		String ip= config.getMemberValue("Ip");
 		int port = Integer.parseInt(config.getMemberValue("Port"));		
 		setName(map.getName());

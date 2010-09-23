@@ -61,7 +61,7 @@ public class SessionManager {
 		 */
 		
 		PlayerManager manager = Server.getInstance()
-		.getWorldModule().getPlayerManager();
+		.getWorld().getPlayerManager();
 		Iterator<Player> player1Iter = manager.getPlayerListIterator();
 
 		while (player1Iter.hasNext()) {

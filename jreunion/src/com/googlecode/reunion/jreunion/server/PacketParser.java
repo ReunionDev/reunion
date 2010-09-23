@@ -29,21 +29,18 @@ import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
  */
 public class PacketParser extends EventBroadcaster implements EventListener{
 
-	private Server server;
+	//private Server server;
 	private Command com;
-	private World world;
 
 	private MessageParser messageParser;
 
-	public PacketParser(Server server) {
+	public PacketParser() {
 		super();
-		this.server = server;
-		world = server.getWorldModule();
-		com = world.getWorldCommand();
+	//	this.server = server;
 		messageParser = new MessageParser();
-		world.addEventListener(ClientConnectEvent.class, this);
+		
 		//add a listener for the event type NetworkDataEvent
-		server.getNetworkModule().addEventListener(NetworkDataEvent.class, this);
+		
 		
 	}
 
@@ -51,6 +48,9 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 		
 		synchronized(client){
 			Player player = client.getPlayer();
+			World world = client.getWorld();
+			Command com = world.getCommand();			
+			
 		System.out.println("Parsing " + message[0] + " command on "
 				+ client + " with state: " + client.getState() + "");
 		switch (client.getState()) {
@@ -107,7 +107,6 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 						+ client);
 				client.setState(Client.State.DISCONNECTED);
 				break;
-
 			}
 		}
 		case GOT_USERNAME: {
@@ -115,6 +114,7 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 				client.setPassword(new String(message[0]));
 				System.out.println("Got Password");
 				client.setState(Client.State.GOT_PASSWORD);
+				
 				com.authClient(client, client.getUsername(),
 						client.getPassword());
 				break;
@@ -123,7 +123,6 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 						+ client);
 				client.setState(Client.State.DISCONNECTED);
 				break;
-
 			}
 		}
 		case CHAR_LIST: {
@@ -259,7 +258,7 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 						+ player.getConstitution() + player.getLeadership() - 80;
 				player.updateStatus(13, (player.getLevel() - 1) * 3 - statusPoints, 0);
 
-				Server.getInstance().getWorldModule().getTeleportManager().remove(player);
+				world.getTeleportManager().remove(player);
 				client.setState(Client.State.INGAME);
 				
 			}
@@ -365,13 +364,13 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 				try {
 				// if (message.length > 2){
 				if (message[2].equals("npc")) {
-					Mob mob = Server.getInstance().getWorldModule()
+					Mob mob = world
 							.getMobManager()
 							.getMob(Integer.parseInt(message[3]));
 					client.getPlayer().useSkill(mob,
 							Integer.parseInt(message[1]));
 				} else if (message[2].equals("char")) {
-					Player player1 = Server.getInstance().getWorldModule()
+					Player player1 = world
 							.getPlayerManager()
 							.getPlayer(Integer.parseInt(message[3]));
 					client.getPlayer().useSkill(player1,
@@ -429,12 +428,12 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 					}
 				}
 			} else if (message[0].equals("stash_open")) {
-				Npc[] npc = Server.getInstance().getWorldModule()
+				Npc[] npc = world
 						.getNpcManager().getNpcList(139);
 				Warehouse warehouse = (Warehouse) npc[0];
 				warehouse.openStash(client.getPlayer());
 			} else if (message[0].equals("stash_click")) {
-				Npc[] npc = Server.getInstance().getWorldModule()
+				Npc[] npc = world
 						.getNpcManager().getNpcList(139);
 				Warehouse warehouse = (Warehouse) npc[0];
 
@@ -454,7 +453,7 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 			} else if (message[0].equals("shop")) {
 				int npcId = Integer.parseInt(message[1]);
 				Merchant npc = (Merchant) Server.getInstance()
-						.getWorldModule().getNpcManager()
+						.getWorld().getNpcManager()
 						.getNpc(Integer.parseInt(message[1]));
 				if (npc!=null) {
 					npc.openShop(client.getPlayer());
@@ -463,19 +462,19 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 				}
 			} else if (message[0].equals("buy")) {
 				Merchant npc = (Merchant) Server.getInstance()
-						.getWorldModule().getNpcManager()
+						.getWorld().getNpcManager()
 						.getNpc(Integer.parseInt(message[1]));
 				npc.buyItem(client.getPlayer(), Integer.parseInt(message[4]),
 						Integer.parseInt(message[5]),
 						1);
 			} else if (message[0].equals("sell")) {
 				Merchant npc = (Merchant) Server.getInstance()
-						.getWorldModule().getNpcManager()
+						.getWorld().getNpcManager()
 						.getNpc(Integer.parseInt(message[1]));
 				npc.sellItem(client.getPlayer());
 			} else if (message[0].equals("pbuy")) {
 				Merchant npc = (Merchant) Server.getInstance()
-						.getWorldModule().getNpcManager()
+						.getWorld().getNpcManager()
 						.getNpc(Integer.parseInt(message[1]));
 				npc.buyItem(client.getPlayer(), Integer.parseInt(message[2]),
 						Integer.parseInt(message[3]),
@@ -484,14 +483,14 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 				Npc[] npc;
 
 				if (Integer.parseInt(message[1]) == 0) {
-					npc = Server.getInstance().getWorldModule()
+					npc = world
 							.getNpcManager().getNpcList(166);
 					Trader trader = (Trader) npc[0];
 					trader.chipExchange(client.getPlayer(),
 							Integer.parseInt(message[1]),
 							Integer.parseInt(message[2]), 0);
 				} else {
-					npc = Server.getInstance().getWorldModule()
+					npc = world
 							.getNpcManager().getNpcList(167);
 					Trader trader = (Trader) npc[0];
 					trader.chipExchange(client.getPlayer(),
@@ -503,7 +502,7 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 				client.getPlayer().itemExchange(Integer.parseInt(message[2]),
 						Integer.parseInt(message[3]));
 			} else if (message[0].equals("ichange")) {
-				Npc[] npc = Server.getInstance().getWorldModule()
+				Npc[] npc = world
 						.getNpcManager().getNpcList(117);
 				Trader trader = (Trader) npc[0];
 
@@ -529,10 +528,10 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 
 		String[] messages = ParsePacket(packet);
 		if (client.getState() != Client.State.DISCONNECTED) {
-			for (String message2 : messages) {
-				String[] message = ParseMessage(message2);
+			for (String message : messages) {
+				String[] words = ParseMessage(message);
 				if (client.getState() != Client.State.DISCONNECTED) {
-					HandleMessage(client, message);
+					HandleMessage(client, words);
 				}
 			}
 		}
@@ -561,7 +560,7 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 				}
 				
 				if(data!=null&&!data.isEmpty())
-					Parse(client,data);
+					Parse(client, data);
 			}else
 			if(event instanceof ClientConnectEvent){
 				ClientConnectEvent e = (ClientConnectEvent)event;

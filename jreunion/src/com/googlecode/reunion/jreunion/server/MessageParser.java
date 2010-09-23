@@ -27,8 +27,8 @@ public class MessageParser {
 		int userlvl = player.getAdminState();
 		text = text.trim();
 		String word[] = text.split(" ");
-		Command com = Server.getInstance().getWorldModule()
-				.getWorldCommand();
+		Command com = Server.getInstance().getWorld()
+				.getCommand();
 		Client client = player.getClient();
 
 		if (userlvl > -1) {
@@ -114,7 +114,7 @@ public class MessageParser {
 					client.SendData(packetData);
 				}
 				} else if (word.length == 6) {
-					Mob mob = Server.getInstance().getWorldModule()
+					Mob mob = Server.getInstance().getWorld()
 							.getMobManager()
 							.createMob(Integer.parseInt(word[1]));
 					mob.getPosition().setX(player.getPosition().getX() + 10);
@@ -124,13 +124,13 @@ public class MessageParser {
 					mob.setUnknown1(Integer.parseInt(word[3]));
 					mob.setNeoProgmare(Integer.parseInt(word[4]));
 					mob.setUnknown2(Integer.parseInt(word[5]));
-					Server.getInstance().getWorldModule().getMobManager()
+					Server.getInstance().getWorld().getMobManager()
 							.addMob(mob);
 				}
 			} else if (word[0].equals("@addnpc")) {
 				try {
 				if (word.length == 2) {
-					Npc npc = Server.getInstance().getWorldModule()
+					Npc npc = Server.getInstance().getWorld()
 							.getNpcManager()
 							.createNpc(Integer.parseInt(word[1]));
 					npc.getPosition().setX(player.getPosition().getX() + 10);
@@ -149,7 +149,7 @@ public class MessageParser {
 				
 				if(mapref!=null){
 					int mapId   =Integer.parseInt(mapref.getMemberValue("Id"));
-					Map map = Server.getInstance().getWorldModule().getMap(mapId);
+					Map map = Server.getInstance().getWorld().getMap(mapId);
 					
 					if (map != null) {
 						com.GoToWorld(player, map, 0);

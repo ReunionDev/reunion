@@ -169,7 +169,7 @@ public class Mob extends LivingObject {
 			if (mob.checkMembers(new String[] { "Exp" })) {
 				// use member from file
 				setExp((int) (Integer.parseInt(mob.getMemberValue("Exp")) * Server
-						.getInstance().getWorldModule().getServerSetings()
+						.getInstance().getWorld().getServerSetings()
 						.getXp()));
 			} else {
 				// use default
@@ -178,7 +178,7 @@ public class Mob extends LivingObject {
 			if (mob.checkMembers(new String[] { "Lime" })) {
 				// use member from file
 				setLime((int) (Integer.parseInt(mob.getMemberValue("Lime")) * Server
-						.getInstance().getWorldModule().getServerSetings()
+						.getInstance().getWorld().getServerSetings()
 						.getLime()));
 			} else {
 				// use default
@@ -254,12 +254,12 @@ public class Mob extends LivingObject {
 		if (distance < 100) {
 			if (getAttackType() == 1 || getAttackType() == 2) {
 				setIsAttacking(1);
-				Server.getInstance().getWorldModule().getWorldCommand()
+				this.getPosition().getMap().getWorld().getCommand()
 						.NpcAttackChar(player, this);
 				return;
 			} else if (distance < 20) {
 				setIsAttacking(1);
-				Server.getInstance().getWorldModule().getWorldCommand()
+				this.getPosition().getMap().getWorld().getCommand()
 						.NpcAttackChar(player, this);
 				return;
 			}
@@ -327,7 +327,7 @@ public class Mob extends LivingObject {
 	public void setDead(Player player) {
 		setCurrHp(0);
 
-		Server.getInstance().getWorldModule().getMobManager().removeMob(this);
+		this.getPosition().getMap().getWorld().getMobManager().removeMob(this);
 		Spawn spawn =getPosition().getMap()
 				.getSpawnByMob(getEntityId());
 		if (spawn != null) {
@@ -349,12 +349,12 @@ public class Mob extends LivingObject {
 					item.setExtraStats(0);
 					item.setGemNumber(0);
 					
-					Server.getInstance().getWorldModule().getWorldCommand().dropItem(this.getPosition(), item);
+					this.getPosition().getMap().getWorld().getCommand().dropItem(this.getPosition(), item);
 					
 				}
 			}			
 		}
-		Server.getInstance().getWorldModule().getWorldCommand()
+		this.getPosition().getMap().getWorld().getCommand()
 				.serverSay("Experience: " + getExp() + " Lime: " + getLime());
 
 	}
@@ -409,13 +409,13 @@ public class Mob extends LivingObject {
 
 	@Override
 	public void enter(Session session) {
-		Server.getInstance().getWorldModule().getWorldCommand()
+		this.getPosition().getMap().getWorld().getCommand()
 		.mobIn(session.getOwner(), this, false);		
 	}
 
 	@Override
 	public void exit(Session session) {
-		Server.getInstance().getWorldModule().getWorldCommand()
+		this.getPosition().getMap().getWorld().getCommand()
 		.mobOut(session.getOwner(), this);
 		
 	}

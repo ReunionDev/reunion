@@ -149,7 +149,7 @@ public class Network extends Service implements Runnable, EventListener{
 		socketChannel.read(buffer);
 		buffer.flip();
 		Socket socket = socketChannel.socket();
-		Client client = Server.getInstance().getWorldModule().getClients().get(socket);
+		Client client = Server.getInstance().getWorld().getClients().get(socket);
 		
 		if (client == null) {
 			return false;
@@ -182,7 +182,7 @@ public class Network extends Service implements Runnable, EventListener{
 		
 		
 		Socket socket = socketChannel.socket();
-		Client client = Server.getInstance().getWorldModule().getClients().get(socket);
+		Client client = Server.getInstance().getWorld().getClients().get(socket);
 		if (client == null) {
 			return false;
 		}
