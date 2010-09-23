@@ -21,19 +21,19 @@ public abstract class LivingObject extends WorldObject {
 
 	private int targetPosZ;
 
-	private int currHp;
+	private int hp;
 
 	private int maxHp;
 
-	private int currMana;
+	private int mana;
 
 	private int maxMana;
 
-	private int currElect;
+	private int elect;
 
 	private int maxElect;
 
-	private int currStm;
+	private int stm;
 
 	private int maxStm;
 
@@ -46,20 +46,15 @@ public abstract class LivingObject extends WorldObject {
 
 	}
 
-	public int getCurrElect() {
-		return currElect;
+	public int getElect() {
+		return elect;
 	}
-
-	public int getCurrHp() {
-		return currHp;
+	public int getHp() {
+		return stm;
 	}
-
-	public int getCurrMana() {
-		return currMana;
-	}
-
-	public int getCurrStm() {
-		return currStm;
+	
+	public int getStm() {
+		return stm;
 	}
 
 	public int getLevel() {
@@ -76,6 +71,10 @@ public abstract class LivingObject extends WorldObject {
 
 	public int getMaxMana() {
 		return maxMana;
+	}
+	
+	public int getMana() {
+		return mana;
 	}
 
 	public int getMaxStm() {
@@ -105,17 +104,17 @@ public abstract class LivingObject extends WorldObject {
 
 		if (mob == null) {
 			// cant find Item in the reference continue to load defaults:
-			setCurrHp(1);
+			setHp(1);
 			setMaxHp(1);
 			setLevel(1);
 		} else {
 
 			if (mob.checkMembers(new String[] { "Hp" })) {
 				// use member from file
-				setCurrHp(Integer.parseInt(mob.getMemberValue("Hp")));
+				setHp(Integer.parseInt(mob.getMemberValue("Hp")));
 			} else {
 				// use default
-				setCurrHp(1);
+				setHp(1);
 			}
 			if (mob.checkMembers(new String[] { "Hp" })) {
 				// use member from file
@@ -135,19 +134,19 @@ public abstract class LivingObject extends WorldObject {
 	}
 
 	public void setCurrElect(int currElect) {
-		this.currElect = currElect;
+		this.elect = currElect;
 	}
 
-	public void setCurrHp(int currHp) {
-		this.currHp = currHp;
+	public void setHp(int currHp) {
+		this.hp = currHp;
 	}
 
 	public void setCurrMana(int currMana) {
-		this.currMana = currMana;
+		this.mana = currMana;
 	}
 
 	public void setCurrStm(int currStm) {
-		this.currStm = currStm;
+		this.stm = currStm;
 
 		// Client client =
 		// Server.getInstance().networkModule.getClient(this.getPlayerSession().getPlayer(this.getEntityId()));

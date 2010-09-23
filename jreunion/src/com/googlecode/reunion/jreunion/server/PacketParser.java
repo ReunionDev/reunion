@@ -23,8 +23,11 @@ import com.googlecode.reunion.jreunion.game.Player.Race;
 import com.googlecode.reunion.jreunion.game.Player.Sex;
 import com.googlecode.reunion.jreunion.game.Position;
 import com.googlecode.reunion.jreunion.game.Quest;
+import com.googlecode.reunion.jreunion.game.RoamingItem;
 import com.googlecode.reunion.jreunion.game.Trader;
 import com.googlecode.reunion.jreunion.game.Warehouse;
+import com.googlecode.reunion.jreunion.server.Client.LoginType;
+import com.googlecode.reunion.jreunion.server.Client.State;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 /**
  * @author Aidamina
@@ -39,8 +42,6 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 	public PacketParser() {
 		super();
 		messageParser = new MessageParser();
-		
-		//add a listener for the event type NetworkDataEvent
 		
 		
 	}
@@ -59,7 +60,11 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 			break;
 		}
 		case ACCEPTED: {
+			
+			//TODO: Better version handling
+			/*
 			try{
+				
 			if (message[0].equals(Reference.getInstance().getServerReference().getItem("Server").getMemberValue("Version"))) {
 				System.out.println("Got Version");
 				client.setState(Client.State.GOT_VERSION);
@@ -76,23 +81,28 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 				e.printStackTrace();
 				client.disconnect();
 			}
+			*/
+			int version = Integer.parseInt(message[0]);
+			client.setVersion(version);
+			client.setState(State.GOT_VERSION);
+			break;
 
 		}
 		case GOT_VERSION: {
 			if (message[0].equals("login")) {
 				System.out.println("Got login");
-				client.setState(Client.State.GOT_LOGIN);
-				client.setLoginType(Client.LoginType.LOGIN);
+				client.setState(State.GOT_LOGIN);
+				client.setLoginType(LoginType.LOGIN);
 				break;
 			} else if(message[0].equals("play")) {
 				System.out.println("Got play");
-				client.setState(Client.State.GOT_LOGIN);
-				client.setLoginType(Client.LoginType.PLAY);
+				client.setState(State.GOT_LOGIN);
+				client.setLoginType(LoginType.PLAY);
 				break;
 			} else {
 				System.out.println("Inconsistent protocol (err 2) detected on: "
 						+ client);
-				client.setState(Client.State.DISCONNECTED);
+				client.setState(State.DISCONNECTED);
 				break;
 			}
 
@@ -101,12 +111,12 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 			if (message[0].length() < 28) {
 				client.setUsername(new String(message[0]));
 				System.out.println("Got Username");
-				client.setState(Client.State.GOT_USERNAME);
+				client.setState(State.GOT_USERNAME);
 				break;
 			} else {
 				System.out.println("Inconsistent protocol (err 3) detected on: "
 						+ client);
-				client.setState(Client.State.DISCONNECTED);
+				client.setState(State.DISCONNECTED);
 				break;
 			}
 		}
@@ -114,15 +124,13 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 			if (message[0].length() < 28) {
 				client.setPassword(new String(message[0]));
 				System.out.println("Got Password");
-				client.setState(Client.State.GOT_PASSWORD);
-				
-				com.authClient(client, client.getUsername(),
-						client.getPassword());
+				client.setState(State.GOT_PASSWORD);
+				com.authClient(client);
 				break;
 			} else {
 				System.out.println("Inconsistent protocol (err 4) detected on: "
 						+ client);
-				client.setState(Client.State.DISCONNECTED);
+				client.setState(State.DISCONNECTED);
 				break;
 			}
 		}
@@ -253,13 +261,13 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 				 */
 				// "pstatus 13 2 0 0\n");
 
-				player.updateStatus(0, player.getCurrHp(),
+				player.updateStatus(0, player.getHp(),
 						player.getStr() * 1 + player.getConstitution() * 2);
-				player.updateStatus(1, player.getCurrMana(),
+				player.updateStatus(1, player.getMana(),
 						player.getWis() * 2 + player.getDexterity() * 1);
-				player.updateStatus(2, player.getCurrStm(),
+				player.updateStatus(2, player.getStm(),
 						player.getStr() * 2 + player.getConstitution() * 1);
-				player.updateStatus(3, player.getCurrElect(),
+				player.updateStatus(3, player.getElect(),
 						player.getWis() * 1 + player.getDexterity() * 2);
 				player.updateStatus(13, -player.getStatusPoints(), 0);
 
@@ -336,8 +344,15 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 						Integer.parseInt(message[1]) + 10, 1, 0);
 			} else if (message[0].equals("pick")) {
 				
-				//TODO: implement roaming items				
-				//client.getPlayer().pickupItem(Integer.parseInt(message[1]));
+				//TODO: implement roaming items
+				int itemId = Integer.parseInt(message[1]);
+				LocalMap map = player.getPosition().getMap();				
+				RoamingItem roamingItem = map.roamingItems.get(itemId);
+				System.out.println(roamingItem+" "+itemId);
+				if(roamingItem!=null){
+					client.getPlayer().pickupItem(roamingItem);							
+				}
+				
 				
 			} else if (message[0].equals("inven")) {
 				client.getPlayer().getInventory().moveItem(

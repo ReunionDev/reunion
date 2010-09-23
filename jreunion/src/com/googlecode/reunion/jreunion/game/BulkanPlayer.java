@@ -62,7 +62,7 @@ public class BulkanPlayer extends Player {
 
 		int baseDmg = getBaseDmg();
 		// S_Server.getInstance().getWorldModule().getWorldCommand().serverSay("BaseDmg:"+baseDmg);
-		int newHp = mob.getCurrHp() - baseDmg;
+		int newHp = mob.getHp() - baseDmg;
 
 		if (newHp <= 0) {
 
@@ -95,7 +95,7 @@ public class BulkanPlayer extends Player {
 			//	getQuest().questEff(this);
 			}*/
 		} else {
-			mob.setCurrHp(newHp);
+			mob.setHp(newHp);
 		}
 	}
 
@@ -135,10 +135,10 @@ public class BulkanPlayer extends Player {
 		}
 
 		// S_Server.getInstance().getWorldModule().getWorldCommand().serverSay("SkillDmg:"+skillDmg);
-		int newHp = mob.getCurrHp() - (int) skillDmg;
+		int newHp = mob.getHp() - (int) skillDmg;
 
 		updateStatus(skill.getStatusUsed(),
-				getCurrStm() - (int) skill.getCurrConsumn(), getMaxStm());
+				getStm() - (int) skill.getCurrConsumn(), getMaxStm());
 
 		if (newHp <= 0) {
 
@@ -148,12 +148,12 @@ public class BulkanPlayer extends Player {
 			updateStatus(11, mob.getExp(), 0);
 			updateStatus(10, mob.getLime(), 0);
 		} else {
-			mob.setCurrHp(newHp);
+			mob.setHp(newHp);
 		}
 
-		int percentageHp = mob.getCurrHp() * 100 / mob.getMaxHp();
+		int percentageHp = mob.getHp() * 100 / mob.getMaxHp();
 
-		if (percentageHp == 0 && mob.getCurrHp() > 0) {
+		if (percentageHp == 0 && mob.getHp() > 0) {
 			percentageHp = 1;
 		}
 

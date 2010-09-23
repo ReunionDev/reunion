@@ -21,14 +21,11 @@ public class RoamingItem extends WorldObject{
 	@Override
 	public void enter(Session session) {
 		this.getPosition().getMap().getWorld().getCommand().itemIn(session.getOwner(), this);
-		
 	}
 	@Override
 	public void exit(Session session) {
-		this.getPosition().getMap().getWorld().getCommand().itemOut(session.getOwner(), this);
-		
+		this.getPosition().getMap().getWorld().getCommand().itemOut(session.getOwner().getClient(), this);
 	}
-	
 	@Override
 	public int getId() {		
 		return item.getId();

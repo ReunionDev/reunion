@@ -10,6 +10,7 @@ import com.googlecode.reunion.jreunion.events.Event;
 import com.googlecode.reunion.jreunion.events.EventBroadcaster;
 import com.googlecode.reunion.jreunion.events.EventListener;
 import com.googlecode.reunion.jreunion.events.map.MapEvent;
+import com.googlecode.reunion.jreunion.events.session.SessionEvent;
 import com.googlecode.reunion.jreunion.game.Entity;
 import com.googlecode.reunion.jreunion.game.LivingObject;
 import com.googlecode.reunion.jreunion.game.Mob;
@@ -79,16 +80,21 @@ public class Session extends EventBroadcaster implements EventListener{
 		while (entities.contains(entity)) {
 			entities.remove(entity);
 		}
+		entity.addEventListener(SessionEvent.class, this);		
 		entity.exit(this);
 	}
 	
-	
 	public void enter(WorldObject entity){
-		if(this.contains(entity))
-			return;
-		entities.add(entity);
-		entity.enter(this);
 		
+		synchronized(entities){
+			if(this.contains(entity))
+				return;
+		
+			entity.addEventListener(SessionEvent.class, this);
+			entities.add(entity);
+			entity.enter(this);
+			
+		}
 	}
 
 	public void empty() {
@@ -119,10 +125,7 @@ public class Session extends EventBroadcaster implements EventListener{
 	public void handleEvent(Event event) {
 		
 		if(event instanceof MapEvent){
-			LocalMap map = ((MapEvent)event).getMap();
-			
-			
-			
+			LocalMap map = ((MapEvent)event).getMap();			
 			
 		}		
 	}

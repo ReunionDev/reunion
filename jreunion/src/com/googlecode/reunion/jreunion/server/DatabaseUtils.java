@@ -249,7 +249,7 @@ public class DatabaseUtils extends Service {
 				player.setConstitution(rs.getInt("con"));
 				player.setLeadership(rs.getInt("lea"));
 				player.setLevel(rs.getInt("level"));
-				player.setCurrHp(rs.getInt("currHp"));
+				player.setHp(rs.getInt("currHp"));
 				player.setMaxHp(rs.getInt("maxHp"));
 				player.setCurrStm(rs.getInt("currStm"));
 				player.setMaxStm(rs.getInt("maxStm"));
@@ -312,13 +312,13 @@ public class DatabaseUtils extends Service {
 								    +player.getRace().ordinal()+ ","
 								    +player.getSex().ordinal()+ ","
 								    +player.getHairStyle()+ ","
-								    +player.getCurrHp()+ ","
+								    +player.getHp()+ ","
 								    +player.getMaxHp()+ ","
-								    +player.getCurrMana()+ ","
+								    +player.getMana()+ ","
 								    +player.getMaxMana()+ ","
-								    +player.getCurrElect()+ ","
+								    +player.getElect()+ ","
 								    +player.getMaxElect()+ ","
-								    +player.getCurrStm()+ ","
+								    +player.getStm()+ ","
 								    +player.getMaxStm()+ ","
 								    +player.getTotalExp()+ ","
 								    +player.getLvlUpExp()+ ","
@@ -431,7 +431,7 @@ public class DatabaseUtils extends Service {
 			player.setLeadership(lead);
 			
 			player.setMaxHp(((str*1)+(con*2)));
-			player.setCurrHp(player.getMaxHp());
+			player.setHp(player.getMaxHp());
 			player.setMaxMana(((wis*2)+(dex*1)));
 			player.setCurrMana(player.getMaxMana());
 			player.setMaxElect(((wis*1)+(dex*2)));

@@ -113,7 +113,6 @@ public class NpcManager {
 		while (containsNpc(npc)) {
 			npcList.remove(npc);
 		}
-		//ItemManager.getEntityManager().destroyEntity(npc);
 	}
 
 }

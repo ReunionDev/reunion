@@ -12,7 +12,6 @@ public class ItemFactory {
 	public static Item create(int type) {
 		Item item = null;
 		
-
 		ParsedItem parseditem = Reference.getInstance().getItemReference()
 				.getItemById(type);
 		if (parseditem == null) {
@@ -22,7 +21,6 @@ public class ItemFactory {
 		String classname = parseditem.getMemberValue("Class");
 
 		try {
-
 			Class c = Class.forName("com.googlecode.reunion.jreunion.game."
 					+ classname);
 			item = (Item) c.getConstructors()[0].newInstance(type);

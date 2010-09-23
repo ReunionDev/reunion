@@ -29,7 +29,7 @@ import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-public class LocalMap extends Map{
+public class LocalMap extends Map implements Runnable{
 
 	
 	private List<Spawn> mobSpawnList = new Vector<Spawn>();
@@ -49,6 +49,7 @@ public class LocalMap extends Map{
 
 	private Parser playerSpawnReference;
 
+	Thread thread;
 
 	private Parser mobSpawnReference;
 
@@ -64,8 +65,12 @@ public class LocalMap extends Map{
 		super(id);
 		this.world = world;
 		
+		thread = new Thread(this);
+		thread.start();
+		
 		this.addEventListener(NewSessionEvent.class, this);
 		this.addEventListener(ItemDropEvent.class, this);
+		
 	}
 
 	public void addMobSpawn(Spawn spawn) {
@@ -149,17 +154,21 @@ public class LocalMap extends Map{
 			Npc newNpc = Server.getInstance().getWorld()
 					.getNpcManager()
 					.createNpc(Integer.parseInt(i.getMemberValue("Type")));
+			
+			
 			newNpc.getPosition().setX(Integer.parseInt(i.getMemberValue("X")));
 			newNpc.getPosition().setY(Integer.parseInt(i.getMemberValue("Y")));
 			newNpc.getPosition().setRotation(Double.parseDouble(i.getMemberValue("Rotation")));
 			newNpc.getPosition().setMap(this);
 
 			if (newNpc instanceof Merchant) {
-				newNpc.setSellRate(Integer.parseInt(i
-						.getMemberValue("SellRate")));
-				newNpc.setBuyRate(Integer.parseInt(i.getMemberValue("BuyRate")));
-				newNpc.setShop(i.getMemberValue("Shop"));
-				newNpc.loadNpc();
+				
+				Merchant merchant = (Merchant)newNpc;
+				
+				merchant.setSellRate(Integer.parseInt(i.getMemberValue("SellRate")));
+				merchant.setBuyRate(Integer.parseInt(i.getMemberValue("BuyRate")));
+				merchant.setShop(i.getMemberValue("Shop"));
+				merchant.loadFromReference(merchant.getType());
 			}
 		}
 	}
@@ -237,6 +246,7 @@ public class LocalMap extends Map{
 				if(session.contains(position)){
 					
 					results.add(session);
+					
 				}
 				
 			}		
@@ -257,12 +267,16 @@ public class LocalMap extends Map{
 				SessionList<Session> list = GetSessions(mob.getPosition());
 				list.sendPacket(Type.IN_NPC, mob);
 			}
-			
 			if(event instanceof ItemDropEvent){
 				
 				ItemDropEvent itemDropEvent = (ItemDropEvent)event;
 				
 				RoamingItem roamingItem = itemDropEvent.getRoamingItem();
+				
+				synchronized(roamingItems){
+					
+					roamingItems.put(roamingItem.getId(), roamingItem);
+				}
 				
 				System.out.println(itemDropEvent.getRoamingItem().getItem().getId());
 				SessionList<Session> list = GetSessions(roamingItem.getPosition());
@@ -280,5 +294,58 @@ public class LocalMap extends Map{
 				}				
 			}	
 		}
+	}
+
+	@Override
+	public void run() {
+		while(true){
+			try {
+			synchronized(this){				
+				this.wait();
+				
+			}
+			System.out.println("map worker triggered");
+			SessionList<Session> list = null;
+			synchronized(sessions){				
+				list = (SessionList<Session>) sessions.clone();
+				
+			}
+			for(Session session1: list){
+				Player owner = session1.getOwner();
+				for(Session session2: list){
+					if(session1.equals(session2))
+						continue;
+					double distance = owner.getPosition().distance(session2.getOwner().getPosition());
+					
+					if(session1.contains(session2.getOwner())){
+						
+						if(distance>owner.getSessionRadius()){
+							session1.exit(session2.getOwner());
+							
+						}						
+						
+					}else{
+						
+						if(distance<=owner.getSessionRadius()){
+							
+							session1.enter(session2.getOwner());							
+							
+						}
+						
+					}
+					
+				}
+				
+			}
+			
+			
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException(e);
+			}
+			
+			
+		}
+		
 	}
 }

@@ -3,6 +3,7 @@ package com.googlecode.reunion.jreunion.game;
 import java.util.Iterator;
 
 import com.googlecode.reunion.jreunion.server.Client;
+import com.googlecode.reunion.jreunion.server.ItemFactory;
 import com.googlecode.reunion.jreunion.server.Server;
 
 /**
@@ -51,7 +52,7 @@ public class KailiptonPlayer extends Player {
 	private void meleeAttackMob(Mob mob) {
 		int newHp;
 
-		newHp = mob.getCurrHp() - getBaseDmg(this);
+		newHp = mob.getHp() - getBaseDmg(this);
 
 		if (newHp <= 0) {
 
@@ -62,17 +63,17 @@ public class KailiptonPlayer extends Player {
 			updateStatus(10, mob.getLime(), 0);
 
 			if (mob.getType() == 324) {
-				Item item = com.googlecode.reunion.jreunion.server.ItemFactory
-						.create(1054);
+				Item item = ItemFactory.create(1054);
 
 				item.setExtraStats((int) (Math.random() * 10000));
-
-				pickupItem(item);
+				
+				getInventory().addItem(item);
+				//pickupItem(item);
 				getQuest().questEnd(this, 669);
 				getQuest().questEff(this);
 			}
 		} else {
-			mob.setCurrHp(newHp);
+			mob.setHp(newHp);
 		}
 	}
 
@@ -91,10 +92,10 @@ public class KailiptonPlayer extends Player {
 			return;
 		}
 
-		int newHp = mob.getCurrHp() - (int) skill.getCurrFirstRange();
+		int newHp = mob.getHp() - (int) skill.getCurrFirstRange();
 
 		updateStatus(skill.getStatusUsed(),
-				getCurrMana() - (int) skill.getCurrConsumn(), getMaxMana());
+				getMana() - (int) skill.getCurrConsumn(), getMaxMana());
 
 		if (newHp <= 0) {
 
@@ -104,12 +105,12 @@ public class KailiptonPlayer extends Player {
 			updateStatus(11, mob.getExp(), 0);
 			updateStatus(10, mob.getLime(), 0);
 		} else {
-			mob.setCurrHp(newHp);
+			mob.setHp(newHp);
 		}
 
-		int percentageHp = mob.getCurrHp() * 100 / mob.getMaxHp();
+		int percentageHp = mob.getHp() * 100 / mob.getMaxHp();
 
-		if (percentageHp == 0 && mob.getCurrHp() > 0) {
+		if (percentageHp == 0 && mob.getHp() > 0) {
 			percentageHp = 1;
 		}
 

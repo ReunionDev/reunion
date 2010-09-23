@@ -28,7 +28,14 @@ public class Client extends EventBroadcaster implements EventListener,Sendable {
 	public StringBuffer getOutputBuffer() {
 		return outputBuffer;
 	}
+	private int version;
 		
+	public int getVersion() {
+		return version;
+	}
+	public void setVersion(int version) {
+		this.version = version;
+	}
 	private String username;
 
 	private String password;

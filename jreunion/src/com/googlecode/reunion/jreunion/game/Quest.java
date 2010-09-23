@@ -58,7 +58,8 @@ public class Quest {
 			packetData = "qt nt\n";
 			
 					client.SendData(packetData);
-			player.pickupItem(item);
+			player.getInventory().addItem(item);
+			
 		}
 	}
 

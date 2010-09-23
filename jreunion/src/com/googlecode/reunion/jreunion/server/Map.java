@@ -16,10 +16,7 @@ public abstract class Map extends EventBroadcaster implements EventListener {
 	private String name;
 	private InetSocketAddress address;
 
-
-	public Map(int id){
-		
-		
+	public Map(int id){		
 		this.id = id;
 	}	
 	

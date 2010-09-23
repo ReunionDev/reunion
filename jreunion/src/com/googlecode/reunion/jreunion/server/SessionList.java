@@ -9,6 +9,10 @@ public class SessionList<T extends Session> extends Vector<T> implements Sendabl
 	public SessionList() {
 	}
 
+	public SessionList(SessionList<T> sessions) {
+		super(sessions);
+	}
+
 	@Override
 	public void sendPacket(Type packetType, Object... args) {
 		synchronized(this){
@@ -16,8 +20,7 @@ public class SessionList<T extends Session> extends Vector<T> implements Sendabl
 				
 				session.getOwner().getClient().sendPacket(packetType, args);
 				
-			}
-				
+			}				
 		}
 		
 	}

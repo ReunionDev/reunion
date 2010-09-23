@@ -135,16 +135,16 @@ public class QuickSlot {
 			Potion potion = (Potion) qsItem.getItem();
 
 			int newRate = 0;
-			int newHp = player.getCurrHp();
-			int newMana = player.getCurrMana();
-			int newStm = player.getCurrStm();
-			int newElect = player.getCurrElect();
+			int newHp = player.getHp();
+			int newMana = player.getMana();
+			int newStm = player.getStm();
+			int newElect = player.getElect();
 
 			if (potion.getHpRec() > 0) {
 				newRate = potion.getHpRec();
 				for (int i = 4; i > 0; i--) {
 					newHp = newHp + newRate / i;
-					player.setCurrHp(newHp);
+					player.setHp(newHp);
 					player.updateStatus(0, newHp, player.getMaxHp());
 					newRate = newRate - newRate / i;
 				}

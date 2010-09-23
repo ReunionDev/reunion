@@ -54,6 +54,8 @@ public class SessionManager {
 	}
 
 	public synchronized void workSessions() {
+		
+		if(true)return;
 		/*
 		 * Iterator iter = sessionList.iterator(); while (iter.hasNext()) {
 		 * Session session = (Session) iter.next();
@@ -62,6 +64,7 @@ public class SessionManager {
 		
 		PlayerManager manager = Server.getInstance()
 		.getWorld().getPlayerManager();
+		synchronized(manager){
 		Iterator<Player> player1Iter = manager.getPlayerListIterator();
 
 		while (player1Iter.hasNext()) {
@@ -77,18 +80,18 @@ public class SessionManager {
 				
 				//TODO: Move regen somewhere sane!
 				player1.updateStatus(0,
-						player1.getCurrHp() + (int) (player1.getMaxHp() * 0.1),
+						player1.getHp() + (int) (player1.getMaxHp() * 0.1),
 						player1.getMaxHp());
 				player1.updateStatus(1,
-						player1.getCurrMana()
+						player1.getMana()
 								+ (int) (player1.getMaxMana() * 0.08),
 						player1.getMaxMana());
 				player1.updateStatus(2,
-						player1.getCurrStm()
+						player1.getStm()
 								+ (int) (player1.getMaxStm() * 0.08),
 						player1.getMaxStm());
 				player1.updateStatus(3,
-						player1.getCurrElect()
+						player1.getElect()
 								+ (int) (player1.getMaxElect() * 0.08),
 						player1.getMaxElect());
 				
@@ -174,6 +177,7 @@ public class SessionManager {
 					player1.getSession().enter(npc);
 				}
 			}
+		}
 
 		}
 	}

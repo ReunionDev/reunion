@@ -27,7 +27,7 @@ import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
  * @author Autumn
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-public class World extends ClassModule implements EventListener,Sendable{
+public class World extends ClassModule implements EventListener, Sendable{
 	private Command worldCommand;
 
 	private PlayerManager playerManager;
@@ -260,11 +260,7 @@ public class World extends ClassModule implements EventListener,Sendable{
 			while(playerIter.hasNext()){
 				Player player = playerIter.next();
 				player.getClient().sendPacket(packetType, args);
-				
-				
 			}
-			
-			
 		}
 		
 	}

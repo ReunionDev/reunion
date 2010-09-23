@@ -1,6 +1,7 @@
 package com.googlecode.reunion.jreunion.game;
 
 import com.googlecode.reunion.jreunion.server.Client;
+import com.googlecode.reunion.jreunion.server.ItemFactory;
 
 
 /**
@@ -37,7 +38,7 @@ public class HumanPlayer extends Player {
 	private void meleeAttackMob(Mob mob) {
 		int newHp;
 
-		newHp = mob.getCurrHp() - getBaseDmg(this);
+		newHp = mob.getHp() - getBaseDmg(this);
 
 		if (getEquipment().getMainHand() != null) {
 			getEquipment().getMainHand().consumn(this);
@@ -52,17 +53,17 @@ public class HumanPlayer extends Player {
 			updateStatus(10, mob.getLime(), 0);
 
 			if (mob.getType() == 324) {
-				Item item = com.googlecode.reunion.jreunion.server.ItemFactory
-						.create(1054);
+				Item item = ItemFactory.create(1054);
 
 				item.setExtraStats((int) (Math.random() * 10000));
 
-				pickupItem(item);
+				//pickupItem(item);
+				getInventory().addItem(item);
 				getQuest().questEnd(this, 669);
 				getQuest().questEff(this);
 			}
 		} else {
-			mob.setCurrHp(newHp);
+			mob.setHp(newHp);
 		}
 	}
 

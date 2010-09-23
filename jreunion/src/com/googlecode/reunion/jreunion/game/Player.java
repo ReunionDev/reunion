@@ -12,6 +12,7 @@ import com.googlecode.reunion.jreunion.events.Event;
 import com.googlecode.reunion.jreunion.events.EventListener;
 import com.googlecode.reunion.jreunion.events.client.ClientDisconnectEvent;
 import com.googlecode.reunion.jreunion.events.network.NetworkAcceptEvent;
+import com.googlecode.reunion.jreunion.events.session.SessionEvent;
 import com.googlecode.reunion.jreunion.game.Equipment.Slot;
 import com.googlecode.reunion.jreunion.server.CharSkill;
 import com.googlecode.reunion.jreunion.server.Client;
@@ -642,30 +643,13 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		DatabaseUtils.getInstance().saveStash(client);
 		DatabaseUtils.getInstance().saveExchange(this);
 		DatabaseUtils.getInstance().saveQuickSlot(this);
-
-		Iterator<Session> iter = this.getPosition().getMap().getWorld().getSessionManager().getSessionListIterator();
-
-		while (iter.hasNext()) {
-			Session session = iter.next();
-
-			if (session.contains(this)) {
-				session.exit(this);
-			}
-		}
-
-		if (this.getPosition().getMap().getWorld().getPlayerManager()
-				.containsPlayer(this)) {
-			this.getPosition().getMap().getWorld().getPlayerManager()
-					.removePlayer(this);
-		}
-
-		this.getPosition().getMap().getWorld().getSessionManager()
-				.removeSession(getSession());
-		setSession(null);
+		
+		getSession().close();
+		
 	}
 
 	public void loseStamina(int ammount) {
-		int newStamina = getCurrStm() - ammount;
+		int newStamina = getStm() - ammount;
 		if (newStamina < 2) {
 			newStamina = 0;
 		}
@@ -713,21 +697,17 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 	}
 
 	/****** Manages the Pickup command ******/
-	public void pickupItem(Item item) {
+	public void pickupItem(RoamingItem roamingItem) {
 		Client client = getClient();
-
-		if (client == null) {
-			return;
-		}
-
+		
 		String packetData = "pickup " + getId() + "\n";
 		
 		client.SendData(packetData);// send the message
 		// S> pickup [CharID]
 
 		this.getPosition().getMap().getWorld().getCommand()
-				.itemOut(this.getClient(), item);
-		pickItem(item);
+				.itemOut(this.getClient(), roamingItem);
+		//pickItem(roamingItem.getItem());
 	}
 
 	public void place(int posX, int posY, int posZ, double rotation,
@@ -1064,9 +1044,9 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 			if (curr > max) {
 				curr = max;
 			}
-			setCurrHp(curr);
+			setHp(curr);
 			setMaxHp(max);
-			packetData = "status " + id + " " + getCurrHp() + " " + getMaxHp()
+			packetData = "status " + id + " " + getHp() + " " + getMaxHp()
 					+ "\n";
 			
 					client.SendData(packetData);
@@ -1078,7 +1058,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 			}
 			setCurrMana(curr);
 			setMaxMana(max);
-			packetData = "status " + id + " " + getCurrMana() + " "
+			packetData = "status " + id + " " + getMana() + " "
 					+ getMaxMana() + "\n";
 			
 					client.SendData(packetData);
@@ -1090,7 +1070,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 			}
 			setCurrStm(curr);
 			setMaxStm(max);
-			packetData = "status " + id + " " + getCurrStm() + " "
+			packetData = "status " + id + " " + getStm() + " "
 					+ getMaxStm() + "\n";
 			
 					client.SendData(packetData);
@@ -1102,7 +1082,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 			}
 			setCurrElect(curr);
 			setMaxElect(max);
-			packetData = "status " + id + " " + getCurrElect() + " "
+			packetData = "status " + id + " " + getElect() + " "
 					+ getMaxElect() + "\n";
 			
 					client.SendData(packetData);
@@ -1201,8 +1181,8 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 					client.SendData(packetData);
 			DatabaseUtils.getInstance().updateCharStatus(this, id, getStr());
 
-			updateStatus(0, getCurrHp(), getMaxHp() + (getStr() / 50) + 1);
-			updateStatus(2, getCurrStm(), getMaxStm() + (getStr() / 60) + 1);
+			updateStatus(0, getHp(), getMaxHp() + (getStr() / 50) + 1);
+			updateStatus(2, getStm(), getMaxStm() + (getStr() / 60) + 1);
 			updateStatus(13, -1, 0);
 			break;
 		}
@@ -1216,8 +1196,8 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 					client.SendData(packetData);
 			DatabaseUtils.getInstance().updateCharStatus(this, id, getWis());
 
-			updateStatus(1, getCurrMana(), getMaxMana() + (getWis() / 50) + 2);
-			updateStatus(3, getCurrElect(), getMaxElect() + (getWis() / 50) + 1);
+			updateStatus(1, getMana(), getMaxMana() + (getWis() / 50) + 2);
+			updateStatus(3, getElect(), getMaxElect() + (getWis() / 50) + 1);
 			updateStatus(13, -1, 0);
 			break;
 		}
@@ -1231,8 +1211,8 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 					client.SendData(packetData);
 			DatabaseUtils.getInstance().updateCharStatus(this, id, getDexterity());
 
-			updateStatus(1, getCurrMana(), getMaxMana() + (getDexterity() / 50) + 1);
-			updateStatus(3, getCurrElect(), getMaxElect() + (getDexterity() / 50) + 2);
+			updateStatus(1, getMana(), getMaxMana() + (getDexterity() / 50) + 1);
+			updateStatus(3, getElect(), getMaxElect() + (getDexterity() / 50) + 2);
 			updateStatus(13, -1, 0);
 			break;
 		}
@@ -1246,8 +1226,8 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 					client.SendData(packetData);
 			DatabaseUtils.getInstance().updateCharStatus(this, id, getConstitution());
 
-			updateStatus(0, getCurrHp(), getMaxHp() + (getConstitution() / 50) + 2);
-			updateStatus(2, getCurrStm(), getMaxStm() + (getConstitution() / 50) + 1);
+			updateStatus(0, getHp(), getMaxHp() + (getConstitution() / 50) + 2);
+			updateStatus(2, getStm(), getMaxStm() + (getConstitution() / 50) + 1);
 			updateStatus(13, -1, 0);
 			break;
 		}
@@ -1262,10 +1242,10 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 			DatabaseUtils.getInstance().updateCharStatus(this, id, getLeadership());
 
 			if (getLeadership() % 2 == 0) {
-				updateStatus(0, getCurrHp(), getMaxHp() + 1);
-				updateStatus(1, getCurrMana(), getMaxMana() + 1);
-				updateStatus(2, getCurrStm(), getMaxStm() + 1);
-				updateStatus(3, getCurrElect(), getMaxElect() + 1);
+				updateStatus(0, getHp(), getMaxHp() + 1);
+				updateStatus(1, getMana(), getMaxMana() + 1);
+				updateStatus(2, getStm(), getMaxStm() + 1);
+				updateStatus(3, getElect(), getMaxElect() + 1);
 			}
 			updateStatus(13, -1, 0);
 			break;
@@ -1428,6 +1408,13 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 			if(clientDisconnectEvent.getClient()!=getClient())return;
 			logout();
 		}
+		if(event instanceof SessionEvent){
+			SessionEvent sessionEvent = (SessionEvent) event;
+			
+			
+			
+		}
+		
 	}
 	
 	public String toString(){
@@ -1452,6 +1439,5 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		buffer.append("}");
 		return buffer.toString();
 	}
-	
 	
 }

@@ -4,21 +4,10 @@ package com.googlecode.reunion.jreunion.game;
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-public class Entity {
-	private int id;
+public interface Entity  {
 
-	public Entity() {
-		id = -1;
+	public int getId();
 
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-		
-	}
+	public void setId(int id);
 
 }

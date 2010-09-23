@@ -143,7 +143,7 @@ public class PacketFactory {
 					eqSecondHand = eq.getOffHand().getType();
 				}
 
-				int percentageHp = player.getCurrHp() * 100 / player.getMaxHp();
+				int percentageHp = player.getHp() * 100 / player.getMaxHp();
 				String packetData = warping?"appear ":"in ";
 
 				packetData += "char " + player.getId() + " " + player.getName()
@@ -175,7 +175,6 @@ public class PacketFactory {
 		case SAY:{
 			if(args.length>0){
 				String text = (String)args[0];
-				
 				
 				LivingObject from = null;
 				
@@ -234,7 +233,7 @@ public class PacketFactory {
 					spawn = (Boolean)args[1];
 				}
 
-			int percentageHp = mob.getCurrHp() * 100 / mob.getMaxHp();
+			int percentageHp = mob.getHp() * 100 / mob.getMaxHp();
 
 			String packetData = "in npc " + mob.getId() + " " + mob.getType()
 					+ " " + mob.getPosition().getX() + " "

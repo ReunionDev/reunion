@@ -2,6 +2,7 @@ package com.googlecode.reunion.jreunion.server;
 
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.util.BitSet;
 import java.util.Iterator;
 
 import com.googlecode.reunion.jreunion.events.map.ItemDropEvent;
@@ -18,6 +19,7 @@ import com.googlecode.reunion.jreunion.game.RoamingItem;
 import com.googlecode.reunion.jreunion.game.Skill;
 import com.googlecode.reunion.jreunion.game.SlayerWeapon;
 import com.googlecode.reunion.jreunion.game.Weapon;
+import com.googlecode.reunion.jreunion.server.Client.LoginType;
 import com.googlecode.reunion.jreunion.server.Client.State;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 
@@ -33,8 +35,60 @@ public class Command {
 		super();
 		world = parent;
 	}
+	// Returns a bitset containing the values in bytes.
+	// The byte-ordering of bytes must be big-endian which means the most significant bit is in element 0.
+	public static BitSet fromByteArray(byte[] bytes) {
+	    BitSet bits = new BitSet();
+	    for (int i=0; i<bytes.length*8; i++) {
+	        if ((bytes[bytes.length-i/8-1]&(1<<(i%8))) > 0) {
+	            bits.set(i);
+	        }
+	    }
+	    return bits;
+	}
 
-	void authClient(Client client, String username, String password) {
+	// Returns a byte array of at least length 1.
+	// The most significant bit in the result is guaranteed not to be a 1
+	// (since BitSet does not support sign extension).
+	// The byte-ordering of the result is big-endian which means the most significant bit is in element 0.
+	// The bit at index 0 of the bit set is assumed to be the least significant bit.
+	public static byte[] toByteArray(BitSet bits) {
+	    byte[] bytes = new byte[bits.length()/8+1];
+	    for (int i=0; i<bits.length(); i++) {
+	        if (bits.get(i)) {
+	            bytes[bytes.length-i/8-1] |= 1<<(i%8);
+	        }
+	    }
+	    return bytes;
+	}
+
+	void authClient(Client client) {
+		String username = client.getUsername();
+		String password = client.getPassword();
+		if(client.getVersion()==101&&client.getLoginType()!=LoginType.PLAY){
+			
+			byte key = 0x03;
+			byte [] input = username.getBytes();
+			byte [] output = new byte[input.length];
+			for(int i = 0; i<input.length;i++){
+				output[i]= (byte) ((byte) (input[i]^key)%256);				
+			}
+			username = new String(output);
+			
+			input = password.getBytes();
+			output = new byte[input.length];
+			for(int i = 0; i<input.length;i++){
+				output[i]= (byte) ((byte) (input[i]^key)%256);				
+			}
+			password = new String(output);
+			
+			client.setUsername(username);
+			client.setPassword(password);
+		}
+		
+		
+		
+		
 		int accountId = DatabaseUtils.getInstance().Auth(username, password);
 		if (accountId == -1) {
 			System.out.println("Invalid Login");
@@ -106,12 +160,7 @@ public class Command {
 		
 		LocalMap map = position.getMap();
 		
-		System.out.println(map);
-
-		
 		map.fireEvent(ItemDropEvent.class, roamingItem);
-		
-		System.out.println(roamingItem);
 		
 		return roamingItem;
 	
@@ -257,8 +306,8 @@ public class Command {
 		// [gemNumber] [Special]
 	}
 
-	public void itemOut(Player sessionOwner, RoamingItem roamingItem) {
-		this.itemOut(sessionOwner.getClient(), roamingItem.getItem());
+	public void itemOut(Sendable sendable, RoamingItem roamingItem) {
+		this.itemOut(sendable, roamingItem.getItem());
 
 	}
 
@@ -472,7 +521,7 @@ public class Command {
 			return;
 		}
 
-		int percentageHp = mob.getCurrHp() * 100 / mob.getMaxHp();
+		int percentageHp = mob.getHp() * 100 / mob.getMaxHp();
 
 		String packetData = "in npc " + mob.getId() + " " + mob.getType()
 				+ " " + mob.getPosition().getX() + " "
@@ -523,10 +572,10 @@ public class Command {
 
 		player.meleeAttack(livingObject);
 
-		int percentageHp = livingObject.getCurrHp() * 100
+		int percentageHp = livingObject.getHp() * 100
 				/ livingObject.getMaxHp();
 
-		if (percentageHp == 0 && livingObject.getCurrHp() > 0) {
+		if (percentageHp == 0 && livingObject.getHp() > 0) {
 			percentageHp = 1;
 		}
 
@@ -570,7 +619,7 @@ public class Command {
 															// player
 		Client client = player.getClient();
 		String packetData = "";
-		int newHp = player.getCurrHp();
+		int newHp = player.getHp();
 
 		if (client == null) {
 			return;
@@ -579,7 +628,7 @@ public class Command {
 		int dmg = mob.getDmg() - player.getDef();
 
 		if (dmg > 0) {
-			newHp = player.getCurrHp() - dmg;
+			newHp = player.getHp() - dmg;
 		}
 		if (newHp < 0) {
 			newHp = 0;
@@ -587,7 +636,7 @@ public class Command {
 
 		player.updateStatus(0, newHp, player.getMaxHp());
 
-		double percentageHp = player.getCurrHp() * 100 / player.getMaxHp();
+		double percentageHp = player.getHp() * 100 / player.getMaxHp();
 
 		if (percentageHp > 0 && percentageHp < 1) {
 			percentageHp = 1;
@@ -696,28 +745,25 @@ public class Command {
 
 	public void serverSay(String text) {
 		
-		world.sendPacket(Type.SAY,text,null);
+		world.sendPacket(Type.SAY,text);
 
 	}
 	
 	public void playerSay(Player player, String text){
 		
 		boolean admin = player.getAdminState()==255;
-		String name = player.getName();
-		
+		String name = player.getName();		
 		if(admin)
 		{
-			name = "<GM>"+name;			
-			
+			name = "<GM>"+name;
 		}
-		;		
 		world.sendPacket(Type.SAY, text, player, name, admin);
 		
 	}
 
 	public void serverTell(Sendable sendable, String text) {
 		
-		sendable.sendPacket(Type.SAY, null,text);
+		sendable.sendPacket(Type.SAY, text);
 	}
 
 	/****** player1 attacks player2 with Sub Attack ******/
@@ -786,10 +832,10 @@ public class Command {
 
 		player.clearAttackQueue();
 
-		int newHp = mob.getCurrHp() - (int) dmg;
+		int newHp = mob.getHp() - (int) dmg;
 
 		if (newHp <= 0) {
-			mob.setCurrHp(0);
+			mob.setHp(0);
 			serverSay("Experience: " + mob.getExp() + " Lime: " + mob.getLime());
 			player.updateStatus(12, player.getLvlUpExp() - mob.getExp(), 0);
 			player.updateStatus(11, mob.getExp(), 0);
@@ -797,21 +843,21 @@ public class Command {
 			// S_Server.getInstance().getWorldModule().getMobManager().removeMob(mob);
 
 			if (mob.getType() == 324) {
-				Item item2 = new Item(1054);
-
-				item2.loadFromReference(1054);
+				
+				Item item2 = ItemFactory.create(1054);
 				item2.setExtraStats(1080);
 				item2.setGemNumber(0);
 
-				player.pickupItem(item);
+				player.getInventory().addItem(item2);
+				//player.pickupItem(item);
 				player.getQuest().questEnd(player, 669);
 				player.getQuest().questEff(player);
 			}
 		} else {
-			mob.setCurrHp(newHp);
+			mob.setHp(newHp);
 		}
 
-		double percentageHp = mob.getCurrHp() * 100 / mob.getMaxHp();
+		double percentageHp = mob.getHp() * 100 / mob.getMaxHp();
 
 		if (percentageHp > 0 && percentageHp <= 1) {
 			percentageHp = 1;

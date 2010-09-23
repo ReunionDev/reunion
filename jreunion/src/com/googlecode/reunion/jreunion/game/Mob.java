@@ -17,7 +17,7 @@ import com.googlecode.reunion.jreunion.server.Timer;
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-public class Mob extends LivingObject {
+public class Mob extends Npc {
 
 	private int type;
 
@@ -47,20 +47,13 @@ public class Mob extends LivingObject {
 
 	private int isAttacking;
 	
-	private Spawn spawn;
 
-	public Spawn getSpawn() {
-		return spawn;
-	}
-
-	public void setSpawn(Spawn spawn) {
-		this.spawn = spawn;
-	}
 
 	private Timer time = new Timer();
 
 	public Mob(int type) {
-		super();
+		super(type);
+		
 		this.type = type;
 		loadFromReference(type);
 	}
@@ -325,7 +318,7 @@ public class Mob extends LivingObject {
 	}
 
 	public void kill(Player player) {
-		setCurrHp(0);
+		setHp(0);
 
 		this.getPosition().getMap().getWorld().getMobManager().removeMob(this);
 		Spawn spawn = this.getSpawn();

@@ -7,10 +7,12 @@ import com.googlecode.reunion.jreunion.server.Reference;
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-public class Item extends Entity {
+public class Item implements Entity {
 	
 	private int price;
 
+	private int id = -1;
+	
 	private int sizeX; // number of cols
 
 	private int sizeY; // number of rows
@@ -33,6 +35,15 @@ public class Item extends Entity {
 
 	public int getDescription() {
 		return description;
+	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+		
 	}
 
 	public int getExtraStats() {

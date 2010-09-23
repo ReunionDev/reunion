@@ -37,7 +37,7 @@ public class HybriderPlayer extends Player {
 
 	private void meleeAttackMob(Mob mob) {
 
-		int newHp = mob.getCurrHp() - getBaseDmg(this);
+		int newHp = mob.getHp() - getBaseDmg(this);
 
 		if (newHp <= 0) {
 
@@ -53,12 +53,13 @@ public class HybriderPlayer extends Player {
 
 				item.setExtraStats((int) (Math.random() * 10000));
 
-				pickupItem(item);
+				//pickupItem(item);
+				getInventory().addItem(item);
 				getQuest().questEnd(this, 669);
 				getQuest().questEff(this);
 			}
 		} else {
-			mob.setCurrHp(newHp);
+			mob.setHp(newHp);
 		}
 	}
 

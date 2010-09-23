@@ -44,11 +44,11 @@ public class Weapon extends PlayerItem {
 	/****** Handle the consumn of the weapon, if exists. ******/
 	public void consumn(Player player) {
 		if (getEeUsed() != 0) {
-			player.updateStatus(3, player.getCurrElect()
+			player.updateStatus(3, player.getElect()
 					- player.getEquipment().getMainHand().getEeUsed(),
 					player.getMaxElect());
 		} else if (getManaUsed() != 0) {
-			player.updateStatus(1, player.getCurrMana()
+			player.updateStatus(1, player.getMana()
 					- player.getEquipment().getMainHand().getManaUsed(),
 					player.getMaxMana());
 		}
