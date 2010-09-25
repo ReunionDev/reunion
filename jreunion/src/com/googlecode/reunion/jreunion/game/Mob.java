@@ -27,14 +27,6 @@ public class Mob extends Npc {
 
 	private int lime;
 
-	private int mutant;
-
-	private int neoProgmare;
-
-	private int unknown1;
-
-	private int unknown2;
-
 	private boolean running;
 
 	private int attackType;
@@ -106,14 +98,8 @@ public class Mob extends Npc {
 	public int getLime() {
 		return lime;
 	}
+	
 
-	public int getMutant() {
-		return mutant;
-	}
-
-	public int getNeoProgmare() {
-		return neoProgmare;
-	}
 
 	public boolean getRunning() {
 		return running;
@@ -131,13 +117,7 @@ public class Mob extends Npc {
 		return type;
 	}
 
-	public int getUnknown1() {
-		return unknown1;
-	}
 
-	public int getUnknown2() {
-		return unknown2;
-	}
 
 	@Override
 	public void loadFromReference(int id) {
@@ -384,28 +364,12 @@ public class Mob extends Npc {
 		this.lime = lime;
 	}
 
-	public void setMutant(int mutant) {
-		this.mutant = mutant;
-	}
-
-	public void setNeoProgmare(int neoProgmare) {
-		this.neoProgmare = neoProgmare;
-	}
-
 	public void setRunning(boolean running) {
 		this.running = running;
 	}
 
 	public void setSpeed(int speed) {
 		this.speed = speed;
-	}
-
-	public void setUnknown1(int unknown1) {
-		this.unknown1 = unknown1;
-	}
-
-	public void setUnknown2(int unknown2) {
-		this.unknown2 = unknown2;
 	}
 
 	@Override

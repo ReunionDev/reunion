@@ -13,7 +13,7 @@ import com.googlecode.reunion.jreunion.events.EventBroadcaster;
 import com.googlecode.reunion.jreunion.events.EventListener;
 import com.googlecode.reunion.jreunion.events.map.ItemDropEvent;
 import com.googlecode.reunion.jreunion.events.map.MapEvent;
-import com.googlecode.reunion.jreunion.events.map.MobSpawnEvent;
+import com.googlecode.reunion.jreunion.events.map.NpcSpawnEvent;
 import com.googlecode.reunion.jreunion.events.map.PlayerLoginEvent;
 import com.googlecode.reunion.jreunion.events.session.NewSessionEvent;
 import com.googlecode.reunion.jreunion.events.session.SessionEvent;
@@ -45,10 +45,7 @@ public class LocalMap extends Map implements Runnable{
 	private SessionList<Session>  sessions = new SessionList<Session>();
 	
 	private List<WorldObject> entities = new Vector<WorldObject>();
-	
-	//<ItemID,ItemContainer>
-	//public java.util.Map<Integer,RoamingItem> roamingItems = new HashMap<Integer,RoamingItem>();
-	
+		
 	private Area pvpArea = new Area();
 
 	private Parser playerSpawnReference;
@@ -71,8 +68,8 @@ public class LocalMap extends Map implements Runnable{
 		
 		thread = new Thread(this);
 		thread.start();
-		
-		this.addEventListener(PlayerLoginEvent.class, this);
+		this.addEventListener(NpcSpawnEvent.class, this);
+		this.addEventListener(PlayerLoginEvent.class, this);		
 		this.addEventListener(ItemDropEvent.class, this);
 		
 	}
@@ -261,21 +258,21 @@ public class LocalMap extends Map implements Runnable{
 	
 	@Override
 	public void handleEvent(Event event) {
-		System.out.println(event);
+		//System.out.println(event);
 		if(event instanceof MapEvent){
 			LocalMap map = ((MapEvent)event).getMap();
 			
-			if(event instanceof MobSpawnEvent){
-				MobSpawnEvent mobSpawnEvent = (MobSpawnEvent)event;
-				Mob mob = mobSpawnEvent.getMob();
-				SessionList<Session> list = GetSessions(mob.getPosition());
+			if(event instanceof NpcSpawnEvent){
+				NpcSpawnEvent mobSpawnEvent = (NpcSpawnEvent)event;
+				Npc npc = mobSpawnEvent.getNpc();
+				SessionList<Session> list = GetSessions(npc.getPosition());
 				
 				synchronized(entities) {
 					
-					entities.add(mob);
-					list.enter(mob, false);		
+					entities.add(npc);
+					list.enter(npc, false);		
 				}
-				list.sendPacket(Type.IN_NPC, mob);
+				list.sendPacket(Type.IN_NPC, npc);
 				
 			}
 			if(event instanceof ItemDropEvent){
@@ -290,10 +287,7 @@ public class LocalMap extends Map implements Runnable{
 					entities.add(roamingItem);
 					list.enter(roamingItem, false);					
 				}
-				
-				System.out.println(itemDropEvent.getRoamingItem().getItem().getId());
-				
-				
+								
 				list.sendPacket(Type.DROP, roamingItem);
 			}
 			if(event instanceof PlayerLoginEvent){
@@ -356,14 +350,19 @@ public class LocalMap extends Map implements Runnable{
 						if(owner.equals(entity))
 							continue;
 						
-						boolean within = owner.getPosition().within(entity.getPosition(),owner.getSessionRadius());
+						boolean within = owner.getPosition().within(entity.getPosition(), owner.getSessionRadius());
 						boolean contains = session.contains(entity);
 						
-						if(contains&&!within){
+						if(entity instanceof Npc) {
+							
+							
+						}
+						
+						if(contains && !within){
 							
 							session.exit(entity);	
 							
-						}else if(!contains&&within){
+						}else if(!contains && within){
 												
 							session.enter(entity);
 													
@@ -371,7 +370,6 @@ public class LocalMap extends Map implements Runnable{
 					}
 				}
 				timer.Stop();
-				System.out.println(entities.size());
 				System.out.println(timer.getTimeElapsedSeconds());
 			
 			} catch (Exception e) {

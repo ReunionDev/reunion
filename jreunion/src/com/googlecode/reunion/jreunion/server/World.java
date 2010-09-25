@@ -162,24 +162,6 @@ public class World extends ClassModule implements EventListener, Sendable{
 	@Override
 	public void Work() {
 
-		//mapManager.workSpawns();
-
-		/*
-		 * Iterator mobsIter =
-		 * S_Server.getInstance().getWorldModule().getMobManager
-		 * ().getMobListIterator();
-		 * 
-		 * while(mobsIter.hasNext()){
-		 * 
-		 * G_Mob mob = (G_Mob)mobsIter.next();
-		 * if(mob.getTimer().getTimeElapsedSeconds() > 2){ mob.setIsMoving(1);
-		 * mob.getTimer().Stop(); mob.getTimer().Reset(); } if(mob.getIsMoving()
-		 * == 0){ mob.setIsMoving(1); mob.getTimer().Start();
-		 * S_Server.getInstance().getWorldModule().getMobManager().workMob(mob);
-		 * }
-		 * }
-		 */
-
 		if ((int) (serverTime.getTimeElapsedSeconds() % 2) == 0
 				&& mobMoving == false) {
 			Iterator<Mob> mobsIter = Server.getInstance().getWorld()
@@ -199,7 +181,6 @@ public class World extends ClassModule implements EventListener, Sendable{
 		if ((int) serverTime.getTimeElapsedSeconds() >= 60) {
 			serverTime.Stop();
 			serverTime.Reset();
-	
 		}
 
 		if (!serverTime.isRunning()) {

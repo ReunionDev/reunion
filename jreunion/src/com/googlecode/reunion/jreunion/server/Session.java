@@ -96,12 +96,12 @@ public class Session extends EventBroadcaster implements EventListener{
 		}
 	}
 	public void enter(WorldObject entity){
-		enter(entity,true);
+		enter(entity, true);
 	
 	}
 	public void enter(WorldObject entity, boolean defaultAction){
 		
-		System.out.println("enter "+getOwner()+" "+entity);
+		System.out.println("enter "+getOwner().getName()+" "+entity);
 		synchronized(entities){
 			if(this.contains(entity))
 				return;

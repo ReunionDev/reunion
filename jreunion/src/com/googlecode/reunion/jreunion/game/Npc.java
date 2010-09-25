@@ -19,10 +19,12 @@ public class Npc extends LivingObject {
 
 
 	private int type;
-
-	private int hp;
 	
 	private Spawn spawn;
+
+	private int unknown1;
+
+	private int unknown2;
 
 	public Spawn getSpawn() {
 		return spawn;
@@ -36,17 +38,47 @@ public class Npc extends LivingObject {
 		super();
 		this.type = type;
 		
-	}	
-	public int getHp() {
-		return hp;
 	}
+	
+	private int mutant;
+
+	private int neoProgmare;
+
+	public int getMutant() {
+		return mutant;
+	}
+
+	public int getNeoProgmare() {
+		return neoProgmare;
+	}
+
+	public void setMutant(int mutant) {
+		this.mutant = mutant;
+	}
+
+	public void setNeoProgmare(int neoProgmare) {
+		this.neoProgmare = neoProgmare;
+	}
+
 
 	public int getType() {
 		return type;
 	}
 	
-	public void setHp(int hp) {
-		this.hp = hp;
+	public void setUnknown1(int unknown1) {
+		this.unknown1 = unknown1;
+	}
+
+	public void setUnknown2(int unknown2) {
+		this.unknown2 = unknown2;
+	}
+	
+	public int getUnknown1() {
+		return unknown1;
+	}
+
+	public int getUnknown2() {
+		return unknown2;
 	}
 
 	@Override

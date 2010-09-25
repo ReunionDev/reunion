@@ -2,6 +2,8 @@ package com.googlecode.reunion.jreunion.server;
 
 import java.util.HashMap;
 import java.util.Random;
+import org.apache.log4j.*;
+import org.apache.log4j.xml.XMLLayout;
 
 import com.googlecode.reunion.jreunion.events.EventBroadcaster;
 import com.googlecode.reunion.jreunion.events.network.NetworkDataEvent;
@@ -96,6 +98,18 @@ public class Server extends ClassModule {
 
 		super();
 		RemoteAdmin.enableRemoteAdmin();
+		Logger logger = Logger.getRootLogger();
+		XMLLayout layout = new XMLLayout();
+		//SimpleLayout layout = new SimpleLayout();
+		FileAppender appender = null;
+		try {
+		appender = new FileAppender(layout,"output.txt",false);
+		} catch(Exception e) {}
+
+		logger.addAppender(appender);
+		logger.setLevel(Level.DEBUG);
+		
+		
 		PrintStream.useFileLogging();
 		PerformanceStats.createPerformanceStats(this);
 		Reference.getInstance().Load();

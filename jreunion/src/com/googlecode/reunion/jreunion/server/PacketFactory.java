@@ -8,6 +8,7 @@ import com.googlecode.reunion.jreunion.game.Equipment;
 import com.googlecode.reunion.jreunion.game.Item;
 import com.googlecode.reunion.jreunion.game.LivingObject;
 import com.googlecode.reunion.jreunion.game.Mob;
+import com.googlecode.reunion.jreunion.game.Npc;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Position;
 import com.googlecode.reunion.jreunion.game.RoamingItem;
@@ -226,23 +227,24 @@ public class PacketFactory {
 		case IN_NPC:{
 			
 			if(args.length>0){
-				Mob mob = (Mob)args[0];
+				Npc npc = (Npc)args[0];
 				Boolean spawn = false;
 				if(args.length>1){
 					
 					spawn = (Boolean)args[1];
 				}
 
-			int percentageHp = mob.getHp() * 100 / mob.getMaxHp();
+			int percentageHp = npc.getHp() * 100 / npc.getMaxHp();
 
-			String packetData = "in npc " + mob.getId() + " " + mob.getType()
-					+ " " + mob.getPosition().getX() + " "
-					+ mob.getPosition().getY() + " 0 "
-					+ mob.getPosition().getRotation() + " " + percentageHp + " "
-					+ mob.getMutant() + " " + mob.getUnknown1() + " "
-					+ mob.getNeoProgmare() + " 0 " + (spawn ? 1 : 0) + " "
-					+ mob.getUnknown2() + "\n";
+			String packetData = "in npc " + npc.getId() + " " + npc.getType()
+					+ " " + npc.getPosition().getX() + " "
+					+ npc.getPosition().getY() + " 0 "
+					+ npc.getPosition().getRotation() + " " + percentageHp + " "
+					+ npc.getMutant() + " " + npc.getUnknown1() + " "
+					+ npc.getNeoProgmare() + " 0 " + (spawn ? 1 : 0) + " "
+					+ npc.getUnknown2() + "\n";
 			
+			return packetData;
 			
 			}
 		}

@@ -3,7 +3,7 @@ package com.googlecode.reunion.jreunion.game;
 import java.util.Random;
 import java.util.TimerTask;
 
-import com.googlecode.reunion.jreunion.events.map.MobSpawnEvent;
+import com.googlecode.reunion.jreunion.events.map.NpcSpawnEvent;
 import com.googlecode.reunion.jreunion.server.LocalMap;
 import com.googlecode.reunion.jreunion.server.Map;
 import com.googlecode.reunion.jreunion.server.Server;
@@ -18,10 +18,6 @@ public class Spawn {
 	private int mobType;
 
 	private float respawnTime; // seconds
-
-	private int centerX;
-
-	private int centerY;
 
 	private int radius;
 	
@@ -57,11 +53,6 @@ public class Spawn {
 	}
 	
 	/**
-	 * @param map
-	 *            The map to set.
-	 */
-
-	/**
 	 * @param mobType
 	 *            The mobType to set.
 	 */
@@ -94,14 +85,15 @@ public class Spawn {
 				.createMob(getMobType());
 		mob.setSpawn(this);
 		
-		int posX = rand.nextInt(radius * 2) - radius + centerX;
-		int posY = rand.nextInt(radius * 2) - radius + centerY;
+		int posX = rand.nextInt(radius * 2) - radius + position.getX();
+		int posY = rand.nextInt(radius * 2) - radius + position.getY();
 		double rotation = rand.nextDouble() * Math.PI * 2;
 		
 		
-		Position mobPosition = new Position(posX, posY, 0, map, rotation);
+		Position mobPosition = new Position(posX, posY, position.getZ(), map, rotation);
 		mob.setPosition(mobPosition);
-		map.fireEvent(MobSpawnEvent.class, mob);
+		
+		map.fireEvent(NpcSpawnEvent.class, mob);
 		
 	}
 

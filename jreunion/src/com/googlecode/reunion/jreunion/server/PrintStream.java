@@ -48,7 +48,7 @@ public class PrintStream extends java.io.PrintStream {
 	}
 
 	private String generateLogfileName() {
-		String path = "logs/";
+		String path = "logs/output/";
 		Calendar c = Calendar.getInstance();
 
 		// Date df = new Date();
@@ -65,6 +65,7 @@ public class PrintStream extends java.io.PrintStream {
 		try {
 			logfilename = generateLogfileName();
 			new File("logs").mkdir();
+			new File("logs/output").mkdir();
 			if (filebuffer != null) {
 				filebuffer.close();
 			}

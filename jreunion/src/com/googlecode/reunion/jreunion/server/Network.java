@@ -20,6 +20,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Vector;
 
+import org.apache.log4j.Logger;
+
 import com.googlecode.reunion.jreunion.events.Event;
 import com.googlecode.reunion.jreunion.events.EventBroadcaster;
 import com.googlecode.reunion.jreunion.events.EventListener;
@@ -32,7 +34,6 @@ import com.googlecode.reunion.jreunion.events.server.ServerEvent;
 import com.googlecode.reunion.jreunion.events.server.ServerStartEvent;
 import com.googlecode.reunion.jreunion.events.server.ServerStopEvent;
 import com.googlecode.reunion.jreunion.game.Player;
-import java.util.logging.*;
 
 /**
  * @author Aidamina
@@ -176,8 +177,8 @@ public class Network extends Service implements Runnable, EventListener{
 		
 		fireEvent(NetworkDataEvent.class, socket, data);
 		
-		Logger logger = client.getLogger();
-		//logger.info(data);
+		//Logger logger = client.getLogger();
+		Logger.getLogger(Network.class).info(data);
 		
 		
 		
@@ -185,7 +186,6 @@ public class Network extends Service implements Runnable, EventListener{
 	}
 	
 	private boolean processOutput(SocketChannel socketChannel) throws IOException {
-		
 		
 		Socket socket = socketChannel.socket();
 		Client client = Server.getInstance().getWorld().getClients().get(socket);
