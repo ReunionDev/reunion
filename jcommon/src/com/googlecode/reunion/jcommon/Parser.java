@@ -9,6 +9,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
+import org.apache.log4j.Logger;
+
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
@@ -109,8 +111,8 @@ public class Parser {
 	public void Parse(String filename) throws IOException {
 		File file = new File(filename);
 		if (!file.exists()) {
-			System.out.println("Parsing error: \"" + file.getAbsolutePath()
-					+ "\" does not exist");
+			Logger.getLogger(Parser.class).info("Parsing error: '" + file.getAbsolutePath()
+					+ "' does not exist");
 			throw new FileNotFoundException(file.getAbsolutePath());
 			
 		}
@@ -138,7 +140,7 @@ public class Parser {
 								hobject.length() - 1);
 						hobjectname = hobjectname.trim();
 						if (getItem(hobjectname) != null) {
-							System.out.println(parseError(filename, linenr,
+							Logger.getLogger(Parser.class).info(parseError(filename, linenr,
 									"Object with name \"" + hobjectname
 											+ "\" already exits", line));
 							continue;
@@ -147,7 +149,7 @@ public class Parser {
 						addMember(parsedItem);
 
 					} else {
-						System.out.println(parseError(filename, linenr,
+						Logger.getLogger(Parser.class).info(parseError(filename, linenr,
 								"Line can not be identified", line));
 					}
 				}
@@ -155,7 +157,7 @@ public class Parser {
 				if (object.length == 2) {
 					if (parsedItem == null) {
 
-						System.out.println(parseError(filename, linenr,
+						Logger.getLogger(Parser.class).info(parseError(filename, linenr,
 								"Member needs an object", line));
 						continue;
 					}
@@ -166,7 +168,7 @@ public class Parser {
 					parsedItem.addMember(parsedItemMember);
 				}
 				if (object.length < 1 || object.length > 2) {
-					System.out.println(parseError(filename, linenr,
+					Logger.getLogger(Parser.class).info(parseError(filename, linenr,
 							"Invalid member syntax", line));
 					continue;
 				}
@@ -175,7 +177,7 @@ public class Parser {
 
 		} catch (Exception e) {
 
-			e.printStackTrace();
+			Logger.getLogger(this.getClass()).warn("Exception",e);
 		}
 
 	}
