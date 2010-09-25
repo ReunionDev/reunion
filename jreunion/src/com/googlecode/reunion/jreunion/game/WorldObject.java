@@ -1,8 +1,12 @@
 package com.googlecode.reunion.jreunion.game;
 
 import com.googlecode.reunion.jreunion.events.EventBroadcaster;
+import com.googlecode.reunion.jreunion.events.session.SendPacketSessionEvent;
 import com.googlecode.reunion.jreunion.server.LocalMap;
 import com.googlecode.reunion.jreunion.server.Map;
+import com.googlecode.reunion.jreunion.server.PacketFactory;
+import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
+import com.googlecode.reunion.jreunion.server.Sendable;
 import com.googlecode.reunion.jreunion.server.Session;
 /**
  * @author Aidamina
@@ -13,6 +17,12 @@ public abstract class WorldObject extends EventBroadcaster implements Entity {
 	private int id = -1;
 	public int getId() {
 		return id;
+	}
+	
+	private Interested interested = new Interested(this);
+
+	public Interested getInterested() {
+		return interested;
 	}
 
 	public void setId(int id) {
@@ -25,8 +35,9 @@ public abstract class WorldObject extends EventBroadcaster implements Entity {
 		synchronized(map){			
 			map.notify();			
 		}
-		
 	}
+	
+	
 		
 	private Position position = new Position();
 
@@ -40,5 +51,22 @@ public abstract class WorldObject extends EventBroadcaster implements Entity {
 	public abstract void enter(Session session);
 	
 	public abstract void exit(Session session);
+	
+	public class Interested implements Sendable{
 
+		private WorldObject entity;
+		public Interested(WorldObject entity){
+			
+			this.entity = entity;
+			
+		}
+		
+		@Override
+		public void sendPacket(Type packetType, Object... args) {
+			String data = PacketFactory.createPacket(packetType, args);
+			entity.fireEvent(SendPacketSessionEvent.class,null,data);
+			
+		}
+				
+	}
 }

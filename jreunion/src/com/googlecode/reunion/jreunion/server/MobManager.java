@@ -172,7 +172,7 @@ public class MobManager {
 			// Condition that detects that the mob its out of player session
 			// range
 			if (distance >= player.getSessionRadius()) {
-				player.getSession().exit(mob);
+				//player.getSession().exit(mob);
 			}
 
 			if (distance < player.getSessionRadius()) {

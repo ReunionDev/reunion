@@ -12,6 +12,7 @@ import com.googlecode.reunion.jreunion.events.client.ClientConnectEvent;
 import com.googlecode.reunion.jreunion.events.client.ClientDisconnectEvent;
 import com.googlecode.reunion.jreunion.events.client.ClientEvent;
 import com.googlecode.reunion.jreunion.events.client.ClientReceiveEvent;
+import com.googlecode.reunion.jreunion.events.map.PlayerLoginEvent;
 import com.googlecode.reunion.jreunion.events.network.NetworkDataEvent;
 import com.googlecode.reunion.jreunion.events.session.NewSessionEvent;
 import com.googlecode.reunion.jreunion.game.Equipment;
@@ -229,12 +230,11 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 				player.getPosition().setZ(z);
 				
 				
-				
-				Session session = new Session(player);				
+						
 
 				world.getPlayerManager().addPlayer(player);
 				
-				player.getPosition().getMap().fireEvent(NewSessionEvent.class, session);
+				player.getPosition().getMap().fireEvent(PlayerLoginEvent.class, player);
 				//world.getSessionManager().newSession(player);
 				
 				client.SendData(
@@ -260,7 +260,7 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 				 * "pstatus 16 6 0 0\n" + "pstatus 18 967 0 0\n");
 				 */
 				// "pstatus 13 2 0 0\n");
-
+				/*
 				player.updateStatus(0, player.getHp(),
 						player.getStr() * 1 + player.getConstitution() * 2);
 				player.updateStatus(1, player.getMana(),
@@ -276,6 +276,7 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 				player.updateStatus(13, (player.getLevel() - 1) * 3 - statusPoints, 0);
 
 				world.getTeleportManager().remove(player);
+				*/
 				client.setState(Client.State.INGAME);
 				
 				
@@ -289,6 +290,7 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 						Integer.parseInt(message[2]),
 						Integer.parseInt(message[3]),
 						Integer.parseInt(message[4]));
+				client.getPlayer().update();
 			} else if (message[0].equals("place")) {
 
 				double rotation = Double.parseDouble(message[4]);
@@ -298,6 +300,7 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 						Integer.parseInt(message[3]), rotation / 1000,
 						Integer.parseInt(message[5]),
 						Integer.parseInt(message[6]));
+				client.getPlayer().update();
 			} else if (message[0].equals("stop")) {
 
 				double rotation = Double.parseDouble(message[4]);
@@ -305,6 +308,7 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 				client.getPlayer().stop(Integer.parseInt(message[1]),
 						Integer.parseInt(message[2]),
 						Integer.parseInt(message[3]), rotation / 1000);
+				client.getPlayer().update();
 			} else if (message[0].equals("stamina")) {
 				client.getPlayer().loseStamina(Integer.parseInt(message[1]));
 			}
@@ -347,7 +351,7 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 				//TODO: implement roaming items
 				int itemId = Integer.parseInt(message[1]);
 				LocalMap map = player.getPosition().getMap();				
-				RoamingItem roamingItem = map.roamingItems.get(itemId);
+				RoamingItem roamingItem = map.getRoamingItem(itemId);
 				System.out.println(roamingItem+" "+itemId);
 				if(roamingItem!=null){
 					client.getPlayer().pickupItem(roamingItem);							

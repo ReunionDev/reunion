@@ -32,20 +32,30 @@ public class Position {
 	
 	public double distance(Position position){
 		
-		if(!this.getMap().equals(position.getMap())){
+		if(!(this.getMap()==position.getMap())){
 			throw new RuntimeException("Can not calculate distance between two positions on different maps: "+this.getMap()+", "+position.getMap());			
 		}
 		
-		double xcomp = Math.pow(this.getX() - position.getX(),
-				2);
-		double ycomp = Math.pow(this.getY() - position.getY(),
-				2);
-		double zcomp = Math.pow(this.getZ() - position.getZ(),
-				2);
+		double xd =this.getX() - position.getX();
+				;
+		double yd = this.getY() - position.getY();
 		
-		return  Math.sqrt((xcomp * xcomp) + (ycomp * ycomp)  + (zcomp * zcomp));
+		double zd = this.getZ() - position.getZ();
 		
-			
+		return  Math.sqrt((xd * xd) + (yd * yd)  + (zd * zd));
+		
+	}
+	
+	public boolean within(Position position, double range) {
+		
+		double xd =this.getX() - position.getX();
+		
+		double yd = this.getY() - position.getY();
+		
+		double zd = this.getZ() - position.getZ();
+		
+		return (xd * xd) + (yd * yd)  + (zd * zd) < (range*range);
+		
 	}
 
 	@Override

@@ -211,6 +211,8 @@ public class Command {
 				+ player.getPosition().getRotation() + "\n";
 		client.SendData(packetData);
 
+		//TODO: fix goto
+		/*
 		Iterator<Session> sessionIter = Server.getInstance()
 				.getWorld().getSessionManager().getSessionListIterator();
 
@@ -241,6 +243,7 @@ public class Command {
 				player.getSession().enter(pl);
 			}
 		}
+		*/
 	}
 
 	/****** change map ******/

@@ -2,6 +2,8 @@ package com.googlecode.reunion.jreunion.server;
 
 import java.util.Vector;
 
+import com.googlecode.reunion.jreunion.events.session.SessionEvent;
+import com.googlecode.reunion.jreunion.game.WorldObject;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 
 public class SessionList<T extends Session> extends Vector<T> implements Sendable{
@@ -19,10 +21,49 @@ public class SessionList<T extends Session> extends Vector<T> implements Sendabl
 			for(Session session : this){
 				
 				session.getOwner().getClient().sendPacket(packetType, args);
-				
 			}				
 		}
 		
+	}
+	
+	public void exit(WorldObject entity){
+		synchronized(this){
+			for(Session session : this){
+				
+				session.exit(entity);
+			}
+		}
+		
+	}
+	
+	public void exit(WorldObject entity, boolean defaultAction){
+
+		synchronized(this){
+			for(Session session : this){
+				
+				session.exit(entity, defaultAction);
+				
+			}
+		}
+	}
+	public void enter(WorldObject entity){
+		synchronized(this){
+			for(Session session : this){
+				
+				session.enter(entity);
+			}
+		}
+	
+	}
+	public void enter(WorldObject entity, boolean defaultAction){
+		
+		synchronized(this){
+			for(Session session : this){
+				
+				session.enter(entity,defaultAction);
+				
+			}
+		}
 	}
 	
 }

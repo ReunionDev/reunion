@@ -14,6 +14,7 @@ import com.googlecode.reunion.jreunion.events.EventListener;
 import com.googlecode.reunion.jreunion.events.map.ItemDropEvent;
 import com.googlecode.reunion.jreunion.events.map.MapEvent;
 import com.googlecode.reunion.jreunion.events.map.MobSpawnEvent;
+import com.googlecode.reunion.jreunion.events.map.PlayerLoginEvent;
 import com.googlecode.reunion.jreunion.events.session.NewSessionEvent;
 import com.googlecode.reunion.jreunion.events.session.SessionEvent;
 import com.googlecode.reunion.jreunion.game.Merchant;
@@ -23,6 +24,7 @@ import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Position;
 import com.googlecode.reunion.jreunion.game.RoamingItem;
 import com.googlecode.reunion.jreunion.game.Spawn;
+import com.googlecode.reunion.jreunion.game.WorldObject;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 
 /**
@@ -40,10 +42,12 @@ public class LocalMap extends Map implements Runnable{
 
 	private Area mobArea = new Area();
 	
-	private SessionList<Session>  sessions = new SessionList<Session>();	
+	private SessionList<Session>  sessions = new SessionList<Session>();
+	
+	private List<WorldObject> entities = new Vector<WorldObject>();
 	
 	//<ItemID,ItemContainer>
-	public java.util.Map<Integer,RoamingItem> roamingItems = new HashMap<Integer,RoamingItem>();
+	//public java.util.Map<Integer,RoamingItem> roamingItems = new HashMap<Integer,RoamingItem>();
 	
 	private Area pvpArea = new Area();
 
@@ -68,7 +72,7 @@ public class LocalMap extends Map implements Runnable{
 		thread = new Thread(this);
 		thread.start();
 		
-		this.addEventListener(NewSessionEvent.class, this);
+		this.addEventListener(PlayerLoginEvent.class, this);
 		this.addEventListener(ItemDropEvent.class, this);
 		
 	}
@@ -265,7 +269,14 @@ public class LocalMap extends Map implements Runnable{
 				MobSpawnEvent mobSpawnEvent = (MobSpawnEvent)event;
 				Mob mob = mobSpawnEvent.getMob();
 				SessionList<Session> list = GetSessions(mob.getPosition());
+				
+				synchronized(entities) {
+					
+					entities.add(mob);
+					list.enter(mob, false);		
+				}
 				list.sendPacket(Type.IN_NPC, mob);
+				
 			}
 			if(event instanceof ItemDropEvent){
 				
@@ -273,14 +284,33 @@ public class LocalMap extends Map implements Runnable{
 				
 				RoamingItem roamingItem = itemDropEvent.getRoamingItem();
 				
-				synchronized(roamingItems){
-					
-					roamingItems.put(roamingItem.getId(), roamingItem);
+				SessionList<Session> list = GetSessions(roamingItem.getPosition());
+				
+				synchronized(entities) {
+					entities.add(roamingItem);
+					list.enter(roamingItem, false);					
 				}
 				
 				System.out.println(itemDropEvent.getRoamingItem().getItem().getId());
-				SessionList<Session> list = GetSessions(roamingItem.getPosition());
+				
+				
 				list.sendPacket(Type.DROP, roamingItem);
+			}
+			if(event instanceof PlayerLoginEvent){
+				
+				PlayerLoginEvent playerLoginEvent = (PlayerLoginEvent)event;
+				
+				Player player = playerLoginEvent.getPlayer();
+				
+				SessionList<Session> list = GetSessions(player.getPosition());
+				
+				Session session = new Session(player);
+				synchronized(entities) {
+					sessions.add(session);
+					entities.add(player);
+					list.enter(player, false);					
+				}				
+				list.sendPacket(Type.CHAR_IN, player,true);
 			}
 			
 		}else if(event instanceof SessionEvent){
@@ -298,54 +328,78 @@ public class LocalMap extends Map implements Runnable{
 
 	@Override
 	public void run() {
+		Timer timer = new Timer();
 		while(true){
 			try {
-			synchronized(this){				
-				this.wait();
-				
-			}
-			System.out.println("map worker triggered");
-			SessionList<Session> list = null;
-			synchronized(sessions){				
-				list = (SessionList<Session>) sessions.clone();
-				
-			}
-			for(Session session1: list){
-				Player owner = session1.getOwner();
-				for(Session session2: list){
-					if(session1.equals(session2))
-						continue;
-					double distance = owner.getPosition().distance(session2.getOwner().getPosition());
-					
-					if(session1.contains(session2.getOwner())){
-						
-						if(distance>owner.getSessionRadius()){
-							session1.exit(session2.getOwner());
-							
-						}						
-						
-					}else{
-						
-						if(distance<=owner.getSessionRadius()){
-							
-							session1.enter(session2.getOwner());							
-							
-						}
-						
-					}
+				synchronized(this){				
+					this.wait();
 					
 				}
 				
-			}
-			
+				System.out.println(this+" work");
+				
+				timer.Start();
+				
+				List<WorldObject> objects = null;
+				SessionList<Session> sessionList = null;
+				synchronized(this.entities){			
+					objects = new Vector<WorldObject>(this.entities);
+				}
+				synchronized(this.sessions){			
+					sessionList = (SessionList<Session>) this.sessions.clone();
+				}
+				
+				for(Session session: sessionList){
+					
+					Player owner = session.getOwner();
+					for(WorldObject entity: objects){
+						if(owner.equals(entity))
+							continue;
+						
+						boolean within = owner.getPosition().within(entity.getPosition(),owner.getSessionRadius());
+						boolean contains = session.contains(entity);
+						
+						if(contains&&!within){
+							
+							session.exit(entity);	
+							
+						}else if(!contains&&within){
+												
+							session.enter(entity);
+													
+						}				
+					}
+				}
+				timer.Stop();
+				System.out.println(entities.size());
+				System.out.println(timer.getTimeElapsedSeconds());
 			
 			} catch (Exception e) {
 				e.printStackTrace();
 				throw new RuntimeException(e);
 			}
+			finally{
+				
+				timer.Reset();
+				
+			}
 			
 			
 		}
 		
+	}
+
+	public RoamingItem getRoamingItem(int itemId) {
+		synchronized(entities){
+			
+			for(WorldObject entity:entities){
+				if(entity instanceof RoamingItem){
+					if(entity.getId()==itemId)
+						return (RoamingItem) entity;
+				}
+			}
+		}
+		
+		return null;
 	}
 }

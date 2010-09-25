@@ -10,6 +10,7 @@ import com.googlecode.reunion.jreunion.events.Event;
 import com.googlecode.reunion.jreunion.events.EventBroadcaster;
 import com.googlecode.reunion.jreunion.events.EventListener;
 import com.googlecode.reunion.jreunion.events.map.MapEvent;
+import com.googlecode.reunion.jreunion.events.session.SendPacketSessionEvent;
 import com.googlecode.reunion.jreunion.events.session.SessionEvent;
 import com.googlecode.reunion.jreunion.game.Entity;
 import com.googlecode.reunion.jreunion.game.LivingObject;
@@ -52,8 +53,9 @@ public class Session extends EventBroadcaster implements EventListener{
 	}
 
 	public boolean contains(WorldObject entity) {
-		
-		return entities.contains(entity);			
+		synchronized(entities){
+			return entities.contains(entity);
+		}
 	}
 
 	public boolean getActive() {
@@ -74,33 +76,47 @@ public class Session extends EventBroadcaster implements EventListener{
 	
 	public void exit(WorldObject entity){
 		
-		if (!entities.contains(entity)) {
-			return;
-		}
-		while (entities.contains(entity)) {
-			entities.remove(entity);
-		}
-		entity.addEventListener(SessionEvent.class, this);		
-		entity.exit(this);
+		exit(entity, true);
+		
 	}
 	
+	public void exit(WorldObject entity, boolean defaultAction){
+
+		System.out.println("exit "+getOwner()+" "+entity);
+		synchronized(entities){
+			if (!entities.contains(entity)) {
+				return;
+			}
+			while (entities.contains(entity)) {
+				entities.remove(entity);
+			}
+			entity.addEventListener(SessionEvent.class, this);
+			if(defaultAction)
+				entity.exit(this);
+		}
+	}
 	public void enter(WorldObject entity){
+		enter(entity,true);
+	
+	}
+	public void enter(WorldObject entity, boolean defaultAction){
 		
+		System.out.println("enter "+getOwner()+" "+entity);
 		synchronized(entities){
 			if(this.contains(entity))
 				return;
 		
 			entity.addEventListener(SessionEvent.class, this);
 			entities.add(entity);
-			entity.enter(this);
+			if(defaultAction)
+				entity.enter(this);
 			
 		}
 	}
 
 	public void empty() {
 		
-		List<WorldObject> tmpEntities = new Vector<WorldObject>();
-		Collections.copy(tmpEntities, entities);
+		List<WorldObject> tmpEntities = new Vector<WorldObject>(entities);
 		for(WorldObject object:tmpEntities)
 		{		
 			exit(object);			
@@ -127,6 +143,15 @@ public class Session extends EventBroadcaster implements EventListener{
 		if(event instanceof MapEvent){
 			LocalMap map = ((MapEvent)event).getMap();			
 			
+		}
+		
+		if(event instanceof SessionEvent){
+			Session session = ((SessionEvent)event).getSession();
+			if(event instanceof SendPacketSessionEvent){
+				SendPacketSessionEvent sendPacketSessionEvent = (SendPacketSessionEvent)event;
+				String data = sendPacketSessionEvent.getData();
+				getOwner().getClient().SendData(data);
+			}
 		}		
 	}
 }

@@ -32,8 +32,6 @@ public class World extends ClassModule implements EventListener, Sendable{
 
 	private PlayerManager playerManager;
 
-	private SessionManager sessionManager;
-
 	private MobManager mobManager;
 	
 	private TeleportManager teleportManager;
@@ -57,7 +55,6 @@ public class World extends ClassModule implements EventListener, Sendable{
 		super(parent);
 		worldCommand = new Command(this);
 		playerManager = new PlayerManager();
-		sessionManager = new SessionManager(this);
 		mobManager = new MobManager();		
 		npcManager = new NpcManager();
 		serverHour = 4;
@@ -107,13 +104,6 @@ public class World extends ClassModule implements EventListener, Sendable{
 	 */
 	public ServerSetings getServerSetings() {
 		return serverSetings;
-	}
-
-	/**
-	 * @return Returns the sessionManager.
-	 */
-	public SessionManager getSessionManager() {
-		return sessionManager;
 	}
 
 	/**
@@ -172,7 +162,6 @@ public class World extends ClassModule implements EventListener, Sendable{
 	@Override
 	public void Work() {
 
-		sessionManager.workSessions();
 		//mapManager.workSpawns();
 
 		/*

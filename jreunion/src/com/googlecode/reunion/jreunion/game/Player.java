@@ -17,6 +17,7 @@ import com.googlecode.reunion.jreunion.game.Equipment.Slot;
 import com.googlecode.reunion.jreunion.server.CharSkill;
 import com.googlecode.reunion.jreunion.server.Client;
 import com.googlecode.reunion.jreunion.server.DatabaseUtils;
+import com.googlecode.reunion.jreunion.server.LocalMap;
 import com.googlecode.reunion.jreunion.server.Reference;
 import com.googlecode.reunion.jreunion.server.Server;
 import com.googlecode.reunion.jreunion.server.Session;
@@ -192,49 +193,23 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 	/****** Manages the Item Drop ******/
 	public void dropItem(int uniqueId) {
 	
-		try {
-			Item item = getInventory().getItemSelected().getItem();
-	
-			if (item == null) {
-				return;
-			}
-		
-			Client client = this.getClient();
-			if (client == null) {
-				return;
-			}
-			getInventory().setItemSelected(null);
-			if (item != null) {
-				String packetData = "drop " + item.getId() + " " + item.getType()
-						+ " " + getPosition().getX() + " " + getPosition().getY() + " " + getPosition().getZ() + " "
-						+ getPosition().getRotation() + " " + item.getGemNumber() + " "
-						+ item.getExtraStats() + "\n";
-				System.out.println(packetData);
-				client.SendData(packetData);
-	
-				Iterator<WorldObject> playerIter = getSession()
-						.getPlayerListIterator();
+		Item item = getInventory().getItemSelected().getItem();
 
-				while (playerIter.hasNext()) {
-					Player player = (Player) playerIter.next();
-					client = player.getClient();
-
-					if (client == null) {
-						continue;
-					}
-
-					client.SendData( packetData);
-				}
-				
-			}
-			
-			// S> drop [ItemID] [ItemType] [PosX] [PosY] [Height] [Rotation]
-			// [GemNumber] [Special]
-		} catch (Exception e) {
-			//TODO: look at this
-			System.out.println("Itembug not fixxed but server crash");
+		if (item == null) {
+			return;
 		}
 		
+		LocalMap map = getPosition().getMap();
+		map.getWorld().getCommand().dropItem(getPosition(), item);
+		
+		getInventory().setItemSelected(null);
+	
+		Client client = this.getClient();
+		
+		// S> drop [ItemID] [ItemType] [PosX] [PosY] [Height] [Rotation]
+		// [GemNumber] [Special]
+	
+	
 		
 	}
 	
@@ -664,6 +639,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 	public abstract void meleeAttack(LivingObject livingObject);
 
 	/****** Manages the Pick command ******/
+	// When you pick up an item, or buy something from merchant
 	public void pickItem(Item item) {
 		Client client = getClient();
 
@@ -754,37 +730,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		updateStatus(0, getMaxHp(), getMaxHp());
 		
 		spawn();
-		
 
-		Iterator<Session> sessionIter = Server.getInstance()
-				.getWorld().getSessionManager().getSessionListIterator();
-
-		while (sessionIter.hasNext()) {
-			Session session = sessionIter.next();
-			Player player = session.getOwner();
-
-			if (session.contains(this)) {
-				session.exit(this);
-				getSession().exit(player);
-			}
-
-			if (player.getPosition().getMap() != getPosition().getMap() || player == this) {
-				continue;
-			}
-
-			Client client = player.getClient();
-
-			if (client == null) {
-				continue;
-			}
-
-			int distance = player.getDistance(this);
-
-			if (distance <= this.getSessionRadius()) {
-				session.enter(this);//TODO: This looks weird
-				getSession().enter(player);
-			}
-		}
 	}
 
 	public void say(String text) {
@@ -1029,7 +975,46 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		
 				client.SendData(packetData);
 	}
-
+	
+	
+	public static enum Status{
+		
+		HP(0),
+		MANA(1),
+		STAMINA(2),
+		ELECTRICITY(3),
+		LEVEL(4),
+		LIME(10),
+		TOTALXP(11),
+		NEXTLEVELXP(12),
+		STATUSPOINTS(13),
+		
+		//TODO: Finish this
+		;
+		
+		int value;
+		Status(int value){
+			this.value = value;
+			
+		}
+		public int value(){
+			return value;			
+		
+		}
+		
+		public static Status byValue(int slotId){
+			
+			for(Status slot:Status.values())
+			{
+				if(slot.value()==slotId){					
+					return slot;
+				}
+			}
+			return null;
+		}
+		
+	}
+	
 	/****** Handles all the Status Updates ******/
 	public void updateStatus(int id, int curr, int max) {
 		String packetData = new String();

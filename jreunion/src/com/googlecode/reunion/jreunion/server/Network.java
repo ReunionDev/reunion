@@ -32,11 +32,15 @@ import com.googlecode.reunion.jreunion.events.server.ServerEvent;
 import com.googlecode.reunion.jreunion.events.server.ServerStartEvent;
 import com.googlecode.reunion.jreunion.events.server.ServerStopEvent;
 import com.googlecode.reunion.jreunion.game.Player;
+import java.util.logging.*;
 
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
+
+
+
 public class Network extends Service implements Runnable, EventListener{
 	
 	private final ByteBuffer buffer = ByteBuffer.allocate(16384);
@@ -171,6 +175,11 @@ public class Network extends Service implements Runnable, EventListener{
 		System.out.print(data);
 		
 		fireEvent(NetworkDataEvent.class, socket, data);
+		
+		Logger logger = client.getLogger();
+		//logger.info(data);
+		
+		
 		
 		return true;
 	}
