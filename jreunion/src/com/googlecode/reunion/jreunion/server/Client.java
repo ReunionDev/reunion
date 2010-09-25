@@ -87,7 +87,7 @@ public class Client extends EventBroadcaster implements EventListener,Sendable {
 	}
 
 
-	public void setSocket(Socket socket) {
+	private void setSocket(Socket socket) {
 		this.socket = socket;
 	}
 
@@ -120,7 +120,7 @@ public class Client extends EventBroadcaster implements EventListener,Sendable {
 	
 	private Logger logger;
 	
-	public Client(World world,Socket socket) {
+	public Client(World world, Socket socket) {
 		
 		super();
 		

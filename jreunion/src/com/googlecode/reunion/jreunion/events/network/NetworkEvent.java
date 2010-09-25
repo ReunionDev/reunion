@@ -33,7 +33,7 @@ public class NetworkEvent extends Event {
 		@Override
 		public boolean filter(Event event) {
 			if(!(event instanceof NetworkEvent)){
-				throw new InvalidEventException(event,NetworkEvent.class);
+				throw new InvalidEventException(event, NetworkEvent.class);
 			}
 			return ((NetworkEvent)event).getSocket().equals(this.socket);			
 		}
