@@ -124,6 +124,7 @@ CREATE TABLE `roaming` (
   `mapid` int(11) NOT NULL,
   `x` int(11) NOT NULL,
   `y` int(11) NOT NULL,
+  `z` int(11) NOT NULL,
   `charid` int(11) DEFAULT NULL,
   `dropped` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`itemid`)

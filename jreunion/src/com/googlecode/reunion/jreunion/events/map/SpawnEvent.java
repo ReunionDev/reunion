@@ -1,5 +1,6 @@
 package com.googlecode.reunion.jreunion.events.map;
 
+import com.googlecode.reunion.jreunion.game.LivingObject;
 import com.googlecode.reunion.jreunion.game.Mob;
 import com.googlecode.reunion.jreunion.game.Npc;
 import com.googlecode.reunion.jreunion.game.RoamingItem;
@@ -7,12 +8,12 @@ import com.googlecode.reunion.jreunion.server.LocalMap;
 
 public class SpawnEvent extends MapEvent {
 
-	Npc npc;
-	public SpawnEvent(Npc npc) {
-		super(npc.getPosition().getMap());
-		this.npc = npc;
+	LivingObject spawnee;
+	public SpawnEvent(LivingObject spawnee) {
+		super(spawnee.getPosition().getMap());
+		this.spawnee = spawnee;
 	}
-	public Npc getNpc() {
-		return npc;
+	public LivingObject getSpawnee() {
+		return spawnee;
 	}
 }

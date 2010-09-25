@@ -779,7 +779,7 @@ public class DatabaseUtils extends Service {
 			deleteRoamingItem(item);
 			stmt  = database.conn.createStatement();
 			String q = 
-			"INSERT INTO `roaming` (`itemid`,`mapid`,`x`,`y`,`charid`)VALUES("+
+			"INSERT INTO `roaming` (`itemid`,`mapid`,`x`,`y`,`z`,`charid`)VALUES("+
 			itemId+","+
 			position.getMap().getId()+","+
 			position.getX()+","+

@@ -16,6 +16,7 @@ import com.googlecode.reunion.jreunion.events.map.PlayerLoginEvent;
 import com.googlecode.reunion.jreunion.events.map.PlayerLogoutEvent;
 import com.googlecode.reunion.jreunion.events.session.NewSessionEvent;
 import com.googlecode.reunion.jreunion.events.session.SessionEvent;
+import com.googlecode.reunion.jreunion.game.LivingObject;
 import com.googlecode.reunion.jreunion.game.Npc;
 import com.googlecode.reunion.jreunion.game.NpcSpawn;
 import com.googlecode.reunion.jreunion.game.Player;
@@ -70,6 +71,7 @@ public class LocalMap extends Map implements Runnable{
 		this.world = world;
 		
 		thread = new Thread(this);
+		thread.setDaemon(true);
 		thread.start();
 		this.addEventListener(SpawnEvent.class, this);
 		this.addEventListener(PlayerLoginEvent.class, this);
@@ -176,11 +178,13 @@ public class LocalMap extends Map implements Runnable{
 
 	public void load() {
 		super.load();
+		thread.setName("Map: "+getName());
 		
-		Logger.getLogger(LocalMap.class).info("Loading "+this.getName());
+		Logger.getLogger(LocalMap.class).info("Loading "+getName());
 		if(!Server.getInstance().getNetwork().register(getAddress())){
 			return;
 		}
+		
 		playerSpawnReference = new Parser();
 		mobSpawnReference = new Parser();
 		npcSpawnReference = new Parser();
@@ -282,7 +286,8 @@ public class LocalMap extends Map implements Runnable{
 	public SessionList<Session> GetSessions(WorldObject entity){
 		
 		SessionList<Session> results = new SessionList<Session>();
-		synchronized(sessions){			
+		synchronized(sessions){	
+			
 			for(Session session:sessions){
 				if(session.contains(entity)){					
 					results.add(session);
@@ -300,15 +305,26 @@ public class LocalMap extends Map implements Runnable{
 			
 			if(event instanceof SpawnEvent){
 				SpawnEvent mobSpawnEvent = (SpawnEvent)event;
-				Npc npc = mobSpawnEvent.getNpc();
-				SessionList<Session> list = GetSessions(npc.getPosition());
+				LivingObject entity = mobSpawnEvent.getSpawnee();
+				SessionList<Session> list = GetSessions(entity.getPosition());
 				
 				synchronized(entities) {
 					
-					entities.add(npc);
-					list.enter(npc, false);		
+					entities.add(entity);
+					list.enter(entity, false);		
 				}
-				list.sendPacket(Type.IN_NPC, npc);
+				
+				if(entity instanceof Player){
+					Player player = (Player)entity;
+					Session session = player.getSession();
+					sessions.add(session);
+
+					list.sendPacket(Type.CHAR_IN, player, true);
+				}else{
+					
+					list.sendPacket(Type.IN_NPC, entity);				
+				}
+				entity.update();
 				
 			}
 			if(event instanceof ItemDropEvent){
@@ -331,20 +347,9 @@ public class LocalMap extends Map implements Runnable{
 				PlayerLoginEvent playerLoginEvent = (PlayerLoginEvent)event;
 				
 				Player player = playerLoginEvent.getPlayer();
-				
-				defaultSpawn.spawn(player);
-				
-				SessionList<Session> list = GetSessions(player.getPosition());
-				
 				Session session = new Session(player);
-				synchronized(entities) {
-					sessions.add(session);
-					entities.add(player);
-									
-				}
-				
-				list.enter(player, false);
-				list.sendPacket(Type.CHAR_IN, player, true);
+				defaultSpawn.spawn(player);
+		
 			}
 			if(event instanceof PlayerLogoutEvent){
 				
@@ -352,7 +357,8 @@ public class LocalMap extends Map implements Runnable{
 				
 				Player player = playerLogoutEvent.getPlayer();
 				
-				Session session = player.getSession();
+				Session session = new Session(player);
+				
 				synchronized(entities) {
 					sessions.remove(session);
 					entities.remove(player);

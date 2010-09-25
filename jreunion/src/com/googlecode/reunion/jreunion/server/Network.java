@@ -58,6 +58,9 @@ public class Network extends Service implements Runnable, EventListener{
 			server.addEventListener(ServerEvent.class, this);		
 			selector = Selector.open();
 			thread = new Thread(this);
+			thread.setDaemon(true);
+			thread.setName("Network");
+			
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}	
