@@ -58,13 +58,12 @@ public class Server extends ClassModule {
 			@Override
 			public String format(LoggingEvent event) {
 
-				String result =  super.format(event);
+				String result = super.format(event);
 				if(result.endsWith("\n\r\n")){
 					
 					result = result.substring(0, result.length()-2);
 				}
 				return result;
-				
 			}
 			
 		},ConsoleAppender.SYSTEM_OUT));
@@ -84,7 +83,6 @@ public class Server extends ClassModule {
 								// Load a module by extending it from
 								// ClassModule
 								// And put the put the parent in the constructor
-			
 			
 			
 			while (true) {

@@ -2,8 +2,11 @@ package com.googlecode.reunion.jreunion.server;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 import org.apache.log4j.Logger;
+import org.apache.log4j.net.SocketAppender;
 
 import com.googlecode.reunion.jreunion.game.Item;
 import com.googlecode.reunion.jreunion.game.Mob;
@@ -185,6 +188,29 @@ public class MessageParser {
 			if (words[1].equals("char")) {
 				com.GoToChar(player, words[2]);
 			}
+			
+		} else if (words[0].equals("@debug")) {
+			
+			Logger logger = Logger.getRootLogger();
+			
+			String host = words[1];
+			InetAddress address = null;
+			try {
+				address = InetAddress.getByName(host);
+				int port = Integer.parseInt(words[2]);
+				SocketAppender socketAppender = new SocketAppender(address, port);			
+				socketAppender.setReconnectionDelay(10);			
+				logger.addAppender(socketAppender);
+				
+			} catch (UnknownHostException e) {
+				
+				Logger.getLogger(Debug.class).warn("host("+host+") not found in @debug",e);
+				com.serverTell(client, "Host not found");
+			}			
+			com.serverTell(client, "Logger connected");
+			
+			
+			
 		} else if (words[0].equals("@spawn")||words[0].equals("@s")) {
 				//@spawn mobid mobtypecount radius
 				BufferedWriter bw = null;
