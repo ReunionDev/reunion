@@ -1,5 +1,7 @@
 package com.googlecode.reunion.jreunion.server;
 
+import org.apache.log4j.Logger;
+
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
@@ -24,10 +26,10 @@ public class RemoteAdmin {
 	static void enableRemoteAdmin() {
 		if (remoteAdmin == null) {
 			remoteAdmin = new RemoteAdmin();
-			System.out.println("Started Remote Admin");
+			Logger.getLogger(RemoteAdmin.class).info("Started Remote Admin");
 
 		} else {
-			System.out.println("Remote Admin already running");
+			Logger.getLogger(RemoteAdmin.class).info("Remote Admin already running");
 
 		}
 

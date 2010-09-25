@@ -3,6 +3,8 @@ package com.googlecode.reunion.jreunion.server;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+import org.apache.log4j.Logger;
+
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
@@ -137,57 +139,57 @@ public class Area {
 
 			nsize = constructInt(bf, 2);
 
-			// System.out.println("File type is :"+(char)bf[0]+(char)bf[1]);
+			// Logger.getLogger(Area.class).info("File type is :"+(char)bf[0]+(char)bf[1]);
 
-			// System.out.println("Size of file is :"+nsize);
+			// Logger.getLogger(Area.class).info("Size of file is :"+nsize);
 
 			nbisize = constructInt(bi, 2);
 
-			// System.out.println("Size of bitmapinfoheader is :"+nbisize);
+			// Logger.getLogger(Area.class).info("Size of bitmapinfoheader is :"+nbisize);
 
 			nwidth = constructInt(bi, 4);
 
-			// System.out.println("Width is :"+nwidth);
+			// Logger.getLogger(Area.class).info("Width is :"+nwidth);
 
 			nheight = constructInt(bi, 8);
 
-			// System.out.println("Height is :"+nheight);
+			// Logger.getLogger(Area.class).info("Height is :"+nheight);
 
 			nplanes = constructShort(bi, 12); // (((int)bi[13]&0xff)<<8) |
 												// (int)bi[12]&0xff;
 
-			// System.out.println("Planes is :"+nplanes);
+			// Logger.getLogger(Area.class).info("Planes is :"+nplanes);
 
 			nbitcount = constructShort(bi, 14); // (((int)bi[15]&0xff)<<8) |
 												// (int)bi[14]&0xff;
 
-			// System.out.println("BitCount is :"+nbitcount);
+			// Logger.getLogger(Area.class).info("BitCount is :"+nbitcount);
 
 			// Look for non-zero values to indicate compression
 
 			ncompression = constructInt(bi, 16);
 
-			// System.out.println("Compression is :"+ncompression);
+			// Logger.getLogger(Area.class).info("Compression is :"+ncompression);
 
 			nsizeimage = constructInt(bi, 20);
 
-			// System.out.println("SizeImage is :"+nsizeimage);
+			// Logger.getLogger(Area.class).info("SizeImage is :"+nsizeimage);
 
 			nxpm = constructInt(bi, 24);
 
-			// System.out.println("X-Pixels per meter is :"+nxpm);
+			// Logger.getLogger(Area.class).info("X-Pixels per meter is :"+nxpm);
 
 			nypm = constructInt(bi, 28);
 
-			// System.out.println("Y-Pixels per meter is :"+nypm);
+			// Logger.getLogger(Area.class).info("Y-Pixels per meter is :"+nypm);
 
 			nclrused = constructInt(bi, 32);
 
-			// System.out.println("Colors used are :"+nclrused);
+			// Logger.getLogger(Area.class).info("Colors used are :"+nclrused);
 
 			nclrimp = constructInt(bi, 36);
 
-			// System.out.println("Colors important are :"+nclrimp);
+			// Logger.getLogger(Area.class).info("Colors important are :"+nclrimp);
 
 		}
 
@@ -239,56 +241,36 @@ public class Area {
 						if ((bArray[j * 160 + i] & shift << h) != 0) {
 							// if
 							// (file.equalsIgnoreCase("data/areas/LaglamiaPvpArea.bmp"))
-							// System.out.println(x+","+y+" "+(bArray[j*160+i] &
+							// Logger.getLogger(Area.class).info(x+","+y+" "+(bArray[j*160+i] &
 							// (shift << h)));
 
 							data[x][1279 - y] = true;
 						} else {
 
-							// System.out.println("false:"+x+","+y+" "+(bArray[j*160+i]
+							// Logger.getLogger(Area.class).info("false:"+x+","+y+" "+(bArray[j*160+i]
 							// & (shift << h)));
 							data[x][1279 - y] = false;
 						}
-						// System.out.println((bArray[j*160+i] & (shift << h)));
+						// Logger.getLogger(Area.class).info((bArray[j*160+i] & (shift << h)));
 
 					}
-					// System.out.println();
+					// Logger.getLogger(Area.class).info();
 
 				}
 
 			}
 
-			System.out.println("done loading: " + file);
+			Logger.getLogger(Area.class).info("done loading: " + file);
 
 			return true;
 
 		} catch (Exception e) {
-			//e.printStackTrace();
+			//Logger.getLogger(this.getClass()).warn("Exception",e);
 			return false;
 		}
 
 	}
 }
-//
-
-// This code was taken and cleaned up from a
-
-// Javaworld tips and tricks column
-
-//
-
-//
-
-// really just a collection of methods to read a BMP file
-
-//
-
-//
-
-// internal class representing a bitmap header structure
-
-// with code to read it from a file
-
 /**
  * readMap24 internal routine to read the bytes in a 24 bit bitmap
  * 
@@ -480,7 +462,7 @@ public class Area {
  * 
  * }
  * 
- * // System.out.println("The number of Colors is"+nNumColors);
+ * // Logger.getLogger(Area.class).info("The number of Colors is"+nNumColors);
  * 
  * 
  * 
@@ -496,7 +478,7 @@ public class Area {
  * 
  * bh.nsizeimage *= bh.nheight;
  * 
- * // System.out.println("nsizeimage (backup) is"+nsizeimage);
+ * // Logger.getLogger(Area.class).info("nsizeimage (backup) is"+nsizeimage);
  * 
  * }
  * 
@@ -532,7 +514,7 @@ public class Area {
  * 
  * int npad8 = (bh.nsizeimage / bh.nheight) - bh.nwidth;
  * 
- * // System.out.println("nPad is:"+npad8);
+ * // Logger.getLogger(Area.class).info("nPad is:"+npad8);
  * 
  * 
  * 

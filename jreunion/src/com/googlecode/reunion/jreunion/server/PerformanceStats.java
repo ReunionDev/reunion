@@ -137,7 +137,7 @@ public class PerformanceStats extends ClassModule {
 		}
 		if (loopTimer.getTimeElapsedSeconds() >= 1) {
 			ticksList.add(new Tick(frames));
-			// System.out.println(frames);
+			// Logger.getLogger(PerformanceStats.class).info(frames);
 			loopTimer.Reset();
 			frames = 0;
 		}

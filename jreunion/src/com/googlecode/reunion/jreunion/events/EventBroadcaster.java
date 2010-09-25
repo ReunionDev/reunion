@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.LinkedBlockingQueue;
+
+import org.apache.log4j.Logger;
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
@@ -108,7 +110,7 @@ public class EventBroadcaster{
 									worker.notify();
 								}
 						}catch(Exception e){
-							e.printStackTrace();
+							Logger.getLogger(this.getClass()).warn("Exception",e);
 							throw new RuntimeException(e);
 						}
 					}
@@ -142,7 +144,7 @@ public class EventBroadcaster{
 							listener.handleEvent(event);						
 						
 					}catch(Exception e){
-						e.printStackTrace();
+						Logger.getLogger(this.getClass()).warn("Exception",e);
 						
 					}finally{
 						listener = null;
@@ -152,7 +154,7 @@ public class EventBroadcaster{
 				}
 			} catch (Exception e) {
 				if (!(e instanceof InterruptedException)){
-					e.printStackTrace();
+					Logger.getLogger(this.getClass()).warn("Exception",e);
 					throw new RuntimeException(e);
 				}
 				

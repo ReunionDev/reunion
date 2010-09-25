@@ -3,9 +3,12 @@ package com.googlecode.reunion.jreunion.server;
 import java.util.HashMap;
 import java.util.Random;
 import org.apache.log4j.*;
+import org.apache.log4j.net.SocketAppender;
+import org.apache.log4j.spi.LoggingEvent;
 import org.apache.log4j.xml.XMLLayout;
 
 import com.googlecode.reunion.jreunion.events.EventBroadcaster;
+import com.googlecode.reunion.jreunion.events.Test;
 import com.googlecode.reunion.jreunion.events.network.NetworkDataEvent;
 import com.googlecode.reunion.jreunion.events.server.ServerStartEvent;
 import com.googlecode.reunion.jreunion.events.server.ServerStopEvent;
@@ -37,7 +40,7 @@ public class Server extends ClassModule {
 				_instance = new Server();
 			} catch (Exception e) {
 
-				e.printStackTrace();
+				Logger.getLogger(Server.class).warn("Exception",e);
 				return null;
 			}
 		}
@@ -49,7 +52,28 @@ public class Server extends ClassModule {
 	 * @throws Throwable
 	 */
 	public static void main(String[] args) throws Exception {
+		Logger logger = Logger.getRootLogger();
+		logger.addAppender(new ConsoleAppender(new PatternLayout("%-5p [%t]: %m\r\n"){
+			
+			@Override
+			public String format(LoggingEvent event) {
 
+				String result =  super.format(event);
+				if(result.endsWith("\n\r\n")){
+					
+					result = result.substring(0, result.length()-2);
+				}
+				return result;
+				
+			}
+			
+		},ConsoleAppender.SYSTEM_OUT));
+
+	
+		PrintStream.useFileLogging();
+		Reference.getInstance().Load();
+		
+		
 		Server server = Server.getInstance();
 
 		try {
@@ -72,7 +96,7 @@ public class Server extends ClassModule {
 
 		} catch (Exception e) {
 			
-			e.printStackTrace();
+			Logger.getLogger(Server.class).warn("Exception",e);
 			
 		}
 		finally {
@@ -97,23 +121,11 @@ public class Server extends ClassModule {
 	private Server() throws Exception {
 
 		super();
+		
+		new Debug();
 		RemoteAdmin.enableRemoteAdmin();
-		Logger logger = Logger.getRootLogger();
-		XMLLayout layout = new XMLLayout();
-		//SimpleLayout layout = new SimpleLayout();
-		FileAppender appender = null;
-		try {
-		appender = new FileAppender(layout,"output.txt",false);
-		} catch(Exception e) {}
-
-		logger.addAppender(appender);
-		logger.setLevel(Level.DEBUG);
-		
-		
-		PrintStream.useFileLogging();
 		PerformanceStats.createPerformanceStats(this);
-		Reference.getInstance().Load();
-
+		
 		database = new Database(this);
 		network = new Network(this);
 		world = new World(this);
@@ -163,19 +175,19 @@ public class Server extends ClassModule {
 
 	@Override
 	public void start() {
-		System.out.println("Server start");
+		Logger.getLogger(Server.class).info("Server start");
 		
 		
 	}
 
 	@Override
 	public void stop() {
-		System.out.println("Server stop");
+		Logger.getLogger(Server.class).info("Server stop");
 	}
 
 	@Override
 	public void Work() {
-		// System.out.println("server work");
+		// Logger.getLogger(Server.class).info("server work");
 	}
 
 }

@@ -3,6 +3,9 @@ package com.googlecode.reunion.jreunion.server.database;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import org.apache.log4j.Logger;
+
+import com.googlecode.reunion.jcommon.Parser;
 import com.mysql.jdbc.MySQLConnection;
 import com.mysql.jdbc.PreparedStatement;
 import com.mysql.jdbc.Statement;
@@ -37,7 +40,7 @@ public class SaveInventory extends DatabaseAction {
 	}
 
 	public void perform() throws SQLException {
-		System.out.println("perform");
+		Logger.getLogger(SaveInventory.class).info("perform");
 		deleteStatement.execute();
 		insertStatement.executeBatch();
 	}

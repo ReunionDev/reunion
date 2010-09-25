@@ -6,6 +6,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
+import org.apache.log4j.Logger;
+
 import com.googlecode.reunion.jreunion.events.Event;
 import com.googlecode.reunion.jreunion.events.EventBroadcaster;
 import com.googlecode.reunion.jreunion.events.EventListener;
@@ -82,7 +84,7 @@ public class Session extends EventBroadcaster implements EventListener{
 	
 	public void exit(WorldObject entity, boolean defaultAction){
 
-		System.out.println("exit "+getOwner()+" "+entity);
+		Logger.getLogger(Session.class).debug("exit "+getOwner()+" "+entity);
 		synchronized(entities){
 			if (!entities.contains(entity)) {
 				return;
@@ -101,7 +103,7 @@ public class Session extends EventBroadcaster implements EventListener{
 	}
 	public void enter(WorldObject entity, boolean defaultAction){
 		
-		System.out.println("enter "+getOwner().getName()+" "+entity);
+		Logger.getLogger(Session.class).debug("enter "+getOwner().getName()+" "+entity);
 		synchronized(entities){
 			if(this.contains(entity))
 				return;

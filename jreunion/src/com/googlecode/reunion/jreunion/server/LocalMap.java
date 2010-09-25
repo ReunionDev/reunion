@@ -4,6 +4,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
+import org.apache.log4j.Logger;
+
 import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jcommon.Parser;
 import com.googlecode.reunion.jreunion.events.Event;
@@ -86,7 +88,7 @@ public class LocalMap extends Map implements Runnable{
 
 			if (!item.checkMembers(new String[] { "ID", "X", "Y",
 					"Radius", "RespawnTime", "Type" })) {
-				System.out.println("Error loading a mob spawn on map: "
+				Logger.getLogger(LocalMap.class).info("Error loading a mob spawn on map: "
 						+ getId());
 				continue;
 			}
@@ -127,7 +129,7 @@ public class LocalMap extends Map implements Runnable{
 
 			if (!item.checkMembers(new String[] { "ID", "X", "Y",
 					"Rotation", "Type" })) {
-				System.out.println("Error loading a npc spawn on map: "
+				Logger.getLogger(LocalMap.class).info("Error loading a npc spawn on map: "
 						+ getId());
 				continue;
 			}
@@ -175,8 +177,10 @@ public class LocalMap extends Map implements Runnable{
 	public void load() {
 		super.load();
 		
-		System.out.println("Loading "+this.getName());
-		Server.getInstance().getNetwork().register(getAddress());
+		Logger.getLogger(LocalMap.class).info("Loading "+this.getName());
+		if(!Server.getInstance().getNetwork().register(getAddress())){
+			return;
+		}
 		playerSpawnReference = new Parser();
 		mobSpawnReference = new Parser();
 		npcSpawnReference = new Parser();
@@ -184,7 +188,7 @@ public class LocalMap extends Map implements Runnable{
 		createMobSpawns();
 		createNpcSpawns();
 		createPlayerSpawns();
-		System.out.println(getName()+" running on "+getAddress());
+		Logger.getLogger(LocalMap.class).info(getName()+" running on "+getAddress());
 		
 	}
 
@@ -200,7 +204,7 @@ public class LocalMap extends Map implements Runnable{
 
 			if (!item.checkMembers(new String[] { "ID", "X", "Y"
 					})) {
-				System.out.println("Error loading a player spawn on map: "
+				Logger.getLogger(LocalMap.class).info("Error loading a player spawn on map: "
 						+ getId());
 				continue;
 			}			
@@ -250,7 +254,7 @@ public class LocalMap extends Map implements Runnable{
 					.getItemById(id).getMemberValue("NpcSpawn"));
 			
 		} catch(Exception e){			
-			e.printStackTrace();			
+			Logger.getLogger(this.getClass()).warn("Exception",e);			
 		}
 
 		playerArea.load(Reference.getInstance().getMapReference()
@@ -290,7 +294,7 @@ public class LocalMap extends Map implements Runnable{
 	
 	@Override
 	public void handleEvent(Event event) {
-		//System.out.println(event);
+		//Logger.getLogger(LocalMap.class).info(event);
 		if(event instanceof MapEvent){
 			LocalMap map = ((MapEvent)event).getMap();
 			
@@ -381,7 +385,7 @@ public class LocalMap extends Map implements Runnable{
 					this.wait();
 				}
 				
-				System.out.println(this+" work");
+				Logger.getLogger(LocalMap.class).info(this+" work");
 				
 				timer.Start();
 				
@@ -416,10 +420,10 @@ public class LocalMap extends Map implements Runnable{
 					}
 				}
 				timer.Stop();
-				System.out.println(timer.getTimeElapsedSeconds());
+				Logger.getLogger(LocalMap.class).info(timer.getTimeElapsedSeconds());
 			
 			} catch (Exception e) {
-				e.printStackTrace();
+				Logger.getLogger(this.getClass()).warn("Exception",e);
 				throw new RuntimeException(e);
 			}
 			finally{				

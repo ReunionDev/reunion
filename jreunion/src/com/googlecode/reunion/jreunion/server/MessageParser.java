@@ -3,6 +3,8 @@ package com.googlecode.reunion.jreunion.server;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 
+import org.apache.log4j.Logger;
+
 import com.googlecode.reunion.jreunion.game.Item;
 import com.googlecode.reunion.jreunion.game.Mob;
 import com.googlecode.reunion.jreunion.game.Npc;
@@ -150,7 +152,7 @@ public class MessageParser {
 				}
 				} catch (Exception e) {
 					//TODO: Fix the Mob id error server crash
-					System.out.println("Mob id error detected");
+					Logger.getLogger(MessageParser.class).info("Mob id error detected");
 				}
 			} else if (words[0].equals("@tele")) {
 			try {
@@ -227,7 +229,7 @@ public class MessageParser {
 					client.SendData(packetData);
 			      }catch(Exception e){
 			    	  com.serverTell(player.getClient(),e.getMessage());
-			    	  e.printStackTrace();
+			    	  Logger.getLogger(this.getClass()).warn("Exception",e);
 			    	  String packetData = "say 1 S_Server Spawnpoint cannot be added";
 			    	  client.SendData(packetData);
 			      }

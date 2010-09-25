@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
+import org.apache.log4j.Logger;
+
 import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jcommon.Parser;
 import com.googlecode.reunion.jreunion.server.Client;
@@ -89,7 +91,7 @@ public class Merchant extends Npc {
 		try {
 			shopReference.Parse("data/"+getShop());
 		} catch (IOException e) {
-			e.printStackTrace();
+			Logger.getLogger(this.getClass()).warn("Exception",e);
 		}
 			
 	}
@@ -108,7 +110,7 @@ public class Merchant extends Npc {
 				ParsedItem i = iter.next();
 	
 				if (!i.checkMembers(new String[] { "Type" })) {
-					System.out.println("Error loading a Npc Shop Item on map: "
+					Logger.getLogger(Merchant.class).info("Error loading a Npc Shop Item on map: "
 							+ getPosition().getMap());
 					continue;
 				}
@@ -197,7 +199,7 @@ public class Merchant extends Npc {
 			}
 			
 		} catch (Exception e) {
-			System.err.println("Item Sell bug");
+			Logger.getLogger(Merchant.class).error("Item Sell bug");
 		}
 	}
 }

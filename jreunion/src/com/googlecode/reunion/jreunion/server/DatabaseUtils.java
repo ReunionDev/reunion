@@ -12,6 +12,8 @@ import java.util.List;
 import java.util.Queue;
 import java.util.Vector;
 
+import org.apache.log4j.Logger;
+
 import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jreunion.game.Armor;
 import com.googlecode.reunion.jreunion.game.Axe;
@@ -25,9 +27,11 @@ import com.googlecode.reunion.jreunion.game.Item;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Player.Race;
 import com.googlecode.reunion.jreunion.game.Player.Sex;
+import com.googlecode.reunion.jreunion.game.Position;
 import com.googlecode.reunion.jreunion.game.Potion;
 import com.googlecode.reunion.jreunion.game.QuickSlotItem;
 import com.googlecode.reunion.jreunion.game.RingWeapon;
+import com.googlecode.reunion.jreunion.game.RoamingItem;
 import com.googlecode.reunion.jreunion.game.Skill;
 import com.googlecode.reunion.jreunion.game.StaffWeapon;
 import com.googlecode.reunion.jreunion.game.StashItem;
@@ -102,7 +106,7 @@ public class DatabaseUtils extends Service {
 			}
 			return -1;
 		} catch (SQLException e1) {
-			e1.printStackTrace();
+			Logger.getLogger(this.getClass()).warn("Exception",e1);
 			return -1;
 		}
 		
@@ -185,11 +189,11 @@ public class DatabaseUtils extends Service {
 			}
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Logger.getLogger(this.getClass()).warn("Exception",e);
 			return null;
 		}
 		
-		System.out.println("found " + chars
+		Logger.getLogger(DatabaseUtils.class).info("found " + chars
 				+ " char(s) for Account(" + accountId + ")");		
 		
 		charlist += "chars_end\n";
@@ -215,7 +219,7 @@ public class DatabaseUtils extends Service {
 			
 			
 		} catch (SQLException e1) {
-			e1.printStackTrace();
+			Logger.getLogger(this.getClass()).warn("Exception",e1);
 			
 		}
 		return equipment;
@@ -266,14 +270,14 @@ public class DatabaseUtils extends Service {
 				player.setName(rs.getString("name"));
 				player.setGuildId(rs.getInt("guildid"));
 				player.setGuildLvl(rs.getInt("guildlvl"));
-				System.err.println(rs.getInt("userlevel"));
+				Logger.getLogger(DatabaseUtils.class).error(rs.getInt("userlevel"));
 				player.setAdminState(rs.getInt("userlevel"));
 				player.setHairStyle(rs.getInt("hair"));
 				return player;
 			} else
 				return null;
 		} catch (SQLException e1) {
-			e1.printStackTrace();
+			Logger.getLogger(this.getClass()).warn("Exception",e1);
 			return null;
 		}
 	}
@@ -341,7 +345,7 @@ public class DatabaseUtils extends Service {
 			
 						
 		} catch (Exception e1) {
-			e1.printStackTrace();
+			Logger.getLogger(this.getClass()).warn("Exception",e1);
 			return;
 		  }
 	}
@@ -378,7 +382,7 @@ public class DatabaseUtils extends Service {
 		catch (SQLException e) 
 		{
 			
-			e.printStackTrace();
+			Logger.getLogger(this.getClass()).warn("Exception",e);
 			
 		}
 	}
@@ -398,7 +402,7 @@ public class DatabaseUtils extends Service {
 			} else
 				return true;
 		} catch (SQLException e1) {
-			e1.printStackTrace();
+			Logger.getLogger(this.getClass()).warn("Exception",e1);
 			return false;
 		}
 	}
@@ -448,7 +452,7 @@ public class DatabaseUtils extends Service {
 			saveCharacter(player);
 			int characterId = player.getId();
 			
-			System.out.println(characterId);
+			Logger.getLogger(DatabaseUtils.class).info(characterId);
 			
 			stmt.execute("INSERT INTO slots (charid, slot, accountid) VALUES ("
 					+ characterId + ","
@@ -491,7 +495,7 @@ public class DatabaseUtils extends Service {
 			saveInventory(player);
 						
 		} catch (SQLException e1) {
-			e1.printStackTrace();
+			Logger.getLogger(this.getClass()).warn("Exception",e1);
 			return;
 		}
 	}
@@ -509,7 +513,7 @@ public class DatabaseUtils extends Service {
 					+ accountId
 					+ ";");
 		} catch (SQLException e1) {
-			e1.printStackTrace();
+			Logger.getLogger(this.getClass()).warn("Exception",e1);
 			return;
 		}
 	}
@@ -535,11 +539,11 @@ public class DatabaseUtils extends Service {
 			player = loadCharStatus(client, characterId);
 			player.setSlot(slot);
 			
-			System.out.println("Loaded: " + player.getName());
+			Logger.getLogger(DatabaseUtils.class).info("Loaded: " + player.getName());
 			
 		} catch (SQLException e1) {
 			
-			e1.printStackTrace();
+			Logger.getLogger(this.getClass()).warn("Exception",e1);
 			
 		}
 		
@@ -563,7 +567,7 @@ public class DatabaseUtils extends Service {
 			}
 			
 		} catch (SQLException e1) {
-			e1.printStackTrace();
+			Logger.getLogger(this.getClass()).warn("Exception",e1);
 			return null;
 		}
 		return player;
@@ -579,7 +583,7 @@ public class DatabaseUtils extends Service {
 			saveInventory.getDeleteStatement().setInt(1, player.getEntityId());
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			Logger.getLogger(this.getClass()).warn("Exception",e);
 		}
 		*/
 	
@@ -622,7 +626,7 @@ public class DatabaseUtils extends Service {
 			//queue.add(saveInventory);
 			
 		} catch (SQLException e1) {
-			e1.printStackTrace();
+			Logger.getLogger(this.getClass()).warn("Exception",e1);
 			return;
 		}
 	}
@@ -658,7 +662,7 @@ public class DatabaseUtils extends Service {
 		} catch (SQLException e) 
 		{
 			
-			e.printStackTrace();
+			Logger.getLogger(this.getClass()).warn("Exception",e);
 			return idList;
 		}
 		return idList;
@@ -682,7 +686,7 @@ public class DatabaseUtils extends Service {
 		catch (SQLException e) 
 		{
 			
-			e.printStackTrace();
+			Logger.getLogger(this.getClass()).warn("Exception",e);
 			
 		}
 		return -1;
@@ -709,7 +713,7 @@ public class DatabaseUtils extends Service {
 				.getItemById(type);
 				
 				if (parseditem == null) {
-					System.out.println("Item loaded failed, no such item type!");
+					Logger.getLogger(DatabaseUtils.class).info("Item loaded failed, no such item type!");
 					return null;
 				}
 				
@@ -723,8 +727,8 @@ public class DatabaseUtils extends Service {
 
 				} catch (Exception e) {
 
-					System.out.println("Cannot create class:" + classname);
-					e.printStackTrace();
+					Logger.getLogger(DatabaseUtils.class).info("Cannot create class:" + classname);
+					Logger.getLogger(this.getClass()).warn("Exception",e);
 					return null;
 				}
 				
@@ -739,10 +743,56 @@ public class DatabaseUtils extends Service {
 		catch (SQLException e) 
 		{
 			
-			e.printStackTrace();
+			Logger.getLogger(this.getClass()).warn("Exception",e);
 			
 		}
 		return null;
+	}
+	
+	public boolean deleteRoamingItem(Item item){
+		if (!checkDatabase())
+			return false ;
+		Statement stmt;
+		try {
+			
+			stmt  = database.conn.createStatement();		
+			return stmt.execute("DELETE FROM `roaming` WHERE `itemid`="+item.getId()+";");
+			
+		}catch (Exception e) {
+			Logger.getLogger(this.getClass()).warn("Exception",e);
+		}
+		return false;
+	}
+	
+	public void saveItem(RoamingItem roamingItem){
+		if (!checkDatabase())
+			return ;
+		Item item = roamingItem.getItem();
+		Position position = roamingItem.getPosition();
+		Player owner = roamingItem.getOwner();
+		saveItem(item);
+		
+		int itemId = item.getId();
+		Statement stmt;
+		try {
+				
+			deleteRoamingItem(item);
+			stmt  = database.conn.createStatement();
+			String q = 
+			"INSERT INTO `roaming` (`itemid`,`mapid`,`x`,`y`,`charid`)VALUES("+
+			itemId+","+
+			position.getMap().getId()+","+
+			position.getX()+","+
+			position.getY()+","+
+			position.getZ()+","+
+			(owner==null? "NULL" : ""+owner.getId())+");";
+			stmt.execute(q);
+		
+		} 
+		catch (Exception e) {
+			Logger.getLogger(this.getClass()).warn("Exception",e);
+		}
+		
 	}
 	public void saveItem(Item item){
 		if (!checkDatabase())
@@ -773,7 +823,7 @@ public class DatabaseUtils extends Service {
 			
 		} 
 		catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(this.getClass()).warn("Exception",e);
 		}
 		
 		
@@ -795,7 +845,7 @@ public class DatabaseUtils extends Service {
 		catch (SQLException e) 
 		{
 			
-			e.printStackTrace();
+			Logger.getLogger(this.getClass()).warn("Exception",e);
 			
 		}
 	}
@@ -829,7 +879,7 @@ public class DatabaseUtils extends Service {
 				stmt.execute(query+data);
 			
 		} catch (SQLException e1) {
-			e1.printStackTrace();
+			Logger.getLogger(this.getClass()).warn("Exception",e1);
 			return;
 		}
 	}
@@ -848,7 +898,7 @@ public class DatabaseUtils extends Service {
 			}
 			
 		} catch (SQLException e1) {
-			e1.printStackTrace();
+			Logger.getLogger(this.getClass()).warn("Exception",e1);
 			return;
 		}
 	}
@@ -880,7 +930,7 @@ public class DatabaseUtils extends Service {
 				stmt.execute(query+data);
 			
 		} catch (SQLException e1) {
-			e1.printStackTrace();
+			Logger.getLogger(this.getClass()).warn("Exception",e1);
 			return;
 		}
 	}
@@ -914,7 +964,7 @@ public class DatabaseUtils extends Service {
 			}
 						
 		} catch (SQLException e1) {
-			e1.printStackTrace();
+			Logger.getLogger(this.getClass()).warn("Exception",e1);
 			return;
 		}
 	}
@@ -940,7 +990,7 @@ public class DatabaseUtils extends Service {
 			}
 			
 		} catch (SQLException e1) {
-			e1.printStackTrace();
+			Logger.getLogger(this.getClass()).warn("Exception",e1);
 			return;
 		  }
 	}
@@ -965,7 +1015,7 @@ public class DatabaseUtils extends Service {
 			}
 			
 		} catch (SQLException e1) {
-			e1.printStackTrace();
+			Logger.getLogger(this.getClass()).warn("Exception",e1);
 			return;
 		}
 	}
@@ -993,7 +1043,7 @@ public class DatabaseUtils extends Service {
 			}
 			
 		} catch (SQLException e1) {
-			e1.printStackTrace();
+			Logger.getLogger(this.getClass()).warn("Exception",e1);
 			return;
 		  }
 	}
@@ -1012,7 +1062,7 @@ public class DatabaseUtils extends Service {
 		catch (SQLException e) 
 		{
 			
-			e.printStackTrace();
+			Logger.getLogger(this.getClass()).warn("Exception",e);
 			
 		}
 	}
@@ -1036,7 +1086,7 @@ public class DatabaseUtils extends Service {
 			}
 			
 		} catch (SQLException e1) {
-			e1.printStackTrace();
+			Logger.getLogger(this.getClass()).warn("Exception",e1);
 			return;
 		}
 	}
@@ -1062,7 +1112,7 @@ public class DatabaseUtils extends Service {
 			}
 			
 		} catch (SQLException e1) {
-			e1.printStackTrace();
+			Logger.getLogger(this.getClass()).warn("Exception",e1);
 			return;
 		  }
 	}

@@ -1,5 +1,7 @@
 package com.googlecode.reunion.jreunion.server;
 
+import org.apache.log4j.Logger;
+
 import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jreunion.game.Item;
 
@@ -27,8 +29,7 @@ public class ItemFactory {
 
 		} catch (Exception e) {
 
-			System.out.println("Cannot create class:" + classname);
-			e.printStackTrace();
+			Logger.getLogger(ItemFactory.class).warn("Cannot create class:"+classname,e);
 			return null;
 		}
 		DatabaseUtils.getInstance().saveItem(item);

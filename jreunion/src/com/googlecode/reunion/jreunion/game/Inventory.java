@@ -4,7 +4,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
+import org.apache.log4j.Logger;
+
 import com.googlecode.reunion.jreunion.server.Client;
+import com.googlecode.reunion.jreunion.server.Network;
 import com.googlecode.reunion.jreunion.server.Server;
 
 /**
@@ -46,7 +49,7 @@ public class Inventory {
 		if (itemFit(tab, posX, posY, item.getSizeX(), item.getSizeY()) == true) {
 			items.add(inventoryItem);
 			success = true;
-			// System.out.print("Item Inserted\n");
+			// Logger.getLogger(Inventory.class).info("Item Inserted\n");
 			// PrintInventoryMap(0);
 			// PrintInventoryMap(1);
 			// PrintInventoryMap(2);
@@ -199,7 +202,7 @@ public class Inventory {
 				return;
 			}
 
-			 System.out.print("Item Selected: "+newInvItem.getItem().getType()+"\n");
+			Logger.getLogger(Inventory.class).info("Item Selected: "+newInvItem.getItem().getType()+"\n");
 			if (newInvItem != null) {
 				for (int x = 0; x < newInvItem.getItem().getSizeX(); x++) {
 					for (int y = 0; y < newInvItem.getItem().getSizeY(); y++) {
@@ -264,7 +267,7 @@ public class Inventory {
 			}
 		}
 
-		System.out.print("Tab " + tab + ": \n");
+		Logger.getLogger(Inventory.class).debug("Tab " + tab + ": \n");
 		Iterator<InventoryItem> iter = getInventoryIterator();
 		while (iter.hasNext()) {
 			InventoryItem item = iter.next();
@@ -283,13 +286,12 @@ public class Inventory {
 		for (int y = 0; y < 6; y++) {
 			for (int x = 0; x < 8; x++) {
 				if (newInvMap[x][y] == false) {
-					System.out.print("0");
+					Logger.getLogger(Inventory.class).debug("0");
 				}
 				if (newInvMap[x][y] == true) {
-					System.out.print("1");
+					Logger.getLogger(Inventory.class).debug("1");
 				}
 			}
-			System.out.print("\n");
 		}
 	}
 

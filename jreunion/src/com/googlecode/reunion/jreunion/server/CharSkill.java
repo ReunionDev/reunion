@@ -4,6 +4,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
+import org.apache.log4j.Logger;
+
+import com.googlecode.reunion.jcommon.Parser;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Player.Race;
 import com.googlecode.reunion.jreunion.game.Skill;
@@ -65,7 +68,7 @@ public class CharSkill {
 		// if(skill.getCurrLevel()==0){
 		// skill.setDmg(skill.getStartAmmount());
 		// }
-		// System.out.println("Skill lvl Before: "+skill.getLevel());
+		// Logger.getLogger(CharSkill.class).info("Skill lvl Before: "+skill.getLevel());
 		if (skill == null) {
 			return;
 		}

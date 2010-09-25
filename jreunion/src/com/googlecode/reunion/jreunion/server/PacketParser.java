@@ -4,6 +4,8 @@ import java.net.Socket;
 import java.util.Random;
 import java.util.regex.Pattern;
 
+import org.apache.log4j.Logger;
+
 import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jreunion.events.Event;
 import com.googlecode.reunion.jreunion.events.EventBroadcaster;
@@ -54,7 +56,7 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 			World world = client.getWorld();
 			Command com = world.getCommand();			
 			
-		System.out.println("Parsing " + message[0] + " command on client: "
+		Logger.getLogger(PacketParser.class).info("Parsing " + message[0] + " command on client: "
 				+ client);
 		switch (client.getState()) {
 		case DISCONNECTED: {
@@ -67,11 +69,11 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 			try{
 				
 			if (message[0].equals(Reference.getInstance().getServerReference().getItem("Server").getMemberValue("Version"))) {
-				System.out.println("Got Version");
+				Logger.getLogger(PacketParser.class).info("Got Version");
 				client.setState(Client.State.GOT_VERSION);
 				break;
 			} else {
-				System.out.println("Inconsistent version (err 1) detected on: "
+				Logger.getLogger(PacketParser.class).info("Inconsistent version (err 1) detected on: "
 						+ client);
 				client.sendWrongVersion(Integer.parseInt(message[0]));
 				client.setState(Client.State.DISCONNECTED);
@@ -79,7 +81,7 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 			}
 			}catch(Exception e)
 			{
-				e.printStackTrace();
+				Logger.getLogger(this.getClass()).warn("Exception",e);
 				client.disconnect();
 			}
 			*/
@@ -91,17 +93,17 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 		}
 		case GOT_VERSION: {
 			if (message[0].equals("login")) {
-				System.out.println("Got login");
+				Logger.getLogger(PacketParser.class).info("Got login");
 				client.setState(State.GOT_LOGIN);
 				client.setLoginType(LoginType.LOGIN);
 				break;
 			} else if(message[0].equals("play")) {
-				System.out.println("Got play");
+				Logger.getLogger(PacketParser.class).info("Got play");
 				client.setState(State.GOT_LOGIN);
 				client.setLoginType(LoginType.PLAY);
 				break;
 			} else {
-				System.out.println("Inconsistent protocol (err 2) detected on: "
+				Logger.getLogger(PacketParser.class).info("Inconsistent protocol (err 2) detected on: "
 						+ client);
 				client.setState(State.DISCONNECTED);
 				break;
@@ -111,11 +113,11 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 		case GOT_LOGIN: {
 			if (message[0].length() < 28) {
 				client.setUsername(new String(message[0]));
-				System.out.println("Got Username");
+				Logger.getLogger(PacketParser.class).info("Got Username");
 				client.setState(State.GOT_USERNAME);
 				break;
 			} else {
-				System.out.println("Inconsistent protocol (err 3) detected on: "
+				Logger.getLogger(PacketParser.class).info("Inconsistent protocol (err 3) detected on: "
 						+ client);
 				client.setState(State.DISCONNECTED);
 				break;
@@ -124,12 +126,12 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 		case GOT_USERNAME: {
 			if (message[0].length() < 28) {
 				client.setPassword(new String(message[0]));
-				System.out.println("Got Password");
+				Logger.getLogger(PacketParser.class).info("Got Password");
 				client.setState(State.GOT_PASSWORD);
 				com.authClient(client);
 				break;
 			} else {
-				System.out.println("Inconsistent protocol (err 4) detected on: "
+				Logger.getLogger(PacketParser.class).info("Inconsistent protocol (err 4) detected on: "
 						+ client);
 				client.setState(State.DISCONNECTED);
 				break;
@@ -330,7 +332,7 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 				int itemId = Integer.parseInt(message[1]);
 				LocalMap map = player.getPosition().getMap();				
 				RoamingItem roamingItem = map.getRoamingItem(itemId);
-				System.out.println(roamingItem+" "+itemId);
+				Logger.getLogger(PacketParser.class).info(roamingItem+" "+itemId);
 				if(roamingItem!=null){
 					client.getPlayer().pickupItem(roamingItem);							
 				}
@@ -389,7 +391,7 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 							Integer.parseInt(message[1]));
 				}
 				} catch (Exception e) {
-					System.out.println("Skill bug");
+					Logger.getLogger(PacketParser.class).info("Skill bug");
 					//TODO: Fix Skill bug
 				}
 				// client.getPlayer()Object.useSkill(Integer.parseInt(message[1]));
@@ -470,7 +472,7 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 				if (npc!=null) {
 					npc.openShop(client.getPlayer());
 				} else {
-					System.err.println("Npc not found: " + npcId);				
+					Logger.getLogger(PacketParser.class).error("Npc not found: " + npcId);				
 				}
 			} else if (message[0].equals("buy")) {
 				Merchant npc = (Merchant) Server.getInstance()
@@ -529,7 +531,7 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 			break;
 		}
 		default: {
-			System.out.println("State Conflict");
+			Logger.getLogger(PacketParser.class).info("State Conflict");
 			client.setState(Client.State.DISCONNECTED);
 		}
 		}

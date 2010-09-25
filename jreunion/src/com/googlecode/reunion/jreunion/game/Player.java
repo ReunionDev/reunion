@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.Vector;
 
+import org.apache.log4j.Logger;
+
 import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jcommon.Parser;
 import com.googlecode.reunion.jreunion.events.Event;
@@ -612,7 +614,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 	public void logout() {
 
 
-		System.out.print("Player " + getName() + " logging out...\n");
+		Logger.getLogger(Player.class).info("Player " + getName() + " logging out...\n");
 
 		DatabaseUtils.getInstance().saveSkills(this);
 		DatabaseUtils.getInstance().saveInventory(this);

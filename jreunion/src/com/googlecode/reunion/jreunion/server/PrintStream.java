@@ -9,6 +9,8 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import org.apache.log4j.Logger;
+
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
@@ -72,7 +74,7 @@ public class PrintStream extends java.io.PrintStream {
 			filebuffer = new BufferedWriter(new FileWriter(logfilename, true));
 		} catch (IOException e) {
 
-			e.printStackTrace();
+			Logger.getLogger(this.getClass()).warn("Exception",e);
 		}
 	}
 
@@ -82,14 +84,14 @@ public class PrintStream extends java.io.PrintStream {
 	 * @see java.io.PrintStream#write(byte[], int, int)
 	 */
 	@Override
-	public void write(byte[] arg0, int arg1, int arg2) {
+	public void write(byte[] buff, int off, int len) {
 
-		super.write(arg0, arg1, arg2);
+		super.write(buff, off, len);
 		checkLogfile();
 
 		try {
 
-			for (int i = 0; i < arg2; i++) {
+			for (int i = 0; i < len; i++) {
 
 				if (newline == true) {
 					String timestring = DateFormat.getTimeInstance().format(
@@ -97,9 +99,9 @@ public class PrintStream extends java.io.PrintStream {
 					filebuffer.write(timestring + " | ");
 
 				}
-				filebuffer.write(arg0[arg1 + i]);
+				filebuffer.write(buff[off + i]);
 
-				if (arg0[arg1 + i] == 10) {
+				if (buff[off + i] == 10) {
 					newline = true;
 				} else {
 					newline = false;
@@ -109,7 +111,7 @@ public class PrintStream extends java.io.PrintStream {
 			filebuffer.flush();
 		} catch (IOException e) {
 
-			e.printStackTrace();
+			Logger.getLogger(this.getClass()).warn("Exception",e);
 		}
 
 	}

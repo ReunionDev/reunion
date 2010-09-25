@@ -31,6 +31,7 @@ public class Reference {
 
 	private Parser mapReference;
 	private Parser mapConfigReference;
+	private Parser loggerConfigReference;
 
 	private Parser serverReference;
 	private static Reference _instance = null;
@@ -46,6 +47,7 @@ public class Reference {
 		npcReference = new Parser();
 		serverReference = new Parser();
 		dropListReference = new Parser();
+		loggerConfigReference = new Parser();
 	}
 
 	public void clear() {
@@ -58,6 +60,7 @@ public class Reference {
 		npcReference.clear();
 		serverReference.clear();
 		dropListReference.clear();
+		loggerConfigReference.clear();
 	}
 
 	public Parser getExpReference() {
@@ -110,7 +113,12 @@ public class Reference {
 		npcReference.Parse("data/Npc.dta");
 		serverReference.Parse("config/Settings.dta");
 		dropListReference.Parse("data/DropList.dta");
+		loggerConfigReference.Parse("config/Logger.dta");
 		
+	}
+
+	public Parser getLoggerConfigReference() {
+		return loggerConfigReference;
 	}
 
 }

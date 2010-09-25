@@ -12,6 +12,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+
 import com.googlecode.reunion.jreunion.events.client.ClientEvent.ClientFilter;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Player.Sex;
@@ -36,16 +38,20 @@ public class Test extends EventBroadcaster implements EventListener,Runnable {
 	 */
 	public static void main(String[] args) throws Exception {
 		Test t = new Test();
-
+		try{
+			throw new Exception("lalalala");
+		}catch(Exception e){
+			Logger.getLogger(Test.class).warn(e);
+		}
 		
 		Position position1 = new Position();
 		Position position2 = new Position();
 		position2.setX(10);
 		position2.setY(10);
 		
-		System.out.println(position1.distance(position2));
-		System.out.println(position1.distance(position2));
-		System.out.println(position1.within(position2,15));
+		Logger.getLogger(Test.class).info(position1.distance(position2));
+		Logger.getLogger(Test.class).info(position1.distance(position2));
+		Logger.getLogger(Test.class).info(position1.within(position2,15));
 		
 		/*
 		int port = 4009;
@@ -54,7 +60,7 @@ public class Test extends EventBroadcaster implements EventListener,Runnable {
 		Thread thread = new Thread(t);
 		thread.start();
 		Socket cl = socket.accept();
-		System.out.println(cl.getLocalSocketAddress());		
+		Logger.getLogger(Parser.class).info(cl.getLocalSocketAddress());		
 		*/
 		
 		{
@@ -62,17 +68,17 @@ public class Test extends EventBroadcaster implements EventListener,Runnable {
 			for(int i =0;i<10000;i++){
 				t.fireEvent(t.createEvent(TestEvent.class));
 			}
-			System.out.println(System.currentTimeMillis()-start);
+			Logger.getLogger(Test.class).info(System.currentTimeMillis()-start);
 		}
-		System.out.println(count);
+		Logger.getLogger(Test.class).info(count);
 		
 		EventBroadcaster.shutdown();
-		System.out.println(count);
+		Logger.getLogger(Test.class).info(count);
 	}
 
 	@Override
 	public void handleEvent(Event event) {
-		//System.out.println("ohai!"+event.getClass());
+		//Logger.getLogger(Test.class).info("ohai!"+event.getClass());
 		synchronized(this){
 			count++;
 		}
@@ -82,11 +88,11 @@ public class Test extends EventBroadcaster implements EventListener,Runnable {
 	public void run() {
 		try {
 			Socket socket = new Socket("home.aidamina.org",4009);
-			System.out.println(socket);
+			Logger.getLogger(Test.class).info(socket);
 			
 		} catch (Exception e) {
 
-			e.printStackTrace();
+			Logger.getLogger(Test.class).warn(e);
 		}
 	}
 }

@@ -4,6 +4,8 @@ import java.util.Iterator;
 import java.util.Random;
 import java.util.TimerTask;
 
+import org.apache.log4j.Logger;
+
 import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jcommon.Parser;
 import com.googlecode.reunion.jreunion.server.Client;
@@ -338,7 +340,7 @@ public class Mob extends Npc {
 			if(parsedItem.getMemberValue("Mob").equals(""+this.getType())){
 				float rate = Float.parseFloat(parsedItem.getMemberValue("Rate"));
 				if( r.nextFloat()<rate){
-					System.out.println(parsedItem.getMemberValue("Item"));
+					Logger.getLogger(Mob.class).info(parsedItem.getMemberValue("Item"));
 					int itemType = Integer.parseInt(parsedItem.getMemberValue("Item"));
 					
 					Item item = ItemFactory.create(itemType);

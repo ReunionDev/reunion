@@ -3,6 +3,8 @@ package com.googlecode.reunion.jreunion.server;
 import java.util.Iterator;
 import java.util.Vector;
 
+import org.apache.log4j.Logger;
+
 import com.googlecode.reunion.jreunion.game.Mob;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Position;
@@ -164,7 +166,7 @@ public class MobManager {
 					moveToPlayer = false;
 				}
 				} catch (Exception e) {
-					System.out.println("Mob Bug");
+					Logger.getLogger(MobManager.class).info("Mob Bug");
 					//TODO: Fix Mob move bug
 				}
 			}
@@ -194,7 +196,7 @@ public class MobManager {
 				double distance = spawn.getPosition().distance(newPos);
 			
 				if ((int) distance <= spawn.getRadius()) {
-					// System.out.print("Distance <= Radius\n");					
+					// Logger.getLogger(MobManager.class).info("Distance <= Radius\n");					
 					mob.setPosition(newPos);
 				}
 			}

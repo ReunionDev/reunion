@@ -122,17 +122,8 @@ public class Client extends EventBroadcaster implements EventListener,Sendable {
 	
 	public Client(World world,Socket socket) {
 		
-		
-		
 		super();
 		
-		logger = Logger.getLogger("server.client."+socket);
-		try {
-			fh = new FileHandler("mylog.txt");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		logger.addHandler(fh);
 		setWorld(world);
 		accountId = -1;
 		state = State.DISCONNECTED;

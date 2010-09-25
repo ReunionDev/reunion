@@ -15,6 +15,8 @@ import com.googlecode.reunion.jreunion.events.server.ServerStopEvent;
 import com.mysql.jdbc.MySQLConnection;
 import java.sql.PreparedStatement;
 
+import org.apache.log4j.Logger;
+
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
@@ -39,7 +41,7 @@ public class Database implements EventListener {
 
 		if (databaseConfig == null
 				|| !databaseConfig.checkMembers(requiredMembers)) {
-			System.out.println("Error loading database config");
+			Logger.getLogger(Database.class).info("Error loading database config");
 			return;
 		}
 		DatabaseUtils.getInstance().setDatabase(this); // link utils to
@@ -51,7 +53,7 @@ public class Database implements EventListener {
 				+ "?autoReconnect=true";
 		Class.forName("com.mysql.jdbc.Driver").newInstance();
 		conn = DriverManager.getConnection(url, userName, password);
-		System.out.println(getClass().getSimpleName() + " connection established");
+		Logger.getLogger(Database.class).info(getClass().getSimpleName() + " connection established");
 
 	}
 
@@ -60,7 +62,7 @@ public class Database implements EventListener {
 		try {
 			connect();
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(this.getClass()).warn("Exception",e);
 		}
 	
 	}
@@ -70,7 +72,7 @@ public class Database implements EventListener {
 		if (conn != null) {
 			try {
 				conn.close();
-				System.out.println(getClass().getName()
+				Logger.getLogger(Database.class).info(getClass().getName()
 						+ " connection terminated");
 			} catch (Exception e) { /* ignore close errors */
 			}
@@ -79,7 +81,7 @@ public class Database implements EventListener {
 
 	@Override
 	public void handleEvent(Event event) {
-		System.out.println(event);
+		Logger.getLogger(Database.class).info(event);
 		 if(event instanceof ServerStartEvent){
 			start();
 		}else if(event instanceof ServerStopEvent){

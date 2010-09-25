@@ -113,8 +113,7 @@ public class Network extends Service implements Runnable, EventListener{
 							// If the connection is dead, then remove it
 							// from the selector and close it
 							if (!ok) {
-								System.out
-								.println("Client Connection Lost");
+								Logger.getLogger(Network.class).info("Client Connection Lost");
 								throw new IOException("Connection Lost");
 
 							}
@@ -142,7 +141,7 @@ public class Network extends Service implements Runnable, EventListener{
 		} catch (Exception ie) {
 			if(ie instanceof ClosedSelectorException)
 				return;
-			System.err.println(ie);
+			Logger.getLogger(Network.class).error(ie);
 		}
 	}
 	
@@ -167,13 +166,12 @@ public class Network extends Service implements Runnable, EventListener{
 		byte[] output = new byte[size];
 		buffer.get(output, 0, size);
 
-		System.out.print(client + " sends: \n");
-
 		char[] decOutput = Crypt.getInstance().C2Sdecrypt(output);
 
 		String data = new String(decOutput);
 		
-		System.out.print(data);
+		
+		Logger.getLogger(World.class).debug(client + " sends: \n"+data);
 		
 		fireEvent(NetworkDataEvent.class, socket, data);
 		
@@ -204,12 +202,13 @@ public class Network extends Service implements Runnable, EventListener{
 			buffer.put(packetBytes);
 			buffer.flip();
 			outputBuffer.setLength(0);
-			System.out.print("Sending to "+client+":\n" + packetData);
+			
+			Logger.getLogger(Network.class).info("Sending to "+client+":\n" + packetData);
 		}
 		try {
 			socketChannel.write(buffer);
 		} catch (IOException e) {
-			e.printStackTrace();
+			Logger.getLogger(this.getClass()).warn("Exception",e);
 			disconnect(socket);				
 		}
 		return true;
@@ -221,16 +220,15 @@ public class Network extends Service implements Runnable, EventListener{
 				processOutput(socket.getChannel());
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				Logger.getLogger(this.getClass()).warn("Exception",e);
 			}
 		}
-		
-		System.out.println("Disconnecting " + socket);
+		Logger.getLogger(Network.class).info("Disconnecting " + socket);
 		fireEvent(NetworkDisconnectEvent.class, socket);
 		try {
 			socket.close();
 		} catch (IOException e) {
-			// e.printStackTrace();
+			// Logger.getLogger(this.getClass()).warn("Exception",e);
 		}
 	}
 	
@@ -243,7 +241,7 @@ public class Network extends Service implements Runnable, EventListener{
 				}
 			}
 		} catch (ClosedChannelException e) {
-			e.printStackTrace();
+			Logger.getLogger(this.getClass()).warn("Exception",e);
 		}		
 	}
 
@@ -253,7 +251,7 @@ public class Network extends Service implements Runnable, EventListener{
 		
 	}
 
-	public void register(InetSocketAddress address) {
+	public boolean register(InetSocketAddress address) {
 		try {
 			ServerSocketChannel serverChannel = ServerSocketChannel.open();
 			ServerSocket serverSocket = serverChannel.socket();
@@ -266,16 +264,17 @@ public class Network extends Service implements Runnable, EventListener{
 			
 		} catch (Exception e) {
 			if (e instanceof BindException) {
-				System.out.println("Port " + address.getPort()
-						+ " not available. Is the server already running?");
-				throw new RuntimeException(e);
+				Logger.getLogger(Network.class).error("Port " + address.getPort()
+						+ " not available. Is the server already running?",e);
+				return false;
 			}
 		}
+		return true;
 	}
 
 	public void stop() {
 		try {
-			System.out.println("net stop");
+			Logger.getLogger(Network.class).info("net stop");
 		
 			for(Socket socket : sockets){				
 				disconnect(socket);
@@ -284,7 +283,7 @@ public class Network extends Service implements Runnable, EventListener{
 			selector.close();
 			thread.interrupt();
 		} catch (IOException e) {
-			e.printStackTrace();
+			Logger.getLogger(this.getClass()).warn("Exception",e);
 		}
 	}
 

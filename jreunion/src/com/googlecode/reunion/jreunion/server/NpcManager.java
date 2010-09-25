@@ -3,6 +3,8 @@ package com.googlecode.reunion.jreunion.server;
 import java.util.Iterator;
 import java.util.Vector;
 
+import org.apache.log4j.Logger;
+
 import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jreunion.game.Npc;
 
@@ -48,8 +50,8 @@ public class NpcManager {
 
 		} catch (Exception e) {
 
-			System.out.println("Cannot create class:" + classname);
-			e.printStackTrace();
+			Logger.getLogger(NpcManager.class).info("Cannot create class:" + classname);
+			Logger.getLogger(this.getClass()).warn("Exception",e);
 			return null;
 		}
 		npc.setId(++npcIdCounter);

@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.TimerTask;
 import java.util.Vector;
 
+import org.apache.log4j.Logger;
+
 import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jreunion.events.Event;
 import com.googlecode.reunion.jreunion.events.EventListener;
@@ -200,7 +202,7 @@ public class World extends ClassModule implements EventListener, Sendable{
 															
 				network.addEventListener(NetworkDataEvent.class, client, new NetworkEvent.NetworkFilter(socket));
 				
-				System.out.print("Got connection from " + socket+"\n");
+				Logger.getLogger(World.class).debug("Got connection from " + socket+"\n");
 				
 				client.setState(Client.State.ACCEPTED);
 				

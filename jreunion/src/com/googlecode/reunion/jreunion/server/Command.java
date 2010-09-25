@@ -5,6 +5,8 @@ import java.net.Socket;
 import java.util.BitSet;
 import java.util.Iterator;
 
+import org.apache.log4j.Logger;
+
 import com.googlecode.reunion.jreunion.events.map.ItemDropEvent;
 import com.googlecode.reunion.jreunion.game.Equipment;
 import com.googlecode.reunion.jreunion.game.Item;
@@ -91,12 +93,12 @@ public class Command {
 		
 		int accountId = DatabaseUtils.getInstance().Auth(username, password);
 		if (accountId == -1) {
-			System.out.println("Invalid Login");
+			Logger.getLogger(Command.class).info("Invalid Login");
 			client.sendPacket(Type.FAIL,"Username and password combination is invalid");
 			//client.disconnect();
 		} else {
 			
-			System.out.println("" + client + " authed as account(" + accountId + ")");
+			Logger.getLogger(Command.class).info("" + client + " authed as account(" + accountId + ")");
 			client.setAccountId(accountId);
 			
 			java.util.Map<Socket,Client> clients = world.getClients();
@@ -158,6 +160,8 @@ public class Command {
 		RoamingItem roamingItem = new RoamingItem(item);
 		roamingItem.setPosition(position);
 		
+		DatabaseUtils.getInstance().saveItem(roamingItem);
+		
 		LocalMap map = position.getMap();
 		
 		map.fireEvent(ItemDropEvent.class, roamingItem);
@@ -169,22 +173,9 @@ public class Command {
 	/****** teleport player to player2 position ******/
 	public void GoToChar(Player player, String charName) {
 		Client client = player.getClient();
-		Player player2 = Server.getInstance().getWorld()
+		Player target = Server.getInstance().getWorld()
 				.getPlayerManager().getPlayer(charName);
-
-		if (client == null) {
-			return;
-		}
-
-		player.getPosition().setX(player2.getPosition().getX() + 10);
-		player.getPosition().setY(player2.getPosition().getY() + 10);
-		player.getPosition().setZ(player2.getPosition().getZ());
-
-		String packetData = "goto " + player.getPosition().getX() + " "
-				+ player.getPosition().getY() + " "
-				+ player.getPosition().getZ() + " "
-				+ player.getPosition().getRotation() + "\n";
-		client.SendData(packetData);
+		GoToPos(player,target.getPosition());
 	}
 	
 	
@@ -234,8 +225,7 @@ public class Command {
 		session.empty();
 		} catch (Exception e) {
 			//TODO: Fix Teleporting
-			e.printStackTrace();
-			System.out.println("teleportbug");
+			Logger.getLogger(Command.class).warn("teleportbug",e);
 		}
 		
 		client.sendPacket(Type.GO_WORLD, map, unknown);
@@ -291,34 +281,21 @@ public class Command {
 				accountId, client);
 		
 		Socket socket = client.getSocket();
-		/*
-		 * S_Map map =
-		 * S_Server.getInstance().getWorldModule().getTeleportManager
-		 * ().getDestination(player); if (map==null) {
-		 * if(client.getLoginType()==S_LoginType.PLAY) { System.err.println(
-		 * "Got a play login while no teleport for this player was pending"
-		 * +client.getPlayer()); client.disconnect();
-		 * 
-		 * return null; } int mapId =
-		 * Integer.parseInt(S_Reference.getInstance().
-		 * getServerReference().getItem("Server").getMemberValue("DefaultMap"));
-		 * map = S_Server.getInstance().getWorldModule().getMap(mapId);
-		 * System.out.println("Loading default map "+ map); }
-		 */
+	
 		// TODO: Fix hack and prevent teleport hack
 		Map map = null;
-		System.out.println(socket.getLocalSocketAddress());
+		Logger.getLogger(Command.class).info(socket.getLocalSocketAddress());
 		for (Map m : Server.getInstance().getWorld().getMaps()) {
-			System.out.println(m.getAddress());
+			Logger.getLogger(Command.class).info(m.getAddress());
 			if (m.getAddress().equals(socket.getLocalSocketAddress())) {
 				map = m;
 				break;
 			}
 		}
 
-		// TODO: do we really need this here?
+		
 		if (map == null || !map.isLocal()) {
-			System.err.println("Invalid Map: " + map);
+			Logger.getLogger(Command.class).error("Invalid Map: " + map);
 			player.getClient().disconnect();
 			return null;
 		}
@@ -654,7 +631,7 @@ public class Command {
 		if (client == null) {
 			return;
 		}
-		System.out.println(uniqueId);
+		Logger.getLogger(Command.class).info(uniqueId);
 
 		Item item = null;
 		//TODO: FIX
@@ -760,7 +737,7 @@ public class Command {
 					+ spWeapon.getSpecialWeaponMinDamage();
 		}
 
-		System.out.print("Skill Level: "
+		Logger.getLogger(Command.class).info("Skill Level: "
 				+ player.getCharSkill().getSkill(40).getCurrLevel() + "\n");
 
 		// Max normal attack damage * memory of the slayer * % skill (40)

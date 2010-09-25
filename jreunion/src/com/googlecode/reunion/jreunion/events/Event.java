@@ -2,6 +2,8 @@ package com.googlecode.reunion.jreunion.events;
 
 import java.lang.reflect.InvocationTargetException;
 
+import org.apache.log4j.Logger;
+
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
@@ -29,7 +31,7 @@ public class Event {
 			event.setSource(source);
 			return (T) event;
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger.getLogger(Event.class).warn("Exception",e);
 		}
 		return null;
 	}
