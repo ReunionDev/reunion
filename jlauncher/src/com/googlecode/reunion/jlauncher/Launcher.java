@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.util.Iterator;
 
+import org.apache.log4j.Logger;
+
 import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jcommon.Parser;
 import com.googlecode.reunion.jcommon.ServerList;
@@ -30,7 +32,7 @@ public class Launcher {
 			Runtime.getRuntime().exec("Game.exe "+version);
 			
 		} catch (IOException e) {
-			e.printStackTrace();
+			Logger.getLogger(Launcher.class).warn("Exception",e);
 		}
 
 	}
