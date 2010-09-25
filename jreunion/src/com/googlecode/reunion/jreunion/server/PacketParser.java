@@ -212,35 +212,13 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 				client.SendData(
 						"status 19 " + player.getPenaltyPoints() + " 0\n");
 				
-				int defaultSpawnId = Integer.parseInt(Reference.getInstance().getMapReference().getItemById(player.getPosition().getMap().getId()).getMemberValue("DefaultSpawnId"));
-				ParsedItem spawn =player.getPosition().getMap().getPlayerSpawnReference().getItemById(defaultSpawnId);
 				
-				int x = Integer.parseInt(spawn.getMemberValue("X"));
-				int y = Integer.parseInt(spawn.getMemberValue("Y"));
-				int z = spawn.getMemberValue("Z")==null?0:Integer.parseInt(spawn.getMemberValue("Z"));
-				int width = Integer.parseInt(spawn.getMemberValue("Width"));
-				int height = Integer.parseInt(spawn.getMemberValue("Height"));
-				
-				Random rand = new Random(System.currentTimeMillis());
-				int spawnX = x+(width>0?rand.nextInt(width):0);
-				int spawnY = y+(height>0?rand.nextInt(height):0);
-				
-				player.getPosition().setX(spawnX);
-				player.getPosition().setY(spawnY);
-				player.getPosition().setZ(z);
-				
-				
-						
-
 				world.getPlayerManager().addPlayer(player);
 				
 				player.getPosition().getMap().fireEvent(PlayerLoginEvent.class, player);
 				//world.getSessionManager().newSession(player);
 				
-				client.SendData(
-						"at " + client.getPlayer().getId() + " "
-								+ player.getPosition().getX() + " " + player.getPosition().getY() + " "
-								+ player.getPosition().getZ() + " 0\n");
+				
 
 				/*
 				 * server.getNetworkModule().SendPacket(client.networkId,

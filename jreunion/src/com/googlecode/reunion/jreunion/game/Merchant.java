@@ -76,8 +76,14 @@ public class Merchant extends Npc {
 	
 	
 	@Override
-	public void loadFromReference(int id) {
-		super.loadFromReference(id);
+	public void loadFromReference(int type) {
+		super.loadFromReference(type);
+		ParsedItem npc = Reference.getInstance().getNpcReference().getItemById(type);
+		
+		
+		setSellRate(Integer.parseInt(npc.getMemberValue("SellRate")));
+		setBuyRate(Integer.parseInt(npc.getMemberValue("BuyRate")));
+		setShop(npc.getMemberValue("Shop"));
 
 		loadItemList();
 		try {
@@ -85,19 +91,7 @@ public class Merchant extends Npc {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		ParsedItem npc = Reference.getInstance().getNpcReference()
-				.getItemById(id);
-
-		if (npc == null) {
-			// cant find Item in the reference continue to load defaults:
-			setHp(100);
-		} else {
-
-			if (npc.checkMembers(new String[] { "Hp" })) {
-				// use member from file
-				setHp(Integer.parseInt(npc.getMemberValue("Hp")));
-			}
-		}
+			
 	}
 
 	public void loadItemList() {

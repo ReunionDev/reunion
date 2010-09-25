@@ -192,58 +192,17 @@ public class Command {
 		
 		Client client = player.getClient();
 		
+		SessionList<Session> exit = player.getInterested().getSessions();
+		exit.exit(player);
 		player.setPosition(position);
+		
+		SessionList<Session> entry = player.getPosition().getMap().GetSessions(position);
+		
+		entry.enter(player, false);		
+		entry.sendPacket(Type.CHAR_IN, player, true);
 		
 		client.sendPacket(Type.GOTO, position);
 		
-		
-	}
-
-	/****** teleport player to position (posX,posY) in the current map ******/
-	public void GoToPos(Player player, int posX, int posY) {
-		Client client = player.getClient();
-
-		
-		player.getPosition().setX(posX);
-		player.getPosition().setY(posY);
-
-		String packetData = "goto " + posX + " " + posY + " 0 "
-				+ player.getPosition().getRotation() + "\n";
-		client.SendData(packetData);
-
-		//TODO: fix goto
-		/*
-		Iterator<Session> sessionIter = Server.getInstance()
-				.getWorld().getSessionManager().getSessionListIterator();
-
-		while (sessionIter.hasNext()) {
-			Session session = sessionIter.next();
-			Player pl = session.getOwner();
-
-			if (session.contains(player)) {
-				session.enter(player);
-				player.getSession().exit(pl);
-			}
-
-			if (pl.getPosition().getMap() != player.getPosition().getMap()
-					|| pl == player) {
-				continue;
-			}
-
-			client = pl.getClient();
-
-			if (client == null) {
-				continue;
-			}
-
-			int distance = pl.getDistance(player);
-
-			if (distance <= session.getOwner().getSessionRadius()) {
-				session.enter(player); // TODO: fix warp
-				player.getSession().enter(pl);
-			}
-		}
-		*/
 	}
 
 	/****** change map ******/
@@ -275,6 +234,7 @@ public class Command {
 		session.empty();
 		} catch (Exception e) {
 			//TODO: Fix Teleporting
+			e.printStackTrace();
 			System.out.println("teleportbug");
 		}
 		
@@ -327,11 +287,8 @@ public class Command {
 
 	public Player loginChar(int slotNumber, int accountId, Client client) {
 		
-		
-		
 		Player player = DatabaseUtils.getInstance().loadChar(slotNumber,
 				accountId, client);
-		
 		
 		Socket socket = client.getSocket();
 		/*
@@ -362,10 +319,10 @@ public class Command {
 		// TODO: do we really need this here?
 		if (map == null || !map.isLocal()) {
 			System.err.println("Invalid Map: " + map);
+			player.getClient().disconnect();
 			return null;
 		}
-
-		
+		player.getPosition().setMap((LocalMap)map);
 
 		DatabaseUtils.getInstance().loadEquipment(player);
 		Equipment eq = player.getEquipment();
@@ -448,19 +405,6 @@ public class Command {
 		DatabaseUtils.getInstance().loadExchange(player);
 		DatabaseUtils.getInstance().loadStash(client);
 		DatabaseUtils.getInstance().loadQuickSlot(player);
-
-		
-		
-		if(!(map instanceof LocalMap)){
-			
-			player.getClient().disconnect();
-			System.err.println("not a local map");
-			
-		}
-		else
-			player.getPosition().setMap((LocalMap)map);
-		
-
 
 		serverSay(player.getName() + " is logging in (ID: "
 				+ player.getId() + ")\n");

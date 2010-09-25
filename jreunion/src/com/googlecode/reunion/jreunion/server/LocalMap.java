@@ -1,7 +1,5 @@
 package com.googlecode.reunion.jreunion.server;
 
-import java.net.InetSocketAddress;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
@@ -9,18 +7,17 @@ import java.util.Vector;
 import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jcommon.Parser;
 import com.googlecode.reunion.jreunion.events.Event;
-import com.googlecode.reunion.jreunion.events.EventBroadcaster;
-import com.googlecode.reunion.jreunion.events.EventListener;
 import com.googlecode.reunion.jreunion.events.map.ItemDropEvent;
 import com.googlecode.reunion.jreunion.events.map.MapEvent;
-import com.googlecode.reunion.jreunion.events.map.NpcSpawnEvent;
+import com.googlecode.reunion.jreunion.events.map.SpawnEvent;
 import com.googlecode.reunion.jreunion.events.map.PlayerLoginEvent;
+import com.googlecode.reunion.jreunion.events.map.PlayerLogoutEvent;
 import com.googlecode.reunion.jreunion.events.session.NewSessionEvent;
 import com.googlecode.reunion.jreunion.events.session.SessionEvent;
-import com.googlecode.reunion.jreunion.game.Merchant;
-import com.googlecode.reunion.jreunion.game.Mob;
 import com.googlecode.reunion.jreunion.game.Npc;
+import com.googlecode.reunion.jreunion.game.NpcSpawn;
 import com.googlecode.reunion.jreunion.game.Player;
+import com.googlecode.reunion.jreunion.game.PlayerSpawn;
 import com.googlecode.reunion.jreunion.game.Position;
 import com.googlecode.reunion.jreunion.game.RoamingItem;
 import com.googlecode.reunion.jreunion.game.Spawn;
@@ -36,7 +33,9 @@ public class LocalMap extends Map implements Runnable{
 	
 	private List<Spawn> mobSpawnList = new Vector<Spawn>();
 
-	private List<Npc> npcSpawnList = new Vector<Npc>();
+	private List<Spawn> npcSpawnList = new Vector<Spawn>();
+	
+	private List<Spawn> playerSpawnList = new Vector<Spawn>();
 
 	private Area playerArea = new Area();
 
@@ -55,6 +54,8 @@ public class LocalMap extends Map implements Runnable{
 	private Parser mobSpawnReference;
 
 	private Parser npcSpawnReference;
+	
+	private PlayerSpawn defaultSpawn;
 
 	World world;
 
@@ -68,33 +69,13 @@ public class LocalMap extends Map implements Runnable{
 		
 		thread = new Thread(this);
 		thread.start();
-		this.addEventListener(NpcSpawnEvent.class, this);
-		this.addEventListener(PlayerLoginEvent.class, this);		
+		this.addEventListener(SpawnEvent.class, this);
+		this.addEventListener(PlayerLoginEvent.class, this);
+		this.addEventListener(PlayerLogoutEvent.class, this);
 		this.addEventListener(ItemDropEvent.class, this);
-		
 	}
-
-	public void addMobSpawn(Spawn spawn) {
-		if (spawn == null) {
-			return;
-		}
-		mobSpawnList.add(spawn);
-
-	}
-
-	public void addNpcSpawn(Npc npc) {
-		if (npc == null) {
-			return;
-		}
-		npcSpawnList.add(npc);
-
-	}
-
-	public void createMobSpawns() {
-
-		if (mobSpawnReference == null) {
-			return;
-		}
+	
+	private void createMobSpawns() {
 
 		mobSpawnList.clear();
 		Iterator<ParsedItem> iter = mobSpawnReference.getItemListIterator();
@@ -110,10 +91,11 @@ public class LocalMap extends Map implements Runnable{
 				continue;
 			}
 
-			Spawn spawn = new Spawn();
+			NpcSpawn spawn = new NpcSpawn();
+			spawn.setType(Spawn.Type.MOB);
 			
 			int posZ = item.getMemberValue("Z") == null ? 0 : Integer.parseInt(item.getMemberValue("Z"));
-			double rotation = item.getMemberValue("Rotation") == null ? Server.getRand().nextDouble()*Math.PI * 2 : Double.parseDouble(item.getMemberValue("Rotation"));
+			double rotation = item.getMemberValue("Rotation") == null ? Double.NaN : Double.parseDouble(item.getMemberValue("Rotation"));
 			Position position = new Position(
 					Integer.parseInt(item.getMemberValue("X")),
 					Integer.parseInt(item.getMemberValue("Y")),
@@ -123,20 +105,17 @@ public class LocalMap extends Map implements Runnable{
 			
 			spawn.setPosition(position);
 			spawn.setRadius(Integer.parseInt(item.getMemberValue("Radius")));
-			spawn.setMobType(Integer.parseInt(item.getMemberValue("Type")));
+			spawn.setNpcType(Integer.parseInt(item.getMemberValue("Type")));
 			spawn.setRespawnTime(Integer.parseInt(item
 					.getMemberValue("RespawnTime")));
 			
-			addMobSpawn(spawn);
-			spawn.spawnMob();
+			mobSpawnList.add(spawn);
+			
+			spawn.spawn();
 		}
 	}
 
-	public void createNpcSpawns() {
-
-		if (npcSpawnReference == null) {
-			return;
-		}
+	private void createNpcSpawns() {
 
 		npcSpawnList.clear();
 
@@ -144,33 +123,32 @@ public class LocalMap extends Map implements Runnable{
 
 		while (iter.hasNext()) {
 
-			ParsedItem i = iter.next();
+			ParsedItem item = iter.next();
 
-			if (!i.checkMembers(new String[] { "ID", "X", "Y",
+			if (!item.checkMembers(new String[] { "ID", "X", "Y",
 					"Rotation", "Type" })) {
 				System.out.println("Error loading a npc spawn on map: "
 						+ getId());
 				continue;
 			}
-			Npc newNpc = Server.getInstance().getWorld()
-					.getNpcManager()
-					.createNpc(Integer.parseInt(i.getMemberValue("Type")));
 			
+			NpcSpawn spawn = new NpcSpawn();
+			spawn.setType(Spawn.Type.NPC);
 			
-			newNpc.getPosition().setX(Integer.parseInt(i.getMemberValue("X")));
-			newNpc.getPosition().setY(Integer.parseInt(i.getMemberValue("Y")));
-			newNpc.getPosition().setRotation(Double.parseDouble(i.getMemberValue("Rotation")));
-			newNpc.getPosition().setMap(this);
-
-			if (newNpc instanceof Merchant) {
-				
-				Merchant merchant = (Merchant)newNpc;
-				
-				merchant.setSellRate(Integer.parseInt(i.getMemberValue("SellRate")));
-				merchant.setBuyRate(Integer.parseInt(i.getMemberValue("BuyRate")));
-				merchant.setShop(i.getMemberValue("Shop"));
-				merchant.loadFromReference(merchant.getType());
-			}
+			int posZ = item.getMemberValue("Z") == null ? 0 : Integer.parseInt(item.getMemberValue("Z"));
+			double rotation = item.getMemberValue("Rotation") == null ? Double.NaN : Double.parseDouble(item.getMemberValue("Rotation"));
+			Position position = new Position(
+					Integer.parseInt(item.getMemberValue("X")),
+					Integer.parseInt(item.getMemberValue("Y")),
+					posZ,
+					this,
+					rotation);
+			
+			spawn.setPosition(position);
+			spawn.setNpcType(Integer.parseInt(item.getMemberValue("Type")));
+			npcSpawnList.add(spawn);
+			
+			spawn.spawn();
 		}
 	}
 
@@ -205,8 +183,61 @@ public class LocalMap extends Map implements Runnable{
 		loadFromReference(getId());
 		createMobSpawns();
 		createNpcSpawns();
+		createPlayerSpawns();
 		System.out.println(getName()+" running on "+getAddress());
 		
+	}
+
+	private void createPlayerSpawns() {
+		int defaultSpawnId = Integer.parseInt(Reference.getInstance().getMapReference().getItemById(this.getId()).getMemberValue("DefaultSpawnId"));
+		playerSpawnList.clear();
+
+		Iterator<ParsedItem> iter = playerSpawnReference.getItemListIterator();
+
+		while (iter.hasNext()) {
+
+			ParsedItem item = iter.next();
+
+			if (!item.checkMembers(new String[] { "ID", "X", "Y"
+					})) {
+				System.out.println("Error loading a player spawn on map: "
+						+ getId());
+				continue;
+			}			
+			PlayerSpawn spawn = new PlayerSpawn();
+			
+			int posZ = item.getMemberValue("Z") == null ? 0 : Integer.parseInt(item.getMemberValue("Z"));
+			double rotation = item.getMemberValue("Rotation") == null ? Double.NaN : Double.parseDouble(item.getMemberValue("Rotation"));
+			Position position = new Position(
+					Integer.parseInt(item.getMemberValue("X")),
+					Integer.parseInt(item.getMemberValue("Y")),
+					posZ,
+					this,
+					rotation);
+			
+			int targetX = item.getMemberValue("TargetX")==null?-1:Integer.parseInt(item.getMemberValue("TargetX"));
+			int targetY = item.getMemberValue("TargetY")==null?-1:Integer.parseInt(item.getMemberValue("TargetY"));
+			int targetWidth = item.getMemberValue("TargetWidth")==null?-1:Integer.parseInt(item.getMemberValue("TargetWidth")); 
+			int targetHeight = item.getMemberValue("TargetHeight")==null?-1:Integer.parseInt(item.getMemberValue("TargetHeight"));
+			
+			int radius = item.getMemberValue("Radius")==null?0:Integer.parseInt(item.getMemberValue("Radius"));
+			
+			spawn.setRadius(radius);
+			spawn.setTargetX(targetX);
+			spawn.setTargetY(targetY);
+			spawn.setTargetWidth(targetWidth);
+			spawn.setTargetHeight(targetHeight);
+			
+			spawn.setPosition(position);
+			
+			if(Integer.parseInt(item.getMemberValue("ID"))==defaultSpawnId){
+				
+				this.defaultSpawn = spawn;
+			}
+			
+			playerSpawnList.add(spawn);
+			
+		}
 	}
 
 	public void loadFromReference(int id) {
@@ -230,28 +261,29 @@ public class LocalMap extends Map implements Runnable{
 				.getItemById(id).getMemberValue("PvpArea"));
 	}
 
-	public Iterator<Spawn> mobSpawnListIterator() {
-		return mobSpawnList.iterator();
-	}
-
-	public Iterator<Npc> npcSpawnListIterator() {
-		return npcSpawnList.iterator();
-	}	
 	
 	public SessionList<Session> GetSessions(Position position){
 		
 		SessionList<Session> results = new SessionList<Session>();
-		
 		synchronized(sessions){			
 			for(Session session:sessions){
-				if(session.contains(position)){
-					
+				if(session.contains(position)){					
 					results.add(session);
 					
 				}
-				
-			}		
-			
+			}
+		}
+		return results;
+	}
+	public SessionList<Session> GetSessions(WorldObject entity){
+		
+		SessionList<Session> results = new SessionList<Session>();
+		synchronized(sessions){			
+			for(Session session:sessions){
+				if(session.contains(entity)){					
+					results.add(session);
+				}
+			}
 		}
 		return results;
 	}
@@ -262,8 +294,8 @@ public class LocalMap extends Map implements Runnable{
 		if(event instanceof MapEvent){
 			LocalMap map = ((MapEvent)event).getMap();
 			
-			if(event instanceof NpcSpawnEvent){
-				NpcSpawnEvent mobSpawnEvent = (NpcSpawnEvent)event;
+			if(event instanceof SpawnEvent){
+				SpawnEvent mobSpawnEvent = (SpawnEvent)event;
 				Npc npc = mobSpawnEvent.getNpc();
 				SessionList<Session> list = GetSessions(npc.getPosition());
 				
@@ -296,15 +328,35 @@ public class LocalMap extends Map implements Runnable{
 				
 				Player player = playerLoginEvent.getPlayer();
 				
+				defaultSpawn.spawn(player);
+				
 				SessionList<Session> list = GetSessions(player.getPosition());
 				
 				Session session = new Session(player);
 				synchronized(entities) {
 					sessions.add(session);
 					entities.add(player);
-					list.enter(player, false);					
-				}				
-				list.sendPacket(Type.CHAR_IN, player,true);
+									
+				}
+				
+				list.enter(player, false);
+				list.sendPacket(Type.CHAR_IN, player, true);
+			}
+			if(event instanceof PlayerLogoutEvent){
+				
+				PlayerLogoutEvent playerLogoutEvent = (PlayerLogoutEvent)event;
+				
+				Player player = playerLogoutEvent.getPlayer();
+				
+				Session session = player.getSession();
+				synchronized(entities) {
+					sessions.remove(session);
+					entities.remove(player);
+					
+				}	
+				SessionList<Session> list = player.getInterested().getSessions();
+				list.exit(player, false);
+				list.sendPacket(Type.OUT_CHAR, player);				
 			}
 			
 		}else if(event instanceof SessionEvent){
@@ -327,7 +379,6 @@ public class LocalMap extends Map implements Runnable{
 			try {
 				synchronized(this){				
 					this.wait();
-					
 				}
 				
 				System.out.println(this+" work");
@@ -353,16 +404,11 @@ public class LocalMap extends Map implements Runnable{
 						boolean within = owner.getPosition().within(entity.getPosition(), owner.getSessionRadius());
 						boolean contains = session.contains(entity);
 						
-						if(entity instanceof Npc) {
-							
-							
-						}
-						
-						if(contains && !within){
+						if(contains && !within) {
 							
 							session.exit(entity);	
 							
-						}else if(!contains && within){
+						} else if(!contains && within) {
 												
 							session.enter(entity);
 													
@@ -376,15 +422,11 @@ public class LocalMap extends Map implements Runnable{
 				e.printStackTrace();
 				throw new RuntimeException(e);
 			}
-			finally{
-				
+			finally{				
 				timer.Reset();
 				
 			}
-			
-			
 		}
-		
 	}
 
 	public RoamingItem getRoamingItem(int itemId) {

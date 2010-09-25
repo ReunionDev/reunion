@@ -128,6 +128,9 @@ public class Mob extends Npc {
 
 		if (mob == null) {
 			// cant find Item in the reference continue to load defaults:
+			setHp(1);
+			setMaxHp(1);
+			setLevel(1);
 			setExp(1);
 			setLime(1);
 			setDmg(0);
@@ -136,7 +139,25 @@ public class Mob extends Npc {
 			setNeoProgmare(0);
 			setSpeed(1);
 		} else {
-
+			
+			if (mob.checkMembers(new String[] { "Hp" })) {
+				// use member from file
+				setHp(Integer.parseInt(mob.getMemberValue("Hp")));
+				setMaxHp(Integer.parseInt(mob.getMemberValue("Hp")));
+			} else {
+				// use default
+				setHp(1);
+				setMaxHp(1);
+			}
+			
+			if (mob.checkMembers(new String[] { "Level" })) {
+				// use member from file
+				setLevel(Integer.parseInt(mob.getMemberValue("Level")));
+			} else {
+				// use default
+				setLevel(1);
+			}
+			
 			if (mob.checkMembers(new String[] { "Exp" })) {
 				// use member from file
 				setExp((int) (Integer.parseInt(mob.getMemberValue("Exp")) * Server
@@ -199,6 +220,10 @@ public class Mob extends Npc {
 				// use default
 				setSpeed(1);
 			}
+			
+			
+			
+			
 		}
 	}
 	
@@ -301,7 +326,7 @@ public class Mob extends Npc {
 		setHp(0);
 
 		this.getPosition().getMap().getWorld().getMobManager().removeMob(this);
-		Spawn spawn = this.getSpawn();
+		NpcSpawn spawn = this.getSpawn();
 		if (spawn != null) {
 			spawn.kill();
 		}

@@ -6,7 +6,9 @@ import java.io.FileWriter;
 import com.googlecode.reunion.jreunion.game.Item;
 import com.googlecode.reunion.jreunion.game.Mob;
 import com.googlecode.reunion.jreunion.game.Npc;
+import com.googlecode.reunion.jreunion.game.NpcSpawn;
 import com.googlecode.reunion.jreunion.game.Player;
+import com.googlecode.reunion.jreunion.game.Position;
 import com.googlecode.reunion.jreunion.game.Spawn;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 import com.googlecode.reunion.jcommon.ParsedItem;
@@ -96,23 +98,25 @@ public class MessageParser {
 
 			} else if (words[0].equals("@addmob")) { //Adds a NPC 
 				if (words.length == 2) {
-					Spawn spawn = new Spawn();
+					NpcSpawn spawn = new NpcSpawn();
 					spawn.setPosition(player.getPosition().clone());
-					spawn.setMobType(Integer.parseInt(words[1]));
+					spawn.setNpcType(Integer.parseInt(words[1]));
+					spawn.setType(Spawn.Type.MOB);
 					spawn.setRadius(300);
 					spawn.setRespawnTime(10);
-					spawn.spawnMob();
+					spawn.spawn();
 
 				} else if (words.length == 3) {
 					try {
 						int count = Integer.parseInt(words[2]);
 						for (int x = 1; x < count; x++) {
-							Spawn spawn = new Spawn();
-							spawn.setMobType(Integer.parseInt(words[1]));
+							NpcSpawn spawn = new NpcSpawn();
+							spawn.setNpcType(Integer.parseInt(words[1]));
+							spawn.setType(Spawn.Type.MOB);
 							spawn.setPosition(player.getPosition().clone());
 							spawn.setRadius(300);
 							spawn.setRespawnTime(10);
-							spawn.spawnMob();
+							spawn.spawn();
 						}
 					} catch (Exception NumberFormatException) {
 						String packetData = "say 1 S_Server (NOTICE) @addmob with more than 1 mob failed";
@@ -135,13 +139,14 @@ public class MessageParser {
 			} else if (words[0].equals("@addnpc")) {
 				try {
 				if (words.length == 2) {
-					Npc npc = Server.getInstance().getWorld()
-							.getNpcManager()
-							.createNpc(Integer.parseInt(words[1]));
-					npc.getPosition().setX(player.getPosition().getX() + 10);
-					npc.getPosition().setY(player.getPosition().getY() + 10);
-					npc.getPosition().setRotation(0.0);
-					com.npcIn(player, npc);
+					
+					NpcSpawn spawn = new NpcSpawn();
+					spawn.setType(Spawn.Type.NPC);
+					
+					spawn.setPosition(player.getPosition().clone());
+					spawn.setNpcType(Integer.parseInt(words[1]));
+					spawn.spawn();
+					
 				}
 				} catch (Exception e) {
 					//TODO: Fix the Mob id error server crash
@@ -169,8 +174,11 @@ public class MessageParser {
 			}
 		}  else if (words[0].equals("@goto")) {
 			if (words[1].equals("pos")) {
-				com.GoToPos(player, Integer.parseInt(words[2]),
-						Integer.parseInt(words[3]));
+				
+				Position position = player.getPosition().clone();
+				position.setX(Integer.parseInt(words[2]));
+				position.setY(Integer.parseInt(words[3]));
+				com.GoToPos(player, position);
 			}
 			if (words[1].equals("char")) {
 				com.GoToChar(player, words[2]);
@@ -208,12 +216,13 @@ public class MessageParser {
 					bw.newLine();
 					bw.flush();
 			    	 
-					Spawn spawn = new Spawn();
+					NpcSpawn spawn = new NpcSpawn();
+					spawn.setType(Spawn.Type.MOB);
 					spawn.setPosition(player.getPosition().clone());
-					spawn.setMobType(Integer.parseInt(words[1]));
+					spawn.setNpcType(Integer.parseInt(words[1]));
 					spawn.setRadius(Integer.parseInt(words[3]));
 					spawn.setRespawnTime(10);
-					spawn.spawnMob();
+					spawn.spawn();
 					String packetData = "say 1 S_Server Spawnpoint succesfully added";
 					client.SendData(packetData);
 			      }catch(Exception e){

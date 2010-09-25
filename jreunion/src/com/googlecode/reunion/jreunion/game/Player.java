@@ -11,6 +11,7 @@ import com.googlecode.reunion.jcommon.Parser;
 import com.googlecode.reunion.jreunion.events.Event;
 import com.googlecode.reunion.jreunion.events.EventListener;
 import com.googlecode.reunion.jreunion.events.client.ClientDisconnectEvent;
+import com.googlecode.reunion.jreunion.events.map.PlayerLogoutEvent;
 import com.googlecode.reunion.jreunion.events.network.NetworkAcceptEvent;
 import com.googlecode.reunion.jreunion.events.session.SessionEvent;
 import com.googlecode.reunion.jreunion.game.Equipment.Slot;
@@ -356,9 +357,10 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 	}
 
 	public void spawn() {
-		
+		//TODO: fix respawn
+		/*
 		int defaultSpawnId = Integer.parseInt(Reference.getInstance().getMapReference().getItemById(getPosition().getMap().getId()).getMemberValue("DefaultSpawnId"));
-		ParsedItem defaultSpawn =getPosition().getMap().getPlayerSpawnReference().getItemById(defaultSpawnId);
+		ParsedItem defaultSpawn = getPosition().getMap().getPlayerSpawnReference().getItemById(defaultSpawnId);
 				
 		Parser playerSpawns = getPosition().getMap().getPlayerSpawnReference();
 		Iterator<ParsedItem> iter = playerSpawns.getItemListIterator();
@@ -407,6 +409,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		.getWorld()
 		.getCommand()
 		.GoToPos(this,spawnX,spawnY);
+		*/
 	}
 
 	public boolean getRunMode() {
@@ -619,6 +622,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		DatabaseUtils.getInstance().saveExchange(this);
 		DatabaseUtils.getInstance().saveQuickSlot(this);
 		
+		getPosition().getMap().fireEvent(PlayerLogoutEvent.class, this);
 		getSession().close();
 		
 	}
@@ -719,7 +723,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 					+ " " + posY + " " + posZ + " " + rotation + " "
 					+ unknown + " " + run + "\n";
 			
-					client.SendData(packetData);
+			client.SendData(packetData);
 		}
 		
 	}
@@ -728,7 +732,6 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 	public void revive() {
 
 		updateStatus(0, getMaxHp(), getMaxHp());
-		
 		spawn();
 
 	}
@@ -1390,16 +1393,12 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		Server.getInstance().getNetwork().addEventListener(NetworkAcceptEvent.class, this);
 		if(event instanceof ClientDisconnectEvent){
 			ClientDisconnectEvent clientDisconnectEvent = (ClientDisconnectEvent) event;
-			if(clientDisconnectEvent.getClient()!=getClient())return;
 			logout();
 		}
 		if(event instanceof SessionEvent){
 			SessionEvent sessionEvent = (SessionEvent) event;
 			
-			
-			
 		}
-		
 	}
 	
 	public String toString(){

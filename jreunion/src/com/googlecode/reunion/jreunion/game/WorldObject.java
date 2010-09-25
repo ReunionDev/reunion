@@ -8,6 +8,7 @@ import com.googlecode.reunion.jreunion.server.PacketFactory;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 import com.googlecode.reunion.jreunion.server.Sendable;
 import com.googlecode.reunion.jreunion.server.Session;
+import com.googlecode.reunion.jreunion.server.SessionList;
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
@@ -37,8 +38,6 @@ public abstract class WorldObject extends EventBroadcaster implements Entity {
 		}
 	}
 	
-	
-		
 	private Position position = new Position();
 
 	public Position getPosition() {
@@ -58,6 +57,10 @@ public abstract class WorldObject extends EventBroadcaster implements Entity {
 		public Interested(WorldObject entity){
 			
 			this.entity = entity;
+			
+		}
+		public SessionList<Session> getSessions(){
+			return entity.getPosition().getMap().GetSessions(entity);
 			
 		}
 		

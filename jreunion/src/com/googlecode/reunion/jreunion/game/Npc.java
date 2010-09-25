@@ -20,17 +20,17 @@ public class Npc extends LivingObject {
 
 	private int type;
 	
-	private Spawn spawn;
+	private NpcSpawn spawn;
 
 	private int unknown1;
 
 	private int unknown2;
 
-	public Spawn getSpawn() {
+	public NpcSpawn getSpawn() {
 		return spawn;
 	}
 
-	public void setSpawn(Spawn spawn) {
+	public void setSpawn(NpcSpawn spawn) {
 		this.spawn = spawn;
 	}
 

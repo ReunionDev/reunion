@@ -3,7 +3,7 @@ package com.googlecode.reunion.jreunion.game;
 import java.util.Random;
 import java.util.TimerTask;
 
-import com.googlecode.reunion.jreunion.events.map.NpcSpawnEvent;
+import com.googlecode.reunion.jreunion.events.map.SpawnEvent;
 import com.googlecode.reunion.jreunion.server.LocalMap;
 import com.googlecode.reunion.jreunion.server.Map;
 import com.googlecode.reunion.jreunion.server.Server;
@@ -15,9 +15,24 @@ import com.googlecode.reunion.jreunion.server.Timer;
  */
 public class Spawn {
 
-	private int mobType;
 
-	private float respawnTime; // seconds
+	
+	private Type type;
+	
+	public Type getType() {
+		return type;
+	}
+
+	public void setType(Type type) {
+		this.type = type;
+	}
+
+	public static enum Type{
+		PLAYER,
+		NPC,
+		MOB,
+	}
+	
 
 	private int radius;
 	
@@ -37,75 +52,52 @@ public class Spawn {
 	/**
 	 * @return Returns the mobType.
 	 */
-	public int getMobType() {
-		return mobType;
-	}
+
 
 	public int getRadius() {
 		return radius;
 	}
 
-	/**
-	 * @return Returns the respawnTime.
-	 */
-	public float getRespawnTime() {
-		return respawnTime;
-	}
-	
+
+
 	/**
 	 * @param mobType
 	 *            The mobType to set.
 	 */
-	public void setMobType(int mobType) {
-		this.mobType = mobType;
-	}
+
 
 	public void setRadius(int radius) {
 		this.radius = radius;
 	}
 
-	/**
-	 * @param respawnTime
-	 *            The respawnTime to set.
-	 */
-	public void setRespawnTime(float respawnTime) {
-		this.respawnTime = respawnTime;
-	}
-	
 	private Random rand = new Random(System.currentTimeMillis());
+	
+	public Position generatePosition(){
+		
+		Position position = getPosition();		
+		LocalMap map = position.getMap();
+		
+		int posX = (radius>0?rand.nextInt(radius * 2) - radius:0)+position.getX();
+		int posY = (radius>0?rand.nextInt(radius * 2) - radius:0)+position.getY();
+		
+		double rotation = position.getRotation();
+		
+		if(rotation==Double.NaN)
+			rotation = Server.getRand().nextDouble() * Math.PI * 2;
 
-	public void spawnMob() {		
 		
+		return new Position(posX, posY, position.getZ(), map, rotation);
 		
-		Position position = getPosition();
+	}
+
+	protected void spawn(LivingObject entity) {		
+		
 		
 		LocalMap map = position.getMap();
 		
-		Mob mob = map.getWorld().getMobManager()
-				.createMob(getMobType());
-		mob.setSpawn(this);
-		
-		int posX = rand.nextInt(radius * 2) - radius + position.getX();
-		int posY = rand.nextInt(radius * 2) - radius + position.getY();
-		double rotation = rand.nextDouble() * Math.PI * 2;
-		
-		
-		Position mobPosition = new Position(posX, posY, position.getZ(), map, rotation);
-		mob.setPosition(mobPosition);
-		
-		map.fireEvent(NpcSpawnEvent.class, mob);
+		map.fireEvent(SpawnEvent.class, entity);
 		
 	}
 
-	public void kill() {
-		
-		java.util.Timer timer = new java.util.Timer();
-		timer.schedule(new TimerTask() {
-			@Override
-			public void run() {
-				spawnMob();				
-			}
-			
-		}, (long) (respawnTime*1000));
-	}
+
 }

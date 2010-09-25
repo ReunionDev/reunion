@@ -5,10 +5,10 @@ import com.googlecode.reunion.jreunion.game.Npc;
 import com.googlecode.reunion.jreunion.game.RoamingItem;
 import com.googlecode.reunion.jreunion.server.LocalMap;
 
-public class NpcSpawnEvent extends MapEvent {
+public class SpawnEvent extends MapEvent {
 
 	Npc npc;
-	public NpcSpawnEvent(Npc npc) {
+	public SpawnEvent(Npc npc) {
 		super(npc.getPosition().getMap());
 		this.npc = npc;
 	}

@@ -30,7 +30,7 @@ public class PacketFactory {
 		CHAR_IN, 
 		OUT_CHAR, 
 		SAY, 
-		OUT_ITEM, DROP, IN_NPC
+		OUT_ITEM, DROP, IN_NPC, AT
 		
 	}
 	
@@ -110,9 +110,7 @@ public class PacketFactory {
 				if(args.length>1){
 					warping = (Boolean)args[1];					
 				}
-				
-				int combat = player.getCombatMode()?1:0;
-
+				int combat = player.getCombatMode() ? 1 : 0;
 				Equipment eq = player.getEquipment();
 
 				int eqHelmet = -1;
@@ -242,12 +240,21 @@ public class PacketFactory {
 					+ npc.getPosition().getRotation() + " " + percentageHp + " "
 					+ npc.getMutant() + " " + npc.getUnknown1() + " "
 					+ npc.getNeoProgmare() + " 0 " + (spawn ? 1 : 0) + " "
-					+ npc.getUnknown2() + "\n";
+					+ npc.getUnknown2();
 			
 			return packetData;
 			
 			}
 		}
+		case AT:
+			if(args.length>0){
+				Player player = (Player)args[0];
+			return
+					"at " + player.getId() + " "
+							+ player.getPosition().getX() + " " + player.getPosition().getY() + " "
+							+ player.getPosition().getZ() + " 0";//TODO: check for rotation??
+			}
+			break;
 		
 		default:{			
 			throw new NotImplementedException();

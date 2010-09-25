@@ -113,8 +113,11 @@ public class QuickSlot {
 				|| qsItem.getItem().getType() == 1053) {
 			switch (qsItem.getItem().getType()) {
 			case 175: {
+				Position position = player.getPosition().clone();
+				position.setX(6655);
+				position.setX(5224);
 				Server.getInstance().getWorld().getCommand()
-						.GoToPos(player, 6655, 5224);
+						.GoToPos(player, position);
 				break;
 			}
 			case 1053: {

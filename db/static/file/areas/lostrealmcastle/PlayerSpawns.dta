@@ -1,6 +1,6 @@
 [Default]
 ID = 1
-X = 6550
-Y = 6225
-Width = 100
-Height = 150
+X = 6600
+Y = 6300
+Z = 248
+Radius = 75

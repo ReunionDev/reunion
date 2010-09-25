@@ -24,7 +24,7 @@ import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 
 /**
- * @author Autumn
+ * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
 public class World extends ClassModule implements EventListener, Sendable{
@@ -43,7 +43,6 @@ public class World extends ClassModule implements EventListener, Sendable{
 	private NpcManager npcManager;
 
 	private Timer serverTime = new Timer();
-	
 
 	private int serverHour;
 
@@ -60,8 +59,6 @@ public class World extends ClassModule implements EventListener, Sendable{
 		serverHour = 4;
 		teleportManager = new TeleportManager();
 		serverSetings = new ServerSetings();
-		
-		
 	}
 
 	/**
