@@ -14,12 +14,17 @@ public abstract class LivingObject extends WorldObject {
 	private int team;
 
 	private LivingObject target;
+	
+	
+	private Position targetPosition;
 
-	private int targetPosX;
+	public Position getTargetPosition() {
+		return targetPosition;
+	}
 
-	private int targetPosY;
-
-	private int targetPosZ;
+	public void setTargetPosition(Position targetPosition) {
+		this.targetPosition = targetPosition;
+	}
 
 	private int hp;
 
@@ -48,7 +53,7 @@ public abstract class LivingObject extends WorldObject {
 	}
 
 	public int getHp() {
-		return stm;
+		return hp;
 	}
 
 	public int getStm() {
@@ -83,18 +88,6 @@ public abstract class LivingObject extends WorldObject {
 		return target;
 	}
 
-	public int getTargetPosX() {
-		return targetPosX;
-	}
-
-	public int getTargetPosY() {
-		return targetPosY;
-	}
-
-	public int getTargetPosZ() {
-		return targetPosZ;
-	}
-
 	public void loadFromReference(int id) {
 
 	}
@@ -105,6 +98,8 @@ public abstract class LivingObject extends WorldObject {
 
 	public void setHp(int currHp) {
 		this.hp = currHp;
+		
+		
 	}
 
 	public void setCurrMana(int currMana) {
@@ -114,11 +109,6 @@ public abstract class LivingObject extends WorldObject {
 	public void setCurrStm(int currStm) {
 		this.stm = currStm;
 
-		// Client client =
-		// Server.getInstance().networkModule.getClient(this.getPlayerSession().getPlayer(this.getEntityId()));
-		// if(client.clientState == 10)
-		// Server.getInstance().networkModule.SendPacket(client.networkId,"status
-		// 2 "+this.getPlayerCurrStm()+" "+this.getPlayerMaxStm());
 	}
 
 	public void setLevel(int level) {
@@ -143,18 +133,6 @@ public abstract class LivingObject extends WorldObject {
 
 	public void setTarget(LivingObject target) {
 		this.target = target;
-	}
-
-	public void setTargetPosX(int targetPosX) {
-		this.targetPosX = targetPosX;
-	}
-
-	public void setTargetPosY(int targetPosY) {
-		this.targetPosY = targetPosY;
-	}
-
-	public void setTargetPosZ(int targetPosZ) {
-		this.targetPosZ = targetPosZ;
 	}
 
 }

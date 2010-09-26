@@ -80,9 +80,12 @@ public class Merchant extends Npc {
 	@Override
 	public void loadFromReference(int type) {
 		super.loadFromReference(type);
-		ParsedItem npc = Reference.getInstance().getNpcReference().getItemById(type);
 		
 		
+		ParsedItem npc = this.getPosition().getMap().getNpcSpawnReference().getItemById(this.getSpawn().getId());
+		
+		this.setMaxHp(100);
+				
 		setSellRate(Integer.parseInt(npc.getMemberValue("SellRate")));
 		setBuyRate(Integer.parseInt(npc.getMemberValue("BuyRate")));
 		setShop(npc.getMemberValue("Shop"));

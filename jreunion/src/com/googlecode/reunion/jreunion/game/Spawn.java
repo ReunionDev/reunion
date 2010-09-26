@@ -16,7 +16,16 @@ import com.googlecode.reunion.jreunion.server.Timer;
 public class Spawn {
 
 
+	private int id;	
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	private Type type;
 	
 	public Type getType() {
@@ -82,9 +91,8 @@ public class Spawn {
 		
 		double rotation = position.getRotation();
 		
-		if(rotation==Double.NaN)
+		if(Double.isNaN(rotation))
 			rotation = Server.getRand().nextDouble() * Math.PI * 2;
-
 		
 		return new Position(posX, posY, position.getZ(), map, rotation);
 		

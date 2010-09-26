@@ -165,7 +165,6 @@ public class Network extends Service implements Runnable, EventListener{
 		}
 		
 		int size = buffer.limit();
-		PerformanceStats.getInstance().receivedPacket(buffer.limit());
 		byte[] output = new byte[size];
 		buffer.get(output, 0, size);
 
@@ -196,7 +195,6 @@ public class Network extends Service implements Runnable, EventListener{
 		synchronized(client){
 			
 			StringBuffer outputBuffer = client.getOutputBuffer();
-			PerformanceStats.getInstance().sentPacket(outputBuffer.length());
 			
 			buffer.clear();
 			String packetData = outputBuffer.toString();

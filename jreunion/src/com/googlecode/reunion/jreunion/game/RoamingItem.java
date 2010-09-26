@@ -2,6 +2,7 @@ package com.googlecode.reunion.jreunion.game;
 
 import com.googlecode.reunion.jreunion.server.Server;
 import com.googlecode.reunion.jreunion.server.Session;
+import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 
 public class RoamingItem extends WorldObject{
 
@@ -20,11 +21,12 @@ public class RoamingItem extends WorldObject{
 	}
 	@Override
 	public void enter(Session session) {
-		this.getPosition().getMap().getWorld().getCommand().itemIn(session.getOwner(), this);
+		session.getOwner().getClient().sendPacket(Type.IN_ITEM, this);
+		
 	}
 	@Override
 	public void exit(Session session) {
-		this.getPosition().getMap().getWorld().getCommand().itemOut(session.getOwner().getClient(), this);
+		session.getOwner().getClient().sendPacket(Type.OUT_ITEM, this);
 	}
 	@Override
 	public int getId() {		

@@ -398,17 +398,4 @@ public class Mob extends Npc {
 	public void setSpeed(int speed) {
 		this.speed = speed;
 	}
-
-	@Override
-	public void enter(Session session) {
-		this.getPosition().getMap().getWorld().getCommand()
-		.mobIn(session.getOwner(), this, false);		
-	}
-
-	@Override
-	public void exit(Session session) {
-		this.getPosition().getMap().getWorld().getCommand()
-		.mobOut(session.getOwner(), this);
-		
-	}
 }

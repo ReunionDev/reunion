@@ -20,6 +20,7 @@ public class EventBroadcaster{
 		for(int i=0; i<threads.length;i++) {
 			EventWorker worker = new EventWorker();
 			worker.thread = threads[i] = new Thread(worker);
+			worker.thread.setName("EventThread="+i);
 			worker.thread.start();
 		}
 	}
@@ -30,7 +31,6 @@ public class EventBroadcaster{
 	
 	public <T extends Event> int fireEvent(Class<T> eventClass,Object... args){
 		return this.fireEvent(this.createEvent(eventClass, args));
-		
 	}
 	
 	private  Map<Class,Map<EventListener,Filter>> listeners;
@@ -157,7 +157,6 @@ public class EventBroadcaster{
 					Logger.getLogger(this.getClass()).warn("Exception",e);
 					throw new RuntimeException(e);
 				}
-				
 			}			
 		}		
 	}
@@ -174,11 +173,6 @@ public class EventBroadcaster{
 					}
 				}
 			}
-		}
-		
-	}
-	
-	
-	
-	
+		}	
+	}	
 }

@@ -39,17 +39,9 @@ public class MessageParser {
 		Client client = player.getClient();
 
 		if (userlvl > -1) {
-			if (words[0].equals("@stats")) {
-				if (words.length >= 2 && words[1].equals("dump")) {
-					if (words.length >= 3) {
-						PerformanceStats.getInstance().dumpPerformance(
-								words[2]);
-					} else {
-						PerformanceStats.getInstance().dumpPerformance();
-					}
-				}
+		
 
-			} else if (words[0].equals("@testcol")) {
+			if (words[0].equals("@testcol")) {
 				Player p = player;
 				
 				LocalMap map = p.getPosition().getMap();
@@ -65,9 +57,7 @@ public class MessageParser {
 
 				com.serverSay("(" + p.getPosition().getX() / 10 + "," + p.getPosition().getY() / 10
 						+ ")" + "collision test: " + s1 + " " + s2 + " " + s3);
-			}
-
-			else if (words[0].equals("@d")||words[0].equals("@drop")) { //Drop Item
+			} else if (words[0].equals("@d")||words[0].equals("@drop")) { //Drop Item
 				if (words.length >= 2) {
 					try {
 						

@@ -2,6 +2,8 @@ package com.googlecode.reunion.jreunion.server;
 
 import java.net.InetSocketAddress;
 
+import org.apache.log4j.Logger;
+
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import com.googlecode.reunion.jreunion.game.Equipment;
@@ -30,7 +32,17 @@ public class PacketFactory {
 		CHAR_IN, 
 		OUT_CHAR, 
 		SAY, 
-		OUT_ITEM, DROP, IN_NPC, AT
+		IN_ITEM,
+		OUT_ITEM, 
+		DROP, 
+		OUT_NPC,
+		IN_NPC, 
+		AT, 
+		PLACE, 
+		S_CHAR, 
+		WALK_CHAR, 
+		SOCIAL, 
+		COMBAT
 		
 	}
 	
@@ -42,7 +54,7 @@ public class PacketFactory {
 
 	public static String createPacket(Type packetType, Object... args) {
 		switch (packetType) {
-		case VERSION_ERROR: {
+		case VERSION_ERROR: 
 			if (args.length == 1) {
 				
 				
@@ -56,20 +68,20 @@ public class PacketFactory {
 			}
 			break;
 
-		}
-		case FAIL:{
+		
+		case FAIL:
 			String message = "";
 			for(Object o: args){
 				message+=" "+o;
 			}
 			return "fail"+message;
-		}
 		
-		case OK: {
+		
+		case OK: 
 			return "OK";
-		}
 		
-		case GO_WORLD:{
+		
+		case GO_WORLD:
 			
 			if(args.length>0){				
 				LocalMap map = (LocalMap)args[0];
@@ -78,8 +90,8 @@ public class PacketFactory {
 				return "go_world "+address.getAddress().getHostAddress()+" "+address.getPort()+" " + map.getId()+" "+unknown;
 			}
 			break;
-		}
-		case GOTO:{
+		
+		case GOTO:
 			if(args.length>0){
 				Position position = (Position)args[0];
 			
@@ -88,21 +100,21 @@ public class PacketFactory {
 			}
 			break;
 			
-		}
-		case PARTY_DISBAND:{
+		
+		case PARTY_DISBAND:
 			return "party disband";
 			
-		}
-		case HOUR:{
+		
+		case HOUR:
 			
 			if(args.length>0){
 				int hour = (Integer)args[0];
 				return "hour " + hour;
 			}
 			break;
-		}
 		
-		case CHAR_IN:{
+		
+		case CHAR_IN:
 			
 			if(args.length>0){
 				Player player = (Player)args[0];
@@ -162,15 +174,15 @@ public class PacketFactory {
 				return packetData;
 			}
 			break;
-		}
-		case OUT_CHAR:{
+		
+		case OUT_CHAR:
 			
 			if(args.length>0){
 				Player player = (Player)args[0];
 				return "out char " + player.getId();
 			}
 			break;
-		}
+		
 		case SAY:{
 			if(args.length>0){
 				String text = (String)args[0];
@@ -201,7 +213,7 @@ public class PacketFactory {
 			break;
 		}
 		
-		case DROP:{
+		case DROP:
 			if(args.length>0){
 				RoamingItem roamingItem = (RoamingItem)args[0];
 				Position position = roamingItem.getPosition();
@@ -211,41 +223,56 @@ public class PacketFactory {
 				+ position.getX() + " " + position.getY() + " " + position.getZ() + " "+position.getRotation()+" " + item.getGemNumber() + " "
 				+ item.getExtraStats();
 				
-			}
-			
-			
-		}
-		
-		case OUT_ITEM:{
+			}			
+		break;
+		case IN_ITEM:
 			if(args.length>0){
-				Item item = (Item)args[0];
+				RoamingItem roamingItem = (RoamingItem)args[0];
+				Item item = roamingItem.getItem();
+				Position position = roamingItem.getPosition();
+				return "in item " + roamingItem.getId() + " " + item.getType() + " " + position.getX()
+				+ " " + position.getY() + " " + position.getZ() + " " + position.getRotation() + " " + item.getGemNumber() + " "
+				+ item.getExtraStats();
+			}
+			break;
+		
+		case OUT_ITEM:
+			if(args.length>0){
+				RoamingItem item = (RoamingItem)args[0];
 				return "out item " + item.getId();				
 			}			
-		}
-		case IN_NPC:{
-			
-			if(args.length>0){
-				Npc npc = (Npc)args[0];
-				Boolean spawn = false;
-				if(args.length>1){
-					
-					spawn = (Boolean)args[1];
-				}
+			break;
+		
+		case IN_NPC:			
+		if(args.length>0){
+			Npc npc = (Npc)args[0];
+			Boolean spawn = false;
+			if(args.length>1){
+				
+				spawn = (Boolean)args[1];
+			}
 
-			int percentageHp = npc.getHp() * 100 / npc.getMaxHp();
-
+			int percentageHp = (int)(((double)npc.getHp()/ (double)npc.getMaxHp())* 100);
+				
 			String packetData = "in npc " + npc.getId() + " " + npc.getType()
 					+ " " + npc.getPosition().getX() + " "
-					+ npc.getPosition().getY() + " 0 "
+					+ npc.getPosition().getY() + " "+npc.getPosition().getZ()+" "
 					+ npc.getPosition().getRotation() + " " + percentageHp + " "
 					+ npc.getMutant() + " " + npc.getUnknown1() + " "
 					+ npc.getNeoProgmare() + " 0 " + (spawn ? 1 : 0) + " "
 					+ npc.getUnknown2();
 			
 			return packetData;
+		
+		}
+		break;
+		case OUT_NPC:
+			if(args.length>0){
+				Npc npc = (Npc)args[0];
+				return "out npc " + npc.getId();
 			
 			}
-		}
+			break;
 		case AT:
 			if(args.length>0){
 				Player player = (Player)args[0];
@@ -253,6 +280,54 @@ public class PacketFactory {
 					"at " + player.getId() + " "
 							+ player.getPosition().getX() + " " + player.getPosition().getY() + " "
 							+ player.getPosition().getZ() + " 0";//TODO: check for rotation??
+			}
+			break;
+			
+		case PLACE:
+			if(args.length>1){
+			Player player = (Player)args[0];
+			Position position = player.getPosition();
+			
+			int unknown = (Integer)args[1];
+			return "place char " + player.getId() + " " + position.getX()
+			+ " " + position.getY() + " " + position.getZ() + " " + position.getRotation() + " "
+			+ unknown + " " + (player.isRunning()?1:0);
+			}
+			break;
+		case S_CHAR:
+			if(args.length>0){
+				Player player = (Player)args[0];
+				Position position = player.getPosition();
+				return "s char " + player.getId() + " " + position.getX()
+					+ " " + position.getY() + " " + position.getZ() + " " + position.getRotation();
+			}
+			break;
+		case WALK_CHAR:
+			
+			if(args.length>0){
+				Player player = (Player)args[0];
+				Position position = player.getPosition();
+				return "walk char " + player.getId() + " " + position.getZ()
+				+ " " + position.getZ() + " " + position.getZ() + " " + (player.isRunning()?1:0);
+				
+			}
+			break;
+		case SOCIAL:
+			
+			if(args.length>1){
+				
+				Player player = (Player)args[0];
+				int emotionId = (Integer)args[1];
+				return "social char " + player.getId() + " "
+				+ emotionId;
+			}
+			break;
+			
+		case COMBAT:
+			if(args.length>0){
+				
+				Player player = (Player)args[0];
+				return "combat " + player.getId() + " " + (player.getCombatMode()?1:0);
 			}
 			break;
 		

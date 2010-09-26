@@ -266,28 +266,47 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 		}
 		case INGAME: {
 			if (message[0].equals("walk")) {
-				client.getPlayer().walk(Integer.parseInt(message[1]),
+				
+				Position position = new Position(
+						Integer.parseInt(message[1]),
 						Integer.parseInt(message[2]),
 						Integer.parseInt(message[3]),
-						Integer.parseInt(message[4]));
+						 player.getPosition().getMap(),
+						 Double.NaN
+				);
+				
+				client.getPlayer().walk(position,
+						Integer.parseInt(message[4])==1);
 				client.getPlayer().update();
 			} else if (message[0].equals("place")) {
 
 				double rotation = Double.parseDouble(message[4]);
-
-				client.getPlayer().place(Integer.parseInt(message[1]),
+				Position position = new Position(
+						Integer.parseInt(message[1]),
 						Integer.parseInt(message[2]),
-						Integer.parseInt(message[3]), rotation / 1000,
+						Integer.parseInt(message[3]),
+						 player.getPosition().getMap(),
+						 rotation / 1000
+				);
+								
+				client.getPlayer().place(position,
 						Integer.parseInt(message[5]),
-						Integer.parseInt(message[6]));
+						Integer.parseInt(message[6])==1);
+				
 				client.getPlayer().update();
+				
 			} else if (message[0].equals("stop")) {
 
 				double rotation = Double.parseDouble(message[4]);
-
-				client.getPlayer().stop(Integer.parseInt(message[1]),
+				Position position = new Position(
+						Integer.parseInt(message[1]),
 						Integer.parseInt(message[2]),
-						Integer.parseInt(message[3]), rotation / 1000);
+						Integer.parseInt(message[3]),
+						 player.getPosition().getMap(),
+						 rotation / 1000
+				);
+
+				client.getPlayer().stop(position);
 				client.getPlayer().update();
 			} else if (message[0].equals("stamina")) {
 				client.getPlayer().loseStamina(Integer.parseInt(message[1]));
@@ -320,7 +339,7 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 
 				// client.getPlayer()Object.tell(message[1], text);
 			} else if (message[0].equals("combat")) {
-				client.getPlayer().charCombat(Integer.parseInt(message[1]));
+				client.getPlayer().charCombat(Integer.parseInt(message[1])==1);
 			} else if (message[0].equals("social")) {
 				client.getPlayer().social(Integer.parseInt(message[1]));
 			} else if (message[0].equals("levelup")) {
@@ -336,7 +355,6 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 				if(roamingItem!=null){
 					client.getPlayer().pickupItem(roamingItem);							
 				}
-				
 				
 			} else if (message[0].equals("inven")) {
 				client.getPlayer().getInventory().moveItem(

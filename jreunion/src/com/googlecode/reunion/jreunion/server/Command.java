@@ -182,14 +182,14 @@ public class Command {
 	public void GoToPos(Player player, Position position){
 		
 		Client client = player.getClient();
-		
+				
 		SessionList<Session> exit = player.getInterested().getSessions();
 		exit.exit(player);
 		player.setPosition(position);
 		
 		SessionList<Session> entry = player.getPosition().getMap().GetSessions(position);
 		
-		entry.enter(player, false);		
+		entry.enter(player, false);
 		entry.sendPacket(Type.CHAR_IN, player, true);
 		
 		client.sendPacket(Type.GOTO, position);
@@ -259,13 +259,9 @@ public class Command {
 		// [gemNumber] [Special]
 	}
 
-	public void itemOut(Sendable sendable, RoamingItem roamingItem) {
-		this.itemOut(sendable, roamingItem.getItem());
-
-	}
 
 	/****** Manages the Item Out ******/
-	public void itemOut(Sendable sendable, Item item) {
+	public void itemOut(Sendable sendable, RoamingItem item) {
 
 		
 		sendable.sendPacket(Type.OUT_ITEM, item);				
@@ -454,6 +450,29 @@ public class Command {
 				+ mob.getMutant() + " " + mob.getUnknown1() + " "
 				+ mob.getNeoProgmare() + " 0 " + (spawn ? 1 : 0) + " "
 				+ mob.getUnknown2() + "\n";
+		// in npc [UniqueID] [type] [XPos] [YPos] [ZPos] [Rotation] [HP]
+		// [MutantType] 0 [NeoProgmare] 0 0
+		client.SendData(packetData);
+	}
+	
+	
+	public void newNpcIn(Player player, Npc npc, boolean spawn) {
+
+		Client client = player.getClient();
+
+		if (client == null) {
+			return;
+		}
+
+		int percentageHp = npc.getHp() * 100 / npc.getMaxHp();
+
+		String packetData = "in npc " + npc.getId() + " " + npc.getType()
+				+ " " + npc.getPosition().getX() + " "
+				+ npc.getPosition().getY() + " 0 "
+				+ npc.getPosition().getRotation() + " " + percentageHp + " "
+				+ npc.getMutant() + " " + npc.getUnknown1() + " "
+				+ npc.getNeoProgmare() + " 0 " + (spawn ? 1 : 0) + " "
+				+ npc.getUnknown2() + "\n";
 		// in npc [UniqueID] [type] [XPos] [YPos] [ZPos] [Rotation] [HP]
 		// [MutantType] 0 [NeoProgmare] 0 0
 		client.SendData(packetData);

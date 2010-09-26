@@ -25,6 +25,7 @@ import com.googlecode.reunion.jreunion.server.LocalMap;
 import com.googlecode.reunion.jreunion.server.Reference;
 import com.googlecode.reunion.jreunion.server.Server;
 import com.googlecode.reunion.jreunion.server.Session;
+import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 
 /**
  * @author Aidamina
@@ -99,7 +100,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 
 	private int penaltyPoints;
 
-	private boolean runMode; // 0 - Off; 1 - On
+	private boolean running; // 0 - Off; 1 - On
 
 	private int adminState; // 0 - normal user; 255 - SuperGM
 
@@ -162,29 +163,10 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 	}
 
 
-	public void charCombat(int combat) {
+	public void charCombat(boolean combat) {
 
-		if (combat == 1) {
-			setCombatMode(true);
-		} else {
-			setCombatMode(false);
-		}
-
-		Iterator<WorldObject> playerIter = getSession()
-				.getPlayerListIterator();
-
-		while (playerIter.hasNext()) {
-			Player player = (Player) playerIter.next();
-			Client client = player.getClient();
-
-			if (client == null) {
-				continue;
-			}
-
-			String packetData = "combat " + getId() + " " + combat
-					+ "\n";
-					client.SendData( packetData);
-		}
+		setCombatMode(combat);
+		getInterested().sendPacket(Type.COMBAT, this);
 		
 	}
 
@@ -210,7 +192,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 	
 		Client client = this.getClient();
 		
-		// S> drop [ItemID] [ItemType] [PosX] [PosY] [Height] [Rotation]
+		// S> drop [ItemID] [ItemType] [PosX] [PosY] [PosZ] [Rotation]
 		// [GemNumber] [Special]
 	
 	
@@ -415,8 +397,8 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		*/
 	}
 
-	public boolean getRunMode() {
-		return runMode;
+	public boolean isRunning() {
+		return running;
 	}
 
 	/**
@@ -693,41 +675,16 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		//pickItem(roamingItem.getItem());
 	}
 
-	public void place(int posX, int posY, int posZ, double rotation,
-			int unknown, int run) {
-
-		if (run == 1) {
-			setRunMode(true);
-		} else {
-			setRunMode(false);
+	public void place(Position position, int unknown, boolean running) {
+		
+		setIsRunning(running);
+		
+		synchronized(this){
+			setPosition(position);
+			setTargetPosition(position.clone());			
 		}
-
-		getPosition().setX(posX);
-		getPosition().setY(posY);
-		getPosition().setZ(posZ);
-		getPosition().setRotation(rotation);
-
-		setTargetPosX(posX);
-		setTargetPosY(posY);
-		setTargetPosZ(posZ);
-
-		Iterator<WorldObject> playerIter = getSession()
-				.getPlayerListIterator();
-
-		while (playerIter.hasNext()) {
-			Player player = (Player) playerIter.next();
-			Client client = player.getClient();
-
-			if (client == null) {
-				continue;
-			}
-
-			String packetData = "place char " + getId() + " " + posX
-					+ " " + posY + " " + posZ + " " + rotation + " "
-					+ unknown + " " + run + "\n";
-			
-			client.SendData(packetData);
-		}
+		
+		this.getInterested().sendPacket(Type.PLACE, this, unknown);
 		
 	}
 
@@ -829,8 +786,8 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 	}
 
 
-	public void setRunMode(boolean runMode) {
-		this.runMode = runMode;
+	public void setIsRunning(boolean running) {
+		this.running = running;
 	}
 
 	/**
@@ -915,50 +872,18 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 
 	public void social(int emotionId) {
 
-		Iterator<WorldObject> iter = getSession().getPlayerListIterator();
-		while (iter.hasNext()) {
-			Player player = (Player) iter.next();
-			Client client = player.getClient();
-
-			if (client == null) {
-				continue;
-			}
-
-			String packetData = "social char " + getId() + " "
-					+ emotionId + "\n";
-			
-					client.SendData(packetData);
-		}
+		getInterested().sendPacket(Type.SOCIAL, this, emotionId);
 		
 	}
 
-	public void stop(int posX, int posY, int posZ, double rotation) {
+	public void stop(Position position) {
 
-		getPosition().setX(posX);
-		getPosition().setY(posY);
-		getPosition().setZ(posZ);
-		getPosition().setRotation(rotation);
-
-		setTargetPosX(posX);
-		setTargetPosY(posY);
-		setTargetPosZ(posZ);
-
-		Iterator<WorldObject> playerIter = getSession()
-				.getPlayerListIterator();
-
-		while (playerIter.hasNext()) {
-			Player player = (Player) playerIter.next();
-			Client client = player.getClient();
-
-			if (client == null) {
-				continue;
-			}
-
-			String packetData = "s char " + getId() + " " + posX
-					+ " " + posY + " " + posZ + " " + rotation + "\n";
-			
-					client.SendData(packetData);
+		synchronized(this) {
+			setPosition(position);	
+			setTargetPosition(position.clone());		
 		}
+		
+		this.getInterested().sendPacket(Type.S_CHAR, this);
 	
 	}
 
@@ -966,20 +891,16 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 
 		Client client = this.getClient();
 
-		if (client == null) {
-			return;
-		}
-
 		if (targetPlayer == null) {
 			String packetData = "Player not online";
 			
-					client.SendData(packetData);
+			client.SendData(packetData);
 			return;
 		}
 
 		String packetData = "say 1 " + getName() + " (PM) " + text + " 0\n";
 		
-				client.SendData(packetData);
+		client.SendData(packetData);
 	}
 	
 	
@@ -1256,39 +1177,17 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		// DatabaseUtils.getInstance().saveCharStatus(this);
 	}
 
-	public void walk(int posX, int posY, int posZ, int run) {
+	public void walk(Position position, boolean running) {
 
-		if (run == 1) {
-			setRunMode(true);
-		} else {
-			setRunMode(false);
-		}
+		setIsRunning(running);
 
-		getPosition().setX(posX);
-		getPosition().setY(posY);
-		getPosition().setZ(posZ);
-
-		setTargetPosX(posX);
-		setTargetPosY(posY);
-		setTargetPosZ(posZ);
-
-		Iterator<WorldObject> playerIter = getSession()
-				.getPlayerListIterator();
-
-		while (playerIter.hasNext()) {
-			Player player = (Player) playerIter.next();
-			Client client = player.getClient();
-
-			if (client == null) {
-				continue;
-			}
-
-			String packetData = "walk char " + getId() + " " + posX
-					+ " " + posY + " " + posZ + " " + run + "\n";
-			
-					client.SendData(packetData);
+		synchronized(this){
+			setPosition(position);
+			setTargetPosition(position.clone());			
 		}
 		
+		getInterested().sendPacket(Type.WALK_CHAR, this);
+				
 	}
 
 	public void wearSlot(Slot slot) {
@@ -1355,10 +1254,10 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 			}
 			if (extraPacketData != null) {
 				
-						client.SendData(extraPacketData);
+				client.SendData(extraPacketData);
 			}
 			
-					client.SendData(packetData);
+			client.SendData(packetData);
 		}
 		
 	}

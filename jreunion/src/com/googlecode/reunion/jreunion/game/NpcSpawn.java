@@ -48,6 +48,7 @@ public class NpcSpawn extends Spawn
 			Mob mob = map.getWorld().getMobManager()
 			.createMob(getNpcType());
 			mob.setSpawn(this);
+			mob.loadFromReference(getNpcType());
 			
 			entity = mob;
 			
@@ -57,12 +58,15 @@ public class NpcSpawn extends Spawn
 			
 			Npc npc = map.getWorld().getNpcManager()
 			.createNpc(getNpcType());
-			npc.setSpawn(this);			
+			npc.setSpawn(this);
+			npc.setUnknown2(10);
+			
 			entity = npc;
 			break;
 		}
 		
 		entity.setPosition(entityPosition);
+		entity.loadFromReference(getNpcType());
 		super.spawn(entity);
 	}
 	

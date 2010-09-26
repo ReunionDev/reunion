@@ -96,6 +96,7 @@ public class LocalMap extends Map implements Runnable{
 			}
 
 			NpcSpawn spawn = new NpcSpawn();
+			spawn.setId(Integer.parseInt(item.getMemberValue("Id")));
 			spawn.setType(Spawn.Type.MOB);
 			
 			int posZ = item.getMemberValue("Z") == null ? 0 : Integer.parseInt(item.getMemberValue("Z"));
@@ -119,6 +120,14 @@ public class LocalMap extends Map implements Runnable{
 		}
 	}
 
+	public Parser getMobSpawnReference() {
+		return mobSpawnReference;
+	}
+
+	public Parser getNpcSpawnReference() {
+		return npcSpawnReference;
+	}
+
 	private void createNpcSpawns() {
 
 		npcSpawnList.clear();
@@ -137,6 +146,7 @@ public class LocalMap extends Map implements Runnable{
 			}
 			
 			NpcSpawn spawn = new NpcSpawn();
+			spawn.setId(Integer.parseInt(item.getMemberValue("Id")));
 			spawn.setType(Spawn.Type.NPC);
 			
 			int posZ = item.getMemberValue("Z") == null ? 0 : Integer.parseInt(item.getMemberValue("Z"));
@@ -213,6 +223,7 @@ public class LocalMap extends Map implements Runnable{
 				continue;
 			}			
 			PlayerSpawn spawn = new PlayerSpawn();
+			spawn.setId(Integer.parseInt(item.getMemberValue("Id")));
 			
 			int posZ = item.getMemberValue("Z") == null ? 0 : Integer.parseInt(item.getMemberValue("Z"));
 			double rotation = item.getMemberValue("Rotation") == null ? Double.NaN : Double.parseDouble(item.getMemberValue("Rotation"));
@@ -391,7 +402,7 @@ public class LocalMap extends Map implements Runnable{
 					this.wait();
 				}
 				
-				Logger.getLogger(LocalMap.class).info(this+" work");
+				//Logger.getLogger(LocalMap.class).info(this+" work");
 				
 				timer.Start();
 				
@@ -408,6 +419,7 @@ public class LocalMap extends Map implements Runnable{
 					
 					Player owner = session.getOwner();
 					for(WorldObject entity: objects){
+						try{
 						if(owner.equals(entity))
 							continue;
 						
@@ -422,11 +434,16 @@ public class LocalMap extends Map implements Runnable{
 												
 							session.enter(entity);
 													
-						}				
+						}			
+						}catch(Exception e ){
+							Logger.getLogger(this.getClass()).warn("Exception in mapworker", e);
+							
+							
+						}
 					}
 				}
 				timer.Stop();
-				Logger.getLogger(LocalMap.class).info(timer.getTimeElapsedSeconds());
+				//Logger.getLogger(LocalMap.class).info(timer.getTimeElapsedSeconds());
 			
 			} catch (Exception e) {
 				Logger.getLogger(this.getClass()).warn("Exception",e);

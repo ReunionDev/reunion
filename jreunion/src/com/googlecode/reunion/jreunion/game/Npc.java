@@ -5,8 +5,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
+import org.apache.log4j.Logger;
+
 import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jcommon.Parser;
+import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 import com.googlecode.reunion.jreunion.server.Reference;
 import com.googlecode.reunion.jreunion.server.Server;
 import com.googlecode.reunion.jreunion.server.Session;
@@ -36,6 +39,9 @@ public class Npc extends LivingObject {
 
 	public Npc(int type) {
 		super();
+		this.setMaxHp(100);
+		this.setHp(this.getMaxHp());
+		
 		this.type = type;
 		
 	}
@@ -83,14 +89,13 @@ public class Npc extends LivingObject {
 
 	@Override
 	public void enter(Session session) {
-		this.getPosition().getMap().getWorld().getCommand()
-		.npcIn(session.getOwner(), this);		
+		
+		session.getOwner().getClient().sendPacket(Type.IN_NPC, this);
 	}
 
 	@Override
 	public void exit(Session session) {
-		this.getPosition().getMap().getWorld().getCommand()
-		.npcOut(session.getOwner(), this);
 		
+		session.getOwner().getClient().sendPacket(Type.OUT_NPC, this);
 	}
 }

@@ -98,7 +98,6 @@ public class Server extends ClassModule {
 			
 		}
 		finally {
-			PerformanceStats.getInstance().dumpPerformance();
 			server.fireEvent(server.createEvent(ServerStopEvent.class, server));
 			server.doStop();
 			
@@ -122,7 +121,6 @@ public class Server extends ClassModule {
 		
 		new Debug();
 		RemoteAdmin.enableRemoteAdmin();
-		PerformanceStats.createPerformanceStats(this);
 		
 		database = new Database(this);
 		network = new Network(this);
