@@ -90,7 +90,19 @@ public class MessageParser {
 				client.SendData(data.substring(2));				
 				return null;
 				//client.SendPacket(Type.SAY, words[3],Integer.parseInt(words[2]),Integer.parseInt(words[1]));
-
+			} else if (words[0].equals("@p")) { //Adds a NPC
+				String data = "";
+				for(int i = 1 ;i<words.length;i++){
+					if(!data.isEmpty())
+						data+=" ";
+					data+=words[i];
+					
+					
+				}
+				if(data.isEmpty())
+					client.SendData(data);
+				return null;
+			
 			} else if (words[0].equals("@addmob")) { //Adds a NPC 
 				if (words.length == 2) {
 					NpcSpawn spawn = new NpcSpawn();

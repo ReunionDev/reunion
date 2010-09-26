@@ -135,10 +135,12 @@ public class World extends ClassModule implements EventListener, Sendable{
 			maps.put(mapId, map);
 		}
 		java.util.Timer timer = new java.util.Timer();
+		
 		timer.schedule(new TimerTask() {
 			
 			@Override
 			public void run() {
+				Thread.currentThread().setName("Hour thread");
 				serverHour = (serverHour + 1) % 5;
 				
 				synchronized(playerManager){

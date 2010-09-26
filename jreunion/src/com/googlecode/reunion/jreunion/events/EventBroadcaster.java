@@ -21,6 +21,7 @@ public class EventBroadcaster{
 			EventWorker worker = new EventWorker();
 			worker.thread = threads[i] = new Thread(worker);
 			worker.thread.setName("EventThread="+i);
+			worker.thread.setDaemon(true);
 			worker.thread.start();
 		}
 	}

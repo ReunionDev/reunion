@@ -222,14 +222,9 @@ public class Mob extends Npc {
 				// use default
 				setSpeed(1);
 			}
-			
-			
-			
-			
+						
 		}
 	}
-	
-	
 
 	public void moveToPlayer(Player player, double distance) {
 	
