@@ -18,6 +18,7 @@ import com.googlecode.reunion.jreunion.events.map.PlayerLoginEvent;
 import com.googlecode.reunion.jreunion.events.network.NetworkDataEvent;
 import com.googlecode.reunion.jreunion.events.session.NewSessionEvent;
 import com.googlecode.reunion.jreunion.game.Equipment;
+import com.googlecode.reunion.jreunion.game.LivingObject;
 import com.googlecode.reunion.jreunion.game.Merchant;
 import com.googlecode.reunion.jreunion.game.Mob;
 import com.googlecode.reunion.jreunion.game.Npc;
@@ -311,20 +312,14 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 			}
 
 			else if (message[0].equals("say")) {
-
 				String text = message[1];
-
 				for (int i = 2; i < message.length; i++) {
 					text += " " + message[i];
 				}
-
 				text = messageParser.parse(client.getPlayer(), text);
-
-				if (text != null && text.length() > 0) {					
-					
+				if (text != null && text.length() > 0) {
 					client.getPlayer().say(text);
 				}
-
 			}
 
 			else if (message[0].equals("tell")) {
@@ -348,7 +343,7 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 				//TODO: implement roaming items
 				int itemId = Integer.parseInt(message[1]);
 				LocalMap map = player.getPosition().getMap();				
-				RoamingItem roamingItem = map.getRoamingItem(itemId);
+				RoamingItem roamingItem = (RoamingItem)map.getEntity(itemId);
 				Logger.getLogger(PacketParser.class).info(roamingItem+" "+itemId);
 				if(roamingItem!=null){
 					client.getPlayer().pickupItem(roamingItem);							
@@ -365,15 +360,11 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 			} else if (message[0].equals("attack")) {
 				com.normalAttack(client.getPlayer(),
 						Integer.parseInt(message[2]));
+				
 			} else if (message[0].equals("subat")) {
-				if (message[1].equals("char")) {
-					com.subAttackChar(client.getPlayer(),
-							Integer.parseInt(message[2]));
-				}
-				if (message[1].equals("npc")) {
-					com.subAttackNpc(client.getPlayer(),
-							Integer.parseInt(message[2]));
-				}
+				com.subAttack(player,
+						(LivingObject)player.getPosition().getMap().getEntity(Integer.parseInt(message[2])));
+			
 			} else if (message[0].equals("pulse")) {
 				if (Integer.parseInt(message[2].substring(0,
 						message[2].length() - 1)) == -1) {

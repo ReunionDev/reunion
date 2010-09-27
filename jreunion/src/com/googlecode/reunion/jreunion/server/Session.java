@@ -127,24 +127,11 @@ public class Session extends EventBroadcaster implements EventListener{
 		
 	}
 
-	public Iterator<WorldObject> getPlayerListIterator() {
-		
-		List<WorldObject> players = new ArrayList<WorldObject>(entities);
-		Iterator<WorldObject> iter = players.iterator();
-		while (iter.hasNext()) {
-		WorldObject player = iter.next(); 
-			if(!(player instanceof Player))
-				iter.remove();
-		}
-		return players.iterator();
-	}
-
 	@Override
 	public void handleEvent(Event event) {
 		
 		if(event instanceof MapEvent){
-			LocalMap map = ((MapEvent)event).getMap();			
-			
+			LocalMap map = ((MapEvent)event).getMap();
 		}
 		
 		if(event instanceof SessionEvent){

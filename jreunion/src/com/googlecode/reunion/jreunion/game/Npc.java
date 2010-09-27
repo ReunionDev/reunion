@@ -41,7 +41,6 @@ public class Npc extends LivingObject {
 		super();
 		this.setMaxHp(100);
 		this.setHp(this.getMaxHp());
-		
 		this.type = type;
 		
 	}
@@ -65,8 +64,7 @@ public class Npc extends LivingObject {
 	public void setNeoProgmare(int neoProgmare) {
 		this.neoProgmare = neoProgmare;
 	}
-
-
+	
 	public int getType() {
 		return type;
 	}
@@ -86,14 +84,6 @@ public class Npc extends LivingObject {
 	public int getUnknown2() {
 		return unknown2;
 	}
-	private int dmgType;
-	public int getDmgType() {
-		return dmgType;
-	}
-
-	public void setDmgType(int dmgType) {
-		this.dmgType = dmgType;
-	}
 	
 	@Override
 	public void enter(Session session) {
@@ -104,6 +94,6 @@ public class Npc extends LivingObject {
 	@Override
 	public void exit(Session session) {
 		
-		session.getOwner().getClient().sendPacket(Type.OUT_NPC, this);
+		session.getOwner().getClient().sendPacket(Type.OUT, this);
 	}
 }

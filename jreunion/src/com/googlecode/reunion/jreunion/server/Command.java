@@ -126,7 +126,6 @@ public class Command {
 
 	/****** teleport player to player2 position ******/
 	public void GoToChar(Player player, String charName) {
-		Client client = player.getClient();
 		Player target = Server.getInstance().getWorld()
 				.getPlayerManager().getPlayer(charName);
 		GoToPos(player,target.getPosition());
@@ -281,41 +280,11 @@ public class Command {
 		}
 
 		player.meleeAttack(livingObject);
-
-		int percentageHp = livingObject.getPercentageHp();
-
 		
-		String packetData = new String();
-
-		if (livingObject instanceof Mob) {
-			packetData = "attack_vital npc " + livingObject.getId() + " "
-					+ percentageHp + " 0 0\n";
-		} else {
-			packetData = "attack_vital char " + livingObject.getId()
-					+ " " + percentageHp + " 0 0\n";
-		}
-		// S> attack_vital npc [NpcID] [RemainHP%] 0 0
-		client.sendData(packetData);
-		// TODO: Fix attack
-		/*
-		 * if (player.getSession().getPlayerListSize() > 0) { Iterator<G_Player>
-		 * playerIter = player.getSession() .getPlayerListIterator();
-		 * 
-		 * while (playerIter.hasNext()) { G_Player pl = playerIter.next();
-		 * 
-		 * client = S_Server.getInstance().getNetworkModule() .getClient(pl);
-		 * 
-		 * if (client == null) { continue; }
-		 * 
-		 * if (livingObject instanceof G_Mob) { packetData = "attack char " +
-		 * player.getEntityId() + " npc " + uniqueId + " " + percentageHp +
-		 * " 0 0 0 0\n"; } else { packetData = "attack char " +
-		 * player.getEntityId() + " char " + uniqueId + " " + percentageHp +
-		 * " 0 0 0 0\n"; }
-		 * 
-		 * // S> attack char [CharID] npc [NpcID] [RemainHP%] 0 0 0 0
-		 * client.SendData( packetData); } }
-		 */
+		client.sendPacket(Type.ATTACK_VITAL, livingObject);	
+		
+		player.getInterested().sendPacket(Type.ATTACK, player, livingObject);
+		
 	}
 
 	/****** mob attacks player with normal attack ******/
@@ -340,32 +309,9 @@ public class Command {
 
 		player.updateStatus(0, newHp, player.getMaxHp());
 
-		int percentageHp = player.getPercentageHp();
 
-		switch (mob.getAttackType()) {
-		case 0: {
-			packetData = "attack npc " + mob.getId() + " char "
-					+ player.getId() + " " + percentageHp + " "
-					+ mob.getDmgType() + " 0 0 0\n";
-			break;
-		}
-		case 1: {
-			packetData = "attack npc " + mob.getId() + " char "
-					+ player.getId() + " " + percentageHp + " "
-					+ mob.getDmgType() + " 0 0 0\n";
-			break;
-		}
-		case 2: {
-			packetData = "attack npc " + mob.getId() + " char "
-					+ player.getId() + " " + percentageHp + " "
-					+ mob.getDmgType() + " 0 0 0\n";
-			break;
-		}
-		default:
-			break;
-		}
-		client.sendPacket(Type.ATTACK_NPC, player, mob);
-		player.getInterested().sendPacket(Type.ATTACK_NPC, player, mob);
+		client.sendPacket(Type.ATTACK, mob, player);
+		player.getInterested().sendPacket(Type.ATTACK, mob, player);
 		
 		// S> attack npc [NpcID] char [CharID] [RemainCharHP%] 0 0 0 0
 	
@@ -433,25 +379,15 @@ public class Command {
 	}
 
 	/****** player1 attacks player2 with Sub Attack ******/
-	public void subAttackChar(Player player1, int uniqueId) {
-		Client client = player1.getClient();
-		// G_Player player2 =
-		// (G_Player)G_EntityManager.getEntityManager().getEnt(uniqueId);
-
-		String packetData = "attack_vital char " + player1.getId()
-				+ " 100 0 0\n";
-		client.sendData(packetData);
-
-		// TODO: fix sub attack
-		/*
-		 * if (player1.getSession().getPlayerListSize() > 0) { for (int i = 0; i
-		 * < player1.getSession().getPlayerListSize(); i++) { client =
-		 * S_Server.getInstance().getNetworkModule()
-		 * .getClient(player1.getSession().getPlayer(i)); if (client == null) {
-		 * return; } packetData = "effect 40 char " + player1.getEntityId() +
-		 * " char " + uniqueId + " 100 0 0\n"; client.SendData( packetData); } }
-		 */
-
+	public void subAttack(Player player, LivingObject target) {
+		Client client = player.getClient();
+		
+		client.sendPacket(Type.ATTACK_VITAL, target);
+		
+		Skill skill = player.getCharSkill().getSkill(40);
+		
+		player.getInterested().sendPacket(Type.EFFECT, player, target, skill);
+		
 	}
 
 	/****** player attacks mob with Sub Attack ******/

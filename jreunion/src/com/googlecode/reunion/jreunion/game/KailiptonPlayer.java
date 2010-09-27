@@ -5,6 +5,7 @@ import java.util.Iterator;
 import com.googlecode.reunion.jreunion.server.Client;
 import com.googlecode.reunion.jreunion.server.ItemFactory;
 import com.googlecode.reunion.jreunion.server.Server;
+import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 
 /**
  * @author Aidamina
@@ -112,29 +113,10 @@ public class KailiptonPlayer extends Player {
 				+ mob.getPercentageHp() + " 0 0\n";
 
 		// S> attack_vital npc [NpcID] [RemainHP%] 0 0
-				client.sendData( packetData);
-
-			Iterator<WorldObject> playerIter = getSession()
-					.getPlayerListIterator();
-
-			while (playerIter.hasNext()) {
-				Player pl =(Player) playerIter.next();
-
-				client = pl.getClient();
-
-				if (client == null) {
-					continue;
-				}
-
-				packetData = "effect " + skill.getId() + " char "
-						+ getId() + " npc " + mob.getId() + " "
-						+ mob.getPercentageHp() + " 0 0\n";
-
-				// S> effect [SkillID] char [charID] npc [npcID] [RemainNpcHP%]
-				// 0 0
-						client.sendData( packetData);
-			}
+		client.sendData( packetData);
 		
+		getInterested().sendPacket(Type.EFFECT, this, mob, skill);
+
 	}
 
 	public void skillAttackPlayer(Player player, Skill skill) {

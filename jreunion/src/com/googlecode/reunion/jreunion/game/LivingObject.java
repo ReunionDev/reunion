@@ -4,6 +4,7 @@ import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jreunion.server.LocalMap;
 import com.googlecode.reunion.jreunion.server.Reference;
 import com.googlecode.reunion.jreunion.server.Session;
+import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 
 /**
  * @author Aidamina
@@ -29,12 +30,41 @@ public abstract class LivingObject extends WorldObject {
 	public int getPercentageHp(){
 		
 		double percentageHp = this.getHp() * 100 / this.getMaxHp();
-
 		if (percentageHp > 0 && percentageHp < 1) {
 			percentageHp = 1;
 		}
-		return (int) percentageHp;
-		
+		return (int) percentageHp;		
+	}
+	
+	public void walk(Position position, boolean running) {
+
+		setIsRunning(running);
+		synchronized(this) {
+			setPosition(position);
+			setTargetPosition(position.clone());			
+		}
+		getInterested().sendPacket(Type.WALK, this, position);
+				
+	}
+	
+	private int dmgType;
+	
+	public int getDmgType() {
+		return dmgType;
+	}
+
+	public void setDmgType(int dmgType) {
+		this.dmgType = dmgType;
+	}
+	
+	private boolean running; // 0 - Off; 1 - On
+
+	public void setIsRunning(boolean running) {
+		this.running = running;
+	}
+	
+	public boolean isRunning() {
+		return running;
 	}
 
 	private int hp;

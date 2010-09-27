@@ -14,6 +14,7 @@ import com.googlecode.reunion.jreunion.server.Reference;
 import com.googlecode.reunion.jreunion.server.Server;
 import com.googlecode.reunion.jreunion.server.Session;
 import com.googlecode.reunion.jreunion.server.Timer;
+import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 
 /**
  * @author Aidamina
@@ -28,8 +29,6 @@ public class Mob extends Npc {
 	private int exp;
 
 	private int lime;
-
-	private boolean running;
 
 	private int attackType;
 
@@ -99,12 +98,6 @@ public class Mob extends Npc {
 		return lime;
 	}
 	
-
-
-	public boolean getRunning() {
-		return running;
-	}
-
 	public int getSpeed() {
 		return speed;
 	}
@@ -280,28 +273,7 @@ public class Mob extends Npc {
 		} else {
 			return;
 		}
-		int run = getRunning()?1:0;
-
-		String packetData = "walk npc " + getId() + " " + getPosition().getX() + " "
-				+ getPosition().getY() + " 0 " + run + "\n";
-		// S> walk npc [UniqueId] [Xpos] [Ypos] [ZPos] [Running]
-
-		client.sendData(packetData);
-
-			Iterator<WorldObject> playerIter = player.getSession()
-					.getPlayerListIterator();
-
-			while (playerIter.hasNext()) {
-				Player pl =  (Player) playerIter.next();
-
-				client = pl.getClient();
-				if (client == null) {
-					continue;
-				}
-				if (getPosition().distance(pl.getPosition()) < pl.getSessionRadius()) {
-					client.sendData(packetData);
-				}
-			}
+		walk(getPosition(),isRunning());
 		
 	}
 
@@ -380,10 +352,6 @@ public class Mob extends Npc {
 
 	public void setLime(int lime) {
 		this.lime = lime;
-	}
-
-	public void setRunning(boolean running) {
-		this.running = running;
 	}
 
 	public void setSpeed(int speed) {

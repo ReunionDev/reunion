@@ -135,7 +135,7 @@ public class MessageParser {
 							.createMob(Integer.parseInt(words[1]));
 					mob.getPosition().setX(player.getPosition().getX() + 10);
 					mob.getPosition().setY(player.getPosition().getY() + 10);
-					mob.setRunning(true);
+					mob.setIsRunning(true);
 					mob.setMutant(Integer.parseInt(words[2]));
 					mob.setUnknown1(Integer.parseInt(words[3]));
 					mob.setNeoProgmare(Integer.parseInt(words[4]));

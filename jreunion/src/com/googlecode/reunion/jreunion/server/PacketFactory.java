@@ -15,6 +15,8 @@ import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Position;
 import com.googlecode.reunion.jreunion.game.RoamingItem;
 import com.googlecode.reunion.jreunion.game.Equipment.Slot;
+import com.googlecode.reunion.jreunion.game.Skill;
+import com.googlecode.reunion.jreunion.game.WorldObject;
 
 /**
  * @author Aidamina
@@ -25,35 +27,31 @@ public class PacketFactory {
 	public static enum Type{
 		FAIL,
 		OK,
+		OUT,
 		GO_WORLD,
 		GOTO,
-		PARTY_DISBAND, 
-		HOUR, 
-		IN_CHAR, 
-		OUT_CHAR, 
-		SAY, 
+		PARTY_DISBAND,
+		HOUR,
+		IN_CHAR,
+		SAY,
 		IN_ITEM,
-		OUT_ITEM, 
-		DROP, 
-		OUT_NPC,
-		IN_NPC, 
-		AT, 
-		PLACE, 
-		S_CHAR, 
-		WALK_CHAR, 
-		SOCIAL, 
+		DROP,
+		IN_NPC,
+		AT,
+		PLACE,
+		S_CHAR,
+		WALK,
+		SOCIAL,
 		COMBAT,
-		JUMP, 
-		ATTACK_NPC
-		
+		JUMP,
+		LEVELUP,
+		STATUS, 
+		EFFECT,
+		CHAR_REMOVE, 
+		CHAR_WEAR, ATTACK,
+		ATTACK_VITAL
 	}
 	
-	//public static final int PT_VERSION_ERROR = 1001;
-	//public static final int PT_OK = 1002;
-	//parametered arguments
-	
-	// PacketFactory.createPacket(Type.FAIL);
-
 	public static String createPacket(Type packetType, Object... args) {
 		switch (packetType) {
 		
@@ -123,10 +121,10 @@ public class PacketFactory {
 			}
 			break;
 		
-		case OUT_CHAR:
+		case OUT:
 			if(args.length>0){
-				Player player = (Player)args[0];
-				return "out char " + player.getId();
+				WorldObject object = (WorldObject)args[0];
+				return "out "+getObjectType(object)+" " + object.getId();
 			}
 			break;
 		
@@ -177,13 +175,6 @@ public class PacketFactory {
 			}
 			break;
 		
-		case OUT_ITEM:
-			if(args.length>0){
-				RoamingItem item = (RoamingItem)args[0];
-				return "out item " + item.getId();				
-			}			
-			break;
-		
 		case IN_NPC:			
 			if(args.length>0){
 				Npc npc = (Npc)args[0];
@@ -200,13 +191,6 @@ public class PacketFactory {
 						+ npc.getMutant() + " " + npc.getUnknown1() + " "
 						+ npc.getNeoProgmare() + " 0 " + (spawn ? 1 : 0) + " "
 						+ npc.getUnknown2();
-			}
-			break;
-			
-		case OUT_NPC:
-			if(args.length>0){
-				Npc npc = (Npc)args[0];
-				return "out npc " + npc.getId();
 			}
 			break;
 			
@@ -241,12 +225,13 @@ public class PacketFactory {
 			}
 			break;
 			
-		case WALK_CHAR:
-			if(args.length>0){
-				Player player = (Player)args[0];
-				Position position = player.getPosition();
-				return "walk char " + player.getId() + " " + position.getZ()
-				+ " " + position.getZ() + " " + position.getZ() + " " + (player.isRunning()?1:0);
+		case WALK:
+			if(args.length>1){
+				LivingObject livingObject = (LivingObject)args[0];
+				Position position = (Position)args[1];
+					
+				return "walk "+getObjectType(livingObject)+" " + livingObject.getId() + " " + position.getX()
+				+ " " + position.getY() + " " + position.getZ() + " " + (livingObject.isRunning()?1:0);
 			}
 			break;
 			
@@ -274,23 +259,95 @@ public class PacketFactory {
 			}
 			break;
 			
-		case ATTACK_NPC:
+					
+		case LEVELUP:
+			if(args.length>0){
+				Player player = (Player)args[0];
+				return "levelup " + player.getId();
+			}
+			break;
+			
+		case STATUS:
+			if(args.length>2){
+				int id = (Integer)args[0];
+				int arg1 = (Integer)args[1];
+				int arg2 = (Integer)args[2];
+				return "status " + id + " " + arg1 + " " + arg2;
+			}
+			break;
+			
+		case EFFECT:
+			if(args.length>2){
+				LivingObject source = (LivingObject) args[0];				
+				LivingObject target = (LivingObject)args[1];
+				Skill skill = (Skill)args[2];
+				
+				return "effect " + skill.getId() + " "+getObjectType(source)+" "
+				+ source.getId() + " "+getObjectType(target)+" " + target.getId() + " "
+				+ target.getPercentageHp() + " 0 0";
+	
+				// S> effect [SkillID] char [charID] npc [npcID] [RemainNpcHP%]
+				// 0 0
+			}
+			break;
+			
+		case CHAR_REMOVE:
 			if(args.length>1){
 				Player player = (Player)args[0];
-				Npc npc = (Npc)args[1];
+				Slot slot = (Slot)args[1];
+				return "char_remove " + player.getId() + " " + slot.ordinal() + "\n";
+			}
+			break;
+			
+		case CHAR_WEAR:
+			if(args.length>1){
+				Player player = (Player)args[0];
+				Slot slot = (Slot)args[1];
+				Item item = (Item)args[2];
+				return "char_wear " + player.getId() + " " + slot.ordinal() + " "
+				+ item.getType() + " " + item.getGemNumber() + "\n";
+			}
+			break;	
+		case ATTACK:
+			if(args.length>1){
+				LivingObject source = (LivingObject) args[0];				
+				LivingObject target = (LivingObject)args[1];
 				
-				return "attack npc " + npc.getId() + " char "
-				+ player.getId() + " " + npc.getPercentageHp() + " "
-				+ npc.getDmgType() + " 0 0 0";
+				return "attack "+getObjectType(source)+" " +
+					  source.getId() + " "+getObjectType(target)+" " + target.getId() + " " + target.getPercentageHp() +
+					  " "+source.getDmgType()+" 0 0 0\n";
+					  // S> attack char [CharID] npc [NpcID] [RemainHP%] 0 0 0 0
+				
 			}
 			break;
 		
+		case ATTACK_VITAL:
+			if(args.length>0){
+				LivingObject target = (LivingObject)args[1];
+				return 
+				"attack_vital "+getObjectType(target)+" " + target.getId() + " "
+				+ target.getPercentageHp() + " 0 0\n";
+			}
+			break;
+			
 		default:			
 			throw new NotImplementedException();
-		
-
 		}
 		throw new RuntimeException("Invalid parameters for "+packetType+" message");
+	}
+	
+	private static String getObjectType(WorldObject object){
+		if (object instanceof Player){
+			return "char";
+		}
+		if(object instanceof RoamingItem){
+			return "item";			
+		}
+		else if (object instanceof Npc) {
+			return "npc";
+		}
+		
+		throw new RuntimeException("Invalid Object: "+object);
 	}
 
 	public PacketFactory() {

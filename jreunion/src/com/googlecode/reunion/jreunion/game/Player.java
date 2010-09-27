@@ -100,8 +100,6 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 
 	private int penaltyPoints;
 
-	private boolean running; // 0 - Off; 1 - On
-
 	private int adminState; // 0 - normal user; 255 - SuperGM
 
 	private Session playerSession;
@@ -397,10 +395,6 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		*/
 	}
 
-	public boolean isRunning() {
-		return running;
-	}
-
 	/**
 	 * @return Returns the playerSession.
 	 * @uml.property name="playerSession"
@@ -670,7 +664,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		client.sendData(packetData);// send the message
 		// S> pickup [CharID]
 		
-		getClient().sendPacket(Type.OUT_ITEM, roamingItem);
+		getClient().sendPacket(Type.OUT, roamingItem);
 
 		//pickItem(roamingItem.getItem());
 	}
@@ -785,10 +779,6 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		this.quickSlot = quickSlot;
 	}
 
-
-	public void setIsRunning(boolean running) {
-		this.running = running;
-	}
 
 	/**
 	 * @param playerSession
@@ -1004,35 +994,22 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 			setLevel(getLevel() + curr);
 			packetData = "status " + id + " " + getLevel() + " " + max + "\n";
 			
-					client.sendData(packetData);
+			client.sendData(packetData);
 
-			packetData = "levelup " + getId() + "\n";
-			
-					client.sendData(packetData);
 			DatabaseUtils.getInstance()
 					.updateCharStatus(this, id, getLevel());
+			
+			client.sendPacket(Type.LEVELUP, this);
+			
+			getInterested().sendPacket(Type.LEVELUP, this);
 
-			Iterator<WorldObject> playerIter = getSession()
-					.getPlayerListIterator();
-
-			while (playerIter.hasNext()) {
-				Player pl = (Player) playerIter.next();
-				client = pl.getClient();
-
-				if (client == null) {
-					continue;
-				}
-
-				
-						client.sendData(packetData);
-			}
 			break;
 		}
 		case 10: { // Player Lime Status
 			setLime(getLime() + curr);
 			packetData = "status " + id + " " + getLime() + " " + max + "\n";
 			
-					client.sendData(packetData);
+			client.sendData(packetData);
 			DatabaseUtils.getInstance().updateCharStatus(this, id, getLime());
 			break;
 		}
@@ -1177,24 +1154,9 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		// DatabaseUtils.getInstance().saveCharStatus(this);
 	}
 
-	public void walk(Position position, boolean running) {
-
-		setIsRunning(running);
-
-		synchronized(this){
-			setPosition(position);
-			setTargetPosition(position.clone());			
-		}
-		
-		getInterested().sendPacket(Type.WALK_CHAR, this);
-				
-	}
-
 	public void wearSlot(Slot slot) {
 	
 		InventoryItem invItem = getInventory().getItemSelected();
-		String packetData = new String();
-		String extraPacketData = null;
 
 		if (invItem == null) {
 			if (getEquipment().getItem(slot) instanceof Weapon) {
@@ -1207,13 +1169,14 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 							new InventoryItem(getEquipment().getItem(slot),
 									0, 0, 0));
 			getEquipment().setItem(slot, null);
-
-			packetData = "char_remove " + getId() + " " + slot + "\n";
+			getInterested().sendPacket(Type.CHAR_REMOVE, this, slot);
+			
 		} else {
 			if (getEquipment().getItem(slot) == null) {
 				Item item = invItem.getItem();
-				packetData = "char_wear " + getId() + " " + slot + " "
-						+ item.getType() + " " + item.getGemNumber() + "\n";
+				
+				getInterested().sendPacket(Type.CHAR_WEAR, this, slot, item);
+				
 				getEquipment().setItem(slot, item);
 				getInventory().setItemSelected(null);
 				if (getEquipment().getItem(slot) instanceof Weapon) {
@@ -1223,8 +1186,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 				}
 			} else {
 				Item currentItem = getEquipment().getItem(slot);
-				extraPacketData = "char_remove " + getId() + " " + slot
-						+ "\n";
+				getInterested().sendPacket(Type.CHAR_REMOVE, this, slot);
 				getEquipment().setItem(slot, invItem.getItem());
 				getInventory().setItemSelected(
 						new InventoryItem(currentItem, 0, 0, 0));
@@ -1234,31 +1196,14 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 					setMaxDmg(weapon.getMaxDamage());
 				}
 				Item item = getEquipment().getItem(slot);
-				packetData = "char_wear " + getId() + " " + slot + " "
-						+ item.getType() + " " + item.getGemNumber() + "\n";
+
+				getInterested().sendPacket(Type.CHAR_WEAR, this, slot, item);
 				
 			}
 
 		}
 		// DatabaseUtils.getInstance().saveEquipment(this);
 
-		Iterator<WorldObject> playerIter = getSession()
-				.getPlayerListIterator();
-
-		while (playerIter.hasNext()) {
-			Player player = (Player) playerIter.next();
-			Client client = player.getClient();
-
-			if (client == null) {
-				continue;
-			}
-			if (extraPacketData != null) {
-				
-				client.sendData(extraPacketData);
-			}
-			
-			client.sendData(packetData);
-		}
 	}
 	/**
 	 * @param sessionRadius the sessionRadius to set
@@ -1284,7 +1229,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 
 	@Override
 	public void exit(Session session){
-		this.getClient().sendPacket(Type.OUT_CHAR, this);
+		this.getClient().sendPacket(Type.OUT, this);
 	}
 	
 	public void handleEvent(Event event){

@@ -101,7 +101,7 @@ public class MobManager {
 			return;
 		}
 
-		int run = mob.getRunning()?1:0;
+		int run = mob.isRunning()?1:0;
 		// int newPosX,newPosY;
 		// double directionX=0, directionY=0;
 
@@ -179,6 +179,9 @@ public class MobManager {
 
 			if (distance < player.getSessionRadius()) {
 				if (mob.getIsAttacking() == 0) {
+					
+					
+					
 					String packetData = "walk npc " + mob.getId() + " "
 							+ mob.getPosition().getX() + " " + mob.getPosition().getY() + " 0 " + run
 							+ "\n";

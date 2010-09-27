@@ -1,5 +1,6 @@
 package com.googlecode.reunion.jreunion.server;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
@@ -46,7 +47,7 @@ public class LocalMap extends Map implements Runnable{
 	
 	private SessionList<Session>  sessions = new SessionList<Session>();
 	
-	private List<WorldObject> entities = new Vector<WorldObject>();
+	private java.util.Map<Integer, WorldObject> entities = new HashMap<Integer, WorldObject>();
 		
 	private Area pvpArea = new Area();
 
@@ -77,6 +78,13 @@ public class LocalMap extends Map implements Runnable{
 		this.addEventListener(PlayerLoginEvent.class, this);
 		this.addEventListener(PlayerLogoutEvent.class, this);
 		this.addEventListener(ItemDropEvent.class, this);
+	}
+	
+	public WorldObject getEntity(int id) {		
+		synchronized(entities){			
+			return (WorldObject) entities.get(id);
+		}
+		
 	}
 	
 	private void createMobSpawns() {
@@ -127,7 +135,7 @@ public class LocalMap extends Map implements Runnable{
 	public Parser getNpcSpawnReference() {
 		return npcSpawnReference;
 	}
-
+	
 	private void createNpcSpawns() {
 
 		npcSpawnList.clear();
@@ -321,7 +329,7 @@ public class LocalMap extends Map implements Runnable{
 				
 				synchronized(entities) {
 					
-					entities.add(entity);
+					entities.put(entity.getId(), entity);
 					list.enter(entity, false);		
 				}
 				
@@ -347,7 +355,7 @@ public class LocalMap extends Map implements Runnable{
 				SessionList<Session> list = GetSessions(roamingItem.getPosition());
 				
 				synchronized(entities) {
-					entities.add(roamingItem);
+					entities.put(roamingItem.getId(), roamingItem);
 					list.enter(roamingItem, false);					
 				}
 								
@@ -377,7 +385,7 @@ public class LocalMap extends Map implements Runnable{
 				}	
 				SessionList<Session> list = player.getInterested().getSessions();
 				list.exit(player, false);
-				list.sendPacket(Type.OUT_CHAR, player);				
+				list.sendPacket(Type.OUT, player);				
 			}
 			
 		}else if(event instanceof SessionEvent){
@@ -409,7 +417,7 @@ public class LocalMap extends Map implements Runnable{
 				List<WorldObject> objects = null;
 				SessionList<Session> sessionList = null;
 				synchronized(this.entities){			
-					objects = new Vector<WorldObject>(this.entities);
+					objects = new Vector<WorldObject>(this.entities.values());
 				}
 				synchronized(this.sessions){			
 					sessionList = (SessionList<Session>) this.sessions.clone();
@@ -454,19 +462,5 @@ public class LocalMap extends Map implements Runnable{
 				
 			}
 		}
-	}
-
-	public RoamingItem getRoamingItem(int itemId) {
-		synchronized(entities){
-			
-			for(WorldObject entity:entities){
-				if(entity instanceof RoamingItem){
-					if(entity.getId()==itemId)
-						return (RoamingItem) entity;
-				}
-			}
-		}
-		
-		return null;
 	}
 }

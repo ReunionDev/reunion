@@ -26,7 +26,7 @@ public class RoamingItem extends WorldObject{
 	}
 	@Override
 	public void exit(Session session) {
-		session.getOwner().getClient().sendPacket(Type.OUT_ITEM, this);
+		session.getOwner().getClient().sendPacket(Type.OUT, this);
 	}
 	@Override
 	public int getId() {		

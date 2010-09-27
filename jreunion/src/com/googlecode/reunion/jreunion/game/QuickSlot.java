@@ -126,7 +126,7 @@ public class QuickSlot {
 				mob.getPosition().setX(client.getPlayer().getPosition().getX() + 20);
 				mob.getPosition().setY(client.getPlayer().getPosition().getY() + 20);
 				mob.getPosition().setZ(client.getPlayer().getPosition().getZ());
-				mob.setRunning(true);
+				mob.setIsRunning(true);
 				Server.getInstance().getWorld().getMobManager()
 						.addMob(mob);
 				break;
