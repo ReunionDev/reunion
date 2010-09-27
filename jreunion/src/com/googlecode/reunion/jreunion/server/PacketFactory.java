@@ -103,7 +103,6 @@ public class PacketFactory {
 				int combat = player.getCombatMode() ? 1 : 0;
 				Equipment eq = player.getEquipment();
 				
-				int percentageHp = player.getHp() * 100 / player.getMaxHp();
 				String packetData = warping?"appear ":"in ";
 
 				packetData += "char " + player.getId() + " " + player.getName()
@@ -114,7 +113,7 @@ public class PacketFactory {
 						+ player.getPosition().getRotation() + " " + eq.getType(Slot.HELMET) + " "
 						+ eq.getType(Slot.CHEST) + " " + eq.getType(Slot.PANTS) + " " + eq.getType(Slot.SHOULDER) + " "
 						+ eq.getType(Slot.BOOTS) + " " + eq.getType(Slot.OFFHAND) + " " + eq.getType(Slot.MAINHAND) + " "
-						+ percentageHp + " " + combat + " 0 0 0 0 0 0";
+						+ player.getPercentageHp() + " " + combat + " 0 0 0 0 0 0";
 				// in char [UniqueID] [Name] [Race] [Gender] [HairStyle] [XPos]
 				// [YPos] [ZPos] [Rotation] [Helm] [Armor] [Pants] [ShoulderMount]
 				// [Boots] [Shield] [Weapon] [Hp%] [CombatMode] 0 0 0 [Boosted] [PKMode]

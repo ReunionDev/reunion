@@ -107,15 +107,9 @@ public class KailiptonPlayer extends Player {
 		} else {
 			mob.setHp(newHp);
 		}
-
-		int percentageHp = mob.getHp() * 100 / mob.getMaxHp();
-
-		if (percentageHp == 0 && mob.getHp() > 0) {
-			percentageHp = 1;
-		}
-
+		
 		String packetData = "attack_vital npc " + mob.getId() + " "
-				+ percentageHp + " 0 0\n";
+				+ mob.getPercentageHp() + " 0 0\n";
 
 		// S> attack_vital npc [NpcID] [RemainHP%] 0 0
 				client.sendData( packetData);
@@ -134,7 +128,7 @@ public class KailiptonPlayer extends Player {
 
 				packetData = "effect " + skill.getId() + " char "
 						+ getId() + " npc " + mob.getId() + " "
-						+ percentageHp + " 0 0\n";
+						+ mob.getPercentageHp() + " 0 0\n";
 
 				// S> effect [SkillID] char [charID] npc [npcID] [RemainNpcHP%]
 				// 0 0

@@ -282,15 +282,9 @@ public class Command {
 
 		player.meleeAttack(livingObject);
 
-		int percentageHp = livingObject.getHp() * 100
-				/ livingObject.getMaxHp();
+		int percentageHp = livingObject.getPercentageHp();
 
-		if (percentageHp == 0 && livingObject.getHp() > 0) {
-			percentageHp = 1;
-		}
-
-		// if(percentageHp > 0 && percentageHp <= 1)
-		// percentageHp = 1;
+		
 		String packetData = new String();
 
 		if (livingObject instanceof Mob) {
@@ -346,28 +340,24 @@ public class Command {
 
 		player.updateStatus(0, newHp, player.getMaxHp());
 
-		double percentageHp = player.getHp() * 100 / player.getMaxHp();
-
-		if (percentageHp > 0 && percentageHp < 1) {
-			percentageHp = 1;
-		}
+		int percentageHp = player.getPercentageHp();
 
 		switch (mob.getAttackType()) {
 		case 0: {
 			packetData = "attack npc " + mob.getId() + " char "
-					+ player.getId() + " " + (int) percentageHp + " "
+					+ player.getId() + " " + percentageHp + " "
 					+ mob.getDmgType() + " 0 0 0\n";
 			break;
 		}
 		case 1: {
 			packetData = "attack npc " + mob.getId() + " char "
-					+ player.getId() + " " + (int) percentageHp + " "
+					+ player.getId() + " " + percentageHp + " "
 					+ mob.getDmgType() + " 0 0 0\n";
 			break;
 		}
 		case 2: {
 			packetData = "attack npc " + mob.getId() + " char "
-					+ player.getId() + " " + (int) percentageHp + " "
+					+ player.getId() + " " + percentageHp + " "
 					+ mob.getDmgType() + " 0 0 0\n";
 			break;
 		}
@@ -533,11 +523,7 @@ public class Command {
 			mob.setHp(newHp);
 		}
 
-		double percentageHp = mob.getHp() * 100 / mob.getMaxHp();
-
-		if (percentageHp > 0 && percentageHp <= 1) {
-			percentageHp = 1;
-		}
+		int percentageHp = mob.getPercentageHp();
 
 		String packetData = "sav npc " + uniqueId + " " + percentageHp
 				+ " 1 0 " + item.getExtraStats() + "\n";

@@ -95,17 +95,6 @@ public class Npc extends LivingObject {
 		this.dmgType = dmgType;
 	}
 	
-	public int getPercentageHp(){
-		
-		double percentageHp = this.getHp() * 100 / this.getMaxHp();
-
-		if (percentageHp > 0 && percentageHp < 1) {
-			percentageHp = 1;
-		}
-		return (int) percentageHp;
-		
-	}
-
 	@Override
 	public void enter(Session session) {
 		
