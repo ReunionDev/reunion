@@ -330,7 +330,7 @@ public class LocalMap extends Map implements Runnable{
 					Session session = player.getSession();
 					sessions.add(session);
 
-					list.sendPacket(Type.CHAR_IN, player, true);
+					list.sendPacket(Type.IN_CHAR, player, true);
 				}else{
 					
 					list.sendPacket(Type.IN_NPC, entity);				

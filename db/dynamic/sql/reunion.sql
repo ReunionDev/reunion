@@ -145,7 +145,7 @@ CREATE TABLE `slots` (
   `accountid` int(11) NOT NULL,
   `charid` int(11) NOT NULL,
   `slot` int(11) NOT NULL,
-  PRIMARY KEY  (`accountid`,`charid`)
+  PRIMARY KEY  (`accountid`,`slot`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `warehouse`;

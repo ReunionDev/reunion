@@ -29,7 +29,7 @@ public class PacketFactory {
 		GOTO,
 		PARTY_DISBAND, 
 		HOUR, 
-		CHAR_IN, 
+		IN_CHAR, 
 		OUT_CHAR, 
 		SAY, 
 		IN_ITEM,
@@ -114,7 +114,7 @@ public class PacketFactory {
 			break;
 		
 		
-		case CHAR_IN:
+		case IN_CHAR:
 			
 			if(args.length>0){
 				Player player = (Player)args[0];
@@ -279,7 +279,7 @@ public class PacketFactory {
 			return
 					"at " + player.getId() + " "
 							+ player.getPosition().getX() + " " + player.getPosition().getY() + " "
-							+ player.getPosition().getZ() + " 0";//TODO: check for rotation??
+							+ player.getPosition().getZ() + " 0";
 			}
 			break;
 			

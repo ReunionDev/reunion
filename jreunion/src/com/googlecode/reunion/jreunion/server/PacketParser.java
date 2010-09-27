@@ -214,8 +214,9 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 				client.SendData(
 						"status 19 " + player.getPenaltyPoints() + " 0\n");
 				
-				
 				world.getPlayerManager().addPlayer(player);
+				
+				
 				
 				player.getPosition().getMap().fireEvent(PlayerLoginEvent.class, player);
 				//world.getSessionManager().newSession(player);
@@ -257,10 +258,7 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 
 				world.getTeleportManager().remove(player);
 				*/
-				client.setState(Client.State.INGAME);
-				
-				
-				
+				client.setState(Client.State.INGAME);				
 			}
 			break;
 		}

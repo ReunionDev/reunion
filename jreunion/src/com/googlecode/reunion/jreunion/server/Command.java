@@ -37,36 +37,12 @@ public class Command {
 		super();
 		world = parent;
 	}
-	// Returns a bitset containing the values in bytes.
-	// The byte-ordering of bytes must be big-endian which means the most significant bit is in element 0.
-	public static BitSet fromByteArray(byte[] bytes) {
-	    BitSet bits = new BitSet();
-	    for (int i=0; i<bytes.length*8; i++) {
-	        if ((bytes[bytes.length-i/8-1]&(1<<(i%8))) > 0) {
-	            bits.set(i);
-	        }
-	    }
-	    return bits;
-	}
-
-	// Returns a byte array of at least length 1.
-	// The most significant bit in the result is guaranteed not to be a 1
-	// (since BitSet does not support sign extension).
-	// The byte-ordering of the result is big-endian which means the most significant bit is in element 0.
-	// The bit at index 0 of the bit set is assumed to be the least significant bit.
-	public static byte[] toByteArray(BitSet bits) {
-	    byte[] bytes = new byte[bits.length()/8+1];
-	    for (int i=0; i<bits.length(); i++) {
-	        if (bits.get(i)) {
-	            bytes[bytes.length-i/8-1] |= 1<<(i%8);
-	        }
-	    }
-	    return bytes;
-	}
 
 	void authClient(Client client) {
 		String username = client.getUsername();
 		String password = client.getPassword();
+		
+		//Handling for a client that doesnt want to behave
 		if(client.getVersion()==101&&client.getLoginType()!=LoginType.PLAY){
 			
 			byte key = 0x03;
@@ -129,7 +105,7 @@ public class Command {
 	public void charIn(Sendable sendable, Player player, boolean warping) {
 	
 		
-		sendable.sendPacket(Type.CHAR_IN, player, warping);
+		sendable.sendPacket(Type.IN_CHAR, player, warping);
 		// serverTell(player, "char in id "+ePlayer.getEntityId());
 	}
 
@@ -190,7 +166,7 @@ public class Command {
 		SessionList<Session> entry = player.getPosition().getMap().GetSessions(position);
 		
 		entry.enter(player, false);
-		entry.sendPacket(Type.CHAR_IN, player, true);
+		entry.sendPacket(Type.IN_CHAR, player, true);
 		
 		client.sendPacket(Type.GOTO, position);
 		
@@ -221,54 +197,11 @@ public class Command {
 		Session session = player.getSession();
 
 		// flush the session
-		try {
 		session.empty();
-		} catch (Exception e) {
-			//TODO: Fix Teleporting
-			Logger.getLogger(Command.class).warn("teleportbug",e);
-		}
 		
 		client.sendPacket(Type.GO_WORLD, map, unknown);
 
 
-	}
-
-	public void itemIn(Player sessionOwner, RoamingItem roamingItem) {
-		Item item = roamingItem.getItem();
-		this.itemIn(sessionOwner, item.getId(), item.getType(),
-				roamingItem.getPosition().getX(), roamingItem.getPosition()
-						.getY(), roamingItem.getPosition().getZ(), roamingItem
-						.getPosition().getRotation(), item.getGemNumber(), item
-						.getExtraStats());
-
-	}
-
-	/****** Manages the Item In ******/
-	public void itemIn(Player owner, int uniqueid, int itemtype, int posX,
-			int posY, int posZ, double rotation, int gems, int special) {
-		Client client = owner.getClient();
-
-		String packetData = "in item " + uniqueid + " " + itemtype + " " + posX
-				+ " " + posY + " " + posZ + " " + rotation + " " + gems + " "
-				+ special + "\n";
-		client.SendData(packetData);
-
-		serverTell(owner.getClient(), "Item in itemid " + uniqueid + " type " + itemtype
-				+ "");
-		// S> in item [UniqueID] [TypeID] [XPos] [YPos] [ZPos] [Rotation]
-		// [gemNumber] [Special]
-	}
-
-
-	/****** Manages the Item Out ******/
-	public void itemOut(Sendable sendable, RoamingItem item) {
-
-		
-		sendable.sendPacket(Type.OUT_ITEM, item);				
-		
-		serverTell(sendable, "out: id  " + item.getId());
-
-		// S> out item [UniqueID]
 	}
 
 	public Player loginChar(int slotNumber, int accountId, Client client) {
@@ -288,7 +221,6 @@ public class Command {
 				break;
 			}
 		}
-
 		
 		if (map == null || !map.isLocal()) {
 			Logger.getLogger(Command.class).error("Invalid Map: " + map);

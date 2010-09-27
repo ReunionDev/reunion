@@ -68,9 +68,9 @@ public class Network extends Service implements Runnable, EventListener{
 
 	@Override
 	public void run() {
-		try {
 			
 			while (true) {
+				try {
 				// See if we've had any activity -- either an incoming connection,
 				// or incoming data on an existing connection
 					int num = selector.select();
@@ -107,7 +107,8 @@ public class Network extends Service implements Runnable, EventListener{
 						
 						// Register it with the selector, for reading
 						clientSocketChannel.register(selector, SelectionKey.OP_READ);
-					} else if ((key.readyOps() & SelectionKey.OP_READ) == SelectionKey.OP_READ) {
+					} 
+					else if ((key.readyOps() & SelectionKey.OP_READ) == SelectionKey.OP_READ) {
 						
 						try {
 							// It's incoming data on a connection, so process it
@@ -130,7 +131,8 @@ public class Network extends Service implements Runnable, EventListener{
 							disconnect(socket);
 							
 						}
-					} else if ((key.readyOps() & SelectionKey.OP_WRITE) == SelectionKey.OP_WRITE) {
+					} 
+					else if ((key.readyOps() & SelectionKey.OP_WRITE) == SelectionKey.OP_WRITE) {
 						
 						boolean ok = processOutput((SocketChannel) socketChannel);
 						if(ok){
@@ -140,12 +142,14 @@ public class Network extends Service implements Runnable, EventListener{
 				}
 				// We remove the selected keys, because we've dealt with them.
 				keys.clear();
+				
+			} catch (Exception e) {
+				if(e instanceof ClosedSelectorException)
+					return;
+				Logger.getLogger(Network.class).error("Error in network",e);
 			}
-		} catch (Exception ie) {
-			if(ie instanceof ClosedSelectorException)
-				return;
-			Logger.getLogger(Network.class).error(ie);
 		}
+	
 	}
 	
 	private boolean processInput(SocketChannel socketChannel) throws IOException {
@@ -172,16 +176,10 @@ public class Network extends Service implements Runnable, EventListener{
 
 		String data = new String(decOutput);
 		
-		
 		Logger.getLogger(World.class).debug(client + " sends: \n"+data);
 		
 		fireEvent(NetworkDataEvent.class, socket, data);
-		
-		//Logger logger = client.getLogger();
-		Logger.getLogger(Network.class).info(data);
-		
-		
-		
+				
 		return true;
 	}
 	
@@ -204,12 +202,12 @@ public class Network extends Service implements Runnable, EventListener{
 			buffer.flip();
 			outputBuffer.setLength(0);
 			
-			Logger.getLogger(Network.class).info("Sending to "+client+":\n" + packetData);
+			Logger.getLogger(Network.class).debug("Sending to "+client+":\n" + packetData);
 		}
 		try {
 			socketChannel.write(buffer);
 		} catch (IOException e) {
-			Logger.getLogger(this.getClass()).warn("Exception",e);
+			Logger.getLogger(this.getClass()).warn("Exception", e);
 			disconnect(socket);				
 		}
 		return true;
@@ -220,8 +218,7 @@ public class Network extends Service implements Runnable, EventListener{
 			try {
 				processOutput(socket.getChannel());
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				Logger.getLogger(this.getClass()).warn("Exception",e);
+				Logger.getLogger(this.getClass()).warn("Exception", e);
 			}
 		}
 		Logger.getLogger(Network.class).info("Disconnecting " + socket);

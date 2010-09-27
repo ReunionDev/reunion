@@ -669,9 +669,9 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		
 		client.SendData(packetData);// send the message
 		// S> pickup [CharID]
+		
+		getClient().sendPacket(Type.OUT_ITEM, roamingItem);
 
-		this.getPosition().getMap().getWorld().getCommand()
-				.itemOut(this.getClient(), roamingItem);
 		//pickItem(roamingItem.getItem());
 	}
 
@@ -1259,7 +1259,6 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 			
 			client.SendData(packetData);
 		}
-		
 	}
 	/**
 	 * @param sessionRadius the sessionRadius to set
@@ -1280,15 +1279,12 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 	
 	@Override
 	public void enter(Session session){
-		this.getPosition().getMap().getWorld().getCommand()
-		.charIn(session.getOwner(), this);
+		this.getClient().sendPacket(Type.IN_CHAR, this, false);
 	}
-		
 
 	@Override
 	public void exit(Session session){
-		this.getPosition().getMap().getWorld().getCommand()
-		.charOut(session.getOwner().getClient(), this);
+		this.getClient().sendPacket(Type.OUT_CHAR, this);
 	}
 	
 	public void handleEvent(Event event){
@@ -1299,7 +1295,6 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		}
 		if(event instanceof SessionEvent){
 			SessionEvent sessionEvent = (SessionEvent) event;
-			
 		}
 	}
 	
