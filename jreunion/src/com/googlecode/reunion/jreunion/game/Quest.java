@@ -30,7 +30,7 @@ public class Quest {
 
 		player.setQuest(null);
 		String packetData = "qt get -1\n";
-				client.SendData(packetData);
+				client.sendData(packetData);
 	}
 
 	/****** Update Quest Points Obtained ********/
@@ -45,7 +45,7 @@ public class Quest {
 		String packetData = "qt pt " + remainPoints + " " + obtainedPoints
 				+ "\n";
 		
-				client.SendData(packetData);
+				client.sendData(packetData);
 
 		/****** Quest Points Reached Zero ********/
 		if (remainPoints == 0) {
@@ -57,7 +57,7 @@ public class Quest {
 			// QuestSecondFase(player);
 			packetData = "qt nt\n";
 			
-					client.SendData(packetData);
+					client.sendData(packetData);
 			player.getInventory().addItem(item);
 			
 		}
@@ -73,7 +73,7 @@ public class Quest {
 
 		String packetData = "qt tp " + tp + "\n";
 		
-				client.SendData(packetData);
+				client.sendData(packetData);
 	}
 
 	/****** Quest Points Reached Zero ********/
@@ -109,7 +109,7 @@ public class Quest {
 		QuickSlotItem qsItem = player.getQuickSlot().getItem(slot);
 		String packetData = "qt get " + questId + "\n";
 		
-				client.SendData(packetData);
+				client.sendData(packetData);
 
 		if (questId == 669) {
 			double tp = Math.random() * 2000 + 300;
@@ -137,7 +137,7 @@ public class Quest {
 		String packetData = "qt eff " + player.getPosition().getX() + " "
 				+ player.getPosition().getY() + " " + player.getId() + "\n";
 		
-				client.SendData(packetData);
+				client.sendData(packetData);
 	}
 
 	/****** Quest End ********/
@@ -151,7 +151,7 @@ public class Quest {
 		player.setQuest(null);
 		String packetData = "qt end " + questId + "\n";
 		
-				client.SendData(packetData);
+				client.sendData(packetData);
 	}
 
 	/****** Quest Kill ********/
@@ -167,7 +167,7 @@ public class Quest {
 
 		String packetData = "qt kill " + pos + " " + ammount + "\n";
 		
-				client.SendData(packetData);
+				client.sendData(packetData);
 		// S> qt kill [Pos] [Ammount]
 	}
 
@@ -192,7 +192,7 @@ public class Quest {
 		}
 
 		String packetData = "usq succ " + slot + "\n";
-				client.SendData(packetData);
+				client.sendData(packetData);
 	}
 
 	/****** Update the Mission Receiver in the Quick Slot ********/
@@ -209,6 +209,6 @@ public class Quest {
 
 		String packetData = "qt quick " + slot + " " + missionsRemaining + "\n";
 
-				client.SendData(packetData);
+				client.sendData(packetData);
 	}
 }

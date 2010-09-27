@@ -68,6 +68,26 @@ public class Equipment {
 	public Armor getHelmet() {
 		return helmet;
 	}
+	
+	public int getType(Slot slot){
+		Item item = getItem(slot); 
+		return item == null ? -1 : item.getType();
+	}
+	
+	public int getId(Slot slot){
+		Item item = getItem(slot); 
+		return item == null ? -1 : item.getId();
+	}
+	
+	public int getExtraStats(Slot slot){
+		Item item = getItem(slot); 
+		return item == null ? 0 : item.getExtraStats();
+	}
+	
+	public int getGemNumber(Slot slot){
+		Item item = getItem(slot); 
+		return item == null ? 0 : item.getGemNumber();
+	}
 
 	public Item getItem(Slot slot) {
 

@@ -140,24 +140,26 @@ public class Client extends EventBroadcaster implements EventListener,Sendable {
 	}
 
 	public void sendWrongVersion(int clientVersion) {
+		String requiredVersion = Reference.getInstance().getServerReference().getItem("Server").getMemberValue("Version");
+		String message = "Wrong clientversion: current version "
+				+ clientVersion + " required version "
+				+ requiredVersion;
 		
-		sendPacket(PacketFactory.Type.VERSION_ERROR,clientVersion);
+		sendPacket(PacketFactory.Type.FAIL,message);
 	}
 	
-	public void SendData(String data) {
+	public void sendData(String data) {
 		synchronized(this){
 			this.outputBuffer.append(data);
 			if(!data.endsWith("\n")){
 				this.outputBuffer.append("\n");
 			}
-			
-			this.fireEvent(NetworkSendEvent.class, this.getSocket());
-			
+			this.fireEvent(NetworkSendEvent.class, this.getSocket());			
 		}
-		
 	}
+	
 	public void sendPacket(PacketFactory.Type packetType, Object ...args){		
-		SendData(PacketFactory.createPacket(packetType, args));
+		sendData(PacketFactory.createPacket(packetType, args));
 	}
 
 	public void setState(State state) {

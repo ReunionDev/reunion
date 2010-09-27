@@ -268,7 +268,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		getCharSkill().incSkill(this, skill);
 		packetData = "skilllevel " + skill.getId() + " " + skill.getCurrLevel()
 				+ "\n";
-				client.SendData( packetData);
+				client.sendData( packetData);
 	}
 
 	public Exchange getExchange() {
@@ -518,7 +518,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 					+ exchangeItem.getItem().getExtraStats() + "\n";
 			// inven [Tab] [UniqueId] [Type] [PosX] [PosY] [Gems] [Special]
 			
-					client.SendData( packetData);
+					client.sendData( packetData);
 		}
 	}
 
@@ -563,7 +563,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 					+ invItem.getItem().getExtraStats() + "\n";
 			// inven [Tab] [UniqueId] [Type] [PosX] [PosY] [Gems] [Special]
 			
-					client.SendData(packetData);
+					client.sendData(packetData);
 
 		}
 	}
@@ -588,7 +588,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 						+ item.getGemNumber() + " "
 						+ item.getExtraStats() + "\n";
 				
-						client.SendData( packetData);
+						client.sendData( packetData);
 			}
 		}
 	}
@@ -667,7 +667,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		
 		String packetData = "pickup " + getId() + "\n";
 		
-		client.SendData(packetData);// send the message
+		client.sendData(packetData);// send the message
 		// S> pickup [CharID]
 		
 		getClient().sendPacket(Type.OUT_ITEM, roamingItem);
@@ -894,13 +894,13 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		if (targetPlayer == null) {
 			String packetData = "Player not online";
 			
-			client.SendData(packetData);
+			client.sendData(packetData);
 			return;
 		}
 
 		String packetData = "say 1 " + getName() + " (PM) " + text + " 0\n";
 		
-		client.SendData(packetData);
+		client.sendData(packetData);
 	}
 	
 	
@@ -961,7 +961,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 			packetData = "status " + id + " " + getHp() + " " + getMaxHp()
 					+ "\n";
 			
-					client.SendData(packetData);
+					client.sendData(packetData);
 			break;
 		}
 		case 1: { // Mana Status
@@ -973,7 +973,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 			packetData = "status " + id + " " + getMana() + " "
 					+ getMaxMana() + "\n";
 			
-					client.SendData(packetData);
+					client.sendData(packetData);
 			break;
 		}
 		case 2: { // Stamina Status
@@ -985,7 +985,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 			packetData = "status " + id + " " + getStm() + " "
 					+ getMaxStm() + "\n";
 			
-					client.SendData(packetData);
+					client.sendData(packetData);
 			break;
 		}
 		case 3: { // Electric Energy Status
@@ -997,18 +997,18 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 			packetData = "status " + id + " " + getElect() + " "
 					+ getMaxElect() + "\n";
 			
-					client.SendData(packetData);
+					client.sendData(packetData);
 			break;
 		}
 		case 4: { // Player Level Status
 			setLevel(getLevel() + curr);
 			packetData = "status " + id + " " + getLevel() + " " + max + "\n";
 			
-					client.SendData(packetData);
+					client.sendData(packetData);
 
 			packetData = "levelup " + getId() + "\n";
 			
-					client.SendData(packetData);
+					client.sendData(packetData);
 			DatabaseUtils.getInstance()
 					.updateCharStatus(this, id, getLevel());
 
@@ -1024,7 +1024,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 				}
 
 				
-						client.SendData(packetData);
+						client.sendData(packetData);
 			}
 			break;
 		}
@@ -1032,7 +1032,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 			setLime(getLime() + curr);
 			packetData = "status " + id + " " + getLime() + " " + max + "\n";
 			
-					client.SendData(packetData);
+					client.sendData(packetData);
 			DatabaseUtils.getInstance().updateCharStatus(this, id, getLime());
 			break;
 		}
@@ -1041,7 +1041,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 			packetData = "status " + id + " " + getTotalExp() + " " + max
 					+ "\n";
 			
-					client.SendData(packetData);
+					client.sendData(packetData);
 			DatabaseUtils.getInstance().updateCharStatus(this, id,
 					getTotalExp());
 			break;
@@ -1059,7 +1059,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 				packetData = "status " + id + " " + getLvlUpExp() + " " + max
 						+ "\n";
 				
-						client.SendData(packetData);
+						client.sendData(packetData);
 				DatabaseUtils.getInstance().updateCharStatus(this, id,
 						getLvlUpExp());
 			} else {
@@ -1067,7 +1067,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 				packetData = "status " + id + " " + getLvlUpExp() + " " + max
 						+ "\n";
 				
-						client.SendData(packetData);
+						client.sendData(packetData);
 				DatabaseUtils.getInstance().updateCharStatus(this, id,
 						getLvlUpExp());
 			}
@@ -1078,7 +1078,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 			packetData = "status " + id + " " + getStatusPoints() + " " + max
 					+ "\n";
 			
-					client.SendData(packetData);
+					client.sendData(packetData);
 			DatabaseUtils.getInstance().updateCharStatus(this, id,
 					getStatusPoints());
 			break;
@@ -1090,7 +1090,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 			setStrength(getStr() + curr);
 			packetData = "status " + id + " " + getStr() + " " + max + "\n";
 			
-					client.SendData(packetData);
+					client.sendData(packetData);
 			DatabaseUtils.getInstance().updateCharStatus(this, id, getStr());
 
 			updateStatus(0, getHp(), getMaxHp() + (getStr() / 50) + 1);
@@ -1105,7 +1105,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 			setWisdom(getWis() + curr);
 			packetData = "status " + id + " " + getWis() + " " + max + "\n";
 			
-					client.SendData(packetData);
+					client.sendData(packetData);
 			DatabaseUtils.getInstance().updateCharStatus(this, id, getWis());
 
 			updateStatus(1, getMana(), getMaxMana() + (getWis() / 50) + 2);
@@ -1120,7 +1120,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 			setDexterity(getDexterity() + curr);
 			packetData = "status " + id + " " + getDexterity() + " " + max + "\n";
 			
-					client.SendData(packetData);
+					client.sendData(packetData);
 			DatabaseUtils.getInstance().updateCharStatus(this, id, getDexterity());
 
 			updateStatus(1, getMana(), getMaxMana() + (getDexterity() / 50) + 1);
@@ -1135,7 +1135,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 			setConstitution(getConstitution() + curr);
 			packetData = "status " + id + " " + getConstitution() + " " + max + "\n";
 			
-					client.SendData(packetData);
+					client.sendData(packetData);
 			DatabaseUtils.getInstance().updateCharStatus(this, id, getConstitution());
 
 			updateStatus(0, getHp(), getMaxHp() + (getConstitution() / 50) + 2);
@@ -1150,7 +1150,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 			setLeadership(getLeadership() + curr);
 			packetData = "status " + id + " " + getLeadership() + " " + max + "\n";
 			
-					client.SendData(packetData);
+					client.sendData(packetData);
 			DatabaseUtils.getInstance().updateCharStatus(this, id, getLeadership());
 
 			if (getLeadership() % 2 == 0) {
@@ -1166,7 +1166,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 					// 1000=100; 10000=1000)
 			packetData = "status " + id + " " + curr + " " + max + "\n";
 			
-					client.SendData(packetData);
+					client.sendData(packetData);
 			DatabaseUtils.getInstance().updateCharStatus(this, id,
 					getPenaltyPoints());
 			break;
@@ -1254,10 +1254,10 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 			}
 			if (extraPacketData != null) {
 				
-				client.SendData(extraPacketData);
+				client.sendData(extraPacketData);
 			}
 			
-			client.SendData(packetData);
+			client.sendData(packetData);
 		}
 	}
 	/**

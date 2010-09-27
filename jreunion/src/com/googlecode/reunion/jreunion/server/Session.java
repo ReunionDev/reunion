@@ -152,7 +152,7 @@ public class Session extends EventBroadcaster implements EventListener{
 			if(event instanceof SendPacketSessionEvent){
 				SendPacketSessionEvent sendPacketSessionEvent = (SendPacketSessionEvent)event;
 				String data = sendPacketSessionEvent.getData();
-				getOwner().getClient().SendData(data);
+				getOwner().getClient().sendData(data);
 			}
 		}		
 	}

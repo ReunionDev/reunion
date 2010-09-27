@@ -70,7 +70,7 @@ public class Trader extends Npc {
 			}
 		}
 
-				client.SendData(packetData);
+				client.sendData(packetData);
 	}
 
 	/******
@@ -116,7 +116,7 @@ public class Trader extends Npc {
 					+ newItem.getExtraStats() + "\n";
 		}
 
-				client.SendData(packetData);
+				client.sendData(packetData);
 
 	}
 

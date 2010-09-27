@@ -78,7 +78,7 @@ public class MessageParser {
 						
 					} catch (Exception e) {
 						String packetData = "say 1 S_Server (NOTICE) @drop failed";
-						client.SendData(packetData);
+						client.sendData(packetData);
 					}
 				}
 				
@@ -87,7 +87,7 @@ public class MessageParser {
 				for(String word: words){
 					data+=" "+word;					
 				}
-				client.SendData(data.substring(2));				
+				client.sendData(data.substring(2));				
 				return null;
 				//client.SendPacket(Type.SAY, words[3],Integer.parseInt(words[2]),Integer.parseInt(words[1]));
 			} else if (words[0].equals("@p")) { //Adds a NPC
@@ -100,7 +100,7 @@ public class MessageParser {
 					
 				}
 				if(data.isEmpty())
-					client.SendData(data);
+					client.sendData(data);
 				return null;
 			
 			} else if (words[0].equals("@addmob")) { //Adds a NPC 
@@ -127,7 +127,7 @@ public class MessageParser {
 						}
 					} catch (Exception NumberFormatException) {
 						String packetData = "say 1 S_Server (NOTICE) @addmob with more than 1 mob failed";
-						client.SendData(packetData);
+						client.sendData(packetData);
 					}
 				} else if (words.length == 6) {
 					Mob mob = Server.getInstance().getWorld()
@@ -174,7 +174,7 @@ public class MessageParser {
 				}
 				else{
 					String packetData = "say 1 S_Server (NOTICE) @tele failed -> @tele worldname";
-					client.SendData(packetData);					
+					client.sendData(packetData);					
 				}
 			} catch (Exception e) {
 				
@@ -254,12 +254,12 @@ public class MessageParser {
 					spawn.setRespawnTime(10);
 					spawn.spawn();
 					String packetData = "say 1 S_Server Spawnpoint succesfully added";
-					client.SendData(packetData);
+					client.sendData(packetData);
 			      }catch(Exception e){
 			    	  com.serverTell(player.getClient(),e.getMessage());
 			    	  Logger.getLogger(this.getClass()).warn("Exception",e);
 			    	  String packetData = "say 1 S_Server Spawnpoint cannot be added";
-			    	  client.SendData(packetData);
+			    	  client.sendData(packetData);
 			      }
 				
 			} else if (words[0].equals("@com")) {
@@ -270,7 +270,7 @@ public class MessageParser {
 						packetData = packetData + " ";
 					}
 				}
-				client.SendData( packetData + "\n");
+				client.sendData( packetData + "\n");
 			} else if (words[0].equals("@spot")) {
 				com.serverSay("{ X:" + player.getPosition().getX() + ", Y:"
 						+ player.getPosition().getY()+", Z:"+player.getPosition().getZ()+"}");

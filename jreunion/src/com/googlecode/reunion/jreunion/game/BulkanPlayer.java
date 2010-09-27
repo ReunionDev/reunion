@@ -161,7 +161,7 @@ public class BulkanPlayer extends Player {
 				+ percentageHp + " 0 0\n";
 
 		// S> attack_vital npc [NpcID] [RemainHP%] 0 0
-				client.SendData( packetData);
+				client.sendData( packetData);
 		/*
 		if (getSession().getPlayerListSize() > 0) {
 			Iterator<G_Player> playerIter = getSession()

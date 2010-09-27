@@ -143,7 +143,7 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 				if (DatabaseUtils.getInstance().getCharNameFree(message[1])) {
 					com.sendSuccess(client);
 				} else {
-					com.sendFail(client);
+					client.sendPacket(Type.FAIL);
 				}
 				break;
 				
@@ -203,15 +203,15 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 		case CHAR_SELECTED: {
 			if (message[0].equals("start_game")) {
 
-				client.SendData(
+				client.sendData(
 						"status 11 " + player.getTotalExp() + " 0\n");
-				client.SendData(
+				client.sendData(
 						"status 12 " + player.getLvlUpExp() + " 0\n");
-				client.SendData(
+				client.sendData(
 						"status 13 " + player.getStatusPoints() + " 0\n");
-				client.SendData(
+				client.sendData(
 						"status 10 " + player.getLime() + " 0\n");
-				client.SendData(
+				client.sendData(
 						"status 19 " + player.getPenaltyPoints() + " 0\n");
 				
 				world.getPlayerManager().addPlayer(player);

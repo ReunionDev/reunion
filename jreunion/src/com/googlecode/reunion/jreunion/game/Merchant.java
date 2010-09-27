@@ -145,7 +145,7 @@ public class Merchant extends Npc {
 
 		if (player.getLime() - item.getPrice() < 0) {
 			String packetData = "msg Not enough lime.\n";
-					client.SendData(packetData);
+					client.sendData(packetData);
 			return;
 		}
 
@@ -177,7 +177,7 @@ public class Merchant extends Npc {
 
 		String packetData = "shop_rate " + this.getBuyRate() + " "
 				+ this.getSellRate() + "\n";
-				client.SendData(packetData);
+				client.sendData(packetData);
 
 		Iterator<VendorItem> itemListIter = this.itemsListIterator();
 
@@ -185,7 +185,7 @@ public class Merchant extends Npc {
 			VendorItem item = itemListIter.next();
 
 			packetData = "shop_item " + item.getType() + "\n";
-					client.SendData(packetData);
+					client.sendData(packetData);
 		}
 	}
 

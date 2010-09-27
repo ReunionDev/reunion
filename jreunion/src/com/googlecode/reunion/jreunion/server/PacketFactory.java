@@ -14,6 +14,7 @@ import com.googlecode.reunion.jreunion.game.Npc;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Position;
 import com.googlecode.reunion.jreunion.game.RoamingItem;
+import com.googlecode.reunion.jreunion.game.Equipment.Slot;
 
 /**
  * @author Aidamina
@@ -22,7 +23,6 @@ import com.googlecode.reunion.jreunion.game.RoamingItem;
 public class PacketFactory {
 
 	public static enum Type{
-		VERSION_ERROR,
 		FAIL,
 		OK,
 		GO_WORLD,
@@ -42,7 +42,9 @@ public class PacketFactory {
 		S_CHAR, 
 		WALK_CHAR, 
 		SOCIAL, 
-		COMBAT
+		COMBAT,
+		JUMP, 
+		ATTACK_NPC
 		
 	}
 	
@@ -54,20 +56,6 @@ public class PacketFactory {
 
 	public static String createPacket(Type packetType, Object... args) {
 		switch (packetType) {
-		case VERSION_ERROR: 
-			if (args.length == 1) {
-				
-				
-				String clientVersion = (String) args[0];
-				String requiredVersion = Reference.getInstance().getServerReference().getItem("Server").getMemberValue("Version");
-				String message = "Wrong clientversion: current version "
-						+ clientVersion + " required version "
-						+ requiredVersion;
-
-				return PacketFactory.createPacket(Type.FAIL, message);
-			}
-			break;
-
 		
 		case FAIL:
 			String message = "";
@@ -76,13 +64,10 @@ public class PacketFactory {
 			}
 			return "fail"+message;
 		
-		
 		case OK: 
 			return "OK";
 		
-		
 		case GO_WORLD:
-			
 			if(args.length>0){				
 				LocalMap map = (LocalMap)args[0];
 				int unknown =  args.length>1?(Integer)args[1]:0;
@@ -94,28 +79,21 @@ public class PacketFactory {
 		case GOTO:
 			if(args.length>0){
 				Position position = (Position)args[0];
-			
 				return "goto " + position.getX() + " " + position.getY() + " "+position.getZ()+" "	+ position.getRotation();
-			
 			}
 			break;
-			
 		
 		case PARTY_DISBAND:
 			return "party disband";
-			
 		
 		case HOUR:
-			
 			if(args.length>0){
 				int hour = (Integer)args[0];
 				return "hour " + hour;
 			}
 			break;
 		
-		
 		case IN_CHAR:
-			
 			if(args.length>0){
 				Player player = (Player)args[0];
 				boolean warping = false;
@@ -124,36 +102,7 @@ public class PacketFactory {
 				}
 				int combat = player.getCombatMode() ? 1 : 0;
 				Equipment eq = player.getEquipment();
-
-				int eqHelmet = -1;
-				int eqArmor = -1;
-				int eqPants = -1;
-				int eqShoulderMount = -1;
-				int eqBoots = -1;
-				int eqFirstHand = -1;
-				int eqSecondHand = -1;
-				if (eq.getHelmet() != null) {
-					eqHelmet = eq.getHelmet().getType();
-				}
-				if (eq.getArmor() != null) {
-					eqArmor = eq.getArmor().getType();
-				}
-				if (eq.getPants() != null) {
-					eqPants = eq.getPants().getType();
-				}
-				if (eq.getShoulderMount() != null) {
-					eqShoulderMount = eq.getShoulderMount().getType();
-				}
-				if (eq.getBoots() != null) {
-					eqBoots = eq.getBoots().getType();
-				}
-				if (eq.getMainHand() != null) {
-					eqFirstHand = eq.getMainHand().getType();
-				}
-				if (eq.getOffHand() != null) {
-					eqSecondHand = eq.getOffHand().getType();
-				}
-
+				
 				int percentageHp = player.getHp() * 100 / player.getMaxHp();
 				String packetData = warping?"appear ":"in ";
 
@@ -162,10 +111,10 @@ public class PacketFactory {
 						+ player.getHairStyle() + " " + player.getPosition().getX()
 						+ " " + player.getPosition().getY() + " "
 						+ player.getPosition().getZ() + " "
-						+ player.getPosition().getRotation() + " " + eqHelmet + " "
-						+ eqArmor + " " + eqPants + " " + eqShoulderMount + " "
-						+ eqBoots + " " + eqSecondHand + " " + eqFirstHand + " "
-						+ percentageHp + " " + combat + " 0 0 0 0 0 0\n";
+						+ player.getPosition().getRotation() + " " + eq.getType(Slot.HELMET) + " "
+						+ eq.getType(Slot.CHEST) + " " + eq.getType(Slot.PANTS) + " " + eq.getType(Slot.SHOULDER) + " "
+						+ eq.getType(Slot.BOOTS) + " " + eq.getType(Slot.OFFHAND) + " " + eq.getType(Slot.MAINHAND) + " "
+						+ percentageHp + " " + combat + " 0 0 0 0 0 0";
 				// in char [UniqueID] [Name] [Race] [Gender] [HairStyle] [XPos]
 				// [YPos] [ZPos] [Rotation] [Helm] [Armor] [Pants] [ShoulderMount]
 				// [Boots] [Shield] [Weapon] [Hp%] [CombatMode] 0 0 0 [Boosted] [PKMode]
@@ -176,17 +125,15 @@ public class PacketFactory {
 			break;
 		
 		case OUT_CHAR:
-			
 			if(args.length>0){
 				Player player = (Player)args[0];
 				return "out char " + player.getId();
 			}
 			break;
 		
-		case SAY:{
+		case SAY:
 			if(args.length>0){
 				String text = (String)args[0];
-				
 				LivingObject from = null;
 				
 				if(args.length>1){
@@ -194,12 +141,9 @@ public class PacketFactory {
 				}
 				
 				if(from==null) {
-				
 					return "say "+ -1 +" "+text;
-					
 				} else { 
 					if(args.length>2){
-						
 						boolean admin = false;
 						String name = (String)args[2];
 						if(args.length>3) {
@@ -207,11 +151,9 @@ public class PacketFactory {
 							return "say "+from.getId()+" "+name+" " + text + " "+(admin?1:0);	
 						}
 					}
-				}
-											
+				}				
 			}
-			break;
-		}
+			break;		
 		
 		case DROP:
 			if(args.length>0){
@@ -222,9 +164,9 @@ public class PacketFactory {
 				return "drop " + item.getId() + " " + item.getType() + " "
 				+ position.getX() + " " + position.getY() + " " + position.getZ() + " "+position.getRotation()+" " + item.getGemNumber() + " "
 				+ item.getExtraStats();
-				
 			}			
-		break;
+			break;
+		
 		case IN_ITEM:
 			if(args.length>0){
 				RoamingItem roamingItem = (RoamingItem)args[0];
@@ -244,35 +186,31 @@ public class PacketFactory {
 			break;
 		
 		case IN_NPC:			
-		if(args.length>0){
-			Npc npc = (Npc)args[0];
-			Boolean spawn = false;
-			if(args.length>1){
-				
-				spawn = (Boolean)args[1];
+			if(args.length>0){
+				Npc npc = (Npc)args[0];
+				Boolean spawn = false;
+				if(args.length>1){
+					spawn = (Boolean)args[1];
+				}
+				int percentageHp = (int)(((double)npc.getHp()/ (double)npc.getMaxHp())* 100);
+					
+				return "in npc " + npc.getId() + " " + npc.getType()
+						+ " " + npc.getPosition().getX() + " "
+						+ npc.getPosition().getY() + " "+npc.getPosition().getZ()+" "
+						+ npc.getPosition().getRotation() + " " + percentageHp + " "
+						+ npc.getMutant() + " " + npc.getUnknown1() + " "
+						+ npc.getNeoProgmare() + " 0 " + (spawn ? 1 : 0) + " "
+						+ npc.getUnknown2();
 			}
-
-			int percentageHp = (int)(((double)npc.getHp()/ (double)npc.getMaxHp())* 100);
-				
-			String packetData = "in npc " + npc.getId() + " " + npc.getType()
-					+ " " + npc.getPosition().getX() + " "
-					+ npc.getPosition().getY() + " "+npc.getPosition().getZ()+" "
-					+ npc.getPosition().getRotation() + " " + percentageHp + " "
-					+ npc.getMutant() + " " + npc.getUnknown1() + " "
-					+ npc.getNeoProgmare() + " 0 " + (spawn ? 1 : 0) + " "
-					+ npc.getUnknown2();
+			break;
 			
-			return packetData;
-		
-		}
-		break;
 		case OUT_NPC:
 			if(args.length>0){
 				Npc npc = (Npc)args[0];
 				return "out npc " + npc.getId();
-			
 			}
 			break;
+			
 		case AT:
 			if(args.length>0){
 				Player player = (Player)args[0];
@@ -294,6 +232,7 @@ public class PacketFactory {
 			+ unknown + " " + (player.isRunning()?1:0);
 			}
 			break;
+			
 		case S_CHAR:
 			if(args.length>0){
 				Player player = (Player)args[0];
@@ -302,20 +241,18 @@ public class PacketFactory {
 					+ " " + position.getY() + " " + position.getZ() + " " + position.getRotation();
 			}
 			break;
-		case WALK_CHAR:
 			
+		case WALK_CHAR:
 			if(args.length>0){
 				Player player = (Player)args[0];
 				Position position = player.getPosition();
 				return "walk char " + player.getId() + " " + position.getZ()
 				+ " " + position.getZ() + " " + position.getZ() + " " + (player.isRunning()?1:0);
-				
 			}
 			break;
-		case SOCIAL:
 			
+		case SOCIAL:
 			if(args.length>1){
-				
 				Player player = (Player)args[0];
 				int emotionId = (Integer)args[1];
 				return "social char " + player.getId() + " "
@@ -325,16 +262,33 @@ public class PacketFactory {
 			
 		case COMBAT:
 			if(args.length>0){
-				
 				Player player = (Player)args[0];
 				return "combat " + player.getId() + " " + (player.getCombatMode()?1:0);
 			}
 			break;
-		
-		default:{			
-			throw new NotImplementedException();
-		}
 			
+		case JUMP:
+			if(args.length>0){
+				Player player = (Player)args[0];
+				return "jump " + player.getPosition().getX() + " "
+				+ player.getPosition().getY() + " " + player.getId();
+			}
+			break;
+			
+		case ATTACK_NPC:
+			if(args.length>1){
+				Player player = (Player)args[0];
+				Npc npc = (Npc)args[1];
+				
+				return "attack npc " + npc.getId() + " char "
+				+ player.getId() + " " + npc.getPercentageHp() + " "
+				+ npc.getDmgType() + " 0 0 0";
+			}
+			break;
+		
+		default:			
+			throw new NotImplementedException();
+		
 
 		}
 		throw new RuntimeException("Invalid parameters for "+packetType+" message");

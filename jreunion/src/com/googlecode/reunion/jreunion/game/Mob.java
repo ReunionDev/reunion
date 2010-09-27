@@ -33,7 +33,7 @@ public class Mob extends Npc {
 
 	private int attackType;
 
-	private int dmgType;
+	
 
 	private int speed;
 
@@ -81,9 +81,7 @@ public class Mob extends Npc {
 		return dmg;
 	}
 
-	public int getDmgType() {
-		return dmgType;
-	}
+
 
 	public int getExp() {
 		return exp;
@@ -288,7 +286,7 @@ public class Mob extends Npc {
 				+ getPosition().getY() + " 0 " + run + "\n";
 		// S> walk npc [UniqueId] [Xpos] [Ypos] [ZPos] [Running]
 
-		client.SendData(packetData);
+		client.sendData(packetData);
 
 			Iterator<WorldObject> playerIter = player.getSession()
 					.getPlayerListIterator();
@@ -301,7 +299,7 @@ public class Mob extends Npc {
 					continue;
 				}
 				if (getPosition().distance(pl.getPosition()) < pl.getSessionRadius()) {
-					client.SendData(packetData);
+					client.sendData(packetData);
 				}
 			}
 		
@@ -365,10 +363,8 @@ public class Mob extends Npc {
 	public void setDmg(int dmg) {
 		this.dmg = dmg;
 	}
+	
 
-	public void setDmgType(int dmgType) {
-		this.dmgType = dmgType;
-	}
 
 	public void setExp(int exp) {
 		this.exp = exp;

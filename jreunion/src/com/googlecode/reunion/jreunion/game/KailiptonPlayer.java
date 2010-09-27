@@ -118,7 +118,7 @@ public class KailiptonPlayer extends Player {
 				+ percentageHp + " 0 0\n";
 
 		// S> attack_vital npc [NpcID] [RemainHP%] 0 0
-				client.SendData( packetData);
+				client.sendData( packetData);
 
 			Iterator<WorldObject> playerIter = getSession()
 					.getPlayerListIterator();
@@ -138,7 +138,7 @@ public class KailiptonPlayer extends Player {
 
 				// S> effect [SkillID] char [charID] npc [npcID] [RemainNpcHP%]
 				// 0 0
-						client.SendData( packetData);
+						client.sendData( packetData);
 			}
 		
 	}

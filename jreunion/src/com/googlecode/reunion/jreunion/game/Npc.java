@@ -86,6 +86,25 @@ public class Npc extends LivingObject {
 	public int getUnknown2() {
 		return unknown2;
 	}
+	private int dmgType;
+	public int getDmgType() {
+		return dmgType;
+	}
+
+	public void setDmgType(int dmgType) {
+		this.dmgType = dmgType;
+	}
+	
+	public int getPercentageHp(){
+		
+		double percentageHp = this.getHp() * 100 / this.getMaxHp();
+
+		if (percentageHp > 0 && percentageHp < 1) {
+			percentageHp = 1;
+		}
+		return (int) percentageHp;
+		
+	}
 
 	@Override
 	public void enter(Session session) {

@@ -184,7 +184,7 @@ public class MobManager {
 							+ "\n";
 					// S> walk npc [UniqueId] [Xpos] [Ypos] [ZPos] [Running]
 
-					client.SendData( packetData);
+					client.sendData( packetData);
 				}
 			}
 		}
