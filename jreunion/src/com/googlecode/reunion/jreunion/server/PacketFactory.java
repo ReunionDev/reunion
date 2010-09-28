@@ -49,7 +49,8 @@ public class PacketFactory {
 		EFFECT,
 		CHAR_REMOVE, 
 		CHAR_WEAR, ATTACK,
-		ATTACK_VITAL
+		ATTACK_VITAL,
+		SKILLLEVEL
 	}
 	
 	public static String createPacket(Type packetType, Object... args) {
@@ -323,13 +324,20 @@ public class PacketFactory {
 		
 		case ATTACK_VITAL:
 			if(args.length>0){
-				LivingObject target = (LivingObject)args[1];
+				LivingObject target = (LivingObject)args[0];
 				return 
 				"attack_vital "+getObjectType(target)+" " + target.getId() + " "
 				+ target.getPercentageHp() + " 0 0\n";
 			}
 			break;
 			
+		case SKILLLEVEL:
+			if(args.length>1){
+				Skill skill = (Skill)args[0];
+				int currentSkillLevel =  (Integer)args[1];
+				return "skilllevel " + skill.getId() + " " + currentSkillLevel;
+			}
+			break;
 		default:			
 			throw new NotImplementedException();
 		}

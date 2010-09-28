@@ -138,9 +138,7 @@ public abstract class LivingObject extends WorldObject {
 	}
 
 	public void setHp(int currHp) {
-		this.hp = currHp;
-		
-		
+		this.hp = currHp;		
 	}
 
 	public void setCurrMana(int currMana) {

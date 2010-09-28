@@ -2,6 +2,8 @@ package com.googlecode.reunion.jreunion.game;
 
 import java.util.Iterator;
 
+import com.googlecode.reunion.jreunion.game.skills.bulkan.AxeMastery;
+import com.googlecode.reunion.jreunion.game.skills.bulkan.SwordMastery;
 import com.googlecode.reunion.jreunion.server.Client;
 import com.googlecode.reunion.jreunion.server.Server;
 
@@ -36,17 +38,11 @@ public class BulkanPlayer extends Player {
 				+ (int) (Math.random() * (getMaxDmg() - getMinDmg()));
 
 		baseDmg = (randDmg + getLevel() / 6 + getStr() / 4 + getDexterity() / 4 + getConstitution() / 8);
-
-		if (getEquipment().getMainHand() instanceof Sword) {
-			baseDmg = (int) (baseDmg + baseDmg
-					* (getCharSkill().getSkill(1).getCurrFirstRange() / 100));
-		} else if (getEquipment().getMainHand() instanceof Axe) {
-			baseDmg = (int) (baseDmg + baseDmg
-					* (getCharSkill().getSkill(2).getCurrFirstRange() / 100));
-		}
-		;
-
-		return baseDmg;
+		
+		SwordMastery swordMastery = (SwordMastery) getSkill(1);
+		AxeMastery axeMastery = (AxeMastery) getSkill(2);
+		
+		return(int) (baseDmg * swordMastery.getDamageModifier(this)* axeMastery.getDamageModifier(this));
 	}
 
 	@Override
@@ -117,6 +113,10 @@ public class BulkanPlayer extends Player {
 		float baseDmg = getBaseDmg();
 		float skillDmg = baseDmg;
 
+		
+		//TODO: fix
+		/*
+		 
 		if (skill.getId() == 31) { // Whirlwind Slash Skill
 			if (getEquipment().getMainHand() instanceof Sword) {
 				skillDmg = baseDmg + baseDmg
@@ -133,13 +133,15 @@ public class BulkanPlayer extends Player {
 						* (skill.getCurrFirstRange() / 100);
 			}
 		}
+		*/
 
 		// S_Server.getInstance().getWorldModule().getWorldCommand().serverSay("SkillDmg:"+skillDmg);
 		int newHp = mob.getHp() - (int) skillDmg;
 
+		/*
 		updateStatus(skill.getStatusUsed(),
 				getStm() - (int) skill.getCurrConsumn(), getMaxStm());
-
+		 */
 		if (newHp <= 0) {
 
 			mob.kill(this);
@@ -192,7 +194,7 @@ public class BulkanPlayer extends Player {
 	@Override
 	public void useSkill(LivingObject livingObject, int skillId) {
 
-		Skill skill = getCharSkill().getSkill(skillId);
+		Skill skill = getPosition().getMap().getWorld().getSkillManager().getSkill(skillId);
 
 		if (skill.getType() == 0) {
 			permanentSkill(skill);

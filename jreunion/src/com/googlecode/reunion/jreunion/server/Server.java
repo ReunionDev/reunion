@@ -85,7 +85,10 @@ public class Server extends ClassModule {
 								// And put the put the parent in the constructor
 			
 			
+
+			System.gc();
 			while (true) {
+
 				server.doWork();
 				Thread.sleep(1); // Sleep to make sure it doesnt use 100%
 									// cpu resources

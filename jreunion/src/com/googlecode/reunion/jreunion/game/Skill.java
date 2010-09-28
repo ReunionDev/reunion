@@ -16,13 +16,9 @@ public class Skill {
 
 	private int maxLevel;
 
-	private int currLevel = 0;
-
 	private int minFirstRange;
 
 	private int maxFirstRange;
-
-	private float currFirstRange = 0;
 
 	private int minSecondRange;
 
@@ -43,22 +39,6 @@ public class Skill {
 	public Skill(int id) {
 		this.id = id;
 		loadFromReference(id);
-	}
-
-	public float getCurrConsumn() {
-		return currConsumn;
-	}
-
-	public float getCurrFirstRange() {
-		return currFirstRange;
-	}
-
-	public int getCurrLevel() {
-		return currLevel;
-	}
-
-	public float getCurrSecondRange() {
-		return currSecondRange;
 	}
 
 	public int getId() {
@@ -210,14 +190,11 @@ public class Skill {
 	public void setCurrConsumn(float currConsumn) {
 		this.currConsumn = currConsumn;
 	}
-
-	public void setCurrFirstRange(float currFirstRange) {
-		this.currFirstRange = currFirstRange;
+	
+	public void use(LivingObject source, LivingObject target){
+		
 	}
 
-	public void setCurrLevel(int currLevel) {
-		this.currLevel = currLevel;
-	}
 
 	public void setCurrSecondRange(float currSecondRange) {
 		this.currSecondRange = currSecondRange;
@@ -254,10 +231,6 @@ public class Skill {
 	public void setMinSecondRange(int minSecondRange) {
 		this.minSecondRange = minSecondRange;
 	}
-
-	// public void incCurrLevel(int amount) {
-	// this.currLevel = this.currLevel + amount;
-	// }
 
 	public void setRace(int race) {
 		this.race = race;

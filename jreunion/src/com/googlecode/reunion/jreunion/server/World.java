@@ -50,11 +50,18 @@ public class World extends ClassModule implements EventListener, Sendable{
 
 	private boolean mobMoving = false;
 
+	private SkillManager skillManager;
+
+	public SkillManager getSkillManager() {
+		return skillManager;
+	}
+
 	static public ServerSetings serverSetings;
 
 	public World(Module parent) {
 		super(parent);
 		worldCommand = new Command(this);
+		skillManager = new SkillManager();
 		playerManager = new PlayerManager();
 		mobManager = new MobManager();		
 		npcManager = new NpcManager();

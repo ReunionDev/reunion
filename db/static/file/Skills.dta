@@ -24,7 +24,7 @@ MinSecondRange = 0
 MaxSecondRange = 0
 StatusUsed = -1
 Type = 0
-Class = PlaceHolder
+Class = bulkan.SwordMastery
 
 [Axe Master]
 ID = 2
@@ -38,7 +38,7 @@ MinSecondRange = 0
 MaxSecondRange = 0
 StatusUsed = -1
 Type = 0
-Class = PlaceHolder
+Class = bulkan.AxeMastery
 
 [Fireball]
 ID = 3

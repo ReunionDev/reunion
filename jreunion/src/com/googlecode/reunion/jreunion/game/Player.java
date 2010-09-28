@@ -1,6 +1,7 @@
 package com.googlecode.reunion.jreunion.game;
 
 import java.awt.Rectangle;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
@@ -18,7 +19,6 @@ import com.googlecode.reunion.jreunion.events.map.PlayerLogoutEvent;
 import com.googlecode.reunion.jreunion.events.network.NetworkAcceptEvent;
 import com.googlecode.reunion.jreunion.events.session.SessionEvent;
 import com.googlecode.reunion.jreunion.game.Equipment.Slot;
-import com.googlecode.reunion.jreunion.server.CharSkill;
 import com.googlecode.reunion.jreunion.server.Client;
 import com.googlecode.reunion.jreunion.server.DatabaseUtils;
 import com.googlecode.reunion.jreunion.server.LocalMap;
@@ -36,6 +36,8 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 	private int def = 0;
 
 	private int minDmg;
+	
+	java.util.Map<Skill,Integer> skills = new HashMap<Skill,Integer> ();
 
 	private int maxDmg;
 
@@ -110,8 +112,6 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 
 	private List<Integer> attackQueue = new Vector<Integer>();
 
-	private CharSkill charSkill;
-
 	private QuickSlot quickSlot;
 
 	private Quest quest;
@@ -143,7 +143,6 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		client.setPlayer(this);
 		inventory = new Inventory();
 		equipment = new Equipment();
-		charSkill = new CharSkill();
 		quickSlot = new QuickSlot();
 		stash = new Stash();
 		exchange = new Exchange();
@@ -188,13 +187,6 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		
 		getInventory().setItemSelected(null);
 	
-		Client client = this.getClient();
-		
-		// S> drop [ItemID] [ItemType] [PosX] [PosY] [PosZ] [Rotation]
-		// [GemNumber] [Special]
-	
-	
-		
 	}
 	
 
@@ -221,11 +213,11 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		}
 		return bestAttack;
 	}
-
+	/*
 	public CharSkill getCharSkill() {
 		return charSkill;
 	}
-
+	*/
 	public boolean getCombatMode() {
 		return combatMode;
 	}
@@ -255,18 +247,20 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 	}
 	
 	public void levelUpSkill(Skill skill) {
-		Client client = getClient();
-
-		if (client == null) {
-			return;
+		
+		if(!skills.containsKey(skill))
+			return; //cheater?
+		synchronized(this){
+		
+			int currentSkillLevel = skills.get(skill);
+			
+			if(currentSkillLevel<skill.getMaxLevel()){
+				
+				skills.put(skill, ++currentSkillLevel);
+				
+				 getClient().sendPacket(Type.SKILLLEVEL, skill,currentSkillLevel);
+			}
 		}
-
-		String packetData = new String();
-
-		getCharSkill().incSkill(this, skill);
-		packetData = "skilllevel " + skill.getId() + " " + skill.getCurrLevel()
-				+ "\n";
-				client.sendData( packetData);
 	}
 
 	public Exchange getExchange() {
@@ -689,6 +683,16 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		spawn();
 
 	}
+	
+	public int getSkillLevel(Skill skill){
+		
+		return skills.get(skill);
+		
+	}
+
+	public java.util.Map<Skill, Integer> getSkills() {
+		return skills;
+	}
 
 	public void say(String text) {
 	
@@ -697,10 +701,6 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 
 	public void setAdminState(int adminState) {
 		this.adminState = adminState;
-	}
-
-	public void setCharSkill(CharSkill charSkill) {
-		this.charSkill = charSkill;
 	}
 
 	public void setCombatMode(boolean combatMode) {
@@ -834,6 +834,9 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 	/****** increase skill level ******/
 	public void skillUp(int skillId) {
 
+		Skill skill = getPosition().getMap().getWorld().getSkillManager().getSkill(skillId);
+		//TODO: Check why this was linked
+		/*
 		if (skillId == 3 || skillId == 4 || skillId == 12) {
 			levelUpSkill(getCharSkill().getSkill(3));
 			levelUpSkill(getCharSkill().getSkill(4));
@@ -855,6 +858,8 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		} else {
 			levelUpSkill(getCharSkill().getSkill(skillId));
 		}
+		*/
+		levelUpSkill(skill);
 
 		updateStatus(13, -1, 0);
 		// S> skilllevel [SkillNumber] [SkillLevel]
@@ -1266,4 +1271,9 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		return buffer.toString();
 	}
 	
+	public Skill getSkill(int id){
+		
+		return getPosition().getMap().getWorld().getSkillManager().getSkill(id);
+		
+	}
 }

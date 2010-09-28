@@ -199,7 +199,8 @@ public class Command {
 		DatabaseUtils.getInstance().loadEquipment(player);
 		Equipment eq = player.getEquipment();
 		
-		player.getCharSkill().loadSkillList(player.getRace());
+		world.getSkillManager().loadSkills(player);
+		//player.getCharSkill().loadSkillList(player.getRace());
 		DatabaseUtils.getInstance().loadSkills(player);
 		DatabaseUtils.getInstance().loadInventory(player);
 		DatabaseUtils.getInstance().loadExchange(player);
@@ -210,6 +211,7 @@ public class Command {
 				+ player.getId() + ")\n");
 
 		String packetData = "skilllevel_all";
+		/*
 		Iterator<Skill> skillIter = player.getCharSkill()
 				.getSkillListIterator();
 		while (skillIter.hasNext()) {
@@ -218,6 +220,18 @@ public class Command {
 					+ skill.getCurrLevel();
 			// "skilllevel_all 1 25 2 25 17 0 18 25 19 0 31 0 37 0 38 0 39 0 40 25 41 0 60 0 61 0 71 0 75 0\n");
 		}
+		*/
+		
+		for(Skill skill :player.getSkills().keySet()){
+			
+			packetData += " " + skill.getId() + " "
+			+ player.getSkillLevel(skill);
+			
+		}
+			// "skilllevel_all 1 25 2 25 17 0 18 25 19 0 31 0 37 0 38 0 39 0 40 25 41 0 60 0 61 0 71 0 75 0\n");
+		
+		
+		
 
 		client.sendData(packetData);
 
@@ -262,10 +276,6 @@ public class Command {
 	public void normalAttack(Player player, int uniqueId) {
 
 		Client client = player.getClient();
-
-		if (client == null) {
-			return;
-		}
 
 		LivingObject livingObject = Server.getInstance().getWorld()
 				.getMobManager().getMob(uniqueId);
@@ -384,12 +394,12 @@ public class Command {
 		
 		client.sendPacket(Type.ATTACK_VITAL, target);
 		
-		Skill skill = player.getCharSkill().getSkill(40);
+		Skill skill = world.getSkillManager().getSkill(40);
 		
 		player.getInterested().sendPacket(Type.EFFECT, player, target, skill);
 		
 	}
-
+	/*
 	/****** player attacks mob with Sub Attack ******/
 	public void subAttackNpc(Player player, int uniqueId) {
 		Client client = player.getClient();
@@ -397,6 +407,7 @@ public class Command {
 		if (client == null) {
 			return;
 		}
+		Skill skill = world.getSkillManager().getSkill(40);
 
 		Mob mob = Server.getInstance().getWorld().getMobManager()
 				.getMob(uniqueId);
@@ -414,10 +425,10 @@ public class Command {
 			slayerDmg = Math.random() * 100
 					+ spWeapon.getSpecialWeaponMinDamage();
 		}
-
+/*
 		Logger.getLogger(Command.class).info("Skill Level: "
 				+ player.getCharSkill().getSkill(40).getCurrLevel() + "\n");
-
+*/
 		// Max normal attack damage * memory of the slayer * % skill (40)
 		// increase +
 		// slayer attack damage * % skill (40) increase * 1 (if no demolition
@@ -427,9 +438,9 @@ public class Command {
 		double dmg = player.getBestAttack()
 				* spWeapon.getMemoryDmg()
 				/ 100
-				* (player.getCharSkill().getSkill(40).getCurrLevel() * 20 / 100)
+				* (player.getSkillLevel(skill) * 20 / 100)
 				+ slayerDmg
-				* (player.getCharSkill().getSkill(40).getCurrLevel() * 20 / 100)
+				* (player.getSkillLevel(skill) * 20 / 100)
 				* 1;
 
 		player.clearAttackQueue();

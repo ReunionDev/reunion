@@ -43,6 +43,10 @@ public class Test extends EventBroadcaster implements EventListener,Runnable {
 		}catch(Exception e){
 			Logger.getLogger(Test.class).warn(e);
 		}
+		int a = 0;
+		System.out.println(++a);
+		
+		
 		
 		Position position1 = new Position();
 		Position position2 = new Position();

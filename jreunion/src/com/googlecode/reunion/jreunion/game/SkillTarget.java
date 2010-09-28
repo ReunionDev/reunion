@@ -6,6 +6,5 @@ package com.googlecode.reunion.jreunion.game;
  */
 public interface SkillTarget {
 
-	// public void useSkill(G_Skill skill);
 	public void useSkill(LivingObject livingObject, int skillId);
 }

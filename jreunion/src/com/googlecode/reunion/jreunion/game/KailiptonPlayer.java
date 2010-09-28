@@ -87,6 +87,7 @@ public class KailiptonPlayer extends Player {
 	}
 
 	public void skillAttackMob(Mob mob, Skill skill) {
+		/*
 		Client client = this.getClient();
 
 		if (client == null) {
@@ -116,9 +117,9 @@ public class KailiptonPlayer extends Player {
 		client.sendData( packetData);
 		
 		getInterested().sendPacket(Type.EFFECT, this, mob, skill);
-
+*/
 	}
-
+	
 	public void skillAttackPlayer(Player player, Skill skill) {
 
 	}
@@ -126,7 +127,8 @@ public class KailiptonPlayer extends Player {
 	@Override
 	public void useSkill(LivingObject livingObject, int skillId) {
 
-		Skill skill = getCharSkill().getSkill(skillId);
+		Skill skill = getPosition().getMap().getWorld().getSkillManager().getSkill(skillId);
+		
 
 		if (skill.getType() == 0) {
 			permanentSkill(skill);

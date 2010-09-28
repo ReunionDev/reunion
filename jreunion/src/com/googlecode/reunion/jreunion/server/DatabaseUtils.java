@@ -860,21 +860,23 @@ public class DatabaseUtils extends Service {
 		try {
 			stmt = database.conn.createStatement();
 			int playerId = player.getId();
-			stmt.execute("DELETE FROM skills WHERE charid="+playerId+";");
+			stmt.execute("DELETE FROM `skills` WHERE `charid`="+playerId+";");
 
-			String query = "INSERT INTO skills (charid,id,level) VALUES ";
+			String query = "INSERT INTO `skills` (`charid`, `id`, `level`) VALUES ";
 			String data = "";
-			Iterator<Skill> skillsIter = player.getCharSkill().getSkillListIterator();
 			
-			while(skillsIter.hasNext()){
-				Skill skill = (Skill)skillsIter.next();
+			for(Skill skill:player.getSkills().keySet())
+			{
+				if(!data.isEmpty())
+					data+=", ";
 				
-				if(skill.getCurrLevel()>0){
-					data+="("+playerId+","+skill.getId()+","+skill.getCurrLevel()+")";			
-					if(skillsIter.hasNext())
-						data+= ", ";
+				int level = player.getSkillLevel(skill);
+				if(level>0){
+					data+="("+playerId+","+skill.getId()+","+level+")";			
+					
 				}
 			}
+			
 			if(!data.isEmpty())
 				stmt.execute(query+data);
 			
@@ -894,7 +896,10 @@ public class DatabaseUtils extends Service {
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				int level = rs.getInt("level");
-				player.getCharSkill().getSkill(id).setCurrLevel(level);
+				
+				Skill skill = Server.getInstance().getWorld().getSkillManager().getSkill(id);
+				player.getSkills().put(skill, level);
+				//player.getCharSkill().getSkill(id).setCurrLevel(level);
 			}
 			
 		} catch (SQLException e1) {
