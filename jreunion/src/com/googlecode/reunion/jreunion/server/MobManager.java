@@ -18,7 +18,7 @@ public class MobManager {
 	private java.util.List<Mob> mobList = new Vector<Mob>();
 
 	private boolean moveToPlayer = true;
-	int mobIdCounter = 0;
+	int mobIdCounter = 20000;
 
 	public MobManager() {
 

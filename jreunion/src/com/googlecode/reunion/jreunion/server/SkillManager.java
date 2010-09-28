@@ -45,10 +45,7 @@ public class SkillManager {
 				Logger.getLogger(SkillManager.class).warn("Cannot create class: "+className,e);
 				
 			}
-		}
-		
-		System.out.println(skills.size());
-			
+		}	
 		
 		for(Race race : Race.values()){
 			

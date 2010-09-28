@@ -11,6 +11,7 @@ import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jcommon.Parser;
 import com.googlecode.reunion.jreunion.events.Event;
 import com.googlecode.reunion.jreunion.events.map.ItemDropEvent;
+import com.googlecode.reunion.jreunion.events.map.ItemPickupEvent;
 import com.googlecode.reunion.jreunion.events.map.MapEvent;
 import com.googlecode.reunion.jreunion.events.map.SpawnEvent;
 import com.googlecode.reunion.jreunion.events.map.PlayerLoginEvent;
@@ -361,6 +362,27 @@ public class LocalMap extends Map implements Runnable{
 								
 				list.sendPacket(Type.DROP, roamingItem);
 			}
+			if(event instanceof ItemPickupEvent){
+				
+				ItemPickupEvent itemPickupEvent = (ItemPickupEvent)event;
+				
+				RoamingItem roamingItem = itemPickupEvent.getRoamingItem();
+				
+				synchronized(entities) {
+				
+					roamingItem = (RoamingItem) this.entities.remove(roamingItem.getId());
+					if(roamingItem!=null) {
+						
+						Player player = itemPickupEvent.getPlayer();
+						player.pickItem(roamingItem.getItem());
+					}
+				
+				}
+				
+				roamingItem.getInterested().sendPacket(Type.OUT, roamingItem);
+				
+			}
+			
 			if(event instanceof PlayerLoginEvent){
 				
 				PlayerLoginEvent playerLoginEvent = (PlayerLoginEvent)event;
@@ -376,7 +398,11 @@ public class LocalMap extends Map implements Runnable{
 				
 				Player player = playerLogoutEvent.getPlayer();
 				
-				Session session = new Session(player);
+				Session session = player.getSession();
+				if(session!=null){
+					session.close();
+					
+				}
 				
 				synchronized(entities) {
 					sessions.remove(session);
@@ -385,7 +411,8 @@ public class LocalMap extends Map implements Runnable{
 				}	
 				SessionList<Session> list = player.getInterested().getSessions();
 				list.exit(player, false);
-				list.sendPacket(Type.OUT, player);				
+				list.sendPacket(Type.OUT, player);
+				
 			}
 			
 		}else if(event instanceof SessionEvent){

@@ -1116,8 +1116,8 @@ public class DatabaseUtils extends Service {
 						+qsItem.getSlot()+");");
 			}
 			
-		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+		} catch (SQLException e) {
+			Logger.getLogger(this.getClass()).warn("Exception",e);
 			return;
 		  }
 	}

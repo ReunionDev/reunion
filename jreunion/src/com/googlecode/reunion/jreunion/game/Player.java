@@ -15,6 +15,7 @@ import com.googlecode.reunion.jreunion.events.Event;
 import com.googlecode.reunion.jreunion.events.EventListener;
 import com.googlecode.reunion.jreunion.events.client.ClientDisconnectEvent;
 import com.googlecode.reunion.jreunion.events.client.ClientEvent.ClientFilter;
+import com.googlecode.reunion.jreunion.events.map.ItemPickupEvent;
 import com.googlecode.reunion.jreunion.events.map.PlayerLogoutEvent;
 import com.googlecode.reunion.jreunion.events.network.NetworkAcceptEvent;
 import com.googlecode.reunion.jreunion.events.session.SessionEvent;
@@ -596,7 +597,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		DatabaseUtils.getInstance().saveQuickSlot(this);
 		
 		getPosition().getMap().fireEvent(PlayerLogoutEvent.class, this);
-		getSession().close();
+		
 		
 	}
 
@@ -653,12 +654,28 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 	public void pickupItem(RoamingItem roamingItem) {
 		Client client = getClient();
 		
+		Item item = roamingItem.getItem();
+		
+		Player owner = roamingItem.getOwner();
+		if(roamingItem.getOwner()!=null){
+			
+			getClient().sendPacket(Type.SAY, "This item belongs to "+owner.getName(),-1);
+			return;
+			
+		}
+		
 		String packetData = "pickup " + getId() + "\n";
 		
-		client.sendData(packetData);// send the message
+		
+		this.getInterested().sendPacket(Type.PICKUP, this);
+				
+		getPosition().getMap().fireEvent(ItemPickupEvent.class, this, roamingItem);
 		// S> pickup [CharID]
 		
-		getClient().sendPacket(Type.OUT, roamingItem);
+		
+		
+		
+		
 
 		//pickItem(roamingItem.getItem());
 	}
@@ -1272,8 +1289,8 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 	}
 	
 	public Skill getSkill(int id){
-		
-		return getPosition().getMap().getWorld().getSkillManager().getSkill(id);
+		Skill skill = getPosition().getMap().getWorld().getSkillManager().getSkill(id);		
+		return skills.containsKey(skill)?skill:null;
 		
 	}
 }

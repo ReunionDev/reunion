@@ -50,7 +50,8 @@ public class PacketFactory {
 		CHAR_REMOVE, 
 		CHAR_WEAR, ATTACK,
 		ATTACK_VITAL,
-		SKILLLEVEL
+		SKILLLEVEL,
+		PICKUP
 	}
 	
 	public static String createPacket(Type packetType, Object... args) {
@@ -151,7 +152,7 @@ public class PacketFactory {
 					}
 				}				
 			}
-			break;		
+			break;
 		
 		case DROP:
 			if(args.length>0){
@@ -259,8 +260,7 @@ public class PacketFactory {
 				+ player.getPosition().getY() + " " + player.getId();
 			}
 			break;
-			
-					
+				
 		case LEVELUP:
 			if(args.length>0){
 				Player player = (Player)args[0];
@@ -308,7 +308,8 @@ public class PacketFactory {
 				return "char_wear " + player.getId() + " " + slot.ordinal() + " "
 				+ item.getType() + " " + item.getGemNumber() + "\n";
 			}
-			break;	
+			break;
+			
 		case ATTACK:
 			if(args.length>1){
 				LivingObject source = (LivingObject) args[0];				
@@ -318,7 +319,6 @@ public class PacketFactory {
 					  source.getId() + " "+getObjectType(target)+" " + target.getId() + " " + target.getPercentageHp() +
 					  " "+source.getDmgType()+" 0 0 0\n";
 					  // S> attack char [CharID] npc [NpcID] [RemainHP%] 0 0 0 0
-				
 			}
 			break;
 		
@@ -338,6 +338,13 @@ public class PacketFactory {
 				return "skilllevel " + skill.getId() + " " + currentSkillLevel;
 			}
 			break;
+		case PICKUP:
+			if(args.length>0){
+				Player player = (Player)args[0];
+				return "pickup " + player.getId();
+			}
+			break;
+			
 		default:			
 			throw new NotImplementedException();
 		}

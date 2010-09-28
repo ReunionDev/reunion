@@ -52,7 +52,7 @@ MinSecondRange = 145
 MaxSecondRange = 170
 StatusUsed = 1
 Type = 2
-Class = PlaceHolder
+Class = kailipton.Fireball
 
 [Lightning Ball]
 ID = 4

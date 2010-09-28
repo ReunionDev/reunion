@@ -46,14 +46,20 @@ public class Launcher {
 				serverList.getItems().add(serverList.new ServerListItem(server.getName(), InetAddress.getByName(server.getMemberValue("Address")), Integer.parseInt(server.getMemberValue("Port"))));				
 			}
 			serverList.Save("SvrList.dta");
+			
+			String dir = ".";
+			dir = "E:\\Games\\BiosFear\\";
+			
 			String version = launcher.getItem("Launcher").getMemberValue("Version");
 			ProcessBuilder builder = new ProcessBuilder(new String[] { "cmd.exe", "/C", "Game.exe "+version });
-			builder.directory(new File("."));
+			builder.directory(new File(dir));
 			
-			builder.start();
+			Process p = builder.start();
+			//Runtime.getRuntime().exec("E:\\Games\\BiosFear\\game.exe 100");
+			//System.out.println(p.waitFor());
 			
 			
-		} catch (IOException e) {
+		} catch (Exception e) {
 			Logger.getLogger(Launcher.class).warn("Exception",e);
 		}
 

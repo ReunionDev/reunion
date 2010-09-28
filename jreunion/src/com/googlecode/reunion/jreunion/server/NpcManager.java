@@ -15,7 +15,7 @@ import com.googlecode.reunion.jreunion.game.Npc;
 public class NpcManager {
 
 	private java.util.List<Npc> npcList = new Vector<Npc>();
-	int npcIdCounter = 0;
+	int npcIdCounter = 10000;
 
 	public NpcManager() {
 
