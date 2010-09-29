@@ -125,8 +125,7 @@ CREATE TABLE `roaming` (
   `x` int(11) NOT NULL,
   `y` int(11) NOT NULL,
   `z` int(11) NOT NULL,
-  `charid` int(11) DEFAULT NULL,
-  `dropped` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `rotation` double NOT NULL,
   PRIMARY KEY (`itemid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 

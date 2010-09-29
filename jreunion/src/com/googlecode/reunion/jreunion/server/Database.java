@@ -21,14 +21,13 @@ import org.apache.log4j.Logger;
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-public class Database implements EventListener {
+public class Database {
 
 	public Connection conn = null;
 	
 	private PreparedStatement statement;
 
 	public Database(Server server) {
-		server.addEventListener(ServerEvent.class, this);
 		
 	}
 
@@ -77,16 +76,6 @@ public class Database implements EventListener {
 			} catch (Exception e) { /* ignore close errors */
 			}
 		}
-	}
-
-	@Override
-	public void handleEvent(Event event) {
-		Logger.getLogger(Database.class).info(event);
-		 if(event instanceof ServerStartEvent){
-			start();
-		}else if(event instanceof ServerStopEvent){
-			stop();
-		}				
 	}
 
 }

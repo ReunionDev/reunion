@@ -90,7 +90,9 @@ public class Server extends ClassModule {
 
 		try {
 
-			server.fireEvent(server.createEvent(ServerStartEvent.class, server));
+			
+			server.database.start();
+			server.fireEvent(server.createEvent(ServerStartEvent.class, server));			
 			server.doStart(); // Call the start functions in all the loaded
 								// modules
 								// Load a module by extending it from
@@ -118,9 +120,8 @@ public class Server extends ClassModule {
 			server.setState(State.CLOSING);
 			server.fireEvent(server.createEvent(ServerStopEvent.class, server));
 			server.doStop();
-			
 			EventBroadcaster.shutdown();
-			
+			server.database.stop();
 			System.exit(-1);
 		}
 	}

@@ -18,6 +18,7 @@ import com.googlecode.reunion.jreunion.events.map.PlayerLoginEvent;
 import com.googlecode.reunion.jreunion.events.map.PlayerLogoutEvent;
 import com.googlecode.reunion.jreunion.events.session.NewSessionEvent;
 import com.googlecode.reunion.jreunion.events.session.SessionEvent;
+import com.googlecode.reunion.jreunion.game.Item;
 import com.googlecode.reunion.jreunion.game.LivingObject;
 import com.googlecode.reunion.jreunion.game.Npc;
 import com.googlecode.reunion.jreunion.game.NpcSpawn;
@@ -211,6 +212,18 @@ public class LocalMap extends Map implements Runnable{
 		createMobSpawns();
 		createNpcSpawns();
 		createPlayerSpawns();
+		
+		synchronized(entities){
+		
+			List<RoamingItem> roamingItems = DatabaseUtils.getInstance().loadRoamingItems(this);
+			for(RoamingItem roamingItem : roamingItems){				
+				entities.put(roamingItem.getId(), roamingItem);
+				
+			}
+		
+		}
+		
+		
 		Logger.getLogger(LocalMap.class).info(getName()+" running on "+getAddress());
 		
 	}
@@ -353,7 +366,7 @@ public class LocalMap extends Map implements Runnable{
 				}
 				entity.update();
 				
-			}
+			} else
 			if(event instanceof ItemDropEvent){
 				
 				ItemDropEvent itemDropEvent = (ItemDropEvent)event;
@@ -368,7 +381,7 @@ public class LocalMap extends Map implements Runnable{
 				}
 								
 				list.sendPacket(Type.DROP, roamingItem);
-			}
+			} else
 			if(event instanceof ItemPickupEvent){
 				
 				ItemPickupEvent itemPickupEvent = (ItemPickupEvent)event;
@@ -377,10 +390,13 @@ public class LocalMap extends Map implements Runnable{
 				
 				synchronized(entities) {
 				
+					
 					roamingItem = (RoamingItem) this.entities.remove(roamingItem.getId());
 					if(roamingItem!=null) {
 						
 						Player player = itemPickupEvent.getPlayer();
+						Item item = roamingItem.getItem();
+						DatabaseUtils.getInstance().deleteRoamingItem(item);
 						player.pickItem(roamingItem.getItem());
 					}
 				
@@ -421,7 +437,7 @@ public class LocalMap extends Map implements Runnable{
 				
 			}
 			
-		}else if(event instanceof SessionEvent){
+		} else if(event instanceof SessionEvent) {
 			
 			Session session = ((SessionEvent)event).getSession();
 			if(event instanceof NewSessionEvent){

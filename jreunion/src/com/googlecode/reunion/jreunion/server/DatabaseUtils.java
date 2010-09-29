@@ -764,12 +764,46 @@ public class DatabaseUtils extends Service {
 		return false;
 	}
 	
+	public List<RoamingItem> loadRoamingItems(LocalMap map){
+		
+		List<RoamingItem> items = new Vector<RoamingItem>();
+		synchronized(database) {
+		
+			Statement stmt;
+			try {
+				stmt = database.conn.createStatement();
+				
+				ResultSet rs = stmt.executeQuery("SELECT * FROM `roaming` WHERE `mapid` = "+map.getId()+";");
+				
+				while (rs.next()) 
+				{
+					int itemid = rs.getInt("itemid");
+					Item item = ItemFactory.loadItem(itemid);
+					
+					if (item==null)
+						stmt.execute("DELETE FROM `roaming` WHERE itemid="+itemid);
+					else{
+						RoamingItem roamingItem = new RoamingItem(item);
+						Position position = new Position(rs.getInt("x"), rs.getInt("y"), rs.getInt("z"), map, rs.getDouble("rotation"));
+						roamingItem.setPosition(position);
+						items.add(roamingItem);
+					}
+				}
+				
+			} catch (SQLException e) {
+				Logger.getLogger(this.getClass()).warn("Exception",e);
+				return null;
+			}
+		
+		}
+		return items;		
+	}
+	
 	public void saveItem(RoamingItem roamingItem){
 		if (!checkDatabase())
 			return ;
 		Item item = roamingItem.getItem();
 		Position position = roamingItem.getPosition();
-		Player owner = roamingItem.getOwner();
 		saveItem(item);
 		
 		int itemId = item.getId();
@@ -779,13 +813,13 @@ public class DatabaseUtils extends Service {
 			deleteRoamingItem(item);
 			stmt  = database.conn.createStatement();
 			String q = 
-			"INSERT INTO `roaming` (`itemid`,`mapid`,`x`,`y`,`z`,`charid`)VALUES("+
+			"INSERT INTO `roaming` (`itemid`,`mapid`,`x`,`y`,`z`,`rotation`) VALUES ("+
 			itemId+","+
 			position.getMap().getId()+","+
 			position.getX()+","+
 			position.getY()+","+
 			position.getZ()+","+
-			(owner==null? "NULL" : ""+owner.getId())+");";
+			position.getRotation()+");";
 			stmt.execute(q);
 		
 		} 

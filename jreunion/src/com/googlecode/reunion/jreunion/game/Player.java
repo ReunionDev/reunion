@@ -583,7 +583,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 	}
 
 	/****** Manages the char Logout ******/
-	public void logout() {
+	public synchronized void logout() {
 
 
 		Logger.getLogger(Player.class).info("Player " + getName() + " logging out...\n");
