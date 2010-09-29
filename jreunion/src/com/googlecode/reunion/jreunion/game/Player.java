@@ -1246,12 +1246,12 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 	
 	@Override
 	public void enter(Session session){
-		this.getClient().sendPacket(Type.IN_CHAR, this, false);
+		session.getOwner().getClient().sendPacket(Type.IN_CHAR, this, false);
 	}
 
 	@Override
 	public void exit(Session session){
-		this.getClient().sendPacket(Type.OUT, this);
+		session.getOwner().getClient().sendPacket(Type.OUT, this);
 	}
 	
 	public void handleEvent(Event event){

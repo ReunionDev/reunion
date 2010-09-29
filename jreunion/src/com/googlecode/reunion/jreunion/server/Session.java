@@ -93,9 +93,10 @@ public class Session extends EventBroadcaster implements EventListener{
 				entities.remove(entity);
 			}
 			entity.addEventListener(SessionEvent.class, this);
-			if(defaultAction)
-				entity.exit(this);
+			
 		}
+		if(defaultAction)
+			entity.exit(this);
 	}
 	public void enter(WorldObject entity){
 		enter(entity, true);
@@ -110,10 +111,11 @@ public class Session extends EventBroadcaster implements EventListener{
 		
 			entity.addEventListener(SessionEvent.class, this);
 			entities.add(entity);
-			if(defaultAction)
-				entity.enter(this);
+			
 			
 		}
+		if(defaultAction)
+			entity.enter(this);
 	}
 
 	public void empty() {

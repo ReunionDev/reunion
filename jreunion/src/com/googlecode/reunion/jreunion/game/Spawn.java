@@ -102,7 +102,6 @@ public class Spawn {
 		
 		
 		LocalMap map = position.getMap();
-		
 		map.fireEvent(SpawnEvent.class, entity);
 		
 	}

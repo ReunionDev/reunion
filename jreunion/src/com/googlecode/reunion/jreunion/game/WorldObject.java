@@ -67,7 +67,7 @@ public abstract class WorldObject extends EventBroadcaster implements Entity {
 		@Override
 		public void sendPacket(Type packetType, Object... args) {
 			String data = PacketFactory.createPacket(packetType, args);
-			entity.fireEvent(SendPacketSessionEvent.class,null,data);
+			entity.fireEvent(SendPacketSessionEvent.class, null, data);
 			
 		}
 				

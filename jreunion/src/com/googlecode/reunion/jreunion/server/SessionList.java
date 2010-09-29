@@ -60,7 +60,7 @@ public class SessionList<T extends Session> extends Vector<T> implements Sendabl
 		synchronized(this){
 			for(Session session : this){
 				
-				session.enter(entity,defaultAction);
+				session.enter(entity, defaultAction);
 				
 			}
 		}

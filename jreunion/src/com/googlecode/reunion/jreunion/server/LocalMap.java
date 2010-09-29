@@ -324,13 +324,15 @@ public class LocalMap extends Map implements Runnable{
 			LocalMap map = ((MapEvent)event).getMap();
 			
 			if(event instanceof SpawnEvent){
-				SpawnEvent mobSpawnEvent = (SpawnEvent)event;
-				LivingObject entity = mobSpawnEvent.getSpawnee();
+				SpawnEvent spawnEvent = (SpawnEvent)event;
+				LivingObject entity = spawnEvent.getSpawnee();
 				SessionList<Session> list = GetSessions(entity.getPosition());
 				
 				synchronized(entities) {
 					
-					entities.put(entity.getId(), entity);
+					WorldObject object = entities.put(entity.getId(), entity);
+					if(object!=null) 
+						throw new RuntimeException("This should never happen! 1");
 					list.enter(entity, false);		
 				}
 				
@@ -338,6 +340,11 @@ public class LocalMap extends Map implements Runnable{
 					Player player = (Player)entity;
 					Session session = player.getSession();
 					sessions.add(session);
+					
+					if(list.contains(session)){
+						
+						throw new RuntimeException("This should never happen! 2");
+					}
 
 					list.sendPacket(Type.IN_CHAR, player, true);
 				}else{
@@ -401,12 +408,11 @@ public class LocalMap extends Map implements Runnable{
 				Session session = player.getSession();
 				if(session!=null){
 					session.close();
-					
 				}
 				
 				synchronized(entities) {
 					sessions.remove(session);
-					entities.remove(player);
+					entities.remove(player.getId());
 					
 				}	
 				SessionList<Session> list = player.getInterested().getSessions();
