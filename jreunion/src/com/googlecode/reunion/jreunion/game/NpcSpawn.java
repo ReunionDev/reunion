@@ -41,33 +41,24 @@ public class NpcSpawn extends Spawn
 		
 		LocalMap map = getPosition().getMap();
 		Position entityPosition = generatePosition();
-		LivingObject entity = null;
+		Npc npc = null;
 		switch(getType()){
 		case MOB:
-			
-			Mob mob = map.getWorld().getMobManager()
-			.createMob(getNpcType());
-			mob.setSpawn(this);
-			mob.loadFromReference(getNpcType());
-			
-			entity = mob;
-			
+			npc = map.getWorld().getMobManager().createMob(getNpcType());				
 			break;
 			
 		case NPC:
-			
-			Npc npc = map.getWorld().getNpcManager()
-			.createNpc(getNpcType());
-			npc.setSpawn(this);
-			npc.setUnknown2(10);
-			
-			entity = npc;
+			npc = map.getWorld().getNpcManager().createNpc(getNpcType());
+			//npc.setUnknown2(10);
 			break;
 		}
+		if(npc==null)
+			return;
+		npc.setSpawn(this);
+		npc.setPosition(entityPosition);
+		npc.loadFromReference(getNpcType());
 		
-		entity.setPosition(entityPosition);
-		entity.loadFromReference(getNpcType());
-		super.spawn(entity);
+		super.spawn(npc);
 	}
 	
 	public void kill() {

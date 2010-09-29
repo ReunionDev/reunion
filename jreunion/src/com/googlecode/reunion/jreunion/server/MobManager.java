@@ -5,6 +5,8 @@ import java.util.Vector;
 
 import org.apache.log4j.Logger;
 
+import com.googlecode.reunion.jcommon.ParsedItem;
+import com.googlecode.reunion.jreunion.game.Item;
 import com.googlecode.reunion.jreunion.game.Mob;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Position;
@@ -37,7 +39,20 @@ public class MobManager {
 
 	public Mob createMob(int type) {
 		synchronized(this){
-			Mob mob = new Mob(type);
+			
+			ParsedItem parsedItem = Reference.getInstance().getMobReference().getItemById(type);			
+			if(parsedItem==null){
+				
+				Logger.getLogger(MobManager.class).warn("Unknown mob type: "+type);
+				return null;
+				
+			}
+			String className = "com.googlecode.reunion.jreunion.game." + parsedItem.getMemberValue("Class");		
+			
+			Mob mob = (Mob)ClassFactory.create(className, type);
+			if(mob==null)
+				return null;
+			
 			mob.setId(mobIdCounter++);
 			addMob(mob);
 			return mob;

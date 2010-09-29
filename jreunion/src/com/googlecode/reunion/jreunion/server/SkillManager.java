@@ -41,21 +41,16 @@ public class SkillManager {
 				continue;
 			
 			int id = Integer.parseInt(item.getMemberValue("Id"));
-			String className = item.getMemberValue("Class");
+			String className = "com.googlecode.reunion.jreunion.game.skills."+item.getMemberValue("Class");
 			
 			
-			try {
-				Class c = Class.forName("com.googlecode.reunion.jreunion.game.skills."
-						+ className);
-				Skill skill = (Skill) c.getConstructors()[0].newInstance(id);
+			Skill skill = (Skill) ClassFactory.create(className, id);
+			if(skill==null)
+				continue;
 				
-				skills.put(id, skill);
+			skills.put(id, skill);
 
-			} catch (Exception e) {
-
-				Logger.getLogger(SkillManager.class).warn("Cannot create class: "+className,e);
-				
-			}
+		
 		}
 		parser.clear();
 		

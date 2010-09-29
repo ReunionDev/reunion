@@ -20,18 +20,10 @@ public class ItemFactory {
 			return null;
 		}
 
-		String className = parseditem.getMemberValue("Class");
-
-		try {
-			Class c = Class.forName("com.googlecode.reunion.jreunion.game."
-					+ className);
-			item = (Item) c.getConstructors()[0].newInstance(type);
-
-		} catch (Exception e) {
-
-			Logger.getLogger(ItemFactory.class).warn("Cannot create class:"+className,e);
-			return null;
-		}
+		String className = "com.googlecode.reunion.jreunion.game." + parseditem.getMemberValue("Class");		
+		
+		item = (Item)ClassFactory.create(className, type);
+		
 		DatabaseUtils.getInstance().saveItem(item);
 		return item;
 	}

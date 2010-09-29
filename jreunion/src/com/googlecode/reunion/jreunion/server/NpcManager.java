@@ -6,6 +6,7 @@ import java.util.Vector;
 import org.apache.log4j.Logger;
 
 import com.googlecode.reunion.jcommon.ParsedItem;
+import com.googlecode.reunion.jreunion.game.Item;
 import com.googlecode.reunion.jreunion.game.Npc;
 
 /**
@@ -38,22 +39,12 @@ public class NpcManager {
 		if (parsednpc == null) {
 			return null;
 		}
-
-		String classname = parsednpc.getMemberValue("Class");
-
-		Npc npc = null;
-
-		try {
-			Class c = Class.forName("com.googlecode.reunion.jreunion.game."
-					+ classname);
-			npc = (Npc) c.getConstructors()[0].newInstance(type);
-
-		} catch (Exception e) {
-
-			Logger.getLogger(NpcManager.class).info("Cannot create class:" + classname);
-			Logger.getLogger(this.getClass()).warn("Exception",e);
+		String className = "com.googlecode.reunion.jreunion.game." + parsednpc.getMemberValue("Class");		
+		
+		Npc npc = (Npc)ClassFactory.create(className, type);
+		if(npc==null)
 			return null;
-		}
+		
 		npc.setId(++npcIdCounter);
 		addNpc(npc);
 

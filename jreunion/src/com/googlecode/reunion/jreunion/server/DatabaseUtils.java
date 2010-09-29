@@ -717,21 +717,11 @@ public class DatabaseUtils extends Service {
 					return null;
 				}
 				
-				String classname = parseditem.getMemberValue("Class");
+				String className = "com.googlecode.reunion.jreunion.game." + parseditem.getMemberValue("Class");		
 				
-				Item item = null;
-				
-				try {
-					Class c = Class.forName("com.googlecode.reunion.jreunion.game." + classname);
-					item = (Item) c.getConstructors()[0].newInstance(type);
-
-				} catch (Exception e) {
-
-					Logger.getLogger(DatabaseUtils.class).info("Cannot create class:" + classname);
-					Logger.getLogger(this.getClass()).warn("Exception",e);
+				Item item = (Item)ClassFactory.create(className, type);
+				if(item==null)
 					return null;
-				}
-				
 				item.setId(itemId);
 				
 				item.setGemNumber(rs.getInt("gemnumber"));
@@ -901,13 +891,11 @@ public class DatabaseUtils extends Service {
 			
 			for(Skill skill:player.getSkills().keySet())
 			{
-				if(!data.isEmpty())
-					data+=", ";
-				
 				int level = player.getSkillLevel(skill);
 				if(level>0){
-					data+="("+playerId+","+skill.getId()+","+level+")";			
-					
+					if(!data.isEmpty())
+						data+=", ";
+					data+="("+playerId+","+skill.getId()+","+level+")";
 				}
 			}
 			

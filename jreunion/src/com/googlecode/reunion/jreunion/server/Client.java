@@ -116,9 +116,7 @@ public class Client extends EventBroadcaster implements EventListener,Sendable {
 	public void setLoginType(LoginType loginType) {
 		this.loginType = loginType;
 	}
-	private static FileHandler fh;
 	
-	private Logger logger;
 	
 	public Client(World world, Socket socket) {
 		
@@ -132,9 +130,6 @@ public class Client extends EventBroadcaster implements EventListener,Sendable {
 		Server.getInstance().getNetwork().addEventListener(NetworkDisconnectEvent.class, this, new NetworkEvent.NetworkFilter(this.socket));
 	}
 
-	public Logger getLogger() {
-		return logger;
-	}
 	public State getState() {
 		return state;
 	}

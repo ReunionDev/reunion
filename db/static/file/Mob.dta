@@ -15,6 +15,7 @@
 
 #### Laglamia ####
 [Armor Rat ot Contrition]
+Class = Mob
 ID = 226
 Level = 0
 Hp = 1
@@ -28,6 +29,7 @@ Exp = 1
 Lime = 1
 
 [Armored Mouse]
+Class = Mob
 ID = 97
 Level = 1
 Hp = 30
@@ -41,6 +43,7 @@ Exp = 10
 Lime = 1
 
 [Wolf]
+Class = Mob
 ID = 23
 Level = 3
 Hp = 50
@@ -54,6 +57,7 @@ Exp = 23
 Lime = 2
 
 [Lada]
+Class = Mob
 ID = 25
 Level = 5
 Hp = 71
@@ -67,6 +71,7 @@ Exp = 37
 Lime = 3
 
 [Armored Crab]
+Class = Mob
 ID = 98
 Level = 8
 Hp = 105
@@ -80,6 +85,7 @@ Exp = 57
 Lime = 5
 
 [Poison Crab]
+Class = Mob
 ID = 99
 Level = 10
 Hp = 130
@@ -93,6 +99,7 @@ Exp = 70
 Lime = 6
 
 [White Tiger]
+Class = Mob
 ID = 24
 Level = 12
 Hp = 157
@@ -106,6 +113,7 @@ Exp = 83
 Lime = 7
 
 [Sea Scorpion]
+Class = Mob
 ID = 100
 Level = 22
 Hp = 346
@@ -119,6 +127,7 @@ Exp = 141
 Lime = 11
 
 [Poison Scorpion]
+Class = Mob
 ID = 101
 Level = 30
 Hp = 590
@@ -132,6 +141,7 @@ Exp = 232
 Lime = 19
 
 [Chmero]
+Class = Mob
 ID = 102
 Level = 35
 Hp = 799
@@ -145,6 +155,7 @@ Exp = 311
 Lime = 25
 
 [Skewer Halfer]
+Class = Mob
 ID = 110
 Level = 65
 Hp = 7514
@@ -158,6 +169,7 @@ Exp = 1511
 Lime = 121
 
 [Mad Cyborg 2]
+Class = Mob
 ID = 109
 Level = 70
 Hp = 4150
@@ -171,6 +183,7 @@ Exp = 1852
 Lime = 148
 
 [Mace Kabal]
+Class = Mob
 ID = 108
 Level = 105
 Hp = 29086
@@ -184,6 +197,7 @@ Exp = 6220
 Lime = 498
 
 [Drakion Magic]
+Class = Mob
 ID = 112
 Level = 120
 Hp = 127650
@@ -197,6 +211,7 @@ Exp = 27750
 Lime = 2220
 
 [Drakion Sword]
+Class = Mob
 ID = 111
 Level = 125
 Hp = 249610
@@ -211,6 +226,7 @@ Lime = 4362
 
 #### Shilon ####
 [Dark Soul]
+Class = Mob
 ID = 125
 Level = 0
 Hp = 1
@@ -224,6 +240,7 @@ Exp = 1
 Lime = 1
 
 [Uokepaloid]
+Class = Mob
 ID = 149
 Level = 0
 Hp = 1
@@ -237,6 +254,7 @@ Exp = 1
 Lime = 1
 
 [Karmaroid]
+Class = Mob
 ID = 152
 Level = 0
 Hp = 1
@@ -250,24 +268,31 @@ Exp = 1
 Lime = 1
 
 [1]
+Class = Mob
 ID = 160
 
 [2]
+Class = Mob
 ID = 150
 
 [4]
+Class = Mob
 ID = 148
 
 [5]
+Class = Mob
 ID = 140
 
 [6]
+Class = Mob
 ID = 141
 
 [7]
+Class = Mob
 ID = 139
 
 [War Giant]
+Class = Mob
 ID = 38
 Level = 190
 Hp = 1
@@ -280,9 +305,12 @@ NeoProgmare = 0
 Exp = 60000
 Lime = 10000
 
+
+
 ###### Update Shilon Mobs start ##########
 
 [Cutter Lizard]
+Class = Mob
 ID = 153
 Level = 0
 Hp = 1
@@ -296,6 +324,7 @@ Exp = 1
 Lime = 1
 
 [Horror Lizard]
+Class = Mob
 ID = 154
 Level = 0
 Hp = 1
@@ -309,6 +338,7 @@ Exp = 1
 Lime = 1
 
 [Torres]
+Class = Mob
 ID = 155
 Level = 0
 Hp = 1
@@ -322,6 +352,7 @@ Exp = 1
 Lime = 1
 
 [Minot]
+Class = Mob
 ID = 156
 Level = 0
 Hp = 1
@@ -335,6 +366,7 @@ Exp = 1
 Lime = 1
 
 [X-Lizard]
+Class = Mob
 ID = 157
 Level = 0
 Hp = 1
@@ -348,6 +380,7 @@ Exp = 1
 Lime = 1
 
 [Sauron]
+Class = Mob
 ID = 158
 Level = 0
 Hp = 1
@@ -361,6 +394,7 @@ Exp = 1
 Lime = 1
 
 [Tauron]
+Class = Mob
 ID = 159
 Level = 0
 Hp = 1
@@ -377,6 +411,7 @@ Lime = 1
 ######## Update Shilon Mobs end ############
 #### Pharous ####
 [Wolf Wing]
+Class = Mob
 ID = 285
 Level = 92
 Hp = 1
@@ -390,6 +425,7 @@ Exp = 20000
 Lime = 330
 
 [Kapier Fencer]
+Class = Mob
 ID = 286
 Level = 103
 Hp = 1
@@ -403,6 +439,7 @@ Exp = 5802
 Lime = 300
 
 [Axe Wing]
+Class = Mob
 ID = 287
 Level = 158
 Hp = 1
@@ -416,6 +453,7 @@ Exp = 27671
 Lime = 415
 
 [Sorceress Wing]
+Class = Mob
 ID = 288
 Level = 125
 Hp = 1
@@ -429,6 +467,7 @@ Exp = 28563
 Lime = 350
 
 [Storm Fencer]
+Class = Mob
 ID = 289
 Level = 125
 Hp = 1
@@ -442,6 +481,7 @@ Exp = 28563
 Lime = 350
 
 [Hell Wing]
+Class = Mob
 ID = 290
 Level = 158
 Hp = 1
@@ -455,6 +495,7 @@ Exp = 27671
 Lime = 415
 
 [Battle Dragon]
+Class = Mob
 ID = 291
 Level = 158
 Hp = 1
@@ -468,6 +509,7 @@ Exp = 27671
 Lime = 415
 
 [Wolf Dragon]
+Class = Mob
 ID = 292
 Level = 158
 Hp = 1
@@ -481,6 +523,7 @@ Exp = 27671
 Lime = 415
 
 [Raven Mage]
+Class = Mob
 ID = 219
 Level = 158
 Hp = 1
@@ -494,6 +537,7 @@ Exp = 27671
 Lime = 415
 
 [Head Dragon]
+Class = Mob
 ID = 220
 Level = 158
 Hp = 1
@@ -507,6 +551,7 @@ Exp = 27671
 Lime = 415
 
 [Ghost Hydra]
+Class = Mob
 ID = 243
 Level = 158
 Hp = 1
@@ -521,6 +566,7 @@ Lime = 415
 #in npc 11599 243 1891 1669 0 0.0 100 10 1 4 0 0 3
 
 [Raven Valkyrie]
+Class = Mob
 ID = 244
 Level = 158
 Hp = 1
@@ -535,6 +581,7 @@ Lime = 415
 #in npc 11481 244 1896 1784 0 0.0 100 10 2 3 0 0 3
 
 [Flying Devil King]
+Class = Mob
 ID = 249
 Level = 158
 Hp = 1
@@ -549,6 +596,7 @@ Lime = 415
 #in npc 9400 249 1056 2310 0 0.0 100 0 0 0 0 0 8
 
 [Bat Dragon]
+Class = Mob
 ID = 245
 Level = 158
 Hp = 1
@@ -563,6 +611,7 @@ Lime = 415
 #in npc 11499 245 1064 1951 0 0.0 100 10 2 2 0 0 4
 
 [Iron Dragon]
+Class = Mob
 ID = 221
 Level = 158
 Hp = 1
@@ -578,6 +627,7 @@ Lime = 415
 
 #### Quests ####
 [King Chmero]
+Class = Mob
 ID = 228
 Level = 0
 Hp = 100
@@ -591,6 +641,7 @@ Exp = 2360
 Lime = 1
 
 [Devil Dyor]
+Class = Mob
 ID = 324
 Level = 0
 Hp = 100
@@ -605,30 +656,35 @@ Lime = 1
 
 #### Water ####
 [Dark Blue Fish]
+Class = Mob
 ID = 231
 AttackType = 0
 DmgType = -1
 Speed = 20
 
 [Light Green Fish]
+Class = Mob
 ID = 232
 AttackType = 0
 DmgType = -1
 Speed = 20
 
 [Purple Fish]
+Class = Mob
 ID = 233
 AttackType = 0
 DmgType = -1
 Speed = 20
 
 [Light Blue Fish]
+Class = Mob
 ID = 234
 AttackType = 0
 DmgType = -1
 Speed = 20
 
 [Dolfin]
+Class = Mob
 ID = 235
 Hp = 1
 AttackType = 0
@@ -636,6 +692,7 @@ DmgType = -1
 Speed = 20
 
 [Shark]
+Class = Mob
 ID = 236
 Hp = 1
 AttackType = 0
@@ -643,6 +700,7 @@ DmgType = -1
 Speed = 20
 
 [Turtle]
+Class = Mob
 ID = 237
 Hp = 1
 AttackType = 0
@@ -651,6 +709,7 @@ Speed = 20
 
 #### Christmas ####
 [Perky Socks]
+Class = Mob
 ID = 324
 Level = 0
 Hp = 100
@@ -663,6 +722,7 @@ Lime = 1
 
 #### Summon ####
 [Summon Devil Giant]
+Class = Mob
 ID = 213
 Level = 1
 Hp = 100
@@ -673,14 +733,17 @@ DmgType = 0
 
 #### Other ####
 [Soccer Ball]
+Class = Mob
 ID = 173
 Hp = 1
 Speed = 20
 
 [Arbor Day_Tree]
+Class = Mob
 ID = 323
 
 [Monkey]
+Class = Mob
 ID = 315
 Level = 1
 Hp = 100
@@ -692,7 +755,22 @@ DmgType = 0
 ##########LostrealmCastle##############
 
 
+[Moke]
+Class = Mob
+ID = 39
+Level = 0
+Hp = 1
+Dmg = 1
+Speed = 20
+AttackType = 2
+DmgType = 2
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 1
+
 [Grem]
+Class = Mob
 ID = 40
 Level = 0
 Hp = 1
@@ -706,6 +784,7 @@ Exp = 1
 Lime = 1
 
 [Pro Giant]
+Class = Mob
 ID = 41
 Level = 0
 Hp = 1
@@ -719,6 +798,7 @@ Exp = 1
 Lime = 1
 
 [Dark Soldier]
+Class = Mob
 ID = 104
 Level = 0
 Hp = 1
@@ -732,6 +812,7 @@ Exp = 1
 Lime = 1
 
 [Devil Giant]
+Class = Mob
 ID = 105
 Level = 0
 Hp = 1
@@ -745,6 +826,7 @@ Exp = 1
 Lime = 1
 
 [Battle Giant]
+Class = Mob
 ID = 106
 Level = 0
 Hp = 1
@@ -758,6 +840,7 @@ Exp = 1
 Lime = 1
 
 [Mad Cyborg]
+Class = Mob
 ID = 107
 Level = 0
 Hp = 1
@@ -774,12 +857,15 @@ Lime = 1
 
 #### Unknown ####
 [Unknown 1]
+Class = Mob
 ID = 298
 
 [Unknown 2]
+Class = Mob
 ID = 301
 
 [Unknown 3]
+Class = Mob
 ID = 342
 
 #################

@@ -12,6 +12,7 @@ import com.googlecode.reunion.jreunion.events.client.ClientSendEvent;
 import com.googlecode.reunion.jreunion.events.server.ServerEvent;
 import com.googlecode.reunion.jreunion.events.server.ServerStartEvent;
 import com.googlecode.reunion.jreunion.events.server.ServerStopEvent;
+import com.mysql.jdbc.Driver;
 import com.mysql.jdbc.MySQLConnection;
 import java.sql.PreparedStatement;
 
@@ -50,7 +51,8 @@ public class Database {
 		String url = "jdbc:mysql://" + databaseConfig.getMemberValue("address")
 				+ "/" + databaseConfig.getMemberValue("database")
 				+ "?autoReconnect=true";
-		Class.forName("com.mysql.jdbc.Driver").newInstance();
+		Driver driver = (Driver)ClassFactory.create("com.mysql.jdbc.Driver");
+		
 		conn = DriverManager.getConnection(url, userName, password);
 		Logger.getLogger(Database.class).info(getClass().getSimpleName() + " connection established");
 
