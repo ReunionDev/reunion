@@ -1,5 +1,6 @@
 package com.googlecode.reunion.jreunion.server;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -8,6 +9,7 @@ import java.util.Vector;
 import org.apache.log4j.Logger;
 
 import com.googlecode.reunion.jcommon.ParsedItem;
+import com.googlecode.reunion.jcommon.Parser;
 import com.googlecode.reunion.jreunion.game.Item;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Skill;
@@ -21,7 +23,16 @@ public class SkillManager {
 	
 	public SkillManager(){
 		
-		Iterator<ParsedItem> iter = Reference.getInstance().getSkillReference().getItemListIterator();
+
+		Parser parser = new Parser();
+		try {
+			parser.Parse("data/Skills.dta");
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+		
+		Iterator<ParsedItem> iter = parser.getItemListIterator();
 		
 		while(iter.hasNext()){
 			
@@ -45,7 +56,8 @@ public class SkillManager {
 				Logger.getLogger(SkillManager.class).warn("Cannot create class: "+className,e);
 				
 			}
-		}	
+		}
+		parser.clear();
 		
 		for(Race race : Race.values()){
 			

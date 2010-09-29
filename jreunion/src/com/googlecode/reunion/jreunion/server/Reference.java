@@ -24,7 +24,6 @@ public class Reference {
 
 	private Parser itemReference;
 	private Parser mobReference;
-	private Parser skillReference;
 	private Parser expReference;
 	private Parser npcReference;
 	private Parser dropListReference;
@@ -40,7 +39,6 @@ public class Reference {
 		super();
 		itemReference = new Parser();
 		mobReference = new Parser();
-		skillReference = new Parser();
 		expReference = new Parser();
 		mapReference = new Parser();
 		mapConfigReference = new Parser();
@@ -53,7 +51,6 @@ public class Reference {
 	public void clear() {
 		mobReference.clear();
 		itemReference.clear();
-		skillReference.clear();
 		mapReference.clear();
 		mapConfigReference.clear();
 		expReference.clear();
@@ -93,10 +90,7 @@ public class Reference {
 	public Parser getServerReference() {
 		return serverReference;
 	}
-
-	public Parser getSkillReference() {
-		return skillReference;
-	}
+	
 	public Parser getDropListReference() {
 		return dropListReference;
 	}
@@ -106,7 +100,6 @@ public class Reference {
 		
 		itemReference.Parse("data/Items.dta");
 		mobReference.Parse("data/Mob.dta");
-		skillReference.Parse("data/Skills.dta");
 		expReference.Parse("data/ExpTable.dta");
 		mapReference.Parse("data/Maps.dta");
 		mapConfigReference.Parse("config/Maps.dta");
