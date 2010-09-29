@@ -38,7 +38,6 @@ public class Skill {
 
 	public Skill(int id) {
 		this.id = id;
-		loadFromReference(id);
 	}
 
 	public int getId() {
@@ -87,104 +86,6 @@ public class Skill {
 
 	public int getType() {
 		return type;
-	}
-
-	public void loadFromReference(int id) {
-		ParsedItem skill = Reference.getInstance().getSkillReference()
-				.getItemById(id);
-
-		if (skill == null) {
-			// cant find Item in the reference continue to load defaults:
-			setLevel(0);
-			setMaxLevel(0);
-			setMinFirstRange(0);
-			setMaxFirstRange(0);
-			setMinSecondRange(0);
-			setMaxSecondRange(0);
-			setMinConsumn(0);
-			setMaxConsumn(0);
-			setType(0);
-			setStatusUsed(-1);
-		} else {
-
-			if (skill.checkMembers(new String[] { "Level" })) {
-				// use member from file
-				setLevel(Integer.parseInt(skill.getMemberValue("Level")));
-			} else {
-				// use default
-				setLevel(0);
-			}
-			if (skill.checkMembers(new String[] { "MaxLevel" })) {
-				// use member from file
-				setMaxLevel(Integer.parseInt(skill.getMemberValue("MaxLevel")));
-			} else {
-				// use default
-				setMaxLevel(0);
-			}
-			if (skill.checkMembers(new String[] { "MinFirstRange" })) {
-				// use member from file
-				setMinFirstRange(Integer.parseInt(skill
-						.getMemberValue("MinFirstRange")));
-			} else {
-				// use default
-				setMinFirstRange(0);
-			}
-			if (skill.checkMembers(new String[] { "MaxFirstRange" })) {
-				// use member from file
-				setMaxFirstRange(Integer.parseInt(skill
-						.getMemberValue("MaxFirstRange")));
-			} else {
-				// use default
-				setMaxFirstRange(0);
-			}
-			if (skill.checkMembers(new String[] { "MinSecondRange" })) {
-				// use member from file
-				setMinSecondRange(Integer.parseInt(skill
-						.getMemberValue("MinSecondRange")));
-			} else {
-				// use default
-				setMinSecondRange(0);
-			}
-			if (skill.checkMembers(new String[] { "MaxSecondRange" })) {
-				// use member from file
-				setMaxSecondRange(Integer.parseInt(skill
-						.getMemberValue("MaxSecondRange")));
-			} else {
-				// use default
-				setMaxSecondRange(0);
-			}
-			if (skill.checkMembers(new String[] { "MinConsumn" })) {
-				// use member from file
-				setMinConsumn(Integer.parseInt(skill
-						.getMemberValue("MinConsumn")));
-			} else {
-				// use default
-				setMinConsumn(0);
-			}
-			if (skill.checkMembers(new String[] { "MaxConsumn" })) {
-				// use member from file
-				setMaxConsumn(Integer.parseInt(skill
-						.getMemberValue("MaxConsumn")));
-			} else {
-				// use default
-				setMaxConsumn(0);
-			}
-			if (skill.checkMembers(new String[] { "Type" })) {
-				// use member from file
-				setType(Integer.parseInt(skill.getMemberValue("Type")));
-			} else {
-				// use default
-				setType(0);
-			}
-			if (skill.checkMembers(new String[] { "StatusUsed" })) {
-				// use member from file
-				setStatusUsed(Integer.parseInt(skill
-						.getMemberValue("StatusUsed")));
-			} else {
-				// use default
-				setStatusUsed(-1);
-			}
-		}
 	}
 
 	public void setCurrConsumn(float currConsumn) {

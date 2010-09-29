@@ -22,10 +22,22 @@ public class Server extends ClassModule {
 
 	private static Server _instance = null;
 	
+	
+	
 	private static Random rand = new Random(System.currentTimeMillis());
 	
 	public static Random getRand() {
 		return rand;
+	}
+	
+	private State state = State.LOADING;
+
+	public State getState() {
+		return state;
+	}
+
+	private void setState(State state) {
+		this.state = state;
 	}
 
 	private HashMap<String,Service> services = new HashMap<String,Service>();
@@ -74,6 +86,7 @@ public class Server extends ClassModule {
 		
 		
 		Server server = Server.getInstance();
+		
 
 		try {
 
@@ -87,6 +100,7 @@ public class Server extends ClassModule {
 			
 
 			System.gc();
+			server.setState(State.RUNNING);
 			while (true) {
 
 				server.doWork();
@@ -101,6 +115,7 @@ public class Server extends ClassModule {
 			
 		}
 		finally {
+			server.setState(State.CLOSING);
 			server.fireEvent(server.createEvent(ServerStopEvent.class, server));
 			server.doStop();
 			
@@ -187,6 +202,14 @@ public class Server extends ClassModule {
 	@Override
 	public void Work() {
 		// Logger.getLogger(Server.class).info("server work");
+	}
+	
+	public static enum State{
+		
+		LOADING,
+		RUNNING,
+		CLOSING
+		
 	}
 
 }

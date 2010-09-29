@@ -24,6 +24,7 @@ import com.googlecode.reunion.jreunion.events.network.NetworkSendEvent;
 import com.googlecode.reunion.jreunion.game.Mob;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
+import com.googlecode.reunion.jreunion.server.Server.State;
 
 /**
  * @author Aidamina
@@ -203,6 +204,8 @@ public class World extends ClassModule implements EventListener, Sendable{
 			Socket socket = ((NetworkEvent)event).getSocket();
 			
 			if(event instanceof NetworkAcceptEvent){
+				
+				
 				NetworkAcceptEvent networkAcceptEvent = (NetworkAcceptEvent) event;
 				Network network = (Network) networkAcceptEvent.getSource();
 				Client client = new Client(this, socket);
@@ -218,6 +221,7 @@ public class World extends ClassModule implements EventListener, Sendable{
 				clients.put(socket, client);
 				
 				fireEvent(ClientConnectEvent.class, client);
+								
 			}
 			if(event instanceof NetworkDisconnectEvent){
 				Client client = clients.remove(socket);

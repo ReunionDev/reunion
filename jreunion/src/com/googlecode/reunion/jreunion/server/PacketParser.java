@@ -127,6 +127,22 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 				}
 			}
 			case GOT_USERNAME: {
+				
+				Server.State serverState = Server.getInstance().getState();
+				if(serverState!=Server.State.RUNNING){
+					String failMessage = null;
+					switch(serverState) {
+					case LOADING:
+						failMessage="Server loading, try again in a few minutes.";					
+						break;
+					case CLOSING:
+						failMessage="Server closing, try again in a few minutes.";
+						break;
+					}
+					client.sendPacket(Type.FAIL, failMessage);
+					return;
+				}
+				
 				if (message[0].length() < 28) {
 					client.setPassword(new String(message[0]));
 					Logger.getLogger(PacketParser.class).info("Got Password");

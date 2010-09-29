@@ -172,7 +172,6 @@ public class Parser {
 							"Invalid member syntax", line));
 					continue;
 				}
-				
 
 			}
 			input.close();

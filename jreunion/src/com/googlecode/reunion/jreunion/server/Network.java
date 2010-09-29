@@ -90,6 +90,8 @@ public class Network extends Service implements Runnable, EventListener{
 				while (it.hasNext()) {
 					// Get a key representing one of bits of I/O activity
 					SelectionKey key = it.next();
+					if(!key.isValid())
+						continue;
 					SelectableChannel socketChannel = key.channel();
 					
 					// What kind of activity is it?
@@ -100,13 +102,9 @@ public class Network extends Service implements Runnable, EventListener{
 						// so we can listen for input on it						
 						
 						SocketChannel clientSocketChannel = ((ServerSocketChannel)socketChannel).accept();
-						clientSocketChannel.configureBlocking(false);
-						Socket socket = clientSocketChannel.socket();
 						
-						fireEvent(NetworkAcceptEvent.class,socket);
-						
-						// Register it with the selector, for reading
-						clientSocketChannel.register(selector, SelectionKey.OP_READ);
+						processAccept(clientSocketChannel);
+					
 					} 
 					else if ((key.readyOps() & SelectionKey.OP_READ) == SelectionKey.OP_READ) {
 						
@@ -152,6 +150,18 @@ public class Network extends Service implements Runnable, EventListener{
 	
 	}
 	
+	private void processAccept(SocketChannel clientSocketChannel) throws IOException {
+		
+		clientSocketChannel.configureBlocking(false);
+		Socket socket = clientSocketChannel.socket();
+	
+		fireEvent(NetworkAcceptEvent.class, socket);
+		
+		// Register it with the selector, for reading
+		clientSocketChannel.register(selector, SelectionKey.OP_READ);
+
+	}
+
 	private boolean processInput(SocketChannel socketChannel) throws IOException {
 
 		buffer.clear();
@@ -185,7 +195,15 @@ public class Network extends Service implements Runnable, EventListener{
 	
 	private boolean processOutput(SocketChannel socketChannel) throws IOException {
 		
+		
 		Socket socket = socketChannel.socket();
+		
+		if(!socketChannel.isOpen()||!socketChannel.isConnected()){
+			disconnect(socket);
+			return false;
+			
+		}
+		
 		Client client = Server.getInstance().getWorld().getClients().get(socket);
 		if (client == null) {
 			return false;
@@ -208,7 +226,8 @@ public class Network extends Service implements Runnable, EventListener{
 			socketChannel.write(buffer);
 		} catch (IOException e) {
 			Logger.getLogger(this.getClass()).warn("Exception", e);
-			disconnect(socket);				
+			disconnect(socket);
+			return false;
 		}
 		return true;
 	}
