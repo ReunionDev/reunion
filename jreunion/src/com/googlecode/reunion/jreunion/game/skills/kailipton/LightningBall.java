@@ -24,9 +24,5 @@ public class LightningBall extends Tier1 implements Castable {
 			}
 			
 		}		
-	}
-
-	
-	
-	
+	}	
 }

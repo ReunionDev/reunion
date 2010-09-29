@@ -18,6 +18,7 @@ import com.googlecode.reunion.jreunion.events.map.PlayerLoginEvent;
 import com.googlecode.reunion.jreunion.events.network.NetworkDataEvent;
 import com.googlecode.reunion.jreunion.events.session.NewSessionEvent;
 import com.googlecode.reunion.jreunion.game.Castable;
+import com.googlecode.reunion.jreunion.game.Effectable;
 import com.googlecode.reunion.jreunion.game.Equipment;
 import com.googlecode.reunion.jreunion.game.LivingObject;
 import com.googlecode.reunion.jreunion.game.Merchant;
@@ -409,7 +410,10 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 					
 					if(Castable.class.isInstance(skill))
 					{
-						((Castable)skill).cast(player, target);						
+						((Castable)skill).cast(player, target);
+						if(Effectable.class.isInstance(skill))
+							skill.effect(player, target);
+						
 					}
 					else{						
 						throw new RuntimeException(skill+" is not Castable");
