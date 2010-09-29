@@ -416,7 +416,12 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 					}
 					
 				} else if (message[0].equals("skillup")) {
-					client.getPlayer().skillUp(Integer.parseInt(message[1]));
+					int skillId = Integer.parseInt(message[1]);
+					Skill skill = player.getSkill(skillId);
+					if(skill.levelUp(player)){
+						player.updateStatus(13, -1, 0);
+					}
+					
 				} else if (message[0].equals("revival")) {
 					client.getPlayer().revive();
 				} else if (message[0].equals("quick")) {

@@ -8,4 +8,15 @@ public class PlaceHolder extends Skill{
 		super(id);
 	}
 
+	@Override
+	public int getMaxLevel() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getLevelRequirement(int level) {
+		return 0;
+	}
+
 }

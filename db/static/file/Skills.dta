@@ -66,7 +66,7 @@ MinSecondRange = 145
 MaxSecondRange = 170
 StatusUsed = 1
 Type = 2
-Class = PlaceHolder
+Class = kailipton.LightningBall
 
 [Lightning]
 ID = 5
@@ -80,7 +80,7 @@ MinSecondRange = 145
 MaxSecondRange = 170
 StatusUsed = 1
 Type = 2
-Class = PlaceHolder
+Class = kailipton.Tier2
 
 [Recovery]
 ID = 6
@@ -122,7 +122,7 @@ MinSecondRange = 0
 MaxSecondRange = 0
 StatusUsed = -1
 Type = 0
-Class = PlaceHolder
+Class = kailipton.Mastery
 
 [Glow of Peace]
 ID = 9
@@ -150,7 +150,7 @@ MinSecondRange = 145
 MaxSecondRange = 170
 StatusUsed = 1
 Type = 2
-Class = PlaceHolder
+Class = kailipton.Tier2
 
 [Stone Mastery]
 ID = 11
@@ -164,7 +164,7 @@ MinSecondRange = 0
 MaxSecondRange = 0
 StatusUsed = -1
 Type = 0
-Class = PlaceHolder
+Class = kailipton.Mastery
 
 [Pebble Shot]
 ID = 12
@@ -178,7 +178,7 @@ MinSecondRange = 145
 MaxSecondRange = 170
 StatusUsed = 1
 Type = 2
-Class = PlaceHolder
+Class = kailipton.PebbleShot
 
 [Hail]
 ID = 13
@@ -192,7 +192,7 @@ MinSecondRange = 145
 MaxSecondRange = 170
 StatusUsed = 1
 Type = 2
-Class = PlaceHolder
+Class = kailipton.Tier2
 
 [Lightning Mastery]
 ID = 14
@@ -206,7 +206,7 @@ MinSecondRange = 0
 MaxSecondRange = 0
 StatusUsed = -1
 Type = 0
-Class = PlaceHolder
+Class = kailipton.Mastery
 
 [Return to Village]
 ID = 15
@@ -374,7 +374,7 @@ MinSecondRange = 145
 MaxSecondRange = 170
 StatusUsed = 1
 Type = 2
-Class = PlaceHolder
+Class = kailipton.Tier3
 
 [Shock Sphere]
 ID = 27
@@ -388,7 +388,7 @@ MinSecondRange = 145
 MaxSecondRange = 170
 StatusUsed = 1
 Type = 2
-Class = PlaceHolder
+Class = kailipton.Tier3
 
 [Stone Lance]
 ID = 28
@@ -402,7 +402,7 @@ MinSecondRange = 145
 MaxSecondRange = 170
 StatusUsed = 1
 Type = 2
-Class = PlaceHolder
+Class = kailipton.Tier3
 
 [Semi-automatic skill]
 ID = 29

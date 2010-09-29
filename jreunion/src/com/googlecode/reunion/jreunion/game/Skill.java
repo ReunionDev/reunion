@@ -1,13 +1,15 @@
 package com.googlecode.reunion.jreunion.game;
 
 import com.googlecode.reunion.jcommon.ParsedItem;
+import com.googlecode.reunion.jreunion.server.Map;
 import com.googlecode.reunion.jreunion.server.Reference;
+import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-public class Skill {
+public abstract class Skill {
 	private int id;
 
 	private int level;
@@ -56,10 +58,8 @@ public class Skill {
 		return maxFirstRange;
 	}
 
-	public int getMaxLevel() {
-		return maxLevel;
-	}
-
+	public abstract int  getMaxLevel();
+	
 	public int getMaxSecondRange() {
 		return maxSecondRange;
 	}
@@ -92,14 +92,33 @@ public class Skill {
 		this.currConsumn = currConsumn;
 	}
 	
-	public void use(LivingObject source, LivingObject target){
+	public boolean levelUp(Player player) {
+	
+		synchronized(player){			
+			
+			java.util.Map<Skill,Integer> skills = player.getSkills();
+			
+			if(!skills.containsKey(this))
+				return false; //cheater?
 		
+			int currentSkillLevel = skills.get(this);
+			
+			if(currentSkillLevel < this.getMaxLevel() && this.getLevelRequirement(currentSkillLevel+1) <= player.getLevel()){
+				
+				skills.put(this, ++currentSkillLevel);
+				
+				player.getClient().sendPacket(Type.SKILLLEVEL, this, currentSkillLevel);
+				return true;
+			}
+			return false;
+		}
 	}
-
 
 	public void setCurrSecondRange(float currSecondRange) {
 		this.currSecondRange = currSecondRange;
 	}
+	
+	public abstract int getLevelRequirement(int level);
 
 	public void setLevel(int level) {
 		this.level = level;

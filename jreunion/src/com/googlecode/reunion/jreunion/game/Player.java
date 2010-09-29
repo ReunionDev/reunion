@@ -247,22 +247,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		return equipment;
 	}
 	
-	public void levelUpSkill(Skill skill) {
-		
-		if(!skills.containsKey(skill))
-			return; //cheater?
-		synchronized(this){
-		
-			int currentSkillLevel = skills.get(skill);
-			
-			if(currentSkillLevel<skill.getMaxLevel()){
-				
-				skills.put(skill, ++currentSkillLevel);
-				
-				 getClient().sendPacket(Type.SKILLLEVEL, skill,currentSkillLevel);
-			}
-		}
-	}
+
 
 	public Exchange getExchange() {
 		return exchange;
@@ -848,39 +833,6 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 	 * Server.getInstance().getNetworkModule() .SendPacket(client.networkId,
 	 * packetData); // S> skill [SkillLevel] char [CharID] [SkillID] }
 	 */
-	/****** increase skill level ******/
-	public void skillUp(int skillId) {
-
-		Skill skill = getPosition().getMap().getWorld().getSkillManager().getSkill(skillId);
-		//TODO: Check why this was linked
-		/*
-		if (skillId == 3 || skillId == 4 || skillId == 12) {
-			levelUpSkill(getCharSkill().getSkill(3));
-			levelUpSkill(getCharSkill().getSkill(4));
-			levelUpSkill(getCharSkill().getSkill(12));
-		} else if (skillId == 5 || skillId == 10 || skillId == 13) {
-			levelUpSkill(getCharSkill().getSkill(5));
-			levelUpSkill(getCharSkill().getSkill(10));
-			levelUpSkill(getCharSkill().getSkill(13));
-		}
-
-		else if (skillId == 8 || skillId == 11 || skillId == 14) {
-			levelUpSkill(getCharSkill().getSkill(8));
-			levelUpSkill(getCharSkill().getSkill(11));
-			levelUpSkill(getCharSkill().getSkill(14));
-		} else if (skillId == 26 || skillId == 27 || skillId == 28) {
-			levelUpSkill(getCharSkill().getSkill(26));
-			levelUpSkill(getCharSkill().getSkill(27));
-			levelUpSkill(getCharSkill().getSkill(28));
-		} else {
-			levelUpSkill(getCharSkill().getSkill(skillId));
-		}
-		*/
-		levelUpSkill(skill);
-
-		updateStatus(13, -1, 0);
-		// S> skilllevel [SkillNumber] [SkillLevel]
-	}
 
 	public void social(int emotionId) {
 
@@ -1291,6 +1243,12 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 	public Skill getSkill(int id){
 		Skill skill = getPosition().getMap().getWorld().getSkillManager().getSkill(id);		
 		return skills.containsKey(skill)?skill:null;
+		
+	}
+
+	public void setSkillLevel(Skill skill, int level) {
+			
+		skills.put(skill, level);
 		
 	}
 }

@@ -17,4 +17,6 @@ public class SwordMastery extends WeaponMastery {
 		return Sword.class;
 	}
 
+	
+
 }

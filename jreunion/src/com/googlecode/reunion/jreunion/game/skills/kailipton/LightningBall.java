@@ -5,9 +5,9 @@ import com.googlecode.reunion.jreunion.game.LivingObject;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Skill;
 
-public class Fireball extends Tier1 implements Castable {
+public class LightningBall extends Tier1 implements Castable {
 
-	public Fireball(int id) {
+	public LightningBall(int id) {
 		super(id);
 	}
 

@@ -201,7 +201,14 @@ public class SkillManager {
 			for(Skill skill : defaultSkills.get(race)){
 				player.getSkills().put(skill, 0);
 	
-			}		
+			}
+		}
+		switch(race){
+		case KAILIPTON:
+			player.setSkillLevel(getSkill(3),1); //Fireball
+			player.setSkillLevel(getSkill(4),1); //Lightning Ball
+			player.setSkillLevel(getSkill(12),1); //Pebble Shot
+			
 		}
 	}
 }

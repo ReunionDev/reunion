@@ -34,5 +34,15 @@ public abstract class WeaponMastery extends Skill {
 		return 0.1;
 		
 	}
+	
+	@Override
+	public int getLevelRequirement(int level) {
+		return level;
+	}
+	
+	@Override
+	public int getMaxLevel() {
+		return 10;
+	}
 
 }
