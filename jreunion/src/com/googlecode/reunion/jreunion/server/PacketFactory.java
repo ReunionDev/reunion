@@ -63,7 +63,9 @@ public class PacketFactory {
 		MSG,
 		STASH,
 		STASH_END,
-		INVEN
+		INVEN,
+		SKILLLEVEL_ALL, 
+		A_
 	}
 	
 	public static String createPacket(Type packetType, Object... args) {
@@ -260,6 +262,25 @@ public class PacketFactory {
 			}
 			break;
 			
+		case SKILLLEVEL_ALL:
+			if(args.length>0){
+				String packetData = "skilllevel_all";
+				Player player = (Player)args[0];
+				for(Skill skill: player.getSkills().keySet()) {
+					packetData += " " + skill.getId() + " " + player.getSkillLevel(skill);
+				}
+				return packetData;
+			}
+			break;
+		case A_:
+			if(args.length>1){
+				String type = (String)args[0];
+				Object value = args[1];				
+				return "a_" + type + " " + value;
+				
+			}
+			break;
+				
 		case COMBAT:
 			if(args.length>0){
 				Player player = (Player)args[0];

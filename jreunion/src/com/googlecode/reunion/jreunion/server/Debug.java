@@ -17,6 +17,7 @@ import org.apache.log4j.net.SocketAppender;
 import org.apache.log4j.xml.XMLLayout;
 
 import com.googlecode.reunion.jcommon.ParsedItem;
+import com.googlecode.reunion.jcommon.Parser;
 
 public class Debug {
 	
@@ -25,9 +26,15 @@ public class Debug {
 		Logger logger = Logger.getRootLogger();
 
 		logger.setLevel(Level.ALL);
+		Parser loggerConfigReference = new Parser();
+		try {
+			loggerConfigReference.Parse("config/Logger.dta");
+		} catch (IOException e1) {			
+			e1.printStackTrace();
+			return;
+		}
 		
-		
-		Iterator<ParsedItem> iter = Reference.getInstance().getLoggerConfigReference().getItemListIterator();
+		Iterator<ParsedItem> iter = loggerConfigReference.getItemListIterator();
 		while(iter.hasNext()){
 			
 			ParsedItem item = iter.next();
@@ -51,7 +58,6 @@ public class Debug {
 				}				
 				int port = Integer.parseInt(item.getMemberValue("Port"));
 				SocketAppender socketAppender = new SocketAppender(address, port);
-				//socketAppender.
 				if(item.getMemberValue("Reconnect")!=null){
 					socketAppender.setReconnectionDelay(Integer.parseInt(item.getMemberValue("Reconnect")));
 				}

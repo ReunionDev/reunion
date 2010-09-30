@@ -343,6 +343,7 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 					for (int i = 3; i < message.length; i++) {
 						text += " " + message[i];
 					}
+					
 	
 					// client.getPlayer()Object.tell(message[1], text);
 				} else if (message[0].equals("combat")) {

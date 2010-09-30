@@ -207,38 +207,16 @@ public class Command {
 
 		serverSay(player.getName() + " is logging in (ID: "	+ player.getId() + ")\n");
 
-		String packetData = "skilllevel_all";
-		/*
-		Iterator<Skill> skillIter = player.getCharSkill()
-				.getSkillListIterator();
-		while (skillIter.hasNext()) {
-			Skill skill = skillIter.next();
-			packetData = packetData + " " + skill.getId() + " "
-					+ skill.getCurrLevel();
-			// "skilllevel_all 1 25 2 25 17 0 18 25 19 0 31 0 37 0 38 0 39 0 40 25 41 0 60 0 61 0 71 0 75 0\n");
-		}
-		*/
-		
-		for(Skill skill :player.getSkills().keySet()){
-			
-			packetData += " " + skill.getId() + " " + player.getSkillLevel(skill);
-			
-		}
-			// "skilllevel_all 1 25 2 25 17 0 18 25 19 0 31 0 37 0 38 0 39 0 40 25 41 0 60 0 61 0 71 0 75 0\n");
+		client.sendPacket(Type.SKILLLEVEL_ALL,player);
+		String packetData = "";
 		
 		
-		
+		client.sendPacket(Type.SKILLLEVEL_ALL, "idx", client.getAccountId());
 
+		client.sendPacket(Type.SKILLLEVEL_ALL, "idn", client.getUsername());
 		client.sendData(packetData);
 
-		packetData = "a_idx " + client.getAccountId() + "\n";
-		client.sendData(packetData);
-
-		packetData = "a_idn " + client.getUsername() + "\n";
-		client.sendData(packetData);
-
-		packetData = "a_lev " + player.getAdminState() + "\n";
-		client.sendData(packetData);
+		client.sendPacket(Type.SKILLLEVEL_ALL, "lev", player.getAdminState());
 
 		packetData = "wearing " + eq.getId(Slot.HELMET) + " " + eq.getType(Slot.HELMET) + " "
 				+ eq.getGemNumber(Slot.HELMET) + " " + eq.getExtraStats(Slot.HELMET) + " " + eq.getId(Slot.CHEST) + " "
@@ -354,7 +332,9 @@ public class Command {
 	}
 
 	void sendSuccess(Client client) {
+		
 		client.sendPacket(Type.SUCCESS);
+		
 	}
 
 	public void serverSay(String text) {
