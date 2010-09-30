@@ -89,19 +89,20 @@ public class Merchant extends Npc {
 		setSellRate(Integer.parseInt(npc.getMemberValue("SellRate")));
 		setBuyRate(Integer.parseInt(npc.getMemberValue("BuyRate")));
 		setShop(npc.getMemberValue("Shop"));
-
-		loadItemList();
+		
+		
 		try {
 			shopReference.Parse("data/"+getShop());
 		} catch (IOException e) {
 			Logger.getLogger(this.getClass()).warn("Exception",e);
 		}
+		loadItemList();
 			
 	}
 
 	public void loadItemList() {
 
-
+		
 		if (shopReference != null) {
 	
 			itemsList.clear();
@@ -117,6 +118,7 @@ public class Merchant extends Npc {
 							+ getPosition().getMap());
 					continue;
 				}
+				
 				VendorItem item = new VendorItem(Integer.parseInt(i.getMemberValue("Type")));
 				addItem(item);
 			}
@@ -127,23 +129,15 @@ public class Merchant extends Npc {
 	
 
 	/****** Buy items from merchant shop ******/
-	public void buyItem(Player player, int itemType, int tab,
-			int quantity) {
+	public void buyItem(Player player, int itemType, int tab, int quantity) {
 
 		Client client = player.getClient();
-
-		if (client == null) {
-			return;
-		}
-
-		// if(player.getInventory().freeSlots(tab) == false)
-		// return;
 
 		Item item = ItemFactory.create(itemType);
 		
 		int count = 0;
 
-		if (player.getLime() - item.getPrice() < 0) {
+		if (player.getLime() - item.getPrice() * quantity < 0) {
 			String packetData = "msg Not enough lime.\n";
 					client.sendData(packetData);
 			return;
@@ -156,13 +150,13 @@ public class Merchant extends Npc {
 			item = ItemFactory.create(itemType);
 			
 			if (item != null) {
-			player.pickItem(item);
-			count++;
+				player.pickItem(item);
+				count++;
 			}
 			
 		}
 		if (item != null) {
-		player.updateStatus(10, item.getPrice() * this.getBuyRate() / 100 * -1 * count, 0);
+			player.updateStatus(10, item.getPrice() * this.getBuyRate() / 100 * -1 * count, 0);
 		
 		
 		}
@@ -192,17 +186,20 @@ public class Merchant extends Npc {
 	/****** Sell items to merchant shop ******/
 	public void sellItem(Player player) {
 		
-		try {
-			Item item = player.getInventory().getItemSelected().getItem();
-		
-			if (item != null) {
-				player.updateStatus(10, (item.getPrice() * (this.getSellRate() / 100)), 0);
-				player.getInventory().setItemSelected(null);
-				DatabaseUtils.getInstance().deleteItem(item);
-			}
-			
-		} catch (Exception e) {
-			Logger.getLogger(Merchant.class).error("Item Sell bug");
+		Item item = player.getInventory().getItemSelected().getItem();
+	
+		if (item != null) {
+			int price = (int) (item.getPrice() * ((double)this.getSellRate() / 100));
+			Logger.getLogger(Merchant.class).warn("Selling"+item+" for "+price);
+			player.updateStatus(10, price, 0);
+			player.getInventory().setItemSelected(null);
+			DatabaseUtils.getInstance().deleteItem(item);
 		}
+		else{
+			Logger.getLogger(Merchant.class).warn("Sell failed, no item selected");
+			
+			
+		}
+		
 	}
 }

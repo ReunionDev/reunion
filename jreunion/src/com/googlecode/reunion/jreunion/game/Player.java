@@ -537,7 +537,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 					+ invItem.getItem().getExtraStats() + "\n";
 			// inven [Tab] [UniqueId] [Type] [PosX] [PosY] [Gems] [Special]
 			
-					client.sendData(packetData);
+			client.sendData(packetData);
 
 		}
 	}
@@ -606,32 +606,20 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 	public void pickItem(Item item) {
 		Client client = getClient();
 
-		if (client == null) {
-			return;
-		}
 		//TODO: Fix item pickup
-		/*Item item = (Item) EntityManager.getEntityManager().getEnt(uniqueid);
 		getInventory().addItem(item);
+		
+		getInventory().PrintInventoryMap(0);
 		InventoryItem invItem = getInventory().getItem(item);
 		// DatabaseUtils.getInstance().saveInventory(client.getPlayer()Object);
 
 		if (invItem == null) {
-			getInventory().setItemSelected(new InventoryItem(item, 0, 0, 0));
-			String packetData = "pick " + uniqueid + " " + item.getType()
-					+ " 0 0 0 " + item.getGemNumber() + " "
-					+ item.getExtraStats() + "\n";
-			
-					client.SendData(packetData);
-			return;
+			invItem = new InventoryItem(item, 0, 0, 0);
+			getInventory().setItemSelected(invItem);
+				
 		}
-
-		String packetData = "pick " + uniqueid + " " + item.getType() + " "
-				+ invItem.getPosX() + " " + invItem.getPosY() + " "
-				+ invItem.getTab() + " " + item.getGemNumber() + " "
-				+ item.getExtraStats() + "\n";
+		client.sendPacket(Type.PICK, invItem);
 		
-				client.SendData(packetData);
-		*/
 		// S> pick [UniqueID] [Type] [Tab] [PosX] [PosY] [GemNumber] [Special]
 	}
 
@@ -647,20 +635,13 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 			getClient().sendPacket(Type.SAY, "This item belongs to "+owner.getName(),-1);
 			return;
 			
-		}
+		}		
 		
-		String packetData = "pickup " + getId() + "\n";
-		
-		
+		client.sendPacket(Type.PICKUP, this);
 		this.getInterested().sendPacket(Type.PICKUP, this);
 				
 		getPosition().getMap().fireEvent(ItemPickupEvent.class, this, roamingItem);
 		// S> pickup [CharID]
-		
-		
-		
-		
-		
 
 		//pickItem(roamingItem.getItem());
 	}

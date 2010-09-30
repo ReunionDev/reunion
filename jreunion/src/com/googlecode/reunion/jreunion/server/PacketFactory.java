@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import com.googlecode.reunion.jreunion.game.Equipment;
+import com.googlecode.reunion.jreunion.game.InventoryItem;
 import com.googlecode.reunion.jreunion.game.Item;
 import com.googlecode.reunion.jreunion.game.LivingObject;
 import com.googlecode.reunion.jreunion.game.Mob;
@@ -51,7 +52,8 @@ public class PacketFactory {
 		CHAR_WEAR, ATTACK,
 		ATTACK_VITAL,
 		SKILLLEVEL,
-		PICKUP
+		PICKUP,
+		PICK
 	}
 	
 	public static String createPacket(Type packetType, Object... args) {
@@ -342,6 +344,16 @@ public class PacketFactory {
 			if(args.length>0){
 				Player player = (Player)args[0];
 				return "pickup " + player.getId();
+			}
+			break;
+			
+		case PICK:
+			if(args.length>0){
+				InventoryItem invItem = (InventoryItem)args[0];
+				Item item = invItem.getItem();
+				return "pick " + item.getId() + " " + item.getType()
+				+ " "+invItem.getPosX()+" "+invItem.getPosY()+" "+invItem.getTab()+" " + item.getGemNumber() + " "
+				+ item.getExtraStats() + "\n";
 			}
 			break;
 			

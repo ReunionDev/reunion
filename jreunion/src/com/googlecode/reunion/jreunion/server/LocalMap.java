@@ -80,6 +80,7 @@ public class LocalMap extends Map implements Runnable{
 		this.addEventListener(PlayerLoginEvent.class, this);
 		this.addEventListener(PlayerLogoutEvent.class, this);
 		this.addEventListener(ItemDropEvent.class, this);
+		this.addEventListener(ItemPickupEvent.class, this);
 	}
 	
 	public WorldObject getEntity(int id) {		
@@ -389,7 +390,6 @@ public class LocalMap extends Map implements Runnable{
 				RoamingItem roamingItem = itemPickupEvent.getRoamingItem();
 				
 				synchronized(entities) {
-				
 					
 					roamingItem = (RoamingItem) this.entities.remove(roamingItem.getId());
 					if(roamingItem!=null) {

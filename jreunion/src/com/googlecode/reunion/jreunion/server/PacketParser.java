@@ -369,10 +369,13 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 					}
 					
 				} else if (message[0].equals("inven")) {
-					client.getPlayer().getInventory().moveItem(
-							client.getPlayer(), Integer.parseInt(message[1]),
-							Integer.parseInt(message[2]),
-							Integer.parseInt(message[3]));
+					
+					int tab = Integer.parseInt(message[1]);
+					int x = Integer.parseInt(message[2]);
+					int y = Integer.parseInt(message[3]);
+					client.getPlayer().getInventory().handleInventory( client.getPlayer(),
+							tab,
+							x,y);
 					// S_DatabaseUtils.getInstance().saveInventory(client.getPlayer()Object);
 				} else if (message[0].equals("drop")) {
 					client.getPlayer().dropItem(Integer.parseInt(message[1]));
@@ -494,9 +497,7 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 					}
 				} else if (message[0].equals("shop")) {
 					int npcId = Integer.parseInt(message[1]);
-					Merchant npc = (Merchant) Server.getInstance()
-							.getWorld().getNpcManager()
-							.getNpc(Integer.parseInt(message[1]));
+					Merchant npc = (Merchant) player.getPosition().getMap().getEntity(npcId);
 					if (npc!=null) {
 						npc.openShop(client.getPlayer());
 					} else {
@@ -513,10 +514,12 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 					npc.sellItem(client.getPlayer());
 				} else if (message[0].equals("pbuy")) {
 					Merchant npc = (Merchant) player.getPosition().getMap().getEntity(Integer.parseInt(message[1]));
+					int itemType = Integer.parseInt(message[2]);
+					int tab = Integer.parseInt(message[2]);
+					int quantity = 10;
 					
-					npc.buyItem(client.getPlayer(), Integer.parseInt(message[2]),
-							Integer.parseInt(message[3]),
-							10);
+					npc.buyItem(client.getPlayer(), itemType, tab, quantity);
+					
 				} else if (message[0].equals("chip_exchange")) {
 					Npc[] npc;
 	

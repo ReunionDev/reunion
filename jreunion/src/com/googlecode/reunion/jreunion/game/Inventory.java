@@ -18,6 +18,8 @@ public class Inventory {
 	private List<InventoryItem> items;
 
 	private boolean success = false;
+	
+	private Item[][][] inventory=new Item[3][8][6];
 
 	private InventoryItem selected = null;
 
@@ -145,7 +147,7 @@ public class Inventory {
 	}
 
 	/****** Manages the Items on the Inventory ******/
-	public void moveItem(Player player, int tab, int posX, int posY) {
+	public void handleInventory(Player player, int tab, int posX, int posY) {
 	
 		Client client = player.getClient();
 
@@ -173,7 +175,7 @@ public class Inventory {
 
 						if (auxItem != newInvItem) {
 							auxItem = newInvItem;
-							count++;
+							count++;	
 						}
 
 						if (count > 1) {
