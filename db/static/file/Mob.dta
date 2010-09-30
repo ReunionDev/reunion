@@ -267,18 +267,6 @@ NeoProgmare = 0
 Exp = 1
 Lime = 1
 
-[1]
-Class = Mob
-ID = 160
-
-[2]
-Class = Mob
-ID = 150
-
-[4]
-Class = Mob
-ID = 148
-
 [5]
 Class = Mob
 ID = 140
@@ -308,6 +296,76 @@ Lime = 10000
 
 
 ###### Update Shilon Mobs start ##########
+
+[Rexroid]
+Class = Mob
+ID = 160
+Level = 0
+Hp = 1
+Dmg = 1
+Speed = 20
+AttackType = 2
+DmgType = 2
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 1
+
+[Raptoroid]
+Class = Mob
+ID = 150
+Level = 0
+Hp = 1
+Dmg = 1
+Speed = 20
+AttackType = 2
+DmgType = 2
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 1
+
+[Parkikepaloid]
+Class = Mob
+ID = 148
+Level = 0
+Hp = 1
+Dmg = 1
+Speed = 20
+AttackType = 2
+DmgType = 2
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 1
+
+[Tyranorid]
+Class = Mob
+ID = 147
+Level = 0
+Hp = 1
+Dmg = 1
+Speed = 20
+AttackType = 2
+DmgType = 2
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 1
+
+[Styrokonoid]
+Class = Mob
+ID = 151
+Level = 0
+Hp = 1
+Dmg = 1
+Speed = 20
+AttackType = 2
+DmgType = 2
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 1
 
 [Cutter Lizard]
 Class = Mob
