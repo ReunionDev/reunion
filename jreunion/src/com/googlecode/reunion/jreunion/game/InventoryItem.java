@@ -7,16 +7,16 @@ package com.googlecode.reunion.jreunion.game;
 public class InventoryItem {
 	private Item item;
 
-	private int posX;
+	private int x;
 
-	private int posY;
+	private int y;
 
 	private int tab;
 
-	public InventoryItem(Item item, int posX, int posY, int tab) {
+	public InventoryItem(Item item, int x, int y, int tab) {
 		this.item = item;
-		this.posX = posX;
-		this.posY = posY;
+		this.x = x;
+		this.y = y;
 		this.tab = tab; // 1,2 or 3
 	}
 
@@ -24,12 +24,12 @@ public class InventoryItem {
 		return item;
 	}
 
-	public int getPosX() {
-		return posX;
+	public int getX() {
+		return x;
 	}
 
-	public int getPosY() {
-		return posY;
+	public int getY() {
+		return y;
 	}
 
 	public int getSizeX() {
@@ -44,12 +44,12 @@ public class InventoryItem {
 		return tab;
 	}
 
-	public void setPosX(int posX) {
-		this.posX = posX;
+	public void setX(int x) {
+		this.x = x;
 	}
 
-	public void setPosY(int posY) {
-		this.posY = posY;
+	public void setY(int y) {
+		this.y = y;
 	}
 
 	public void setTab(int tab) {

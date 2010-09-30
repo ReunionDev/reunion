@@ -77,6 +77,7 @@ public class MessageParser {
 						com.dropItem(player.getPosition(), item);
 						
 					} catch (Exception e) {
+						client.sendPacket(Type.SAY, "S_Server (NOTICE) @drop failed");
 						String packetData = "say 1 S_Server (NOTICE) @drop failed";
 						client.sendData(packetData);
 					}

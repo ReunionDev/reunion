@@ -149,8 +149,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		exchange = new Exchange();
 		
 		client.addEventListener(ClientDisconnectEvent.class, this, new ClientFilter(client));
-		// setPlayerMinDmg(325);
-		// setPlayerMaxDmg(370);
+
 	}
 
 	public void addAttack(int attack) {
@@ -483,16 +482,10 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 				.itemListIterator();
 		while (exchangeIter.hasNext()) {
 			ExchangeItem exchangeItem = exchangeIter.next();
-
-			String packetData = "inven 3 "
-					+ exchangeItem.getItem().getId() + " "
-					+ exchangeItem.getItem().getType() + " "
-					+ exchangeItem.getPosX() + " " + exchangeItem.getPosY()
-					+ " " + exchangeItem.getItem().getGemNumber() + " "
-					+ exchangeItem.getItem().getExtraStats() + "\n";
-			// inven [Tab] [UniqueId] [Type] [PosX] [PosY] [Gems] [Special]
 			
-					client.sendData( packetData);
+			client.sendPacket(Type.INVEN, exchangeItem);
+
+			// inven [Tab] [UniqueId] [Type] [PosX] [PosY] [Gems] [Special]
 		}
 	}
 
@@ -528,16 +521,9 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 				.getInventoryIterator();
 		while (invIter.hasNext()) {
 			InventoryItem invItem = invIter.next();
-
-			String packetData = "inven " + invItem.getTab() + " "
-					+ invItem.getItem().getId() + " "
-					+ invItem.getItem().getType() + " " + invItem.getPosX()
-					+ " " + invItem.getPosY() + " "
-					+ invItem.getItem().getGemNumber() + " "
-					+ invItem.getItem().getExtraStats() + "\n";
-			// inven [Tab] [UniqueId] [Type] [PosX] [PosY] [Gems] [Special]
 			
-			client.sendData(packetData);
+			client.sendPacket(Type.INVEN, invItem);
+			// inven [Tab] [UniqueId] [Type] [PosX] [PosY] [Gems] [Special]
 
 		}
 	}
@@ -837,9 +823,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		Client client = this.getClient();
 
 		if (targetPlayer == null) {
-			String packetData = "Player not online";
-			
-			client.sendData(packetData);
+			client.sendPacket(Type.MSG,"Player not online");
 			return;
 		}
 
@@ -903,10 +887,8 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 			}
 			setHp(curr);
 			setMaxHp(max);
-			packetData = "status " + id + " " + getHp() + " " + getMaxHp()
-					+ "\n";
+			client.sendPacket(Type.STATUS, id, getHp(), getMaxHp());
 			
-					client.sendData(packetData);
 			break;
 		}
 		case 1: { // Mana Status
@@ -914,11 +896,8 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 				curr = max;
 			}
 			setCurrMana(curr);
-			setMaxMana(max);
-			packetData = "status " + id + " " + getMana() + " "
-					+ getMaxMana() + "\n";
-			
-					client.sendData(packetData);
+			setMaxMana(max);			
+			client.sendPacket(Type.STATUS, id, getMana(), getMaxMana());
 			break;
 		}
 		case 2: { // Stamina Status
@@ -927,10 +906,8 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 			}
 			setCurrStm(curr);
 			setMaxStm(max);
-			packetData = "status " + id + " " + getStm() + " "
-					+ getMaxStm() + "\n";
+			client.sendPacket(Type.STATUS, id, getStm(), getMaxStm());
 			
-					client.sendData(packetData);
 			break;
 		}
 		case 3: { // Electric Energy Status
@@ -939,18 +916,14 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 			}
 			setCurrElect(curr);
 			setMaxElect(max);
-			packetData = "status " + id + " " + getElect() + " "
-					+ getMaxElect() + "\n";
+			client.sendPacket(Type.STATUS, id, getElect(), getMaxElect());
 			
-					client.sendData(packetData);
 			break;
 		}
 		case 4: { // Player Level Status
 			setLevel(getLevel() + curr);
-			packetData = "status " + id + " " + getLevel() + " " + max + "\n";
+			client.sendPacket(Type.STATUS, id, getLevel(), max);
 			
-			client.sendData(packetData);
-
 			DatabaseUtils.getInstance()
 					.updateCharStatus(this, id, getLevel());
 			
@@ -962,18 +935,15 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		}
 		case 10: { // Player Lime Status
 			setLime(getLime() + curr);
-			packetData = "status " + id + " " + getLime() + " " + max + "\n";
+			client.sendPacket(Type.STATUS, id, getLime(), max);
 			
-			client.sendData(packetData);
 			DatabaseUtils.getInstance().updateCharStatus(this, id, getLime());
 			break;
 		}
 		case 11: { // Player Total Exp Status
 			setTotalExp(getTotalExp() + curr);
-			packetData = "status " + id + " " + getTotalExp() + " " + max
-					+ "\n";
-			
-					client.sendData(packetData);
+			client.sendPacket(Type.STATUS, id, getTotalExp(), max);
+	
 			DatabaseUtils.getInstance().updateCharStatus(this, id,
 					getTotalExp());
 			break;
@@ -988,18 +958,15 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 				updateStatus(3, getMaxElect(), getMaxElect());
 
 				loadFromReference(getLevel());
-				packetData = "status " + id + " " + getLvlUpExp() + " " + max
-						+ "\n";
-				
-						client.sendData(packetData);
+				client.sendPacket(Type.STATUS, id, getLvlUpExp(), max);
+						
 				DatabaseUtils.getInstance().updateCharStatus(this, id,
 						getLvlUpExp());
 			} else {
 				setLvlUpExp(curr);
-				packetData = "status " + id + " " + getLvlUpExp() + " " + max
-						+ "\n";
 				
-						client.sendData(packetData);
+				client.sendPacket(Type.STATUS, id, getLvlUpExp(), max);
+						
 				DatabaseUtils.getInstance().updateCharStatus(this, id,
 						getLvlUpExp());
 			}
@@ -1007,10 +974,9 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		}
 		case 13: { // Player Distribution Status Points
 			setStatusPoints(getStatusPoints() + curr);
-			packetData = "status " + id + " " + getStatusPoints() + " " + max
-					+ "\n";
 			
-					client.sendData(packetData);
+			
+			client.sendPacket(Type.STATUS, id, getStatusPoints(), max);
 			DatabaseUtils.getInstance().updateCharStatus(this, id,
 					getStatusPoints());
 			break;
@@ -1022,7 +988,8 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 			setStrength(getStr() + curr);
 			packetData = "status " + id + " " + getStr() + " " + max + "\n";
 			
-					client.sendData(packetData);
+			client.sendPacket(Type.STATUS, id, getStr(), max);
+					
 			DatabaseUtils.getInstance().updateCharStatus(this, id, getStr());
 
 			updateStatus(0, getHp(), getMaxHp() + (getStr() / 50) + 1);
@@ -1037,7 +1004,8 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 			setWisdom(getWis() + curr);
 			packetData = "status " + id + " " + getWis() + " " + max + "\n";
 			
-					client.sendData(packetData);
+			client.sendPacket(Type.STATUS, id, getWis(), max);
+					
 			DatabaseUtils.getInstance().updateCharStatus(this, id, getWis());
 
 			updateStatus(1, getMana(), getMaxMana() + (getWis() / 50) + 2);
@@ -1050,9 +1018,9 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 				return;
 			}
 			setDexterity(getDexterity() + curr);
-			packetData = "status " + id + " " + getDexterity() + " " + max + "\n";
-			
-					client.sendData(packetData);
+
+			client.sendPacket(Type.STATUS, id, getDexterity(), max);
+					
 			DatabaseUtils.getInstance().updateCharStatus(this, id, getDexterity());
 
 			updateStatus(1, getMana(), getMaxMana() + (getDexterity() / 50) + 1);
@@ -1065,9 +1033,9 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 				return;
 			}
 			setConstitution(getConstitution() + curr);
-			packetData = "status " + id + " " + getConstitution() + " " + max + "\n";
 			
-					client.sendData(packetData);
+			client.sendPacket(Type.STATUS, id, getConstitution(), max);
+					
 			DatabaseUtils.getInstance().updateCharStatus(this, id, getConstitution());
 
 			updateStatus(0, getHp(), getMaxHp() + (getConstitution() / 50) + 2);
@@ -1080,9 +1048,9 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 				return;
 			}
 			setLeadership(getLeadership() + curr);
-			packetData = "status " + id + " " + getLeadership() + " " + max + "\n";
-			
-					client.sendData(packetData);
+						
+			client.sendPacket(Type.STATUS, id, getLeadership(), max);
+					
 			DatabaseUtils.getInstance().updateCharStatus(this, id, getLeadership());
 
 			if (getLeadership() % 2 == 0) {
@@ -1096,9 +1064,9 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		}
 		case 19: { // Player Penalty Points Status ([inGame=packet] -> 100=10;
 					// 1000=100; 10000=1000)
-			packetData = "status " + id + " " + curr + " " + max + "\n";
-			
-					client.sendData(packetData);
+	
+			client.sendPacket(Type.STATUS, id, curr, max);
+					
 			DatabaseUtils.getInstance().updateCharStatus(this, id,
 					getPenaltyPoints());
 			break;
@@ -1191,6 +1159,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		Server.getInstance().getNetwork().addEventListener(NetworkAcceptEvent.class, this);
 		if(event instanceof ClientDisconnectEvent){
 			ClientDisconnectEvent clientDisconnectEvent = (ClientDisconnectEvent) event;
+			Logger.getLogger(Player.class).debug(clientDisconnectEvent.getSource());
 			logout();
 		}
 		if(event instanceof SessionEvent){

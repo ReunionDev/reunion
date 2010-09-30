@@ -420,7 +420,7 @@ public class DatabaseUtils extends Service {
 			stmt = database.conn.createStatement();
 			
 								
-			Player player = Player.createPlayer(client, race);			
+			Player player = Player.createPlayer(client, race);
 			
 			player.setId(-1);
 			
@@ -614,7 +614,7 @@ public class DatabaseUtils extends Service {
 				*/
 				
 				data+="("+player.getId()+ ",'"+item.getId()+"',"+invItem.getTab()+
-					","+invItem.getPosX()+ ","+invItem.getPosY()+ ")";			
+					","+invItem.getX()+ ","+invItem.getY()+ ")";			
 				if(iter.hasNext())
 					data+= ", ";			
 			}
@@ -1065,8 +1065,8 @@ public class DatabaseUtils extends Service {
 				stmt.execute("INSERT INTO exchange (charid, itemid, x, y)" +
 						" VALUES ("+player.getId()+ ","
 								   +exchangeItem.getItem().getId()+","
-								   +exchangeItem.getPosX()+","
-								   +exchangeItem.getPosY()+");");
+								   +exchangeItem.getX()+","
+								   +exchangeItem.getY()+");");
 			}
 			
 		} catch (SQLException e1) {

@@ -2,8 +2,8 @@ package com.googlecode.reunion.jreunion.server;
 
 import java.io.IOException;
 import java.net.Socket;
-import java.util.logging.FileHandler;
-import java.util.logging.Logger;
+
+import org.apache.log4j.Logger;
 
 import com.googlecode.reunion.jreunion.events.Event;
 import com.googlecode.reunion.jreunion.events.EventBroadcaster;
@@ -50,8 +50,6 @@ public class Client extends EventBroadcaster implements EventListener,Sendable {
 	private State state;
 
 	private Player player;
-	
-	
 
 	private StringBuffer inputBuffer = new StringBuffer();
 	
@@ -86,7 +84,6 @@ public class Client extends EventBroadcaster implements EventListener,Sendable {
 		this.world = world;
 	}
 
-
 	private void setSocket(Socket socket) {
 		this.socket = socket;
 	}
@@ -117,11 +114,9 @@ public class Client extends EventBroadcaster implements EventListener,Sendable {
 		this.loginType = loginType;
 	}
 	
-	
 	public Client(World world, Socket socket) {
 		
 		super();
-		
 		setWorld(world);
 		accountId = -1;
 		state = State.DISCONNECTED;
@@ -224,6 +219,8 @@ public class Client extends EventBroadcaster implements EventListener,Sendable {
 			}
 			if(event instanceof NetworkDisconnectEvent){				
 				
+
+				Logger.getLogger(Client.class).debug(event);
 				fireEvent(ClientDisconnectEvent.class, this);
 			}
 		}

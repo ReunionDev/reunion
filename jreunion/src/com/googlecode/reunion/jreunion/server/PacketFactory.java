@@ -10,6 +10,7 @@ import com.googlecode.reunion.jreunion.game.Equipment;
 import com.googlecode.reunion.jreunion.game.InventoryItem;
 import com.googlecode.reunion.jreunion.game.Item;
 import com.googlecode.reunion.jreunion.game.LivingObject;
+import com.googlecode.reunion.jreunion.game.Merchant;
 import com.googlecode.reunion.jreunion.game.Mob;
 import com.googlecode.reunion.jreunion.game.Npc;
 import com.googlecode.reunion.jreunion.game.Player;
@@ -17,6 +18,8 @@ import com.googlecode.reunion.jreunion.game.Position;
 import com.googlecode.reunion.jreunion.game.RoamingItem;
 import com.googlecode.reunion.jreunion.game.Equipment.Slot;
 import com.googlecode.reunion.jreunion.game.Skill;
+import com.googlecode.reunion.jreunion.game.StashItem;
+import com.googlecode.reunion.jreunion.game.VendorItem;
 import com.googlecode.reunion.jreunion.game.WorldObject;
 
 /**
@@ -53,7 +56,14 @@ public class PacketFactory {
 		ATTACK_VITAL,
 		SKILLLEVEL,
 		PICKUP,
-		PICK
+		PICK,
+		SHOP_RATE, 
+		SHOP_ITEM, 
+		SUCCESS,
+		MSG,
+		STASH,
+		STASH_END,
+		INVEN
 	}
 	
 	public static String createPacket(Type packetType, Object... args) {
@@ -136,7 +146,6 @@ public class PacketFactory {
 			if(args.length>0){
 				String text = (String)args[0];
 				LivingObject from = null;
-				
 				if(args.length>1){
 					from = (LivingObject)args[1];
 				}
@@ -239,6 +248,9 @@ public class PacketFactory {
 			}
 			break;
 			
+		case SUCCESS:
+			return "success";
+			
 		case SOCIAL:
 			if(args.length>1){
 				Player player = (Player)args[0];
@@ -271,11 +283,21 @@ public class PacketFactory {
 			break;
 			
 		case STATUS:
-			if(args.length>2){
+			if(args.length>1){
 				int id = (Integer)args[0];
-				int arg1 = (Integer)args[1];
-				int arg2 = (Integer)args[2];
+				Object arg1 = (Integer)args[1];
+				Object arg2 = 0;
+				if(args.length > 2){
+					arg2 = (Integer)args[2];
+				}
 				return "status " + id + " " + arg1 + " " + arg2;
+			}
+			break;
+		
+		case MSG:
+			if(args.length>0){
+				String msg = (String)args[0];
+				return "msg "+msg;
 			}
 			break;
 			
@@ -298,7 +320,7 @@ public class PacketFactory {
 			if(args.length>1){
 				Player player = (Player)args[0];
 				Slot slot = (Slot)args[1];
-				return "char_remove " + player.getId() + " " + slot.ordinal() + "\n";
+				return "char_remove " + player.getId() + " " + slot.ordinal();
 			}
 			break;
 			
@@ -308,7 +330,7 @@ public class PacketFactory {
 				Slot slot = (Slot)args[1];
 				Item item = (Item)args[2];
 				return "char_wear " + player.getId() + " " + slot.ordinal() + " "
-				+ item.getType() + " " + item.getGemNumber() + "\n";
+				+ item.getType() + " " + item.getGemNumber();
 			}
 			break;
 			
@@ -319,7 +341,7 @@ public class PacketFactory {
 				
 				return "attack "+getObjectType(source)+" " +
 					  source.getId() + " "+getObjectType(target)+" " + target.getId() + " " + target.getPercentageHp() +
-					  " "+source.getDmgType()+" 0 0 0\n";
+					  " "+source.getDmgType()+" 0 0 0";
 					  // S> attack char [CharID] npc [NpcID] [RemainHP%] 0 0 0 0
 			}
 			break;
@@ -329,7 +351,7 @@ public class PacketFactory {
 				LivingObject target = (LivingObject)args[0];
 				return 
 				"attack_vital "+getObjectType(target)+" " + target.getId() + " "
-				+ target.getPercentageHp() + " 0 0\n";
+				+ target.getPercentageHp() + " 0 0";
 			}
 			break;
 			
@@ -352,11 +374,54 @@ public class PacketFactory {
 				InventoryItem invItem = (InventoryItem)args[0];
 				Item item = invItem.getItem();
 				return "pick " + item.getId() + " " + item.getType()
-				+ " "+invItem.getPosX()+" "+invItem.getPosY()+" "+invItem.getTab()+" " + item.getGemNumber() + " "
-				+ item.getExtraStats() + "\n";
+				+ " "+invItem.getX()+" "+invItem.getY()+" "+invItem.getTab()+" " + item.getGemNumber() + " "
+				+ item.getExtraStats();
+			}
+			break;
+		case SHOP_RATE:
+			if(args.length>0){
+				Merchant merchant = (Merchant)args[0];
+				return "shop_rate " + merchant.getBuyRate() + " "+ merchant.getSellRate();
 			}
 			break;
 			
+		case SHOP_ITEM:
+			if(args.length>0){
+				VendorItem vendorItem = (VendorItem)args[0];
+				return "shop_item " + vendorItem.getType();			
+			}
+			break;
+			
+		case STASH:
+			if(args.length>1){
+				Player player = (Player) args[0];
+				StashItem stashItem = (StashItem)args[1];
+				Item item = stashItem.getItem();
+				return "stash " + stashItem.getPos() + " "
+				+ item.getType() + " "
+				+ item.getGemNumber() + " "
+				+ item.getExtraStats() + " "
+				+ player.getStash().getQuantity(stashItem.getPos());
+			}
+			break;
+		case STASH_END:
+			return "stash_end";
+			
+		case INVEN:
+			
+			if(args.length > 0){
+				InventoryItem invItem = (InventoryItem)args[0];
+				Item item = invItem.getItem();
+				return "inven " + invItem.getTab() + " "
+				+ item.getId() + " "
+				+ item.getType() + " " + invItem.getX()
+				+ " " + invItem.getY() + " "
+				+ item.getGemNumber() + " "
+				+ item.getExtraStats();
+			}
+			break;
+
+	
 		default:			
 			throw new NotImplementedException();
 		}

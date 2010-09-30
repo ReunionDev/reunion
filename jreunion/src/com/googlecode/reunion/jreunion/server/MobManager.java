@@ -11,6 +11,7 @@ import com.googlecode.reunion.jreunion.game.Mob;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Position;
 import com.googlecode.reunion.jreunion.game.Spawn;
+import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 
 /**
  * @author Aidamina
@@ -116,7 +117,6 @@ public class MobManager {
 			return;
 		}
 
-		int run = mob.isRunning()?1:0;
 		// int newPosX,newPosY;
 		// double directionX=0, directionY=0;
 
@@ -196,13 +196,15 @@ public class MobManager {
 				if (mob.getIsAttacking() == 0) {
 					
 					
-					
+					/*
 					String packetData = "walk npc " + mob.getId() + " "
-							+ mob.getPosition().getX() + " " + mob.getPosition().getY() + " 0 " + run
+							+ mob.getPosition().getX() + " " + mob.getPosition().getY() + " 0 " + (mob.isRunning()?1:0)
 							+ "\n";
+							*/
 					// S> walk npc [UniqueId] [Xpos] [Ypos] [ZPos] [Running]
-
-					client.sendData( packetData);
+					mob.walk(mob.getPosition(), mob.isRunning());
+					//client.sendPacket(Type.WALK, mob);
+					//client.sendData( packetData);
 				}
 			}
 		}

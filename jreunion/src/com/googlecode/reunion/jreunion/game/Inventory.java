@@ -108,9 +108,9 @@ public class Inventory {
 		while (iter.hasNext()) {
 			InventoryItem invItem = iter.next();
 
-			for (int x = invItem.getPosX(); x < invItem.getPosX()
+			for (int x = invItem.getX(); x < invItem.getX()
 					+ invItem.getItem().getSizeX(); x++) {
-				for (int y = invItem.getPosY(); y < invItem.getPosY()
+				for (int y = invItem.getY(); y < invItem.getY()
 						+ invItem.getItem().getSizeY(); y++) {
 					if (x == posX && y == posY && invItem.getTab() == tab) {
 						return invItem;
@@ -188,8 +188,8 @@ public class Inventory {
 					return;
 				}
 
-				oldInvItem.setPosX(posX);
-				oldInvItem.setPosY(posY);
+				oldInvItem.setX(posX);
+				oldInvItem.setY(posY);
 				oldInvItem.setTab(tab);
 
 				player.getInventory().removeItem(newInvItem);
@@ -204,7 +204,7 @@ public class Inventory {
 				return;
 			}
 
-			Logger.getLogger(Inventory.class).info("Item Selected: "+newInvItem.getItem().getType()+"\n");
+			Logger.getLogger(Inventory.class).info("Item Selected: " + newInvItem.getItem().getType() + "\n");
 			if (newInvItem != null) {
 				for (int x = 0; x < newInvItem.getItem().getSizeX(); x++) {
 					for (int y = 0; y < newInvItem.getItem().getSizeY(); y++) {
@@ -232,9 +232,8 @@ public class Inventory {
 				player.getInventory().setItemSelected(auxItem);
 			}
 
-			// System.out.print("Item "+newInvItem.getItem().getType()+" is goind to be added\n");
-			newInvItem.setPosX(posX);
-			newInvItem.setPosY(posY);
+			newInvItem.setX(posX);
+			newInvItem.setY(posY);
 			newInvItem.setTab(tab);
 			player.getInventory()
 					.addItem(posX, posY, newInvItem.getItem(), tab);
@@ -247,9 +246,9 @@ public class Inventory {
 		while (iter.hasNext()) {
 			InventoryItem item = iter.next();
 
-			for (int x = item.getPosX(); x < item.getPosX()
+			for (int x = item.getX(); x < item.getX()
 					+ item.getItem().getSizeX(); x++) {
-				for (int y = item.getPosY(); y < item.getPosY()
+				for (int y = item.getY(); y < item.getY()
 						+ item.getItem().getSizeY(); y++) {
 					if (x == posX && y == posY && item.getTab() == tab) {
 						return false;
@@ -274,9 +273,9 @@ public class Inventory {
 		while (iter.hasNext()) {
 			InventoryItem item = iter.next();
 
-			for (int x = item.getPosX(); x < item.getPosX()
+			for (int x = item.getX(); x < item.getX()
 					+ item.getItem().getSizeX(); x++) {
-				for (int y = item.getPosY(); y < item.getPosY()
+				for (int y = item.getY(); y < item.getY()
 						+ item.getItem().getSizeY(); y++) {
 					if (item.getTab() == tab) {
 						newInvMap[x][y] = true;

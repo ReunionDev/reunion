@@ -223,26 +223,21 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 			case CHAR_SELECTED: {
 				if (message[0].equals("start_game")) {
 	
-					client.sendData(
-							"status 11 " + player.getTotalExp() + " 0\n");
-					client.sendData(
-							"status 12 " + player.getLvlUpExp() + " 0\n");
-					client.sendData(
-							"status 13 " + player.getStatusPoints() + " 0\n");
-					client.sendData(
-							"status 10 " + player.getLime() + " 0\n");
-					client.sendData(
-							"status 19 " + player.getPenaltyPoints() + " 0\n");
+					
+					client.sendPacket(Type.STATUS, 11, player.getTotalExp());
+					
+					client.sendPacket(Type.STATUS, 12, player.getLvlUpExp());
+					
+					client.sendPacket(Type.STATUS, 13, player.getStatusPoints());
+					
+					client.sendPacket(Type.STATUS, 10, player.getLime());
+					
+					client.sendPacket(Type.STATUS, 19, player.getPenaltyPoints());					
 					
 					world.getPlayerManager().addPlayer(player);
 					
-					
-					
 					player.getPosition().getMap().fireEvent(PlayerLoginEvent.class, player);
-					//world.getSessionManager().newSession(player);
-					
-					
-	
+						
 					/*
 					 * server.getNetworkModule().SendPacket(client.networkId,
 					 * "hour 3\n" + "weather 0\n" + "gwar_prize  0\n" +
@@ -359,7 +354,6 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 							Integer.parseInt(message[1]) + 10, 1, 0);
 				} else if (message[0].equals("pick")) {
 					
-					//TODO: implement roaming items
 					int itemId = Integer.parseInt(message[1]);
 					LocalMap map = player.getPosition().getMap();				
 					RoamingItem roamingItem = (RoamingItem)map.getEntity(itemId);
@@ -609,7 +603,6 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 				client.addEventListener(ClientReceiveEvent.class, this);
 			}else
 			if(event instanceof ClientDisconnectEvent){
-				
 				client.removeEventListener(ClientReceiveEvent.class, this);
 			}
 		}

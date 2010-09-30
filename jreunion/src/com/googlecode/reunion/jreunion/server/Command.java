@@ -91,7 +91,6 @@ public class Command {
 			}
 			sendCharList(client);
 		}
-
 	}	
 
 	public void createChar(Client client, int slotNumber, String charName,
@@ -108,7 +107,7 @@ public class Command {
 		DatabaseUtils.getInstance().delChar(slotNumber, accountId);
 	}
 
-	// debug command
+	
 	public RoamingItem dropItem(Position position, Item item) {
 
 		RoamingItem roamingItem = new RoamingItem(item);
@@ -200,15 +199,13 @@ public class Command {
 		Equipment eq = player.getEquipment();
 		
 		world.getSkillManager().loadSkills(player);
-		//player.getCharSkill().loadSkillList(player.getRace());
 		DatabaseUtils.getInstance().loadSkills(player);
 		DatabaseUtils.getInstance().loadInventory(player);
 		DatabaseUtils.getInstance().loadExchange(player);
 		DatabaseUtils.getInstance().loadStash(client);
 		DatabaseUtils.getInstance().loadQuickSlot(player);
 
-		serverSay(player.getName() + " is logging in (ID: "
-				+ player.getId() + ")\n");
+		serverSay(player.getName() + " is logging in (ID: "	+ player.getId() + ")\n");
 
 		String packetData = "skilllevel_all";
 		/*
@@ -224,8 +221,7 @@ public class Command {
 		
 		for(Skill skill :player.getSkills().keySet()){
 			
-			packetData += " " + skill.getId() + " "
-			+ player.getSkillLevel(skill);
+			packetData += " " + skill.getId() + " " + player.getSkillLevel(skill);
 			
 		}
 			// "skilllevel_all 1 25 2 25 17 0 18 25 19 0 31 0 37 0 38 0 39 0 40 25 41 0 60 0 61 0 71 0 75 0\n");
@@ -301,7 +297,7 @@ public class Command {
 	public void NpcAttackChar(Player player, Mob mob) { // mob attacks
 															// player
 		Client client = player.getClient();
-		String packetData = "";
+
 		int newHp = player.getHp();
 
 		if (client == null) {
@@ -331,9 +327,6 @@ public class Command {
 	public void playerWeapon(Player player, int uniqueId) {
 		Client client = player.getClient();
 
-		if (client == null) {
-			return;
-		}
 		Logger.getLogger(Command.class).info(uniqueId);
 
 		Item item = null;
@@ -361,8 +354,7 @@ public class Command {
 	}
 
 	void sendSuccess(Client client) {
-		client.sendData("success\n");
-		return;
+		client.sendPacket(Type.SUCCESS);
 	}
 
 	public void serverSay(String text) {
@@ -409,8 +401,7 @@ public class Command {
 		}
 		Skill skill = world.getSkillManager().getSkill(40);
 
-		Mob mob = Server.getInstance().getWorld().getMobManager()
-				.getMob(uniqueId);
+		LivingObject livingObject = (LivingObject) player.getPosition().getMap().getEntity(uniqueId);
 		Item item = player.getEquipment().getShoulderMount();
 		SlayerWeapon spWeapon = new SlayerWeapon(item.getType());
 
@@ -445,17 +436,17 @@ public class Command {
 
 		player.clearAttackQueue();
 
-		int newHp = mob.getHp() - (int) dmg;
+		int newHp = livingObject.getHp() - (int) dmg;
 
 		if (newHp <= 0) {
-			mob.setHp(0);
-			serverSay("Experience: " + mob.getExp() + " Lime: " + mob.getLime());
-			player.updateStatus(12, player.getLvlUpExp() - mob.getExp(), 0);
-			player.updateStatus(11, mob.getExp(), 0);
-			player.updateStatus(10, mob.getLime(), 0);
+			livingObject.setHp(0);
+			//serverSay("Experience: " + livingObject.getExp() + " Lime: " + livingObject.getLime());
+			//player.updateStatus(12, player.getLvlUpExp() - livingObject.getExp(), 0);
+			//player.updateStatus(11, livingObject.getExp(), 0);
+			//player.updateStatus(10, livingObject.getLime(), 0);
 			// S_Server.getInstance().getWorldModule().getMobManager().removeMob(mob);
 
-			if (mob.getType() == 324) {
+			//if (livingObject.getType() == 324) {
 				
 				Item item2 = ItemFactory.create(1054);
 				item2.setExtraStats(1080);
@@ -465,12 +456,12 @@ public class Command {
 				//player.pickupItem(item);
 				player.getQuest().questEnd(player, 669);
 				player.getQuest().questEff(player);
-			}
+			//}
 		} else {
-			mob.setHp(newHp);
+			livingObject.setHp(newHp);
 		}
 
-		int percentageHp = mob.getPercentageHp();
+		int percentageHp = livingObject.getPercentageHp();
 
 		String packetData = "sav npc " + uniqueId + " " + percentageHp
 				+ " 1 0 " + item.getExtraStats() + "\n";
@@ -485,11 +476,12 @@ public class Command {
 		 * " 1 0 " + item.getExtraStats() + "\n"; client.SendData( packetData);
 		 * } }
 		 */
-
+/*
 		if (percentageHp == 0) {
 			Server.getInstance().getWorld().getMobManager()
-					.removeMob(mob);
+					.removeMob(livingObject);
 		}
+	*/
 	}
 
 }

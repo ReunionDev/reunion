@@ -12,6 +12,7 @@ import com.googlecode.reunion.jcommon.Parser;
 import com.googlecode.reunion.jreunion.server.Client;
 import com.googlecode.reunion.jreunion.server.DatabaseUtils;
 import com.googlecode.reunion.jreunion.server.ItemFactory;
+import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 import com.googlecode.reunion.jreunion.server.Reference;
 import com.googlecode.reunion.jreunion.server.Server;
 
@@ -138,8 +139,7 @@ public class Merchant extends Npc {
 		int count = 0;
 
 		if (player.getLime() - item.getPrice() * quantity < 0) {
-			String packetData = "msg Not enough lime.\n";
-					client.sendData(packetData);
+			client.sendPacket(Type.MSG, "Not enough lime.");
 			return;
 		}
 
@@ -158,7 +158,6 @@ public class Merchant extends Npc {
 		if (item != null) {
 			player.updateStatus(10, item.getPrice() * this.getBuyRate() / 100 * -1 * count, 0);
 		
-		
 		}
 
 	}
@@ -168,18 +167,15 @@ public class Merchant extends Npc {
 
 		Client client = player.getClient();
 
-
-		String packetData = "shop_rate " + this.getBuyRate() + " "
-				+ this.getSellRate() + "\n";
-				client.sendData(packetData);
-
+		client.sendPacket(Type.SHOP_RATE, this);
+		
 		Iterator<VendorItem> itemListIter = this.itemsListIterator();
 
 		while (itemListIter.hasNext()) {
-			VendorItem item = itemListIter.next();
+			VendorItem vendorItem = itemListIter.next();
+			
+			client.sendPacket(Type.SHOP_ITEM, vendorItem);
 
-			packetData = "shop_item " + item.getType() + "\n";
-					client.sendData(packetData);
 		}
 	}
 
@@ -196,10 +192,7 @@ public class Merchant extends Npc {
 			DatabaseUtils.getInstance().deleteItem(item);
 		}
 		else{
-			Logger.getLogger(Merchant.class).warn("Sell failed, no item selected");
-			
-			
-		}
-		
+			Logger.getLogger(Merchant.class).warn("Sell failed, no item selected");			
+		}		
 	}
 }

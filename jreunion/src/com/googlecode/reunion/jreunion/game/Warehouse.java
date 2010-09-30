@@ -5,6 +5,7 @@ import java.util.Iterator;
 import com.googlecode.reunion.jreunion.server.Client;
 import com.googlecode.reunion.jreunion.server.DatabaseUtils;
 import com.googlecode.reunion.jreunion.server.ItemFactory;
+import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 import com.googlecode.reunion.jreunion.server.Server;
 
 /**
@@ -22,22 +23,13 @@ public class Warehouse extends Npc {
 
 		Client client = player.getClient();
 
-		if (client == null) {
-			return;
-		}
-
 		Iterator<StashItem> stashIter = player.getStash().itemListIterator();
 		while (stashIter.hasNext()) {
-			StashItem stashItem = stashIter.next();
-
-			String packetData = "stash " + stashItem.getPos() + " "
-					+ stashItem.getItem().getType() + " "
-					+ stashItem.getItem().getGemNumber() + " "
-					+ stashItem.getItem().getExtraStats() + " "
-					+ player.getStash().getQuantity(stashItem.getPos()) + "\n";
-					client.sendData( packetData);
+			StashItem stashItem = stashIter.next();			
+			client.sendPacket(Type.STASH, player, stashItem);
+		
 		}
-				client.sendData( "stash_end");
+		client.sendPacket(Type.STASH_END);
 	}
 
 	/****** Add/Remove items from stash ******/
@@ -56,8 +48,7 @@ public class Warehouse extends Npc {
 
 		if (pos == 12) {
 			if (gems > player.getLime()) {
-				packetData = "msg WARNING: Lime cheating detected!\n";
-						client.sendData( packetData);
+				client.sendPacket(Type.MSG, "WARNING: Lime cheating detected!");
 				return;
 			}
 			stashItem = stash.getItem(pos);
