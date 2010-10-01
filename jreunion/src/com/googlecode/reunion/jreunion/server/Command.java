@@ -211,12 +211,12 @@ public class Command {
 		String packetData = "";
 		
 		
-		client.sendPacket(Type.SKILLLEVEL_ALL, "idx", client.getAccountId());
+		client.sendPacket(Type.A_, "idx", client.getAccountId());
 
-		client.sendPacket(Type.SKILLLEVEL_ALL, "idn", client.getUsername());
+		client.sendPacket(Type.A_, "idn", client.getUsername());
 		client.sendData(packetData);
 
-		client.sendPacket(Type.SKILLLEVEL_ALL, "lev", player.getAdminState());
+		client.sendPacket(Type.A_, "lev", player.getAdminState());
 
 		packetData = "wearing " + eq.getId(Slot.HELMET) + " " + eq.getType(Slot.HELMET) + " "
 				+ eq.getGemNumber(Slot.HELMET) + " " + eq.getExtraStats(Slot.HELMET) + " " + eq.getId(Slot.CHEST) + " "
