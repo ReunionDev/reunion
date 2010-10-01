@@ -133,7 +133,7 @@ public abstract class LivingObject extends WorldObject {
 
 	}
 
-	public void setCurrElect(int currElect) {
+	public void setElect(int currElect) {
 		this.elect = currElect;
 	}
 
@@ -141,11 +141,11 @@ public abstract class LivingObject extends WorldObject {
 		this.hp = currHp;		
 	}
 
-	public void setCurrMana(int currMana) {
+	public void setMana(int currMana) {
 		this.mana = currMana;
 	}
 
-	public void setCurrStm(int currStm) {
+	public void setStm(int currStm) {
 		this.stm = currStm;
 
 	}

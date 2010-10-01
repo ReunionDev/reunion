@@ -155,7 +155,7 @@ public class QuickSlot {
 				newRate = potion.getManaRec();
 				for (int i = 4; i > 0; i--) {
 					newMana = newMana + newRate / i;
-					player.setCurrMana(newMana);
+					player.setMana(newMana);
 					player.updateStatus(1, newMana, player.getMaxMana());
 					newRate = newRate - newRate / i;
 				}
@@ -163,7 +163,7 @@ public class QuickSlot {
 				newRate = potion.getStmRec();
 				for (int i = 4; i > 0; i--) {
 					newStm = newStm + newRate / i;
-					player.setCurrStm(newStm);
+					player.setStm(newStm);
 					player.updateStatus(2, newStm, player.getMaxStm());
 					newRate = newRate - newRate / i;
 				}
@@ -171,7 +171,7 @@ public class QuickSlot {
 				newRate = potion.getElectRec();
 				for (int i = 4; i > 0; i--) {
 					newElect = newElect + newRate / i;
-					player.setCurrElect(newElect);
+					player.setElect(newElect);
 					player.updateStatus(3, newElect, player.getMaxElect());
 					newRate = newRate - newRate / i;
 				}

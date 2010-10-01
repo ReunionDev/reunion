@@ -616,9 +616,9 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		Item item = roamingItem.getItem();
 		
 		Player owner = roamingItem.getOwner();
-		if(roamingItem.getOwner()!=null){
+		if(roamingItem.getOwner()!=null&&roamingItem.getOwner()!=this){
 			
-			getClient().sendPacket(Type.SAY, "This item belongs to "+owner.getName(),-1);
+			getClient().sendPacket(Type.SAY, "This item belongs to "+owner.getName());
 			return;
 			
 		}		
@@ -873,7 +873,6 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 	
 	/****** Handles all the Status Updates ******/
 	public void updateStatus(int id, int curr, int max) {
-		String packetData = new String();
 		Client client = this.getClient();
 
 		if (client == null) {
@@ -895,7 +894,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 			if (curr > max) {
 				curr = max;
 			}
-			setCurrMana(curr);
+			setMana(curr);
 			setMaxMana(max);			
 			client.sendPacket(Type.STATUS, id, getMana(), getMaxMana());
 			break;
@@ -904,7 +903,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 			if (curr > max) {
 				curr = max;
 			}
-			setCurrStm(curr);
+			setStm(curr);
 			setMaxStm(max);
 			client.sendPacket(Type.STATUS, id, getStm(), getMaxStm());
 			
@@ -914,7 +913,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 			if (curr > max) {
 				curr = max;
 			}
-			setCurrElect(curr);
+			setElect(curr);
 			setMaxElect(max);
 			client.sendPacket(Type.STATUS, id, getElect(), getMaxElect());
 			
@@ -985,9 +984,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 			if (getStatusPoints() <= 0) {
 				return;
 			}
-			setStrength(getStr() + curr);
-			packetData = "status " + id + " " + getStr() + " " + max + "\n";
-			
+			setStrength(getStr() + curr);			
 			client.sendPacket(Type.STATUS, id, getStr(), max);
 					
 			DatabaseUtils.getInstance().updateCharStatus(this, id, getStr());
@@ -1002,7 +999,6 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 				return;
 			}
 			setWisdom(getWis() + curr);
-			packetData = "status " + id + " " + getWis() + " " + max + "\n";
 			
 			client.sendPacket(Type.STATUS, id, getWis(), max);
 					

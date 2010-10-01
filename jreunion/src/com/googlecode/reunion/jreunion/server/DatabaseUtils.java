@@ -147,20 +147,9 @@ public class DatabaseUtils extends Service {
 					continue;
 				
 				Equipment eq = loadEquipment(rs.getInt("id"));
-				
-				int eqHelmet = -1;
-				int eqArmor = -1;
-				int eqPants = -1;
-				int eqShoulderMount = -1;
-				int eqBoots = -1;
-				int eqShield = -1;
-				if (eq.getHelmet()!=null) eqHelmet = eq.getHelmet().getType();
-				if (eq.getArmor()!=null) eqArmor = eq.getArmor().getType();
-				if (eq.getPants()!=null) eqPants = eq.getPants().getType();
-				if (eq.getShoulderMount()!=null) eqShoulderMount = eq.getShoulderMount().getType();
-				if (eq.getBoots()!=null) eqBoots = eq.getBoots().getType();
-				if (eq.getOffHand()!=null) eqShield = eq.getOffHand().getType();
-				
+		
+
+				/*
 				charlist += "chars_exist " + slot + " "
 				+ rs.getString("name") + " " + rs.getString("race")
 				+ " " + rs.getString("sex") + " "
@@ -174,12 +163,47 @@ public class DatabaseUtils extends Service {
 				+ rs.getString("maxStm") + " "
 				+ rs.getString("maxMana") + " "
 				+ rs.getString("maxElect") + " "
-				+ rs.getString("str") + " " + rs.getString("wis")
-				+ " " + rs.getString("dex") + " "
-				+ rs.getString("con") + " " + rs.getString("lea")
-				+ " " + eqHelmet + " " + eqArmor
-				+ " " + eqPants	+ " " + eqShoulderMount
-				+ " " + eqBoots + " " + eqShield + " 1\n";
+				+ rs.getString("str") + " " 
+				+ rs.getString("wis") + " " 
+				+ rs.getString("dex") + " "
+				+ rs.getString("con") + " " 
+				+ rs.getString("lea") + " "
+				+ eq.getType(Slot.HELMET) + " " 
+				+ eq.getType(Slot.CHEST) + " " 
+				+ eq.getType(Slot.PANTS) + " " 
+				+ eq.getType(Slot.SHOULDER)	+ " "
+				+ eq.getType(Slot.BOOTS) + " " 
+				+ eq.getType(Slot.OFFHAND) 
+				+ " 1\n";
+				*/
+				charlist += "chars_exist " + slot + " "
+				+ rs.getString("name") + " " + rs.getString("race")
+				+ " " + rs.getString("sex") + " "
+				+ rs.getString("hair") + " "
+				+ rs.getString("level") + " "
+				+ rs.getString("currHp") + " "
+				+ rs.getString("maxHp") + " "
+				+ rs.getString("currMana") + " "
+				+ rs.getString("maxMana") + " "
+				+ rs.getString("currStm") + " "
+				+ rs.getString("maxStm") + " "
+				+ rs.getString("currElect") + " "
+				+ rs.getString("maxElect") + " "
+				+ rs.getString("str") + " " 
+				+ rs.getString("wis") + " " 
+				+ rs.getString("dex") + " "
+				+ rs.getString("con") + " " 
+				+ rs.getString("lea") + " "
+				+ eq.getType(Slot.HELMET) + " " 
+				+ eq.getType(Slot.CHEST) + " " 
+				+ eq.getType(Slot.PANTS) + " " 
+				+ eq.getType(Slot.SHOULDER)	+ " "
+				+ eq.getType(Slot.BOOTS) + " " 
+				+ eq.getType(Slot.OFFHAND) 
+				+ " 1\n";
+				
+				//chars_exist 3 12341234 0 0 0 2 90 12 15 15 90 90 15 15 30 5 5 30 10 309 -1 -1 -1 -1 -1 1
+				//chars_exist 3 12341234 0 0 0 2 90 12 15 15 90 90 15 15 30 5 5 30 10 309 -1 -1 -1 -1 -1 1
 				// chars_exist [SlotNumber] [Name] [Race] [Sex] [HairStyle]
 				// [Level] [Vitality] [Stamina] [Magic] [Energy] [Vitality]
 				// [Stamina] [Magic] [Energy] [Strength] [Wisdom]
@@ -255,11 +279,11 @@ public class DatabaseUtils extends Service {
 				player.setLevel(rs.getInt("level"));
 				player.setHp(rs.getInt("currHp"));
 				player.setMaxHp(rs.getInt("maxHp"));
-				player.setCurrStm(rs.getInt("currStm"));
+				player.setStm(rs.getInt("currStm"));
 				player.setMaxStm(rs.getInt("maxStm"));
-				player.setCurrMana(rs.getInt("currMana"));
+				player.setMana(rs.getInt("currMana"));
 				player.setMaxMana(rs.getInt("maxMana"));
-				player.setCurrElect(rs.getInt("currElect"));
+				player.setElect(rs.getInt("currElect"));
 				player.setMaxElect(rs.getInt("maxElect"));
 				player.setTotalExp(rs.getInt("totalExp"));
 				player.setLvlUpExp(rs.getInt("lvlUpExp"));
@@ -437,12 +461,12 @@ public class DatabaseUtils extends Service {
 			player.setMaxHp(((str*1)+(con*2)));
 			player.setHp(player.getMaxHp());
 			player.setMaxMana(((wis*2)+(dex*1)));
-			player.setCurrMana(player.getMaxMana());
+			player.setMana(player.getMaxMana());
 			player.setMaxElect(((wis*1)+(dex*2)));
-			player.setCurrElect(player.getMaxElect());
+			player.setElect(player.getMaxElect());
 			
 			player.setMaxStm(((str*2)+(con*1)));
-			player.setCurrStm(player.getMaxStm());
+			player.setStm(player.getMaxStm());
 			
 			player.setLime(Integer.parseInt(Reference.getInstance().getServerReference().getItem("Server").getMemberValue("StartLime")));
 			
@@ -534,12 +558,13 @@ public class DatabaseUtils extends Service {
 					+ slot + ");");
 			if (rs.next()) {
 				characterId = rs.getInt("charid");
+			
+			
+				player = loadCharStatus(client, characterId);
+				player.setSlot(slot);
+				
+				Logger.getLogger(DatabaseUtils.class).info("Loaded: " + player.getName());
 			}
-			
-			player = loadCharStatus(client, characterId);
-			player.setSlot(slot);
-			
-			Logger.getLogger(DatabaseUtils.class).info("Loaded: " + player.getName());
 			
 		} catch (SQLException e1) {
 			
