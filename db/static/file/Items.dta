@@ -13,7 +13,7 @@
 
 
 #######################
-###### ARMOR SETS #####
+###### Armor SETS #####
 #######################
 
 ######## HELMS ########
@@ -28,7 +28,7 @@ Position = 0
 SizeX = 2
 SizeY = 2
 Price = 50
-Class = Armor
+Class = equipment.Armor
 
 [Warrior Helmet]
 ID = 310
@@ -41,7 +41,7 @@ Position = 0
 SizeX = 2
 SizeY = 2
 Price = 630
-Class = Armor
+Class = equipment.Armor
 
 [Iron Helmet]
 ID = 311
@@ -54,7 +54,7 @@ Position = 0
 SizeX = 2
 SizeY = 2
 Price = 2090
-Class = Armor
+Class = equipment.Armor
 
 [Xeno Helmet]
 ID = 312
@@ -67,7 +67,7 @@ Position = 0
 SizeX = 2
 SizeY = 2
 Price = 3810
-Class = Armor
+Class = equipment.Armor
 
 [Hurricane Hat]
 ID = 317
@@ -80,7 +80,7 @@ Position = 0
 SizeX = 2
 SizeY = 2
 Price = 4490
-Class = Armor
+Class = equipment.Armor
 
 [Purity Hair Band]
 ID = 411
@@ -93,7 +93,7 @@ Position = 0
 SizeX = 2
 SizeY = 2
 Price = 3130
-Class = Armor
+Class = equipment.Armor
 
 [Marine Cap]
 ID = 322
@@ -106,7 +106,7 @@ Position = 0
 SizeX = 2
 SizeY = 2
 Price = 4040
-Class = Armor
+Class = equipment.Armor
 
 [Brino Helmet]
 ID = 313
@@ -119,7 +119,7 @@ Position = 0
 SizeX = 2
 SizeY = 2
 Price = 6100
-Class = Armor
+Class = equipment.Armor
 
 [Cloud Cap]
 ID = 318
@@ -132,7 +132,7 @@ Position = 0
 SizeX = 2
 SizeY = 2
 Price = 6880
-Class = Armor
+Class = equipment.Armor
 
 [Prosperity Hat]
 ID = 412
@@ -145,7 +145,7 @@ Position = 0
 SizeX = 2
 SizeY = 2
 Price = 4900
-Class = Armor
+Class = equipment.Armor
 
 [Scout Helmet]
 ID = 361
@@ -158,7 +158,7 @@ Position = 0
 SizeX = 2
 SizeY = 2
 Price = 6400
-Class = Armor
+Class = equipment.Armor
 
 [Xeno Metal Helmet]
 ID = 314
@@ -171,7 +171,7 @@ Position = 0
 SizeX = 2
 SizeY = 2
 Price = 10400
-Class = Armor
+Class = equipment.Armor
 
 [Tranquility Hat]
 ID = 319
@@ -184,7 +184,7 @@ Position = 0
 SizeX = 2
 SizeY = 2
 Price = 11070
-Class = Armor
+Class = equipment.Armor
 
 [Mercy Hair Band]
 ID = 413
@@ -197,7 +197,7 @@ Position = 0
 SizeX = 2
 SizeY = 2
 Price = 8100
-Class = Armor
+Class = equipment.Armor
 
 [BulleTyperoof Helmet]
 ID = 362
@@ -210,7 +210,7 @@ Position = 0
 SizeX = 2
 SizeY = 2
 Price = 10690
-Class = Armor
+Class = equipment.Armor
 
 [Pahwang Helmet]
 ID = 315
@@ -223,7 +223,7 @@ Position = 0
 SizeX = 2
 SizeY = 2
 Price = 14880
-Class = Armor
+Class = equipment.Armor
 
 [Marsh Turban]
 ID = 320
@@ -236,7 +236,7 @@ Position = 0
 SizeX = 2
 SizeY = 2
 Price = 15000
-Class = Armor
+Class = equipment.Armor
 
 [Hope Hair Band]
 ID = 414
@@ -249,7 +249,7 @@ Position = 0
 SizeX = 2
 SizeY = 2
 Price = 10780
-Class = Armor
+Class = equipment.Armor
 
 [Infantry Helmet]
 ID = 363
@@ -262,7 +262,7 @@ Position = 0
 SizeX = 2
 SizeY = 2
 Price = 14790
-Class = Armor
+Class = equipment.Armor
 
 [Power Metal Helmet]
 ID = 316
@@ -275,7 +275,7 @@ Position = 0
 SizeX = 2
 SizeY = 2
 Price = 20160
-Class = Armor
+Class = equipment.Armor
 
 [Flame Crown]
 ID = 321
@@ -288,7 +288,7 @@ Position = 0
 SizeX = 2
 SizeY = 2
 Price = 19990
-Class = Armor
+Class = equipment.Armor
 
 [Passion Hair Band]
 ID = 415
@@ -301,7 +301,7 @@ Position = 0
 SizeX = 2
 SizeY = 2
 Price = 14180
-Class = Armor
+Class = equipment.Armor
 
 [Heavy Infantry Helmet]
 ID = 364
@@ -314,7 +314,7 @@ Position = 0
 SizeX = 2
 SizeY = 2
 Price = 19870
-Class = Armor
+Class = equipment.Armor
 
 [Black Knight Helmet]
 ID = 234
@@ -327,7 +327,7 @@ Position = 0
 SizeX = 2
 SizeY = 2
 Price = 26200
-Class = Armor
+Class = equipment.Armor
 
 [Blood Helmet]
 ID = 475
@@ -340,7 +340,7 @@ Position = 0
 SizeX = 2
 SizeY = 2
 Price = 36500
-Class = Armor
+Class = equipment.Armor
 
 [Blizzard Cap]
 ID = 476
@@ -353,7 +353,7 @@ Position = 0
 SizeX = 2
 SizeY = 2
 Price = 36500
-Class = Armor
+Class = equipment.Armor
 
 [Shadow Helmet]
 ID = 712
@@ -366,7 +366,7 @@ Position = 0
 SizeX = 2
 SizeY = 2
 Price = 36500
-Class = Armor
+Class = equipment.Armor
 
 [Bionic Helmet]
 ID = 477
@@ -379,7 +379,7 @@ Position = 0
 SizeX = 2
 SizeY = 2
 Price = 36500
-Class = Armor
+Class = equipment.Armor
 
 [Duke Helmet]
 ID = 498
@@ -392,7 +392,7 @@ Position = 0
 SizeX = 2
 SizeY = 2
 Price = 56000
-Class = Armor
+Class = equipment.Armor
 
 [Spell Cap]
 ID = 499
@@ -405,7 +405,7 @@ Position = 0
 SizeX = 2
 SizeY = 2
 Price = 65990
-Class = Armor
+Class = equipment.Armor
 
 [Leopard Helmet]
 ID = 856
@@ -418,7 +418,7 @@ Position = 0
 SizeX = 2
 SizeY = 2
 Price = 56000
-Class = Armor
+Class = equipment.Armor
 
 [Aquamarine Helmet]
 ID = 500
@@ -431,7 +431,7 @@ Position = 0
 SizeX = 2
 SizeY = 2
 Price = 80100
-Class = Armor
+Class = equipment.Armor
 
 [Bulkan White Knight Helmet]
 ID = 696
@@ -445,7 +445,7 @@ Position = 0
 SizeX = 2
 SizeY = 2
 Price = 60400
-Class = Armor
+Class = equipment.Armor
 
 [Kailipton White Knight Helmet]
 ID = 697
@@ -459,7 +459,7 @@ Position = 0
 SizeX = 2
 SizeY = 2
 Price = 60400
-Class = Armor
+Class = equipment.Armor
 
 [Aidia White Knight Helmet]
 ID = 698
@@ -473,7 +473,7 @@ Position = 0
 SizeX = 2
 SizeY = 2
 Price = 60400
-Class = Armor
+Class = equipment.Armor
 
 [Human White Knight Helmet]
 ID = 699
@@ -487,7 +487,7 @@ Position = 0
 SizeX = 2
 SizeY = 2
 Price = 92000
-Class = Armor
+Class = equipment.Armor
 
 [Teurus Helmet]
 ID = 624
@@ -501,7 +501,7 @@ Position = 0
 SizeX = 2
 SizeY = 2
 Price = 113900
-Class = Armor
+Class = equipment.Armor
 
 [Star Soul Mask]
 ID = 625
@@ -515,7 +515,7 @@ Position = 0
 SizeX = 2
 SizeY = 2
 Price = 113900
-Class = Armor
+Class = equipment.Armor
 
 [Eagle Helmet]
 ID = 877
@@ -529,7 +529,7 @@ Position = 0
 SizeX = 2
 SizeY = 2
 Price = 113900
-Class = Armor
+Class = equipment.Armor
 
 [Fire Marine Helmet]
 ID = 626
@@ -543,7 +543,7 @@ Position = 0
 SizeX = 2
 SizeY = 2
 Price = 113900
-Class = Armor
+Class = equipment.Armor
 
 [Meruduke Helmet]
 ID = 881
@@ -557,7 +557,7 @@ Position = 0
 SizeX = 2
 SizeY = 2
 Price = 125000
-Class = Armor
+Class = equipment.Armor
 
 [Magma Helmet]
 ID = 882
@@ -571,7 +571,7 @@ Position = 0
 SizeX = 2
 SizeY = 2
 Price = 125000
-Class = Armor
+Class = equipment.Armor
 
 [Apollo Helmet]
 ID = 896
@@ -585,7 +585,7 @@ Position = 0
 SizeX = 2
 SizeY = 2
 Price = 125000
-Class = Armor
+Class = equipment.Armor
 
 [Salvation Helmet]
 ID = 883
@@ -599,7 +599,7 @@ Position = 0
 SizeX = 2
 SizeY = 2
 Price = 125000
-Class = Armor
+Class = equipment.Armor
 
 ######## TOPS ########
 [Leather Jacket]
@@ -613,7 +613,7 @@ Position = 1
 SizeX = 2
 SizeY = 2
 Price = 6
-Class = Armor
+Class = equipment.Armor
 
 [Warrior Armor]
 ID = 325
@@ -626,7 +626,7 @@ Position = 1
 SizeX = 2
 SizeY = 2
 Price = 820
-Class = Armor
+Class = equipment.Armor
 
 [Iron Armor]
 ID = 327
@@ -639,7 +639,7 @@ Position = 1
 SizeX = 2
 SizeY = 2
 Price = 2370
-Class = Armor
+Class = equipment.Armor
 
 [Xeno Armor]
 ID = 328
@@ -652,7 +652,7 @@ Position = 1
 SizeX = 2
 SizeY = 2
 Price = 4450
-Class = Armor
+Class = equipment.Armor
 
 [Hurricane Armor]
 ID = 333
@@ -665,7 +665,7 @@ Position = 1
 SizeX = 2
 SizeY = 2
 Price = 5100
-Class = Armor
+Class = equipment.Armor
 
 [Purity Shirt]
 ID = 416
@@ -678,7 +678,7 @@ Position = 1
 SizeX = 2
 SizeY = 2
 Price = 3590
-Class = Armor
+Class = equipment.Armor
 
 [Marine Suit]
 ID = 338
@@ -691,7 +691,7 @@ Position = 1
 SizeX = 2
 SizeY = 2
 Price = 4540
-Class = Armor
+Class = equipment.Armor
 
 [Brino Armor]
 ID = 329
@@ -704,7 +704,7 @@ Position = 1
 SizeX = 2
 SizeY = 2
 Price = 7140
-Class = Armor
+Class = equipment.Armor
 
 [Cloud Ware]
 ID = 334
@@ -717,7 +717,7 @@ Position = 1
 SizeX = 2
 SizeY = 2
 Price = 7650
-Class = Armor
+Class = equipment.Armor
 
 [Prosperity Shirt]
 ID = 417
@@ -730,7 +730,7 @@ Position = 1
 SizeX = 2
 SizeY = 2
 Price = 5500
-Class = Armor
+Class = equipment.Armor
 
 [Scout Suit]
 ID = 339
@@ -743,7 +743,7 @@ Position = 1
 SizeX = 2
 SizeY = 2
 Price = 7250
-Class = Armor
+Class = equipment.Armor
 
 [Xeno Metal Armor]
 ID = 330
@@ -756,7 +756,7 @@ Position = 1
 SizeX = 2
 SizeY = 2
 Price = 12000
-Class = Armor
+Class = equipment.Armor
 
 [Tranquility Shirt]
 ID = 335
@@ -769,7 +769,7 @@ Position = 1
 SizeX = 2
 SizeY = 2
 Price = 12400
-Class = Armor
+Class = equipment.Armor
 
 [Mercy Shirt]
 ID = 418
@@ -782,7 +782,7 @@ Position = 1
 SizeX = 2
 SizeY = 2
 Price = 9130
-Class = Armor
+Class = equipment.Armor
 
 [Bulletproof Suit]
 ID = 340
@@ -795,7 +795,7 @@ Position = 1
 SizeX = 2
 SizeY = 2
 Price = 12050
-Class = Armor
+Class = equipment.Armor
 
 [Pahwang Armor]
 ID = 331
@@ -808,7 +808,7 @@ Position = 1
 SizeX = 2
 SizeY = 2
 Price = 17140
-Class = Armor
+Class = equipment.Armor
 
 [Marsh Ware]
 ID = 336
@@ -821,7 +821,7 @@ Position = 1
 SizeX = 2
 SizeY = 2
 Price = 17430
-Class = Armor
+Class = equipment.Armor
 
 [Hope Shirt]
 ID = 419
@@ -834,7 +834,7 @@ Position = 1
 SizeX = 2
 SizeY = 2
 Price = 12660
-Class = Armor
+Class = equipment.Armor
 
 [Infantary Suit]
 ID = 341
@@ -847,7 +847,7 @@ Position = 1
 SizeX = 2
 SizeY = 2
 Price = 17090
-Class = Armor
+Class = equipment.Armor
 
 [Power Metal Armor]
 ID = 332
@@ -860,7 +860,7 @@ Position = 1
 SizeX = 2
 SizeY = 2
 Price = 23180
-Class = Armor
+Class = equipment.Armor
 
 [Flame Shirt]
 ID = 337
@@ -873,7 +873,7 @@ Position = 1
 SizeX = 2
 SizeY = 2
 Price = 22810
-Class = Armor
+Class = equipment.Armor
 
 [Passion Shirt]
 ID = 420
@@ -886,7 +886,7 @@ Position = 1
 SizeX = 2
 SizeY = 2
 Price = 16380
-Class = Armor
+Class = equipment.Armor
 
 [Heavy Infantary Suit]
 ID = 342
@@ -899,7 +899,7 @@ Position = 1
 SizeX = 2
 SizeY = 2
 Price = 22580
-Class = Armor
+Class = equipment.Armor
 
 [Black Knight Armor]
 ID = 239
@@ -912,7 +912,7 @@ Position = 1
 SizeX = 2
 SizeY = 2
 Price = 29920
-Class = Armor
+Class = equipment.Armor
 
 [Blood Armor]
 ID = 478
@@ -925,7 +925,7 @@ Position = 1
 SizeX = 2
 SizeY = 2
 Price = 46150
-Class = Armor
+Class = equipment.Armor
 
 [Blizzard Shirt]
 ID = 479
@@ -938,7 +938,7 @@ Position = 1
 SizeX = 2
 SizeY = 2
 Price = 46150
-Class = Armor
+Class = equipment.Armor
 
 [Shadow Armor]
 ID = 713
@@ -951,7 +951,7 @@ Position = 1
 SizeX = 2
 SizeY = 2
 Price = 46150
-Class = Armor
+Class = equipment.Armor
 
 [Bionic Armor]
 ID = 480
@@ -964,7 +964,7 @@ Position = 1
 SizeX = 2
 SizeY = 2
 Price = 46150
-Class = Armor
+Class = equipment.Armor
 
 [Duke Armor]
 ID = 501
@@ -977,7 +977,7 @@ Position = 1
 SizeX = 2
 SizeY = 2
 Price = 47550
-Class = Armor
+Class = equipment.Armor
 
 [Spell Shirt]
 ID = 502
@@ -990,7 +990,7 @@ Position = 1
 SizeX = 2
 SizeY = 2
 Price = 79880
-Class = Armor
+Class = equipment.Armor
 
 [Leopard Armor]
 ID = 857
@@ -1003,7 +1003,7 @@ Position = 1
 SizeX = 2
 SizeY = 2
 Price = 47550
-Class = Armor
+Class = equipment.Armor
 
 [Aquamarine Armor]
 ID = 503
@@ -1016,7 +1016,7 @@ Position = 1
 SizeX = 2
 SizeY = 2
 Price = 89000
-Class = Armor
+Class = equipment.Armor
 
 [Bulkan White Knight Armor]
 ID = 700
@@ -1030,7 +1030,7 @@ Position = 1
 SizeX = 2
 SizeY = 2
 Price = 78400
-Class = Armor
+Class = equipment.Armor
 
 [Kailipton White Knight Armor]
 ID = 701
@@ -1044,7 +1044,7 @@ Position = 1
 SizeX = 2
 SizeY = 2
 Price = 78400
-Class = Armor
+Class = equipment.Armor
 
 [Aidia White Knight Armor]
 ID = 702
@@ -1058,7 +1058,7 @@ Position = 1
 SizeX = 2
 SizeY = 2
 Price = 78400
-Class = Armor
+Class = equipment.Armor
 
 [Human White Knight Armor]
 ID = 703
@@ -1072,7 +1072,7 @@ Position = 1
 SizeX = 2
 SizeY = 2
 Price = 120000
-Class = Armor
+Class = equipment.Armor
 
 [Teurus Armor]
 ID = 228
@@ -1086,7 +1086,7 @@ Position = 1
 SizeX = 2
 SizeY = 2
 Price = 147800
-Class = Armor
+Class = equipment.Armor
 
 [Star Soul Suit]
 ID = 629
@@ -1100,7 +1100,7 @@ Position = 1
 SizeX = 2
 SizeY = 2
 Price = 147800
-Class = Armor
+Class = equipment.Armor
 
 [Eagle Armor]
 ID = 878
@@ -1114,7 +1114,7 @@ Position = 1
 SizeX = 2
 SizeY = 2
 Price = 147800
-Class = Armor
+Class = equipment.Armor
 
 [Fire Marine Armor]
 ID = 630
@@ -1128,7 +1128,7 @@ Position = 1
 SizeX = 2
 SizeY = 2
 Price = 147800
-Class = Armor
+Class = equipment.Armor
 
 [Meruduke Armor]
 ID = 884
@@ -1142,7 +1142,7 @@ Position = 1
 SizeX = 2
 SizeY = 2
 Price = 162000
-Class = Armor
+Class = equipment.Armor
 
 [Magma Armor]
 ID = 885
@@ -1156,7 +1156,7 @@ Position = 1
 SizeX = 2
 SizeY = 2
 Price = 162000
-Class = Armor
+Class = equipment.Armor
 
 [Apollo Armor]
 ID = 897
@@ -1170,7 +1170,7 @@ Position = 1
 SizeX = 2
 SizeY = 2
 Price = 162000
-Class = Armor
+Class = equipment.Armor
 
 [Salvation Armor]
 ID = 886
@@ -1184,7 +1184,7 @@ Position = 1
 SizeX = 2
 SizeY = 2
 Price = 162000
-Class = Armor
+Class = equipment.Armor
 
 ######## PANTS ########
 [Leather Pants]
@@ -1198,7 +1198,7 @@ Position = 2
 SizeX = 2
 SizeY = 3
 Price = 7
-Class = Armor
+Class = equipment.Armor
 
 [Warrior Pants]
 ID = 344
@@ -1211,7 +1211,7 @@ Position = 2
 SizeX = 2
 SizeY = 3
 Price = 1050
-Class = Armor
+Class = equipment.Armor
 
 [Iron Pants]
 ID = 345
@@ -1224,7 +1224,7 @@ Position = 2
 SizeX = 2
 SizeY = 3
 Price = 2860
-Class = Armor
+Class = equipment.Armor
 
 [Xeno Pants]
 ID = 346
@@ -1237,7 +1237,7 @@ Position = 2
 SizeX = 2
 SizeY = 3
 Price = 5280
-Class = Armor
+Class = equipment.Armor
 
 [Hurricane Skirt]
 ID = 351
@@ -1250,7 +1250,7 @@ Position = 2
 SizeX = 2
 SizeY = 3
 Price = 5960
-Class = Armor
+Class = equipment.Armor
 
 [Purity Pants]
 ID = 421
@@ -1263,7 +1263,7 @@ Position = 2
 SizeX = 2
 SizeY = 3
 Price = 4250
-Class = Armor
+Class = equipment.Armor
 
 [Marine Pants]
 ID = 356
@@ -1276,7 +1276,7 @@ Position = 2
 SizeX = 2
 SizeY = 3
 Price = 5380
-Class = Armor
+Class = equipment.Armor
 
 [Brino Pants]
 ID = 347
@@ -1289,7 +1289,7 @@ Position = 2
 SizeX = 2
 SizeY = 3
 Price = 7350
-Class = Armor
+Class = equipment.Armor
 
 [Cloud Pants]
 ID = 352
@@ -1302,7 +1302,7 @@ Position = 2
 SizeX = 2
 SizeY = 3
 Price = 7880
-Class = Armor
+Class = equipment.Armor
 
 [Prosperity Pants]
 ID = 422
@@ -1315,7 +1315,7 @@ Position = 2
 SizeX = 2
 SizeY = 3
 Price = 5690
-Class = Armor
+Class = equipment.Armor
 
 [Scout Pants]
 ID = 357
@@ -1328,7 +1328,7 @@ Position = 2
 SizeX = 2
 SizeY = 3
 Price = 7380
-Class = Armor
+Class = equipment.Armor
 
 [Xeno Metal Pants]
 ID = 348
@@ -1341,7 +1341,7 @@ Position = 2
 SizeX = 2
 SizeY = 3
 Price = 13670
-Class = Armor
+Class = equipment.Armor
 
 [Tranquility Skirt]
 ID = 353
@@ -1354,7 +1354,7 @@ Position = 2
 SizeX = 2
 SizeY = 3
 Price = 14140
-Class = Armor
+Class = equipment.Armor
 
 [Mercy Pants]
 ID = 423
@@ -1367,7 +1367,7 @@ Position = 2
 SizeX = 2
 SizeY = 3
 Price = 10200
-Class = Armor
+Class = equipment.Armor
 
 [Bulletproof Pants]
 ID = 358
@@ -1380,7 +1380,7 @@ Position = 2
 SizeX = 2
 SizeY = 3
 Price = 13480
-Class = Armor
+Class = equipment.Armor
 
 [Pahwang Pants]
 ID = 349
@@ -1393,7 +1393,7 @@ Position = 2
 SizeX = 2
 SizeY = 3
 Price = 19470
-Class = Armor
+Class = equipment.Armor
 
 [Marsh Skirt]
 ID = 354
@@ -1406,7 +1406,7 @@ Position = 2
 SizeX = 2
 SizeY = 3
 Price = 19500
-Class = Armor
+Class = equipment.Armor
 
 [Hope Pants]
 ID = 424
@@ -1419,7 +1419,7 @@ Position = 2
 SizeX = 2
 SizeY = 3
 Price = 14280
-Class = Armor
+Class = equipment.Armor
 
 [Infantry Pants]
 ID = 359
@@ -1432,7 +1432,7 @@ Position = 2
 SizeX = 2
 SizeY = 3
 Price = 19140
-Class = Armor
+Class = equipment.Armor
 
 [Power Metal Pants]
 ID = 350
@@ -1445,7 +1445,7 @@ Position = 2
 SizeX = 2
 SizeY = 3
 Price = 26750
-Class = Armor
+Class = equipment.Armor
 
 [Flame Skirt]
 ID = 355
@@ -1458,7 +1458,7 @@ Position = 2
 SizeX = 2
 SizeY = 3
 Price = 26140
-Class = Armor
+Class = equipment.Armor
 
 [Passion Pants]
 ID = 425
@@ -1471,7 +1471,7 @@ Position = 2
 SizeX = 2
 SizeY = 3
 Price = 18950
-Class = Armor
+Class = equipment.Armor
 
 [Heavy Infantry Pants]
 ID = 360
@@ -1484,7 +1484,7 @@ Position = 2
 SizeX = 2
 SizeY = 3
 Price = 25830
-Class = Armor
+Class = equipment.Armor
 
 [Black Knight Pants]
 ID = 244
@@ -1497,7 +1497,7 @@ Position = 2
 SizeX = 2
 SizeY = 3
 Price = 33750
-Class = Armor
+Class = equipment.Armor
 
 [Blood Pants]
 ID = 481
@@ -1510,7 +1510,7 @@ Position = 2
 SizeX = 2
 SizeY = 3
 Price = 52000
-Class = Armor
+Class = equipment.Armor
 
 [Blizzard Pants]
 ID = 482
@@ -1523,7 +1523,7 @@ Position = 2
 SizeX = 2
 SizeY = 3
 Price = 52000
-Class = Armor
+Class = equipment.Armor
 
 [Shadow Pants]
 ID = 714
@@ -1536,7 +1536,7 @@ Position = 2
 SizeX = 2
 SizeY = 3
 Price = 52000
-Class = Armor
+Class = equipment.Armor
 
 [Bionic Pants]
 ID = 483
@@ -1549,7 +1549,7 @@ Position = 2
 SizeX = 2
 SizeY = 3
 Price = 52000
-Class = Armor
+Class = equipment.Armor
 
 [Duke Pants]
 ID = 504
@@ -1562,7 +1562,7 @@ Position = 2
 SizeX = 2
 SizeY = 3
 Price = 63520
-Class = Armor
+Class = equipment.Armor
 
 [Spell Pants]
 ID = 505
@@ -1575,7 +1575,7 @@ Position = 2
 SizeX = 2
 SizeY = 3
 Price = 85090
-Class = Armor
+Class = equipment.Armor
 
 [Leopard Pants]
 ID = 858
@@ -1588,7 +1588,7 @@ Position = 2
 SizeX = 2
 SizeY = 3
 Price = 63520
-Class = Armor
+Class = equipment.Armor
 
 [Aquamarine Pants]
 ID = 506
@@ -1601,7 +1601,7 @@ Position = 2
 SizeX = 2
 SizeY = 3
 Price = 93000
-Class = Armor
+Class = equipment.Armor
 
 [Bulkan White Knight Pants]
 ID = 704
@@ -1615,7 +1615,7 @@ Position = 2
 SizeX = 2
 SizeY = 3
 Price = 87200
-Class = Armor
+Class = equipment.Armor
 
 [Kailipton White Knight Pants]
 ID = 705
@@ -1629,7 +1629,7 @@ Position = 2
 SizeX = 2
 SizeY = 3
 Price = 87200
-Class = Armor
+Class = equipment.Armor
 
 [Aidia White Knight Pants]
 ID = 706
@@ -1643,7 +1643,7 @@ Position = 2
 SizeX = 2
 SizeY = 3
 Price = 87200
-Class = Armor
+Class = equipment.Armor
 
 [Human White Knight Pants]
 ID = 707
@@ -1657,7 +1657,7 @@ Position = 2
 SizeX = 2
 SizeY = 3
 Price = 140000
-Class = Armor
+Class = equipment.Armor
 
 [Teurus Pants]
 ID = 631
@@ -1671,7 +1671,7 @@ Position = 2
 SizeX = 2
 SizeY = 3
 Price = 164400
-Class = Armor
+Class = equipment.Armor
 
 [Star Soul Pants]
 ID = 632
@@ -1685,7 +1685,7 @@ Position = 2
 SizeX = 2
 SizeY = 3
 Price = 164400
-Class = Armor
+Class = equipment.Armor
 
 [Eagle Pants]
 ID = 879
@@ -1699,7 +1699,7 @@ Position = 2
 SizeX = 2
 SizeY = 3
 Price = 164400
-Class = Armor
+Class = equipment.Armor
 
 [Fire Marine Pants]
 ID = 633
@@ -1713,7 +1713,7 @@ Position = 2
 SizeX = 2
 SizeY = 3
 Price = 164400
-Class = Armor
+Class = equipment.Armor
 
 [Meruduke Pants]
 ID = 887
@@ -1727,7 +1727,7 @@ Position = 2
 SizeX = 2
 SizeY = 3
 Price = 180000
-Class = Armor
+Class = equipment.Armor
 
 [Magma Pants]
 ID = 888
@@ -1741,7 +1741,7 @@ Position = 2
 SizeX = 2
 SizeY = 3
 Price = 180000
-Class = Armor
+Class = equipment.Armor
 
 [Apollo Pants]
 ID = 898
@@ -1755,7 +1755,7 @@ Position = 2
 SizeX = 2
 SizeY = 3
 Price = 180000
-Class = Armor
+Class = equipment.Armor
 
 [Salvation Pants]
 ID = 889
@@ -1769,7 +1769,7 @@ Position = 2
 SizeX = 2
 SizeY = 3
 Price = 180000
-Class = Armor
+Class = equipment.Armor
 
 ######## BOOTS ########
 [Leather Boots]
@@ -1783,7 +1783,7 @@ Position = 4
 SizeX = 2
 SizeY = 2
 Price = 40
-Class = Armor
+Class = equipment.Armor
 
 [Warrior Boots]
 ID = 366
@@ -1796,7 +1796,7 @@ Position = 4
 SizeX = 2
 SizeY = 2
 Price = 490
-Class = Armor
+Class = equipment.Armor
 
 [Iron Boots]
 ID = 367
@@ -1809,7 +1809,7 @@ Position = 4
 SizeX = 2
 SizeY = 2
 Price = 1770
-Class = Armor
+Class = equipment.Armor
 
 [Xeno Shoes]
 ID = 368
@@ -1822,7 +1822,7 @@ Position = 4
 SizeX = 2
 SizeY = 2
 Price = 3300
-Class = Armor
+Class = equipment.Armor
 
 [Hurricane Shoes]
 ID = 373
@@ -1835,7 +1835,7 @@ Position = 4
 SizeX = 2
 SizeY = 2
 Price = 4000
-Class = Armor
+Class = equipment.Armor
 
 [Purity Shoes]
 ID = 426
@@ -1848,7 +1848,7 @@ Position = 4
 SizeX = 2
 SizeY = 2
 Price = 2760
-Class = Armor
+Class = equipment.Armor
 
 [Marine Shoes]
 ID = 378
@@ -1861,7 +1861,7 @@ Position = 4
 SizeX = 2
 SizeY = 2
 Price = 3530
-Class = Armor
+Class = equipment.Armor
 
 [Brino Shoes]
 ID = 369
@@ -1874,7 +1874,7 @@ Position = 4
 SizeX = 2
 SizeY = 2
 Price = 5200
-Class = Armor
+Class = equipment.Armor
 
 [Cloud Shoes]
 ID = 374
@@ -1887,7 +1887,7 @@ Position = 4
 SizeX = 2
 SizeY = 2
 Price = 5960
-Class = Armor
+Class = equipment.Armor
 
 [Prosperity Shoes]
 ID = 427
@@ -1900,7 +1900,7 @@ Position = 4
 SizeX = 2
 SizeY = 2
 Price = 4200
-Class = Armor
+Class = equipment.Armor
 
 [Scout Shoes]
 ID = 379
@@ -1913,7 +1913,7 @@ Position = 4
 SizeX = 2
 SizeY = 2
 Price = 5700
-Class = Armor
+Class = equipment.Armor
 
 [Xeno Metal Boots]
 ID = 370
@@ -1926,7 +1926,7 @@ Position = 4
 SizeX = 2
 SizeY = 2
 Price = 8980
-Class = Armor
+Class = equipment.Armor
 
 [Tranquility Shoes]
 ID = 375
@@ -1939,7 +1939,7 @@ Position = 4
 SizeX = 2
 SizeY = 2
 Price = 9570
-Class = Armor
+Class = equipment.Armor
 
 [Mercy Shoes]
 ID = 428
@@ -1952,7 +1952,7 @@ Position = 4
 SizeX = 2
 SizeY = 2
 Price = 6930
-Class = Armor
+Class = equipment.Armor
 
 [BulleTyperoof Boots]
 ID = 380
@@ -1965,7 +1965,7 @@ Position = 4
 SizeX = 2
 SizeY = 2
 Price = 9260
-Class = Armor
+Class = equipment.Armor
 
 [Pahwang Boots]
 ID = 371
@@ -1978,7 +1978,7 @@ Position = 4
 SizeX = 2
 SizeY = 2
 Price = 12850
-Class = Armor
+Class = equipment.Armor
 
 [Marsh Shoes]
 ID = 376
@@ -1991,7 +1991,7 @@ Position = 4
 SizeX = 2
 SizeY = 2
 Price = 13200
-Class = Armor
+Class = equipment.Armor
 
 [Hope Shoes]
 ID = 429
@@ -2004,7 +2004,7 @@ Position = 4
 SizeX = 2
 SizeY = 2
 Price = 9370
-Class = Armor
+Class = equipment.Armor
 
 [Infantry Boots]
 ID = 381
@@ -2017,7 +2017,7 @@ Position = 4
 SizeX = 2
 SizeY = 2
 Price = 13030
-Class = Armor
+Class = equipment.Armor
 
 [Power Metal Boots]
 ID = 372
@@ -2030,7 +2030,7 @@ Position = 4
 SizeX = 2
 SizeY = 2
 Price = 17390
-Class = Armor
+Class = equipment.Armor
 
 [Flame Shoes]
 ID = 377
@@ -2043,7 +2043,7 @@ Position = 4
 SizeX = 2
 SizeY = 2
 Price = 17400
-Class = Armor
+Class = equipment.Armor
 
 [Passion Shoes]
 ID = 430
@@ -2056,7 +2056,7 @@ Position = 4
 SizeX = 2
 SizeY = 2
 Price = 12160
-Class = Armor
+Class = equipment.Armor
 
 [Heavy Infantry Boots]
 ID = 382
@@ -2069,7 +2069,7 @@ Position = 4
 SizeX = 2
 SizeY = 2
 Price = 17410
-Class = Armor
+Class = equipment.Armor
 
 [Black Knight Boots]
 ID = 249
@@ -2082,7 +2082,7 @@ Position = 4
 SizeX = 2
 SizeY = 2
 Price = 22180
-Class = Armor
+Class = equipment.Armor
 
 [Blood Boots]
 ID = 484
@@ -2095,7 +2095,7 @@ Position = 4
 SizeX = 2
 SizeY = 2
 Price = 36500
-Class = Armor
+Class = equipment.Armor
 
 [Blizzard Shoes]
 ID = 485
@@ -2108,7 +2108,7 @@ Position = 4
 SizeX = 2
 SizeY = 2
 Price = 36500
-Class = Armor
+Class = equipment.Armor
 
 [Shadow Boots]
 ID = 715
@@ -2121,7 +2121,7 @@ Position = 4
 SizeX = 2
 SizeY = 2
 Price = 36500
-Class = Armor
+Class = equipment.Armor
 
 [Bionic Boots]
 ID = 486
@@ -2134,7 +2134,7 @@ Position = 4
 SizeX = 2
 SizeY = 2
 Price = 36500
-Class = Armor
+Class = equipment.Armor
 
 [Duke Shoes]
 ID = 507
@@ -2147,7 +2147,7 @@ Position = 4
 SizeX = 2
 SizeY = 2
 Price = 46200
-Class = Armor
+Class = equipment.Armor
 
 [Spell Shoes]
 ID = 508
@@ -2160,7 +2160,7 @@ Position = 4
 SizeX = 2
 SizeY = 2
 Price = 65790
-Class = Armor
+Class = equipment.Armor
 
 [Leopard Boots]
 ID = 859
@@ -2173,7 +2173,7 @@ Position = 4
 SizeX = 2
 SizeY = 2
 Price = 46200
-Class = Armor
+Class = equipment.Armor
 
 [Aquamarine Boots]
 ID = 509
@@ -2186,7 +2186,7 @@ Position = 4
 SizeX = 2
 SizeY = 2
 Price = 78040
-Class = Armor
+Class = equipment.Armor
 
 [Bulkan White Knight Boots]
 ID = 708
@@ -2200,7 +2200,7 @@ Position = 4
 SizeX = 2
 SizeY = 2
 Price = 50600
-Class = Armor
+Class = equipment.Armor
 
 [Kailipton White Knight Boots]
 ID = 709
@@ -2214,7 +2214,7 @@ Position = 4
 SizeX = 2
 SizeY = 2
 Price = 50600
-Class = Armor
+Class = equipment.Armor
 
 [Aidia White Knight Boots]
 ID = 710
@@ -2228,7 +2228,7 @@ Position = 4
 SizeX = 2
 SizeY = 2
 Price = 50600
-Class = Armor
+Class = equipment.Armor
 
 [Human White Knight Boots]
 ID = 711
@@ -2242,7 +2242,7 @@ Position = 4
 SizeX = 2
 SizeY = 2
 Price = 80000
-Class = Armor
+Class = equipment.Armor
 
 [Teurus Boots]
 ID = 634
@@ -2256,7 +2256,7 @@ Position = 4
 SizeX = 2
 SizeY = 2
 Price = 93500
-Class = Armor
+Class = equipment.Armor
 
 [Star Soul Boots]
 ID = 635
@@ -2270,7 +2270,7 @@ Position = 4
 SizeX = 2
 SizeY = 2
 Price = 93500
-Class = Armor
+Class = equipment.Armor
 
 [Eagle Boots]
 ID = 880
@@ -2284,7 +2284,7 @@ Position = 4
 SizeX = 2
 SizeY = 2
 Price = 93500
-Class = Armor
+Class = equipment.Armor
 
 [Fire Marine Boots]
 ID = 636
@@ -2298,7 +2298,7 @@ Position = 4
 SizeX = 2
 SizeY = 2
 Price = 93500
-Class = Armor
+Class = equipment.Armor
 
 [Meruduke Boots]
 ID = 890
@@ -2312,7 +2312,7 @@ Position = 4
 SizeX = 2
 SizeY = 2
 Price = 102000
-Class = Armor
+Class = equipment.Armor
 
 [Magma Boots]
 ID = 891
@@ -2326,7 +2326,7 @@ Position = 4
 SizeX = 2
 SizeY = 2
 Price = 102000
-Class = Armor
+Class = equipment.Armor
 
 [Apollo Boots]
 ID = 899
@@ -2340,7 +2340,7 @@ Position = 4
 SizeX = 2
 SizeY = 2
 Price = 102000
-Class = Armor
+Class = equipment.Armor
 
 [Salvation Boots]
 ID = 892
@@ -2354,7 +2354,7 @@ Position = 4
 SizeX = 2
 SizeY = 2
 Price = 102000
-Class = Armor
+Class = equipment.Armor
 
 #########################
 #### PRIMARY WEAPONS ####
@@ -2377,7 +2377,7 @@ Handed = 2
 SizeX = 2
 SizeY = 2
 Price = 30
-Class = GunWeapon
+Class = equipment.GunWeapon
 
 [Air Hand Gun]
 ID = 203
@@ -2395,7 +2395,7 @@ Handed = 2
 SizeX = 2
 SizeY = 2
 Price = 650
-Class = GunWeapon
+Class = equipment.GunWeapon
 
 [Power Gun]
 ID = 464
@@ -2413,7 +2413,7 @@ Handed = 2
 SizeX = 2
 SizeY = 2
 Price = 1100
-Class = GunWeapon
+Class = equipment.GunWeapon
 
 [Air Gun]
 ID = 55
@@ -2431,7 +2431,7 @@ Handed = 2
 SizeX = 2
 SizeY = 2
 Price = 2000
-Class = GunWeapon
+Class = equipment.GunWeapon
 
 [Ranger]
 ID = 465
@@ -2449,7 +2449,7 @@ Handed = 2
 SizeX = 2
 SizeY = 2
 Price = 2950
-Class = GunWeapon
+Class = equipment.GunWeapon
 
 [Blaster Pistol]
 ID = 60
@@ -2467,7 +2467,7 @@ Handed = 2
 SizeX = 2
 SizeY = 2
 Price = 4030
-Class = GunWeapon
+Class = equipment.GunWeapon
 
 [Laser Shot Gun]
 ID = 466
@@ -2485,7 +2485,7 @@ Handed = 2
 SizeX = 2
 SizeY = 3
 Price = 5000
-Class = GunWeapon
+Class = equipment.GunWeapon
 
 [Blaster Rifle]
 ID = 467
@@ -2503,7 +2503,7 @@ Handed = 2
 SizeX = 2
 SizeY = 3
 Price = 6500
-Class = GunWeapon
+Class = equipment.GunWeapon
 
 [Killer Rifle]
 ID = 286
@@ -2521,7 +2521,7 @@ Handed = 2
 SizeX = 2
 SizeY = 3
 Price = 7700
-Class = GunWeapon
+Class = equipment.GunWeapon
 
 [Machine Gun]
 ID = 61
@@ -2539,7 +2539,7 @@ Handed = 2
 SizeX = 2
 SizeY = 3
 Price = 9550
-Class = GunWeapon
+Class = equipment.GunWeapon
 
 [Bio Rifle]
 ID = 287
@@ -2557,7 +2557,7 @@ Handed = 2
 SizeX = 2
 SizeY = 3
 Price = 12530
-Class = GunWeapon
+Class = equipment.GunWeapon
 
 [Plasma Rifle]
 ID = 305
@@ -2575,7 +2575,7 @@ Handed = 2
 SizeX = 2
 SizeY = 3
 Price = 16630
-Class = GunWeapon
+Class = equipment.GunWeapon
 
 [Pascal Rifle]
 ID = 306
@@ -2593,7 +2593,7 @@ Handed = 2
 SizeX = 2
 SizeY = 3
 Price = 20490
-Class = GunWeapon
+Class = equipment.GunWeapon
 
 [M-99 Gun]
 ID = 407
@@ -2611,7 +2611,7 @@ Handed = 2
 SizeX = 2
 SizeY = 3
 Price = 25650
-Class = GunWeapon
+Class = equipment.GunWeapon
 
 [Xylo Gun]
 ID = 408
@@ -2629,7 +2629,7 @@ Handed = 2
 SizeX = 2
 SizeY = 3
 Price = 32400
-Class = GunWeapon
+Class = equipment.GunWeapon
 
 [Sigma Rifle]
 ID = 409
@@ -2647,7 +2647,7 @@ Handed = 2
 SizeX = 2
 SizeY = 3
 Price = 39930
-Class = GunWeapon
+Class = equipment.GunWeapon
 
 [Crypto Rifle]
 ID = 410
@@ -2665,7 +2665,7 @@ Handed = 2
 SizeX = 2
 SizeY = 3
 Price = 48250
-Class = GunWeapon
+Class = equipment.GunWeapon
 
 [Tornado Rifle]
 ID = 474
@@ -2683,7 +2683,7 @@ Handed = 2
 SizeX = 2
 SizeY = 3
 Price = 68000
-Class = GunWeapon
+Class = equipment.GunWeapon
 
 [Wave Rifle]
 #ID = 
@@ -2701,7 +2701,7 @@ Handed = 2
 SizeX = 2
 SizeY = 3
 Price = 50000
-Class = GunWeapon
+Class = equipment.GunWeapon
 
 [Matrix Rifle]
 ID = 644
@@ -2719,7 +2719,7 @@ Handed = 2
 SizeX = 2
 SizeY = 3
 Price = 95000
-Class = GunWeapon
+Class = equipment.GunWeapon
 
 [Crumble Gun]
 ID = 1066
@@ -2737,7 +2737,7 @@ Handed = 2
 SizeX = 2
 SizeY = 3
 Price = 10000000
-Class = GunWeapon
+Class = equipment.GunWeapon
 
 ####### Swords ########
 [Short Sword]
@@ -2754,7 +2754,7 @@ Handed = 1
 SizeX = 1
 SizeY = 3
 Price = 30
-Class = Sword
+Class = equipment.Sword
 
 [Long Sword]
 ID = 37
@@ -2770,7 +2770,7 @@ Handed = 1
 SizeX = 1
 SizeY = 3
 Price = 110
-Class = Sword
+Class = equipment.Sword
 
 [Righteouseness Blade]
 ID = 154
@@ -2786,7 +2786,7 @@ Handed = 1
 SizeX = 1
 SizeY = 3
 Price = 310
-Class = Sword
+Class = equipment.Sword
 
 [Curved Blade]
 ID = 163
@@ -2802,7 +2802,7 @@ Handed = 1
 SizeX = 1
 SizeY = 3
 Price = 650
-Class = Sword
+Class = equipment.Sword
 
 [Victory Blade]
 ID = 459
@@ -2818,7 +2818,7 @@ Handed = 1
 SizeX = 2
 SizeY = 3
 Price = 1300
-Class = Sword
+Class = equipment.Sword
 
 [Blue Crystal Sword]
 ID = 152
@@ -2834,7 +2834,7 @@ Handed = 1
 SizeX = 1
 SizeY = 3
 Price = 1750
-Class = Sword
+Class = equipment.Sword
 
 [Golden Sword]
 ID = 150
@@ -2850,7 +2850,7 @@ Handed = 2
 SizeX = 2
 SizeY = 3
 Price = 2700
-Class = Sword
+Class = equipment.Sword
 
 [Wing Sword]
 ID = 460
@@ -2866,7 +2866,7 @@ Handed = 2
 SizeX = 2
 SizeY = 3
 Price = 3600
-Class = Sword
+Class = equipment.Sword
 
 [Sonic Sword]
 ID = 212
@@ -2882,7 +2882,7 @@ Handed = 1
 SizeX = 2
 SizeY = 3
 Price = 4400
-Class = Sword
+Class = equipment.Sword
 
 [Broad Sword]
 ID = 162
@@ -2898,7 +2898,7 @@ Handed = 2
 SizeX = 2
 SizeY = 3
 Price = 5400
-Class = Sword
+Class = equipment.Sword
 
 [Great Sword]
 ID = 151
@@ -2914,7 +2914,7 @@ Handed = 2
 SizeX = 2
 SizeY = 3
 Price = 7700
-Class = Sword
+Class = equipment.Sword
 
 [Green Crystal Sword]
 ID = 176
@@ -2930,7 +2930,7 @@ Handed = 1
 SizeX = 1
 SizeY = 3
 Price = 11290
-Class = Sword
+Class = equipment.Sword
 
 [Red Crystal Sword]
 ID = 177
@@ -2946,7 +2946,7 @@ Handed = 1
 SizeX = 2
 SizeY = 3
 Price = 13500
-Class = Sword
+Class = equipment.Sword
 
 [Darkness Sword]
 ID = 178
@@ -2962,7 +2962,7 @@ Handed = 2
 SizeX = 2
 SizeY = 3
 Price = 15910
-Class = Sword
+Class = equipment.Sword
 
 [Saber]
 ID = 250
@@ -2978,7 +2978,7 @@ Handed = 2
 SizeX = 2
 SizeY = 3
 Price = 20900
-Class = Sword
+Class = equipment.Sword
 
 [Oriental Sword]
 ID = 251
@@ -2994,7 +2994,7 @@ Handed = 2
 SizeX = 2
 SizeY = 3
 Price = 26110
-Class = Sword
+Class = equipment.Sword
 
 [Warrior Sword]
 ID = 252
@@ -3010,7 +3010,7 @@ Handed = 1
 SizeX = 2
 SizeY = 3
 Price = 32400
-Class = Sword
+Class = equipment.Sword
 
 [Karma Blade]
 ID = 253
@@ -3026,7 +3026,7 @@ Handed = 1
 SizeX = 2
 SizeY = 3
 Price = 40500
-Class = Sword
+Class = equipment.Sword
 
 [Explusion]
 ID = 254
@@ -3042,7 +3042,7 @@ Handed = 2
 SizeX = 2
 SizeY = 3
 Price = 49500
-Class = Sword
+Class = equipment.Sword
 
 [Cyclone Blade]
 ID = 471
@@ -3058,7 +3058,7 @@ Handed = 2
 SizeX = 2
 SizeY = 3
 Price = 70000
-Class = Sword
+Class = equipment.Sword
 
 [Twilight Sword]
 #ID = 
@@ -3074,7 +3074,7 @@ Handed = 2
 SizeX = 2
 SizeY = 3
 Price = 50000
-Class = Sword
+Class = equipment.Sword
 
 [Teurus Sword]
 ID = 641
@@ -3090,7 +3090,7 @@ Handed = 2
 SizeX = 2
 SizeY = 3
 Price = 100000
-Class = Sword
+Class = equipment.Sword
 
 [Defeat Sword]
 ID = 1062
@@ -3106,7 +3106,7 @@ Handed = 2
 SizeX = 2
 SizeY = 3
 Price = 10000000
-Class = Sword
+Class = equipment.Sword
 
 ####### Axes ########
 [Stone Axe]
@@ -3123,7 +3123,7 @@ Handed = 1
 SizeX = 1
 SizeY = 3
 Price = 30
-Class = Axe
+Class = equipment.Axe
 
 [Bulkan Axe]
 ID = 49
@@ -3139,7 +3139,7 @@ Handed = 1
 SizeX = 1
 SizeY = 3
 Price = 200
-Class = Axe
+Class = equipment.Axe
 
 [Big Bulkan Axe]
 ID = 155
@@ -3171,7 +3171,7 @@ Handed = 1
 SizeX = 2
 SizeY = 3
 Price = 900
-Class = Axe
+Class = equipment.Axe
 
 [Blood Axe]
 ID = 461
@@ -3187,7 +3187,7 @@ Handed = 2
 SizeX = 2
 SizeY = 3
 Price = 1400
-Class = Axe
+Class = equipment.Axe
 
 [Double Edge Axe]
 ID = 156
@@ -3203,7 +3203,7 @@ Handed = 2
 SizeX = 2
 SizeY = 3
 Price = 1750
-Class = Axe
+Class = equipment.Axe
 
 [Half Moon Axe]
 ID = 462
@@ -3219,7 +3219,7 @@ Handed = 2
 SizeX = 2
 SizeY = 3
 Price = 2400
-Class = Axe
+Class = equipment.Axe
 
 [Warrior Axe]
 ID = 157
@@ -3235,7 +3235,7 @@ Handed = 2
 SizeX = 2
 SizeY = 3
 Price = 3010
-Class = Axe
+Class = equipment.Axe
 
 [Knife Edge Axe]
 ID = 463
@@ -3251,7 +3251,7 @@ Handed = 2
 SizeX = 2
 SizeY = 3
 Price = 5000
-Class = Axe
+Class = equipment.Axe
 
 [Darkness Axe]
 ID = 158
@@ -3267,7 +3267,7 @@ Handed = 2
 SizeX = 2
 SizeY = 3
 Price = 6050
-Class = Axe
+Class = equipment.Axe
 
 [Star Axe]
 ID = 213
@@ -3283,7 +3283,7 @@ Handed = 2
 SizeX = 2
 SizeY = 3
 Price = 7450
-Class = Axe
+Class = equipment.Axe
 
 [Brave Warrior Axe]
 ID = 179
@@ -3299,7 +3299,7 @@ Handed = 2
 SizeX = 2
 SizeY = 3
 Price = 9000
-Class = Axe
+Class = equipment.Axe
 
 [Power Axe]
 ID = 180
@@ -3315,7 +3315,7 @@ Handed = 2
 SizeX = 2
 SizeY = 3
 Price = 1450
-Class = Axe
+Class = equipment.Axe
 
 [Triple Horn Axe]
 ID = 255
@@ -3331,7 +3331,7 @@ Handed = 2
 SizeX = 2
 SizeY = 3
 Price = 19690
-Class = Axe
+Class = equipment.Axe
 
 [Heavy Axe]
 ID = 256
@@ -3347,7 +3347,7 @@ Handed = 2
 SizeX = 2
 SizeY = 3
 Price = 25200
-Class = Axe
+Class = equipment.Axe
 
 [Lion Axe]
 ID = 257
@@ -3363,7 +3363,7 @@ Handed = 1
 SizeX = 2
 SizeY = 3
 Price = 32400
-Class = Axe
+Class = equipment.Axe
 
 [Battle Axe]
 ID = 258
@@ -3379,7 +3379,7 @@ Handed = 2
 SizeX = 2
 SizeY = 3
 Price = 40500
-Class = Axe
+Class = equipment.Axe
 
 [Vampire Axe]
 ID = 259
@@ -3395,7 +3395,7 @@ Handed = 2
 SizeX = 2
 SizeY = 3
 Price = 49500
-Class = Axe
+Class = equipment.Axe
 
 [Scream Axe]
 ID = 472
@@ -3411,7 +3411,7 @@ Handed = 2
 SizeX = 2
 SizeY = 3
 Price = 70000
-Class = Axe
+Class = equipment.Axe
 
 [Glorious Axe]
 #ID = 
@@ -3427,7 +3427,7 @@ Handed = 2
 SizeX = 2
 SizeY = 3
 Price = 50000
-Class = Axe
+Class = equipment.Axe
 
 [Crash Axe]
 ID = 642
@@ -3443,7 +3443,7 @@ Handed = 2
 SizeX = 2
 SizeY = 3
 Price = 100000
-Class = Axe
+Class = equipment.Axe
 
 [Havoc Axe]
 ID = 1063
@@ -3459,7 +3459,7 @@ Handed = 2
 SizeX = 2
 SizeY = 3
 Price = 10000000
-Class = Axe
+Class = equipment.Axe
 
 ####### Rings ########
 [Bee Swarm Ring]
@@ -3478,7 +3478,7 @@ Handed = 1
 SizeX = 2
 SizeY = 2
 Price = 30
-Class = RingWeapon
+Class = equipment.RingWeapon
 
 [Butterfly Ring]
 ID = 432
@@ -3496,7 +3496,7 @@ Handed = 1
 SizeX = 2
 SizeY = 2
 Price = 180
-Class = RingWeapon
+Class = equipment.RingWeapon
 
 [Purple Ring]
 ID = 439
@@ -3514,7 +3514,7 @@ Handed = 1
 SizeX = 2
 SizeY = 2
 Price = 1750
-Class = RingWeapon
+Class = equipment.RingWeapon
 
 [Poisonous Moth Ring]
 ID = 440
@@ -3532,7 +3532,7 @@ Handed = 1
 SizeX = 2
 SizeY = 2
 Price = 3800
-Class = RingWeapon
+Class = equipment.RingWeapon
 
 [Horn Bug Ring]
 ID = 510
@@ -3550,7 +3550,7 @@ Handed = 1
 SizeX = 2
 SizeY = 2
 Price = 6000
-Class = RingWeapon
+Class = equipment.RingWeapon
 
 [Silver Fly Ring]
 ID = 544
@@ -3568,7 +3568,7 @@ Handed = 1
 SizeX = 2
 SizeY = 2
 Price = 9200
-Class = RingWeapon
+Class = equipment.RingWeapon
 
 [Raven Ring]
 ID = 545
@@ -3586,7 +3586,7 @@ Handed = 1
 SizeX = 2
 SizeY = 2
 Price = 12500
-Class = RingWeapon
+Class = equipment.RingWeapon
 
 [Kynes Ring]
 ID = 546
@@ -3604,7 +3604,7 @@ Handed = 1
 SizeX = 2
 SizeY = 2
 Price = 15600
-Class = RingWeapon
+Class = equipment.RingWeapon
 
 [Neosnake Ring]
 ID = 547
@@ -3622,7 +3622,7 @@ Handed = 1
 SizeX = 2
 SizeY = 2
 Price = 18690
-Class = RingWeapon
+Class = equipment.RingWeapon
 
 [Kaizen Ring]
 ID = 548
@@ -3640,7 +3640,7 @@ Handed = 1
 SizeX = 2
 SizeY = 2
 Price = 30050
-Class = RingWeapon
+Class = equipment.RingWeapon
 
 [Phoenix Ring]
 ID = 860
@@ -3658,7 +3658,7 @@ Handed = 1
 SizeX = 2
 SizeY = 2
 Price = 42800
-Class = RingWeapon
+Class = equipment.RingWeapon
 
 [Griffon Ring]
 ID = 929
@@ -3676,7 +3676,7 @@ Handed = 1
 SizeX = 2
 SizeY = 2
 Price = 56000
-Class = RingWeapon
+Class = equipment.RingWeapon
 
 [Sphinx Ring]
 #ID = 
@@ -3694,7 +3694,7 @@ Handed = 1
 SizeX = 2
 SizeY = 2
 Price = 50000
-Class = RingWeapon
+Class = equipment.RingWeapon
 
 [Dragon Ring]
 ID = 930
@@ -3712,7 +3712,7 @@ Handed = 1
 SizeX = 2
 SizeY = 2
 Price = 70000
-Class = RingWeapon
+Class = equipment.RingWeapon
 
 [Devil Ring]
 ID = 1065
@@ -3730,7 +3730,7 @@ Handed = 1
 SizeX = 2
 SizeY = 2
 Price = 10000000
-Class = RingWeapon
+Class = equipment.RingWeapon
 
 ####### Staffs ########
 [Red Staff]
@@ -3749,7 +3749,7 @@ Position = 9
 SizeX = 1
 SizeY = 3
 Price = 30
-Class = StaffWeapon
+Class = equipment.StaffWeapon
 
 [God Staff]
 ID = 170
@@ -3767,7 +3767,7 @@ Position = 9
 SizeX = 1
 SizeY = 3
 Price = 200
-Class = StaffWeapon
+Class = equipment.StaffWeapon
 
 [Eagle Staff]
 ID = 169
@@ -3785,7 +3785,7 @@ Position = 9
 SizeX = 1
 SizeY = 3
 Price = 500
-Class = StaffWeapon
+Class = equipment.StaffWeapon
 
 [King Staff]
 ID = 159
@@ -3803,7 +3803,7 @@ Position = 9
 SizeX = 2
 SizeY = 3
 Price = 1140
-Class = StaffWeapon
+Class = equipment.StaffWeapon
 
 [Skeleton Staff]
 ID = 161
@@ -3821,7 +3821,7 @@ Position = 9
 SizeX = 2
 SizeY = 3
 Price = 1750
-Class = StaffWeapon
+Class = equipment.StaffWeapon
 
 [Wiseman Staff]
 ID = 468
@@ -3839,7 +3839,7 @@ Position = 9
 SizeX = 2
 SizeY = 3
 Price = 1750
-Class = StaffWeapon
+Class = equipment.StaffWeapon
 
 [One-eyed Staff]
 ID = 160
@@ -3857,7 +3857,7 @@ Position = 9
 SizeX = 2
 SizeY = 3
 Price = 3500
-Class = StaffWeapon
+Class = equipment.StaffWeapon
 
 [Evil Wizard Staff]
 ID = 181
@@ -3875,7 +3875,7 @@ Position = 9
 SizeX = 2
 SizeY = 3
 Price = 4990
-Class = StaffWeapon
+Class = equipment.StaffWeapon
 
 [Crystal Staff]
 ID = 469
@@ -3893,7 +3893,7 @@ Position = 9
 SizeX = 2
 SizeY = 3
 Price = 4990
-Class = StaffWeapon
+Class = equipment.StaffWeapon
 
 [Emerald Staff]
 ID = 182
@@ -3911,7 +3911,7 @@ Position = 9
 SizeX = 2
 SizeY = 3
 Price = 9000
-Class = StaffWeapon
+Class = equipment.StaffWeapon
 
 [Mystery Staff]
 ID = 284
@@ -3929,7 +3929,7 @@ Position = 9
 SizeX = 2
 SizeY = 3
 Price = 13170
-Class = StaffWeapon
+Class = equipment.StaffWeapon
 
 [Fan Staff]
 ID = 285
@@ -3947,7 +3947,7 @@ Position = 9
 SizeX = 2
 SizeY = 3
 Price = 17000
-Class = StaffWeapon
+Class = equipment.StaffWeapon
 
 [Ancient Staff]
 ID = 293
@@ -3965,7 +3965,7 @@ Position = 9
 SizeX = 2
 SizeY = 3
 Price = 21730
-Class = StaffWeapon
+Class = equipment.StaffWeapon
 
 [Sharp Staff]
 ID = 292
@@ -3983,7 +3983,7 @@ Position = 9
 SizeX = 2
 SizeY = 3
 Price = 29900
-Class = StaffWeapon
+Class = equipment.StaffWeapon
 
 [Golden Jade Staff]
 ID = 294
@@ -4001,7 +4001,7 @@ Position = 9
 SizeX = 2
 SizeY = 3
 Price = 37700
-Class = StaffWeapon
+Class = equipment.StaffWeapon
 
 [Ring Staff]
 ID = 295
@@ -4019,7 +4019,7 @@ Position = 9
 SizeX = 2
 SizeY = 3
 Price = 46400
-Class = StaffWeapon
+Class = equipment.StaffWeapon
 
 [Mighty Staff]
 ID = 296
@@ -4037,7 +4037,7 @@ Position = 9
 SizeX = 2
 SizeY = 3
 Price = 56000
-Class = StaffWeapon
+Class = equipment.StaffWeapon
 
 [Falcon Staff]
 ID = 473
@@ -4055,7 +4055,7 @@ Position = 9
 SizeX = 2
 SizeY = 3
 Price = 72000
-Class = StaffWeapon
+Class = equipment.StaffWeapon
 
 [Silverwing Staff]
 #ID = 
@@ -4073,7 +4073,7 @@ Position = 9
 SizeX = 2
 SizeY = 3
 Price = 50000
-Class = StaffWeapon
+Class = equipment.StaffWeapon
 
 [Soul Staff]
 ID = 643
@@ -4091,7 +4091,7 @@ Position = 9
 SizeX = 2
 SizeY = 3
 Price = 94000
-Class = StaffWeapon
+Class = equipment.StaffWeapon
 
 [Ruin Staff]
 ID = 1064
@@ -4109,7 +4109,7 @@ Position = 9
 SizeX = 2
 SizeY = 3
 Price = 10000000
-Class = StaffWeapon
+Class = equipment.StaffWeapon
 
 ##########################
 #### SECONDARY WEAPON ####
@@ -4133,7 +4133,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 100000
-Class = HeavyWeapon
+Class = equipment.HeavyWeapon
 
 [Charging Cannon]
 ID = 740
@@ -4152,7 +4152,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 150000
-Class = HeavyWeapon
+Class = equipment.HeavyWeapon
 
 [Flame Thrower]
 ID = 741
@@ -4171,7 +4171,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 150000
-Class = HeavyWeapon
+Class = equipment.HeavyWeapon
 
 [Laser Weapon]
 ID = 742
@@ -4190,7 +4190,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 150000
-Class = HeavyWeapon
+Class = equipment.HeavyWeapon
 
 [Mine Layer]
 ID = 743
@@ -4209,7 +4209,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 150000
-Class = HeavyWeapon
+Class = equipment.HeavyWeapon
 
 [Rocket Gun]
 ID = 744
@@ -4228,7 +4228,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 150000
-Class = HeavyWeapon
+Class = equipment.HeavyWeapon
 
 [Charging Cannon-MK1_1]
 ID = 745
@@ -4247,7 +4247,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 250000
-Class = HeavyWeapon
+Class = equipment.HeavyWeapon
 
 [Flame Thrower-MK1]
 ID = 746
@@ -4266,7 +4266,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 250000
-Class = HeavyWeapon
+Class = equipment.HeavyWeapon
 
 [Laser Weapon-MK1]
 ID = 747
@@ -4285,7 +4285,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 250000
-Class = HeavyWeapon
+Class = equipment.HeavyWeapon
 
 [Charging Cannon-MK1_2]
 ID = 950
@@ -4304,7 +4304,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 270000
-Class = HeavyWeapon
+Class = equipment.HeavyWeapon
 
 [Charging Cannon-MK2_1]
 ID = 951
@@ -4323,7 +4323,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 270000
-Class = HeavyWeapon
+Class = equipment.HeavyWeapon
 
 [Flame Thrower-MK1 BP]
 ID = 952
@@ -4342,7 +4342,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 270000
-Class = HeavyWeapon
+Class = equipment.HeavyWeapon
 
 [Flame Thrower-MK2 SP]
 ID = 953
@@ -4361,7 +4361,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 270000
-Class = HeavyWeapon
+Class = equipment.HeavyWeapon
 
 [Mine Layer-MK1]
 ID = 748
@@ -4380,7 +4380,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 250000
-Class = HeavyWeapon
+Class = equipment.HeavyWeapon
 
 [Rocket Gun-MK1]
 ID = 749
@@ -4399,7 +4399,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 250000
-Class = HeavyWeapon
+Class = equipment.HeavyWeapon
 
 [Laser Weapon-MK1 BP]
 ID = 954
@@ -4418,7 +4418,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 270000
-Class = HeavyWeapon
+Class = equipment.HeavyWeapon
 
 [Laser Weapon-MK2 SP]
 ID = 955
@@ -4437,7 +4437,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 270000
-Class = HeavyWeapon
+Class = equipment.HeavyWeapon
 
 [Charging Cannon-MK2_2]
 ID = 750
@@ -4456,7 +4456,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 400000
-Class = HeavyWeapon
+Class = equipment.HeavyWeapon
 
 [Flame Thrower-MK2]
 ID = 751
@@ -4475,7 +4475,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 400000
-Class = HeavyWeapon
+Class = equipment.HeavyWeapon
 
 [Laser Weapon-MK2]
 ID = 752
@@ -4494,7 +4494,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 400000
-Class = HeavyWeapon
+Class = equipment.HeavyWeapon
 
 [Mine Layer-MK2]
 ID = 753
@@ -4513,7 +4513,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 400000
-Class = HeavyWeapon
+Class = equipment.HeavyWeapon
 
 [Rocket Gun-MK2]
 ID = 754
@@ -4532,7 +4532,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 400000
-Class = HeavyWeapon
+Class = equipment.HeavyWeapon
 
 ###### SLAYERS ######
 [Slayer]
@@ -4552,7 +4552,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 70000
-Class = SlayerWeapon
+Class = equipment.SlayerWeapon
 
 [Demolition]
 ID = 725
@@ -4571,7 +4571,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 70000
-Class = SlayerWeapon
+Class = equipment.SlayerWeapon
 
 [Heavy Slayer]
 ID = 726
@@ -4590,7 +4590,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 120000
-Class = SlayerWeapon
+Class = equipment.SlayerWeapon
 
 [Heavy Demolition]
 ID = 727
@@ -4609,7 +4609,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 120000
-Class = SlayerWeapon
+Class = equipment.SlayerWeapon
 
 [Mammoth Slayer]
 ID = 947
@@ -4628,7 +4628,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 150000
-Class = SlayerWeapon
+Class = equipment.SlayerWeapon
 
 [Mammoth Demolition]
 ID = 948
@@ -4647,7 +4647,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 150000
-Class = SlayerWeapon
+Class = equipment.SlayerWeapon
 
 [Power Slayer]
 ID = 728
@@ -4666,7 +4666,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 200000
-Class = SlayerWeapon
+Class = equipment.SlayerWeapon
 
 [Power Demolition]
 ID = 729
@@ -4685,7 +4685,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 200000
-Class = SlayerWeapon
+Class = equipment.SlayerWeapon
 
 ##### CHAKURAMS #####
 [Chakuram]
@@ -4706,7 +4706,7 @@ Handed = 1
 SizeX = 2
 SizeY = 2
 Price = 70000
-Class = ChakuranWeapon
+Class = equipment.ChakuranWeapon
 
 [Chakuram Petrifaction]
 ID = 731
@@ -4726,7 +4726,7 @@ Handed = 1
 SizeX = 2
 SizeY = 2
 Price = 70000
-Class = ChakuranWeapon
+Class = equipment.ChakuranWeapon
 
 [Chakuram Paralysis]
 ID = 732
@@ -4746,7 +4746,7 @@ Handed = 1
 SizeX = 2
 SizeY = 2
 Price = 70000
-Class = ChakuranWeapon
+Class = equipment.ChakuranWeapon
 
 [Heavy Chakuram Petrifaction]
 ID = 733
@@ -4766,7 +4766,7 @@ Handed = 1
 SizeX = 2
 SizeY = 2
 Price = 120000
-Class = ChakuranWeapon
+Class = equipment.ChakuranWeapon
 
 [Heavy Chakuram Paralysis]
 ID = 735
@@ -4786,7 +4786,7 @@ Handed = 1
 SizeX = 2
 SizeY = 2
 Price = 120000
-Class = ChakuranWeapon
+Class = equipment.ChakuranWeapon
 
 [Power Chakuram Petrifaction]
 ID = 734
@@ -4806,7 +4806,7 @@ Handed = 1
 SizeX = 2
 SizeY = 2
 Price = 200000
-Class = ChakuranWeapon
+Class = equipment.ChakuranWeapon
 
 [Power Chakuram Paralysis]
 ID = 736
@@ -4826,7 +4826,7 @@ Handed = 1
 SizeX = 2
 SizeY = 2
 Price = 200000
-Class = ChakuranWeapon
+Class = equipment.ChakuranWeapon
 
 [Magic Chakuram]
 ID = 737
@@ -4846,7 +4846,7 @@ Handed = 1
 SizeX = 2
 SizeY = 2
 Price = 200000
-Class = ChakuranWeapon
+Class = equipment.ChakuranWeapon
 
 ####### WANDS #######
 [Magic Arrow Wand]
@@ -4868,7 +4868,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 10000
-Class = WandWeapon
+Class = equipment.WandWeapon
 
 [Magic Bullet Wand]
 ID = 769
@@ -4888,7 +4888,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 10000
-Class = WandWeapon
+Class = equipment.WandWeapon
 
 [Chain Lightning Wand]
 ID = 770
@@ -4909,7 +4909,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 20000
-Class = WandWeapon
+Class = equipment.WandWeapon
 
 [Meteorite Wand]
 ID = 771
@@ -4929,7 +4929,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 20000
-Class = WandWeapon
+Class = equipment.WandWeapon
 
 [Magic Sword Wand_1]
 ID = 949
@@ -4950,7 +4950,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 25000
-Class = WandWeapon
+Class = equipment.WandWeapon
 
 [Blizzard Wand]
 ID = 772
@@ -4971,7 +4971,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 30000
-Class = WandWeapon
+Class = equipment.WandWeapon
 
 [Magic Sword Wand_2]
 ID = 773
@@ -4991,7 +4991,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 30000
-Class = WandWeapon
+Class = equipment.WandWeapon
 
 [Confusing Storm Wand]
 ID = 774
@@ -5012,7 +5012,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 50000
-Class = WandWeapon
+Class = equipment.WandWeapon
 
 #######################
 ####### SHIELDS #######
@@ -5028,7 +5028,7 @@ Position = 5
 SizeX = 2
 SizeY = 2
 Price = 320
-Class = Shield
+Class = equipment.Shield
 
 [Brince Shield]
 ID = 187
@@ -5040,7 +5040,7 @@ Position = 5
 SizeX = 2
 SizeY = 2
 Price = 660
-Class = Shield
+Class = equipment.Shield
 
 [Xeno Shield]
 ID = 188
@@ -5052,7 +5052,7 @@ Position = 5
 SizeX = 2
 SizeY = 2
 Price = 1730
-Class = Shield
+Class = equipment.Shield
 
 [Skull Shield]
 ID = 189
@@ -5064,7 +5064,7 @@ Position = 5
 SizeX = 2
 SizeY = 2
 Price = 4210
-Class = Shield
+Class = equipment.Shield
 
 [Hell Shield]
 ID = 190
@@ -5076,7 +5076,7 @@ Position = 5
 SizeX = 2
 SizeY = 2
 Price = 8110
-Class = Shield
+Class = equipment.Shield
 
 [Golden Shield]
 ID = 121
@@ -5088,7 +5088,7 @@ Position = 5
 SizeX = 2
 SizeY = 2
 Price = 15090
-Class = Shield
+Class = equipment.Shield
 
 [Bulkan Meta Shield]
 ID = 875
@@ -5102,7 +5102,7 @@ Position = 5
 SizeX = 2
 SizeY = 2
 Price = 1000000
-Class = Shield
+Class = equipment.Shield
 
 [Human Meta Shield]
 ID = 876
@@ -5116,7 +5116,7 @@ Position = 5
 SizeX = 2
 SizeY = 2
 Price = 1000000
-Class = Shield
+Class = equipment.Shield
 
 [Bulkan Hi-Meta Shield]
 ID = 1027
@@ -5130,7 +5130,7 @@ Position = 5
 SizeX = 2
 SizeY = 2
 Price = 10000000
-Class = Shield
+Class = equipment.Shield
 
 [Human Hi-Meta Shield]
 ID = 1028
@@ -5144,7 +5144,7 @@ Position = 5
 SizeX = 2
 SizeY = 2
 Price = 10000000
-Class = Shield
+Class = equipment.Shield
 
 #######################
 ####### Mantles #######
@@ -5164,7 +5164,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 800
-Class = Mantle
+Class = equipment.Mantle
 
 [Hurricane Mantle]
 ID = 192
@@ -5180,7 +5180,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 3000
-Class = Mantle
+Class = equipment.Mantle
 
 [Peace Mantle]
 ID = 193
@@ -5196,7 +5196,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 4500
-Class = Mantle
+Class = equipment.Mantle
 
 [Wiseman Mantle]
 ID = 194
@@ -5212,7 +5212,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 6000
-Class = Mantle
+Class = equipment.Mantle
 
 [Darkness Mantle]
 ID = 195
@@ -5228,7 +5228,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 10000
-Class = Mantle
+Class = equipment.Mantle
 
 [Ancient Mantle]
 ID = 196
@@ -5244,7 +5244,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 12000
-Class = Mantle
+Class = equipment.Mantle
 
 [Blood Mantle]
 ID = 197
@@ -5260,7 +5260,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 15000
-Class = Mantle
+Class = equipment.Mantle
 
 [Sun Mantle]
 ID = 198
@@ -5276,7 +5276,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 20000
-Class = Mantle
+Class = equipment.Mantle
 
 [Veteran Mantle]
 ID = 199
@@ -5292,7 +5292,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 25000
-Class = Mantle
+Class = equipment.Mantle
 
 [Golden Mantle]
 ID = 200
@@ -5308,7 +5308,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 30000
-Class = Mantle
+Class = equipment.Mantle
 
 [Blizzard Cloak]
 ID = 912
@@ -5324,7 +5324,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 45000
-Class = Mantle
+Class = equipment.Mantle
 
 [White Knight Cloak]
 ID = 913
@@ -5340,7 +5340,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 55000
-Class = Mantle
+Class = equipment.Mantle
 
 [Kailipton Meta Cape]
 ID = 573
@@ -5357,7 +5357,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 1000000
-Class = Mantle
+Class = equipment.Mantle
 
 [Human Meta Cape]
 ID = 574
@@ -5373,7 +5373,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 1000000
-Class = Mantle
+Class = equipment.Mantle
 
 [Kailipton Hi-Meta Cape]
 ID = 1029
@@ -5390,7 +5390,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 10000000
-Class = Mantle
+Class = equipment.Mantle
 
 #######################
 ######## Wings ########
@@ -5408,7 +5408,7 @@ Position = 5
 SizeX = 2
 SizeY = 2
 Price = 1000
-Class = Wing
+Class = equipment.Wing
 
 [Lake Wing]
 ID = 916
@@ -5422,7 +5422,7 @@ Position = 5
 SizeX = 2
 SizeY = 2
 Price = 1400
-Class = Wing
+Class = equipment.Wing
 
 [Purity Wing]
 ID = 902
@@ -5436,7 +5436,7 @@ Position = 5
 SizeX = 2
 SizeY = 2
 Price = 1800
-Class = Wing
+Class = equipment.Wing
 
 [Prosperity Wing]
 ID = 903
@@ -5451,7 +5451,7 @@ Position = 5
 SizeX = 2
 SizeY = 2
 Price = 2000
-Class = Wing
+Class = equipment.Wing
 
 [Mercy Wing]
 ID = 904
@@ -5467,7 +5467,7 @@ Position = 5
 SizeX = 2
 SizeY = 2
 Price = 4000
-Class = Wing
+Class = equipment.Wing
 
 [Hope Wing]
 ID = 905
@@ -5483,7 +5483,7 @@ Position = 5
 SizeX = 2
 SizeY = 2
 Price = 5000
-Class = Wing
+Class = equipment.Wing
 
 [Passion Wing]
 ID = 906
@@ -5499,7 +5499,7 @@ Position = 5
 SizeX = 2
 SizeY = 2
 Price = 6600
-Class = Wing
+Class = equipment.Wing
 
 [Darkness Wing]
 ID = 907
@@ -5515,7 +5515,7 @@ Position = 5
 SizeX = 2
 SizeY = 2
 Price = 18000
-Class = Wing
+Class = equipment.Wing
 
 [Sky Wing]
 ID = 908
@@ -5531,7 +5531,7 @@ Position = 5
 SizeX = 2
 SizeY = 2
 Price = 29000
-Class = Wing
+Class = equipment.Wing
 
 [Haeven Wing]
 ID = 909
@@ -5547,7 +5547,7 @@ Position = 5
 SizeX = 2
 SizeY = 2
 Price = 55000
-Class = Wing
+Class = equipment.Wing
 
 [Aidia Meta Wing]
 ID = 575
@@ -5564,7 +5564,7 @@ Position = 5
 SizeX = 2
 SizeY = 2
 Price = 1000000
-Class = Wing
+Class = equipment.Wing
 
 [Hi-Light Wing]
 ID = 1030
@@ -5581,7 +5581,7 @@ Position = 5
 SizeX = 2
 SizeY = 2
 Price = 10000000
-Class = Wing
+Class = equipment.Wing
 
 #######################
 ###### Necklaces ######
@@ -5597,7 +5597,7 @@ Position = 6
 SizeX = 1
 SizeY = 1
 Price = 1000
-Class = Necklace
+Class = equipment.Necklace
 
 [Magic Amulet]
 ID = 446
@@ -5609,7 +5609,7 @@ Position = 6
 SizeX = 1
 SizeY = 1
 Price = 1000
-Class = Necklace
+Class = equipment.Necklace
 
 [Stamina Amulet]
 ID = 447
@@ -5621,7 +5621,7 @@ Position = 6
 SizeX = 1
 SizeY = 1
 Price = 1000
-Class = Necklace
+Class = equipment.Necklace
 
 [Electric Amulet]
 ID = 448
@@ -5633,7 +5633,7 @@ Position = 6
 SizeX = 1
 SizeY = 1
 Price = 1000
-Class = Necklace
+Class = equipment.Necklace
 
 
 ########################
@@ -5650,7 +5650,7 @@ Position = 8
 SizeX = 1
 SizeY = 1
 #Price = 
-Class = Bracelet
+Class = equipment.Bracelet
 
 [Bracelet Of Adventurer]
 #ID = 
@@ -5662,7 +5662,7 @@ Position = 8
 SizeX = 1
 SizeY = 1
 #Price = 
-Class = Bracelet
+Class = equipment.Bracelet
 
 [Evolution Bracelet]
 ID = 1087
@@ -5674,7 +5674,7 @@ Position = 8
 SizeX = 1
 SizeY = 1
 Price = 1000
-Class = Bracelet
+Class = equipment.Bracelet
 
 ########################
 #### ORNAMENT RINGS ####
@@ -5689,7 +5689,7 @@ Position = 8
 SizeX = 1
 SizeY = 1
 #Price = 
-Class = Ring
+Class = equipment.Ring
 
 [Ring Of Athena]
 #ID = 
@@ -5700,7 +5700,7 @@ Position = 8
 SizeX = 1
 SizeY = 1
 #Price = 
-Class = Ring
+Class = equipment.Ring
 
 [Ring Of Artemis]
 #ID = 
@@ -5711,7 +5711,7 @@ Position = 8
 SizeX = 1
 SizeY = 1
 #Price = 
-Class = Ring
+Class = equipment.Ring
 
 [Ring Of Titan]
 #ID = 
@@ -5722,7 +5722,7 @@ Position = 8
 SizeX = 1
 SizeY = 1
 #Price = 
-Class = Ring
+Class = equipment.Ring
 
 [Ring Of Zeus]
 #ID = 
@@ -5733,7 +5733,7 @@ Position = 8
 SizeX = 1
 SizeY = 1
 #Price = 
-Class = Ring
+Class = equipment.Ring
 
 ########################
 ##### MAGIC STONES #####
@@ -6016,7 +6016,7 @@ Price = 565000
 Class = StoneOfCalling
 
 #########################
-####### GEMSTONES #######
+####### GemStones #######
 #########################
 
 [Rough Amethyst]
@@ -6028,7 +6028,7 @@ CraftKits = 1
 SizeX = 1
 SizeY = 1
 Price = 5000
-Class = GemStones
+Class = GemStone
 
 [Amethyst]
 ID = 222
@@ -6037,7 +6037,7 @@ ReqStr = 5
 SizeX = 1
 SizeY = 1
 Price = 6000
-Class = GemStones
+Class = GemStone
 
 [Amethyst Chip Grade 1]
 ID = 521
@@ -6046,7 +6046,7 @@ ReqStr = 5
 SizeX = 1
 SizeY = 1
 Price = 1200
-Class = GemStones
+Class = GemStone
 
 [Amethyst Chip Grade 2]
 ID = 528
@@ -6055,7 +6055,7 @@ ReqStr = 5
 SizeX = 1
 SizeY = 1
 Price = 240
-Class = GemStones
+Class = GemStone
 
 [Amethyst Chip Grade 3]
 ID = 535
@@ -6064,7 +6064,7 @@ ReqStr = 5
 SizeX = 1
 SizeY = 1
 Price = 48
-Class = GemStones
+Class = GemStone
 
 [Rough Topaz]
 ID = 216
@@ -6075,7 +6075,7 @@ CraftKits = 2
 SizeX = 1
 SizeY = 1
 Price = 19000
-Class = GemStones
+Class = GemStone
 
 [Topaz]
 ID = 223
@@ -6084,7 +6084,7 @@ ReqStr = 5
 SizeX = 1
 SizeY = 1
 Price = 22000
-Class = GemStones
+Class = GemStone
 
 [Topaz Chip Grade 1]
 ID = 522
@@ -6093,7 +6093,7 @@ ReqStr = 5
 SizeX = 1
 SizeY = 1
 Price = 4400
-Class = GemStones
+Class = GemStone
 
 [Topaz Chip Grade 2]
 ID = 529
@@ -6102,7 +6102,7 @@ ReqStr = 5
 SizeX = 1
 SizeY = 1
 Price = 880
-Class = GemStones
+Class = GemStone
 
 [Topaz Chip Grade 3]
 ID = 536
@@ -6111,7 +6111,7 @@ ReqStr = 5
 SizeX = 1
 SizeY = 1
 Price = 176
-Class = GemStones
+Class = GemStone
 
 [Rough Opal]
 ID = 217
@@ -6122,7 +6122,7 @@ CraftKits = 3
 SizeX = 1
 SizeY = 1
 Price = 51000
-Class = GemStones
+Class = GemStone
 
 [Opal]
 ID = 224
@@ -6131,7 +6131,7 @@ ReqStr = 5
 SizeX = 1
 SizeY = 1
 Price = 58000
-Class = GemStones
+Class = GemStone
 
 [Opal Chip Grade 1]
 ID = 523
@@ -6140,7 +6140,7 @@ ReqStr = 5
 SizeX = 1
 SizeY = 1
 Price = 11600
-Class = GemStones
+Class = GemStone
 
 [Opal Chip Grade 2]
 ID = 530
@@ -6149,7 +6149,7 @@ ReqStr = 5
 SizeX = 1
 SizeY = 1
 Price = 2320
-Class = GemStones
+Class = GemStone
 
 [Opal Chip Grade 3]
 ID = 537
@@ -6158,7 +6158,7 @@ ReqStr = 5
 SizeX = 1
 SizeY = 1
 Price = 464
-Class = GemStones
+Class = GemStone
 
 [Rough Sapphire]
 ID = 218
@@ -6169,7 +6169,7 @@ CraftKits = 5
 SizeX = 1
 SizeY = 1
 Price = 101000
-Class = GemStones
+Class = GemStone
 
 [Sapphire]
 ID = 225
@@ -6178,7 +6178,7 @@ ReqStr = 5
 SizeX = 1
 SizeY = 1
 Price = 113000
-Class = GemStones
+Class = GemStone
 
 [Sapphire Chip Grade 1]
 ID = 524
@@ -6187,7 +6187,7 @@ ReqStr = 5
 SizeX = 1
 SizeY = 1
 Price = 22600
-Class = GemStones
+Class = GemStone
 
 [Sapphire Chip Grade 2]
 ID = 531
@@ -6196,7 +6196,7 @@ ReqStr = 5
 SizeX = 1
 SizeY = 1
 Price = 4520
-Class = GemStones
+Class = GemStone
 
 [Sapphire Chip Grade 3]
 ID = 538
@@ -6205,7 +6205,7 @@ ReqStr = 5
 SizeX = 1
 SizeY = 1
 Price = 904
-Class = GemStones
+Class = GemStone
 
 [Rough Ruby]
 ID = 219
@@ -6216,7 +6216,7 @@ CraftKits = 7
 SizeX = 1
 SizeY = 1
 Price = 170000
-Class = GemStones
+Class = GemStone
 
 [Ruby]
 ID = 226
@@ -6225,7 +6225,7 @@ ReqStr = 5
 SizeX = 1
 SizeY = 1
 Price = 189000
-Class = GemStones
+Class = GemStone
 
 [Ruby Chip Grade 1]
 ID = 525
@@ -6234,7 +6234,7 @@ ReqStr = 5
 SizeX = 1
 SizeY = 1
 Price = 37800
-Class = GemStones
+Class = GemStone
 
 [Ruby Chip Grade 2]
 ID = 532
@@ -6243,7 +6243,7 @@ ReqStr = 5
 SizeX = 1
 SizeY = 1
 Price = 7560
-Class = GemStones
+Class = GemStone
 
 [Ruby Chip Grade 3]
 ID = 539
@@ -6252,7 +6252,7 @@ ReqStr = 5
 SizeX = 1
 SizeY = 1
 Price = 1512
-Class = GemStones
+Class = GemStone
 
 [Rough Emerald]
 ID = 220
@@ -6263,7 +6263,7 @@ CraftKits = 12
 SizeX = 1
 SizeY = 1
 Price = 256
-Class = GemStones
+Class = GemStone
 
 [Emerald]
 ID = 227
@@ -6272,7 +6272,7 @@ ReqStr = 5
 SizeX = 1
 SizeY = 1
 Price = 285000
-Class = GemStones
+Class = GemStone
 
 [Emerald Chip Grade 1]
 ID = 526
@@ -6281,7 +6281,7 @@ ReqStr = 5
 SizeX = 1
 SizeY = 1
 Price = 57000
-Class = GemStones
+Class = GemStone
 
 [Emerald Chip Grade 2]
 ID = 533
@@ -6290,7 +6290,7 @@ ReqStr = 5
 SizeX = 1
 SizeY = 1
 Price = 11400
-Class = GemStones
+Class = GemStone
 
 [Emerald Chip Grade 3]
 ID = 540
@@ -6299,7 +6299,7 @@ ReqStr = 5
 SizeX = 1
 SizeY = 1
 Price = 2280
-Class = GemStones
+Class = GemStone
 
 [Rough Diamond]
 ID = 221
@@ -6310,7 +6310,7 @@ CraftKits = 20
 SizeX = 1
 SizeY = 1
 Price = 360000
-Class = GemStones
+Class = GemStone
 
 [Diamond]
 ID = 228
@@ -6319,7 +6319,7 @@ ReqStr = 5
 SizeX = 1
 SizeY = 1
 Price = 400000
-Class = GemStones
+Class = GemStone
 
 [Diamond Chip Grade 1]
 ID = 527
@@ -6328,7 +6328,7 @@ ReqStr = 5
 SizeX = 1
 SizeY = 1
 Price = 80000
-Class = GemStones
+Class = GemStone
 
 [Diamond Chip Grade 2]
 ID = 534
@@ -6337,7 +6337,7 @@ ReqStr = 5
 SizeX = 1
 SizeY = 1
 Price = 16000
-Class = GemStones
+Class = GemStone
 
 [Diamond Chip Grade 3]
 ID = 541
@@ -6346,7 +6346,7 @@ ReqStr = 5
 SizeX = 1
 SizeY = 1
 Price = 3200
-Class = GemStones
+Class = GemStone
 
 [Rough Regent Diamond]
 ID = 1067
@@ -6357,7 +6357,7 @@ CraftKits = 30
 SizeX = 1
 SizeY = 1
 Price = 10800000
-Class = GemStones
+Class = GemStone
 
 [Regent Diamond]
 ID = 1068
@@ -6366,7 +6366,7 @@ ReqStr = 5
 SizeX = 1
 SizeY = 1
 Price = 12000000
-Class = GemStones
+Class = GemStone
 
 #######################
 ####### POTIONS #######
@@ -6376,417 +6376,321 @@ Class = GemStones
 ID = 145
 Type = 20
 ReqStr = 2
-HpRec = 40
-ManaRec = 0
-StmRec = 0
-ElectRec = 0
+Effect = 40
 SizeX = 1
 SizeY = 1
 Price = 6
-Class = Potion
+Class = potion.HealthPotion
 
 [Small Healing Potion]
 ID = 140
 Type = 20
 ReqStr = 3
-HpRec = 80
-ManaRec = 0
-StmRec = 0
-ElectRec = 0
+Effect = 80
 SizeX = 1
 SizeY = 1
 Price = 11
-Class = Potion
+Class = potion.HealthPotion
 
 [Healing Potion]
 ID = 133
 Type = 20
 ReqStr = 5
-HpRec = 300
-ManaRec = 0
-StmRec = 0
-ElectRec = 0
+Effect = 300
 SizeX = 1
 SizeY = 1
 Price = 38
-Class = Potion
+Class = potion.HealthPotion
 
 [Large Healing Potion]
 ID = 288
 Type = 20
 ReqStr = 5
-HpRec = 500
-ManaRec = 0
-StmRec = 0
-ElectRec = 0
+Effect = 500
 SizeX = 1
 SizeY = 1
 Price = 80
-Class = Potion
+Class = potion.HealthPotion
 
 [Mega Vitality Potion]
 ID = 470
 Type = 20
 ReqStr = 5
-HpRec = 800
-ManaRec = 0
-StmRec = 0
-ElectRec = 0
+Effect = 800
 SizeX = 1
 SizeY = 1
 Price = 114
-Class = Potion
+Class = potion.HealthPotion
 
 [Giga Vitality Potion]
 ID = 515
 Type = 20
 ReqStr = 5
-HpRec = 1000
-ManaRec = 0
-StmRec = 0
-ElectRec = 0
+Effect = 1000
 SizeX = 1
 SizeY = 1
 Price = 140
-Class = Potion
+Class = potion.HealthPotion
 
 [Instant Vitality Increaser]
 ID = 1044
 Type = 20
 ReqStr = 5
-HpRec = 1000
-ManaRec = 0
-StmRec = 0
-ElectRec = 0
+Effect = 1000
 SizeX = 1
 SizeY = 1
 Price = 420
-Class = Potion
+Class = potion.HealthPotion
 
 [Vitality Increaser]
 ID = 1040
 Type = 20
 ReqStr = 5
-HpRec = 1500
-ManaRec = 0
-StmRec = 0
-ElectRec = 0
+Effect = 1500
 SizeX = 1
 SizeY = 1
 Price = 560
-Class = Potion
+Class = potion.HealthPotion
 
 [Mana Recovery Potion]
 ID = 1048
 Type = 20
 ReqStr = 2
-HpRec = 0
-ManaRec = 60
-StmRec = 0
-ElectRec = 0
+Effect = 60
 SizeX = 1
 SizeY = 1
 Price = 6
-Class = Potion
+Class = potion.ManaPotion
 
 [Small Mana Potion]
 ID = 146
 Type = 20
 ReqStr = 1
-HpRec = 0
-ManaRec = 120
-StmRec = 0
-ElectRec = 0
+Effect = 120
 SizeX = 1
 SizeY = 1
 Price = 11
-Class = Potion
+Class = potion.ManaPotion
 
 [Mana Potion]
 ID = 147
 Type = 20
 ReqStr = 2
-HpRec = 0
-ManaRec = 300
-StmRec = 0
-ElectRec = 0
+Effect = 300
 SizeX = 1
 SizeY = 1
 Price = 40
-Class = Potion
+Class = potion.ManaPotion
 
 [Large Mana Potion]
 ID = 289
 Type = 20
 ReqStr = 2
-HpRec = 0
-ManaRec = 500
-StmRec = 0
-ElectRec = 0
+Effect = 500
 SizeX = 1
 SizeY = 1
 Price = 80
-Class = Potion
+Class = potion.ManaPotion
 
 [Mega Mana Potion]
 ID = 512
 Type = 20
 ReqStr = 5
-HpRec = 0
-ManaRec = 800
-StmRec = 0
-ElectRec = 0
+Effect = 800
 SizeX = 1
 SizeY = 1
 Price = 114
-Class = Potion
+Class = potion.ManaPotion
 
 [Giga Mana Potion]
 ID = 568
 Type = 20
 ReqStr = 5
-HpRec = 1000
-ManaRec = 0
-StmRec = 0
-ElectRec = 0
+Effect = 1000
 SizeX = 1
 SizeY = 1
 Price = 133
-Class = Potion
+Class = potion.ManaPotion
 
 [Instant Mana Increaser]
 ID = 1045
 Type = 20
 ReqStr = 5
-HpRec = 0
-ManaRec = 1000
-StmRec = 0
-ElectRec = 0
+Effect = 1000
 SizeX = 1
 SizeY = 1
 Price = 420
-Class = Potion
+Class = potion.ManaPotion
 
 [Mana Increaser]
 ID = 1041
 Type = 20
 ReqStr = 5
-HpRec = 0
-ManaRec = 1500
-StmRec = 0
-ElectRec = 0
+Effect = 1500
 SizeX = 1
 SizeY = 1
 Price = 560
-Class = Potion
+Class = potion.ManaPotion
 
 [Wolf Meat]
 ID = 142
 Type = 20
 ReqStr = 2
-HpRec = 0
-ManaRec = 0
-StmRec = 50
-ElectRec = 0
+Effect = 50
 SizeX = 1
 SizeY = 1
 Price = 4
-Class = Potion
+Class = potion.StaminaPotion
 
 [Tiger Meat]
 ID = 143
 Type = 20
 ReqStr = 2
-HpRec = 0
-ManaRec = 0
-StmRec = 80
-ElectRec = 0
+Effect = 80
 SizeX = 1
 SizeY = 1
 Price = 9
-Class = Potion
+Class = potion.StaminaPotion
 
 [Stamina Potion]
 ID = 144
 Type = 20
 ReqStr = 2
-HpRec = 0
-ManaRec = 0
-StmRec = 300
-ElectRec = 0
+Effect = 300
 SizeX = 1
 SizeY = 1
 Price = 40
-Class = Potion
+Class = potion.StaminaPotion
 
 [Large Stamina Potion]
 ID = 290
 Type = 20
 ReqStr = 2
-HpRec = 0
-ManaRec = 0
-StmRec = 500
-ElectRec = 0
+Effect = 500
 SizeX = 1
 SizeY = 1
 Price = 80
-Class = Potion
+Class = potion.StaminaPotion
 
 [Mega Stamina Potion]
 ID = 513
 Type = 20
 ReqStr = 5
-HpRec = 0
-ManaRec = 0
-StmRec = 800
-ElectRec = 0
+Effect = 800
 SizeX = 1
 SizeY = 1
 Price = 114
-Class = Potion
+Class = potion.StaminaPotion
 
 [Giga Stamina Potion]
 ID = 1039
 Type = 20
 ReqStr = 5
-HpRec = 0
-ManaRec = 0
-StmRec = 1000
-ElectRec = 0
+Effect = 1000
 SizeX = 1
 SizeY = 1
 Price = 140
-Class = Potion
+Class = potion.StaminaPotion
 
 [Instant Stamina Increaser]
 ID = 1047
 Type = 20
 ReqStr = 5
-HpRec = 0
-ManaRec = 0
-StmRec = 1000
-ElectRec = 0
+Effect = 1000
 SizeX = 1
 SizeY = 1
 Price = 420
-Class = Potion
+Class = potion.StaminaPotion
 
 [Stamina Increaser]
 ID = 1043
 Type = 20
 ReqStr = 5
-HpRec = 0
-ManaRec = 0
-StmRec = 1500
-ElectRec = 0
+Effect = 1500
 SizeX = 1
 SizeY = 1
 Price = 560
-Class = Potion
+Class = potion.StaminaPotion
 
 [Mini Cell]
 ID = 209
 Type = 20
 ReqStr = 2
-HpRec = 0
-ManaRec = 0
-StmRec = 0
-ElectRec = 40
+Effect = 40
 SizeX = 1
 SizeY = 1
 Price = 6
-Class = Potion
+Class = potion.ElectricityPotion
 
 [Battery]
 ID = 210
 Type = 20
 ReqStr = 3
-HpRec = 0
-ManaRec = 0
-StmRec = 0
-ElectRec = 80
+Effect = 80
 SizeX = 1
 SizeY = 1
 Price = 11
-Class = Potion
+Class = potion.ElectricityPotion
 
 [Charging Pack]
 ID = 211
 Type = 20
 ReqStr = 5
-HpRec = 0
-ManaRec = 0
-StmRec = 0
-ElectRec = 300
+Effect = 300
 SizeX = 1
 SizeY = 1
 Price = 38
-Class = Potion
+Class = potion.ElectricityPotion
 
 [Large Electric Power Potion]
 ID = 291
 Type = 20
 ReqStr = 2
-HpRec = 0
-ManaRec = 0
-StmRec = 0
-ElectRec = 500
+Effect = 500
 SizeX = 1
 SizeY = 1
 Price = 80
-Class = Potion
+Class = potion.ElectricityPotion
 
 [Mega Electric Power Potion]
 ID = 514
 Type = 20
 ReqStr = 5
-HpRec = 0
-ManaRec = 0
-StmRec = 0
-ElectRec = 800
+Effect = 800
 SizeX = 1
 SizeY = 1
 Price = 114
-Class = Potion
+Class = potion.ElectricityPotion
 
 [Giga Electric Power Potion]
 ID = 569
 Type = 20
 ReqStr = 5
-HpRec = 0
-ManaRec = 0
-StmRec = 0
-ElectRec = 1000
+Effect = 1000
 SizeX = 1
 SizeY = 1
 Price = 133
-Class = Potion
+Class = potion.ElectricityPotion
 
 [Instant Electricity Increaser]
 ID = 1046
 Type = 20
 ReqStr = 5
-HpRec = 0
-ManaRec = 0
-StmRec = 0
-ElectRec = 1000
+Effect = 1000
 SizeX = 1
 SizeY = 1
 Price = 420
-Class = Potion
+Class = potion.ElectricityPotion
 
 [Electricity Increaser]
 ID = 1042
 Type = 20
 ReqStr = 5
-HpRec = 0
-ManaRec = 0
-StmRec = 0
-ElectRec = 1500
+Effect = 1500
 SizeX = 1
 SizeY = 1
 Price = 560
-Class = Potion
+Class = potion.ElectricityPotion
 
 ########################
 ###### WARP GATES ######
@@ -6996,7 +6900,7 @@ ReqStr = 5
 SizeX = 1
 SizeY = 1
 Price = 10
-Class = AssemblingParts
+Class = AssemblingPart
 
 [Processor Kit]
 ID = 845
@@ -7006,7 +6910,7 @@ ReqStr = 2
 SizeX = 1
 SizeY = 1
 Price = 300
-Class = AssemblingParts
+Class = AssemblingPart
 
 [Control Kit]
 ID = 846
@@ -7016,7 +6920,7 @@ ReqStr = 5
 SizeX = 1
 SizeY = 1
 Price = 500
-Class = AssemblingParts
+Class = AssemblingPart
 
 [Assembly Kit]
 ID = 855
@@ -7026,7 +6930,7 @@ ReqStr = 1
 SizeX = 1
 SizeY = 1
 Price = 50000
-Class = AssemblingParts
+Class = AssemblingPart
 
 [Cell Capsule]
 ID = 848
@@ -7036,7 +6940,7 @@ ReqStr = 5
 SizeX = 1
 SizeY = 1
 Price = 1000
-Class = AssemblingParts
+Class = AssemblingPart
 
 [Antibiotic Capsule]
 ID = 849
@@ -7046,7 +6950,7 @@ ReqStr = 5
 SizeX = 1
 SizeY = 1
 Price = 1200
-Class = AssemblingParts
+Class = AssemblingPart
 
 [Genetic Capsule]
 ID = 850
@@ -7056,7 +6960,7 @@ ReqStr = 5
 SizeX = 1
 SizeY = 1
 Price = 1500
-Class = AssemblingParts
+Class = AssemblingPart
 
 [Harpoon Capsule]
 ID = 853
@@ -7066,7 +6970,7 @@ ReqStr = 5
 SizeX = 1
 SizeY = 1
 Price = 2000
-Class = AssemblingParts
+Class = AssemblingPart
 
 [Khan Capsule]
 ID = 854
@@ -7076,7 +6980,7 @@ ReqStr = 5
 SizeX = 1
 SizeY = 1
 Price = 3000
-Class = AssemblingParts
+Class = AssemblingPart
 
 [Spirit Capsule]  ### NEW ###
 ID = 1076
@@ -7086,7 +6990,7 @@ ReqStr = 1
 SizeX = 1
 SizeY = 1
 Price = 500000
-Class = AssemblingParts
+Class = AssemblingPart
 
 [Dragon Capsule] ### NEW ###
 ID = 1075
@@ -7096,7 +7000,7 @@ ReqStr = 1
 SizeX = 1
 SizeY = 1
 Price = 560000
-Class = AssemblingParts
+Class = AssemblingPart
 
 ########################
 ### SMALL EQUIPMENTS ###
@@ -7249,7 +7153,7 @@ Class = SmallEquipment
 ### SCROLL AND SPELL BOOKS ###
 ##############################
 
-[wand Charger 1]
+[Wand Charger 1]
 ID = 776
 Type = 25
 Race = 1
@@ -7260,7 +7164,7 @@ SizeY = 1
 Price = 400
 Class = ScrollAndSpellBoock
 
-[wand Charger 2]
+[Wand Charger 2]
 ID = 777
 Type = 25
 Race = 1
@@ -7271,7 +7175,7 @@ SizeY = 1
 #Price = 
 Class = ScrollAndSpellBoock
 
-[wand Charger 3]
+[Wand Charger 3]
 ID = 778
 Type = 25
 Race = 1
@@ -7282,7 +7186,7 @@ SizeY = 1
 #Price = 
 Class = ScrollAndSpellBoock
 
-[wand Charger 4]
+[Wand Charger 4]
 ID = 779
 Type = 25
 Race = 1
@@ -7620,7 +7524,7 @@ ReqStr = 0
 SizeX = 1
 SizeY = 1
 Price = 500
-Class = PetItem
+Class = pet.PetItem
 
 [Labiyoing recall device]
 ID = 968
@@ -7629,7 +7533,7 @@ ReqStr = 2
 SizeX = 1
 SizeY = 1
 Price = 50000
-Class = PetItem
+Class = pet.PetItem
 
 [Change Pet Name]
 ID = 620
@@ -7638,7 +7542,7 @@ ReqStr = 2
 SizeX = 1
 SizeY = 1
 Price = 500000
-Class = PetItem
+Class = pet.PetItem
 
 [Pet Transfer]
 ID = 969
@@ -7647,7 +7551,7 @@ ReqStr = 0
 SizeX = 1
 SizeY = 1
 Price = 500000
-Class = PetItem
+Class = pet.PetItem
 
 
 [Dragon Slayer]
@@ -7667,7 +7571,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 10000000
-Class = SlayerWeapon
+Class = equipment.SlayerWeapon
 
 [Rocket Cannon Launcher]
 ID = 755
@@ -7686,7 +7590,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 10000000
-Class = HeavyWeapon
+Class = equipment.HeavyWeapon
 
 [Mini Nuclear Launcher]
 ID = 756
@@ -7705,7 +7609,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 10000000
-Class = HeavyWeapon
+Class = equipment.HeavyWeapon
 
 [Slash Chakuram]
 ID = 738
@@ -7725,7 +7629,7 @@ Handed = 1
 SizeX = 2
 SizeY = 2
 Price = 7500000
-Class = ChakuranWeapon
+Class = equipment.ChakuranWeapon
 
 
 [Death Wave Wand]
@@ -7747,7 +7651,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 50000
-Class = WandWeapon
+Class = equipment.WandWeapon
 
 ###########
 ###QUEST###
@@ -7762,7 +7666,7 @@ Position = 8
 SizeX = 1
 SizeY = 1
 Price = 2000
-Class = Ring
+Class = equipment.Ring
 
 [Zeus Finger Ring]
 ID = 938
@@ -7773,7 +7677,7 @@ Position = 8
 SizeX = 1
 SizeY = 1
 Price = 2000
-Class = Ring
+Class = equipment.Ring
 
 [Life Amulet Quest]
 ID = 939
@@ -7785,7 +7689,7 @@ Position = 6
 SizeX = 1
 SizeY = 1
 Price = 2000
-Class = Necklace
+Class = equipment.Necklace
 
 [Stamina Amulet Quest]
 ID = 940
@@ -7797,7 +7701,7 @@ Position = 6
 SizeX = 1
 SizeY = 1
 Price = 2000
-Class = Necklace
+Class = equipment.Necklace
 
 [Dekadun Bracelet]
 ID = 901
@@ -7809,7 +7713,7 @@ Position = 8
 SizeX = 1
 SizeY = 1
 Price = 1000
-Class = Bracelet
+Class = equipment.Bracelet
 
 #################################
 
@@ -7823,7 +7727,7 @@ Position = 8
 SizeX = 1
 SizeY = 1
 Price = 1000
-Class = Bracelet
+Class = equipment.Bracelet
 
 [Merchant Bracelet]
 ID = 457
@@ -7835,7 +7739,7 @@ Position = 8
 SizeX = 1
 SizeY = 1
 Price = 1000
-Class = Bracelet
+Class = equipment.Bracelet
 
 [Planner Bracelet]
 ID = 458
@@ -7847,7 +7751,7 @@ Position = 8
 SizeX = 1
 SizeY = 1
 Price = 1000
-Class = Bracelet
+Class = equipment.Bracelet
 
 [Salamander Magic Stone]
 ID = 554
@@ -7976,7 +7880,7 @@ Position = 3
 SizeX = 2
 SizeY = 3
 Price = 950000
-Class = Mantle
+Class = equipment.Mantle
 
 [Rocket Cannon]
 ID = 766
@@ -8018,7 +7922,7 @@ ReqStr = 1
 SizeX = 1
 SizeY = 1
 Price = 1615
-Class = AssemblingParts
+Class = AssemblingPart
 
 [Special Kit 2]
 ID = 852
@@ -8028,7 +7932,7 @@ ReqStr = 1
 SizeX = 1
 SizeY = 1
 Price = 1757
-Class = AssemblingParts
+Class = AssemblingPart
 
 [Machine Device]
 ID = 847
@@ -8038,14 +7942,14 @@ ReqStr = 1
 SizeX = 1
 SizeY = 1
 Price = 760
-Class = AssemblingParts
+Class = AssemblingPart
 
 #######################
 ###### TYPE LIST ######
 #######################
 
 [Type]
-Armor = 0
+equipment.Armor = 0
 Gun = 1
 Sword = 2
 Axe = 3
