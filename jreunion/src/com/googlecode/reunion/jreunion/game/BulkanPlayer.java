@@ -31,6 +31,7 @@ public class BulkanPlayer extends Player {
 		return Tools.statCalc(getWisdom(), 80) + (getLeadership() / 2);		
 	}
 	
+	@Override
 	public int getMaxHp(){
 		return Tools.statCalc(getStrength(), 50) + Tools.statCalc(getConstitution(), 20)+ (getLeadership() / 2);		
 	}

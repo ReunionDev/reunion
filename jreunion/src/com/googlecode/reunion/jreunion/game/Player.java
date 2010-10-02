@@ -30,6 +30,7 @@ import com.googlecode.reunion.jreunion.server.Reference;
 import com.googlecode.reunion.jreunion.server.Server;
 import com.googlecode.reunion.jreunion.server.Session;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
+import com.googlecode.reunion.jreunion.server.Tools;
 
 /**
  * @author Aidamina
@@ -279,7 +280,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 	
 
 	public void setStamina(int stamina){
-		this.stamina = between(stamina, 0, getMaxStamina());
+		this.stamina = Tools.between(stamina, 0, getMaxStamina());
 		this.sendStatus(Status.STAMINA);
 	}
 	
@@ -413,13 +414,14 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 
 	
 	public void setMana(int mana) {
-		this.mana = between(mana, 0, getMaxMana());
+		this.mana = Tools.between(mana, 0, getMaxMana());
 		sendStatus(Status.MANA);
 	}
 
 
 	public void setElectricity(int electricity) {
-		this.electricity =  between(electricity,0,getMaxElectricity());
+		this.electricity = Tools.between(electricity,0,getMaxElectricity());
+		sendStatus(Status.ELECTRICITY);
 	}	
 
 	public Race getRace() {
@@ -804,6 +806,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 	public void setGuildId(int guildId) {
 		this.guildId = guildId;
 	}
+	
 	@Override
 	public void setLevel(int level) {
 		super.setLevel(level);
@@ -866,6 +869,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 
 	public void setPenaltyPoints(int penaltyPoints) {
 		this.penaltyPoints = penaltyPoints;
+		sendStatus(Status.PENALTYPOINTS);
 	}
 
 	public void setQuest(Quest quest) {

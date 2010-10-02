@@ -78,7 +78,7 @@ public class AidiaPlayer extends Player {
 		return Tools.statCalc(getDexterity(), 80) +(getLeadership() / 2);
 	}
 	
-	
+	@Override
 	public int getMaxHp(){
 		return Tools.statCalc(getStrength(), 80) + Tools.statCalc(getConstitution(), 40)+((getLeadership() / 2) * 5);		
 	}

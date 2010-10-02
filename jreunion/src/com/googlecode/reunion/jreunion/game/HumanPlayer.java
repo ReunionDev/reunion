@@ -76,6 +76,7 @@ public class HumanPlayer extends Player {
 		return Tools.statCalc(getDexterity(), 30) +(getLeadership() / 2);
 	}
 	
+	@Override
 	public int getMaxHp(){
 		return Tools.statCalc(getStrength(), 80) + Tools.statCalc(getConstitution(), 30)+ (getLeadership() / 2);		
 	}
@@ -86,7 +87,6 @@ public class HumanPlayer extends Player {
 	public int getMaxStamina(){
 		return getStrength() + (getLeadership() / 2);
 	}
-	
 
 	@Override
 	public int getBaseDamage() {

@@ -5,6 +5,7 @@ import com.googlecode.reunion.jreunion.server.LocalMap;
 import com.googlecode.reunion.jreunion.server.Reference;
 import com.googlecode.reunion.jreunion.server.Session;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
+import com.googlecode.reunion.jreunion.server.Tools;
 
 /**
  * @author Aidamina
@@ -94,15 +95,8 @@ public abstract class LivingObject extends WorldObject {
 
 	}
 
-
 	public void setHp(int hp) {
-		this.hp = between(hp, 0, getMaxHp());		
-	}
-	
-	static int between(int current, int min, int max) {
-		
-		return Math.max(Math.min(current, max),min);
-		
+		this.hp = Tools.between(hp, 0, getMaxHp());		
 	}
 
 	public void setLevel(int level) {
