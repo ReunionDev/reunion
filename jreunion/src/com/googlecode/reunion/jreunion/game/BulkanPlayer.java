@@ -6,6 +6,7 @@ import com.googlecode.reunion.jreunion.game.skills.bulkan.AxeMastery;
 import com.googlecode.reunion.jreunion.game.skills.bulkan.SwordMastery;
 import com.googlecode.reunion.jreunion.server.Client;
 import com.googlecode.reunion.jreunion.server.Server;
+import com.googlecode.reunion.jreunion.server.Tools;
 
 
 
@@ -21,6 +22,22 @@ public class BulkanPlayer extends Player {
 
 	public void activationSkill(Skill skill) {
 
+	}
+	public int getMaxElectricity(){
+		return Tools.statCalc(getDexterity(), 50) +(getLeadership() / 2);
+	}
+	
+	public int getMaxMana(){
+		return Tools.statCalc(getWisdom(), 80) + (getLeadership() / 2);		
+	}
+	
+	public int getMaxHp(){
+		return Tools.statCalc(getStrength(), 50) + Tools.statCalc(getConstitution(), 20)+ (getLeadership() / 2);		
+	}
+	
+	public int getMaxStamina(){
+		return Tools.statCalc(getStrength(), 60) + (getLeadership() / 2);		
+		
 	}
 
 	public void attackSkill(LivingObject livingObject, Skill skill) {
@@ -196,5 +213,11 @@ public class BulkanPlayer extends Player {
 		} else if (skill.getType() == 2) {
 			attackSkill(livingObject, skill);
 		}
+	}
+
+	@Override
+	int getBaseDamage() {
+
+		return (getLevel() / 7) + (getStrength() / 4) + (getConstitution() / 8) + (getDexterity() / 4);
 	}
 }

@@ -6,6 +6,7 @@ import java.util.TimerTask;
 import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jreunion.game.Etc;
 import com.googlecode.reunion.jreunion.game.LivingObject;
+import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Usable;
 import com.googlecode.reunion.jreunion.server.Reference;
 
@@ -40,12 +41,13 @@ public abstract class Potion extends Etc implements Usable {
 		TimerTask o= new TimerTask(){
 			int left = getEffect();
 			int ticks = Potion.ticks;
+			Player player = (Player)user;
 			@Override
 			public void run() {
 				System.out.println(System.currentTimeMillis()-start);
 				int effect = getEffect()/Potion.ticks;
 				
-				effect(user, Math.min(left, effect));
+				effect(player, Math.min(left, effect));
 				
 				left-=effect;
 				ticks--;
@@ -67,6 +69,6 @@ public abstract class Potion extends Etc implements Usable {
 		this.setEffect(Integer.parseInt(item.getMemberValue("Effect")));		
 	}
 	
-	public abstract void effect(LivingObject target, int effect);
+	public abstract void effect(Player target, int effect);
 	
 }

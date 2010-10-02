@@ -1,6 +1,7 @@
 package com.googlecode.reunion.jreunion.game.items.potion;
 
 import com.googlecode.reunion.jreunion.game.LivingObject;
+import com.googlecode.reunion.jreunion.game.Player;
 
 public class HealthPotion extends Potion {
 
@@ -10,7 +11,7 @@ public class HealthPotion extends Potion {
 
 
 	@Override
-	public void effect(LivingObject target, int effect) {
+	public void effect(Player target, int effect) {
 		synchronized(target){
 			target.setHp(target.getHp()+effect);
 		

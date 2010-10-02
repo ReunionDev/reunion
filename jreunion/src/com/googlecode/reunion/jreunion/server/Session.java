@@ -1,8 +1,5 @@
 package com.googlecode.reunion.jreunion.server;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
@@ -14,10 +11,6 @@ import com.googlecode.reunion.jreunion.events.EventListener;
 import com.googlecode.reunion.jreunion.events.map.MapEvent;
 import com.googlecode.reunion.jreunion.events.session.SendPacketSessionEvent;
 import com.googlecode.reunion.jreunion.events.session.SessionEvent;
-import com.googlecode.reunion.jreunion.game.Entity;
-import com.googlecode.reunion.jreunion.game.LivingObject;
-import com.googlecode.reunion.jreunion.game.Mob;
-import com.googlecode.reunion.jreunion.game.Npc;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Position;
 import com.googlecode.reunion.jreunion.game.WorldObject;

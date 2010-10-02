@@ -46,8 +46,9 @@ public class PlayerSpawn extends Spawn
 
 		Position position = generatePosition();
 		player.setPosition(position);
-		//this.getPosition().getMap().getWorld().getCommand().GoToPos(player, position);
 		player.getClient().sendPacket(PacketFactory.Type.AT, player);
+	
+		
 		super.spawn(player);
 	}
 

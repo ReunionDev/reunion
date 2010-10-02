@@ -1,6 +1,7 @@
 package com.googlecode.reunion.jreunion.game;
 
 import com.googlecode.reunion.jcommon.ParsedItem;
+import com.googlecode.reunion.jreunion.game.Player.Race;
 import com.googlecode.reunion.jreunion.server.Reference;
 
 /**
@@ -8,7 +9,7 @@ import com.googlecode.reunion.jreunion.server.Reference;
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
 public class EtcItem extends PlayerItem {
-	private int race; // -1 - Common; 0 - Bulkan; 1 - Kailipton; 2 - Aidia;
+	private Race race; // -1 - Common; 0 - Bulkan; 1 - Kailipton; 2 - Aidia;
 
 	// 3 - Human; 4 - Pet
 
@@ -20,19 +21,11 @@ public class EtcItem extends PlayerItem {
 
 	private int skillLevel;
 
-	private int hpRec;
-
-	private int manaRec;
-
-	private int stmRec;
-
-	private int electRec;
-
 	public EtcItem(int id) {
 		super(id);
 	}
 
-	public int getRace() {
+	public Race getRace() {
 		return race;
 	}
 
@@ -65,7 +58,7 @@ public class EtcItem extends PlayerItem {
 			setReqStr(0);
 			setReqInt(0);
 			setReqDex(0);
-			setRace(-1);
+			setRace(Race.UNDEFINED);
 		} else {
 			
 			if (item.checkMembers(new String[] { "SkillLevel" })) {
@@ -99,15 +92,15 @@ public class EtcItem extends PlayerItem {
 			}
 			if (item.checkMembers(new String[] { "Race" })) {
 				// use member from file
-				setRace(Integer.parseInt(item.getMemberValue("Race")));
+				setRace(Race.values()[Integer.parseInt(item.getMemberValue("Race"))]);
 			} else {
 				// use default
-				setRace(-1);
+				setRace(Race.UNDEFINED);
 			}
 		}
 	}
 
-	public void setRace(int race) {
+	public void setRace(Race race) {
 		this.race = race;
 	}
 

@@ -355,6 +355,12 @@ public class LocalMap extends Map implements Runnable{
 					
 					player.getClient().setState(Client.State.INGAME);
 					
+					player.sendStatus(Player.Status.HP);
+					player.sendStatus(Player.Status.MANA);
+					player.sendStatus(Player.Status.STAMINA);
+					player.sendStatus(Player.Status.ELECTRICITY);
+					
+					
 					if(list.contains(session)){
 						
 						throw new RuntimeException("This should never happen! 2");

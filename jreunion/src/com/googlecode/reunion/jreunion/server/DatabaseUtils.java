@@ -181,14 +181,14 @@ public class DatabaseUtils extends Service {
 				+ " " + rs.getString("sex") + " "
 				+ rs.getString("hair") + " "
 				+ rs.getString("level") + " "
-				+ rs.getString("hp") + " "
-				+ rs.getString("hp") + " "
-				+ rs.getString("mana") + " "
-				+ rs.getString("mana") + " "
-				+ rs.getString("stamina") + " "
-				+ rs.getString("stamina") + " "
-				+ rs.getString("electricity") + " "
-				+ rs.getString("electricity") + " "
+				+ 1 + " " //hp
+				+ 1 + " " //hp max
+				+ 1 + " " //mana
+				+ 1 + " " //mana max
+				+ 1 + " " //stamina
+				+ 1 + " " //stamina max
+				+ 1 + " " //electricity
+				+ 1 + " " //electricity max
 				+ rs.getString("strength") + " " 
 				+ rs.getString("wisdom") + " " 
 				+ rs.getString("dexterity") + " "
@@ -275,14 +275,6 @@ public class DatabaseUtils extends Service {
 				player.setConstitution(rs.getInt("constitution"));
 				player.setLeadership(rs.getInt("leadership"));
 				player.setLevel(rs.getInt("level"));
-				player.setMaxHp(rs.getInt("hp"));
-				player.setHp(rs.getInt("hp"));
-				player.setMaxStamina(rs.getInt("stamina"));
-				player.setStamina(rs.getInt("stamina"));				
-				player.setMaxMana(rs.getInt("mana"));
-				player.setMana(rs.getInt("mana"));
-				player.setMaxElectricity(rs.getInt("electricity"));
-				player.setElectricity(rs.getInt("electricity"));
 				player.setTotalExp(rs.getInt("totalExp"));
 				player.setLevelUpExp(rs.getInt("levelUpExp"));
 				player.setLime(rs.getInt("lime"));
@@ -294,6 +286,13 @@ public class DatabaseUtils extends Service {
 				player.setGuildLevel(rs.getInt("guildlvl"));
 				player.setAdminState(rs.getInt("userlevel"));
 				player.setHairStyle(rs.getInt("hair"));
+				
+				player.setHp(player.getMaxHp());				
+				player.setStamina(player.getMaxStamina());				
+				player.setMana(player.getMaxMana());				
+				player.setElectricity(player.getMaxElectricity());
+				
+				
 				return player;
 			} else
 				return null;
@@ -322,8 +321,7 @@ public class DatabaseUtils extends Service {
 			
 						
 			stmt.execute("INSERT INTO characters ("+(charid==-1?"":"id,")+"accountid,name,level,strength,wisdom,dexterity,constitution,leadership,race,sex,hair," +
-												  "hp,mana,electricity," +
-												  "stamina,totalExp,levelUpExp,lime,statusPoints,penaltyPoints," +
+												  "totalExp,levelUpExp,lime,statusPoints,penaltyPoints," +
 												  "guildid,guildlvl)" +
 						 " VALUES ("+(charid==-1?"":player.getId()+ ",")
 								    +client.getAccountId()+ ",'"
@@ -336,11 +334,7 @@ public class DatabaseUtils extends Service {
 								    +player.getLeadership()+ ","
 								    +player.getRace().ordinal()+ ","
 								    +player.getSex().ordinal()+ ","
-								    +player.getHairStyle()+ ","
-								    +player.getHp()+ ","
-								    +player.getMana()+ ","
-								    +player.getElectricity()+ ","
-								    +player.getStamina()+ ","
+								    +player.getHairStyle()+ ","								   
 								    +player.getTotalExp()+ ","
 								    +player.getLevelUpExp()+ ","
 								    +player.getLime()+ ","
@@ -451,18 +445,12 @@ public class DatabaseUtils extends Service {
 			player.setConstitution(con);
 			player.setLeadership(lead);
 			
-			player.setMaxHp(((str*1)+(con*2)));
 			player.setHp(player.getMaxHp());
-			player.setMaxMana(((wis*2)+(dex*1)));
 			player.setMana(player.getMaxMana());
-			player.setMaxElectricity(((wis*1)+(dex*2)));
-			player.setElectricity(player.getMaxElectricity());
-			
-			player.setMaxStamina(((str*2)+(con*1)));
+			player.setElectricity(player.getMaxElectricity());			
 			player.setStamina(player.getMaxStamina());
 			
 			player.setLime(Integer.parseInt(Reference.getInstance().getServerReference().getItem("Server").getMemberValue("StartLime")));
-			
 			
 			client.setPlayer(player);
 		

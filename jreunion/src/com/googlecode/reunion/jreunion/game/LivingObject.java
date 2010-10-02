@@ -14,7 +14,6 @@ public abstract class LivingObject extends WorldObject {
 
 	private LivingObject target;
 	
-	
 	private Position targetPosition;
 
 	public Position getTargetPosition() {
@@ -25,7 +24,7 @@ public abstract class LivingObject extends WorldObject {
 		this.targetPosition = targetPosition;
 	}
 	
-	public int getPercentageHp(){
+	public int getPercentageHp() {
 		
 		double percentageHp = this.getHp() * 100 / this.getMaxHp();
 		if (percentageHp > 0 && percentageHp < 1) {
@@ -69,58 +68,22 @@ public abstract class LivingObject extends WorldObject {
 
 	private int maxHp;
 
-	private int mana;
-
-	private int maxMana;
-
-	private int electricity;
-
-	private int maxElectricity;
-
-	private int stamina;
-
-	private int maxStm;
-
 	private int level;
 
 	public LivingObject() {
 		super();
 	}
 
-	public int getElectricity() {
-		return electricity;
-	}
-
 	public int getHp() {
 		return hp;
-	}
-
-	public int getStamina() {
-		return stamina;
 	}
 
 	public int getLevel() {
 		return level;
 	}
 
-	public int getMaxElectricity() {
-		return maxElectricity;
-	}
-
 	public int getMaxHp() {
 		return maxHp;
-	}
-
-	public int getMaxMana() {
-		return maxMana;
-	}
-
-	public int getMana() {
-		return mana;
-	}
-
-	public int getMaxStamina() {
-		return maxStm;
 	}
 
 	public LivingObject getTarget() {
@@ -131,23 +94,12 @@ public abstract class LivingObject extends WorldObject {
 
 	}
 
-	public void setElectricity(int electricity) {
-		this.electricity =  between(electricity,0,getMaxElectricity());
-	}
 
 	public void setHp(int hp) {
 		this.hp = between(hp, 0, getMaxHp());		
 	}
-
-	public void setMana(int mana) {
-		this.mana = between(mana, 0, getMaxMana());
-	}
-
-	public void setStamina(int stamina) {
-		this.stamina = between(stamina, 0, getMaxStamina());
-	}
 	
-	static int between(int current, int min, int max){
+	static int between(int current, int min, int max) {
 		
 		return Math.max(Math.min(current, max),min);
 		
@@ -157,20 +109,8 @@ public abstract class LivingObject extends WorldObject {
 		this.level = level;
 	}
 
-	public void setMaxElectricity(int maxElectricity) {
-		this.maxElectricity = maxElectricity;
-	}
-
 	public void setMaxHp(int maxHp) {
 		this.maxHp = maxHp;
-	}
-
-	public void setMaxMana(int maxMana) {
-		this.maxMana = maxMana;
-	}
-
-	public void setMaxStamina(int maxStm) {
-		this.maxStm = maxStm;
 	}
 
 	public void setTarget(LivingObject target) {

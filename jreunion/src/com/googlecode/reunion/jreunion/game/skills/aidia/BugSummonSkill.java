@@ -1,10 +1,8 @@
-package com.googlecode.reunion.jreunion.game.skills;
-
+package com.googlecode.reunion.jreunion.game.skills.aidia;
 import com.googlecode.reunion.jreunion.game.Skill;
+public class BugSummonSkill extends Skill {
 
-public class PlaceHolder extends Skill{
-
-	public PlaceHolder(int id) {
+	public BugSummonSkill(int id) {
 		super(id);
 	}
 
@@ -15,7 +13,7 @@ public class PlaceHolder extends Skill{
 
 	@Override
 	public int getLevelRequirement(int level) {
-		return 0;
+		return level;
 	}
 
 }

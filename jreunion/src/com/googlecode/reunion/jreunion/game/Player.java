@@ -77,7 +77,9 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 
 		HYBRIDER, //4
 		
-		RACE_PET; //5
+		RACE_PET, //5
+		
+		UNDEFINED; //6
 	}
 
 	private boolean isInCombat; // 0 - Peace Mode; 1 - Attack Mode
@@ -135,8 +137,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 	public void setClient(Client client) {
 		this.client = client;
 	}
-
-
+	
 	private static Integer sessionRadius;
 
 	public Player(Client client) {
@@ -151,6 +152,12 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		
 		client.addEventListener(ClientDisconnectEvent.class, this, new ClientFilter(client));
 
+	}
+	
+	@Override
+	public int getMaxHp(){
+		return getStrength()+(getStrength()*(getStrength() / 50));
+		//10+(10/50)+10
 	}
 
 	public void addAttack(int attack) {
@@ -201,7 +208,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		this.sendStatus(Status.HP);
 	}
 	
-	public void sendStatus(Status status, Object ...args) {
+	public void sendStatus(Status status) {
 		if(client.getState()==Client.State.INGAME){
 			int min=0,max=0;
 			switch (status) {
@@ -262,11 +269,21 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		}
 	}
 
-	@Override
+	public abstract int getMaxElectricity();
+	
+
+	public abstract int getMaxMana();
+	
+
+	public abstract int getMaxStamina();
+	
+
 	public void setStamina(int stamina){
-		super.setStamina(stamina);
+		this.stamina = between(stamina, 0, getMaxStamina());
 		this.sendStatus(Status.STAMINA);
 	}
+	
+	abstract int getBaseDamage();
 	
 
 	public Iterator<Integer> getAttackQueueIterator() {
@@ -372,6 +389,38 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 	public QuickSlot getQuickSlot() {
 		return quickSlot;
 	}
+	
+	private int mana;
+
+	private int electricity;
+
+	private int stamina;
+
+	
+
+	public int getElectricity() {
+		return electricity;
+	}	
+	
+	public int getStamina() {
+		return stamina;
+	}
+	
+	
+	public int getMana() {
+		return mana;
+	}
+
+	
+	public void setMana(int mana) {
+		this.mana = between(mana, 0, getMaxMana());
+		sendStatus(Status.MANA);
+	}
+
+
+	public void setElectricity(int electricity) {
+		this.electricity =  between(electricity,0,getMaxElectricity());
+	}	
 
 	public Race getRace() {
 		if(this instanceof BulkanPlayer)
@@ -735,15 +784,17 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 	public void setConstitution(int cons) {
 		this.constitution = cons;
 		sendStatus(Status.CONSTITUTION);
+		sendStatus(Status.HP);
 	}
 
-	public void setDef(int def) {
+	public void setDefense(int def) {
 		this.defense = def;
 	}
 
 	public void setDexterity(int dex) {
 		this.dexterity = dex;
 		sendStatus(Status.DEXTERITY);
+		sendStatus(Status.ELECTRICITY);
 	}
 
 	public void setEquipment(Equipment equipment) {
@@ -775,6 +826,10 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 	public void setLeadership(int lead) {
 		this.leadership = lead;
 		sendStatus(Status.LEADERSHIP);
+		sendStatus(Status.HP);
+		sendStatus(Status.MANA);
+		sendStatus(Status.STAMINA);
+		sendStatus(Status.ELECTRICITY);
 	}
 
 	public void setLime(int lime) {
@@ -842,6 +897,8 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 	public void setStrength(int str) {
 		this.strength = str;
 		sendStatus(Status.STRENGTH);
+		sendStatus(Status.HP);
+		sendStatus(Status.STAMINA);
 	}
 
 	public void setTotalExp(int totalExp) {
@@ -852,6 +909,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 	public void setWisdom(int wisdom) {
 		this.wisdom = wisdom;
 		sendStatus(Status.WISDOM);
+		sendStatus(Status.MANA);
 	}
 
 	public void social(int emotionId) {
@@ -938,45 +996,8 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		}
 
 		switch (id) {
-		case 0: { // Hp Status
-			if (curr > max) {
-				curr = max;
-			}
-			setHp(curr);
-			setMaxHp(max);
-			client.sendPacket(Type.STATUS, id, getHp(), getMaxHp());
-			
-			break;
-		}
-		case 1: { // Mana Status
-			if (curr > max) {
-				curr = max;
-			}
-			setMana(curr);
-			setMaxMana(max);			
-			client.sendPacket(Type.STATUS, id, getMana(), getMaxMana());
-			break;
-		}
-		case 2: { // Stamina Status
-			if (curr > max) {
-				curr = max;
-			}
-			setStamina(curr);
-			setMaxStamina(max);
-			client.sendPacket(Type.STATUS, id, getStamina(), getMaxStamina());
-			
-			break;
-		}
-		case 3: { // Electric Energy Status
-			if (curr > max) {
-				curr = max;
-			}
-			setElectricity(curr);
-			setMaxElectricity(max);
-			client.sendPacket(Type.STATUS, id, getElectricity(), getMaxElectricity());
-			
-			break;
-		}
+
+
 		case 4: { // Player Level Status
 			setLevel(getLevel() + curr);
 			client.sendPacket(Type.STATUS, id, getLevel(), max);

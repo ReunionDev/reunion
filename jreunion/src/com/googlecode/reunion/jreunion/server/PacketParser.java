@@ -427,10 +427,17 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 					}
 					
 				} else if (message[0].equals("skillup")) {
-					int skillId = Integer.parseInt(message[1]);
-					Skill skill = player.getSkill(skillId);
-					if(skill.levelUp(player)){
-						player.updateStatus(13, -1, 0);
+					
+					synchronized(player) {
+						int statusPoints = player.getStatusPoints();
+						
+						if(statusPoints>0){
+							int skillId = Integer.parseInt(message[1]);
+							Skill skill = player.getSkill(skillId);
+							if(skill.levelUp(player)){
+								player.setStatusPoints(player.getStatusPoints()-1);
+							}
+						}
 					}
 					
 				} else if (message[0].equals("revival")) {

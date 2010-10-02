@@ -346,7 +346,7 @@ MinSecondRange = 0
 MaxSecondRange = 0
 StatusUsed = -1
 Type = 0
-Class = PlaceHolder
+Class = aidia.BugSummonSkill
 
 [Healing]
 ID = 25

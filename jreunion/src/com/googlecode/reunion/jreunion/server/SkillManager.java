@@ -171,13 +171,11 @@ public class SkillManager {
 				break;
 			
 			}
-			case RACE_PET:
+			
 				
-				//skill pets
-				continue;
 			
 			default:
-				throw new RuntimeException("Invalid Race: " + race);
+				continue;
 			
 			}
 			defaultSkills.put(race, raceSkillList);
