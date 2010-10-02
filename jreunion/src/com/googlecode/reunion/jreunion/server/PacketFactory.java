@@ -114,7 +114,7 @@ public class PacketFactory {
 				if(args.length>1){
 					warping = (Boolean)args[1];					
 				}
-				int combat = player.getCombatMode() ? 1 : 0;
+				int combat = player.isInCombat() ? 1 : 0;
 				Equipment eq = player.getEquipment();
 				
 				String packetData = warping?"appear ":"in ";
@@ -277,14 +277,13 @@ public class PacketFactory {
 				String type = (String)args[0];
 				Object value = args[1];				
 				return "a_" + type + " " + value;
-				
 			}
 			break;
 				
 		case COMBAT:
 			if(args.length>0){
 				Player player = (Player)args[0];
-				return "combat " + player.getId() + " " + (player.getCombatMode()?1:0);
+				return "combat " + player.getId() + " " + (player.isInCombat()?1:0);
 			}
 			break;
 			

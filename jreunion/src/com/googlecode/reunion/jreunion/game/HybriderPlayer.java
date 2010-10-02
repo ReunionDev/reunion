@@ -21,7 +21,7 @@ public class HybriderPlayer extends Player {
 				+ (int) (Math.random() * (player.getMaxDmg() - player
 						.getMinDmg()));
 
-		baseDmg = (randDmg + getLevel() / 6 + getStr() / 4 + getDexterity() / 4 + getConstitution() / 8);
+		baseDmg = (randDmg + getLevel() / 6 + getStrength() / 4 + getDexterity() / 4 + getConstitution() / 8);
 
 		return baseDmg;
 	}
@@ -42,10 +42,6 @@ public class HybriderPlayer extends Player {
 		if (newHp <= 0) {
 
 			mob.kill(this);
-
-			updateStatus(12, getLvlUpExp() - mob.getExp(), 0);
-			updateStatus(11, mob.getExp(), 0);
-			updateStatus(10, mob.getLime(), 0);
 
 			if (mob.getType() == 324) {
 				Item item = com.googlecode.reunion.jreunion.server.ItemFactory

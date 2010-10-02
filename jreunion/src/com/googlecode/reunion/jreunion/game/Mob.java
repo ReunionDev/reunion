@@ -297,6 +297,15 @@ public class Mob extends Npc {
 		if (spawn != null) {
 			spawn.kill();
 		}
+		
+		synchronized(player){
+			
+			player.setLime(player.getLime()+this.getLime());
+			player.setTotalExp(player.getTotalExp()+this.getExp());
+			player.setLevelUpExp(player.getLevelUpExp()-this.getExp());
+		
+		}
+		
 		Parser dropList = Reference.getInstance().getDropListReference();
 		Iterator<ParsedItem> iter =dropList.getItemListIterator();
 		Random r = new Random();

@@ -23,7 +23,10 @@ public class Inventory {
 
 	private InventoryItem selected = null;
 
-	public Inventory() {
+	private Player player;
+
+	public Inventory(Player player) {
+		this.player = player;
 		items = new Vector<InventoryItem>();
 	}
 
@@ -309,5 +312,17 @@ public class Inventory {
 	public void setItemSelected(InventoryItem selected) {
 		// PrintInventoryMap(0);
 		this.selected = selected;
+	}
+
+	public void use(int tab, int x, int y) {
+
+		InventoryItem invItem = getItem(tab,x,y);
+		
+		Item item = invItem.getItem();
+		
+		player.getPosition().getMap().getWorld().getCommand().useItem(player, item);
+		
+		removeItem(invItem);
+		
 	}
 }

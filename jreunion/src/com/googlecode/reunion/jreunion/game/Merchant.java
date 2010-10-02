@@ -156,7 +156,12 @@ public class Merchant extends Npc {
 			
 		}
 		if (item != null) {
-			player.updateStatus(10, item.getPrice() * this.getBuyRate() / 100 * -1 * count, 0);
+			int cost = item.getPrice() * this.getBuyRate() / 100 * count;
+			synchronized(player) {
+				player.setLime(player.getLime()-cost);
+			
+			}
+			//player.updateStatus(10, item.getPrice() * this.getBuyRate() / 100 * -1 * count, 0);
 		
 		}
 
@@ -187,7 +192,10 @@ public class Merchant extends Npc {
 		if (item != null) {
 			int price = (int) (item.getPrice() * ((double)this.getSellRate() / 100));
 			Logger.getLogger(Merchant.class).warn("Selling"+item+" for "+price);
-			player.updateStatus(10, price, 0);
+			synchronized(player){
+				player.setLime(player.getLime()+price);
+			}
+
 			player.getInventory().setItemSelected(null);
 			DatabaseUtils.getInstance().deleteItem(item);
 		}

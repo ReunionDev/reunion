@@ -54,7 +54,10 @@ public class Warehouse extends Npc {
 			stashItem = stash.getItem(pos);
 			stashItem.getItem().setGemNumber(
 					stashItem.getItem().getGemNumber() + gems / 100);
-			player.updateStatus(10, gems * -1, 0);
+			synchronized(player) {
+				player.setLime(player.getLime()-gems);			
+			}
+			
 			DatabaseUtils.getInstance().saveItem(stashItem.getItem());
 			if (gems >= 0) {
 				packetData = "stash_to " + stashItem.getPos() + " "

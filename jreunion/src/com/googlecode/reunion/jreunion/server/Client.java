@@ -193,7 +193,8 @@ public class Client extends EventBroadcaster implements EventListener,Sendable {
 		GOT_AUTH,	
 		CHAR_LIST,	
 		CHAR_SELECTED,		
-		PORTING,	
+		PORTING,
+		LOADING,
 		INGAME;
 	
 	}

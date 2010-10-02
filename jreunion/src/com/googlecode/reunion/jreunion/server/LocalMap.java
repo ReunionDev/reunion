@@ -219,9 +219,7 @@ public class LocalMap extends Map implements Runnable{
 			List<RoamingItem> roamingItems = DatabaseUtils.getInstance().loadRoamingItems(this);
 			for(RoamingItem roamingItem : roamingItems){				
 				entities.put(roamingItem.getId(), roamingItem);
-				
 			}
-		
 		}
 		
 		
@@ -354,6 +352,8 @@ public class LocalMap extends Map implements Runnable{
 					Player player = (Player)entity;
 					Session session = player.getSession();
 					sessions.add(session);
+					
+					player.getClient().setState(Client.State.INGAME);
 					
 					if(list.contains(session)){
 						

@@ -2,6 +2,7 @@ package com.googlecode.reunion.jreunion.game;
 
 import java.util.Iterator;
 
+import com.googlecode.reunion.jreunion.game.items.equipment.Armor;
 import com.googlecode.reunion.jreunion.server.Client;
 import com.googlecode.reunion.jreunion.server.DatabaseUtils;
 import com.googlecode.reunion.jreunion.server.ItemFactory;
@@ -107,9 +108,11 @@ public class Trader extends Npc {
 
 			player.getExchange().clearExchange();
 			player.getExchange().addItem(newExchangeItem);
-			player.updateStatus(10, (int) (newItem.getPrice() * 0.333328) * -1,
-					0);
+			int cost =  (int) (newItem.getPrice() * 0.333328);
+			synchronized(player){							
+				player.setLime(player.getLime()-cost);
 
+			}
 			packetData = "ichange " + oldExchangeItem.getItem().getId()
 					+ " " + newItem.getId() + " " + newItem.getType()
 					+ " " + newItem.getGemNumber() + " "

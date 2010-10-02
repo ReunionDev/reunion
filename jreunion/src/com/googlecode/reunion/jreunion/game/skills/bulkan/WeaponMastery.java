@@ -2,7 +2,7 @@ package com.googlecode.reunion.jreunion.game.skills.bulkan;
 
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Skill;
-import com.googlecode.reunion.jreunion.game.Weapon;
+import com.googlecode.reunion.jreunion.game.items.equipment.Weapon;
 
 public abstract class WeaponMastery extends Skill {
 	

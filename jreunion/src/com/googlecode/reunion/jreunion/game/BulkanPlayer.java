@@ -37,7 +37,7 @@ public class BulkanPlayer extends Player {
 		randDmg = getMinDmg()
 				+ (int) (Math.random() * (getMaxDmg() - getMinDmg()));
 
-		baseDmg = (randDmg + getLevel() / 6 + getStr() / 4 + getDexterity() / 4 + getConstitution() / 8);
+		baseDmg = (randDmg + getLevel() / 6 + getStrength() / 4 + getDexterity() / 4 + getConstitution() / 8);
 		
 		SwordMastery swordMastery = (SwordMastery) getSkill(1);
 		AxeMastery axeMastery = (AxeMastery) getSkill(2);
@@ -64,9 +64,6 @@ public class BulkanPlayer extends Player {
 
 			mob.kill(this);
 
-			updateStatus(12, getLvlUpExp() - mob.getExp(), 0);
-			updateStatus(11, mob.getExp(), 0);
-			updateStatus(10, mob.getLime(), 0);
 
 		/*	if (mob.getType() == 226) {
 				
@@ -145,10 +142,6 @@ public class BulkanPlayer extends Player {
 		if (newHp <= 0) {
 
 			mob.kill(this);
-
-			updateStatus(12, getLvlUpExp() - mob.getExp(), 0);
-			updateStatus(11, mob.getExp(), 0);
-			updateStatus(10, mob.getLime(), 0);
 		} else {
 			mob.setHp(newHp);
 		}

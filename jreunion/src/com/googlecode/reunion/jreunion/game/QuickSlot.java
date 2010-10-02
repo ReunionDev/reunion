@@ -4,6 +4,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
+import org.apache.log4j.Logger;
+
+import com.googlecode.reunion.jreunion.game.items.potion.Potion;
 import com.googlecode.reunion.jreunion.server.Client;
 import com.googlecode.reunion.jreunion.server.DatabaseUtils;
 import com.googlecode.reunion.jreunion.server.Server;
@@ -15,8 +18,7 @@ import com.googlecode.reunion.jreunion.server.Server;
 public class QuickSlot {
 	private List<QuickSlotItem> itemList = new Vector<QuickSlotItem>();
 
-	public QuickSlot() {
-
+	public QuickSlot(Player player) {
 	}
 
 	public void addItem(QuickSlotItem qsItem) {
@@ -96,19 +98,15 @@ public class QuickSlot {
 
 	/****** Use Quick Slot Items ******/
 	public void useQuickSlot(Player player, int slot) {
-		// int newRate = hpRec;
-		// for(int i=4; i>0; i--){
-		// newHp = newHp + newRate/i;
-		// newRate = newRate - newRate/i;
-		// }
-		Client client = player.getClient();
-
-		if (client == null) {
-			return;
-		}
 
 		QuickSlotItem qsItem = getItem(slot);
-
+		
+		Item item = qsItem.getItem();
+		
+		Logger.getLogger(QuickSlot.class).info("using" +item);
+		
+		player.getPosition().getMap().getWorld().getCommand().useItem(player, item);
+/*
 		if (qsItem.getItem().getType() == 175
 				|| qsItem.getItem().getType() == 1053) {
 			switch (qsItem.getItem().getType()) {
@@ -177,6 +175,8 @@ public class QuickSlot {
 				}
 			}
 		}
+		*/
+		
 		removeItem(qsItem);
 		DatabaseUtils.getInstance().deleteItem(qsItem.getItem());
 	}

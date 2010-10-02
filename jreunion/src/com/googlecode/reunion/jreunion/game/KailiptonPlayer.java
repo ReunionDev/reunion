@@ -36,7 +36,7 @@ public class KailiptonPlayer extends Player {
 				+ (int) (Math.random() * (player.getMaxDmg() - player
 						.getMinDmg()));
 
-		baseDmg = (randDmg + getLevel() / 5 + getWis() / 2);
+		baseDmg = (randDmg + getLevel() / 5 + getWisdom() / 2);
 
 		return baseDmg;
 	}
@@ -58,10 +58,6 @@ public class KailiptonPlayer extends Player {
 		if (newHp <= 0) {
 
 			mob.kill(this);
-
-			updateStatus(12, getLvlUpExp() - mob.getExp(), 0);
-			updateStatus(11, mob.getExp(), 0);
-			updateStatus(10, mob.getLime(), 0);
 
 			if (mob.getType() == 324) {
 				Item item = ItemFactory.create(1054);

@@ -20,7 +20,7 @@ public class ItemFactory {
 			return null;
 		}
 
-		String className = "com.googlecode.reunion.jreunion.game." + parseditem.getMemberValue("Class");		
+		String className = "com.googlecode.reunion.jreunion.game.items." + parseditem.getMemberValue("Class");		
 		
 		item = (Item)ClassFactory.create(className, type);
 		

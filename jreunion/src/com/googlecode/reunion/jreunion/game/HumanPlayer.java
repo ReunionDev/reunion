@@ -21,7 +21,7 @@ public class HumanPlayer extends Player {
 				+ (int) (Math.random() * (player.getMaxDmg() - player
 						.getMinDmg()));
 
-		baseDmg = (randDmg + getLevel() / 6 + getStr() + getDexterity() / 4);
+		baseDmg = (randDmg + getLevel() / 6 + getStrength() + getDexterity() / 4);
 
 		return baseDmg;
 	}
@@ -47,10 +47,6 @@ public class HumanPlayer extends Player {
 		if (newHp <= 0) {
 
 			mob.kill(this);
-
-			updateStatus(12, getLvlUpExp() - mob.getExp(), 0);
-			updateStatus(11, mob.getExp(), 0);
-			updateStatus(10, mob.getLime(), 0);
 
 			if (mob.getType() == 324) {
 				Item item = ItemFactory.create(1054);

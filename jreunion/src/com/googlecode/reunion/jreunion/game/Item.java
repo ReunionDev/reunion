@@ -73,10 +73,16 @@ public class Item implements Entity {
 	public int getType() {
 		return type;
 	}
+	
+	public String getName(){		
+		return Reference.getInstance().getItemReference()
+		.getItemById(getType()).getName();
+	}
 
-	public void loadFromReference(int id) {
+	public void loadFromReference(int type) {		
+		
 		ParsedItem item = Reference.getInstance().getItemReference()
-				.getItemById(id);
+				.getItemById(type);
 		
 		if (item == null) {
 			// cant find Item in the reference continue to load defaults:

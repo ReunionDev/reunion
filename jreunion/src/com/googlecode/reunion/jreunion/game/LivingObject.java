@@ -12,8 +12,6 @@ import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
  */
 public abstract class LivingObject extends WorldObject {
 
-	private int team;
-
 	private LivingObject target;
 	
 	
@@ -75,11 +73,11 @@ public abstract class LivingObject extends WorldObject {
 
 	private int maxMana;
 
-	private int elect;
+	private int electricity;
 
-	private int maxElect;
+	private int maxElectricity;
 
-	private int stm;
+	private int stamina;
 
 	private int maxStm;
 
@@ -89,24 +87,24 @@ public abstract class LivingObject extends WorldObject {
 		super();
 	}
 
-	public int getElect() {
-		return elect;
+	public int getElectricity() {
+		return electricity;
 	}
 
 	public int getHp() {
 		return hp;
 	}
 
-	public int getStm() {
-		return stm;
+	public int getStamina() {
+		return stamina;
 	}
 
 	public int getLevel() {
 		return level;
 	}
 
-	public int getMaxElect() {
-		return maxElect;
+	public int getMaxElectricity() {
+		return maxElectricity;
 	}
 
 	public int getMaxHp() {
@@ -121,7 +119,7 @@ public abstract class LivingObject extends WorldObject {
 		return mana;
 	}
 
-	public int getMaxStm() {
+	public int getMaxStamina() {
 		return maxStm;
 	}
 
@@ -133,29 +131,34 @@ public abstract class LivingObject extends WorldObject {
 
 	}
 
-	public void setElect(int currElect) {
-		this.elect = currElect;
+	public void setElectricity(int electricity) {
+		this.electricity =  between(electricity,0,getMaxElectricity());
 	}
 
-	public void setHp(int currHp) {
-		this.hp = currHp;		
+	public void setHp(int hp) {
+		this.hp = between(hp, 0, getMaxHp());		
 	}
 
-	public void setMana(int currMana) {
-		this.mana = currMana;
+	public void setMana(int mana) {
+		this.mana = between(mana, 0, getMaxMana());
 	}
 
-	public void setStm(int currStm) {
-		this.stm = currStm;
-
+	public void setStamina(int stamina) {
+		this.stamina = between(stamina, 0, getMaxStamina());
+	}
+	
+	static int between(int current, int min, int max){
+		
+		return Math.max(Math.min(current, max),min);
+		
 	}
 
 	public void setLevel(int level) {
 		this.level = level;
 	}
 
-	public void setMaxElect(int maxElect) {
-		this.maxElect = maxElect;
+	public void setMaxElectricity(int maxElectricity) {
+		this.maxElectricity = maxElectricity;
 	}
 
 	public void setMaxHp(int maxHp) {
@@ -166,7 +169,7 @@ public abstract class LivingObject extends WorldObject {
 		this.maxMana = maxMana;
 	}
 
-	public void setMaxStm(int maxStm) {
+	public void setMaxStamina(int maxStm) {
 		this.maxStm = maxStm;
 	}
 

@@ -12,7 +12,7 @@ public class Stash {
 
 	private List<StashItem> itemList;
 
-	public Stash() {
+	public Stash(Player player) {
 		itemList = new Vector<StashItem>();
 	}
 

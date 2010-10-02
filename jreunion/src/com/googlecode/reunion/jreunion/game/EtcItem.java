@@ -32,18 +32,6 @@ public class EtcItem extends PlayerItem {
 		super(id);
 	}
 
-	public int getElectRec() {
-		return electRec;
-	}
-
-	public int getHpRec() {
-		return hpRec;
-	}
-
-	public int getManaRec() {
-		return manaRec;
-	}
-
 	public int getRace() {
 		return race;
 	}
@@ -64,10 +52,6 @@ public class EtcItem extends PlayerItem {
 		return skillLevel;
 	}
 
-	public int getStmRec() {
-		return stmRec;
-	}
-
 	@Override
 	public void loadFromReference(int id) {
 		super.loadFromReference(id);
@@ -76,45 +60,14 @@ public class EtcItem extends PlayerItem {
 				.getItemById(id);
 
 		if (item == null) {
-			// cant find Item in the reference continue to load defaults:
-			setHpRec(0);
-			setManaRec(0);
-			setStmRec(0);
-			setElectRec(0);
+			// cant find Item in the reference continue to load defaults:		
 			setSkillLevel(0);
 			setReqStr(0);
 			setReqInt(0);
 			setReqDex(0);
 			setRace(-1);
 		} else {
-			if (item.checkMembers(new String[] { "HpRec" })) {
-				// use member from file
-				setHpRec(Integer.parseInt(item.getMemberValue("HpRec")));
-			} else {
-				// use default
-				setHpRec(0);
-			}
-			if (item.checkMembers(new String[] { "ManaRec" })) {
-				// use member from file
-				setManaRec(Integer.parseInt(item.getMemberValue("ManaRec")));
-			} else {
-				// use default
-				setManaRec(0);
-			}
-			if (item.checkMembers(new String[] { "StmRec" })) {
-				// use member from file
-				setStmRec(Integer.parseInt(item.getMemberValue("StmRec")));
-			} else {
-				// use default
-				setStmRec(0);
-			}
-			if (item.checkMembers(new String[] { "ElectRec" })) {
-				// use member from file
-				setElectRec(Integer.parseInt(item.getMemberValue("ElectRec")));
-			} else {
-				// use default
-				setElectRec(0);
-			}
+			
 			if (item.checkMembers(new String[] { "SkillLevel" })) {
 				// use member from file
 				setSkillLevel(Integer.parseInt(item
@@ -154,18 +107,6 @@ public class EtcItem extends PlayerItem {
 		}
 	}
 
-	public void setElectRec(int electRec) {
-		this.electRec = electRec;
-	}
-
-	public void setHpRec(int hpRec) {
-		this.hpRec = hpRec;
-	}
-
-	public void setManaRec(int manaRec) {
-		this.manaRec = manaRec;
-	}
-
 	public void setRace(int race) {
 		this.race = race;
 	}
@@ -184,9 +125,5 @@ public class EtcItem extends PlayerItem {
 
 	public void setSkillLevel(int skillLevel) {
 		this.skillLevel = skillLevel;
-	}
-
-	public void setStmRec(int stmRec) {
-		this.stmRec = stmRec;
 	}
 }

@@ -15,28 +15,28 @@ import java.util.Vector;
 import org.apache.log4j.Logger;
 
 import com.googlecode.reunion.jcommon.ParsedItem;
-import com.googlecode.reunion.jreunion.game.Armor;
-import com.googlecode.reunion.jreunion.game.Axe;
 import com.googlecode.reunion.jreunion.game.Entity;
 import com.googlecode.reunion.jreunion.game.Equipment;
 import com.googlecode.reunion.jreunion.game.Equipment.Slot;
 import com.googlecode.reunion.jreunion.game.ExchangeItem;
-import com.googlecode.reunion.jreunion.game.GunWeapon;
 import com.googlecode.reunion.jreunion.game.InventoryItem;
 import com.googlecode.reunion.jreunion.game.Item;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Player.Race;
 import com.googlecode.reunion.jreunion.game.Player.Sex;
+import com.googlecode.reunion.jreunion.game.items.equipment.Armor;
+import com.googlecode.reunion.jreunion.game.items.equipment.Axe;
+import com.googlecode.reunion.jreunion.game.items.equipment.GunWeapon;
+import com.googlecode.reunion.jreunion.game.items.equipment.RingWeapon;
+import com.googlecode.reunion.jreunion.game.items.equipment.StaffWeapon;
+import com.googlecode.reunion.jreunion.game.items.equipment.Sword;
+import com.googlecode.reunion.jreunion.game.items.equipment.Weapon;
+import com.googlecode.reunion.jreunion.game.items.potion.Potion;
 import com.googlecode.reunion.jreunion.game.Position;
-import com.googlecode.reunion.jreunion.game.Potion;
 import com.googlecode.reunion.jreunion.game.QuickSlotItem;
-import com.googlecode.reunion.jreunion.game.RingWeapon;
 import com.googlecode.reunion.jreunion.game.RoamingItem;
 import com.googlecode.reunion.jreunion.game.Skill;
-import com.googlecode.reunion.jreunion.game.StaffWeapon;
 import com.googlecode.reunion.jreunion.game.StashItem;
-import com.googlecode.reunion.jreunion.game.Sword;
-import com.googlecode.reunion.jreunion.game.Weapon;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 import com.googlecode.reunion.jreunion.server.database.DatabaseAction;
 import com.googlecode.reunion.jreunion.server.database.SaveInventory;
@@ -146,7 +146,7 @@ public class DatabaseUtils extends Service {
 				if(alreadyLogged)
 					continue;
 				
-				Equipment eq = loadEquipment(rs.getInt("id"));
+				Equipment eq = loadEquipment(new Equipment(null), rs.getInt("id"));
 		
 
 				/*
@@ -181,19 +181,19 @@ public class DatabaseUtils extends Service {
 				+ " " + rs.getString("sex") + " "
 				+ rs.getString("hair") + " "
 				+ rs.getString("level") + " "
-				+ rs.getString("currHp") + " "
-				+ rs.getString("maxHp") + " "
-				+ rs.getString("currMana") + " "
-				+ rs.getString("maxMana") + " "
-				+ rs.getString("currStm") + " "
-				+ rs.getString("maxStm") + " "
-				+ rs.getString("currElect") + " "
-				+ rs.getString("maxElect") + " "
-				+ rs.getString("str") + " " 
-				+ rs.getString("wis") + " " 
-				+ rs.getString("dex") + " "
-				+ rs.getString("con") + " " 
-				+ rs.getString("lea") + " "
+				+ rs.getString("hp") + " "
+				+ rs.getString("hp") + " "
+				+ rs.getString("mana") + " "
+				+ rs.getString("mana") + " "
+				+ rs.getString("stamina") + " "
+				+ rs.getString("stamina") + " "
+				+ rs.getString("electricity") + " "
+				+ rs.getString("electricity") + " "
+				+ rs.getString("strength") + " " 
+				+ rs.getString("wisdom") + " " 
+				+ rs.getString("dexterity") + " "
+				+ rs.getString("constitution") + " " 
+				+ rs.getString("leadership") + " "
 				+ eq.getType(Slot.HELMET) + " " 
 				+ eq.getType(Slot.CHEST) + " " 
 				+ eq.getType(Slot.PANTS) + " " 
@@ -224,9 +224,8 @@ public class DatabaseUtils extends Service {
 		return charlist;
 	}
 	
-	public Equipment loadEquipment(int charid) {
+	public Equipment loadEquipment(Equipment equipment, int charid) {
 		
-		Equipment equipment = new Equipment();
 		if (!checkDatabase())
 			return null;
 		Statement stmt;
@@ -250,9 +249,8 @@ public class DatabaseUtils extends Service {
 		
 	}
 
-	public void loadEquipment(Player player) {
-		Equipment equipment = loadEquipment(player.getId());
-		player.setEquipment(equipment);
+	public void loadEquipment(Player player) {		
+		loadEquipment(player.getEquipment(), player.getId());
 	}
 	
 	
@@ -271,30 +269,29 @@ public class DatabaseUtils extends Service {
 				Race race = Race.values()[raceId];
 				player = Player.createPlayer(client, race);
 				player.setId(characterId);				
-				player.setStrength(rs.getInt("str"));
-				player.setWisdom(rs.getInt("wis"));
-				player.setDexterity(rs.getInt("dex"));
-				player.setConstitution(rs.getInt("con"));
-				player.setLeadership(rs.getInt("lea"));
+				player.setStrength(rs.getInt("strength"));
+				player.setWisdom(rs.getInt("wisdom"));
+				player.setDexterity(rs.getInt("dexterity"));
+				player.setConstitution(rs.getInt("constitution"));
+				player.setLeadership(rs.getInt("leadership"));
 				player.setLevel(rs.getInt("level"));
-				player.setHp(rs.getInt("currHp"));
-				player.setMaxHp(rs.getInt("maxHp"));
-				player.setStm(rs.getInt("currStm"));
-				player.setMaxStm(rs.getInt("maxStm"));
-				player.setMana(rs.getInt("currMana"));
-				player.setMaxMana(rs.getInt("maxMana"));
-				player.setElect(rs.getInt("currElect"));
-				player.setMaxElect(rs.getInt("maxElect"));
+				player.setMaxHp(rs.getInt("hp"));
+				player.setHp(rs.getInt("hp"));
+				player.setMaxStamina(rs.getInt("stamina"));
+				player.setStamina(rs.getInt("stamina"));				
+				player.setMaxMana(rs.getInt("mana"));
+				player.setMana(rs.getInt("mana"));
+				player.setMaxElectricity(rs.getInt("electricity"));
+				player.setElectricity(rs.getInt("electricity"));
 				player.setTotalExp(rs.getInt("totalExp"));
-				player.setLvlUpExp(rs.getInt("lvlUpExp"));
+				player.setLevelUpExp(rs.getInt("levelUpExp"));
 				player.setLime(rs.getInt("lime"));
 				player.setStatusPoints(rs.getInt("statusPoints"));
 				player.setPenaltyPoints(rs.getInt("penaltyPoints"));
 				player.setSex(Sex.values()[rs.getInt("sex")]);
 				player.setName(rs.getString("name"));
 				player.setGuildId(rs.getInt("guildid"));
-				player.setGuildLvl(rs.getInt("guildlvl"));
-				Logger.getLogger(DatabaseUtils.class).error(rs.getInt("userlevel"));
+				player.setGuildLevel(rs.getInt("guildlvl"));
 				player.setAdminState(rs.getInt("userlevel"));
 				player.setHairStyle(rs.getInt("hair"));
 				return player;
@@ -324,16 +321,16 @@ public class DatabaseUtils extends Service {
 				stmt.execute("DELETE FROM characters WHERE id="+charid+";");		
 			
 						
-			stmt.execute("INSERT INTO characters ("+(charid==-1?"":"id,")+"accountid,name,level,str,wis,dex,con,lea,race,sex,hair," +
-												  "currHp,MaxHp,currMana,maxMana,currElect,maxElect,currStm," +
-												  "maxStm,totalExp,lvlUpExp,lime,statusPoints,penaltyPoints," +
+			stmt.execute("INSERT INTO characters ("+(charid==-1?"":"id,")+"accountid,name,level,strength,wisdom,dexterity,constitution,leadership,race,sex,hair," +
+												  "hp,mana,electricity," +
+												  "stamina,totalExp,levelUpExp,lime,statusPoints,penaltyPoints," +
 												  "guildid,guildlvl)" +
 						 " VALUES ("+(charid==-1?"":player.getId()+ ",")
 								    +client.getAccountId()+ ",'"
 								    +player.getName()+ "',"
 								    +player.getLevel()+ ","
-								    +player.getStr()+ ","
-								    +player.getWis()+ ","
+								    +player.getStrength()+ ","
+								    +player.getWisdom()+ ","
 								    +player.getDexterity()+ ","
 								    +player.getConstitution()+ ","
 								    +player.getLeadership()+ ","
@@ -341,15 +338,11 @@ public class DatabaseUtils extends Service {
 								    +player.getSex().ordinal()+ ","
 								    +player.getHairStyle()+ ","
 								    +player.getHp()+ ","
-								    +player.getMaxHp()+ ","
 								    +player.getMana()+ ","
-								    +player.getMaxMana()+ ","
-								    +player.getElect()+ ","
-								    +player.getMaxElect()+ ","
-								    +player.getStm()+ ","
-								    +player.getMaxStm()+ ","
+								    +player.getElectricity()+ ","
+								    +player.getStamina()+ ","
 								    +player.getTotalExp()+ ","
-								    +player.getLvlUpExp()+ ","
+								    +player.getLevelUpExp()+ ","
 								    +player.getLime()+ ","
 								    +player.getStatusPoints()+ ","
 								    +player.getPenaltyPoints()+ ","
@@ -387,11 +380,11 @@ public class DatabaseUtils extends Service {
 			case 11: {status = "totalExp"; break; }
 			case 12: {status = "lvlUpExp"; break; }
 			case 13: {status = "statusPoints"; break; }
-			case 14: {status = "str"; break; }
-			case 15: {status = "wis"; break; }
-			case 16: {status = "dex"; break; }
-			case 17: {status = "con"; break; }
-			case 18: {status = "lea"; break; }
+			case 14: {status = "strength"; break; }
+			case 15: {status = "wisdom"; break; }
+			case 16: {status = "dexterity"; break; }
+			case 17: {status = "constitution"; break; }
+			case 18: {status = "leadership"; break; }
 			case 19: {status = "penaltyPoints"; break; }
 			default: return;
 		}
@@ -462,11 +455,11 @@ public class DatabaseUtils extends Service {
 			player.setHp(player.getMaxHp());
 			player.setMaxMana(((wis*2)+(dex*1)));
 			player.setMana(player.getMaxMana());
-			player.setMaxElect(((wis*1)+(dex*2)));
-			player.setElect(player.getMaxElect());
+			player.setMaxElectricity(((wis*1)+(dex*2)));
+			player.setElectricity(player.getMaxElectricity());
 			
-			player.setMaxStm(((str*2)+(con*1)));
-			player.setStm(player.getMaxStm());
+			player.setMaxStamina(((str*2)+(con*1)));
+			player.setStamina(player.getMaxStamina());
 			
 			player.setLime(Integer.parseInt(Reference.getInstance().getServerReference().getItem("Server").getMemberValue("StartLime")));
 			
@@ -588,7 +581,7 @@ public class DatabaseUtils extends Service {
 			{
 				Item item = ItemFactory.loadItem(invTable.getInt("itemid"));
 				if (item!=null)
-				player.getInventory().addItem(invTable.getInt("x"),invTable.getInt("y"),item,invTable.getInt("tab"));
+				player.getInventory().addItem(invTable.getInt("x"), invTable.getInt("y"), item,invTable.getInt("tab"));
 			}
 			
 		} catch (SQLException e1) {
@@ -742,7 +735,7 @@ public class DatabaseUtils extends Service {
 					return null;
 				}
 				
-				String className = "com.googlecode.reunion.jreunion.game." + parseditem.getMemberValue("Class");		
+				String className = "com.googlecode.reunion.jreunion.game.items." + parseditem.getMemberValue("Class");		
 				
 				Item item = (Item)ClassFactory.create(className, type);
 				if(item==null)

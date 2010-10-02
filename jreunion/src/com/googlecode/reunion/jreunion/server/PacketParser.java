@@ -27,6 +27,7 @@ import com.googlecode.reunion.jreunion.game.Npc;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Player.Race;
 import com.googlecode.reunion.jreunion.game.Player.Sex;
+import com.googlecode.reunion.jreunion.game.Player.Status;
 import com.googlecode.reunion.jreunion.game.Position;
 import com.googlecode.reunion.jreunion.game.Quest;
 import com.googlecode.reunion.jreunion.game.RoamingItem;
@@ -226,7 +227,7 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 					
 					client.sendPacket(Type.STATUS, 11, player.getTotalExp());
 					
-					client.sendPacket(Type.STATUS, 12, player.getLvlUpExp());
+					client.sendPacket(Type.STATUS, 12, player.getLevelUpExp());
 					
 					client.sendPacket(Type.STATUS, 13, player.getStatusPoints());
 					
@@ -273,7 +274,7 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 	
 					world.getTeleportManager().remove(player);
 					*/
-					client.setState(Client.State.INGAME);				
+					client.setState(Client.State.LOADING);				
 				}
 				break;
 			}
@@ -351,8 +352,8 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 				} else if (message[0].equals("social")) {
 					client.getPlayer().social(Integer.parseInt(message[1]));
 				} else if (message[0].equals("levelup")) {
-					client.getPlayer().updateStatus(
-							Integer.parseInt(message[1]) + 10, 1, 0);
+					Status status = Status.byValue(Integer.parseInt(message[1])+10);
+					player.addStatus(status);
 				} else if (message[0].equals("pick")) {
 					
 					int itemId = Integer.parseInt(message[1]);
@@ -362,6 +363,14 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 					if(roamingItem!=null){
 						client.getPlayer().pickupItem(roamingItem);							
 					}
+					
+				} else if (message[0].equals("use_inven")) {
+					
+					int tab = Integer.parseInt(message[1]);
+					int x = Integer.parseInt(message[2]);
+					int y = Integer.parseInt(message[3]);
+					
+					player.getInventory().use(tab,x,y);
 					
 				} else if (message[0].equals("inven")) {
 					

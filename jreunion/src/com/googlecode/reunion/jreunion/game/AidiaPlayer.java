@@ -21,7 +21,7 @@ public class AidiaPlayer extends Player {
 				+ (int) (Math.random() * (player.getMaxDmg() - player
 						.getMinDmg()));
 
-		baseDmg = (randDmg + getLevel() / 5 + getWis() / 3 + getLeadership());
+		baseDmg = (randDmg + getLevel() / 5 + getWisdom() / 3 + getLeadership());
 
 		return baseDmg;
 	}
@@ -48,9 +48,6 @@ public class AidiaPlayer extends Player {
 
 			mob.kill(this);
 
-			updateStatus(12, getLvlUpExp() - mob.getExp(), 0);
-			updateStatus(11, mob.getExp(), 0);
-			updateStatus(10, mob.getLime(), 0);
 
 			if (mob.getType() == 324) {
 				Item item = ItemFactory.create(1054);

@@ -14,14 +14,16 @@ import com.googlecode.reunion.jreunion.game.LivingObject;
 import com.googlecode.reunion.jreunion.game.Mob;
 import com.googlecode.reunion.jreunion.game.Npc;
 import com.googlecode.reunion.jreunion.game.Player;
+import com.googlecode.reunion.jreunion.game.QuickSlot;
+import com.googlecode.reunion.jreunion.game.Usable;
 import com.googlecode.reunion.jreunion.game.Equipment.Slot;
 import com.googlecode.reunion.jreunion.game.Player.Race;
 import com.googlecode.reunion.jreunion.game.Player.Sex;
+import com.googlecode.reunion.jreunion.game.items.equipment.SlayerWeapon;
+import com.googlecode.reunion.jreunion.game.items.equipment.Weapon;
 import com.googlecode.reunion.jreunion.game.Position;
 import com.googlecode.reunion.jreunion.game.RoamingItem;
 import com.googlecode.reunion.jreunion.game.Skill;
-import com.googlecode.reunion.jreunion.game.SlayerWeapon;
-import com.googlecode.reunion.jreunion.game.Weapon;
 import com.googlecode.reunion.jreunion.server.Client.LoginType;
 import com.googlecode.reunion.jreunion.server.Client.State;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
@@ -214,8 +216,7 @@ public class Command {
 		client.sendPacket(Type.A_, "idx", client.getAccountId());
 
 		client.sendPacket(Type.A_, "idn", client.getUsername());
-		client.sendData(packetData);
-
+		
 		client.sendPacket(Type.A_, "lev", player.getAdminState());
 
 		packetData = "wearing " + eq.getId(Slot.HELMET) + " " + eq.getType(Slot.HELMET) + " "
@@ -291,7 +292,8 @@ public class Command {
 			newHp = 0;
 		}
 
-		player.updateStatus(0, newHp, player.getMaxHp());
+		player.setHp(newHp);
+		
 
 
 		client.sendPacket(Type.ATTACK, mob, player);
@@ -462,6 +464,25 @@ public class Command {
 					.removeMob(livingObject);
 		}
 	*/
+	}
+
+	public void useItem(Player player ,Item item) {
+		
+		
+		if(Usable.class.isInstance(item)){
+			
+			
+			((Usable)item).use(player);
+			
+			DatabaseUtils.getInstance().deleteItem(item);
+			
+		}
+		else{
+			
+			Logger.getLogger(QuickSlot.class).error(item+ " not Usable");
+			
+		}
+		
 	}
 
 }

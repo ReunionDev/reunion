@@ -12,7 +12,7 @@ public class Exchange {
 
 	private List<ExchangeItem> itemList;
 
-	public Exchange() {
+	public Exchange(Player player) {
 		itemList = new Vector<ExchangeItem>();
 	}
 
