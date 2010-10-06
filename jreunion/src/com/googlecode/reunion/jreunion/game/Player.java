@@ -190,9 +190,11 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 	}
 	
 	@Override
-	public void setHp(int hp){
+	public synchronized void setHp(int hp){
+		int before = this.getHp();
 		super.setHp(hp);	
-		this.sendStatus(Status.HP);
+		if(before!=this.getHp())
+			this.sendStatus(Status.HP);
 	}
 	
 	public void sendStatus(Status status) {
@@ -265,9 +267,11 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 	public abstract int getMaxStamina();
 	
 
-	public void setStamina(int stamina){
+	public synchronized void setStamina(int stamina){
+		int before = this.stamina;
 		this.stamina = Tools.between(stamina, 0, getMaxStamina());
-		this.sendStatus(Status.STAMINA);
+		if(before!=this.stamina)
+			this.sendStatus(Status.STAMINA);
 	}
 	
 	abstract int getBaseDamage();
@@ -399,15 +403,19 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 	}
 
 	
-	public void setMana(int mana) {
+	public synchronized void setMana(int mana) {
+		int before = this.mana;
 		this.mana = Tools.between(mana, 0, getMaxMana());
-		sendStatus(Status.MANA);
+		if(before!=this.mana)
+			sendStatus(Status.MANA);
 	}
 
 
-	public void setElectricity(int electricity) {
+	public synchronized void setElectricity(int electricity) {
+		int before = this.electricity;
 		this.electricity = Tools.between(electricity,0,getMaxElectricity());
-		sendStatus(Status.ELECTRICITY);
+		if(this.electricity!=before)
+			sendStatus(Status.ELECTRICITY);
 	}	
 
 	public Race getRace() {
@@ -799,9 +807,18 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		super.setLevel(level);
 		loadFromReference(level);
 		if(client.getState()==State.INGAME){
+
+			
 			sendStatus(Status.LEVEL);
 			client.sendPacket(Type.LEVELUP, this);		
 			getInterested().sendPacket(Type.LEVELUP, this);
+			
+			setHp(this.getMaxHp());
+			setMana(this.getMaxHp());
+			setElectricity(this.getMaxElectricity());
+			setStamina(this.getMaxStamina());
+			
+			
 		}
 	}
 

@@ -142,9 +142,9 @@ public class World extends ClassModule implements EventListener, Sendable{
 			map.load();
 			maps.put(mapId, map);
 		}
-		java.util.Timer timer = new java.util.Timer();
+		java.util.Timer timer1 = new java.util.Timer();
 		
-		timer.schedule(new TimerTask() {
+		timer1.schedule(new TimerTask() {
 			
 			@Override
 			public void run() {
@@ -161,6 +161,36 @@ public class World extends ClassModule implements EventListener, Sendable{
 				}				
 			}
 		}, 0, 60 * 1000);
+		
+		java.util.Timer timer2 = new java.util.Timer();
+		
+		timer2.schedule(new TimerTask() {
+			
+			@Override
+			public void run() {
+				Thread.currentThread().setName("Regen thread");
+				synchronized(playerManager){
+					Iterator<Player> iter = playerManager.getPlayerListIterator();
+					while (iter.hasNext()) {
+						Player player = iter.next();
+						
+						synchronized(player){
+							int maxHp = player.getMaxHp();
+							player.setHp(player.getHp()+Tools.between(maxHp/100, 1, maxHp));							
+							
+							int maxMana = player.getMaxMana();
+							player.setMana(player.getMana()+Tools.between(maxMana/100, 1, maxMana));	
+							
+							int maxStamina = player.getMaxStamina();
+							player.setStamina(player.getStamina()+Tools.between(maxStamina/100, 1, maxStamina));	
+							
+							int maxElectricity = player.getMaxElectricity();
+							player.setElectricity(player.getElectricity()+Tools.between(maxElectricity/100, 1, maxElectricity));	
+						}
+					}
+				}				
+			}
+		}, 0, 3*1000);
 	}
 
 	@Override

@@ -347,7 +347,7 @@ public class DatabaseUtils extends Service {
 				
 			}
 			
-			String key = "(SELECT Rank FROM(SELECT Id,@rownum:=@rownum+1 `rank` FROM (SELECT Id FROM characters UNION SELECT `Id` FROM items Order By `Id`) t,(SELECT @rownum:=0) r) t2 WHERE Rank <> Id LIMIT 1 UNION SELECT MAX(`Id`)+1 FROM (SELECT Id FROM characters UNION SELECT Id FROM items) t3 LIMIT 1)";
+			String key = "(SELECT Rank FROM(SELECT Id,@rownum:=@rownum+1 `rank` FROM (SELECT Id FROM characters UNION SELECT `Id` FROM items Order By `Id`) t,(SELECT @rownum:=0) r) t2 WHERE Rank <> Id LIMIT 1 UNION SELECT IF(MAX(`Id`) IS NULL, 1 ,MAX(`Id`)+1) FROM (SELECT Id FROM characters UNION SELECT Id FROM items) t3 LIMIT 1)";
 			
 						
 			String q = "INSERT INTO characters (id,accountid,name,level,strength,wisdom,dexterity,constitution,leadership,race,sex,hair," +
@@ -873,7 +873,7 @@ public class DatabaseUtils extends Service {
 			}
 			
 			//stmt.execute("LOCK TABLES characters WRITE, items WRITE;");
-			ResultSet rs = stmt.executeQuery("SELECT Rank FROM(SELECT `Id`,@rownum:=@rownum+1 `rank` FROM (SELECT `Id` FROM characters UNION SELECT `Id` FROM items Order By `Id`) t,(SELECT @rownum:=0) r) t2 WHERE Rank <> Id LIMIT 1 UNION SELECT MAX(`Id`)+1 FROM (SELECT `Id` FROM characters UNION SELECT `Id` FROM items) t3 LIMIT 1");
+			ResultSet rs = stmt.executeQuery("SELECT Rank FROM(SELECT `Id`,@rownum:=@rownum+1 `rank` FROM (SELECT `Id` FROM characters UNION SELECT `Id` FROM items Order By `Id`) t,(SELECT @rownum:=0) r) t2 WHERE Rank <> Id LIMIT 1 UNION SELECT IF(MAX(`Id`) IS NULL, 1 ,MAX(`Id`)+1) FROM (SELECT `Id` FROM characters UNION SELECT `Id` FROM items) t3 LIMIT 1");
 			rs.next();
 			itemId = rs.getInt(1);
 			System.out.println("itemId: "+itemId);

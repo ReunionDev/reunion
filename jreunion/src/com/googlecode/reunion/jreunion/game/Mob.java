@@ -293,6 +293,8 @@ public class Mob extends Npc {
 		setHp(0);
 
 		this.getPosition().getMap().getWorld().getMobManager().removeMob(this);
+		
+		
 		NpcSpawn spawn = this.getSpawn();
 		if (spawn != null) {
 			spawn.kill();

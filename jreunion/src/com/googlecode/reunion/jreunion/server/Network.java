@@ -251,7 +251,7 @@ public class Network extends Service implements Runnable, EventListener{
 	public void notifySend(Socket socket) {
 		try {
 			synchronized(this){
-				if(socket.getChannel().isOpen()){
+				if(socket.getChannel().isOpen()&&selector.isOpen()){
 					selector.wakeup();					
 					socket.getChannel().register(selector, SelectionKey.OP_READ | SelectionKey.OP_WRITE);
 				}
