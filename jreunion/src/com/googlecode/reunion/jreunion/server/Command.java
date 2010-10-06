@@ -252,9 +252,7 @@ public class Command {
 
 		Client client = player.getClient();
 
-		LivingObject livingObject = Server.getInstance().getWorld()
-				.getMobManager().getMob(uniqueId);
-
+		LivingObject livingObject = (LivingObject) player.getPosition().getMap().getEntity(uniqueId);
 		if (livingObject == null) {
 			livingObject = Server.getInstance().getWorld()
 					.getPlayerManager().getPlayer(uniqueId);

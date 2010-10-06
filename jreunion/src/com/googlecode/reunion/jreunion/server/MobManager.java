@@ -61,6 +61,7 @@ public class MobManager {
 	}
 
 	public Mob getMob(int uniqueid) {
+		
 		Iterator<Mob> iter = getMobListIterator();
 		while (iter.hasNext()) {
 			Mob mob = iter.next();

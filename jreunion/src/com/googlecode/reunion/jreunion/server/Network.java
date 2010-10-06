@@ -195,7 +195,6 @@ public class Network extends Service implements Runnable, EventListener{
 	
 	private boolean processOutput(SocketChannel socketChannel) throws IOException {
 		
-		
 		Socket socket = socketChannel.socket();
 		
 		if(!socketChannel.isOpen()||!socketChannel.isConnected()){

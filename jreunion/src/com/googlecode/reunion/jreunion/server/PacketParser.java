@@ -348,7 +348,7 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 	
 					// client.getPlayer()Object.tell(message[1], text);
 				} else if (message[0].equals("combat")) {
-					client.getPlayer().charCombat(Integer.parseInt(message[1])==1);
+					client.getPlayer().setIsInCombat(Integer.parseInt(message[1])==1);
 				} else if (message[0].equals("social")) {
 					client.getPlayer().social(Integer.parseInt(message[1]));
 				} else if (message[0].equals("levelup")) {

@@ -155,27 +155,13 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 
 	}
 	
-	@Override
-	public int getMaxHp(){
-		return getStrength()+(getStrength()*(getStrength() / 50));
-		//10+(10/50)+10
-	}
-
 	public void addAttack(int attack) {
 		if (attackQueue.size() >= 5) {
 			attackQueue.remove(0);
 		}
 		attackQueue.add(attack);
 	}
-
-
-	public void charCombat(boolean combat) {
-
-		setIsInCombat(combat);
-		getInterested().sendPacket(Type.COMBAT, this);
-		
-	}
-
+	
 	public void clearAttackQueue() {
 		for (int i = 0; i < attackQueue.size(); i++) {
 			attackQueue.remove(i);
@@ -781,6 +767,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 
 	public void setIsInCombat(boolean isInCombat) {
 		this.isInCombat = isInCombat;
+		getInterested().sendPacket(Type.COMBAT, this);
 	}
 
 	public void setConstitution(int cons) {

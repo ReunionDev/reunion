@@ -143,9 +143,9 @@ public class Client extends EventBroadcaster implements EventListener,Sendable {
 			this.outputBuffer.append(data);
 			if(!data.endsWith("\n")){
 				this.outputBuffer.append("\n");
-			}
-			this.fireEvent(NetworkSendEvent.class, this.getSocket());			
+			}		
 		}
+		this.fireEvent(NetworkSendEvent.class, this.getSocket());
 	}
 	
 	public void sendPacket(PacketFactory.Type packetType, Object ...args){		

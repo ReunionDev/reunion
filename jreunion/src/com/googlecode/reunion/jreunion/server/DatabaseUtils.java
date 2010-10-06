@@ -253,6 +253,30 @@ public class DatabaseUtils extends Service {
 		loadEquipment(player.getEquipment(), player.getId());
 	}
 	
+	public String createUnique(){
+		return null;
+		
+		
+		
+		/*
+		return "
+		SELECT Rank FROM(SELECT Id,@rownum:=@rownum+1 `rank` FROM (SELECT Id FROM characters
+				UNION
+				SELECT ID FROM items) t,(SELECT @rownum:=0) r) t2
+				WHERE Rank <> Id
+				LIMIT 1
+				UNION
+				SELECT MAX(`Id`)+1
+				FROM (
+				SELECT Id FROM characters
+				UNION
+				SELECT Id FROM items) t3
+				LIMIT 1;
+		";" +
+		*/
+		
+	}
+	
 	
 	public Player loadCharStatus(Client client, int characterId){
 		Player player = null;
@@ -316,14 +340,20 @@ public class DatabaseUtils extends Service {
 			
 			int charid = player.getId();
 			Statement stmt = database.conn.createStatement();
-			if(charid!=-1)
-				stmt.execute("DELETE FROM characters WHERE id="+charid+";");		
+			
+			if(charid!=-1){
+				
+				stmt.execute("DELETE FROM characters WHERE id="+charid+";");
+				
+			}
+			
+			String key = "(SELECT Rank FROM(SELECT Id,@rownum:=@rownum+1 `rank` FROM (SELECT Id FROM characters UNION SELECT `Id` FROM items Order By `Id`) t,(SELECT @rownum:=0) r) t2 WHERE Rank <> Id LIMIT 1 UNION SELECT MAX(`Id`)+1 FROM (SELECT Id FROM characters UNION SELECT Id FROM items) t3 LIMIT 1)";
 			
 						
-			stmt.execute("INSERT INTO characters ("+(charid==-1?"":"id,")+"accountid,name,level,strength,wisdom,dexterity,constitution,leadership,race,sex,hair," +
+			String q = "INSERT INTO characters (id,accountid,name,level,strength,wisdom,dexterity,constitution,leadership,race,sex,hair," +
 												  "totalExp,levelUpExp,lime,statusPoints,penaltyPoints," +
 												  "guildid,guildlvl)" +
-						 " VALUES ("+(charid==-1?"":player.getId()+ ",")
+						 " VALUES ("+(charid==-1?key:player.getId())+ ","
 								    +client.getAccountId()+ ",'"
 								    +player.getName()+ "',"
 								    +player.getLevel()+ ","
@@ -341,12 +371,13 @@ public class DatabaseUtils extends Service {
 								    +player.getStatusPoints()+ ","
 								    +player.getPenaltyPoints()+ ","
 								    +player.getGuildId()+ ","
-								    +player.getGuildLvl()+ ");",
-								    Statement.RETURN_GENERATED_KEYS);
+								    +player.getGuildLvl()+ ");";
+			System.out.println(q); 
+			stmt.execute(q);
 			if(charid==-1){
 				
-				ResultSet rs = stmt.getGeneratedKeys();
-				rs.beforeFirst();
+				
+				ResultSet rs = stmt.executeQuery("SELECT Id from characters where name ='"+player.getName()+"'");
 				rs.next();
 				charid = rs.getInt(1);
 				if(charid==-1)
@@ -428,8 +459,7 @@ public class DatabaseUtils extends Service {
 		Statement stmt;
 		try {
 						
-			stmt = database.conn.createStatement();
-			
+			stmt = database.conn.createStatement();			
 								
 			Player player = Player.createPlayer(client, race);
 			
@@ -824,7 +854,7 @@ public class DatabaseUtils extends Service {
 		}
 		
 	}
-	public void saveItem(Item item){
+	public synchronized void saveItem(Item item){
 		if (!checkDatabase())
 			return ;
 			
@@ -834,22 +864,28 @@ public class DatabaseUtils extends Service {
 			
 			int itemId = item.getId();
 			if(itemId!=-1){
-				stmt.execute("DELETE FROM items WHERE id="+itemId+";");
+				
+				int res = stmt.executeUpdate("UPDATE `items` SET `type`="+item.getType()+", `gemnumber`="+item.getGemNumber()+", `extrastats`="+item.getExtraStats()+" WHERE `Id` = "+itemId);
+				if(res==0){
+					Logger.getLogger(DatabaseUtils.class).error("item not found: "+itemId);					
+				}
+				return;
 			}
 			
-			stmt.execute("INSERT INTO items ("+(itemId==-1?"":"id,")+" type, gemnumber, extrastats)" +
-					" VALUES ("+(itemId==-1?"":item.getId()+ ",")+item.getType()+","
-					+item.getGemNumber()+","+item.getExtraStats()+");",Statement.RETURN_GENERATED_KEYS);
-						
-			if(itemId==-1){
-				ResultSet rs = stmt.getGeneratedKeys();
-				rs.beforeFirst();
-				rs.next();
-				itemId = rs.getInt(1);
-				if(itemId==-1)
-					throw new Exception("key is -1!");
-				item.setId(itemId);
-			}
+			//stmt.execute("LOCK TABLES characters WRITE, items WRITE;");
+			ResultSet rs = stmt.executeQuery("SELECT Rank FROM(SELECT `Id`,@rownum:=@rownum+1 `rank` FROM (SELECT `Id` FROM characters UNION SELECT `Id` FROM items Order By `Id`) t,(SELECT @rownum:=0) r) t2 WHERE Rank <> Id LIMIT 1 UNION SELECT MAX(`Id`)+1 FROM (SELECT `Id` FROM characters UNION SELECT `Id` FROM items) t3 LIMIT 1");
+			rs.next();
+			itemId = rs.getInt(1);
+			System.out.println("itemId: "+itemId);
+			
+			stmt.execute("INSERT INTO items (id, type, gemnumber, extrastats)" +
+					" VALUES ("+itemId+","+item.getType()+","
+					+item.getGemNumber()+","+item.getExtraStats()+");");
+			
+			item.setId(itemId);
+			
+			
+			//stmt.execute("UNLOCK TABLES");
 			
 		} 
 		catch (Exception e) {

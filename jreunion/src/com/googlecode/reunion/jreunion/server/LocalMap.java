@@ -343,9 +343,9 @@ public class LocalMap extends Map implements Runnable{
 				synchronized(entities) {
 					
 					WorldObject object = entities.put(entity.getId(), entity);
-					if(object!=null) 
-						throw new RuntimeException("This should never happen! 1");
 					list.enter(entity, false);		
+					if(object!=null) 
+						throw new RuntimeException("This should never happen! 1 id:"+entity.getId());
 				}
 				
 				if(entity instanceof Player){
