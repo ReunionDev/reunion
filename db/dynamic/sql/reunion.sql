@@ -30,26 +30,27 @@ CREATE TABLE `accounts` (
 DROP TABLE IF EXISTS `characters`;
 
 CREATE TABLE `characters` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `accountid` int(11) NOT NULL,
-  `name` varchar(32) NOT NULL,
-  `level` int(11) NOT NULL DEFAULT '1',
-  `strength` int(11) NOT NULL DEFAULT '1',
-  `wisdom` int(11) NOT NULL DEFAULT '1',
-  `dexterity` int(11) NOT NULL DEFAULT '1',
-  `constitution` int(11) NOT NULL DEFAULT '1',
-  `leadership` int(11) NOT NULL DEFAULT '1',
-  `race` int(11) NOT NULL DEFAULT '1',
-  `sex` int(11) NOT NULL DEFAULT '1',
-  `hair` int(11) NOT NULL DEFAULT '1',
-  `totalExp` int(11) NOT NULL,
-  `levelUpExp` int(11) NOT NULL,
-  `lime` int(11) NOT NULL,
-  `statusPoints` int(11) NOT NULL,
-  `penaltyPoints` int(11) NOT NULL,
-  `guildid` int(11) NOT NULL DEFAULT '-1',
-  `guildlvl` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`)
+  `id` int(11) unsigned NOT NULL,
+  `accountid` int(11) DEFAULT NULL,
+  `name` varchar(32) DEFAULT NULL,
+  `level` int(11) DEFAULT NULL,
+  `strength` int(11) DEFAULT NULL,
+  `wisdom` int(11) DEFAULT NULL,
+  `dexterity` int(11) DEFAULT NULL,
+  `constitution` int(11) DEFAULT NULL,
+  `leadership` int(11) DEFAULT NULL,
+  `race` int(11) DEFAULT NULL,
+  `sex` int(11) DEFAULT NULL,
+  `hair` int(11) DEFAULT NULL,
+  `totalExp` int(11) DEFAULT NULL,
+  `levelUpExp` int(11) DEFAULT NULL,
+  `lime` int(11) DEFAULT NULL,
+  `statusPoints` int(11) DEFAULT NULL,
+  `penaltyPoints` int(11) DEFAULT NULL,
+  `guildid` int(11) DEFAULT NULL,
+  `guildlvl` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name_UNIQUE` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `equipment`;
@@ -93,11 +94,11 @@ CREATE TABLE `inventory` (
 DROP TABLE IF EXISTS `items`;
 
 CREATE TABLE `items` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `type` int(11) NOT NULL,
-  `gemnumber` int(11) NOT NULL default '0',
-  `extrastats` int(11) NOT NULL default '0',
-  PRIMARY KEY  (`id`)
+  `id` int(11) unsigned NOT NULL,
+  `type` int(11) DEFAULT NULL,
+  `gemnumber` int(11) DEFAULT NULL,
+  `extrastats` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `quickslot`;
