@@ -14,7 +14,7 @@ import org.apache.log4j.Logger;
  */
 public class EventBroadcaster{
 	private static LinkedBlockingQueue<EventWorker> workers;
-	private static Thread [] threads = new Thread[25];
+	private static Thread [] threads = new Thread[100];
 	static {
 		workers = new LinkedBlockingQueue<EventWorker>(threads.length);
 		for(int i=0; i<threads.length;i++) {
@@ -96,27 +96,41 @@ public class EventBroadcaster{
 	
 	protected int fireEvent(Event event){
 		Map<Class,Map<EventListener,Filter>> listeners = this.getListeners();
-		int counter =0;
+		int counter =0;		
+		List<Entry<EventListener,Filter>> entries = new LinkedList<Entry<EventListener,Filter>>();		
 		synchronized(listeners){
 			for(Class c :listeners.keySet()){
 				if(c.isInstance(event)){
 					for(Entry<EventListener,Filter> entry: listeners.get(c).entrySet()){
-						counter++;
-						try{					
-							EventWorker worker = workers.take();
-								synchronized(worker){
-									worker.event = event;
-									worker.listener = entry.getKey();
-									worker.filter = entry.getValue();
-									worker.notify();
-								}
-						}catch(Exception e){
-							Logger.getLogger(this.getClass()).warn("Exception",e);
-							throw new RuntimeException(e);
-						}
+						
+						entries.add(entry);
+			
 					}
 				}
 			}		
+		}
+		for(Entry<EventListener,Filter> entry: entries){
+			counter++;
+			try{					
+				EventWorker worker = null;
+					while(worker==null) {
+						worker = workers.poll();
+						if(worker==null){
+							synchronized(workers){
+								workers.wait();
+							}							
+						}
+					}
+					synchronized(worker){
+						worker.event = event;
+						worker.listener = entry.getKey();
+						worker.filter = entry.getValue();
+						worker.notify();
+					}
+			}catch(Exception e){
+				Logger.getLogger(this.getClass()).warn("Exception",e);
+				throw new RuntimeException(e);
+			}
 		}
 		return counter;
 	}
@@ -135,6 +149,9 @@ public class EventBroadcaster{
 					while((listener==null||event==null)){
 						synchronized(this){							
 							workers.add(this);
+							synchronized(workers){
+								workers.notifyAll();
+							}
 							this.waiting = true;
 							this.wait();
 							this.waiting = false;
@@ -150,6 +167,7 @@ public class EventBroadcaster{
 					}finally{
 						listener = null;
 						event = null;
+						filter = null;
 					}
 					
 				}
