@@ -12,6 +12,7 @@ import com.googlecode.reunion.jreunion.events.Test;
 import com.googlecode.reunion.jreunion.events.network.NetworkDataEvent;
 import com.googlecode.reunion.jreunion.events.server.ServerStartEvent;
 import com.googlecode.reunion.jreunion.events.server.ServerStopEvent;
+import com.googlecode.reunion.jreunion.server.protocol.Protocol;
 
 
 /**
@@ -141,12 +142,14 @@ public class Server extends ClassModule {
 		new Debug();
 		RemoteAdmin.enableRemoteAdmin();
 		
+		Protocol.load();
+		
 		database = new Database(this);
 		network = new Network(this);
 		world = new World(this);
 		packetParser = new PacketParser();
 		
-		network.addEventListener(NetworkDataEvent.class, packetParser);
+		//network.addEventListener(NetworkDataEvent.class, packetParser);
 	}
 	
 	

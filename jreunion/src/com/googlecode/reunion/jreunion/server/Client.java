@@ -18,6 +18,8 @@ import com.googlecode.reunion.jreunion.events.network.NetworkDisconnectEvent;
 import com.googlecode.reunion.jreunion.events.network.NetworkEvent;
 import com.googlecode.reunion.jreunion.events.network.NetworkSendEvent;
 import com.googlecode.reunion.jreunion.game.Player;
+import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
+import com.googlecode.reunion.jreunion.server.protocol.Protocol;
 
 /**
  * @author Aidamina
@@ -42,6 +44,8 @@ public class Client extends EventBroadcaster implements EventListener,Sendable {
 	private String username;
 
 	private String password;
+	
+	private Protocol protocol;
 
 	private Socket socket;
 
@@ -196,12 +200,22 @@ public class Client extends EventBroadcaster implements EventListener,Sendable {
 		PORTING,
 		LOADING,
 		INGAME;
-	
 	}
 	
 	public enum LoginType{
 		PLAY,
 		LOGIN		
+	}
+	
+	public byte[] flush(){
+		
+		StringBuffer outputBuffer = this.getOutputBuffer();
+		if(outputBuffer.length()==0)
+			return null;
+		String packetData = outputBuffer.toString();		
+		outputBuffer.setLength(0);
+		Logger.getLogger(Network.class).debug("Sending to "+this+":\n" + packetData);
+		return protocol.encrypt(this, packetData);
 	}
 
 	@Override
@@ -211,9 +225,24 @@ public class Client extends EventBroadcaster implements EventListener,Sendable {
 			if(event instanceof NetworkDataEvent) {
 				synchronized(this){
 					NetworkDataEvent networkDataEvent = (NetworkDataEvent) event;
-					String data = networkDataEvent.getData();
-					this.inputBuffer.append(networkDataEvent.getData());
-					if(!data.endsWith("\n"))
+
+					byte [] data = networkDataEvent.getData();
+					
+					if(protocol==null){
+						protocol = Protocol.find(this, data);
+						if(protocol==null) {							
+							this.disconnect();
+							throw new RuntimeException("Unknown Protocol");//TODO: Proper handling
+						}
+						
+						Logger.getLogger(Client.class).debug(this + " protocol discovered: "+protocol);
+					}
+					
+					String decryptedData = protocol.decrypt(this, data);
+					Logger.getLogger(Client.class).debug(this + " sends: \n"+decryptedData);
+					
+					this.inputBuffer.append(decryptedData);
+					if(!decryptedData.endsWith("\n"))
 						inputBuffer.append("\n");
 					fireEvent(ClientReceiveEvent.class,this);			
 				}

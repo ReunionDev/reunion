@@ -51,7 +51,7 @@ public class BulkanPlayer extends Player {
 
 	public int getBaseDmg() {
 		int randDmg, baseDmg = 0;
-
+		
 		randDmg = getMinDmg()
 				+ (int) (Math.random() * (getMaxDmg() - getMinDmg()));
 
@@ -81,7 +81,6 @@ public class BulkanPlayer extends Player {
 		if (newHp <= 0) {
 
 			mob.kill(this);
-
 
 		/*	if (mob.getType() == 226) {
 				

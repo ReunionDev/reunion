@@ -9,14 +9,14 @@ import com.googlecode.reunion.jreunion.server.Client;
  */
 public class NetworkDataEvent extends NetworkEvent
 {
-	String data;
+	byte [] data;
 	
-	public NetworkDataEvent(Socket socket, String data) {
+	public NetworkDataEvent(Socket socket, byte[] data) {
 		super(socket);
 		this.data = data;
 	}
 
-	public String getData() {
+	public byte[] getData() {
 		return data;
 	}
 }

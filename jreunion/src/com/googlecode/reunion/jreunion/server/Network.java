@@ -179,14 +179,8 @@ public class Network extends Service implements Runnable, EventListener{
 		}
 		
 		int size = buffer.limit();
-		byte[] output = new byte[size];
-		buffer.get(output, 0, size);
-
-		char[] decOutput = Crypt.getInstance().C2Sdecrypt(output);
-
-		String data = new String(decOutput);
-		
-		Logger.getLogger(World.class).debug(client + " sends: \n"+data);
+		byte[] data = new byte[size];
+		buffer.get(data, 0, size);		
 		
 		fireEvent(NetworkDataEvent.class, socket, data);
 				
@@ -208,18 +202,12 @@ public class Network extends Service implements Runnable, EventListener{
 			return false;
 		}
 		synchronized(client){
-			
-			StringBuffer outputBuffer = client.getOutputBuffer();
-			
-			buffer.clear();
-			String packetData = outputBuffer.toString();
-			byte [] packetBytes = Crypt.getInstance().S2Cencrypt(
-					packetData.toCharArray());
+			buffer.clear();			
+			byte [] packetBytes = client.flush(); 
+			if(packetBytes==null)
+				return true;
 			buffer.put(packetBytes);
-			buffer.flip();
-			outputBuffer.setLength(0);
-			
-			Logger.getLogger(Network.class).debug("Sending to "+client+":\n" + packetData);
+			buffer.flip();			
 		}
 		try {
 			socketChannel.write(buffer);
