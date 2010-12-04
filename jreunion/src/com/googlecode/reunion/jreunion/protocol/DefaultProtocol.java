@@ -1,17 +1,17 @@
-package com.googlecode.reunion.jreunion.server.protocol;
+package com.googlecode.reunion.jreunion.protocol;
 
 import com.googlecode.reunion.jreunion.server.Client;
 
 public class DefaultProtocol extends Protocol 
 {
-	public String decrypt(Client client, byte data[]) {
+	public String decryptServer(Client client, byte data[]) {
 		for (int i = 0; i < data.length; i++) {
 			data[i] = (byte)(data[i] - 15);
 		}
 		return new String(data);
 	}
 	
-	public byte[] encrypt(Client client, String data) {
+	public byte[] encryptServer(Client client, String data) {
 
 		byte [] buffer = new byte[data.length()];
 		for (int i = 0; i < data.length(); i++) {

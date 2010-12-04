@@ -1,4 +1,4 @@
-package com.googlecode.reunion.jreunion.server.protocol;
+package com.googlecode.reunion.jreunion.protocol;
 
 import java.net.InetAddress;
 
@@ -11,7 +11,7 @@ public class OtherProtocol extends Protocol {
 	
 	
 	@Override
-	public String decrypt(Client client, byte[] data) {
+	public String decryptServer(Client client, byte[] data) {
 		InetAddress address = client.getSocket().getLocalAddress();
 		int port = client.getSocket().getLocalPort();
 		System.out.println(address+" "+port);
@@ -30,23 +30,19 @@ public class OtherProtocol extends Protocol {
 	}
 
 	@Override
-	public byte[] encrypt(Client client, String packet) {
+	public byte[] encryptServer(Client client, String packet) {
 	
 		InetAddress address = client.getSocket().getLocalAddress();
 		int port = client.getSocket().getLocalPort();
 		int version = client.getVersion();
 		int mapId = -1;
 		for(Map map :Server.getInstance().getWorld().getMaps()){
-			if(map.getAddress().getAddress().equals(address)&&map.getAddress().getPort()==port){
-				
+			if(map.getAddress().getAddress().equals(address)&&map.getAddress().getPort()==port) {
 				mapId = map.getId();
-				
 			}
 		}
-		if(mapId==-1){
-			
+		if(mapId==-1) {
 			throw new RuntimeException("Invalid Map");
-			
 		}
 		return encrypt(address, port,version, mapId, packet);
 		
@@ -61,14 +57,10 @@ public class OtherProtocol extends Protocol {
 		for(int i = 0; i<data.length; i++) {
 			
 			int rstep3 = data[i] ^ magic4;
-			
 			int rstep2 = rstep3 + 19;
-			
 			int rstep1 = magic2 ^ rstep2;
-			
 			data[i] = (byte)rstep1;
 		}
-		
 		return data;
 	}
 	

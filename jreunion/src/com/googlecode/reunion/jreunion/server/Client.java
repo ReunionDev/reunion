@@ -18,8 +18,8 @@ import com.googlecode.reunion.jreunion.events.network.NetworkDisconnectEvent;
 import com.googlecode.reunion.jreunion.events.network.NetworkEvent;
 import com.googlecode.reunion.jreunion.events.network.NetworkSendEvent;
 import com.googlecode.reunion.jreunion.game.Player;
+import com.googlecode.reunion.jreunion.protocol.Protocol;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
-import com.googlecode.reunion.jreunion.server.protocol.Protocol;
 
 /**
  * @author Aidamina
@@ -215,7 +215,7 @@ public class Client extends EventBroadcaster implements EventListener,Sendable {
 		String packetData = outputBuffer.toString();		
 		outputBuffer.setLength(0);
 		Logger.getLogger(Network.class).debug("Sending to "+this+":\n" + packetData);
-		return protocol.encrypt(this, packetData);
+		return protocol.encryptServer(this, packetData);
 	}
 
 	@Override
@@ -238,7 +238,7 @@ public class Client extends EventBroadcaster implements EventListener,Sendable {
 						Logger.getLogger(Client.class).debug(this + " protocol discovered: "+protocol);
 					}
 					
-					String decryptedData = protocol.decrypt(this, data);
+					String decryptedData = protocol.decryptServer(this, data);
 					Logger.getLogger(Client.class).debug(this + " sends: \n"+decryptedData);
 					
 					this.inputBuffer.append(decryptedData);

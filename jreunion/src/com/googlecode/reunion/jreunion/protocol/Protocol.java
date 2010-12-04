@@ -1,4 +1,4 @@
-package com.googlecode.reunion.jreunion.server.protocol;
+package com.googlecode.reunion.jreunion.protocol;
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -32,8 +32,7 @@ public abstract class Protocol {
 		
 		for(Protocol protocol : protocols){
 			
-			String decrypted = protocol.decrypt(client, data.clone());
-			
+			String decrypted = protocol.decryptServer(client, data.clone());
 			
 			if(testLogin(decrypted)){
 				return protocol;
@@ -76,9 +75,9 @@ public abstract class Protocol {
 		
 	}
 	
-	public abstract String decrypt(Client client, byte data[]);
+	public abstract String decryptServer(Client client, byte data[]);
 
-	public abstract byte[] encrypt(Client client, String data);
+	public abstract byte[] encryptServer(Client client, String data);
 	
 	
 }

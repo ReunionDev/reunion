@@ -12,7 +12,7 @@ import com.googlecode.reunion.jreunion.events.Test;
 import com.googlecode.reunion.jreunion.events.network.NetworkDataEvent;
 import com.googlecode.reunion.jreunion.events.server.ServerStartEvent;
 import com.googlecode.reunion.jreunion.events.server.ServerStopEvent;
-import com.googlecode.reunion.jreunion.server.protocol.Protocol;
+import com.googlecode.reunion.jreunion.protocol.Protocol;
 
 
 /**
