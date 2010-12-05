@@ -15,11 +15,38 @@ public class OtherProtocol extends Protocol {
 		InetAddress address = client.getSocket().getLocalAddress();
 		int port = client.getSocket().getLocalPort();
 		System.out.println(address+" "+port);
-		return decrypt(address,port,data);
+		return decryptServer(address,port,data);
 	}
 	
 	
-	public String decrypt(InetAddress address,int port, byte[] data) {
+	
+	public String decryptClient(byte[] data, InetAddress address, int port, int version, int mapId){
+		
+		
+		
+		int magic1 = OtherProtocol.magic(address, 0);
+		int magic2 = OtherProtocol.magic(address, 1);
+		int magic4 = magic1 - port - mapId + version;
+		
+		for(int i=0;i<data.length;i++){
+			
+			int step1 = magic2 ^ data[i];
+			int step2 = step1 - 19;			
+			int step3 = step2 ^ magic4;			
+			data[i] = (byte)step3;
+		}		
+		return new String(data);
+		}
+	
+	
+	public byte[] encryptClient(String data){
+		
+		
+		return null;
+	}
+	
+	
+	public String decryptServer(InetAddress address,int port, byte[] data) {
 		
 		int magic1 = magic(address, 0);
 		int magic2 = (port - 17) % 131;
@@ -44,10 +71,10 @@ public class OtherProtocol extends Protocol {
 		if(mapId==-1) {
 			throw new RuntimeException("Invalid Map");
 		}
-		return encrypt(address, port,version, mapId, packet);
+		return encryptServer(address, port,version, mapId, packet);
 		
 	}
-	public byte[] encrypt(InetAddress address, int port,int version, int mapId, String packet) {
+	public byte[] encryptServer(InetAddress address, int port,int version, int mapId, String packet) {
 		int magic1 = magic(address, 0);
 		int magic2 = magic(address, 1);
 		int magic4 = magic1 - port - mapId + version;

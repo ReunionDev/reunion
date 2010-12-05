@@ -70,7 +70,8 @@ public class ProtocolTest {
 		int port = 4005;
 		byte input = 'l';
 		System.out.println("original: "+Integer.toHexString(input)+" "+input);
-		int magic1 = magic(ip, 0);
+		InetAddress address = InetAddress.getByName(ip);
+		int magic1 = OtherProtocol.magic(address, 0);
 		int magic2 = (port - 17) % 131;
 		
 		int step1 = input ^ magic2;
@@ -99,7 +100,7 @@ public class ProtocolTest {
 		byte [] result = encrypt1(packet, ip, port);
 		
 		OtherProtocol prot = new OtherProtocol();
-		packet = prot.decrypt(InetAddress.getByName(ip), port, result);
+		packet = prot.decryptServer(InetAddress.getByName(ip), port, result);
 		
 		System.out.println(packet);
 		System.out.println(getHex(result));
@@ -119,10 +120,11 @@ public class ProtocolTest {
 	
 	
 	
-	public byte [] encrypt1(String test, String ip, int port){
+	public byte [] encrypt1(String test, String ip, int port) throws UnknownHostException{
 		
-		int magic1 = magic(ip, 0);
-		int dword_packet_encrypt_007 = magic(ip, 1);
+		InetAddress address = InetAddress.getByName(ip);
+		int magic1 = OtherProtocol.magic(address, 0);
+		int dword_packet_encrypt_007 = OtherProtocol.magic(address, 1);
 				
 		byte [] data = test.getBytes();
 		
@@ -166,22 +168,5 @@ public class ProtocolTest {
 	    return hex.toString();
 	  }
 	  
-	  int magic(String ip, int a2)
-	  {
-		  String [] snumbers = ip.split("\\.");
-		  
-		  int  v9 = Integer.parseInt(snumbers[0]);
-		  int  v10 = Integer.parseInt(snumbers[1]);
-		  int  v11 = Integer.parseInt(snumbers[2]);
-		  int  v12 = Integer.parseInt(snumbers[3]);
-	    
-        if ( a2 == 1 )
-          return v9 ^ v10 ^ v11 ^ v12;
-        else
-        	return v9 + v10 + v11 + v12;
-	    
-	   
-	  }
-
 
 }

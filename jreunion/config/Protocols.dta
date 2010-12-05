@@ -1,1 +1,1 @@
-[OtherProtocol]Class = com.googlecode.reunion.jreunion.server.protocol.OtherProtocolMinVersion = 0MaxVersion = 10000[DefaultProtocol]Class = com.googlecode.reunion.jreunion.server.protocol.DefaultProtocolMinVersion = 0MaxVersion = 10000
+[OtherProtocol]Class = com.googlecode.reunion.jreunion.protocol.OtherProtocolMinVersion = 0MaxVersion = 10000[DefaultProtocol]Class = com.googlecode.reunion.jreunion.protocol.DefaultProtocolMinVersion = 0MaxVersion = 10000
