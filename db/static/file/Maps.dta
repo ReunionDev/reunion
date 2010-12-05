@@ -8,7 +8,7 @@ MobArea = areas/laglamia/MobArea.bmp
 PvpArea = areas/laglamia/PvpArea.bmp
 DefaultSpawnId = 1
 
-[Lost Realm Castle]
+[LostRealmCastle]
 ID = 0
 PlayerSpawn = areas/lostrealmcastle/PlayerSpawns.dta
 MobSpawn = areas/lostrealmcastle/MobSpawns.dta
@@ -68,12 +68,22 @@ MobArea = areas/deckaran/MobArea.bmp
 PvpArea = areas/deckaran/PvpArea.bmp
 DefaultSpawnId = 1
 
-####################### OLD ############################
-
-[Great White Horn]
+[GreatWhiteHorn]
 ID = 7
-PlayerSpawn = GWHSpawns.dta
-PlayerArea = GWHPlayerArea.bmp
-MobArea = GWHMobArea.bmp
-PvpArea = GWHPvpArea.bmp
+PlayerSpawn = areas/greatewhitehorn/PlayerSpawns.dta
+MobSpawn = areas/greatewhitehorn/MobSpawns.dta
+NpcSpawn = areas/greatewhitehorn/NpcSpawns.dta
+PlayerArea = areas/greatewhitehorn/PlayerArea.bmp
+MobArea = areas/greatewhitehorn/MobArea.bmp
+PvpArea = areas/greatewhitehorn/PvpArea.bmp
+DefaultSpawnId = 1
+
+[GenusLabor]
+ID = 8
+PlayerSpawn = areas/genuslabor/PlayerSpawns.dta
+MobSpawn = areas/genuslabor/MobSpawns.dta
+NpcSpawn = areas/genuslabor/NpcSpawns.dta
+PlayerArea = areas/genuslabor/PlayerArea.bmp
+MobArea = areas/genuslabor/MobArea.bmp
+PvpArea = areas/genuslabor/PvpArea.bmp
 DefaultSpawnId = 1
