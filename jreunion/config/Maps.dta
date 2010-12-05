@@ -40,3 +40,15 @@ Ip = 127.0.0.1
 Port = 4007
 Location = Local
 
+[GreatWhiteHorn]
+ID = 7
+Ip = 127.0.0.1
+Port = 4008
+Location = Local
+
+[Genus Labor]
+ID = 8
+Ip = 127.0.0.1
+Port = 4009
+Location = Local
+
