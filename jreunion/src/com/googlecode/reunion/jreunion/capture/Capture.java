@@ -1,5 +1,6 @@
 package com.googlecode.reunion.jreunion.capture;
 
+import java.io.DataInputStream;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.net.InetAddress;
@@ -20,6 +21,8 @@ import javax.xml.bind.Marshaller.Listener;
 
 import org.apache.log4j.Logger;
 
+import com.googlecode.reunion.jreunion.protocol.OtherProtocol;
+import com.googlecode.reunion.jreunion.protocol.Protocol;
 import com.googlecode.reunion.jreunion.server.Client;
 import com.googlecode.reunion.jreunion.server.Network;
 import com.googlecode.reunion.jreunion.server.Server;
@@ -31,25 +34,57 @@ public class Capture extends Thread{
 	public Capture() throws UnknownHostException {
 		address = InetAddress.getByName("127.0.0.1");
 	}
+	
 	@Override
 	public void run() {
 		try {
+			OtherProtocol protocol = new OtherProtocol(null);
+			protocol.setVersion(version);
+			protocol.setMapId(mapId);
+			protocol.setAddress(address);
+			protocol.setPort(port);
+			
+			
+			System.out.println("Proxy started for "+address+":"+port);
+			ServerSocket serverSocket = new ServerSocket(port);
+			System.out.println("started listening");
+			CaptureEndpoint local = new CaptureEndpoint(true, serverSocket.accept(), protocol);
+			System.out.println("connection accepted");
+			CaptureEndpoint remote = new CaptureEndpoint(false, new Socket(address,port), protocol);
+			
+			
+			remote.start();
+			local.start();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void run1() {
+		try {
 
+			OtherProtocol localProtocol = new OtherProtocol(null);
+			localProtocol.setVersion(version);
+			localProtocol.setMapId(mapId);
+			localProtocol.setAddress(address);
+			localProtocol.setPort(port);
+			OtherProtocol remoteProtocol = new OtherProtocol(null);
+			localProtocol.setVersion(version);
+			localProtocol.setMapId(mapId);
+			localProtocol.setAddress(address);
+			localProtocol.setPort(port);
+			
 			Selector selector = Selector.open();
-			
-			
-			
 			System.out.println("Proxy started for "+address+":"+port);
 			ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
 			serverSocketChannel.socket().bind(new InetSocketAddress(InetAddress.getByName("127.0.0.1"), port));
 			serverSocketChannel.configureBlocking(false);
 			serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
 			System.out.println("started listening");
-			selector.select();			
+			selector.select();
 			SocketChannel local = serverSocketChannel.accept();
-			
-			
-			
+						
 			System.out.println("connection accepted");
 			serverSocketChannel.close();
 			SocketChannel remote = SocketChannel.open(new InetSocketAddress(address, port));
@@ -80,21 +115,21 @@ public class Capture extends Thread{
 							continue;
 						}
 						byte[] data = new byte[size];
-						buffer.get(data, 0, size);		
-						
-						
+						buffer.get(data, 0, size);
 						System.out.println("Received "+size +" bytes from "+socketChannel);
 						SocketChannel target = socketChannel.equals(local)?remote:local;						
 						target.register(selector, SelectionKey.OP_WRITE, data);
 						
 					}else if ((key.readyOps() & SelectionKey.OP_WRITE) == SelectionKey.OP_WRITE) {
-						buffer.clear();			
-						buffer.put((byte[])key.attachment());
-						buffer.flip();
-						System.out.println("Sending "+buffer.limit() +" bytes to "+socketChannel);
-						socketChannel.write(buffer);
+						buffer.clear();		
+						byte [] data = (byte[])key.attachment();
+						if(data!=null){
+							buffer.put((byte[])key.attachment());
+							buffer.flip();
+							System.out.println("Sending "+buffer.limit() +" bytes to "+socketChannel);
+							socketChannel.write(buffer);
+						}
 						socketChannel.register(selector, SelectionKey.OP_READ);
-						
 					}
 				}
 			}
@@ -103,7 +138,66 @@ public class Capture extends Thread{
 			e.printStackTrace();
 		}
 	}
+	
 
+	public class CaptureEndpoint extends Thread {
+		private boolean isClient;
+		private Socket socket;
+		private Protocol protocol;
+		
+		public CaptureEndpoint(boolean isClient, Socket socket, Protocol protocol){
+			this.isClient = isClient;
+			this.socket = socket;
+			this.protocol = protocol;
+		}
+		
+		@Override
+		public void run() {
+			
+			try{
+				while(true) {
+	
+				    int n = socket.getInputStream().available();
+				    if(n==0){
+				    	Thread.sleep(10);
+				    	continue;
+				    }
+				    byte [] buffer = new byte[n];
+				    int m = socket.getInputStream().read(buffer, 0, n);
+				    if (m == -1) break;
+				    String packet = null;
+				    if(isClient){
+				    	packet = protocol.decryptClient(buffer);
+				    }else{
+				    	packet = protocol.decryptServer(buffer);
+				    }
+				  
+				}
+			}catch(Exception e){
+				
+				e.printStackTrace();
+				
+			}
+				
+		}
+		
+		public void send(String packet){
+			byte [] data = null;
+			if(isClient){
+				data = protocol.encryptClient(packet);
+			} else {
+				data = protocol.encryptServer(packet);
+			}
+			
+			try {
+				socket.getOutputStream().write(data);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
+		}
+	}
+	
 	public InetAddress address = null;
 	public int port = 4005;
 	public int version = 2000;

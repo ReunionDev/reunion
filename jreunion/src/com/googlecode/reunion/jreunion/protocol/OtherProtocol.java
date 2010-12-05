@@ -10,19 +10,67 @@ public class OtherProtocol extends Protocol {
 
 	
 	
+	public OtherProtocol(Client client) {
+		super(client);
+		if(client!=null){
+			address = getClient().getSocket().getLocalAddress();
+			port =  getClient().getSocket().getLocalPort();
+			version = getClient().getVersion();
+			for(Map map :Server.getInstance().getWorld().getMaps()){
+				if(map.getAddress().getAddress().equals(address)&&map.getAddress().getPort()==port) {
+					mapId = map.getId();
+				}
+			}
+		}
+	}
+	
+	private InetAddress address;
+	private int port = 4005;
+	public InetAddress getAddress() {
+		return address;
+	}
+	
+	public void setAddress(InetAddress address) {
+		this.address = address;
+	}
+	public int getPort() {
+		return port;
+	}
+	public void setPort(int port) {
+		this.port = port;
+	}
+	public int getVersion() {
+		return version;
+	}
+	public void setVersion(int version) {
+		this.version = version;
+	}
+	public int getMapId() {
+		return mapId;
+	}
+	public void setMapId(int mapId) {
+		this.mapId = mapId;
+	}
+
+	private int version = 100;
+	private int mapId = 4;
+
+
 	@Override
-	public String decryptServer(Client client, byte[] data) {
-		InetAddress address = client.getSocket().getLocalAddress();
-		int port = client.getSocket().getLocalPort();
+	public String decryptServer(byte[] data) {
 		System.out.println(address+" "+port);
-		return decryptServer(address,port,data);
+		
+		int magic1 = magic(address, 0);
+		int magic2 = (port - 17) % 131;
+		for(int i=0;i<data.length;i++){
+			data[i]=(byte)(((magic1 ^ data[i]) + 49) ^ magic2);
+		}		
+		return new String(data);
 	}
 	
 	
-	
-	public String decryptClient(byte[] data, InetAddress address, int port, int version, int mapId){
-		
-		
+	@Override
+	public String decryptClient(byte[] data){
 		
 		int magic1 = OtherProtocol.magic(address, 0);
 		int magic2 = OtherProtocol.magic(address, 1);
@@ -38,43 +86,24 @@ public class OtherProtocol extends Protocol {
 		return new String(data);
 		}
 	
-	
+	@Override
 	public byte[] encryptClient(String data){
 		
 		
 		return null;
 	}
 	
-	
-	public String decryptServer(InetAddress address,int port, byte[] data) {
-		
-		int magic1 = magic(address, 0);
-		int magic2 = (port - 17) % 131;
-		for(int i=0;i<data.length;i++){
-			data[i]=(byte)(((magic1 ^ data[i]) + 49) ^ magic2);
-		}		
-		return new String(data);
-	}
-
 	@Override
-	public byte[] encryptServer(Client client, String packet) {
+	public byte[] encryptServer(String packet) {
 	
-		InetAddress address = client.getSocket().getLocalAddress();
-		int port = client.getSocket().getLocalPort();
-		int version = client.getVersion();
-		int mapId = -1;
-		for(Map map :Server.getInstance().getWorld().getMaps()){
-			if(map.getAddress().getAddress().equals(address)&&map.getAddress().getPort()==port) {
-				mapId = map.getId();
-			}
-		}
+		//refresh version because its not always available on connect
+		if(getClient()!=null)
+			version = getClient().getVersion();
+		
 		if(mapId==-1) {
 			throw new RuntimeException("Invalid Map");
 		}
-		return encryptServer(address, port,version, mapId, packet);
 		
-	}
-	public byte[] encryptServer(InetAddress address, int port,int version, int mapId, String packet) {
 		int magic1 = magic(address, 0);
 		int magic2 = magic(address, 1);
 		int magic4 = magic1 - port - mapId + version;
@@ -89,8 +118,9 @@ public class OtherProtocol extends Protocol {
 			data[i] = (byte)rstep1;
 		}
 		return data;
+		
+		
 	}
-	
 	
 	public static int magic(InetAddress ip, int a2)
 	{

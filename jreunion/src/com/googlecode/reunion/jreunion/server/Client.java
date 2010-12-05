@@ -215,7 +215,7 @@ public class Client extends EventBroadcaster implements EventListener,Sendable {
 		String packetData = outputBuffer.toString();		
 		outputBuffer.setLength(0);
 		Logger.getLogger(Network.class).debug("Sending to "+this+":\n" + packetData);
-		return protocol.encryptServer(this, packetData);
+		return protocol.encryptServer(packetData);
 	}
 
 	@Override
@@ -238,7 +238,7 @@ public class Client extends EventBroadcaster implements EventListener,Sendable {
 						Logger.getLogger(Client.class).debug(this + " protocol discovered: "+protocol);
 					}
 					
-					String decryptedData = protocol.decryptServer(this, data);
+					String decryptedData = protocol.decryptServer(data);
 					Logger.getLogger(Client.class).debug(this + " sends: \n"+decryptedData);
 					
 					this.inputBuffer.append(decryptedData);
@@ -249,7 +249,6 @@ public class Client extends EventBroadcaster implements EventListener,Sendable {
 			}
 			if(event instanceof NetworkDisconnectEvent){				
 				
-
 				Logger.getLogger(Client.class).debug(event);
 				fireEvent(ClientDisconnectEvent.class, this);
 			}

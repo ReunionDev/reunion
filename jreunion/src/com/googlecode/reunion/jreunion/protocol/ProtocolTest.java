@@ -68,6 +68,7 @@ public class ProtocolTest {
 		String ip = "46.4.196.51";
 		//String ip = "127.0.0.1";
 		int port = 4005;
+		int version  = 2000;
 		byte input = 'l';
 		System.out.println("original: "+Integer.toHexString(input)+" "+input);
 		InetAddress address = InetAddress.getByName(ip);
@@ -99,8 +100,12 @@ public class ProtocolTest {
 		String packet = "login\n";
 		byte [] result = encrypt1(packet, ip, port);
 		
-		OtherProtocol prot = new OtherProtocol();
-		packet = prot.decryptServer(InetAddress.getByName(ip), port, result);
+		OtherProtocol prot = new OtherProtocol(null);
+		prot.setAddress(InetAddress.getByName(ip));
+		prot.setPort(port);
+		prot.setVersion(version);
+		
+		packet = prot.decryptServer(result);
 		
 		System.out.println(packet);
 		System.out.println(getHex(result));

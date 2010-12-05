@@ -7,6 +7,8 @@ import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jcommon.Parser;
 import com.googlecode.reunion.jreunion.server.ClassFactory;
@@ -14,31 +16,40 @@ import com.googlecode.reunion.jreunion.server.Client;
 import com.googlecode.reunion.jreunion.server.Reference;
 
 public abstract class Protocol {
-	public static Pattern login = Pattern.compile("(\\d+)\\n(login|play)\\n(.+)\\n(.+)\\n");
+	public static Pattern login = Pattern.compile("(\\d+)\\n((login|play)\\n)?((.+)\\n)?((.+)\\n)?");
 	
-	private static List<Protocol> protocols = new Vector<Protocol>();
+	private static List<Class<?>> protocols = new Vector<Class<?>>();
+	
+	
+	private Client client;
+	public Protocol (Client client){
+		
+		this.client = client;
+		
+	}
+	public Client getClient(){
+		return client;
+	}
+	
 	
 	public static boolean testLogin(String input) {
 		
 		System.out.println(input);
-		
 		Matcher matcher = login.matcher(input);
-		
 		return matcher.matches();
 		
 	}
 	
 	public static Protocol find(Client client, byte [] data) {
 		
-		for(Protocol protocol : protocols){
-			
-			String decrypted = protocol.decryptServer(client, data.clone());
+		for(Class<?> protocolClass : protocols){
+			Protocol protocol = (Protocol) ClassFactory.create(protocolClass, client);
+			String decrypted = protocol.decryptServer(data.clone());
 			
 			if(testLogin(decrypted)){
-				return protocol;
+				 return (Protocol) ClassFactory.create(protocol.getClass(),client);
 			}			
 		}
-		
 		return null;
 	}
 	
@@ -51,7 +62,7 @@ public abstract class Protocol {
 	}
 	
 	
-	public static void load(){
+	public static void load() throws ClassNotFoundException{
 		
 		protocols.clear();
 		Parser protocolConfig = new Parser();
@@ -63,8 +74,8 @@ public abstract class Protocol {
 			while(iter.hasNext()){
 				
 				ParsedItem item = iter.next();
-				Protocol protocol = (Protocol) ClassFactory.create(item.getMemberValue("Class"));
-				protocols.add(protocol);
+				Class<?> protocolName = Class.forName(item.getMemberValue("Class"));
+				protocols.add(protocolName);
 				
 			}
 			
@@ -75,9 +86,19 @@ public abstract class Protocol {
 		
 	}
 	
-	public abstract String decryptServer(Client client, byte data[]);
+	public abstract String decryptServer(byte data[]);
 
-	public abstract byte[] encryptServer(Client client, String data);
+	public abstract byte[] encryptServer(String data);
+	
+	//Optional	
+	public String decryptClient(byte [] data) {
+		throw new NotImplementedException();
+	}
+	
+	//Optional
+	public byte[] encryptClient(String data) {
+		throw new NotImplementedException();
+	}
 	
 	
 }
