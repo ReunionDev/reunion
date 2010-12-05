@@ -203,6 +203,7 @@ public class World extends ClassModule implements EventListener, Sendable{
 
 		if ((int) (serverTime.getTimeElapsedSeconds() % 2) == 0
 				&& mobMoving == false) {
+		
 			Iterator<Mob> mobsIter = Server.getInstance().getWorld()
 					.getMobManager().getMobListIterator();
 			while (mobsIter.hasNext()) {

@@ -95,7 +95,7 @@ public class MobManager {
 	}
 
 	public Iterator<Mob> getMobListIterator() {
-		return mobList.iterator();
+		return new Vector<Mob>(mobList).iterator();
 	}
 
 	public int getNumberOfMobs() {
