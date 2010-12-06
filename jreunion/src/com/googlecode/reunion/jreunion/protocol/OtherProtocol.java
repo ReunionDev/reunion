@@ -1,6 +1,9 @@
 package com.googlecode.reunion.jreunion.protocol;
 
 import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.googlecode.reunion.jreunion.server.Client;
 import com.googlecode.reunion.jreunion.server.Map;
@@ -9,6 +12,12 @@ import com.googlecode.reunion.jreunion.server.Server;
 public class OtherProtocol extends Protocol {
 
 	
+	public static Pattern packetRegex = Pattern.compile("(.+)\\n$");
+	public static Pattern placeRegex = Pattern.compile("place (-?\\d+) (-?\\d+) (-?\\d+) (-?\\d+) (-?\\d+) (-?\\d+)\\n");
+	public static Pattern walkRegex = Pattern.compile("walk (-?\\d+) (-?\\d+) (-?\\d+) (-?\\d+)\\n");
+	int [] place = new int [6];
+	int iter = -1;
+	int iterCheck = -1;
 	
 	public OtherProtocol(Client client) {
 		super(client);
@@ -55,20 +64,123 @@ public class OtherProtocol extends Protocol {
 	private int version = 100;
 	private int mapId = 4;
 
-
 	@Override
 	public String decryptServer(byte[] data) {
-		System.out.println(address+" "+port);
+			
+		String result = decryptServer(data,iter,iterCheck);		
+		if(result.contains("place")){
+			
+			Matcher matcher = placeRegex.matcher(result);
+			while(matcher.find()){
+				
+				for(int i=0;i<6;i++){
+					place[i]= Integer.parseInt(matcher.group(i+1));
+				}
+			}
+		}
+		if(result.contains("walk")){
+			
+			Matcher matcher = placeRegex.matcher(result);
+			while(matcher.find()){
+				
+				for(int i=0;i<4;i++){
+					place[i]= Integer.parseInt(matcher.group(i+1));
+				}
+			}
+		}
 		
-		int magic1 = magic(address, 0);
-		int magic2 = (port - 17) % 131;
-		for(int i=0;i<data.length;i++){
-			data[i]=(byte)(((magic1 ^ data[i]) + 49) ^ magic2);
-		}		
-		return new String(data);
+		if(result.contains("encrypt_key")){
+			
+			int magic0 = magic(address,0);
+			int magic1 = magic(address,1);
+			
+			int magicx = Math.abs(place[0]+place[1]-magic0);
+			//int v17 = magic1 + place[0] + v22 - *(_DWORD *)a4;
+			//int magicx = (HIDWORD(v17) ^ v17) - HIDWORD(v17);			
+			
+			
+			iter =  magicx%4;
+			iterCheck += ( magic1 ^ (magicx + 2 * magic1 - mapId));
+			System.out.println("magicx: "+magicx+" "+iter);
+		}
+		
+		return result;
 	}
 	
 	
+	public String decryptServer(byte[] data, int iter, int iterCheck) {
+		String result = null;
+		int magic0 = magic(address, 0);
+		int magic1 = magic(address, 1);
+		switch(iter+1){
+			case 0:
+				int magic3 = (port - 17) % 131;
+				for(int i=0;i<data.length;i++){
+					data[i]=(byte)(((magic0 ^ data[i]) + 49) ^ magic3);
+				}
+				result = new String(data);
+				break;
+			case 1:
+				int magic4 = iterCheck - version + 10;
+				for(int i=0;i<data.length;i++){
+					data[i]=(byte)(data[i]^magic4^version);
+				}
+				result = new String(data);
+				break;
+			case 2:
+				int magic5 = iterCheck +magic1-magic0;
+				for(int i=0;i<data.length;i++){
+					data[i]=(byte)(((data[i]^magic5)-19)^mapId);
+				}
+				result = new String(data);
+				break;
+			case 3:
+				int magic6 = port + 3 * mapId + mapId % 3;
+				for(int i=0;i<data.length;i++){
+					data[i]=(byte)(((data[i]^magic6)^iterCheck)+4);
+				}
+				result = new String(data);
+				break;
+			case 4:
+				for(int i=0;i<data.length;i++){
+					data[i]=(byte)(((data[i]^(iterCheck+111))+33)^version);
+				}
+				result = new String(data);
+				break;
+		}
+		if(result==null)
+			throw new RuntimeException("Unable to Decrypt");
+		return result;
+	}
+	 
+	private int findIter(byte[] data) {
+		
+		int magic0 = magic(address, 1);
+		int magic1 = magic(address, 1);
+		System.out.println("findIter!");
+		int [] place = new int[]{0,0,0,0};
+		int magicx = Math.abs(place[0]+place[1]-magic0);
+		iter =  magicx%4;
+		iterCheck += ( magic1 ^ (magicx + 2 * magic1 - mapId));
+		
+		String packet = decryptServer(data, iter, iterCheck);
+		if(packetRegex.matcher(packet).matches()){
+			return iter;
+		}
+		/*
+		for(int i=0; i<5; i++) {
+			int iterCheck = (this.iterCheck)+( magic1 ^ (i + 2 * magic1 - mapId));
+			String packet = decryptServer(data, i, iterCheck);
+			System.out.println(packet);
+			if(packetRegex.matcher(packet).matches()){
+				return i;
+			}
+			
+		}
+		*/
+		return -1;
+	}
+
 	@Override
 	public String decryptClient(byte[] data){
 		
@@ -131,5 +243,20 @@ public class OtherProtocol extends Protocol {
 		else
 			return rip[0] + rip[1] + rip[2] + rip[3];
 	   
-	 }
+	}
+	
+	public static void main(String[] args) {
+		
+		int [] place = new int[6];
+		String result = "place 6973 5281 106 -10650 14 1\n";
+		if(result.contains("place")){
+			Matcher matcher = placeRegex.matcher(result);
+			while(matcher.find()){
+				
+				for(int i=0;i<6;i++){
+					place[i]= Integer.parseInt(matcher.group(i+1));
+				}
+			}
+		}
+	}
 }

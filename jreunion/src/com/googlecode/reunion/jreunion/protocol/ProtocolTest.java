@@ -2,6 +2,7 @@ package com.googlecode.reunion.jreunion.protocol;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.regex.Matcher;
 
 
 public class ProtocolTest {
@@ -117,7 +118,15 @@ public class ProtocolTest {
 	 * @throws UnknownHostException 
 	 */
 	public static void main(String[] args) throws UnknownHostException {
-		new ProtocolTest(); 
+		
+	
+		
+		int r = 62^2000^9999;
+		System.out.println(r);
+		int b = r ^ 9999 ^ 2000;
+		System.out.println(b);
+		
+		//new ProtocolTest(); 
 		
 
 	}
