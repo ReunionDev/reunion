@@ -47,7 +47,7 @@ public abstract class Protocol {
 			String decrypted = protocol.decryptServer(data.clone());
 			
 			if(testLogin(decrypted)){
-				 return (Protocol) ClassFactory.create(protocol.getClass(),client);
+				 return (Protocol) ClassFactory.create(protocol.getClass(), client);
 			}			
 		}
 		return null;
