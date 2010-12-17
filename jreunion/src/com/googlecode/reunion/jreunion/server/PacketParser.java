@@ -1,6 +1,7 @@
 package com.googlecode.reunion.jreunion.server;
 
 import java.net.Socket;
+import java.nio.channels.SocketChannel;
 import java.util.Random;
 import java.util.regex.Pattern;
 
@@ -171,7 +172,7 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 				} else if (message[0].equals("char_new")) {
 					int slot = Integer.parseInt(message[1]);
 					
-					java.util.Map<Socket,Client> clients = world.getClients();
+					java.util.Map<SocketChannel,Client> clients = world.getClients();
 					synchronized(clients){
 						for(Client cl: clients.values()){
 							if(cl.equals(client))
@@ -225,15 +226,20 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 				if (message[0].equals("start_game")) {
 	
 					
-					client.sendPacket(Type.STATUS, 11, player.getTotalExp());
+					player.sendStatus(Status.TOTALEXP);
+					//client.sendPacket(Type.STATUS, 11, player.getTotalExp());
 					
-					client.sendPacket(Type.STATUS, 12, player.getLevelUpExp());
+					player.sendStatus(Status.LEVELUPEXP);
+					//client.sendPacket(Type.STATUS, 12, player.getLevelUpExp());
 					
-					client.sendPacket(Type.STATUS, 13, player.getStatusPoints());
+					player.sendStatus(Status.STATUSPOINTS);
+					//client.sendPacket(Type.STATUS, 13, player.getStatusPoints());
 					
-					client.sendPacket(Type.STATUS, 10, player.getLime());
+					player.sendStatus(Status.LIME);
+					//client.sendPacket(Type.STATUS, 10, player.getLime());
 					
-					client.sendPacket(Type.STATUS, 19, player.getPenaltyPoints());					
+					player.sendStatus(Status.PENALTYPOINTS);
+					//client.sendPacket(Type.STATUS, 19, player.getPenaltyPoints());					
 					
 					world.getPlayerManager().addPlayer(player);
 					

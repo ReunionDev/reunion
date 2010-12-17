@@ -124,7 +124,7 @@ public abstract class Skill {
 		this.currSecondRange = currSecondRange;
 	}
 	
-	public abstract int getLevelRequirement(int level);
+	public abstract int getLevelRequirement(int skillLevel);
 
 	public void setLevel(int level) {
 		this.level = level;

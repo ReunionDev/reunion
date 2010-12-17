@@ -58,10 +58,8 @@ public class SkillManager {
 			
 			List<Skill> raceSkillList = new Vector<Skill>();
 		
-			switch(race){
-		
+			switch(race) {
 			case BULKAN: {
-				
 				raceSkillList.add(skills.get(1));
 				raceSkillList.add(skills.get(1));
 				raceSkillList.add(skills.get(2));
@@ -171,9 +169,6 @@ public class SkillManager {
 				break;
 			
 			}
-			
-				
-			
 			default:
 				continue;
 			

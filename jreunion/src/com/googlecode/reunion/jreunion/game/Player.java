@@ -951,8 +951,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		client.sendData(packetData);
 	}
 	
-	
-	public static enum Status{
+	public static enum Status {
 		
 		HP(0),
 		MANA(1),
@@ -970,7 +969,6 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		LEADERSHIP(18),
 		PENALTYPOINTS(19),
 
-		
 		//TODO: Finish this
 		;
 		
@@ -992,7 +990,6 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 			}
 			return null;
 		}
-		
 	}
 	
 	/****** Handles all the Status Updates ******/

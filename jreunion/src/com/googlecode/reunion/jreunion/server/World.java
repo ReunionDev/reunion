@@ -1,6 +1,7 @@
 package com.googlecode.reunion.jreunion.server;
 
 import java.net.Socket;
+import java.nio.channels.SocketChannel;
 import java.util.Collection;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -41,7 +42,7 @@ public class World extends ClassModule implements EventListener, Sendable{
 	
 	java.util.Map<Integer,Map> maps = new Hashtable<Integer,Map>();	
 
-	java.util.Map<Socket,Client> clients = new Hashtable<Socket, Client>();
+	java.util.Map<SocketChannel,Client> clients = new Hashtable<SocketChannel, Client>();
 
 	private NpcManager npcManager;
 
@@ -232,36 +233,36 @@ public class World extends ClassModule implements EventListener, Sendable{
 	public void handleEvent(Event event) {
 		if(event instanceof NetworkEvent){
 			
-			Socket socket = ((NetworkEvent)event).getSocket();
+			SocketChannel socketChannel = ((NetworkEvent)event).getSocketChannel();
 			
 			if(event instanceof NetworkAcceptEvent){
 				
 				
 				NetworkAcceptEvent networkAcceptEvent = (NetworkAcceptEvent) event;
 				Network network = (Network) networkAcceptEvent.getSource();
-				Client client = new Client(this, socket);
+				Client client = new Client(this, socketChannel);
 				
 				client.addEventListener(NetworkSendEvent.class, network);
 															
-				network.addEventListener(NetworkDataEvent.class, client, new NetworkEvent.NetworkFilter(socket));
+				network.addEventListener(NetworkDataEvent.class, client, new NetworkEvent.NetworkFilter(socketChannel));
 				
-				Logger.getLogger(World.class).debug("Got connection from " + socket+"\n");
+				Logger.getLogger(World.class).debug("Got connection from " + socketChannel+"\n");
 				
 				client.setState(Client.State.ACCEPTED);
 				
-				clients.put(socket, client);
+				clients.put(socketChannel, client);
 				
 				fireEvent(ClientConnectEvent.class, client);
 								
 			}
 			if(event instanceof NetworkDisconnectEvent){
-				Client client = clients.remove(socket);
+				Client client = clients.remove(socketChannel);
 				
 			}
 		}
 	}
 
-	public java.util.Map<Socket, Client> getClients() {
+	public java.util.Map<SocketChannel, Client> getClients() {
 		return clients;
 	}
 

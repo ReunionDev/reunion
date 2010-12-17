@@ -52,7 +52,6 @@ public class Server extends ClassModule {
 			try {
 				_instance = new Server();
 			} catch (Exception e) {
-
 				Logger.getLogger(Server.class).warn("Exception",e);
 				return null;
 			}
@@ -81,7 +80,9 @@ public class Server extends ClassModule {
 			
 		},ConsoleAppender.SYSTEM_OUT));
 
-	
+		
+		Thread.currentThread().setName("main");
+		
 		PrintStream.useFileLogging();
 		Reference.getInstance().Load();
 		

@@ -16,4 +16,5 @@ public abstract class DatabaseAction {
 	}
 	
 	public abstract void perform() throws Exception;
+	
 }

@@ -262,7 +262,7 @@ MinSecondRange = 140
 MaxSecondRange = 170
 StatusUsed = 2
 Type = 2
-Class = PlaceHolder
+Class = bulkan.OverheadBlow
 
 [Recovery Boost]
 ID = 19
@@ -276,7 +276,7 @@ MinSecondRange = 0
 MaxSecondRange = 0
 StatusUsed = -1
 Type = 0
-Class = PlaceHolder
+Class = bulkan.RecoveryBoost
 
 [Marksmanship]
 ID = 20
@@ -290,7 +290,7 @@ MinSecondRange = 0
 MaxSecondRange = 0
 StatusUsed = -1
 Type = 0
-Class = PlaceHolder
+Class = human.Marksmanship
 
 [Gem Cutting Skill]
 ID = 21
@@ -304,7 +304,7 @@ MinSecondRange = 0
 MaxSecondRange = 0
 StatusUsed = -1
 Type = 0
-Class = PlaceHolder
+Class = human.GemCutting
 
 [Teleport]
 ID = 22
@@ -416,7 +416,7 @@ MinSecondRange = 5
 MaxSecondRange = 100
 StatusUsed = -1
 Type = 0
-Class = PlaceHolder
+Class = human.SemiAutomatic
 
 [Electric Shield]
 ID = 30
@@ -430,7 +430,7 @@ MinSecondRange = 5
 MaxSecondRange = 50
 StatusUsed = 3
 Type = 1
-Class = PlaceHolder
+Class = human.ElectricShield
 
 [Whirlwind Slash]
 ID = 31
@@ -444,7 +444,7 @@ MinSecondRange = 140
 MaxSecondRange = 170
 StatusUsed = 2
 Type = 2
-Class = PlaceHolder
+Class = bulkan.WhirlwindSlash
 
 [Safety Shield]
 ID = 32

@@ -2,6 +2,7 @@ package com.googlecode.reunion.jreunion.server;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.nio.channels.SocketChannel;
 
 import org.apache.log4j.Logger;
 
@@ -47,7 +48,7 @@ public class Client extends EventBroadcaster implements EventListener,Sendable {
 	
 	private Protocol protocol;
 
-	private Socket socket;
+	private SocketChannel socketChannel;
 
 	private int accountId;
 
@@ -75,8 +76,8 @@ public class Client extends EventBroadcaster implements EventListener,Sendable {
 		this.password = password;
 	}
 
-	public Socket getSocket() {
-		return socket;
+	public SocketChannel getSocketChannel() {
+		return socketChannel;
 	}
 	
 	private World world;
@@ -88,8 +89,8 @@ public class Client extends EventBroadcaster implements EventListener,Sendable {
 		this.world = world;
 	}
 
-	private void setSocket(Socket socket) {
-		this.socket = socket;
+	private void setSocketChannel(SocketChannel socketChannel) {
+		this.socketChannel = socketChannel;
 	}
 
 	public int getAccountId() {
@@ -118,15 +119,15 @@ public class Client extends EventBroadcaster implements EventListener,Sendable {
 		this.loginType = loginType;
 	}
 	
-	public Client(World world, Socket socket) {
+	public Client(World world, SocketChannel socketChannel) {
 		
 		super();
 		setWorld(world);
 		accountId = -1;
 		state = State.DISCONNECTED;
-		setSocket(socket);
+		setSocketChannel(socketChannel);
 		world.addEventListener(ClientSendEvent.class, this, new ClientEvent.ClientFilter(this));
-		Server.getInstance().getNetwork().addEventListener(NetworkDisconnectEvent.class, this, new NetworkEvent.NetworkFilter(this.socket));
+		Server.getInstance().getNetwork().addEventListener(NetworkDisconnectEvent.class, this, new NetworkEvent.NetworkFilter(socketChannel));
 	}
 
 	public State getState() {
@@ -149,7 +150,7 @@ public class Client extends EventBroadcaster implements EventListener,Sendable {
 				this.outputBuffer.append("\n");
 			}		
 		}
-		this.fireEvent(NetworkSendEvent.class, this.getSocket());
+		this.fireEvent(NetworkSendEvent.class, this.getSocketChannel());
 	}
 	
 	public void sendPacket(PacketFactory.Type packetType, Object ...args){		
@@ -168,9 +169,9 @@ public class Client extends EventBroadcaster implements EventListener,Sendable {
 			buffer.append(player);
 			buffer.append(", ");
 		}
-		if(socket!=null){
+		if(socketChannel!=null){
 			buffer.append("socket: ");
-			buffer.append(socket);
+			buffer.append(socketChannel);
 			buffer.append(", ");
 		}
 		
@@ -183,7 +184,7 @@ public class Client extends EventBroadcaster implements EventListener,Sendable {
 	}
 
 	public void disconnect() {
-		Server.getInstance().getNetwork().disconnect(this.getSocket());		
+		Server.getInstance().getNetwork().disconnect(this.getSocketChannel());		
 	}
 	
 	public static enum State {
@@ -221,7 +222,7 @@ public class Client extends EventBroadcaster implements EventListener,Sendable {
 	@Override
 	public void handleEvent(Event event) {
 		if(event instanceof NetworkEvent){
-			Socket socket =((NetworkEvent) event).getSocket();
+			SocketChannel socketChannel =((NetworkEvent) event).getSocketChannel();
 			if(event instanceof NetworkDataEvent) {
 				synchronized(this){
 					NetworkDataEvent networkDataEvent = (NetworkDataEvent) event;

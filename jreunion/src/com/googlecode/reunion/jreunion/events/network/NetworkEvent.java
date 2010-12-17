@@ -1,6 +1,7 @@
 package com.googlecode.reunion.jreunion.events.network;
 
 import java.net.Socket;
+import java.nio.channels.SocketChannel;
 
 import com.googlecode.reunion.jreunion.events.Event;
 import com.googlecode.reunion.jreunion.events.Filter;
@@ -12,21 +13,21 @@ import com.googlecode.reunion.jreunion.server.Client;
  */
 public class NetworkEvent extends Event {
 	
-	Socket socket;
+	SocketChannel socketChannel;
 	
-	public NetworkEvent(Socket socket) {
-		this.socket = socket;
+	public NetworkEvent(SocketChannel socketChannel) {
+		this.socketChannel = socketChannel;
 	}
 	
-	public Socket getSocket() {
-		return socket;
+	public SocketChannel getSocketChannel() {
+		return socketChannel;
 	}
 	
 	public static class NetworkFilter implements Filter{
 		
-		Socket socket;
-		public NetworkFilter(Socket socket){
-			this.socket = socket;
+		SocketChannel socketChannel;
+		public NetworkFilter(SocketChannel socketChannel){
+			this.socketChannel = socketChannel;
 			
 		}
 		
@@ -35,7 +36,7 @@ public class NetworkEvent extends Event {
 			if(!(event instanceof NetworkEvent)){
 				throw new InvalidEventException(event, NetworkEvent.class);
 			}
-			return ((NetworkEvent)event).getSocket().equals(this.socket);			
+			return ((NetworkEvent)event).getSocketChannel().equals(this.socketChannel);			
 		}
 	}
 }

@@ -2,6 +2,7 @@ package com.googlecode.reunion.jreunion.server;
 
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.nio.channels.SocketChannel;
 import java.util.BitSet;
 import java.util.Iterator;
 
@@ -77,7 +78,7 @@ public class Command {
 			Logger.getLogger(Command.class).info("" + client + " authed as account(" + accountId + ")");
 			client.setAccountId(accountId);
 			
-			java.util.Map<Socket,Client> clients = world.getClients();
+			java.util.Map<SocketChannel,Client> clients = world.getClients();
 			synchronized(clients){
 				for(Client cl: clients.values()){
 					if(cl.equals(client))
@@ -177,7 +178,7 @@ public class Command {
 		Player player = DatabaseUtils.getInstance().loadChar(slotNumber,
 				accountId, client);
 		
-		Socket socket = client.getSocket();
+		Socket socket = client.getSocketChannel().socket();
 	
 		// TODO: Fix hack and prevent teleport hack
 		Map map = null;

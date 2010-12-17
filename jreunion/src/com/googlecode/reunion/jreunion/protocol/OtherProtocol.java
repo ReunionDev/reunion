@@ -19,8 +19,8 @@ public class OtherProtocol extends Protocol {
 	public OtherProtocol(Client client) {
 		super(client);
 		if(client!=null){
-			setAddress(getClient().getSocket().getLocalAddress());
-			setPort(getClient().getSocket().getLocalPort());
+			setAddress(getClient().getSocketChannel().socket().getLocalAddress());
+			setPort(getClient().getSocketChannel().socket().getLocalPort());
 			setVersion(version = getClient().getVersion());
 			for(Map map :Server.getInstance().getWorld().getMaps()){
 				if(map.getAddress().getAddress().equals(address)&&map.getAddress().getPort()==port) {
@@ -160,13 +160,10 @@ public class OtherProtocol extends Protocol {
 		//refresh version because its not always available on connect
 		if(getVersion() == -1&&getClient()!=null)
 			setVersion(getClient().getVersion());
-		
 		if(mapId==-1) {
 			throw new RuntimeException("Invalid Map");
 		}
-		
 		int magic4 = magic0 - port - mapId + version;
-		
 		byte [] data = packet.getBytes();
 		for(int i = 0; i<data.length; i++) {
 			int rstep3 = data[i] ^ magic4;

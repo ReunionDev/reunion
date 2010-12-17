@@ -1,6 +1,7 @@
 package com.googlecode.reunion.jreunion.server;
 
 import java.net.Socket;
+import java.nio.channels.SocketChannel;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -128,7 +129,7 @@ public class DatabaseUtils extends Service {
 				
 				int slot = rs.getInt("slot");
 				boolean alreadyLogged = false;
-				java.util.Map<Socket,Client> clients = Server.getInstance().getWorld().getClients();			
+				java.util.Map<SocketChannel,Client> clients = Server.getInstance().getWorld().getClients();			
 				synchronized(clients){
 					for(Client cl: clients.values()){
 						if(cl.equals(client))

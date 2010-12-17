@@ -11,7 +11,7 @@ public abstract class WeaponMastery extends Skill {
 		super(id);
 	}
 	
-	public abstract Class getWeaponType();
+	public abstract Class<?> getWeaponType();
 	
 
 	public double getDamageModifier(Player player){
