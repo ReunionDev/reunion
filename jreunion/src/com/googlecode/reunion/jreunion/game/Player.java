@@ -804,10 +804,10 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 	
 	@Override
 	public void setLevel(int level) {
+		int oldLevel = getLevel();
 		super.setLevel(level);
 		loadFromReference(level);
-		if(client.getState()==State.INGAME){
-
+		if(client.getState()==State.INGAME) {
 			
 			sendStatus(Status.LEVEL);
 			client.sendPacket(Type.LEVELUP, this);		
@@ -817,7 +817,6 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 			setMana(this.getMaxHp());
 			setElectricity(this.getMaxElectricity());
 			setStamina(this.getMaxStamina());
-			
 			
 		}
 	}
@@ -847,7 +846,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 	public void setLevelUpExp(int lvlUpExp) {
 		synchronized(this) {
 			
-			if(lvlUpExp<0){
+			if(lvlUpExp<=0){
 				this.setLevel(getLevel()+1);
 				this.setStatusPoints(this.getStatusPoints()+3);
 				this.setLevelUpExp(this.getLevelUpExp()-Math.abs(lvlUpExp));

@@ -12,7 +12,7 @@ public class PebbleShot extends Tier1 implements Castable {
 	}
 
 	@Override
-	public void cast(LivingObject caster, LivingObject target) {
+	public boolean cast(LivingObject caster, LivingObject target) {
 		if(caster instanceof Player){
 			
 			Player player = (Player)caster;
@@ -20,10 +20,11 @@ public class PebbleShot extends Tier1 implements Castable {
 			
 			synchronized(target){
 				
-				
+				return true;
 			}
 			
 		}		
+		return false;
 	}
 
 	

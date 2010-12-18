@@ -39,9 +39,12 @@ public class MessageParser {
 		Client client = player.getClient();
 
 		if (userlvl > -1) {
-		
-
-			if (words[0].equals("@testcol")) {
+			
+			if (words[0].equals("@level")) {
+				
+				player.setLevelUpExp(0);
+				
+			}else if (words[0].equals("@testcol")) {
 				Player p = player;
 				
 				LocalMap map = p.getPosition().getMap();

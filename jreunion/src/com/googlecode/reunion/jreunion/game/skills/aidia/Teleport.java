@@ -1,19 +1,19 @@
 package com.googlecode.reunion.jreunion.game.skills.aidia;
 import com.googlecode.reunion.jreunion.game.Skill;
-public class BugSummonSkill extends Skill {
+public class Teleport extends Skill {
 
-	public BugSummonSkill(int id) {
+	public Teleport(int id) {
 		super(id);
 	}
 
 	@Override
 	public int getMaxLevel() {
-		return 25;
+		return 10;
 	}
 
 	@Override
 	public int getLevelRequirement(int skillLevel) {
-		return skillLevel;
+		return 54+skillLevel;
 	}
 
 }

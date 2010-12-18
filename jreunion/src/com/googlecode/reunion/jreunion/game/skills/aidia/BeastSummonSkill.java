@@ -1,8 +1,8 @@
 package com.googlecode.reunion.jreunion.game.skills.aidia;
 import com.googlecode.reunion.jreunion.game.Skill;
-public class BugSummonSkill extends Skill {
+public class BeastSummonSkill extends Skill {
 
-	public BugSummonSkill(int id) {
+	public BeastSummonSkill(int id) {
 		super(id);
 	}
 
@@ -13,7 +13,7 @@ public class BugSummonSkill extends Skill {
 
 	@Override
 	public int getLevelRequirement(int skillLevel) {
-		return skillLevel;
+		return 44+skillLevel;
 	}
 
 }

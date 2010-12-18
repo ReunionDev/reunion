@@ -116,8 +116,8 @@ public abstract class Skill {
 	
 	
 	public void effect(LivingObject source, LivingObject target){
-		source.getInterested().sendPacket(Type.EFFECT, source,target,this);
-		target.getInterested().sendPacket(Type.EFFECT, source,target,this);
+		source.getInterested().sendPacket(Type.EFFECT, source, target, this);
+		target.getInterested().sendPacket(Type.EFFECT, source, target, this);
 	}
 
 	public void setCurrSecondRange(float currSecondRange) {

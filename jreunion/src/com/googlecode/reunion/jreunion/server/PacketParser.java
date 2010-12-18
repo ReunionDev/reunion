@@ -416,19 +416,21 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 				} else if (message[0].equals("use_skill")) {
 					
 					int skillId = Integer.parseInt(message[1]);
-					int entityId = Integer.parseInt(message[3]);
 					
-					LivingObject target = (LivingObject) player.getPosition().getMap().getEntity(entityId);
+					LivingObject target = null;
+					if(message.length == 2) {
+						target = player;
+					} else {
+						int entityId = Integer.parseInt(message[2]);
+						target = (LivingObject) player.getPosition().getMap().getEntity(entityId);
+					}
 					Skill skill = player.getSkill(skillId);
-					
 					if(Castable.class.isInstance(skill))
 					{
-						((Castable)skill).cast(player, target);
-						if(Effectable.class.isInstance(skill))
-							skill.effect(player, target);
-						
-					}
-					else{						
+						if(((Castable)skill).cast(player, target))
+							if(Effectable.class.isInstance(skill))
+								skill.effect(player, target);
+					} else{						
 						throw new RuntimeException(skill+" is not Castable");
 					}
 					

@@ -94,7 +94,7 @@ MinSecondRange = 0
 MaxSecondRange = 0
 StatusUsed = 1
 Type = 1
-Class = PlaceHolder
+Class = aidia.Recovery
 
 [Mana Shield]
 ID = 7
@@ -318,7 +318,7 @@ MinSecondRange = 0
 MaxSecondRange = 0
 StatusUsed = 1
 Type = 1
-Class = PlaceHolder
+Class = aidia.Teleport
 
 [Party Summon Skill]
 ID = 23
@@ -458,7 +458,7 @@ MinSecondRange = 10
 MaxSecondRange = 70
 StatusUsed = 1
 Type = 1
-Class = PlaceHolder
+Class = aidia.SafetyShield
 
 [Beast Summon Skill]
 ID = 33
@@ -472,7 +472,7 @@ MinSecondRange = 0
 MaxSecondRange = 0
 StatusUsed = -1
 Type = 0
-Class = PlaceHolder
+Class = aidia.BeastSummonSkill
 
 [Phenomenon]
 ID = 34
