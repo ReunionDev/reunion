@@ -24,23 +24,23 @@ public class Recovery extends Skill implements Castable,Effectable {
 
 	@Override
 	public boolean cast(LivingObject caster, LivingObject target) {
-		if(caster == target&&caster instanceof Player) {
+		if(caster == target && caster instanceof Player) {
 			Player player = (Player)caster;
 			int level = player.getSkillLevel(this);
 			int playerHp = player.getHp();
-			if(playerHp<player.getMaxHp()) {
-
-				int mana = 10+(int)((level-1)*((double)21/(double)25));
-				int hp = 40+(int)((level-1)*2.5);
-
+			if(playerHp < player.getMaxHp()) {
+				int mana = 10 + (int)((level-1) * ((double)21 / (double)25)); //mana usage
+				int hp = 40 + (int)((level-1) * 2.5f); //hp recovery
 				int playerMana = player.getMana();
-				if(playerMana>=mana){
-					player.setMana(playerMana-mana);
-					player.setHp(playerHp+hp);
+				if(playerMana >= mana) {
+					player.setMana(playerMana - mana);
+					player.setHp(playerHp + hp);
 					return true;
 				}
 			}
-		}	
-		return true;
+
+			return true;
+		}
+		return false;
 	}
 }

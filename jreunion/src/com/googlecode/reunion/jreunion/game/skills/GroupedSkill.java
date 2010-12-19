@@ -12,12 +12,11 @@ public abstract class GroupedSkill extends Skill{
 	
 	@Override
 	public boolean levelUp(Player player) {
-		for(Object skillObject:getSkillsInGroup()){
+		for(int skillObject:getSkillsInGroup()){
 			
-			GroupedSkill skill = (GroupedSkill)player.getSkill((Integer)skillObject);
+			GroupedSkill skill = (GroupedSkill)player.getSkill(skillObject);
 			if(skill==null||!skill.groupUp(player))
 				return false;
-			
 		}
 		
 		return false;

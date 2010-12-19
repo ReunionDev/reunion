@@ -10,10 +10,10 @@ import com.googlecode.reunion.jreunion.server.Server;
 
 public class OtherProtocol extends Protocol {
 
-	public static Pattern locationRegex = Pattern.compile("(?:place|walk) (-?\\d+) (-?\\d+) (-?\\d+) (-?\\d+)(?: (-?\\d+) (-?\\d+))?\\n");
+	public static Pattern locationRegex = Pattern.compile("(place|walk) (-?\\d+) (-?\\d+) (-?\\d+) (?:-?\\d+)(?: (?:-?\\d+) (?:-?\\d+))?\\n");
 
-	int [] location = new int [4];
-	public int iter = -1;
+	short [] location = new short [3];
+	public short iter = -1;
 	public short iterCheck = -1;
 	
 	public OtherProtocol(Client client) {
@@ -29,8 +29,10 @@ public class OtherProtocol extends Protocol {
 			}
 		}
 	}
-	int magic0 = -1;
-	int magic1 = -1;
+	
+	short magic0 = -1;
+	short magic1 = -1;
+	boolean isLastLocationPlace = false;
 	
 	private InetAddress address;
 	private int port = 4005;
@@ -69,26 +71,38 @@ public class OtherProtocol extends Protocol {
 	public String decryptServer(byte[] data) {
 			
 		String result = decryptServer(data, iter, iterCheck);		
-		if(result.contains("walk")||result.contains("place")) {
-			Matcher matcher = locationRegex.matcher(result);
+		handleChanges(result);
+		return result;
+	}
+	
+	public void handleChanges(String data) {
+		
+		if(data.contains("walk")||data.contains("place")) {
+			Matcher matcher = locationRegex.matcher(data);
 			while(matcher.find()) {
-				for(int i=0;i<location.length;i++){
-					location[i]= Integer.parseInt(matcher.group(i+1));
+				
+				isLastLocationPlace = matcher.group(1).equals("place");
+				
+				for(int i=0; i<location.length; i++){
+					location[i] = Short.parseShort(matcher.group(i + 2));
 				}
 			}
 		}
-		if(result.contains("encrypt_key")){
+		if(data.contains("encrypt_key")){
 			
 			System.out.println("place: "+location[0] +" "+ location[1] +" "+ location[2]);
-			int v17 = magic1 + location[0] + location[1] - location[2];
-			int magicx = v17 ^ v17 - v17;
+			short magicx = -1;
+			if(isLastLocationPlace) {
+				short v17 = (short) (magic1 + location[0] + location[1] - location[2]);
+				magicx = (short) (v17 ^ v17 - v17);
+			} else {
+				magicx = (short)Math.abs((short)(location[0] + location[1] - magic0));
+			}
 			
-			iter =  magicx%4;
-			iterCheck += ( magic1 ^ (magicx + 2 * magic1 - mapId));
+			iter =  (short)(magicx % 4);
+			iterCheck += (magic1 ^ (magicx + 2 * magic1 - mapId));
 			System.out.println("magics: "+magicx+" "+iter+" "+iterCheck);
 		}
-		
-		return result;
 	}
 	
 	public String decryptServer(byte[] data, int iter, int iterCheck) {
@@ -149,9 +163,50 @@ public class OtherProtocol extends Protocol {
 	}
 	
 	@Override
-	public byte[] encryptClient(String data){
+	public byte[] encryptClient(String packet){
 		
-		return null;
+		byte[] result = encryptClient(packet, iter, iterCheck);
+		handleChanges(packet);
+		
+		return result;
+	}
+	
+	public byte [] encryptClient(String packet, int iter, int iterCheck) {
+		byte [] data = packet.getBytes();
+		switch(iter + 1){
+			case 0:
+				int magic3 = (port - 17) % 131;
+				for(int i = 0; i < data.length; i++) {
+					data[i] = (byte)(magic0 ^ ((data[i] ^ magic3) - 49));
+				}
+				break;
+			case 1:
+				int magic4 = iterCheck - version + 10;
+				for(int i = 0; i < data.length; i++) {
+					data[i] = (byte)(data[i] ^ version ^ magic4);
+				}
+				break;
+			case 2:
+				int magic5 = iterCheck + magic1 - magic0;
+				for(int i = 0; i < data.length; i++) {
+					data[i]=(byte)(magic5^((mapId ^ data[i]) + 19));
+				}
+				break;
+			case 3: // ?
+				int magic6 = port + 3 * mapId + mapId % 3;
+				for(int i = 0; i < data.length; i++) {
+					data[i] = (byte)(((iterCheck ^ data[i]) - 4) ^ magic6);
+				}
+				break;
+			case 4: 
+				for(int i = 0; i < data.length; i++) {
+					data[i] = (byte)((iterCheck + 111) ^ ((data[i] ^ version) - 33));
+				}
+				break;
+			default:
+				throw new RuntimeException("Unable to Encrypt");
+		}
+		return data;
 	}
 	
 	@Override
@@ -175,14 +230,14 @@ public class OtherProtocol extends Protocol {
 		
 	}
 	
-	public static int magic(InetAddress ip, int mask)
+	public static short magic(InetAddress ip, int mask)
 	{
 		byte [] rip = ip.getAddress();
 		
 		if ( mask == 1 )
-			return rip[0] ^ rip[1] ^ rip[2] ^ rip[3];
+			return (short)(rip[0] ^ rip[1] ^ rip[2] ^ rip[3]);
 		else
-			return rip[0] + rip[1] + rip[2] + rip[3];	   
+			return (short)(rip[0] + rip[1] + rip[2] + rip[3]);	   
 	}
 	
 	public static void main(String[] args) {
@@ -194,11 +249,10 @@ public class OtherProtocol extends Protocol {
 		while(matcher.find()){
 			System.out.println(matcher.group());
 			System.out.println(matcher.groupCount());
-			for(int i=0;i<4;i++){
+			for(int i=0;i<3;i++){
 				System.out.println(matcher.group(i+1));
 				place[i]= Integer.parseInt(matcher.group(i+1));
 			}
 		}
-		
 	}
 }

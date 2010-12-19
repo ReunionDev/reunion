@@ -126,7 +126,6 @@ public class KailiptonPlayer extends Player {
 
 		Skill skill = getPosition().getMap().getWorld().getSkillManager().getSkill(skillId);
 		
-
 		if (skill.getType() == 0) {
 			permanentSkill(skill);
 		} else if (skill.getType() == 1) {
