@@ -49,6 +49,10 @@ CREATE TABLE `characters` (
   `penaltyPoints` int(11) DEFAULT NULL,
   `guildid` int(11) DEFAULT NULL,
   `guildlvl` int(11) DEFAULT NULL,
+  `x` int(11) DEFAULT NULL,
+  `y` int(11) DEFAULT NULL,
+  `z` int(11) DEFAULT NULL,
+  `mapId` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name_UNIQUE` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
