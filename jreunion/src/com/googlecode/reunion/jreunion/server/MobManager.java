@@ -153,7 +153,7 @@ public class MobManager {
 			if (client == null) {
 				continue;
 			} else if (client.getState() != Client.State.INGAME
-					|| mob.getPosition().getMap() != player.getPosition().getMap()) {
+					|| mob.getPosition().getLocalMap() != player.getPosition().getLocalMap()) {
 				continue;
 			}
 
@@ -175,7 +175,7 @@ public class MobManager {
 			
 			if (distance <= 150) {
 				try {
-				if (mob.getPosition().getMap()
+				if (mob.getPosition().getLocalMap()
 						.getMobArea()
 						.get((player.getPosition().getX() / 10 - 300),
 								(player.getPosition().getY() / 10)) == true) {

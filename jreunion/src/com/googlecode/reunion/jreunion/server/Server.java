@@ -7,7 +7,7 @@ import org.apache.log4j.net.SocketAppender;
 import org.apache.log4j.spi.LoggingEvent;
 import org.apache.log4j.xml.XMLLayout;
 
-import com.googlecode.reunion.jreunion.events.EventBroadcaster;
+import com.googlecode.reunion.jreunion.events.EventDispatcher;
 import com.googlecode.reunion.jreunion.events.Test;
 import com.googlecode.reunion.jreunion.events.network.NetworkDataEvent;
 import com.googlecode.reunion.jreunion.events.server.ServerStartEvent;
@@ -122,7 +122,7 @@ public class Server extends ClassModule {
 			server.setState(State.CLOSING);
 			server.fireEvent(server.createEvent(ServerStopEvent.class, server));
 			server.doStop();
-			EventBroadcaster.shutdown();
+			EventDispatcher.shutdown();
 			server.database.stop();
 			System.exit(-1);
 		}

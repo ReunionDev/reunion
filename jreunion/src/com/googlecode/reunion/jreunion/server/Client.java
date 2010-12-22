@@ -7,7 +7,7 @@ import java.nio.channels.SocketChannel;
 import org.apache.log4j.Logger;
 
 import com.googlecode.reunion.jreunion.events.Event;
-import com.googlecode.reunion.jreunion.events.EventBroadcaster;
+import com.googlecode.reunion.jreunion.events.EventDispatcher;
 import com.googlecode.reunion.jreunion.events.EventListener;
 import com.googlecode.reunion.jreunion.events.client.ClientDisconnectEvent;
 import com.googlecode.reunion.jreunion.events.client.ClientEvent;
@@ -26,7 +26,7 @@ import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-public class Client extends EventBroadcaster implements EventListener,Sendable {
+public class Client extends EventDispatcher implements EventListener,Sendable {
 	
 	public StringBuffer getInputBuffer() {
 		return inputBuffer;

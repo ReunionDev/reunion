@@ -12,8 +12,8 @@ public class NpcSpawn extends Spawn
 	
 	private int npcType;
 	
-	public void setNpcType(int mobType) {
-		this.npcType = mobType;
+	public void setNpcType(int npcType) {
+		this.npcType = npcType;
 	}
 	public int getNpcType() {
 		return npcType;
@@ -36,11 +36,26 @@ public class NpcSpawn extends Spawn
 		return respawnTime;
 	}
 	
+	private Type type;
 	
-	public void spawn() {
+	public Type getType() {
+		return type;
+	}
+
+	public void setType(Type type) {
+		this.type = type;
+	}
+
+	public static enum Type{
+		NPC,
+		MOB,
+	}
+	
+	
+	public Position spawn() {
 		
-		LocalMap map = getPosition().getMap();
-		Position entityPosition = generatePosition();
+		LocalMap map = getPosition().getLocalMap();
+		
 		Npc npc = null;
 		switch(getType()){
 		case MOB:
@@ -49,16 +64,17 @@ public class NpcSpawn extends Spawn
 			
 		case NPC:
 			npc = map.getWorld().getNpcManager().createNpc(getNpcType());
-			//npc.setUnknown2(10);
 			break;
 		}
-		if(npc==null)
-			return;
-		npc.setSpawn(this);
-		npc.setPosition(entityPosition);
-		npc.loadFromReference(getNpcType());
 		
-		super.spawn(npc);
+		if(npc==null)
+			return null;
+		npc.setSpawn(this);
+		
+		Position position = super.spawn(npc);
+		npc.loadFromReference(getNpcType());
+		return position;
+		
 	}
 	
 	public void kill() {

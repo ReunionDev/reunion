@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
 
 import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jreunion.events.Event;
-import com.googlecode.reunion.jreunion.events.EventBroadcaster;
+import com.googlecode.reunion.jreunion.events.EventDispatcher;
 import com.googlecode.reunion.jreunion.events.EventListener;
 import com.googlecode.reunion.jreunion.events.client.ClientConnectEvent;
 import com.googlecode.reunion.jreunion.events.client.ClientDisconnectEvent;
@@ -42,7 +42,7 @@ import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-public class PacketParser extends EventBroadcaster implements EventListener{
+public class PacketParser extends EventDispatcher implements EventListener{
 
 
 
@@ -224,26 +224,54 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 			
 			case CHAR_SELECTED: {
 				if (message[0].equals("start_game")) {
-	
 					
-					player.sendStatus(Status.TOTALEXP);
-					//client.sendPacket(Type.STATUS, 11, player.getTotalExp());
+					Map map = null;
 					
-					player.sendStatus(Status.LEVELUPEXP);
-					//client.sendPacket(Type.STATUS, 12, player.getLevelUpExp());
+					for (Map m : Server.getInstance().getWorld().getMaps()) {
+						if (m.getAddress().equals(client.getSocketChannel().socket().getLocalSocketAddress())) {
+							map = m;
+							break;
+						}
+					}
 					
-					player.sendStatus(Status.STATUSPOINTS);
-					//client.sendPacket(Type.STATUS, 13, player.getStatusPoints());
+					if (map == null || !map.isLocal()) {
+						Logger.getLogger(Command.class).error("Invalid Map: " + map);
+						player.getClient().disconnect();
+						return;
+					}
 					
-					player.sendStatus(Status.LIME);
-					//client.sendPacket(Type.STATUS, 10, player.getLime());
+					Position savedPosition = DatabaseUtils.getInstance().getSavedPosition(player);
 					
-					player.sendStatus(Status.PENALTYPOINTS);
-					//client.sendPacket(Type.STATUS, 19, player.getPenaltyPoints());					
+					if(savedPosition != null) {
+						Map savedMap = savedPosition.getMap();
+						
+						if(client.getLoginType()==LoginType.LOGIN){
+							if(map!= savedMap) {
+								com.GoToWorld(player, savedMap, 0);
+								return;
+							}
+						}
+						else{
+							if(map!= savedMap) {
+								savedPosition = null;
+								
+								
+							}
+						}
+							
+					}
+
+					player.getPosition().setMap((LocalMap)map);
 					
+					//--			
 					world.getPlayerManager().addPlayer(player);
 					
-					player.getPosition().getMap().fireEvent(PlayerLoginEvent.class, player);
+					
+					System.out.println(savedPosition);
+					map.fireEvent(PlayerLoginEvent.class, player, savedPosition);
+					
+					
+					
 						
 					/*
 					 * server.getNetworkModule().SendPacket(client.networkId,
@@ -291,7 +319,7 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 							Integer.parseInt(message[1]),
 							Integer.parseInt(message[2]),
 							Integer.parseInt(message[3]),
-							 player.getPosition().getMap(),
+							 player.getPosition().getLocalMap(),
 							 Double.NaN
 					);
 					
@@ -305,7 +333,7 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 							Integer.parseInt(message[1]),
 							Integer.parseInt(message[2]),
 							Integer.parseInt(message[3]),
-							 player.getPosition().getMap(),
+							 player.getPosition().getLocalMap(),
 							 rotation / 1000
 					);
 									
@@ -322,7 +350,7 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 							Integer.parseInt(message[1]),
 							Integer.parseInt(message[2]),
 							Integer.parseInt(message[3]),
-							 player.getPosition().getMap(),
+							 player.getPosition().getLocalMap(),
 							 rotation / 1000
 					);
 	
@@ -363,7 +391,7 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 				} else if (message[0].equals("pick")) {
 					
 					int itemId = Integer.parseInt(message[1]);
-					LocalMap map = player.getPosition().getMap();				
+					LocalMap map = player.getPosition().getLocalMap();				
 					RoamingItem roamingItem = (RoamingItem)map.getEntity(itemId);
 					Logger.getLogger(PacketParser.class).info(roamingItem+" "+itemId);
 					if(roamingItem!=null){
@@ -395,7 +423,7 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 					
 				} else if (message[0].equals("subat")) {
 					com.subAttack(player,
-							(LivingObject)player.getPosition().getMap().getEntity(Integer.parseInt(message[2])));
+							(LivingObject)player.getPosition().getLocalMap().getEntity(Integer.parseInt(message[2])));
 				
 				} else if (message[0].equals("pulse")) {
 					if (Integer.parseInt(message[2].substring(0,
@@ -422,7 +450,7 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 						target = player;
 					} else {
 						int entityId = Integer.parseInt(message[2]);
-						target = (LivingObject) player.getPosition().getMap().getEntity(entityId);
+						target = (LivingObject) player.getPosition().getLocalMap().getEntity(entityId);
 					}
 					Skill skill = player.getSkill(skillId);
 					if(Castable.class.isInstance(skill))
@@ -516,23 +544,23 @@ public class PacketParser extends EventBroadcaster implements EventListener{
 					}
 				} else if (message[0].equals("shop")) {
 					int npcId = Integer.parseInt(message[1]);
-					Merchant npc = (Merchant) player.getPosition().getMap().getEntity(npcId);
+					Merchant npc = (Merchant) player.getPosition().getLocalMap().getEntity(npcId);
 					if (npc!=null) {
 						npc.openShop(client.getPlayer());
 					} else {
 						Logger.getLogger(PacketParser.class).error("Npc not found: " + npcId);				
 					}
 				} else if (message[0].equals("buy")) {
-					Merchant npc = (Merchant) player.getPosition().getMap().getEntity(Integer.parseInt(message[1]));
+					Merchant npc = (Merchant) player.getPosition().getLocalMap().getEntity(Integer.parseInt(message[1]));
 							
 					npc.buyItem(client.getPlayer(), Integer.parseInt(message[4]),
 							Integer.parseInt(message[5]),
 							1);
 				} else if (message[0].equals("sell")) {
-					Merchant npc = (Merchant) player.getPosition().getMap().getEntity(Integer.parseInt(message[1]));
+					Merchant npc = (Merchant) player.getPosition().getLocalMap().getEntity(Integer.parseInt(message[1]));
 					npc.sellItem(client.getPlayer());
 				} else if (message[0].equals("pbuy")) {
-					Merchant npc = (Merchant) player.getPosition().getMap().getEntity(Integer.parseInt(message[1]));
+					Merchant npc = (Merchant) player.getPosition().getLocalMap().getEntity(Integer.parseInt(message[1]));
 					int itemType = Integer.parseInt(message[2]);
 					int tab = Integer.parseInt(message[2]);
 					int quantity = 10;

@@ -109,8 +109,41 @@ public class DatabaseUtils extends Service {
 		} catch (SQLException e1) {
 			Logger.getLogger(this.getClass()).warn("Exception",e1);
 			return -1;
+		}	
+	}
+	
+	public Position getSavedPosition(Player player){
+		if (!checkDatabase())
+			return null;
+		Position position = null;
+		try {
+			Statement stmt = database.conn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT `x`, `y`, `z`, `mapId` FROM `characters` WHERE `characters`.`id`="+player.getId()+" AND `mapId` IS NOT NULL AND `x` IS NOT NULL AND `y` IS NOT NULL AND `z` IS NOT NULL");
+			
+			if(rs.next()){
+				Map map = Server.getInstance().getWorld().getMap(rs.getInt("mapId"));
+				if(map != null){
+					position = new Position(rs.getInt("x"),rs.getInt("y"),rs.getInt("z"), map, 0.0d);
+				}
+			}
+			rs.close();
+		} catch (SQLException e) {
+			Logger.getLogger(this.getClass()).error("Exception", e);
 		}
-		
+		return position;
+	}
+	
+	public void setSavedPosition(Player player){
+		if (!checkDatabase())
+			return;
+		try {
+			Statement stmt = database.conn.createStatement();
+			Position position = player.getPosition();
+			boolean res = stmt.execute("UPDATE `characters` SET `x`="+position.getX()+", `y`="+position.getY()+", `z`="+position.getZ()+", `mapId`="+position.getMap().getId()+" WHERE `characters`.`id`="+player.getId());
+			
+		} catch (SQLException e) {
+			Logger.getLogger(this.getClass()).error("Exception", e);
+		}
 	}
 	
 	public String getCharList(Client client) {
@@ -385,6 +418,8 @@ public class DatabaseUtils extends Service {
 					throw new Exception("key is -1!");
 				player.setId(charid);
 			}
+			
+			setSavedPosition(player);
 			
 						
 		} catch (Exception e1) {
@@ -842,7 +877,7 @@ public class DatabaseUtils extends Service {
 			String q = 
 			"INSERT INTO `roaming` (`itemid`,`mapid`,`x`,`y`,`z`,`rotation`) VALUES ("+
 			itemId+","+
-			position.getMap().getId()+","+
+			position.getLocalMap().getId()+","+
 			position.getX()+","+
 			position.getY()+","+
 			position.getZ()+","+

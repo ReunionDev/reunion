@@ -10,7 +10,7 @@ public class SpawnEvent extends MapEvent {
 
 	LivingObject spawnee;
 	public SpawnEvent(LivingObject spawnee) {
-		super(spawnee.getPosition().getMap());
+		super(spawnee.getPosition().getLocalMap());
 		this.spawnee = spawnee;
 	}
 	public LivingObject getSpawnee() {

@@ -6,7 +6,7 @@ import java.util.Vector;
 import org.apache.log4j.Logger;
 
 import com.googlecode.reunion.jreunion.events.Event;
-import com.googlecode.reunion.jreunion.events.EventBroadcaster;
+import com.googlecode.reunion.jreunion.events.EventDispatcher;
 import com.googlecode.reunion.jreunion.events.EventListener;
 import com.googlecode.reunion.jreunion.events.map.MapEvent;
 import com.googlecode.reunion.jreunion.events.session.SendPacketSessionEvent;
@@ -19,7 +19,7 @@ import com.googlecode.reunion.jreunion.game.WorldObject;
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-public class Session extends EventBroadcaster implements EventListener{
+public class Session extends EventDispatcher implements EventListener{
 	
 	private List<WorldObject> entities = new Vector<WorldObject>();
 

@@ -10,19 +10,19 @@ import org.apache.log4j.Logger;
  */
 public class Event {
 	
-	public EventBroadcaster getSource() {
+	public EventDispatcher getSource() {
 		return source;
 	}
-	EventBroadcaster source;
+	EventDispatcher source;
 	
-	private void setSource(EventBroadcaster source) {
+	private void setSource(EventDispatcher source) {
 		this.source = source;
 	}
 
 	protected Event() {
 	}
 		
-	public  static  <T extends Event> T Create(Class<T> cl, EventBroadcaster source, Object... args)
+	public  static  <T extends Event> T Create(Class<T> cl, EventDispatcher source, Object... args)
 	{
 		Event event = null;
 		try {

@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.googlecode.reunion.jreunion.events.Event;
-import com.googlecode.reunion.jreunion.events.EventBroadcaster;
+import com.googlecode.reunion.jreunion.events.EventDispatcher;
 import com.googlecode.reunion.jreunion.events.EventListener;
 
-public class Service extends EventBroadcaster implements EventListener {
+public class Service extends EventDispatcher implements EventListener {
 	static List<Class> services = new ArrayList<Class>();
 	
 	

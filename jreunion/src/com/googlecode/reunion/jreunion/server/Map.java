@@ -6,11 +6,11 @@ import java.util.Vector;
 
 import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jreunion.events.Event;
-import com.googlecode.reunion.jreunion.events.EventBroadcaster;
+import com.googlecode.reunion.jreunion.events.EventDispatcher;
 import com.googlecode.reunion.jreunion.events.EventListener;
 import com.googlecode.reunion.jreunion.game.Position;
 
-public abstract class Map extends EventBroadcaster implements EventListener {
+public abstract class Map extends EventDispatcher implements EventListener {
 	
 	private int id;
 	private String name;

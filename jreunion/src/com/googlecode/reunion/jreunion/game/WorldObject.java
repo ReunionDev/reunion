@@ -1,6 +1,6 @@
 package com.googlecode.reunion.jreunion.game;
 
-import com.googlecode.reunion.jreunion.events.EventBroadcaster;
+import com.googlecode.reunion.jreunion.events.EventDispatcher;
 import com.googlecode.reunion.jreunion.events.session.SendPacketSessionEvent;
 import com.googlecode.reunion.jreunion.server.LocalMap;
 import com.googlecode.reunion.jreunion.server.Map;
@@ -13,7 +13,7 @@ import com.googlecode.reunion.jreunion.server.SessionList;
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-public abstract class WorldObject extends EventBroadcaster implements Entity {
+public abstract class WorldObject extends EventDispatcher implements Entity {
 	
 	private int id = -1;
 	public int getId() {
@@ -31,7 +31,7 @@ public abstract class WorldObject extends EventBroadcaster implements Entity {
 	}
 	
 	public void update(){
-		LocalMap map = position.getMap();
+		LocalMap map = position.getLocalMap();
 		
 		synchronized(map){			
 			map.notify();			
@@ -60,7 +60,7 @@ public abstract class WorldObject extends EventBroadcaster implements Entity {
 			
 		}
 		public SessionList<Session> getSessions(){
-			return entity.getPosition().getMap().GetSessions(entity);
+			return entity.getPosition().getLocalMap().GetSessions(entity);
 			
 		}
 		

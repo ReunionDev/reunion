@@ -5,9 +5,12 @@ import com.googlecode.reunion.jreunion.server.PacketFactory;
 public class PlayerSpawn extends Spawn 
 {
 	public PlayerSpawn(){
-		setType(Type.PLAYER);
-		
 	}
+	
+	public PlayerSpawn(Position position){
+		super(position);
+	}
+	
 	
 	int targetX =-1;
 	int targetY =-1;
@@ -42,14 +45,10 @@ public class PlayerSpawn extends Spawn
 		this.targetHeight = targetHeight;
 	}
 
-	public void spawn(Player player) {
-
-		Position position = generatePosition();
-		player.setPosition(position);
+	public Position spawn(Player player) {
+		Position position = super.spawn(player);
 		player.getClient().sendPacket(PacketFactory.Type.AT, player);
-	
+		return position;
 		
-		super.spawn(player);
 	}
-
 }

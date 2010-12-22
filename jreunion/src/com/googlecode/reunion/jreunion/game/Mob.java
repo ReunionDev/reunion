@@ -240,12 +240,12 @@ public class Mob extends Npc {
 		if (distance < 100) {
 			if (getAttackType() == 1 || getAttackType() == 2) {
 				setIsAttacking(1);
-				this.getPosition().getMap().getWorld().getCommand()
+				this.getPosition().getLocalMap().getWorld().getCommand()
 						.NpcAttackChar(player, this);
 				return;
 			} else if (distance < 20) {
 				setIsAttacking(1);
-				this.getPosition().getMap().getWorld().getCommand()
+				this.getPosition().getLocalMap().getWorld().getCommand()
 						.NpcAttackChar(player, this);
 				return;
 			}
@@ -266,7 +266,7 @@ public class Mob extends Npc {
 		int newPosX = (int) (getPosition().getX() + xcomp);
 		int newPosY = (int) (getPosition().getY() + ycomp);
 
-		if (getPosition().getMap()
+		if (getPosition().getLocalMap()
 				.getMobArea().get((newPosX / 10 - 300), (newPosY / 10)) == true) {
 			getPosition().setX(newPosX);
 			getPosition().setY(newPosY);
@@ -292,7 +292,7 @@ public class Mob extends Npc {
 	public void kill(Player player) {
 		setHp(0);
 
-		this.getPosition().getMap().getWorld().getMobManager().removeMob(this);
+		this.getPosition().getLocalMap().getWorld().getMobManager().removeMob(this);
 		
 		
 		NpcSpawn spawn = this.getSpawn();
@@ -322,7 +322,7 @@ public class Mob extends Npc {
 					Item item = ItemFactory.create(itemType);
 					item.setExtraStats(0);
 					item.setGemNumber(0);					
-					final RoamingItem roamingItem = getPosition().getMap().getWorld().getCommand().dropItem(this.getPosition(), item);
+					final RoamingItem roamingItem = getPosition().getLocalMap().getWorld().getCommand().dropItem(this.getPosition(), item);
 					roamingItem.setOwner(player);
 					
 					java.util.Timer timer = new java.util.Timer();
@@ -338,7 +338,7 @@ public class Mob extends Npc {
 				}
 			}			
 		}
-		this.getPosition().getMap().getWorld().getCommand()
+		this.getPosition().getLocalMap().getWorld().getCommand()
 				.serverSay("Experience: " + getExp() + " Lime: " + getLime());
 
 	}

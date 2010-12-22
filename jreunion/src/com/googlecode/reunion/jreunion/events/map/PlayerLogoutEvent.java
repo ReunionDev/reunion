@@ -9,7 +9,7 @@ public class PlayerLogoutEvent extends MapEvent {
 
 	Player player;
 	public PlayerLogoutEvent(Player player) {
-		super(player.getPosition().getMap());
+		super(player.getPosition().getLocalMap());
 		this.player = player;
 	}
 	public Player getPlayer() {

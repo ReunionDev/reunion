@@ -23,7 +23,7 @@ import java.util.Vector;
 import org.apache.log4j.Logger;
 
 import com.googlecode.reunion.jreunion.events.Event;
-import com.googlecode.reunion.jreunion.events.EventBroadcaster;
+import com.googlecode.reunion.jreunion.events.EventDispatcher;
 import com.googlecode.reunion.jreunion.events.EventListener;
 import com.googlecode.reunion.jreunion.events.client.ClientSendEvent;
 import com.googlecode.reunion.jreunion.events.network.NetworkAcceptEvent;

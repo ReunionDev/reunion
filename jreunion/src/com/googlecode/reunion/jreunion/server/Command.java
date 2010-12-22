@@ -20,6 +20,7 @@ import com.googlecode.reunion.jreunion.game.Usable;
 import com.googlecode.reunion.jreunion.game.Equipment.Slot;
 import com.googlecode.reunion.jreunion.game.Player.Race;
 import com.googlecode.reunion.jreunion.game.Player.Sex;
+import com.googlecode.reunion.jreunion.game.Player.Status;
 import com.googlecode.reunion.jreunion.game.items.equipment.SlayerWeapon;
 import com.googlecode.reunion.jreunion.game.items.equipment.Weapon;
 import com.googlecode.reunion.jreunion.game.Position;
@@ -72,7 +73,7 @@ public class Command {
 		if (accountId == -1) {
 			Logger.getLogger(Command.class).info("Invalid Login");
 			client.sendPacket(Type.FAIL,"Username and password combination is invalid");
-			//client.disconnect();
+			client.disconnect();
 		} else {
 			
 			Logger.getLogger(Command.class).info("" + client + " authed as account(" + accountId + ")");
@@ -118,7 +119,7 @@ public class Command {
 		
 		DatabaseUtils.getInstance().saveItem(roamingItem);
 		
-		LocalMap map = position.getMap();
+		LocalMap map = position.getLocalMap();
 		
 		map.fireEvent(ItemDropEvent.class, roamingItem);
 		
@@ -142,7 +143,7 @@ public class Command {
 		exit.exit(player);
 		player.setPosition(position);
 		
-		SessionList<Session> entry = player.getPosition().getMap().GetSessions(position);
+		SessionList<Session> entry = player.getPosition().getLocalMap().GetSessions(position);
 		
 		entry.enter(player, false);
 		entry.sendPacket(Type.IN_CHAR, player, true);
@@ -167,7 +168,8 @@ public class Command {
 		Session session = player.getSession();
 
 		// flush the session
-		session.empty();
+		if(session!=null)
+			session.empty();
 		
 		client.sendPacket(Type.GO_WORLD, map, unknown);
 
@@ -180,23 +182,7 @@ public class Command {
 		
 		Socket socket = client.getSocketChannel().socket();
 	
-		// TODO: Fix hack and prevent teleport hack
-		Map map = null;
-		Logger.getLogger(Command.class).info(socket.getLocalSocketAddress());
-		for (Map m : Server.getInstance().getWorld().getMaps()) {
-			Logger.getLogger(Command.class).info(m.getAddress());
-			if (m.getAddress().equals(socket.getLocalSocketAddress())) {
-				map = m;
-				break;
-			}
-		}
 		
-		if (map == null || !map.isLocal()) {
-			Logger.getLogger(Command.class).error("Invalid Map: " + map);
-			player.getClient().disconnect();
-			return null;
-		}
-		player.getPosition().setMap((LocalMap)map);
 
 		DatabaseUtils.getInstance().loadEquipment(player);
 		Equipment eq = player.getEquipment();
@@ -242,6 +228,13 @@ public class Command {
 		player.loadInventory();
 		player.loadExchange();
 		player.loadQuickSlot();
+		
+		
+		player.sendStatus(Status.TOTALEXP);					
+		player.sendStatus(Status.LEVELUPEXP);					
+		player.sendStatus(Status.STATUSPOINTS);					
+		player.sendStatus(Status.LIME);
+		player.sendStatus(Status.PENALTYPOINTS);		
 
 		client.sendPacket(PacketFactory.Type.OK);
 
@@ -253,7 +246,7 @@ public class Command {
 
 		Client client = player.getClient();
 
-		LivingObject livingObject = (LivingObject) player.getPosition().getMap().getEntity(uniqueId);
+		LivingObject livingObject = (LivingObject) player.getPosition().getLocalMap().getEntity(uniqueId);
 		if (livingObject == null) {
 			livingObject = Server.getInstance().getWorld()
 					.getPlayerManager().getPlayer(uniqueId);
@@ -382,7 +375,7 @@ public class Command {
 		}
 		Skill skill = world.getSkillManager().getSkill(40);
 
-		LivingObject livingObject = (LivingObject) player.getPosition().getMap().getEntity(uniqueId);
+		LivingObject livingObject = (LivingObject) player.getPosition().getLocalMap().getEntity(uniqueId);
 		Item item = player.getEquipment().getShoulderMount();
 		SlayerWeapon spWeapon = new SlayerWeapon(item.getType());
 

@@ -7,16 +7,15 @@ public class Position {
 	
 	private int x;
 	private int y;
-	private int z;
-	
-	private LocalMap map;
+	private int z;	
+	private Map map;
+	private double rotation;
 	
 	public Position(){
 		
 	}
 
-	public Position(int x, int y, int z, LocalMap map, double rotation) {
-		super();
+	public Position(int x, int y, int z, Map map, double rotation) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
@@ -26,18 +25,18 @@ public class Position {
 	
 	public Position clone()
 	{				
-		return new Position(x,y,z,map,rotation);
+		return new Position(x, y, z, map, rotation);
 	
 	}
 	
 	public double distance(Position position){
 		
-		if(!(this.getMap()==position.getMap())){
-			throw new RuntimeException("Can not calculate distance between two positions on different maps: "+this.getMap()+", "+position.getMap());			
+		if(this.getMap()!=position.getMap()){
+			throw new RuntimeException("Can not calculate distance between two positions on different maps: "+this.getLocalMap()+", "+position.getLocalMap());			
 		}
 		
 		double xd =this.getX() - position.getX();
-				;
+				
 		double yd = this.getY() - position.getY();
 		
 		double zd = this.getZ() - position.getZ();
@@ -107,16 +106,18 @@ public class Position {
 		this.z = z;
 	}
 
-	public LocalMap getMap() {
+	public LocalMap getLocalMap() {
+		return (LocalMap)map;
+	}
+	
+	public Map getMap() {
 		return map;
 	}
 
-	public void setMap(LocalMap map) {
+	public void setMap(Map map) {
 		this.map = map;
 	}
 	
-	public double rotation;
-
 	public double getRotation() {
 		return rotation;
 	}

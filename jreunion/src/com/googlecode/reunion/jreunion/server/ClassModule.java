@@ -4,14 +4,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
-import com.googlecode.reunion.jreunion.events.EventBroadcaster;
+import com.googlecode.reunion.jreunion.events.EventDispatcher;
 import com.googlecode.reunion.jreunion.events.EventListener;
 
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-abstract class ClassModule extends EventBroadcaster implements Module {
+abstract class ClassModule extends EventDispatcher implements Module {
 	protected Module parentModule;
 
 	private List<Module> childModules = new Vector<Module>();

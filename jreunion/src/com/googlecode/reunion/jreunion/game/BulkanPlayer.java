@@ -204,7 +204,7 @@ public class BulkanPlayer extends Player {
 	@Override
 	public void useSkill(LivingObject livingObject, int skillId) {
 
-		Skill skill = getPosition().getMap().getWorld().getSkillManager().getSkill(skillId);
+		Skill skill = getPosition().getLocalMap().getWorld().getSkillManager().getSkill(skillId);
 
 		if (skill.getType() == 0) {
 			permanentSkill(skill);

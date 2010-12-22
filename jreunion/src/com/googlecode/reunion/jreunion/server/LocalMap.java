@@ -108,7 +108,7 @@ public class LocalMap extends Map implements Runnable{
 
 			NpcSpawn spawn = new NpcSpawn();
 			spawn.setId(Integer.parseInt(item.getMemberValue("Id")));
-			spawn.setType(Spawn.Type.MOB);
+			spawn.setType(NpcSpawn.Type.MOB);
 			
 			int posZ = item.getMemberValue("Z") == null ? 0 : Integer.parseInt(item.getMemberValue("Z"));
 			double rotation = item.getMemberValue("Rotation") == null ? Double.NaN : Double.parseDouble(item.getMemberValue("Rotation"));
@@ -158,7 +158,7 @@ public class LocalMap extends Map implements Runnable{
 			
 			NpcSpawn spawn = new NpcSpawn();
 			spawn.setId(Integer.parseInt(item.getMemberValue("Id")));
-			spawn.setType(Spawn.Type.NPC);
+			spawn.setType(NpcSpawn.Type.NPC);
 			
 			int posZ = item.getMemberValue("Z") == null ? 0 : Integer.parseInt(item.getMemberValue("Z"));
 			double rotation = item.getMemberValue("Rotation") == null ? Double.NaN : Double.parseDouble(item.getMemberValue("Rotation"));
@@ -360,7 +360,6 @@ public class LocalMap extends Map implements Runnable{
 					player.sendStatus(Player.Status.STAMINA);
 					player.sendStatus(Player.Status.ELECTRICITY);
 					
-					
 					if(list.contains(session)){
 						
 						throw new RuntimeException("This should never happen! 2");
@@ -418,8 +417,13 @@ public class LocalMap extends Map implements Runnable{
 				
 				Player player = playerLoginEvent.getPlayer();
 				Session session = new Session(player);
-				defaultSpawn.spawn(player);
-		
+				
+				Position position = playerLoginEvent.getPosition();
+				if(position==null){
+					defaultSpawn.spawn(player);
+				} else {
+					new PlayerSpawn(position).spawn(player);					
+				}
 			}
 			if(event instanceof PlayerLogoutEvent){
 				
@@ -440,6 +444,8 @@ public class LocalMap extends Map implements Runnable{
 				SessionList<Session> list = player.getInterested().getSessions();
 				list.exit(player, false);
 				list.sendPacket(Type.OUT, player);
+				
+				player.save();
 				
 			}
 			

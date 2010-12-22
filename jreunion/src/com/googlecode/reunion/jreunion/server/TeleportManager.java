@@ -20,7 +20,7 @@ public class TeleportManager {
 	public void register(Player player, Map map){
 		synchronized(teleports){
 			S_TeleportBucket bucket = new S_TeleportBucket();
-			bucket.from = player.getPosition().getMap();
+			bucket.from = player.getPosition().getLocalMap();
 			bucket.to = map;
 			bucket.player = player;
 			teleports.add(bucket);

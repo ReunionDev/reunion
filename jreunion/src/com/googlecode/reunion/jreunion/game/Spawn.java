@@ -26,22 +26,6 @@ public class Spawn {
 		this.id = id;
 	}
 
-	private Type type;
-	
-	public Type getType() {
-		return type;
-	}
-
-	public void setType(Type type) {
-		this.type = type;
-	}
-
-	public static enum Type{
-		PLAYER,
-		NPC,
-		MOB,
-	}
-	
 
 	private int radius;
 	
@@ -50,6 +34,10 @@ public class Spawn {
 	public Spawn() {
 	}	
 	
+	public Spawn(Position position) {
+		this.setPosition(position);
+	}
+
 	public Position getPosition() {
 		return position;
 	}
@@ -84,7 +72,7 @@ public class Spawn {
 	public Position generatePosition(){
 		
 		Position position = getPosition();		
-		LocalMap map = position.getMap();
+		LocalMap map = position.getLocalMap();
 		
 		int posX = (radius>0?rand.nextInt(radius * 2) - radius:0)+position.getX();
 		int posY = (radius>0?rand.nextInt(radius * 2) - radius:0)+position.getY();
@@ -98,11 +86,15 @@ public class Spawn {
 		
 	}
 
-	protected void spawn(LivingObject entity) {		
+	protected Position spawn(LivingObject entity) {
 		
-		
-		LocalMap map = position.getMap();
+		Position position = getPosition();
+		if(position==null)
+			position = generatePosition();
+		entity.setPosition(position);
+		LocalMap map = position.getLocalMap();
 		map.fireEvent(SpawnEvent.class, entity);
+		return position;
 		
 	}
 

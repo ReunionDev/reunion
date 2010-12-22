@@ -83,7 +83,7 @@ public class Merchant extends Npc {
 		super.loadFromReference(type);
 		
 		
-		ParsedItem npc = this.getPosition().getMap().getNpcSpawnReference().getItemById(this.getSpawn().getId());
+		ParsedItem npc = this.getPosition().getLocalMap().getNpcSpawnReference().getItemById(this.getSpawn().getId());
 		
 		this.setMaxHp(100);
 				
@@ -116,7 +116,7 @@ public class Merchant extends Npc {
 	
 				if (!i.checkMembers(new String[] { "Type" })) {
 					Logger.getLogger(Merchant.class).info("Error loading a Npc Shop Item on map: "
-							+ getPosition().getMap());
+							+ getPosition().getLocalMap());
 					continue;
 				}
 				

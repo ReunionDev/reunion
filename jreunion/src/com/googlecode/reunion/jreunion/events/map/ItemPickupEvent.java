@@ -9,7 +9,7 @@ public class ItemPickupEvent extends MapEvent {
 	Player player;
 	RoamingItem roamingItem;
 	public ItemPickupEvent(Player player, RoamingItem roamingItem) {
-		super(roamingItem.getPosition().getMap());
+		super(roamingItem.getPosition().getLocalMap());
 		this.player = player;
 		this.roamingItem = roamingItem;
 	}

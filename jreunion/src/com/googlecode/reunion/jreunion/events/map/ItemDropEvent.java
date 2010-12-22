@@ -7,7 +7,7 @@ public class ItemDropEvent extends MapEvent {
 
 	RoamingItem roamingItem;
 	public ItemDropEvent(RoamingItem roamingItem) {
-		super(roamingItem.getPosition().getMap());
+		super(roamingItem.getPosition().getLocalMap());
 		this.roamingItem = roamingItem;
 	}
 	public RoamingItem getRoamingItem() {

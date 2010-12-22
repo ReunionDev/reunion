@@ -22,7 +22,7 @@ import com.googlecode.reunion.jreunion.game.Position;
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-public class Test extends EventBroadcaster implements EventListener,Runnable {
+public class Test extends EventDispatcher implements EventListener,Runnable {
 
 	public Test() {
 		this.addEventListener(Event.class,this, null);
@@ -76,7 +76,7 @@ public class Test extends EventBroadcaster implements EventListener,Runnable {
 		}
 		Logger.getLogger(Test.class).info(count);
 		
-		EventBroadcaster.shutdown();
+		EventDispatcher.shutdown();
 		Logger.getLogger(Test.class).info(count);
 	}
 

@@ -4,6 +4,7 @@ import java.awt.Rectangle;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Vector;
 
@@ -177,7 +178,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 			return;
 		}
 		
-		LocalMap map = getPosition().getMap();
+		LocalMap map = getPosition().getLocalMap();
 		map.getWorld().getCommand().dropItem(getPosition(), item);
 		
 		getInventory().setItemSelected(null);
@@ -664,11 +665,9 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 	}
 
 	/****** Manages the char Logout ******/
-	public synchronized void logout() {
+	public synchronized void save() {
 
-
-		Logger.getLogger(Player.class).info("Player " + getName() + " logging out...\n");
-
+		Logger.getLogger(Player.class).info("Player " + getName() + " saving...\n");
 		DatabaseUtils.getInstance().saveSkills(this);
 		DatabaseUtils.getInstance().saveInventory(this);
 		DatabaseUtils.getInstance().saveCharacter(this);
@@ -676,9 +675,6 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		DatabaseUtils.getInstance().saveStash(client);
 		DatabaseUtils.getInstance().saveExchange(this);
 		DatabaseUtils.getInstance().saveQuickSlot(this);
-		
-		getPosition().getMap().fireEvent(PlayerLogoutEvent.class, this);
-		
 		
 	}
 
@@ -727,7 +723,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		client.sendPacket(Type.PICKUP, this);
 		this.getInterested().sendPacket(Type.PICKUP, this);
 				
-		getPosition().getMap().fireEvent(ItemPickupEvent.class, this, roamingItem);
+		getPosition().getLocalMap().fireEvent(ItemPickupEvent.class, this, roamingItem);
 		// S> pickup [CharID]
 
 		//pickItem(roamingItem.getItem());
@@ -766,7 +762,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 
 	public void say(String text) {
 	
-		getPosition().getMap().getWorld().getCommand().playerSay(this, text);
+		getPosition().getLocalMap().getWorld().getCommand().playerSay(this, text);
 	}
 
 	public void setAdminState(int adminState) {
@@ -1240,7 +1236,11 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		if(event instanceof ClientDisconnectEvent){
 			ClientDisconnectEvent clientDisconnectEvent = (ClientDisconnectEvent) event;
 			Logger.getLogger(Player.class).debug(clientDisconnectEvent.getSource());
-			logout();
+			Position position = getPosition();
+			if(position!=null&&position.getMap()!=null){
+				LocalMap map = getPosition().getLocalMap();
+				map.fireEvent(PlayerLogoutEvent.class, this);
+			}
 		}
 		if(event instanceof SessionEvent){
 			SessionEvent sessionEvent = (SessionEvent) event;
@@ -1271,7 +1271,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 	}
 	
 	public Skill getSkill(int id){
-		Skill skill = getPosition().getMap().getWorld().getSkillManager().getSkill(id);		
+		Skill skill = getPosition().getLocalMap().getWorld().getSkillManager().getSkill(id);		
 		return skills.containsKey(skill)?skill:null;
 		
 	}

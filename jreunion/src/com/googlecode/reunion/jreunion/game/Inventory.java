@@ -320,7 +320,7 @@ public class Inventory {
 		
 		Item item = invItem.getItem();
 		
-		player.getPosition().getMap().getWorld().getCommand().useItem(player, item);
+		player.getPosition().getLocalMap().getWorld().getCommand().useItem(player, item);
 		
 		removeItem(invItem);
 		
