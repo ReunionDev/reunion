@@ -11,6 +11,7 @@ import com.googlecode.reunion.jreunion.game.Mob;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Position;
 import com.googlecode.reunion.jreunion.game.Spawn;
+import com.googlecode.reunion.jreunion.server.Area.Field;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 
 /**
@@ -176,9 +177,9 @@ public class MobManager {
 			if (distance <= 150) {
 				try {
 				if (mob.getPosition().getLocalMap()
-						.getMobArea()
+						.getArea()
 						.get((player.getPosition().getX() / 10 - 300),
-								(player.getPosition().getY() / 10)) == true) {
+								(player.getPosition().getY() / 10),Field.MOB) == true) {
 					moveToPlayer = false;
 				}
 				} catch (Exception e) {

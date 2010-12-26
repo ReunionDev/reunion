@@ -39,7 +39,6 @@ public class Inventory {
 					if (success == true) {
 						return;
 					}
-
 					addItem(x, y, item, tab);
 				}
 			}

@@ -14,6 +14,7 @@ import com.googlecode.reunion.jreunion.server.Reference;
 import com.googlecode.reunion.jreunion.server.Server;
 import com.googlecode.reunion.jreunion.server.Session;
 import com.googlecode.reunion.jreunion.server.Timer;
+import com.googlecode.reunion.jreunion.server.Area.Field;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 
 /**
@@ -267,7 +268,7 @@ public class Mob extends Npc {
 		int newPosY = (int) (getPosition().getY() + ycomp);
 
 		if (getPosition().getLocalMap()
-				.getMobArea().get((newPosX / 10 - 300), (newPosY / 10)) == true) {
+				.getArea().get((newPosX / 10 - 300), (newPosY / 10),Field.MOB) == true) {
 			getPosition().setX(newPosX);
 			getPosition().setY(newPosY);
 		} else {

@@ -28,6 +28,7 @@ import com.googlecode.reunion.jreunion.game.Position;
 import com.googlecode.reunion.jreunion.game.RoamingItem;
 import com.googlecode.reunion.jreunion.game.Spawn;
 import com.googlecode.reunion.jreunion.game.WorldObject;
+import com.googlecode.reunion.jreunion.server.Area.Field;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 
 /**
@@ -42,17 +43,15 @@ public class LocalMap extends Map implements Runnable{
 	private List<Spawn> npcSpawnList = new Vector<Spawn>();
 	
 	private List<Spawn> playerSpawnList = new Vector<Spawn>();
+	
+	
+	private Area area = new Area();
 
-	private Area playerArea = new Area();
-
-	private Area mobArea = new Area();
 	
 	private SessionList<Session>  sessions = new SessionList<Session>();
 	
 	private java.util.Map<Integer, WorldObject> entities = new HashMap<Integer, WorldObject>();
 		
-	private Area pvpArea = new Area();
-
 	private Parser playerSpawnReference;
 
 	Thread thread;
@@ -181,20 +180,11 @@ public class LocalMap extends Map implements Runnable{
 	 * @return Returns the mapid.
 	 */
 	
-	public Area getMobArea() {
-		return mobArea;
+	public Area getArea() {
+		return area;
 	}
-
-	public Area getPlayerArea() {
-		return playerArea;
-	}
-
 	public Parser getPlayerSpawnReference() {
 		return playerSpawnReference;
-	}
-
-	public Area getPvpArea() {
-		return pvpArea;
 	}
 
 	public void load() {
@@ -292,13 +282,13 @@ public class LocalMap extends Map implements Runnable{
 		} catch(Exception e){			
 			Logger.getLogger(this.getClass()).warn("Exception",e);			
 		}
-
-		playerArea.load(Reference.getInstance().getMapReference()
-				.getItemById(id).getMemberValue("PlayerArea"));
-		mobArea.load(Reference.getInstance().getMapReference()
-				.getItemById(id).getMemberValue("MobArea"));
-		pvpArea.load(Reference.getInstance().getMapReference()
-				.getItemById(id).getMemberValue("PvpArea"));
+		Area area = getArea();
+		area.load("data/"+Reference.getInstance().getMapReference()
+				.getItemById(id).getMemberValue("PlayerArea"),Field.PLAYER);
+		area.load("data/"+Reference.getInstance().getMapReference()
+				.getItemById(id).getMemberValue("MobArea"),Field.MOB);
+		area.load("data/"+Reference.getInstance().getMapReference()
+				.getItemById(id).getMemberValue("PvpArea"),Field.PVP);
 	}
 
 	

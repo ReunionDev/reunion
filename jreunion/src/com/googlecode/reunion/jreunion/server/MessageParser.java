@@ -15,6 +15,7 @@ import com.googlecode.reunion.jreunion.game.NpcSpawn;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Position;
 import com.googlecode.reunion.jreunion.game.Spawn;
+import com.googlecode.reunion.jreunion.server.Area.Field;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 import com.googlecode.reunion.jcommon.ParsedItem;
 
@@ -48,15 +49,14 @@ public class MessageParser {
 				Player p = player;
 				
 				LocalMap map = p.getPosition().getLocalMap();
+				Area area = map.getArea();
+				
 				String s1 = ""
-						+ map.getPlayerArea()
-								.get(p.getPosition().getX() / 10 - 300, p.getPosition().getY() / 10);
+						+ area.get(p.getPosition().getX() / 10 - 300, p.getPosition().getY() / 10,Field.PLAYER);
 				String s2 = ""
-						+ map.getMobArea()
-								.get(p.getPosition().getX() / 10 - 300, p.getPosition().getY() / 10);
+						+ area.get(p.getPosition().getX() / 10 - 300, p.getPosition().getY() / 10,Field.MOB);
 				String s3 = ""
-						+ map.getPvpArea()
-								.get(p.getPosition().getX() / 10 - 300, p.getPosition().getY() / 10);
+						+ area.get(p.getPosition().getX() / 10 - 300, p.getPosition().getY() / 10,Field.PVP);
 
 				com.serverSay("(" + p.getPosition().getX() / 10 + "," + p.getPosition().getY() / 10
 						+ ")" + "collision test: " + s1 + " " + s2 + " " + s3);

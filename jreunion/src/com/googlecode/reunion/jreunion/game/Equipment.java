@@ -412,10 +412,7 @@ public class Equipment {
 				}
 			}
 			return null;
-		}
-		
-		
-	}
-		
+		}		
+	}	
 	
 }
