@@ -47,10 +47,8 @@ public class MobManager {
 				
 				Logger.getLogger(MobManager.class).warn("Unknown mob type: "+type);
 				return null;
-				
 			}
-			String className = "com.googlecode.reunion.jreunion.game." + parsedItem.getMemberValue("Class");		
-			
+			String className = "com.googlecode.reunion.jreunion.game." + parsedItem.getMemberValue("Class");
 			Mob mob = (Mob)ClassFactory.create(className, type);
 			if(mob==null)
 				return null;
@@ -193,9 +191,10 @@ public class MobManager {
 			if (distance >= player.getSessionRadius()) {
 				//player.getSession().exit(mob);
 			}
+			
 
 			if (distance < player.getSessionRadius()) {
-				if (mob.getIsAttacking() == 0) {
+				if (!mob.getIsAttacking()) {
 					
 					
 					/*
@@ -217,7 +216,7 @@ public class MobManager {
 				
 				double distance = spawn.getPosition().distance(newPos);
 			
-				if ((int) distance <= spawn.getRadius()) {
+				if (distance <= spawn.getRadius()) {
 					// Logger.getLogger(MobManager.class).info("Distance <= Radius\n");					
 					mob.setPosition(newPos);
 				}

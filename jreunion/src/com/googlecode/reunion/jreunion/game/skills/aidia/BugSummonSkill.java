@@ -15,5 +15,4 @@ public class BugSummonSkill extends Skill {
 	public int getLevelRequirement(int skillLevel) {
 		return skillLevel;
 	}
-
 }

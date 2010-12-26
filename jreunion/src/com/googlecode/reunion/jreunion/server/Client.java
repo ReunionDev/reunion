@@ -235,17 +235,16 @@ public class Client extends EventDispatcher implements EventListener,Sendable {
 							this.disconnect();
 							throw new RuntimeException("Unknown Protocol");//TODO: Proper handling
 						}
-						
 						Logger.getLogger(Client.class).debug(this + " protocol discovered: "+protocol);
 					}
 					
 					String decryptedData = protocol.decryptServer(data);
-					Logger.getLogger(Client.class).debug(this + " sends: \n"+decryptedData);
+					Logger.getLogger(Client.class).debug(this + " sends: \n" + decryptedData);
 					
 					this.inputBuffer.append(decryptedData);
 					if(!decryptedData.endsWith("\n"))
 						inputBuffer.append("\n");
-					fireEvent(ClientReceiveEvent.class,this);			
+					fireEvent(ClientReceiveEvent.class, this);			
 				}
 			}
 			if(event instanceof NetworkDisconnectEvent){				

@@ -55,7 +55,7 @@ public abstract class LivingObject extends WorldObject {
 		this.dmgType = dmgType;
 	}
 	
-	private boolean running; // 0 - Off; 1 - On
+	private boolean running;
 
 	public void setIsRunning(boolean running) {
 		this.running = running;
@@ -110,5 +110,4 @@ public abstract class LivingObject extends WorldObject {
 	public void setTarget(LivingObject target) {
 		this.target = target;
 	}
-
 }

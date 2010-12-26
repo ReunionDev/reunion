@@ -100,7 +100,7 @@ public class Area {
 			return true;
 
 		} catch (Exception e) {
-			Logger.getLogger(this.getClass()).warn("Exception",e);
+			Logger.getLogger(this.getClass()).error("Exception",e);
 			return false;
 		}
 	}

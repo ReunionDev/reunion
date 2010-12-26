@@ -428,7 +428,6 @@ public class PacketFactory {
 			return "stash_end";
 			
 		case INVEN:
-			
 			if(args.length > 0){
 				InventoryItem invItem = (InventoryItem)args[0];
 				Item item = invItem.getItem();
@@ -440,8 +439,7 @@ public class PacketFactory {
 				+ item.getExtraStats();
 			}
 			break;
-
-	
+			
 		default:			
 			throw new NotImplementedException();
 		}

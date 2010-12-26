@@ -115,7 +115,6 @@ public class EventDispatcher{
 		}
 		for(final Entry<EventListener,Filter> entry: entries){
 			counter++;
-			
 			tpe.submit(
 			new Callable<Object>(){
 				@Override

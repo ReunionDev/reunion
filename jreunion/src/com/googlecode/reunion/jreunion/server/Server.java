@@ -19,7 +19,7 @@ import com.googlecode.reunion.jreunion.protocol.Protocol;
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-public class Server extends ClassModule {
+public class Server extends EventDispatcher {
 
 	private static Server _instance = null;
 	
@@ -94,8 +94,10 @@ public class Server extends ClassModule {
 
 			
 			server.database.start();
+
+			Logger.getLogger(Server.class).info("Server start");
 			server.fireEvent(server.createEvent(ServerStartEvent.class, server));			
-			server.doStart(); // Call the start functions in all the loaded
+			
 								// modules
 								// Load a module by extending it from
 								// ClassModule
@@ -105,14 +107,11 @@ public class Server extends ClassModule {
 
 			System.gc();
 			server.setState(State.RUNNING);
-			while (true) {
-
-				server.doWork();
-				Thread.sleep(1); // Sleep to make sure it doesnt use 100%
-									// cpu resources
-				
+			synchronized(server){
+				server.wait();
 			}
-
+			
+			
 		} catch (Exception e) {
 			
 			Logger.getLogger(Server.class).warn("Exception",e);
@@ -121,7 +120,9 @@ public class Server extends ClassModule {
 		finally {
 			server.setState(State.CLOSING);
 			server.fireEvent(server.createEvent(ServerStopEvent.class, server));
-			server.doStop();
+			
+			Logger.getLogger(Server.class).info("Server stop");
+			
 			EventDispatcher.shutdown();
 			server.database.stop();
 			System.exit(-1);
@@ -191,23 +192,6 @@ public class Server extends ClassModule {
 		this.database = databaseModule;
 	}
 
-
-	@Override
-	public void start() {
-		Logger.getLogger(Server.class).info("Server start");
-		
-		
-	}
-
-	@Override
-	public void stop() {
-		Logger.getLogger(Server.class).info("Server stop");
-	}
-
-	@Override
-	public void Work() {
-		// Logger.getLogger(Server.class).info("server work");
-	}
 	
 	public static enum State{
 		

@@ -7,7 +7,6 @@ import com.googlecode.reunion.jreunion.events.map.SpawnEvent;
 import com.googlecode.reunion.jreunion.server.LocalMap;
 import com.googlecode.reunion.jreunion.server.Map;
 import com.googlecode.reunion.jreunion.server.Server;
-import com.googlecode.reunion.jreunion.server.Timer;
 
 /**
  * @author Aidamina

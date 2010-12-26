@@ -42,7 +42,6 @@ public class Npc extends LivingObject {
 		this.setMaxHp(100);
 		this.setHp(this.getMaxHp());
 		this.type = type;
-		
 	}
 	
 	private int mutant;
@@ -83,6 +82,7 @@ public class Npc extends LivingObject {
 
 	public int getUnknown2() {
 		return unknown2;
+		//this seems to be 10 for certain npcs and 1 for mobs
 	}
 	
 	@Override

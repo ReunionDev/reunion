@@ -454,7 +454,6 @@ public class LocalMap extends Map implements Runnable{
 
 	@Override
 	public void run() {
-		Timer timer = new Timer();
 		while(true){
 			try {
 				synchronized(this){				
@@ -463,7 +462,6 @@ public class LocalMap extends Map implements Runnable{
 				
 				//Logger.getLogger(LocalMap.class).info(this+" work");
 				
-				timer.Start();
 				
 				List<WorldObject> objects = null;
 				SessionList<Session> sessionList = null;
@@ -501,15 +499,13 @@ public class LocalMap extends Map implements Runnable{
 						}
 					}
 				}
-				timer.Stop();
 				//Logger.getLogger(LocalMap.class).info(timer.getTimeElapsedSeconds());
 			
 			} catch (Exception e) {
 				Logger.getLogger(this.getClass()).warn("Exception",e);
 				throw new RuntimeException(e);
 			}
-			finally{				
-				timer.Reset();
+			finally{			
 				
 			}
 		}

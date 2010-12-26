@@ -13,7 +13,6 @@ import com.googlecode.reunion.jreunion.server.ItemFactory;
 import com.googlecode.reunion.jreunion.server.Reference;
 import com.googlecode.reunion.jreunion.server.Server;
 import com.googlecode.reunion.jreunion.server.Session;
-import com.googlecode.reunion.jreunion.server.Timer;
 import com.googlecode.reunion.jreunion.server.Area.Field;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 
@@ -23,32 +22,24 @@ import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
  */
 public class Mob extends Npc {
 
-	private int type;
-
 	private int dmg;
 
 	private int exp;
 
 	private int lime;
 
-	private int attackType;
-
-	
+	private int attackType;	
 
 	private int speed;
 
-	private int isMoving;
+	private boolean isMoving;
 
-	private int isAttacking;
-	
+	private boolean isAttacking;
 
-
-	private Timer time = new Timer();
 
 	public Mob(int type) {
 		super(type);
 		
-		this.type = type;
 		loadFromReference(type);
 	}
 
@@ -81,17 +72,15 @@ public class Mob extends Npc {
 		return dmg;
 	}
 
-
-
 	public int getExp() {
 		return exp;
 	}
 
-	public int getIsAttacking() {
+	public boolean getIsAttacking() {
 		return isAttacking;
 	}
 
-	public int getIsMoving() {
+	public boolean getIsMoving() {
 		return isMoving;
 	}
 
@@ -102,15 +91,6 @@ public class Mob extends Npc {
 	public int getSpeed() {
 		return speed;
 	}
-
-	public Timer getTimer() {
-		return time;
-	}
-
-	public int getType() {
-		return type;
-	}
-
 
 
 	@Override
@@ -225,11 +205,11 @@ public class Mob extends Npc {
 		if (client == null) {
 			return;
 		}
-
+/*
 		if (time.getTimeElapsedSeconds() > 1) {
 			time.Stop();
 			time.Reset();
-			setIsAttacking(0);
+			setIsAttacking(false);
 		}
 		if (time.getTimeElapsedSeconds() < 1 && time.isRunning()) {
 			return;
@@ -240,22 +220,26 @@ public class Mob extends Npc {
 
 		if (distance < 100) {
 			if (getAttackType() == 1 || getAttackType() == 2) {
-				setIsAttacking(1);
+				setIsAttacking(true);
 				this.getPosition().getLocalMap().getWorld().getCommand()
 						.NpcAttackChar(player, this);
 				return;
 			} else if (distance < 20) {
-				setIsAttacking(1);
+				setIsAttacking(true);
 				this.getPosition().getLocalMap().getWorld().getCommand()
 						.NpcAttackChar(player, this);
 				return;
 			}
 		}
+		*/
 
+		//player.getPosition().
+		
 
 		double xcomp = player.getPosition().getX() - getPosition().getX();
 		double ycomp = player.getPosition().getY() - getPosition().getY();
 
+		// Huh?
 		if (xcomp >= 0 && ycomp >= 0) {
 			xcomp = Math.pow(xcomp, 1.1);
 			ycomp = Math.pow(ycomp, 1.1);
@@ -266,16 +250,15 @@ public class Mob extends Npc {
 
 		int newPosX = (int) (getPosition().getX() + xcomp);
 		int newPosY = (int) (getPosition().getY() + ycomp);
-
-		if (getPosition().getLocalMap()
-				.getArea().get((newPosX / 10 - 300), (newPosY / 10),Field.MOB) == true) {
-			getPosition().setX(newPosX);
-			getPosition().setY(newPosY);
-		} else {
-			return;
-		}
-		walk(getPosition(),isRunning());
 		
+		if (getPosition().getLocalMap()
+				.getArea().get((newPosX / 10 - 300), (newPosY / 10), Field.MOB) == true) {
+			Position newPosition = getPosition().clone();
+			newPosition.setX(newPosX);
+			newPosition.setY(newPosY);
+			walk(getPosition(), isRunning());
+			
+		} 
 	}
 
 	private void rangeMagicAttackPlayer(Player player) {
@@ -348,17 +331,15 @@ public class Mob extends Npc {
 		this.dmg = dmg;
 	}
 	
-
-
 	public void setExp(int exp) {
 		this.exp = exp;
 	}
 
-	public void setIsAttacking(int isAttacking) {
+	public void setIsAttacking(boolean isAttacking) {
 		this.isAttacking = isAttacking;
 	}
 
-	public void setIsMoving(int isMoving) {
+	public void setIsMoving(boolean isMoving) {
 		this.isMoving = isMoving;
 	}
 

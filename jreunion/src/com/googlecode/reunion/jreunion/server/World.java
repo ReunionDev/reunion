@@ -6,13 +6,18 @@ import java.util.Collection;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Vector;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
 
 import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jreunion.events.Event;
+import com.googlecode.reunion.jreunion.events.EventDispatcher;
 import com.googlecode.reunion.jreunion.events.EventListener;
 import com.googlecode.reunion.jreunion.events.client.ClientConnectEvent;
 import com.googlecode.reunion.jreunion.events.client.ClientDisconnectEvent;
@@ -22,6 +27,9 @@ import com.googlecode.reunion.jreunion.events.network.NetworkDataEvent;
 import com.googlecode.reunion.jreunion.events.network.NetworkDisconnectEvent;
 import com.googlecode.reunion.jreunion.events.network.NetworkEvent;
 import com.googlecode.reunion.jreunion.events.network.NetworkSendEvent;
+import com.googlecode.reunion.jreunion.events.server.ServerEvent;
+import com.googlecode.reunion.jreunion.events.server.ServerStartEvent;
+import com.googlecode.reunion.jreunion.events.server.ServerStopEvent;
 import com.googlecode.reunion.jreunion.game.Mob;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
@@ -31,26 +39,25 @@ import com.googlecode.reunion.jreunion.server.Server.State;
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-public class World extends ClassModule implements EventListener, Sendable{
+public class World extends EventDispatcher implements EventListener, Sendable {
+	
 	private Command worldCommand;
 
 	private PlayerManager playerManager;
 
 	private MobManager mobManager;
 	
+	private ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
+	
 	private TeleportManager teleportManager;
 	
-	java.util.Map<Integer,Map> maps = new Hashtable<Integer,Map>();	
+	private Hashtable<Integer, Map> maps = new Hashtable<Integer,Map>();	
 
-	java.util.Map<SocketChannel,Client> clients = new Hashtable<SocketChannel, Client>();
+	private Hashtable<SocketChannel, Client> clients = new Hashtable<SocketChannel, Client>();
 
 	private NpcManager npcManager;
 
-	private Timer serverTime = new Timer();
-
 	private int serverHour;
-
-	private boolean mobMoving = false;
 
 	private SkillManager skillManager;
 
@@ -60,8 +67,8 @@ public class World extends ClassModule implements EventListener, Sendable{
 
 	static public ServerSetings serverSetings;
 
-	public World(Module parent) {
-		super(parent);
+	public World(Server server) {
+		
 		worldCommand = new Command(this);
 		skillManager = new SkillManager();
 		playerManager = new PlayerManager();
@@ -69,7 +76,8 @@ public class World extends ClassModule implements EventListener, Sendable{
 		npcManager = new NpcManager();
 		serverHour = 4;
 		teleportManager = new TeleportManager();
-		serverSetings = new ServerSetings();
+		serverSetings = new ServerSetings();		
+		server.addEventListener(ServerEvent.class, this);
 	}
 
 	/**
@@ -121,7 +129,6 @@ public class World extends ClassModule implements EventListener, Sendable{
 		return worldCommand;
 	}
 
-	@Override
 	public void start() {
 
 		Server.getInstance().getNetwork().addEventListener(NetworkAcceptEvent.class, this);
@@ -143,13 +150,11 @@ public class World extends ClassModule implements EventListener, Sendable{
 			map.load();
 			maps.put(mapId, map);
 		}
-		java.util.Timer timer1 = new java.util.Timer();
 		
-		timer1.schedule(new TimerTask() {
+		executorService.scheduleAtFixedRate(new Runnable() {
 			
 			@Override
 			public void run() {
-				Thread.currentThread().setName("Hour thread");
 				serverHour = (serverHour + 1) % 5;
 				
 				synchronized(playerManager){
@@ -161,15 +166,12 @@ public class World extends ClassModule implements EventListener, Sendable{
 					}
 				}				
 			}
-		}, 0, 60 * 1000);
+		}, 0, 60, TimeUnit.SECONDS);		
 		
-		java.util.Timer timer2 = new java.util.Timer();
-		
-		timer2.schedule(new TimerTask() {
+		executorService.scheduleAtFixedRate(new Runnable() {
 			
 			@Override
 			public void run() {
-				Thread.currentThread().setName("Regen thread");
 				synchronized(playerManager){
 					Iterator<Player> iter = playerManager.getPlayerListIterator();
 					while (iter.hasNext()) {
@@ -191,52 +193,51 @@ public class World extends ClassModule implements EventListener, Sendable{
 					}
 				}				
 			}
-		}, 0, 3*1000);
+		}, 0, 3, TimeUnit.SECONDS);
+		
+		
+		executorService.scheduleAtFixedRate(new Runnable() {
+			
+			@Override
+			public void run() {
+
+				Iterator<Mob> mobsIter = Server.getInstance().getWorld()
+						.getMobManager().getMobListIterator();
+				while (mobsIter.hasNext()) {
+					Server.getInstance().getWorld().getMobManager()
+							.workMob(mobsIter.next());
+				}
+			
+				
+			}
+			
+		}, 0, 2, TimeUnit.SECONDS);
 	}
 
-	@Override
 	public void stop() {
+		executorService.shutdown();
 		Server.getInstance().getNetwork().removeEventListener(NetworkAcceptEvent.class, this);
 	}
 
 	@Override
-	public void Work() {
-
-		if ((int) (serverTime.getTimeElapsedSeconds() % 2) == 0
-				&& mobMoving == false) {
-		
-			Iterator<Mob> mobsIter = Server.getInstance().getWorld()
-					.getMobManager().getMobListIterator();
-			while (mobsIter.hasNext()) {
-				Server.getInstance().getWorld().getMobManager()
-						.workMob(mobsIter.next());
-			}
-			mobMoving = true;
-		}
-
-		if ((int) (serverTime.getTimeElapsedSeconds() % 2) != 0
-				&& mobMoving == true) {
-			mobMoving = false;
-		}
-
-		if ((int) serverTime.getTimeElapsedSeconds() >= 60) {
-			serverTime.Stop();
-			serverTime.Reset();
-		}
-
-		if (!serverTime.isRunning()) {
-			serverTime.Start();
-		}
-	}
-
-	@Override
 	public void handleEvent(Event event) {
+		
+		if(event instanceof ServerEvent){
+			
+			if (event instanceof ServerStartEvent) {
+				start();
+			}
+			if (event instanceof ServerStopEvent) {
+				
+				stop();
+			}			
+		}
+		
 		if(event instanceof NetworkEvent){
 			
 			SocketChannel socketChannel = ((NetworkEvent)event).getSocketChannel();
 			
-			if(event instanceof NetworkAcceptEvent){
-				
+			if(event instanceof NetworkAcceptEvent) {
 				
 				NetworkAcceptEvent networkAcceptEvent = (NetworkAcceptEvent) event;
 				Network network = (Network) networkAcceptEvent.getSource();
