@@ -11,7 +11,6 @@ public class PlayerSpawn extends Spawn
 		super(position);
 	}
 	
-	
 	int targetX =-1;
 	int targetY =-1;
 	int targetWidth =-1; 
@@ -20,21 +19,18 @@ public class PlayerSpawn extends Spawn
 	public int getTargetX() {
 		return targetX;
 	}
-
 	public void setTargetX(int targetX) {
 		this.targetX = targetX;
 	}
 	public int getTargetY() {
 		return targetY;
 	}
-
 	public void setTargetY(int targetY) {
 		this.targetY = targetY;
 	}
 	public int getTargetWidth() {
 		return targetWidth;
 	}
-
 	public void setTargetWidth(int targetWidth) {
 		this.targetWidth = targetWidth;
 	}
@@ -49,6 +45,5 @@ public class PlayerSpawn extends Spawn
 		Position position = super.spawn(player);
 		player.getClient().sendPacket(PacketFactory.Type.AT, player);
 		return position;
-		
 	}
 }

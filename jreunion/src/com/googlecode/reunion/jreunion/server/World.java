@@ -55,8 +55,6 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 
 	private Hashtable<SocketChannel, Client> clients = new Hashtable<SocketChannel, Client>();
 
-	private NpcManager npcManager;
-
 	private int serverHour;
 
 	private SkillManager skillManager;
@@ -72,8 +70,7 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 		worldCommand = new Command(this);
 		skillManager = new SkillManager();
 		playerManager = new PlayerManager();
-		mobManager = new MobManager();		
-		npcManager = new NpcManager();
+		mobManager = new MobManager();
 		serverHour = 4;
 		teleportManager = new TeleportManager();
 		serverSetings = new ServerSetings();		
@@ -97,17 +94,16 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 	/**
 	 * @return Returns the mobManager.
 	 */
+	/*
 	public MobManager getMobManager() {
 		return mobManager;
 	}
+	*/
 
 	/**
 	 * @return Returns the npcManager.
 	 */
-	public NpcManager getNpcManager() {
-		return npcManager;
-	}
-
+	
 	/**
 	 * @return Returns the playerManager.
 	 */
@@ -194,24 +190,7 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 				}				
 			}
 		}, 0, 3, TimeUnit.SECONDS);
-		
-		
-		executorService.scheduleAtFixedRate(new Runnable() {
-			
-			@Override
-			public void run() {
-
-				Iterator<Mob> mobsIter = Server.getInstance().getWorld()
-						.getMobManager().getMobListIterator();
-				while (mobsIter.hasNext()) {
-					Server.getInstance().getWorld().getMobManager()
-							.workMob(mobsIter.next());
-				}
-			
-				
-			}
-			
-		}, 0, 2, TimeUnit.SECONDS);
+	
 	}
 
 	public void stop() {
@@ -228,7 +207,6 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 				start();
 			}
 			if (event instanceof ServerStopEvent) {
-				
 				stop();
 			}			
 		}

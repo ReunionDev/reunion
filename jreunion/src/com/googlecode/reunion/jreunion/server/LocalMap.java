@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
 
@@ -18,8 +21,10 @@ import com.googlecode.reunion.jreunion.events.map.PlayerLoginEvent;
 import com.googlecode.reunion.jreunion.events.map.PlayerLogoutEvent;
 import com.googlecode.reunion.jreunion.events.session.NewSessionEvent;
 import com.googlecode.reunion.jreunion.events.session.SessionEvent;
+import com.googlecode.reunion.jreunion.game.Entity;
 import com.googlecode.reunion.jreunion.game.Item;
 import com.googlecode.reunion.jreunion.game.LivingObject;
+import com.googlecode.reunion.jreunion.game.Mob;
 import com.googlecode.reunion.jreunion.game.Npc;
 import com.googlecode.reunion.jreunion.game.NpcSpawn;
 import com.googlecode.reunion.jreunion.game.Player;
@@ -37,22 +42,19 @@ import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
  */
 public class LocalMap extends Map implements Runnable{
 
-	
-	private List<Spawn> mobSpawnList = new Vector<Spawn>();
-
 	private List<Spawn> npcSpawnList = new Vector<Spawn>();
 	
 	private List<Spawn> playerSpawnList = new Vector<Spawn>();
 	
-	
 	private Area area = new Area();
-
 	
-	private SessionList<Session>  sessions = new SessionList<Session>();
+	private SessionList<Session> sessions = new SessionList<Session>();
 	
-	private java.util.Map<Integer, WorldObject> entities = new HashMap<Integer, WorldObject>();
+	private HashMap<Integer, Entity> entities = new HashMap<Integer, Entity>();
 		
 	private Parser playerSpawnReference;
+
+	private ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
 
 	Thread thread;
 
@@ -66,6 +68,22 @@ public class LocalMap extends Map implements Runnable{
 
 	public World getWorld() {
 		return world;
+	}
+	
+	public Npc createNpc(int typeId) {
+		
+		ParsedItem parsedNpc = Reference.getInstance().getMobReference().getItemById(typeId);
+		if (parsedNpc == null) {
+			parsedNpc = Reference.getInstance().getNpcReference().getItemById(typeId);
+			if (parsedNpc == null) {
+				return null;
+			}
+		}		
+		String className = "com.googlecode.reunion.jreunion.game." + parsedNpc.getMemberValue("Class");		
+		
+		Npc npc = (Npc)ClassFactory.create(className, typeId);
+		return npc;
+		
 	}
 
 	public LocalMap(World world, int id) {
@@ -82,16 +100,40 @@ public class LocalMap extends Map implements Runnable{
 		this.addEventListener(ItemPickupEvent.class, this);
 	}
 	
-	public WorldObject getEntity(int id) {		
+	public Entity getEntity(int id) {		
 		synchronized(entities){			
-			return (WorldObject) entities.get(id);
+			return (Entity) entities.get(id);
 		}
-		
+	}
+	private int entityIter = 0;
+	public synchronized int createEntityId(Entity obj){
+		synchronized(this.entities){
+			if(!entities.containsValue(obj)){
+				int counter = 0;
+				
+				while(entities.containsKey(entityIter)){
+					entityIter++;
+					if(entityIter >= Integer.MAX_VALUE) {
+						entityIter=0;
+					}
+					counter++;
+					if(counter >= Integer.MAX_VALUE)
+						throw new RuntimeException("No more available entity ids");
+				}
+				int id = entityIter;
+				entities.put(id, obj);
+				obj.setEntityId(id);
+				return id;
+			
+				
+			} else {
+				return obj.getEntityId();
+			}
+		}
 	}
 	
 	private void createMobSpawns() {
-
-		mobSpawnList.clear();
+		
 		Iterator<ParsedItem> iter = mobSpawnReference.getItemListIterator();
 
 		while (iter.hasNext()) {
@@ -124,7 +166,7 @@ public class LocalMap extends Map implements Runnable{
 			spawn.setRespawnTime(Integer.parseInt(item
 					.getMemberValue("RespawnTime")));
 			
-			mobSpawnList.add(spawn);
+			npcSpawnList.add(spawn);
 			
 			spawn.spawn();
 		}
@@ -139,9 +181,7 @@ public class LocalMap extends Map implements Runnable{
 	}
 	
 	private void createNpcSpawns() {
-
-		npcSpawnList.clear();
-
+		
 		Iterator<ParsedItem> iter = npcSpawnReference.getItemListIterator();
 
 		while (iter.hasNext()) {
@@ -200,6 +240,7 @@ public class LocalMap extends Map implements Runnable{
 		mobSpawnReference = new Parser();
 		npcSpawnReference = new Parser();
 		loadFromReference(getId());
+		npcSpawnList.clear();
 		createMobSpawns();
 		createNpcSpawns();
 		createPlayerSpawns();
@@ -208,10 +249,28 @@ public class LocalMap extends Map implements Runnable{
 		
 			List<RoamingItem> roamingItems = DatabaseUtils.getInstance().loadRoamingItems(this);
 			for(RoamingItem roamingItem : roamingItems){				
-				entities.put(roamingItem.getId(), roamingItem);
+				entities.put(roamingItem.getEntityId(), roamingItem);
 			}
 		}
 		
+		executorService.scheduleAtFixedRate(new Runnable() {
+			
+			@Override
+			public void run() {
+
+				List<Entity> objects = null;
+				synchronized(entities){			
+					objects = new Vector<Entity>(entities.values());
+				}
+				for(Entity entity: objects){
+					if(entity instanceof Mob){
+						Mob mob = (Mob)entity;	
+						//mob.workMob();
+					}
+				}
+			}
+			
+		}, 0, 2, TimeUnit.SECONDS);
 		
 		Logger.getLogger(LocalMap.class).info(getName()+" running on "+getAddress());
 		
@@ -332,10 +391,7 @@ public class LocalMap extends Map implements Runnable{
 				
 				synchronized(entities) {
 					
-					WorldObject object = entities.put(entity.getId(), entity);
-					list.enter(entity, false);		
-					if(object!=null) 
-						throw new RuntimeException("This should never happen! 1 id:"+entity.getId());
+					list.enter(entity, false);
 				}
 				
 				if(entity instanceof Player){
@@ -344,11 +400,6 @@ public class LocalMap extends Map implements Runnable{
 					sessions.add(session);
 					
 					player.getClient().setState(Client.State.INGAME);
-					
-					player.sendStatus(Player.Status.HP);
-					player.sendStatus(Player.Status.MANA);
-					player.sendStatus(Player.Status.STAMINA);
-					player.sendStatus(Player.Status.ELECTRICITY);
 					
 					if(list.contains(session)){
 						
@@ -372,7 +423,7 @@ public class LocalMap extends Map implements Runnable{
 				SessionList<Session> list = GetSessions(roamingItem.getPosition());
 				
 				synchronized(entities) {
-					entities.put(roamingItem.getId(), roamingItem);
+					entities.put(roamingItem.getEntityId(), roamingItem);
 					list.enter(roamingItem, false);					
 				}
 								
@@ -386,17 +437,15 @@ public class LocalMap extends Map implements Runnable{
 				
 				synchronized(entities) {
 					
-					roamingItem = (RoamingItem) this.entities.remove(roamingItem.getId());
+					roamingItem = (RoamingItem) this.entities.remove(roamingItem.getEntityId());
 					if(roamingItem!=null) {
 						
 						Player player = itemPickupEvent.getPlayer();
 						Item item = roamingItem.getItem();
 						DatabaseUtils.getInstance().deleteRoamingItem(item);
 						player.pickItem(roamingItem.getItem());
-					}
-				
-				}
-				
+					}				
+				}				
 				roamingItem.getInterested().sendPacket(Type.OUT, roamingItem);
 				
 			}
@@ -428,7 +477,7 @@ public class LocalMap extends Map implements Runnable{
 				
 				synchronized(entities) {
 					sessions.remove(session);
-					entities.remove(player.getId());
+					entities.remove(player.getEntityId());
 					
 				}	
 				SessionList<Session> list = player.getInterested().getSessions();
@@ -463,10 +512,10 @@ public class LocalMap extends Map implements Runnable{
 				//Logger.getLogger(LocalMap.class).info(this+" work");
 				
 				
-				List<WorldObject> objects = null;
+				List<Entity> objects = null;
 				SessionList<Session> sessionList = null;
 				synchronized(this.entities){			
-					objects = new Vector<WorldObject>(this.entities.values());
+					objects = new Vector<Entity>(this.entities.values());
 				}
 				synchronized(this.sessions){			
 					sessionList = (SessionList<Session>) this.sessions.clone();
@@ -475,27 +524,30 @@ public class LocalMap extends Map implements Runnable{
 				for(Session session: sessionList){
 					
 					Player owner = session.getOwner();
-					for(WorldObject entity: objects){
-						try{
-						if(owner.equals(entity))
-							continue;
-						
-						boolean within = owner.getPosition().within(entity.getPosition(), owner.getSessionRadius());
-						boolean contains = session.contains(entity);
-						
-						if(contains && !within) {
-							
-							session.exit(entity);	
-							
-						} else if(!contains && within) {
-												
-							session.enter(entity);
-													
-						}			
-						}catch(Exception e ){
-							Logger.getLogger(this.getClass()).warn("Exception in mapworker", e);
-							
-							
+					for(Entity entity: objects){
+						if(entity instanceof WorldObject){
+							WorldObject object = (WorldObject)entity;
+							try{
+								if(owner.equals(entity))
+									continue;
+								
+								boolean within = owner.getPosition().within(object.getPosition(), owner.getSessionRadius());
+								boolean contains = session.contains(object);
+								
+								if(contains && !within) {
+									
+									session.exit(object);	
+									
+								} else if(!contains && within) {
+														
+									session.enter(object);
+															
+								}			
+							}catch(Exception e ){
+								Logger.getLogger(this.getClass()).warn("Exception in mapworker", e);
+								
+								
+							}
 						}
 					}
 				}
@@ -508,6 +560,14 @@ public class LocalMap extends Map implements Runnable{
 			finally{			
 				
 			}
+		}
+	}
+
+	public void removeEntity(Entity entity) {
+		synchronized(entities){
+			int entitiId = entity.getEntityId();
+			if(entities.containsKey(entitiId))
+				entities.remove(entitiId);
 		}
 	}
 }

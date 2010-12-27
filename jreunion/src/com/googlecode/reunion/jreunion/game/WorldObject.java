@@ -16,7 +16,7 @@ import com.googlecode.reunion.jreunion.server.SessionList;
 public abstract class WorldObject extends EventDispatcher implements Entity {
 	
 	private int id = -1;
-	public int getId() {
+	public int getEntityId() {
 		return id;
 	}
 	
@@ -26,7 +26,7 @@ public abstract class WorldObject extends EventDispatcher implements Entity {
 		return interested;
 	}
 
-	public void setId(int id) {
+	public void setEntityId(int id) {
 		this.id = id;		
 	}
 	

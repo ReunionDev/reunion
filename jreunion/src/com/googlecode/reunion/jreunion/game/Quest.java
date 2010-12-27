@@ -135,7 +135,7 @@ public class Quest {
 		}
 
 		String packetData = "qt eff " + player.getPosition().getX() + " "
-				+ player.getPosition().getY() + " " + player.getId() + "\n";
+				+ player.getPosition().getY() + " " + player.getEntityId() + "\n";
 		
 				client.sendData(packetData);
 	}

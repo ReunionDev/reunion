@@ -11,8 +11,12 @@ public class Item implements Entity {
 	
 	private int price;
 
-	private int id = -1;
+	private int entityId = -1;
 	
+	private int itemId = -1; //for database;
+	
+
+
 	private int sizeX; // number of cols
 
 	private int sizeY; // number of rows
@@ -32,18 +36,25 @@ public class Item implements Entity {
 		this.type = type;
 		loadFromReference(type);
 	}
+	
+	public int getItemId() {
+		return itemId;
+	}
 
+	public void setItemId(int itemId) {
+		this.itemId = itemId;
+	}
+	
 	public int getDescription() {
 		return description;
 	}
 	
-	public int getId() {
-		return id;
+	public int getEntityId() {
+		return entityId;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-		
+	public void setEntityId(int id) {
+		this.entityId = id;
 	}
 
 	public int getExtraStats() {
@@ -81,8 +92,7 @@ public class Item implements Entity {
 
 	public void loadFromReference(int type) {		
 		
-		ParsedItem item = Reference.getInstance().getItemReference()
-				.getItemById(type);
+		ParsedItem item = Reference.getInstance().getItemReference().getItemById(type);
 		
 		if (item == null) {
 			// cant find Item in the reference continue to load defaults:
@@ -122,7 +132,6 @@ public class Item implements Entity {
 				setDescription(-1);
 			}
 		}
-
 	}
 
 	public void setDescription(int description) {

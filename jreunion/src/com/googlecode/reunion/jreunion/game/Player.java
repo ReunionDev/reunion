@@ -54,6 +54,17 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 	private int lime; // Gold
 	
 	private int slot;
+	
+	
+	public int playerId = -1 ; //id used for database storage
+
+	public int getPlayerId() {
+		return playerId;
+	}
+
+	public void setPlayerId(int playerId) {
+		this.playerId = playerId;
+	}
 
 	public int getSlot() {
 		return slot;
@@ -199,7 +210,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 	}
 	
 	public void sendStatus(Status status) {
-		if(client.getState()==Client.State.INGAME){
+		if(client.getState()==State.INGAME||client.getState()==State.LOADED){
 			int min=0,max=0;
 			switch (status) {
 				case HP: //0
@@ -632,9 +643,11 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 				.getInventoryIterator();
 		while (invIter.hasNext()) {
 			InventoryItem invItem = invIter.next();
-			
+			Item item = invItem.getItem();
+			if(item.getEntityId()==-1){
+				client.getPlayer().getPosition().getLocalMap().createEntityId(item);
+			}
 			client.sendPacket(Type.INVEN, invItem);
-			// inven [Tab] [UniqueId] [Type] [PosX] [PosY] [Gems] [Special]
 
 		}
 	}
@@ -654,7 +667,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 			Item item = qsItem.getItem();
 			if(item!=null){
 				String packetData = "quick " + qsItem.getSlot() + " "
-						+ item.getId() + " "
+						+ item.getEntityId() + " "
 						+ item.getType() + " "
 						+ item.getGemNumber() + " "
 						+ item.getExtraStats() + "\n";
@@ -701,6 +714,10 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 			getInventory().setItemSelected(invItem);
 				
 		}
+		if(item.getEntityId()==-1){
+			getPosition().getLocalMap().createEntityId(item);
+		}
+		
 		client.sendPacket(Type.PICK, invItem);
 		
 		// S> pick [UniqueID] [Type] [Tab] [PosX] [PosY] [GemNumber] [Special]
@@ -713,11 +730,9 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		Item item = roamingItem.getItem();
 		
 		Player owner = roamingItem.getOwner();
-		if(roamingItem.getOwner()!=null&&roamingItem.getOwner()!=this){
-			
-			getClient().sendPacket(Type.SAY, "This item belongs to "+owner.getName());
+		if(roamingItem.getOwner()!=null&&roamingItem.getOwner()!=this) {
+			getClient().sendPacket(Type.SAY, "This item belongs to " + owner.getName());
 			return;
-			
 		}		
 		
 		client.sendPacket(Type.PICKUP, this);
@@ -813,7 +828,6 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 			setMana(this.getMaxHp());
 			setElectricity(this.getMaxElectricity());
 			setStamina(this.getMaxStamina());
-			
 		}
 	}
 
@@ -875,11 +889,6 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		this.quest = quest;
 	}
 
-	/**
-	 * @param playerSession
-	 *            The playerSession to set.
-	 * @uml.property name="playerSession"
-	 */
 	public void setSession(Session session) {
 		playerSession = session;
 	}
@@ -1252,7 +1261,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		buffer.append("{");
 
 		buffer.append("id: ");
-		buffer.append(getId());
+		buffer.append(getPlayerId());
 		buffer.append(", ");
 		
 		buffer.append("name: ");

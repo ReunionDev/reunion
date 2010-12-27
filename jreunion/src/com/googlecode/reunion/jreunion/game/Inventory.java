@@ -7,6 +7,7 @@ import java.util.Vector;
 import org.apache.log4j.Logger;
 
 import com.googlecode.reunion.jreunion.server.Client;
+import com.googlecode.reunion.jreunion.server.LocalMap;
 import com.googlecode.reunion.jreunion.server.Network;
 import com.googlecode.reunion.jreunion.server.Server;
 
@@ -16,8 +17,6 @@ import com.googlecode.reunion.jreunion.server.Server;
  */
 public class Inventory {
 	private List<InventoryItem> items;
-
-	private boolean success = false;
 	
 	private Item[][][] inventory=new Item[3][8][6];
 
@@ -30,34 +29,34 @@ public class Inventory {
 		items = new Vector<InventoryItem>();
 	}
 
-	public void addItem(Item item) {
-		success = false;
-
+	public boolean addItem(Item item) {
+		
 		for (int tab = 0; tab < 3; tab++) {
 			for (int x = 0; x < 8; x++) {
 				for (int y = 0; y < 6; y++) {
-					if (success == true) {
-						return;
-					}
-					addItem(x, y, item, tab);
+					if(addItem(x, y, item, tab))
+						return true;
 				}
 			}
 		}
+		return false;
 	}
 
-	public void addItem(int posX, int posY, Item item, int tab) {
+	public boolean addItem(int posX, int posY, Item item, int tab) {
 
 		InventoryItem inventoryItem = new InventoryItem(item, posX, posY,
 				tab);
 
 		if (itemFit(tab, posX, posY, item.getSizeX(), item.getSizeY()) == true) {
 			items.add(inventoryItem);
-			success = true;
+			return true;
 			// Logger.getLogger(Inventory.class).info("Item Inserted\n");
 			// PrintInventoryMap(0);
 			// PrintInventoryMap(1);
 			// PrintInventoryMap(2);
 		}
+		
+		return false;
 
 	}
 
@@ -97,7 +96,7 @@ public class Inventory {
 		while (iter.hasNext()) {
 			InventoryItem invItem = iter.next();
 
-			if (invItem.getItem().getId() == itemId) {
+			if (invItem.getItem().getEntityId() == itemId) {
 				return invItem;
 			}
 		}
@@ -162,7 +161,7 @@ public class Inventory {
 		InventoryItem auxItem = null;
 		int count = 0;
 
-		if (player.getInventory().posEmpty(tab, posX, posY) == false) {
+		if (!player.getInventory().posEmpty(tab, posX, posY)) {
 			if (player.getInventory().getItemSelected() == null) {
 				newInvItem = player.getInventory().getItem(tab, posX, posY);
 				player.getInventory().removeItem(newInvItem);

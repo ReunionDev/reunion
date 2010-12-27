@@ -53,10 +53,7 @@ public class DatabaseUtils extends Service {
 	private DatabaseUtils() {
 		super();
 		database = null;
-		
 	}
-	
-	private Queue<DatabaseAction> queue = new LinkedList<DatabaseAction>();
 	
 	private Database database;
 	
@@ -72,8 +69,8 @@ public class DatabaseUtils extends Service {
 	 *            The database to set.
 	 * @uml.property name="database"
 	 */
-	public void setDatabase(Database db) {
-		database = db;
+	public void setDatabase(Database database) {
+		this.database = database;
 	}
 	
 	private static DatabaseUtils _instance = null;
@@ -106,8 +103,8 @@ public class DatabaseUtils extends Service {
 				return Integer.parseInt(s);
 			}
 			return -1;
-		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+		} catch (SQLException e) {
+			Logger.getLogger(this.getClass()).warn("Exception",e);
 			return -1;
 		}	
 	}
@@ -118,7 +115,7 @@ public class DatabaseUtils extends Service {
 		Position position = null;
 		try {
 			Statement stmt = database.conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT `x`, `y`, `z`, `mapId` FROM `characters` WHERE `characters`.`id`="+player.getId()+" AND `mapId` IS NOT NULL AND `x` IS NOT NULL AND `y` IS NOT NULL AND `z` IS NOT NULL");
+			ResultSet rs = stmt.executeQuery("SELECT `x`, `y`, `z`, `mapId` FROM `characters` WHERE `characters`.`id`="+player.getPlayerId()+" AND `mapId` IS NOT NULL AND `x` IS NOT NULL AND `y` IS NOT NULL AND `z` IS NOT NULL");
 			
 			if(rs.next()){
 				Map map = Server.getInstance().getWorld().getMap(rs.getInt("mapId"));
@@ -139,7 +136,8 @@ public class DatabaseUtils extends Service {
 		try {
 			Statement stmt = database.conn.createStatement();
 			Position position = player.getPosition();
-			boolean res = stmt.execute("UPDATE `characters` SET `x`="+position.getX()+", `y`="+position.getY()+", `z`="+position.getZ()+", `mapId`="+position.getMap().getId()+" WHERE `characters`.`id`="+player.getId());
+			if(position!=null&&position.getMap()!=null)
+				stmt.execute("UPDATE `characters` SET `x`="+position.getX()+", `y`="+position.getY()+", `z`="+position.getZ()+", `mapId`="+position.getMap().getId()+" WHERE `characters`.`id`="+player.getPlayerId());
 			
 		} catch (SQLException e) {
 			Logger.getLogger(this.getClass()).error("Exception", e);
@@ -157,7 +155,6 @@ public class DatabaseUtils extends Service {
 			Statement stmt = database.conn.createStatement();
 			
 			ResultSet rs = stmt.executeQuery("SELECT * FROM `characters`,`slots` WHERE `characters`.`accountid`="+accountId+" AND `characters`.`id`=`slots`.`charid` ORDER BY `slot` ASC");
-		
 			while (rs.next()) {
 				
 				int slot = rs.getInt("slot");
@@ -168,9 +165,9 @@ public class DatabaseUtils extends Service {
 						if(cl.equals(client))
 							continue;
 						if(cl.getAccountId()==client.getAccountId()){
-							Player p1 = cl.getPlayer();
+							Player player = cl.getPlayer();
 							
-							if(p1!=null&&p1.getSlot()==slot){								
+							if(player!=null&&player.getSlot()==slot){								
 								
 								alreadyLogged = true;
 							}							
@@ -182,7 +179,6 @@ public class DatabaseUtils extends Service {
 				
 				Equipment eq = loadEquipment(new Equipment(null), rs.getInt("id"));
 		
-
 				/*
 				charlist += "chars_exist " + slot + " "
 				+ rs.getString("name") + " " + rs.getString("race")
@@ -271,7 +267,7 @@ public class DatabaseUtils extends Service {
 				int slotId = rs.getInt("slot");
 				
 				Slot slot = Slot.byValue(slotId);
-				equipment.setItem(slot,ItemFactory.loadItem(rs.getInt("itemid")));
+				equipment.setItem(slot, ItemFactory.loadItem(rs.getInt("itemid")));
 			}
 			
 			
@@ -284,35 +280,10 @@ public class DatabaseUtils extends Service {
 	}
 
 	public void loadEquipment(Player player) {		
-		loadEquipment(player.getEquipment(), player.getId());
+		loadEquipment(player.getEquipment(), player.getPlayerId());
 	}
 	
-	public String createUnique(){
-		return null;
-		
-		
-		
-		/*
-		return "
-		SELECT Rank FROM(SELECT Id,@rownum:=@rownum+1 `rank` FROM (SELECT Id FROM characters
-				UNION
-				SELECT ID FROM items) t,(SELECT @rownum:=0) r) t2
-				WHERE Rank <> Id
-				LIMIT 1
-				UNION
-				SELECT MAX(`Id`)+1
-				FROM (
-				SELECT Id FROM characters
-				UNION
-				SELECT Id FROM items) t3
-				LIMIT 1;
-		";" +
-		*/
-		
-	}
-	
-	
-	public Player loadCharStatus(Client client, int characterId){
+	public Player loadCharStatus(Client client, int charId){
 		Player player = null;
 		if (!checkDatabase())
 			return null;
@@ -321,12 +292,12 @@ public class DatabaseUtils extends Service {
 			stmt = database.conn.createStatement();
 			ResultSet rs = stmt
 			.executeQuery("SELECT C.*,A.level AS userlevel FROM characters AS C, accounts AS A WHERE C.accountid=A.id AND C.id="
-					+ characterId + ";");
+					+ charId + ";");
 			if (rs.next()) {
 				int raceId = rs.getInt("race");
 				Race race = Race.values()[raceId];
 				player = Player.createPlayer(client, race);
-				player.setId(characterId);				
+				player.setPlayerId(charId);				
 				player.setStrength(rs.getInt("strength"));
 				player.setWisdom(rs.getInt("wisdom"));
 				player.setDexterity(rs.getInt("dexterity"));
@@ -344,12 +315,7 @@ public class DatabaseUtils extends Service {
 				player.setGuildLevel(rs.getInt("guildlvl"));
 				player.setAdminState(rs.getInt("userlevel"));
 				player.setHairStyle(rs.getInt("hair"));
-				
-				player.setHp(player.getMaxHp());				
-				player.setStamina(player.getMaxStamina());				
-				player.setMana(player.getMaxMana());				
-				player.setElectricity(player.getMaxElectricity());
-				
+							
 				
 				return player;
 			} else
@@ -372,22 +338,17 @@ public class DatabaseUtils extends Service {
 			
 		try {
 			
-			int charid = player.getId();
+			int charId = player.getPlayerId();
 			Statement stmt = database.conn.createStatement();
 			
-			if(charid!=-1){
-				
-				stmt.execute("DELETE FROM characters WHERE id="+charid+";");
-				
+			if(charId!=-1){				
+				stmt.execute("DELETE FROM characters WHERE id="+charId+";");				
 			}
-			
-			String key = "(SELECT Rank FROM(SELECT Id,@rownum:=@rownum+1 `rank` FROM (SELECT Id FROM characters UNION SELECT `Id` FROM items Order By `Id`) t,(SELECT @rownum:=0) r) t2 WHERE Rank <> Id LIMIT 1 UNION SELECT IF(MAX(`Id`) IS NULL, 1 ,MAX(`Id`)+1) FROM (SELECT Id FROM characters UNION SELECT Id FROM items) t3 LIMIT 1)";
-			
 						
-			String q = "INSERT INTO characters (id,accountid,name,level,strength,wisdom,dexterity,constitution,leadership,race,sex,hair," +
+			String q = "INSERT INTO characters ("+(charId==-1?"":"id,")+"accountid,name,level,strength,wisdom,dexterity,constitution,leadership,race,sex,hair," +
 												  "totalExp,levelUpExp,lime,statusPoints,penaltyPoints," +
 												  "guildid,guildlvl)" +
-						 " VALUES ("+(charid==-1?key:player.getId())+ ","
+						 " VALUES ("+(charId==-1?"":charId+",")+
 								    +client.getAccountId()+ ",'"
 								    +player.getName()+ "',"
 								    +player.getLevel()+ ","
@@ -406,32 +367,25 @@ public class DatabaseUtils extends Service {
 								    +player.getPenaltyPoints()+ ","
 								    +player.getGuildId()+ ","
 								    +player.getGuildLvl()+ ");";
-			System.out.println(q); 
-			stmt.execute(q);
-			if(charid==-1){
-				
-				
-				ResultSet rs = stmt.executeQuery("SELECT Id from characters where name ='"+player.getName()+"'");
-				rs.next();
-				charid = rs.getInt(1);
-				if(charid==-1)
-					throw new Exception("key is -1!");
-				player.setId(charid);
-			}
+			
+			stmt.execute(q,Statement.RETURN_GENERATED_KEYS);
+			
+			ResultSet res = stmt.getGeneratedKeys();
+			if (res.next())
+			    player.setPlayerId(res.getInt(1));			
 			
 			setSavedPosition(player);
-			
 						
-		} catch (Exception e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+		} catch (Exception e) {
+			Logger.getLogger(this.getClass()).warn("Exception",e);
 			return;
-		  }
+		}
 	}
 	
 	public void updateCharStatus(Player player, int id, int value)
 	{
-			if (!checkDatabase())
-			return ;
+		if (!checkDatabase())
+			return;
 
 		String status = "";
 			
@@ -454,7 +408,7 @@ public class DatabaseUtils extends Service {
 		try {
 			stmt  = database.conn.createStatement();
 			
-			stmt.execute("UPDATE characters SET "+status+" = '"+value+"' WHERE id='"+player.getId()+"';");
+			stmt.execute("UPDATE characters SET "+status+" = '"+value+"' WHERE id='"+player.getPlayerId()+"';");
 
 		} 
 		catch (SQLException e) 
@@ -498,9 +452,7 @@ public class DatabaseUtils extends Service {
 			stmt = database.conn.createStatement();			
 								
 			Player player = Player.createPlayer(client, race);
-			
-			player.setId(-1);
-			
+						
 			player.setLevel(1);
 			player.setName(charName);
 			player.setSex(sex);
@@ -521,12 +473,12 @@ public class DatabaseUtils extends Service {
 			client.setPlayer(player);
 		
 			saveCharacter(player);
-			int characterId = player.getId();
+			int charId = player.getPlayerId();
 			
-			Logger.getLogger(DatabaseUtils.class).info(characterId);
+			Logger.getLogger(DatabaseUtils.class).info(charId);
 			
 			stmt.execute("INSERT INTO slots (charid, slot, accountid) VALUES ("
-					+ characterId + ","
+					+ charId + ","
 					+ slot + ","
 					+ client.getAccountId() + "); ");
 			
@@ -613,10 +565,8 @@ public class DatabaseUtils extends Service {
 				Logger.getLogger(DatabaseUtils.class).info("Loaded: " + player.getName());
 			}
 			
-		} catch (SQLException e1) {
-			
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
-			
+		} catch (SQLException e) {
+			Logger.getLogger(this.getClass()).warn("Exception", e);
 		}
 		
 		return player;
@@ -629,13 +579,13 @@ public class DatabaseUtils extends Service {
 		try {
 			invStmt = database.conn.createStatement();
 			
-			ResultSet invTable = invStmt.executeQuery("SELECT * FROM inventory WHERE charid="+player.getId()+";");
+			ResultSet invTable = invStmt.executeQuery("SELECT * FROM inventory WHERE charid="+player.getPlayerId()+";");
 			
 			while (invTable.next()) 
 			{
 				Item item = ItemFactory.loadItem(invTable.getInt("itemid"));
 				if (item!=null)
-				player.getInventory().addItem(invTable.getInt("x"), invTable.getInt("y"), item,invTable.getInt("tab"));
+					player.getInventory().addItem(invTable.getInt("x"), invTable.getInt("y"), item,invTable.getInt("tab"));
 			}
 			
 		} catch (SQLException e1) {
@@ -662,7 +612,7 @@ public class DatabaseUtils extends Service {
 		Statement stmt;
 		try {
 			stmt = database.conn.createStatement();
-			stmt.execute("DELETE FROM inventory WHERE charid="+player.getId()+";");
+			stmt.execute("DELETE FROM inventory WHERE charid="+player.getPlayerId()+";");
 		
 			String query = "INSERT INTO inventory (charid, itemid, tab, x, y) VALUES ";
 			String data = "";
@@ -674,8 +624,8 @@ public class DatabaseUtils extends Service {
 				InventoryItem invItem = iter.next();
 				Item item = invItem.getItem();
 				saveItem(item);
-				/*
 				
+				/*
 				PreparedStatement statement = saveInventory.getInsertStatement();
 				statement.setInt(1,player.getEntityId());
 				statement.setInt(2,item.getEntityId());
@@ -685,7 +635,7 @@ public class DatabaseUtils extends Service {
 				statement.addBatch();				
 				*/
 				
-				data+="("+player.getId()+ ",'"+item.getId()+"',"+invItem.getTab()+
+				data+="("+player.getPlayerId()+ ",'"+item.getItemId()+"',"+invItem.getTab()+
 					","+invItem.getX()+ ","+invItem.getY()+ ")";			
 				if(iter.hasNext())
 					data+= ", ";			
@@ -769,8 +719,6 @@ public class DatabaseUtils extends Service {
 		if (itemId==-1)return null;
 		if (!checkDatabase())return null;
 		
-		
-		
 		Statement stmt;
 		try {
 			stmt  = database.conn.createStatement();
@@ -778,8 +726,7 @@ public class DatabaseUtils extends Service {
 			ResultSet rs = stmt.executeQuery("SELECT * FROM items WHERE id='"+itemId+"';");
 			
 			if (rs.next())
-			{
-				
+			{				
 				int type = rs.getInt("type");
 				ParsedItem parseditem = Reference.getInstance().getItemReference()
 				.getItemById(type);
@@ -794,7 +741,7 @@ public class DatabaseUtils extends Service {
 				Item item = (Item)ClassFactory.create(className, type);
 				if(item==null)
 					return null;
-				item.setId(itemId);
+				item.setItemId(itemId);
 				
 				item.setGemNumber(rs.getInt("gemnumber"));
 				item.setExtraStats(rs.getInt("extrastats"));
@@ -816,9 +763,8 @@ public class DatabaseUtils extends Service {
 			return false ;
 		Statement stmt;
 		try {
-			
 			stmt  = database.conn.createStatement();		
-			return stmt.execute("DELETE FROM `roaming` WHERE `itemid`="+item.getId()+";");
+			return stmt.execute("DELETE FROM `roaming` WHERE `itemid`="+item.getItemId()+";");
 			
 		}catch (Exception e) {
 			Logger.getLogger(this.getClass()).warn("Exception",e);
@@ -868,7 +814,9 @@ public class DatabaseUtils extends Service {
 		Position position = roamingItem.getPosition();
 		saveItem(item);
 		
-		int itemId = item.getId();
+		
+		
+		int itemId = item.getItemId();
 		Statement stmt;
 		try {
 				
@@ -881,7 +829,7 @@ public class DatabaseUtils extends Service {
 			position.getX()+","+
 			position.getY()+","+
 			position.getZ()+","+
-			position.getRotation()+");";
+			(!Double.isNaN(position.getRotation())?position.getRotation():0)+");";
 			stmt.execute(q);
 		
 		} 
@@ -898,36 +846,28 @@ public class DatabaseUtils extends Service {
 		try {
 			stmt  = database.conn.createStatement();
 			
-			int itemId = item.getId();
+			int itemId = item.getItemId();
 			if(itemId!=-1){
 				
 				int res = stmt.executeUpdate("UPDATE `items` SET `type`="+item.getType()+", `gemnumber`="+item.getGemNumber()+", `extrastats`="+item.getExtraStats()+" WHERE `Id` = "+itemId);
 				if(res==0){
 					Logger.getLogger(DatabaseUtils.class).error("item not found: "+itemId);					
 				}
-				return;
+			} else {
+				stmt.execute("INSERT INTO items (type, gemnumber, extrastats)" +
+						" VALUES ("+item.getType()+","
+						+item.getGemNumber()+","+item.getExtraStats()+");",Statement.RETURN_GENERATED_KEYS);
+				
+				ResultSet res = stmt.getGeneratedKeys();
+				if (res.next())
+					item.setItemId(res.getInt(1));
 			}
-			
-			//stmt.execute("LOCK TABLES characters WRITE, items WRITE;");
-			ResultSet rs = stmt.executeQuery("SELECT Rank FROM(SELECT `Id`,@rownum:=@rownum+1 `rank` FROM (SELECT `Id` FROM characters UNION SELECT `Id` FROM items Order By `Id`) t,(SELECT @rownum:=0) r) t2 WHERE Rank <> Id LIMIT 1 UNION SELECT IF(MAX(`Id`) IS NULL, 1 ,MAX(`Id`)+1) FROM (SELECT `Id` FROM characters UNION SELECT `Id` FROM items) t3 LIMIT 1");
-			rs.next();
-			itemId = rs.getInt(1);
-			System.out.println("itemId: "+itemId);
-			
-			stmt.execute("INSERT INTO items (id, type, gemnumber, extrastats)" +
-					" VALUES ("+itemId+","+item.getType()+","
-					+item.getGemNumber()+","+item.getExtraStats()+");");
-			
-			item.setId(itemId);
-			
-			
-			//stmt.execute("UNLOCK TABLES");
+
 			
 		} 
 		catch (Exception e) {
 			Logger.getLogger(this.getClass()).warn("Exception",e);
 		}
-		
 		
 	}
 	
@@ -941,7 +881,7 @@ public class DatabaseUtils extends Service {
 		try {
 			stmt  = database.conn.createStatement();
 			
-			stmt.execute("DELETE FROM items WHERE id='"+item.getId()+"';");
+			stmt.execute("DELETE FROM items WHERE id='"+item.getItemId()+"';");
 				
 		} 
 		catch (SQLException e) 
@@ -961,7 +901,7 @@ public class DatabaseUtils extends Service {
 		
 		try {
 			stmt = database.conn.createStatement();
-			int playerId = player.getId();
+			int playerId = player.getPlayerId();
 			stmt.execute("DELETE FROM `skills` WHERE `charid`="+playerId+";");
 
 			String query = "INSERT INTO `skills` (`charid`, `id`, `level`) VALUES ";
@@ -992,7 +932,7 @@ public class DatabaseUtils extends Service {
 		Statement stmt;
 		try {
 			stmt = database.conn.createStatement();
-			ResultSet rs = stmt.executeQuery("SELECT id,level FROM skills WHERE charid="+player.getId()+";");			
+			ResultSet rs = stmt.executeQuery("SELECT id,level FROM skills WHERE charid="+player.getPlayerId()+";");			
 			while (rs.next()) {
 				int id = rs.getInt("id");
 				int level = rs.getInt("level");
@@ -1016,19 +956,19 @@ public class DatabaseUtils extends Service {
 		Statement stmt;
 		try {
 			stmt = database.conn.createStatement();
-			stmt.execute("DELETE FROM equipment WHERE charid="+player.getId()+";");
+			stmt.execute("DELETE FROM equipment WHERE charid="+player.getPlayerId()+";");
 			Equipment eq = player.getEquipment();
 			
 			String query = "INSERT INTO equipment (charid, slot, itemid) VALUES ";
 			String data = "";
-			int playerId = player.getId();
+			int playerId = player.getPlayerId();
 			for(Slot slot: Slot.values())
 			{
 				Item item = eq.getItem(slot);
 				if(item!=null){
 					if(!data.isEmpty())
 						data+= ", ";
-					data+="("+playerId+","+slot.value()+","+item.getId()+")";		
+					data+="("+playerId+","+slot.value()+","+item.getItemId()+")";		
 				}
 			}							
 			if(!data.isEmpty())
@@ -1091,7 +1031,7 @@ public class DatabaseUtils extends Service {
 				stmt.execute("INSERT INTO stash (accountid, pos, itemid)" +
 						" VALUES ("+client.getAccountId()+ ","
 						+stashItem.getPos()+ ","
-						+stashItem.getItem().getId()+ ");");
+						+stashItem.getItem().getItemId()+ ");");
 			}
 			
 		} catch (SQLException e1) {
@@ -1108,7 +1048,7 @@ public class DatabaseUtils extends Service {
 		try {
 			Statement invStmt = database.conn.createStatement();
 			
-			ResultSet exchangeTable = invStmt.executeQuery("SELECT * FROM exchange WHERE charid="+player.getId()+";");
+			ResultSet exchangeTable = invStmt.executeQuery("SELECT * FROM exchange WHERE charid="+player.getPlayerId()+";");
 						
 			while (exchangeTable.next()) 
 			{
@@ -1132,7 +1072,7 @@ public class DatabaseUtils extends Service {
 		
 		try {
 			Statement stmt = database.conn.createStatement();
-			stmt.execute("DELETE FROM exchange WHERE charid="+player.getId()+";");
+			stmt.execute("DELETE FROM exchange WHERE charid="+player.getPlayerId()+";");
 			
 			Iterator<ExchangeItem> exchangeIter = player.getExchange().itemListIterator();
 			
@@ -1141,16 +1081,16 @@ public class DatabaseUtils extends Service {
 				ExchangeItem exchangeItem = exchangeIter.next();
 				
 				stmt.execute("INSERT INTO exchange (charid, itemid, x, y)" +
-						" VALUES ("+player.getId()+ ","
-								   +exchangeItem.getItem().getId()+","
+						" VALUES ("+player.getPlayerId()+ ","
+								   +exchangeItem.getItem().getItemId()+","
 								   +exchangeItem.getX()+","
 								   +exchangeItem.getY()+");");
 			}
 			
-		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+		} catch (SQLException e) {
+			Logger.getLogger(this.getClass()).warn("Exception", e);
 			return;
-		  }
+		}
 	}
 	
 	public void deleteGuild(int id)
@@ -1180,18 +1120,17 @@ public class DatabaseUtils extends Service {
 		try {
 			Statement invStmt = database.conn.createStatement();
 			
-			ResultSet quickSlotTable = invStmt.executeQuery("SELECT * FROM quickslot WHERE charid="+player.getId()+";");
+			ResultSet quickSlotTable = invStmt.executeQuery("SELECT * FROM quickslot WHERE charid="+player.getPlayerId()+";");
 						
 			while (quickSlotTable.next()) 
 			{
 				Item item = ItemFactory.loadItem(quickSlotTable.getInt("itemid"));
 				QuickSlotItem quickSlotItem = new QuickSlotItem(item,quickSlotTable.getInt("slot"));
-				
 				player.getQuickSlot().addItem(quickSlotItem);
 			}
 			
-		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+		} catch (SQLException e) {
+			Logger.getLogger(this.getClass()).warn("Exception", e);
 			return;
 		}
 	}
@@ -1203,7 +1142,7 @@ public class DatabaseUtils extends Service {
 		
 		try {
 			Statement stmt = database.conn.createStatement();
-			stmt.execute("DELETE FROM quickslot WHERE charid="+player.getId()+";");
+			stmt.execute("DELETE FROM quickslot WHERE charid="+player.getPlayerId()+";");
 			
 			Iterator<QuickSlotItem> qsIter = player.getQuickSlot().getQuickSlotIterator();
 			
@@ -1212,7 +1151,7 @@ public class DatabaseUtils extends Service {
 				QuickSlotItem qsItem = qsIter.next();
 				
 				stmt.execute("INSERT INTO quickslot (charid, itemid, slot)" +
-						" VALUES ("+player.getId()+ ","+qsItem.getItem().getId()+","
+						" VALUES ("+player.getPlayerId()+ ","+qsItem.getItem().getItemId()+","
 						+qsItem.getSlot()+");");
 			}
 			
@@ -1221,7 +1160,5 @@ public class DatabaseUtils extends Service {
 			return;
 		  }
 	}
-	
-	
 	
 }

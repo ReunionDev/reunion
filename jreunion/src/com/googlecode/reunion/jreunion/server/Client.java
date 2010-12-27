@@ -197,9 +197,9 @@ public class Client extends EventDispatcher implements EventListener,Sendable {
 		GOT_PASSWORD,
 		GOT_AUTH,	
 		CHAR_LIST,	
-		CHAR_SELECTED,		
+		LOADING,		
 		PORTING,
-		LOADING,
+		LOADED,
 		INGAME;
 	}
 	

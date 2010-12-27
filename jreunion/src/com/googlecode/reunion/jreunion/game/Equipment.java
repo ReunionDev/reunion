@@ -86,9 +86,9 @@ public class Equipment {
 		return item == null ? -1 : item.getType();
 	}
 	
-	public int getId(Slot slot){
+	public int getEntityId(Slot slot){
 		Item item = getItem(slot); 
-		return item == null ? -1 : item.getId();
+		return item == null ? -1 : item.getEntityId();
 	}
 	
 	public int getExtraStats(Slot slot){
@@ -104,7 +104,6 @@ public class Equipment {
 	public Item getItem(Slot slot) {
 
 		switch (slot) {
-
 		case BRACELET:
 			return getBracelet();
 		case BOOTS:

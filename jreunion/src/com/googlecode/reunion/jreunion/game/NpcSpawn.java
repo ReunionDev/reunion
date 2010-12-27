@@ -57,6 +57,7 @@ public class NpcSpawn extends Spawn
 		LocalMap map = getPosition().getLocalMap();
 		
 		Npc npc = null;
+		/*
 		switch(getType()){
 		case MOB:
 			npc = map.getWorld().getMobManager().createMob(getNpcType());				
@@ -66,6 +67,11 @@ public class NpcSpawn extends Spawn
 			npc = map.getWorld().getNpcManager().createNpc(getNpcType());
 			break;
 		}
+		*/
+		npc = map.createNpc(getNpcType());
+		
+		
+		
 		
 		if(npc==null)
 			return null;

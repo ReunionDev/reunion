@@ -44,15 +44,11 @@ import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
  */
 public class PacketParser extends EventDispatcher implements EventListener{
 
-
-
 	private MessageParser messageParser;
 
 	public PacketParser() {
 		super();
 		messageParser = new MessageParser();
-		
-		
 	}
 
 	private void HandleMessage(Client client, String message[]) {
@@ -211,7 +207,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 	
 					com.sendCharList(client);
 				} else if (message[0].equals("start")) {
-					client.setState(Client.State.CHAR_SELECTED);
+					client.setState(Client.State.LOADING);
 					int slot = Integer.parseInt(message[1]);
 					player = com.loginChar(slot, client.getAccountId(),	client);
 					if(player==null){
@@ -222,7 +218,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 				break;
 			}
 			
-			case CHAR_SELECTED: {
+			case LOADING: {
 				if (message[0].equals("start_game")) {
 					
 					Map map = null;
@@ -262,9 +258,17 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					}
 
 					player.getPosition().setMap((LocalMap)map);
-					
-					//--			
+										
 					world.getPlayerManager().addPlayer(player);
+					
+					
+					DatabaseUtils.getInstance().loadStash(client);
+					DatabaseUtils.getInstance().loadQuickSlot(player);
+					DatabaseUtils.getInstance().loadInventory(player);
+					DatabaseUtils.getInstance().loadExchange(player);
+					player.loadInventory();
+					player.loadExchange();
+					player.loadQuickSlot();
 					
 					
 					System.out.println(savedPosition);
@@ -308,7 +312,15 @@ public class PacketParser extends EventDispatcher implements EventListener{
 	
 					world.getTeleportManager().remove(player);
 					*/
-					client.setState(Client.State.LOADING);				
+
+					client.setState(Client.State.LOADED);
+					
+					player.setHp(player.getMaxHp());				
+					player.setStamina(player.getMaxStamina());				
+					player.setMana(player.getMaxMana());				
+					player.setElectricity(player.getMaxElectricity());
+					
+					
 				}
 				break;
 			}
@@ -520,11 +532,17 @@ public class PacketParser extends EventDispatcher implements EventListener{
 						}
 					}
 				} else if (message[0].equals("stash_open")) {
+					
+					/*
+					LocalMap map = player.getPosition().getLocalMap();
+					map.getEntity(id)
 					Npc[] npc = world
 							.getNpcManager().getNpcList(139);
 					Warehouse warehouse = (Warehouse) npc[0];
 					warehouse.openStash(client.getPlayer());
+					*/
 				} else if (message[0].equals("stash_click")) {
+					/*
 					Npc[] npc = world
 							.getNpcManager().getNpcList(139);
 					Warehouse warehouse = (Warehouse) npc[0];
@@ -542,6 +560,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 								Integer.parseInt(message[2]),
 								Integer.parseInt(message[3]), 0);
 					}
+					*/
 				} else if (message[0].equals("shop")) {
 					int npcId = Integer.parseInt(message[1]);
 					Merchant npc = (Merchant) player.getPosition().getLocalMap().getEntity(npcId);
@@ -569,7 +588,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					
 				} else if (message[0].equals("chip_exchange")) {
 					Npc[] npc;
-	
+					/*
 					if (Integer.parseInt(message[1]) == 0) {
 						npc = world
 								.getNpcManager().getNpcList(166);
@@ -586,10 +605,12 @@ public class PacketParser extends EventDispatcher implements EventListener{
 								Integer.parseInt(message[2]),
 								Integer.parseInt(message[3]));
 					}
+					*/
 				} else if (message[0].equals("exch")) {
 					client.getPlayer().itemExchange(Integer.parseInt(message[2]),
 							Integer.parseInt(message[3]));
 				} else if (message[0].equals("ichange")) {
+					/*
 					Npc[] npc = world
 							.getNpcManager().getNpcList(117);
 					Trader trader = (Trader) npc[0];
@@ -600,6 +621,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 						trader.exchangeArmor(client.getPlayer(),
 								Integer.parseInt(message[1]));
 					}
+					*/
 				}
 	
 				break;

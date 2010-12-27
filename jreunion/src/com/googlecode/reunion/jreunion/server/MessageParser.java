@@ -134,9 +134,8 @@ public class MessageParser {
 						client.sendData(packetData);
 					}
 				} else if (words.length == 6) {
-					Mob mob = Server.getInstance().getWorld()
-							.getMobManager()
-							.createMob(Integer.parseInt(words[1]));
+					LocalMap map = player.getPosition().getLocalMap();
+					Mob mob = (Mob)map.createNpc(Integer.parseInt(words[1]));
 					mob.getPosition().setX(player.getPosition().getX() + 10);
 					mob.getPosition().setY(player.getPosition().getY() + 10);
 					mob.setIsRunning(true);
@@ -144,8 +143,7 @@ public class MessageParser {
 					mob.setUnknown1(Integer.parseInt(words[3]));
 					mob.setNeoProgmare(Integer.parseInt(words[4]));
 					mob.setUnknown2(Integer.parseInt(words[5]));
-					Server.getInstance().getWorld().getMobManager()
-							.addMob(mob);
+					//Server.getInstance().getWorld().getMobManager().addMob(mob);
 				}
 			} else if (words[0].equals("@addnpc")) {
 				try {

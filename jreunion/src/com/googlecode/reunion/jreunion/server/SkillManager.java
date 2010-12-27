@@ -185,7 +185,6 @@ public class SkillManager {
 		Race race = player.getRace();
 		synchronized(player){
 			player.getSkills().clear();
-			
 			for(Skill skill : defaultSkills.get(race)){
 				player.getSkills().put(skill, 0);
 	

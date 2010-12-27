@@ -82,7 +82,6 @@ public class Spawn {
 			rotation = Server.getRand().nextDouble() * Math.PI * 2;
 		
 		return new Position(posX, posY, position.getZ(), map, rotation);
-		
 	}
 
 	protected Position spawn(LivingObject entity) {
@@ -92,10 +91,10 @@ public class Spawn {
 			position = generatePosition();
 		entity.setPosition(position);
 		LocalMap map = position.getLocalMap();
+		if(map.getEntity(entity.getEntityId())!=entity)
+			map.createEntityId(entity);
 		map.fireEvent(SpawnEvent.class, entity);
 		return position;
 		
 	}
-
-
 }

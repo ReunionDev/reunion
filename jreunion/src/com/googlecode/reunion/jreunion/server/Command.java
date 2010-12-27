@@ -104,13 +104,11 @@ public class Command {
 			DatabaseUtils.getInstance().createChar(client, slotNumber,
 					charName, race, sex, hair, str, intel, dex, con, lea);
 		}
-
 	}
 
 	public void delChar(int slotNumber, int accountId) {
 		DatabaseUtils.getInstance().delChar(slotNumber, accountId);
 	}
-
 	
 	public RoamingItem dropItem(Position position, Item item) {
 
@@ -120,6 +118,8 @@ public class Command {
 		DatabaseUtils.getInstance().saveItem(roamingItem);
 		
 		LocalMap map = position.getLocalMap();
+		if(item.getItemId()==-1)
+			map.createEntityId(item);
 		
 		map.fireEvent(ItemDropEvent.class, roamingItem);
 		
@@ -180,21 +180,14 @@ public class Command {
 		Player player = DatabaseUtils.getInstance().loadChar(slotNumber,
 				accountId, client);
 		
-		Socket socket = client.getSocketChannel().socket();
-	
-		
-
 		DatabaseUtils.getInstance().loadEquipment(player);
 		Equipment eq = player.getEquipment();
 		
 		world.getSkillManager().loadSkills(player);
 		DatabaseUtils.getInstance().loadSkills(player);
-		DatabaseUtils.getInstance().loadInventory(player);
-		DatabaseUtils.getInstance().loadExchange(player);
-		DatabaseUtils.getInstance().loadStash(client);
-		DatabaseUtils.getInstance().loadQuickSlot(player);
+		
 
-		serverSay(player.getName() + " is logging in (ID: "	+ player.getId() + ")\n");
+		serverSay(player.getName() + " is logging in (ID: "	+ player.getPlayerId() + ")\n");
 
 		client.sendPacket(Type.SKILLLEVEL_ALL,player);
 		String packetData = "";
@@ -206,35 +199,37 @@ public class Command {
 		
 		client.sendPacket(Type.A_, "lev", player.getAdminState());
 
-		packetData = "wearing " + eq.getId(Slot.HELMET) + " " + eq.getType(Slot.HELMET) + " "
-				+ eq.getGemNumber(Slot.HELMET) + " " + eq.getExtraStats(Slot.HELMET) + " " + eq.getId(Slot.CHEST) + " "
+		packetData = "wearing " + eq.getEntityId(Slot.HELMET) + " " + eq.getType(Slot.HELMET) + " "
+				+ eq.getGemNumber(Slot.HELMET) + " " + eq.getExtraStats(Slot.HELMET) + " " + eq.getEntityId(Slot.CHEST) + " "
 				+ eq.getType(Slot.CHEST) + " " + eq.getGemNumber(Slot.CHEST) + " " + eq.getExtraStats(Slot.CHEST) + " "
-				+ eq.getId(Slot.PANTS) + " " + eq.getType(Slot.PANTS) + " " + eq.getGemNumber(Slot.PANTS) + " "
-				+ eq.getExtraStats(Slot.PANTS) + " " + eq.getId(Slot.SHOULDER) + " "
+				+ eq.getEntityId(Slot.PANTS) + " " + eq.getType(Slot.PANTS) + " " + eq.getGemNumber(Slot.PANTS) + " "
+				+ eq.getExtraStats(Slot.PANTS) + " " + eq.getEntityId(Slot.SHOULDER) + " "
 				+ eq.getType(Slot.SHOULDER) + " " + eq.getGemNumber(Slot.SHOULDER) + " "
-				+ eq.getExtraStats(Slot.SHOULDER) + " " + eq.getId(Slot.BOOTS) + " " + eq.getType(Slot.BOOTS)
-				+ " " + eq.getGemNumber(Slot.BOOTS) + " " + eq.getExtraStats(Slot.BOOTS) + " " + eq.getId(Slot.OFFHAND)
+				+ eq.getExtraStats(Slot.SHOULDER) + " " + eq.getEntityId(Slot.BOOTS) + " " + eq.getType(Slot.BOOTS)
+				+ " " + eq.getGemNumber(Slot.BOOTS) + " " + eq.getExtraStats(Slot.BOOTS) + " " + eq.getEntityId(Slot.OFFHAND)
 				+ " " + eq.getType(Slot.OFFHAND) + " " + eq.getGemNumber(Slot.OFFHAND) + " " + eq.getExtraStats(Slot.OFFHAND)
-				+ " " + eq.getId(Slot.NECKLACE) + " " + eq.getType(Slot.NECKLACE) + " "
-				+ eq.getGemNumber(Slot.NECKLACE) + " " + eq.getExtraStats(Slot.NECKLACE) + " " + eq.getId(Slot.BRACELET)
+				+ " " + eq.getEntityId(Slot.NECKLACE) + " " + eq.getType(Slot.NECKLACE) + " "
+				+ eq.getGemNumber(Slot.NECKLACE) + " " + eq.getExtraStats(Slot.NECKLACE) + " " + eq.getEntityId(Slot.BRACELET)
 				+ " " + eq.getType(Slot.BRACELET) + " " + eq.getGemNumber(Slot.BRACELET) + " "
-				+ eq.getExtraStats(Slot.BRACELET) + " " + eq.getId(Slot.RING) + " " + eq.getType(Slot.RING) + " "
-				+ eq.getGemNumber(Slot.RING) + " " + eq.getExtraStats(Slot.RING) + " " + eq.getId(Slot.MAINHAND) + " "
+				+ eq.getExtraStats(Slot.BRACELET) + " " + eq.getEntityId(Slot.RING) + " " + eq.getType(Slot.RING) + " "
+				+ eq.getGemNumber(Slot.RING) + " " + eq.getExtraStats(Slot.RING) + " " + eq.getEntityId(Slot.MAINHAND) + " "
 				+ eq.getType(Slot.MAINHAND) + " " + eq.getGemNumber(Slot.MAINHAND) + " " + eq.getExtraStats(Slot.MAINHAND);
 		// wearing [Helm] [Armor] [Pants] [ShoulderMount] [Boots] [Shield]
 		// [Necklace] [Bracelet] [Ring] [Weapon]
 		client.sendData(packetData);
 
-		player.loadInventory();
-		player.loadExchange();
-		player.loadQuickSlot();
+		
+		
+	
 		
 		
 		player.sendStatus(Status.TOTALEXP);					
 		player.sendStatus(Status.LEVELUPEXP);					
 		player.sendStatus(Status.STATUSPOINTS);					
 		player.sendStatus(Status.LIME);
-		player.sendStatus(Status.PENALTYPOINTS);		
+		player.sendStatus(Status.PENALTYPOINTS);
+		
+		
 
 		client.sendPacket(PacketFactory.Type.OK);
 
@@ -466,6 +461,7 @@ public class Command {
 			
 			((Usable)item).use(player);
 			
+			player.getPosition().getLocalMap().removeEntity(item);			
 			DatabaseUtils.getInstance().deleteItem(item);
 			
 		}

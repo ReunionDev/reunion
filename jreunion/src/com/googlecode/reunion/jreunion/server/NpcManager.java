@@ -34,18 +34,17 @@ public class NpcManager {
 	}
 
 	public Npc createNpc(int type) {
-		ParsedItem parsednpc = Reference.getInstance().getNpcReference()
-				.getItemById(type);
-		if (parsednpc == null) {
+		ParsedItem parsedNpc = Reference.getInstance().getNpcReference().getItemById(type);
+		if (parsedNpc == null) {
 			return null;
 		}
-		String className = "com.googlecode.reunion.jreunion.game." + parsednpc.getMemberValue("Class");		
+		String className = "com.googlecode.reunion.jreunion.game." + parsedNpc.getMemberValue("Class");		
 		
 		Npc npc = (Npc)ClassFactory.create(className, type);
 		if(npc==null)
 			return null;
 		
-		npc.setId(++npcIdCounter);
+		npc.setEntityId(++npcIdCounter);
 		addNpc(npc);
 
 		return npc;
@@ -58,19 +57,12 @@ public class NpcManager {
 		while (iter.hasNext()) {
 			Npc npc = iter.next();
 
-			if (npc.getId() == uniqueId) {
+			if (npc.getEntityId() == uniqueId) {
 				return npc;
 			}
 		}
 		return null;
 	}
-
-	/*
-	 * public G_Npc createNpc(int type) { G_Npc npc = new G_Npc(type);
-	 * G_EntityManager.getEntityManager().createEntity(npc); addNpc(npc);
-	 * 
-	 * return npc; }
-	 */
 
 	public Npc[] getNpcList(int type) {
 		Npc[] newNpcList = new Npc[10];

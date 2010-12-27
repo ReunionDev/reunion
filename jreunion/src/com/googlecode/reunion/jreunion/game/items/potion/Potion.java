@@ -44,7 +44,7 @@ public abstract class Potion extends Etc implements Usable {
 			Player player = (Player)user;
 			@Override
 			public void run() {
-				System.out.println(System.currentTimeMillis()-start);
+				
 				int effect = getEffect()/Potion.ticks;
 				
 				effect(player, Math.min(left, effect));
@@ -62,9 +62,7 @@ public abstract class Potion extends Etc implements Usable {
 	public void loadFromReference(int id) {
 		super.loadFromReference(id);
 		
-		
-		ParsedItem item = Reference.getInstance().getItemReference()
-		.getItemById(id);
+		ParsedItem item = Reference.getInstance().getItemReference().getItemById(id);
 		
 		this.setEffect(Integer.parseInt(item.getMemberValue("Effect")));		
 	}

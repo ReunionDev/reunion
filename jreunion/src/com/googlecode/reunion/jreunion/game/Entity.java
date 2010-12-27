@@ -6,8 +6,7 @@ package com.googlecode.reunion.jreunion.game;
  */
 public interface Entity  {
 
-	public int getId();
-
-	public void setId(int id);
+	public int getEntityId();
+	public void setEntityId(int id);
 
 }
