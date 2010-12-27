@@ -30,7 +30,7 @@ CREATE TABLE `accounts` (
 DROP TABLE IF EXISTS `characters`;
 
 CREATE TABLE `characters` (
-  `id` int(11) unsigned NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `accountid` int(11) DEFAULT NULL,
   `name` varchar(32) DEFAULT NULL,
   `level` int(11) DEFAULT NULL,
@@ -98,7 +98,7 @@ CREATE TABLE `inventory` (
 DROP TABLE IF EXISTS `items`;
 
 CREATE TABLE `items` (
-  `id` int(11) unsigned NOT NULL,
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `type` int(11) DEFAULT NULL,
   `gemnumber` int(11) DEFAULT NULL,
   `extrastats` int(11) DEFAULT NULL,
