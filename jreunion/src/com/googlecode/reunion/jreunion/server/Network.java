@@ -185,7 +185,10 @@ public class Network extends Service implements Runnable, EventListener{
 
 		Client client = Server.getInstance().getWorld().getClients().get(socketChannel);
 		
-		if(!socketChannel.isOpen()||!socketChannel.isConnected()||client == null){
+		if(client == null)
+			return false;
+		
+		if(!socketChannel.isOpen()||!socketChannel.isConnected()){
 			disconnect(socketChannel);
 			return false;
 		}
