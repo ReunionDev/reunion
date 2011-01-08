@@ -461,8 +461,15 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					if(message.length == 2) {
 						target = player;
 					} else {
-						int entityId = Integer.parseInt(message[2]);
-						target = (LivingObject) player.getPosition().getLocalMap().getEntity(entityId);
+						if(message[2].equals("npc"))
+						{
+							int entityId = Integer.parseInt(message[3]);
+							target = (LivingObject) player.getPosition().getLocalMap().getEntity(entityId);
+						}else
+						{
+							int entityId = Integer.parseInt(message[2]); //TODO: is 2 used?... no idea
+							target = (LivingObject) player.getPosition().getLocalMap().getEntity(entityId);
+						}
 					}
 					Skill skill = player.getSkill(skillId);
 					if(Castable.class.isInstance(skill))
@@ -470,7 +477,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 						if(((Castable)skill).cast(player, target))
 							if(Effectable.class.isInstance(skill))
 								skill.effect(player, target);
-					} else{						
+					} else{
 						throw new RuntimeException(skill+" is not Castable");
 					}
 					
