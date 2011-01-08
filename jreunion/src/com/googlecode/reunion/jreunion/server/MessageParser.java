@@ -41,9 +41,17 @@ public class MessageParser {
 
 		if (userlvl > -1) {
 			
-			if (words[0].equals("@level")) {
-				
-				player.setLevelUpExp(0);
+			if (words[0].equals("@levelup")) {
+				if (words.length > 1) {
+					int count=1;
+					while(count <= Integer.parseInt(words[1]))
+					{
+						player.setLevelUpExp(0);
+						count++;
+					}
+				}
+				else
+					player.setLevelUpExp(0);
 				
 			}else if (words[0].equals("@testcol")) {
 				Player p = player;
