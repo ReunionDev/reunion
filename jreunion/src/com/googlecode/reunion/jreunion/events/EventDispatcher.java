@@ -98,11 +98,13 @@ public class EventDispatcher{
 				this.listeners = null;
 			}
 		}		
-	}	
+	}
 	
-	protected int fireEvent(final Event event){
+	
+	
+	private List<Entry<EventListener,Filter>> findEntries(Event event){
 		Map<Class<? extends Event>,Map<EventListener,Filter>> listeners = this.getListeners();
-		int counter =0;		
+			
 		List<Entry<EventListener,Filter>> entries = new LinkedList<Entry<EventListener,Filter>>();		
 		synchronized(listeners){
 			for(Class<? extends Event> c :listeners.keySet()){
@@ -113,6 +115,28 @@ public class EventDispatcher{
 				}
 			}		
 		}
+		return entries;
+	}
+	
+	protected int fireEvent(Event event) {
+		List<Entry<EventListener,Filter>> entries = findEntries(event);
+		int counter =0;	
+		for(Entry<EventListener,Filter> entry: entries){
+			counter++;
+			try{
+				EventListener listener = entry.getKey();
+				Filter filter = entry.getValue();
+				if(filter==null || filter.filter(event))
+					listener.handleEvent(event);
+			}catch(Exception e){
+				Logger.getLogger(this.getClass()).error("Exception",e);
+			}
+		}
+		return counter;
+	}
+	protected int fireEventAsync(final Event event) {
+		List<Entry<EventListener,Filter>> entries = findEntries(event);
+		int counter =0;	
 		for(final Entry<EventListener,Filter> entry: entries){
 			counter++;
 			tpe.submit(
