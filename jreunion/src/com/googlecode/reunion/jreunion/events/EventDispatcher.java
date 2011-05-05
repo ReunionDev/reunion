@@ -22,7 +22,6 @@ public class EventDispatcher{
 		
 		@Override
 		public Thread newThread(Runnable r) {
-			
 			Thread thread = Executors.defaultThreadFactory().newThread(r);
 			System.out.println("Thread created: "+thread);
 			return thread;

@@ -227,7 +227,8 @@ public class Network extends Service implements Runnable, EventListener{
 		try {
 			synchronized(this){ // we synchronize this to make sure we register the key before the selector gets back to sleep again.
 				if(socketChannel.isOpen()&&selector.isOpen()){
-					selector.wakeup();					
+					selector.wakeup();
+					
 					socketChannel.register(selector, SelectionKey.OP_READ | SelectionKey.OP_WRITE);
 				}
 			}
