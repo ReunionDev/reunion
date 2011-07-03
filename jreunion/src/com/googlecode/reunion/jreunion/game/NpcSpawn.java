@@ -78,6 +78,7 @@ public class NpcSpawn extends Spawn
 		npc.setSpawn(this);
 		
 		Position position = super.spawn(npc);
+		
 		npc.loadFromReference(getNpcType());
 		return position;
 		

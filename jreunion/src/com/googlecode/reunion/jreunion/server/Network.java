@@ -6,6 +6,7 @@ import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.ByteBuffer;
+import java.nio.channels.CancelledKeyException;
 import java.nio.channels.ClosedChannelException;
 import java.nio.channels.ClosedSelectorException;
 import java.nio.channels.SelectableChannel;
@@ -233,8 +234,15 @@ public class Network extends Service implements Runnable, EventListener{
 				}
 			}
 		} catch (ClosedChannelException e) {
-			Logger.getLogger(this.getClass()).warn("Exception",e);
-		}		
+			//Disconnect detected
+		}catch(CancelledKeyException e){
+			
+		
+		}catch(Exception e){
+			
+			Logger.getLogger(this.getClass()).error("Exception",e);
+			
+		}
 	}
 
 	public void start() {

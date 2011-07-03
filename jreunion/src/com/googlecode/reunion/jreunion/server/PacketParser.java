@@ -217,7 +217,6 @@ public class PacketParser extends EventDispatcher implements EventListener{
 				}
 				break;
 			}
-			
 			case LOADING: {
 				if (message[0].equals("start_game")) {
 					
@@ -322,6 +321,12 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					
 					
 				}
+				break;
+			}
+			case LOADED: {
+				Logger.getLogger(PacketParser.class).info("Received" +message[0]+" while loaded state");
+				
+				
 				break;
 			}
 			case INGAME: {
@@ -634,7 +639,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 				break;
 			}
 			default: {
-				Logger.getLogger(PacketParser.class).info("State Conflict");
+				Logger.getLogger(PacketParser.class).info("State Conflict: "+client.getState());
 				client.setState(Client.State.DISCONNECTED);
 			}
 			}

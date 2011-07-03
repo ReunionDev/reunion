@@ -42,7 +42,9 @@ public class Spawn {
 	}
 
 	public void setPosition(Position position) {
+		
 		this.position = position;
+		
 	}
 
 	/**
@@ -78,8 +80,9 @@ public class Spawn {
 		
 		double rotation = position.getRotation();
 		
-		if(Double.isNaN(rotation))
+		if(Double.isNaN(rotation)){
 			rotation = Server.getRand().nextDouble() * Math.PI * 2;
+		}
 		
 		return new Position(posX, posY, position.getZ(), map, rotation);
 	}
@@ -87,8 +90,10 @@ public class Spawn {
 	protected Position spawn(LivingObject entity) {
 		
 		Position position = getPosition();
+		
 		if(position==null)
 			position = generatePosition();
+		
 		entity.setPosition(position);
 		LocalMap map = position.getLocalMap();
 		if(map.getEntity(entity.getEntityId())!=entity)

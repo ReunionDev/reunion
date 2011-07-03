@@ -198,11 +198,11 @@ public class PacketFactory {
 					spawn = (Boolean)args[1];
 				}
 				int percentageHp = (int)(((double)npc.getHp()/ (double)npc.getMaxHp())* 100);
-					
+				Position npcPosition = npc.getPosition();
 				return "in npc " + npc.getEntityId() + " " + npc.getType()
-						+ " " + npc.getPosition().getX() + " "
-						+ npc.getPosition().getY() + " "+npc.getPosition().getZ()+" "
-						+ npc.getPosition().getRotation() + " " + percentageHp + " "
+						+ " " + npcPosition.getX() + " "
+						+ npcPosition.getY() + " "+npcPosition.getZ()+" "
+						+ (npcPosition.getRotation()==Double.NaN?0.0:npcPosition.getRotation()) + " " + percentageHp + " "
 						+ npc.getMutant() + " " + npc.getUnknown1() + " "
 						+ npc.getNeoProgmare() + " 0 " + (spawn ? 1 : 0) + " "
 						+ npc.getUnknown2();
