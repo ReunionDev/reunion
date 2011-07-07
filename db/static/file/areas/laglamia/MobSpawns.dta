@@ -414,7 +414,7 @@ Type = 24
 
 [Spawn 52]
 ID = 52
-X = 6651
+X = 6761
 Y = 4343
 Radius = 400
 RespawnTime = 60
@@ -422,7 +422,7 @@ Type = 24
 
 [Spawn 53]
 ID = 53
-X = 6651
+X = 6871
 Y = 4343
 Radius = 400
 RespawnTime = 60
@@ -430,7 +430,7 @@ Type = 24
 
 [Spawn 54]
 ID = 54
-X = 6651
+X = 6981
 Y = 4343
 Radius = 400
 RespawnTime = 60
@@ -438,7 +438,7 @@ Type = 24
 
 [Spawn 55]
 ID = 55
-X = 6651
+X = 7091
 Y = 4343
 Radius = 400
 RespawnTime = 60
