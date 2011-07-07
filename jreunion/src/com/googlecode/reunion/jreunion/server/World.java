@@ -44,8 +44,6 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 	private Command worldCommand;
 
 	private PlayerManager playerManager;
-
-	private MobManager mobManager;
 	
 	private ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
 	
@@ -70,7 +68,6 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 		worldCommand = new Command(this);
 		skillManager = new SkillManager();
 		playerManager = new PlayerManager();
-		mobManager = new MobManager();
 		serverHour = 4;
 		teleportManager = new TeleportManager();
 		serverSetings = new ServerSetings();		

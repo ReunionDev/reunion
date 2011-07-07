@@ -120,7 +120,6 @@ public class MessageParser {
 					NpcSpawn spawn = new NpcSpawn();
 					spawn.setPosition(player.getPosition().clone());
 					spawn.setNpcType(Integer.parseInt(words[1]));
-					spawn.setType(NpcSpawn.Type.MOB);
 					spawn.setRadius(300);
 					spawn.setRespawnTime(10);
 					spawn.spawn();
@@ -131,7 +130,6 @@ public class MessageParser {
 						for (int x = 1; x < count; x++) {
 							NpcSpawn spawn = new NpcSpawn();
 							spawn.setNpcType(Integer.parseInt(words[1]));
-							spawn.setType(NpcSpawn.Type.MOB);
 							spawn.setPosition(player.getPosition().clone());
 							spawn.setRadius(300);
 							spawn.setRespawnTime(10);
@@ -158,7 +156,6 @@ public class MessageParser {
 				if (words.length == 2) {
 					
 					NpcSpawn spawn = new NpcSpawn();
-					spawn.setType(NpcSpawn.Type.NPC);
 					
 					spawn.setPosition(player.getPosition().clone());
 					spawn.setNpcType(Integer.parseInt(words[1]));
@@ -257,7 +254,6 @@ public class MessageParser {
 					bw.flush();
 			    	 
 					NpcSpawn spawn = new NpcSpawn();
-					spawn.setType(NpcSpawn.Type.MOB);
 					spawn.setPosition(player.getPosition().clone());
 					spawn.setNpcType(Integer.parseInt(words[1]));
 					spawn.setRadius(Integer.parseInt(words[3]));

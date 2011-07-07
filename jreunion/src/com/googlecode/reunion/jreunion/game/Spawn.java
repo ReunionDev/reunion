@@ -80,7 +80,7 @@ public class Spawn {
 		
 		double rotation = position.getRotation();
 		
-		if(Double.isNaN(rotation)){
+		if(Double.NaN==rotation){
 			rotation = Server.getRand().nextDouble() * Math.PI * 2;
 		}
 		

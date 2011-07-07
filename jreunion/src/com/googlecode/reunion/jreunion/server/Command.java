@@ -118,7 +118,7 @@ public class Command {
 		DatabaseUtils.getInstance().saveItem(roamingItem);
 		
 		LocalMap map = position.getLocalMap();
-		if(item.getItemId()==-1)
+		if(item.getEntityId()==-1)
 			map.createEntityId(item);
 		
 		map.fireEvent(ItemDropEvent.class, roamingItem);

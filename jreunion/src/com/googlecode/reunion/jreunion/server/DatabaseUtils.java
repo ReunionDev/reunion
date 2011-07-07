@@ -814,8 +814,6 @@ public class DatabaseUtils extends Service {
 		Position position = roamingItem.getPosition();
 		saveItem(item);
 		
-		
-		
 		int itemId = item.getItemId();
 		Statement stmt;
 		try {
@@ -829,7 +827,7 @@ public class DatabaseUtils extends Service {
 			position.getX()+","+
 			position.getY()+","+
 			position.getZ()+","+
-			(!Double.isNaN(position.getRotation())?position.getRotation():0)+");";
+			(position.getRotation() == Double.NaN ? 0: position.getRotation())+");";
 			stmt.execute(q);
 		
 		} 

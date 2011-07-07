@@ -10,7 +10,6 @@ import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jcommon.Parser;
 import com.googlecode.reunion.jreunion.server.Client;
 import com.googlecode.reunion.jreunion.server.ItemFactory;
-import com.googlecode.reunion.jreunion.server.MobManager;
 import com.googlecode.reunion.jreunion.server.Reference;
 import com.googlecode.reunion.jreunion.server.Server;
 import com.googlecode.reunion.jreunion.server.Session;
@@ -359,7 +358,7 @@ public class Mob extends Npc {
 					
 				}
 				} catch (Exception e) {
-					Logger.getLogger(MobManager.class).info("Mob Bug");
+					Logger.getLogger(Mob.class).info("Mob Bug");
 					//TODO: Fix Mob move bug
 				}
 			}

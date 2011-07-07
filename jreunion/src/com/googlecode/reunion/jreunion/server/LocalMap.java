@@ -149,13 +149,12 @@ public class LocalMap extends Map implements Runnable{
 
 			NpcSpawn spawn = new NpcSpawn();
 			spawn.setId(Integer.parseInt(item.getMemberValue("Id")));
-			spawn.setType(NpcSpawn.Type.MOB);
 			
 			int posZ = item.getMemberValue("Z") == null ? 0 : Integer.parseInt(item.getMemberValue("Z"));
 			String rotValue = item.getMemberValue("Rotation");
 			double rotation = rotValue == null ? Double.NaN : Double.parseDouble(rotValue);
 			if (rotation==Double.NaN){
-				Logger.getLogger(LocalMap.class).info("Invalid rotation: "+rotValue+" for npc "+spawn.getId());
+				//Logger.getLogger(LocalMap.class).info("Invalid rotation: "+rotValue+" for npc "+spawn.getId());
 				
 			}
 			Position position = new Position(
@@ -202,7 +201,6 @@ public class LocalMap extends Map implements Runnable{
 			
 			NpcSpawn spawn = new NpcSpawn();
 			spawn.setId(Integer.parseInt(item.getMemberValue("Id")));
-			spawn.setType(NpcSpawn.Type.NPC);
 			
 			int posZ = item.getMemberValue("Z") == null ? 0 : Integer.parseInt(item.getMemberValue("Z"));
 			double rotation = item.getMemberValue("Rotation") == null ? Double.NaN : Double.parseDouble(item.getMemberValue("Rotation"));
