@@ -153,7 +153,7 @@ public class LocalMap extends Map implements Runnable{
 			int posZ = item.getMemberValue("Z") == null ? 0 : Integer.parseInt(item.getMemberValue("Z"));
 			String rotValue = item.getMemberValue("Rotation");
 			double rotation = rotValue == null ? Double.NaN : Double.parseDouble(rotValue);
-			if (rotation==Double.NaN){
+			if (Double.isNaN(rotation)){
 				//Logger.getLogger(LocalMap.class).info("Invalid rotation: "+rotValue+" for npc "+spawn.getId());
 				
 			}

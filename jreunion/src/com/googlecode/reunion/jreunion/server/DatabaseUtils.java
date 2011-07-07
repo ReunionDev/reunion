@@ -827,14 +827,13 @@ public class DatabaseUtils extends Service {
 			position.getX()+","+
 			position.getY()+","+
 			position.getZ()+","+
-			(position.getRotation() == Double.NaN ? 0: position.getRotation())+");";
+			(Double.isNaN(position.getRotation()) ? 0 : position.getRotation()) + ");";
 			stmt.execute(q);
 		
 		} 
 		catch (Exception e) {
 			Logger.getLogger(this.getClass()).warn("Exception",e);
 		}
-		
 	}
 	public synchronized void saveItem(Item item){
 		if (!checkDatabase())

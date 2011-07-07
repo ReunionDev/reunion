@@ -202,7 +202,7 @@ public class PacketFactory {
 				return "in npc " + npc.getEntityId() + " " + npc.getType()
 						+ " " + npcPosition.getX() + " "
 						+ npcPosition.getY() + " "+npcPosition.getZ()+" "
-						+ (npcPosition.getRotation()==Double.NaN?0.0:npcPosition.getRotation()) + " " + percentageHp + " "
+						+ (Double.isNaN(npcPosition.getRotation())?0.0:npcPosition.getRotation()) + " " + percentageHp + " "
 						+ npc.getMutant() + " " + npc.getUnknown1() + " "
 						+ npc.getNeoProgmare() + " 0 " + (spawn ? 1 : 0) + " "
 						+ npc.getUnknown2();

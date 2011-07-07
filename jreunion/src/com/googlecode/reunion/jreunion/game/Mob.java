@@ -235,7 +235,6 @@ public class Mob extends Npc {
 
 		//player.getPosition().
 		
-
 		double xcomp = player.getPosition().getX() - getPosition().getX();
 		double ycomp = player.getPosition().getY() - getPosition().getY();
 
