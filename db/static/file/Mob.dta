@@ -267,18 +267,6 @@ NeoProgmare = 0
 Exp = 1
 Lime = 1
 
-[5]
-Class = Mob
-ID = 140
-
-[6]
-Class = Mob
-ID = 141
-
-[7]
-Class = Mob
-ID = 139
-
 [War Giant]
 Class = Mob
 ID = 38
