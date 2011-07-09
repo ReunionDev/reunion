@@ -10,7 +10,7 @@ MinSecondRange = -1
 MaxSecondRange = -1
 StatusUsed = -1
 Type = 0
-Class = PlaceHolder
+Class = BasicAttack
 
 [Sword Master]
 ID = 1
