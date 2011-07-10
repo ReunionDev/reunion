@@ -302,11 +302,13 @@ public class Command {
 		if (item == null) {
 			return;
 		}
+		/*
 		Weapon weapon = new Weapon(item.getType());
 		weapon.loadFromReference(item.getType());
 
 		player.setMinDmg(weapon.getMinDamage());
 		player.setMaxDmg(weapon.getMaxDamage());
+		*/
 		// C> pulse [SystemTime], [WeaponType], [WeaponUniqueID], [WeaponSpeed],
 		// 120
 

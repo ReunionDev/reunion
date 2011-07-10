@@ -9,7 +9,7 @@ import com.googlecode.reunion.jreunion.server.Reference;
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-public class Weapon extends PlayerItem {
+public abstract class Weapon extends PlayerItem {
 	private int speed; // 0 - Very Fast; 1 - Fast; 2 - Normal; 3 - Slow;
 
 	// 4 - Very Slow
@@ -43,8 +43,10 @@ public class Weapon extends PlayerItem {
 		loadFromReference(id);
 	}
 
-	/****** Handle the consumn of the weapon, if exists. ******/
-	public void consumn(Player player) {
+	/****** Handle the consumn of the weapon, if exists. 
+	 * @return TODO******/
+	public abstract boolean use(Player player);
+	/*{
 		if (getEeUsed() != 0) {
 			synchronized(player){
 				player.setElectricity(player.getElectricity()- player.getEquipment().getMainHand().getEeUsed());
@@ -56,9 +58,10 @@ public class Weapon extends PlayerItem {
 				
 			}
 		}
-	}
+		return true;
+	}*/
 
-	public int getEeUsed() {
+	public int getElectricityUsed() {
 		return eeUsed;
 	}
 

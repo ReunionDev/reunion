@@ -1,5 +1,6 @@
 package com.googlecode.reunion.jreunion.game.items.equipment;
 
+import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.RangedWeapon;
 
 /**
@@ -18,4 +19,17 @@ public class GunWeapon extends RangedWeapon {
 		super.loadFromReference(id);
 	}
 
+	@Override
+	public boolean use(Player player) {
+		int electricityUsed = getElectricityUsed();
+		if (electricityUsed > 0) {
+			synchronized(player){
+				if(player.getElectricity() < electricityUsed) {					
+					return false;				
+				}
+				player.setElectricity(player.getElectricity() - electricityUsed);				
+			}
+		}
+		return true;
+	}
 }

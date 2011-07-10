@@ -438,6 +438,9 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					com.normalAttack(client.getPlayer(),
 							Integer.parseInt(message[2]));
 					
+					
+					
+					
 				} else if (message[0].equals("subat")) {
 					com.subAttack(player,
 							(LivingObject)player.getPosition().getLocalMap().getEntity(Integer.parseInt(message[2])));
@@ -458,10 +461,10 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					Equipment.Slot slot =Equipment.Slot.byValue(slotId);
 					client.getPlayer().wearSlot(slot);
 					// com.getPlayer()Wear(client.getPlayer()Object,Integer.parseInt(message[1]));
-				} else if (message[0].equals("use_skill")) {
-					
-					int skillId = Integer.parseInt(message[1]);
-					
+				} else if (message[0].equals("use_skill")||message[0].equals("attack")) {
+					int skillId = message[0].equals("attack")?0:Integer.parseInt(message[1]);
+
+					//TODO: melee attack handling
 					LivingObject target = null;
 					if(message.length == 2) {
 						target = player;

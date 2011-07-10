@@ -6,7 +6,7 @@ import com.googlecode.reunion.jreunion.game.items.equipment.Weapon;
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-public class RangedWeapon extends Weapon {
+public abstract class RangedWeapon extends Weapon {
 	public RangedWeapon(int type) {
 		super(type);
 	}

@@ -15,4 +15,9 @@ public class MeleeWeapon extends Weapon {
 	public void loadFromReference(int id) {
 		super.loadFromReference(id);
 	}
+
+	@Override
+	public boolean use(Player player) {
+		return true;
+	}
 }

@@ -42,7 +42,7 @@ public class AidiaPlayer extends Player {
 		newHp = mob.getHp() - getBaseDmg(this);
 
 		if (getEquipment().getMainHand() != null) {
-			getEquipment().getMainHand().consumn(this);
+			getEquipment().getMainHand().use(this);
 		}
 
 		if (newHp <= 0) {
