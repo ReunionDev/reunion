@@ -34,9 +34,7 @@ public abstract class Weapon extends PlayerItem {
 
 	private int handed; // 1 - One handed; 2 - Two handed
 
-	private int manaUsed;
-
-	private int eeUsed;
+	
 
 	public Weapon(int id) {
 		super(id);
@@ -46,24 +44,8 @@ public abstract class Weapon extends PlayerItem {
 	/****** Handle the consumn of the weapon, if exists. 
 	 * @return TODO******/
 	public abstract boolean use(Player player);
-	/*{
-		if (getEeUsed() != 0) {
-			synchronized(player){
-				player.setElectricity(player.getElectricity()- player.getEquipment().getMainHand().getEeUsed());
-				
-			}
-		} else if (getManaUsed() != 0) {
-			synchronized(player){
-				player.setMana(player.getMana()- - player.getEquipment().getMainHand().getManaUsed());
-				
-			}
-		}
-		return true;
-	}*/
-
-	public int getElectricityUsed() {
-		return eeUsed;
-	}
+	
+	
 
 	public int getHanded() {
 		return handed;
@@ -71,11 +53,7 @@ public abstract class Weapon extends PlayerItem {
 
 	public int getLevel() {
 		return level;
-	}
-
-	public int getManaUsed() {
-		return manaUsed;
-	}
+	}	
 
 	public int getMaxDamage() {
 		return maxDamage;
@@ -128,8 +106,6 @@ public abstract class Weapon extends PlayerItem {
 			setReqDex(0);
 			setPosition(9);
 			setRace(-1);
-			setEeUsed(0);
-			setManaUsed(0);
 		} else {
 			if (item.checkMembers(new String[] { "Level" })) {
 				// use member from file
@@ -200,28 +176,10 @@ public abstract class Weapon extends PlayerItem {
 			} else {
 				// use default
 				setRace(-1);
-			}
-			if (item.checkMembers(new String[] { "EeUsed" })) {
-				// use member from file
-				setEeUsed(Integer.parseInt(item.getMemberValue("EeUsed")));
-			} else {
-				// use default
-				setEeUsed(0);
-			}
-			if (item.checkMembers(new String[] { "ManaUsed" })) {
-				// use member from file
-				setManaUsed(Integer.parseInt(item.getMemberValue("ManaUsed")));
-			} else {
-				// use default
-				setManaUsed(0);
-			}
+			}	
 		}
 	}
-
-	public void setEeUsed(int eeUsed) {
-		this.eeUsed = eeUsed;
-	}
-
+	
 	public void setHanded(int handed) {
 		if (handed > 1) {
 			handed = 2;
@@ -234,10 +192,7 @@ public abstract class Weapon extends PlayerItem {
 		this.level = level;
 	}
 
-	public void setManaUsed(int manaUsed) {
-		this.manaUsed = manaUsed;
-	}
-
+	
 	public void setMaxDamage(int maxDamage) {
 		this.maxDamage = maxDamage;
 	}

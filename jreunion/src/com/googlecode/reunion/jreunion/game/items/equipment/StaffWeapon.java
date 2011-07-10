@@ -20,15 +20,7 @@ public class StaffWeapon extends RangedWeapon {
 	
 	@Override
 	public boolean use(Player player) {
-		int manaUsed = getManaUsed();
-		if (manaUsed > 0) {
-			synchronized(player){
-				if(player.getMana() < manaUsed) {					
-					return false;				
-				}
-				player.setMana(player.getMana()- manaUsed);				
-			}
-		}
+		
 		return true;
 	}
 }
