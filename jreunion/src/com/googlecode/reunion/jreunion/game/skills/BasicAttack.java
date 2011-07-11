@@ -19,7 +19,7 @@ public abstract class BasicAttack extends Skill {
 		if (attacker instanceof Player){
 			Player player = (Player)attacker; 
 			Weapon weapon = player.getEquipment().getMainHand();
-			//damage = player.getBaseDamage();
+			damage = player.getBaseDamage();
 			if(weapon!=null){
 				int min = weapon.getMinDamage();
 				int max = weapon.getMaxDamage();

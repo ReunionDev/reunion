@@ -192,7 +192,6 @@ public abstract class Weapon extends PlayerItem {
 		this.level = level;
 	}
 
-	
 	public void setMaxDamage(int maxDamage) {
 		this.maxDamage = maxDamage;
 	}
