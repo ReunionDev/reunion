@@ -48,8 +48,8 @@ public class BulkanPlayer extends Player {
 			skillAttackPlayer((Player) livingObject, skill);
 		}
 	}
-
-	public int getBaseDmg() {
+	/*
+	public float getBaseDamage() {
 		int randDmg, baseDmg = 0;
 		
 		randDmg = getMinDmg()
@@ -57,10 +57,24 @@ public class BulkanPlayer extends Player {
 
 		baseDmg = (randDmg + getLevel() / 6 + getStrength() / 4 + getDexterity() / 4 + getConstitution() / 8);
 		
+		
+		this.getPosition().getLocalMap().getWorld().getCommand().serverSay("BaseDmg:"+baseDmg+" SwMastDmg: "+((int)(swordMasteryDamage*100))/100+" AxMastDmg: "+((int)(axeMasteryDamage*100))/100);
+		return baseDmg;
+	}
+	*/
+	
+	public float getDamage() {
+		
+		float baseDamage = getBaseDamage();
+		
 		SwordMastery swordMastery = (SwordMastery) getSkill(1);
 		AxeMastery axeMastery = (AxeMastery) getSkill(2);
+				
+		double swordMasteryDamage = swordMastery.getDamageModifier(this);
+		double axeMasteryDamage = axeMastery.getDamageModifier(this);
 		
-		return(int) (baseDmg * swordMastery.getDamageModifier(this)* axeMastery.getDamageModifier(this));
+		this.getPosition().getLocalMap().getWorld().getCommand().serverSay("BaseDmg:"+baseDamage+" SwMastDmg: "+((int)(swordMasteryDamage*100))/100+" AxMastDmg: "+((int)(axeMasteryDamage*100))/100);
+		return(int) (baseDamage * swordMasteryDamage * axeMasteryDamage);
 	}
 
 	@Override
@@ -74,9 +88,9 @@ public class BulkanPlayer extends Player {
 
 	private void meleeAttackMob(Mob mob) {
 
-		int baseDmg = getBaseDmg();
-		// S_Server.getInstance().getWorldModule().getWorldCommand().serverSay("BaseDmg:"+baseDmg);
-		int newHp = mob.getHp() - baseDmg;
+		float damage = getDamage();
+		
+		int newHp = (int)(mob.getHp() - damage);
 
 		if (newHp <= 0) {
 
@@ -124,7 +138,7 @@ public class BulkanPlayer extends Player {
 			return;
 		}
 
-		float baseDmg = getBaseDmg();
+		float baseDmg = getBaseDamage();
 		float skillDmg = baseDmg;
 
 		
@@ -216,7 +230,7 @@ public class BulkanPlayer extends Player {
 	}
 
 	@Override
-	int getBaseDamage() {
+	public float getBaseDamage() {
 
 		return (getLevel() / 7) + (getStrength() / 4) + (getConstitution() / 8) + (getDexterity() / 4);
 	}

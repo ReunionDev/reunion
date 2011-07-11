@@ -224,6 +224,7 @@ public class DatabaseUtils extends Service {
 				+ rs.getString("dexterity") + " "
 				+ rs.getString("constitution") + " " 
 				+ rs.getString("leadership") + " "
+				//+ "0" + " " // the new version client have this extra value in the packet
 				+ eq.getType(Slot.HELMET) + " " 
 				+ eq.getType(Slot.CHEST) + " " 
 				+ eq.getType(Slot.PANTS) + " " 
@@ -232,7 +233,6 @@ public class DatabaseUtils extends Service {
 				+ eq.getType(Slot.OFFHAND) 
 				+ " 1\n";
 				
-				//chars_exist 3 12341234 0 0 0 2 90 12 15 15 90 90 15 15 30 5 5 30 10 309 -1 -1 -1 -1 -1 1
 				//chars_exist 3 12341234 0 0 0 2 90 12 15 15 90 90 15 15 30 5 5 30 10 309 -1 -1 -1 -1 -1 1
 				// chars_exist [SlotNumber] [Name] [Race] [Sex] [HairStyle]
 				// [Level] [Vitality] [Stamina] [Magic] [Energy] [Vitality]
@@ -248,9 +248,11 @@ public class DatabaseUtils extends Service {
 		}
 		
 		Logger.getLogger(DatabaseUtils.class).info("found " + chars
-				+ " char(s) for Account(" + accountId + ")");		
+				+ " char(s) for Account(" + accountId + ")");	
 		
-		charlist += "chars_end\n";
+		
+		charlist += "chars_end\n"; // Old client version
+		//charlist += "chars_end 0 "+client.getAccountId()+"\n"; //New client version
 		return charlist;
 	}
 	
@@ -1025,7 +1027,7 @@ public class DatabaseUtils extends Service {
 			{
 				StashItem stashItem = stashIter.next();
 				
-				stmt.execute("INSERT INTO stash (accountid, pos, itemid)" +
+				stmt.execute("INSERT INTO warehouse (accountid, pos, itemid)" +
 						" VALUES ("+client.getAccountId()+ ","
 						+stashItem.getPos()+ ","
 						+stashItem.getItem().getItemId()+ ");");

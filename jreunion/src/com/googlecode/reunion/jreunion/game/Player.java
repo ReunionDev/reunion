@@ -286,7 +286,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 			this.sendStatus(Status.STAMINA);
 	}
 	
-	abstract int getBaseDamage();
+	public abstract float getBaseDamage();
 	
 
 	public Iterator<Integer> getAttackQueueIterator() {
@@ -705,7 +705,7 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		//TODO: Fix item pickup
 		getInventory().addItem(item);
 		
-		getInventory().PrintInventoryMap(0);
+		//getInventory().PrintInventoryMap(0); //Debug
 		InventoryItem invItem = getInventory().getItem(item);
 		// DatabaseUtils.getInstance().saveInventory(client.getPlayer()Object);
 

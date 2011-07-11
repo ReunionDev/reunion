@@ -92,7 +92,7 @@ public class AidiaPlayer extends Player {
 	}
 
 	@Override
-	int getBaseDamage() {
+	public float getBaseDamage() {
 		
 		return (getLevel() / 5) + (getWisdom() / 3) + getLeadership();
 	}

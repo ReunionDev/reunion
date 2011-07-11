@@ -222,13 +222,14 @@ public class Command {
 		
 	
 		
-		
+		/* //this statment isn't executed because the server isn't in
+		   //the state INGAME yet
 		player.sendStatus(Status.TOTALEXP);					
 		player.sendStatus(Status.LEVELUPEXP);					
 		player.sendStatus(Status.STATUSPOINTS);					
 		player.sendStatus(Status.LIME);
 		player.sendStatus(Status.PENALTYPOINTS);
-		
+		*/
 		
 
 		client.sendPacket(PacketFactory.Type.OK);

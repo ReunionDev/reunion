@@ -89,6 +89,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 				*/
 				int version = Integer.parseInt(message[0]);
 				client.setVersion(version);
+				Logger.getLogger(PacketParser.class).info("Got version");
 				client.setState(State.GOT_VERSION);
 				break;
 	
@@ -311,15 +312,18 @@ public class PacketParser extends EventDispatcher implements EventListener{
 	
 					world.getTeleportManager().remove(player);
 					*/
-
-					client.setState(Client.State.LOADED);
 					
-					player.setHp(player.getMaxHp());				
+					client.setState(Client.State.INGAME);
+					
+					player.setHp(player.getMaxHp());
 					player.setStamina(player.getMaxStamina());				
 					player.setMana(player.getMaxMana());				
 					player.setElectricity(player.getMaxElectricity());
-					
-					
+					player.sendStatus(Status.TOTALEXP);					
+					player.sendStatus(Status.LEVELUPEXP);					
+					player.sendStatus(Status.STATUSPOINTS);					
+					player.sendStatus(Status.LIME);
+					player.sendStatus(Status.PENALTYPOINTS);
 				}
 				break;
 			}
@@ -408,8 +412,10 @@ public class PacketParser extends EventDispatcher implements EventListener{
 				} else if (message[0].equals("pick")) {
 					
 					int itemId = Integer.parseInt(message[1]);
-					LocalMap map = player.getPosition().getLocalMap();				
+					LocalMap map = player.getPosition().getLocalMap();
 					RoamingItem roamingItem = (RoamingItem)map.getEntity(itemId);
+					//ParsedItem parsedItem = Reference.getInstance().getItemReference().getItemById(itemId);
+					
 					Logger.getLogger(PacketParser.class).info(roamingItem+" "+itemId);
 					if(roamingItem!=null){
 						client.getPlayer().pickupItem(roamingItem);							
@@ -550,12 +556,14 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					
 					/*
 					LocalMap map = player.getPosition().getLocalMap();
-					map.getEntity(id)
-					Npc[] npc = world
-							.getNpcManager().getNpcList(139);
+					map.getEntity(id);
+					Npc[] npc = world.getNpcManager().getNpcList(139);
 					Warehouse warehouse = (Warehouse) npc[0];
 					warehouse.openStash(client.getPlayer());
 					*/
+					Warehouse warehouse = new Warehouse(139);
+					warehouse.openStash(client.getPlayer());
+					
 				} else if (message[0].equals("stash_click")) {
 					/*
 					Npc[] npc = world
@@ -576,9 +584,26 @@ public class PacketParser extends EventDispatcher implements EventListener{
 								Integer.parseInt(message[3]), 0);
 					}
 					*/
+					Warehouse warehouse = new Warehouse(139);
+					warehouse.openStash(client.getPlayer());
+					
+					if (message.length == 5) {
+						warehouse.stashClick(client.getPlayer(),
+								Integer.parseInt(message[1]),
+								Integer.parseInt(message[2]),
+								Integer.parseInt(message[3]),
+								Integer.parseInt(message[4]));
+					}
+					if (message.length == 4) {
+						warehouse.stashClick(client.getPlayer(),
+								Integer.parseInt(message[1]),
+								Integer.parseInt(message[2]),
+								Integer.parseInt(message[3]), 0);
+					}
 				} else if (message[0].equals("shop")) {
 					int npcId = Integer.parseInt(message[1]);
 					Merchant npc = (Merchant) player.getPosition().getLocalMap().getEntity(npcId);
+					
 					if (npc!=null) {
 						npc.openShop(client.getPlayer());
 					} else {

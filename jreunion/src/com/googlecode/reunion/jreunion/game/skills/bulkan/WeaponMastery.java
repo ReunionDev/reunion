@@ -20,29 +20,45 @@ public abstract class WeaponMastery extends Skill {
 		
 		Weapon weapon = player.getEquipment().getMainHand();
 		
-		
 		if(weapon!=null&&getWeaponType().isInstance(weapon)){
 		
 			int level = player.getSkillLevel(this);
-			modifier+=level * getDamageModifier();
+			if(level>0){
+				modifier += (0.1+((level-1)*getDamageModifier()));			
+			}			
+			player.getPosition().getLocalMap().getWorld().getCommand().serverSay("Weapon Mastery Skill Level: "+level);
+							
 		}
 		
 		return modifier;
 	}
 	public double getDamageModifier(){
+		/*
+		 * lvl 1 = 10%
+		 * lvl 2 = 17%
+		 * 
+		 * 
+		 * lvl 25 = 200%
+		 * 
+		 * 2.90 = 200% - 10% + 100%
+		 * 24 = m
+		 */
 		
-		return 0.1;
+		return 2.90/(getMaxLevel()-1);		
 		
 	}
+	
 	
 	@Override
 	public int getLevelRequirement(int level) {
-		return level;
+		return 4+level;
 	}
+	
 	
 	@Override
 	public int getMaxLevel() {
-		return 10;
+		return 25;
 	}
+	
 
 }

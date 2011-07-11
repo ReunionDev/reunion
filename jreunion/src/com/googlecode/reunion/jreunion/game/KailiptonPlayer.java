@@ -152,7 +152,7 @@ public class KailiptonPlayer extends Player {
 	}
 
 	@Override
-	public int getBaseDamage() {
-		return (getLevel()/ 5) + (getWisdom() / 2);
+	public float getBaseDamage() {
+		return (getLevel() / 5) + (getWisdom() / 2);
 	}
 }

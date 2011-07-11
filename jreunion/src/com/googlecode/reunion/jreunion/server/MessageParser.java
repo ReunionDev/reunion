@@ -14,6 +14,7 @@ import com.googlecode.reunion.jreunion.game.Npc;
 import com.googlecode.reunion.jreunion.game.NpcSpawn;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Position;
+import com.googlecode.reunion.jreunion.game.Skill;
 import com.googlecode.reunion.jreunion.game.Spawn;
 import com.googlecode.reunion.jreunion.server.Area.Field;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
@@ -102,6 +103,8 @@ public class MessageParser {
 				client.sendData(data.substring(2));				
 				return null;
 				//client.SendPacket(Type.SAY, words[3],Integer.parseInt(words[2]),Integer.parseInt(words[1]));
+			
+			/* not sure what is this (SAM)
 			} else if (words[0].equals("@p")) { //Adds a NPC
 				String data = "";
 				for(int i = 1 ;i<words.length;i++){
@@ -114,7 +117,7 @@ public class MessageParser {
 				if(data.isEmpty())
 					client.sendData(data);
 				return null;
-			
+			*/
 			} else if (words[0].equals("@addmob")) { //Adds a NPC 
 				if (words.length == 2) {
 					NpcSpawn spawn = new NpcSpawn();
@@ -151,7 +154,7 @@ public class MessageParser {
 					mob.setUnknown2(Integer.parseInt(words[5]));
 					//Server.getInstance().getWorld().getMobManager().addMob(mob);
 				}
-			} else if (words[0].equals("@addnpc")) {
+			} else if (words[0].equals("@addnpc")) { //adds a NPC
 				try {
 				if (words.length == 2) {
 					
@@ -280,6 +283,27 @@ public class MessageParser {
 			} else if (words[0].equals("@spot")) {
 				com.serverSay("{ X:" + player.getPosition().getX() + ", Y:"
 						+ player.getPosition().getY()+", Z:"+player.getPosition().getZ()+"}");
+			}
+			// set the level of a skill from the player
+			// @skilllevel [SkillID] [SkillLevel]
+			else if (words[0].equals("@skilllevel")) {
+				if (words.length == 3) {
+					synchronized(player) {
+						Skill skill = player.getSkill(Integer.parseInt(words[1]));
+						
+						int currentSkillLevel = player.getSkillLevel(skill);
+						int newSkillLevel = Integer.parseInt(words[2]);
+						
+						if(newSkillLevel < currentSkillLevel){	
+							player.setSkillLevel(skill, newSkillLevel);
+							player.getClient().sendPacket(Type.SKILLLEVEL, skill, newSkillLevel);
+							//DatabaseUtils.getInstance().saveSkills(player);
+						
+							int playerCurrentStatusPoints = player.getStatusPoints();
+							player.setStatusPoints(playerCurrentStatusPoints+(currentSkillLevel-newSkillLevel));
+						}
+					}
+				}
 			}
 		}
 

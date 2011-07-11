@@ -87,7 +87,7 @@ public class HybriderPlayer extends Player {
 	}
 
 	@Override
-	int getBaseDamage() {
+	public float getBaseDamage() {
 		return (getLevel() / 6) + (getStrength() / 5) + (getWisdom()/ 4) + (getDexterity() / 3);
 	}
 	

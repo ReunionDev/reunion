@@ -89,7 +89,7 @@ public class HumanPlayer extends Player {
 	}
 
 	@Override
-	public int getBaseDamage() {
+	public float getBaseDamage() {
 		return (getLevel() / 6) + (getDexterity() / 4)+ getStrength();
 		
 	}
