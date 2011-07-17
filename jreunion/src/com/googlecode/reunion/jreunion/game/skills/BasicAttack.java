@@ -6,7 +6,7 @@ import com.googlecode.reunion.jreunion.game.Skill;
 import com.googlecode.reunion.jreunion.game.items.equipment.Weapon;
 import com.googlecode.reunion.jreunion.server.Server;
 
-public abstract class BasicAttack extends Skill {
+public class BasicAttack extends Skill {
 	
 	
 	public BasicAttack(int id) {
@@ -36,5 +36,17 @@ public abstract class BasicAttack extends Skill {
 		}		
 		
 		return true;
+	}
+
+	@Override
+	public int getMaxLevel() {
+
+		return 0;
+	}
+
+	@Override
+	public int getLevelRequirement(int skillLevel) {
+
+		return 0;
 	}
 }
