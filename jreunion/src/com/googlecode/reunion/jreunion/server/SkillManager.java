@@ -44,7 +44,7 @@ public class SkillManager {
 			String className = "com.googlecode.reunion.jreunion.game.skills."+item.getMemberValue("Class");
 			
 			
-			Skill skill = (Skill) ClassFactory.create(className, id);
+			Skill skill = (Skill) ClassFactory.create(className, this, id);
 			if(skill==null)
 				continue;
 				
@@ -57,9 +57,10 @@ public class SkillManager {
 		for(Race race : Race.values()){
 			
 			List<Skill> raceSkillList = new Vector<Skill>();
-		
+			raceSkillList.add(skills.get(0));
 			switch(race) {
 			case BULKAN: {
+				
 				raceSkillList.add(skills.get(1));
 				raceSkillList.add(skills.get(1));
 				raceSkillList.add(skills.get(2));
