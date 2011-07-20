@@ -2,8 +2,6 @@ package com.googlecode.reunion.jreunion.game;
 
 import java.util.Iterator;
 
-import com.googlecode.reunion.jreunion.game.skills.bulkan.AxeMastery;
-import com.googlecode.reunion.jreunion.game.skills.bulkan.SwordMastery;
 import com.googlecode.reunion.jreunion.server.Client;
 import com.googlecode.reunion.jreunion.server.Server;
 import com.googlecode.reunion.jreunion.server.Tools;
@@ -20,9 +18,6 @@ public class BulkanPlayer extends Player {
 		super(client);
 	}
 
-	public void activationSkill(Skill skill) {
-
-	}
 	public int getMaxElectricity(){
 		return Tools.statCalc(getDexterity(), 50) +(getLeadership() / 2);
 	}
@@ -40,44 +35,9 @@ public class BulkanPlayer extends Player {
 		return Tools.statCalc(getStrength(), 60) + (getLeadership() / 2);		
 		
 	}
-
-	public void attackSkill(LivingObject livingObject, Skill skill) {
-		if (livingObject instanceof Mob) {
-			skillAttackMob((Mob) livingObject, skill);
-		} else if (livingObject instanceof Player) {
-			skillAttackPlayer((Player) livingObject, skill);
-		}
-	}
-	/*
-	public float getBaseDamage() {
-		int randDmg, baseDmg = 0;
 		
-		randDmg = getMinDmg()
-				+ (int) (Math.random() * (getMaxDmg() - getMinDmg()));
-
-		baseDmg = (randDmg + getLevel() / 6 + getStrength() / 4 + getDexterity() / 4 + getConstitution() / 8);
-		
-		
-		this.getPosition().getLocalMap().getWorld().getCommand().serverSay("BaseDmg:"+baseDmg+" SwMastDmg: "+((int)(swordMasteryDamage*100))/100+" AxMastDmg: "+((int)(axeMasteryDamage*100))/100);
-		return baseDmg;
-	}
-	*/
 	
-	public float getDamage() {
-		
-		float baseDamage = getBaseDamage();
-		
-		SwordMastery swordMastery = (SwordMastery) getSkill(1);
-		AxeMastery axeMastery = (AxeMastery) getSkill(2);
-				
-		double swordMasteryDamage = swordMastery.getDamageModifier(this);
-		double axeMasteryDamage = axeMastery.getDamageModifier(this);
-		
-		this.getPosition().getLocalMap().getWorld().getCommand().serverSay("BaseDmg:"+baseDamage+" SwMastDmg: "+((int)(swordMasteryDamage*100))/100+" AxMastDmg: "+((int)(axeMasteryDamage*100))/100);
-		return(int) (baseDamage * swordMasteryDamage * axeMasteryDamage);
-	}
-
-	@Override
+	@Deprecated()
 	public void meleeAttack(LivingObject livingObject) {
 		if (livingObject instanceof Mob) {
 			meleeAttackMob((Mob) livingObject);
@@ -85,137 +45,38 @@ public class BulkanPlayer extends Player {
 			meleeAttackPlayer((Player) livingObject);
 		}
 	}
-
+	
+	@Deprecated()
 	private void meleeAttackMob(Mob mob) {
 
-		float damage = getDamage();
-		
-		int newHp = (int)(mob.getHp() - damage);
-
-		if (newHp <= 0) {
-
-			mob.kill(this);
-
-		/*	if (mob.getType() == 226) {
-				
-				G_Item item = com.googlecode.reunion.jreunion.server.S_ItemFactory
-						.createItem(150);
-				
-				
-				
-				double random = Math.round(Math.random() * 10);	
-
-				if (random == 0) {
-					item.setGemNumber ((int) (Math.random() * 10000));
-					item.setExtraStats((int) (Math.random() * 10000));
-				}	
-				
-			//	dropItemMob(mob.getType(), item.getEntityId(),
-			//			mob.getPosX(), mob.getPosY(), 0, 0, 0, 0, this);
-				
-			//	dropItem(item.getEntityId());
-			  pickupItem(item.getEntityId());
-			//	getQuest().questEnd(this, 669);
-			//	getQuest().questEff(this);
-			}*/
-		} else {
-			mob.setHp(newHp);
-		}
 	}
-
+	
+	@Deprecated()
 	private void meleeAttackPlayer(Player player) {
 
 	}
 
+	@Deprecated()
+	public void attackSkill(LivingObject livingObject, Skill skill) {
+
+	}
+	
+	@Deprecated()
 	public void permanentSkill(Skill skill) {
 
 	}
 
-	public void skillAttackMob(Mob mob, Skill skill) {
-		Client client = this.getClient();
+	@Deprecated()
+	public void activationSkill(Skill skill) {
 
-		if (client == null) {
-			return;
-		}
-
-		float baseDmg = getBaseDamage();
-		float skillDmg = baseDmg;
-
-		
-		//TODO: fix
-		/*
-		 
-		if (skill.getId() == 31) { // Whirlwind Slash Skill
-			if (getEquipment().getMainHand() instanceof Sword) {
-				skillDmg = baseDmg + baseDmg
-						* (skill.getCurrFirstRange() / 100);
-			}
-		} else if (skill.getId() == 18) { // Overhead Blow Skill
-			if (getEquipment().getMainHand() instanceof Axe) {
-				skillDmg = baseDmg + baseDmg
-						* (skill.getCurrFirstRange() / 100);
-			}
-		} else if (skill.getId() == 38) { // Exploding rage
-			if (getEquipment().getMainHand() instanceof Axe) {
-				skillDmg = baseDmg + baseDmg
-						* (skill.getCurrFirstRange() / 100);
-			}
-		}
-		*/
-
-		// S_Server.getInstance().getWorldModule().getWorldCommand().serverSay("SkillDmg:"+skillDmg);
-		int newHp = mob.getHp() - (int) skillDmg;
-
-		/*
-		updateStatus(skill.getStatusUsed(),
-				getStm() - (int) skill.getCurrConsumn(), getMaxStm());
-		 */
-		if (newHp <= 0) {
-
-			mob.kill(this);
-		} else {
-			mob.setHp(newHp);
-		}
-
-		
-
-		String packetData = "attack_vital npc " + mob.getEntityId() + " "
-				+ mob.getPercentageHp() + " 0 0\n";
-
-		// S> attack_vital npc [NpcID] [RemainHP%] 0 0
-				client.sendData( packetData);
-		/*
-		if (getSession().getPlayerListSize() > 0) {
-			Iterator<G_Player> playerIter = getSession()
-					.getPlayerListIterator();
-
-			while (playerIter.hasNext()) {
-				G_Player pl = playerIter.next();
-
-				client = S_Server.getInstance().getNetworkModule()
-						.getClient(pl);
-
-				if (client == null) {
-					continue;
-				}
-
-				packetData = "effect " + skill.getId() + " char "
-						+ getEntityId() + " npc " + mob.getEntityId() + " "
-						+ mob.getPercentageHp() + " 0 0\n";
-
-				// S> effect [SkillID] char [charID] npc [npcID] [RemainNpcHP%]
-				// 0 0
-						client.SendData( packetData);
-			}
-		}
-		*/
 	}
-
+	
+	@Deprecated()
 	public void skillAttackPlayer(Player player, Skill skill) {
 
 	}
 
-	@Override
+	@Deprecated()
 	public void useSkill(LivingObject livingObject, int skillId) {
 
 		Skill skill = getPosition().getLocalMap().getWorld().getSkillManager().getSkill(skillId);
@@ -229,9 +90,9 @@ public class BulkanPlayer extends Player {
 		}
 	}
 
+	
 	@Override
 	public float getBaseDamage() {
-
-		return (getLevel() / 7) + (getStrength() / 4) + (getConstitution() / 8) + (getDexterity() / 4);
+		return (getLevel()/6) + (getStrength()/4) + (getDexterity()/4) + (getConstitution()/8);
 	}
 }

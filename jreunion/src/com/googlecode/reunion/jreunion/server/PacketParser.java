@@ -33,6 +33,7 @@ import com.googlecode.reunion.jreunion.game.Position;
 import com.googlecode.reunion.jreunion.game.Quest;
 import com.googlecode.reunion.jreunion.game.RoamingItem;
 import com.googlecode.reunion.jreunion.game.Skill;
+import com.googlecode.reunion.jreunion.game.skills.BasicAttack;
 import com.googlecode.reunion.jreunion.game.Trader;
 import com.googlecode.reunion.jreunion.game.Warehouse;
 import com.googlecode.reunion.jreunion.server.Client.LoginType;
@@ -440,13 +441,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					// S_DatabaseUtils.getInstance().saveInventory(client.getPlayer()Object);
 				} else if (message[0].equals("drop")) {
 					client.getPlayer().dropItem(Integer.parseInt(message[1]));
-				} else if (message[0].equals("attack")) {
-					com.normalAttack(client.getPlayer(),
-							Integer.parseInt(message[2]));
-					
-					
-					
-					
+							
 				} else if (message[0].equals("subat")) {
 					com.subAttack(player,
 							(LivingObject)player.getPosition().getLocalMap().getEntity(Integer.parseInt(message[2])));
@@ -467,33 +462,33 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					Equipment.Slot slot =Equipment.Slot.byValue(slotId);
 					client.getPlayer().wearSlot(slot);
 					// com.getPlayer()Wear(client.getPlayer()Object,Integer.parseInt(message[1]));
-				} else if (message[0].equals("use_skill")||message[0].equals("attack")) {
+					
+				} else if (message[0].equals("use_skill") || message[0].equals("attack")) {
 					int skillId = message[0].equals("attack")?0:Integer.parseInt(message[1]);
-
 					//TODO: melee attack handling
 					LivingObject target = null;
 					if(message.length == 2) {
 						target = player;
 					} else {
-						if(message[2].equals("npc"))
+						int entityId=0;
+						if(message[2].equals("npc")){ // Skill attack
+							entityId = Integer.parseInt(message[3]);
+						}
+						else{ // Basic attack
+							entityId = Integer.parseInt(message[2]); 
+						}
+						target = (LivingObject) player.getPosition().getLocalMap().getEntity(entityId);
+						Skill skill = player.getSkill(skillId);
+						if(Castable.class.isInstance(skill))
 						{
-							int entityId = Integer.parseInt(message[3]);
-							target = (LivingObject) player.getPosition().getLocalMap().getEntity(entityId);
-						}else
-						{
-							int entityId = Integer.parseInt(message[2]); //TODO: is 2 used?... no idea
-							target = (LivingObject) player.getPosition().getLocalMap().getEntity(entityId);
+							if(((Castable)skill).cast(player, target))
+								if(Effectable.class.isInstance(skill))
+									skill.effect(player, target);
+						} else{
+							throw new RuntimeException(skill+" is not Castable");
 						}
 					}
-					Skill skill = player.getSkill(skillId);
-					if(Castable.class.isInstance(skill))
-					{
-						if(((Castable)skill).cast(player, target))
-							if(Effectable.class.isInstance(skill))
-								skill.effect(player, target);
-					} else{
-						throw new RuntimeException(skill+" is not Castable");
-					}
+					
 					
 				} else if (message[0].equals("skillup")) {
 					

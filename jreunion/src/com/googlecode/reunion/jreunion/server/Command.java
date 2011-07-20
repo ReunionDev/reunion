@@ -238,6 +238,7 @@ public class Command {
 	}
 
 	/****** player normal attacks ******/
+	@Deprecated()
 	public void normalAttack(Player player, int uniqueId) {
 
 		Client client = player.getClient();

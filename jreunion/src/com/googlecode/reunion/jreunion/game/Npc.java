@@ -51,6 +51,12 @@ public class Npc extends LivingObject {
 	public int getMutant() {
 		return mutant;
 	}
+	@Override
+	public void setHp(int hp){
+		super.setHp(hp);
+		this.getInterested().sendPacket(Type.ATTACK_VITAL, this);
+	
+	}
 
 	public int getNeoProgmare() {
 		return neoProgmare;
