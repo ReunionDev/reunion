@@ -1,10 +1,11 @@
 package com.googlecode.reunion.jreunion.game.skills.bulkan;
 
 import com.googlecode.reunion.jreunion.game.items.equipment.Axe;
+import com.googlecode.reunion.jreunion.server.SkillManager;
 public class AxeMastery extends WeaponMastery{
 
-	public AxeMastery(int id)  {
-		super(id);
+	public AxeMastery(SkillManager skillManager,int id)  {
+		super(skillManager,id);
 		
 	}
 
@@ -13,7 +14,6 @@ public class AxeMastery extends WeaponMastery{
 		return Axe.class;
 	}
 
-	
 
 	
 

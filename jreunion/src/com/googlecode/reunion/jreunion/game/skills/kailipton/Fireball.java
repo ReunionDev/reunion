@@ -5,11 +5,12 @@ import com.googlecode.reunion.jreunion.game.Effectable;
 import com.googlecode.reunion.jreunion.game.LivingObject;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Skill;
+import com.googlecode.reunion.jreunion.server.SkillManager;
 
 public class Fireball extends Tier1 implements Castable,Effectable {
 
-	public Fireball(int id) {
-		super(id);
+	public Fireball(SkillManager skillManager,int id) {
+		super(skillManager,id);
 	}
 
 	@Override
@@ -28,7 +29,15 @@ public class Fireball extends Tier1 implements Castable,Effectable {
 		return false;
 	}
 
+	public int getLevelRequirement(int level) {
+		return 0+level;
+	}
 	
+	public double getDamageModifier(){
+		
+		return 3.333333;
+		
+	}
 	
 	
 }

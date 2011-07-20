@@ -2,10 +2,11 @@ package com.googlecode.reunion.jreunion.game.skills;
 
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Skill;
+import com.googlecode.reunion.jreunion.server.SkillManager;
 
 public abstract class GroupedSkill extends Skill{
-	public GroupedSkill(int id) {
-		super(id);
+	public GroupedSkill(SkillManager skillManager,int id) {
+		super(skillManager,id);
 	}
 	
 	protected abstract int [] getSkillsInGroup();

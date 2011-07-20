@@ -1,9 +1,10 @@
 package com.googlecode.reunion.jreunion.game.skills.human;
 import com.googlecode.reunion.jreunion.game.Skill;
+import com.googlecode.reunion.jreunion.server.SkillManager;
 public class GemCutting extends Skill {
 
-	public GemCutting(int id) {
-		super(id);
+	public GemCutting(SkillManager skillManager,int id) {
+		super(skillManager,id);
 	}
 
 	@Override

@@ -1,9 +1,10 @@
 package com.googlecode.reunion.jreunion.game.skills.aidia;
 import com.googlecode.reunion.jreunion.game.Skill;
+import com.googlecode.reunion.jreunion.server.SkillManager;
 public class BugSummonSkill extends Skill {
 
-	public BugSummonSkill(int id) {
-		super(id);
+	public BugSummonSkill(SkillManager skillManager,int id) {
+		super(skillManager,id);
 	}
 
 	@Override

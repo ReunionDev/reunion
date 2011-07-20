@@ -1,9 +1,10 @@
 package com.googlecode.reunion.jreunion.game.skills.human;
 import com.googlecode.reunion.jreunion.game.Skill;
+import com.googlecode.reunion.jreunion.server.SkillManager;
 public class SemiAutomatic extends Skill {
 
-	public SemiAutomatic(int id) {
-		super(id);
+	public SemiAutomatic(SkillManager skillManager,int id) {
+		super(skillManager,id);
 	}
 
 	@Override

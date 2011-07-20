@@ -4,6 +4,7 @@ import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jreunion.server.Map;
 import com.googlecode.reunion.jreunion.server.Reference;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
+import com.googlecode.reunion.jreunion.server.SkillManager;
 
 /**
  * @author Aidamina
@@ -13,8 +14,11 @@ public abstract class Skill {
 	private int id;
 
 	private int type;
+	
+	private SkillManager skillManager;
 
-	public Skill(int id) {
+	public Skill(SkillManager skillManager, int id) {
+		this.setSkillManager(skillManager);
 		this.id = id;
 	}
 
@@ -63,5 +67,13 @@ public abstract class Skill {
 
 	public void setType(int type) {
 		this.type = type;
+	}
+
+	public SkillManager getSkillManager() {
+		return skillManager;
+	}
+
+	private void setSkillManager(SkillManager skillManager) {
+		this.skillManager = skillManager;
 	}
 }

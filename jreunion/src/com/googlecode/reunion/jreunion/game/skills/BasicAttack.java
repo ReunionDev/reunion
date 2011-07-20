@@ -1,42 +1,82 @@
 package com.googlecode.reunion.jreunion.game.skills;
 
+import com.googlecode.reunion.jreunion.game.BulkanPlayer;
+import com.googlecode.reunion.jreunion.game.Castable;
+import com.googlecode.reunion.jreunion.game.Effectable;
 import com.googlecode.reunion.jreunion.game.LivingObject;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Skill;
 import com.googlecode.reunion.jreunion.game.items.equipment.Weapon;
+import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 import com.googlecode.reunion.jreunion.server.Server;
+import com.googlecode.reunion.jreunion.server.SkillManager;
 
-public class BasicAttack extends Skill {
+public class BasicAttack extends Skill implements Castable, Effectable {
 	
 	
-	public BasicAttack(int id) {
-		super(id);
+	public BasicAttack(SkillManager skillManager,int id) {
+		super(skillManager,id);
 	}
 	
-	public boolean attack(LivingObject attacker, LivingObject victim) {
+	public boolean cast(LivingObject attacker, LivingObject victim) {
 		
 		float damage = 0;
+		
 		if (attacker instanceof Player){
 			Player player = (Player)attacker; 
 			Weapon weapon = player.getEquipment().getMainHand();
-			damage = player.getBaseDamage();
+			float baseDamage = player.getBaseDamage();
+			float weaponDamage = 0;
+			
 			if(weapon!=null){
-				int min = weapon.getMinDamage();
-				int max = weapon.getMaxDamage();
-				
-				damage += min + (Server.getRand().nextFloat()*(max-min));
+				weaponDamage += weapon.getMinDamage() + 
+							(Server.getRand().nextFloat()*(weapon.getMaxDamage()-weapon.getMinDamage()));
 				if(!weapon.use(player)){
 					return false;
 				}
 			}
+			
+			damage = baseDamage + weaponDamage;
+			
+			for(Skill skill: ((Player)attacker).getSkills().keySet()){
+				if (Modifier.class.isInstance(skill)){
+					Modifier modifier = (Modifier)skill; 
+					if(modifier.getAffectedSkills().contains(this)){
+						if(modifier.getCondition(attacker)){
+							if(modifier.getValueType()==Modifier.ValueType.DAMAGE){
+								
+								switch(modifier.getModifierType()){
+									
+									case MULTIPLICATIVE:
+										damage *= modifier.getModifier(attacker);
+										break;
+									case ADDITIVE:
+										damage += modifier.getModifier(attacker);
+										break;
+								}
+							}
+						}
+					}						
+				}
+			}
 		}
+		
 		synchronized(victim){
 			
 			victim.setHp((int)(victim.getHp()-damage));
+			
 		}		
 		
 		return true;
 	}
+	
+	@Override 
+	public void effect(LivingObject source, LivingObject target){	
+		//TODO: Figure out what to send on attack to other players.
+		
+		
+	}
+	
 
 	@Override
 	public int getMaxLevel() {

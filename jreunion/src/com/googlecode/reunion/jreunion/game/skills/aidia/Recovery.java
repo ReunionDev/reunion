@@ -6,10 +6,11 @@ import com.googlecode.reunion.jreunion.game.Effectable;
 import com.googlecode.reunion.jreunion.game.LivingObject;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Skill;
-public class Recovery extends Skill implements Castable,Effectable {
+import com.googlecode.reunion.jreunion.server.SkillManager;
+public class Recovery extends Skill implements Castable, Effectable {
 
-	public Recovery(int id) {
-		super(id);
+	public Recovery(SkillManager skillManager,int id) {
+		super(skillManager,id);
 	}
 
 	@Override

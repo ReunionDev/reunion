@@ -1,9 +1,10 @@
 package com.googlecode.reunion.jreunion.game.skills.aidia;
 import com.googlecode.reunion.jreunion.game.Skill;
+import com.googlecode.reunion.jreunion.server.SkillManager;
 public class BeastSummonSkill extends Skill {
 
-	public BeastSummonSkill(int id) {
-		super(id);
+	public BeastSummonSkill(SkillManager skillManager,int id) {
+		super(skillManager,id);
 	}
 
 	@Override

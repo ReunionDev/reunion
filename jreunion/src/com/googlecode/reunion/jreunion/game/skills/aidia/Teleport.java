@@ -1,9 +1,10 @@
 package com.googlecode.reunion.jreunion.game.skills.aidia;
 import com.googlecode.reunion.jreunion.game.Skill;
+import com.googlecode.reunion.jreunion.server.SkillManager;
 public class Teleport extends Skill {
 
-	public Teleport(int id) {
-		super(id);
+	public Teleport(SkillManager skillManager,int id) {
+		super(skillManager,id);
 	}
 
 	@Override

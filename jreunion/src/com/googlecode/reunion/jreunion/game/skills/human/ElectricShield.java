@@ -1,9 +1,10 @@
 package com.googlecode.reunion.jreunion.game.skills.human;
 import com.googlecode.reunion.jreunion.game.Skill;
+import com.googlecode.reunion.jreunion.server.SkillManager;
 public class ElectricShield extends Skill {
 
-	public ElectricShield(int id) {
-		super(id);
+	public ElectricShield(SkillManager skillManager,int id) {
+		super(skillManager,id);
 	}
 
 	@Override

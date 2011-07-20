@@ -3,11 +3,12 @@ package com.googlecode.reunion.jreunion.game.skills.kailipton;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Skill;
 import com.googlecode.reunion.jreunion.game.skills.GroupedSkill;
+import com.googlecode.reunion.jreunion.server.SkillManager;
 
 public class Mastery extends GroupedSkill{
 	
-	public Mastery(int id) {
-		super(id);
+	public Mastery(SkillManager skillManager,int id) {
+		super(skillManager,id);
 	}
 
 	@Override

@@ -1,9 +1,10 @@
 package com.googlecode.reunion.jreunion.game.skills.aidia;
 import com.googlecode.reunion.jreunion.game.Skill;
+import com.googlecode.reunion.jreunion.server.SkillManager;
 public class SafetyShield extends Skill {
 
-	public SafetyShield(int id) {
-		super(id);
+	public SafetyShield(SkillManager skillManager,int id) {
+		super(skillManager,id);
 	}
 
 	@Override

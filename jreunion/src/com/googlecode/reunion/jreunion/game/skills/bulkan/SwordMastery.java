@@ -3,12 +3,13 @@ package com.googlecode.reunion.jreunion.game.skills.bulkan;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Skill;
 import com.googlecode.reunion.jreunion.game.items.equipment.Sword;
+import com.googlecode.reunion.jreunion.server.SkillManager;
 
 
 public class SwordMastery extends WeaponMastery {
 
-	public SwordMastery(int id) {
-		super(id);
+	public SwordMastery(SkillManager skillManager,int id) {
+		super(skillManager,id);
 		// TODO Auto-generated constructor stub
 	}
 
