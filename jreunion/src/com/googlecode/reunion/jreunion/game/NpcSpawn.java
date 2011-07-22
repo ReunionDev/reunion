@@ -42,7 +42,8 @@ public class NpcSpawn extends Spawn
 		
 		Npc npc = null;
 		
-		npc = map.createNpc(getNpcType());
+		int npcType = getNpcType();
+		npc = Npc.create(npcType);
 		
 		if(npc==null)
 			return null;
@@ -50,7 +51,8 @@ public class NpcSpawn extends Spawn
 		
 		Position position = super.spawn(npc);
 		
-		npc.loadFromReference(getNpcType());
+		npc.loadFromReference(npcType);
+		
 		return position;
 		
 	}

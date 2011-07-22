@@ -28,10 +28,8 @@ public class RoamingItem extends WorldObject{
 	public void exit(Session session) {
 		session.getOwner().getClient().sendPacket(Type.OUT, this);
 	}
-	@Override
-	public int getEntityId() {		
-		return item.getEntityId();
-	}
+	
+	
 	public void setOwner(Player owner) {
 		this.owner = owner;
 	}

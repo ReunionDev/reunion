@@ -119,32 +119,26 @@ public class MessageParser {
 				return null;
 			*/
 			} else if (words[0].equals("@addmob")) { //Adds a NPC 
-				if (words.length == 2) {
-					NpcSpawn spawn = new NpcSpawn();
-					spawn.setPosition(player.getPosition().clone());
-					spawn.setNpcType(Integer.parseInt(words[1]));
-					spawn.setRadius(300);
-					spawn.setRespawnTime(10);
-					spawn.spawn();
-
-				} else if (words.length == 3) {
+				if (words.length == 2||words.length == 3) {
+					int count = 0;
 					try {
-						int count = Integer.parseInt(words[2]);
-						for (int x = 1; x < count; x++) {
+						count = words.length == 3?Integer.parseInt(words[2]):1;
+						for (int x = 0; x < count; x++) {
 							NpcSpawn spawn = new NpcSpawn();
-							spawn.setNpcType(Integer.parseInt(words[1]));
 							spawn.setPosition(player.getPosition().clone());
+							spawn.setNpcType(Integer.parseInt(words[1]));
 							spawn.setRadius(300);
 							spawn.setRespawnTime(10);
 							spawn.spawn();
 						}
 					} catch (Exception NumberFormatException) {
-						String packetData = "say 1 S_Server (NOTICE) @addmob with more than 1 mob failed";
+						String packetData = "say 1 S_Server (NOTICE) @addmob with "+count+" mob failed";
 						client.sendData(packetData);
 					}
+				
 				} else if (words.length == 6) {
 					LocalMap map = player.getPosition().getLocalMap();
-					Mob mob = (Mob)map.createNpc(Integer.parseInt(words[1]));
+					Mob mob = (Mob)Npc.create(Integer.parseInt(words[1]));
 					mob.getPosition().setX(player.getPosition().getX() + 10);
 					mob.getPosition().setY(player.getPosition().getY() + 10);
 					mob.setIsRunning(true);

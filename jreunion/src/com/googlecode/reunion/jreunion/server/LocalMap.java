@@ -70,21 +70,7 @@ public class LocalMap extends Map implements Runnable{
 		return world;
 	}
 	
-	public Npc createNpc(int typeId) {
-		
-		ParsedItem parsedNpc = Reference.getInstance().getMobReference().getItemById(typeId);
-		if (parsedNpc == null) {
-			parsedNpc = Reference.getInstance().getNpcReference().getItemById(typeId);
-			if (parsedNpc == null) {
-				return null;
-			}
-		}		
-		String className = "com.googlecode.reunion.jreunion.game." + parsedNpc.getMemberValue("Class");		
-		
-		Npc npc = (Npc)ClassFactory.create(className, typeId);
-		return npc;
-		
-	}
+
 
 	public LocalMap(World world, int id) {
 		super(id);
@@ -153,10 +139,7 @@ public class LocalMap extends Map implements Runnable{
 			int posZ = item.getMemberValue("Z") == null ? 0 : Integer.parseInt(item.getMemberValue("Z"));
 			String rotValue = item.getMemberValue("Rotation");
 			double rotation = rotValue == null ? Double.NaN : Double.parseDouble(rotValue);
-			if (Double.isNaN(rotation)){
-				//Logger.getLogger(LocalMap.class).info("Invalid rotation: "+rotValue+" for npc "+spawn.getId());
-				
-			}
+			
 			Position position = new Position(
 					Integer.parseInt(item.getMemberValue("X")),
 					Integer.parseInt(item.getMemberValue("Y")),
@@ -252,8 +235,10 @@ public class LocalMap extends Map implements Runnable{
 		synchronized(entities){
 		
 			List<RoamingItem> roamingItems = DatabaseUtils.getInstance().loadRoamingItems(this);
-			for(RoamingItem roamingItem : roamingItems){				
-				entities.put(roamingItem.getEntityId(), roamingItem);
+			for(RoamingItem roamingItem : roamingItems){
+				//TODO: A better way to manage items going in and out of the map
+				int id = createEntityId(roamingItem);
+				
 			}
 		}
 		

@@ -31,7 +31,7 @@ public class ItemFactory {
 	public static Item loadItem(int itemId) {
 		
 		return DatabaseUtils.getInstance().loadItem(itemId);
-
+		
 	}
 
 	public ItemFactory() {

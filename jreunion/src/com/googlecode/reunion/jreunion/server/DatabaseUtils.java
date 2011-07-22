@@ -743,6 +743,7 @@ public class DatabaseUtils extends Service {
 				Item item = (Item)ClassFactory.create(className, type);
 				if(item==null)
 					return null;
+				
 				item.setItemId(itemId);
 				
 				item.setGemNumber(rs.getInt("gemnumber"));

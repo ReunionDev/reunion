@@ -66,7 +66,6 @@ public class Spawn {
 			posX += rand.nextInt(radius * 2) - radius;
 			posY += rand.nextInt(radius * 2) - radius;
 		}
-		
 		double rotation = position.getRotation();
 		
 		if(Double.isNaN(rotation)){

@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jcommon.Parser;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
+import com.googlecode.reunion.jreunion.server.ClassFactory;
 import com.googlecode.reunion.jreunion.server.Reference;
 import com.googlecode.reunion.jreunion.server.Server;
 import com.googlecode.reunion.jreunion.server.Session;
@@ -102,4 +103,24 @@ public class Npc extends LivingObject {
 		
 		session.getOwner().getClient().sendPacket(Type.OUT, this);
 	}
+	
+	public static Npc create(int typeId) {
+		
+		ParsedItem parsedNpc = Reference.getInstance().getMobReference().getItemById(typeId);
+		if (parsedNpc == null) {
+			parsedNpc = Reference.getInstance().getNpcReference().getItemById(typeId);
+			if (parsedNpc == null) {
+				return null;
+			}
+		}		
+		String className = "com.googlecode.reunion.jreunion.game." + parsedNpc.getMemberValue("Class");		
+		
+		Npc npc = (Npc)ClassFactory.create(className, typeId);
+		
+		//npc.loadFromReference(typeId);
+		return npc;
+		
+	}
+	
+	
 }
