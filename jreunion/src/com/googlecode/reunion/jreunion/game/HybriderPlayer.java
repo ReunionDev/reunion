@@ -32,60 +32,6 @@ public class HybriderPlayer extends Player {
 		
 	}
 	
-	public int getBaseDmg(Player player) {
-		int randDmg, baseDmg = 0;
-
-		randDmg = player.getMinDmg()
-				+ (int) (Math.random() * (player.getMaxDmg() - player
-						.getMinDmg()));
-
-		baseDmg = (randDmg + getLevel() / 6 + getStrength() / 4 + getDexterity() / 4 + getConstitution() / 8);
-
-		return baseDmg;
-	}
-
-	@Override
-	public void meleeAttack(LivingObject livingObject) {
-		if (livingObject instanceof Mob) {
-			meleeAttackMob((Mob) livingObject);
-		} else if (livingObject instanceof Player) {
-			meleeAttackPlayer((Player) livingObject);
-		}
-	}
-
-	private void meleeAttackMob(Mob mob) {
-
-		int newHp = mob.getHp() - getBaseDmg(this);
-
-		if (newHp <= 0) {
-
-			mob.kill(this);
-
-			if (mob.getType() == 324) {
-				Item item = com.googlecode.reunion.jreunion.server.ItemFactory
-						.create(1054);
-
-				item.setExtraStats((int) (Math.random() * 10000));
-
-				//pickupItem(item);
-				getInventory().addItem(item);
-				getQuest().questEnd(this, 669);
-				getQuest().questEff(this);
-			}
-		} else {
-			mob.setHp(newHp);
-		}
-	}
-
-	private void meleeAttackPlayer(Player player) {
-
-	}
-
-	@Override
-	public void useSkill(LivingObject livingObject, int skillId) {
-
-	}
-
 	@Override
 	public float getBaseDamage() {
 		return (getLevel() / 6) + (getStrength() / 5) + (getWisdom()/ 4) + (getDexterity() / 3);

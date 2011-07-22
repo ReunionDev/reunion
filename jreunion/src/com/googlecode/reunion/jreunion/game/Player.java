@@ -37,7 +37,7 @@ import com.googlecode.reunion.jreunion.server.Tools;
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-public abstract class Player extends LivingObject implements SkillTarget, EventListener {
+public abstract class Player extends LivingObject implements EventListener {
 
 	private int defense = 0;
 
@@ -695,7 +695,6 @@ public abstract class Player extends LivingObject implements SkillTarget, EventL
 		setStamina(getStamina() - ammount);		
 	}
 
-	public abstract void meleeAttack(LivingObject livingObject);
 
 	/****** Manages the Pick command ******/
 	// When you pick up an item, or buy something from merchant

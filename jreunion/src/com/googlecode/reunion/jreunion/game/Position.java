@@ -44,7 +44,7 @@ public class Position {
 		return  Math.sqrt((xd * xd) + (yd * yd)  + (zd * zd));
 		
 	}
-	
+	// *within* doesn't use distance because Math.sqrt is expensive and unnecesary for this
 	public boolean within(Position position, double range) {
 		
 		double xd =this.getX() - position.getX();

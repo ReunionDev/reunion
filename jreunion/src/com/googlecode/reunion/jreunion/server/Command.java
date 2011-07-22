@@ -237,61 +237,6 @@ public class Command {
 		return player;
 	}
 
-	/****** player normal attacks ******/
-	@Deprecated()
-	public void normalAttack(Player player, int uniqueId) {
-
-		Client client = player.getClient();
-
-		LivingObject livingObject = (LivingObject) player.getPosition().getLocalMap().getEntity(uniqueId);
-		if (livingObject == null) {
-			livingObject = Server.getInstance().getWorld()
-					.getPlayerManager().getPlayer(uniqueId);
-
-			if (livingObject == null) {
-				return;
-			}
-		}
-
-		player.meleeAttack(livingObject);
-		
-		client.sendPacket(Type.ATTACK_VITAL, livingObject);	
-		
-		player.getInterested().sendPacket(Type.ATTACK, player, livingObject);
-		
-	}
-
-	/****** mob attacks player with normal attack ******/
-	public void NpcAttackChar(Player player, Mob mob) { // mob attacks
-															// player
-		Client client = player.getClient();
-
-		int newHp = player.getHp();
-
-		if (client == null) {
-			return;
-		}
-
-		int dmg = mob.getDmg() - player.getDef();
-
-		if (dmg > 0) {
-			newHp = player.getHp() - dmg;
-		}
-		if (newHp < 0) {
-			newHp = 0;
-		}
-
-		player.setHp(newHp);
-		
-
-
-		client.sendPacket(Type.ATTACK, mob, player);
-		player.getInterested().sendPacket(Type.ATTACK, mob, player);
-		
-		// S> attack npc [NpcID] char [CharID] [RemainCharHP%] 0 0 0 0
-	
-	}
-
 	/****** Manages the player wear Weapon ******/
 	public void playerWeapon(Player player, int uniqueId) {
 		Client client = player.getClient();

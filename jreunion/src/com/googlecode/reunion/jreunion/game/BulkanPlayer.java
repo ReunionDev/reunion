@@ -34,62 +34,7 @@ public class BulkanPlayer extends Player {
 	public int getMaxStamina(){
 		return Tools.statCalc(getStrength(), 60) + (getLeadership() / 2);		
 		
-	}
-		
-	
-	@Deprecated()
-	public void meleeAttack(LivingObject livingObject) {
-		if (livingObject instanceof Mob) {
-			meleeAttackMob((Mob) livingObject);
-		} else if (livingObject instanceof Player) {
-			meleeAttackPlayer((Player) livingObject);
-		}
-	}
-	
-	@Deprecated()
-	private void meleeAttackMob(Mob mob) {
-
-	}
-	
-	@Deprecated()
-	private void meleeAttackPlayer(Player player) {
-
-	}
-
-	@Deprecated()
-	public void attackSkill(LivingObject livingObject, Skill skill) {
-
-	}
-	
-	@Deprecated()
-	public void permanentSkill(Skill skill) {
-
-	}
-
-	@Deprecated()
-	public void activationSkill(Skill skill) {
-
-	}
-	
-	@Deprecated()
-	public void skillAttackPlayer(Player player, Skill skill) {
-
-	}
-
-	@Deprecated()
-	public void useSkill(LivingObject livingObject, int skillId) {
-
-		Skill skill = getPosition().getLocalMap().getWorld().getSkillManager().getSkill(skillId);
-
-		if (skill.getType() == 0) {
-			permanentSkill(skill);
-		} else if (skill.getType() == 1) {
-			activationSkill(skill);
-		} else if (skill.getType() == 2) {
-			attackSkill(livingObject, skill);
-		}
-	}
-
+	}	
 	
 	@Override
 	public float getBaseDamage() {

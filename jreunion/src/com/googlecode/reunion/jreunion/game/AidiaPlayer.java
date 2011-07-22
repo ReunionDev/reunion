@@ -14,66 +14,7 @@ public class AidiaPlayer extends Player {
 	public AidiaPlayer(Client client) {
 		super(client);
 	}
-
-	public int getBaseDmg(Player player) {
-		int baseDmg, randDmg;
-
-		randDmg = player.getMinDmg()
-				+ (int) (Math.random() * (player.getMaxDmg() - player
-						.getMinDmg()));
-
-		baseDmg = (randDmg + getLevel() / 5 + getWisdom() / 3 + getLeadership());
-
-		return baseDmg;
-	}
-
-	@Override
-	public void meleeAttack(LivingObject livingObject) {
-		if (livingObject instanceof Mob) {
-			meleeAttackMob((Mob) livingObject);
-		} else if (livingObject instanceof Player) {
-			meleeAttackPlayer((Player) livingObject);
-		}
-	}
-
-	private void meleeAttackMob(Mob mob) {
-		int newHp;
-
-		newHp = mob.getHp() - getBaseDmg(this);
-
-		if (getEquipment().getMainHand() != null) {
-			getEquipment().getMainHand().use(this);
-		}
-
-		if (newHp <= 0) {
-
-			mob.kill(this);
-
-
-			if (mob.getType() == 324) {
-				Item item = ItemFactory.create(1054);
-
-				item.setExtraStats((int) (Math.random() * 10000));
-				
-				getInventory().addItem(item);
-				//pickupItem(item);
-				getQuest().questEnd(this, 669);
-				getQuest().questEff(this);
-			}
-		} else {
-			mob.setHp(newHp);
-		}
-	}
-
-	private void meleeAttackPlayer(Player player) {
-
-	}
-
-	@Override
-	public void useSkill(LivingObject livingObject, int skillId) {
-
-	}
-	
+			
 	public int getMaxElectricity(){
 		return Tools.statCalc(getDexterity(), 80) +(getLeadership() / 2);
 	}
