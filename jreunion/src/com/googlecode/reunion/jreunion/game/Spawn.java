@@ -25,7 +25,6 @@ public class Spawn {
 		this.id = id;
 	}
 
-
 	private int radius;
 	
 	private Position position;
@@ -42,58 +41,44 @@ public class Spawn {
 	}
 
 	public void setPosition(Position position) {
-		
 		this.position = position;
 		
 	}
-
-	/**
-	 * @return Returns the mobType.
-	 */
-
 
 	public int getRadius() {
 		return radius;
 	}
 
-
-
-	/**
-	 * @param mobType
-	 *            The mobType to set.
-	 */
-
-
 	public void setRadius(int radius) {
 		this.radius = radius;
 	}
 
-	private Random rand = new Random(System.currentTimeMillis());
-	
-	public Position generatePosition(){
+	public Position generateSpawnPosition(){
+		
+		Random rand = Server.getRand();
 		
 		Position position = getPosition();		
 		LocalMap map = position.getLocalMap();
+		int posX = position.getX();
+		int posY = position.getY();
 		
-		int posX = (radius>0?rand.nextInt(radius * 2) - radius:0)+position.getX();
-		int posY = (radius>0?rand.nextInt(radius * 2) - radius:0)+position.getY();
+		if(radius>0){
+			posX += rand.nextInt(radius * 2) - radius;
+			posY += rand.nextInt(radius * 2) - radius;
+		}
 		
 		double rotation = position.getRotation();
 		
-		if(Double.NaN==rotation){
+		if(Double.isNaN(rotation)){
 			rotation = Server.getRand().nextDouble() * Math.PI * 2;
 		}
 		
 		return new Position(posX, posY, position.getZ(), map, rotation);
 	}
 
-	protected Position spawn(LivingObject entity) {
-		
-		Position position = getPosition();
-		
-		if(position==null)
-			position = generatePosition();
-		
+	protected Position spawn(LivingObject entity) {		
+	
+		Position position = generateSpawnPosition();		
 		entity.setPosition(position);
 		LocalMap map = position.getLocalMap();
 		if(map.getEntity(entity.getEntityId())!=entity)
