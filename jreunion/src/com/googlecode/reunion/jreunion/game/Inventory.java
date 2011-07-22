@@ -18,8 +18,6 @@ import com.googlecode.reunion.jreunion.server.Server;
 public class Inventory {
 	private List<InventoryItem> items;
 	
-	private Item[][][] inventory=new Item[3][8][6];
-
 	private InventoryItem selected = null;
 
 	private Player player;
@@ -27,6 +25,10 @@ public class Inventory {
 	public Inventory(Player player) {
 		this.player = player;
 		items = new Vector<InventoryItem>();
+	}
+
+	public Player getPlayer() {
+		return player;
 	}
 
 	public boolean addItem(Item item) {
@@ -148,30 +150,24 @@ public class Inventory {
 	}
 
 	/****** Manages the Items on the Inventory ******/
-	public void handleInventory(Player player, int tab, int posX, int posY) {
-	
-		Client client = player.getClient();
-
-		if (client == null) {
-			return;
-		}
+	public void handleInventory(int tab, int posX, int posY) {
 
 		InventoryItem oldInvItem = null;
 		InventoryItem newInvItem = null;
 		InventoryItem auxItem = null;
 		int count = 0;
 
-		if (!player.getInventory().posEmpty(tab, posX, posY)) {
-			if (player.getInventory().getItemSelected() == null) {
-				newInvItem = player.getInventory().getItem(tab, posX, posY);
-				player.getInventory().removeItem(newInvItem);
-				player.getInventory().setItemSelected(newInvItem);
+		if (!posEmpty(tab, posX, posY)) {
+			if (getItemSelected() == null) {
+				newInvItem = getItem(tab, posX, posY);
+				removeItem(newInvItem);
+				setItemSelected(newInvItem);
 			} else {
-				oldInvItem = player.getInventory().getItemSelected();
+				oldInvItem = getItemSelected();
 
 				for (int x = 0; x < oldInvItem.getItem().getSizeX(); x++) {
 					for (int y = 0; y < oldInvItem.getItem().getSizeY(); y++) {
-						newInvItem = player.getInventory().getItem(tab,
+						newInvItem = getItem(tab,
 								posX + x, posY + y);
 
 						if (auxItem != newInvItem) {
@@ -193,13 +189,13 @@ public class Inventory {
 				oldInvItem.setY(posY);
 				oldInvItem.setTab(tab);
 
-				player.getInventory().removeItem(newInvItem);
-				player.getInventory().setItemSelected(newInvItem);
-				player.getInventory().addItem(posX, posY, oldInvItem.getItem(),
+				removeItem(newInvItem);
+				setItemSelected(newInvItem);
+				addItem(posX, posY, oldInvItem.getItem(),
 						tab);
 			}
 		} else {
-			newInvItem = player.getInventory().getItemSelected();
+			newInvItem = getItemSelected();
 
 			if (newInvItem == null) {
 				return;
@@ -210,7 +206,7 @@ public class Inventory {
 				for (int x = 0; x < newInvItem.getItem().getSizeX(); x++) {
 					for (int y = 0; y < newInvItem.getItem().getSizeY(); y++) {
 						
-						oldInvItem = player.getInventory().getItem(tab, posX + x,
+						oldInvItem = getItem(tab, posX + x,
 								posY + y);
 						if (auxItem != oldInvItem && oldInvItem != null) {
 							auxItem = oldInvItem;
@@ -223,21 +219,18 @@ public class Inventory {
 					}
 				}
 			}
-				
-		
 
 			if (auxItem == null) {
-				player.getInventory().setItemSelected(null);
+				setItemSelected(null);
 			} else {
-				player.getInventory().removeItem(auxItem);
-				player.getInventory().setItemSelected(auxItem);
+				removeItem(auxItem);
+				setItemSelected(auxItem);
 			}
 
 			newInvItem.setX(posX);
 			newInvItem.setY(posY);
 			newInvItem.setTab(tab);
-			player.getInventory()
-					.addItem(posX, posY, newInvItem.getItem(), tab);
+			addItem(posX, posY, newInvItem.getItem(), tab);
 		}
 	}
 
@@ -312,15 +305,4 @@ public class Inventory {
 		this.selected = selected;
 	}
 
-	public void use(int tab, int x, int y) {
-
-		InventoryItem invItem = getItem(tab,x,y);
-		
-		Item item = invItem.getItem();
-		
-		player.getPosition().getLocalMap().getWorld().getCommand().useItem(player, item);
-		
-		removeItem(invItem);
-		
-	}
 }

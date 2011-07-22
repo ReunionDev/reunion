@@ -402,7 +402,7 @@ public class Command {
 	*/
 	}
 
-	public void useItem(Player player ,Item item) {
+	public boolean useItem(Player player ,Item item) {
 		
 		
 		if(Usable.class.isInstance(item)){
@@ -412,6 +412,7 @@ public class Command {
 			
 			player.getPosition().getLocalMap().removeEntity(item);			
 			DatabaseUtils.getInstance().deleteItem(item);
+			return true;
 			
 		}
 		else{
@@ -419,6 +420,7 @@ public class Command {
 			Logger.getLogger(QuickSlot.class).error(item+ " not Usable");
 			
 		}
+		return false;
 		
 	}
 

@@ -28,8 +28,7 @@ public class ItemFactory {
 		return item;
 	}
 
-	public static Item loadItem(int itemId) {
-		
+	public static Item loadItem(int itemId) {		
 		return DatabaseUtils.getInstance().loadItem(itemId);
 		
 	}

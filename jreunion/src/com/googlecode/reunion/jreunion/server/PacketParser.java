@@ -21,6 +21,9 @@ import com.googlecode.reunion.jreunion.events.session.NewSessionEvent;
 import com.googlecode.reunion.jreunion.game.Castable;
 import com.googlecode.reunion.jreunion.game.Effectable;
 import com.googlecode.reunion.jreunion.game.Equipment;
+import com.googlecode.reunion.jreunion.game.Inventory;
+import com.googlecode.reunion.jreunion.game.InventoryItem;
+import com.googlecode.reunion.jreunion.game.Item;
 import com.googlecode.reunion.jreunion.game.LivingObject;
 import com.googlecode.reunion.jreunion.game.Merchant;
 import com.googlecode.reunion.jreunion.game.Mob;
@@ -428,17 +431,19 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					int x = Integer.parseInt(message[2]);
 					int y = Integer.parseInt(message[3]);
 					
-					player.getInventory().use(tab,x,y);
+					Inventory inventory = player.getInventory();
+					InventoryItem inventoryItem = inventory.getItem(tab, x, y);
+					Item item = inventoryItem.getItem();
+					com.useItem(player, item);					
+					inventory.removeItem(inventoryItem);
 					
 				} else if (message[0].equals("inven")) {
 					
 					int tab = Integer.parseInt(message[1]);
 					int x = Integer.parseInt(message[2]);
 					int y = Integer.parseInt(message[3]);
-					client.getPlayer().getInventory().handleInventory( client.getPlayer(),
-							tab,
-							x,y);
-					// S_DatabaseUtils.getInstance().saveInventory(client.getPlayer()Object);
+					client.getPlayer().getInventory().handleInventory(tab, x, y);
+
 				} else if (message[0].equals("drop")) {
 					client.getPlayer().dropItem(Integer.parseInt(message[1]));
 							

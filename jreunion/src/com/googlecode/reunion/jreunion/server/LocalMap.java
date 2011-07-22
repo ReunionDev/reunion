@@ -312,9 +312,7 @@ public class LocalMap extends Map implements Runnable{
 				
 				this.defaultSpawn = spawn;
 			}
-			
 			playerSpawnList.add(spawn);
-			
 		}
 	}
 
@@ -347,7 +345,6 @@ public class LocalMap extends Map implements Runnable{
 			for(Session session:sessions){
 				if(session.contains(position)){					
 					results.add(session);
-					
 				}
 			}
 		}

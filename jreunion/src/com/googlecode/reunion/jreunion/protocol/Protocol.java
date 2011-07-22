@@ -75,8 +75,7 @@ public abstract class Protocol {
 				
 				ParsedItem item = iter.next();
 				Class<?> protocolName = Class.forName(item.getMemberValue("Class"));
-				protocols.add(protocolName);
-				
+				protocols.add(protocolName);				
 			}
 			
 		} catch (IOException e) {
