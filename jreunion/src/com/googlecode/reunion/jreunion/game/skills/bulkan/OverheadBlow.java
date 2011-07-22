@@ -72,6 +72,13 @@ public class OverheadBlow extends WeaponAttack implements Castable{
 		
 		if(caster instanceof BulkanPlayer){	
 			
+			int currentStamina = ((BulkanPlayer) caster).getStamina();
+			// stamina spent: level 1 = 10 ... level 25 = 40 
+			int staminaSpent = 10 + (((BulkanPlayer) caster).getSkillLevel(this)-1 * (30/(getMaxLevel()-1)));
+			
+			if((currentStamina - staminaSpent)  < 0)
+				return false;
+			
 			float baseDamage = ((BulkanPlayer) caster).getBaseDamage();
 			float skillDamage = getDamageModifier((BulkanPlayer) caster);
 			float weaponDamage = 0;
@@ -112,7 +119,8 @@ public class OverheadBlow extends WeaponAttack implements Castable{
 					((Mob)target).kill((BulkanPlayer)caster);
 				} else {
 					target.setHp(newHp);
-				}				
+				}			
+				((BulkanPlayer) caster).setStamina(currentStamina - staminaSpent);
 				return true;
 			}
 		}		

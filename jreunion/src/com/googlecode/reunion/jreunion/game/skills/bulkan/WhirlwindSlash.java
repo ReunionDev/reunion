@@ -71,6 +71,13 @@ public class WhirlwindSlash extends WeaponAttack implements Castable{
 		
 		if(caster instanceof BulkanPlayer){	
 			
+			int currentStamina = ((BulkanPlayer) caster).getStamina();
+			// stamina spent: level 1 = 7 ... level 25 = 30 
+			int staminaSpent = 7 + (((BulkanPlayer) caster).getSkillLevel(this)-1 * (23/(getMaxLevel()-1)));
+			
+			if((currentStamina - staminaSpent)  < 0)
+				return false;
+			
 			float baseDamage = ((BulkanPlayer) caster).getBaseDamage();
 			float skillDamage = getDamageModifier((BulkanPlayer) caster);
 			float weaponDamage = 0;
@@ -111,7 +118,8 @@ public class WhirlwindSlash extends WeaponAttack implements Castable{
 					((Mob)target).kill((BulkanPlayer)caster);
 				} else {
 					target.setHp(newHp);
-				}				
+				}	
+				((BulkanPlayer) caster).setStamina(currentStamina - staminaSpent);
 				return true;
 			}
 		}		

@@ -32,6 +32,9 @@ import com.googlecode.reunion.jreunion.events.server.ServerStartEvent;
 import com.googlecode.reunion.jreunion.events.server.ServerStopEvent;
 import com.googlecode.reunion.jreunion.game.Mob;
 import com.googlecode.reunion.jreunion.game.Player;
+import com.googlecode.reunion.jreunion.game.BulkanPlayer;
+import com.googlecode.reunion.jreunion.game.Skill;
+import com.googlecode.reunion.jreunion.game.skills.bulkan.RecoveryBoost;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 import com.googlecode.reunion.jreunion.server.Server.State;
 
@@ -171,22 +174,34 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 						Player player = iter.next();
 						
 						synchronized(player){
+							float statusModifier = 0.1f; //increase 10% of status 
+							
 							int maxHp = player.getMaxHp();
-							player.setHp(player.getHp()+Tools.between(maxHp/100, 1, maxHp));							
+							int hpModifier = (int)(maxHp * statusModifier); //increase 10% of Hp
+					
+							if(player instanceof BulkanPlayer){
+								RecoveryBoost recoveryBoost = (RecoveryBoost)player.getSkill(19);
+								hpModifier *= recoveryBoost.getRecoveryBoostModifier(player); //boost HP modifier;
+							}
+							
+							player.setHp(player.getHp()+hpModifier);
 							
 							int maxMana = player.getMaxMana();
-							player.setMana(player.getMana()+Tools.between(maxMana/100, 1, maxMana));	
+							int manaModifier = (int)(maxMana * statusModifier); //increase 10% of Mana
+							player.setMana(player.getMana()+manaModifier);	
 							
 							int maxStamina = player.getMaxStamina();
-							player.setStamina(player.getStamina()+Tools.between(maxStamina/100, 1, maxStamina));	
+							int staminaModifier = (int)(maxStamina * statusModifier); //increase 10% of Stamina
+							player.setStamina(player.getStamina()+staminaModifier);	
 							
 							int maxElectricity = player.getMaxElectricity();
-							player.setElectricity(player.getElectricity()+Tools.between(maxElectricity/100, 1, maxElectricity));	
+							int electricityModifier = (int)(maxElectricity * statusModifier); //increase 10% of Electricity
+							player.setElectricity(player.getElectricity()+electricityModifier);	
 						}
 					}
 				}				
 			}
-		}, 0, 3, TimeUnit.SECONDS);
+		}, 0, 10, TimeUnit.SECONDS);
 	
 	}
 
