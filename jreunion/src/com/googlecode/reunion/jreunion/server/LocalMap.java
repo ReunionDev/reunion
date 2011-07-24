@@ -109,6 +109,7 @@ public class LocalMap extends Map implements Runnable{
 				int id = entityIter;
 				entities.put(id, obj);
 				obj.setEntityId(id);
+				
 				return id;
 			
 				
@@ -408,8 +409,9 @@ public class LocalMap extends Map implements Runnable{
 				
 				SessionList<Session> list = GetSessions(roamingItem.getPosition());
 				
+				
 				synchronized(entities) {
-					entities.put(roamingItem.getEntityId(), roamingItem);
+					createEntityId(roamingItem);
 					list.enter(roamingItem, false);					
 				}
 								

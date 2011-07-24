@@ -173,7 +173,7 @@ public class PacketFactory {
 				Position position = roamingItem.getPosition();
 				Item item = roamingItem.getItem();
 
-				return "drop " + item.getEntityId() + " " + item.getType() + " "
+				return "drop " + roamingItem.getEntityId() + " " + item.getType() + " "
 				+ position.getX() + " " + position.getY() + " " + position.getZ() + " "+position.getRotation()+" " + item.getGemNumber() + " "
 				+ item.getExtraStats();
 			}			
