@@ -24,8 +24,8 @@ public class Recovery extends Skill implements Castable, Effectable {
 	}
 
 	@Override
-	public boolean cast(LivingObject caster, LivingObject target) {
-		if(caster == target && caster instanceof Player) {
+	public boolean cast(LivingObject caster, LivingObject... target) {
+		if(caster == target[0] && caster instanceof Player) {
 			Player player = (Player)caster;
 			int level = player.getSkillLevel(this);
 			int playerHp = player.getHp();

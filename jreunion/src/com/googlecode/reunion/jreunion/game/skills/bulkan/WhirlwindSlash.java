@@ -67,7 +67,7 @@ public class WhirlwindSlash extends WeaponAttack implements Castable{
 	}
 	
 	@Override
-	public boolean cast(LivingObject caster, LivingObject target) {
+	public boolean cast(LivingObject caster, LivingObject... target) {
 		
 		if(caster instanceof BulkanPlayer){	
 			
@@ -75,9 +75,12 @@ public class WhirlwindSlash extends WeaponAttack implements Castable{
 			// stamina spent: level 1 = 7 ... level 25 = 30 
 			int staminaSpent = 7 + (((BulkanPlayer) caster).getSkillLevel(this)-1 * (23/(getMaxLevel()-1)));
 			
-			if((currentStamina - staminaSpent)  < 0)
+			if((currentStamina - staminaSpent)  < 0){
+				((Player)(caster)).getClient().sendPacket(Type.SAY, "Not enought stamina to use the skill.");
 				return false;
-			
+			} else {
+				((BulkanPlayer) caster).setStamina(currentStamina - staminaSpent);
+			}
 			float baseDamage = ((BulkanPlayer) caster).getBaseDamage();
 			float skillDamage = getDamageModifier((BulkanPlayer) caster);
 			float weaponDamage = 0;
@@ -113,13 +116,12 @@ public class WhirlwindSlash extends WeaponAttack implements Castable{
 			
 				
 			synchronized(target){	
-				int newHp = target.getHp() - (int) (damage);				
+				int newHp = target[0].getHp() - (int) (damage);				
 				if (newHp <= 0) {
-					((Mob)target).kill((BulkanPlayer)caster);
+					((Mob)target[0]).kill((BulkanPlayer)caster);
 				} else {
-					target.setHp(newHp);
+					target[0].setHp(newHp);
 				}	
-				((BulkanPlayer) caster).setStamina(currentStamina - staminaSpent);
 				return true;
 			}
 		}		

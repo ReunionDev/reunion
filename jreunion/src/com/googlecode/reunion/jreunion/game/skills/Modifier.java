@@ -8,7 +8,10 @@ import com.googlecode.reunion.jreunion.game.Skill;
 public interface Modifier {
 	
 	public enum ValueType{
-		DAMAGE
+		DAMAGE,
+		FIRE,
+		LIGHT,
+		EARTH
 	}
 	public enum ModifierType{
 		ADDITIVE,

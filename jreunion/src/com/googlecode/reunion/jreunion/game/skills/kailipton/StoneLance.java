@@ -17,9 +17,9 @@ import com.googlecode.reunion.jreunion.game.skills.Modifier.ValueType;
 import com.googlecode.reunion.jreunion.server.SkillManager;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 
-public class PebbleShot extends Tier1 implements Castable, Modifier {
+public class StoneLance extends Tier3 implements Castable {
 
-	public PebbleShot(SkillManager skillManager,int id) {
+	public StoneLance(SkillManager skillManager,int id) {
 		super(skillManager,id);
 	}
 	
@@ -32,18 +32,18 @@ public class PebbleShot extends Tier1 implements Castable, Modifier {
 	}
 
 	public int getLevelRequirement(int level) {
-		return 0+level;
+		return 49+level;
 	}
 	
 	public float getDamageModifier(){
-		/* level 1 = 15 (magic damage)
+		/* level 1 = 6 (magic damage)
 		 * level 2 = 18
 		 * level 3 = 21
 		 * ...
-		 * level 25 = 90
+		 * level 25 = 155
 		 */
 		
-		return (float)75/(getMaxLevel()-1);
+		return (float)149/(getMaxLevel()-1);
 		
 	}
 	
@@ -53,18 +53,18 @@ public class PebbleShot extends Tier1 implements Castable, Modifier {
 		int level = player.getSkillLevel(this);
 		
 		if(level>0){
-			modifier += (15+((level-1)*getDamageModifier()));			
+			modifier += (6+((level-1)*getDamageModifier()));			
 			}	
 		
 		return modifier;
 	}
 	
 	@Override
-	public boolean cast(LivingObject caster, LivingObject... target) {
+	public boolean cast(LivingObject caster, LivingObject... targets) {
 		if(caster instanceof KailiptonPlayer){
 			int currentMana = ((KailiptonPlayer) caster).getMana();
-			// mana spent: level 1 = 3 ... level 25 = 15 
-			int manaSpent = (int)(3 + ((((KailiptonPlayer) caster).getSkillLevel(this)-1) * ((float)15/(getMaxLevel()-1))));
+			// mana spent: level 1 = 21 ... level 25 = 45 
+			int manaSpent = (int)(21 + ((((KailiptonPlayer) caster).getSkillLevel(this)-1) * ((float)24/(getMaxLevel()-1))));
 			
 			if((currentMana - manaSpent)  < 0){
 				((Player)(caster)).getClient().sendPacket(Type.SAY, "Not enought mana to use the skill.");
@@ -76,14 +76,14 @@ public class PebbleShot extends Tier1 implements Castable, Modifier {
 			Player player = (Player)caster;
 			Weapon weapon = player.getEquipment().getMainHand();
 			float baseDamage = player.getBaseDamage();
-			double weaponMagicBoost=1;
+			double weaponMagicBoost = 1;
 			if(weapon instanceof StaffWeapon){
 				weaponMagicBoost += ((double)weapon.getMagicDmg())/100; // % of magic dmg boost
 			}
 			float stoneDamage = getDamageModifier(player);
 			float stoneMasteryDamage = 1;
 			
-			// calculate damage of skill StoneMastery
+			// calculate damage of skill PebbleShot, Hail and StoneMastery
 			for(Skill skill: ((Player)caster).getSkills().keySet()){
 				if (Modifier.class.isInstance(skill)){
 					Modifier modifier = (Modifier)skill; 
@@ -93,8 +93,13 @@ public class PebbleShot extends Tier1 implements Castable, Modifier {
 								case MULTIPLICATIVE: // StoneMastery
 									stoneMasteryDamage *= modifier.getModifier(caster);
 									break;
-								case ADDITIVE:
-									stoneDamage += modifier.getModifier(caster);
+								case ADDITIVE: // PebbleShot / Hail
+									if(skill instanceof PebbleShot){
+										stoneDamage += (modifier.getModifier(caster)*0.5);
+									}
+									else if(skill instanceof Hail){
+										stoneDamage += (modifier.getModifier(caster)*0.7);
+									}
 									break;
 							}
 						}
@@ -104,51 +109,18 @@ public class PebbleShot extends Tier1 implements Castable, Modifier {
 			
 			float magicDamage = (float)((baseDamage + stoneDamage) * stoneMasteryDamage * weaponMagicBoost);
 			
-			synchronized(target){
-				int newHp = target[0].getHp() - (int) (magicDamage);				
+			synchronized(targets){
+				int newHp = targets[0].getHp() - (int) (magicDamage);				
 				if (newHp <= 0) {
-					((Mob)target[0]).kill((KailiptonPlayer)caster);
+					if(targets[0] instanceof Mob)
+						((Mob)targets[0]).kill((KailiptonPlayer)caster);
 				} else {
-					target[0].setHp(newHp);
+					targets[0].setHp(newHp);
 				}
 				return true;
 			}
 			
 		}		
 		return false;
-	}
-	
-
-	public boolean getCondition(LivingObject owner){
-		// not needed is the class
-		return true;
-	}
-
-	@Override
-	public ModifierType getModifierType() {
-
-		return Modifier.ModifierType.ADDITIVE;
-	}
-	
-	private int [] affectedSkillIds = {13, 28};
-	private List<Skill>  affectedSkills = null ;
-	
-	@Override
-	public List<Skill> getAffectedSkills() {
-		synchronized(affectedSkillIds){
-			if (affectedSkills==null){
-				affectedSkills = new Vector<Skill>();
-				for(int skillId:affectedSkillIds){					
-					SkillManager skillManager = getSkillManager();
-					affectedSkills.add(skillManager.getSkill(skillId));					
-				}
-			}		
-		}		
-		return affectedSkills;
-	}
-
-	@Override
-	public float getModifier(LivingObject livingObject) {
-		return getDamageModifier((Player)livingObject);
 	}
 }

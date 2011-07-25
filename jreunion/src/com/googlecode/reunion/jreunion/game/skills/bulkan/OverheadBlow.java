@@ -14,9 +14,9 @@ import com.googlecode.reunion.jreunion.server.Server;
 import com.googlecode.reunion.jreunion.server.SkillManager;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 
-public class OverheadBlow extends WeaponAttack implements Castable{
+public class OverHeadBlow extends WeaponAttack implements Castable{
 
-	public OverheadBlow(SkillManager skillManager,int id) {
+	public OverHeadBlow(SkillManager skillManager,int id) {
 		super(skillManager,id);
 	}
 
@@ -68,7 +68,7 @@ public class OverheadBlow extends WeaponAttack implements Castable{
 	}
 	
 	@Override
-	public boolean cast(LivingObject caster, LivingObject target) {
+	public boolean cast(LivingObject caster, LivingObject... target) {
 		
 		if(caster instanceof BulkanPlayer){	
 			
@@ -76,8 +76,12 @@ public class OverheadBlow extends WeaponAttack implements Castable{
 			// stamina spent: level 1 = 10 ... level 25 = 40 
 			int staminaSpent = 10 + (((BulkanPlayer) caster).getSkillLevel(this)-1 * (30/(getMaxLevel()-1)));
 			
-			if((currentStamina - staminaSpent)  < 0)
+			if((currentStamina - staminaSpent)  < 0){
+				((Player)(caster)).getClient().sendPacket(Type.SAY, "Not enought stamina to use the skill.");
 				return false;
+			} else {
+				((BulkanPlayer) caster).setStamina(currentStamina - staminaSpent);
+			}
 			
 			float baseDamage = ((BulkanPlayer) caster).getBaseDamage();
 			float skillDamage = getDamageModifier((BulkanPlayer) caster);
@@ -114,13 +118,12 @@ public class OverheadBlow extends WeaponAttack implements Castable{
 			
 				
 			synchronized(target){	
-				int newHp = target.getHp() - (int) (damage);				
+				int newHp = target[0].getHp() - (int) (damage);				
 				if (newHp <= 0) {
-					((Mob)target).kill((BulkanPlayer)caster);
+					((Mob)target[0]).kill((BulkanPlayer)caster);
 				} else {
-					target.setHp(newHp);
+					target[0].setHp(newHp);
 				}			
-				((BulkanPlayer) caster).setStamina(currentStamina - staminaSpent);
 				return true;
 			}
 		}		

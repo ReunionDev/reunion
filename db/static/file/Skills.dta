@@ -52,7 +52,7 @@ MinSecondRange = 145
 MaxSecondRange = 170
 StatusUsed = 1
 Type = 2
-Class = kailipton.Fireball
+Class = kailipton.FireBall
 
 [Lightning Ball]
 ID = 4
@@ -80,7 +80,7 @@ MinSecondRange = 145
 MaxSecondRange = 170
 StatusUsed = 1
 Type = 2
-Class = kailipton.Tier2
+Class = kailipton.Lightning
 
 [Recovery]
 ID = 6
@@ -122,7 +122,7 @@ MinSecondRange = 0
 MaxSecondRange = 0
 StatusUsed = -1
 Type = 0
-Class = kailipton.Mastery
+Class = kailipton.FireMastery
 
 [Glow of Peace]
 ID = 9
@@ -150,7 +150,7 @@ MinSecondRange = 145
 MaxSecondRange = 170
 StatusUsed = 1
 Type = 2
-Class = kailipton.Tier2
+Class = kailipton.FirePillar
 
 [Stone Mastery]
 ID = 11
@@ -164,7 +164,7 @@ MinSecondRange = 0
 MaxSecondRange = 0
 StatusUsed = -1
 Type = 0
-Class = kailipton.Mastery
+Class = kailipton.StoneMastery
 
 [Pebble Shot]
 ID = 12
@@ -192,7 +192,7 @@ MinSecondRange = 145
 MaxSecondRange = 170
 StatusUsed = 1
 Type = 2
-Class = kailipton.Tier2
+Class = kailipton.Hail
 
 [Lightning Mastery]
 ID = 14
@@ -206,7 +206,7 @@ MinSecondRange = 0
 MaxSecondRange = 0
 StatusUsed = -1
 Type = 0
-Class = kailipton.Mastery
+Class = kailipton.LightningMastery
 
 [Return to Village]
 ID = 15
@@ -262,7 +262,7 @@ MinSecondRange = 140
 MaxSecondRange = 170
 StatusUsed = 2
 Type = 2
-Class = bulkan.OverheadBlow
+Class = bulkan.OverHeadBlow
 
 [Recovery Boost]
 ID = 19
@@ -374,7 +374,7 @@ MinSecondRange = 145
 MaxSecondRange = 170
 StatusUsed = 1
 Type = 2
-Class = kailipton.Tier3
+Class = kailipton.StarFlare
 
 [Shock Sphere]
 ID = 27
@@ -388,7 +388,7 @@ MinSecondRange = 145
 MaxSecondRange = 170
 StatusUsed = 1
 Type = 2
-Class = kailipton.Tier3
+Class = kailipton.ShockSphere
 
 [Stone Lance]
 ID = 28
@@ -402,7 +402,7 @@ MinSecondRange = 145
 MaxSecondRange = 170
 StatusUsed = 1
 Type = 2
-Class = kailipton.Tier3
+Class = kailipton.StoneLance
 
 [Semi-automatic skill]
 ID = 29

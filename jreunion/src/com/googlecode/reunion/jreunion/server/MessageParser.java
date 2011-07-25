@@ -16,6 +16,7 @@ import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Position;
 import com.googlecode.reunion.jreunion.game.Skill;
 import com.googlecode.reunion.jreunion.game.Spawn;
+import com.googlecode.reunion.jreunion.game.Player.Race;
 import com.googlecode.reunion.jreunion.server.Area.Field;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 import com.googlecode.reunion.jcommon.ParsedItem;
@@ -85,7 +86,6 @@ public class MessageParser {
 							item.setGemNumber(0);
 							item.setExtraStats(0);
 						}
-						DatabaseUtils.getInstance().saveItem(item);
 						com.dropItem(player.getPosition(), item);
 						
 					} catch (Exception e) {
@@ -278,25 +278,28 @@ public class MessageParser {
 				com.serverSay("{ X:" + player.getPosition().getX() + ", Y:"
 						+ player.getPosition().getY()+", Z:"+player.getPosition().getZ()+"}");
 			}
-			// set the level of a skill from the player
-			// @skilllevel [SkillID] [SkillLevel]
-			else if (words[0].equals("@skilllevel")) {
-				if (words.length == 3) {
-					synchronized(player) {
-						Skill skill = player.getSkill(Integer.parseInt(words[1]));
-						
-						int currentSkillLevel = player.getSkillLevel(skill);
-						int newSkillLevel = Integer.parseInt(words[2]);
-						
-						if(newSkillLevel < currentSkillLevel){	
-							player.setSkillLevel(skill, newSkillLevel);
-							player.getClient().sendPacket(Type.SKILLLEVEL, skill, newSkillLevel);
-							//DatabaseUtils.getInstance().saveSkills(player);
-						
-							int playerCurrentStatusPoints = player.getStatusPoints();
-							player.setStatusPoints(playerCurrentStatusPoints+(currentSkillLevel-newSkillLevel));
-						}
+			// resets all the skill from player
+			// @resetskills
+			else if (words[0].equals("@resetskills")) {			
+				for(Skill skill: (player.getSkills().keySet())){
+					int skillLevel = player.getSkillLevel(skill);
+					int newSkillLevel = 0;
+					if(skillLevel > 0){
+						// if is Fireball / Lightning Ball / Pebble Shot
+						if(skill.getId() == 3 || skill.getId() == 4 || skill.getId() == 12)
+							newSkillLevel = 1;
+						player.setSkillLevel(skill, newSkillLevel);
+						player.getClient().sendPacket(Type.SKILLLEVEL, skill, newSkillLevel);
+						int playerCurrentStatusPoints = player.getStatusPoints();
+						player.setStatusPoints(playerCurrentStatusPoints+skillLevel-newSkillLevel);
 					}
+				}
+			}
+			else if (words[0].equals("@mobattack")) {
+				if (words.length == 2) {
+					Mob mob = (Mob)player.getPosition().getLocalMap().getEntity(Integer.parseInt(words[1]));
+					mob.attack(player);
+					player.getClient().sendPacket(Type.ATTACK,mob,player);
 				}
 			}
 		}

@@ -4,6 +4,7 @@ import com.googlecode.reunion.jreunion.game.BulkanPlayer;
 import com.googlecode.reunion.jreunion.game.Castable;
 import com.googlecode.reunion.jreunion.game.Effectable;
 import com.googlecode.reunion.jreunion.game.LivingObject;
+import com.googlecode.reunion.jreunion.game.Mob;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Skill;
 import com.googlecode.reunion.jreunion.game.items.equipment.Weapon;
@@ -18,7 +19,7 @@ public class BasicAttack extends Skill implements Castable, Effectable {
 		super(skillManager,id);
 	}
 	
-	public boolean cast(LivingObject attacker, LivingObject victim) {
+	public boolean cast(LivingObject attacker, LivingObject... victim) {
 		
 		float damage = 0;
 		
@@ -62,9 +63,12 @@ public class BasicAttack extends Skill implements Castable, Effectable {
 		}
 		
 		synchronized(victim){
-			
-			victim.setHp((int)(victim.getHp()-damage));
-			
+			int newHp = victim[0].getHp() - (int) (damage);				
+			if (newHp <= 0) {
+				((Mob)victim[0]).kill((BulkanPlayer)attacker);
+			} else {
+				victim[0].setHp(newHp);
+			}
 		}		
 		
 		return true;

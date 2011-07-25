@@ -34,7 +34,7 @@ public abstract class Weapon extends PlayerItem {
 
 	private int handed; // 1 - One handed; 2 - Two handed
 
-	
+	private float magicDmg;
 
 	public Weapon(int id) {
 		super(id);
@@ -86,6 +86,10 @@ public abstract class Weapon extends PlayerItem {
 	public int getSpeed() {
 		return speed;
 	}
+	
+	public float getMagicDmg() {
+		return magicDmg;
+	}
 
 	@Override
 	public void loadFromReference(int id) {
@@ -106,6 +110,7 @@ public abstract class Weapon extends PlayerItem {
 			setReqDex(0);
 			setPosition(9);
 			setRace(-1);
+			setMagicDmg(0);
 		} else {
 			if (item.checkMembers(new String[] { "Level" })) {
 				// use member from file
@@ -177,6 +182,13 @@ public abstract class Weapon extends PlayerItem {
 				// use default
 				setRace(-1);
 			}	
+			if (item.checkMembers(new String[] { "MagicDmg" })) {
+				// use member from file
+				setMagicDmg(Integer.parseInt(item.getMemberValue("MagicDmg")));
+			} else {
+				// use default
+				setMagicDmg(0);
+			}	
 		}
 	}
 	
@@ -222,6 +234,10 @@ public abstract class Weapon extends PlayerItem {
 
 	public void setSpeed(int speed) {
 		this.speed = speed;
+	}
+	
+	public void setMagicDmg(int magicDmg) {
+		this.magicDmg = magicDmg;
 	}
 
 }
