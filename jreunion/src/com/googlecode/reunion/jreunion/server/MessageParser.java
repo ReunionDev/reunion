@@ -280,18 +280,37 @@ public class MessageParser {
 			}
 			// resets all the skill from player
 			// @resetskills
-			else if (words[0].equals("@resetskills")) {			
-				for(Skill skill: (player.getSkills().keySet())){
-					int skillLevel = player.getSkillLevel(skill);
-					int newSkillLevel = 0;
+			else if (words[0].equals("@resetskills")) {
+				
+				int skillLevel = 0;
+				int newSkillLevel = 0;
+				
+				if (words.length == 2) { //@resetskills [skillID]
+					int skillId = Integer.parseInt(words[1]);
+					Skill skillToReset = player.getSkill(skillId);
+					skillLevel = player.getSkillLevel(skillToReset);
+					
 					if(skillLevel > 0){
 						// if is Fireball / Lightning Ball / Pebble Shot
-						if(skill.getId() == 3 || skill.getId() == 4 || skill.getId() == 12)
+						if(skillToReset.getId() == 3 || skillToReset.getId() == 4 || skillToReset.getId() == 12)
 							newSkillLevel = 1;
-						player.setSkillLevel(skill, newSkillLevel);
-						player.getClient().sendPacket(Type.SKILLLEVEL, skill, newSkillLevel);
+						player.setSkillLevel(skillToReset, newSkillLevel);
+						player.getClient().sendPacket(Type.SKILLLEVEL, skillToReset, newSkillLevel);
 						int playerCurrentStatusPoints = player.getStatusPoints();
 						player.setStatusPoints(playerCurrentStatusPoints+skillLevel-newSkillLevel);
+					}
+				}else{ //@resetskills
+					for(Skill skill: (player.getSkills().keySet())){
+						skillLevel = player.getSkillLevel(skill);
+						if(skillLevel > 0){
+							// if is Fireball / Lightning Ball / Pebble Shot
+							if(skill.getId() == 3 || skill.getId() == 4 || skill.getId() == 12)
+								newSkillLevel = 1;
+							player.setSkillLevel(skill, newSkillLevel);
+							player.getClient().sendPacket(Type.SKILLLEVEL, skill, newSkillLevel);
+							int playerCurrentStatusPoints = player.getStatusPoints();
+							player.setStatusPoints(playerCurrentStatusPoints+skillLevel-newSkillLevel);
+						}
 					}
 				}
 			}
