@@ -278,8 +278,7 @@ public class MessageParser {
 				com.serverSay("{ X:" + player.getPosition().getX() + ", Y:"
 						+ player.getPosition().getY()+", Z:"+player.getPosition().getZ()+"}");
 			}
-			// resets all the skill from player
-			// @resetskills
+			// resets all the skill from player: @resetskills [skillID]
 			else if (words[0].equals("@resetskills")) {
 				
 				int skillLevel = 0;

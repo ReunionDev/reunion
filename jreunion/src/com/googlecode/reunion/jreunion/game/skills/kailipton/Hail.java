@@ -80,9 +80,7 @@ public class Hail extends Tier2 implements Castable, Modifier {
 			if(weapon instanceof StaffWeapon){
 				weaponMagicBoost += ((double)weapon.getMagicDmg())/100; // % of magic dmg boost
 			}
-			player.getClient().sendPacket(Type.SAY, "ManaUsed: "+manaSpent+" BaseDmg: "+baseDamage+" WeaponBoost: "+weaponMagicBoost);
 			float stoneDamage = getDamageModifier(player);
-			player.getClient().sendPacket(Type.SAY, "Hail Damage: "+stoneDamage);
 			float stoneMasteryDamage = 1;
 			
 			// calculate damage of skill PebbleShot and StoneMastery
@@ -94,11 +92,9 @@ public class Hail extends Tier2 implements Castable, Modifier {
 							switch(modifier.getModifierType()){	
 								case MULTIPLICATIVE: // StoneMastery
 									stoneMasteryDamage *= modifier.getModifier(caster);
-									player.getClient().sendPacket(Type.SAY, "StoneMastery Damage: "+stoneMasteryDamage);
 									break;
 								case ADDITIVE: // PebbleShot
 									stoneDamage += (modifier.getModifier(caster)*0.6);
-									player.getClient().sendPacket(Type.SAY, "PebbleShot Damage: "+(modifier.getModifier(caster)*0.6));
 									break;
 							}
 						}
@@ -107,7 +103,6 @@ public class Hail extends Tier2 implements Castable, Modifier {
 			}
 			
 			float magicDamage = (float)((baseDamage + stoneDamage) * stoneMasteryDamage * weaponMagicBoost);
-			player.getClient().sendPacket(Type.SAY, "Total Damage: "+magicDamage);
 			
 			synchronized(targets){
 				int newHp = targets[0].getHp() - (int) (magicDamage);				
