@@ -52,7 +52,7 @@ MinSecondRange = 145
 MaxSecondRange = 170
 StatusUsed = 1
 Type = 2
-Class = kailipton.FireBall
+Class = kailipton.Fireball
 
 [Lightning Ball]
 ID = 4
@@ -262,7 +262,7 @@ MinSecondRange = 140
 MaxSecondRange = 170
 StatusUsed = 2
 Type = 2
-Class = bulkan.OverHeadBlow
+Class = bulkan.OverheadBlow
 
 [Recovery Boost]
 ID = 19
