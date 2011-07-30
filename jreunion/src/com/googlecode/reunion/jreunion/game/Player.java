@@ -1,17 +1,13 @@
 package com.googlecode.reunion.jreunion.game;
 
-import java.awt.Rectangle;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Random;
 import java.util.Vector;
 
 import org.apache.log4j.Logger;
 
 import com.googlecode.reunion.jcommon.ParsedItem;
-import com.googlecode.reunion.jcommon.Parser;
 import com.googlecode.reunion.jreunion.events.Event;
 import com.googlecode.reunion.jreunion.events.EventListener;
 import com.googlecode.reunion.jreunion.events.client.ClientDisconnectEvent;
@@ -21,7 +17,6 @@ import com.googlecode.reunion.jreunion.events.map.PlayerLogoutEvent;
 import com.googlecode.reunion.jreunion.events.network.NetworkAcceptEvent;
 import com.googlecode.reunion.jreunion.events.session.SessionEvent;
 import com.googlecode.reunion.jreunion.game.Equipment.Slot;
-import com.googlecode.reunion.jreunion.game.Player.Status;
 import com.googlecode.reunion.jreunion.game.items.equipment.Weapon;
 import com.googlecode.reunion.jreunion.server.Client;
 import com.googlecode.reunion.jreunion.server.Client.State;
@@ -40,12 +35,8 @@ import com.googlecode.reunion.jreunion.server.Tools;
 public abstract class Player extends LivingObject implements EventListener {
 
 	private int defense = 0;
-
-	private int minDmg;
 	
 	java.util.Map<Skill,Integer> skills = new HashMap<Skill,Integer> ();
-
-	private int maxDmg;
 
 	private int totalExp;
 
@@ -181,19 +172,17 @@ public abstract class Player extends LivingObject implements EventListener {
 	}
 
 	/****** Manages the Item Drop ******/
-	public void dropItem(int uniqueId) {
-	
+	public void dropItem(int playerId) {
+		
 		Item item = getInventory().getItemSelected().getItem();
-
+		
 		if (item == null) {
 			return;
 		}
 		
 		LocalMap map = getPosition().getLocalMap();
 		map.getWorld().getCommand().dropItem(getPosition(), item);
-		
 		getInventory().setItemSelected(null);
-	
 	}
 	
 
@@ -369,14 +358,6 @@ public abstract class Player extends LivingObject implements EventListener {
 		return lvlUpExp;
 	}
 
-	public int getMaxDmg() {
-		return maxDmg;
-	}
-
-	public int getMinDmg() {
-		return minDmg;
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -498,6 +479,8 @@ public abstract class Player extends LivingObject implements EventListener {
 		.getCommand()
 		.GoToPos(this,spawnX,spawnY);
 		*/
+		this.setPosition(new Position(7026, 5220, 106, this.getPosition().getLocalMap(), 0.0f));
+		getClient().getWorld().getCommand().GoToPos(this, this.getPosition());
 	}
 
 	/**
@@ -867,14 +850,6 @@ public abstract class Player extends LivingObject implements EventListener {
 		}
 	}
 
-	public void setMaxDmg(int maxDmg) {
-		this.maxDmg = maxDmg;
-	}
-
-	public void setMinDmg(int minDmg) {
-		this.minDmg = minDmg;
-	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -1166,10 +1141,12 @@ public abstract class Player extends LivingObject implements EventListener {
 		InventoryItem invItem = getInventory().getItemSelected();
 
 		if (invItem == null) {
+			/*
 			if (getEquipment().getItem(slot) instanceof Weapon) {
 				setMinDmg(1);
 				setMaxDmg(2);
 			}
+			*/
 
 			getInventory()
 					.setItemSelected(
@@ -1186,22 +1163,26 @@ public abstract class Player extends LivingObject implements EventListener {
 				
 				getEquipment().setItem(slot, item);
 				getInventory().setItemSelected(null);
+				/*
 				if (getEquipment().getItem(slot) instanceof Weapon) {
 					Weapon weapon = (Weapon) getEquipment().getItem(slot);
 					setMinDmg(weapon.getMinDamage());
 					setMaxDmg(weapon.getMaxDamage());
 				}
+				*/
 			} else {
 				Item currentItem = getEquipment().getItem(slot);
 				getInterested().sendPacket(Type.CHAR_REMOVE, this, slot);
 				getEquipment().setItem(slot, invItem.getItem());
 				getInventory().setItemSelected(
 						new InventoryItem(currentItem, 0, 0, 0));
+				/*
 				if (getEquipment().getItem(slot) instanceof Weapon) {
 					Weapon weapon = (Weapon) getEquipment().getItem(slot);
 					setMinDmg(weapon.getMinDamage());
 					setMaxDmg(weapon.getMaxDamage());
 				}
+				*/
 				Item item = getEquipment().getItem(slot);
 
 				getInterested().sendPacket(Type.CHAR_WEAR, this, slot, item);

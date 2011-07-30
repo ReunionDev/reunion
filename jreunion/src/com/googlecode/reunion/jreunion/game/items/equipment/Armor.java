@@ -27,28 +27,28 @@ public class Armor extends PlayerItem {
 
 	// 4 - Feet; 5 - Shield;
 
-	private int boltMagicDef;
+	private float boltMagicDef; // value in %
 
-	private int coldMagicDef;
+	private float coldMagicDef; // value in %
 
-	private int volcanicMagicDef;
+	private float volcanicMagicDef; // value in %
 
-	private int stunMagicDef;
+	private float stunMagicDef; // value in %
 
-	private int magicDef; // value in %
+	private float magicDef; // value in %
 
-	private int manaUsed; // value in %
+	private float manaUsed; // value in %
 
 	public Armor(int id) {
 		super(id);
 		loadFromReference(id);
 	}
 
-	public int getBoltMagicDef() {
+	public float getBoltMagicDef() {
 		return boltMagicDef;
 	}
 
-	public int getColdMagicDef() {
+	public float getColdMagicDef() {
 		return coldMagicDef;
 	}
 
@@ -60,11 +60,11 @@ public class Armor extends PlayerItem {
 		return level;
 	}
 
-	public int getMagicDef() {
+	public float getMagicDef() {
 		return magicDef;
 	}
 
-	public int getManaUsed() {
+	public float getManaUsed() {
 		return manaUsed;
 	}
 
@@ -88,11 +88,11 @@ public class Armor extends PlayerItem {
 		return reqStr;
 	}
 
-	public int getStunMagicDef() {
+	public float getStunMagicDef() {
 		return stunMagicDef;
 	}
 
-	public int getVolcanicMagicDef() {
+	public float getVolcanicMagicDef() {
 		return volcanicMagicDef;
 	}
 
@@ -171,7 +171,7 @@ public class Armor extends PlayerItem {
 			}
 			if (item.checkMembers(new String[] { "BoltMagicDef" })) {
 				// use member from file
-				setBoltMagicDef(Integer.parseInt(item
+				setBoltMagicDef(Float.parseFloat(item
 						.getMemberValue("BoltMagicDef")));
 			} else {
 				// use default
@@ -179,7 +179,7 @@ public class Armor extends PlayerItem {
 			}
 			if (item.checkMembers(new String[] { "VolcanicMagicDef" })) {
 				// use member from file
-				setVolcanicMagicDef(Integer.parseInt(item
+				setVolcanicMagicDef(Float.parseFloat(item
 						.getMemberValue("VolcanicMagicDef")));
 			} else {
 				// use default
@@ -187,7 +187,7 @@ public class Armor extends PlayerItem {
 			}
 			if (item.checkMembers(new String[] { "ColdMagicDef" })) {
 				// use member from file
-				setColdMagicDef(Integer.parseInt(item
+				setColdMagicDef(Float.parseFloat(item
 						.getMemberValue("ColdMagicDef")));
 			} else {
 				// use default
@@ -195,7 +195,7 @@ public class Armor extends PlayerItem {
 			}
 			if (item.checkMembers(new String[] { "StunMagicDef" })) {
 				// use member from file
-				setStunMagicDef(Integer.parseInt(item
+				setStunMagicDef(Float.parseFloat(item
 						.getMemberValue("StunMagicDef")));
 			} else {
 				// use default
@@ -203,14 +203,14 @@ public class Armor extends PlayerItem {
 			}
 			if (item.checkMembers(new String[] { "MagicDef" })) {
 				// use member from file
-				setMagicDef(Integer.parseInt(item.getMemberValue("MagicDef")));
+				setMagicDef(Float.parseFloat(item.getMemberValue("MagicDef")));
 			} else {
 				// use default
 				setMagicDef(0);
 			}
 			if (item.checkMembers(new String[] { "ManaUsed" })) {
 				// use member from file
-				setManaUsed(Integer.parseInt(item.getMemberValue("ManaUsed")));
+				setManaUsed(Float.parseFloat(item.getMemberValue("ManaUsed")));
 			} else {
 				// use default
 				setManaUsed(0);
@@ -218,15 +218,11 @@ public class Armor extends PlayerItem {
 		}
 	}
 
-	public int setBoltMagicDef() {
-		return boltMagicDef;
-	}
-
-	public void setBoltMagicDef(int boltMagicDef) {
+	public void setBoltMagicDef(float boltMagicDef) {
 		this.boltMagicDef = boltMagicDef;
 	}
 
-	public void setColdMagicDef(int coldMagicDef) {
+	public void setColdMagicDef(float coldMagicDef) {
 		this.coldMagicDef = coldMagicDef;
 	}
 
@@ -238,11 +234,11 @@ public class Armor extends PlayerItem {
 		this.level = level;
 	}
 
-	public void setMagicDef(int magicDef) {
+	public void setMagicDef(float magicDef) {
 		this.magicDef = magicDef;
 	}
 
-	public void setManaUsed(int manaUsed) {
+	public void setManaUsed(float manaUsed) {
 		this.manaUsed = manaUsed;
 	}
 
@@ -266,11 +262,11 @@ public class Armor extends PlayerItem {
 		this.reqStr = reqStr;
 	}
 
-	public void setStunMagicDef(int stunMagicDef) {
+	public void setStunMagicDef(float stunMagicDef) {
 		this.stunMagicDef = stunMagicDef;
 	}
 
-	public void setVolcanicMagicDef(int volcanicMagicDef) {
+	public void setVolcanicMagicDef(float volcanicMagicDef) {
 		this.volcanicMagicDef = volcanicMagicDef;
 	}
 }

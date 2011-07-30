@@ -12,9 +12,7 @@ import com.googlecode.reunion.jreunion.server.Client;
 import com.googlecode.reunion.jreunion.server.ItemFactory;
 import com.googlecode.reunion.jreunion.server.Reference;
 import com.googlecode.reunion.jreunion.server.Server;
-import com.googlecode.reunion.jreunion.server.Session;
 import com.googlecode.reunion.jreunion.server.Area.Field;
-import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 
 /**
  * @author Aidamina
@@ -60,7 +58,7 @@ public class Mob extends Npc {
 	}
 
 	private void closeMeleeAttackPlayer(Player player) {
-
+		player.setHp(player.getHp() - getDmg());
 	}
 
 	public int getAttackType() {
@@ -432,6 +430,7 @@ public class Mob extends Npc {
 					Item item = ItemFactory.create(itemType);
 					item.setExtraStats(0);
 					item.setGemNumber(0);					
+					
 					final RoamingItem roamingItem = getPosition().getLocalMap().getWorld().getCommand().dropItem(this.getPosition(), item);
 					roamingItem.setOwner(player);
 					

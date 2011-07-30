@@ -3,8 +3,8 @@ package com.googlecode.reunion.jreunion.server;
 public class Tools {
 
 	/**
-	 * Caculate how much a stat increases an attribute
-	 * @param n input stat
+	 * Calculate how much a status increases an attribute
+	 * @param n input status
 	 * @param count increment boundary
 	 * @return increased value
 	 */
@@ -27,5 +27,14 @@ public class Tools {
 
 		return Math.max(Math.min(current, max), min);
 
+	}
+	
+	/**
+	 * Calculate a random success rate from a given value
+	 * @param limit
+	 * @return true if given limit is greater then random success rate
+	 */
+	public static boolean successRateCalc(float limit){
+		return limit > Server.getRand().nextDouble();
 	}
 }

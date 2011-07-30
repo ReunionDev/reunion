@@ -108,7 +108,7 @@ MinSecondRange = 10
 MaxSecondRange = 70
 StatusUsed = 1
 Type = 1
-Class = PlaceHolder
+Class = kailipton.ManaShield
 
 [Fire Mastery]
 ID = 8
@@ -220,7 +220,7 @@ MinSecondRange = 0
 MaxSecondRange = 0
 StatusUsed = 1
 Type = 1
-Class = PlaceHolder
+Class = kailipton.ReturnToVillage
 
 [Power-up Stamina]
 ID = 16

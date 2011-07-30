@@ -23,16 +23,8 @@ public class FirePillar extends Tier2 implements Castable, Modifier {
 		super(skillManager,id);
 	}
 	
-	public int getMaxLevel() {
-		return 25;
-	}
-	
 	public ValueType getValueType() {
 		return Modifier.ValueType.FIRE;
-	}
-
-	public int getLevelRequirement(int level) {
-		return 37+level;
 	}
 	
 	public float getDamageModifier(){
@@ -59,27 +51,45 @@ public class FirePillar extends Tier2 implements Castable, Modifier {
 		return modifier;
 	}
 	
+	public float getManaModifier(){
+		/* mana spent:
+		 * level 1 = 22
+		 * level 2 = 23
+		 * level 3 = 25
+		 * ...
+		 * level 25 = 66
+		 */
+		return 44f/(getMaxLevel()-1);
+	}
+	
+	float getManaModifier(Player player){
+		float modifier = 0;
+		int level = player.getSkillLevel(this);
+		
+		if(level>0){
+			modifier += (22 + ((level-1) * getManaModifier()));			
+			}	
+		
+		return modifier;
+	}
+	
 	@Override
 	public boolean cast(LivingObject caster, LivingObject... targets) {
 		if(caster instanceof KailiptonPlayer){
-			int currentMana = ((KailiptonPlayer) caster).getMana();
-			// mana spent: level 1 = 22 ... level 25 = 66 
-			int manaSpent = (int)(22 + ((((KailiptonPlayer) caster).getSkillLevel(this)-1) * ((float)44/(getMaxLevel()-1))));
-			
-			if((currentMana - manaSpent)  < 0){
-				((Player)(caster)).getClient().sendPacket(Type.SAY, "Not enought mana to use the skill.");
-				return false;
-			}  else {
-				((KailiptonPlayer) caster).setMana(currentMana - manaSpent);
-			}
-			
 			Player player = (Player)caster;
+			int currentMana = player.getMana();
+			int manaSpent = (int) getManaModifier(player);
+			
+			player.setMana(currentMana - manaSpent);
+			
 			Weapon weapon = player.getEquipment().getMainHand();
 			float baseDamage = player.getBaseDamage();
 			double weaponMagicBoost = 1;
+			
 			if(weapon instanceof StaffWeapon){
 				weaponMagicBoost += ((double)weapon.getMagicDmg())/100; // % of magic dmg boost
 			}
+			
 			float fireDamage = getDamageModifier(player);
 			float fireMasteryDamage = 1;
 			
@@ -115,8 +125,7 @@ public class FirePillar extends Tier2 implements Castable, Modifier {
 					targets[0].setHp(newHp);
 				}
 				return true;
-			}
-			
+			}	
 		}		
 		return false;
 	}

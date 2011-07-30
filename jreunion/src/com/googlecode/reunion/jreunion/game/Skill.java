@@ -28,6 +28,10 @@ public abstract class Skill {
 
 
 	public abstract int  getMaxLevel();
+	
+	public int getMinLevel(){
+		return 0;
+	}
 
 	public int getType() {
 		return type;

@@ -4,6 +4,8 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.HashMap;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.net.SocketAppender;
@@ -15,8 +17,7 @@ import com.googlecode.reunion.jreunion.game.NpcSpawn;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Position;
 import com.googlecode.reunion.jreunion.game.Skill;
-import com.googlecode.reunion.jreunion.game.Spawn;
-import com.googlecode.reunion.jreunion.game.Player.Race;
+import com.googlecode.reunion.jreunion.game.skills.GroupedSkill;
 import com.googlecode.reunion.jreunion.server.Area.Field;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 import com.googlecode.reunion.jcommon.ParsedItem;
@@ -275,49 +276,69 @@ public class MessageParser {
 				}
 				client.sendData( packetData + "\n");
 			} else if (words[0].equals("@spot")) {
-				com.serverSay("{ X:" + player.getPosition().getX() + ", Y:"
+				client.sendPacket(Type.SAY, "{ X:" + player.getPosition().getX() + ", Y:"
 						+ player.getPosition().getY()+", Z:"+player.getPosition().getZ()+"}");
 			}
 			// resets all the skill from player: @resetskills [skillID]
 			else if (words[0].equals("@resetskills")) {
 				
-				int skillLevel = 0;
-				int newSkillLevel = 0;
+				//List<Skill> affectedSkills = (words.length == 2) ? List<Skill>(new Skill[]{player.getSkill(Integer.parseInt(words[1]))}):player.getSkills().keySet();
+				//java.util.Map<Skill,Integer> affectedSkill = (words.length == 2) ? affectedSkills.put(player.getSkill(Integer.parseInt(words[1])),player.getSkillLevel(player.getSkill(Integer.parseInt(words[1])))) : player.getSkills();
+				
+				java.util.Map<Skill,Integer> affectedSkills = new HashMap<Skill,Integer> ();
 				
 				if (words.length == 2) { //@resetskills [skillID]
 					int skillId = Integer.parseInt(words[1]);
-					Skill skillToReset = player.getSkill(skillId);
-					skillLevel = player.getSkillLevel(skillToReset);
+					Skill skill = player.getSkill(skillId);
 					
-					if(skillLevel > 0){
-						// if is Fireball / Lightning Ball / Pebble Shot
-						if(skillToReset.getId() == 3 || skillToReset.getId() == 4 || skillToReset.getId() == 12)
-							newSkillLevel = 1;
-						player.setSkillLevel(skillToReset, newSkillLevel);
-						player.getClient().sendPacket(Type.SKILLLEVEL, skillToReset, newSkillLevel);
-						int playerCurrentStatusPoints = player.getStatusPoints();
-						player.setStatusPoints(playerCurrentStatusPoints+skillLevel-newSkillLevel);
+					if(skill == null){
+						client.sendPacket(Type.SAY, "SkillID "+skillId+" don't bellong to "+player.getRace());
+						return null;
 					}
-				}else{ //@resetskills
-					for(Skill skill: (player.getSkills().keySet())){
-						skillLevel = player.getSkillLevel(skill);
-						if(skillLevel > 0){
-							// if is Fireball / Lightning Ball / Pebble Shot
-							if(skill.getId() == 3 || skill.getId() == 4 || skill.getId() == 12)
-								newSkillLevel = 1;
-							player.setSkillLevel(skill, newSkillLevel);
-							player.getClient().sendPacket(Type.SKILLLEVEL, skill, newSkillLevel);
-							int playerCurrentStatusPoints = player.getStatusPoints();
-							player.setStatusPoints(playerCurrentStatusPoints+skillLevel-newSkillLevel);
+					
+					if(skill instanceof GroupedSkill){//grouped skills can only be reseted together
+						for(int skillObject:((GroupedSkill)skill).getSkillsInGroup()){
+							skill = player.getSkill(skillObject);
+							affectedSkills.put(skill, player.getSkillLevel(skill));
 						}
 					}
+					else affectedSkills.put(skill, player.getSkillLevel(skill));
+					
+				} else //@resetskills
+					affectedSkills = player.getSkills(); 
+					
+				// resets player skills to its minimum level
+				for(Skill skill: affectedSkills.keySet()){ 
+					int skillLevel = player.getSkillLevel(skill);
+					
+					if(skillLevel == 0)
+						continue;
+					
+					int newSkillLevel = skill.getMinLevel();
+					player.setSkillLevel(skill, newSkillLevel);
+					client.sendPacket(Type.SKILLLEVEL, skill, newSkillLevel);
+					int playerCurrentStatusPoints = player.getStatusPoints();
+					player.setStatusPoints(playerCurrentStatusPoints+skillLevel-newSkillLevel);
 				}
 			}
+			// order a mob to attack player several times: @mobattack [mobUniqueID] [numberOfattacks]
 			else if (words[0].equals("@mobattack")) {
-				if (words.length == 2) {
-					Mob mob = (Mob)player.getPosition().getLocalMap().getEntity(Integer.parseInt(words[1]));
+				if(words.length < 2){ // command to short
+					client.sendPacket(Type.SAY, "USAGE: @mobattack [mobUniqueID] / @mobattack [mobUniqueID] [numberOfAttacks]");
+					return "";
+				}
+				int numberOfAttacks = 1;
+				// get mob by entity
+				Mob mob = (Mob)player.getPosition().getLocalMap().getEntity(Integer.parseInt(words[1]));
+				if (words.length == 3) { // get number of attacks
+					numberOfAttacks = Integer.parseInt(words[2]);
+				}
+				// sends the several mob attack packets
+				for(int attacksCounter = numberOfAttacks; attacksCounter > 0; attacksCounter-- ){
 					mob.attack(player);
 					player.getClient().sendPacket(Type.ATTACK,mob,player);
+					if(player.getHp() <= 0)
+						break;
 				}
 			}
 		}

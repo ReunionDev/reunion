@@ -59,27 +59,45 @@ public class Lightning extends Tier2 implements Castable, Modifier {
 		return modifier;
 	}
 	
+	public float getManaModifier(){
+		/* mana spent:
+		 * level 1 = 10
+		 * level 2 = 10
+		 * level 3 = 11
+		 * ...
+		 * level 25 = 30
+		 */
+		return 20f/(getMaxLevel()-1);
+	}
+	
+	float getManaModifier(Player player){
+		float modifier = 0;
+		int level = player.getSkillLevel(this);
+		
+		if(level>0){
+			modifier += (10 + ((level-1) * getManaModifier()));			
+			}	
+		
+		return modifier;
+	}
+	
 	@Override
 	public boolean cast(LivingObject caster, LivingObject... targets) {
 		if(caster instanceof KailiptonPlayer){
-			int currentMana = ((KailiptonPlayer) caster).getMana();
-			// mana spent: level 1 = 10 ... level 25 = 30 
-			int manaSpent = (int)(10 + ((((KailiptonPlayer) caster).getSkillLevel(this)-1) * ((float)20/(getMaxLevel()-1))));
-			
-			if((currentMana - manaSpent)  < 0){
-				((Player)(caster)).getClient().sendPacket(Type.SAY, "Not enought mana to use the skill.");
-				return false;
-			}  else {
-				((KailiptonPlayer) caster).setMana(currentMana - manaSpent);
-			}
-			
 			Player player = (Player)caster;
+			int currentMana = player.getMana();
+			int manaSpent = (int) getManaModifier(player);
+			
+			player.setMana(currentMana - manaSpent);
+			
 			Weapon weapon = player.getEquipment().getMainHand();
 			float baseDamage = player.getBaseDamage();
 			double weaponMagicBoost = 1;
+			
 			if(weapon instanceof StaffWeapon){
 				weaponMagicBoost += ((double)weapon.getMagicDmg())/100; // % of magic dmg boost
 			}
+			
 			float lightDamage = getDamageModifier(player);
 			float lightningMasteryDamage = 1;
 			

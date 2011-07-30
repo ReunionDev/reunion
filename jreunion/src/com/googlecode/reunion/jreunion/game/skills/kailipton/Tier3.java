@@ -17,7 +17,7 @@ public class Tier3 extends GroupedSkill{
 	}
 
 	@Override
-	protected int[] getSkillsInGroup() {
+	public int[] getSkillsInGroup() {
 		return new int[]{26,27,28};
 	}
 

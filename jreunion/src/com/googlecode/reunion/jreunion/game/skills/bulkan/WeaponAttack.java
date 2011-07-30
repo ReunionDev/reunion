@@ -14,4 +14,13 @@ public abstract class WeaponAttack extends Skill {
 	
 	public abstract Class<?> getWeaponType();
 
+	@Override
+	public int getMaxLevel() {
+		return 25;
+	}
+
+	@Override
+	public int getLevelRequirement(int skillLevel) {
+		return 44+skillLevel;
+	}
 }

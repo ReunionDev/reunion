@@ -34,7 +34,7 @@ public abstract class Weapon extends PlayerItem {
 
 	private int handed; // 1 - One handed; 2 - Two handed
 
-	private float magicDmg;
+	private float magicDmg; // value in %
 
 	public Weapon(int id) {
 		super(id);
@@ -184,7 +184,7 @@ public abstract class Weapon extends PlayerItem {
 			}	
 			if (item.checkMembers(new String[] { "MagicDmg" })) {
 				// use member from file
-				setMagicDmg(Integer.parseInt(item.getMemberValue("MagicDmg")));
+				setMagicDmg(Float.parseFloat(item.getMemberValue("MagicDmg")));
 			} else {
 				// use default
 				setMagicDmg(0);
@@ -236,7 +236,7 @@ public abstract class Weapon extends PlayerItem {
 		this.speed = speed;
 	}
 	
-	public void setMagicDmg(int magicDmg) {
+	public void setMagicDmg(float magicDmg) {
 		this.magicDmg = magicDmg;
 	}
 

@@ -9,7 +9,7 @@ public abstract class GroupedSkill extends Skill{
 		super(skillManager,id);
 	}
 	
-	protected abstract int [] getSkillsInGroup();
+	public abstract int [] getSkillsInGroup();
 	
 	@Override
 	public boolean levelUp(Player player) {
@@ -20,7 +20,7 @@ public abstract class GroupedSkill extends Skill{
 				return false;
 		}
 		
-		return false;
+		return true;
 		
 	}
 	

@@ -31,7 +31,7 @@ public abstract class Mastery extends GroupedSkill implements Modifier{
 	}
 
 	@Override
-	protected int[] getSkillsInGroup() {
+	public int[] getSkillsInGroup() {
 		return new int[]{8,11,14};
 	}
 	

@@ -23,16 +23,8 @@ public class FireBall extends Tier1 implements Castable, Modifier {
 		super(skillManager,id);
 	}
 	
-	public int getMaxLevel() {
-		return 25;
-	}
-	
 	public ValueType getValueType() {
 		return Modifier.ValueType.FIRE;
-	}
-
-	public int getLevelRequirement(int level) {
-		return 0+level;
 	}
 	
 	public float getDamageModifier(){
@@ -53,7 +45,29 @@ public class FireBall extends Tier1 implements Castable, Modifier {
 		int level = player.getSkillLevel(this);
 		
 		if(level>0){
-			modifier += (15+((level-1)*getDamageModifier()));			
+			modifier += (15 + ((level-1)*getDamageModifier()));			
+			}	
+		
+		return modifier;
+	}
+	
+	public float getManaModifier(){
+		/* mana spent:
+		 * level 1 = 5
+		 * level 2 = 5
+		 * level 3 = 6
+		 * ...
+		 * level 25 = 25
+		 */
+		return 20f/(getMaxLevel()-1);
+	}
+	
+	float getManaModifier(Player player){
+		float modifier = 0;
+		int level = player.getSkillLevel(this);
+		
+		if(level>0){
+			modifier += (5 + ((level-1) * getManaModifier()));			
 			}	
 		
 		return modifier;
@@ -62,29 +76,25 @@ public class FireBall extends Tier1 implements Castable, Modifier {
 	@Override
 	public boolean cast(LivingObject caster, LivingObject... targets) {
 		if(caster instanceof KailiptonPlayer){
-			int currentMana = ((KailiptonPlayer) caster).getMana();
-			// mana spent: level 1 = 5 ... level 25 = 25 
-			int manaSpent = (int)(5 + ((((KailiptonPlayer) caster).getSkillLevel(this)-1) * ((float)20/(getMaxLevel()-1))));
-			
-			if((currentMana - manaSpent)  < 0){
-				((Player)(caster)).getClient().sendPacket(Type.SAY, "Not enought mana to use the skill.");
-				return false;
-			}  else {
-				((KailiptonPlayer) caster).setMana(currentMana - manaSpent);
-			}
-			
 			Player player = (Player)caster;
+			int currentMana = player.getMana();
+			int manaSpent = (int) getManaModifier(player);
+			
+			player.setMana(currentMana - manaSpent);
+			
 			Weapon weapon = player.getEquipment().getMainHand();
 			float baseDamage = player.getBaseDamage();
 			double weaponMagicBoost=1;
+			
 			if(weapon instanceof StaffWeapon){
-				weaponMagicBoost += ((double)weapon.getMagicDmg())/100; // % of magic dmg boost
+				weaponMagicBoost += weapon.getMagicDmg(); // % of magic dmg boost
 			}
+			
 			float fireDamage = getDamageModifier(player);
 			float fireMasteryDamage = 1;
 			
 			// calculate damage from skill FireMastery
-			for(Skill skill: ((Player)caster).getSkills().keySet()){
+			for(Skill skill: player.getSkills().keySet()){
 				if (Modifier.class.isInstance(skill)){
 					Modifier modifier = (Modifier)skill; 
 					if(modifier.getAffectedSkills().contains(this)){
@@ -109,7 +119,7 @@ public class FireBall extends Tier1 implements Castable, Modifier {
 				int newHp = targets[0].getHp() - (int) (magicDamage);				
 				if (newHp <= 0) {
 					if(targets[0] instanceof Mob)
-						((Mob)targets[0]).kill((KailiptonPlayer)caster);
+						((Mob)targets[0]).kill(player);
 				} else {
 					targets[0].setHp(newHp);
 				}
@@ -120,8 +130,8 @@ public class FireBall extends Tier1 implements Castable, Modifier {
 		return false;
 	}
 	
+	// function not needed in this skill
 	public boolean getCondition(LivingObject owner){
-		// not needed is the class
 		return true;
 	}
 

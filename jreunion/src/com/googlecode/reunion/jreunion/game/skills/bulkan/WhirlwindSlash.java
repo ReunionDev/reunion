@@ -19,16 +19,6 @@ public class WhirlwindSlash extends WeaponAttack implements Castable{
 	public WhirlwindSlash(SkillManager skillManager, int id) {
 		super(skillManager,id);
 	}
-
-	@Override
-	public int getMaxLevel() {
-		return 25;
-	}
-
-	@Override
-	public int getLevelRequirement(int skillLevel) {
-		return 44+skillLevel;
-	}
 	
 	@Override
 	public Class<?> getWeaponType() {

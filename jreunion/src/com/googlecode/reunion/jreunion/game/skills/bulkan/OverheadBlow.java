@@ -21,16 +21,6 @@ public class OverHeadBlow extends WeaponAttack implements Castable{
 	}
 
 	@Override
-	public int getMaxLevel() {
-		return 25;
-	}
-
-	@Override
-	public int getLevelRequirement(int skillLevel) {
-		return 44+skillLevel;
-	}
-
-	@Override
 	public Class<?> getWeaponType() {
 		return Axe.class;
 	}
