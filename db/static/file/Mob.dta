@@ -2368,6 +2368,129 @@ Exp = 1
 Lime = 1875
 AllowedOnMap = 3,5
 
+#### All Maps #########################################
+
+
+[Sheep]
+Class = Mob
+ID = 161
+Level = 35
+Hp = 1
+Dmg = 1
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 1
+AllowedOnMap = 4,0,3,5,6,2,1,7,8
+
+[Small Mine]
+Class = Mob
+ID = 218
+Level = 35
+Hp = 1
+Dmg = 1
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 1
+AllowedOnMap = 4,0,3,5,6,2,1,7,8
+
+[Perky Socks]
+Class = Mob
+ID = 304
+Level = 35
+Hp = 1
+Dmg = 1
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 1
+AllowedOnMap = 4,0,3,5,6,2,1,7,8
+
+[Snowman]
+Class = Mob
+ID = 305
+Level = 35
+Hp = 1
+Dmg = 1
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 1
+AllowedOnMap = 4,0,3,5,6,2,1,7,8
+
+[Monkey]
+Class = Mob
+ID = 315
+Level = 35
+Hp = 1
+Dmg = 1
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 1
+AllowedOnMap = 4,0,3,5,6,2,1,7,8
+
+[An Old Man]
+Class = Mob
+ID = 317
+Level = 35
+Hp = 1
+Dmg = 1
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 1
+AllowedOnMap = 4,0,3,5,6,2,1,7,8
+
+[An Old Lady]
+Class = Mob
+ID = 318
+Level = 35
+Hp = 1
+Dmg = 1
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 1
+AllowedOnMap = 4,0,3,5,6,2,1,7,8
+
+[Bunnygirl]
+Class = Mob
+ID = 321
+Level = 35
+Hp = 1
+Dmg = 1
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 1
+AllowedOnMap = 4,0,3,5,6,2,1,7,8
+
 [War Giant]
 Class = Mob
 ID = 38
@@ -2383,7 +2506,158 @@ Exp = 1
 Lime = 10
 AllowedOnMap = 4,0,3,5,6,2,1,7,8
 
-#### Quests ####
+##### Castle Gates ######
+[Mouel]
+Class = Mob
+ID = 352
+Level = 1
+Hp = 1
+Dmg = 1
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 1
+AllowedOnMap = 4,0,3,5,6,2,1,7,8
+
+[Kisare]
+Class = Mob
+ID = 353
+Level = 1
+Hp = 1
+Dmg = 1
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 1
+AllowedOnMap = 4,0,3,5,6,2,1,7,8
+
+[Sicrin]
+Class = Mob
+ID = 354
+Level = 1
+Hp = 1
+Dmg = 1
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 1
+AllowedOnMap = 4,0,3,5,6,2,1,7,8
+
+[Shakload]
+Class = Mob
+ID = 355
+Level = 1
+Hp = 1
+Dmg = 1
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 1
+AllowedOnMap = 4,0,3,5,6,2,1,7,8
+
+[Beradin]
+Class = Mob
+ID = 356
+Level = 1
+Hp = 1
+Dmg = 1
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 1
+AllowedOnMap = 4,0,3,5,6,2,1,7,8
+
+[Garpon Soldier]
+Class = Mob
+ID = 364
+Level = 1
+Hp = 1
+Dmg = 1
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 1
+AllowedOnMap = 4,0,3,5,6,2,1,7,8
+
+[Quake Stone]
+Class = Mob
+ID = 367
+Level = 1
+Hp = 1
+Dmg = 1
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 1
+AllowedOnMap = 4,0,3,5,6,2,1,7,8
+
+[Life Stone]
+Class = Mob
+ID = 368
+Level = 1
+Hp = 1
+Dmg = 1
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 1
+AllowedOnMap = 4,0,3,5,6,2,1,7,8
+
+[Tiger Bunny]
+Class = Mob
+ID = 370
+Level = 1
+Hp = 1
+Dmg = 1
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 1
+AllowedOnMap = 4,0,3,5,6,2,1,7,8
+
+[x_0 Nose Santa]
+Class = Mob
+ID = 382
+Level = 1
+Hp = 1
+Dmg = 1
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 1
+AllowedOnMap = 4,0,3,5,6,2,1,7,8
+
+######## Quests #####################################
 [Devil Dyor]
 Class = Mob
 ID = 324
