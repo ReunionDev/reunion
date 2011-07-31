@@ -826,7 +826,7 @@ Exp = 1
 Lime = 233
 AllowedOnMap = 2
 
-[Mace Kabal]
+[Mace Kabal 2]
 Class = Mob
 ID = 82
 Level = 56
@@ -1399,7 +1399,7 @@ Exp = 1
 Lime = 1
 AllowedOnMap = 3
 
-[Lightning Stone Guard Tower]
+[Lightning Stone Guard Tower 2]
 Class = Mob
 ID = 183
 Level = 170
@@ -1793,7 +1793,7 @@ Exp = 1
 Lime = 1
 AllowedOnMap = 5
 
-[Pitcher]
+[Pitcher 2]
 Class = Mob
 ID = 258
 Level = 142
