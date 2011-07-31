@@ -52,7 +52,7 @@ MinSecondRange = 145
 MaxSecondRange = 170
 StatusUsed = 1
 Type = 2
-Class = kailipton.Fireball
+Class = kailipton.FireBall
 
 [Lightning Ball]
 ID = 4
@@ -250,7 +250,7 @@ StatusUsed = 2
 Type = 1
 Class = PlaceHolder
 
-[Overhead Blow]
+[OverHead Blow]
 ID = 18
 Level = 45
 MaxLevel = 25
@@ -262,7 +262,7 @@ MinSecondRange = 140
 MaxSecondRange = 170
 StatusUsed = 2
 Type = 2
-Class = bulkan.OverheadBlow
+Class = bulkan.OverHeadBlow
 
 [Recovery Boost]
 ID = 19

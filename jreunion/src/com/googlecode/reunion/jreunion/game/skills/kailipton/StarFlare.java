@@ -12,10 +12,8 @@ import com.googlecode.reunion.jreunion.game.Skill;
 import com.googlecode.reunion.jreunion.game.items.equipment.StaffWeapon;
 import com.googlecode.reunion.jreunion.game.items.equipment.Weapon;
 import com.googlecode.reunion.jreunion.game.skills.Modifier;
-import com.googlecode.reunion.jreunion.game.skills.Modifier.ModifierType;
 import com.googlecode.reunion.jreunion.game.skills.Modifier.ValueType;
 import com.googlecode.reunion.jreunion.server.SkillManager;
-import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 
 public class StarFlare extends Tier3 implements Castable {
 

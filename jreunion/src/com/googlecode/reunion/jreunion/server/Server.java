@@ -21,9 +21,7 @@ import com.googlecode.reunion.jreunion.protocol.Protocol;
  */
 public class Server extends EventDispatcher {
 
-	private static Server _instance = null;
-	
-	
+	private static Server _instance = null;	
 	
 	private static Random rand = new Random(System.currentTimeMillis());
 	
