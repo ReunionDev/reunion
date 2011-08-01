@@ -52,11 +52,21 @@ public class MessageParser {
 						player.setLevelUpExp(0);
 						count++;
 					}
+					client.sendPacket(Type.SAY, "Currently dissabled");
 				}
 				else
 					player.setLevelUpExp(0);
-				
-			}else if (words[0].equals("@testcol")) {
+			}
+			else if (words[0].equals("@fp")) {
+				String packetData = "";
+				for (int i = 1; i <= (words.length-1);i++){
+					packetData = packetData+words[i];
+					if(i < (words.length-1))
+						packetData = packetData+" ";
+				}
+				client.sendData(packetData);
+			}
+			else if (words[0].equals("@testcol")) {
 				Player p = player;
 				
 				LocalMap map = p.getPosition().getLocalMap();
