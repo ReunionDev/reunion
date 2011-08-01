@@ -80,9 +80,10 @@ public class Spawn {
 		Position position = generateSpawnPosition();		
 		entity.setPosition(position);
 		LocalMap map = position.getLocalMap();
-		if(map.getEntity(entity.getEntityId())!=entity)
+		if(map.getEntity(entity.getEntityId())!=entity){
 			map.createEntityId(entity);
-		map.fireEvent(SpawnEvent.class, entity);
+			map.fireEvent(SpawnEvent.class, entity);
+		}
 		return position;
 		
 	}

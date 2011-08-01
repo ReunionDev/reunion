@@ -502,8 +502,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 							int skillId = Integer.parseInt(message[1]);
 							Skill skill = player.getSkill(skillId);
 							if(skill.levelUp(player)){
-								int statusPointsSpent = skill instanceof GroupedSkill ? 3 : 1;
-								player.setStatusPoints(player.getStatusPoints() - statusPointsSpent);
+								player.setStatusPoints(player.getStatusPoints() - 1);
 							}
 						}
 					}

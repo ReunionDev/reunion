@@ -56,27 +56,16 @@ public class ReturnToVillage extends Skill implements Castable {
 	@Override
 	public boolean cast(LivingObject caster, LivingObject... targets) {
 		if(caster instanceof KailiptonPlayer){
+			Player player = (Player)caster;
 			int manaSpent = 10;
 			// calculate Success Rate of skill
 			if(!Tools.successRateCalc(getSuccessRateModifier((Player)caster))){
-				((KailiptonPlayer) caster).setMana(((KailiptonPlayer) caster).getMana() - manaSpent);
-				((KailiptonPlayer) caster).getClient().sendPacket(Type.SAY, "Failed to cast the skill.");
+				player.setMana(player.getMana() - manaSpent);
+				player.getClient().sendPacket(Type.SAY, "Failed to cast the skill.");
 				return false;
 			}
-			Map map = caster.getPosition().getMap();
-			
-			switch(map.getId()){
-				case 4: { //Laglamia
-					Position townPosition = new Position(7026,5220,106,caster.getPosition().getLocalMap(),0.0f);			
-					((KailiptonPlayer) caster).getClient().getWorld().getCommand().GoToPos((Player)caster, townPosition);
-					((KailiptonPlayer) caster).setMana(((KailiptonPlayer) caster).getMana() - manaSpent);
-					return true;
-				}
-				default: {// unknown return map location
-					((KailiptonPlayer) caster).getClient().sendPacket(Type.SAY, "Return to Village location, not set yet to this map.");
-					return false;
-				}
-			}
+			player.spawn();
+			player.setMana(player.getMana() - manaSpent);
 		}
 		return false;
 	}

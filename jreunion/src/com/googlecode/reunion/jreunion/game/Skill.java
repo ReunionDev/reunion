@@ -36,6 +36,20 @@ public abstract class Skill {
 	public int getType() {
 		return type;
 	}
+	
+	public void reset(Player player){
+		
+		int skillLevel = player.getSkillLevel(this);
+		
+		//if skill current level is zero, there is no need to reset it.
+		if(skillLevel == 0)
+			return;
+		
+		int min = getMinLevel();
+		player.setSkillLevel(this, min);
+		player.getClient().sendPacket(Type.SKILLLEVEL, this, min);
+		player.setStatusPoints(player.getStatusPoints() + skillLevel - min);
+	}
 
 	public boolean levelUp(Player player) {
 	

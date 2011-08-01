@@ -12,6 +12,19 @@ public abstract class GroupedSkill extends Skill{
 	public abstract int [] getSkillsInGroup();
 	
 	@Override
+	public void reset(Player player){
+		
+		for(int skillObject:getSkillsInGroup()){
+			GroupedSkill skill = (GroupedSkill)player.getSkill(skillObject);
+			skill.groupReset(player);
+		}			
+	}
+	
+	private void groupReset(Player player){
+		super.reset(player);
+	}
+	
+	@Override
 	public boolean levelUp(Player player) {
 		for(int skillObject:getSkillsInGroup()){
 			

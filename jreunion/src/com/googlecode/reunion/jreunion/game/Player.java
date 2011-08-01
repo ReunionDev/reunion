@@ -479,8 +479,13 @@ public abstract class Player extends LivingObject implements EventListener {
 		.getCommand()
 		.GoToPos(this,spawnX,spawnY);
 		*/
-		this.setPosition(new Position(7026, 5220, 106, this.getPosition().getLocalMap(), 0.0f));
-		getClient().getWorld().getCommand().GoToPos(this, this.getPosition());
+		
+		//this.setPosition(new Position(7026, 5220, 106, this.getPosition().getLocalMap(), 0.0f));
+		//getClient().getWorld().getCommand().GoToPos(this, this.getPosition());
+		
+		PlayerSpawn defaultSpawn = this.getPosition().getLocalMap().getDefaultSpawn();
+		//TODO: Gracefully handle respawn
+		defaultSpawn.spawn(this);
 	}
 
 	/**

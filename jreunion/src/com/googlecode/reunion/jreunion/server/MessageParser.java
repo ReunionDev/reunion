@@ -281,10 +281,7 @@ public class MessageParser {
 			}
 			// resets all the skill from player: @resetskills [skillID]
 			else if (words[0].equals("@resetskills")) {
-				
-				//List<Skill> affectedSkills = (words.length == 2) ? List<Skill>(new Skill[]{player.getSkill(Integer.parseInt(words[1]))}):player.getSkills().keySet();
-				//java.util.Map<Skill,Integer> affectedSkill = (words.length == 2) ? affectedSkills.put(player.getSkill(Integer.parseInt(words[1])),player.getSkillLevel(player.getSkill(Integer.parseInt(words[1])))) : player.getSkills();
-				
+						
 				java.util.Map<Skill,Integer> affectedSkills = new HashMap<Skill,Integer> ();
 				
 				if (words.length == 2) { //@resetskills [skillID]
@@ -296,29 +293,14 @@ public class MessageParser {
 						return null;
 					}
 					
-					if(skill instanceof GroupedSkill){//grouped skills can only be reseted together
-						for(int skillObject:((GroupedSkill)skill).getSkillsInGroup()){
-							skill = player.getSkill(skillObject);
-							affectedSkills.put(skill, player.getSkillLevel(skill));
-						}
-					}
-					else affectedSkills.put(skill, player.getSkillLevel(skill));
+					affectedSkills.put(skill, player.getSkillLevel(skill));
 					
 				} else //@resetskills
 					affectedSkills = player.getSkills(); 
 					
-				// resets player skills to its minimum level
-				for(Skill skill: affectedSkills.keySet()){ 
-					int skillLevel = player.getSkillLevel(skill);
-					
-					if(skillLevel == 0)
-						continue;
-					
-					int newSkillLevel = skill.getMinLevel();
-					player.setSkillLevel(skill, newSkillLevel);
-					client.sendPacket(Type.SKILLLEVEL, skill, newSkillLevel);
-					int playerCurrentStatusPoints = player.getStatusPoints();
-					player.setStatusPoints(playerCurrentStatusPoints+skillLevel-newSkillLevel);
+					// reset player skills to its minimum level
+					for(Skill skill: affectedSkills.keySet()){
+						skill.reset(player);
 				}
 			}
 			// order a mob to attack player several times: @mobattack [mobUniqueID] [numberOfattacks]

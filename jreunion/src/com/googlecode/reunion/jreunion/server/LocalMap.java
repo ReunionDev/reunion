@@ -389,7 +389,7 @@ public class LocalMap extends Map implements Runnable{
 					player.getClient().setState(Client.State.INGAME);
 					
 					if(list.contains(session)){
-						
+						//TODO: Gracefully handle respawn
 						throw new RuntimeException("This should never happen! 2");
 					}
 
@@ -557,5 +557,9 @@ public class LocalMap extends Map implements Runnable{
 			if(entities.containsKey(entitiId))
 				entities.remove(entitiId);
 		}
+	}
+	
+	public PlayerSpawn getDefaultSpawn(){
+		return defaultSpawn;
 	}
 }
