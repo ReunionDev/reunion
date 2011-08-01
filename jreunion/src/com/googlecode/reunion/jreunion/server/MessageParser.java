@@ -52,7 +52,6 @@ public class MessageParser {
 						player.setLevelUpExp(0);
 						count++;
 					}
-					client.sendPacket(Type.SAY, "Currently dissabled");
 				}
 				else
 					player.setLevelUpExp(0);
