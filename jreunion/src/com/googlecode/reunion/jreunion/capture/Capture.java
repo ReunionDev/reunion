@@ -1,8 +1,10 @@
 package com.googlecode.reunion.jreunion.capture;
 
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.math.BigInteger;
 import java.net.InetAddress;
@@ -39,14 +41,26 @@ public class Capture extends Thread{
 	
 	public Capture() throws Exception {
 		
-		version = 2000;
+	
+		BufferedReader serverbr = new BufferedReader(new FileReader("server.txt"));
+		String serverbuffer, serverresult ="";
+		while ((serverbuffer = serverbr.readLine()) != null) {
+			serverresult = serverresult + serverbuffer;
+		}
 
-		bos = new BufferedOutputStream(new FileOutputStream("output-"+(new Date().getTime()/1000)+".txt", true));
+		BufferedReader versionbr = new BufferedReader(new FileReader("version.txt"));
+		String versionbuff, versionres ="";
+		while ((versionbuff = versionbr.readLine()) != null) {
+			versionres = versionres + versionbuff;
+		}
+	
+		version = Integer.parseInt(versionres);
 		
-		maps.put(4005, 4);
-		maps.put(4001, 0);
+		String [] srvport = serverresult.split(" ");
 		
-		address = InetAddress.getByName("93.90.190.134");
+		maps.put(Integer.parseInt(srvport[1]), 4);
+		
+		address = InetAddress.getByName(srvport[0]);
 		
 	}	
 	public void run() {
@@ -61,10 +75,12 @@ public class Capture extends Thread{
 				serverSocketChannel.configureBlocking(false);
 				serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
 
-				System.out.println("Proxy started for "+address+":"+port);
+				System.out.println("Proxy started for "+address+": "+port);
 				
 			}
-						
+			
+			boolean started=false;
+			//(go_world) ([0-9]{1,3}\\.){3}[0-9]{1,3} (-?\\d+) (-?\\d+) (-?\\d+)
 			System.out.println("started listening");
 			
 			while(true) {
@@ -84,6 +100,7 @@ public class Capture extends Thread{
 							continue;
 						int port = socketChannel.socket().getLocalPort();
 						int mapId = maps.get(port);
+						
 						{
 							OtherProtocol protocol = new OtherProtocol(null);
 							protocol.setAddress(address);
@@ -115,7 +132,7 @@ public class Capture extends Thread{
 						
 						remoteRoutes.put(port, socketChannel);
 						
-						System.out.println("rerouted "+ port);
+						System.out.println("Rerouted packets to port: "+ port);
 						
 					}else{
 						
@@ -143,11 +160,65 @@ public class Capture extends Thread{
 								
 								output = "From client:\n"+protocol.decryptServer(data.clone());								
 							} else {
-								output = "From server:\n"+protocol.decryptClient(data.clone());
+								String cd = protocol.decryptClient(data.clone());
+								output = "From server:\n"+cd;
 								
+								//(go_world) ([0-9]{1,3}\.){3}[0-9]{1,3} (-?\d+) (-?\d+) (-?\d+)
+								
+								if(protocol.decryptClient(data.clone()).contains("go_world "))
+								{
+									String[] sp = cd.split("go_world ");
+									
+									String[] nmp = sp[1].split(" ");
+									
+									maps.put(Integer.parseInt(nmp[1]), Integer.parseInt(nmp[2]));
+									System.out.println("Added map "+nmp[2]+" with port "+ nmp[1]);
+									address = InetAddress.getByName(nmp[0]);
+									System.out.println("Changed ip addr. to: "+nmp[0]);
+									
+									port = Integer.parseInt(nmp[1]);
+									
+									try
+									{
+										mapId = maps.get(port);
+										ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
+										serverSocketChannel.socket().bind(new InetSocketAddress(InetAddress.getByName("127.0.0.1"), port));
+										serverSocketChannel.configureBlocking(false);
+										serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
+
+										System.out.println("Proxy started for "+address+":"+port);
+										
+										protocol.setAddress(address);
+										protocol.setVersion(version);
+										protocol.setMapId(mapId);
+										protocol.setPort(port);
+										protocols.put(port, protocol);
+										
+										socketChannel = SocketChannel.open(new InetSocketAddress(address,port));
+										socketChannel.configureBlocking(false);
+										socketChannel.register(selector, SelectionKey.OP_READ);
+										
+										remoteRoutes.put(port, socketChannel);
+										
+										System.out.println("Rerouted packets to port: "+ port);
+									}
+									catch (Exception e)
+									{
+										System.out.println("Map is allready registred.");
+									}
+									
+									System.out.println(sp[1]);
+									
+								}
+									
 							}
 							
 							System.out.println(output);
+							if(started==false)
+							{
+								bos = new BufferedOutputStream(new FileOutputStream("packetlog-"+(new Date().getTime()/1000)+".txt", true));
+								started = true;
+							}
 							bos.write(output.getBytes());
 							bos.flush();
 														
