@@ -76,8 +76,9 @@ public class BasicAttack extends Skill implements Castable, Effectable {
 	
 	@Override 
 	public void effect(LivingObject source, LivingObject target){	
-		//TODO: Figure out what to send on attack to other players.
 		
+		//TODO merge interested of source and target
+		source.getInterested().sendPacket(Type.ATTACK, source, target);		
 		
 	}
 	

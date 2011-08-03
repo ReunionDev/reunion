@@ -147,7 +147,7 @@ public class Network extends Service implements Runnable, EventListener{
 	private void processAccept(SocketChannel socketChannel) throws IOException {
 		
 		socketChannel.configureBlocking(false);
-	
+		
 		fireEvent(NetworkAcceptEvent.class, socketChannel);
 		
 		// Register it with the selector, for reading

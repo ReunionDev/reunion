@@ -43,6 +43,7 @@ public abstract class WorldObject extends EventDispatcher implements Entity {
 	public Position getPosition() {
 		return position;
 	}
+	
 	public void setPosition(Position position) {
 		this.position = position;
 	}
@@ -54,8 +55,11 @@ public abstract class WorldObject extends EventDispatcher implements Entity {
 	public class Interested implements Sendable{
 
 		private WorldObject entity;
+		
+		public WorldObject getEntity() {
+			return entity;
+		}
 		public Interested(WorldObject entity){
-			
 			this.entity = entity;
 			
 		}
