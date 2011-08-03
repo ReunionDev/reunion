@@ -1,6376 +1,11367 @@
-[Raptoroid]
+[Spawn 1]
 ID = 1
-X = 8015
-Y = 11755
-Radius = 200
-RespawnTime = 10
-Type = 150
+X = 9333
+Y = 11626
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
 
-[Raptoroid1]
+[Spawn 2]
 ID = 2
-X = 8125
-Y = 11825
-Radius = 200
-RespawnTime = 10
-Type = 150
+X = 9538
+Y = 11717
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
 
-[Raptoroid2]
+[Spawn 3]
 ID = 3
-X = 8085
-Y = 11606
-Radius = 200
-RespawnTime = 10
-Type = 150
+X = 9954
+Y = 11724
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
 
-[Raptoroid3]
+[Spawn 4]
 ID = 4
-X = 8986
-Y = 10866
-Radius = 200
-RespawnTime = 10
+X = 10279
+Y = 11679
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid4]
+[Spawn 5]
 ID = 5
-X = 8285
-Y = 11935
-Radius = 200
-RespawnTime = 10
+X = 10119
+Y = 11632
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid5]
+[Spawn 6]
 ID = 6
-X = 8515
-Y = 11645
-Radius = 200
-RespawnTime = 10
-Type = 150
+X = 10403
+Y = 11736
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
 
-[Parkikepaloid0]
+[Spawn 7]
 ID = 7
-X = 9065
-Y = 10875
-Radius = 200
-RespawnTime = 10
-Type = 148
+X = 11789
+Y = 11833
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
 
-[Parkikepaloid1]
+[Spawn 8]
 ID = 8
-X = 8995
-Y = 10905
-Radius = 200
-RespawnTime = 10
+X = 12011
+Y = 11797
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 148
 
-[Parkikepaloid2]
+[Spawn 9]
 ID = 9
-X = 8805
-Y = 10785
-Radius = 200
-RespawnTime = 10
-Type = 148
+X = 11805
+Y = 11440
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
 
-[Parkikeppaloid3]
+[Spawn 10]
 ID = 10
-X = 8965
-Y = 10535
-Radius = 200
-RespawnTime = 10
-Type = 148
+X = 11845
+Y = 10781
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
 
-[Parkikepaloid4]
+[Spawn 11]
 ID = 11
-X = 9129
-Y = 10490
-Radius = 200
-RespawnTime = 10
-Type = 148
+X = 12028
+Y = 10078
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
 
-[Pakikepaloid5]
+[Spawn 12]
 ID = 12
-X = 9385
-Y = 10405
-Radius = 200
-RespawnTime = 10
-Type = 148
+X = 11301
+Y = 9601
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
 
-[Parkikepaloid6]
+[Spawn 13]
 ID = 13
-X = 9755
-Y = 10545
-Radius = 200
-RespawnTime = 10
-Type = 148
+X = 11083
+Y = 10154
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
 
-[Parkikepaloid7]
+[Spawn 14]
 ID = 14
-X = 9765
-Y = 10774
-Radius = 200
-RespawnTime = 10
-Type = 148
+X = 10663
+Y = 9316
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
 
-[Parkikepaloid]
+[Spawn 15]
 ID = 15
-X = 10025
-Y = 10815
-Radius = 200
-RespawnTime = 10
-Type = 148
+X = 10431
+Y = 9364
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
 
-[Parkikepaloid9]
+[Spawn 16]
 ID = 16
-X = 10324
-Y = 10655
-Radius = 200
-RespawnTime = 10
-Type = 148
+X = 10363
+Y = 9280
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
 
-[Parkikepaloid10]
+[Spawn 17]
 ID = 17
-X = 10785
-Y = 10695
-Radius = 200
-RespawnTime = 10
-Type = 148
+X = 10029
+Y = 9230
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
 
-[Parkikepaloid11]
+[Spawn 18]
 ID = 18
-X = 11134
-Y = 11245
-Radius = 200
-RespawnTime = 10
-Type = 148
+X = 10133
+Y = 9789
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
 
-[Parkikepaloid13]
+[Spawn 19]
 ID = 19
-X = 11125
-Y = 10056
-Radius = 200
-RespawnTime = 10
-Type = 148
+X = 9963
+Y = 9312
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
 
-[Parkikepaloid14]
+[Spawn 20]
 ID = 20
-X = 9705
-Y = 9775
-Radius = 200
-RespawnTime = 10
-Type = 148
+X = 10228
+Y = 9164
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
 
-[Parkikepaloid15]
+[Spawn 21]
 ID = 21
-X = 8206
-Y = 10474
-Radius = 200
-RespawnTime = 10
-Type = 148
+X = 9901
+Y = 9582
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
 
-[Parkikepaloid16]
+[Spawn 22]
 ID = 22
-X = 7816
-Y = 10614
-Radius = 200
-RespawnTime = 10
-Type = 148
+X = 9783
+Y = 9242
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
 
-[Parkikepaloid17]
+[Spawn 23]
+ID = 23
+X = 10191
+Y = 9695
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 24]
 ID = 24
-X = 7535
-Y = 10735
-Radius = 200
-RespawnTime = 10
-Type = 148
+X = 9699
+Y = 9791
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 147
 
-[Raptoroid6]
+[Spawn 25]
 ID = 25
-X = 10215
-Y = 10884
-Radius = 200
-RespawnTime = 10
+X = 9954
+Y = 9787
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid7]
+[Spawn 26]
 ID = 26
-X = 10435
-Y = 11135
-Radius = 200
-RespawnTime = 10
+X = 9418
+Y = 9797
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raporoid8]
+[Spawn 27]
 ID = 27
-X = 10735
-Y = 11355
-Radius = 200
-RespawnTime = 10
-Type = 150
+X = 9225
+Y = 9860
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
 
-[Raptoroid9]
+[Spawn 28]
 ID = 28
-X = 10835
-Y = 11685
-Radius = 200
-RespawnTime = 10
-Type = 150
+X = 9644
+Y = 10145
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
 
-[Raptoroid10]
+[Spawn 29]
 ID = 29
-X = 10375
-Y = 11775
-Radius = 200
-RespawnTime = 10
-Type = 150
+X = 8832
+Y = 10087
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
 
-[Raptoroid11]
+[Spawn 30]
 ID = 30
-X = 10104
-Y = 11536
-Radius = 200
-RespawnTime = 10
-Type = 150
+X = 8862
+Y = 10031
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 233
 
-[Raptoroid12]
+[Spawn 31]
 ID = 31
-X = 9924
-Y = 11326
-Radius = 200
-RespawnTime = 10
-Type = 150
-
-[Raptoroid13]
-ID = 32
-X = 9985
-Y = 11215
-Radius = 200
-RespawnTime = 10
-Type = 150
-
-[Raptoroid14]
-ID = 33
-X = 10043
-Y = 11055
-Radius = 200
-RespawnTime = 10
-Type = 150
-
-[Raptoroid15]
-ID = 34
-X = 9564
-Y = 11125
-Radius = 200
-RespawnTime = 10
-Type = 150
-
-[Raptoroid16]
-ID = 35
-X = 9235
-Y = 11135
-Radius = 200
-RespawnTime = 10
-Type = 150
-
-[Raptoroid17]
-ID = 36
-X = 10395
-Y = 10305
-Radius = 200
-RespawnTime = 10
-Type = 150
-
-[Raptoroid18]
-ID = 37
-X = 10655
-Y = 9956
-Radius = 200
-RespawnTime = 10
-Type = 150
-
-[Raptoroid19]
-ID = 38
-X = 10485
-Y = 9605
-Radius = 200
-RespawnTime = 10
-Type = 150
-
-[Raptoroid20]
-ID = 39
-X = 10015
-Y = 9345
-Radius = 200
-RespawnTime = 10
-Type = 150
-
-[Raptoroid21]
-ID = 40
-X = 9726
-Y = 9614
-Radius = 200
-RespawnTime = 10
-Type = 150
-
-[Raptoroid22]
-ID = 41
-X = 9476
-Y = 9805
-Radius = 200
-RespawnTime = 10
-Type = 150
-
-[Raptoroid23]
-ID = 45
-X = 8354
-Y = 11405
-Radius = 200
-RespawnTime = 10
-Type = 150
-
-[Raptoroid24]
-ID = 46
-X = 8464
-Y = 10986
-Radius = 200
-RespawnTime = 10
-Type = 150
-
-[Raptoroid25]
-ID = 47
-X = 8475
-Y = 10546
-Radius = 200
-RespawnTime = 10
-Type = 150
-
-[Raptoroid26]
-ID = 48
-X = 8834
-Y = 10315
-Radius = 200
-RespawnTime = 10
-Type = 150
-
-[Raptoroid27]
-ID = 49
-X = 9905
-Y = 9905
-Radius = 200
-RespawnTime = 10
-Type = 150
-
-[Raptoroid28]
-ID = 50
-X = 10855
-Y = 9725
-Radius = 200
-RespawnTime = 10
-Type = 150
-
-[Raptoroid29]
-ID = 51
-X = 11284
-Y = 9895
-Radius = 200
-RespawnTime = 10
-Type = 150
-
-[Raptoroid30]
-ID = 52
-X = 11704
-Y = 10195
-Radius = 200
-RespawnTime = 10
-Type = 150
-
-[Raptoroid31]
-ID = 53
-X = 11905
-Y = 10545
-Radius = 200
-RespawnTime = 10
-Type = 150
-
-[Raptoroid32]
-ID = 54
-X = 11935
-Y = 11135
-Radius = 200
-RespawnTime = 10
-Type = 150
-
-[Raptoroid33]
-ID = 55
-X = 11945
-Y = 11494
-Radius = 200
-RespawnTime = 10
-Type = 150
-
-[Raptoroid34]
-ID = 56
-X = 11826
-Y = 11905
-Radius = 200
-RespawnTime = 10
-Type = 150
-
-[Raptoroid35]
-ID = 57
-X = 11385
-Y = 11875
-Radius = 200
-RespawnTime = 10
-Type = 150
-
-[Tyranorid1]
-ID = 58
-X = 9875
-Y = 11105
-Radius = 200
-RespawnTime = 10
-Type = 147
-
-[Uokepaloid1]
-ID = 59
-X = 9726
-Y = 11155
-Radius = 200
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid2]
-ID = 59
-X = 9695
-Y = 11665
-Radius = 200
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid3]
-ID = 60
-X = 9705
-Y = 11456
-Radius = 200
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid4]
-ID = 61
-X = 9404
-Y = 11565
-Radius = 200
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid5]
-ID = 62
-X = 9094
-Y = 11375
-Radius = 200
-RespawnTime = 10
-Type = 149
-
-[Styrokonoid1]
-ID = 63
-X = 8985
-Y = 11405
-Radius = 200
-RespawnTime = 10
-Type = 151
-
-[Uokepaloid6]
-ID = 64
-X = 8634
-Y = 11385
-Radius = 200
-RespawnTime = 10
-Type = 149
-
-[Parkikepaloid18]
-ID = 65
-X = 8574
-Y = 11545
-Radius = 200
-RespawnTime = 10
-Type = 148
-
-[Parkikepaloid19]
-ID = 66
-X = 9525
-Y = 11875
-Radius = 200
-RespawnTime = 10
-Type = 148
-
-[Parkikepaloid20]
-ID = 67
-X = 10085
-Y = 11615
-Radius = 200
-RespawnTime = 10
-Type = 148
-
-[Parkikepaloid21]
-ID = 68
-X = 9125
-Y = 11355
-Radius = 200
-RespawnTime = 10
-Type = 148
-
-[Uokepaloid7]
-ID = 69
-X = 9266
-Y = 11904
-Radius = 200
-RespawnTime = 10
-Type = 149
-
-[Parkikepaloid22]
-ID = 70
-X = 9056
-Y = 11895
-Radius = 200
-RespawnTime = 10
-Type = 148
-
-[Uokepaloid8]
-ID = 71
-X = 8756
-Y = 12005
-Radius = 200
-RespawnTime = 10
-Type = 149
-
-[Parkikepaloid23]
-ID = 72
-X = 8525
-Y = 12015
-Radius = 200
-RespawnTime = 10
-Type = 148
-
-[Uokepaloid9]
-ID = 73
-X = 8134
-Y = 11646
-Radius = 150
-RespawnTime = 10
-Type = 149
-
-[Parkikepaloid24]
-ID = 74
-X = 8074
-Y = 11864
-Radius = 200
-RespawnTime = 10
-Type = 148
-
-[Parkikepaloid25]
-ID = 75
-X = 8125
-Y = 11536
-Radius = 200
-RespawnTime = 10
-Type = 148
-
-[Parkikepaloid26]
-ID = 76
-X = 8095
-Y = 11346
-Radius = 200
-RespawnTime = 10
-Type = 148
-
-[Parkikepaloid27]
-ID = 77
-X = 7565
-Y = 10985
-Radius = 200
-RespawnTime = 10
-Type = 148
-
-[Parkikepaloid28]
-ID = 78
-X = 7246
-Y = 10975
-Radius = 200
-RespawnTime = 10
-Type = 148
-
-[Raptoroid36]
-ID = 79
-X = 6985
-Y = 11045
-Radius = 200
-RespawnTime = 10
-Type = 150
-
-[Raptoroid37]
-ID = 80
-X = 7244
-Y = 11064
-Radius = 200
-RespawnTime = 10
-Type = 150
-
-[Raptoroid38]
-ID = 81
-X = 7525
-Y = 11045
-Radius = 200
-RespawnTime = 10
-Type = 150
-
-[Raptoroid39]
-ID = 82
-X = 7594
-Y = 11114
-Radius = 200
-RespawnTime = 10
-Type = 150
-
-[Raptoroid40]
-ID = 83
-X = 7775
-Y = 11105
-Radius = 200
-RespawnTime = 10
-Type = 150
-
-[Raptoroid41]
-ID = 84
-X = 7994
-Y = 11016
-Radius = 200
-RespawnTime = 10
-Type = 150
-
-[Karmaroid1]
-ID = 85
-X = 7864
-Y = 10975
-Radius = 200
-RespawnTime = 10
-Type = 152
-
-[Karmaroid2]
-ID = 86
-X = 7735
-Y = 10556
-Radius = 200
-RespawnTime = 10
-Type = 152
-
-[Karmaroid3]
-ID = 87
-X = 7245
-Y = 10775
-Radius = 200
-RespawnTime = 10
-Type = 152
-
-[Uokepaloid10]
-ID = 88
-X = 8095
-Y = 10843
-Radius = 200
-RespawnTime = 10
-Type = 149
-
-[Karmaroid4]
-ID = 89
-X = 8025
-Y = 10314
-Radius = 200
-RespawnTime = 10
-Type = 152
-
-[Uokepaloid11]
-ID = 90
-X = 8255
-Y = 10395
-Radius = 200
-RespawnTime = 10
-Type = 149
-
-[Karmaroid5]
-ID = 91
-X = 8895
-Y = 10365
-Radius = 200
-RespawnTime = 10
-Type = 152
-
-[Karmaroid6]
-ID = 92
-X = 9115
-Y = 11065
-Radius = 200
-RespawnTime = 10
-Type = 152
-
-[Karmaroid7]
-ID = 93
-X = 9805
-Y = 10606
-Radius = 200
-RespawnTime = 10
-Type = 152
-
-[uokepaloid12]
-ID = 94
-X = 9906
-Y = 10194
-Radius = 200
-RespawnTime = 10
-Type = 149
-
-[Karmaroid8]
-ID = 95
-X = 9945
-Y = 9975
-Radius = 200
-RespawnTime = 10
-Type = 152
-
-[Karmaroid9]
-ID = 96
-X = 10355
-Y = 9736
-Radius = 200
-RespawnTime = 10
-Type = 152
-
-[Karmaroid10]
-ID = 97
-X = 11024
-Y = 10065
-Radius = 200
-RespawnTime = 10
-Type = 152
-
-[Karmaroid11]
-ID = 98
-X = 11575
-Y = 10315
-Radius = 200
-RespawnTime = 10
-Type = 152
-
-[Karmaroid12]
-ID = 99
-X = 11865
-Y = 10704
-Radius = 200
-RespawnTime = 10
-Type = 152
-
-[Karmaroid13]
-ID = 100
-X = 11436
-Y = 11354
-Radius = 200
-RespawnTime = 10
-Type = 152
-
-[Karmaroid14]
-ID = 101
-X = 11605
-Y = 11835
-Radius = 200
-RespawnTime = 10
-Type = 152
-
-[Raptoroid42]
-ID = 102
-X = 10895
-Y = 11465
-Radius = 200
-RespawnTime = 10
-Type = 150
-
-[Parkikepaloid29]
-ID = 103
-X = 10585
-Y = 11105
-Radius = 200
-RespawnTime = 10
-Type = 148
-
-[Uokepaloid13]
-ID = 104
-X = 10456
-Y = 10957
-Radius = 200
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid14]
-ID = 105
-X = 9855
-Y = 10775
-Radius = 200
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid15]
-ID = 106
-X = 9445
-Y = 10365
-Radius = 200
-RespawnTime = 10
-Type = 149
-
-[Karmaroid15]
-ID = 107
-X = 9455
-Y = 11094
-Radius = 200
-RespawnTime = 10
-Type = 152
-
-[Raptoroid43]
-ID = 108
-X = 9615
-Y = 11625
-Radius = 200
-RespawnTime = 10
-Type = 150
-
-[Uokepaloid16]
-ID = 109
-X = 8385
-Y = 10967
-Radius = 200
-RespawnTime = 10
-Type = 149
-
-[Parkikepaloid30]
-ID = 110
-X = 8514
-Y = 10795
-Radius = 200
-RespawnTime = 10
-Type = 148
-
-[Karmaroid16]
-ID = 111
-X = 8555
-Y = 10506
-Radius = 200
-RespawnTime = 10
-Type = 152
-
-[Karmaroid17]
-ID = 112
-X = 10344
-Y = 6535
-Radius = 200
-RespawnTime = 10
-Type = 152
-
-[Karmaroid18]
-ID = 113
-X = 10584
-Y = 6285
-Radius = 200
-RespawnTime = 10
-Type = 152
-
-[Karmaroid19]
-ID = 114
-X = 10765
-Y = 6165
-Radius = 200
-RespawnTime = 10
-Type = 152
-
-[Karmaroid20]
-ID = 115
-X = 11014
-Y = 6006
-Radius = 200
-RespawnTime = 10
-Type = 152
-
-[karmaroid21]
-ID = 116
-X = 11285
-Y = 5845
-Radius = 200
-RespawnTime = 10
-Type = 152
-
-[Karmaroid22]
-ID = 117
-X = 11445
-Y = 5605
-Radius = 200
-RespawnTime = 10
-Type = 152
-
-[Karmaroid23]
-ID = 118
-X = 11205
-Y = 5555
-Radius = 200
-RespawnTime = 10
-Type = 152
-
-[Karmaroid24]
-ID = 119
-X = 10846
-Y = 5525
-Radius = 200
-RespawnTime = 10
-Type = 152
-
-[Karmaroid25]
-ID = 120
-X = 10957
-Y = 5785
-Radius = 200
-RespawnTime = 10
-Type = 152
-
-[Karmaroid26]
-ID = 121
-X = 10546
-Y = 5455
-Radius = 200
-RespawnTime = 10
-Type = 152
-
-[Karmaroid27]
-ID = 122
-X = 10155
-Y = 5375
-Radius = 200
-RespawnTime = 10
-Type = 152
-
-[Karmaroid28]
-ID = 123
-X = 9916
-Y = 5384
-Radius = 200
-RespawnTime = 10
-Type = 152
-
-[Karmaroid29]
-ID = 124
-X = 9746
-Y = 5534
-Radius = 200
-RespawnTime = 10
-Type = 152
-
-[Karmaroid30]
-ID = 125
-X = 10034
-Y = 5845
-Radius = 200
-RespawnTime = 10
-Type = 152
-
-[Karmaroid31]
-ID = 126
-X = 10224
-Y = 6064
-Radius = 200
-RespawnTime = 10
-Type = 152
-
-[Karmaroid32]
-ID = 127
-X = 10484
-Y = 6106
-Radius = 200
-RespawnTime = 10
-Type = 152
-
-[Parkikepaloid31]
-ID = 128
-X = 10784
-Y = 5975
-Radius = 200
-RespawnTime = 10
-Type = 148
-
-[Parkikepaloid32]
-ID = 129
-X = 10685
-Y = 5445
-Radius = 200
-RespawnTime = 10
-Type = 148
-
-[Parkikepaloid33]
-ID = 130
-X = 10104
-Y = 5744
-Radius = 200
-RespawnTime = 10
-Type = 148
-
-[Uokepaloid17]
-ID = 131
-X = 9925
-Y = 5585
-Radius = 200
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid18]
-ID = 132
-X = 10785
-Y = 5485
-Radius = 200
-RespawnTime = 10
-Type = 149
-
-[Raptoroid44]
-ID = 133
-X = 11394
-Y = 5585
-Radius = 200
-RespawnTime = 10
-Type = 150
-
-[Raptoroid45]
-ID = 134
-X = 11007
-Y = 5694
-Radius = 200
-RespawnTime = 10
-Type = 150
-
-[Raptoroid46]
-ID = 135
-X = 10846
-Y = 6104
-Radius = 200
-RespawnTime = 10
-Type = 150
-
-[Raptoroid47]
-ID = 136
-X = 10596
-Y = 6345
-Radius = 200
-RespawnTime = 10
-Type = 150
-
-[Raptoroid48]
-ID = 137
-X = 10266
-Y = 6077
-Radius = 200
-RespawnTime = 10
-Type = 150
-
-[Raptoroid49]
-ID = 138
-X = 10005
-Y = 5786
-Radius = 200
-RespawnTime = 10
-Type = 150
-
-[Raptoroid50]
-ID = 139
-X = 10055
-Y = 5427
-Radius = 200
-RespawnTime = 10
-Type = 150
-
-[DarkSoul1]
-ID = 144
-X = 1365
-Y = 6257
-Radius = 200
-RespawnTime = 10
-Type = 125
-
-[Darksoul2]
-ID = 145
-X = 6915
-Y = 10745
-Radius = 200
-RespawnTime = 10
-Type = 125
-
-[Torres1]
-ID = 146
-X = 1365
-Y = 5617
-Radius = 10
-RespawnTime = 10
-Type = 155
-
-[CutterLizard4]
-ID = 147
-X = 2173
-Y = 6065
-Radius = 10
-RespawnTime = 10
-Type = 153
-
-[Torres16]
-ID = 148
-X = 2256
-Y = 6194
-Radius = 10
-RespawnTime = 10
-Type = 155
-
-[HooroLizard4]
-ID = 149
-X = 2175
-Y = 6055
-Radius = 10
-RespawnTime = 10
-Type = 154
-
-[Torres17]
-ID = 150
-X = 2356
-Y = 6224
-Radius = 10
-RespawnTime = 10
-Type = 155
-
-[Sauron1]
-ID = 151
-X = 2405
-Y = 6195
-Radius = 10
-RespawnTime = 10
-Type = 158
-
-[Sauron6]
-ID = 152
-X = 2405
-Y = 6195
-Radius = 10
-RespawnTime = 10
-Type = 158
-
-[HorrorLizard5]
-ID = 153
-X = 2435
-Y = 6146
-Radius = 10
-RespawnTime = 10
-Type = 154
-
-[HorrorLizard6]
-ID = 154
-X = 2404
-Y = 6126
-Radius = 10
-RespawnTime = 10
-Type = 154
-
-[CutterLizard3]
-ID = 155
-X = 2405
-Y = 6025
-Radius = 10
-RespawnTime = 10
-Type = 153
-
-[Tauron1]
-ID = 156
-X = 2385
-Y = 5935
-Radius = 10
-RespawnTime = 10
-Type = 159
-
-[Sauron2]
-ID = 157
-X = 2385
-Y = 5716
-Radius = 10
-RespawnTime = 10
-Type = 158
-
-[Minot9]
-ID = 158
-X = 2385
-Y = 5676
-Radius = 10
-RespawnTime = 10
-Type = 156
-
-[Torres18]
-ID = 159
-X = 2523
-Y = 5605
-Radius = 10
-RespawnTime = 10
-Type = 155
-
-[Torres19]
-ID = 160
-X = 2694
-Y = 5626
-Radius = 10
-RespawnTime = 10
-Type = 155
-
-[XLizard5]
-ID = 161
-X = 2685
-Y = 5674
-Radius = 10
-RespawnTime = 10
-Type = 157
-
-[Sauron3]
-ID = 162
-X = 2547
-Y = 5675
-Radius = 10
-RespawnTime = 10
-Type = 158
-
-[Minot10]
-ID = 163
-X = 2664
-Y = 5714
-Radius = 10
-RespawnTime = 10
-Type = 156
-
-[CutterLizard5]
-ID = 164
-X = 2645
-Y = 5695
-Radius = 10
-RespawnTime = 10
-Type = 153
-
-[Minot11]
-ID = 165
-X = 2575
-Y = 5765
-Radius = 10
-RespawnTime = 10
-Type = 156
-
-[Tauron2]
-ID = 166
-X = 2475
-Y = 5825
-Radius = 10
-RespawnTime = 10
-Type = 159
-
-[Sauron4]
-ID = 167
-X = 2505
-Y = 5795
-Radius = 10
-RespawnTime = 10
-Type = 158
-
-[Minot12]
-ID = 168
-X = 2485
-Y = 5785
-Radius = 12
-RespawnTime = 10
-Type = 156
-
-[XLizard6]
-ID = 169
-X = 2456
-Y = 5895
-Radius = 10
-RespawnTime = 10
-Type = 157
-
-[XLizard7]
-ID = 170
-X = 2634
-Y = 5895
-Radius = 10
-RespawnTime = 10
-Type = 157
-
-[Tauron3]
-ID = 171
-X = 2715
-Y = 5915
-Radius = 10
-RespawnTime = 10
-Type = 159
-
-[Sauron5]
-ID = 172
-X = 2695
-Y = 5916
-Radius = 10
-RespawnTime = 10
-Type = 158
-
-[Minot1]
-ID = 172
-X = 1305
-Y = 5598
-Radius = 10
-RespawnTime = 10
-Type = 156
-
-[Torres2]
-ID = 173
-X = 1236
-Y = 5605
-Radius = 10
-RespawnTime = 10
-Type = 155
-
-[Minot2]
-ID = 174
-X = 1075
-Y = 5585
-Radius = 10
-RespawnTime = 10
-Type = 156
-
-[Torres3]
-ID = 175
-X = 1075
-Y = 5669
-Radius = 10
-RespawnTime = 10
-Type = 155
-
-[Torres4]
-ID = 176
-X = 1026
-Y = 5577
-Radius = 10
-RespawnTime = 10
-Type = 155
-
-[Minot3]
-ID = 177
-X = 1077
-Y = 5456
-Radius = 10
-RespawnTime = 10
-Type = 156
-
-[Torres5]
-ID = 178
-X = 1015
-Y = 5405
-Radius = 10
-RespawnTime = 10
-Type = 155
-
-[Torres6]
-ID = 179
-X = 1015
-Y = 5285
-Radius = 10
-RespawnTime = 10
-Type = 155
-
-[HorrorLizard1]
-ID = 180
-X = 1077
-Y = 5215
-Radius = 10
-RespawnTime = 10
-Type = 154
-
-[HorrorLizard2]
-ID = 181
-X = 1036
-Y = 5196
-Radius = 10
-RespawnTime = 10
-Type = 154
-
-[CutterLizard1]
-ID = 182
-X = 1031
-Y = 5495
-Radius = 10
-RespawnTime = 10
-Type = 153
-
-[Torres7]
-ID = 183
-X = 1055
-Y = 5066
-Radius = 10
-RespawnTime = 10
-Type = 155
-
-[XLizard1]
-ID = 184
-X = 1275
-Y = 5166
-Radius = 10
-RespawnTime = 10
-Type = 157
-
-[Minot4]
-ID = 185
-X = 1246
-Y = 5203
-Radius = 10
-RespawnTime = 10
-Type = 156
-
-[XLizard2]
-ID = 186
-X = 1265
-Y = 5265
-Radius = 10
-RespawnTime = 10
-Type = 157
-
-[Torres8]
-ID = 187
-X = 1475
-Y = 5265
-Radius = 10
-RespawnTime = 10
-Type = 155
-
-[Torres9]
-ID = 188
-X = 1204
-Y = 5445
-Radius = 10
-RespawnTime = 10
-Type = 155
-
-[Minot5]
-ID = 189
-X = 1237
-Y = 5445
-Radius = 10
-RespawnTime = 10
-Type = 156
-
-[Torres10]
-ID = 190
-X = 1433
-Y = 5455
-Radius = 10
-RespawnTime = 10
-Type = 155
-
-[Torres11]
-ID = 191
-X = 1555
-Y = 5454
-Radius = 10
-RespawnTime = 10
-Type = 155
-
-[XLizard3]
-ID = 192
-X = 1515
-Y = 5486
-Radius = 10
-RespawnTime = 10
-Type = 157
-
-[Torres12]
-ID = 193
-X = 1565
-Y = 5605
-Radius = 10
-RespawnTime = 10
-Type = 155
-
-[XLizard4]
-ID = 194
-X = 1646
-Y = 5616
-Radius = 10
-RespawnTime = 10
-Type = 157
-
-[Minot6]
-ID = 195
-X = 1685
-Y = 5615
-Radius = 10
-RespawnTime = 10
-Type = 156
-
-[Torres13]
-ID = 196
-X = 2206
-Y = 5615
-Radius = 5
-RespawnTime = 10
-Type = 155
-
-[CutterLizard2]
-ID = 197
-X = 2175
-Y = 5932
-Radius = 10
-RespawnTime = 10
-Type = 153
-
-[HorrorLizard3]
-ID = 198
-X = 2185
-Y = 5798
-Radius = 10
-RespawnTime = 10
-Type = 154
-
-[Torres14]
-ID = 199
-X = 2195
-Y = 6004
-Radius = 10
-RespawnTime = 10
-Type = 155
-
-[HorrorLizard13]
-ID = 200
-X = 2175
-Y = 6085
-Radius = 10
-RespawnTime = 10
-Type = 154
-
-[Minot7]
-ID = 201
-X = 2175
-Y = 6147
-Radius = 10
-RespawnTime = 10
-Type = 156
-
-[Minot8]
-ID = 202
-X = 2246
-Y = 6214
-Radius = 10
-RespawnTime = 10
-Type = 156
-
-[Torres15]
-ID = 203
-X = 2185
-Y = 6215
-Radius = 10
-RespawnTime = 10
-Type = 156
-
-[XLizard9]
-ID = 204
-X = 10624
-Y = 8054
-Radius = 200
-RespawnTime = 10
-Type = 157
-
-[Torres20]
-ID = 205
-X = 10763
-Y = 8064
-Radius = 200
-RespawnTime = 10
-Type = 155
-
-[Torres21]
-ID = 206
-X = 10845
-Y = 8064
-Radius = 200
-RespawnTime = 10
-Type = 155
-
-[HorrorLizard7]
-ID = 207
-X = 10815
-Y = 8055
-Radius = 200
-RespawnTime = 10
-Type = 154
-
-[CutterLizard6]
-ID = 208
-X = 10806
-Y = 8105
-Radius = 200
-RespawnTime = 10
-Type = 153
-
-[CutterLizard7]
-ID = 209
-X = 10806
-Y = 8105
-Radius = 200
-RespawnTime = 10
-Type = 153
-
-[Karmarois34]
-ID = 210
-X = 10975
-Y = 8145
-Radius = 200
-RespawnTime = 10
-Type = 152
-
-[Sauron7]
-ID = 211
-X = 11024
-Y = 8077
-Radius = 200
-RespawnTime = 10
-Type = 158
-
-[Tauron4]
-ID = 212
-X = 11155
-Y = 7955
-Radius = 200
-RespawnTime = 10
-Type = 159
-
-[Minot13]
-ID = 213
-X = 11035
-Y = 7845
-Radius = 200
-RespawnTime = 10
-Type = 156
-
-[Minot14]
-ID = 214
-X = 11196
-Y = 7795
-Radius = 200
-RespawnTime = 10
-Type = 156
-
-[Minot15]
-ID = 215
-X = 11274
-Y = 7944
-Radius = 200
-RespawnTime = 10
-Type = 156
-
-[Minot16]
-ID = 216
-X = 11484
-Y = 7924
-Radius = 200
-RespawnTime = 10
-Type = 156
-
-[Minot17]
-ID = 217
-X = 11685
-Y = 8035
-Radius = 200
-RespawnTime = 10
-Type = 156
-
-[Minot18]
-ID = 218
-X = 11835
-Y = 7805
-Radius = 200
-RespawnTime = 10
-Type = 156
-
-[Minot19]
-ID = 219
-X = 11867
-Y = 7577
-Radius = 100
-RespawnTime = 10
-Type = 156
-
-[Minot20]
-ID = 220
-X = 11685
-Y = 7497
-Radius = 200
-RespawnTime = 10
-Type = 156
-
-[Minot21]
-ID = 221
-X = 11646
-Y = 8424
-Radius = 200
-RespawnTime = 10
-Type = 156
-
-[Minot22]
-ID = 222
-X = 11805
-Y = 8625
-Radius = 100
-RespawnTime = 10
-Type = 156
-
-[Minot23]
-ID = 223
-X = 11026
-Y = 8295
-Radius = 100
-RespawnTime = 10
-Type = 156
-
-[Minot24]
-ID = 224
-X = 10808
-Y = 8124
-Radius = 100
-RespawnTime = 10
-Type = 156
-
-[Minot25]
-ID = 225
-X = 11383
-Y = 8205
-Radius = 100
-RespawnTime = 10
-Type = 156
-
-[Minot26]
-ID = 226
-X = 11256
-Y = 7726
-Radius = 100
-RespawnTime = 10
-Type = 156
-
-[CutterLizard8]
-ID = 227
-X = 11256
-Y = 7726
-Radius = 100
-RespawnTime = 10
-Type = 153
-
-[CutterLizard9]
-ID = 228
-X = 11525
-Y = 7595
-Radius = 100
-RespawnTime = 10
-Type = 153
-
-[CutterLizard11]
-ID = 229
-X = 11666
-Y = 7565
-Radius = 100
-RespawnTime = 10
-Type = 153
-
-[CutterLizard12]
-ID = 230
-X = 11775
-Y = 7894
-Radius = 100
-RespawnTime = 10
-Type = 153
-
-[CutterLizard13]
-ID = 231
-X = 11766
-Y = 8074
-Radius = 100
-RespawnTime = 10
-Type = 153
-
-[CutterLizard14]
-ID = 232
-X = 11705
-Y = 8363
-Radius = 100
-RespawnTime = 10
-Type = 153
-
-[CutterLizard15]
-ID = 233
-X = 11305
-Y = 8173
-Radius = 100
-RespawnTime = 10
-Type = 153
-
-[CutterLizard16]
-ID = 234
-X = 11426
-Y = 8157
-Radius = 100
-RespawnTime = 10
-Type = 153
-
-[Torres22]
-ID = 235
-X = 11014
-Y = 7775
-Radius = 100
-RespawnTime = 10
-Type = 155
-
-[Torres23]
-ID = 236
-X = 11154
-Y = 7745
-Radius = 100
-RespawnTime = 10
-Type = 155
-
-[Torres24]
-ID = 237
-X = 11494
-Y = 7765
-Radius = 100
-RespawnTime = 10
-Type = 155
-
-[Torres25]
-ID = 238
-X = 11516
-Y = 7954
-Radius = 100
-RespawnTime = 10
-Type = 155
-
-[Torres26]
-ID = 239
-X = 11624
-Y = 8174
-Radius = 100
-RespawnTime = 10
-Type = 155
-
-[Torres27]
-ID = 240
-X = 11825
-Y = 7867
-Radius = 100
-RespawnTime = 10
-Type = 155
-
-[Torres28]
-ID = 241
-X = 11725
-Y = 7576
-Radius = 100
-RespawnTime = 10
-Type = 155
-
-[Torres29]
-ID = 242
-X = 11864
-Y = 8136
-Radius = 100
-RespawnTime = 10
-Type = 155
-
-[Torres30]
-ID = 243
-X = 11865
-Y = 8485
-Radius = 100
-RespawnTime = 10
-Type = 155
-
-[Torres31]
-ID = 244
-X = 11415
-Y = 8485
-Radius = 100
-RespawnTime = 10
-Type = 155
-
-[Torres32]
-ID = 245
-X = 11294
-Y = 8126
-Radius = 100
-RespawnTime = 10
-Type = 155
-
-[Torres33]
-ID = 246
-X = 11085
-Y = 8324
-Radius = 100
-RespawnTime = 10
-Type = 155
-
-[Torres34]
-ID = 247
-X = 10655
-Y = 8045
-Radius = 100
-RespawnTime = 10
-Type = 155
-
-[XLizard12]
-ID = 248
-X = 11024
-Y = 7885
-Radius = 100
-RespawnTime = 10
-Type = 157
-
-[XLizard13]
-ID = 249
-X = 11494
-Y = 7606
-Radius = 100
-RespawnTime = 10
-Type = 157
-
-[XLizard10]
-ID = 250
-X = 11855
-Y = 7715
-Radius = 100
-RespawnTime = 10
-Type = 157
-
-[XLizard11]
-ID = 251
-X = 11954
-Y = 8325
-Radius = 100
-RespawnTime = 10
-Type = 157
-
-[HorrorLizard8]
-ID = 252
-X = 11173
-Y = 8304
-Radius = 100
-RespawnTime = 10
-Type = 154
-
-[HorrorLizard9]
-ID = 253
-X = 11605
-Y = 8545
-Radius = 100
-RespawnTime = 10
-Type = 154
-
-[HorrorLizard10]
-ID = 254
-X = 11845
-Y = 8206
-Radius = 100
-RespawnTime = 10
-Type = 154
-
-[HorrorLizard11]
-ID = 255
-X = 11845
-Y = 7816
-Radius = 100
-RespawnTime = 10
-Type = 154
-
-[HorrorLizard12]
-ID = 256
-X = 11456
-Y = 7705
-Radius = 100
-RespawnTime = 10
-Type = 154
-
-[Karmaroid35]
-ID = 257
-X = 11805
-Y = 8335
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Tyranorid2]
-ID = 258
-X = 7406
-Y = 7593
-Radius = 200
-RespawnTime = 10
-Type = 147
-
-[Tyranorid3]
-ID = 259
-X = 6807
-Y = 7864
-Radius = 200
-RespawnTime = 10
-Type = 147
-
-[Tyranorid4]
-ID = 260
-X = 5566
-Y = 7595
-Radius = 200
-RespawnTime = 10
-Type = 147
-
-[Tyranorid5]
-ID = 261
-X = 10314
-Y = 10656
-Radius = 200
-RespawnTime = 10
-Type = 147
-
-[Tyranorid6]
-ID = 262
-X = 6874
-Y = 6336
-Radius = 200
-RespawnTime = 10
-Type = 147
-
-[Tyranorid7]
-ID = 263
-X = 7614
-Y = 6295
-Radius = 200
-RespawnTime = 10
-Type = 147
-
-[Tyranorid8]
-ID = 264
-X = 8464
-Y = 6794
-Radius = 200
-RespawnTime = 10
-Type = 147
-
-[Tyranorid9]
-ID = 265
-X = 8725
-Y = 7573
-Radius = 200
-RespawnTime = 10
-Type = 147
-
-[Tyranorid10]
-ID = 266
-X = 8385
-Y = 9142
-Radius = 200
-RespawnTime = 10
-Type = 147
-
-[Tyranorid11]
-ID = 267
-X = 3745
-Y = 7605
-Radius = 200
-RespawnTime = 10
-Type = 147
-
-[Tyranorid12]
-ID = 268
-X = 3714
-Y = 6606
-Radius = 200
-RespawnTime = 10
-Type = 147
-
-[Tyranorid13]
-ID = 269
-X = 3765
-Y = 5766
-Radius = 200
-RespawnTime = 10
-Type = 147
-
-[Tyranorid14]
-ID = 270
-X = 1046
-Y = 6825
-Radius = 200
-RespawnTime = 10
-Type = 147
-
-[Tyranorid15]
-ID = 271
-X = 1225
-Y = 7624
-Radius = 200
-RespawnTime = 10
-Type = 147
-
-[Tyranorid16]
-ID = 272
-X = 1515
-Y = 9025
-Radius = 200
-RespawnTime = 10
-Type = 147
-
-[Rexroid1]
-ID = 273
-X = 3014
-Y = 7545
-Radius = 200
-RespawnTime = 10
-Type = 160
-
-[Rexroid2]
-ID = 274
-X = 3764
-Y = 7534
-Radius = 200
-RespawnTime = 10
-Type = 160
-
-[Rexroid3]
-ID = 275
-X = 3376
-Y = 6706
-Radius = 200
-RespawnTime = 10
-Type = 160
-
-[Rexroid4]
-ID = 276
-X = 6615
-Y = 6175
-Radius = 150
-RespawnTime = 10
-Type = 160
-
-[Rexroid5]
-ID = 277
-X = 7575
-Y = 6156
-Radius = 200
-RespawnTime = 10
-Type = 160
-
-[Uokepaloid 19]
-ID = 278
-X = 8335
-Y = 9785
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 20]
-ID = 279
-X = 8326
-Y = 9495
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 21]
-ID = 281
-X = 8155
-Y = 8824
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 22]
-ID = 282
-X = 7985
-Y = 8355
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 23]
-ID = 283
-X = 7755
-Y = 8125
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 24]
-ID = 284
-X = 7944
-Y = 7866
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 25]
-ID = 285
-X = 8175
-Y = 7506
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 26]
-ID = 286
-X = 8175
-Y = 7076
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 27]
-ID = 287
-X = 8475
-Y = 6865
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 28]
-ID = 288
-X = 8555
-Y = 6605
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 29]
-ID = 289
-X = 8665
-Y = 6386
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 30]
-ID = 290
-X = 8336
-Y = 6235
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 31]
-ID = 291
-X = 8205
-Y = 5905
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 32]
-ID = 292
-X = 7956
-Y = 5696
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 33]
-ID = 293
-X = 7715
-Y = 5595
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 34]
-ID = 294
-X = 7466
-Y = 5535
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 35]
-ID = 295
-X = 7205
-Y = 5675
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 36]
-ID = 296
-X = 7175
-Y = 6005
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 37]
-ID = 297
-X = 7045
-Y = 6205
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 38]
-ID = 298
-X = 6865
-Y = 6005
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 39]
-ID = 299
-X = 6596
-Y = 6135
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 40]
-ID = 300
-X = 6615
-Y = 6485
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 41]
-ID = 301
-X = 6615
-Y = 6804
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 42]
-ID = 302
-X = 6555
-Y = 7085
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 43]
-ID = 303
-X = 6366
-Y = 7225
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 44]
-ID = 304
-X = 6395
-Y = 7465
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 45]
-ID = 305
-X = 6664
-Y = 7555
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 46]
-ID = 306
-X = 6865
-Y = 7725
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 47]
-ID = 307
-X = 7035
-Y = 7815
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 48]
-ID = 308
-X = 6995
-Y = 8194
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 49]
-ID = 309
-X = 6985
-Y = 8445
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 50]
-ID = 310
-X = 7275
-Y = 8645
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 51]
-ID = 311
-X = 7594
-Y = 8695
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 52]
-ID = 312
-X = 7595
-Y = 8883
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 53]
-ID = 313
-X = 7855
-Y = 8975
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 54]
-ID = 314
-X = 7976
-Y = 9275
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 55]
-ID = 315
-X = 7985
-Y = 9655
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 56]
-ID = 316
-X = 8565
-Y = 9765
-Radius = 50
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 57]
-ID = 317
-X = 8924
-Y = 9596
-Radius = 50
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 58]
-ID = 318
-X = 8835
-Y = 9285
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 59]
-ID = 319
-X = 8556
-Y = 8886
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 60]
-ID = 320
-X = 8495
-Y = 8496
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 61]
-ID = 321
-X = 8445
-Y = 8085
-Radius = 50
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 62]
-ID = 322
-X = 8775
-Y = 7916
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 63]
-ID = 323
-X = 8785
-Y = 7675
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 64]
-ID = 324
-X = 8914
-Y = 7376
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 65]
-ID = 325
-X = 9084
-Y = 7085
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 66]
-ID = 326
-X = 9465
-Y = 6756
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 67]
-ID = 327
-X = 9405
-Y = 6335
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 68]
-ID = 328
-X = 9085
-Y = 6075
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 69]
-ID = 329
-X = 8995
-Y = 5746
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 70]
-ID = 330
-X = 8795
-Y = 5415
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 71]
-ID = 331
-X = 8466
-Y = 5285
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 72]
-ID = 332
-X = 8195
-Y = 5155
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 73]
-ID = 333
-X = 7805
-Y = 5285
-Radius = 50
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 74]
-ID = 334
-X = 7605
-Y = 5855
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 75]
-ID = 335
-X = 7576
-Y = 6195
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 76]
-ID = 336
-X = 7345
-Y = 6455
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 77]
-ID = 337
-X = 7195
-Y = 6735
-Radius = 100
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 78]
-ID = 338
-X = 7265
-Y = 7065
-Radius = 50
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 79]
-ID = 339
-X = 7265
-Y = 7155
-Radius = 50
-RespawnTime = 10
-Type = 149
-
-[Uokepaloid 80]
-ID = 340
-X = 6826
-Y = 7524
-Radius = 50
-RespawnTime = 10
-Type = 149
-
-[Styrokonoid 2]
-ID = 341
-X = 6565
-Y = 6175
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 3]
-ID = 342
-X = 6675
-Y = 6055
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 4]
-ID = 343
-X = 6735
-Y = 5885
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 5]
-ID = 344
-X = 7045
-Y = 6165
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 6]
-ID = 345
-X = 7185
-Y = 6385
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 7]
-ID = 346
-X = 7345
-Y = 6605
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 8]
-ID = 347
-X = 7584
-Y = 6366
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 9]
-ID = 348
-X = 7824
-Y = 6275
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 10]
-ID = 349
-X = 8114
-Y = 6106
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 11]
-ID = 350
-X = 8414
-Y = 6175
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 12]
-ID = 351
-X = 8306
-Y = 5926
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 13]
-ID = 352
-X = 8035
-Y = 5895
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 14]
-ID = 353
-X = 7876
-Y = 5915
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 15]
-ID = 354
-X = 7545
-Y = 5895
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 16]
-ID = 355
-X = 7385
-Y = 5985
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 17]
-ID = 356
-X = 7275
-Y = 6215
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 18]
-ID = 357
-X = 6905
-Y = 6404
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 19]
-ID = 358
-X = 6595
-Y = 6574
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 20]
-ID = 359
-X = 7374
-Y = 6576
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 59]
-ID = 360
-X = 7675
-Y = 6655
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 21]
-ID = 361
-X = 8315
-Y = 6384
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 22]
-ID = 362
-X = 8676
-Y = 6355
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 23]
-ID = 363
-X = 8795
-Y = 6865
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 24]
-ID = 364
-X = 8536
-Y = 7105
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 25]
-ID = 365
-X = 8336
-Y = 7324
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 26]
-ID = 366
-X = 8086
-Y = 7514
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 27]
-ID = 367
-X = 8304
-Y = 7754
-Radius = 50
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 28]
-ID = 368
-X = 8495
-Y = 8115
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 29]
-ID = 369
-X = 8804
-Y = 7836
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 30]
-ID = 370
-X = 8915
-Y = 7566
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 31]
-ID = 371
-X = 9105
-Y = 7305
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 32]
-ID = 372
-X = 8776
-Y = 7255
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 33]
-ID = 373
-X = 8615
-Y = 7395
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 60]
-ID = 374
-X = 1005
-Y = 11325
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 34]
-ID = 375
-X = 1194
-Y = 11146
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 35]
-ID = 376
-X = 1414
-Y = 11035
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 36]
-ID = 377
-X = 1694
-Y = 11315
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 37]
-ID = 378
-X = 1685
-Y = 11735
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 38]
-ID = 379
-X = 1385
-Y = 11885
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 39]
-ID = 380
-X = 1605
-Y = 12005
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 40]
-ID = 381
-X = 2034
-Y = 11985
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 41]
-ID = 382
-X = 2265
-Y = 11815
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 42]
-ID = 383
-X = 2365
-Y = 11496
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 43]
-ID = 384
-X = 2644
-Y = 11435
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 44]
-ID = 385
-X = 2874
-Y = 11475
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 45]
-ID = 386
-X = 2835
-Y = 11105
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 46]
-ID = 387
-X = 3114
-Y = 11035
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 47]
-ID = 388
-X = 3384
-Y = 11014
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 48]
-ID = 389
-X = 3565
-Y = 11404
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 49]
-ID = 390
-X = 3545
-Y = 11794
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 50]
-ID = 391
-X = 3785
-Y = 11905
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 51]
-ID = 392
-X = 3975
-Y = 11565
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 52]
-ID = 393
-X = 3875
-Y = 11186
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 53]
-ID = 394
-X = 3895
-Y = 10915
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 54]
-ID = 395
-X = 4194
-Y = 10925
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 55]
-ID = 396
-X = 4425
-Y = 10855
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 56]
-ID = 397
-X = 4775
-Y = 10925
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 57]
-ID = 398
-X = 4735
-Y = 11214
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Styrokonoid 58]
-ID = 399
-X = 4944
-Y = 11414
-Radius = 100
-RespawnTime = 10
-Type = 151
-
-[Raptoroid 51]
-ID = 400
-X = 5075
-Y = 10355
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 52]
-ID = 401
-X = 5184
-Y = 10196
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 53]
-ID = 402
-X = 5414
-Y = 10284
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 54]
-ID = 403
-X = 5634
-Y = 10474
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 55]
-ID = 404
-X = 5836
-Y = 10595
-Radius = 50
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 56]
-ID = 405
-X = 6114
-Y = 10515
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 57]
-ID = 406
-X = 6284
-Y = 10555
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 58]
-ID = 407
-X = 6405
-Y = 10604
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 59]
-ID = 408
-X = 6535
-Y = 10485
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 60]
-ID = 409
-X = 6734
-Y = 10314
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 61]
-ID = 410
-X = 6964
-Y = 10226
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 62]
-ID = 411
-X = 7224
-Y = 10115
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 63]
-ID = 412
-X = 7475
-Y = 9965
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 64]
-ID = 413
-X = 7653
-Y = 9865
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 65]
-ID = 414
-X = 7853
-Y = 9805
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 66]
-ID = 415
-X = 8084
-Y = 9785
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 67]
-ID = 416
-X = 8304
-Y = 9835
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 68]
-ID = 417
-X = 8504
-Y = 9736
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 69]
-ID = 418
-X = 8614
-Y = 9595
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 70]
-ID = 419
-X = 8825
-Y = 9465
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 71]
-ID = 420
-X = 8904
-Y = 9326
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 72]
-ID = 421
-X = 8796
-Y = 9216
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 73]
-ID = 422
-X = 8626
-Y = 8976
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 74]
-ID = 423
-X = 8505
-Y = 8766
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 75]
-ID = 424
-X = 8475
-Y = 8556
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 76]
-ID = 425
-X = 8545
-Y = 8365
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 77]
-ID = 426
-X = 8635
-Y = 8146
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 78]
-ID = 427
-X = 8735
-Y = 7966
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 79]
-ID = 428
 X = 8865
-Y = 7675
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 80]
-ID = 429
-X = 9015
-Y = 7526
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 81]
-ID = 430
-X = 9185
-Y = 7306
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 82]
-ID = 431
-X = 9294
-Y = 7146
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 83]
-ID = 432
-X = 9454
-Y = 6985
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 84]
-ID = 433
-X = 9674
-Y = 6774
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 85]
-ID = 434
-X = 9814
-Y = 6596
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 86]
-ID = 435
-X = 9765
-Y = 6365
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 87]
-ID = 436
-X = 9635
-Y = 6345
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 88]
-ID = 437
-X = 9425
-Y = 6175
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 89]
-ID = 438
-X = 9246
-Y = 6065
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 90]
-ID = 439
-X = 9025
-Y = 5945
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 91]
-ID = 440
-X = 8936
-Y = 5886
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 92]
-ID = 441
-X = 8895
-Y = 5675
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 93]
-ID = 442
-X = 8945
-Y = 5496
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 94]
-ID = 443
-X = 8805
-Y = 5325
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 95]
-ID = 444
-X = 8725
-Y = 5205
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 96]
-ID = 445
-X = 8575
-Y = 5045
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 97]
-ID = 446
-X = 8316
-Y = 4975
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 98]
-ID = 447
-X = 8116
-Y = 4985
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 99]
-ID = 448
-X = 7866
-Y = 5025
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 100]
-ID = 449
-X = 7745
-Y = 5035
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 101]
-ID = 450
-X = 7516
-Y = 5035
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 102]
-ID = 451
-X = 7345
-Y = 5035
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 103]
-ID = 452
-X = 7156
-Y = 5024
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 104]
-ID = 453
-X = 6928
-Y = 5045
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 105]
-ID = 454
-X = 6737
-Y = 5114
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 106]
-ID = 455
-X = 6586
-Y = 5215
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 107]
-ID = 457
-X = 6455
-Y = 5304
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 108]
-ID = 458
-X = 6346
-Y = 5335
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 109]
-ID = 459
-X = 6176
-Y = 5315
-Radius = 150
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 110]
-ID = 460
-X = 5995
-Y = 5305
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 111]
-ID = 461
-X = 5685
-Y = 5295
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 112]
-ID = 462
-X = 5486
-Y = 5285
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 113]
-ID = 463
-X = 5305
-Y = 5295
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 114]
-ID = 464
-X = 5064
-Y = 5196
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 115]
-ID = 465
-X = 4796
-Y = 5095
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 116]
-ID = 466
-X = 4605
-Y = 5085
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 117]
-ID = 467
-X = 4356
-Y = 5075
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 118]
-ID = 468
-X = 4095
-Y = 5075
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 119]
-ID = 469
-X = 3856
-Y = 5075
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 120]
-ID = 470
-X = 3626
-Y = 5075
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 121]
-ID = 471
-X = 3466
-Y = 5015
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 122]
-ID = 472
-X = 3236
-Y = 5016
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 123]
-ID = 473
-X = 2976
-Y = 5015
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 124]
-ID = 474
-X = 2815
-Y = 5094
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 125]
-ID = 475
-X = 2615
-Y = 5125
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 126]
-ID = 476
-X = 2426
-Y = 5125
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 127]
-ID = 477
-X = 2235
-Y = 5085
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 128]
-ID = 478
-X = 2205
-Y = 5264
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 129]
-ID = 479
-X = 2365
-Y = 5244
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 130]
-ID = 480
-X = 2553
-Y = 5205
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 131]
-ID = 481
-X = 2805
-Y = 5255
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 132]
-ID = 482
-X = 2985
-Y = 5295
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 133]
-ID = 483
-X = 3235
-Y = 5575
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 134]
-ID = 484
-X = 3195
-Y = 5775
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 135]
-ID = 485
-X = 3205
-Y = 6034
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 136]
-ID = 486
-X = 3205
-Y = 6034
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 137]
-ID = 487
-X = 3225
-Y = 6285
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 138]
-ID = 488
-X = 3295
-Y = 6535
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 139]
-ID = 489
-X = 3125
-Y = 6595
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 140]
-ID = 490
-X = 2925
-Y = 6505
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 141]
-ID = 491
-X = 2706
-Y = 6655
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 142]
-ID = 492
-X = 2515
-Y = 6635
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 143]
-ID = 493
-X = 2316
-Y = 6565
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 144]
-ID = 494
-X = 2136
-Y = 6555
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 145]
-ID = 495
-X = 1935
-Y = 6525
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 146]
-ID = 496
-X = 1806
-Y = 6356
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 147]
-ID = 497
-X = 1785
-Y = 6065
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 148]
-ID = 498
-X = 1335
-Y = 6435
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 149]
-ID = 499
-X = 1006
-Y = 6485
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 150]
-ID = 500
-X = 865
-Y = 6835
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 151]
-ID = 501
-X = 1244
-Y = 7194
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 152]
-ID = 502
-X = 1055
-Y = 7515
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 153]
-ID = 503
-X = 785
-Y = 7665
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 154]
-ID = 504
-X = 735
-Y = 7904
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 155]
-ID = 505
-X = 755
-Y = 8204
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 156]
-ID = 506
-X = 945
-Y = 8515
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 157]
-ID = 507
-X = 1044
-Y = 8854
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 158]
-ID = 508
-X = 1015
-Y = 9135
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 159]
-ID = 509
-X = 1235
-Y = 9515
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 160]
-ID = 510
-X = 1225
-Y = 9885
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 161]
-ID = 511
-X = 1105
-Y = 10185
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 162]
-ID = 512
-X = 1055
-Y = 10444
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 163]
-ID = 513
-X = 886
-Y = 10714
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 164]
-ID = 514
-X = 1015
-Y = 10925
-Radius = 50
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 165]
-ID = 515
-X = 915
-Y = 11355
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 166]
-ID = 516
-X = 1105
-Y = 11645
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 167]
-ID = 517
-X = 1274
-Y = 11884
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 168]
-ID = 518
-X = 1554
-Y = 11915
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 169]
-ID = 519
-X = 1694
-Y = 11706
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 170]
-ID = 520
-X = 2025
-Y = 11795
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 171]
-ID = 521
-X = 1905
-Y = 11995
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 172]
-ID = 522
-X = 2275
-Y = 11755
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 173]
-ID = 523
-X = 2584
-Y = 11755
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 174]
-ID = 524
-X = 2835
-Y = 11594
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 175]
-ID = 525
-X = 3184
-Y = 11515
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 176]
-ID = 526
-X = 3444
-Y = 11355
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 177]
-ID = 527
-X = 3775
-Y = 11425
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 178]
-ID = 528
-X = 3855
-Y = 11754
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 179]
-ID = 529
-X = 3575
-Y = 11945
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 180]
-ID = 530
-X = 4204
-Y = 11825
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 181]
-ID = 531
-X = 4395
-Y = 11585
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 182]
-ID = 532
-X = 4725
-Y = 11395
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 183]
-ID = 533
-X = 5134
-Y = 11235
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 184]
-ID = 534
-X = 4686
-Y = 10886
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 185]
-ID = 535
-X = 4156
-Y = 10515
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 186]
-ID = 536
-X = 3666
-Y = 10605
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 187]
-ID = 537
-X = 3045
-Y = 10635
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 188]
-ID = 538
-X = 2586
-Y = 10775
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 189]
-ID = 539
-X = 2615
-Y = 11135
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 190]
-ID = 540
-X = 2325
-Y = 11305
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 191]
-ID = 541
-X = 2145
-Y = 11055
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 192]
-ID = 542
-X = 2005
-Y = 10685
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 193]
-ID = 543
-X = 1706
-Y = 10684
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 194]
-ID = 544
-X = 1714
-Y = 11076
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 195]
-ID = 545
-X = 1486
-Y = 11444
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 196]
-ID = 546
-X = 1725
-Y = 10175
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 197]
-ID = 547
-X = 1745
-Y = 9715
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 198]
-ID = 548
-X = 1785
-Y = 9175
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 199]
-ID = 549
-X = 1755
-Y = 8846
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 200]
-ID = 550
-X = 1785
-Y = 8446
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 201]
-ID = 551
-X = 1985
-Y = 8055
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 202]
-ID = 552
-X = 1955
-Y = 7635
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 203]
-ID = 553
-X = 1905
-Y = 7236
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 204]
-ID = 554
-X = 2084
-Y = 6856
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 205]
-ID = 555
-X = 2414
-Y = 6795
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 206]
-ID = 556
-X = 2675
-Y = 7165
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 207]
-ID = 557
-X = 2715
-Y = 7473
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 208]
-ID = 558
-X = 3145
-Y = 7725
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 209]
-ID = 559
-X = 3584
-Y = 7675
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 210]
-ID = 560
-X = 3516
-Y = 7266
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 211]
-ID = 561
-X = 3236
-Y = 7085
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 212]
-ID = 562
-X = 3364
-Y = 6856
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 213]
-ID = 563
-X = 3585
-Y = 6666
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 214]
-ID = 564
-X = 4045
-Y = 6525
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 215]
-ID = 565
-X = 4315
-Y = 6295
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 216]
-ID = 566
-X = 4854
-Y = 6205
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 217]
-ID = 567
-X = 5244
-Y = 6096
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 218]
-ID = 568
-X = 5265
-Y = 6594
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 219]
-ID = 569
-X = 5025
-Y = 6845
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 220]
-ID = 570
-X = 4655
-Y = 6975
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 221]
-ID = 571
-X = 4245
-Y = 6955
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 222]
-ID = 572
-X = 4854
-Y = 7054
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 223]
-ID = 573
-X = 5154
-Y = 7224
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 224]
-ID = 574
-X = 5414
-Y = 7235
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 225]
-ID = 575
-X = 5575
-Y = 7025
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 226]
-ID = 576
-X = 5825
-Y = 6915
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 227]
-ID = 577
-X = 6174
-Y = 6845
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 228]
-ID = 578
-X = 6385
-Y = 6696
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 229]
-ID = 579
-X = 6664
-Y = 6695
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 230]
-ID = 580
-X = 6795
-Y = 6526
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 231]
-ID = 581
-X = 6964
-Y = 6356
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 232]
-ID = 582
-X = 7165
-Y = 6395
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 233]
-ID = 583
-X = 7185
-Y = 6524
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 234]
-ID = 584
-X = 7304
-Y = 6654
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 235]
-ID = 585
-X = 7465
-Y = 6645
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 236]
-ID = 586
-X = 7635
-Y = 6615
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 237]
-ID = 587
-X = 7814
-Y = 6575
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 238]
-ID = 588
-X = 7964
-Y = 6575
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 239]
-ID = 589
-X = 8124
-Y = 6466
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 240]
-ID = 590
-X = 8245
-Y = 6286
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 241]
-ID = 591
-X = 8464
-Y = 6255
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 242]
-ID = 592
-X = 8366
-Y = 6075
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 243]
-ID = 593
+Y = 10069
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 231
+
+[Spawn 32]
+ID = 32
+X = 8651
+Y = 10047
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 233
+
+[Spawn 33]
+ID = 33
+X = 8809
+Y = 10501
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 34]
+ID = 34
+X = 8528
+Y = 10201
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 35]
+ID = 35
+X = 8275
+Y = 10181
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 237
+
+[Spawn 36]
+ID = 36
+X = 8382
+Y = 10027
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 37]
+ID = 37
+X = 8218
+Y = 10149
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 231
+
+[Spawn 38]
+ID = 38
 X = 8266
-Y = 5956
-Radius = 100
-RespawnTime = 10
+Y = 10461
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 39]
+ID = 39
+X = 8010
+Y = 10078
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 237
+
+[Spawn 40]
+ID = 40
+X = 8044
+Y = 10131
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 41]
+ID = 41
+X = 8021
+Y = 10039
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 42]
+ID = 42
+X = 7807
+Y = 10043
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 231
+
+[Spawn 43]
+ID = 43
+X = 7838
+Y = 10069
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 233
+
+[Spawn 44]
+ID = 44
+X = 7998
+Y = 10026
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 233
+
+[Spawn 45]
+ID = 45
+X = 7883
+Y = 10054
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 237
+
+[Spawn 46]
+ID = 46
+X = 7845
+Y = 10048
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 232
+
+[Spawn 47]
+ID = 47
+X = 7897
+Y = 10292
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 48]
+ID = 48
+X = 7601
+Y = 10276
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 233
+
+[Spawn 49]
+ID = 49
+X = 7748
+Y = 10243
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 50]
+ID = 50
+X = 7723
+Y = 10740
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 51]
+ID = 51
+X = 7722
+Y = 10756
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 52]
+ID = 52
+X = 7605
+Y = 10613
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 53]
+ID = 53
+X = 7843
+Y = 10784
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid 244]
-ID = 594
-X = 8125
-Y = 5806
-Radius = 100
-RespawnTime = 10
+[Spawn 54]
+ID = 54
+X = 7551
+Y = 10399
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 231
+
+[Spawn 55]
+ID = 55
+X = 7540
+Y = 10600
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 56]
+ID = 56
+X = 7809
+Y = 10795
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 57]
+ID = 57
+X = 7850
+Y = 10763
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid 245]
-ID = 595
-X = 7896
-Y = 5765
-Radius = 100
-RespawnTime = 10
+[Spawn 58]
+ID = 58
+X = 7292
+Y = 10389
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 237
+
+[Spawn 59]
+ID = 59
+X = 7209
+Y = 10294
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 60]
+ID = 60
+X = 7371
+Y = 10486
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 231
+
+[Spawn 61]
+ID = 61
+X = 7306
+Y = 10474
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 232
+
+[Spawn 62]
+ID = 62
+X = 7275
+Y = 10700
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 63]
+ID = 63
+X = 7197
+Y = 10445
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 231
+
+[Spawn 64]
+ID = 64
+X = 7077
+Y = 10852
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 65]
+ID = 65
+X = 7377
+Y = 10929
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 66]
+ID = 66
+X = 7290
+Y = 11120
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 177
+
+[Spawn 67]
+ID = 67
+X = 6827
+Y = 11196
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 68]
+ID = 68
+X = 6733
+Y = 10678
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 233
+
+[Spawn 69]
+ID = 69
+X = 6700
+Y = 10834
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 232
+
+[Spawn 70]
+ID = 70
+X = 6654
+Y = 10815
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 232
+
+[Spawn 71]
+ID = 71
+X = 6412
+Y = 10865
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 72]
+ID = 72
+X = 6347
+Y = 10801
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 73]
+ID = 73
+X = 6319
+Y = 10980
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 237
+
+[Spawn 74]
+ID = 74
+X = 6329
+Y = 10948
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 237
+
+[Spawn 75]
+ID = 75
+X = 6229
+Y = 10944
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 231
+
+[Spawn 76]
+ID = 76
+X = 6278
+Y = 10949
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 232
+
+[Spawn 77]
+ID = 77
+X = 6246
+Y = 10911
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 232
+
+[Spawn 78]
+ID = 78
+X = 6360
+Y = 10929
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 233
+
+[Spawn 79]
+ID = 79
+X = 6325
+Y = 11094
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 80]
+ID = 80
+X = 6534
+Y = 11276
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 81]
+ID = 81
+X = 6205
+Y = 10912
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 82]
+ID = 82
+X = 6399
+Y = 11460
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 83]
+ID = 83
+X = 6006
+Y = 11139
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 231
+
+[Spawn 84]
+ID = 84
+X = 5806
+Y = 11179
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 85]
+ID = 85
+X = 5965
+Y = 11055
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 232
+
+[Spawn 86]
+ID = 86
+X = 5883
+Y = 11054
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 237
+
+[Spawn 87]
+ID = 87
+X = 5942
+Y = 11191
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 237
+
+[Spawn 88]
+ID = 88
+X = 5960
+Y = 11366
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 89]
+ID = 89
+X = 5838
+Y = 11440
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 231
+
+[Spawn 90]
+ID = 90
+X = 5836
+Y = 11405
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 232
+
+[Spawn 91]
+ID = 91
+X = 5808
+Y = 11509
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 231
+
+[Spawn 92]
+ID = 92
+X = 5810
+Y = 11087
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 233
+
+[Spawn 93]
+ID = 93
+X = 5818
+Y = 11662
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 232
+
+[Spawn 94]
+ID = 94
+X = 5711
+Y = 11811
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 231
+
+[Spawn 95]
+ID = 95
+X = 5731
+Y = 11867
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 231
+
+[Spawn 96]
+ID = 96
+X = 5695
+Y = 11848
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 233
+
+[Spawn 97]
+ID = 97
+X = 5838
+Y = 12090
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 98]
+ID = 98
+X = 5547
+Y = 11939
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 237
+
+[Spawn 99]
+ID = 99
+X = 5436
+Y = 11900
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 233
+
+[Spawn 100]
+ID = 100
+X = 5873
+Y = 12232
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 101]
+ID = 101
+X = 5201
+Y = 11915
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 232
+
+[Spawn 102]
+ID = 102
+X = 5278
+Y = 12222
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 103]
+ID = 103
+X = 5042
+Y = 11812
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 104]
+ID = 104
+X = 5108
+Y = 11908
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 105]
+ID = 105
+X = 5053
+Y = 11813
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 231
+
+[Spawn 106]
+ID = 106
+X = 4982
+Y = 12266
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 107]
+ID = 107
+X = 4754
+Y = 11801
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 232
+
+[Spawn 108]
+ID = 108
+X = 4607
+Y = 11905
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 109]
+ID = 109
+X = 4784
+Y = 11898
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 110]
+ID = 110
+X = 4779
+Y = 11906
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 237
+
+[Spawn 111]
+ID = 111
+X = 4490
+Y = 11817
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 112]
+ID = 112
+X = 6128
+Y = 11006
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 232
+
+[Spawn 113]
+ID = 113
+X = 6690
+Y = 11516
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 114]
+ID = 114
+X = 6760
+Y = 11570
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 144
+
+[Spawn 115]
+ID = 115
+X = 6885
+Y = 11561
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid 246]
-ID = 596
-X = 7676
-Y = 5645
-Radius = 100
-RespawnTime = 10
+[Spawn 116]
+ID = 116
+X = 7270
+Y = 11200
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 144
+
+[Spawn 117]
+ID = 117
+X = 7490
+Y = 11120
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 178
+
+[Spawn 118]
+ID = 118
+X = 7902
+Y = 11041
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid 247]
-ID = 597
-X = 7466
-Y = 5734
-Radius = 100
-RespawnTime = 10
-Type = 150
+[Spawn 119]
+ID = 119
+X = 7807
+Y = 11005
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
 
-[Raptoroid 248]
-ID = 598
-X = 7326
-Y = 5874
-Radius = 100
-RespawnTime = 10
-Type = 150
+[Spawn 120]
+ID = 120
+X = 7980
+Y = 11379
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
 
-[Raptoroid 249]
-ID = 599
-X = 7086
-Y = 5746
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 250]
-ID = 600
-X = 6876
-Y = 5934
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 251]
-ID = 601
-X = 6675
-Y = 6045
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 252]
-ID = 602
-X = 6566
-Y = 6194
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 253]
-ID = 603
-X = 6445
-Y = 6374
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 254]
-ID = 604
-X = 6594
-Y = 6425
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 255]
-ID = 605
-X = 6744
-Y = 6365
-Radius = 50
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 256]
-ID = 606
-X = 6995
-Y = 6105
-Radius = 50
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 257]
-ID = 607
-X = 7254
-Y = 5535
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 258]
-ID = 608
-X = 7466
-Y = 5325
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 259]
-ID = 609
-X = 7765
-Y = 5295
-Radius = 50
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 260]
-ID = 610
+[Spawn 121]
+ID = 121
 X = 8164
-Y = 5515
-Radius = 100
-RespawnTime = 10
+Y = 10877
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 122]
+ID = 122
+X = 8376
+Y = 10813
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 123]
+ID = 123
+X = 8371
+Y = 11247
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid 261]
-ID = 611
-X = 8453
-Y = 5396
-Radius = 100
-RespawnTime = 10
+[Spawn 124]
+ID = 124
+X = 8589
+Y = 11341
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 125]
+ID = 125
+X = 8581
+Y = 10802
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 126]
+ID = 126
+X = 8704
+Y = 10990
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 127]
+ID = 127
+X = 8747
+Y = 11038
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 128]
+ID = 128
+X = 8793
+Y = 11371
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid 262]
-ID = 612
-X = 8605
-Y = 5785
-Radius = 50
-RespawnTime = 10
+[Spawn 129]
+ID = 129
+X = 8976
+Y = 10916
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 130]
+ID = 130
+X = 8821
+Y = 11141
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 131]
+ID = 131
+X = 8820
+Y = 11098
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid 263]
-ID = 613
-X = 8824
-Y = 6234
-Radius = 100
-RespawnTime = 10
+[Spawn 132]
+ID = 132
+X = 9401
+Y = 10571
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 133]
+ID = 133
+X = 9772
+Y = 10186
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid 264]
-ID = 614
-X = 9264
-Y = 6504
-Radius = 50
-RespawnTime = 10
+[Spawn 134]
+ID = 134
+X = 9664
+Y = 10171
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 135]
+ID = 135
+X = 9913
+Y = 9754
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 136]
+ID = 136
+X = 10303
+Y = 9736
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 137]
+ID = 137
+X = 10342
+Y = 9935
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 138]
+ID = 138
+X = 10389
+Y = 9861
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 139]
+ID = 139
+X = 10500
+Y = 9882
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 140]
+ID = 140
+X = 10534
+Y = 10106
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 141]
+ID = 141
+X = 10796
+Y = 10031
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid 265]
-ID = 615
-X = 9085
-Y = 6825
-Radius = 100
-RespawnTime = 10
+[Spawn 142]
+ID = 142
+X = 10919
+Y = 10391
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid 266]
-ID = 616
-X = 8846
-Y = 6686
-Radius = 100
-RespawnTime = 10
+[Spawn 143]
+ID = 143
+X = 11159
+Y = 10706
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid 267]
-ID = 617
-X = 8606
-Y = 6486
-Radius = 100
-RespawnTime = 10
+[Spawn 144]
+ID = 144
+X = 11036
+Y = 10743
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 145]
+ID = 145
+X = 11703
+Y = 10985
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid 268]
-ID = 618
-X = 8375
-Y = 6804
-Radius = 100
-RespawnTime = 10
+[Spawn 146]
+ID = 146
+X = 11544
+Y = 11355
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid 269]
-ID = 619
-X = 8156
-Y = 6924
-Radius = 100
-RespawnTime = 10
+[Spawn 147]
+ID = 147
+X = 11186
+Y = 11272
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 148]
+ID = 148
+X = 10815
+Y = 11427
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid 270]
-ID = 620
-X = 7956
-Y = 6955
-Radius = 100
-RespawnTime = 10
+[Spawn 149]
+ID = 149
+X = 10872
+Y = 11434
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid 271]
-ID = 621
-X = 7904
-Y = 7194
-Radius = 100
-RespawnTime = 10
+[Spawn 150]
+ID = 150
+X = 10092
+Y = 11450
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 151]
+ID = 151
+X = 9898
+Y = 11417
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 152]
+ID = 152
+X = 9803
+Y = 11513
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 153]
+ID = 153
+X = 9602
+Y = 11874
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 154]
+ID = 154
+X = 9402
+Y = 11730
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid 272]
-ID = 622
-X = 8005
-Y = 7375
-Radius = 100
-RespawnTime = 10
+[Spawn 155]
+ID = 155
+X = 8676
+Y = 11515
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 151
+
+[Spawn 156]
+ID = 156
+X = 8026
+Y = 11481
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid 273]
-ID = 623
-X = 8184
-Y = 7435
-Radius = 100
-RespawnTime = 10
+[Spawn 157]
+ID = 157
+X = 8114
+Y = 10889
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 158]
+ID = 158
+X = 8360
+Y = 10707
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 159]
+ID = 159
+X = 8211
+Y = 10458
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid 274]
-ID = 624
-X = 8424
-Y = 7345
-Radius = 100
-RespawnTime = 10
+[Spawn 160]
+ID = 160
+X = 8641
+Y = 10591
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 161]
+ID = 161
+X = 8715
+Y = 10881
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 162]
+ID = 162
+X = 8201
+Y = 10464
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 163]
+ID = 163
+X = 9146
+Y = 10802
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 164]
+ID = 164
+X = 9402
+Y = 10613
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid 275]
-ID = 625
-X = 8554
-Y = 7155
-Radius = 100
-RespawnTime = 10
+[Spawn 165]
+ID = 165
+X = 9892
+Y = 10132
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 166]
+ID = 166
+X = 10093
+Y = 10570
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 167]
+ID = 167
+X = 10372
+Y = 10284
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 168]
+ID = 168
+X = 10457
+Y = 10529
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 169]
+ID = 169
+X = 10514
+Y = 10592
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid 276]
-ID = 626
-X = 8725
-Y = 6966
-Radius = 100
-RespawnTime = 10
+[Spawn 170]
+ID = 170
+X = 11298
+Y = 10463
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 171]
+ID = 171
+X = 11223
+Y = 10936
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 172]
+ID = 172
+X = 10747
+Y = 11528
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid 277]
-ID = 627
-X = 8825
-Y = 7155
-Radius = 100
-RespawnTime = 10
+[Spawn 173]
+ID = 173
+X = 9295
+Y = 11158
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 174]
+ID = 174
+X = 9918
+Y = 10817
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 175]
+ID = 175
+X = 9892
+Y = 11114
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 176]
+ID = 176
+X = 9592
+Y = 10804
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 177]
+ID = 177
+X = 10061
+Y = 10995
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid 278]
-ID = 628
-X = 8846
-Y = 7355
-Radius = 100
-RespawnTime = 10
+[Spawn 178]
+ID = 178
+X = 10316
+Y = 10590
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid 279]
-ID = 629
-X = 8575
-Y = 7575
-Radius = 100
-RespawnTime = 10
+[Spawn 179]
+ID = 179
+X = 10072
+Y = 11103
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 147
+
+[Spawn 180]
+ID = 180
+X = 9341
+Y = 10851
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 181]
+ID = 181
+X = 7568
+Y = 11225
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid 280]
-ID = 630
-X = 8294
-Y = 7744
-Radius = 100
-RespawnTime = 10
+[Spawn 182]
+ID = 182
+X = 7630
+Y = 11245
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid 281]
-ID = 631
-X = 8235
-Y = 8075
-Radius = 50
-RespawnTime = 10
+[Spawn 183]
+ID = 183
+X = 5884
+Y = 11228
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 233
+
+[Spawn 184]
+ID = 184
+X = 5777
+Y = 11365
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 185]
+ID = 185
+X = 5788
+Y = 11332
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 186]
+ID = 186
+X = 5323
+Y = 11671
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 187]
+ID = 187
+X = 5142
+Y = 11523
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 188]
+ID = 188
+X = 5140
+Y = 11620
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 189]
+ID = 189
+X = 4809
+Y = 11495
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 190]
+ID = 190
+X = 4840
+Y = 11797
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 237
+
+[Spawn 191]
+ID = 191
+X = 5212
+Y = 11255
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 192]
+ID = 192
+X = 4457
+Y = 11525
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 193]
+ID = 193
+X = 4546
+Y = 11472
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 194]
+ID = 194
+X = 4554
+Y = 11200
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 195]
+ID = 195
+X = 4393
+Y = 11599
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 196]
+ID = 196
+X = 4127
+Y = 11254
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 197]
+ID = 197
+X = 4112
+Y = 11276
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 198]
+ID = 198
+X = 4084
+Y = 11281
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 199]
+ID = 199
+X = 3901
+Y = 11532
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 200]
+ID = 200
+X = 3973
+Y = 11769
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 201]
+ID = 201
+X = 3788
+Y = 11383
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 202]
+ID = 202
+X = 3615
+Y = 11388
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 203]
+ID = 203
+X = 3513
+Y = 11592
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 204]
+ID = 204
+X = 3345
+Y = 11554
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid 282]
-ID = 632
-X = 8025
-Y = 8195
-Radius = 50
-RespawnTime = 10
+[Spawn 205]
+ID = 205
+X = 3138
+Y = 11703
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 206]
+ID = 206
+X = 3140
+Y = 11739
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 207]
+ID = 207
+X = 3054
+Y = 11759
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid 283]
-ID = 633
-X = 7856
-Y = 8016
-Radius = 50
-RespawnTime = 10
+[Spawn 208]
+ID = 208
+X = 3152
+Y = 11219
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 209]
+ID = 209
+X = 2590
+Y = 11629
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid 284]
-ID = 634
-X = 7675
-Y = 8244
-Radius = 50
-RespawnTime = 10
+[Spawn 210]
+ID = 210
+X = 1840
+Y = 11206
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 211]
+ID = 211
+X = 2146
+Y = 11308
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 212]
+ID = 212
+X = 2052
+Y = 11234
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 213]
+ID = 213
+X = 2186
+Y = 11678
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 214]
+ID = 214
+X = 1806
+Y = 11412
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid 285]
-ID = 635
-X = 7974
-Y = 8604
-Radius = 50
-RespawnTime = 10
+[Spawn 215]
+ID = 215
+X = 1628
+Y = 11549
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 216]
+ID = 216
+X = 1997
+Y = 11798
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 160
+
+[Spawn 217]
+ID = 217
+X = 1500
+Y = 11428
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 218]
+ID = 218
+X = 1098
+Y = 11232
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 219]
+ID = 219
+X = 831
+Y = 11275
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 220]
+ID = 220
+X = 682
+Y = 11445
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 221]
+ID = 221
+X = 768
+Y = 11636
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 222]
+ID = 222
+X = 451
+Y = 11365
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid 286]
-ID = 636
-X = 8174
-Y = 8695
-Radius = 100
-RespawnTime = 10
+[Spawn 223]
+ID = 223
+X = 925
+Y = 11985
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 151
+
+[Spawn 224]
+ID = 224
+X = 990
+Y = 12275
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 147
+
+[Spawn 225]
+ID = 225
+X = 1133
+Y = 12201
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 226]
+ID = 226
+X = 1361
+Y = 11941
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid 287]
-ID = 637
-X = 8316
-Y = 8983
-Radius = 100
-RespawnTime = 10
+[Spawn 227]
+ID = 227
+X = 1588
+Y = 12134
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 147
+
+[Spawn 228]
+ID = 228
+X = 1959
+Y = 11943
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 151
+
+[Spawn 229]
+ID = 229
+X = 2432
+Y = 11948
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 230]
+ID = 230
+X = 3174
+Y = 12026
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 231]
+ID = 231
+X = 3472
+Y = 12001
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 232]
+ID = 232
+X = 3774
+Y = 11767
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 233]
+ID = 233
+X = 4010
+Y = 11778
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 234]
+ID = 234
+X = 4206
+Y = 12089
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 235]
+ID = 235
+X = 5503
+Y = 11205
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 236]
+ID = 236
+X = 5645
+Y = 11018
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 233
+
+[Spawn 237]
+ID = 237
+X = 5721
+Y = 11020
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 237
+
+[Spawn 238]
+ID = 238
+X = 5665
+Y = 11018
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 233
+
+[Spawn 239]
+ID = 239
+X = 5678
+Y = 11027
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 232
+
+[Spawn 240]
+ID = 240
+X = 4429
+Y = 11050
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 241]
+ID = 241
+X = 4434
+Y = 11234
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 242]
+ID = 242
+X = 4609
+Y = 10809
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 243]
+ID = 243
+X = 3961
+Y = 11168
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 244]
+ID = 244
+X = 4061
+Y = 11037
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 245]
+ID = 245
+X = 3619
+Y = 11151
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 246]
+ID = 246
+X = 3609
+Y = 10942
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 247]
+ID = 247
+X = 3413
+Y = 11030
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 248]
+ID = 248
+X = 3431
+Y = 11050
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid 288]
-ID = 638
-X = 8265
-Y = 9265
-Radius = 100
-RespawnTime = 10
+[Spawn 249]
+ID = 249
+X = 3261
+Y = 10875
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 250]
+ID = 250
+X = 2853
+Y = 10933
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 251]
+ID = 251
+X = 2368
+Y = 10963
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 252]
+ID = 252
+X = 2226
+Y = 11181
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid 289]
-ID = 639
-X = 7946
-Y = 9215
-Radius = 100
-RespawnTime = 10
-Type = 150
+[Spawn 253]
+ID = 253
+X = 2362
+Y = 11076
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
 
-[Raptoroid 290]
-ID = 640
-X = 7826
-Y = 8975
-Radius = 100
-RespawnTime = 10
-Type = 150
+[Spawn 254]
+ID = 254
+X = 1357
+Y = 11022
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
 
-[Raptoroid 291]
-ID = 641
-X = 7635
-Y = 8775
-Radius = 100
-RespawnTime = 10
-Type = 150
+[Spawn 255]
+ID = 255
+X = 1181
+Y = 11027
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
 
-[Raptoroid 292]
-ID = 642
-X = 7635
+[Spawn 256]
+ID = 256
+X = 1127
+Y = 11109
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 160
+
+[Spawn 257]
+ID = 257
+X = 907
+Y = 11067
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 258]
+ID = 258
+X = 800
+Y = 11189
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 259]
+ID = 259
+X = 955
+Y = 11192
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 260]
+ID = 260
+X = 1503
+Y = 10817
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 261]
+ID = 261
+X = 1580
+Y = 10850
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 262]
+ID = 262
+X = 2418
+Y = 10697
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 263]
+ID = 263
+X = 3276
+Y = 10765
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 264]
+ID = 264
+X = 3626
+Y = 10754
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 265]
+ID = 265
+X = 4672
+Y = 10816
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 266]
+ID = 266
+X = 4544
+Y = 10601
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 151
+
+[Spawn 267]
+ID = 267
+X = 4980
+Y = 10646
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 233
+
+[Spawn 268]
+ID = 268
+X = 5200
+Y = 10766
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 233
+
+[Spawn 269]
+ID = 269
+X = 5320
+Y = 10939
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 237
+
+[Spawn 270]
+ID = 270
+X = 5316
+Y = 10850
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 237
+
+[Spawn 271]
+ID = 271
+X = 4769
+Y = 10632
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 272]
+ID = 272
+X = 4885
+Y = 10404
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 232
+
+[Spawn 273]
+ID = 273
+X = 4979
+Y = 10548
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 231
+
+[Spawn 274]
+ID = 274
+X = 4920
+Y = 10458
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 231
+
+[Spawn 275]
+ID = 275
+X = 4920
+Y = 10552
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 276]
+ID = 276
+X = 4809
+Y = 10452
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 233
+
+[Spawn 277]
+ID = 277
+X = 4601
+Y = 10555
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 278]
+ID = 278
+X = 4766
+Y = 10311
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 231
+
+[Spawn 279]
+ID = 279
+X = 4766
+Y = 10271
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 232
+
+[Spawn 280]
+ID = 280
+X = 4651
+Y = 10296
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 233
+
+[Spawn 281]
+ID = 281
+X = 4721
+Y = 10289
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 282]
+ID = 282
+X = 4898
+Y = 10311
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 233
+
+[Spawn 283]
+ID = 283
+X = 4877
+Y = 10289
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 237
+
+[Spawn 284]
+ID = 284
+X = 4119
+Y = 10223
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 285]
+ID = 285
+X = 3814
+Y = 10458
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 286]
+ID = 286
+X = 3500
+Y = 10500
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 185
+
+[Spawn 287]
+ID = 287
+X = 3499
+Y = 10607
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 288]
+ID = 288
+X = 3296
+Y = 10467
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 289]
+ID = 289
+X = 2926
+Y = 10386
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 290]
+ID = 290
+X = 2900
+Y = 10500
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 185
+
+[Spawn 291]
+ID = 291
+X = 2778
+Y = 10209
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 292]
+ID = 292
+X = 2479
+Y = 10661
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 293]
+ID = 293
+X = 1788
+Y = 10379
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 294]
+ID = 294
+X = 1698
+Y = 10556
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 295]
+ID = 295
+X = 1597
+Y = 10752
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 296]
+ID = 296
+X = 1412
+Y = 10537
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 297]
+ID = 297
+X = 1111
+Y = 10690
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 298]
+ID = 298
+X = 486
+Y = 10343
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 299]
+ID = 299
+X = 729
+Y = 9800
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 300]
+ID = 300
+X = 812
+Y = 9977
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 301]
+ID = 301
+X = 1003
+Y = 9881
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 302]
+ID = 302
+X = 1152
+Y = 10121
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 151
+
+[Spawn 303]
+ID = 303
+X = 1005
+Y = 10049
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 147
+
+[Spawn 304]
+ID = 304
+X = 1019
+Y = 10315
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 305]
+ID = 305
+X = 1386
+Y = 10078
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 147
+
+[Spawn 306]
+ID = 306
+X = 1456
+Y = 9622
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 307]
+ID = 307
+X = 1519
+Y = 9893
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 308]
+ID = 308
+X = 1666
+Y = 9621
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 309]
+ID = 309
+X = 1749
+Y = 9891
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 310]
+ID = 310
+X = 1821
+Y = 9872
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 311]
+ID = 311
+X = 1648
+Y = 9602
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 312]
+ID = 312
+X = 2072
+Y = 9863
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 313]
+ID = 313
+X = 2212
+Y = 9701
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 233
+
+[Spawn 314]
+ID = 314
+X = 2266
+Y = 9834
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 232
+
+[Spawn 315]
+ID = 315
+X = 2202
+Y = 10028
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 316]
+ID = 316
+X = 2481
+Y = 9860
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 231
+
+[Spawn 317]
+ID = 317
+X = 2579
+Y = 9858
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 231
+
+[Spawn 318]
+ID = 318
+X = 2500
+Y = 10100
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 185
+
+[Spawn 319]
+ID = 319
+X = 2588
+Y = 9900
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 237
+
+[Spawn 320]
+ID = 320
+X = 2797
+Y = 9852
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 233
+
+[Spawn 321]
+ID = 321
+X = 2680
+Y = 10050
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 177
+
+[Spawn 322]
+ID = 322
+X = 2962
+Y = 9844
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 237
+
+[Spawn 323]
+ID = 323
+X = 2952
+Y = 10135
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 324]
+ID = 324
+X = 3125
+Y = 9861
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 143
+
+[Spawn 325]
+ID = 325
+X = 3238
+Y = 9855
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 143
+
+[Spawn 326]
+ID = 326
+X = 2860
+Y = 9815
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 231
+
+[Spawn 327]
+ID = 327
+X = 3522
+Y = 9834
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 232
+
+[Spawn 328]
+ID = 328
+X = 3466
+Y = 9860
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 231
+
+[Spawn 329]
+ID = 329
+X = 3776
+Y = 9871
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 231
+
+[Spawn 330]
+ID = 330
+X = 3600
+Y = 10040
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 178
+
+[Spawn 331]
+ID = 331
+X = 3941
+Y = 9960
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 332]
+ID = 332
+X = 3902
+Y = 9981
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 333]
+ID = 333
+X = 3889
+Y = 9814
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 237
+
+[Spawn 334]
+ID = 334
+X = 3900
+Y = 10100
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 185
+
+[Spawn 335]
+ID = 335
+X = 4023
+Y = 9758
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 237
+
+[Spawn 336]
+ID = 336
+X = 4019
+Y = 9639
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 231
+
+[Spawn 337]
+ID = 337
+X = 4186
+Y = 10026
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 338]
+ID = 338
+X = 4253
+Y = 9976
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 339]
+ID = 339
+X = 4284
+Y = 10072
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 340]
+ID = 340
+X = 4399
+Y = 9902
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 233
+
+[Spawn 341]
+ID = 341
+X = 3033
+Y = 9447
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 142
+
+[Spawn 342]
+ID = 342
+X = 3130
+Y = 9500
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 137
+
+[Spawn 343]
+ID = 343
+X = 3334
+Y = 9433
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 143
+
+[Spawn 344]
+ID = 344
+X = 3453
+Y = 9218
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 142
+
+[Spawn 345]
+ID = 345
+X = 3547
+Y = 9207
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 143
+
+[Spawn 346]
+ID = 346
+X = 3270
+Y = 9060
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 137
+
+[Spawn 347]
+ID = 347
+X = 2928
+Y = 9018
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 143
+
+[Spawn 348]
+ID = 348
+X = 3151
+Y = 8817
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 143
+
+[Spawn 349]
+ID = 349
+X = 3136
+Y = 8956
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 143
+
+[Spawn 350]
+ID = 350
+X = 3326
+Y = 8809
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 137
+
+[Spawn 351]
+ID = 351
+X = 3037
+Y = 8814
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 143
+
+[Spawn 352]
+ID = 352
+X = 3092
+Y = 8707
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 137
+
+[Spawn 353]
+ID = 353
+X = 3112
+Y = 8611
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 143
+
+[Spawn 354]
+ID = 354
+X = 3322
+Y = 8743
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 143
+
+[Spawn 355]
+ID = 355
+X = 3338
+Y = 8793
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 137
+
+[Spawn 356]
+ID = 356
+X = 3586
+Y = 8965
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 137
+
+[Spawn 357]
+ID = 357
+X = 3000
+Y = 8453
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 232
+
+[Spawn 358]
+ID = 358
+X = 3507
+Y = 8414
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 237
+
+[Spawn 359]
+ID = 359
+X = 3595
+Y = 8433
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 233
+
+[Spawn 360]
+ID = 360
+X = 3471
+Y = 8413
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 232
+
+[Spawn 361]
+ID = 361
+X = 2714
+Y = 8414
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 233
+
+[Spawn 362]
+ID = 362
+X = 2763
+Y = 8747
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 143
+
+[Spawn 363]
+ID = 363
+X = 2795
+Y = 8723
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 143
+
+[Spawn 364]
+ID = 364
+X = 2728
+Y = 8853
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 143
+
+[Spawn 365]
+ID = 365
+X = 2503
 Y = 8973
-Radius = 100
-RespawnTime = 10
-Type = 150
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 137
 
-[Raptoroid 293]
-ID = 643
-X = 8425
-Y = 9285
-Radius = 100
-RespawnTime = 10
-Type = 150
+[Spawn 366]
+ID = 366
+X = 2745
+Y = 9467
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 137
 
-[Raptoroid 294]
-ID = 644
-X = 8495
-Y = 9086
-Radius = 100
-RespawnTime = 10
-Type = 150
+[Spawn 367]
+ID = 367
+X = 2736
+Y = 9423
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 143
 
-[Raptoroid 295]
-ID = 645
-X = 8145
-Y = 8435
-Radius = 100
-RespawnTime = 10
-Type = 150
+[Spawn 368]
+ID = 368
+X = 2630
+Y = 9410
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 135
 
-[Raptoroid 296]
-ID = 646
-X = 7415
-Y = 8515
-Radius = 100
-RespawnTime = 10
-Type = 150
+[Spawn 369]
+ID = 369
+X = 2524
+Y = 8708
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 143
 
-[Raptoroid 297]
-ID = 647
-X = 7015
-Y = 8495
-Radius = 100
-RespawnTime = 10
-Type = 150
+[Spawn 370]
+ID = 370
+X = 3960
+Y = 9220
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
 
-[Raptoroid 298]
-ID = 648
-X = 6536
-Y = 8455
-Radius = 50
-RespawnTime = 10
-Type = 150
+[Spawn 371]
+ID = 371
+X = 2201
+Y = 9511
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 231
 
-[Raptoroid 299]
-ID = 649
-X = 6285
-Y = 8245
-Radius = 100
-RespawnTime = 10
-Type = 150
+[Spawn 372]
+ID = 372
+X = 2199
+Y = 9202
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 237
 
-[Raptoroid 300]
-ID = 650
-X = 6096
-Y = 8235
-Radius = 100
-RespawnTime = 10
-Type = 150
+[Spawn 373]
+ID = 373
+X = 2284
+Y = 9209
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 232
 
-[Raptoroid 301]
-ID = 651
-X = 5776
-Y = 8205
-Radius = 100
-RespawnTime = 10
-Type = 150
+[Spawn 374]
+ID = 374
+X = 2383
+Y = 9053
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 232
 
-[Raptoroid 302]
-ID = 652
-X = 5525
+[Spawn 375]
+ID = 375
+X = 2254
+Y = 8831
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 232
+
+[Spawn 376]
+ID = 376
+X = 2295
+Y = 8742
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 231
+
+[Spawn 377]
+ID = 377
+X = 2376
+Y = 8691
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 233
+
+[Spawn 378]
+ID = 378
+X = 2257
+Y = 8687
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 237
+
+[Spawn 379]
+ID = 379
+X = 2346
+Y = 8361
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 237
+
+[Spawn 380]
+ID = 380
+X = 1807
 Y = 7906
-Radius = 100
-RespawnTime = 10
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 381]
+ID = 381
+X = 2058
+Y = 7678
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid 303]
-ID = 653
-X = 5785
-Y = 7636
-Radius = 100
-RespawnTime = 10
+[Spawn 382]
+ID = 382
+X = 2314
+Y = 7669
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid 304]
-ID = 654
-X = 6044
-Y = 7535
-Radius = 100
-RespawnTime = 10
+[Spawn 383]
+ID = 383
+X = 2098
+Y = 7608
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 384]
+ID = 384
+X = 1804
+Y = 7546
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 385]
+ID = 385
+X = 1807
+Y = 7367
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 386]
+ID = 386
+X = 2184
+Y = 6085
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 155
+
+[Spawn 387]
+ID = 387
+X = 2195
+Y = 6170
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 153
+
+[Spawn 388]
+ID = 388
+X = 2195
+Y = 6152
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 155
+
+[Spawn 389]
+ID = 389
+X = 2193
+Y = 6042
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 156
+
+[Spawn 390]
+ID = 390
+X = 1686
+Y = 5690
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 153
+
+[Spawn 391]
+ID = 391
+X = 1721
+Y = 5682
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 157
+
+[Spawn 392]
+ID = 392
+X = 1709
+Y = 5606
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 156
+
+[Spawn 393]
+ID = 393
+X = 1679
+Y = 6754
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 147
+
+[Spawn 394]
+ID = 394
+X = 1668
+Y = 6858
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 395]
+ID = 395
+X = 1516
+Y = 7197
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 396]
+ID = 396
+X = 1734
+Y = 7077
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 397]
+ID = 397
+X = 1595
+Y = 7368
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 398]
+ID = 398
+X = 1659
+Y = 7486
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 399]
+ID = 399
+X = 1604
+Y = 7760
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 400]
+ID = 400
+X = 1456
+Y = 7802
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 151
+
+[Spawn 401]
+ID = 401
+X = 1425
+Y = 8008
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 402]
+ID = 402
+X = 1453
+Y = 8001
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 160
+
+[Spawn 403]
+ID = 403
+X = 1441
+Y = 8294
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 404]
+ID = 404
+X = 1425
+Y = 8309
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 405]
+ID = 405
+X = 1400
+Y = 8320
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 406]
+ID = 406
+X = 1678
+Y = 8662
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid 305]
-ID = 655
-X = 6294
-Y = 7436
-Radius = 100
-RespawnTime = 10
+[Spawn 407]
+ID = 407
+X = 1600
+Y = 8946
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 408]
+ID = 408
+X = 1447
+Y = 9065
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 409]
+ID = 409
+X = 1755
+Y = 9155
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 410]
+ID = 410
+X = 1441
+Y = 9357
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid 306]
-ID = 656
-X = 6595
-Y = 7555
-Radius = 100
-RespawnTime = 10
+[Spawn 411]
+ID = 411
+X = 1544
+Y = 10522
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 412]
+ID = 412
+X = 1087
+Y = 11241
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 413]
+ID = 413
+X = 1203
+Y = 10897
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 151
+
+[Spawn 414]
+ID = 414
+X = 1034
+Y = 10274
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 415]
+ID = 415
+X = 1046
+Y = 9439
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 416]
+ID = 416
+X = 1010
+Y = 9480
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 417]
+ID = 417
+X = 931
+Y = 9293
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid 307]
-ID = 657
-X = 6736
-Y = 7725
-Radius = 100
-RespawnTime = 10
+[Spawn 418]
+ID = 418
+X = 1060
+Y = 9392
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 419]
+ID = 419
+X = 839
+Y = 9065
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid 308]
-ID = 658
-X = 6725
-Y = 7925
-Radius = 100
-RespawnTime = 10
+[Spawn 420]
+ID = 420
+X = 660
+Y = 9288
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 421]
+ID = 421
+X = 757
+Y = 9345
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 422]
+ID = 422
+X = 646
+Y = 9434
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 423]
+ID = 423
+X = 878
+Y = 8517
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid 309]
-ID = 659
-X = 6925
-Y = 8155
-Radius = 50
-RespawnTime = 10
+[Spawn 424]
+ID = 424
+X = 889
+Y = 8517
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 425]
+ID = 425
+X = 997
+Y = 8482
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 426]
+ID = 426
+X = 1025
+Y = 8684
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 427]
+ID = 427
+X = 919
+Y = 8278
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 428]
+ID = 428
+X = 1081
+Y = 8269
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 429]
+ID = 429
+X = 1275
+Y = 8355
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 430]
+ID = 430
+X = 946
+Y = 8058
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 431]
+ID = 431
+X = 986
+Y = 8023
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 432]
+ID = 432
+X = 898
+Y = 8049
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 433]
+ID = 433
+X = 803
+Y = 8338
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 434]
+ID = 434
+X = 800
+Y = 7675
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 435]
+ID = 435
+X = 1337
+Y = 7760
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid 310]
-ID = 660
-X = 7064
+[Spawn 436]
+ID = 436
+X = 891
+Y = 7413
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 437]
+ID = 437
+X = 933
+Y = 7438
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 438]
+ID = 438
+X = 904
+Y = 7595
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 439]
+ID = 439
+X = 815
+Y = 7308
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 160
+
+[Spawn 440]
+ID = 440
+X = 851
+Y = 7225
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 441]
+ID = 441
+X = 1026
+Y = 7127
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 147
+
+[Spawn 442]
+ID = 442
+X = 1008
+Y = 6773
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 443]
+ID = 443
+X = 1173
+Y = 6613
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 444]
+ID = 444
+X = 1082
+Y = 6870
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 445]
+ID = 445
+X = 1230
+Y = 6669
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 446]
+ID = 446
+X = 1126
+Y = 6599
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 447]
+ID = 447
+X = 1355
+Y = 6414
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 448]
+ID = 448
+X = 1266
+Y = 6581
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 449]
+ID = 449
+X = 1006
+Y = 6693
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 147
+
+[Spawn 450]
+ID = 450
+X = 1004
+Y = 6207
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 451]
+ID = 451
+X = 1292
+Y = 6118
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 452]
+ID = 452
+X = 1209
+Y = 5811
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 453]
+ID = 453
+X = 968
+Y = 5844
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 454]
+ID = 454
+X = 1188
+Y = 5661
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 155
+
+[Spawn 455]
+ID = 455
+X = 1016
+Y = 5632
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 156
+
+[Spawn 456]
+ID = 456
+X = 1029
+Y = 5661
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 156
+
+[Spawn 457]
+ID = 457
+X = 1008
+Y = 5687
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 155
+
+[Spawn 458]
+ID = 458
+X = 806
+Y = 6377
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 459]
+ID = 459
+X = 616
+Y = 6635
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 151
+
+[Spawn 460]
+ID = 460
+X = 626
+Y = 7160
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 461]
+ID = 461
+X = 1031
+Y = 7167
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 462]
+ID = 462
+X = 615
+Y = 7298
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 463]
+ID = 463
+X = 948
+Y = 7201
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 464]
+ID = 464
+X = 636
+Y = 7557
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 465]
+ID = 465
+X = 828
+Y = 7574
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 466]
+ID = 466
+X = 611
+Y = 7169
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 467]
+ID = 467
+X = 735
+Y = 7640
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 468]
+ID = 468
+X = 720
+Y = 8199
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 469]
+ID = 469
+X = 643
+Y = 8278
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 151
+
+[Spawn 470]
+ID = 470
+X = 617
+Y = 8309
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 471]
+ID = 471
+X = 609
+Y = 9032
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 472]
+ID = 472
+X = 604
+Y = 10092
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 473]
+ID = 473
+X = 1107
+Y = 10783
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 474]
+ID = 474
+X = 656
+Y = 10781
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 475]
+ID = 475
+X = 7149
+Y = 11176
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 476]
+ID = 476
+X = 7402
+Y = 11003
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 477]
+ID = 477
+X = 7598
+Y = 11001
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 478]
+ID = 478
+X = 7588
+Y = 11180
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 479]
+ID = 479
+X = 7409
+Y = 10913
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 480]
+ID = 480
+X = 7628
+Y = 10800
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 481]
+ID = 481
+X = 7694
+Y = 10801
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 482]
+ID = 482
+X = 7413
+Y = 10737
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 483]
+ID = 483
+X = 7981
+Y = 11033
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 484]
+ID = 484
+X = 7440
+Y = 10595
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 485]
+ID = 485
+X = 7624
+Y = 10226
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 486]
+ID = 486
+X = 8164
+Y = 10512
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 487]
+ID = 487
+X = 7741
+Y = 9842
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 488]
+ID = 488
+X = 7880
+Y = 10042
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 489]
+ID = 489
+X = 7744
+Y = 9808
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 490]
+ID = 490
+X = 7605
+Y = 10128
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 491]
+ID = 491
+X = 8286
+Y = 9793
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 492]
+ID = 492
+X = 8343
+Y = 9844
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 493]
+ID = 493
+X = 8292
+Y = 10039
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 494]
+ID = 494
+X = 8322
+Y = 10091
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 495]
+ID = 495
+X = 8553
+Y = 9609
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 496]
+ID = 496
+X = 8661
+Y = 9781
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 497]
+ID = 497
+X = 8685
+Y = 9750
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 498]
+ID = 498
+X = 8937
+Y = 10171
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 499]
+ID = 499
+X = 9027
+Y = 9271
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 500]
+ID = 500
+X = 9425
+Y = 9492
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 501]
+ID = 501
+X = 9393
+Y = 8925
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 502]
+ID = 502
+X = 9775
+Y = 8682
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 503]
+ID = 503
+X = 9908
+Y = 8563
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 504]
+ID = 504
+X = 10198
+Y = 8405
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 505]
+ID = 505
+X = 10406
+Y = 8364
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 506]
+ID = 506
+X = 10762
+Y = 8123
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 156
+
+[Spawn 507]
+ID = 507
+X = 10794
+Y = 8239
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 154
+
+[Spawn 508]
+ID = 508
+X = 10729
+Y = 8384
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 158
+
+[Spawn 509]
+ID = 509
+X = 10838
+Y = 8035
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 510]
+ID = 510
+X = 10826
+Y = 8068
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 158
+
+[Spawn 511]
+ID = 511
+X = 10921
+Y = 8065
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 153
+
+[Spawn 512]
+ID = 512
+X = 10872
+Y = 8355
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 513]
+ID = 513
+X = 10990
+Y = 8417
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 514]
+ID = 514
+X = 10510
+Y = 7913
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 156
+
+[Spawn 515]
+ID = 515
+X = 10648
+Y = 7839
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 516]
+ID = 516
+X = 10937
+Y = 7809
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 157
+
+[Spawn 517]
+ID = 517
+X = 10860
+Y = 7957
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 155
+
+[Spawn 518]
+ID = 518
+X = 10949
+Y = 7902
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 519]
+ID = 519
+X = 10692
+Y = 7815
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 520]
+ID = 520
+X = 10984
+Y = 7781
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 155
+
+[Spawn 521]
+ID = 521
+X = 10897
+Y = 7667
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 522]
+ID = 522
+X = 10959
+Y = 7649
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 153
+
+[Spawn 523]
+ID = 523
+X = 11127
+Y = 7650
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 524]
+ID = 524
+X = 11166
+Y = 7968
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 525]
+ID = 525
+X = 11091
 Y = 7876
-Radius = 100
-RespawnTime = 10
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 526]
+ID = 526
+X = 11195
+Y = 7928
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 158
+
+[Spawn 527]
+ID = 527
+X = 11115
+Y = 8056
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 528]
+ID = 528
+X = 11158
+Y = 7572
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 153
+
+[Spawn 529]
+ID = 529
+X = 11015
+Y = 7595
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 156
+
+[Spawn 530]
+ID = 530
+X = 11123
+Y = 7573
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 157
+
+[Spawn 531]
+ID = 531
+X = 11184
+Y = 7586
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 155
+
+[Spawn 532]
+ID = 532
+X = 11259
+Y = 7517
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 155
+
+[Spawn 533]
+ID = 533
+X = 11311
+Y = 7423
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 155
+
+[Spawn 534]
+ID = 534
+X = 11450
+Y = 7690
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 535]
+ID = 535
+X = 11598
+Y = 7666
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 536]
+ID = 536
+X = 11445
+Y = 7748
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 156
+
+[Spawn 537]
+ID = 537
+X = 11470
+Y = 7625
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 538]
+ID = 538
+X = 11517
+Y = 7731
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 156
+
+[Spawn 539]
+ID = 539
+X = 11557
+Y = 7791
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 153
+
+[Spawn 540]
+ID = 540
+X = 11413
+Y = 7959
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 158
+
+[Spawn 541]
+ID = 541
+X = 11387
+Y = 7985
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 153
+
+[Spawn 542]
+ID = 542
+X = 11381
+Y = 7392
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 153
+
+[Spawn 543]
+ID = 543
+X = 11657
+Y = 7254
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 544]
+ID = 544
+X = 11663
+Y = 7433
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 155
+
+[Spawn 545]
+ID = 545
+X = 11732
+Y = 7449
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 155
+
+[Spawn 546]
+ID = 546
+X = 11769
+Y = 7711
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 157
+
+[Spawn 547]
+ID = 547
+X = 11668
+Y = 7666
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 548]
+ID = 548
+X = 11658
+Y = 7685
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 159
+
+[Spawn 549]
+ID = 549
+X = 11700
+Y = 7757
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 158
+
+[Spawn 550]
+ID = 550
+X = 11706
+Y = 7717
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 155
+
+[Spawn 551]
+ID = 551
+X = 11674
+Y = 7682
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 154
+
+[Spawn 552]
+ID = 552
+X = 11997
+Y = 7521
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 154
+
+[Spawn 553]
+ID = 553
+X = 11829
+Y = 7475
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 155
+
+[Spawn 554]
+ID = 554
+X = 11826
+Y = 7520
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 555]
+ID = 555
+X = 11862
+Y = 7622
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 159
+
+[Spawn 556]
+ID = 556
+X = 11816
+Y = 7603
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 157
+
+[Spawn 557]
+ID = 557
+X = 11802
+Y = 7604
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 155
+
+[Spawn 558]
+ID = 558
+X = 12044
+Y = 7736
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 559]
+ID = 559
+X = 12194
+Y = 7754
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 560]
+ID = 560
+X = 11628
+Y = 7923
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 159
+
+[Spawn 561]
+ID = 561
+X = 11691
+Y = 7879
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 562]
+ID = 562
+X = 11905
+Y = 7860
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 563]
+ID = 563
+X = 12010
+Y = 7891
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 564]
+ID = 564
+X = 12048
+Y = 7876
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 565]
+ID = 565
+X = 12057
+Y = 7838
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 158
+
+[Spawn 566]
+ID = 566
+X = 12007
+Y = 7926
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 156
+
+[Spawn 567]
+ID = 567
+X = 11863
+Y = 8086
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 157
+
+[Spawn 568]
+ID = 568
+X = 11908
+Y = 8041
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 157
+
+[Spawn 569]
+ID = 569
+X = 12189
+Y = 8010
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 570]
+ID = 570
+X = 12079
+Y = 8115
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 156
+
+[Spawn 571]
+ID = 571
+X = 12035
+Y = 8083
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 159
+
+[Spawn 572]
+ID = 572
+X = 11627
+Y = 8261
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 154
+
+[Spawn 573]
+ID = 573
+X = 11977
+Y = 8328
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 574]
+ID = 574
+X = 11819
+Y = 8232
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 157
+
+[Spawn 575]
+ID = 575
+X = 12075
+Y = 8303
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 576]
+ID = 576
+X = 12135
+Y = 8306
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 156
+
+[Spawn 577]
+ID = 577
+X = 11640
+Y = 8399
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 154
+
+[Spawn 578]
+ID = 578
+X = 11723
+Y = 8575
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 579]
+ID = 579
+X = 11758
+Y = 8584
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 156
+
+[Spawn 580]
+ID = 580
+X = 11987
+Y = 8479
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 153
+
+[Spawn 581]
+ID = 581
+X = 11815
+Y = 8579
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 159
+
+[Spawn 582]
+ID = 582
+X = 11633
+Y = 8683
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 153
+
+[Spawn 583]
+ID = 583
+X = 11744
+Y = 8772
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 156
+
+[Spawn 584]
+ID = 584
+X = 11854
+Y = 8764
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 585]
+ID = 585
+X = 11432
+Y = 8503
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 586]
+ID = 586
+X = 11471
+Y = 8417
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 156
+
+[Spawn 587]
+ID = 587
+X = 11494
+Y = 8536
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 156
+
+[Spawn 588]
+ID = 588
+X = 11582
+Y = 8700
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 589]
+ID = 589
+X = 11922
+Y = 8872
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 590]
+ID = 590
+X = 11901
+Y = 8951
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 591]
+ID = 591
+X = 11456
+Y = 8403
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 156
+
+[Spawn 592]
+ID = 592
+X = 11217
+Y = 8226
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 593]
+ID = 593
+X = 11232
+Y = 8259
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 158
+
+[Spawn 594]
+ID = 594
+X = 11300
+Y = 8230
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 156
+
+[Spawn 595]
+ID = 595
+X = 11267
+Y = 8543
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 155
+
+[Spawn 596]
+ID = 596
+X = 11350
+Y = 8040
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 597]
+ID = 597
+X = 11374
+Y = 8143
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 598]
+ID = 598
+X = 11525
+Y = 7899
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 155
+
+[Spawn 599]
+ID = 599
+X = 11517
+Y = 8110
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 156
+
+[Spawn 600]
+ID = 600
+X = 10034
+Y = 7934
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 601]
+ID = 601
+X = 10070
+Y = 7415
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 602]
+ID = 602
+X = 10510
+Y = 7474
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 603]
+ID = 603
+X = 9957
+Y = 7418
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 604]
+ID = 604
+X = 9519
+Y = 8767
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 605]
+ID = 605
+X = 9276
+Y = 8524
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 237
+
+[Spawn 606]
+ID = 606
+X = 9190
+Y = 8699
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 231
+
+[Spawn 607]
+ID = 607
+X = 8911
+Y = 8510
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 232
+
+[Spawn 608]
+ID = 608
+X = 8822
+Y = 8627
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 231
+
+[Spawn 609]
+ID = 609
+X = 8737
+Y = 8584
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid 311]
+[Spawn 610]
+ID = 610
+X = 8726
+Y = 8220
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 611]
+ID = 611
+X = 8411
+Y = 8673
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 612]
+ID = 612
+X = 8516
+Y = 8730
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 613]
+ID = 613
+X = 8462
+Y = 8777
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 614]
+ID = 614
+X = 8499
+Y = 8788
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 615]
+ID = 615
+X = 8240
+Y = 8215
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 616]
+ID = 616
+X = 8221
+Y = 8764
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 617]
+ID = 617
+X = 8348
+Y = 8788
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 618]
+ID = 618
+X = 8201
+Y = 8668
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 619]
+ID = 619
+X = 8346
+Y = 8639
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 620]
+ID = 620
+X = 8081
+Y = 8401
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 621]
+ID = 621
+X = 8148
+Y = 8490
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 622]
+ID = 622
+X = 8030
+Y = 8482
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 623]
+ID = 623
+X = 8133
+Y = 8743
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 624]
+ID = 624
+X = 7848
+Y = 8380
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 625]
+ID = 625
+X = 7997
+Y = 8850
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 626]
+ID = 626
+X = 7888
+Y = 8936
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 627]
+ID = 627
+X = 8129
+Y = 8838
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 628]
+ID = 628
+X = 8256
+Y = 8967
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 629]
+ID = 629
+X = 8231
+Y = 8833
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 147
+
+[Spawn 630]
+ID = 630
+X = 8256
+Y = 8980
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 631]
+ID = 631
+X = 6567
+Y = 8525
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 632]
+ID = 632
+X = 6415
+Y = 8423
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 633]
+ID = 633
+X = 6500
+Y = 8501
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 634]
+ID = 634
+X = 5775
+Y = 8648
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 635]
+ID = 635
+X = 5423
+Y = 8621
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 636]
+ID = 636
+X = 5528
+Y = 8670
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 637]
+ID = 637
+X = 5315
+Y = 8431
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 147
+
+[Spawn 638]
+ID = 638
+X = 5306
+Y = 8929
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 639]
+ID = 639
+X = 5283
+Y = 8811
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 640]
+ID = 640
+X = 5075
+Y = 8388
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 641]
+ID = 641
+X = 4434
+Y = 8803
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 642]
+ID = 642
+X = 4040
+Y = 9395
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 231
+
+[Spawn 643]
+ID = 643
+X = 4008
+Y = 9489
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 237
+
+[Spawn 644]
+ID = 644
+X = 4731
+Y = 9493
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 645]
+ID = 645
+X = 4946
+Y = 9928
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 646]
+ID = 646
+X = 5257
+Y = 9907
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 647]
+ID = 647
+X = 4963
+Y = 10431
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 232
+
+[Spawn 648]
+ID = 648
+X = 4905
+Y = 10473
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 232
+
+[Spawn 649]
+ID = 649
+X = 5089
+Y = 10637
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 231
+
+[Spawn 650]
+ID = 650
+X = 5420
+Y = 10291
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 651]
+ID = 651
+X = 5770
+Y = 10716
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 652]
+ID = 652
+X = 5460
+Y = 10984
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 237
+
+[Spawn 653]
+ID = 653
+X = 5744
+Y = 10823
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 654]
+ID = 654
+X = 5969
+Y = 10610
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 655]
+ID = 655
+X = 5946
+Y = 10416
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 656]
+ID = 656
+X = 6024
+Y = 11121
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 237
+
+[Spawn 657]
+ID = 657
+X = 6338
+Y = 10517
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 658]
+ID = 658
+X = 6576
+Y = 10383
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 659]
+ID = 659
+X = 6774
+Y = 10348
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 660]
+ID = 660
+X = 6619
+Y = 10213
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 661]
 ID = 661
-X = 7234
-Y = 7696
-Radius = 100
-RespawnTime = 10
-Type = 150
+X = 6974
+Y = 10115
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
 
-[Raptoroid 312]
+[Spawn 662]
 ID = 662
-X = 7364
-Y = 7626
-Radius = 100
-RespawnTime = 10
-Type = 150
+X = 7174
+Y = 10449
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
 
-[Raptoroid 313]
+[Spawn 663]
 ID = 663
-X = 7524
-Y = 7556
-Radius = 100
-RespawnTime = 10
+X = 6745
+Y = 10021
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid 314]
+[Spawn 664]
 ID = 664
-X = 7804
-Y = 7515
-Radius = 100
-RespawnTime = 10
+X = 7389
+Y = 10298
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid 315]
+[Spawn 665]
 ID = 665
-X = 7844
-Y = 7495
-Radius = 100
-RespawnTime = 10
-Type = 150
+X = 7541
+Y = 10331
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
 
-[Raptoroid 316]
+[Spawn 666]
 ID = 666
 X = 7416
-Y = 7165
-Radius = 100
-RespawnTime = 10
-Type = 150
+Y = 10428
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 237
 
-[Raptoroid 317]
+[Spawn 667]
 ID = 667
-X = 7054
-Y = 6865
-Radius = 100
-RespawnTime = 10
-Type = 150
+X = 7119
+Y = 9890
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
 
-[Raptoroid 318]
+[Spawn 668]
 ID = 668
-X = 6776
-Y = 6816
-Radius = 100
-RespawnTime = 10
+X = 7590
+Y = 9945
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid 319]
+[Spawn 669]
 ID = 669
-X = 6585
-Y = 7035
-Radius = 100
-RespawnTime = 10
+X = 8688
+Y = 9680
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid 320]
+[Spawn 670]
 ID = 670
-X = 5835
-Y = 7335
-Radius = 100
-RespawnTime = 10
-Type = 150
+X = 8407
+Y = 9513
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
 
-[Raptoroid 321]
+[Spawn 671]
 ID = 671
-X = 5486
-Y = 7484
-Radius = 100
-RespawnTime = 10
-Type = 150
+X = 8868
+Y = 9809
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
 
-[Raptoroid 322]
+[Spawn 672]
 ID = 672
-X = 5205
-Y = 7565
-Radius = 100
-RespawnTime = 10
-Type = 150
+X = 8604
+Y = 9336
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
 
-[Raptoroid 323]
+[Spawn 673]
 ID = 673
-X = 4865
-Y = 7764
-Radius = 100
-RespawnTime = 10
-Type = 150
+X = 8724
+Y = 9272
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
 
-[Raptoroid 324]
+[Spawn 674]
 ID = 674
-X = 4655
-Y = 8045
-Radius = 100
-RespawnTime = 10
-Type = 150
+X = 9019
+Y = 9107
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
 
-[Raptoroid 325]
+[Spawn 675]
 ID = 675
-X = 4576
-Y = 8344
-Radius = 50
-RespawnTime = 10
-Type = 150
+X = 9158
+Y = 8959
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 237
 
-[Raptoroid 326]
+[Spawn 676]
 ID = 676
-X = 4455
-Y = 8694
-Radius = 100
-RespawnTime = 10
-Type = 150
+X = 8417
+Y = 8949
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
 
-[Raptoroid 327]
+[Spawn 677]
 ID = 677
-X = 4465
-Y = 8964
-Radius = 100
-RespawnTime = 10
+X = 8481
+Y = 8955
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 150
 
-[Raptoroid 328]
+[Spawn 678]
 ID = 678
-X = 4445
-Y = 9205
-Radius = 100
-RespawnTime = 10
-Type = 150
+X = 8590
+Y = 8967
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
 
-[Raptoroid 329]
+[Spawn 679]
 ID = 679
-X = 4495
-Y = 9505
-Radius = 100
-RespawnTime = 10
-Type = 150
+X = 8527
+Y = 8968
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
 
-[Raptoroid 330]
+[Spawn 680]
 ID = 680
-X = 4715
-Y = 9685
-Radius = 100
-RespawnTime = 10
-Type = 150
+X = 8584
+Y = 9028
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
 
-[Raptoroid 331]
+[Spawn 681]
 ID = 681
-X = 4885
-Y = 9884
-Radius = 100
-RespawnTime = 10
-Type = 150
+X = 8537
+Y = 9297
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
 
-[Raptoroid 332]
+[Spawn 682]
 ID = 682
-X = 5104
-Y = 9796
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 333]
-ID = 683
-X = 5075
-Y = 9496
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 334]
-ID = 684
-X = 5025
-Y = 9206
-Radius = 50
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 335]
-ID = 685
-X = 5325
-Y = 8925
-Radius = 50
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 336]
-ID = 686
-X = 5724
-Y = 8856
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 337]
-ID = 687
-X = 6034
-Y = 9104
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 338]
-ID = 688
-X = 6235
-Y = 9474
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 339]
-ID = 689
-X = 6265
-Y = 9854
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 340]
-ID = 690
-X = 6275
-Y = 10185
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 341]
-ID = 691
-X = 6574
-Y = 9996
-Radius = 50
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 342]
-ID = 692
-X = 6874
-Y = 9935
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 343]
-ID = 693
-X = 7214
-Y = 9796
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 344]
-ID = 694
-X = 7515
-Y = 9506
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 345]
-ID = 695
-X = 8055
-Y = 9064
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 346]
-ID = 696
-X = 5463
-Y = 7406
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 347]
-ID = 697
-X = 4674
-Y = 6614
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 348]
-ID = 698
-X = 4405
-Y = 6646
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 349]
-ID = 699
-X = 3915
-Y = 7134
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 350]
-ID = 700
-X = 3815
-Y = 7345
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Raptoroid 351]
-ID = 701
-X = 3895
-Y = 7614
-Radius = 100
-RespawnTime = 10
-Type = 150
-
-[Karmaroid 26]
-ID = 702
-X = 3065
-Y = 6964
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 27]
-ID = 703
-X = 3484
-Y = 7155
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 28]
-ID = 704
-X = 3804
-Y = 7434
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 29]
-ID = 705
-X = 3984
-Y = 7714
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 30]
-ID = 706
-X = 4183
-Y = 7856
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 31]
-ID = 707
-X = 4314
-Y = 8075
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 32]
-ID = 708
-X = 4514
-Y = 8115
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 33]
-ID = 709
-X = 4455
-Y = 8334
-Radius = 50
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 34]
-ID = 710
-X = 4405
-Y = 8604
-Radius = 50
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 35]
-ID = 711
-X = 4475
-Y = 8883
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 36]
-ID = 712
-X = 4574
-Y = 9124
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 37]
-ID = 713
-X = 4705
-Y = 9424
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 38]
-ID = 714
-X = 4935
-Y = 9584
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 39]
-ID = 715
-X = 5095
-Y = 9895
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 40]
-ID = 716
-X = 5115
-Y = 9377
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 41]
-ID = 717
-X = 5345
-Y = 8805
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 42]
-ID = 718
-X = 5394
-Y = 8595
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 43]
-ID = 719
-X = 5195
-Y = 8395
-Radius = 50
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 44]
-ID = 720
-X = 4885
-Y = 8245
-Radius = 50
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 45]
-ID = 721
-X = 4805
-Y = 8055
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 46]
-ID = 722
-X = 4715
-Y = 7835
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 47]
-ID = 723
-X = 4705
-Y = 7536
-Radius = 50
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 48]
-ID = 724
-X = 4555
-Y = 7395
-Radius = 50
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 49]
-ID = 725
-X = 7275
-Y = 9875
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 50]
-ID = 726
-X = 7514
-Y = 9536
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 51]
-ID = 727
-X = 7764
-Y = 9485
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 52]
-ID = 728
-X = 8064
-Y = 9515
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 53]
-ID = 729
-X = 8285
-Y = 9685
-Radius = 50
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 54]
-ID = 730
-X = 8494
-Y = 9745
-Radius = 50
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 55]
-ID = 731
-X = 8675
-Y = 9525
-Radius = 50
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 56]
-ID = 732
-X = 8765
-Y = 9256
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 57]
-ID = 733
-X = 8585
-Y = 9086
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 58]
-ID = 734
-X = 8395
-Y = 9145
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 59]
-ID = 735
-X = 8235
-Y = 9335
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 60]
-ID = 736
-X = 8126
-Y = 9176
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 61]
-ID = 737
-X = 8365
-Y = 8796
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 62]
-ID = 738
-X = 8515
-Y = 8276
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 63]
-ID = 739
-X = 8255
-Y = 7815
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 64]
-ID = 740
-X = 8176
-Y = 7395
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 65]
-ID = 741
-X = 8614
-Y = 7165
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 66]
-ID = 742
-X = 8725
-Y = 6926
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 67]
-ID = 743
-X = 9015
-Y = 7304
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 68]
-ID = 744
-X = 9284
-Y = 6806
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 69]
-ID = 745
-X = 9534
-Y = 6526
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 70]
-ID = 746
-X = 9286
-Y = 6255
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 71]
-ID = 747
-X = 8975
-Y = 5746
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 72]
-ID = 748
-X = 8805
-Y = 5333
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 73]
-ID = 749
-X = 8415
-Y = 5205
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 74]
-ID = 750
-X = 8116
-Y = 5215
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 75]
-ID = 751
-X = 7756
-Y = 5236
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 76]
-ID = 752
-X = 7426
-Y = 5255
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 77]
-ID = 753
-X = 7445
-Y = 5585
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 78]
-ID = 754
-X = 7554
-Y = 5924
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 79]
-ID = 755
-X = 7545
-Y = 6134
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 80]
-ID = 756
-X = 7725
-Y = 6305
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 81]
-ID = 757
-X = 8014
-Y = 6215
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 82]
-ID = 758
-X = 8165
-Y = 5975
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 83]
-ID = 759
 X = 8205
-Y = 5665
-Radius = 100
-RespawnTime = 10
+Y = 9192
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 683]
+ID = 683
+X = 8220
+Y = 9160
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 684]
+ID = 684
+X = 8221
+Y = 9130
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 685]
+ID = 685
+X = 7809
+Y = 9073
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 152
 
-[Karmaroid 84]
+[Spawn 686]
+ID = 686
+X = 8009
+Y = 8743
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 687]
+ID = 687
+X = 8086
+Y = 8923
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 688]
+ID = 688
+X = 8076
+Y = 9037
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 689]
+ID = 689
+X = 8238
+Y = 9192
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 690]
+ID = 690
+X = 7147
+Y = 9073
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 691]
+ID = 691
+X = 7409
+Y = 9288
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 692]
+ID = 692
+X = 6706
+Y = 9312
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 693]
+ID = 693
+X = 6683
+Y = 9208
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 694]
+ID = 694
+X = 6685
+Y = 9234
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 695]
+ID = 695
+X = 6501
+Y = 9119
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 696]
+ID = 696
+X = 6347
+Y = 9297
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 697]
+ID = 697
+X = 6007
+Y = 9089
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 698]
+ID = 698
+X = 5612
+Y = 9206
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 699]
+ID = 699
+X = 5537
+Y = 9196
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 700]
+ID = 700
+X = 5312
+Y = 9208
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 701]
+ID = 701
+X = 5615
+Y = 9522
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 702]
+ID = 702
+X = 5751
+Y = 9520
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 703]
+ID = 703
+X = 5007
+Y = 9148
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 704]
+ID = 704
+X = 4823
+Y = 9418
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 705]
+ID = 705
+X = 5401
+Y = 9943
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 706]
+ID = 706
+X = 6541
+Y = 10027
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 707]
+ID = 707
+X = 6627
+Y = 10043
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 708]
+ID = 708
+X = 6848
+Y = 9851
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 709]
+ID = 709
+X = 6695
+Y = 9801
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 710]
+ID = 710
+X = 6789
+Y = 9697
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 711]
+ID = 711
+X = 6983
+Y = 9576
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 712]
+ID = 712
+X = 7975
+Y = 9328
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 713]
+ID = 713
+X = 7944
+Y = 9434
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 714]
+ID = 714
+X = 8171
+Y = 9281
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 715]
+ID = 715
+X = 8165
+Y = 9451
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 716]
+ID = 716
+X = 8158
+Y = 9438
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 717]
+ID = 717
+X = 8052
+Y = 9418
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 718]
+ID = 718
+X = 7840
+Y = 9585
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 719]
+ID = 719
+X = 8173
+Y = 9378
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 720]
+ID = 720
+X = 8280
+Y = 9437
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 721]
+ID = 721
+X = 8291
+Y = 9286
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 722]
+ID = 722
+X = 6596
+Y = 9545
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 723]
+ID = 723
+X = 6034
+Y = 9711
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 724]
+ID = 724
+X = 5917
+Y = 9679
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 725]
+ID = 725
+X = 5892
+Y = 9676
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 726]
+ID = 726
+X = 5536
+Y = 9798
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 727]
+ID = 727
+X = 6270
+Y = 8354
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 728]
+ID = 728
+X = 6898
+Y = 8400
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 729]
+ID = 729
+X = 6432
+Y = 8152
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 730]
+ID = 730
+X = 6698
+Y = 8050
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 147
+
+[Spawn 731]
+ID = 731
+X = 7796
+Y = 8009
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 732]
+ID = 732
+X = 8161
+Y = 8425
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 733]
+ID = 733
+X = 8809
+Y = 8020
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 734]
+ID = 734
+X = 8686
+Y = 7802
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 735]
+ID = 735
+X = 8696
+Y = 7821
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 736]
+ID = 736
+X = 9031
+Y = 7989
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 737]
+ID = 737
+X = 9088
+Y = 7855
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 738]
+ID = 738
+X = 9103
+Y = 7807
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 739]
+ID = 739
+X = 9116
+Y = 7813
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 740]
+ID = 740
+X = 8504
+Y = 7615
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 741]
+ID = 741
+X = 8463
+Y = 7827
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 742]
+ID = 742
+X = 8494
+Y = 7947
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 743]
+ID = 743
+X = 8685
+Y = 7605
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 151
+
+[Spawn 744]
+ID = 744
+X = 8663
+Y = 7633
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 745]
+ID = 745
+X = 8762
+Y = 7742
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 151
+
+[Spawn 746]
+ID = 746
+X = 8927
+Y = 7697
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 747]
+ID = 747
+X = 8928
+Y = 7646
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 748]
+ID = 748
+X = 8208
+Y = 7993
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 749]
+ID = 749
+X = 7718
+Y = 7433
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 750]
+ID = 750
+X = 7660
+Y = 7996
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 751]
+ID = 751
+X = 7826
+Y = 7550
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 752]
+ID = 752
+X = 7810
+Y = 7572
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 753]
+ID = 753
+X = 8195
+Y = 7525
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 754]
+ID = 754
+X = 6624
+Y = 7877
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 755]
+ID = 755
+X = 6571
+Y = 7603
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 756]
+ID = 756
+X = 6436
+Y = 7892
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 757]
+ID = 757
+X = 6474
+Y = 7892
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 147
+
+[Spawn 758]
+ID = 758
+X = 6267
+Y = 7427
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 759]
+ID = 759
+X = 6263
+Y = 7586
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 760]
 ID = 760
-X = 7806
-Y = 5945
-Radius = 100
-RespawnTime = 10
-Type = 152
+X = 6751
+Y = 7421
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
 
-[Karmaroid 85]
+[Spawn 761]
 ID = 761
-X = 7286
-Y = 6186
-Radius = 100
-RespawnTime = 10
-Type = 152
+X = 6004
+Y = 7881
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
 
-[Karmaroid 86]
+[Spawn 762]
 ID = 762
-X = 7105
-Y = 5675
-Radius = 100
-RespawnTime = 10
-Type = 152
+X = 5976
+Y = 7717
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
 
-
-[Karmaroid 87]
+[Spawn 763]
 ID = 763
-X = 6745
-Y = 5795
-Radius = 100
-RespawnTime = 10
-Type = 152
+X = 5897
+Y = 7893
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
 
-[Karmaroid 88]
+[Spawn 764]
 ID = 764
-X = 6585
-Y = 6065
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 89]
-ID = 765
-X = 6535
-Y = 6364
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 90]
-ID = 766
-X = 6774
-Y = 6525
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 91]
-ID = 767
-X = 7136
-Y = 6545
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 92]
-ID = 768
-X = 7613
-Y = 6751
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 93]
-ID = 769
-X = 7655
-Y = 7025
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 94]
-ID = 770
-X = 7954
-Y = 7215
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 95]
-ID = 771
-X = 7946
-Y = 7534
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 96]
-ID = 772
-X = 7876
-Y = 7895
-Radius = 50
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 97]
-ID = 773
-X = 7725
-Y = 8104
-Radius = 50
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 98]
-ID = 774
-X = 7517
-Y = 8414
-Radius = 50
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 99]
-ID = 775
-X = 7724
-Y = 8755
-Radius = 50
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 100]
-ID = 776
-X = 7555
-Y = 9065
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 101]
-ID = 777
-X = 7545
-Y = 9403
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 102]
-ID = 778
-X = 7913
-Y = 9145
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 103]
-ID = 779
-X = 8144
-Y = 8896
-Radius = 100
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 104]
-ID = 780
-X = 6495
-Y = 8215
-Radius = 50
-RespawnTime = 10
-Type = 152
-
-[Karmaroid 105]
-ID = 781
-X = 6175
+X = 5725
 Y = 7935
-Radius = 100
-RespawnTime = 10
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 765]
+ID = 765
+X = 5603
+Y = 7791
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 152
 
-[Karmaroid 106]
+[Spawn 766]
+ID = 766
+X = 5270
+Y = 7664
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 767]
+ID = 767
+X = 5336
+Y = 8109
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 768]
+ID = 768
+X = 5321
+Y = 8017
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 769]
+ID = 769
+X = 4969
+Y = 7489
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 770]
+ID = 770
+X = 4400
+Y = 7443
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 771]
+ID = 771
+X = 4216
+Y = 7509
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 772]
+ID = 772
+X = 4250
+Y = 7985
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 773]
+ID = 773
+X = 4106
+Y = 7451
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 774]
+ID = 774
+X = 3636
+Y = 7407
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 775]
+ID = 775
+X = 3491
+Y = 7987
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 776]
+ID = 776
+X = 3419
+Y = 7924
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 777]
+ID = 777
+X = 3841
+Y = 8111
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 778]
+ID = 778
+X = 2945
+Y = 7651
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 779]
+ID = 779
+X = 2522
+Y = 7156
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 780]
+ID = 780
+X = 2573
+Y = 7183
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 781]
+ID = 781
+X = 2962
+Y = 7015
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 782]
 ID = 782
-X = 6315
-Y = 7405
-Radius = 100
-RespawnTime = 10
-Type = 152
+X = 2813
+Y = 7000
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
 
-[Karmaroid 107]
+[Spawn 783]
 ID = 783
-X = 6585
-Y = 6865
-Radius = 50
-RespawnTime = 10
-Type = 152
+X = 3211
+Y = 7251
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
 
-[Karmaroid 108]
+[Spawn 784]
 ID = 784
-X = 6116
-Y = 6795
-Radius = 100
-RespawnTime = 10
+X = 3408
+Y = 7172
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 152
 
-[Karmaroid 109]
+[Spawn 785]
 ID = 785
-X = 5696
-Y = 7184
-Radius = 100
-RespawnTime = 10
-Type = 152
+X = 4204
+Y = 7255
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
 
-[Karmaroid 110]
+[Spawn 786]
 ID = 786
-X = 5375
-Y = 7535
-Radius = 100
-RespawnTime = 10
-Type = 152
+X = 4255
+Y = 7250
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
 
-[Karmaroid 111]
+[Spawn 787]
 ID = 787
-X = 4975
-Y = 7445
-Radius = 100
-RespawnTime = 10
+X = 6110
+Y = 7485
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 152
 
-[Karmaroid 112]
+[Spawn 788]
 ID = 788
-X = 4536
-Y = 7775
-Radius = 50
-RespawnTime = 10
-Type = 152
+X = 6888
+Y = 7424
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
 
-[Karmaroid 113]
+[Spawn 789]
 ID = 789
-X = 4225
-Y = 7406
-Radius = 50
-RespawnTime = 10
-Type = 152
+X = 7099
+Y = 7486
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
 
-[Karmaroid 114]
+[Spawn 790]
 ID = 790
-X = 4445
-Y = 7045
-Radius = 100
-RespawnTime = 10
-Type = 152
+X = 7406
+Y = 7413
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
 
-[Karmaroid 115]
+[Spawn 791]
 ID = 791
-X = 3985
-Y = 6875
-Radius = 100
-RespawnTime = 10
-Type = 152
+X = 7862
+Y = 7606
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
 
-[Karmaroid 116]
+[Spawn 792]
 ID = 792
-X = 3485
-Y = 6905
-Radius = 100
-RespawnTime = 10
-Type = 152
+X = 8417
+Y = 7814
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
 
-[Karmaroid 117]
+[Spawn 793]
 ID = 793
-X = 2746
-Y = 7285
-Radius = 100
-RespawnTime = 10
-Type = 152
+X = 8989
+Y = 7748
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
 
-[Karmaroid 118]
+[Spawn 794]
 ID = 794
-X = 2322
-Y = 7360
-Radius = 100
-RespawnTime = 10
-Type = 152
+X = 8991
+Y = 7673
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
 
-[Karmaroid 119]
+[Spawn 795]
 ID = 795
-X = 2280
-Y = 6939
-Radius = 100
-RespawnTime = 10
-Type = 152
+X = 8835
+Y = 7480
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
 
-[Karmaroid 120]
+[Spawn 796]
 ID = 796
-X = 2613
-Y = 6749
-Radius = 100
-RespawnTime = 10
-Type = 152
+X = 9154
+Y = 7563
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
 
-[Karmaroid 121]
+[Spawn 797]
 ID = 797
-X = 1646
-Y = 7504
-Radius = 100
-RespawnTime = 10
-Type = 152
+X = 9054
+Y = 7452
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
 
-[Karmaroid 122]
+[Spawn 798]
 ID = 798
-X = 1085
-Y = 7665
-Radius = 100
-RespawnTime = 10
-Type = 152
+X = 9220
+Y = 7477
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
 
-[Karmaroid 123]
+[Spawn 799]
 ID = 799
-X = 1065
-Y = 8115
-Radius = 100
-RespawnTime = 10
-Type = 152
+X = 8747
+Y = 7442
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
 
-[Karmaroid 124]
+[Spawn 800]
 ID = 800
-X = 1284
-Y = 8524
-Radius = 100
-RespawnTime = 10
-Type = 152
+X = 8919
+Y = 7359
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
 
-[Karmaroid 125]
+[Spawn 801]
 ID = 801
-X = 1375
-Y = 8865
-Radius = 100
-RespawnTime = 10
-Type = 152
+X = 9183
+Y = 7370
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
 
-[Karmaroid 126]
+[Spawn 802]
 ID = 802
-X = 1056
-Y = 9095
-Radius = 100
-RespawnTime = 10
-Type = 152
+X = 9039
+Y = 7234
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
 
-[Karmaroid 129]
+[Spawn 803]
 ID = 803
-X = 835
-Y = 9464
-Radius = 50
-RespawnTime = 10
+X = 8465
+Y = 7045
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 152
 
-[Karmaroid 127]
+[Spawn 804]
 ID = 804
-X = 975
-Y = 9985
-Radius = 100
-RespawnTime = 10
+X = 8525
+Y = 7435
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 151
+
+[Spawn 805]
+ID = 805
+X = 8611
+Y = 7016
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 806]
+ID = 806
+X = 8923
+Y = 7063
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 807]
+ID = 807
+X = 8816
+Y = 7000
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 151
+
+[Spawn 808]
+ID = 808
+X = 8256
+Y = 7144
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 809]
+ID = 809
+X = 8212
+Y = 7207
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 810]
+ID = 810
+X = 8273
+Y = 7364
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 811]
+ID = 811
+X = 8201
+Y = 7354
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 812]
+ID = 812
+X = 7642
+Y = 7417
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 813]
+ID = 813
+X = 7502
+Y = 7526
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 814]
+ID = 814
+X = 7069
+Y = 7652
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 815]
+ID = 815
+X = 5809
+Y = 7243
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 152
 
-[Karmaroid 128]
-ID = 805
-X = 1395
-Y = 10215
-Radius = 100
-RespawnTime = 10
+[Spawn 816]
+ID = 816
+X = 6258
+Y = 7225
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 817]
+ID = 817
+X = 6202
+Y = 7239
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 818]
+ID = 818
+X = 5343
+Y = 7573
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 819]
+ID = 819
+X = 5031
+Y = 7332
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 820]
+ID = 820
+X = 4793
+Y = 7338
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 821]
+ID = 821
+X = 2873
+Y = 7012
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 822]
+ID = 822
+X = 3380
+Y = 7113
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 823]
+ID = 823
+X = 4153
+Y = 7082
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 824]
+ID = 824
+X = 4732
+Y = 7105
+Z = 0
+Radius = 1
+RespawnTime = 300
 Type = 152
+
+[Spawn 825]
+ID = 825
+X = 4910
+Y = 7071
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 826]
+ID = 826
+X = 5078
+Y = 7080
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 827]
+ID = 827
+X = 5170
+Y = 7003
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 828]
+ID = 828
+X = 5250
+Y = 6967
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 829]
+ID = 829
+X = 5932
+Y = 6988
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 830]
+ID = 830
+X = 5995
+Y = 7060
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 831]
+ID = 831
+X = 5852
+Y = 7084
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 832]
+ID = 832
+X = 6080
+Y = 6935
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 833]
+ID = 833
+X = 6354
+Y = 7062
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 834]
+ID = 834
+X = 6551
+Y = 7279
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 151
+
+[Spawn 835]
+ID = 835
+X = 6486
+Y = 7334
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 836]
+ID = 836
+X = 6721
+Y = 6936
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 837]
+ID = 837
+X = 6764
+Y = 7171
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 838]
+ID = 838
+X = 6659
+Y = 7260
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 839]
+ID = 839
+X = 6925
+Y = 7072
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 840]
+ID = 840
+X = 6936
+Y = 7379
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 841]
+ID = 841
+X = 7308
+Y = 6826
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 842]
+ID = 842
+X = 7317
+Y = 7367
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 147
+
+[Spawn 843]
+ID = 843
+X = 7388
+Y = 6822
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 151
+
+[Spawn 844]
+ID = 844
+X = 7446
+Y = 7077
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 845]
+ID = 845
+X = 7524
+Y = 7084
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 151
+
+[Spawn 846]
+ID = 846
+X = 7491
+Y = 7202
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 847]
+ID = 847
+X = 7574
+Y = 7201
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 848]
+ID = 848
+X = 7891
+Y = 7144
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 849]
+ID = 849
+X = 7847
+Y = 7183
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 850]
+ID = 850
+X = 7834
+Y = 7118
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 851]
+ID = 851
+X = 7984
+Y = 7186
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 852]
+ID = 852
+X = 8150
+Y = 7182
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 151
+
+[Spawn 853]
+ID = 853
+X = 8283
+Y = 7165
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 854]
+ID = 854
+X = 9227
+Y = 7589
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 855]
+ID = 855
+X = 9308
+Y = 7541
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 856]
+ID = 856
+X = 9165
+Y = 7163
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 857]
+ID = 857
+X = 9005
+Y = 7014
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 858]
+ID = 858
+X = 9381
+Y = 7081
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 859]
+ID = 859
+X = 9553
+Y = 7078
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 860]
+ID = 860
+X = 9692
+Y = 7141
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 861]
+ID = 861
+X = 9724
+Y = 7467
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 862]
+ID = 862
+X = 8674
+Y = 6807
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 863]
+ID = 863
+X = 8519
+Y = 6872
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 864]
+ID = 864
+X = 8252
+Y = 6699
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 865]
+ID = 865
+X = 8342
+Y = 6670
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 866]
+ID = 866
+X = 8231
+Y = 6776
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 867]
+ID = 867
+X = 8227
+Y = 6902
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 868]
+ID = 868
+X = 8252
+Y = 6829
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 869]
+ID = 869
+X = 8478
+Y = 6682
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 870]
+ID = 870
+X = 8681
+Y = 6680
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 871]
+ID = 871
+X = 8091
+Y = 6623
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 872]
+ID = 872
+X = 8016
+Y = 6650
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 873]
+ID = 873
+X = 8023
+Y = 6860
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 874]
+ID = 874
+X = 7808
+Y = 6616
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 875]
+ID = 875
+X = 7851
+Y = 6644
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 876]
+ID = 876
+X = 7859
+Y = 6888
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 877]
+ID = 877
+X = 7807
+Y = 6661
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 151
+
+[Spawn 878]
+ID = 878
+X = 7483
+Y = 6649
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 147
+
+[Spawn 879]
+ID = 879
+X = 7311
+Y = 6832
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 880]
+ID = 880
+X = 7000
+Y = 6878
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 881]
+ID = 881
+X = 6947
+Y = 6629
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 151
+
+[Spawn 882]
+ID = 882
+X = 6784
+Y = 6610
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 883]
+ID = 883
+X = 6397
+Y = 6751
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 884]
+ID = 884
+X = 5952
+Y = 6608
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 885]
+ID = 885
+X = 5447
+Y = 7106
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 886]
+ID = 886
+X = 5027
+Y = 7170
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 887]
+ID = 887
+X = 4909
+Y = 6614
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 888]
+ID = 888
+X = 4847
+Y = 6739
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 889]
+ID = 889
+X = 4919
+Y = 6657
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 890]
+ID = 890
+X = 4996
+Y = 6694
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 891]
+ID = 891
+X = 4501
+Y = 6677
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 892]
+ID = 892
+X = 4227
+Y = 6723
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 893]
+ID = 893
+X = 4302
+Y = 6761
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 894]
+ID = 894
+X = 4109
+Y = 6601
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 895]
+ID = 895
+X = 3757
+Y = 6847
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 896]
+ID = 896
+X = 3267
+Y = 6797
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 897]
+ID = 897
+X = 2951
+Y = 6733
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 898]
+ID = 898
+X = 2924
+Y = 6757
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 899]
+ID = 899
+X = 2908
+Y = 6733
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 900]
+ID = 900
+X = 2404
+Y = 6686
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 901]
+ID = 901
+X = 2567
+Y = 6237
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 155
+
+[Spawn 902]
+ID = 902
+X = 2412
+Y = 6201
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 158
+
+[Spawn 903]
+ID = 903
+X = 3044
+Y = 6449
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 904]
+ID = 904
+X = 3219
+Y = 6209
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 905]
+ID = 905
+X = 3554
+Y = 6432
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 906]
+ID = 906
+X = 3510
+Y = 6403
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 907]
+ID = 907
+X = 3526
+Y = 6530
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 160
+
+[Spawn 908]
+ID = 908
+X = 3988
+Y = 6501
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 909]
+ID = 909
+X = 4126
+Y = 6207
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 910]
+ID = 910
+X = 4176
+Y = 6325
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 911]
+ID = 911
+X = 4411
+Y = 6420
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 912]
+ID = 912
+X = 4740
+Y = 6289
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 913]
+ID = 913
+X = 4781
+Y = 6513
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 914]
+ID = 914
+X = 4234
+Y = 6210
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 915]
+ID = 915
+X = 4929
+Y = 6261
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 916]
+ID = 916
+X = 4943
+Y = 6337
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 917]
+ID = 917
+X = 4965
+Y = 6311
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 918]
+ID = 918
+X = 4864
+Y = 6437
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 919]
+ID = 919
+X = 5116
+Y = 6265
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 920]
+ID = 920
+X = 5104
+Y = 6521
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 921]
+ID = 921
+X = 5275
+Y = 6375
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 922]
+ID = 922
+X = 5245
+Y = 6413
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 923]
+ID = 923
+X = 5304
+Y = 6210
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 924]
+ID = 924
+X = 5566
+Y = 6487
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 925]
+ID = 925
+X = 5599
+Y = 6316
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 926]
+ID = 926
+X = 5664
+Y = 6563
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 927]
+ID = 927
+X = 5954
+Y = 6342
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 928]
+ID = 928
+X = 5973
+Y = 6288
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 929]
+ID = 929
+X = 5905
+Y = 6343
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 930]
+ID = 930
+X = 5900
+Y = 6434
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 931]
+ID = 931
+X = 5925
+Y = 6677
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 147
+
+[Spawn 932]
+ID = 932
+X = 6199
+Y = 6233
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 933]
+ID = 933
+X = 6594
+Y = 6448
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 934]
+ID = 934
+X = 6788
+Y = 6279
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 935]
+ID = 935
+X = 6688
+Y = 6487
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 151
+
+[Spawn 936]
+ID = 936
+X = 6907
+Y = 6732
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 937]
+ID = 937
+X = 7166
+Y = 6563
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 938]
+ID = 938
+X = 7570
+Y = 6577
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 939]
+ID = 939
+X = 7482
+Y = 6442
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 940]
+ID = 940
+X = 7604
+Y = 6774
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 941]
+ID = 941
+X = 7709
+Y = 6757
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 942]
+ID = 942
+X = 7647
+Y = 6719
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 151
+
+[Spawn 943]
+ID = 943
+X = 7664
+Y = 6888
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 944]
+ID = 944
+X = 7759
+Y = 6424
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 945]
+ID = 945
+X = 7931
+Y = 6502
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 946]
+ID = 946
+X = 8188
+Y = 6601
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 151
+
+[Spawn 947]
+ID = 947
+X = 8397
+Y = 6620
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 948]
+ID = 948
+X = 8518
+Y = 6565
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 949]
+ID = 949
+X = 8455
+Y = 6685
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 950]
+ID = 950
+X = 8511
+Y = 6825
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 951]
+ID = 951
+X = 8586
+Y = 6558
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 952]
+ID = 952
+X = 8985
+Y = 6413
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 953]
+ID = 953
+X = 8965
+Y = 6492
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 954]
+ID = 954
+X = 8821
+Y = 6640
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 955]
+ID = 955
+X = 8996
+Y = 6559
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 956]
+ID = 956
+X = 9131
+Y = 6462
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 957]
+ID = 957
+X = 9152
+Y = 6560
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 958]
+ID = 958
+X = 9332
+Y = 6460
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 959]
+ID = 959
+X = 9290
+Y = 6658
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 960]
+ID = 960
+X = 9868
+Y = 7155
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 961]
+ID = 961
+X = 7862
+Y = 7094
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 962]
+ID = 962
+X = 7837
+Y = 6603
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 963]
+ID = 963
+X = 2985
+Y = 5551
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 964]
+ID = 964
+X = 3379
+Y = 5888
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 965]
+ID = 965
+X = 3345
+Y = 5229
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 966]
+ID = 966
+X = 3066
+Y = 4995
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 967]
+ID = 967
+X = 2220
+Y = 5363
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 968]
+ID = 968
+X = 1870
+Y = 5511
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 969]
+ID = 969
+X = 2004
+Y = 5424
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 970]
+ID = 970
+X = 1737
+Y = 5583
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 155
+
+[Spawn 971]
+ID = 971
+X = 1721
+Y = 5626
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 154
+
+[Spawn 972]
+ID = 972
+X = 1870
+Y = 5630
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 156
+
+[Spawn 973]
+ID = 973
+X = 2285
+Y = 5621
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 156
+
+[Spawn 974]
+ID = 974
+X = 1699
+Y = 5580
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 157
+
+[Spawn 975]
+ID = 975
+X = 1417
+Y = 4753
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 976]
+ID = 976
+X = 870
+Y = 4887
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 977]
+ID = 977
+X = 821
+Y = 6557
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 151
+
+[Spawn 978]
+ID = 978
+X = 946
+Y = 6710
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 979]
+ID = 979
+X = 951
+Y = 6876
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 160
+
+[Spawn 980]
+ID = 980
+X = 832
+Y = 6859
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 981]
+ID = 981
+X = 887
+Y = 6876
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 982]
+ID = 982
+X = 693
+Y = 6709
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 983]
+ID = 983
+X = 687
+Y = 6995
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 984]
+ID = 984
+X = 625
+Y = 6830
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 985]
+ID = 985
+X = 690
+Y = 7047
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 986]
+ID = 986
+X = 549
+Y = 6719
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 147
+
+[Spawn 987]
+ID = 987
+X = 550
+Y = 7004
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 988]
+ID = 988
+X = 556
+Y = 7379
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 147
+
+[Spawn 989]
+ID = 989
+X = 801
+Y = 7138
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 990]
+ID = 990
+X = 803
+Y = 7796
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 991]
+ID = 991
+X = 704
+Y = 8136
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 992]
+ID = 992
+X = 545
+Y = 8577
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 993]
+ID = 993
+X = 804
+Y = 8903
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 994]
+ID = 994
+X = 605
+Y = 9325
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 995]
+ID = 995
+X = 5605
+Y = 6255
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 996]
+ID = 996
+X = 5620
+Y = 6282
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 997]
+ID = 997
+X = 5856
+Y = 6434
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 998]
+ID = 998
+X = 6544
+Y = 6280
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 999]
+ID = 999
+X = 6518
+Y = 6209
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1000]
+ID = 1000
+X = 6377
+Y = 6020
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1001]
+ID = 1001
+X = 6916
+Y = 6011
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 160
+
+[Spawn 1002]
+ID = 1002
+X = 6987
+Y = 6095
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1003]
+ID = 1003
+X = 6952
+Y = 6026
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1004]
+ID = 1004
+X = 7055
+Y = 6086
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 1005]
+ID = 1005
+X = 7090
+Y = 6000
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 151
+
+[Spawn 1006]
+ID = 1006
+X = 7174
+Y = 5904
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1007]
+ID = 1007
+X = 7087
+Y = 5986
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1008]
+ID = 1008
+X = 7232
+Y = 6101
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 1009]
+ID = 1009
+X = 7254
+Y = 6138
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 151
+
+[Spawn 1010]
+ID = 1010
+X = 7474
+Y = 5956
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1011]
+ID = 1011
+X = 7485
+Y = 6085
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 1012]
+ID = 1012
+X = 7562
+Y = 6383
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1013]
+ID = 1013
+X = 7568
+Y = 6108
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1014]
+ID = 1014
+X = 7645
+Y = 6042
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1015]
+ID = 1015
+X = 7833
+Y = 5801
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 151
+
+[Spawn 1016]
+ID = 1016
+X = 7999
+Y = 6056
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1017]
+ID = 1017
+X = 7824
+Y = 6145
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 151
+
+[Spawn 1018]
+ID = 1018
+X = 7844
+Y = 5786
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1019]
+ID = 1019
+X = 7835
+Y = 5775
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 1020]
+ID = 1020
+X = 7411
+Y = 5721
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1021]
+ID = 1021
+X = 8187
+Y = 5679
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1022]
+ID = 1022
+X = 8199
+Y = 6115
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 1023]
+ID = 1023
+X = 8360
+Y = 5620
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1024]
+ID = 1024
+X = 8357
+Y = 5692
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 1025]
+ID = 1025
+X = 8214
+Y = 5691
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 151
+
+[Spawn 1026]
+ID = 1026
+X = 8320
+Y = 5968
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 151
+
+[Spawn 1027]
+ID = 1027
+X = 8282
+Y = 5882
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 1028]
+ID = 1028
+X = 8251
+Y = 6102
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1029]
+ID = 1029
+X = 8452
+Y = 5799
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 1030]
+ID = 1030
+X = 8493
+Y = 5842
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1031]
+ID = 1031
+X = 8322
+Y = 5417
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1032]
+ID = 1032
+X = 8379
+Y = 5213
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1033]
+ID = 1033
+X = 8650
+Y = 5324
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1034]
+ID = 1034
+X = 8980
+Y = 5261
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 1035]
+ID = 1035
+X = 8849
+Y = 4907
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 1036]
+ID = 1036
+X = 9826
+Y = 4795
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1037]
+ID = 1037
+X = 10380
+Y = 4925
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1038]
+ID = 1038
+X = 10717
+Y = 4881
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1039]
+ID = 1039
+X = 11138
+Y = 5524
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 1040]
+ID = 1040
+X = 11308
+Y = 5754
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1041]
+ID = 1041
+X = 11203
+Y = 5984
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 1042]
+ID = 1042
+X = 11015
+Y = 6121
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1043]
+ID = 1043
+X = 10861
+Y = 5877
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1044]
+ID = 1044
+X = 10889
+Y = 6100
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 1045]
+ID = 1045
+X = 10881
+Y = 6533
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 1046]
+ID = 1046
+X = 10533
+Y = 6654
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1047]
+ID = 1047
+X = 10265
+Y = 6735
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1048]
+ID = 1048
+X = 9957
+Y = 6145
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 1049]
+ID = 1049
+X = 9874
+Y = 5670
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 1050]
+ID = 1050
+X = 9871
+Y = 5954
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 1051]
+ID = 1051
+X = 10153
+Y = 5967
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 1052]
+ID = 1052
+X = 10214
+Y = 5808
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 1053]
+ID = 1053
+X = 9789
+Y = 5726
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 1054]
+ID = 1054
+X = 9654
+Y = 5878
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 1055]
+ID = 1055
+X = 9660
+Y = 5976
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1056]
+ID = 1056
+X = 9796
+Y = 6070
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 1057]
+ID = 1057
+X = 9402
+Y = 5910
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1058]
+ID = 1058
+X = 9405
+Y = 5302
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1059]
+ID = 1059
+X = 9855
+Y = 5362
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1060]
+ID = 1060
+X = 9902
+Y = 5359
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 1061]
+ID = 1061
+X = 9666
+Y = 5111
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 1062]
+ID = 1062
+X = 9614
+Y = 5161
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1063]
+ID = 1063
+X = 9960
+Y = 5185
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1064]
+ID = 1064
+X = 10025
+Y = 5358
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 1065]
+ID = 1065
+X = 10227
+Y = 5592
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 1066]
+ID = 1066
+X = 10393
+Y = 5465
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 1067]
+ID = 1067
+X = 10586
+Y = 5233
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 1068]
+ID = 1068
+X = 10556
+Y = 5481
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1069]
+ID = 1069
+X = 10732
+Y = 5507
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 1070]
+ID = 1070
+X = 10859
+Y = 5296
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 1071]
+ID = 1071
+X = 10856
+Y = 5591
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1072]
+ID = 1072
+X = 10992
+Y = 5301
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1073]
+ID = 1073
+X = 10552
+Y = 5927
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 1074]
+ID = 1074
+X = 10459
+Y = 5872
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1075]
+ID = 1075
+X = 10333
+Y = 5862
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 1076]
+ID = 1076
+X = 10444
+Y = 5617
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 1077]
+ID = 1077
+X = 9028
+Y = 6171
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1078]
+ID = 1078
+X = 9277
+Y = 6383
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1079]
+ID = 1079
+X = 8750
+Y = 6054
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1080]
+ID = 1080
+X = 8677
+Y = 6187
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1081]
+ID = 1081
+X = 8732
+Y = 6457
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 1082]
+ID = 1082
+X = 8610
+Y = 6447
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1083]
+ID = 1083
+X = 8526
+Y = 6454
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1084]
+ID = 1084
+X = 8049
+Y = 6408
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 1085]
+ID = 1085
+X = 8157
+Y = 6599
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1086]
+ID = 1086
+X = 7970
+Y = 6527
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1087]
+ID = 1087
+X = 7878
+Y = 6529
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1088]
+ID = 1088
+X = 7620
+Y = 6565
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1089]
+ID = 1089
+X = 7944
+Y = 6597
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1090]
+ID = 1090
+X = 7601
+Y = 6005
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1091]
+ID = 1091
+X = 7522
+Y = 6039
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1092]
+ID = 1092
+X = 7419
+Y = 6259
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1093]
+ID = 1093
+X = 7502
+Y = 6538
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1094]
+ID = 1094
+X = 7208
+Y = 6462
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 1095]
+ID = 1095
+X = 7301
+Y = 6400
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 151
+
+[Spawn 1096]
+ID = 1096
+X = 6806
+Y = 6489
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1097]
+ID = 1097
+X = 6941
+Y = 6496
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 1098]
+ID = 1098
+X = 6085
+Y = 6224
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 1099]
+ID = 1099
+X = 5919
+Y = 6209
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 1100]
+ID = 1100
+X = 5188
+Y = 6117
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1101]
+ID = 1101
+X = 4822
+Y = 6138
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 1102]
+ID = 1102
+X = 4645
+Y = 6026
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 1103]
+ID = 1103
+X = 4680
+Y = 6185
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 1104]
+ID = 1104
+X = 4697
+Y = 6008
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 1105]
+ID = 1105
+X = 4018
+Y = 5852
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 1106]
+ID = 1106
+X = 3754
+Y = 5920
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 1107]
+ID = 1107
+X = 3631
+Y = 6051
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 147
+
+[Spawn 1108]
+ID = 1108
+X = 3587
+Y = 5943
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1109]
+ID = 1109
+X = 1015
+Y = 5604
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 154
+
+[Spawn 1110]
+ID = 1110
+X = 1037
+Y = 5491
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 156
+
+[Spawn 1111]
+ID = 1111
+X = 1513
+Y = 5518
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 155
+
+[Spawn 1112]
+ID = 1112
+X = 1588
+Y = 5628
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 155
+
+[Spawn 1113]
+ID = 1113
+X = 1024
+Y = 5379
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 155
+
+[Spawn 1114]
+ID = 1114
+X = 1284
+Y = 5248
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 157
+
+[Spawn 1115]
+ID = 1115
+X = 1401
+Y = 5242
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 157
+
+[Spawn 1116]
+ID = 1116
+X = 1495
+Y = 5341
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 156
+
+[Spawn 1117]
+ID = 1117
+X = 1066
+Y = 5197
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 153
+
+[Spawn 1118]
+ID = 1118
+X = 1133
+Y = 5063
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 154
+
+[Spawn 1119]
+ID = 1119
+X = 1004
+Y = 5087
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 155
+
+[Spawn 1120]
+ID = 1120
+X = 1334
+Y = 5085
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 155
+
+[Spawn 1121]
+ID = 1121
+X = 1238
+Y = 5220
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 155
+
+[Spawn 1122]
+ID = 1122
+X = 1630
+Y = 5437
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 155
+
+[Spawn 1123]
+ID = 1123
+X = 2192
+Y = 6054
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 153
+
+[Spawn 1124]
+ID = 1124
+X = 2390
+Y = 6161
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 154
+
+[Spawn 1125]
+ID = 1125
+X = 7103
+Y = 11035
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1126]
+ID = 1126
+X = 7314
+Y = 11007
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1127]
+ID = 1127
+X = 6932
+Y = 10520
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1128]
+ID = 1128
+X = 7168
+Y = 10577
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1129]
+ID = 1129
+X = 4288
+Y = 7830
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 1130]
+ID = 1130
+X = 3138
+Y = 5216
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 1131]
+ID = 1131
+X = 2583
+Y = 5797
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 157
+
+[Spawn 1132]
+ID = 1132
+X = 2486
+Y = 5736
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 158
+
+[Spawn 1133]
+ID = 1133
+X = 2446
+Y = 5769
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 153
+
+[Spawn 1134]
+ID = 1134
+X = 2485
+Y = 5746
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 156
+
+[Spawn 1135]
+ID = 1135
+X = 2561
+Y = 5770
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 156
+
+[Spawn 1136]
+ID = 1136
+X = 2596
+Y = 5949
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 155
+
+[Spawn 1137]
+ID = 1137
+X = 2547
+Y = 5955
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 159
+
+[Spawn 1138]
+ID = 1138
+X = 2596
+Y = 5995
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 153
+
+[Spawn 1139]
+ID = 1139
+X = 2198
+Y = 5892
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 215
+
+[Spawn 1140]
+ID = 1140
+X = 2564
+Y = 6188
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 154
+
+[Spawn 1141]
+ID = 1141
+X = 2768
+Y = 5873
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 157
+
+[Spawn 1142]
+ID = 1142
+X = 2765
+Y = 5675
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 158
+
+[Spawn 1143]
+ID = 1143
+X = 7448
+Y = 11204
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1144]
+ID = 1144
+X = 7603
+Y = 11204
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1145]
+ID = 1145
+X = 7297
+Y = 11098
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1146]
+ID = 1146
+X = 7240
+Y = 11156
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1147]
+ID = 1147
+X = 7507
+Y = 11072
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 1148]
+ID = 1148
+X = 7120
+Y = 11070
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1149]
+ID = 1149
+X = 7384
+Y = 10828
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1150]
+ID = 1150
+X = 7248
+Y = 10939
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1151]
+ID = 1151
+X = 7378
+Y = 10802
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 1152]
+ID = 1152
+X = 7216
+Y = 9632
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1153]
+ID = 1153
+X = 5920
+Y = 6923
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1154]
+ID = 1154
+X = 5620
+Y = 6063
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1155]
+ID = 1155
+X = 6074
+Y = 6062
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 1156]
+ID = 1156
+X = 6189
+Y = 5884
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1157]
+ID = 1157
+X = 6197
+Y = 5661
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1158]
+ID = 1158
+X = 7666
+Y = 8680
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 1159]
+ID = 1159
+X = 7781
+Y = 7944
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1160]
+ID = 1160
+X = 7605
+Y = 7672
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1161]
+ID = 1161
+X = 7755
+Y = 7619
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1162]
+ID = 1162
+X = 7723
+Y = 7709
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 1163]
+ID = 1163
+X = 7391
+Y = 7503
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1164]
+ID = 1164
+X = 7638
+Y = 7536
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 147
+
+[Spawn 1165]
+ID = 1165
+X = 7585
+Y = 7242
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1166]
+ID = 1166
+X = 7423
+Y = 7206
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1167]
+ID = 1167
+X = 7181
+Y = 6967
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1168]
+ID = 1168
+X = 7072
+Y = 6931
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1169]
+ID = 1169
+X = 7086
+Y = 6818
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1170]
+ID = 1170
+X = 7385
+Y = 7047
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1171]
+ID = 1171
+X = 7448
+Y = 6861
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1172]
+ID = 1172
+X = 7355
+Y = 6605
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 151
+
+[Spawn 1173]
+ID = 1173
+X = 7083
+Y = 6423
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1174]
+ID = 1174
+X = 7079
+Y = 6449
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1175]
+ID = 1175
+X = 7438
+Y = 6410
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1176]
+ID = 1176
+X = 6949
+Y = 6467
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1177]
+ID = 1177
+X = 6919
+Y = 6614
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 151
+
+[Spawn 1178]
+ID = 1178
+X = 7151
+Y = 6244
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1179]
+ID = 1179
+X = 7085
+Y = 6379
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1180]
+ID = 1180
+X = 6803
+Y = 6690
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 1181]
+ID = 1181
+X = 6626
+Y = 6016
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 1182]
+ID = 1182
+X = 6676
+Y = 6598
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 1183]
+ID = 1183
+X = 6785
+Y = 6493
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 1184]
+ID = 1184
+X = 7004
+Y = 6065
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 1185]
+ID = 1185
+X = 6976
+Y = 6151
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 160
+
+[Spawn 1186]
+ID = 1186
+X = 6586
+Y = 6145
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1187]
+ID = 1187
+X = 6285
+Y = 5842
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 1188]
+ID = 1188
+X = 6389
+Y = 6008
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1189]
+ID = 1189
+X = 6600
+Y = 5813
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 151
+
+[Spawn 1190]
+ID = 1190
+X = 6412
+Y = 5678
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 1191]
+ID = 1191
+X = 6546
+Y = 5656
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1192]
+ID = 1192
+X = 6795
+Y = 5723
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1193]
+ID = 1193
+X = 6778
+Y = 5676
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1194]
+ID = 1194
+X = 6391
+Y = 5354
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1195]
+ID = 1195
+X = 6597
+Y = 5240
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1196]
+ID = 1196
+X = 6616
+Y = 5213
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1197]
+ID = 1197
+X = 6640
+Y = 5343
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1198]
+ID = 1198
+X = 6799
+Y = 5255
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1199]
+ID = 1199
+X = 6324
+Y = 5045
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 227
+
+[Spawn 1200]
+ID = 1200
+X = 6908
+Y = 5745
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1201]
+ID = 1201
+X = 7106
+Y = 6052
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 1202]
+ID = 1202
+X = 7002
+Y = 6380
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 1203]
+ID = 1203
+X = 7117
+Y = 5840
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 151
+
+[Spawn 1204]
+ID = 1204
+X = 7212
+Y = 6346
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 1205]
+ID = 1205
+X = 7372
+Y = 6218
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 151
+
+[Spawn 1206]
+ID = 1206
+X = 7165
+Y = 5806
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1207]
+ID = 1207
+X = 7394
+Y = 6016
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 151
+
+[Spawn 1208]
+ID = 1208
+X = 7503
+Y = 5847
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1209]
+ID = 1209
+X = 7413
+Y = 6263
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 1210]
+ID = 1210
+X = 7680
+Y = 5988
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 1211]
+ID = 1211
+X = 7856
+Y = 6003
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 151
+
+[Spawn 1212]
+ID = 1212
+X = 7607
+Y = 6520
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 1213]
+ID = 1213
+X = 8123
+Y = 6416
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 1214]
+ID = 1214
+X = 8160
+Y = 6439
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1215]
+ID = 1215
+X = 8091
+Y = 5869
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1216]
+ID = 1216
+X = 8098
+Y = 6026
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 151
+
+[Spawn 1217]
+ID = 1217
+X = 7848
+Y = 5837
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1218]
+ID = 1218
+X = 8177
+Y = 6430
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1219]
+ID = 1219
+X = 8411
+Y = 6339
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1220]
+ID = 1220
+X = 8597
+Y = 6416
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1221]
+ID = 1221
+X = 7969
+Y = 6598
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1222]
+ID = 1222
+X = 8550
+Y = 6491
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1223]
+ID = 1223
+X = 8140
+Y = 6342
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1224]
+ID = 1224
+X = 8322
+Y = 6410
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1225]
+ID = 1225
+X = 8358
+Y = 6371
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1226]
+ID = 1226
+X = 8062
+Y = 5931
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 1227]
+ID = 1227
+X = 8535
+Y = 5801
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 1228]
+ID = 1228
+X = 8000
+Y = 6056
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1229]
+ID = 1229
+X = 8311
+Y = 6126
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 216
+
+[Spawn 1230]
+ID = 1230
+X = 8223
+Y = 6379
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1231]
+ID = 1231
+X = 8368
+Y = 6017
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1232]
+ID = 1232
+X = 8319
+Y = 6058
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 216
+
+[Spawn 1233]
+ID = 1233
+X = 8117
+Y = 6391
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 151
+
+[Spawn 1234]
+ID = 1234
+X = 8030
+Y = 6358
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1235]
+ID = 1235
+X = 8576
+Y = 6007
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1236]
+ID = 1236
+X = 8311
+Y = 5983
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 216
+
+[Spawn 1237]
+ID = 1237
+X = 8267
+Y = 6195
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1238]
+ID = 1238
+X = 7626
+Y = 6101
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 1239]
+ID = 1239
+X = 7839
+Y = 6398
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1240]
+ID = 1240
+X = 7502
+Y = 6325
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1241]
+ID = 1241
+X = 7680
+Y = 5802
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 1242]
+ID = 1242
+X = 7275
+Y = 5937
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1243]
+ID = 1243
+X = 7107
+Y = 6263
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1244]
+ID = 1244
+X = 7757
+Y = 6402
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1245]
+ID = 1245
+X = 7782
+Y = 6542
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 151
+
+[Spawn 1246]
+ID = 1246
+X = 7962
+Y = 6185
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1247]
+ID = 1247
+X = 7934
+Y = 6591
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1248]
+ID = 1248
+X = 7895
+Y = 6593
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1249]
+ID = 1249
+X = 7741
+Y = 6587
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1250]
+ID = 1250
+X = 7951
+Y = 6686
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1251]
+ID = 1251
+X = 7977
+Y = 6615
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 151
+
+[Spawn 1252]
+ID = 1252
+X = 8122
+Y = 6608
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 151
+
+[Spawn 1253]
+ID = 1253
+X = 8226
+Y = 6772
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1254]
+ID = 1254
+X = 8397
+Y = 6416
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 1255]
+ID = 1255
+X = 8392
+Y = 6672
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1256]
+ID = 1256
+X = 7836
+Y = 6623
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1257]
+ID = 1257
+X = 7855
+Y = 6314
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1258]
+ID = 1258
+X = 7805
+Y = 6237
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 125
+
+[Spawn 1259]
+ID = 1259
+X = 7273
+Y = 11147
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 150
+
+[Spawn 1260]
+ID = 1260
+X = 8129
+Y = 12167
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 148
+
+[Spawn 1261]
+ID = 1261
+X = 7449
+Y = 11202
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
+[Spawn 1262]
+ID = 1262
+X = 7938
+Y = 11009
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 149
+
+[Spawn 1263]
+ID = 1263
+X = 7724
+Y = 11007
+Z = 0
+Radius = 1
+RespawnTime = 300
+Type = 152
+
