@@ -13,27 +13,27 @@ import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 import java.util.Set;
 
-public abstract class NetworkThread extends Thread {
+public abstract class NetworkThread<T extends Connection> extends Thread {
 
 	private Selector selector;
 	public NetworkThread(InetSocketAddress address) throws IOException {
 		this.selector = Selector.open();
-		ServerSocketChannel selectable = ServerSocketChannel.open();
-		selectable.configureBlocking(false);
-		ServerSocket serverSocket = selectable.socket();
+		ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
+		serverSocketChannel.configureBlocking(false);
+		ServerSocket serverSocket = serverSocketChannel.socket();
 		serverSocket.bind(address);
-		selectable.register(selector, SelectionKey.OP_ACCEPT);
+		serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
 	}
 
 	Selector getSelector() {
 		return selector;
 	}
 	
-	public abstract void onAccept(Connection connection);
+	public abstract void onAccept(T connection);
 		
-	public abstract void onDisconnect(Connection connection);
+	public abstract void onDisconnect(T connection);
 	
-	public abstract Connection createConnection(SocketChannel socketChannel);
+	public abstract T createConnection(SocketChannel socketChannel);
 	
 	@Override
 	public void interrupt() {
@@ -52,7 +52,7 @@ public abstract class NetworkThread extends Thread {
 				int num = selector.select();
 				if(num == 0){
 					// we need synchronize here otherwise we might block again before we were able to change the selector
-					synchronized(this){
+					synchronized(selector){
 						continue;
 					}
 				}
@@ -62,16 +62,20 @@ public abstract class NetworkThread extends Thread {
 					if(!key.isValid()){
 						continue;		
 					}
-					if (key.isAcceptable()) {
+					boolean readable = key.isReadable(), writable = key.isWritable(), acceptable = key.isAcceptable();
+					
+					if (acceptable) {
 						SocketChannel socketChannel = ((ServerSocketChannel)key.channel()).accept();
-						Connection connection = createConnection(socketChannel);						
+						T connection = createConnection(socketChannel);						
 						onAccept(connection);
-					} else {						
+					}					
+					if(readable||writable){
 						Connection connection = (Connection) key.attachment();
-						if (key.isWritable()) {
+						if (writable) {
+							System.out.println("output");
 							connection.handleOutput();
 						}
-						if (key.isReadable()) {
+						if (readable) {
 							connection.handleInput();
 						}
 					}

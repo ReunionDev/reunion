@@ -69,8 +69,7 @@ public class BasicAttack extends Skill implements Castable, Effectable {
 			} else {
 				victim[0].setHp(newHp);
 			}
-		}		
-		
+		}
 		return true;
 	}
 	

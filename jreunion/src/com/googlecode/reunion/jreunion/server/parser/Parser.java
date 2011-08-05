@@ -40,12 +40,14 @@ public class Parser {
 	}
 	
 	public void parse(Client client, String line) {
-		for(Entry<Pattern, PacketHandler> entry : handlers.entrySet()){
-			Pattern pattern = entry.getKey();
-			Matcher matcher = pattern.matcher(line);
-			if(matcher.matches()){
-				PacketHandler handler = entry.getValue();
-				handler.handle(client, matcher);				
+		synchronized(handlers){
+			for(Entry<Pattern, PacketHandler> entry : handlers.entrySet()){
+				Pattern pattern = entry.getKey();
+				Matcher matcher = pattern.matcher(line);
+				if(matcher.matches()){
+					PacketHandler handler = entry.getValue();
+					handler.handle(client, matcher);				
+				}
 			}
 		}
 	}

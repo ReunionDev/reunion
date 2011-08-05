@@ -26,7 +26,6 @@ public abstract class Skill {
 		return id;
 	}
 
-
 	public abstract int  getMaxLevel();
 	
 	public int getMinLevel(){
@@ -73,15 +72,12 @@ public abstract class Skill {
 		}
 	}
 	
-	
 	public void effect(LivingObject source, LivingObject target){
 		source.getInterested().sendPacket(Type.EFFECT, source, target, this);
 		target.getInterested().sendPacket(Type.EFFECT, source, target, this);
 	}
 
-	public abstract int getLevelRequirement(int skillLevel);
-
-	
+	public abstract int getLevelRequirement(int skillLevel);	
 
 	public void setType(int type) {
 		this.type = type;

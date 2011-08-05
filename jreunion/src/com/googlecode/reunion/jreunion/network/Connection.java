@@ -1,21 +1,13 @@
 package com.googlecode.reunion.jreunion.network;
 
 import java.io.IOException;
-import java.net.Socket;
 import java.nio.ByteBuffer;
-import java.nio.channels.ByteChannel;
 import java.nio.channels.ClosedChannelException;
-import java.nio.channels.ReadableByteChannel;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
-import java.nio.channels.WritableByteChannel;
-import java.util.LinkedList;
-import java.util.Queue;
-
-import com.sun.org.apache.bcel.internal.generic.NEW;
-
-public abstract class Connection {
+public abstract class Connection<T extends Connection<?>> {	
+	
 	
 	private ByteBuffer inputBuffer;
 	private ByteBuffer outputBuffer;	
@@ -24,9 +16,9 @@ public abstract class Connection {
 		return socketChannel;
 	}
 
-	private NetworkThread networkThread;	
+	private NetworkThread<T> networkThread;	
 
-	public Connection(NetworkThread networkThread, SocketChannel socketChannel) throws IOException {
+	public Connection(NetworkThread<T> networkThread, SocketChannel socketChannel) throws IOException {
 		inputBuffer = ByteBuffer.allocate(1024);
 		outputBuffer = ByteBuffer.allocate(1024);
 		this.networkThread = networkThread;
@@ -37,13 +29,29 @@ public abstract class Connection {
 		key.attach(this);
 	}
 	
+	public void disconnect(){
+		try {
+			socketChannel.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+			handleDisconnect();
+		}
+	}
+	
+	public NetworkThread<?> getNetworkThread() {
+		return networkThread;
+	}
+
 	public void write(byte [] data){
 		Selector selector = networkThread.getSelector();
 		try {
 			synchronized(outputBuffer){
 				outputBuffer.put(data);
-				SelectionKey key = socketChannel.register(selector, SelectionKey.OP_WRITE);
-				key.attach(this);	
+				synchronized(selector){
+					selector.wakeup();
+					SelectionKey key = socketChannel.register(selector, SelectionKey.OP_READ | SelectionKey.OP_WRITE);
+					key.attach(this);
+				}
 			}
 		} catch (ClosedChannelException e) {
 			e.printStackTrace();
@@ -54,8 +62,9 @@ public abstract class Connection {
 	void handleDisconnect(){
 		SelectionKey key = socketChannel.keyFor(networkThread.getSelector());	
 		key.cancel();
-		networkThread.onDisconnect(this);
+		networkThread.onDisconnect((T)this);
 	}
+
 	
 	public byte [] getData(){
 		synchronized(inputBuffer){
@@ -95,9 +104,9 @@ public abstract class Connection {
 				outputBuffer.flip();
 				socketChannel.write(outputBuffer);
 				outputBuffer.clear();
-			}
-			SelectionKey key = socketChannel.register(selector, SelectionKey.OP_READ);
-			key.attach(this);
+				SelectionKey key = socketChannel.register(selector, SelectionKey.OP_READ);
+				key.attach(this);
+			}			
 		} catch (Exception e) {			
 			e.printStackTrace();
 			handleDisconnect();		

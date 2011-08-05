@@ -230,7 +230,7 @@ public class Client extends EventDispatcher implements EventListener,Sendable {
 					byte [] data = networkDataEvent.getData();
 					
 					if(protocol==null){
-						protocol = Protocol.find(this, data);
+						protocol = Protocol.find(this,data);
 						if(protocol==null) {							
 							this.disconnect();
 							throw new RuntimeException("Unknown Protocol");//TODO: Proper handling
