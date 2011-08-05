@@ -12,10 +12,8 @@ import com.googlecode.reunion.jreunion.game.Skill;
 import com.googlecode.reunion.jreunion.game.items.equipment.StaffWeapon;
 import com.googlecode.reunion.jreunion.game.items.equipment.Weapon;
 import com.googlecode.reunion.jreunion.game.skills.Modifier;
-import com.googlecode.reunion.jreunion.game.skills.Modifier.ModifierType;
-import com.googlecode.reunion.jreunion.game.skills.Modifier.ValueType;
+import com.googlecode.reunion.jreunion.server.Server;
 import com.googlecode.reunion.jreunion.server.SkillManager;
-import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 
 public class LightningBall extends Tier1 implements Castable, Modifier {
 
@@ -74,7 +72,7 @@ public class LightningBall extends Tier1 implements Castable, Modifier {
 	}
 	
 	@Override
-	public boolean cast(LivingObject caster, LivingObject... target) {
+	public boolean cast(LivingObject caster, List<LivingObject> victims) {
 		if(caster instanceof KailiptonPlayer){
 			Player player = (Player)caster;
 			int currentMana = player.getMana();
@@ -84,10 +82,13 @@ public class LightningBall extends Tier1 implements Castable, Modifier {
 			
 			Weapon weapon = player.getEquipment().getMainHand();
 			float baseDamage = player.getBaseDamage();
+			float weaponDamage = 0;
 			double weaponMagicBoost=1;
 			
 			if(weapon instanceof StaffWeapon){
-				weaponMagicBoost += ((double)weapon.getMagicDmg())/100; // % of magic dmg boost
+				weaponDamage += weapon.getMinDamage() + 
+						(Server.getRand().nextFloat()*(weapon.getMaxDamage()-weapon.getMinDamage()));
+				weaponMagicBoost += weapon.getMagicDmg(); // % of magic dmg boost
 			}
 			
 			float lightDamage = getDamageModifier(player);
@@ -112,18 +113,21 @@ public class LightningBall extends Tier1 implements Castable, Modifier {
 				}
 			}
 			
-			float magicDamage = (float)((baseDamage + lightDamage)* lightningMasteryDamage * weaponMagicBoost);
+			float magicDamage = (float)((baseDamage + weaponDamage + lightDamage)
+					* lightningMasteryDamage * weaponMagicBoost);
 			
-			synchronized(target){
-				int newHp = target[0].getHp() - (int) (magicDamage);				
-				if (newHp <= 0) {
-					((Mob)target[0]).kill((KailiptonPlayer)caster);
-				} else {
-					target[0].setHp(newHp);
+			synchronized(victims){
+				for(LivingObject victim : victims){
+					int newHp = victim.getHp() - (int) (magicDamage);				
+					
+					if (newHp <= 0) {
+						((Mob)victim).kill(player);
+					} else {
+						victim.setHp(newHp);
+					}
 				}
 				return true;
 			}
-			
 		}		
 		return false;
 	}

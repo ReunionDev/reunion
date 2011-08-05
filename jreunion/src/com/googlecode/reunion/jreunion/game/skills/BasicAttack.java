@@ -1,6 +1,8 @@
 package com.googlecode.reunion.jreunion.game.skills;
 
-import com.googlecode.reunion.jreunion.game.BulkanPlayer;
+import java.util.Iterator;
+import java.util.List;
+
 import com.googlecode.reunion.jreunion.game.Castable;
 import com.googlecode.reunion.jreunion.game.Effectable;
 import com.googlecode.reunion.jreunion.game.LivingObject;
@@ -12,14 +14,13 @@ import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 import com.googlecode.reunion.jreunion.server.Server;
 import com.googlecode.reunion.jreunion.server.SkillManager;
 
-public class BasicAttack extends Skill implements Castable, Effectable {
-	
+public class BasicAttack extends Skill implements Castable{
 	
 	public BasicAttack(SkillManager skillManager,int id) {
 		super(skillManager,id);
 	}
 	
-	public boolean cast(LivingObject attacker, LivingObject... victim) {
+	public boolean cast(LivingObject attacker, List<LivingObject> victims) {
 		
 		float damage = 0;
 		
@@ -60,17 +61,22 @@ public class BasicAttack extends Skill implements Castable, Effectable {
 					}						
 				}
 			}
-		}
-		
-		synchronized(victim){
-			int newHp = victim[0].getHp() - (int) (damage);				
-			if (newHp <= 0) {
-				((Mob)victim[0]).kill((BulkanPlayer)attacker);
-			} else {
-				victim[0].setHp(newHp);
+			
+			synchronized(victims){
+				for(LivingObject victim : victims){
+					int newHp = victim.getHp() - (int) (damage);				
+					
+					if (newHp <= 0) {
+						((Mob)victim).kill(player);
+					} else {
+						victim.setHp(newHp);
+					}
+					
+					return true;
+				}
 			}
 		}
-		return true;
+		return false;
 	}
 	
 	@Override 
@@ -81,7 +87,6 @@ public class BasicAttack extends Skill implements Castable, Effectable {
 		
 	}
 	
-
 	@Override
 	public int getMaxLevel() {
 

@@ -12,10 +12,8 @@ import com.googlecode.reunion.jreunion.game.Skill;
 import com.googlecode.reunion.jreunion.game.items.equipment.StaffWeapon;
 import com.googlecode.reunion.jreunion.game.items.equipment.Weapon;
 import com.googlecode.reunion.jreunion.game.skills.Modifier;
-import com.googlecode.reunion.jreunion.game.skills.Modifier.ModifierType;
-import com.googlecode.reunion.jreunion.game.skills.Modifier.ValueType;
+import com.googlecode.reunion.jreunion.server.Server;
 import com.googlecode.reunion.jreunion.server.SkillManager;
-import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 
 public class FirePillar extends Tier2 implements Castable, Modifier {
 
@@ -74,7 +72,7 @@ public class FirePillar extends Tier2 implements Castable, Modifier {
 	}
 	
 	@Override
-	public boolean cast(LivingObject caster, LivingObject... targets) {
+	public boolean cast(LivingObject caster, List<LivingObject> victims) {
 		if(caster instanceof KailiptonPlayer){
 			Player player = (Player)caster;
 			int currentMana = player.getMana();
@@ -84,10 +82,13 @@ public class FirePillar extends Tier2 implements Castable, Modifier {
 			
 			Weapon weapon = player.getEquipment().getMainHand();
 			float baseDamage = player.getBaseDamage();
-			double weaponMagicBoost = 1;
+			float weaponDamage = 0;
+			double weaponMagicBoost=1;
 			
 			if(weapon instanceof StaffWeapon){
-				weaponMagicBoost += ((double)weapon.getMagicDmg())/100; // % of magic dmg boost
+				weaponDamage += weapon.getMinDamage() + 
+						(Server.getRand().nextFloat()*(weapon.getMaxDamage()-weapon.getMinDamage()));
+				weaponMagicBoost += weapon.getMagicDmg(); // % of magic dmg boost
 			}
 			
 			float fireDamage = getDamageModifier(player);
@@ -112,17 +113,22 @@ public class FirePillar extends Tier2 implements Castable, Modifier {
 				}
 			}
 			
-			float magicDamage = (float)((baseDamage + fireDamage) * fireMasteryDamage * weaponMagicBoost);
+			float magicDamage = (float)((baseDamage + weaponDamage + fireDamage) * fireMasteryDamage * weaponMagicBoost);
 			
-			//Todo: this skill can target up to 4 targets
+			//This skill can target up to 4 targets
 			//(Main target 100% damage, other targets 70% damage)
-			synchronized(targets){
-				int newHp = targets[0].getHp() - (int) (magicDamage);				
-				if (newHp <= 0) {
-					if(targets[0] instanceof Mob)
-						((Mob)targets[0]).kill((KailiptonPlayer)caster);
-				} else {
-					targets[0].setHp(newHp);
+			synchronized(victims){
+				int victimCount = 1;
+				for(LivingObject victim : victims){
+					//if its 1st victim apply 100% dmg, if not is only 70% dmg
+					magicDamage *= (victimCount++ == 2) ? 0.7 : 1;
+					int newHp = victim.getHp() - (int) (magicDamage);
+					
+					if (newHp <= 0) {
+						((Mob)victim).kill(player);
+					} else {
+						victim.setHp(newHp);
+					}
 				}
 				return true;
 			}	

@@ -12,10 +12,8 @@ import com.googlecode.reunion.jreunion.game.Skill;
 import com.googlecode.reunion.jreunion.game.items.equipment.StaffWeapon;
 import com.googlecode.reunion.jreunion.game.items.equipment.Weapon;
 import com.googlecode.reunion.jreunion.game.skills.Modifier;
-import com.googlecode.reunion.jreunion.game.skills.Modifier.ModifierType;
-import com.googlecode.reunion.jreunion.game.skills.Modifier.ValueType;
+import com.googlecode.reunion.jreunion.server.Server;
 import com.googlecode.reunion.jreunion.server.SkillManager;
-import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 
 public class FireBall extends Tier1 implements Castable, Modifier {
 
@@ -46,7 +44,7 @@ public class FireBall extends Tier1 implements Castable, Modifier {
 		
 		if(level>0){
 			modifier += (15 + ((level-1)*getDamageModifier()));			
-			}	
+		}	
 		
 		return modifier;
 	}
@@ -68,13 +66,13 @@ public class FireBall extends Tier1 implements Castable, Modifier {
 		
 		if(level>0){
 			modifier += (5 + ((level-1) * getManaModifier()));			
-			}	
+		}	
 		
 		return modifier;
 	}
 	
 	@Override
-	public boolean cast(LivingObject caster, LivingObject... targets) {
+	public boolean cast(LivingObject caster, List<LivingObject> victims) {
 		if(caster instanceof KailiptonPlayer){
 			Player player = (Player)caster;
 			int currentMana = player.getMana();
@@ -84,9 +82,12 @@ public class FireBall extends Tier1 implements Castable, Modifier {
 			
 			Weapon weapon = player.getEquipment().getMainHand();
 			float baseDamage = player.getBaseDamage();
+			float weaponDamage = 0;
 			double weaponMagicBoost=1;
 			
 			if(weapon instanceof StaffWeapon){
+				weaponDamage += weapon.getMinDamage() + 
+						(Server.getRand().nextFloat()*(weapon.getMaxDamage()-weapon.getMinDamage()));
 				weaponMagicBoost += weapon.getMagicDmg(); // % of magic dmg boost
 			}
 			
@@ -112,20 +113,22 @@ public class FireBall extends Tier1 implements Castable, Modifier {
 				}
 			}
 			
-			float magicDamage = (float)((baseDamage + fireDamage) * fireMasteryDamage * weaponMagicBoost);
+			float magicDamage = (float)((baseDamage + weaponDamage + fireDamage) * fireMasteryDamage * weaponMagicBoost);
 			
-			//Todo: this skill can target up to 2 targets 
-			synchronized(targets){
-				int newHp = targets[0].getHp() - (int) (magicDamage);				
-				if (newHp <= 0) {
-					if(targets[0] instanceof Mob)
-						((Mob)targets[0]).kill(player);
-				} else {
-					targets[0].setHp(newHp);
+			//This skill can target up to 2 targets
+			//(Both targets receive 100% dmg)
+			synchronized(victims){
+				for(LivingObject victim : victims){ 
+					int newHp = victim.getHp() - (int) (magicDamage);				
+					
+					if (newHp <= 0) {
+						((Mob)victim).kill(player);
+					} else {
+						victim.setHp(newHp);
+					}
 				}
 				return true;
 			}
-			
 		}		
 		return false;
 	}

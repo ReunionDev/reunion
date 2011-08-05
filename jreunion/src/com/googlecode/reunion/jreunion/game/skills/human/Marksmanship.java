@@ -1,7 +1,9 @@
 package com.googlecode.reunion.jreunion.game.skills.human;
+
 import com.googlecode.reunion.jreunion.game.Skill;
 import com.googlecode.reunion.jreunion.server.SkillManager;
-public class Marksmanship extends Skill {
+
+public class Marksmanship extends GunMastery {
 
 	public Marksmanship(SkillManager skillManager,int id) {
 		super(skillManager,id);
@@ -14,7 +16,9 @@ public class Marksmanship extends Skill {
 
 	@Override
 	public int getLevelRequirement(int skillLevel) {
-		return 49+skillLevel;
+		return 4+skillLevel;
 	}
+	
+	
 
 }

@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import com.googlecode.reunion.jreunion.game.Effectable;
 import com.googlecode.reunion.jreunion.game.Equipment;
 import com.googlecode.reunion.jreunion.game.InventoryItem;
 import com.googlecode.reunion.jreunion.game.Item;
@@ -66,7 +67,9 @@ public class PacketFactory {
 		STASH_END,
 		INVEN,
 		SKILLLEVEL_ALL, 
-		A_
+		A_,
+		SKILL,
+		MULTI_SHOT
 	}
 	
 	public static String createPacket(Type packetType, Object... args) {
@@ -322,7 +325,7 @@ public class PacketFactory {
 			}
 			break;
 			
-		case EFFECT:
+		case EFFECT: //attack skill
 			if(args.length>2){
 				LivingObject source = (LivingObject) args[0];				
 				LivingObject target = (LivingObject)args[1];
@@ -332,8 +335,19 @@ public class PacketFactory {
 				+ source.getEntityId() + " "+getObjectType(target)+" " + target.getEntityId() + " "
 				+ target.getPercentageHp() + " 0 0";
 	
-				// S> effect [SkillID] char [charID] npc [npcID] [RemainNpcHP%]
-				// 0 0
+				// S> effect [SkillID] char [charID] npc [npcID] [RemainNpcHP%] 0 0
+			}
+			break;
+			
+		case SKILL: //self usable skill
+			if(args.length>1){
+				LivingObject source = (LivingObject) args[0];				
+				Skill skill = (Skill)args[1];
+	
+				return "skill " + ((Effectable)skill).getEffectModifier() + " char "+ source.getEntityId() + " "
+						+skill.getId();
+				
+				// S> skill [Duration/Activated] char [CharID] [SkillID]
 			}
 			break;
 			
@@ -438,6 +452,18 @@ public class PacketFactory {
 				+ " " + invItem.getY() + " "
 				+ item.getGemNumber() + " "
 				+ item.getExtraStats();
+			}
+			break;
+			
+		case MULTI_SHOT: //human semi-automatic skill
+			if(args.length >= 1){
+				String source = (String) args[0]; //me or char
+				int numberOfShots = (Integer) args[1];
+				String charId = args.length == 3 ? (String) args[2]+" " : "";
+				
+				return "multi_shot "+source+" " +charId+""+numberOfShots;
+					  // S> multi_shot me [numberOfShots]
+					  // S> multi_shot char [charID] [numberOfShots]
 			}
 			break;
 			

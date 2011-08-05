@@ -13,7 +13,7 @@ import com.googlecode.reunion.jreunion.server.SkillManager;
 public abstract class Skill {
 	private int id;
 
-	private int type;
+	private int type; //0 - Permanent; 1 - Activation; 2 - Attack 
 	
 	private SkillManager skillManager;
 
@@ -73,8 +73,14 @@ public abstract class Skill {
 	}
 	
 	public void effect(LivingObject source, LivingObject target){
-		source.getInterested().sendPacket(Type.EFFECT, source, target, this);
-		target.getInterested().sendPacket(Type.EFFECT, source, target, this);
+		if(target == source){ //self usable skill
+			//source.getInterested().sendPacket(Type.SKILL, source, this);
+			((Player)source).getClient().sendPacket(Type.SKILL, source, this);
+		}
+		else {
+			source.getInterested().sendPacket(Type.EFFECT, source, target, this);
+			target.getInterested().sendPacket(Type.EFFECT, source, target, this);
+		}
 	}
 
 	public abstract int getLevelRequirement(int skillLevel);	

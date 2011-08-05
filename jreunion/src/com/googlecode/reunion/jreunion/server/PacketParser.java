@@ -2,7 +2,12 @@ package com.googlecode.reunion.jreunion.server;
 
 import java.net.Socket;
 import java.nio.channels.SocketChannel;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.LinkedList;
 import java.util.Random;
+import java.util.List;
+import java.util.Vector;
 import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
@@ -473,10 +478,11 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					// if attack command sent, then use SkillID 0 (Basic Attack)
 					int skillId = message[0].equals("attack")?0:Integer.parseInt(message[1]);
 					
-					LivingObject target = null;
+					LivingObject target = player;
+					int entityId=-1;
 					
 					if(message.length > 2) { //if length=2 then player is using skill on himself
-						int entityId=-1;
+						
 						if(message[2].equals("npc")){ // LivingObject Skill attack
 							entityId = Integer.parseInt(message[3]);
 						}
@@ -485,11 +491,23 @@ public class PacketParser extends EventDispatcher implements EventListener{
 						}
 						target = (LivingObject) player.getPosition().getLocalMap().getEntity(entityId);
 					}
+					
 					Skill skill = player.getSkill(skillId);
+					List<LivingObject> victims = new LinkedList<LivingObject>(Arrays.asList(new LivingObject[]{target}));
+					
+					if(message.length > 4){ //multiple targets
+						for(int messageIndex=4; messageIndex < message.length; messageIndex++){
+							entityId = Integer.parseInt(message[messageIndex]);
+							target = (LivingObject) player.getPosition().getLocalMap().getEntity(entityId);
+							victims.add(target);
+						}
+					}
+					
 					if(Castable.class.isInstance(skill)){
-						if(((Castable)skill).cast(player, target))
+						if(((Castable)skill).cast(player, victims)){
 							if(Effectable.class.isInstance(skill))
 								skill.effect(player, target);
+						}
 					} else{
 						throw new RuntimeException(skill+" is not Castable!");
 					}

@@ -1,8 +1,9 @@
 package com.googlecode.reunion.jreunion.game.skills.bulkan;
 
+import java.util.List;
+
 import com.googlecode.reunion.jreunion.game.BulkanPlayer;
 import com.googlecode.reunion.jreunion.game.Castable;
-import com.googlecode.reunion.jreunion.game.Effectable;
 import com.googlecode.reunion.jreunion.game.LivingObject;
 import com.googlecode.reunion.jreunion.game.Mob;
 import com.googlecode.reunion.jreunion.game.Player;
@@ -12,7 +13,6 @@ import com.googlecode.reunion.jreunion.game.items.equipment.Weapon;
 import com.googlecode.reunion.jreunion.game.skills.Modifier;
 import com.googlecode.reunion.jreunion.server.Server;
 import com.googlecode.reunion.jreunion.server.SkillManager;
-import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 
 public class OverHeadBlow extends WeaponAttack implements Castable{
 
@@ -57,26 +57,41 @@ public class OverHeadBlow extends WeaponAttack implements Castable{
 		
 	}
 	
+	public float getStaminaModifier(){
+		/* mana spent:
+		 * level 1 = 10
+		 * level 2 = 11
+		 * ...
+		 * level 25 = 40
+		 */
+		return 30f/(getMaxLevel()-1);
+	}
+	
+	float getStaminaModifier(Player player){
+		float modifier = 0;
+		int level = player.getSkillLevel(this);
+		
+		if(level>0){
+			modifier += (10 + ((level-1) * getStaminaModifier()));			
+		}	
+		
+		return modifier;
+	}
+	
 	@Override
-	public boolean cast(LivingObject caster, LivingObject... target) {
+	public boolean cast(LivingObject caster, List<LivingObject> victims) {
 		
 		if(caster instanceof BulkanPlayer){	
-			
+			Player player = (Player)caster;
 			int currentStamina = ((BulkanPlayer) caster).getStamina();
-			// stamina spent: level 1 = 10 ... level 25 = 40 
-			int staminaSpent = 10 + (((BulkanPlayer) caster).getSkillLevel(this)-1 * (30/(getMaxLevel()-1)));
+			int staminaSpent = (int) getStaminaModifier(player); 
+					
+			player.setStamina(currentStamina - staminaSpent);
 			
-			if((currentStamina - staminaSpent)  < 0){
-				((Player)(caster)).getClient().sendPacket(Type.SAY, "Not enought stamina to use the skill.");
-				return false;
-			} else {
-				((BulkanPlayer) caster).setStamina(currentStamina - staminaSpent);
-			}
-			
-			float baseDamage = ((BulkanPlayer) caster).getBaseDamage();
-			float skillDamage = getDamageModifier((BulkanPlayer) caster);
+			float baseDamage = player.getBaseDamage();
+			float skillDamage = getDamageModifier(player);
 			float weaponDamage = 0;
-			Weapon weapon = ((BulkanPlayer) caster).getEquipment().getMainHand();
+			Weapon weapon = player.getEquipment().getMainHand();
 			
 			if( weapon != null)
 				weaponDamage += weapon.getMinDamage() + 
@@ -84,7 +99,7 @@ public class OverHeadBlow extends WeaponAttack implements Castable{
 			
 			float damage = (baseDamage +  weaponDamage) * skillDamage;
 			
-			for(Skill skill: ((Player)caster).getSkills().keySet()){
+			for(Skill skill: player.getSkills().keySet()){
 				if (Modifier.class.isInstance(skill)){
 					Modifier modifier = (Modifier)skill; 
 					if(modifier.getAffectedSkills().contains(this)){
@@ -106,14 +121,16 @@ public class OverHeadBlow extends WeaponAttack implements Castable{
 				}
 			}
 			
-				
-			synchronized(target){	
-				int newHp = target[0].getHp() - (int) (damage);				
-				if (newHp <= 0) {
-					((Mob)target[0]).kill((BulkanPlayer)caster);
-				} else {
-					target[0].setHp(newHp);
-				}			
+	
+			synchronized(victims){
+				for(LivingObject victim : victims){
+					int newHp = victim.getHp() - (int) (damage);				
+					if (newHp <= 0) {
+						((Mob)victim).kill(player);
+					} else {
+						victim.setHp(newHp);
+					}			
+				}
 				return true;
 			}
 		}		
