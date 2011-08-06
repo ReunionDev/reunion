@@ -83,12 +83,12 @@ public abstract class Protocol {
 	
 	//Optional	
 	public List<String> decryptClient(byte [] data) {
-		throw new NotImplementedException();
+		throw new UnsupportedOperationException();
 	}
 	
 	//Optional
 	public byte[] encryptClient(String data) {
-		throw new NotImplementedException();
+		throw new UnsupportedOperationException();
 	}
 	
 	

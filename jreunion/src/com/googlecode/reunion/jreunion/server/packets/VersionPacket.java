@@ -1,6 +1,6 @@
 package com.googlecode.reunion.jreunion.server.packets;
 
-public class VersionPacket extends Packet {
+public class VersionPacket extends SessionPacket implements ForLoginServer{
 	/**
 	 * 
 	 */

@@ -1,11 +1,7 @@
 package com.googlecode.reunion.jreunion.server;
 
-import java.io.IOException;
-import java.net.Socket;
 import java.nio.channels.SocketChannel;
-
 import org.apache.log4j.Logger;
-
 import com.googlecode.reunion.jreunion.events.Event;
 import com.googlecode.reunion.jreunion.events.EventDispatcher;
 import com.googlecode.reunion.jreunion.events.EventListener;
@@ -13,14 +9,12 @@ import com.googlecode.reunion.jreunion.events.client.ClientDisconnectEvent;
 import com.googlecode.reunion.jreunion.events.client.ClientEvent;
 import com.googlecode.reunion.jreunion.events.client.ClientReceiveEvent;
 import com.googlecode.reunion.jreunion.events.client.ClientSendEvent;
-import com.googlecode.reunion.jreunion.events.network.NetworkAcceptEvent;
 import com.googlecode.reunion.jreunion.events.network.NetworkDataEvent;
 import com.googlecode.reunion.jreunion.events.network.NetworkDisconnectEvent;
 import com.googlecode.reunion.jreunion.events.network.NetworkEvent;
 import com.googlecode.reunion.jreunion.events.network.NetworkSendEvent;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.protocol.Protocol;
-import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 
 /**
  * @author Aidamina

@@ -16,8 +16,6 @@ public class LoginServer extends NetworkThread<LoginConnection> {
 		super(new InetSocketAddress(port));
 	}
 	
-	
-	private int sessionIter = 0;
 	@Override
 	public void onAccept(LoginConnection connection) {
 		
@@ -37,5 +35,11 @@ public class LoginServer extends NetworkThread<LoginConnection> {
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	@Override
+	public void onConnect(LoginConnection connection) {
+		
+		
 	}
 }

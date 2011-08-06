@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-public class FailPacket extends Packet implements ClientSerializator {
+public class FailPacket extends SessionPacket implements ClientSerializator {
 
 	/**
 	 * 

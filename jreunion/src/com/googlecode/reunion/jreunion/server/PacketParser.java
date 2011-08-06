@@ -260,17 +260,13 @@ public class PacketParser extends EventDispatcher implements EventListener{
 						else{
 							if(map!= savedMap) {
 								savedPosition = null;
-								
-								
 							}
 						}
 							
 					}
 
 					player.getPosition().setMap((LocalMap)map);
-										
 					world.getPlayerManager().addPlayer(player);
-					
 					
 					DatabaseUtils.getInstance().loadStash(client);
 					DatabaseUtils.getInstance().loadQuickSlot(player);
@@ -284,9 +280,6 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					System.out.println(savedPosition);
 					map.fireEvent(PlayerLoginEvent.class, player, savedPosition);
 					
-					
-					
-						
 					/*
 					 * server.getNetworkModule().SendPacket(client.networkId,
 					 * "hour 3\n" + "weather 0\n" + "gwar_prize  0\n" +

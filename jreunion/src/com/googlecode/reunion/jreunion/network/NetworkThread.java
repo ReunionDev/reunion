@@ -3,19 +3,17 @@ package com.googlecode.reunion.jreunion.network;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
-import java.net.Socket;
 import java.nio.channels.ClosedSelectorException;
-import java.nio.channels.SelectableChannel;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
-import java.util.Iterator;
 import java.util.Set;
 
-public abstract class NetworkThread<T extends Connection> extends Thread {
+public abstract class NetworkThread<T extends Connection<?>> extends Thread {
 
 	private Selector selector;
+	
 	public NetworkThread(InetSocketAddress address) throws IOException {
 		this.selector = Selector.open();
 		ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
@@ -29,9 +27,13 @@ public abstract class NetworkThread<T extends Connection> extends Thread {
 		return selector;
 	}
 	
-	public abstract void onAccept(T connection);
+	public void onAccept(T connection){
+		throw new UnsupportedOperationException();
+	}
 		
-	public abstract void onDisconnect(T connection);
+	public void onDisconnect(T connection){
+		throw new UnsupportedOperationException();
+	}
 	
 	public abstract T createConnection(SocketChannel socketChannel);
 	
@@ -43,6 +45,19 @@ public abstract class NetworkThread<T extends Connection> extends Thread {
 			e.printStackTrace();
 			super.interrupt();
 		}
+	}
+	
+	public void connect(InetSocketAddress address ) throws IOException{
+		SocketChannel socketChannel = SocketChannel.open();
+		socketChannel.configureBlocking(false);
+		Selector selector = this.selector;
+		SelectionKey key = socketChannel.register(selector, SelectionKey.OP_CONNECT);
+		socketChannel.connect(address);
+		key.attach(socketChannel);
+	}
+	
+	public void onConnect(T connection){
+				
 	}
 	
 	@Override
@@ -62,17 +77,25 @@ public abstract class NetworkThread<T extends Connection> extends Thread {
 					if(!key.isValid()){
 						continue;		
 					}
-					boolean readable = key.isReadable(), writable = key.isWritable(), acceptable = key.isAcceptable();
+					boolean connectable = key.isConnectable(), readable = key.isReadable(), writable = key.isWritable(), acceptable = key.isAcceptable();
 					
 					if (acceptable) {
 						SocketChannel socketChannel = ((ServerSocketChannel)key.channel()).accept();
 						T connection = createConnection(socketChannel);						
 						onAccept(connection);
-					}					
+					}
+					if (connectable){
+						SocketChannel socketChannel = (SocketChannel)key.channel();
+						if(socketChannel.finishConnect()){
+							T connection = createConnection(socketChannel);
+							onConnect(connection);							
+						}else{
+							System.out.println("connection "+socketChannel.socket()+" failed");							
+						}
+					}
 					if(readable||writable){
-						Connection connection = (Connection) key.attachment();
+						T connection = (T) key.attachment();
 						if (writable) {
-							System.out.println("output");
 							connection.handleOutput();
 						}
 						if (readable) {

@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
-public class StubPacket extends Packet implements ClientSerializator {
+public class StubPacket extends SessionPacket implements ClientSerializator {
 
 	/**
 	 * 

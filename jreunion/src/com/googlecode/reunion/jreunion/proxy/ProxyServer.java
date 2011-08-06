@@ -14,12 +14,16 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
 import org.apache.log4j.spi.LoggingEvent;
 import com.googlecode.reunion.jreunion.network.NetworkThread;
+import com.googlecode.reunion.jreunion.proxy.ProxyConnection.ConnectionState;
+import com.googlecode.reunion.jreunion.server.packets.FailPacket;
 import com.googlecode.reunion.jreunion.server.packets.Packet;
 
 public class ProxyServer extends NetworkThread<ProxyConnection> {
 	
 	InetSocketAddress internal;
 	InetSocketAddress external;
+	
+	private int sessionIter = 0;
 	
 	private Map<Integer, ProxyConnection> sessions = new HashMap<Integer, ProxyConnection>();
 	
@@ -29,39 +33,19 @@ public class ProxyServer extends NetworkThread<ProxyConnection> {
 		this.external = external;
 	}
 	
-	/**
-	 * @param args
-	 * @throws IOException 
-	 * @throws  
-	 */
-	public static void main(String[] args) throws Exception {
-		
-		Logger logger = Logger.getRootLogger();
-		logger.addAppender(new ConsoleAppender(new PatternLayout("%-5p [%t]: %m\r\n"){
-			
-			@Override
-			public String format(LoggingEvent event) {
-
-				String result = super.format(event);
-				if(result.endsWith("\n\r\n")){
-					
-					result = result.substring(0, result.length()-2);
-				}
-				return result;
-			}
-			
-		},ConsoleAppender.SYSTEM_OUT));
-		
-		InetSocketAddress internal = new InetSocketAddress(4005);
-		InetSocketAddress external = new InetSocketAddress(InetAddress.getByName("192.168.1.199"), 4005);
-		ProxyServer proxy = new ProxyServer(internal, external);
-		proxy.start();
-			
+	
+	
+	@Override
+	public void onConnect(ProxyConnection connection) {
+		System.out.println(connection.getSocketChannel().socket()+" connected.");
 	}
 	
 	public void onPacketReceived(ProxyConnection connection, Packet packet){
-		
-		
+		if(connection.getState()==ConnectionState.GAME_SERVER){
+			
+		} else {
+			connection.write(new FailPacket("Login Server offline."));
+		}
 	}
 	
 	@Override
@@ -74,11 +58,9 @@ public class ProxyServer extends NetworkThread<ProxyConnection> {
 		}
 	}
 
-	private int sessionIter = 0;
 	@Override
 	public void onAccept(ProxyConnection connection) {
 		System.out.println(connection.getSocketChannel().socket()+" accepted");
-		
 		synchronized(sessions){
 			while(sessions.keySet().contains(sessionIter)){
 				if(sessionIter<Integer.MAX_VALUE){
@@ -88,6 +70,7 @@ public class ProxyServer extends NetworkThread<ProxyConnection> {
 				}
 			}
 			sessions.put(sessionIter, connection);
+			connection.setSessionId(sessionIter);
 		}
 	}
 
@@ -104,5 +87,32 @@ public class ProxyServer extends NetworkThread<ProxyConnection> {
 				}
 			}
 		}
+	}
+	
+	/**
+	 * @param args
+	 * @throws IOException 
+	 * @throws  
+	 */
+	public static void main(String[] args) throws Exception {
+		
+		Logger logger = Logger.getRootLogger();
+		logger.addAppender(new ConsoleAppender(new PatternLayout("%-5p [%t]: %m\r\n"){
+			@Override
+			public String format(LoggingEvent event) {
+				String result = super.format(event);
+				if(result.endsWith("\n\r\n")){
+					result = result.substring(0, result.length()-2);
+				}
+				return result;
+			}
+		},ConsoleAppender.SYSTEM_OUT));
+		
+		InetSocketAddress internal = new InetSocketAddress(4005);
+		InetSocketAddress external = new InetSocketAddress(InetAddress.getByName("192.168.1.199"), 4005);
+		ProxyServer proxy = new ProxyServer(internal, external);
+		proxy.start();
+		proxy.connect(new InetSocketAddress(4004));
+			
 	}
 }

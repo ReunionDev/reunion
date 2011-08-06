@@ -1,11 +1,14 @@
 package com.googlecode.reunion.jreunion.network;
 
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.ClosedChannelException;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
+
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 public abstract class Connection<T extends Connection<?>> {	
 	
 	
@@ -37,7 +40,7 @@ public abstract class Connection<T extends Connection<?>> {
 			handleDisconnect();
 		}
 	}
-	
+
 	public NetworkThread<?> getNetworkThread() {
 		return networkThread;
 	}
@@ -64,7 +67,6 @@ public abstract class Connection<T extends Connection<?>> {
 		key.cancel();
 		networkThread.onDisconnect((T)this);
 	}
-
 	
 	public byte [] getData(){
 		synchronized(inputBuffer){
@@ -76,7 +78,9 @@ public abstract class Connection<T extends Connection<?>> {
 		}
 	}
 	
-	public abstract void onData(ByteBuffer inputBuffer);
+	public void onData(ByteBuffer inputBuffer){
+		throw new UnsupportedOperationException();
+	}
 	
 	void handleInput() {
 		try {
@@ -92,7 +96,7 @@ public abstract class Connection<T extends Connection<?>> {
 				}
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			handleDisconnect();
 		}
 	}

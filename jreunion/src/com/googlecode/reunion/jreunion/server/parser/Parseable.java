@@ -3,9 +3,11 @@ package com.googlecode.reunion.jreunion.server.parser;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public interface Parseable {
+import com.googlecode.reunion.jreunion.server.packets.Packet;
+
+public interface Parseable<T extends Packet> {
 	
 	public Pattern [] getPatterns();
 	
-	public Parseable create(Matcher matcher);
+	public T parse(Matcher matcher);
 }

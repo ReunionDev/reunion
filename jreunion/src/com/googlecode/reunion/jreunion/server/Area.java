@@ -1,18 +1,11 @@
 package com.googlecode.reunion.jreunion.server;
 
 import java.awt.image.BufferedImage;
-import java.io.DataInputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.RandomAccessFile;
-import java.util.BitSet;
 import java.util.Iterator;
 
 import javax.imageio.ImageIO;
-import javax.imageio.ImageReadParam;
 import javax.imageio.ImageReader;
-import javax.imageio.metadata.IIOMetadata;
 import javax.imageio.stream.ImageInputStream;
 
 import org.apache.log4j.Logger;

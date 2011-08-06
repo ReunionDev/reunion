@@ -468,7 +468,7 @@ public class PacketFactory {
 			break;
 			
 		default:			
-			throw new NotImplementedException();
+			throw new UnsupportedOperationException();
 		}
 		throw new RuntimeException("Invalid parameters for "+packetType+" message");
 	}

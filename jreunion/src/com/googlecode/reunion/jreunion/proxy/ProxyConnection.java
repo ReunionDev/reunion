@@ -7,12 +7,15 @@ import java.util.List;
 import com.googlecode.reunion.jreunion.network.Connection;
 import com.googlecode.reunion.jreunion.network.protocol.DefaultProtocol;
 import com.googlecode.reunion.jreunion.network.protocol.Protocol;
+import com.googlecode.reunion.jreunion.proxy.parser.Parser;
 import com.googlecode.reunion.jreunion.server.packets.ClientSerializator;
-import com.googlecode.reunion.jreunion.server.packets.FailPacket;
+import com.googlecode.reunion.jreunion.server.packets.ForGameServer;
+import com.googlecode.reunion.jreunion.server.packets.ForLoginServer;
 import com.googlecode.reunion.jreunion.server.packets.LoginPacket;
 import com.googlecode.reunion.jreunion.server.packets.Packet;
 import com.googlecode.reunion.jreunion.server.packets.PassPacket;
 import com.googlecode.reunion.jreunion.server.packets.PlayPacket;
+import com.googlecode.reunion.jreunion.server.packets.SessionPacket;
 import com.googlecode.reunion.jreunion.server.packets.StubPacket;
 import com.googlecode.reunion.jreunion.server.packets.UserPacket;
 import com.googlecode.reunion.jreunion.server.packets.VersionPacket;
@@ -23,6 +26,16 @@ public class ProxyConnection extends Connection<ProxyConnection> {
 	
 	Protocol protocol;
 	
+	Parser parser;
+	
+	public Parser getParser() {
+		return parser;
+	}
+
+	public void setParser(Parser parser) {
+		this.parser = parser;
+	}
+
 	public ConnectionState getState() {
 		return state;
 	}
@@ -40,18 +53,32 @@ public class ProxyConnection extends Connection<ProxyConnection> {
 		GAME_SERVER,
 	}
 	
+	private int sessionId;
+	
+	void setSessionId(int sessionId) {
+		this.sessionId = sessionId;
+	}
+
 	public void write(ClientSerializator packet){
 		List<String> packets = packet.readClientPacket();
 		byte [] data = protocol.encryptServer(packets);
 		this.write(data);
 	}
 	
-	public ProxyConnection(ProxyServer proxy,
+	public ProxyConnection( ProxyServer proxy,
 			SocketChannel socketChannel) throws IOException {
 		super(proxy, socketChannel);
 		setState(ConnectionState.ACCEPTED);
 	}
 	
+	public Protocol getProtocol() {
+		return protocol;
+	}
+
+	public int getSessionId() {
+		return sessionId;
+	}
+
 	public ProxyServer getProxy(){
 		return (ProxyServer) getNetworkThread();		
 	}
@@ -65,8 +92,8 @@ public class ProxyConnection extends Connection<ProxyConnection> {
 		
 		List<String> packets = protocol.decryptServer(data);
 		for(String packetData: packets){
-			Packet packet = null;
-			switch (state){
+			SessionPacket packet = null;
+			switch (state) {
 				case ACCEPTED:
 					short version = Short.parseShort(packetData);
 					packet = new VersionPacket(version);
@@ -90,17 +117,34 @@ public class ProxyConnection extends Connection<ProxyConnection> {
 				case EXPECTING_PASSWORD:
 					packet = new PassPacket(packetData);
 					break;
-					
-				case LOGIN_SERVER:
-					
-					break;
-					
-				case GAME_SERVER:
-					
+				default:
+					if(parser!=null){
+						List<Packet> ps = parser.parse(packetData);
+						for(Packet p: ps){
+							if(p instanceof SessionPacket){
+								SessionPacket sessionPacket = (SessionPacket)p;
+								sessionPacket.setSessionId(sessionId);
+							}
+							if(p instanceof ForLoginServer){
+								
+							}else if(p instanceof ForGameServer){
+								
+								
+							}else{
+								
+								throw new RuntimeException("No handler");
+								
+							}
+						}
+					}else{
+						throw new RuntimeException("No parser set");
+					}
 					break;
 				
 			}
-			ProxyServer server = getProxy();			
+			ProxyServer server = getProxy();
+			if(packet!=null)
+				packet.setSessionId(sessionId);
 			server.onPacketReceived(this, packet);
 				
 		}
