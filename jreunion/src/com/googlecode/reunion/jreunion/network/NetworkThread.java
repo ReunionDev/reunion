@@ -14,13 +14,20 @@ public abstract class NetworkThread<T extends Connection<?>> extends Thread {
 
 	private Selector selector;
 	
-	public NetworkThread(InetSocketAddress address) throws IOException {
+	public NetworkThread() throws IOException {
 		this.selector = Selector.open();
+	}
+	
+	public SelectionKey bind(InetSocketAddress address) throws IOException{
 		ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
 		serverSocketChannel.configureBlocking(false);
 		ServerSocket serverSocket = serverSocketChannel.socket();
 		serverSocket.bind(address);
-		serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
+		synchronized(selector){
+			selector.wakeup();
+			SelectionKey key = serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
+			return key;
+		}
 	}
 
 	Selector getSelector() {
@@ -47,24 +54,30 @@ public abstract class NetworkThread<T extends Connection<?>> extends Thread {
 		}
 	}
 	
-	public void connect(InetSocketAddress address ) throws IOException{
+	public T connect(InetSocketAddress address ) throws IOException{
 		SocketChannel socketChannel = SocketChannel.open();
 		socketChannel.configureBlocking(false);
-		Selector selector = this.selector;
-		SelectionKey key = socketChannel.register(selector, SelectionKey.OP_CONNECT);
-		socketChannel.connect(address);
-		key.attach(socketChannel);
+		T connection = createConnection(socketChannel);
+		synchronized(selector){
+			selector.wakeup();
+			SelectionKey key = socketChannel.register(selector, SelectionKey.OP_CONNECT);
+			socketChannel.connect(address);
+			key.attach(connection); 
+		}
+		return connection;
 	}
 	
 	public void onConnect(T connection){
-				
+		throw new UnsupportedOperationException();
 	}
 	
 	@Override
 	public void run() {
 		while(true) {
 			try {	
+				System.out.println("1");
 				int num = selector.select();
+				System.out.println(num);
 				if(num == 0){
 					// we need synchronize here otherwise we might block again before we were able to change the selector
 					synchronized(selector){
@@ -73,25 +86,28 @@ public abstract class NetworkThread<T extends Connection<?>> extends Thread {
 				}
 				Set<SelectionKey> keys = selector.selectedKeys();
 				for(SelectionKey key: keys){
-					
+					System.out.println(keys.size());
 					if(!key.isValid()){
 						continue;		
 					}
 					boolean connectable = key.isConnectable(), readable = key.isReadable(), writable = key.isWritable(), acceptable = key.isAcceptable();
-					
 					if (acceptable) {
 						SocketChannel socketChannel = ((ServerSocketChannel)key.channel()).accept();
-						T connection = createConnection(socketChannel);						
+						T connection = createConnection(socketChannel);
+						connection.open();
 						onAccept(connection);
 					}
 					if (connectable){
+						
 						SocketChannel socketChannel = (SocketChannel)key.channel();
-						if(socketChannel.finishConnect()){
-							T connection = createConnection(socketChannel);
-							onConnect(connection);							
-						}else{
-							System.out.println("connection "+socketChannel.socket()+" failed");							
+						try {
+							socketChannel.finishConnect();
+						} catch(IOException e) {
+							e.printStackTrace();
 						}
+						T connection = (T) key.attachment();
+						connection.open();
+						onConnect(connection);
 					}
 					if(readable||writable){
 						T connection = (T) key.attachment();

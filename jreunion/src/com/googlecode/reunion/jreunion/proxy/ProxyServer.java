@@ -13,6 +13,7 @@ import org.apache.log4j.ConsoleAppender;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
 import org.apache.log4j.spi.LoggingEvent;
+
 import com.googlecode.reunion.jreunion.network.NetworkThread;
 import com.googlecode.reunion.jreunion.proxy.ProxyConnection.ConnectionState;
 import com.googlecode.reunion.jreunion.server.packets.FailPacket;
@@ -28,16 +29,19 @@ public class ProxyServer extends NetworkThread<ProxyConnection> {
 	private Map<Integer, ProxyConnection> sessions = new HashMap<Integer, ProxyConnection>();
 	
 	public ProxyServer(InetSocketAddress internal, InetSocketAddress external) throws IOException {
-		super(internal);
 		this.internal = internal;
 		this.external = external;
+		bind(internal);
 	}
-	
-	
-	
+		
 	@Override
 	public void onConnect(ProxyConnection connection) {
-		System.out.println(connection.getSocketChannel().socket()+" connected.");
+		boolean success = connection.getSocketChannel().isConnected();
+		
+		System.out.println(connection.getSocketChannel()+" "+(success?"connected":"connection failed"));
+		if(success){
+			connection.close();
+		}
 	}
 	
 	public void onPacketReceived(ProxyConnection connection, Packet packet){
@@ -76,7 +80,7 @@ public class ProxyServer extends NetworkThread<ProxyConnection> {
 
 	@Override
 	public void onDisconnect(ProxyConnection connection) {
-		System.out.println(connection.getSocketChannel().socket()+" disconnected");
+		System.out.println(connection.getSocketChannel().socket()+" closed");
 		synchronized(sessions){
 			Iterator<Entry<Integer, ProxyConnection>> iterator = sessions.entrySet().iterator();
 			while(iterator.hasNext()){
@@ -107,12 +111,12 @@ public class ProxyServer extends NetworkThread<ProxyConnection> {
 				return result;
 			}
 		},ConsoleAppender.SYSTEM_OUT));
-		
+		System.out.println("launching");
 		InetSocketAddress internal = new InetSocketAddress(4005);
 		InetSocketAddress external = new InetSocketAddress(InetAddress.getByName("192.168.1.199"), 4005);
 		ProxyServer proxy = new ProxyServer(internal, external);
 		proxy.start();
-		proxy.connect(new InetSocketAddress(4004));
+		proxy.connect(new InetSocketAddress(4005));
 			
 	}
 }

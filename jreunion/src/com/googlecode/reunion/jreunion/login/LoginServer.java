@@ -13,7 +13,7 @@ public class LoginServer extends NetworkThread<LoginConnection> {
 	
 
 	public LoginServer(int port) throws IOException {
-		super(new InetSocketAddress(port));
+		bind(new InetSocketAddress(port));
 	}
 	
 	@Override
@@ -37,9 +37,4 @@ public class LoginServer extends NetworkThread<LoginConnection> {
 		}
 	}
 
-	@Override
-	public void onConnect(LoginConnection connection) {
-		
-		
-	}
 }

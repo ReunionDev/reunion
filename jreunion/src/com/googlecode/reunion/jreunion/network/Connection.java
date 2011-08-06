@@ -1,38 +1,44 @@
 package com.googlecode.reunion.jreunion.network;
 
 import java.io.IOException;
-import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.ClosedChannelException;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 public abstract class Connection<T extends Connection<?>> {	
-	
 	
 	private ByteBuffer inputBuffer;
 	private ByteBuffer outputBuffer;	
-	private SocketChannel socketChannel;	
+	private SocketChannel socketChannel;
+	
 	public SocketChannel getSocketChannel() {
 		return socketChannel;
 	}
 
 	private NetworkThread<T> networkThread;	
 
-	public Connection(NetworkThread<T> networkThread, SocketChannel socketChannel) throws IOException {
-		inputBuffer = ByteBuffer.allocate(1024);
-		outputBuffer = ByteBuffer.allocate(1024);
-		this.networkThread = networkThread;
+	public Connection(NetworkThread<T> networkThread, SocketChannel socketChannel) {
 		this.socketChannel = socketChannel;
-		Selector selector = networkThread.getSelector();
-		socketChannel.configureBlocking(false);
-		SelectionKey key = socketChannel.register(selector, SelectionKey.OP_READ);
-		key.attach(this);
+		this.networkThread = networkThread;
 	}
 	
-	public void disconnect(){
+	public void open() throws IOException{
+		
+		System.out.println("open");
+		inputBuffer = ByteBuffer.allocate(1024);
+		outputBuffer = ByteBuffer.allocate(1024);
+		Selector selector = networkThread.getSelector();
+		socketChannel.configureBlocking(false);
+		synchronized(selector){
+			selector.wakeup();
+			SelectionKey key = socketChannel.register(selector, SelectionKey.OP_READ);
+			key.attach(this);
+		}
+	}
+	
+	public void close(){
 		try {
 			socketChannel.close();
 		} catch (IOException e) {

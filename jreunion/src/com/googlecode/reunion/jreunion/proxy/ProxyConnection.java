@@ -119,21 +119,18 @@ public class ProxyConnection extends Connection<ProxyConnection> {
 					break;
 				default:
 					if(parser!=null){
-						List<Packet> ps = parser.parse(packetData);
-						for(Packet p: ps){
-							if(p instanceof SessionPacket){
-								SessionPacket sessionPacket = (SessionPacket)p;
+						List<Packet> parsedPackets = parser.parse(packetData);
+						for(Packet parsedPacket: parsedPackets){
+							if(parsedPacket instanceof SessionPacket){
+								SessionPacket sessionPacket = (SessionPacket)parsedPacket;
 								sessionPacket.setSessionId(sessionId);
 							}
-							if(p instanceof ForLoginServer){
+							if(parsedPacket instanceof ForLoginServer){
 								
-							}else if(p instanceof ForGameServer){
-								
+							}else if(parsedPacket instanceof ForGameServer){
 								
 							}else{
-								
 								throw new RuntimeException("No handler");
-								
 							}
 						}
 					}else{
