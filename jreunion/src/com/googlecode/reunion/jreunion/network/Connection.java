@@ -26,16 +26,16 @@ public abstract class Connection<T extends Connection<?>> {
 	
 	public void open() throws IOException{
 		
-		System.out.println("open");
 		inputBuffer = ByteBuffer.allocate(1024);
 		outputBuffer = ByteBuffer.allocate(1024);
 		Selector selector = networkThread.getSelector();
 		socketChannel.configureBlocking(false);
-		synchronized(selector){
+		synchronized(this.networkThread){
 			selector.wakeup();
-			SelectionKey key = socketChannel.register(selector, SelectionKey.OP_READ);
+			SelectionKey key = socketChannel.register(selector, SelectionKey.OP_READ);		
 			key.attach(this);
 		}
+	
 	}
 	
 	public void close(){
@@ -56,7 +56,7 @@ public abstract class Connection<T extends Connection<?>> {
 		try {
 			synchronized(outputBuffer){
 				outputBuffer.put(data);
-				synchronized(selector){
+				synchronized(this.networkThread){
 					selector.wakeup();
 					SelectionKey key = socketChannel.register(selector, SelectionKey.OP_READ | SelectionKey.OP_WRITE);
 					key.attach(this);
@@ -114,8 +114,11 @@ public abstract class Connection<T extends Connection<?>> {
 				outputBuffer.flip();
 				socketChannel.write(outputBuffer);
 				outputBuffer.clear();
-				SelectionKey key = socketChannel.register(selector, SelectionKey.OP_READ);
-				key.attach(this);
+				synchronized(this.networkThread){
+					selector.wakeup();
+					SelectionKey key = socketChannel.register(selector, SelectionKey.OP_READ);
+					key.attach(this);
+				}
 			}			
 		} catch (Exception e) {			
 			e.printStackTrace();

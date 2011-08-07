@@ -23,9 +23,9 @@ public abstract class NetworkThread<T extends Connection<?>> extends Thread {
 		serverSocketChannel.configureBlocking(false);
 		ServerSocket serverSocket = serverSocketChannel.socket();
 		serverSocket.bind(address);
-		synchronized(selector){
+		synchronized(this){
 			selector.wakeup();
-			SelectionKey key = serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
+			SelectionKey key = serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);		
 			return key;
 		}
 	}
@@ -58,12 +58,12 @@ public abstract class NetworkThread<T extends Connection<?>> extends Thread {
 		SocketChannel socketChannel = SocketChannel.open();
 		socketChannel.configureBlocking(false);
 		T connection = createConnection(socketChannel);
-		synchronized(selector){
+		synchronized(this){
 			selector.wakeup();
 			SelectionKey key = socketChannel.register(selector, SelectionKey.OP_CONNECT);
-			socketChannel.connect(address);
-			key.attach(connection); 
+			key.attach(connection);
 		}
+		socketChannel.connect(address);
 		return connection;
 	}
 	
@@ -75,18 +75,16 @@ public abstract class NetworkThread<T extends Connection<?>> extends Thread {
 	public void run() {
 		while(true) {
 			try {	
-				System.out.println("1");
+				
 				int num = selector.select();
-				System.out.println(num);
 				if(num == 0){
 					// we need synchronize here otherwise we might block again before we were able to change the selector
-					synchronized(selector){
+					synchronized(this){
 						continue;
 					}
 				}
 				Set<SelectionKey> keys = selector.selectedKeys();
 				for(SelectionKey key: keys){
-					System.out.println(keys.size());
 					if(!key.isValid()){
 						continue;		
 					}
@@ -97,20 +95,18 @@ public abstract class NetworkThread<T extends Connection<?>> extends Thread {
 						connection.open();
 						onAccept(connection);
 					}
-					if (connectable){
-						
-						SocketChannel socketChannel = (SocketChannel)key.channel();
-						try {
-							socketChannel.finishConnect();
-						} catch(IOException e) {
-							e.printStackTrace();
+					if(readable||writable||connectable){
+						T connection = (T) key.attachment();
+						if(connectable){
+							SocketChannel socketChannel = (SocketChannel)key.channel();
+							try {
+								socketChannel.finishConnect();
+							} catch(IOException e) {
+								e.printStackTrace();
+							}
+							connection.open();
+							onConnect(connection);
 						}
-						T connection = (T) key.attachment();
-						connection.open();
-						onConnect(connection);
-					}
-					if(readable||writable){
-						T connection = (T) key.attachment();
 						if (writable) {
 							connection.handleOutput();
 						}
@@ -119,8 +115,7 @@ public abstract class NetworkThread<T extends Connection<?>> extends Thread {
 						}
 					}
 				}
-				keys.clear();
-				
+				keys.clear();				
 			} catch (Exception e) {
 				e.printStackTrace();
 				if(e instanceof ClosedSelectorException||e instanceof InterruptedException){

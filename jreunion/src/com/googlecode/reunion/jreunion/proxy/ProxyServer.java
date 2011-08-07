@@ -14,6 +14,7 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
 import org.apache.log4j.spi.LoggingEvent;
 
+import com.googlecode.reunion.jreunion.network.Connection;
 import com.googlecode.reunion.jreunion.network.NetworkThread;
 import com.googlecode.reunion.jreunion.proxy.ProxyConnection.ConnectionState;
 import com.googlecode.reunion.jreunion.server.packets.FailPacket;
@@ -111,12 +112,13 @@ public class ProxyServer extends NetworkThread<ProxyConnection> {
 				return result;
 			}
 		},ConsoleAppender.SYSTEM_OUT));
-		System.out.println("launching");
 		InetSocketAddress internal = new InetSocketAddress(4005);
 		InetSocketAddress external = new InetSocketAddress(InetAddress.getByName("192.168.1.199"), 4005);
 		ProxyServer proxy = new ProxyServer(internal, external);
 		proxy.start();
-		proxy.connect(new InetSocketAddress(4005));
+		Connection connection = proxy.connect(new InetSocketAddress(4005));
+		
+		System.out.println(connection.getSocketChannel());
 			
 	}
 }

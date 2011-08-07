@@ -71,8 +71,8 @@ public class Network extends Service implements Runnable, EventListener{
 			
 			while (true) {
 				try {
-				// See if we've had any activity -- either an incoming connection,
-				// or incoming data on an existing connection
+					// See if we've had any activity -- either an incoming connection,
+					// or incoming data on an existing connection
 					int num = selector.select();
 					if(num == 0){
 						// we need synchronize here otherwise we might block again before we were able to change the selector
@@ -136,7 +136,7 @@ public class Network extends Service implements Runnable, EventListener{
 				keys.clear();
 				
 			} catch (Exception e) {
-				if(e instanceof ClosedSelectorException)
+				if(e instanceof ClosedSelectorException||e instanceof InterruptedException)
 					return;
 				Logger.getLogger(Network.class).error("Error in network",e);
 			}
@@ -151,7 +151,9 @@ public class Network extends Service implements Runnable, EventListener{
 		fireEvent(NetworkAcceptEvent.class, socketChannel);
 		
 		// Register it with the selector, for reading
+		selector.wakeup();
 		socketChannel.register(selector, SelectionKey.OP_READ);
+		
 
 	}
 
@@ -226,13 +228,13 @@ public class Network extends Service implements Runnable, EventListener{
 	
 	public void notifySend(SocketChannel socketChannel) {
 		try {
-			synchronized(this){ // we synchronize this to make sure we register the key before the selector gets back to sleep again.
-				if(socketChannel.isOpen()&&selector.isOpen()){
-					selector.wakeup();
-					
-					socketChannel.register(selector, SelectionKey.OP_READ | SelectionKey.OP_WRITE);
-				}
+			 // we synchronize this to make sure we register the key before the selector gets back to sleep again.
+			if(socketChannel.isOpen()&&selector.isOpen()){
+				selector.wakeup();
+				socketChannel.register(selector, SelectionKey.OP_READ | SelectionKey.OP_WRITE);
+				
 			}
+		
 		} catch (ClosedChannelException e) {
 			//Disconnect detected
 		}catch(CancelledKeyException e){
@@ -257,7 +259,7 @@ public class Network extends Service implements Runnable, EventListener{
 			ServerSocket serverSocket = serverChannel.socket();
 			serverSocket.bind(address);
 			serverChannel.configureBlocking(false);
-			synchronized(this){	
+			synchronized(this){
 				selector.wakeup();
 				serverChannel.register(selector, SelectionKey.OP_ACCEPT);
 			}
@@ -275,7 +277,6 @@ public class Network extends Service implements Runnable, EventListener{
 	public void stop() {
 		try {
 			Logger.getLogger(Network.class).info("net stop");
-		
 			selector.close();
 			thread.interrupt();
 		} catch (IOException e) {
