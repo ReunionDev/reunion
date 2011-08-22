@@ -51,8 +51,8 @@ public class GemCutting extends Skill implements Castable{
 	}
 	
 	//Cuts brut stones existing in the player exchange window.
-	//when casted, this skill don't consume any of the player status.
-	//TODO: Consume the "Gem Cutting Kit" item, and exchange brute stone with usable stone.
+	//when casted, this skill only consume the item "Gem Cutting Kit".
+	//TODO: Consume the "Gem Cutting Kit" item, and exchange brute stone with perfect stone.
 	@Override
 	public boolean cast(LivingObject caster, List<LivingObject> victims) {
 		if(caster instanceof HumanPlayer){

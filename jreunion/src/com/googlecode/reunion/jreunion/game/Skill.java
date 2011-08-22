@@ -74,6 +74,7 @@ public abstract class Skill {
 	
 	public void effect(LivingObject source, LivingObject target){
 		if(target == source){ //self usable skill
+			//TODO: figure out why this is not working
 			//source.getInterested().sendPacket(Type.SKILL, source, this);
 			((Player)source).getClient().sendPacket(Type.SKILL, source, this);
 		}

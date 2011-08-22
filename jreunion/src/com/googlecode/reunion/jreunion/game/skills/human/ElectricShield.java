@@ -166,10 +166,6 @@ public class ElectricShield extends Skill implements Castable, Effectable {
 				player.getClient().sendPacket(Type.SAY, "ElectricShield skill acumulated time, already at maximum.");
 				return false;
 			}
-			if(newElectric < 0){
-				player.getClient().sendPacket(Type.SAY, "There isn't enough Electricity to cast the ElectricShield skill.");
-				return false;
-			}
 			
 			if(getEffectModifier() == 0)
 				player.getClient().sendPacket(Type.SAY, "ElectricShield skill activated.");

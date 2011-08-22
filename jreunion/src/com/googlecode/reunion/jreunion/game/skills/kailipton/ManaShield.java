@@ -168,11 +168,6 @@ public class ManaShield extends Skill implements Castable, Effectable {
 				return false;
 			}
 			
-			if(newMana < 0){
-				player.getClient().sendPacket(Type.SAY, "There isn't enough Mana to cast the ManaShield skill.");
-				return false;
-			}
-			
 			if(getEffectModifier() == 0)
 				player.getClient().sendPacket(Type.SAY, "ManaShield skill activated.");
 			

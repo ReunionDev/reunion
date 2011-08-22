@@ -56,6 +56,8 @@ public abstract class WeaponMastery extends Skill implements Modifier {
 		
 		if(owner instanceof Player){
 			Player player = (Player)owner;
+			if(player.getSkillLevel(this)==0)
+				return false;
 			Weapon weapon= player.getEquipment().getMainHand();
 			return weapon!=null && getWeaponType().isInstance(weapon);			
 		}		

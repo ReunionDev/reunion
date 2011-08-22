@@ -61,8 +61,13 @@ public abstract class Mastery extends GroupedSkill implements Modifier{
 	public abstract ValueType getValueType();
 	
 	public boolean getCondition(LivingObject owner){
-		// not needed is the class
-		return true;
+		if(owner instanceof Player){
+			Player player = (Player)owner;
+			if(player.getSkillLevel(this)==0)
+				return false;
+			return true;
+		}
+		return false;
 	}
 
 	@Override

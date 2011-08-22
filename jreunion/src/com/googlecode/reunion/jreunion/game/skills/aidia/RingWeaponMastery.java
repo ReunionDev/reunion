@@ -1,4 +1,4 @@
-package com.googlecode.reunion.jreunion.game.skills.human;
+package com.googlecode.reunion.jreunion.game.skills.aidia;
 
 import java.util.List;
 import java.util.Vector;
@@ -6,40 +6,40 @@ import java.util.Vector;
 import com.googlecode.reunion.jreunion.game.LivingObject;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Skill;
-import com.googlecode.reunion.jreunion.game.items.equipment.GunWeapon;
+import com.googlecode.reunion.jreunion.game.items.equipment.RingWeapon;
 import com.googlecode.reunion.jreunion.game.items.equipment.Weapon;
 import com.googlecode.reunion.jreunion.game.skills.Modifier;
+import com.googlecode.reunion.jreunion.game.skills.Modifier.ModifierType;
+import com.googlecode.reunion.jreunion.game.skills.Modifier.ValueType;
 import com.googlecode.reunion.jreunion.server.SkillManager;
 
-public abstract class GunMastery extends Skill implements Modifier {
-	public GunMastery(SkillManager skillManager,int id) {
-		super(skillManager, id);
-	}
+public abstract class RingWeaponMastery extends Skill implements Modifier {
 	
-	@Override
-	public int getLevelRequirement(int level) {
-		return 4+level;
+	
+	public RingWeaponMastery(SkillManager skillManager,int id) {
+		super(skillManager, id);
 	}	
 	
 	@Override
-	public int getMaxLevel() {
-		return 25;
-	}
+	public abstract int getLevelRequirement(int level);
 	
-	public Class<?> getWeaponType() {
-		return GunWeapon.class;
+	@Override
+	public abstract int getMaxLevel();
+
+	public Class<?> getWeaponType(){
+		return RingWeapon.class;
 	}
-	
-	public boolean getCondition(LivingObject owner){
+
+	public float getDamageModifier(){
+		/*
+		 * lvl 1 = 10%
+		 * lvl 2 = 13%
+		 * ...
+		 * lvl 25 = 100%
+		 */
 		
-		if(owner instanceof Player){
-			Player player = (Player)owner;
-			if(player.getSkillLevel(this)==0)
-				return false;
-			Weapon weapon= player.getEquipment().getMainHand();
-			return weapon!=null && getWeaponType().isInstance(weapon);			
-		}		
-		return false;		
+		return 0.9f/(getMaxLevel()-1);		
+		
 	}
 	
 	public float getDamageModifier(Player player){
@@ -58,17 +58,16 @@ public abstract class GunMastery extends Skill implements Modifier {
 	
 		return modifier;
 	}
-	public float getDamageModifier(){
-		/*
-		 * lvl 1 = 10%
-		 * lvl 2 = 17%
-		 * 
-		 * 
-		 * lvl 25 = 200%
-		 */
-		
-		return 1.90f/(getMaxLevel()-1);		
-		
+	
+	public boolean getCondition(LivingObject owner){
+		if(owner instanceof Player){
+			Player player = (Player)owner;
+			if(player.getSkillLevel(this)==0)
+				return false;
+			Weapon weapon= player.getEquipment().getMainHand();
+			return weapon!=null && getWeaponType().isInstance(weapon);			
+		}		
+		return false;	
 	}
 	
 	@Override
@@ -99,7 +98,7 @@ public abstract class GunMastery extends Skill implements Modifier {
 		}		
 		return affectedSkills;
 	}
-	
+
 	@Override
 	public float getModifier(LivingObject livingObject) {
 		return getDamageModifier((Player)livingObject);

@@ -134,8 +134,13 @@ public class LightningBall extends Tier1 implements Castable, Modifier {
 	
 
 	public boolean getCondition(LivingObject owner){
-		// not needed is the class
-		return true;
+		if(owner instanceof Player){
+			Player player = (Player)owner;
+			if(player.getSkillLevel(this)==0)
+				return false;
+			return true;
+		}
+		return false;
 	}
 
 	@Override
