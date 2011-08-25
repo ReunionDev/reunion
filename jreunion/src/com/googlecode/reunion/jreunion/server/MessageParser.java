@@ -5,7 +5,10 @@ import java.io.FileWriter;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.net.SocketAppender;
@@ -56,6 +59,38 @@ public class MessageParser {
 				else
 					player.setLevelUpExp(0);
 			}
+			else if (words[0].equals("@shutdown")) {
+				final Iterator<Player> iterPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayerListIterator();
+				final World world = Server.getInstance().getWorld();
+				
+				world.sendPacket(Type.INFO, "Server shutdown immediately! (25 Seconds)");
+				Timer t = new Timer();
+				t.schedule(new TimerTask(){
+					int counter = 0;
+					@Override
+					public void run() {
+						if(counter == 1)
+						world.sendPacket(Type.INFO, "Server shutdown immediately! (20 Seconds)");
+						if(counter == 2)
+						world.sendPacket(Type.INFO, "Server shutdown immediately! (15 Seconds)");
+						if(counter == 3)
+						world.sendPacket(Type.INFO, "Server shutdown immediately! (10 Seconds)");
+						if(counter == 4)
+						{
+							while(iterPlayer.hasNext())
+							{
+								Player currplayer = iterPlayer.next();
+								Client pclient = currplayer.getClient();
+								pclient.sendPacket(Type.SAY, currplayer.getName()+" saved ...");
+							}
+							world.sendPacket(Type.INFO, "Server is going down! (5 Seconds)");
+						}
+						if(counter == 5)
+							System.exit(1);
+						counter++;
+					}
+				}, 0, 5000); //all 5 seconds
+			}
 			else if (words[0].equals("@fp")) {
 				String packetData = "";
 				for (int i = 1; i <= (words.length-1);i++){
@@ -104,8 +139,16 @@ public class MessageParser {
 						client.sendData(packetData);
 					}
 				}
-				
-			} else if (words[0].equals("@say")) {
+			}
+			else if (words[0].equals("@info")) {
+				int lengthofinfo = words.length;
+				String data = "";
+				for(int i = 1; i < lengthofinfo;i++){
+					data+=" "+words[i];					
+				}
+				client.getWorld().sendPacket(Type.INFO, "- "+data+" -");
+			}
+			else if (words[0].equals("@say")) {
 				String data = "";
 				for(String word: words){
 					data+=" "+word;					
@@ -195,7 +238,6 @@ public class MessageParser {
 			}
 		}  else if (words[0].equals("@goto")) {
 			if (words[1].equals("pos")) {
-				
 				Position position = player.getPosition().clone();
 				position.setX(Integer.parseInt(words[2]));
 				position.setY(Integer.parseInt(words[3]));

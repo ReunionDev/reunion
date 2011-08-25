@@ -31,6 +31,7 @@ public class PacketFactory {
 
 	public static enum Type{
 		FAIL,
+		INFO,
 		OK,
 		OUT,
 		GO_WORLD,
@@ -81,7 +82,12 @@ public class PacketFactory {
 				message+=" "+o;
 			}
 			return "fail"+message;
-		
+		case INFO:
+			String infomsg = "";
+			for(Object o: args){
+				infomsg+=" "+o;
+			}
+			return "info"+infomsg;
 		case OK: 
 			return "OK";
 		

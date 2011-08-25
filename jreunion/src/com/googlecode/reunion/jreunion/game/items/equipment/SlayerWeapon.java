@@ -33,7 +33,7 @@ public class SlayerWeapon extends SpecialWeapon {
 		} else {
 			if (item.checkMembers(new String[] { "MemoryDmg" })) {
 				// use member from file
-				setMemoryDmg(Integer.parseInt(item.getMemberValue("MemoryDmg")));
+				setMemoryDmg(Float.parseFloat(item.getMemberValue("MemoryDmg")));
 			} else {
 				// use default
 				setMemoryDmg(0);

@@ -4,7 +4,7 @@ Ip = 127.0.0.1
 Port = 4005
 Location = Local
 
-[Lost Realm Castle]
+[LostRealmCastle]
 ID = 0
 Ip = 127.0.0.1
 Port = 4001
@@ -28,7 +28,7 @@ Ip = 127.0.0.1
 Port = 4003
 Location = Local
 
-[Deckadun]
+[Dekadun]
 ID = 2
 Ip = 127.0.0.1
 Port = 4006
@@ -46,7 +46,7 @@ Ip = 127.0.0.1
 Port = 4008
 Location = Local
 
-[Genus Labor]
+[GenusLabor]
 ID = 8
 Ip = 127.0.0.1
 Port = 4009

@@ -48,7 +48,7 @@ MobArea = areas/paros/MobArea.bmp
 PvpArea = areas/paros/PvpArea.bmp
 DefaultSpawnId = 1
 
-[Deckadun]
+[Dekadun]
 ID = 2
 PlayerSpawn = areas/deckadun/PlayerSpawns.dta
 MobSpawn = areas/deckadun/MobSpawns.dta
