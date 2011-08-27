@@ -81,7 +81,9 @@ public class MessageParser {
 							{
 								Player currplayer = iterPlayer.next();
 								Client pclient = currplayer.getClient();
+								currplayer.save();
 								pclient.sendPacket(Type.SAY, currplayer.getName()+" saved ...");
+								
 							}
 							world.sendPacket(Type.INFO, "Server is going down! (5 Seconds)");
 						}
@@ -134,9 +136,7 @@ public class MessageParser {
 						com.dropItem(player.getPosition(), item);
 						
 					} catch (Exception e) {
-						client.sendPacket(Type.SAY, "S_Server (NOTICE) @drop failed");
-						String packetData = "say 1 S_Server (NOTICE) @drop failed";
-						client.sendData(packetData);
+						client.sendPacket(Type.SAY, "@drop failed (ID:"+words[1]+")");
 					}
 				}
 			}
@@ -153,7 +153,7 @@ public class MessageParser {
 				for(String word: words){
 					data+=" "+word;					
 				}
-				client.sendData(data.substring(2));				
+				client.sendPacket(Type.SAY, data.substring(2));	
 				return null;
 				//client.SendPacket(Type.SAY, words[3],Integer.parseInt(words[2]),Integer.parseInt(words[1]));
 			
@@ -185,8 +185,7 @@ public class MessageParser {
 							spawn.spawn();
 						}
 					} catch (Exception NumberFormatException) {
-						String packetData = "say 1 S_Server (NOTICE) @addmob with "+count+" mob failed";
-						client.sendData(packetData);
+						client.sendPacket(Type.SAY,  "@addmob with "+count+" mob failed");
 					}
 				
 				} else if (words.length == 6) {
@@ -230,8 +229,7 @@ public class MessageParser {
 					}
 				}
 				else{
-					String packetData = "say 1 S_Server (NOTICE) @tele failed -> @tele worldname";
-					client.sendData(packetData);					
+					client.sendPacket(Type.SAY,  "@tele failed -> @tele worldname");				
 				}
 			} catch (Exception e) {
 				
@@ -247,6 +245,24 @@ public class MessageParser {
 				com.GoToChar(player, words[2]);
 			}
 			
+		} else if (words[0].equals("@save")) {
+			if(words.length == 1)
+			{
+				player.save();
+				client.sendPacket(Type.SAY, player.getName()+" saved ...");
+			}
+			else
+			{
+				Iterator<Player> iterPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayerListIterator();
+				
+				while(iterPlayer.hasNext())
+				{
+					Player currplayer = iterPlayer.next();
+					Client pclient = currplayer.getClient();
+					currplayer.save();
+					pclient.sendPacket(Type.SAY, currplayer.getName()+" saved ...");
+				}	
+			}
 		} else if (words[0].equals("@debug")) {
 			
 			Logger logger = Logger.getRootLogger();
@@ -264,7 +280,8 @@ public class MessageParser {
 				
 				Logger.getLogger(Debug.class).warn("host("+host+") not found in @debug",e);
 				com.serverTell(client, "Host not found");
-			}			
+			}
+			 client.sendPacket(Type.SAY, "Spawnpoint cannot be added");
 			com.serverTell(client, "Logger connected");
 			
 			
@@ -308,13 +325,13 @@ public class MessageParser {
 					spawn.setRadius(Integer.parseInt(words[3]));
 					spawn.setRespawnTime(10);
 					spawn.spawn();
-					String packetData = "say 1 S_Server Spawnpoint succesfully added";
-					client.sendData(packetData);
+
+					client.sendPacket(Type.SAY,  "Spawnpoint succesfully added");
 			      }catch(Exception e){
 			    	  com.serverTell(player.getClient(),e.getMessage());
 			    	  Logger.getLogger(this.getClass()).warn("Exception",e);
-			    	  String packetData = "say 1 S_Server Spawnpoint cannot be added";
-			    	  client.sendData(packetData);
+
+			    	  client.sendPacket(Type.SAY, "Spawnpoint cannot be added");
 			      }
 				
 			} else if (words[0].equals("@com")) {
