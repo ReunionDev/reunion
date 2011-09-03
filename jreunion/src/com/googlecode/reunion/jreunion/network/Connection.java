@@ -35,7 +35,6 @@ public abstract class Connection<T extends Connection<?>> {
 			SelectionKey key = socketChannel.register(selector, SelectionKey.OP_READ);		
 			key.attach(this);
 		}
-	
 	}
 	
 	public void close(){

@@ -126,9 +126,9 @@ public class ProxyConnection extends Connection<ProxyConnection> {
 								sessionPacket.setSessionId(sessionId);
 							}
 							if(parsedPacket instanceof ForLoginServer){
-								
+								//send to login server
 							}else if(parsedPacket instanceof ForGameServer){
-								
+								//send to game server
 							}else{
 								throw new RuntimeException("No handler");
 							}

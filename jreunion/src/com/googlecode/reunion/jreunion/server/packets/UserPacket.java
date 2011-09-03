@@ -16,7 +16,4 @@ public class UserPacket extends SessionPacket implements ForLoginServer{
 	}
 
 	String username;
-	
-	
-
 }
