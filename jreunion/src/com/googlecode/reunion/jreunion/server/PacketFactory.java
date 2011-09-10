@@ -8,6 +8,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import com.googlecode.reunion.jreunion.game.Effectable;
 import com.googlecode.reunion.jreunion.game.Equipment;
+import com.googlecode.reunion.jreunion.game.Inventory;
 import com.googlecode.reunion.jreunion.game.InventoryItem;
 import com.googlecode.reunion.jreunion.game.Item;
 import com.googlecode.reunion.jreunion.game.LivingObject;
@@ -182,7 +183,7 @@ public class PacketFactory {
 				RoamingItem roamingItem = (RoamingItem)args[0];
 				Position position = roamingItem.getPosition();
 				Item item = roamingItem.getItem();
-
+				
 				return "drop " + roamingItem.getEntityId() + " " + item.getType() + " "
 				+ position.getX() + " " + position.getY() + " " + position.getZ() + " "+position.getRotation()+" " + item.getGemNumber() + " "
 				+ item.getExtraStats();
@@ -414,8 +415,9 @@ public class PacketFactory {
 			if(args.length>0){
 				InventoryItem invItem = (InventoryItem)args[0];
 				Item item = invItem.getItem();
+				
 				return "pick " + item.getEntityId() + " " + item.getType()
-				+ " "+invItem.getX()+" "+invItem.getY()+" "+invItem.getTab()+" " + item.getGemNumber() + " "
+				+ " "+invItem.getPosX()+" "+invItem.getPosY()+" "+invItem.getTab()+" " + item.getGemNumber() + " "
 				+ item.getExtraStats();
 			}
 			break;

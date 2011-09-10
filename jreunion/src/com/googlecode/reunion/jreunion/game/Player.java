@@ -17,6 +17,7 @@ import com.googlecode.reunion.jreunion.events.map.PlayerLogoutEvent;
 import com.googlecode.reunion.jreunion.events.network.NetworkAcceptEvent;
 import com.googlecode.reunion.jreunion.events.session.SessionEvent;
 import com.googlecode.reunion.jreunion.game.Equipment.Slot;
+import com.googlecode.reunion.jreunion.game.items.equipment.Armor;
 import com.googlecode.reunion.jreunion.game.items.equipment.Weapon;
 import com.googlecode.reunion.jreunion.server.Client;
 import com.googlecode.reunion.jreunion.server.Client.State;
@@ -148,7 +149,7 @@ public abstract class Player extends LivingObject implements EventListener {
 		super();
 		this.setClient(client);
 		client.setPlayer(this);
-		inventory = new Inventory(this);
+		inventory = new Inventory();
 		equipment = new Equipment(this);
 		quickSlot = new QuickSlot(this);
 		stash = new Stash(this);
@@ -174,7 +175,7 @@ public abstract class Player extends LivingObject implements EventListener {
 	/****** Manages the Item Drop ******/
 	public void dropItem(int playerId) {
 		
-		Item item = getInventory().getItemSelected().getItem();
+		Item item = getInventory().getHoldingItem().getItem();
 		
 		if (item == null) {
 			return;
@@ -182,7 +183,7 @@ public abstract class Player extends LivingObject implements EventListener {
 		
 		LocalMap map = getPosition().getLocalMap();
 		map.getWorld().getCommand().dropItem(getPosition(), item);
-		getInventory().setItemSelected(null);
+		getInventory().setHoldingItem(null);
 	}
 	
 
@@ -544,7 +545,7 @@ public abstract class Player extends LivingObject implements EventListener {
 			return;
 		}
 
-		if (getInventory().getItemSelected() == null) {
+		if (getInventory().getHoldingItem() == null) {
 			ExchangeItem item = getExchange().getItem(posX, posY);
 
 			if (item == null) {
@@ -554,10 +555,10 @@ public abstract class Player extends LivingObject implements EventListener {
 			InventoryItem invItem = new InventoryItem(item.getItem(), 0, 0,
 					0);
 
-			getInventory().setItemSelected(invItem);
+			getInventory().setHoldingItem(invItem);
 			getExchange().removeItem(item);
 		} else {
-			Item item = getInventory().getItemSelected().getItem();
+			Item item = getInventory().getHoldingItem().getItem();
 			ExchangeItem newExchangeItem = new ExchangeItem(item, posX,
 					posY);
 			ExchangeItem oldExchangeItem = null;
@@ -573,11 +574,11 @@ public abstract class Player extends LivingObject implements EventListener {
 			}
 
 			if (oldExchangeItem == null) {
-				getInventory().setItemSelected(null);
+				getInventory().setHoldingItem(null);
 			} else {
 				InventoryItem invItem = new InventoryItem(
 						oldExchangeItem.getItem(), 0, 0, 0);
-				getInventory().setItemSelected(invItem);
+				getInventory().setHoldingItem(invItem);
 				getExchange().removeItem(oldExchangeItem);
 			}
 			getExchange().addItem(newExchangeItem);
@@ -698,7 +699,7 @@ public abstract class Player extends LivingObject implements EventListener {
 
 		if (invItem == null) {
 			invItem = new InventoryItem(item, 0, 0, 0);
-			getInventory().setItemSelected(invItem);
+			getInventory().setHoldingItem(invItem);
 				
 		}
 		if(item.getEntityId()==-1){
@@ -714,10 +715,10 @@ public abstract class Player extends LivingObject implements EventListener {
 	public void pickupItem(RoamingItem roamingItem) {
 		Client client = getClient();
 		
-		Item item = roamingItem.getItem();
+		//Item item = roamingItem.getItem();
 		
 		Player owner = roamingItem.getOwner();
-		if(roamingItem.getOwner()!=null&&roamingItem.getOwner()!=this) {
+		if(owner!=null && owner!=this) {
 			getClient().sendPacket(Type.SAY, "This item belongs to " + owner.getName());
 			return;
 		}		
@@ -1143,7 +1144,7 @@ public abstract class Player extends LivingObject implements EventListener {
 
 	public void wearSlot(Slot slot) {
 	
-		InventoryItem invItem = getInventory().getItemSelected();
+		InventoryItem invItem = getInventory().getHoldingItem();
 
 		if (invItem == null) {
 			/*
@@ -1167,7 +1168,7 @@ public abstract class Player extends LivingObject implements EventListener {
 				getInterested().sendPacket(Type.CHAR_WEAR, this, slot, item);
 				
 				getEquipment().setItem(slot, item);
-				getInventory().setItemSelected(null);
+				getInventory().setHoldingItem(null);
 				/*
 				if (getEquipment().getItem(slot) instanceof Weapon) {
 					Weapon weapon = (Weapon) getEquipment().getItem(slot);
@@ -1179,7 +1180,7 @@ public abstract class Player extends LivingObject implements EventListener {
 				Item currentItem = getEquipment().getItem(slot);
 				getInterested().sendPacket(Type.CHAR_REMOVE, this, slot);
 				getEquipment().setItem(slot, invItem.getItem());
-				getInventory().setItemSelected(
+				getInventory().setHoldingItem(
 						new InventoryItem(currentItem, 0, 0, 0));
 				/*
 				if (getEquipment().getItem(slot) instanceof Weapon) {

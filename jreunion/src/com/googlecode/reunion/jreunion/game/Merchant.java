@@ -187,7 +187,7 @@ public class Merchant extends Npc {
 	/****** Sell items to merchant shop ******/
 	public void sellItem(Player player) {
 		
-		Item item = player.getInventory().getItemSelected().getItem();
+		Item item = player.getInventory().getHoldingItem().getItem();
 	
 		if (item != null) {
 			int price = (int) (item.getPrice() * ((double)this.getSellRate() / 100));
@@ -196,7 +196,7 @@ public class Merchant extends Npc {
 				player.setLime(player.getLime()+price);
 			}
 
-			player.getInventory().setItemSelected(null);
+			player.getInventory().setHoldingItem(null);
 			DatabaseUtils.getInstance().deleteItem(item);
 		}
 		else{

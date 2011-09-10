@@ -71,12 +71,12 @@ public class Warehouse extends Npc {
 						+ stashItem.getItem().getExtraStats() + "\n";
 			}
 		} else {
-			if (player.getInventory().getItemSelected() == null) {
+			if (player.getInventory().getHoldingItem() == null) {
 				stashItem = stash.getItem(pos);
 				Item item = ItemFactory.loadItem(stashItem.getItem()
 						.getEntityId());
 				stash.removeItem(stashItem);
-				player.getInventory().setItemSelected(
+				player.getInventory().setHoldingItem(
 						new InventoryItem(item, 0, 0, 0));
 
 				packetData = "stash_from " + stashItem.getPos() + " "
@@ -87,11 +87,11 @@ public class Warehouse extends Npc {
 						+ player.getStash().getQuantity(pos) + "\n";
 			} else {
 				if (stash.checkPosEmpty(pos)) {
-					Item item = player.getInventory().getItemSelected()
+					Item item = player.getInventory().getHoldingItem()
 							.getItem();
 					stashItem = new StashItem(pos, item);
 					stash.addItem(stashItem);
-					player.getInventory().setItemSelected(null);
+					player.getInventory().setHoldingItem(null);
 
 					packetData = "stash_to " + stashItem.getPos() + " "
 							+ stashItem.getItem().getType() + " "
@@ -103,13 +103,13 @@ public class Warehouse extends Npc {
 
 					if (stashItem.getItem().getType() == type
 							&& stashItem.getItem().getGemNumber() == player
-									.getInventory().getItemSelected().getItem()
+									.getInventory().getHoldingItem().getItem()
 									.getGemNumber()
 							&& stashItem.getItem().getExtraStats() == special) {
 						StashItem newStashItem = new StashItem(pos, player
-								.getInventory().getItemSelected().getItem());
+								.getInventory().getHoldingItem().getItem());
 						stash.addItem(newStashItem);
-						player.getInventory().setItemSelected(null);
+						player.getInventory().setHoldingItem(null);
 
 						packetData = "stash_to " + stashItem.getPos() + " "
 								+ stashItem.getItem().getType() + " "

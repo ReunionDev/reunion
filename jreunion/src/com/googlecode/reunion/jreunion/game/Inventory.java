@@ -18,102 +18,133 @@ import com.googlecode.reunion.jreunion.server.Server;
 public class Inventory {
 	private List<InventoryItem> items;
 	
-	private InventoryItem selected = null;
+	private InventoryItem holdingItem = null;
 
-	private Player player;
-
-	public Inventory(Player player) {
-		this.player = player;
+	public Inventory() {
 		items = new Vector<InventoryItem>();
 	}
-
-	public Player getPlayer() {
-		return player;
+	
+	public void setHoldingItem(InventoryItem holdingItem) {
+		this.holdingItem = holdingItem;
 	}
+	
+	public InventoryItem getHoldingItem() {
+		return holdingItem;
+	}
+	
+	public Iterator<InventoryItem> getInventoryIterator() {
+		return items.iterator();
+	}
+	
+	public boolean posEmpty(int tab, int posX, int posY) {
 
-	public boolean addItem(Item item) {
+		Iterator<InventoryItem> iter = getInventoryIterator();
 		
-		for (int tab = 0; tab < 3; tab++) {
-			for (int x = 0; x < 8; x++) {
-				for (int y = 0; y < 6; y++) {
-					if(addItem(x, y, item, tab))
-						return true;
-				}
-			}
-		}
-		return false;
-	}
-
-	public boolean addItem(int posX, int posY, Item item, int tab) {
-
-		InventoryItem inventoryItem = new InventoryItem(item, posX, posY,
-				tab);
-
-		if (itemFit(tab, posX, posY, item.getSizeX(), item.getSizeY()) == true) {
-			items.add(inventoryItem);
-			return true;
-			// Logger.getLogger(Inventory.class).info("Item Inserted\n");
-			// PrintInventoryMap(0);
-			// PrintInventoryMap(1);
-			// PrintInventoryMap(2);
-		}
-		
-		return false;
-
-	}
-
-	public boolean freeSlots(int tab, Item item) {
-		for (int x = 0; x < 8; x++) {
-			for (int y = 0; y < 6; y++) {
-				if (posEmpty(tab, x, y) == true) {
-					if (itemFit(tab, x, y, item.getSizeX(), item.getSizeY())) {
-						return true;
+		while (iter.hasNext()) {
+			InventoryItem item = iter.next();
+			if(item.getTab() == tab){
+				for (int x = item.getPosX(); x < item.getPosX()
+						+ item.getItem().getSizeX(); x++) {
+					for (int y = item.getPosY(); y < item.getPosY()
+							+ item.getItem().getSizeY(); y++) {
+						if (x == posX && y == posY) {
+							//Logger.getLogger(Inventory.class).debug("DETECETED ITEM COLISION: ["+x+"]["+y+"] "+item.getItem().getDescription());
+							return false;
+						}
 					}
 				}
 			}
 		}
+		return true;
+	}
+	
+	public boolean itemFit(int tab, int posX, int posY, int sizeX, int sizeY) {
+
+		//checks if item size, from the position we are trying to place it,
+		//don't stay outside the inventory size.
+		if (posX + sizeX > 8 || posY + sizeY > 6) {
+			return false;
+		}
+
+		//checks if every position occupied by the item, in the inventory, is free 
+		for (int x = posX; x < posX + sizeX; x++) {
+			for (int y = posY; y < posY + sizeY; y++) {
+				//Logger.getLogger(Inventory.class).debug("CHECKING FIT POSITION ["+x+"]["+y+"]");
+				if (posEmpty(tab, x, y) == false) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	
+	//returns the stored item position (top left corner) of an inventory item.
+	//this is used, for example, if we check the position [1;3] in the inventory,
+	//and it correspond to an item that starts in the position [0;1].
+	public int[] getDetectedItemPosition(int tab, int posX, int posY, int sizeX, int sizeY){
+		
+		int[] position = new int[3];
+		
+		//checks if every position occupied by the item, in the inventory, is free 
+		for (int x = posX; x < posX + sizeX; x++) {
+			for (int y = posY; y < posY + sizeY; y++) {
+				if (posEmpty(tab, x, y) == false) {
+					position[0] = tab;
+					position[1] = x;
+					position[2] = y;
+					return position;
+				}
+			}
+		}
+		return null;
+	}
+	
+	//return the first free slot, of the item size
+	public int[] getFreeSlots(Item item){
+		
+		if(item == null)
+			return null;
+		
+		int[] position = new int[3];
+		
+		//checks what is the first free position, where the item fits and returns it.
+		for (int tab = 0; tab < 3; tab++) {
+			for (int posX = 0; posX < 8; posX++) {
+				for (int posY = 0; posY < 6; posY++) {
+					if (itemFit(tab, posX, posY, item.getSizeX(), item.getSizeY())) {
+						position[0] = tab;
+						position[1] = posX;
+						position[2] = posY;
+						return position;
+					}
+				}
+			}
+		}
+		return null;
+	}
+	
+	public boolean freeSlots(int tab, Item item) {
+		for (int x = 0; x < 8; x++) {
+			for (int y = 0; y < 6; y++) {
+				if (itemFit(tab, x, y, item.getSizeX(), item.getSizeY())) {
+					return true;
+				}
+			}
+		}
 		return false;
 	}
 
-	public Iterator<InventoryItem> getInventoryIterator() {
-		return items.iterator();
-	}
-
-	public InventoryItem getItem(Item item) {
-
-		Iterator<InventoryItem> iter = getInventoryIterator();
-		while (iter.hasNext()) {
-			InventoryItem invItem = iter.next();
-
-			if (invItem.getItem() == item) {
-				return invItem;
-			}
-		}
-		return null;
-	}
-
-	public InventoryItem getItem(int itemId) {
-
-		Iterator<InventoryItem> iter = getInventoryIterator();
-		while (iter.hasNext()) {
-			InventoryItem invItem = iter.next();
-
-			if (invItem.getItem().getEntityId() == itemId) {
-				return invItem;
-			}
-		}
-		return null;
-	}
-
+	//returns the inventory item on the given position
 	public InventoryItem getItem(int tab, int posX, int posY) {
 
 		Iterator<InventoryItem> iter = getInventoryIterator();
+		
 		while (iter.hasNext()) {
 			InventoryItem invItem = iter.next();
-
-			for (int x = invItem.getX(); x < invItem.getX()
+			
+			for (int x = invItem.getPosX(); x < invItem.getPosX()
 					+ invItem.getItem().getSizeX(); x++) {
-				for (int y = invItem.getY(); y < invItem.getY()
+				for (int y = invItem.getPosY(); y < invItem.getPosY()
 						+ invItem.getItem().getSizeY(); y++) {
 					if (x == posX && y == posY && invItem.getTab() == tab) {
 						return invItem;
@@ -123,136 +154,100 @@ public class Inventory {
 		}
 		return null;
 	}
-
-	public InventoryItem getItemSelected() {
-		return selected;
-	}
-
-	public int getSize() {
-		return items.size();
-	}
-
-	public boolean itemFit(int tab, int posX, int posY, int sizeX, int sizeY) {
-
-		if (posX + sizeX > 8 || posY + sizeY > 6) {
-			return false;
+	
+	//stores an inventory item on any free position.
+	//in this case, there is no item selected.
+	public boolean storeItem(Item item){
+		if(item != null){
+			
+			int[] position = getFreeSlots(item);
+			
+			addInventoryItem(new InventoryItem(item,position[1],position[2],position[0]));
+			return true;
 		}
-
-		for (int x = posX; x < posX + sizeX; x++) {
-			for (int y = posY; y < posY + sizeY; y++) {
-				if (posEmpty(tab, x, y) == false) {
-					return false;
-				}
+		return false;
+	}
+	
+	//stores an inventory item on the given position.
+	public boolean storeInventoryItem(int tab, int posX, int posY){
+		
+		InventoryItem holdingItem = getHoldingItem();
+		
+		if(holdingItem != null){
+			addInventoryItem(new InventoryItem(holdingItem.getItem(),posX,posY,tab));
+			setHoldingItem(null);
+			return true;
+		}
+		return false;
+	}
+	
+	//removes an inventory item from the given position.
+	public boolean removeInventoryItem(int tab, int posX, int posY){
+		
+		InventoryItem holdingItem = getHoldingItem();
+		int [] itemPosition = new int[3];
+		InventoryItem inventoryItem = null;
+		
+		if(holdingItem != null){
+			itemPosition = getDetectedItemPosition(tab,posX,posY,holdingItem.getSizeX(),holdingItem.getSizeY());
+			//itemPosition[0]=tab / itemPosition[1]=posX / itemPosition[2]=posY
+			inventoryItem = getItem(itemPosition[0],itemPosition[1],itemPosition[2]);	
+		}else {
+			inventoryItem = getItem(tab,posX,posY);	
+		}
+		deleteInventoryItem(inventoryItem);
+		
+		if(holdingItem != null){
+			storeInventoryItem(tab,posX,posY);
+		}
+		setHoldingItem(inventoryItem);
+		
+		//when removing an item from the inventory, there must be an holding item.
+		if(getHoldingItem() == null)
+			return false;
+		else
+			return true;
+	}
+	
+	public void addInventoryItem(InventoryItem inventoryItem){
+		if (inventoryItem != null) {
+				items.add(inventoryItem);
+		}
+	}
+	
+	public void deleteInventoryItem(InventoryItem inventoryItem) {
+		if (inventoryItem != null) {
+			while (items.contains(inventoryItem)) {
+				items.remove(inventoryItem);
 			}
 		}
-
-		return true;
 	}
-
+	
 	/****** Manages the Items on the Inventory ******/
 	public void handleInventory(int tab, int posX, int posY) {
 
-		InventoryItem oldInvItem = null;
-		InventoryItem newInvItem = null;
-		InventoryItem auxItem = null;
-		int count = 0;
+		InventoryItem holdingItem = getHoldingItem();
 
-		if (!posEmpty(tab, posX, posY)) {
-			if (getItemSelected() == null) {
-				newInvItem = getItem(tab, posX, posY);
-				removeItem(newInvItem);
-				setItemSelected(newInvItem);
-			} else {
-				oldInvItem = getItemSelected();
-
-				for (int x = 0; x < oldInvItem.getItem().getSizeX(); x++) {
-					for (int y = 0; y < oldInvItem.getItem().getSizeY(); y++) {
-						newInvItem = getItem(tab,
-								posX + x, posY + y);
-
-						if (auxItem != newInvItem) {
-							auxItem = newInvItem;
-							count++;	
-						}
-
-						if (count > 1) {
-							return;
-						}
-					}
-				}
-
-				if (newInvItem == null) {
-					return;
-				}
-
-				oldInvItem.setX(posX);
-				oldInvItem.setY(posY);
-				oldInvItem.setTab(tab);
-
-				removeItem(newInvItem);
-				setItemSelected(newInvItem);
-				addItem(posX, posY, oldInvItem.getItem(),
-						tab);
+		if(holdingItem != null){
+			//Logger.getLogger(Inventory.class).debug("ITEM STORED: "+holdingItem.getItem().getDescription());
+			if(itemFit(tab,posX,posY,holdingItem.getSizeX(),holdingItem.getSizeY())){
+				storeInventoryItem(tab,posX,posY);				
+			}else {
+				removeInventoryItem(tab, posX, posY);
+				//Logger.getLogger(Inventory.class).debug("ITEM REMOVED: "+getHoldingItem().getItem().getDescription());
 			}
-		} else {
-			newInvItem = getItemSelected();
-
-			if (newInvItem == null) {
-				return;
+		}else {
+			if(!posEmpty(tab, posX, posY)){
+				removeInventoryItem(tab, posX, posY);
+				//Logger.getLogger(Inventory.class).debug("ITEM REMOVED: "+getHoldingItem().getItem().getDescription());
 			}
-
-			Logger.getLogger(Inventory.class).info("Item Selected: " + newInvItem.getItem().getType() + "\n");
-			if (newInvItem != null) {
-				for (int x = 0; x < newInvItem.getItem().getSizeX(); x++) {
-					for (int y = 0; y < newInvItem.getItem().getSizeY(); y++) {
-						
-						oldInvItem = getItem(tab, posX + x,
-								posY + y);
-						if (auxItem != oldInvItem && oldInvItem != null) {
-							auxItem = oldInvItem;
-							count++;
-						}
-						if (count > 1) {
-							return;
-						}
-						
-					}
-				}
-			}
-
-			if (auxItem == null) {
-				setItemSelected(null);
-			} else {
-				removeItem(auxItem);
-				setItemSelected(auxItem);
-			}
-
-			newInvItem.setX(posX);
-			newInvItem.setY(posY);
-			newInvItem.setTab(tab);
-			addItem(posX, posY, newInvItem.getItem(), tab);
+			
 		}
 	}
 
-	public boolean posEmpty(int tab, int posX, int posY) {
+	
 
-		Iterator<InventoryItem> iter = getInventoryIterator();
-		while (iter.hasNext()) {
-			InventoryItem item = iter.next();
-
-			for (int x = item.getX(); x < item.getX()
-					+ item.getItem().getSizeX(); x++) {
-				for (int y = item.getY(); y < item.getY()
-						+ item.getItem().getSizeY(); y++) {
-					if (x == posX && y == posY && item.getTab() == tab) {
-						return false;
-					}
-				}
-			}
-		}
-		return true;
-	}
-
+	@Deprecated
 	public void PrintInventoryMap(int tab) { // Debug Only
 		boolean[][] newInvMap = new boolean[8][6];
 
@@ -267,9 +262,9 @@ public class Inventory {
 		while (iter.hasNext()) {
 			InventoryItem item = iter.next();
 
-			for (int x = item.getX(); x < item.getX()
+			for (int x = item.getPosX(); x < item.getPosX()
 					+ item.getItem().getSizeX(); x++) {
-				for (int y = item.getY(); y < item.getY()
+				for (int y = item.getPosY(); y < item.getPosY()
 						+ item.getItem().getSizeY(); y++) {
 					if (item.getTab() == tab) {
 						newInvMap[x][y] = true;
@@ -289,20 +284,70 @@ public class Inventory {
 			}
 		}
 	}
-
-	public void removeItem(InventoryItem invItem) {
-		if (invItem == null) {
-			return;
+	
+	@Deprecated
+	public boolean addItem(Item item) {
+		
+		for (int tab = 0; tab < 3; tab++) {
+			for (int x = 0; x < 8; x++) {
+				for (int y = 0; y < 6; y++) {
+					if(addItem(x, y, item, tab))
+						return true;
+				}
+			}
 		}
-
-		while (items.contains(invItem)) {
-			items.remove(invItem);
-		}
+		return false;
 	}
 
-	public void setItemSelected(InventoryItem selected) {
-		// PrintInventoryMap(0);
-		this.selected = selected;
+	@Deprecated
+	public boolean addItem(int posX, int posY, Item item, int tab) {
+
+		InventoryItem inventoryItem = new InventoryItem(item, posX, posY,
+				tab);
+
+		if (itemFit(tab, posX, posY, item.getSizeX(), item.getSizeY()) == true) {
+			items.add(inventoryItem);
+			return true;
+			// Logger.getLogger(Inventory.class).info("Item Inserted\n");
+			// PrintInventoryMap(0);
+			// PrintInventoryMap(1);
+			// PrintInventoryMap(2);
+		}
+		return false;
+	}
+	
+	@Deprecated
+	public int getSize() {
+		return items.size();
+	}
+	
+	@Deprecated
+	public InventoryItem getItem(Item item) {
+
+		Iterator<InventoryItem> iter = getInventoryIterator();
+		
+		while (iter.hasNext()) {
+			InventoryItem invItem = iter.next();
+
+			if (invItem.getItem() == item) {
+				return invItem;
+			}
+		}
+		return null;
 	}
 
+	@Deprecated
+	public InventoryItem getItem(int itemId) {
+
+		Iterator<InventoryItem> iter = getInventoryIterator();
+		
+		while (iter.hasNext()) {
+			InventoryItem invItem = iter.next();
+
+			if (invItem.getItem().getEntityId() == itemId) {
+				return invItem;
+			}
+		}
+		return null;
+	}
 }

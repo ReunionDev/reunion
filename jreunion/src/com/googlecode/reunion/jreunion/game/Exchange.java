@@ -35,8 +35,8 @@ public class Exchange {
 
 			for (int x = 0; x < exchangeItem.getItem().getSizeX(); x++) {
 				for (int y = 0; y < exchangeItem.getItem().getSizeY(); y++) {
-					if (posX == x + exchangeItem.getX()
-							&& posY == y + exchangeItem.getY()) {
+					if (posX == x + exchangeItem.getPosX()
+							&& posY == y + exchangeItem.getPosY()) {
 						return exchangeItem;
 					}
 				}

@@ -3,20 +3,21 @@ package com.googlecode.reunion.jreunion.game;
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
+ * Item wrapper for Inventory
  */
 public class InventoryItem {
 	private Item item;
 
-	private int x;
+	private int posX;
 
-	private int y;
+	private int posY;
 
 	private int tab;
 
-	public InventoryItem(Item item, int x, int y, int tab) {
+	public InventoryItem(Item item, int posX, int posY, int tab) {
 		this.item = item;
-		this.x = x;
-		this.y = y;
+		this.posX = posX;
+		this.posY = posY;
 		this.tab = tab; // 1,2 or 3
 	}
 
@@ -24,12 +25,12 @@ public class InventoryItem {
 		return item;
 	}
 
-	public int getX() {
-		return x;
+	public int getPosX() {
+		return posX;
 	}
 
-	public int getY() {
-		return y;
+	public int getPosY() {
+		return posY;
 	}
 
 	public int getSizeX() {
@@ -44,12 +45,12 @@ public class InventoryItem {
 		return tab;
 	}
 
-	public void setX(int x) {
-		this.x = x;
+	public void setPosX(int posX) {
+		this.posX = posX;
 	}
 
-	public void setY(int y) {
-		this.y = y;
+	public void setPosY(int posY) {
+		this.posY = posY;
 	}
 
 	public void setTab(int tab) {

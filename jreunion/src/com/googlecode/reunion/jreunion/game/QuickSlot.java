@@ -55,37 +55,37 @@ public class QuickSlot {
 		InventoryItem invItem = player.getInventory().getItem(itemId);
 		QuickSlotItem qsItem = new QuickSlotItem(invItem.getItem(), slot);
 
-		player.getInventory().removeItem(invItem);
+		player.getInventory().deleteInventoryItem(invItem);
 		addItem(qsItem);
 	}
 
 	/****** Add/Remove Quick Slot Items ******/
 	public void quickSlot(Player player, int slot) {
 
-		if (player.getInventory().getItemSelected() == null) {
+		if (player.getInventory().getHoldingItem() == null) {
 			QuickSlotItem qsItem = getItem(slot);
 			removeItem(qsItem);
 			
 			InventoryItem invItem = new InventoryItem(qsItem.getItem(), -1,
 					-1, -1);
 			
-			player.getInventory().setItemSelected(invItem);
+			player.getInventory().setHoldingItem(invItem);
 			
 			
 		} else {
-			InventoryItem invItem = player.getInventory().getItemSelected();
+			InventoryItem invItem = player.getInventory().getHoldingItem();
 			QuickSlotItem newQuickSlotItem = new QuickSlotItem(
 					invItem.getItem(), slot);
 			QuickSlotItem oldQuickSlotItem = getItem(slot);
 			if (oldQuickSlotItem == null) {
 				addItem(newQuickSlotItem);
-				player.getInventory().setItemSelected(null);
+				player.getInventory().setHoldingItem(null);
 			} else {
 				removeItem(oldQuickSlotItem);
 				addItem(newQuickSlotItem);
 				invItem = new InventoryItem(oldQuickSlotItem.getItem(), 0, 0,
 						0);
-				player.getInventory().setItemSelected(invItem);
+				player.getInventory().setHoldingItem(invItem);
 			}
 		}
 	}

@@ -511,12 +511,12 @@ public class DatabaseUtils extends Service {
 			player.getQuickSlot().addItem(new QuickSlotItem(hpPot1,0));
 			saveQuickSlot(player);
 			
-			player.getInventory().addItem(weapon);
-			player.getInventory().addItem(hpPot2);
-			player.getInventory().addItem(hpPot3);
-			player.getInventory().addItem(hpPot4);
-			player.getInventory().addItem(hpPot5);
-			player.getInventory().addItem(hpPot6);
+			player.getInventory().storeItem(weapon);
+			player.getInventory().storeItem(hpPot2);
+			player.getInventory().storeItem(hpPot3);
+			player.getInventory().storeItem(hpPot4);
+			player.getInventory().storeItem(hpPot5);
+			player.getInventory().storeItem(hpPot6);
 			saveInventory(player);
 						
 		} catch (SQLException e1) {
@@ -537,6 +537,7 @@ public class DatabaseUtils extends Service {
 					+ " and accountid = "
 					+ accountId
 					+ ";");
+			
 		} catch (SQLException e1) {
 			Logger.getLogger(this.getClass()).warn("Exception",e1);
 			return;
@@ -585,9 +586,12 @@ public class DatabaseUtils extends Service {
 			
 			while (invTable.next()) 
 			{
-				Item item = ItemFactory.loadItem(invTable.getInt("itemid"));
-				if (item!=null)
-					player.getInventory().addItem(invTable.getInt("x"), invTable.getInt("y"), item,invTable.getInt("tab"));
+				Item item = ItemFactory.loadItem(invTable.getInt("itemid"));	
+				
+				if (item!=null){
+					InventoryItem inventoryItem = new InventoryItem(item,invTable.getInt("x"), invTable.getInt("y"),invTable.getInt("tab"));
+					player.getInventory().addInventoryItem(inventoryItem);
+				}
 			}
 			
 		} catch (SQLException e1) {
@@ -638,7 +642,7 @@ public class DatabaseUtils extends Service {
 				*/
 				
 				data+="("+player.getPlayerId()+ ",'"+item.getItemId()+"',"+invItem.getTab()+
-					","+invItem.getX()+ ","+invItem.getY()+ ")";			
+					","+invItem.getPosX()+ ","+invItem.getPosY()+ ")";			
 				if(iter.hasNext())
 					data+= ", ";			
 			}
@@ -1083,8 +1087,8 @@ public class DatabaseUtils extends Service {
 				stmt.execute("INSERT INTO exchange (charid, itemid, x, y)" +
 						" VALUES ("+player.getPlayerId()+ ","
 								   +exchangeItem.getItem().getItemId()+","
-								   +exchangeItem.getX()+","
-								   +exchangeItem.getY()+");");
+								   +exchangeItem.getPosX()+","
+								   +exchangeItem.getPosY()+");");
 			}
 			
 		} catch (SQLException e) {

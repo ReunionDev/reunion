@@ -420,7 +420,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					//ParsedItem parsedItem = Reference.getInstance().getItemReference().getItemById(itemId);
 					
 					Logger.getLogger(PacketParser.class).info(roamingItem+" "+itemId);
-					if(roamingItem!=null){
+					if(roamingItem!=null && player.getInventory().getHoldingItem()==null ){
 						client.getPlayer().pickupItem(roamingItem);							
 					}
 					
@@ -434,13 +434,15 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					InventoryItem inventoryItem = inventory.getItem(tab, x, y);
 					Item item = inventoryItem.getItem();
 					com.useItem(player, item);					
-					inventory.removeItem(inventoryItem);
+					inventory.deleteInventoryItem(inventoryItem);
 					
+					//used when we click in any position inside the inventory
 				} else if (message[0].equals("inven")) {
 					
 					int tab = Integer.parseInt(message[1]);
 					int x = Integer.parseInt(message[2]);
 					int y = Integer.parseInt(message[3]);
+					
 					client.getPlayer().getInventory().handleInventory(tab, x, y);
 
 				} else if (message[0].equals("drop")) {
@@ -463,7 +465,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					}
 				} else if (message[0].equals("wear")) {
 					int slotId = Integer.parseInt(message[1]);
-					Equipment.Slot slot =Equipment.Slot.byValue(slotId);
+					Equipment.Slot slot = Equipment.Slot.byValue(slotId);
 					client.getPlayer().wearSlot(slot);
 					// com.getPlayer()Wear(client.getPlayer()Object,Integer.parseInt(message[1]));
 					
