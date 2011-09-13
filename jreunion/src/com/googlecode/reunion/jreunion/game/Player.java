@@ -17,8 +17,6 @@ import com.googlecode.reunion.jreunion.events.map.PlayerLogoutEvent;
 import com.googlecode.reunion.jreunion.events.network.NetworkAcceptEvent;
 import com.googlecode.reunion.jreunion.events.session.SessionEvent;
 import com.googlecode.reunion.jreunion.game.Equipment.Slot;
-import com.googlecode.reunion.jreunion.game.items.equipment.Armor;
-import com.googlecode.reunion.jreunion.game.items.equipment.Weapon;
 import com.googlecode.reunion.jreunion.server.Client;
 import com.googlecode.reunion.jreunion.server.Client.State;
 import com.googlecode.reunion.jreunion.server.DatabaseUtils;
@@ -597,6 +595,11 @@ public abstract class Player extends LivingObject implements EventListener {
 				.itemListIterator();
 		while (exchangeIter.hasNext()) {
 			ExchangeItem exchangeItem = exchangeIter.next();
+			Item item = exchangeItem.getItem();
+			
+			if(item.getEntityId()==-1){
+				client.getPlayer().getPosition().getLocalMap().createEntityId(item);
+			}
 			
 			client.sendPacket(Type.INVEN, exchangeItem);
 
@@ -627,6 +630,10 @@ public abstract class Player extends LivingObject implements EventListener {
 	/****** load Inventory Items ******/
 	public void loadInventory() {
 		Client client = getClient();
+		
+		if (client == null) {
+			return;
+		}
 	
 		Iterator<InventoryItem> invIter = getInventory()
 				.getInventoryIterator();
@@ -654,17 +661,33 @@ public abstract class Player extends LivingObject implements EventListener {
 		while (quickSlot.hasNext()) {
 			QuickSlotItem qsItem = quickSlot.next();
 			Item item = qsItem.getItem();
-			if(item!=null){
-				String packetData = "quick " + qsItem.getSlot() + " "
-						+ item.getEntityId() + " "
-						+ item.getType() + " "
-						+ item.getGemNumber() + " "
-						+ item.getExtraStats() + "\n";
-				
-						client.sendData( packetData);
+			
+			if(item.getEntityId()==-1){
+				client.getPlayer().getPosition().getLocalMap().createEntityId(item);
+			}
+			client.sendPacket(Type.QUICK, qsItem);
+		}
+	}
+	
+	/****** load Equipment Items ******/
+	public void loadEquipment(LocalMap localMap) {
+		
+		if(localMap == null)
+			return;
+		
+		for(int slot=0; slot<10; slot++){
+			Item item = getEquipment().getItem(Equipment.Slot.byValue(slot));
+			
+			if(item == null)
+				continue;
+			
+			if(item.getEntityId()==-1){
+				localMap.createEntityId(item);
 			}
 		}
 	}
+
+		
 
 	/****** Manages the char Logout ******/
 	public synchronized void save() {
@@ -689,24 +712,27 @@ public abstract class Player extends LivingObject implements EventListener {
 	// When you pick up an item, or buy something from merchant
 	public void pickItem(Item item) {
 		Client client = getClient();
-
-		//TODO: Fix item pickup
-		getInventory().addItem(item);
 		
-		//getInventory().PrintInventoryMap(0); //Debug
-		InventoryItem invItem = getInventory().getItem(item);
-		// DatabaseUtils.getInstance().saveInventory(client.getPlayer()Object);
-
-		if (invItem == null) {
-			invItem = new InventoryItem(item, 0, 0, 0);
-			getInventory().setHoldingItem(invItem);
-				
-		}
+		if(item == null)
+			return;
+		
 		if(item.getEntityId()==-1){
 			getPosition().getLocalMap().createEntityId(item);
 		}
 		
-		client.sendPacket(Type.PICK, invItem);
+		//TODO: Fix item pickup
+		InventoryItem inventoryItem = getInventory().storeItem(item);
+		
+		//getInventory().PrintInventoryMap(0); //Debug
+		//InventoryItem invItem = getInventory().getItem(item);
+		// DatabaseUtils.getInstance().saveInventory(client.getPlayer()Object);
+
+		if (inventoryItem == null) {
+			inventoryItem = new InventoryItem(item, 0, 0, 0);
+			getInventory().setHoldingItem(inventoryItem);
+		}
+		
+		client.sendPacket(Type.PICK, inventoryItem);
 		
 		// S> pick [UniqueID] [Type] [Tab] [PosX] [PosY] [GemNumber] [Special]
 	}
@@ -1155,7 +1181,7 @@ public abstract class Player extends LivingObject implements EventListener {
 			*/
 
 			getInventory()
-					.setItemSelected(
+					.setHoldingItem(
 							new InventoryItem(getEquipment().getItem(slot),
 									0, 0, 0));
 			getEquipment().setItem(slot, null);

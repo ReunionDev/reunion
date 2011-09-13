@@ -155,17 +155,20 @@ public class Inventory {
 		return null;
 	}
 	
-	//stores an inventory item on any free position.
+	//stores an inventory item in the first free position.
 	//in this case, there is no item selected.
-	public boolean storeItem(Item item){
+	public InventoryItem storeItem(Item item){
 		if(item != null){
 			
 			int[] position = getFreeSlots(item);
+			if(position == null)
+				return null;
+			InventoryItem inventoryItem = new InventoryItem(item,position[1],position[2],position[0]);
 			
-			addInventoryItem(new InventoryItem(item,position[1],position[2],position[0]));
-			return true;
+			addInventoryItem(inventoryItem);
+			return inventoryItem;
 		}
-		return false;
+		return null;
 	}
 	
 	//stores an inventory item on the given position.

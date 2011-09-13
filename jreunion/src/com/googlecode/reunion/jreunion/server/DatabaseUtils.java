@@ -281,8 +281,8 @@ public class DatabaseUtils extends Service {
 		
 	}
 
-	public void loadEquipment(Player player) {		
-		loadEquipment(player.getEquipment(), player.getPlayerId());
+	public Equipment loadEquipment(Player player) {		
+		return loadEquipment(player.getEquipment(), player.getPlayerId());
 	}
 	
 	public Player loadCharStatus(Client client, int charId){

@@ -17,6 +17,7 @@ import com.googlecode.reunion.jreunion.game.Mob;
 import com.googlecode.reunion.jreunion.game.Npc;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Position;
+import com.googlecode.reunion.jreunion.game.QuickSlotItem;
 import com.googlecode.reunion.jreunion.game.RoamingItem;
 import com.googlecode.reunion.jreunion.game.Equipment.Slot;
 import com.googlecode.reunion.jreunion.game.Skill;
@@ -71,7 +72,9 @@ public class PacketFactory {
 		SKILLLEVEL_ALL, 
 		A_,
 		SKILL,
-		MULTI_SHOT
+		MULTI_SHOT,
+		QUICK,
+		WEARING
 	}
 	
 	public static String createPacket(Type packetType, Object... args) {
@@ -454,10 +457,11 @@ public class PacketFactory {
 			if(args.length > 0){
 				InventoryItem invItem = (InventoryItem)args[0];
 				Item item = invItem.getItem();
+				
 				return "inven " + invItem.getTab() + " "
 				+ item.getEntityId() + " "
-				+ item.getType() + " " + invItem.getX()
-				+ " " + invItem.getY() + " "
+				+ item.getType() + " " + invItem.getPosX()
+				+ " " + invItem.getPosY() + " "
 				+ item.getGemNumber() + " "
 				+ item.getExtraStats();
 			}
@@ -474,6 +478,44 @@ public class PacketFactory {
 					  // S> multi_shot char [charID] [numberOfShots]
 			}
 			break;
+			
+		case QUICK:
+			if(args.length > 0){
+				QuickSlotItem qsItem = (QuickSlotItem)args[0];
+				Item item = qsItem.getItem();
+				
+				return "quick " + qsItem.getSlot() + " "
+						+ item.getEntityId() + " "
+						+ item.getType() + " "
+						+ item.getGemNumber() + " "
+						+ item.getExtraStats() + "\n";
+			}
+			break;
+			
+		case WEARING:
+			if(args.length > 0){
+				Equipment eq = (Equipment)args[0];
+				
+				return "wearing " + eq.getEntityId(Slot.HELMET) + " " + eq.getType(Slot.HELMET) + " "
+						+ eq.getGemNumber(Slot.HELMET) + " " + eq.getExtraStats(Slot.HELMET) + " " + eq.getEntityId(Slot.CHEST) + " "
+						+ eq.getType(Slot.CHEST) + " " + eq.getGemNumber(Slot.CHEST) + " " + eq.getExtraStats(Slot.CHEST) + " "
+						+ eq.getEntityId(Slot.PANTS) + " " + eq.getType(Slot.PANTS) + " " + eq.getGemNumber(Slot.PANTS) + " "
+						+ eq.getExtraStats(Slot.PANTS) + " " + eq.getEntityId(Slot.SHOULDER) + " "
+						+ eq.getType(Slot.SHOULDER) + " " + eq.getGemNumber(Slot.SHOULDER) + " "
+						+ eq.getExtraStats(Slot.SHOULDER) + " " + eq.getEntityId(Slot.BOOTS) + " " + eq.getType(Slot.BOOTS)
+						+ " " + eq.getGemNumber(Slot.BOOTS) + " " + eq.getExtraStats(Slot.BOOTS) + " " + eq.getEntityId(Slot.OFFHAND)
+						+ " " + eq.getType(Slot.OFFHAND) + " " + eq.getGemNumber(Slot.OFFHAND) + " " + eq.getExtraStats(Slot.OFFHAND)
+						+ " " + eq.getEntityId(Slot.NECKLACE) + " " + eq.getType(Slot.NECKLACE) + " "
+						+ eq.getGemNumber(Slot.NECKLACE) + " " + eq.getExtraStats(Slot.NECKLACE) + " " + eq.getEntityId(Slot.BRACELET)
+						+ " " + eq.getType(Slot.BRACELET) + " " + eq.getGemNumber(Slot.BRACELET) + " "
+						+ eq.getExtraStats(Slot.BRACELET) + " " + eq.getEntityId(Slot.RING) + " " + eq.getType(Slot.RING) + " "
+						+ eq.getGemNumber(Slot.RING) + " " + eq.getExtraStats(Slot.RING) + " " + eq.getEntityId(Slot.MAINHAND) + " "
+						+ eq.getType(Slot.MAINHAND) + " " + eq.getGemNumber(Slot.MAINHAND) + " " + eq.getExtraStats(Slot.MAINHAND);
+				// wearing [Helm] [Armor] [Pants] [ShoulderMount] [Boots] [Shield]
+				// [Necklace] [Bracelet] [Ring] [Weapon]
+			}
+			break;
+			
 			
 		default:			
 			throw new UnsupportedOperationException();

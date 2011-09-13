@@ -178,18 +178,15 @@ public class Command {
 		Player player = DatabaseUtils.getInstance().loadChar(slotNumber,
 				accountId, client);
 		
-		DatabaseUtils.getInstance().loadEquipment(player);
-		Equipment eq = player.getEquipment();
+		Equipment equipment = DatabaseUtils.getInstance().loadEquipment(player);
 		
 		world.getSkillManager().loadSkills(player);
-		DatabaseUtils.getInstance().loadSkills(player);
-		
+		DatabaseUtils.getInstance().loadSkills(player);	
+		player.loadEquipment(DatabaseUtils.getInstance().getSavedPosition(player).getLocalMap());
 
 		serverSay(player.getName() + " is logging in (ID: "	+ player.getPlayerId() + ")\n");
 
 		client.sendPacket(Type.SKILLLEVEL_ALL,player);
-		String packetData = "";
-		
 		
 		client.sendPacket(Type.A_, "idx", client.getAccountId());
 
@@ -197,38 +194,7 @@ public class Command {
 		
 		client.sendPacket(Type.A_, "lev", player.getAdminState());
 
-		packetData = "wearing " + eq.getEntityId(Slot.HELMET) + " " + eq.getType(Slot.HELMET) + " "
-				+ eq.getGemNumber(Slot.HELMET) + " " + eq.getExtraStats(Slot.HELMET) + " " + eq.getEntityId(Slot.CHEST) + " "
-				+ eq.getType(Slot.CHEST) + " " + eq.getGemNumber(Slot.CHEST) + " " + eq.getExtraStats(Slot.CHEST) + " "
-				+ eq.getEntityId(Slot.PANTS) + " " + eq.getType(Slot.PANTS) + " " + eq.getGemNumber(Slot.PANTS) + " "
-				+ eq.getExtraStats(Slot.PANTS) + " " + eq.getEntityId(Slot.SHOULDER) + " "
-				+ eq.getType(Slot.SHOULDER) + " " + eq.getGemNumber(Slot.SHOULDER) + " "
-				+ eq.getExtraStats(Slot.SHOULDER) + " " + eq.getEntityId(Slot.BOOTS) + " " + eq.getType(Slot.BOOTS)
-				+ " " + eq.getGemNumber(Slot.BOOTS) + " " + eq.getExtraStats(Slot.BOOTS) + " " + eq.getEntityId(Slot.OFFHAND)
-				+ " " + eq.getType(Slot.OFFHAND) + " " + eq.getGemNumber(Slot.OFFHAND) + " " + eq.getExtraStats(Slot.OFFHAND)
-				+ " " + eq.getEntityId(Slot.NECKLACE) + " " + eq.getType(Slot.NECKLACE) + " "
-				+ eq.getGemNumber(Slot.NECKLACE) + " " + eq.getExtraStats(Slot.NECKLACE) + " " + eq.getEntityId(Slot.BRACELET)
-				+ " " + eq.getType(Slot.BRACELET) + " " + eq.getGemNumber(Slot.BRACELET) + " "
-				+ eq.getExtraStats(Slot.BRACELET) + " " + eq.getEntityId(Slot.RING) + " " + eq.getType(Slot.RING) + " "
-				+ eq.getGemNumber(Slot.RING) + " " + eq.getExtraStats(Slot.RING) + " " + eq.getEntityId(Slot.MAINHAND) + " "
-				+ eq.getType(Slot.MAINHAND) + " " + eq.getGemNumber(Slot.MAINHAND) + " " + eq.getExtraStats(Slot.MAINHAND);
-		// wearing [Helm] [Armor] [Pants] [ShoulderMount] [Boots] [Shield]
-		// [Necklace] [Bracelet] [Ring] [Weapon]
-		client.sendData(packetData);
-
-		
-		
-	
-		
-		/* //this statment isn't executed because the server isn't in
-		   //the state INGAME yet
-		player.sendStatus(Status.TOTALEXP);					
-		player.sendStatus(Status.LEVELUPEXP);					
-		player.sendStatus(Status.STATUSPOINTS);					
-		player.sendStatus(Status.LIME);
-		player.sendStatus(Status.PENALTYPOINTS);
-		*/
-		
+		client.sendPacket(Type.WEARING, equipment);
 
 		client.sendPacket(PacketFactory.Type.OK);
 
