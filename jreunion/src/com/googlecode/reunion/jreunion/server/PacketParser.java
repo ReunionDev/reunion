@@ -408,7 +408,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					
 					item.setGemNumber(itemgem+1);
 					
-					client.sendPacket(Type.SAY,"Itemid: "+item.getItemId());
+					player.getInventory().setHoldingItem(null);
 					
 					client.sendPacket(Type.UPGRADE, item, slot,1);
 				}
