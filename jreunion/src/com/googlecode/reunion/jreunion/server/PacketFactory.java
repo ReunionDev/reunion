@@ -74,7 +74,8 @@ public class PacketFactory {
 		SKILL,
 		MULTI_SHOT,
 		QUICK,
-		WEARING
+		WEARING,
+		UPGRADE
 	}
 	
 	public static String createPacket(Type packetType, Object... args) {
@@ -489,6 +490,19 @@ public class PacketFactory {
 						+ item.getType() + " "
 						+ item.getGemNumber() + " "
 						+ item.getExtraStats() + "\n";
+			}
+			break;
+		
+		case UPGRADE:
+			if(args.length > 0){
+				Item item = (Item) args[0];
+				Slot slot = (Slot) args[1];
+				int upgraderesult = (Integer) args[2];
+				
+				return "upgrade " + upgraderesult + " "
+						+ slot.value() + " "
+						+ item.getEntityId() + " "
+						+ item.getGemNumber() + "\n";
 			}
 			break;
 			

@@ -26,6 +26,7 @@ import com.googlecode.reunion.jreunion.events.session.NewSessionEvent;
 import com.googlecode.reunion.jreunion.game.Castable;
 import com.googlecode.reunion.jreunion.game.Effectable;
 import com.googlecode.reunion.jreunion.game.Equipment;
+import com.googlecode.reunion.jreunion.game.Equipment.Slot;
 import com.googlecode.reunion.jreunion.game.Inventory;
 import com.googlecode.reunion.jreunion.game.InventoryItem;
 import com.googlecode.reunion.jreunion.game.Item;
@@ -394,7 +395,24 @@ public class PacketParser extends EventDispatcher implements EventListener{
 						client.getPlayer().say(text);
 					}
 				}
-	
+				
+				else if (message[0].equals("upgrade")) {
+					String text = message[1];
+					
+					Slot slot = Slot.byValue(Integer.parseInt(text));
+					Item item = player.getEquipment().getItem(slot);
+					
+					client.sendPacket(Type.SAY, "Upgrade Slot "+slot.name()+" (Item:"+item.getName()+")");
+					
+					int itemgem = item.getGemNumber();
+					
+					item.setGemNumber(itemgem+1);
+					
+					client.sendPacket(Type.SAY,"Itemid: "+item.getItemId());
+					
+					client.sendPacket(Type.UPGRADE, item, slot,1);
+				}
+				
 				else if (message[0].equals("tell")) {
 	
 					String text = message[2];
