@@ -767,7 +767,7 @@ public abstract class Player extends LivingObject implements EventListener {
 		if(getLevel() <= 30)
 			setHp(getMaxHp());
 		else
-			setHp((int)getMaxHp()/100*10);
+			setHp((int)(getMaxHp()*.1));
 		
 		spawn();
 	}

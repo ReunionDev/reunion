@@ -173,26 +173,8 @@ public class Item implements Entity {
 		
 		if(itemlvl < 181)
 		{
-			int[] upgradelvl_1to181 = new int[16];
-			upgradelvl_1to181[0] = 0;
-			upgradelvl_1to181[1] = 1;
-			upgradelvl_1to181[2] = 1;
-			upgradelvl_1to181[3] = 2;
-			upgradelvl_1to181[4] = 2;
-			upgradelvl_1to181[5] = 2;
-			upgradelvl_1to181[6] = 3;
-			upgradelvl_1to181[7] = 3;
-			upgradelvl_1to181[8] = 3;
-			upgradelvl_1to181[9] = 3;
-			upgradelvl_1to181[10] = 4;
-			upgradelvl_1to181[11] = 4;
-			upgradelvl_1to181[12] = 4;
-			upgradelvl_1to181[13] = 4;
-			upgradelvl_1to181[14] = 4;
-			upgradelvl_1to181[15] = 5;
-			if(gemnumber > 15)
-				gemnumber = 15;
-			upped = upgradelvl_1to181[gemnumber];
+			upped = (gemnumber/1>0?1:0)+(gemnumber/3>0?1:0)+(gemnumber/6>0?1:0)+(gemnumber/10>0?1:0)+(gemnumber/15>0?1:0);
+			
 		}
 		else if(itemlvl > 181)
 		{

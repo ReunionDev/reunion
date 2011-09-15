@@ -410,6 +410,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					
 					DatabaseUtils.getInstance().saveItem(item);
 					
+					//TODO: Destroy and remove the gem from the database after the upgrade.
 					player.getInventory().setHoldingItem(null);
 					
 					client.sendPacket(Type.UPGRADE, item, slot,1);
