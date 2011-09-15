@@ -4,10 +4,10 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import com.googlecode.reunion.jcommon.ParsedItem;
-import com.googlecode.reunion.jreunion.game.Etc;
 import com.googlecode.reunion.jreunion.game.LivingObject;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Usable;
+import com.googlecode.reunion.jreunion.game.items.Etc;
 import com.googlecode.reunion.jreunion.server.Reference;
 
 /**

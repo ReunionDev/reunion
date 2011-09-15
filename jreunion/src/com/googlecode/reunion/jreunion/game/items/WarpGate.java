@@ -1,12 +1,14 @@
-package com.googlecode.reunion.jreunion.game;
+package com.googlecode.reunion.jreunion.game.items;
+
 
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-public class Etc extends EtcItem {
-	public Etc(int id) {
+public class WarpGate extends Etc {
+	public WarpGate(int id) {
 		super(id);
+		loadFromReference(id);
 	}
 
 	@Override

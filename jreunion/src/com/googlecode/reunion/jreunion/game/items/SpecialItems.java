@@ -1,6 +1,5 @@
 package com.googlecode.reunion.jreunion.game.items;
 
-import com.googlecode.reunion.jreunion.game.EtcItem;
 
 /**
  * @author Aidamina

@@ -1,6 +1,8 @@
-package com.googlecode.reunion.jreunion.game;
+package com.googlecode.reunion.jreunion.game.items;
 
 import com.googlecode.reunion.jcommon.ParsedItem;
+import com.googlecode.reunion.jreunion.game.Player;
+import com.googlecode.reunion.jreunion.game.PlayerItem;
 import com.googlecode.reunion.jreunion.game.Player.Race;
 import com.googlecode.reunion.jreunion.server.Reference;
 

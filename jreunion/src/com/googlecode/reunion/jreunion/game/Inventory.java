@@ -89,10 +89,13 @@ public class Inventory {
 		for (int x = posX; x < posX + sizeX; x++) {
 			for (int y = posY; y < posY + sizeY; y++) {
 				if (posEmpty(tab, x, y) == false) {
+					
 					position[0] = tab;
 					position[1] = x;
 					position[2] = y;
 					return position;
+					
+					//return getItem(tab, x, y);
 				}
 			}
 		}
@@ -192,9 +195,9 @@ public class Inventory {
 		InventoryItem inventoryItem = null;
 		
 		if(holdingItem != null){
-			itemPosition = getDetectedItemPosition(tab,posX,posY,holdingItem.getSizeX(),holdingItem.getSizeY());
+			itemPosition = getDetectedItemPosition(tab, posX, posY, holdingItem.getSizeX(), holdingItem.getSizeY());
 			//itemPosition[0]=tab / itemPosition[1]=posX / itemPosition[2]=posY
-			inventoryItem = getItem(itemPosition[0],itemPosition[1],itemPosition[2]);	
+			inventoryItem = getItem(itemPosition[0], itemPosition[1], itemPosition[2]);
 		}else {
 			inventoryItem = getItem(tab,posX,posY);	
 		}

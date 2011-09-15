@@ -674,9 +674,8 @@ public abstract class Player extends LivingObject implements EventListener {
 		
 		if(localMap == null)
 			return;
-		
-		for(int slot=0; slot<10; slot++){
-			Item item = getEquipment().getItem(Equipment.Slot.byValue(slot));
+		for(Equipment.Slot slot: Equipment.Slot.values()){
+			Item item = getEquipment().getItem(slot);
 			
 			if(item == null)
 				continue;
@@ -712,21 +711,14 @@ public abstract class Player extends LivingObject implements EventListener {
 	// When you pick up an item, or buy something from merchant
 	public void pickItem(Item item) {
 		Client client = getClient();
-		
-		if(item == null)
-			return;
-		
+				
 		if(item.getEntityId()==-1){
-			getPosition().getLocalMap().createEntityId(item);
+			Logger.getLogger(Player.class).error("Player tries to pick up item without a valid entity id");
+			return;
 		}
 		
-		//TODO: Fix item pickup
 		InventoryItem inventoryItem = getInventory().storeItem(item);
 		
-		//getInventory().PrintInventoryMap(0); //Debug
-		//InventoryItem invItem = getInventory().getItem(item);
-		// DatabaseUtils.getInstance().saveInventory(client.getPlayer()Object);
-
 		if (inventoryItem == null) {
 			inventoryItem = new InventoryItem(item, 0, 0, 0);
 			getInventory().setHoldingItem(inventoryItem);
@@ -734,7 +726,6 @@ public abstract class Player extends LivingObject implements EventListener {
 		
 		client.sendPacket(Type.PICK, inventoryItem);
 		
-		// S> pick [UniqueID] [Type] [Tab] [PosX] [PosY] [GemNumber] [Special]
 	}
 
 	/****** Manages the Pickup command ******/
@@ -1175,13 +1166,7 @@ public abstract class Player extends LivingObject implements EventListener {
 		InventoryItem invItem = getInventory().getHoldingItem();
 
 		if (invItem == null) {
-			/*
-			if (getEquipment().getItem(slot) instanceof Weapon) {
-				setMinDmg(1);
-				setMaxDmg(2);
-			}
-			*/
-
+			
 			getInventory()
 					.setHoldingItem(
 							new InventoryItem(getEquipment().getItem(slot),

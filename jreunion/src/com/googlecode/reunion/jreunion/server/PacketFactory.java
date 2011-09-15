@@ -539,8 +539,7 @@ public class PacketFactory {
 						+ eq.getExtraStats(Slot.BRACELET) + " " + eq.getEntityId(Slot.RING) + " " + eq.getType(Slot.RING) + " "
 						+ eq.getGemNumber(Slot.RING) + " " + eq.getExtraStats(Slot.RING) + " " + eq.getEntityId(Slot.MAINHAND) + " "
 						+ eq.getType(Slot.MAINHAND) + " " + eq.getGemNumber(Slot.MAINHAND) + " " + eq.getExtraStats(Slot.MAINHAND);
-				// wearing [Helm] [Armor] [Pants] [ShoulderMount] [Boots] [Shield]
-				// [Necklace] [Bracelet] [Ring] [Weapon]
+			
 			}
 			break;
 			
