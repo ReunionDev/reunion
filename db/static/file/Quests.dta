@@ -1,0 +1,9 @@
+######## Quests ########
+[Test Quest #1]
+ID = 1
+Lime = 1
+XP = 1
+MinLevel = 1
+MaxLevel = 250
+
+Class = Quest
