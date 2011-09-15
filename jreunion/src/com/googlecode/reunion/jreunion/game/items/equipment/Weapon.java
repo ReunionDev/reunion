@@ -16,6 +16,10 @@ public abstract class Weapon extends PlayerItem {
 
 	private int minDamge;
 
+	private int minUnmodifiedDamge;
+	
+	private int maxUnmodifiedDamge;
+	
 	private int maxDamage;
 
 	private int reqStr;
@@ -35,6 +39,8 @@ public abstract class Weapon extends PlayerItem {
 	private int handed; // 1 - One handed; 2 - Two handed
 
 	private float magicDmg; // value in %
+	
+	private float magicUnmodifiedDmg; // value in %
 
 	public Weapon(int id) {
 		super(id);
@@ -63,6 +69,15 @@ public abstract class Weapon extends PlayerItem {
 		return minDamge;
 	}
 
+
+	public int getUnmodifiedMinDamage() {
+		return minUnmodifiedDamge;
+	}
+	
+	public int getUnmodifiedMaxDamage() {
+		return maxUnmodifiedDamge;
+	}
+	
 	public int getPosition() {
 		return position;
 	}
@@ -89,6 +104,10 @@ public abstract class Weapon extends PlayerItem {
 	
 	public float getMagicDmg() {
 		return magicDmg;
+	}
+	
+	public float getUnmodifiedMagicDmg() {
+		return magicUnmodifiedDmg;
 	}
 
 	@Override
@@ -135,16 +154,20 @@ public abstract class Weapon extends PlayerItem {
 			}
 			if (item.checkMembers(new String[] { "MinDmg" })) {
 				// use member from file
+				setUnmodifiedMinDamage(Integer.parseInt(item.getMemberValue("MinDmg")));
 				setMinDamage(Integer.parseInt(item.getMemberValue("MinDmg")));
 			} else {
 				// use default
+				setUnmodifiedMinDamage(1);
 				setMinDamage(1);
 			}
 			if (item.checkMembers(new String[] { "MaxDmg" })) {
 				// use member from file
+				setUnmodifiedMaxDamage(Integer.parseInt(item.getMemberValue("MaxDmg")));
 				setMaxDamage(Integer.parseInt(item.getMemberValue("MaxDmg")));
 			} else {
 				// use default
+				setUnmodifiedMaxDamage(1);
 				setMaxDamage(1);
 			}
 			if (item.checkMembers(new String[] { "ReqStr" })) {
@@ -185,9 +208,11 @@ public abstract class Weapon extends PlayerItem {
 			if (item.checkMembers(new String[] { "MagicDmg" })) {
 				// use member from file
 				setMagicDmg(Float.parseFloat(item.getMemberValue("MagicDmg")));
+				setUnmodifiedMagicDmg(Float.parseFloat(item.getMemberValue("MagicDmg")));
 			} else {
 				// use default
 				setMagicDmg(0);
+				setUnmodifiedMagicDmg(0);
 			}	
 		}
 	}
@@ -212,6 +237,15 @@ public abstract class Weapon extends PlayerItem {
 		this.minDamge = minDamge;
 	}
 
+
+	public void setUnmodifiedMaxDamage(int maxDamage) {
+		this.maxUnmodifiedDamge = maxDamage;
+	}
+
+	public void setUnmodifiedMinDamage(int minDamge) {
+		this.minUnmodifiedDamge = minDamge;
+	}
+	
 	public void setPosition(int position) {
 		this.position = position;
 	}
@@ -238,6 +272,10 @@ public abstract class Weapon extends PlayerItem {
 	
 	public void setMagicDmg(float magicDmg) {
 		this.magicDmg = magicDmg;
+	}
+	
+	public void setUnmodifiedMagicDmg(float magicDmg) {
+		this.magicUnmodifiedDmg = magicDmg;
 	}
 
 }

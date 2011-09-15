@@ -496,7 +496,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					
 					if(message.length > 2) { //if length=2 then player is using skill on himself
 						
-						if(message[2].equals("npc")){ // LivingObject Skill attack
+						if(message[2].equals("npc") || message[2].equals("char")){ // LivingObject Skill attack
 							entityId = Integer.parseInt(message[3]);
 						}
 						else{ // LivingOject Basic attack

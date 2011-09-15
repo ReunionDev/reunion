@@ -75,7 +75,8 @@ public class PacketFactory {
 		MULTI_SHOT,
 		QUICK,
 		WEARING,
-		UPGRADE
+		UPGRADE,
+		KILL
 	}
 	
 	public static String createPacket(Type packetType, Object... args) {
@@ -503,6 +504,19 @@ public class PacketFactory {
 						+ slot.value() + " "
 						+ item.getEntityId() + " "
 						+ item.getGemNumber() + "\n";
+			}
+			break;
+			
+		case KILL:
+			if(args.length > 0){ //Kill is used on 2007+ client
+				LivingObject target = (LivingObject) args[0];
+				
+				if(target instanceof Player)
+				{
+					return "kill c " + target.getEntityId() + "\n";
+				}
+				else
+					return "kill n " + target.getEntityId() + "\n";
 			}
 			break;
 			

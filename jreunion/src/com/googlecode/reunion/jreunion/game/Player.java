@@ -773,10 +773,12 @@ public abstract class Player extends LivingObject implements EventListener {
 
 	/****** revive player when he dies ******/
 	public void revive() {
-
-		setHp(getMaxHp());
+		if(getLevel() <= 30)
+			setHp(getMaxHp());
+		else
+			setHp((int)getMaxHp()/100*10);
+		
 		spawn();
-
 	}
 	
 	public int getSkillLevel(Skill skill){

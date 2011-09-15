@@ -10,6 +10,8 @@ import com.googlecode.reunion.jreunion.server.Reference;
  */
 public class Armor extends PlayerItem {
 	private int def;
+	
+	private int defunmodified;
 
 	private int reqStr;
 
@@ -54,6 +56,10 @@ public class Armor extends PlayerItem {
 
 	public int getDef() {
 		return def;
+	}
+
+	public int getUnmodifiedDef() {
+		return defunmodified;
 	}
 
 	public int getLevel() {
@@ -123,9 +129,11 @@ public class Armor extends PlayerItem {
 			if (item.checkMembers(new String[] { "Def" })) {
 				// use member from file
 				setDef(Integer.parseInt(item.getMemberValue("Def")));
+				setUnmodifiedDef(Integer.parseInt(item.getMemberValue("Def")));
 			} else {
 				// use default
 				setDef(0);
+				setUnmodifiedDef(0);
 			}
 			if (item.checkMembers(new String[] { "ReqStr" })) {
 				// use member from file
@@ -230,6 +238,10 @@ public class Armor extends PlayerItem {
 		this.def = def;
 	}
 
+	public void setUnmodifiedDef(int def) {
+		this.defunmodified = def;
+	}
+	
 	public void setLevel(int level) {
 		this.level = level;
 	}

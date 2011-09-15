@@ -1,6 +1,8 @@
 package com.googlecode.reunion.jreunion.game;
 
 import com.googlecode.reunion.jcommon.ParsedItem;
+import com.googlecode.reunion.jreunion.game.items.equipment.Armor;
+import com.googlecode.reunion.jreunion.game.items.equipment.Weapon;
 import com.googlecode.reunion.jreunion.server.Reference;
 
 /**
@@ -137,6 +139,115 @@ public class Item implements Entity {
 	public void setDescription(int description) {
 		this.description = description;
 	}
+	
+	private void upgrade()
+	{
+		int itemlvl = 0;
+		int upped = 0;
+		int mindamage = 0;
+		int maxdamage = 0;
+		float magicdamage = 0;
+		int defense = 0;
+		
+		int gemnumber = this.getGemNumber();
+		
+		if(this instanceof Weapon)
+		{
+			itemlvl = ((Weapon) this).getLevel();
+		}
+		else if(this instanceof Armor)
+		{
+			itemlvl = ((Armor) this).getLevel();
+		}
+		
+		if(this instanceof Weapon)
+		{
+			mindamage = ((Weapon) this).getUnmodifiedMinDamage();
+			maxdamage = ((Weapon) this).getUnmodifiedMaxDamage();
+			magicdamage = ((Weapon) this).getUnmodifiedMagicDmg();
+		}
+		else if(this instanceof Armor)
+		{
+			defense = ((Armor) this).getUnmodifiedDef();
+		}
+		
+		if(itemlvl < 181)
+		{
+			int[] upgradelvl_1to181 = new int[16];
+			upgradelvl_1to181[0] = 0;
+			upgradelvl_1to181[1] = 1;
+			upgradelvl_1to181[2] = 1;
+			upgradelvl_1to181[3] = 2;
+			upgradelvl_1to181[4] = 2;
+			upgradelvl_1to181[5] = 2;
+			upgradelvl_1to181[6] = 3;
+			upgradelvl_1to181[7] = 3;
+			upgradelvl_1to181[8] = 3;
+			upgradelvl_1to181[9] = 3;
+			upgradelvl_1to181[10] = 4;
+			upgradelvl_1to181[11] = 4;
+			upgradelvl_1to181[12] = 4;
+			upgradelvl_1to181[13] = 4;
+			upgradelvl_1to181[14] = 4;
+			upgradelvl_1to181[15] = 5;
+			if(gemnumber > 15)
+				gemnumber = 15;
+			upped = upgradelvl_1to181[gemnumber];
+		}
+		else if(itemlvl > 181)
+		{
+			upped = gemnumber;
+		}
+		
+		if(upped > 0)
+		{
+			//Lvl < 181 Start
+			float[] steps_1to181 = new float[6];
+			steps_1to181[0] = 0;
+			steps_1to181[1] = .12f;
+			steps_1to181[2] = .26f;
+			steps_1to181[3] = .44f;
+			steps_1to181[4] = .68f;
+			steps_1to181[5] = 1;
+			
+			//Lvl < 181 End
+			
+			//Lvl 181 to 261 Start
+			float step_181to261 = .10f;
+			//Lvl 181 to 261 End
+			
+			if(this instanceof Weapon)
+			{
+				if(itemlvl < 181)
+				{
+					maxdamage = (int)(maxdamage*(steps_1to181[upped])+maxdamage );
+					mindamage = (int)(mindamage*(steps_1to181[upped])+mindamage );
+					magicdamage = magicdamage*(steps_1to181[upped])+magicdamage;
+				}
+				else if(itemlvl >= 181 && itemlvl < 261)
+				{
+					mindamage = (int)(mindamage*(step_181to261*upped)+mindamage);
+					maxdamage = (int)(maxdamage*(step_181to261*upped)+maxdamage);
+					magicdamage = magicdamage*(step_181to261*upped)+magicdamage;
+				}
+				((Weapon) this).setMinDamage(mindamage);
+				((Weapon) this).setMaxDamage(maxdamage);
+				((Weapon) this).setMagicDmg(magicdamage);
+			}
+			else if(this instanceof Armor)
+			{
+				if(itemlvl < 181)
+				{
+					defense = (int)(defense*(steps_1to181[upped])+defense );
+				}
+				else if(itemlvl >= 181 && itemlvl < 261)
+				{
+					defense = (int)(defense*(step_181to261*upped)+defense);
+				}
+				((Armor) this).setDef(defense);
+			}
+		}
+	}
 
 	public void setExtraStats(int extraStats) {
 		this.extraStats = extraStats;
@@ -144,6 +255,7 @@ public class Item implements Entity {
 
 	public void setGemNumber(int gemNumber) {
 		this.gemNumber = gemNumber;
+		upgrade();
 	}
 
 	public void setPrice(int price) {
