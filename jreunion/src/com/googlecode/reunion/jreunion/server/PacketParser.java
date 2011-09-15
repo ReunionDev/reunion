@@ -408,6 +408,8 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					
 					item.setGemNumber(itemgem+1);
 					
+					DatabaseUtils.getInstance().saveItem(item);
+					
 					player.getInventory().setHoldingItem(null);
 					
 					client.sendPacket(Type.UPGRADE, item, slot,1);
