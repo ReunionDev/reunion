@@ -3,7 +3,7 @@ ID = 1
 X = 6600
 Y = 4763
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -12,7 +12,7 @@ ID = 2
 X = 6745
 Y = 4671
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -21,7 +21,7 @@ ID = 3
 X = 6745
 Y = 4741
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -30,7 +30,7 @@ ID = 4
 X = 6792
 Y = 4736
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -39,7 +39,7 @@ ID = 5
 X = 6689
 Y = 4721
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -48,7 +48,7 @@ ID = 6
 X = 6638
 Y = 4741
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -57,7 +57,7 @@ ID = 7
 X = 6772
 Y = 4769
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -66,7 +66,7 @@ ID = 8
 X = 6777
 Y = 4819
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -75,7 +75,7 @@ ID = 9
 X = 6666
 Y = 4987
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -84,7 +84,7 @@ ID = 10
 X = 6856
 Y = 4611
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -93,7 +93,7 @@ ID = 11
 X = 6965
 Y = 4767
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -102,7 +102,7 @@ ID = 12
 X = 6917
 Y = 4615
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -111,7 +111,7 @@ ID = 13
 X = 6900
 Y = 4702
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -120,7 +120,7 @@ ID = 14
 X = 6881
 Y = 4651
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -129,7 +129,7 @@ ID = 15
 X = 6865
 Y = 4762
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -138,7 +138,7 @@ ID = 16
 X = 6858
 Y = 4969
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -147,7 +147,7 @@ ID = 17
 X = 6898
 Y = 4907
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -156,7 +156,7 @@ ID = 18
 X = 7070
 Y = 4769
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -165,7 +165,7 @@ ID = 19
 X = 7174
 Y = 4880
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -174,7 +174,7 @@ ID = 20
 X = 7137
 Y = 4959
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -183,7 +183,7 @@ ID = 21
 X = 7190
 Y = 4988
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -192,7 +192,7 @@ ID = 22
 X = 7345
 Y = 4782
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -201,7 +201,7 @@ ID = 23
 X = 7375
 Y = 4638
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -210,7 +210,7 @@ ID = 24
 X = 7224
 Y = 4963
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -219,7 +219,7 @@ ID = 25
 X = 7373
 Y = 4823
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -228,7 +228,7 @@ ID = 26
 X = 7260
 Y = 4621
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -237,7 +237,7 @@ ID = 27
 X = 7110
 Y = 4600
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -246,7 +246,7 @@ ID = 28
 X = 6928
 Y = 4610
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -255,7 +255,7 @@ ID = 29
 X = 7017
 Y = 4605
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -264,7 +264,7 @@ ID = 30
 X = 6906
 Y = 4604
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -273,7 +273,7 @@ ID = 31
 X = 6921
 Y = 4600
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -282,7 +282,7 @@ ID = 32
 X = 6932
 Y = 4604
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -291,7 +291,7 @@ ID = 33
 X = 7251
 Y = 4628
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -300,7 +300,7 @@ ID = 34
 X = 6813
 Y = 4673
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -309,7 +309,7 @@ ID = 35
 X = 7308
 Y = 4620
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -318,7 +318,7 @@ ID = 36
 X = 7202
 Y = 4626
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -327,7 +327,7 @@ ID = 37
 X = 7235
 Y = 4617
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -336,7 +336,7 @@ ID = 38
 X = 7385
 Y = 4750
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -345,7 +345,7 @@ ID = 39
 X = 6799
 Y = 4515
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -354,7 +354,7 @@ ID = 40
 X = 6623
 Y = 4812
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -363,7 +363,7 @@ ID = 41
 X = 6624
 Y = 4929
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -372,7 +372,7 @@ ID = 42
 X = 6844
 Y = 4440
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -381,7 +381,7 @@ ID = 43
 X = 6912
 Y = 4506
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -390,7 +390,7 @@ ID = 44
 X = 6855
 Y = 4487
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -399,7 +399,7 @@ ID = 45
 X = 6922
 Y = 4556
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -408,7 +408,7 @@ ID = 46
 X = 6886
 Y = 4575
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -417,7 +417,7 @@ ID = 47
 X = 6894
 Y = 4426
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -426,7 +426,7 @@ ID = 48
 X = 6879
 Y = 4437
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -435,7 +435,7 @@ ID = 49
 X = 6918
 Y = 4456
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -444,7 +444,7 @@ ID = 50
 X = 6946
 Y = 4468
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -453,7 +453,7 @@ ID = 51
 X = 6904
 Y = 4468
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -462,7 +462,7 @@ ID = 52
 X = 6874
 Y = 4491
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -471,7 +471,7 @@ ID = 53
 X = 6889
 Y = 4505
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -480,7 +480,7 @@ ID = 54
 X = 6878
 Y = 4421
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -489,7 +489,7 @@ ID = 55
 X = 6620
 Y = 4647
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -498,7 +498,7 @@ ID = 56
 X = 7197
 Y = 4420
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -507,7 +507,7 @@ ID = 57
 X = 7130
 Y = 4419
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -516,7 +516,7 @@ ID = 58
 X = 7136
 Y = 4418
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -525,7 +525,7 @@ ID = 59
 X = 6603
 Y = 4600
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -534,7 +534,7 @@ ID = 60
 X = 7194
 Y = 4429
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -543,7 +543,7 @@ ID = 61
 X = 6946
 Y = 4425
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -552,7 +552,7 @@ ID = 62
 X = 6625
 Y = 4640
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -561,7 +561,7 @@ ID = 63
 X = 6607
 Y = 4431
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -570,7 +570,7 @@ ID = 64
 X = 6830
 Y = 4404
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -579,7 +579,7 @@ ID = 65
 X = 6615
 Y = 4602
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -588,7 +588,7 @@ ID = 66
 X = 6744
 Y = 4400
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -597,7 +597,7 @@ ID = 67
 X = 6604
 Y = 4422
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -606,7 +606,7 @@ ID = 68
 X = 7185
 Y = 4714
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -615,7 +615,7 @@ ID = 69
 X = 7172
 Y = 4711
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -624,7 +624,7 @@ ID = 70
 X = 7376
 Y = 4619
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -633,7 +633,7 @@ ID = 71
 X = 7341
 Y = 4985
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -642,7 +642,7 @@ ID = 72
 X = 7365
 Y = 4994
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -651,7 +651,7 @@ ID = 73
 X = 7331
 Y = 4998
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -660,7 +660,7 @@ ID = 74
 X = 7273
 Y = 4984
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -669,7 +669,7 @@ ID = 75
 X = 7365
 Y = 4960
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -678,7 +678,7 @@ ID = 76
 X = 7343
 Y = 4942
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -687,7 +687,7 @@ ID = 77
 X = 7397
 Y = 4926
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -696,7 +696,7 @@ ID = 78
 X = 7288
 Y = 4991
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -705,7 +705,7 @@ ID = 79
 X = 7381
 Y = 4926
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -714,7 +714,7 @@ ID = 80
 X = 7381
 Y = 4939
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -723,7 +723,7 @@ ID = 81
 X = 7352
 Y = 4907
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -732,7 +732,7 @@ ID = 82
 X = 7279
 Y = 4950
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -741,7 +741,7 @@ ID = 83
 X = 7398
 Y = 4985
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -750,7 +750,7 @@ ID = 84
 X = 7373
 Y = 4480
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -759,7 +759,7 @@ ID = 85
 X = 7470
 Y = 4433
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -768,7 +768,7 @@ ID = 86
 X = 7552
 Y = 4483
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -777,7 +777,7 @@ ID = 87
 X = 7400
 Y = 4972
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -786,7 +786,7 @@ ID = 88
 X = 7446
 Y = 4983
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -795,7 +795,7 @@ ID = 89
 X = 7415
 Y = 4994
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -804,7 +804,7 @@ ID = 90
 X = 7473
 Y = 4990
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -813,7 +813,7 @@ ID = 91
 X = 7500
 Y = 4977
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -822,7 +822,7 @@ ID = 92
 X = 7484
 Y = 4919
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -831,7 +831,7 @@ ID = 93
 X = 7437
 Y = 4955
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -840,7 +840,7 @@ ID = 94
 X = 7405
 Y = 4912
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -849,7 +849,7 @@ ID = 95
 X = 7437
 Y = 4944
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -858,7 +858,7 @@ ID = 96
 X = 7466
 Y = 4939
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -867,7 +867,7 @@ ID = 97
 X = 7422
 Y = 4942
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -876,7 +876,7 @@ ID = 98
 X = 7439
 Y = 4967
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -885,7 +885,7 @@ ID = 99
 X = 7434
 Y = 4998
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -894,7 +894,7 @@ ID = 100
 X = 7405
 Y = 4955
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -903,7 +903,7 @@ ID = 101
 X = 7406
 Y = 4928
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -912,7 +912,7 @@ ID = 102
 X = 7402
 Y = 4985
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -921,7 +921,7 @@ ID = 103
 X = 7434
 Y = 4978
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -930,7 +930,7 @@ ID = 104
 X = 7467
 Y = 4969
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -939,7 +939,7 @@ ID = 105
 X = 7433
 Y = 4918
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -948,7 +948,7 @@ ID = 106
 X = 7450
 Y = 4969
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -957,7 +957,7 @@ ID = 107
 X = 7708
 Y = 4401
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -966,7 +966,7 @@ ID = 108
 X = 7663
 Y = 4495
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -975,7 +975,7 @@ ID = 109
 X = 7667
 Y = 4508
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -984,7 +984,7 @@ ID = 110
 X = 7653
 Y = 4575
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -993,7 +993,7 @@ ID = 111
 X = 7751
 Y = 4727
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -1002,7 +1002,7 @@ ID = 112
 X = 7641
 Y = 4611
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -1011,7 +1011,7 @@ ID = 113
 X = 7725
 Y = 4758
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -1020,7 +1020,7 @@ ID = 114
 X = 7693
 Y = 4989
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -1029,7 +1029,7 @@ ID = 115
 X = 7647
 Y = 4821
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -1038,7 +1038,7 @@ ID = 116
 X = 7762
 Y = 4929
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -1047,7 +1047,7 @@ ID = 117
 X = 7376
 Y = 4999
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -1056,7 +1056,7 @@ ID = 118
 X = 7347
 Y = 4981
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -1065,7 +1065,7 @@ ID = 119
 X = 7451
 Y = 4982
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -1074,7 +1074,7 @@ ID = 120
 X = 7528
 Y = 4409
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -1083,7 +1083,7 @@ ID = 121
 X = 7246
 Y = 4011
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -1092,7 +1092,7 @@ ID = 122
 X = 7250
 Y = 4139
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -1101,7 +1101,7 @@ ID = 123
 X = 7327
 Y = 4139
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -1110,7 +1110,7 @@ ID = 124
 X = 7394
 Y = 4132
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -1119,7 +1119,7 @@ ID = 125
 X = 7308
 Y = 4220
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -1128,7 +1128,7 @@ ID = 126
 X = 7270
 Y = 4333
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -1137,7 +1137,7 @@ ID = 127
 X = 7205
 Y = 4255
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -1146,7 +1146,7 @@ ID = 128
 X = 7515
 Y = 4147
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -1155,7 +1155,7 @@ ID = 129
 X = 7581
 Y = 4060
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -1164,7 +1164,7 @@ ID = 130
 X = 7499
 Y = 4271
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -1173,7 +1173,7 @@ ID = 131
 X = 7543
 Y = 4397
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -1182,7 +1182,7 @@ ID = 132
 X = 7623
 Y = 4166
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -1191,7 +1191,7 @@ ID = 133
 X = 7609
 Y = 4139
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -1200,7 +1200,7 @@ ID = 134
 X = 7606
 Y = 4055
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -1209,7 +1209,7 @@ ID = 135
 X = 7760
 Y = 4105
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -1218,7 +1218,7 @@ ID = 136
 X = 7613
 Y = 4219
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -1227,7 +1227,7 @@ ID = 137
 X = 7707
 Y = 4239
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -1236,7 +1236,7 @@ ID = 138
 X = 7469
 Y = 3824
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -1245,7 +1245,7 @@ ID = 139
 X = 7777
 Y = 3990
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -1254,16 +1254,16 @@ ID = 140
 X = 7549
 Y = 3703
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
 [Spawn 141]
 ID = 141
-X = 7835
-Y = 3900
+X = 7743
+Y = 3907
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -1272,7 +1272,7 @@ ID = 142
 X = 7500
 Y = 3518
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -1281,7 +1281,7 @@ ID = 143
 X = 7452
 Y = 3569
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -1290,7 +1290,7 @@ ID = 144
 X = 7500
 Y = 3507
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -1299,7 +1299,7 @@ ID = 145
 X = 7629
 Y = 3445
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -1308,7 +1308,7 @@ ID = 146
 X = 7710
 Y = 3242
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -1317,7 +1317,7 @@ ID = 147
 X = 7866
 Y = 3291
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -1326,7 +1326,7 @@ ID = 148
 X = 8030
 Y = 3368
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -1335,7 +1335,7 @@ ID = 149
 X = 8105
 Y = 3237
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -1344,7 +1344,7 @@ ID = 150
 X = 8120
 Y = 3220
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -1353,7 +1353,7 @@ ID = 151
 X = 8064
 Y = 3394
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -1362,7 +1362,7 @@ ID = 152
 X = 8195
 Y = 3440
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -1371,7 +1371,7 @@ ID = 153
 X = 8388
 Y = 3205
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -1380,7 +1380,7 @@ ID = 154
 X = 8386
 Y = 3441
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -1389,16 +1389,16 @@ ID = 155
 X = 8396
 Y = 3460
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
 [Spawn 156]
 ID = 156
-X = 8371
-Y = 3680
+X = 8356
+Y = 3510
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -1407,7 +1407,7 @@ ID = 157
 X = 8581
 Y = 3260
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -1416,7 +1416,7 @@ ID = 158
 X = 8543
 Y = 3240
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -1425,7 +1425,7 @@ ID = 159
 X = 8431
 Y = 3272
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -1434,7 +1434,7 @@ ID = 160
 X = 8521
 Y = 3210
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -1443,7 +1443,7 @@ ID = 161
 X = 8584
 Y = 3410
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -1452,7 +1452,7 @@ ID = 162
 X = 8471
 Y = 3452
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -1461,7 +1461,7 @@ ID = 163
 X = 8584
 Y = 3450
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -1470,7 +1470,7 @@ ID = 164
 X = 8493
 Y = 3588
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -1479,7 +1479,7 @@ ID = 165
 X = 8476
 Y = 3543
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -1488,7 +1488,7 @@ ID = 166
 X = 8439
 Y = 3543
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -1497,7 +1497,7 @@ ID = 167
 X = 8589
 Y = 3648
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -1506,7 +1506,7 @@ ID = 168
 X = 8652
 Y = 3383
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -1515,7 +1515,7 @@ ID = 169
 X = 8733
 Y = 3283
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -1524,7 +1524,7 @@ ID = 170
 X = 8719
 Y = 3342
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -1533,7 +1533,7 @@ ID = 171
 X = 8654
 Y = 3503
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -1542,7 +1542,7 @@ ID = 172
 X = 8779
 Y = 3521
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -1551,7 +1551,7 @@ ID = 173
 X = 8762
 Y = 3488
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -1560,7 +1560,7 @@ ID = 174
 X = 8786
 Y = 3757
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -1569,7 +1569,7 @@ ID = 175
 X = 8732
 Y = 3739
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -1578,7 +1578,7 @@ ID = 176
 X = 8658
 Y = 3618
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -1587,7 +1587,7 @@ ID = 177
 X = 8602
 Y = 3655
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -1596,7 +1596,7 @@ ID = 178
 X = 8799
 Y = 3724
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -1605,7 +1605,7 @@ ID = 179
 X = 8769
 Y = 3694
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -1614,7 +1614,7 @@ ID = 180
 X = 8700
 Y = 3606
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -1623,7 +1623,7 @@ ID = 181
 X = 8775
 Y = 3528
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -1632,7 +1632,7 @@ ID = 182
 X = 8642
 Y = 3797
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -1641,7 +1641,7 @@ ID = 183
 X = 8752
 Y = 3902
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -1650,7 +1650,7 @@ ID = 184
 X = 8903
 Y = 3789
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -1659,7 +1659,7 @@ ID = 185
 X = 8880
 Y = 3718
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -1668,7 +1668,7 @@ ID = 186
 X = 8928
 Y = 3655
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -1677,7 +1677,7 @@ ID = 187
 X = 8963
 Y = 3857
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -1686,7 +1686,7 @@ ID = 188
 X = 8910
 Y = 3817
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -1695,7 +1695,7 @@ ID = 189
 X = 8877
 Y = 3947
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -1704,7 +1704,7 @@ ID = 190
 X = 8847
 Y = 3909
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -1713,7 +1713,7 @@ ID = 191
 X = 8991
 Y = 3735
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -1722,7 +1722,7 @@ ID = 192
 X = 8795
 Y = 4139
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -1731,7 +1731,7 @@ ID = 193
 X = 8649
 Y = 4020
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -1740,7 +1740,7 @@ ID = 194
 X = 8991
 Y = 4082
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -1749,7 +1749,7 @@ ID = 195
 X = 8908
 Y = 4154
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -1758,7 +1758,7 @@ ID = 196
 X = 9188
 Y = 3788
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -1767,7 +1767,7 @@ ID = 197
 X = 9116
 Y = 3736
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -1776,7 +1776,7 @@ ID = 198
 X = 9171
 Y = 3689
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -1785,7 +1785,7 @@ ID = 199
 X = 9031
 Y = 3679
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -1794,7 +1794,7 @@ ID = 200
 X = 9163
 Y = 3600
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -1803,7 +1803,7 @@ ID = 201
 X = 9187
 Y = 3986
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -1812,7 +1812,7 @@ ID = 202
 X = 9148
 Y = 3946
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -1821,7 +1821,7 @@ ID = 203
 X = 9079
 Y = 3857
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -1830,7 +1830,7 @@ ID = 204
 X = 9152
 Y = 3975
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -1839,7 +1839,7 @@ ID = 205
 X = 9162
 Y = 3849
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -1848,7 +1848,7 @@ ID = 206
 X = 8968
 Y = 3615
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -1857,16 +1857,16 @@ ID = 207
 X = 8796
 Y = 4382
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
 [Spawn 208]
 ID = 208
-X = 8547
-Y = 4049
+X = 8600
+Y = 4060
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -1875,7 +1875,7 @@ ID = 209
 X = 8450
 Y = 4600
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 173
 
@@ -1884,7 +1884,7 @@ ID = 210
 X = 9287
 Y = 4244
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -1893,7 +1893,7 @@ ID = 211
 X = 9348
 Y = 4215
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -1902,7 +1902,7 @@ ID = 212
 X = 9270
 Y = 3823
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -1911,7 +1911,7 @@ ID = 213
 X = 9313
 Y = 3831
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -1920,7 +1920,7 @@ ID = 214
 X = 9004
 Y = 3663
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -1929,7 +1929,7 @@ ID = 215
 X = 8818
 Y = 3464
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -1938,7 +1938,7 @@ ID = 216
 X = 9192
 Y = 3417
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 234
 
@@ -1947,7 +1947,7 @@ ID = 217
 X = 9358
 Y = 3521
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 232
 
@@ -1956,7 +1956,7 @@ ID = 218
 X = 8960
 Y = 3290
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 234
 
@@ -1965,7 +1965,7 @@ ID = 219
 X = 9135
 Y = 3341
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 233
 
@@ -1974,7 +1974,7 @@ ID = 220
 X = 9070
 Y = 3220
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 231
 
@@ -1983,7 +1983,7 @@ ID = 221
 X = 8872
 Y = 3217
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -1992,7 +1992,7 @@ ID = 222
 X = 8519
 Y = 3082
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -2001,7 +2001,7 @@ ID = 223
 X = 8596
 Y = 3126
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -2010,7 +2010,7 @@ ID = 224
 X = 8715
 Y = 3149
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2019,7 +2019,7 @@ ID = 225
 X = 8259
 Y = 3153
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -2028,7 +2028,7 @@ ID = 226
 X = 8207
 Y = 3109
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2037,7 +2037,7 @@ ID = 227
 X = 8156
 Y = 2947
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -2046,7 +2046,7 @@ ID = 228
 X = 8173
 Y = 2829
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -2055,7 +2055,7 @@ ID = 229
 X = 8385
 Y = 2877
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -2064,7 +2064,7 @@ ID = 230
 X = 8397
 Y = 2853
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -2073,7 +2073,7 @@ ID = 231
 X = 8510
 Y = 2803
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -2082,7 +2082,7 @@ ID = 232
 X = 8410
 Y = 2877
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -2091,7 +2091,7 @@ ID = 233
 X = 8424
 Y = 2875
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -2100,7 +2100,7 @@ ID = 234
 X = 7883
 Y = 2791
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -2109,7 +2109,7 @@ ID = 235
 X = 7855
 Y = 2737
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -2118,7 +2118,7 @@ ID = 236
 X = 7879
 Y = 2758
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -2127,7 +2127,7 @@ ID = 237
 X = 7872
 Y = 2776
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -2136,7 +2136,7 @@ ID = 238
 X = 7937
 Y = 2917
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -2145,7 +2145,7 @@ ID = 239
 X = 7907
 Y = 2850
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -2154,7 +2154,7 @@ ID = 240
 X = 7891
 Y = 2814
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -2163,7 +2163,7 @@ ID = 241
 X = 7901
 Y = 2834
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -2172,7 +2172,7 @@ ID = 242
 X = 7888
 Y = 2800
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -2181,7 +2181,7 @@ ID = 243
 X = 7878
 Y = 3101
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2190,7 +2190,7 @@ ID = 244
 X = 8130
 Y = 2734
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -2199,7 +2199,7 @@ ID = 245
 X = 8141
 Y = 2758
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -2208,7 +2208,7 @@ ID = 246
 X = 8150
 Y = 2768
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -2217,7 +2217,7 @@ ID = 247
 X = 7631
 Y = 2686
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2226,7 +2226,7 @@ ID = 248
 X = 7688
 Y = 2845
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2235,43 +2235,43 @@ ID = 249
 X = 7676
 Y = 2982
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
 [Spawn 250]
 ID = 250
-X = 7570
-Y = 2503
+X = 7709
+Y = 2532
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
 [Spawn 251]
 ID = 251
-X = 7557
-Y = 2499
+X = 7701
+Y = 2572
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
 [Spawn 252]
 ID = 252
-X = 7552
-Y = 2482
+X = 7727
+Y = 2572
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
 [Spawn 253]
 ID = 253
-X = 7545
-Y = 2497
+X = 7740
+Y = 2559
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2280,7 +2280,7 @@ ID = 254
 X = 7572
 Y = 2846
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2289,7 +2289,7 @@ ID = 255
 X = 7510
 Y = 2858
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2298,25 +2298,25 @@ ID = 256
 X = 7482
 Y = 2988
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
 [Spawn 257]
 ID = 257
-X = 7601
-Y = 2526
+X = 7696
+Y = 2601
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
 [Spawn 258]
 ID = 258
-X = 7614
-Y = 2531
+X = 7743
+Y = 2626
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2325,7 +2325,7 @@ ID = 259
 X = 7370
 Y = 2923
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2334,7 +2334,7 @@ ID = 260
 X = 7246
 Y = 3101
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2343,7 +2343,7 @@ ID = 261
 X = 7385
 Y = 3133
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2352,16 +2352,16 @@ ID = 262
 X = 7786
 Y = 3153
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
 [Spawn 263]
 ID = 263
-X = 7008
-Y = 3104
+X = 7013
+Y = 3062
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -2370,7 +2370,7 @@ ID = 264
 X = 7096
 Y = 3112
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -2379,7 +2379,7 @@ ID = 265
 X = 7111
 Y = 3374
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2388,16 +2388,16 @@ ID = 266
 X = 7195
 Y = 3277
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
 [Spawn 267]
 ID = 267
 X = 7001
-Y = 3323
+Y = 3400
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -2406,7 +2406,7 @@ ID = 268
 X = 7459
 Y = 3266
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2415,7 +2415,7 @@ ID = 269
 X = 7476
 Y = 3257
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2424,7 +2424,7 @@ ID = 270
 X = 7451
 Y = 3254
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2433,7 +2433,7 @@ ID = 271
 X = 7072
 Y = 3385
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2442,7 +2442,7 @@ ID = 272
 X = 6893
 Y = 3482
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2451,7 +2451,7 @@ ID = 273
 X = 6891
 Y = 3526
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2460,7 +2460,7 @@ ID = 274
 X = 6939
 Y = 3548
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2469,7 +2469,7 @@ ID = 275
 X = 6886
 Y = 3537
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2478,7 +2478,7 @@ ID = 276
 X = 6915
 Y = 3577
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2487,7 +2487,7 @@ ID = 277
 X = 6803
 Y = 3589
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2496,7 +2496,7 @@ ID = 278
 X = 6985
 Y = 3573
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2505,7 +2505,7 @@ ID = 279
 X = 6917
 Y = 3602
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2514,7 +2514,7 @@ ID = 280
 X = 6966
 Y = 3716
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2523,7 +2523,7 @@ ID = 281
 X = 7001
 Y = 3755
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2532,7 +2532,7 @@ ID = 282
 X = 7110
 Y = 3687
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2541,7 +2541,7 @@ ID = 283
 X = 6800
 Y = 3777
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2550,7 +2550,7 @@ ID = 284
 X = 6984
 Y = 3798
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2559,7 +2559,7 @@ ID = 285
 X = 6816
 Y = 3561
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2568,7 +2568,7 @@ ID = 286
 X = 6767
 Y = 3599
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2577,7 +2577,7 @@ ID = 287
 X = 6720
 Y = 3773
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2586,7 +2586,7 @@ ID = 288
 X = 6759
 Y = 3655
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2595,7 +2595,7 @@ ID = 289
 X = 6738
 Y = 3731
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2604,7 +2604,7 @@ ID = 290
 X = 6863
 Y = 3873
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2613,7 +2613,7 @@ ID = 291
 X = 6406
 Y = 3986
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -2622,7 +2622,7 @@ ID = 292
 X = 6050
 Y = 3579
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -2631,7 +2631,7 @@ ID = 293
 X = 6334
 Y = 3664
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -2640,7 +2640,7 @@ ID = 294
 X = 6240
 Y = 3919
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -2649,7 +2649,7 @@ ID = 295
 X = 6331
 Y = 3965
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2658,7 +2658,7 @@ ID = 296
 X = 6347
 Y = 4107
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -2667,7 +2667,7 @@ ID = 297
 X = 6455
 Y = 4049
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -2676,7 +2676,7 @@ ID = 298
 X = 6061
 Y = 4339
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2685,7 +2685,7 @@ ID = 299
 X = 6150
 Y = 4339
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -2694,7 +2694,7 @@ ID = 300
 X = 6301
 Y = 4272
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -2703,7 +2703,7 @@ ID = 301
 X = 6361
 Y = 4359
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -2712,7 +2712,7 @@ ID = 302
 X = 6029
 Y = 4352
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -2721,7 +2721,7 @@ ID = 303
 X = 6584
 Y = 4125
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -2730,7 +2730,7 @@ ID = 304
 X = 6009
 Y = 4326
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2739,7 +2739,7 @@ ID = 305
 X = 6573
 Y = 4391
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2748,7 +2748,7 @@ ID = 306
 X = 5800
 Y = 4154
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2757,7 +2757,7 @@ ID = 307
 X = 5930
 Y = 4284
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2766,7 +2766,7 @@ ID = 308
 X = 5895
 Y = 4382
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2775,7 +2775,7 @@ ID = 309
 X = 5927
 Y = 4221
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2784,7 +2784,7 @@ ID = 310
 X = 5841
 Y = 4419
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -2793,7 +2793,7 @@ ID = 311
 X = 5999
 Y = 4442
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -2802,7 +2802,7 @@ ID = 312
 X = 5874
 Y = 4495
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -2811,7 +2811,7 @@ ID = 313
 X = 5833
 Y = 4441
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -2820,7 +2820,7 @@ ID = 314
 X = 5910
 Y = 4507
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -2829,7 +2829,7 @@ ID = 315
 X = 5976
 Y = 4532
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2838,7 +2838,7 @@ ID = 316
 X = 5937
 Y = 4520
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -2847,7 +2847,7 @@ ID = 317
 X = 5852
 Y = 4588
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -2856,7 +2856,7 @@ ID = 318
 X = 5925
 Y = 4473
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -2865,7 +2865,7 @@ ID = 319
 X = 6098
 Y = 4594
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2874,7 +2874,7 @@ ID = 320
 X = 6098
 Y = 4467
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -2883,7 +2883,7 @@ ID = 321
 X = 6131
 Y = 4566
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -2892,7 +2892,7 @@ ID = 322
 X = 6208
 Y = 4560
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -2901,7 +2901,7 @@ ID = 323
 X = 6226
 Y = 4526
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2910,7 +2910,7 @@ ID = 324
 X = 5602
 Y = 4223
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2919,7 +2919,7 @@ ID = 325
 X = 5686
 Y = 4362
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -2928,7 +2928,7 @@ ID = 326
 X = 5745
 Y = 4662
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2937,7 +2937,7 @@ ID = 327
 X = 5670
 Y = 4673
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -2946,7 +2946,7 @@ ID = 328
 X = 5988
 Y = 4780
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2955,7 +2955,7 @@ ID = 329
 X = 5997
 Y = 4719
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -2964,7 +2964,7 @@ ID = 330
 X = 6017
 Y = 4787
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -2973,7 +2973,7 @@ ID = 331
 X = 6134
 Y = 4719
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -2982,7 +2982,7 @@ ID = 332
 X = 6110
 Y = 4746
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -2991,7 +2991,7 @@ ID = 333
 X = 5605
 Y = 4485
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -3000,7 +3000,7 @@ ID = 334
 X = 5518
 Y = 4272
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -3009,7 +3009,7 @@ ID = 335
 X = 5574
 Y = 4329
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -3018,7 +3018,7 @@ ID = 336
 X = 5548
 Y = 4507
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -3027,7 +3027,7 @@ ID = 337
 X = 5443
 Y = 4677
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -3036,7 +3036,7 @@ ID = 338
 X = 5501
 Y = 4773
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -3045,7 +3045,7 @@ ID = 339
 X = 5572
 Y = 4676
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -3054,7 +3054,7 @@ ID = 340
 X = 5504
 Y = 4656
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -3063,7 +3063,7 @@ ID = 341
 X = 5468
 Y = 4636
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -3072,7 +3072,7 @@ ID = 342
 X = 5480
 Y = 4778
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -3081,7 +3081,7 @@ ID = 343
 X = 5537
 Y = 4209
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -3090,7 +3090,7 @@ ID = 344
 X = 5644
 Y = 4929
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -3099,7 +3099,7 @@ ID = 345
 X = 5910
 Y = 4823
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -3108,7 +3108,7 @@ ID = 346
 X = 6073
 Y = 4770
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -3117,7 +3117,7 @@ ID = 347
 X = 6168
 Y = 4644
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -3126,7 +3126,7 @@ ID = 348
 X = 6131
 Y = 4979
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -3135,7 +3135,7 @@ ID = 349
 X = 6136
 Y = 4902
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -3144,7 +3144,7 @@ ID = 350
 X = 5675
 Y = 4992
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -3153,7 +3153,7 @@ ID = 351
 X = 5766
 Y = 4986
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -3162,7 +3162,7 @@ ID = 352
 X = 5699
 Y = 4992
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -3171,7 +3171,7 @@ ID = 353
 X = 5619
 Y = 5197
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -3180,7 +3180,7 @@ ID = 354
 X = 5685
 Y = 5156
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -3189,7 +3189,7 @@ ID = 355
 X = 5751
 Y = 5082
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -3198,7 +3198,7 @@ ID = 356
 X = 6087
 Y = 5175
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -3207,7 +3207,7 @@ ID = 357
 X = 6195
 Y = 5150
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 425
 
@@ -3216,7 +3216,7 @@ ID = 358
 X = 5616
 Y = 5391
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -3225,7 +3225,7 @@ ID = 359
 X = 5738
 Y = 5379
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -3234,7 +3234,7 @@ ID = 360
 X = 5764
 Y = 5524
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -3243,7 +3243,7 @@ ID = 361
 X = 5707
 Y = 5457
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -3252,7 +3252,7 @@ ID = 362
 X = 5843
 Y = 5511
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -3261,7 +3261,7 @@ ID = 363
 X = 5863
 Y = 5458
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -3270,7 +3270,7 @@ ID = 364
 X = 5999
 Y = 5425
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -3279,7 +3279,7 @@ ID = 365
 X = 6033
 Y = 5298
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -3288,7 +3288,7 @@ ID = 366
 X = 6067
 Y = 5228
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -3297,7 +3297,7 @@ ID = 367
 X = 6073
 Y = 5242
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -3306,7 +3306,7 @@ ID = 368
 X = 6078
 Y = 5216
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -3315,7 +3315,7 @@ ID = 369
 X = 6087
 Y = 5228
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -3324,7 +3324,7 @@ ID = 370
 X = 6089
 Y = 5216
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -3333,7 +3333,7 @@ ID = 371
 X = 6078
 Y = 5203
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -3342,7 +3342,7 @@ ID = 372
 X = 5738
 Y = 5797
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -3351,7 +3351,7 @@ ID = 373
 X = 5792
 Y = 5713
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -3360,7 +3360,7 @@ ID = 374
 X = 5703
 Y = 5715
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -3369,7 +3369,7 @@ ID = 375
 X = 5669
 Y = 5699
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -3378,7 +3378,7 @@ ID = 376
 X = 5825
 Y = 5653
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -3387,7 +3387,7 @@ ID = 377
 X = 5935
 Y = 5691
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -3396,7 +3396,7 @@ ID = 378
 X = 5900
 Y = 5754
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -3405,7 +3405,7 @@ ID = 379
 X = 5880
 Y = 5623
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -3414,7 +3414,7 @@ ID = 380
 X = 5861
 Y = 5755
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -3423,7 +3423,7 @@ ID = 381
 X = 5807
 Y = 5615
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -3432,7 +3432,7 @@ ID = 382
 X = 6064
 Y = 5783
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -3441,7 +3441,7 @@ ID = 383
 X = 6051
 Y = 5782
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -3450,7 +3450,7 @@ ID = 384
 X = 5556
 Y = 5713
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -3459,7 +3459,7 @@ ID = 385
 X = 5440
 Y = 5925
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -3468,7 +3468,7 @@ ID = 386
 X = 5506
 Y = 5892
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -3477,7 +3477,7 @@ ID = 387
 X = 5600
 Y = 5868
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -3486,7 +3486,7 @@ ID = 388
 X = 5800
 Y = 5822
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -3495,7 +3495,7 @@ ID = 389
 X = 5922
 Y = 5977
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 237
 
@@ -3504,7 +3504,7 @@ ID = 390
 X = 5854
 Y = 5843
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -3513,7 +3513,7 @@ ID = 391
 X = 5985
 Y = 5969
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 231
 
@@ -3522,7 +3522,7 @@ ID = 392
 X = 5817
 Y = 5994
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -3531,7 +3531,7 @@ ID = 393
 X = 5414
 Y = 5941
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -3540,7 +3540,7 @@ ID = 394
 X = 5510
 Y = 5990
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -3549,7 +3549,7 @@ ID = 395
 X = 5717
 Y = 5989
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -3558,7 +3558,7 @@ ID = 396
 X = 5524
 Y = 5985
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -3567,7 +3567,7 @@ ID = 397
 X = 5500
 Y = 5411
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -3576,7 +3576,7 @@ ID = 398
 X = 5708
 Y = 5997
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -3585,7 +3585,7 @@ ID = 399
 X = 5359
 Y = 5901
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -3594,7 +3594,7 @@ ID = 400
 X = 5268
 Y = 6061
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -3603,7 +3603,7 @@ ID = 401
 X = 5309
 Y = 6088
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -3612,7 +3612,7 @@ ID = 402
 X = 5326
 Y = 6134
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -3621,7 +3621,7 @@ ID = 403
 X = 5298
 Y = 6114
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -3630,7 +3630,7 @@ ID = 404
 X = 5425
 Y = 6097
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -3639,7 +3639,7 @@ ID = 405
 X = 5529
 Y = 6148
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -3648,7 +3648,7 @@ ID = 406
 X = 5124
 Y = 5643
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -3657,7 +3657,7 @@ ID = 407
 X = 5075
 Y = 5797
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -3666,7 +3666,7 @@ ID = 408
 X = 5028
 Y = 5811
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -3675,7 +3675,7 @@ ID = 409
 X = 5153
 Y = 5979
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -3684,7 +3684,7 @@ ID = 410
 X = 5145
 Y = 5819
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -3693,7 +3693,7 @@ ID = 411
 X = 5144
 Y = 5882
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -3702,7 +3702,7 @@ ID = 412
 X = 5123
 Y = 6132
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -3711,7 +3711,7 @@ ID = 413
 X = 5130
 Y = 6059
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -3720,7 +3720,7 @@ ID = 414
 X = 5145
 Y = 6071
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -3729,7 +3729,7 @@ ID = 415
 X = 5157
 Y = 6100
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -3738,7 +3738,7 @@ ID = 416
 X = 5354
 Y = 6198
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -3747,7 +3747,7 @@ ID = 417
 X = 5130
 Y = 5621
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -3756,7 +3756,7 @@ ID = 418
 X = 5164
 Y = 6197
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -3765,7 +3765,7 @@ ID = 419
 X = 5212
 Y = 5612
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -3774,7 +3774,7 @@ ID = 420
 X = 4927
 Y = 6124
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -3783,7 +3783,7 @@ ID = 421
 X = 4736
 Y = 5638
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -3792,7 +3792,7 @@ ID = 422
 X = 4647
 Y = 5965
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -3801,7 +3801,7 @@ ID = 423
 X = 4663
 Y = 6099
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -3810,7 +3810,7 @@ ID = 424
 X = 4458
 Y = 6185
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -3819,7 +3819,7 @@ ID = 425
 X = 4771
 Y = 6387
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -3828,7 +3828,7 @@ ID = 426
 X = 4726
 Y = 6356
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -3837,7 +3837,7 @@ ID = 427
 X = 4735
 Y = 6338
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -3846,7 +3846,7 @@ ID = 428
 X = 4976
 Y = 6267
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -3855,7 +3855,7 @@ ID = 429
 X = 3602
 Y = 6049
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 231
 
@@ -3864,7 +3864,7 @@ ID = 430
 X = 4164
 Y = 5690
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -3873,7 +3873,7 @@ ID = 431
 X = 4182
 Y = 5727
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -3882,7 +3882,7 @@ ID = 432
 X = 4158
 Y = 5109
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -3891,7 +3891,7 @@ ID = 433
 X = 4137
 Y = 5340
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -3900,7 +3900,7 @@ ID = 434
 X = 4117
 Y = 5362
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -3909,7 +3909,7 @@ ID = 435
 X = 4075
 Y = 5237
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -3918,7 +3918,7 @@ ID = 436
 X = 4148
 Y = 5344
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -3927,7 +3927,7 @@ ID = 437
 X = 4097
 Y = 5207
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -3936,7 +3936,7 @@ ID = 438
 X = 4098
 Y = 5335
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -3945,7 +3945,7 @@ ID = 439
 X = 4301
 Y = 5182
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -3954,16 +3954,16 @@ ID = 440
 X = 4360
 Y = 5392
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
 [Spawn 441]
 ID = 441
-X = 4521
-Y = 4935
+X = 4482
+Y = 5022
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -3972,7 +3972,7 @@ ID = 442
 X = 4798
 Y = 4320
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -3981,7 +3981,7 @@ ID = 443
 X = 4755
 Y = 4595
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -3990,7 +3990,7 @@ ID = 444
 X = 4795
 Y = 4405
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -3999,7 +3999,7 @@ ID = 445
 X = 4603
 Y = 4202
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4008,7 +4008,7 @@ ID = 446
 X = 4773
 Y = 3890
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4017,7 +4017,7 @@ ID = 447
 X = 4906
 Y = 3850
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4026,7 +4026,7 @@ ID = 448
 X = 4809
 Y = 3812
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4035,7 +4035,7 @@ ID = 449
 X = 4826
 Y = 3908
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4044,7 +4044,7 @@ ID = 450
 X = 4847
 Y = 4040
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4053,7 +4053,7 @@ ID = 451
 X = 4884
 Y = 4053
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4062,7 +4062,7 @@ ID = 452
 X = 5193
 Y = 3815
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4071,7 +4071,7 @@ ID = 453
 X = 5022
 Y = 3876
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4080,7 +4080,7 @@ ID = 454
 X = 5157
 Y = 3894
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4089,7 +4089,7 @@ ID = 455
 X = 5188
 Y = 4003
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4098,7 +4098,7 @@ ID = 456
 X = 5002
 Y = 4002
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4107,7 +4107,7 @@ ID = 457
 X = 5035
 Y = 4090
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4116,7 +4116,7 @@ ID = 458
 X = 5195
 Y = 4243
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4125,7 +4125,7 @@ ID = 459
 X = 5197
 Y = 4012
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4134,7 +4134,7 @@ ID = 460
 X = 4717
 Y = 3770
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4143,7 +4143,7 @@ ID = 461
 X = 4746
 Y = 3710
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4152,7 +4152,7 @@ ID = 462
 X = 4839
 Y = 3616
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4161,7 +4161,7 @@ ID = 463
 X = 5082
 Y = 3714
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4170,7 +4170,7 @@ ID = 464
 X = 5027
 Y = 3613
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4179,7 +4179,7 @@ ID = 465
 X = 4726
 Y = 3529
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4188,7 +4188,7 @@ ID = 466
 X = 4865
 Y = 3515
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4197,7 +4197,7 @@ ID = 467
 X = 5113
 Y = 3477
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4206,7 +4206,7 @@ ID = 468
 X = 5198
 Y = 3467
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4215,7 +4215,7 @@ ID = 469
 X = 4693
 Y = 3409
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4224,7 +4224,7 @@ ID = 470
 X = 4699
 Y = 3371
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4233,7 +4233,7 @@ ID = 471
 X = 4612
 Y = 3276
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4242,7 +4242,7 @@ ID = 472
 X = 4961
 Y = 3377
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4251,7 +4251,7 @@ ID = 473
 X = 4901
 Y = 3257
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4260,7 +4260,7 @@ ID = 474
 X = 4944
 Y = 3297
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4269,7 +4269,7 @@ ID = 475
 X = 5105
 Y = 3230
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4278,7 +4278,7 @@ ID = 476
 X = 5091
 Y = 3271
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4287,7 +4287,7 @@ ID = 477
 X = 5098
 Y = 3293
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4296,7 +4296,7 @@ ID = 478
 X = 4483
 Y = 3070
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4305,7 +4305,7 @@ ID = 479
 X = 4425
 Y = 3290
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4314,7 +4314,7 @@ ID = 480
 X = 4440
 Y = 3262
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4323,7 +4323,7 @@ ID = 481
 X = 4660
 Y = 3161
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4332,7 +4332,7 @@ ID = 482
 X = 4979
 Y = 3135
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4341,7 +4341,7 @@ ID = 483
 X = 4913
 Y = 3098
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4350,7 +4350,7 @@ ID = 484
 X = 4902
 Y = 3117
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4359,7 +4359,7 @@ ID = 485
 X = 4507
 Y = 3597
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 235
 
@@ -4368,7 +4368,7 @@ ID = 486
 X = 4852
 Y = 3023
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4377,7 +4377,7 @@ ID = 487
 X = 4395
 Y = 3387
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 235
 
@@ -4386,7 +4386,7 @@ ID = 488
 X = 4516
 Y = 2878
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4395,7 +4395,7 @@ ID = 489
 X = 4625
 Y = 2947
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4404,16 +4404,16 @@ ID = 490
 X = 4688
 Y = 2898
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
 [Spawn 491]
 ID = 491
-X = 4770
+X = 4700
 Y = 2828
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4422,7 +4422,7 @@ ID = 492
 X = 4639
 Y = 2920
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4431,25 +4431,25 @@ ID = 493
 X = 4685
 Y = 2942
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
 [Spawn 494]
 ID = 494
-X = 4613
+X = 4590
 Y = 2686
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
 [Spawn 495]
 ID = 495
-X = 4638
+X = 4600
 Y = 2712
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4458,61 +4458,61 @@ ID = 496
 X = 4622
 Y = 2722
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
 [Spawn 497]
 ID = 497
-X = 4652
+X = 4632
 Y = 2726
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
 [Spawn 498]
 ID = 498
-X = 4630
-Y = 2624
+X = 4529
+Y = 2668
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
 [Spawn 499]
 ID = 499
-X = 4605
+X = 4580
 Y = 2656
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
 [Spawn 500]
 ID = 500
-X = 4629
+X = 4550
 Y = 2636
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
 [Spawn 501]
 ID = 501
-X = 4638
+X = 4540
 Y = 2605
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
 [Spawn 502]
 ID = 502
-X = 4611
+X = 4530
 Y = 2667
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4521,7 +4521,7 @@ ID = 503
 X = 4163
 Y = 2567
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -4530,7 +4530,7 @@ ID = 504
 X = 4086
 Y = 2699
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -4539,7 +4539,7 @@ ID = 505
 X = 4054
 Y = 2724
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -4548,7 +4548,7 @@ ID = 506
 X = 4011
 Y = 2902
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -4557,7 +4557,7 @@ ID = 507
 X = 4011
 Y = 2802
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -4566,7 +4566,7 @@ ID = 508
 X = 4044
 Y = 2882
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -4575,7 +4575,7 @@ ID = 509
 X = 4008
 Y = 2940
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -4584,7 +4584,7 @@ ID = 510
 X = 4384
 Y = 2450
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4593,7 +4593,7 @@ ID = 511
 X = 4398
 Y = 2448
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4602,7 +4602,7 @@ ID = 512
 X = 4387
 Y = 2485
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4611,7 +4611,7 @@ ID = 513
 X = 4376
 Y = 2483
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4620,7 +4620,7 @@ ID = 514
 X = 4389
 Y = 2467
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4629,16 +4629,16 @@ ID = 515
 X = 4386
 Y = 2497
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
 [Spawn 516]
 ID = 516
-X = 4486
-Y = 2531
+X = 4400
+Y = 2560
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4647,16 +4647,16 @@ ID = 517
 X = 4598
 Y = 2596
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
 [Spawn 518]
 ID = 518
-X = 4445
-Y = 2392
+X = 4332
+Y = 2365
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4665,7 +4665,7 @@ ID = 519
 X = 4416
 Y = 2226
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -4674,7 +4674,7 @@ ID = 520
 X = 4457
 Y = 2399
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4683,7 +4683,7 @@ ID = 521
 X = 4465
 Y = 2389
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4692,7 +4692,7 @@ ID = 522
 X = 4574
 Y = 2386
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -4701,16 +4701,16 @@ ID = 523
 X = 4411
 Y = 2213
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
 [Spawn 524]
 ID = 524
-X = 4424
-Y = 2209
+X = 4344
+Y = 2144
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -4719,7 +4719,7 @@ ID = 525
 X = 4136
 Y = 2118
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -4728,7 +4728,7 @@ ID = 526
 X = 4183
 Y = 2055
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -4737,7 +4737,7 @@ ID = 527
 X = 4399
 Y = 2189
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -4746,7 +4746,7 @@ ID = 528
 X = 4208
 Y = 2028
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -4755,7 +4755,7 @@ ID = 529
 X = 4591
 Y = 1927
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -4764,7 +4764,7 @@ ID = 530
 X = 4403
 Y = 2188
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -4773,7 +4773,7 @@ ID = 531
 X = 4470
 Y = 1819
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -4782,7 +4782,7 @@ ID = 532
 X = 3691
 Y = 1991
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -4791,7 +4791,7 @@ ID = 533
 X = 3619
 Y = 2056
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -4800,7 +4800,7 @@ ID = 534
 X = 3664
 Y = 2007
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -4809,7 +4809,7 @@ ID = 535
 X = 3690
 Y = 2232
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -4818,7 +4818,7 @@ ID = 536
 X = 3990
 Y = 1927
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -4827,7 +4827,7 @@ ID = 537
 X = 3695
 Y = 2389
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -4836,7 +4836,7 @@ ID = 538
 X = 3534
 Y = 1646
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -4845,7 +4845,7 @@ ID = 539
 X = 3579
 Y = 1835
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -4854,7 +4854,7 @@ ID = 540
 X = 3541
 Y = 2167
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -4863,7 +4863,7 @@ ID = 541
 X = 3485
 Y = 2131
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -4872,7 +4872,7 @@ ID = 542
 X = 3570
 Y = 1619
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -4881,7 +4881,7 @@ ID = 543
 X = 3421
 Y = 1802
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -4890,7 +4890,7 @@ ID = 544
 X = 3479
 Y = 1412
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -4899,7 +4899,7 @@ ID = 545
 X = 3463
 Y = 1412
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -4908,7 +4908,7 @@ ID = 546
 X = 3454
 Y = 1424
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -4917,7 +4917,7 @@ ID = 547
 X = 3462
 Y = 1462
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -4926,7 +4926,7 @@ ID = 548
 X = 3625
 Y = 1494
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -4935,7 +4935,7 @@ ID = 549
 X = 3721
 Y = 1575
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -4944,7 +4944,7 @@ ID = 550
 X = 3742
 Y = 1476
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -4953,7 +4953,7 @@ ID = 551
 X = 3583
 Y = 1369
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -4962,7 +4962,7 @@ ID = 552
 X = 3497
 Y = 1386
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -4971,7 +4971,7 @@ ID = 553
 X = 3508
 Y = 1365
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -4980,7 +4980,7 @@ ID = 554
 X = 3463
 Y = 1382
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -4989,7 +4989,7 @@ ID = 555
 X = 3480
 Y = 1385
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -4998,7 +4998,7 @@ ID = 556
 X = 3476
 Y = 1363
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -5007,7 +5007,7 @@ ID = 557
 X = 3485
 Y = 1373
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -5016,7 +5016,7 @@ ID = 558
 X = 3722
 Y = 1232
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -5025,7 +5025,7 @@ ID = 559
 X = 3908
 Y = 1253
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -5034,7 +5034,7 @@ ID = 560
 X = 3993
 Y = 1236
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -5043,7 +5043,7 @@ ID = 561
 X = 4349
 Y = 1622
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -5052,7 +5052,7 @@ ID = 562
 X = 4399
 Y = 1753
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -5061,7 +5061,7 @@ ID = 563
 X = 4585
 Y = 1270
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -5070,7 +5070,7 @@ ID = 564
 X = 4410
 Y = 1664
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -5079,7 +5079,7 @@ ID = 565
 X = 4609
 Y = 1237
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -5088,7 +5088,7 @@ ID = 566
 X = 4647
 Y = 1343
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -5097,7 +5097,7 @@ ID = 567
 X = 4641
 Y = 1511
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -5106,7 +5106,7 @@ ID = 568
 X = 4686
 Y = 1779
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -5115,7 +5115,7 @@ ID = 569
 X = 4754
 Y = 1735
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -5124,7 +5124,7 @@ ID = 570
 X = 4789
 Y = 1621
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -5133,7 +5133,7 @@ ID = 571
 X = 4632
 Y = 1986
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -5142,7 +5142,7 @@ ID = 572
 X = 4895
 Y = 1467
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -5151,7 +5151,7 @@ ID = 573
 X = 4886
 Y = 1704
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -5160,7 +5160,7 @@ ID = 574
 X = 4831
 Y = 1815
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -5169,25 +5169,25 @@ ID = 575
 X = 4977
 Y = 1859
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
 [Spawn 576]
 ID = 576
-X = 4975
-Y = 1925
+X = 5022
+Y = 1903
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
 [Spawn 577]
 ID = 577
-X = 4744
-Y = 2077
+X = 4691
+Y = 2009
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -5196,16 +5196,16 @@ ID = 578
 X = 4968
 Y = 2199
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
 [Spawn 579]
 ID = 579
-X = 4892
-Y = 2147
+X = 4973
+Y = 2097
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -5214,7 +5214,7 @@ ID = 580
 X = 4872
 Y = 2054
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -5223,7 +5223,7 @@ ID = 581
 X = 5186
 Y = 2196
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -5232,7 +5232,7 @@ ID = 582
 X = 5540
 Y = 1693
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -5241,7 +5241,7 @@ ID = 583
 X = 5441
 Y = 2121
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -5250,7 +5250,7 @@ ID = 584
 X = 5503
 Y = 1616
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -5259,16 +5259,16 @@ ID = 585
 X = 5677
 Y = 1639
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
 [Spawn 586]
 ID = 586
-X = 5712
-Y = 2178
+X = 5688
+Y = 2116
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -5277,7 +5277,7 @@ ID = 587
 X = 5735
 Y = 2137
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -5286,7 +5286,7 @@ ID = 588
 X = 5859
 Y = 1602
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5295,7 +5295,7 @@ ID = 589
 X = 6169
 Y = 1762
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -5304,7 +5304,7 @@ ID = 590
 X = 6036
 Y = 2199
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -5313,7 +5313,7 @@ ID = 591
 X = 6190
 Y = 1924
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -5322,7 +5322,7 @@ ID = 592
 X = 6175
 Y = 1947
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -5331,7 +5331,7 @@ ID = 593
 X = 6273
 Y = 1827
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -5340,7 +5340,7 @@ ID = 594
 X = 6259
 Y = 1846
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -5349,7 +5349,7 @@ ID = 595
 X = 6249
 Y = 2037
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -5358,7 +5358,7 @@ ID = 596
 X = 6284
 Y = 2029
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -5367,7 +5367,7 @@ ID = 597
 X = 6588
 Y = 1710
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -5376,7 +5376,7 @@ ID = 598
 X = 6595
 Y = 1695
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -5385,7 +5385,7 @@ ID = 599
 X = 6548
 Y = 1682
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -5394,7 +5394,7 @@ ID = 600
 X = 6450
 Y = 1679
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -5403,7 +5403,7 @@ ID = 601
 X = 6436
 Y = 1866
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -5412,7 +5412,7 @@ ID = 602
 X = 6482
 Y = 1925
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -5421,7 +5421,7 @@ ID = 603
 X = 6414
 Y = 2147
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -5430,7 +5430,7 @@ ID = 604
 X = 6452
 Y = 1563
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -5439,7 +5439,7 @@ ID = 605
 X = 6680
 Y = 1429
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5448,7 +5448,7 @@ ID = 606
 X = 6791
 Y = 1454
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5457,7 +5457,7 @@ ID = 607
 X = 6668
 Y = 1606
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -5466,16 +5466,16 @@ ID = 608
 X = 6711
 Y = 1751
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
 [Spawn 609]
 ID = 609
-X = 6784
-Y = 1987
+X = 6735
+Y = 2034
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -5484,7 +5484,7 @@ ID = 610
 X = 6237
 Y = 1390
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 100
 
@@ -5493,7 +5493,7 @@ ID = 611
 X = 6513
 Y = 1322
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5502,7 +5502,7 @@ ID = 612
 X = 6204
 Y = 1339
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5511,7 +5511,7 @@ ID = 613
 X = 6577
 Y = 1204
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5520,7 +5520,7 @@ ID = 614
 X = 6973
 Y = 940
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5529,7 +5529,7 @@ ID = 615
 X = 7175
 Y = 902
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5538,7 +5538,7 @@ ID = 616
 X = 7099
 Y = 1010
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5547,7 +5547,7 @@ ID = 617
 X = 7195
 Y = 1158
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5556,7 +5556,7 @@ ID = 618
 X = 7198
 Y = 1239
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5565,7 +5565,7 @@ ID = 619
 X = 7191
 Y = 837
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5574,7 +5574,7 @@ ID = 620
 X = 7128
 Y = 1397
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5583,7 +5583,7 @@ ID = 621
 X = 7266
 Y = 803
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5592,7 +5592,7 @@ ID = 622
 X = 7279
 Y = 866
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5601,7 +5601,7 @@ ID = 623
 X = 7392
 Y = 1322
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5610,7 +5610,7 @@ ID = 624
 X = 7386
 Y = 728
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5619,7 +5619,7 @@ ID = 625
 X = 7429
 Y = 649
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5628,7 +5628,7 @@ ID = 626
 X = 7585
 Y = 737
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5637,7 +5637,7 @@ ID = 627
 X = 7580
 Y = 722
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5646,7 +5646,7 @@ ID = 628
 X = 7570
 Y = 712
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5655,7 +5655,7 @@ ID = 629
 X = 7418
 Y = 807
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5664,7 +5664,7 @@ ID = 630
 X = 7460
 Y = 976
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5673,7 +5673,7 @@ ID = 631
 X = 7413
 Y = 836
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5682,7 +5682,7 @@ ID = 632
 X = 7480
 Y = 827
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5691,7 +5691,7 @@ ID = 633
 X = 7501
 Y = 994
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5700,7 +5700,7 @@ ID = 634
 X = 7592
 Y = 861
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5709,7 +5709,7 @@ ID = 635
 X = 7772
 Y = 626
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 235
 
@@ -5718,7 +5718,7 @@ ID = 636
 X = 7792
 Y = 633
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 231
 
@@ -5727,7 +5727,7 @@ ID = 637
 X = 7790
 Y = 1059
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5736,7 +5736,7 @@ ID = 638
 X = 7793
 Y = 878
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5745,7 +5745,7 @@ ID = 639
 X = 7889
 Y = 811
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5754,7 +5754,7 @@ ID = 640
 X = 7924
 Y = 807
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5763,7 +5763,7 @@ ID = 641
 X = 7946
 Y = 800
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5772,7 +5772,7 @@ ID = 642
 X = 7914
 Y = 808
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5781,7 +5781,7 @@ ID = 643
 X = 7809
 Y = 1040
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5790,7 +5790,7 @@ ID = 644
 X = 7989
 Y = 873
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5799,7 +5799,7 @@ ID = 645
 X = 7537
 Y = 610
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 234
 
@@ -5808,7 +5808,7 @@ ID = 646
 X = 8183
 Y = 606
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 235
 
@@ -5817,7 +5817,7 @@ ID = 647
 X = 8143
 Y = 979
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5826,7 +5826,7 @@ ID = 648
 X = 8075
 Y = 951
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5835,7 +5835,7 @@ ID = 649
 X = 8166
 Y = 1002
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5844,7 +5844,7 @@ ID = 650
 X = 8150
 Y = 1162
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5853,7 +5853,7 @@ ID = 651
 X = 8086
 Y = 1198
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5862,7 +5862,7 @@ ID = 652
 X = 8315
 Y = 860
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5871,7 +5871,7 @@ ID = 653
 X = 8364
 Y = 984
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5880,7 +5880,7 @@ ID = 654
 X = 8235
 Y = 1001
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5889,7 +5889,7 @@ ID = 655
 X = 8352
 Y = 1020
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5898,7 +5898,7 @@ ID = 656
 X = 8236
 Y = 1098
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5907,7 +5907,7 @@ ID = 657
 X = 8393
 Y = 917
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5916,7 +5916,7 @@ ID = 658
 X = 8551
 Y = 942
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5925,7 +5925,7 @@ ID = 659
 X = 8509
 Y = 850
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5934,7 +5934,7 @@ ID = 660
 X = 8546
 Y = 1186
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5943,7 +5943,7 @@ ID = 661
 X = 8565
 Y = 1133
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5952,7 +5952,7 @@ ID = 662
 X = 8598
 Y = 1127
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5961,7 +5961,7 @@ ID = 663
 X = 8633
 Y = 952
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5970,7 +5970,7 @@ ID = 664
 X = 8661
 Y = 898
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5979,7 +5979,7 @@ ID = 665
 X = 8630
 Y = 857
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5988,7 +5988,7 @@ ID = 666
 X = 8797
 Y = 1127
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -5997,7 +5997,7 @@ ID = 667
 X = 8776
 Y = 1176
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6006,7 +6006,7 @@ ID = 668
 X = 8658
 Y = 1099
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6015,7 +6015,7 @@ ID = 669
 X = 8702
 Y = 1092
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6024,7 +6024,7 @@ ID = 670
 X = 8743
 Y = 1090
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6033,7 +6033,7 @@ ID = 671
 X = 8592
 Y = 1274
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6042,7 +6042,7 @@ ID = 672
 X = 8475
 Y = 1271
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6051,7 +6051,7 @@ ID = 673
 X = 8900
 Y = 983
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 234
 
@@ -6060,7 +6060,7 @@ ID = 674
 X = 8885
 Y = 940
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 232
 
@@ -6069,7 +6069,7 @@ ID = 675
 X = 8870
 Y = 1384
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -6078,7 +6078,7 @@ ID = 676
 X = 8522
 Y = 1422
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6087,7 +6087,7 @@ ID = 677
 X = 8471
 Y = 1481
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6096,7 +6096,7 @@ ID = 678
 X = 8565
 Y = 1585
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6105,7 +6105,7 @@ ID = 679
 X = 8577
 Y = 1567
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6114,7 +6114,7 @@ ID = 680
 X = 8563
 Y = 1572
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6123,7 +6123,7 @@ ID = 681
 X = 8647
 Y = 1466
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6132,7 +6132,7 @@ ID = 682
 X = 8861
 Y = 1405
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -6141,7 +6141,7 @@ ID = 683
 X = 8479
 Y = 1655
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6150,7 +6150,7 @@ ID = 684
 X = 8482
 Y = 1671
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6159,16 +6159,16 @@ ID = 685
 X = 8497
 Y = 1674
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
 [Spawn 686]
 ID = 686
-X = 8494
-Y = 1628
+X = 8437
+Y = 1594
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6177,7 +6177,7 @@ ID = 687
 X = 8784
 Y = 1756
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -6186,7 +6186,7 @@ ID = 688
 X = 8723
 Y = 1756
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -6195,7 +6195,7 @@ ID = 689
 X = 8833
 Y = 1777
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -6204,7 +6204,7 @@ ID = 690
 X = 8850
 Y = 1705
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -6213,7 +6213,7 @@ ID = 691
 X = 8961
 Y = 1764
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -6222,7 +6222,7 @@ ID = 692
 X = 8907
 Y = 1783
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -6231,7 +6231,7 @@ ID = 693
 X = 8965
 Y = 1797
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -6240,7 +6240,7 @@ ID = 694
 X = 8232
 Y = 1241
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6249,7 +6249,7 @@ ID = 695
 X = 8261
 Y = 1385
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6258,7 +6258,7 @@ ID = 696
 X = 8394
 Y = 1328
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6267,7 +6267,7 @@ ID = 697
 X = 8291
 Y = 1262
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6276,7 +6276,7 @@ ID = 698
 X = 8229
 Y = 1458
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6285,7 +6285,7 @@ ID = 699
 X = 8141
 Y = 1313
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6294,7 +6294,7 @@ ID = 700
 X = 8064
 Y = 1398
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6303,7 +6303,7 @@ ID = 701
 X = 8025
 Y = 1577
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6312,7 +6312,7 @@ ID = 702
 X = 8135
 Y = 1527
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6321,7 +6321,7 @@ ID = 703
 X = 8032
 Y = 1598
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6330,7 +6330,7 @@ ID = 704
 X = 8210
 Y = 1583
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6339,7 +6339,7 @@ ID = 705
 X = 8013
 Y = 1161
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6348,7 +6348,7 @@ ID = 706
 X = 8034
 Y = 1587
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6357,7 +6357,7 @@ ID = 707
 X = 7921
 Y = 1258
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6366,7 +6366,7 @@ ID = 708
 X = 7845
 Y = 1256
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6375,7 +6375,7 @@ ID = 709
 X = 7928
 Y = 1416
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6384,7 +6384,7 @@ ID = 710
 X = 7862
 Y = 1577
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6393,7 +6393,7 @@ ID = 711
 X = 7862
 Y = 1615
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6402,7 +6402,7 @@ ID = 712
 X = 7833
 Y = 1630
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6411,7 +6411,7 @@ ID = 713
 X = 7875
 Y = 1613
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6420,7 +6420,7 @@ ID = 714
 X = 7865
 Y = 1658
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6429,7 +6429,7 @@ ID = 715
 X = 8155
 Y = 1613
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6438,7 +6438,7 @@ ID = 716
 X = 7971
 Y = 1227
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6447,7 +6447,7 @@ ID = 717
 X = 7803
 Y = 1514
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6456,7 +6456,7 @@ ID = 718
 X = 7817
 Y = 1228
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6465,7 +6465,7 @@ ID = 719
 X = 7689
 Y = 1334
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6474,7 +6474,7 @@ ID = 720
 X = 7786
 Y = 1257
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6483,7 +6483,7 @@ ID = 721
 X = 7741
 Y = 1457
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6492,7 +6492,7 @@ ID = 722
 X = 7735
 Y = 1508
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6501,7 +6501,7 @@ ID = 723
 X = 7707
 Y = 1784
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6510,7 +6510,7 @@ ID = 724
 X = 7648
 Y = 1748
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6519,7 +6519,7 @@ ID = 725
 X = 7637
 Y = 1665
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6528,7 +6528,7 @@ ID = 726
 X = 7609
 Y = 1383
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6537,7 +6537,7 @@ ID = 727
 X = 7672
 Y = 1802
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6546,7 +6546,7 @@ ID = 728
 X = 7666
 Y = 1883
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6555,7 +6555,7 @@ ID = 729
 X = 7705
 Y = 2108
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6564,16 +6564,16 @@ ID = 730
 X = 7677
 Y = 2122
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
 [Spawn 731]
 ID = 731
-X = 7749
+X = 7800
 Y = 2019
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6582,7 +6582,7 @@ ID = 732
 X = 7889
 Y = 2149
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -6591,7 +6591,7 @@ ID = 733
 X = 7880
 Y = 2059
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -6600,7 +6600,7 @@ ID = 734
 X = 8041
 Y = 2148
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -6609,7 +6609,7 @@ ID = 735
 X = 8055
 Y = 2153
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -6618,7 +6618,7 @@ ID = 736
 X = 7749
 Y = 2222
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -6627,7 +6627,7 @@ ID = 737
 X = 8190
 Y = 2289
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -6636,7 +6636,7 @@ ID = 738
 X = 8606
 Y = 2990
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -6645,7 +6645,7 @@ ID = 739
 X = 8611
 Y = 2872
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -6654,7 +6654,7 @@ ID = 740
 X = 8899
 Y = 2853
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -6663,7 +6663,7 @@ ID = 741
 X = 8949
 Y = 2938
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -6672,7 +6672,7 @@ ID = 742
 X = 8956
 Y = 2957
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -6681,7 +6681,7 @@ ID = 743
 X = 9024
 Y = 2866
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -6690,7 +6690,7 @@ ID = 744
 X = 9167
 Y = 3323
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 233
 
@@ -6699,7 +6699,7 @@ ID = 745
 X = 9059
 Y = 2804
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -6708,7 +6708,7 @@ ID = 746
 X = 9372
 Y = 3153
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 234
 
@@ -6717,7 +6717,7 @@ ID = 747
 X = 9109
 Y = 2803
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -6726,7 +6726,7 @@ ID = 748
 X = 9439
 Y = 3172
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 231
 
@@ -6735,7 +6735,7 @@ ID = 749
 X = 9590
 Y = 3205
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 232
 
@@ -6744,7 +6744,7 @@ ID = 750
 X = 9540
 Y = 3318
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 233
 
@@ -6753,7 +6753,7 @@ ID = 751
 X = 9598
 Y = 2990
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 233
 
@@ -6762,7 +6762,7 @@ ID = 752
 X = 9691
 Y = 2675
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 231
 
@@ -6771,7 +6771,7 @@ ID = 753
 X = 9620
 Y = 2732
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 231
 
@@ -6780,7 +6780,7 @@ ID = 754
 X = 9762
 Y = 2694
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 231
 
@@ -6789,7 +6789,7 @@ ID = 755
 X = 9684
 Y = 2929
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 231
 
@@ -6798,7 +6798,7 @@ ID = 756
 X = 9385
 Y = 2566
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -6807,7 +6807,7 @@ ID = 757
 X = 9524
 Y = 2516
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 234
 
@@ -6816,7 +6816,7 @@ ID = 758
 X = 9698
 Y = 2416
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 232
 
@@ -6825,7 +6825,7 @@ ID = 759
 X = 9209
 Y = 2624
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -6834,7 +6834,7 @@ ID = 760
 X = 9217
 Y = 2581
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -6843,7 +6843,7 @@ ID = 761
 X = 9580
 Y = 2254
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 231
 
@@ -6852,7 +6852,7 @@ ID = 762
 X = 9461
 Y = 2236
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 231
 
@@ -6861,7 +6861,7 @@ ID = 763
 X = 9925
 Y = 2395
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6870,7 +6870,7 @@ ID = 764
 X = 9963
 Y = 2296
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6879,7 +6879,7 @@ ID = 765
 X = 9949
 Y = 2209
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6888,7 +6888,7 @@ ID = 766
 X = 9897
 Y = 2221
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6897,7 +6897,7 @@ ID = 767
 X = 9983
 Y = 2593
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6906,7 +6906,7 @@ ID = 768
 X = 9911
 Y = 2493
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6915,7 +6915,7 @@ ID = 769
 X = 9930
 Y = 2796
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 232
 
@@ -6924,7 +6924,7 @@ ID = 770
 X = 9983
 Y = 2601
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6933,7 +6933,7 @@ ID = 771
 X = 9299
 Y = 2180
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 233
 
@@ -6942,7 +6942,7 @@ ID = 772
 X = 9346
 Y = 2157
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 231
 
@@ -6951,7 +6951,7 @@ ID = 773
 X = 9216
 Y = 2559
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -6960,7 +6960,7 @@ ID = 774
 X = 9916
 Y = 2597
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6969,7 +6969,7 @@ ID = 775
 X = 9987
 Y = 2501
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6978,7 +6978,7 @@ ID = 776
 X = 10192
 Y = 2306
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6987,7 +6987,7 @@ ID = 777
 X = 10190
 Y = 2253
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -6996,7 +6996,7 @@ ID = 778
 X = 10194
 Y = 2396
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7005,7 +7005,7 @@ ID = 779
 X = 9629
 Y = 1804
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 232
 
@@ -7014,7 +7014,7 @@ ID = 780
 X = 10354
 Y = 1810
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7023,7 +7023,7 @@ ID = 781
 X = 10244
 Y = 1829
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7032,7 +7032,7 @@ ID = 782
 X = 10373
 Y = 2118
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7041,7 +7041,7 @@ ID = 783
 X = 10218
 Y = 2143
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7050,7 +7050,7 @@ ID = 784
 X = 10375
 Y = 2223
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7059,7 +7059,7 @@ ID = 785
 X = 10204
 Y = 2258
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7068,7 +7068,7 @@ ID = 786
 X = 10200
 Y = 2375
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7077,7 +7077,7 @@ ID = 787
 X = 10342
 Y = 2235
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7086,7 +7086,7 @@ ID = 788
 X = 10397
 Y = 1845
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7095,7 +7095,7 @@ ID = 789
 X = 10387
 Y = 1966
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7104,7 +7104,7 @@ ID = 790
 X = 10166
 Y = 1609
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 233
 
@@ -7113,7 +7113,7 @@ ID = 791
 X = 10029
 Y = 1621
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 234
 
@@ -7122,7 +7122,7 @@ ID = 792
 X = 10196
 Y = 1797
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7131,7 +7131,7 @@ ID = 793
 X = 10560
 Y = 1940
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7140,7 +7140,7 @@ ID = 794
 X = 10579
 Y = 1868
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7149,7 +7149,7 @@ ID = 795
 X = 10471
 Y = 2192
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7158,7 +7158,7 @@ ID = 796
 X = 10554
 Y = 2046
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7167,7 +7167,7 @@ ID = 797
 X = 10523
 Y = 2022
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7176,7 +7176,7 @@ ID = 798
 X = 10594
 Y = 2059
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7185,7 +7185,7 @@ ID = 799
 X = 10768
 Y = 1884
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7194,7 +7194,7 @@ ID = 800
 X = 10628
 Y = 1869
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7203,7 +7203,7 @@ ID = 801
 X = 10609
 Y = 2006
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7212,7 +7212,7 @@ ID = 802
 X = 10628
 Y = 2189
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7221,7 +7221,7 @@ ID = 803
 X = 10638
 Y = 2147
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7230,7 +7230,7 @@ ID = 804
 X = 10915
 Y = 1959
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7239,7 +7239,7 @@ ID = 805
 X = 10924
 Y = 1880
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7248,7 +7248,7 @@ ID = 806
 X = 10990
 Y = 2102
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7257,7 +7257,7 @@ ID = 807
 X = 10950
 Y = 2320
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7266,7 +7266,7 @@ ID = 808
 X = 10881
 Y = 2281
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7275,7 +7275,7 @@ ID = 809
 X = 10889
 Y = 2361
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7284,7 +7284,7 @@ ID = 810
 X = 10927
 Y = 2251
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7293,7 +7293,7 @@ ID = 811
 X = 11046
 Y = 2130
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7302,7 +7302,7 @@ ID = 812
 X = 11058
 Y = 2160
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7311,7 +7311,7 @@ ID = 813
 X = 11084
 Y = 2193
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7320,7 +7320,7 @@ ID = 814
 X = 11056
 Y = 2381
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7329,7 +7329,7 @@ ID = 815
 X = 11127
 Y = 2234
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7338,7 +7338,7 @@ ID = 816
 X = 11098
 Y = 2204
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7347,7 +7347,7 @@ ID = 817
 X = 11158
 Y = 1800
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 233
 
@@ -7356,7 +7356,7 @@ ID = 818
 X = 10703
 Y = 2588
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7365,7 +7365,7 @@ ID = 819
 X = 10988
 Y = 2459
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7374,7 +7374,7 @@ ID = 820
 X = 10951
 Y = 2545
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7383,7 +7383,7 @@ ID = 821
 X = 10944
 Y = 2493
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7392,7 +7392,7 @@ ID = 822
 X = 11004
 Y = 2595
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7401,7 +7401,7 @@ ID = 823
 X = 11068
 Y = 2569
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7410,7 +7410,7 @@ ID = 824
 X = 11033
 Y = 2581
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7419,7 +7419,7 @@ ID = 825
 X = 11047
 Y = 2577
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7428,7 +7428,7 @@ ID = 826
 X = 10876
 Y = 2610
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7437,7 +7437,7 @@ ID = 827
 X = 11077
 Y = 2630
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7446,7 +7446,7 @@ ID = 828
 X = 11299
 Y = 2490
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7455,7 +7455,7 @@ ID = 829
 X = 11246
 Y = 2683
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7464,7 +7464,7 @@ ID = 830
 X = 11314
 Y = 2742
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7473,7 +7473,7 @@ ID = 831
 X = 11328
 Y = 2673
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7482,7 +7482,7 @@ ID = 832
 X = 11215
 Y = 2734
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7491,7 +7491,7 @@ ID = 833
 X = 11375
 Y = 2764
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7500,7 +7500,7 @@ ID = 834
 X = 11160
 Y = 2862
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7509,7 +7509,7 @@ ID = 835
 X = 11317
 Y = 2979
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7518,7 +7518,7 @@ ID = 836
 X = 11239
 Y = 2952
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7527,7 +7527,7 @@ ID = 837
 X = 11342
 Y = 2952
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7536,7 +7536,7 @@ ID = 838
 X = 11536
 Y = 2567
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7545,7 +7545,7 @@ ID = 839
 X = 11559
 Y = 2648
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7554,7 +7554,7 @@ ID = 840
 X = 11469
 Y = 2794
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7563,7 +7563,7 @@ ID = 841
 X = 11550
 Y = 2882
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7572,7 +7572,7 @@ ID = 842
 X = 11487
 Y = 2935
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7581,7 +7581,7 @@ ID = 843
 X = 11409
 Y = 2924
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7590,7 +7590,7 @@ ID = 844
 X = 11332
 Y = 2983
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7599,7 +7599,7 @@ ID = 845
 X = 11572
 Y = 2407
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 231
 
@@ -7608,7 +7608,7 @@ ID = 846
 X = 11387
 Y = 3059
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7617,7 +7617,7 @@ ID = 847
 X = 11286
 Y = 3040
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7626,7 +7626,7 @@ ID = 848
 X = 11444
 Y = 3189
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7635,7 +7635,7 @@ ID = 849
 X = 11485
 Y = 3021
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7644,7 +7644,7 @@ ID = 850
 X = 11663
 Y = 2703
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7653,7 +7653,7 @@ ID = 851
 X = 11665
 Y = 2891
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7662,7 +7662,7 @@ ID = 852
 X = 11695
 Y = 2982
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7671,7 +7671,7 @@ ID = 853
 X = 11707
 Y = 3094
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 231
 
@@ -7680,7 +7680,7 @@ ID = 854
 X = 11636
 Y = 3180
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7689,7 +7689,7 @@ ID = 855
 X = 11301
 Y = 3185
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7698,7 +7698,7 @@ ID = 856
 X = 11159
 Y = 3183
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7707,7 +7707,7 @@ ID = 857
 X = 11198
 Y = 3287
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7716,7 +7716,7 @@ ID = 858
 X = 11061
 Y = 3283
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7725,7 +7725,7 @@ ID = 859
 X = 11149
 Y = 3338
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7734,7 +7734,7 @@ ID = 860
 X = 11267
 Y = 3234
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7743,7 +7743,7 @@ ID = 861
 X = 11361
 Y = 3263
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7752,7 +7752,7 @@ ID = 862
 X = 11454
 Y = 3381
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7761,7 +7761,7 @@ ID = 863
 X = 11222
 Y = 3398
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7770,7 +7770,7 @@ ID = 864
 X = 11002
 Y = 3387
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7779,7 +7779,7 @@ ID = 865
 X = 10925
 Y = 3050
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7788,7 +7788,7 @@ ID = 866
 X = 10882
 Y = 3328
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7797,7 +7797,7 @@ ID = 867
 X = 10974
 Y = 3279
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7806,7 +7806,7 @@ ID = 868
 X = 11180
 Y = 3502
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7815,7 +7815,7 @@ ID = 869
 X = 11083
 Y = 3405
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7824,7 +7824,7 @@ ID = 870
 X = 11077
 Y = 3490
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7833,7 +7833,7 @@ ID = 871
 X = 11220
 Y = 3468
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7842,7 +7842,7 @@ ID = 872
 X = 10892
 Y = 3008
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7851,7 +7851,7 @@ ID = 873
 X = 10737
 Y = 3156
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7860,7 +7860,7 @@ ID = 874
 X = 10709
 Y = 3204
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7869,7 +7869,7 @@ ID = 875
 X = 10455
 Y = 2859
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7878,7 +7878,7 @@ ID = 876
 X = 10497
 Y = 2890
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7887,7 +7887,7 @@ ID = 877
 X = 10445
 Y = 2833
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7896,7 +7896,7 @@ ID = 878
 X = 10408
 Y = 2942
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7905,7 +7905,7 @@ ID = 879
 X = 10460
 Y = 2904
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7914,7 +7914,7 @@ ID = 880
 X = 10541
 Y = 2889
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7923,7 +7923,7 @@ ID = 881
 X = 10553
 Y = 2909
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7932,7 +7932,7 @@ ID = 882
 X = 10555
 Y = 3033
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7941,7 +7941,7 @@ ID = 883
 X = 10989
 Y = 2841
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7950,7 +7950,7 @@ ID = 884
 X = 10424
 Y = 2770
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7959,7 +7959,7 @@ ID = 885
 X = 10977
 Y = 2846
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7968,7 +7968,7 @@ ID = 886
 X = 10288
 Y = 2423
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7977,7 +7977,7 @@ ID = 887
 X = 10296
 Y = 2408
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7986,7 +7986,7 @@ ID = 888
 X = 10252
 Y = 2718
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -7995,7 +7995,7 @@ ID = 889
 X = 10367
 Y = 2761
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -8004,7 +8004,7 @@ ID = 890
 X = 10248
 Y = 2993
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 231
 
@@ -8013,7 +8013,7 @@ ID = 891
 X = 10521
 Y = 2500
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -8022,7 +8022,7 @@ ID = 892
 X = 10487
 Y = 2459
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -8031,7 +8031,7 @@ ID = 893
 X = 10216
 Y = 2495
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -8040,7 +8040,7 @@ ID = 894
 X = 10158
 Y = 2568
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -8049,7 +8049,7 @@ ID = 895
 X = 10045
 Y = 2935
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 236
 
@@ -8058,7 +8058,7 @@ ID = 896
 X = 10200
 Y = 2265
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -8067,7 +8067,7 @@ ID = 897
 X = 9201
 Y = 2742
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -8076,7 +8076,7 @@ ID = 898
 X = 9009
 Y = 2608
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -8085,7 +8085,7 @@ ID = 899
 X = 8908
 Y = 2593
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -8094,7 +8094,7 @@ ID = 900
 X = 8991
 Y = 2599
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -8103,7 +8103,7 @@ ID = 901
 X = 8916
 Y = 2709
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -8112,7 +8112,7 @@ ID = 902
 X = 8903
 Y = 2697
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -8121,7 +8121,7 @@ ID = 903
 X = 8669
 Y = 2415
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -8130,7 +8130,7 @@ ID = 904
 X = 8600
 Y = 2627
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -8139,7 +8139,7 @@ ID = 905
 X = 8386
 Y = 2447
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -8148,7 +8148,7 @@ ID = 906
 X = 8319
 Y = 2460
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -8157,7 +8157,7 @@ ID = 907
 X = 8309
 Y = 2462
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -8166,7 +8166,7 @@ ID = 908
 X = 8309
 Y = 2497
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -8175,7 +8175,7 @@ ID = 909
 X = 8388
 Y = 2435
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -8184,7 +8184,7 @@ ID = 910
 X = 8362
 Y = 2440
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -8193,7 +8193,7 @@ ID = 911
 X = 8406
 Y = 2436
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -8202,7 +8202,7 @@ ID = 912
 X = 8459
 Y = 2747
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -8211,7 +8211,7 @@ ID = 913
 X = 8795
 Y = 5211
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -8220,7 +8220,7 @@ ID = 914
 X = 8768
 Y = 5361
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -8229,7 +8229,7 @@ ID = 915
 X = 8644
 Y = 5256
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -8238,7 +8238,7 @@ ID = 916
 X = 8667
 Y = 5247
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -8247,7 +8247,7 @@ ID = 917
 X = 8782
 Y = 5238
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -8256,7 +8256,7 @@ ID = 918
 X = 8747
 Y = 5356
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -8265,7 +8265,7 @@ ID = 919
 X = 8857
 Y = 5133
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -8274,7 +8274,7 @@ ID = 920
 X = 8908
 Y = 5163
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -8283,7 +8283,7 @@ ID = 921
 X = 9043
 Y = 5352
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -8292,7 +8292,7 @@ ID = 922
 X = 8904
 Y = 5412
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -8301,7 +8301,7 @@ ID = 923
 X = 8484
 Y = 5568
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -8310,7 +8310,7 @@ ID = 924
 X = 8781
 Y = 5584
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -8319,7 +8319,7 @@ ID = 925
 X = 8562
 Y = 5593
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -8328,7 +8328,7 @@ ID = 926
 X = 8638
 Y = 5779
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -8337,7 +8337,7 @@ ID = 927
 X = 8762
 Y = 5690
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -8346,7 +8346,7 @@ ID = 928
 X = 9420
 Y = 5390
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 237
 
@@ -8355,7 +8355,7 @@ ID = 929
 X = 9430
 Y = 5400
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 234
 
@@ -8364,7 +8364,7 @@ ID = 930
 X = 9713
 Y = 5321
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 231
 
@@ -8373,7 +8373,7 @@ ID = 931
 X = 9670
 Y = 5344
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 234
 
@@ -8382,7 +8382,7 @@ ID = 932
 X = 9630
 Y = 5782
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -8391,7 +8391,7 @@ ID = 933
 X = 9753
 Y = 5624
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 231
 
@@ -8400,7 +8400,7 @@ ID = 934
 X = 9681
 Y = 5795
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -8409,7 +8409,7 @@ ID = 935
 X = 9372
 Y = 5990
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -8418,7 +8418,7 @@ ID = 936
 X = 9212
 Y = 5986
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -8427,7 +8427,7 @@ ID = 937
 X = 9269
 Y = 6109
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -8436,7 +8436,7 @@ ID = 938
 X = 9215
 Y = 6321
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -8445,7 +8445,7 @@ ID = 939
 X = 9581
 Y = 6150
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -8454,7 +8454,7 @@ ID = 940
 X = 9574
 Y = 6078
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -8463,7 +8463,7 @@ ID = 941
 X = 9656
 Y = 6083
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -8472,7 +8472,7 @@ ID = 942
 X = 9618
 Y = 6391
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -8481,7 +8481,7 @@ ID = 943
 X = 9785
 Y = 6201
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -8490,7 +8490,7 @@ ID = 944
 X = 9766
 Y = 6293
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -8499,7 +8499,7 @@ ID = 945
 X = 9791
 Y = 6294
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -8508,7 +8508,7 @@ ID = 946
 X = 9008
 Y = 5924
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -8517,7 +8517,7 @@ ID = 947
 X = 8801
 Y = 5902
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -8526,7 +8526,7 @@ ID = 948
 X = 8905
 Y = 5815
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -8535,7 +8535,7 @@ ID = 949
 X = 8892
 Y = 5818
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -8544,7 +8544,7 @@ ID = 950
 X = 8852
 Y = 6081
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -8553,7 +8553,7 @@ ID = 951
 X = 8898
 Y = 6072
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -8562,7 +8562,7 @@ ID = 952
 X = 8930
 Y = 6082
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -8571,7 +8571,7 @@ ID = 953
 X = 8945
 Y = 6085
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -8580,7 +8580,7 @@ ID = 954
 X = 8864
 Y = 6078
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -8589,7 +8589,7 @@ ID = 955
 X = 8975
 Y = 6363
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -8598,7 +8598,7 @@ ID = 956
 X = 8574
 Y = 5781
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -8607,7 +8607,7 @@ ID = 957
 X = 8538
 Y = 5914
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -8616,7 +8616,7 @@ ID = 958
 X = 8490
 Y = 6041
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -8625,7 +8625,7 @@ ID = 959
 X = 8427
 Y = 6069
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -8634,7 +8634,7 @@ ID = 960
 X = 8490
 Y = 6083
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -8643,7 +8643,7 @@ ID = 961
 X = 8414
 Y = 5864
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -8652,7 +8652,7 @@ ID = 962
 X = 8001
 Y = 5922
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -8661,7 +8661,7 @@ ID = 963
 X = 8109
 Y = 5995
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -8670,7 +8670,7 @@ ID = 964
 X = 8148
 Y = 5946
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -8679,7 +8679,7 @@ ID = 965
 X = 8112
 Y = 6028
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -8688,7 +8688,7 @@ ID = 966
 X = 8015
 Y = 6089
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -8697,7 +8697,7 @@ ID = 967
 X = 8077
 Y = 6089
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -8706,7 +8706,7 @@ ID = 968
 X = 8247
 Y = 5861
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -8715,7 +8715,7 @@ ID = 969
 X = 8323
 Y = 5996
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -8724,7 +8724,7 @@ ID = 970
 X = 8317
 Y = 5947
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -8733,7 +8733,7 @@ ID = 971
 X = 8225
 Y = 5883
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -8742,7 +8742,7 @@ ID = 972
 X = 7857
 Y = 5896
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -8751,7 +8751,7 @@ ID = 973
 X = 7975
 Y = 5856
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -8760,7 +8760,7 @@ ID = 974
 X = 7982
 Y = 5998
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -8769,7 +8769,7 @@ ID = 975
 X = 7991
 Y = 5930
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -8778,7 +8778,7 @@ ID = 976
 X = 7916
 Y = 5863
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -8787,7 +8787,7 @@ ID = 977
 X = 7970
 Y = 6048
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -8796,7 +8796,7 @@ ID = 978
 X = 7887
 Y = 6031
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -8805,7 +8805,7 @@ ID = 979
 X = 8209
 Y = 5801
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -8814,7 +8814,7 @@ ID = 980
 X = 8069
 Y = 5801
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -8823,7 +8823,7 @@ ID = 981
 X = 7669
 Y = 5947
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 232
 
@@ -8832,7 +8832,7 @@ ID = 982
 X = 7620
 Y = 6084
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 232
 
@@ -8841,7 +8841,7 @@ ID = 983
 X = 7689
 Y = 6153
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 237
 
@@ -8850,7 +8850,7 @@ ID = 984
 X = 7714
 Y = 6266
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 233
 
@@ -8859,7 +8859,7 @@ ID = 985
 X = 7506
 Y = 5939
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 233
 
@@ -8868,7 +8868,7 @@ ID = 986
 X = 7588
 Y = 5962
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 237
 
@@ -8877,7 +8877,7 @@ ID = 987
 X = 7558
 Y = 5813
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 234
 
@@ -8886,7 +8886,7 @@ ID = 988
 X = 7461
 Y = 6196
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -8895,7 +8895,7 @@ ID = 989
 X = 7548
 Y = 6068
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 236
 
@@ -8904,7 +8904,7 @@ ID = 990
 X = 7580
 Y = 6149
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 232
 
@@ -8913,7 +8913,7 @@ ID = 991
 X = 7413
 Y = 6002
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 234
 
@@ -8922,7 +8922,7 @@ ID = 992
 X = 7497
 Y = 6119
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -8931,7 +8931,7 @@ ID = 993
 X = 7417
 Y = 6380
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -8940,7 +8940,7 @@ ID = 994
 X = 7454
 Y = 6367
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -8949,7 +8949,7 @@ ID = 995
 X = 7498
 Y = 6242
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -8958,7 +8958,7 @@ ID = 996
 X = 7477
 Y = 6396
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -8967,7 +8967,7 @@ ID = 997
 X = 7422
 Y = 6304
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -8976,7 +8976,7 @@ ID = 998
 X = 7204
 Y = 5892
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 237
 
@@ -8985,7 +8985,7 @@ ID = 999
 X = 7336
 Y = 5969
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 231
 
@@ -8994,7 +8994,7 @@ ID = 1000
 X = 7233
 Y = 5871
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 232
 
@@ -9003,7 +9003,7 @@ ID = 1001
 X = 7251
 Y = 5894
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 237
 
@@ -9012,7 +9012,7 @@ ID = 1002
 X = 7358
 Y = 5904
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 234
 
@@ -9021,7 +9021,7 @@ ID = 1003
 X = 7274
 Y = 5855
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 232
 
@@ -9030,7 +9030,7 @@ ID = 1004
 X = 7321
 Y = 5896
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 233
 
@@ -9039,7 +9039,7 @@ ID = 1005
 X = 7278
 Y = 5921
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 237
 
@@ -9048,7 +9048,7 @@ ID = 1006
 X = 7326
 Y = 6181
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -9057,7 +9057,7 @@ ID = 1007
 X = 7346
 Y = 6153
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -9066,7 +9066,7 @@ ID = 1008
 X = 7333
 Y = 6131
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -9075,7 +9075,7 @@ ID = 1009
 X = 7376
 Y = 6206
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -9084,7 +9084,7 @@ ID = 1010
 X = 7216
 Y = 6291
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -9093,7 +9093,7 @@ ID = 1011
 X = 6876
 Y = 6113
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 233
 
@@ -9102,7 +9102,7 @@ ID = 1012
 X = 6868
 Y = 6040
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 232
 
@@ -9111,7 +9111,7 @@ ID = 1013
 X = 6871
 Y = 6082
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 237
 
@@ -9120,7 +9120,7 @@ ID = 1014
 X = 6900
 Y = 6359
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -9129,7 +9129,7 @@ ID = 1015
 X = 7023
 Y = 5830
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 233
 
@@ -9138,7 +9138,7 @@ ID = 1016
 X = 7002
 Y = 6171
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 234
 
@@ -9147,7 +9147,7 @@ ID = 1017
 X = 7177
 Y = 6097
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 237
 
@@ -9156,7 +9156,7 @@ ID = 1018
 X = 7150
 Y = 6200
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -9165,7 +9165,7 @@ ID = 1019
 X = 7198
 Y = 6230
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -9174,7 +9174,7 @@ ID = 1020
 X = 6735
 Y = 6057
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 232
 
@@ -9183,7 +9183,7 @@ ID = 1021
 X = 6703
 Y = 6219
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -9192,7 +9192,7 @@ ID = 1022
 X = 6669
 Y = 6341
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -9201,7 +9201,7 @@ ID = 1023
 X = 6623
 Y = 6297
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -9210,7 +9210,7 @@ ID = 1024
 X = 6646
 Y = 6373
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -9219,7 +9219,7 @@ ID = 1025
 X = 6635
 Y = 6258
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -9228,7 +9228,7 @@ ID = 1026
 X = 6645
 Y = 6210
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -9237,7 +9237,7 @@ ID = 1027
 X = 6794
 Y = 6382
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -9246,7 +9246,7 @@ ID = 1028
 X = 6414
 Y = 6199
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 232
 
@@ -9255,7 +9255,7 @@ ID = 1029
 X = 6596
 Y = 6182
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -9264,7 +9264,7 @@ ID = 1030
 X = 6534
 Y = 6239
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -9273,7 +9273,7 @@ ID = 1031
 X = 6545
 Y = 6277
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -9282,7 +9282,7 @@ ID = 1032
 X = 6407
 Y = 6540
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -9291,7 +9291,7 @@ ID = 1033
 X = 6419
 Y = 6432
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -9300,7 +9300,7 @@ ID = 1034
 X = 6446
 Y = 6564
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -9309,7 +9309,7 @@ ID = 1035
 X = 6410
 Y = 6571
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -9318,7 +9318,7 @@ ID = 1036
 X = 6891
 Y = 6504
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -9327,7 +9327,7 @@ ID = 1037
 X = 6896
 Y = 6458
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -9336,7 +9336,7 @@ ID = 1038
 X = 6815
 Y = 6572
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -9345,7 +9345,7 @@ ID = 1039
 X = 6222
 Y = 5840
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 234
 
@@ -9354,7 +9354,7 @@ ID = 1040
 X = 6365
 Y = 5906
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 232
 
@@ -9363,7 +9363,7 @@ ID = 1041
 X = 6323
 Y = 6019
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 234
 
@@ -9372,7 +9372,7 @@ ID = 1042
 X = 6248
 Y = 6118
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 237
 
@@ -9381,7 +9381,7 @@ ID = 1043
 X = 5936
 Y = 6368
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 231
 
@@ -9390,7 +9390,7 @@ ID = 1044
 X = 6146
 Y = 5942
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 237
 
@@ -9399,7 +9399,7 @@ ID = 1045
 X = 6120
 Y = 5931
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 237
 
@@ -9408,7 +9408,7 @@ ID = 1046
 X = 6036
 Y = 6145
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 237
 
@@ -9417,7 +9417,7 @@ ID = 1047
 X = 5751
 Y = 6184
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 232
 
@@ -9426,7 +9426,7 @@ ID = 1048
 X = 5746
 Y = 5271
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -9435,7 +9435,7 @@ ID = 1049
 X = 5629
 Y = 5281
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -9444,7 +9444,7 @@ ID = 1050
 X = 5908
 Y = 5223
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -9453,7 +9453,7 @@ ID = 1051
 X = 5717
 Y = 5060
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -9462,7 +9462,7 @@ ID = 1052
 X = 5924
 Y = 5077
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -9471,7 +9471,7 @@ ID = 1053
 X = 5891
 Y = 5075
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -9480,7 +9480,7 @@ ID = 1054
 X = 5971
 Y = 4856
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -9489,7 +9489,7 @@ ID = 1055
 X = 5829
 Y = 4830
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -9498,7 +9498,7 @@ ID = 1056
 X = 6171
 Y = 4887
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -9507,7 +9507,7 @@ ID = 1057
 X = 5916
 Y = 4813
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -9516,7 +9516,7 @@ ID = 1058
 X = 5805
 Y = 4678
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -9525,7 +9525,7 @@ ID = 1059
 X = 6020
 Y = 4608
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -9534,7 +9534,7 @@ ID = 1060
 X = 6386
 Y = 4755
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -9543,7 +9543,7 @@ ID = 1061
 X = 6342
 Y = 4905
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -9552,7 +9552,7 @@ ID = 1062
 X = 5994
 Y = 4617
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -9561,7 +9561,7 @@ ID = 1063
 X = 6156
 Y = 4425
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -9570,7 +9570,7 @@ ID = 1064
 X = 6364
 Y = 4437
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -9579,7 +9579,7 @@ ID = 1065
 X = 6349
 Y = 4439
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -9588,7 +9588,7 @@ ID = 1066
 X = 6354
 Y = 4462
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -9597,7 +9597,7 @@ ID = 1067
 X = 6573
 Y = 4541
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -9606,7 +9606,7 @@ ID = 1068
 X = 6484
 Y = 4586
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -9615,7 +9615,7 @@ ID = 1069
 X = 6564
 Y = 4778
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -9624,7 +9624,7 @@ ID = 1070
 X = 6558
 Y = 4744
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -9633,7 +9633,7 @@ ID = 1071
 X = 6521
 Y = 4836
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -9642,7 +9642,7 @@ ID = 1072
 X = 6073
 Y = 4419
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -9651,7 +9651,7 @@ ID = 1073
 X = 6487
 Y = 4211
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -9660,7 +9660,7 @@ ID = 1074
 X = 6873
 Y = 4249
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -9669,7 +9669,7 @@ ID = 1075
 X = 6935
 Y = 4259
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -9678,7 +9678,7 @@ ID = 1076
 X = 6941
 Y = 4350
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -9687,7 +9687,7 @@ ID = 1077
 X = 6984
 Y = 4608
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -9696,7 +9696,7 @@ ID = 1078
 X = 6977
 Y = 4337
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -9705,7 +9705,7 @@ ID = 1079
 X = 6989
 Y = 4335
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -9714,7 +9714,7 @@ ID = 1080
 X = 6619
 Y = 4865
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 23
 
@@ -9723,7 +9723,7 @@ ID = 1081
 X = 5821
 Y = 4514
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -9732,7 +9732,7 @@ ID = 1082
 X = 5290
 Y = 4751
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -9741,7 +9741,7 @@ ID = 1083
 X = 5300
 Y = 4715
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -9750,7 +9750,7 @@ ID = 1084
 X = 5259
 Y = 5172
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 25
 
@@ -9759,7 +9759,7 @@ ID = 1085
 X = 5112
 Y = 4958
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -9768,7 +9768,7 @@ ID = 1086
 X = 5002
 Y = 5181
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -9777,7 +9777,7 @@ ID = 1087
 X = 4920
 Y = 4998
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -9786,7 +9786,7 @@ ID = 1088
 X = 4916
 Y = 4871
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -9795,7 +9795,7 @@ ID = 1089
 X = 4904
 Y = 4973
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -9804,7 +9804,7 @@ ID = 1090
 X = 5107
 Y = 5258
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -9813,7 +9813,7 @@ ID = 1091
 X = 4733
 Y = 5233
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -9822,7 +9822,7 @@ ID = 1092
 X = 4615
 Y = 5333
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -9831,7 +9831,7 @@ ID = 1093
 X = 4297
 Y = 5402
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -9840,7 +9840,7 @@ ID = 1094
 X = 4240
 Y = 5511
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -9849,7 +9849,7 @@ ID = 1095
 X = 4630
 Y = 5595
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -9858,7 +9858,7 @@ ID = 1096
 X = 4434
 Y = 5630
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -9867,7 +9867,7 @@ ID = 1097
 X = 3774
 Y = 6171
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 232
 
@@ -9876,7 +9876,7 @@ ID = 1098
 X = 4382
 Y = 6594
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 235
 
@@ -9885,7 +9885,7 @@ ID = 1099
 X = 4319
 Y = 6466
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 234
 
@@ -9894,7 +9894,7 @@ ID = 1100
 X = 4790
 Y = 6511
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 231
 
@@ -9903,7 +9903,7 @@ ID = 1101
 X = 5050
 Y = 6407
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -9912,7 +9912,7 @@ ID = 1102
 X = 5340
 Y = 6362
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 232
 
@@ -9921,7 +9921,7 @@ ID = 1103
 X = 5354
 Y = 6403
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 234
 
@@ -9930,7 +9930,7 @@ ID = 1104
 X = 5381
 Y = 6542
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 233
 
@@ -9939,7 +9939,7 @@ ID = 1105
 X = 5242
 Y = 5963
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -9948,7 +9948,7 @@ ID = 1106
 X = 5564
 Y = 6383
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 234
 
@@ -9957,7 +9957,7 @@ ID = 1107
 X = 5435
 Y = 6554
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 237
 
@@ -9966,7 +9966,7 @@ ID = 1108
 X = 5511
 Y = 6593
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 237
 
@@ -9975,7 +9975,7 @@ ID = 1109
 X = 5326
 Y = 6766
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -9984,7 +9984,7 @@ ID = 1110
 X = 5236
 Y = 6731
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -9993,7 +9993,7 @@ ID = 1111
 X = 5321
 Y = 6684
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -10002,7 +10002,7 @@ ID = 1112
 X = 5517
 Y = 6724
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -10011,7 +10011,7 @@ ID = 1113
 X = 5408
 Y = 6795
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 237
 
@@ -10020,7 +10020,7 @@ ID = 1114
 X = 5680
 Y = 6416
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 232
 
@@ -10029,7 +10029,7 @@ ID = 1115
 X = 5698
 Y = 6798
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -10038,7 +10038,7 @@ ID = 1116
 X = 5734
 Y = 6678
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -10047,7 +10047,7 @@ ID = 1117
 X = 5738
 Y = 6663
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -10056,7 +10056,7 @@ ID = 1118
 X = 5742
 Y = 6689
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -10065,7 +10065,7 @@ ID = 1119
 X = 5787
 Y = 6716
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -10074,7 +10074,7 @@ ID = 1120
 X = 5563
 Y = 6784
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -10083,7 +10083,7 @@ ID = 1121
 X = 5410
 Y = 6792
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 232
 
@@ -10092,7 +10092,7 @@ ID = 1122
 X = 5310
 Y = 7012
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10101,7 +10101,7 @@ ID = 1123
 X = 5223
 Y = 7092
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10110,7 +10110,7 @@ ID = 1124
 X = 5382
 Y = 7067
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10119,7 +10119,7 @@ ID = 1125
 X = 5587
 Y = 6996
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10128,7 +10128,7 @@ ID = 1126
 X = 5494
 Y = 7112
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10137,7 +10137,7 @@ ID = 1127
 X = 5783
 Y = 6849
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -10146,7 +10146,7 @@ ID = 1128
 X = 5737
 Y = 6953
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -10155,7 +10155,7 @@ ID = 1129
 X = 5606
 Y = 7198
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10164,7 +10164,7 @@ ID = 1130
 X = 5733
 Y = 7197
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10173,7 +10173,7 @@ ID = 1131
 X = 5391
 Y = 7183
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10182,7 +10182,7 @@ ID = 1132
 X = 5387
 Y = 7390
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10191,7 +10191,7 @@ ID = 1133
 X = 5395
 Y = 7303
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10200,7 +10200,7 @@ ID = 1134
 X = 5220
 Y = 7397
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10209,7 +10209,7 @@ ID = 1135
 X = 5510
 Y = 7310
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10218,7 +10218,7 @@ ID = 1136
 X = 5708
 Y = 7288
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10227,7 +10227,7 @@ ID = 1137
 X = 5434
 Y = 7380
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10236,7 +10236,7 @@ ID = 1138
 X = 5784
 Y = 7170
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10245,7 +10245,7 @@ ID = 1139
 X = 5782
 Y = 7285
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10254,7 +10254,7 @@ ID = 1140
 X = 5382
 Y = 7372
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10263,7 +10263,7 @@ ID = 1141
 X = 5336
 Y = 7562
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10272,7 +10272,7 @@ ID = 1142
 X = 5346
 Y = 7457
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10281,7 +10281,7 @@ ID = 1143
 X = 5321
 Y = 7530
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10290,7 +10290,7 @@ ID = 1144
 X = 5237
 Y = 7408
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10299,7 +10299,7 @@ ID = 1145
 X = 5472
 Y = 7569
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10308,7 +10308,7 @@ ID = 1146
 X = 5553
 Y = 7568
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10317,16 +10317,16 @@ ID = 1147
 X = 5541
 Y = 7537
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
 [Spawn 1148]
 ID = 1148
-X = 5493
-Y = 7442
+X = 5512
+Y = 7483
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10335,7 +10335,7 @@ ID = 1149
 X = 5771
 Y = 7475
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10344,7 +10344,7 @@ ID = 1150
 X = 5787
 Y = 7266
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10353,7 +10353,7 @@ ID = 1151
 X = 5780
 Y = 7405
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10362,7 +10362,7 @@ ID = 1152
 X = 5615
 Y = 7723
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10371,7 +10371,7 @@ ID = 1153
 X = 5654
 Y = 7763
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10380,7 +10380,7 @@ ID = 1154
 X = 5707
 Y = 7763
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10389,7 +10389,7 @@ ID = 1155
 X = 5957
 Y = 7313
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10398,7 +10398,7 @@ ID = 1156
 X = 5887
 Y = 7286
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10407,7 +10407,7 @@ ID = 1157
 X = 5924
 Y = 7444
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10416,7 +10416,7 @@ ID = 1158
 X = 5932
 Y = 7464
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10425,7 +10425,7 @@ ID = 1159
 X = 5922
 Y = 7477
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10434,7 +10434,7 @@ ID = 1160
 X = 5991
 Y = 7640
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 234
 
@@ -10443,7 +10443,7 @@ ID = 1161
 X = 5992
 Y = 7777
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10452,7 +10452,7 @@ ID = 1162
 X = 5870
 Y = 7843
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10461,7 +10461,7 @@ ID = 1163
 X = 5882
 Y = 7847
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10470,7 +10470,7 @@ ID = 1164
 X = 6018
 Y = 7582
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 237
 
@@ -10479,7 +10479,7 @@ ID = 1165
 X = 6060
 Y = 7533
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 232
 
@@ -10488,7 +10488,7 @@ ID = 1166
 X = 6190
 Y = 7479
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10497,7 +10497,7 @@ ID = 1167
 X = 6116
 Y = 7457
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10506,7 +10506,7 @@ ID = 1168
 X = 6152
 Y = 7498
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10515,7 +10515,7 @@ ID = 1169
 X = 6172
 Y = 7488
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10524,7 +10524,7 @@ ID = 1170
 X = 6070
 Y = 7582
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10533,7 +10533,7 @@ ID = 1171
 X = 6148
 Y = 7478
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10542,7 +10542,7 @@ ID = 1172
 X = 6024
 Y = 7797
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10551,7 +10551,7 @@ ID = 1173
 X = 6146
 Y = 7747
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10560,7 +10560,7 @@ ID = 1174
 X = 6140
 Y = 7643
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10569,7 +10569,7 @@ ID = 1175
 X = 6143
 Y = 7992
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10578,7 +10578,7 @@ ID = 1176
 X = 6120
 Y = 7821
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10587,7 +10587,7 @@ ID = 1177
 X = 6114
 Y = 7802
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10596,7 +10596,7 @@ ID = 1178
 X = 6089
 Y = 7821
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10605,7 +10605,7 @@ ID = 1179
 X = 6270
 Y = 7626
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 234
 
@@ -10614,7 +10614,7 @@ ID = 1180
 X = 6371
 Y = 7767
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10623,7 +10623,7 @@ ID = 1181
 X = 6244
 Y = 7618
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 232
 
@@ -10632,7 +10632,7 @@ ID = 1182
 X = 6248
 Y = 7633
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 237
 
@@ -10641,7 +10641,7 @@ ID = 1183
 X = 6226
 Y = 7954
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10650,7 +10650,7 @@ ID = 1184
 X = 6384
 Y = 8003
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10659,7 +10659,7 @@ ID = 1185
 X = 6392
 Y = 7909
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10668,7 +10668,7 @@ ID = 1186
 X = 6398
 Y = 7815
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10677,7 +10677,7 @@ ID = 1187
 X = 6078
 Y = 8191
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 232
 
@@ -10686,7 +10686,7 @@ ID = 1188
 X = 6551
 Y = 7707
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -10695,7 +10695,7 @@ ID = 1189
 X = 6402
 Y = 7895
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10704,7 +10704,7 @@ ID = 1190
 X = 6574
 Y = 7864
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10713,7 +10713,7 @@ ID = 1191
 X = 6553
 Y = 8053
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10722,7 +10722,7 @@ ID = 1192
 X = 6582
 Y = 8175
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10731,7 +10731,7 @@ ID = 1193
 X = 6057
 Y = 8183
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 235
 
@@ -10740,7 +10740,7 @@ ID = 1194
 X = 6367
 Y = 7617
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 233
 
@@ -10749,7 +10749,7 @@ ID = 1195
 X = 6616
 Y = 7981
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10758,7 +10758,7 @@ ID = 1196
 X = 6658
 Y = 7982
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -10767,7 +10767,7 @@ ID = 1197
 X = 6607
 Y = 7829
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10776,7 +10776,7 @@ ID = 1198
 X = 6609
 Y = 7855
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -10785,7 +10785,7 @@ ID = 1199
 X = 6670
 Y = 7906
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -10794,7 +10794,7 @@ ID = 1200
 X = 6718
 Y = 7860
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10803,7 +10803,7 @@ ID = 1201
 X = 6696
 Y = 7988
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -10812,7 +10812,7 @@ ID = 1202
 X = 6685
 Y = 8030
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10821,7 +10821,7 @@ ID = 1203
 X = 6799
 Y = 8011
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -10830,7 +10830,7 @@ ID = 1204
 X = 6670
 Y = 8051
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10839,7 +10839,7 @@ ID = 1205
 X = 6691
 Y = 8217
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10848,7 +10848,7 @@ ID = 1206
 X = 6611
 Y = 8287
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -10857,7 +10857,7 @@ ID = 1207
 X = 6911
 Y = 8194
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -10866,7 +10866,7 @@ ID = 1208
 X = 6976
 Y = 8139
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -10875,7 +10875,7 @@ ID = 1209
 X = 6933
 Y = 8027
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -10884,7 +10884,7 @@ ID = 1210
 X = 6964
 Y = 8216
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -10893,7 +10893,7 @@ ID = 1211
 X = 6806
 Y = 8236
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -10902,7 +10902,7 @@ ID = 1212
 X = 6842
 Y = 8203
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -10911,7 +10911,7 @@ ID = 1213
 X = 6955
 Y = 8266
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -10920,7 +10920,7 @@ ID = 1214
 X = 7020
 Y = 8125
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -10929,7 +10929,7 @@ ID = 1215
 X = 7190
 Y = 8332
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -10938,7 +10938,7 @@ ID = 1216
 X = 7087
 Y = 8327
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -10947,7 +10947,7 @@ ID = 1217
 X = 7169
 Y = 8253
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -10956,7 +10956,7 @@ ID = 1218
 X = 7131
 Y = 8264
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -10965,7 +10965,7 @@ ID = 1219
 X = 7033
 Y = 8219
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -10974,7 +10974,7 @@ ID = 1220
 X = 7185
 Y = 8288
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -10983,7 +10983,7 @@ ID = 1221
 X = 6662
 Y = 7821
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -10992,7 +10992,7 @@ ID = 1222
 X = 7198
 Y = 8080
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11001,7 +11001,7 @@ ID = 1223
 X = 6869
 Y = 7813
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -11010,7 +11010,7 @@ ID = 1224
 X = 7394
 Y = 8241
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11019,7 +11019,7 @@ ID = 1225
 X = 7331
 Y = 8200
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11028,7 +11028,7 @@ ID = 1226
 X = 7251
 Y = 8264
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11037,7 +11037,7 @@ ID = 1227
 X = 7279
 Y = 8292
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11046,7 +11046,7 @@ ID = 1228
 X = 7264
 Y = 8366
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11055,7 +11055,7 @@ ID = 1229
 X = 6932
 Y = 8385
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11064,7 +11064,7 @@ ID = 1230
 X = 7454
 Y = 7858
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11073,7 +11073,7 @@ ID = 1231
 X = 7461
 Y = 8150
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11082,7 +11082,7 @@ ID = 1232
 X = 7583
 Y = 8060
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11091,7 +11091,7 @@ ID = 1233
 X = 7510
 Y = 7808
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11100,7 +11100,7 @@ ID = 1234
 X = 7734
 Y = 7840
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11109,7 +11109,7 @@ ID = 1235
 X = 7757
 Y = 7918
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11118,7 +11118,7 @@ ID = 1236
 X = 7675
 Y = 7908
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11127,7 +11127,7 @@ ID = 1237
 X = 7786
 Y = 7823
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11136,7 +11136,7 @@ ID = 1238
 X = 7725
 Y = 8337
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11145,7 +11145,7 @@ ID = 1239
 X = 7975
 Y = 7883
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11154,7 +11154,7 @@ ID = 1240
 X = 7849
 Y = 7943
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11163,7 +11163,7 @@ ID = 1241
 X = 7961
 Y = 7969
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11172,7 +11172,7 @@ ID = 1242
 X = 7970
 Y = 8024
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11181,7 +11181,7 @@ ID = 1243
 X = 7891
 Y = 8154
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11190,7 +11190,7 @@ ID = 1244
 X = 7916
 Y = 8124
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11199,7 +11199,7 @@ ID = 1245
 X = 8171
 Y = 7807
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11208,7 +11208,7 @@ ID = 1246
 X = 8165
 Y = 7922
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11217,7 +11217,7 @@ ID = 1247
 X = 8069
 Y = 7958
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11226,7 +11226,7 @@ ID = 1248
 X = 8048
 Y = 7865
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11235,7 +11235,7 @@ ID = 1249
 X = 8154
 Y = 7810
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11244,7 +11244,7 @@ ID = 1250
 X = 8159
 Y = 7893
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11253,7 +11253,7 @@ ID = 1251
 X = 8064
 Y = 8173
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11262,7 +11262,7 @@ ID = 1252
 X = 8134
 Y = 8181
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11271,7 +11271,7 @@ ID = 1253
 X = 8020
 Y = 8060
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11280,7 +11280,7 @@ ID = 1254
 X = 8094
 Y = 8026
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11289,7 +11289,7 @@ ID = 1255
 X = 8017
 Y = 8283
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11298,7 +11298,7 @@ ID = 1256
 X = 8018
 Y = 8303
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11307,7 +11307,7 @@ ID = 1257
 X = 8174
 Y = 7951
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11316,7 +11316,7 @@ ID = 1258
 X = 8195
 Y = 8137
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11325,7 +11325,7 @@ ID = 1259
 X = 8184
 Y = 8068
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11334,7 +11334,7 @@ ID = 1260
 X = 8255
 Y = 8123
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11343,7 +11343,7 @@ ID = 1261
 X = 8395
 Y = 8106
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11352,7 +11352,7 @@ ID = 1262
 X = 8280
 Y = 8360
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11361,7 +11361,7 @@ ID = 1263
 X = 8261
 Y = 8276
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11370,7 +11370,7 @@ ID = 1264
 X = 8398
 Y = 8285
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11379,7 +11379,7 @@ ID = 1265
 X = 8215
 Y = 8385
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11388,7 +11388,7 @@ ID = 1266
 X = 8409
 Y = 7954
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 234
 
@@ -11397,7 +11397,7 @@ ID = 1267
 X = 8459
 Y = 8199
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 234
 
@@ -11406,7 +11406,7 @@ ID = 1268
 X = 8544
 Y = 8228
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 233
 
@@ -11415,7 +11415,7 @@ ID = 1269
 X = 8460
 Y = 8216
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 232
 
@@ -11424,7 +11424,7 @@ ID = 1270
 X = 8730
 Y = 8151
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 233
 
@@ -11433,7 +11433,7 @@ ID = 1271
 X = 8688
 Y = 8108
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 237
 
@@ -11442,7 +11442,7 @@ ID = 1272
 X = 8719
 Y = 8399
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 237
 
@@ -11451,7 +11451,7 @@ ID = 1273
 X = 8907
 Y = 7754
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -11460,7 +11460,7 @@ ID = 1274
 X = 8893
 Y = 7768
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -11469,7 +11469,7 @@ ID = 1275
 X = 8871
 Y = 7904
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 233
 
@@ -11478,7 +11478,7 @@ ID = 1276
 X = 8871
 Y = 7865
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 232
 
@@ -11487,7 +11487,7 @@ ID = 1277
 X = 9167
 Y = 7751
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 234
 
@@ -11496,7 +11496,7 @@ ID = 1278
 X = 9145
 Y = 7691
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 234
 
@@ -11505,7 +11505,7 @@ ID = 1279
 X = 8983
 Y = 7350
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -11514,7 +11514,7 @@ ID = 1280
 X = 8800
 Y = 7255
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -11523,7 +11523,7 @@ ID = 1281
 X = 8843
 Y = 7235
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -11532,7 +11532,7 @@ ID = 1282
 X = 9127
 Y = 7271
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -11541,7 +11541,7 @@ ID = 1283
 X = 9360
 Y = 7393
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -11550,7 +11550,7 @@ ID = 1284
 X = 9256
 Y = 7414
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -11559,7 +11559,7 @@ ID = 1285
 X = 9282
 Y = 7431
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -11568,7 +11568,7 @@ ID = 1286
 X = 9288
 Y = 7782
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 237
 
@@ -11577,7 +11577,7 @@ ID = 1287
 X = 9371
 Y = 7601
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 237
 
@@ -11586,7 +11586,7 @@ ID = 1288
 X = 9320
 Y = 7661
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 233
 
@@ -11595,7 +11595,7 @@ ID = 1289
 X = 9393
 Y = 7646
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -11604,7 +11604,7 @@ ID = 1290
 X = 9308
 Y = 7201
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -11613,7 +11613,7 @@ ID = 1291
 X = 9573
 Y = 7292
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -11622,7 +11622,7 @@ ID = 1292
 X = 9570
 Y = 7347
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11631,7 +11631,7 @@ ID = 1293
 X = 9462
 Y = 7447
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -11640,7 +11640,7 @@ ID = 1294
 X = 9431
 Y = 7622
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -11649,7 +11649,7 @@ ID = 1295
 X = 9590
 Y = 7728
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11658,7 +11658,7 @@ ID = 1296
 X = 9553
 Y = 7225
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -11667,7 +11667,7 @@ ID = 1297
 X = 9460
 Y = 7205
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -11676,7 +11676,7 @@ ID = 1298
 X = 9493
 Y = 7203
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -11685,7 +11685,7 @@ ID = 1299
 X = 9664
 Y = 7357
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11694,7 +11694,7 @@ ID = 1300
 X = 9757
 Y = 7384
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11703,7 +11703,7 @@ ID = 1301
 X = 9777
 Y = 7281
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -11712,7 +11712,7 @@ ID = 1302
 X = 9755
 Y = 7729
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11721,7 +11721,7 @@ ID = 1303
 X = 9785
 Y = 7631
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11730,7 +11730,7 @@ ID = 1304
 X = 9560
 Y = 7066
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11739,7 +11739,7 @@ ID = 1305
 X = 9671
 Y = 7066
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11748,7 +11748,7 @@ ID = 1306
 X = 9656
 Y = 7063
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11757,7 +11757,7 @@ ID = 1307
 X = 9643
 Y = 7081
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11766,7 +11766,7 @@ ID = 1308
 X = 9658
 Y = 7032
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11775,7 +11775,7 @@ ID = 1309
 X = 9658
 Y = 7021
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11784,7 +11784,7 @@ ID = 1310
 X = 9646
 Y = 7003
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11793,7 +11793,7 @@ ID = 1311
 X = 9524
 Y = 6822
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -11802,7 +11802,7 @@ ID = 1312
 X = 9483
 Y = 6995
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11811,7 +11811,7 @@ ID = 1313
 X = 9736
 Y = 6936
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -11820,7 +11820,7 @@ ID = 1314
 X = 9677
 Y = 6989
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -11829,7 +11829,7 @@ ID = 1315
 X = 9307
 Y = 6669
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -11838,7 +11838,7 @@ ID = 1316
 X = 9623
 Y = 6600
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -11847,7 +11847,7 @@ ID = 1317
 X = 9601
 Y = 6732
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -11856,7 +11856,7 @@ ID = 1318
 X = 9612
 Y = 6658
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -11865,7 +11865,7 @@ ID = 1319
 X = 9939
 Y = 5415
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 234
 
@@ -11874,7 +11874,7 @@ ID = 1320
 X = 9990
 Y = 5522
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 233
 
@@ -11883,7 +11883,7 @@ ID = 1321
 X = 10167
 Y = 5428
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 110
 
@@ -11892,7 +11892,7 @@ ID = 1322
 X = 10366
 Y = 5189
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 110
 
@@ -11901,7 +11901,7 @@ ID = 1323
 X = 10360
 Y = 5107
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 109
 
@@ -11910,7 +11910,7 @@ ID = 1324
 X = 10338
 Y = 5320
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 110
 
@@ -11919,7 +11919,7 @@ ID = 1325
 X = 10343
 Y = 5418
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 110
 
@@ -11928,7 +11928,7 @@ ID = 1326
 X = 10367
 Y = 5567
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 108
 
@@ -11937,7 +11937,7 @@ ID = 1327
 X = 10366
 Y = 5443
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 108
 
@@ -11946,7 +11946,7 @@ ID = 1328
 X = 10302
 Y = 5492
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 110
 
@@ -11955,7 +11955,7 @@ ID = 1329
 X = 10395
 Y = 5440
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 110
 
@@ -11964,7 +11964,7 @@ ID = 1330
 X = 10386
 Y = 5674
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 111
 
@@ -11973,7 +11973,7 @@ ID = 1331
 X = 10328
 Y = 5612
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 108
 
@@ -11982,7 +11982,7 @@ ID = 1332
 X = 10553
 Y = 5251
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 109
 
@@ -11991,7 +11991,7 @@ ID = 1333
 X = 10573
 Y = 5262
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 110
 
@@ -12000,7 +12000,7 @@ ID = 1334
 X = 10469
 Y = 5333
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 110
 
@@ -12009,7 +12009,7 @@ ID = 1335
 X = 10580
 Y = 5552
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 108
 
@@ -12018,7 +12018,7 @@ ID = 1336
 X = 10506
 Y = 5562
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 110
 
@@ -12027,7 +12027,7 @@ ID = 1337
 X = 10493
 Y = 5590
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 110
 
@@ -12036,7 +12036,7 @@ ID = 1338
 X = 10476
 Y = 5546
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 110
 
@@ -12045,7 +12045,7 @@ ID = 1339
 X = 10406
 Y = 5574
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 108
 
@@ -12054,7 +12054,7 @@ ID = 1340
 X = 10551
 Y = 5576
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 109
 
@@ -12063,7 +12063,7 @@ ID = 1341
 X = 10494
 Y = 5511
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 418
 
@@ -12072,7 +12072,7 @@ ID = 1342
 X = 10424
 Y = 5601
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 111
 
@@ -12081,7 +12081,7 @@ ID = 1343
 X = 10416
 Y = 5633
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 109
 
@@ -12090,7 +12090,7 @@ ID = 1344
 X = 10446
 Y = 5633
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 108
 
@@ -12099,7 +12099,7 @@ ID = 1345
 X = 10798
 Y = 5391
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 109
 
@@ -12108,7 +12108,7 @@ ID = 1346
 X = 10691
 Y = 5226
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 109
 
@@ -12117,7 +12117,7 @@ ID = 1347
 X = 10674
 Y = 5387
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 110
 
@@ -12126,7 +12126,7 @@ ID = 1348
 X = 10624
 Y = 5352
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 110
 
@@ -12135,7 +12135,7 @@ ID = 1349
 X = 10775
 Y = 5283
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 110
 
@@ -12144,7 +12144,7 @@ ID = 1350
 X = 10754
 Y = 5332
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 110
 
@@ -12153,7 +12153,7 @@ ID = 1351
 X = 10601
 Y = 5371
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 109
 
@@ -12162,7 +12162,7 @@ ID = 1352
 X = 10747
 Y = 5349
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 110
 
@@ -12171,7 +12171,7 @@ ID = 1353
 X = 10606
 Y = 5550
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 109
 
@@ -12180,7 +12180,7 @@ ID = 1354
 X = 10793
 Y = 5499
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 110
 
@@ -12189,7 +12189,7 @@ ID = 1355
 X = 10680
 Y = 5452
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 112
 
@@ -12198,7 +12198,7 @@ ID = 1356
 X = 10721
 Y = 5597
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 112
 
@@ -12207,7 +12207,7 @@ ID = 1357
 X = 10779
 Y = 5461
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 109
 
@@ -12216,7 +12216,7 @@ ID = 1358
 X = 10655
 Y = 5504
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 109
 
@@ -12225,7 +12225,7 @@ ID = 1359
 X = 10720
 Y = 5404
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 112
 
@@ -12234,7 +12234,7 @@ ID = 1360
 X = 10740
 Y = 5455
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 110
 
@@ -12243,7 +12243,7 @@ ID = 1361
 X = 10763
 Y = 5762
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 233
 
@@ -12252,7 +12252,7 @@ ID = 1362
 X = 10634
 Y = 5671
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 110
 
@@ -12261,7 +12261,7 @@ ID = 1363
 X = 10752
 Y = 5732
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 232
 
@@ -12270,7 +12270,7 @@ ID = 1364
 X = 10795
 Y = 5293
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 108
 
@@ -12279,7 +12279,7 @@ ID = 1365
 X = 10788
 Y = 5219
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 108
 
@@ -12288,7 +12288,7 @@ ID = 1366
 X = 10203
 Y = 5751
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 231
 
@@ -12297,7 +12297,7 @@ ID = 1367
 X = 10338
 Y = 5798
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 232
 
@@ -12306,7 +12306,7 @@ ID = 1368
 X = 10528
 Y = 5214
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 110
 
@@ -12315,7 +12315,7 @@ ID = 1369
 X = 10263
 Y = 5789
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 232
 
@@ -12324,7 +12324,7 @@ ID = 1370
 X = 10611
 Y = 5206
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 109
 
@@ -12333,7 +12333,7 @@ ID = 1371
 X = 7170
 Y = 4882
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -12342,7 +12342,7 @@ ID = 1372
 X = 7107
 Y = 4839
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -12351,7 +12351,7 @@ ID = 1373
 X = 7398
 Y = 4950
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -12360,7 +12360,7 @@ ID = 1374
 X = 7390
 Y = 4918
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -12369,7 +12369,7 @@ ID = 1375
 X = 7316
 Y = 4975
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -12378,7 +12378,7 @@ ID = 1376
 X = 7343
 Y = 4946
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -12387,7 +12387,7 @@ ID = 1377
 X = 7387
 Y = 4960
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -12396,7 +12396,7 @@ ID = 1378
 X = 7343
 Y = 4961
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -12405,7 +12405,7 @@ ID = 1379
 X = 7399
 Y = 4992
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -12414,7 +12414,7 @@ ID = 1380
 X = 7388
 Y = 4970
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -12423,7 +12423,7 @@ ID = 1381
 X = 7372
 Y = 4935
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -12432,7 +12432,7 @@ ID = 1382
 X = 7389
 Y = 4935
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -12441,7 +12441,7 @@ ID = 1383
 X = 7373
 Y = 4967
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -12450,7 +12450,7 @@ ID = 1384
 X = 7361
 Y = 4974
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -12459,7 +12459,7 @@ ID = 1385
 X = 7321
 Y = 4988
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -12468,7 +12468,7 @@ ID = 1386
 X = 7264
 Y = 4936
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -12477,7 +12477,7 @@ ID = 1387
 X = 7375
 Y = 4998
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -12486,7 +12486,7 @@ ID = 1388
 X = 7358
 Y = 4987
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -12495,7 +12495,7 @@ ID = 1389
 X = 7353
 Y = 4949
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -12504,7 +12504,7 @@ ID = 1390
 X = 7272
 Y = 5008
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -12513,7 +12513,7 @@ ID = 1391
 X = 7394
 Y = 5006
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -12522,7 +12522,7 @@ ID = 1392
 X = 7355
 Y = 5008
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -12531,7 +12531,7 @@ ID = 1393
 X = 7357
 Y = 5027
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -12540,7 +12540,7 @@ ID = 1394
 X = 7360
 Y = 5043
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -12549,7 +12549,7 @@ ID = 1395
 X = 7372
 Y = 5044
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -12558,7 +12558,7 @@ ID = 1396
 X = 7310
 Y = 5029
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -12567,7 +12567,7 @@ ID = 1397
 X = 7112
 Y = 4808
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -12576,7 +12576,7 @@ ID = 1398
 X = 7396
 Y = 5024
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -12585,7 +12585,7 @@ ID = 1399
 X = 6964
 Y = 4804
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -12594,7 +12594,7 @@ ID = 1400
 X = 6809
 Y = 4807
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -12603,7 +12603,7 @@ ID = 1401
 X = 7099
 Y = 4806
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -12612,7 +12612,7 @@ ID = 1402
 X = 7394
 Y = 4956
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -12621,7 +12621,7 @@ ID = 1403
 X = 7147
 Y = 4822
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 97
 
@@ -12630,7 +12630,7 @@ ID = 1404
 X = 7386
 Y = 4978
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -12639,7 +12639,7 @@ ID = 1405
 X = 7396
 Y = 4961
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -12648,7 +12648,7 @@ ID = 1406
 X = 7399
 Y = 4977
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -12657,7 +12657,7 @@ ID = 1407
 X = 7125
 Y = 4804
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -12666,7 +12666,7 @@ ID = 1408
 X = 7373
 Y = 4946
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -12675,7 +12675,7 @@ ID = 1409
 X = 7393
 Y = 4966
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -12684,7 +12684,7 @@ ID = 1410
 X = 7397
 Y = 4912
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -12693,7 +12693,7 @@ ID = 1411
 X = 7391
 Y = 4970
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -12702,7 +12702,7 @@ ID = 1412
 X = 7390
 Y = 4954
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -12711,7 +12711,7 @@ ID = 1413
 X = 7396
 Y = 4986
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -12720,7 +12720,7 @@ ID = 1414
 X = 7159
 Y = 4808
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 24
 
@@ -12729,7 +12729,7 @@ ID = 1415
 X = 7392
 Y = 4957
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -12738,7 +12738,7 @@ ID = 1416
 X = 6840
 Y = 5577
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 233
 
@@ -12747,7 +12747,7 @@ ID = 1417
 X = 6603
 Y = 5457
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 233
 
@@ -12756,7 +12756,7 @@ ID = 1418
 X = 6567
 Y = 5378
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 234
 
@@ -12765,7 +12765,7 @@ ID = 1419
 X = 6541
 Y = 5402
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 232
 
@@ -12774,7 +12774,7 @@ ID = 1420
 X = 6584
 Y = 5632
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 232
 
@@ -12783,7 +12783,7 @@ ID = 1421
 X = 6796
 Y = 5743
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 233
 
@@ -12792,7 +12792,7 @@ ID = 1422
 X = 6672
 Y = 5771
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 234
 
@@ -12801,7 +12801,7 @@ ID = 1423
 X = 6769
 Y = 5678
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 237
 
@@ -12810,7 +12810,7 @@ ID = 1424
 X = 6602
 Y = 5749
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 231
 
@@ -12819,7 +12819,7 @@ ID = 1425
 X = 7364
 Y = 5470
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -12828,7 +12828,7 @@ ID = 1426
 X = 7376
 Y = 5481
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -12837,7 +12837,7 @@ ID = 1427
 X = 7357
 Y = 5485
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -12846,7 +12846,7 @@ ID = 1428
 X = 7304
 Y = 5466
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -12855,7 +12855,7 @@ ID = 1429
 X = 7363
 Y = 5585
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 231
 
@@ -12864,7 +12864,7 @@ ID = 1430
 X = 7440
 Y = 5000
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -12873,7 +12873,7 @@ ID = 1431
 X = 7485
 Y = 5013
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -12882,7 +12882,7 @@ ID = 1432
 X = 7450
 Y = 5005
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -12891,7 +12891,7 @@ ID = 1433
 X = 7434
 Y = 5028
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -12900,7 +12900,7 @@ ID = 1434
 X = 7501
 Y = 5005
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -12909,7 +12909,7 @@ ID = 1435
 X = 7447
 Y = 5036
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 226
 
@@ -12918,7 +12918,7 @@ ID = 1436
 X = 7596
 Y = 5583
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -12927,7 +12927,7 @@ ID = 1437
 X = 7503
 Y = 5487
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 233
 
@@ -12936,7 +12936,7 @@ ID = 1438
 X = 7587
 Y = 5558
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 237
 
@@ -12945,7 +12945,7 @@ ID = 1439
 X = 7790
 Y = 5594
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -12954,7 +12954,7 @@ ID = 1440
 X = 7643
 Y = 5463
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -12963,7 +12963,7 @@ ID = 1441
 X = 7298
 Y = 5595
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 232
 
@@ -12972,7 +12972,7 @@ ID = 1442
 X = 7702
 Y = 5575
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -12981,7 +12981,7 @@ ID = 1443
 X = 8073
 Y = 5598
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -12990,7 +12990,7 @@ ID = 1444
 X = 9890
 Y = 5477
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 236
 
@@ -12999,7 +12999,7 @@ ID = 1445
 X = 10140
 Y = 5005
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 108
 
@@ -13008,7 +13008,7 @@ ID = 1446
 X = 10275
 Y = 5004
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 111
 
@@ -13017,7 +13017,7 @@ ID = 1447
 X = 10399
 Y = 5210
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 108
 
@@ -13026,7 +13026,7 @@ ID = 1448
 X = 10425
 Y = 5117
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 112
 
@@ -13035,7 +13035,7 @@ ID = 1449
 X = 10524
 Y = 5145
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 112
 
@@ -13044,7 +13044,7 @@ ID = 1450
 X = 10344
 Y = 4963
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 110
 
@@ -13053,7 +13053,7 @@ ID = 1451
 X = 10444
 Y = 4964
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 110
 
@@ -13062,7 +13062,7 @@ ID = 1452
 X = 10426
 Y = 4927
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 108
 
@@ -13071,7 +13071,7 @@ ID = 1453
 X = 10546
 Y = 4893
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 112
 
@@ -13080,7 +13080,7 @@ ID = 1454
 X = 10794
 Y = 4943
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 234
 
@@ -13089,7 +13089,7 @@ ID = 1455
 X = 10713
 Y = 5092
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 110
 
@@ -13098,7 +13098,7 @@ ID = 1456
 X = 10671
 Y = 5264
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 108
 
@@ -13107,7 +13107,7 @@ ID = 1457
 X = 9875
 Y = 4792
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 231
 
@@ -13116,7 +13116,7 @@ ID = 1458
 X = 10283
 Y = 4611
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 235
 
@@ -13125,7 +13125,7 @@ ID = 1459
 X = 9778
 Y = 4760
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 231
 
@@ -13134,7 +13134,7 @@ ID = 1460
 X = 9950
 Y = 4443
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 235
 
@@ -13143,7 +13143,7 @@ ID = 1461
 X = 9815
 Y = 4545
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 234
 
@@ -13152,7 +13152,7 @@ ID = 1462
 X = 10169
 Y = 4557
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 232
 
@@ -13161,7 +13161,7 @@ ID = 1463
 X = 9663
 Y = 4283
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 231
 
@@ -13170,7 +13170,7 @@ ID = 1464
 X = 9856
 Y = 4385
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 231
 
@@ -13179,7 +13179,7 @@ ID = 1465
 X = 9519
 Y = 4180
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -13188,7 +13188,7 @@ ID = 1466
 X = 9782
 Y = 4077
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 233
 
@@ -13197,7 +13197,7 @@ ID = 1467
 X = 9931
 Y = 4339
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 236
 
@@ -13206,7 +13206,7 @@ ID = 1468
 X = 9831
 Y = 5699
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 232
 
@@ -13215,7 +13215,7 @@ ID = 1469
 X = 9919
 Y = 5925
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 233
 
@@ -13224,16 +13224,16 @@ ID = 1470
 X = 8829
 Y = 6002
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
 [Spawn 1471]
 ID = 1471
-X = 9005
-Y = 6446
+X = 9020
+Y = 6533
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -13242,7 +13242,7 @@ ID = 1472
 X = 9015
 Y = 6464
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -13251,7 +13251,7 @@ ID = 1473
 X = 9377
 Y = 6485
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -13260,7 +13260,7 @@ ID = 1474
 X = 9385
 Y = 6978
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 101
 
@@ -13269,7 +13269,7 @@ ID = 1475
 X = 9544
 Y = 7439
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -13278,7 +13278,7 @@ ID = 1476
 X = 9542
 Y = 7777
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -13287,7 +13287,7 @@ ID = 1477
 X = 9790
 Y = 7268
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 232
 
@@ -13296,7 +13296,7 @@ ID = 1478
 X = 9501
 Y = 7934
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 232
 
@@ -13305,7 +13305,7 @@ ID = 1479
 X = 9908
 Y = 7417
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -13314,7 +13314,7 @@ ID = 1480
 X = 9853
 Y = 7524
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -13323,7 +13323,7 @@ ID = 1481
 X = 9979
 Y = 7894
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -13332,7 +13332,7 @@ ID = 1482
 X = 9620
 Y = 8162
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 232
 
@@ -13341,7 +13341,7 @@ ID = 1483
 X = 9559
 Y = 8199
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 237
 
@@ -13350,7 +13350,7 @@ ID = 1484
 X = 9158
 Y = 8347
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 232
 
@@ -13359,7 +13359,7 @@ ID = 1485
 X = 9370
 Y = 8280
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -13368,7 +13368,7 @@ ID = 1486
 X = 9383
 Y = 8291
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -13377,7 +13377,7 @@ ID = 1487
 X = 9147
 Y = 8405
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 231
 
@@ -13386,7 +13386,7 @@ ID = 1488
 X = 9197
 Y = 8598
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 237
 
@@ -13395,7 +13395,7 @@ ID = 1489
 X = 8636
 Y = 8457
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -13404,7 +13404,7 @@ ID = 1490
 X = 8961
 Y = 8620
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -13413,7 +13413,7 @@ ID = 1491
 X = 8994
 Y = 8629
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -13422,7 +13422,7 @@ ID = 1492
 X = 8635
 Y = 8793
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -13431,7 +13431,7 @@ ID = 1493
 X = 8515
 Y = 8809
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -13440,7 +13440,7 @@ ID = 1494
 X = 8211
 Y = 8700
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -13449,7 +13449,7 @@ ID = 1495
 X = 8044
 Y = 8334
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -13458,7 +13458,7 @@ ID = 1496
 X = 7909
 Y = 7934
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -13467,7 +13467,7 @@ ID = 1497
 X = 8377
 Y = 7898
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 233
 
@@ -13476,7 +13476,7 @@ ID = 1498
 X = 7837
 Y = 7580
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -13485,7 +13485,7 @@ ID = 1499
 X = 8041
 Y = 7592
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 232
 
@@ -13494,7 +13494,7 @@ ID = 1500
 X = 8082
 Y = 7567
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 232
 
@@ -13503,7 +13503,7 @@ ID = 1501
 X = 8147
 Y = 7634
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 237
 
@@ -13512,7 +13512,7 @@ ID = 1502
 X = 7939
 Y = 7416
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -13521,7 +13521,7 @@ ID = 1503
 X = 7731
 Y = 7282
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -13530,7 +13530,7 @@ ID = 1504
 X = 7638
 Y = 7297
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 234
 
@@ -13539,7 +13539,7 @@ ID = 1505
 X = 7674
 Y = 7373
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 233
 
@@ -13548,7 +13548,7 @@ ID = 1506
 X = 7668
 Y = 7362
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -13557,7 +13557,7 @@ ID = 1507
 X = 7781
 Y = 7426
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 237
 
@@ -13566,7 +13566,7 @@ ID = 1508
 X = 7787
 Y = 7438
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 232
 
@@ -13575,7 +13575,7 @@ ID = 1509
 X = 7637
 Y = 7585
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -13584,7 +13584,7 @@ ID = 1510
 X = 7736
 Y = 7735
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -13593,7 +13593,7 @@ ID = 1511
 X = 7717
 Y = 7706
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 102
 
@@ -13602,43 +13602,43 @@ ID = 1512
 X = 7829
 Y = 7399
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 232
 
 [Spawn 1513]
 ID = 1513
-X = 8003
-Y = 7334
+X = 7967
+Y = 7361
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
 [Spawn 1514]
 ID = 1514
-X = 8112
-Y = 7201
+X = 8118
+Y = 7267
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
 [Spawn 1515]
 ID = 1515
-X = 8176
-Y = 7248
+X = 8163
+Y = 7285
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
 [Spawn 1516]
 ID = 1516
-X = 8144
-Y = 7202
+X = 8077
+Y = 7339
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -13647,7 +13647,7 @@ ID = 1517
 X = 7652
 Y = 7094
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -13656,7 +13656,7 @@ ID = 1518
 X = 7688
 Y = 6827
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -13665,7 +13665,7 @@ ID = 1519
 X = 7802
 Y = 6969
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -13674,7 +13674,7 @@ ID = 1520
 X = 7836
 Y = 6954
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -13683,7 +13683,7 @@ ID = 1521
 X = 7847
 Y = 6868
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -13692,7 +13692,7 @@ ID = 1522
 X = 7530
 Y = 7014
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -13701,7 +13701,7 @@ ID = 1523
 X = 7876
 Y = 6606
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -13710,7 +13710,7 @@ ID = 1524
 X = 7406
 Y = 7046
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -13719,7 +13719,7 @@ ID = 1525
 X = 7459
 Y = 6214
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -13728,7 +13728,7 @@ ID = 1526
 X = 7488
 Y = 6410
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -13737,7 +13737,7 @@ ID = 1527
 X = 7419
 Y = 6468
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -13746,7 +13746,7 @@ ID = 1528
 X = 7669
 Y = 6448
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 233
 
@@ -13755,7 +13755,7 @@ ID = 1529
 X = 7701
 Y = 6524
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -13764,7 +13764,7 @@ ID = 1530
 X = 7722
 Y = 6426
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -13773,7 +13773,7 @@ ID = 1531
 X = 7721
 Y = 6411
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 99
 
@@ -13782,7 +13782,7 @@ ID = 1532
 X = 7410
 Y = 6629
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 237
 
@@ -13791,7 +13791,7 @@ ID = 1533
 X = 7738
 Y = 5797
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -13800,7 +13800,7 @@ ID = 1534
 X = 7794
 Y = 5693
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -13809,7 +13809,7 @@ ID = 1535
 X = 7721
 Y = 5773
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -13818,7 +13818,7 @@ ID = 1536
 X = 7609
 Y = 5699
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -13827,7 +13827,7 @@ ID = 1537
 X = 7821
 Y = 5616
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 98
 
@@ -13836,7 +13836,7 @@ ID = 1538
 X = 7605
 Y = 5914
 Z = 0
-Radius = 1
+Radius = 50
 RespawnTime = 300
 Type = 231
 

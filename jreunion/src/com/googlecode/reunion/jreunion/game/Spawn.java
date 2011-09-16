@@ -4,9 +4,11 @@ import java.util.Random;
 import java.util.TimerTask;
 
 import com.googlecode.reunion.jreunion.events.map.SpawnEvent;
+import com.googlecode.reunion.jreunion.server.Area;
 import com.googlecode.reunion.jreunion.server.LocalMap;
 import com.googlecode.reunion.jreunion.server.Map;
 import com.googlecode.reunion.jreunion.server.Server;
+import com.googlecode.reunion.jreunion.server.Area.Field;
 
 /**
  * @author Aidamina
@@ -77,7 +79,18 @@ public class Spawn {
 
 	protected Position spawn(LivingObject entity) {		
 	
-		Position position = generateSpawnPosition();		
+		Position position = null;
+		Area entityArea = getPosition().getLocalMap().getArea(); 
+		
+		// TODO: Improve the mob spawn area?
+		if( entity instanceof Mob){
+			while((!entityArea.get(position.getX() / 10, position.getY() / 10,Field.MOB))){
+				position = generateSpawnPosition();
+			}
+		} else {
+			position = generateSpawnPosition();
+		}
+		
 		entity.setPosition(position);
 		LocalMap map = position.getLocalMap();
 		if(map.getEntity(entity.getEntityId())!=entity){
