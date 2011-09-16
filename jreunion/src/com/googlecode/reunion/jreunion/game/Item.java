@@ -1,9 +1,14 @@
 package com.googlecode.reunion.jreunion.game;
 
+import org.apache.log4j.Logger;
+
 import com.googlecode.reunion.jcommon.ParsedItem;
+import com.googlecode.reunion.jreunion.game.Equipment.Slot;
 import com.googlecode.reunion.jreunion.game.items.equipment.Armor;
 import com.googlecode.reunion.jreunion.game.items.equipment.Weapon;
+import com.googlecode.reunion.jreunion.server.DatabaseUtils;
 import com.googlecode.reunion.jreunion.server.Reference;
+import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 
 /**
  * @author Aidamina
@@ -16,8 +21,6 @@ public class Item implements Entity {
 	private int entityId = -1;
 	
 	private int itemId = -1; //for database;
-	
-
 
 	private int sizeX; // number of cols
 
@@ -31,7 +34,7 @@ public class Item implements Entity {
 
 	private int rotation;
 
-	private int description;
+	private String description;
 
 	public Item(int type) {
 		super();
@@ -47,7 +50,7 @@ public class Item implements Entity {
 		this.itemId = itemId;
 	}
 	
-	public int getDescription() {
+	public String getDescription() {
 		return description;
 	}
 	
@@ -101,7 +104,7 @@ public class Item implements Entity {
 			setSizeX(1);
 			setSizeY(1);
 			setPrice(1);
-			setDescription(-1);
+			setDescription("Unknown");
 		} else {
 
 			if (item.checkMembers(new String[] { "SizeX" })) {
@@ -127,108 +130,39 @@ public class Item implements Entity {
 			}
 			if (item.checkMembers(new String[] { "Description" })) {
 				// use member from file
-				setDescription(Integer.parseInt(item
-						.getMemberValue("Description")));
+				setDescription(item.getMemberValue("Description"));
 			} else {
 				// use default
-				setDescription(-1);
+				setDescription(item.getName());
 			}
 		}
 	}
 
-	public void setDescription(int description) {
+	public void setDescription(String description) {
 		this.description = description;
 	}
 	
-	private void upgrade()
-	{
-		int itemlvl = 0;
-		int upped = 0;
-		int mindamage = 0;
-		int maxdamage = 0;
-		float magicdamage = 0;
-		int defense = 0;
+	public int getGradeLevel(){
 		
-		int gemnumber = this.getGemNumber();
+		int gemNumber = getGemNumber();
 		
-		if(this instanceof Weapon)
-		{
-			itemlvl = ((Weapon) this).getLevel();
+		if(((PlayerItem)this).getLevel() < 181) {
+			return (gemNumber/1>0?1:0)+(gemNumber/3>0?1:0)+(gemNumber/6>0?1:0)+(gemNumber/10>0?1:0)+(gemNumber/15>0?1:0);
 		}
-		else if(this instanceof Armor)
-		{
-			itemlvl = ((Armor) this).getLevel();
+		else{
+			return gemNumber;
 		}
+	}
+	
+	public void upgrade(Player player, Slot slot)
+	{	
+		setGemNumber(getGemNumber()+1);
+		DatabaseUtils.getInstance().saveItem(this);
+		DatabaseUtils.getInstance().deleteItem(player.getInventory().getHoldingItem().getItem());
+		player.getInventory().setHoldingItem(null);
+		player.setDefense();
 		
-		if(this instanceof Weapon)
-		{
-			mindamage = ((Weapon) this).getUnmodifiedMinDamage();
-			maxdamage = ((Weapon) this).getUnmodifiedMaxDamage();
-			magicdamage = ((Weapon) this).getUnmodifiedMagicDmg();
-		}
-		else if(this instanceof Armor)
-		{
-			defense = ((Armor) this).getUnmodifiedDef();
-		}
-		
-		if(itemlvl < 181)
-		{
-			upped = (gemnumber/1>0?1:0)+(gemnumber/3>0?1:0)+(gemnumber/6>0?1:0)+(gemnumber/10>0?1:0)+(gemnumber/15>0?1:0);
-			
-		}
-		else if(itemlvl > 181)
-		{
-			upped = gemnumber;
-		}
-		
-		if(upped > 0)
-		{
-			//Lvl < 181 Start
-			float[] steps_1to181 = new float[6];
-			steps_1to181[0] = 0;
-			steps_1to181[1] = .12f;
-			steps_1to181[2] = .26f;
-			steps_1to181[3] = .44f;
-			steps_1to181[4] = .68f;
-			steps_1to181[5] = 1;
-			
-			//Lvl < 181 End
-			
-			//Lvl 181 to 261 Start
-			float step_181to261 = .10f;
-			//Lvl 181 to 261 End
-			
-			if(this instanceof Weapon)
-			{
-				if(itemlvl < 181)
-				{
-					maxdamage = (int)(maxdamage*(steps_1to181[upped])+maxdamage );
-					mindamage = (int)(mindamage*(steps_1to181[upped])+mindamage );
-					magicdamage = magicdamage*(steps_1to181[upped])+magicdamage;
-				}
-				else if(itemlvl >= 181 && itemlvl < 261)
-				{
-					mindamage = (int)(mindamage*(step_181to261*upped)+mindamage);
-					maxdamage = (int)(maxdamage*(step_181to261*upped)+maxdamage);
-					magicdamage = magicdamage*(step_181to261*upped)+magicdamage;
-				}
-				((Weapon) this).setMinDamage(mindamage);
-				((Weapon) this).setMaxDamage(maxdamage);
-				((Weapon) this).setMagicDmg(magicdamage);
-			}
-			else if(this instanceof Armor)
-			{
-				if(itemlvl < 181)
-				{
-					defense = (int)(defense*(steps_1to181[upped])+defense );
-				}
-				else if(itemlvl >= 181 && itemlvl < 261)
-				{
-					defense = (int)(defense*(step_181to261*upped)+defense);
-				}
-				((Armor) this).setDef(defense);
-			}
-		}
+		player.getClient().sendPacket(Type.UPGRADE, this, slot,1);
 	}
 
 	public void setExtraStats(int extraStats) {
@@ -237,7 +171,6 @@ public class Item implements Entity {
 
 	public void setGemNumber(int gemNumber) {
 		this.gemNumber = gemNumber;
-		upgrade();
 	}
 
 	public void setPrice(int price) {

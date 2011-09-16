@@ -396,24 +396,11 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					}
 				}
 				
-				else if (message[0].equals("upgrade")) {
-					String text = message[1];
-					
-					Slot slot = Slot.byValue(Integer.parseInt(text));
+				else if (message[0].equals("upgrade")) {	
+					Slot slot = Slot.byValue(Integer.parseInt(message[1]));
 					Item item = player.getEquipment().getItem(slot);
 					
-					client.sendPacket(Type.SAY, "Upgrade Slot "+slot.name()+" (Item:"+item.getName()+")");
-					
-					int itemgem = item.getGemNumber();
-					
-					item.setGemNumber(itemgem+1);
-					
-					DatabaseUtils.getInstance().saveItem(item);
-					
-					//TODO: Destroy and remove the gem from the database after the upgrade.
-					player.getInventory().setHoldingItem(null);
-					
-					client.sendPacket(Type.UPGRADE, item, slot,1);
+					item.upgrade(player,slot);
 				}
 				
 				else if (message[0].equals("tell")) {
@@ -438,9 +425,10 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					int itemId = Integer.parseInt(message[1]);
 					LocalMap map = player.getPosition().getLocalMap();
 					RoamingItem roamingItem = (RoamingItem)map.getEntity(itemId);
+					roamingItem.getItem().setEntityId(roamingItem.getEntityId());
 					//ParsedItem parsedItem = Reference.getInstance().getItemReference().getItemById(itemId);
 					
-					Logger.getLogger(PacketParser.class).info(roamingItem+" "+itemId);
+					Logger.getLogger(PacketParser.class).info(roamingItem.getItem().getDescription()+" "+itemId);
 					if(roamingItem!=null && player.getInventory().getHoldingItem()==null ){
 						client.getPlayer().pickupItem(roamingItem);							
 					}
@@ -454,7 +442,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					Inventory inventory = player.getInventory();
 					InventoryItem inventoryItem = inventory.getItem(tab, x, y);
 					Item item = inventoryItem.getItem();
-					com.useItem(player, item);					
+					com.useItem(player, item, -1);					
 					inventory.deleteInventoryItem(inventoryItem);
 					
 					//used when we click in any position inside the inventory

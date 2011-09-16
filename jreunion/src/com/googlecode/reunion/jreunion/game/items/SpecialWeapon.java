@@ -19,14 +19,6 @@ public class SpecialWeapon extends PlayerItem {
 
 	private int maxDamage;
 
-	private int reqStr;
-
-	private int reqDex;
-
-	private int reqInt;
-
-	private int level;
-
 	private int position; // 0 - head; 1 - body; 2 - legs; 3 - Feet;
 
 	// 4 - Shield; 5 - Cape/Wings/Special Weapon; 6 - weapon
@@ -49,62 +41,46 @@ public class SpecialWeapon extends PlayerItem {
 		super(id);
 	}
 
-	public int getSpecialWeaponEeUsed() {
+	public int getEeUsed() {
 		return eeUsed;
 	}
 
-	public int getSpecialWeaponHanded() {
+	public int getHanded() {
 		return handed;
 	}
 
-	public int getSpecialWeaponLevel() {
-		return level;
-	}
-
-	public int getSpecialWeaponManaUsed() {
+	public int getManaUsed() {
 		return manaUsed;
 	}
 
-	public int getSpecialWeaponMaxDamage() {
+	public int getMaxDamage() {
 		return maxDamage;
 	}
 
-	public int getSpecialWeaponMinDamage() {
+	public int getMinDamage() {
 		return minDamge;
 	}
 
 	/**
 	 * @return
 	 */
-	public int getSpecialWeaponPosition() {
+	public int getPosition() {
 		return position;
 	}
 
-	public int getSpecialWeaponRace() {
+	public int getRace() {
 		return race;
 	}
 
-	public int getSpecialWeaponReqDex() {
-		return reqDex;
-	}
-
-	public int getSpecialWeaponReqInt() {
-		return reqInt;
-	}
-
-	public int getSpecialWeaponReqStr() {
-		return reqStr;
-	}
-
-	public int getSpecialWeaponSlot() {
+	public int getSlot() {
 		return slot;
 	}
 
-	public int getSpecialWeaponSpeed() {
+	public int getSpeed() {
 		return speed;
 	}
 
-	public int getSpecialWeaponStmUsed() {
+	public int getStmUsed() {
 		return stmUsed;
 	}
 
@@ -117,183 +93,167 @@ public class SpecialWeapon extends PlayerItem {
 
 		if (item == null) {
 			// cant find Item in the reference continue to load defaults:
-			setSpecialWeaponLevel(1);
-			setSpecialWeaponHanded(0);
-			setSpecialWeaponSpeed(4);
-			setSpecialWeaponMinDamage(1);
-			setSpecialWeaponMaxDamage(1);
-			setSpecialWeaponReqStr(0);
-			setSpecialWeaponReqInt(0);
-			setSpecialWeaponReqDex(0);
-			setSpecialWeaponPosition(5);
-			setSpecialWeaponRace(-1);
-			setSpecialWeaponStmUsed(0);
-			setSpecialWeaponEeUsed(0);
-			setSpecialWeaponManaUsed(0);
+			setLevel(1);
+			setHanded(0);
+			setSpeed(4);
+			setMinDamage(1);
+			setMaxDamage(1);
+			setReqStr(0);
+			setReqInt(0);
+			setReqDex(0);
+			setPosition(5);
+			setRace(-1);
+			setStmUsed(0);
+			setEeUsed(0);
+			setManaUsed(0);
 		} else {
 			if (item.checkMembers(new String[] { "Level" })) {
 				// use member from file
-				setSpecialWeaponLevel(Integer.parseInt(item
+				setLevel(Integer.parseInt(item
 						.getMemberValue("Level")));
 			} else {
 				// use default
-				setSpecialWeaponLevel(1);
+				setLevel(1);
 			}
 			if (item.checkMembers(new String[] { "Handed" })) {
 				// use member from file
-				setSpecialWeaponHanded(Integer.parseInt(item
+				setHanded(Integer.parseInt(item
 						.getMemberValue("Handed")));
 			} else {
 				// use default
-				setSpecialWeaponHanded(0);
+				setHanded(0);
 			}
 			if (item.checkMembers(new String[] { "Speed" })) {
 				// use member from file
-				setSpecialWeaponSpeed(Integer.parseInt(item
+				setSpeed(Integer.parseInt(item
 						.getMemberValue("Speed")));
 			} else {
 				// use default
-				setSpecialWeaponSpeed(4);
+				setSpeed(4);
 			}
 			if (item.checkMembers(new String[] { "MinDmg" })) {
 				// use member from file
-				setSpecialWeaponMinDamage(Integer.parseInt(item
+				setMinDamage(Integer.parseInt(item
 						.getMemberValue("MinDmg")));
 			} else {
 				// use default
-				setSpecialWeaponMinDamage(1);
+				setMinDamage(1);
 			}
 			if (item.checkMembers(new String[] { "MaxDmg" })) {
 				// use member from file
-				setSpecialWeaponMaxDamage(Integer.parseInt(item
+				setMaxDamage(Integer.parseInt(item
 						.getMemberValue("MaxDmg")));
 			} else {
 				// use default
-				setSpecialWeaponMaxDamage(1);
+				setMaxDamage(1);
 			}
 			if (item.checkMembers(new String[] { "ReqStr" })) {
 				// use member from file
-				setSpecialWeaponReqStr(Integer.parseInt(item
+				setReqStr(Integer.parseInt(item
 						.getMemberValue("ReqStr")));
 			} else {
 				// use default
-				setSpecialWeaponReqStr(0);
+				setReqStr(0);
 			}
 			if (item.checkMembers(new String[] { "ReqInt" })) {
 				// use member from file
-				setSpecialWeaponReqInt(Integer.parseInt(item
+				setReqInt(Integer.parseInt(item
 						.getMemberValue("ReqInt")));
 			} else {
 				// use default
-				setSpecialWeaponReqInt(0);
+				setReqInt(0);
 			}
 			if (item.checkMembers(new String[] { "ReqDex" })) {
 				// use member from file
-				setSpecialWeaponReqDex(Integer.parseInt(item
+				setReqDex(Integer.parseInt(item
 						.getMemberValue("ReqDex")));
 			} else {
 				// use default
-				setSpecialWeaponReqDex(0);
+				setReqDex(0);
 			}
 			if (item.checkMembers(new String[] { "Position" })) {
 				// use member from file
-				setSpecialWeaponPosition(Integer.parseInt(item
+				setPosition(Integer.parseInt(item
 						.getMemberValue("Position")));
 			} else {
 				// use default
-				setSpecialWeaponPosition(5);
+				setPosition(5);
 			}
 			if (item.checkMembers(new String[] { "Race" })) {
 				// use member from file
-				setSpecialWeaponRace(Integer.parseInt(item
+				setRace(Integer.parseInt(item
 						.getMemberValue("Race")));
 			} else {
 				// use default
-				setSpecialWeaponRace(-1);
+				setRace(-1);
 			}
 			if (item.checkMembers(new String[] { "StmUsed" })) {
 				// use member from file
-				setSpecialWeaponStmUsed(Integer.parseInt(item
+				setStmUsed(Integer.parseInt(item
 						.getMemberValue("StmUsed")));
 			} else {
 				// use default
-				setSpecialWeaponStmUsed(0);
+				setStmUsed(0);
 			}
 			if (item.checkMembers(new String[] { "EeUsed" })) {
 				// use member from file
-				setSpecialWeaponEeUsed(Integer.parseInt(item
+				setEeUsed(Integer.parseInt(item
 						.getMemberValue("EeUsed")));
 			} else {
 				// use default
-				setSpecialWeaponEeUsed(0);
+				setEeUsed(0);
 			}
 			if (item.checkMembers(new String[] { "ManaUsed" })) {
 				// use member from file
-				setSpecialWeaponManaUsed(Integer.parseInt(item
+				setManaUsed(Integer.parseInt(item
 						.getMemberValue("ManaUsed")));
 			} else {
 				// use default
-				setSpecialWeaponManaUsed(0);
+				setManaUsed(0);
 			}
 		}
 	}
 
-	public void setSpecialWeaponEeUsed(int eeUsed) {
+	public void setEeUsed(int eeUsed) {
 		this.eeUsed = eeUsed;
 	}
 
-	public void setSpecialWeaponHanded(int handed) {
+	public void setHanded(int handed) {
 		this.handed = handed;
 	}
 
-	public void setSpecialWeaponLevel(int level) {
-		this.level = level;
-	}
-
-	public void setSpecialWeaponManaUsed(int manaUsed) {
+	public void setManaUsed(int manaUsed) {
 		this.manaUsed = manaUsed;
 	}
 
-	public void setSpecialWeaponMaxDamage(int maxDamage) {
+	public void setMaxDamage(int maxDamage) {
 		this.maxDamage = maxDamage;
 	}
 
-	public void setSpecialWeaponMinDamage(int minDamge) {
+	public void setMinDamage(int minDamge) {
 		this.minDamge = minDamge;
 	}
 
-	public void setSpecialWeaponPosition(int position) {
+	public void setPosition(int position) {
 		this.position = position;
 	}
 
 	/**
 	 * @param race
 	 */
-	public void setSpecialWeaponRace(int race) {
+	public void setRace(int race) {
 		this.race = race;
 	}
 
-	public void setSpecialWeaponReqDex(int reqDex) {
-		this.reqDex = reqDex;
-	}
-
-	public void setSpecialWeaponReqInt(int reqInt) {
-		this.reqInt = reqInt;
-	}
-
-	public void setSpecialWeaponReqStr(int reqStr) {
-		this.reqStr = reqStr;
-	}
-
-	public void setSpecialWeaponSlot(int slot) {
+	public void setSlot(int slot) {
 		this.slot = slot;
 	}
 
-	public void setSpecialWeaponSpeed(int speed) {
+	public void setSpeed(int speed) {
 		this.speed = speed;
 	}
 
-	public void setSpecialWeaponStmUsed(int stmUsed) {
+	public void setStmUsed(int stmUsed) {
 		this.stmUsed = stmUsed;
 	}
 }

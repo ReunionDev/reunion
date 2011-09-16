@@ -1,7 +1,6 @@
 package com.googlecode.reunion.jreunion.game.items;
 
 import com.googlecode.reunion.jcommon.ParsedItem;
-import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.PlayerItem;
 import com.googlecode.reunion.jreunion.game.Player.Race;
 import com.googlecode.reunion.jreunion.server.Reference;
@@ -15,12 +14,6 @@ public class EtcItem extends PlayerItem {
 
 	// 3 - Human; 4 - Pet
 
-	private int reqStr;
-
-	private int reqInt;
-
-	private int reqDex;
-
 	private int skillLevel;
 
 	public EtcItem(int id) {
@@ -29,18 +22,6 @@ public class EtcItem extends PlayerItem {
 
 	public Race getRace() {
 		return race;
-	}
-
-	public int getReqDex() {
-		return reqDex;
-	}
-
-	public int getReqInt() {
-		return reqInt;
-	}
-
-	public int getReqStr() {
-		return reqStr;
 	}
 
 	public int getSkillLevel() {
@@ -104,18 +85,6 @@ public class EtcItem extends PlayerItem {
 
 	public void setRace(Race race) {
 		this.race = race;
-	}
-
-	public void setReqDex(int reqDex) {
-		this.reqDex = reqDex;
-	}
-
-	public void setReqInt(int reqInt) {
-		this.reqInt = reqInt;
-	}
-
-	public void setReqStr(int reqStr) {
-		this.reqStr = reqStr;
 	}
 
 	public void setSkillLevel(int skillLevel) {

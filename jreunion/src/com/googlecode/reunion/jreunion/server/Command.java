@@ -16,6 +16,7 @@ import com.googlecode.reunion.jreunion.game.Mob;
 import com.googlecode.reunion.jreunion.game.Npc;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.QuickSlot;
+import com.googlecode.reunion.jreunion.game.QuickSlotItem;
 import com.googlecode.reunion.jreunion.game.Usable;
 import com.googlecode.reunion.jreunion.game.Equipment.Slot;
 import com.googlecode.reunion.jreunion.game.Player.Race;
@@ -183,6 +184,7 @@ public class Command {
 		world.getSkillManager().loadSkills(player);
 		DatabaseUtils.getInstance().loadSkills(player);	
 		player.loadEquipment(DatabaseUtils.getInstance().getSavedPosition(player).getLocalMap());
+		player.setDefense();
 
 		serverSay(player.getName() + " is logging in (ID: "	+ player.getPlayerId() + ")\n");
 
@@ -293,10 +295,10 @@ public class Command {
 
 		double slayerDmg = 0;
 
-		while (slayerDmg < spWeapon.getSpecialWeaponMinDamage()
-				|| slayerDmg > spWeapon.getSpecialWeaponMaxDamage()) {
+		while (slayerDmg < spWeapon.getMinDamage()
+				|| slayerDmg > spWeapon.getMaxDamage()) {
 			slayerDmg = Math.random() * 100
-					+ spWeapon.getSpecialWeaponMinDamage();
+					+ spWeapon.getMinDamage();
 		}
 /*
 		Logger.getLogger(Command.class).info("Skill Level: "
@@ -366,13 +368,12 @@ public class Command {
 	*/
 	}
 
-	public boolean useItem(Player player ,Item item) {
-		
+	public boolean useItem(Player player ,Item item, int slot) {
 		
 		if(Usable.class.isInstance(item)){
 			
 			
-			((Usable)item).use(player);
+			((Usable)item).use(player, slot);
 			
 			player.getPosition().getLocalMap().removeEntity(item);			
 			DatabaseUtils.getInstance().deleteItem(item);

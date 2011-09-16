@@ -3155,7 +3155,7 @@ Handed = 1
 SizeX = 1
 SizeY = 3
 Price = 500
-Class = Axe
+Class = equipment.Axe
 
 [Woodern Horn Axe]
 ID = 167
@@ -7507,10 +7507,10 @@ Class = ScrollAndSpellBoock
 [Mission Reciver]
 ID = 926
 Type = 26
-#ReqStr = 
+ReqStr = 1
 SizeX = 1
 SizeY = 1
-#Price = 
+Price = 150
 Class = Etc
 
 #######################

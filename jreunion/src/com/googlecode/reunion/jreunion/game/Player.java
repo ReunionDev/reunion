@@ -17,6 +17,7 @@ import com.googlecode.reunion.jreunion.events.map.PlayerLogoutEvent;
 import com.googlecode.reunion.jreunion.events.network.NetworkAcceptEvent;
 import com.googlecode.reunion.jreunion.events.session.SessionEvent;
 import com.googlecode.reunion.jreunion.game.Equipment.Slot;
+import com.googlecode.reunion.jreunion.game.items.equipment.Armor;
 import com.googlecode.reunion.jreunion.server.Client;
 import com.googlecode.reunion.jreunion.server.Client.State;
 import com.googlecode.reunion.jreunion.server.DatabaseUtils;
@@ -802,8 +803,17 @@ public abstract class Player extends LivingObject implements EventListener {
 		sendStatus(Status.HP);
 	}
 
-	public void setDefense(int def) {
-		this.defense = def;
+	public void setDefense() {
+		
+		this.defense = 0;
+		
+		for(Equipment.Slot slot: Equipment.Slot.values()){
+			Item item = getEquipment().getItem(slot);
+			
+			if(item instanceof Armor){
+				this.defense += ((Armor)item).getDef();
+			}
+		}
 	}
 
 	public void setDexterity(int dex) {
@@ -1210,6 +1220,7 @@ public abstract class Player extends LivingObject implements EventListener {
 
 		}
 		// DatabaseUtils.getInstance().saveEquipment(this);
+		setDefense();
 
 	}
 	/**

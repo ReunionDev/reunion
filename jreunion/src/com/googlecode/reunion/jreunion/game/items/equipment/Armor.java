@@ -9,17 +9,6 @@ import com.googlecode.reunion.jreunion.server.Reference;
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
 public class Armor extends PlayerItem {
-	private int def;
-	
-	private int defunmodified;
-
-	private int reqStr;
-
-	private int reqInt;
-
-	private int reqDex;
-
-	private int level;
 
 	private int race; // -1 - Common; 0 - Bulkan; 1 - Kailipton; 2 - Aidia;
 
@@ -28,6 +17,8 @@ public class Armor extends PlayerItem {
 	private int position; // 0 - head; 1 - body; 2 - legs; 3 - Shoulder Mount;
 
 	// 4 - Feet; 5 - Shield;
+	
+	private float def;
 
 	private float boltMagicDef; // value in %
 
@@ -54,20 +45,35 @@ public class Armor extends PlayerItem {
 		return coldMagicDef;
 	}
 
-	public int getDef() {
-		return def;
-	}
-
-	public int getUnmodifiedDef() {
-		return defunmodified;
-	}
-
-	public int getLevel() {
-		return level;
+	public float getDef() {
+		int gradeLevel = getGradeLevel();
+		
+		if(gradeLevel == 0)
+			return def;
+		
+		if(getLevel() < 181){
+			return  def * ((gradeLevel==1?0.12f:0)+(gradeLevel==2?0.26f:0)+
+					(gradeLevel==3?0.44f:0)+(gradeLevel==4?0.68f:0)+
+					(gradeLevel==5?1f:0)+1);
+		} else {
+			return def * ((gradeLevel * 0.1f)+1);
+		}
 	}
 
 	public float getMagicDef() {
-		return magicDef;
+
+		int gradeLevel = getGradeLevel();
+		
+		if(gradeLevel == 0)
+			return magicDef;
+		
+		if(getLevel() < 181){
+			return  (int)(magicDef * ((gradeLevel==1?0.12f:0)+(int)(gradeLevel==2?0.26f:0)+
+					(gradeLevel==3?0.44f:0)+(gradeLevel==4?0.68f:0)+
+					(gradeLevel==5?1f:0)+1));
+		} else {
+			return (int)(magicDef * ((gradeLevel * 0.1f)+1));
+		}
 	}
 
 	public float getManaUsed() {
@@ -80,18 +86,6 @@ public class Armor extends PlayerItem {
 
 	public int getRace() {
 		return race;
-	}
-
-	public int getReqDex() {
-		return reqDex;
-	}
-
-	public int getReqInt() {
-		return reqInt;
-	}
-
-	public int getReqStr() {
-		return reqStr;
 	}
 
 	public float getStunMagicDef() {
@@ -129,11 +123,10 @@ public class Armor extends PlayerItem {
 			if (item.checkMembers(new String[] { "Def" })) {
 				// use member from file
 				setDef(Integer.parseInt(item.getMemberValue("Def")));
-				setUnmodifiedDef(Integer.parseInt(item.getMemberValue("Def")));
+				//setUnmodifiedDef(Integer.parseInt(item.getMemberValue("Def")));
 			} else {
 				// use default
 				setDef(0);
-				setUnmodifiedDef(0);
 			}
 			if (item.checkMembers(new String[] { "ReqStr" })) {
 				// use member from file
@@ -234,16 +227,8 @@ public class Armor extends PlayerItem {
 		this.coldMagicDef = coldMagicDef;
 	}
 
-	public void setDef(int def) {
+	public void setDef(float def) {
 		this.def = def;
-	}
-
-	public void setUnmodifiedDef(int def) {
-		this.defunmodified = def;
-	}
-	
-	public void setLevel(int level) {
-		this.level = level;
 	}
 
 	public void setMagicDef(float magicDef) {
@@ -260,18 +245,6 @@ public class Armor extends PlayerItem {
 
 	public void setRace(int race) {
 		this.race = race;
-	}
-
-	public void setReqDex(int reqDex) {
-		this.reqDex = reqDex;
-	}
-
-	public void setReqInt(int reqInt) {
-		this.reqInt = reqInt;
-	}
-
-	public void setReqStr(int reqStr) {
-		this.reqStr = reqStr;
 	}
 
 	public void setStunMagicDef(float stunMagicDef) {

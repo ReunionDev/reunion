@@ -1,6 +1,9 @@
 package com.googlecode.reunion.jreunion.game.items.equipment;
 
+import org.apache.log4j.Logger;
+
 import com.googlecode.reunion.jcommon.ParsedItem;
+import com.googlecode.reunion.jreunion.game.Item;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.PlayerItem;
 import com.googlecode.reunion.jreunion.server.Reference;
@@ -14,21 +17,9 @@ public abstract class Weapon extends PlayerItem {
 
 	// 4 - Very Slow
 
-	private int minDamge;
-
-	private int minUnmodifiedDamge;
+	private float minDamge;
 	
-	private int maxUnmodifiedDamge;
-	
-	private int maxDamage;
-
-	private int reqStr;
-
-	private int reqDex;
-
-	private int reqInt;
-
-	private int level;
+	private float maxDamage;
 
 	private int position; // -1 - Empty; 3 - Shoulder Mount; 9 - Weapon
 
@@ -39,8 +30,6 @@ public abstract class Weapon extends PlayerItem {
 	private int handed; // 1 - One handed; 2 - Two handed
 
 	private float magicDmg; // value in %
-	
-	private float magicUnmodifiedDmg; // value in %
 
 	public Weapon(int id) {
 		super(id);
@@ -51,31 +40,41 @@ public abstract class Weapon extends PlayerItem {
 	 * @return TODO******/
 	public abstract boolean use(Player player);
 	
-	
 
 	public int getHanded() {
 		return handed;
 	}
 
-	public int getLevel() {
-		return level;
-	}	
-
-	public int getMaxDamage() {
-		return maxDamage;
+	public float getMaxDamage() {
+		int gradeLevel = getGradeLevel();
+		
+		if(gradeLevel == 0)
+			return maxDamage;
+		
+		if(getLevel() < 181){
+			//return (int)(maxDamage * ((((.12f * gradeLevel) + ((gradeLevel * gradeLevel-1))))+1));
+			return  maxDamage * ((gradeLevel==1?0.12f:0)+(gradeLevel==2?0.26f:0)+
+					(gradeLevel==3?0.44f:0)+(gradeLevel==4?0.68f:0)+
+					(gradeLevel==5?1f:0)+1);
+		} else {
+			return maxDamage * ((gradeLevel * 0.1f)+1);
+		}
 	}
 
-	public int getMinDamage() {
-		return minDamge;
-	}
-
-
-	public int getUnmodifiedMinDamage() {
-		return minUnmodifiedDamge;
-	}
-	
-	public int getUnmodifiedMaxDamage() {
-		return maxUnmodifiedDamge;
+	public float getMinDamage() {
+		int gradeLevel = getGradeLevel();
+		
+		if(gradeLevel == 0)
+			return minDamge;
+		
+		if(getLevel() < 181){
+			//return (int)(minDamge * ((((.12f * gradeLevel) + ((gradeLevel * gradeLevel-1) + 2)))+1));
+			return  minDamge * ((gradeLevel==1?0.12f:0)+(gradeLevel==2?0.26f:0)+
+					(gradeLevel==3?0.44f:0)+(gradeLevel==4?0.68f:0)+
+					(gradeLevel==5?1f:0)+1);
+		} else {
+			return minDamge * ((gradeLevel * 0.1f)+1);
+		}
 	}
 	
 	public int getPosition() {
@@ -86,28 +85,24 @@ public abstract class Weapon extends PlayerItem {
 		return race;
 	}
 
-	public int getReqDex() {
-		return reqDex;
-	}
-
-	public int getReqInt() {
-		return reqInt;
-	}
-
-	public int getReqStr() {
-		return reqStr;
-	}
-
 	public int getSpeed() {
 		return speed;
 	}
 	
 	public float getMagicDmg() {
-		return magicDmg;
-	}
-	
-	public float getUnmodifiedMagicDmg() {
-		return magicUnmodifiedDmg;
+		
+		int gradeLevel = getGradeLevel();
+		
+		if(gradeLevel == 0)
+			return magicDmg;
+		
+		if(getLevel() < 181){
+			return  magicDmg * ((gradeLevel==1?0.12f:0)+(gradeLevel==2?0.26f:0)+
+					(gradeLevel==3?0.44f:0)+(gradeLevel==4?0.68f:0)+
+					(gradeLevel==5?1f:0)+1);
+		} else {
+			return magicDmg * ((gradeLevel * 0.1f)+1);
+		}
 	}
 
 	@Override
@@ -154,20 +149,16 @@ public abstract class Weapon extends PlayerItem {
 			}
 			if (item.checkMembers(new String[] { "MinDmg" })) {
 				// use member from file
-				setUnmodifiedMinDamage(Integer.parseInt(item.getMemberValue("MinDmg")));
 				setMinDamage(Integer.parseInt(item.getMemberValue("MinDmg")));
 			} else {
 				// use default
-				setUnmodifiedMinDamage(1);
 				setMinDamage(1);
 			}
 			if (item.checkMembers(new String[] { "MaxDmg" })) {
 				// use member from file
-				setUnmodifiedMaxDamage(Integer.parseInt(item.getMemberValue("MaxDmg")));
 				setMaxDamage(Integer.parseInt(item.getMemberValue("MaxDmg")));
 			} else {
 				// use default
-				setUnmodifiedMaxDamage(1);
 				setMaxDamage(1);
 			}
 			if (item.checkMembers(new String[] { "ReqStr" })) {
@@ -208,11 +199,9 @@ public abstract class Weapon extends PlayerItem {
 			if (item.checkMembers(new String[] { "MagicDmg" })) {
 				// use member from file
 				setMagicDmg(Float.parseFloat(item.getMemberValue("MagicDmg")));
-				setUnmodifiedMagicDmg(Float.parseFloat(item.getMemberValue("MagicDmg")));
 			} else {
 				// use default
 				setMagicDmg(0);
-				setUnmodifiedMagicDmg(0);
 			}	
 		}
 	}
@@ -225,25 +214,12 @@ public abstract class Weapon extends PlayerItem {
 		}
 	}
 
-	public void setLevel(int level) {
-		this.level = level;
-	}
-
-	public void setMaxDamage(int maxDamage) {
+	public void setMaxDamage(float maxDamage) {
 		this.maxDamage = maxDamage;
 	}
 
-	public void setMinDamage(int minDamge) {
+	public void setMinDamage(float minDamge) {
 		this.minDamge = minDamge;
-	}
-
-
-	public void setUnmodifiedMaxDamage(int maxDamage) {
-		this.maxUnmodifiedDamge = maxDamage;
-	}
-
-	public void setUnmodifiedMinDamage(int minDamge) {
-		this.minUnmodifiedDamge = minDamge;
 	}
 	
 	public void setPosition(int position) {
@@ -254,28 +230,12 @@ public abstract class Weapon extends PlayerItem {
 		this.race = race;
 	}
 
-	public void setReqDex(int reqDex) {
-		this.reqDex = reqDex;
-	}
-
-	public void setReqInt(int reqInt) {
-		this.reqInt = reqInt;
-	}
-
-	public void setReqStr(int reqStr) {
-		this.reqStr = reqStr;
-	}
-
 	public void setSpeed(int speed) {
 		this.speed = speed;
 	}
 	
 	public void setMagicDmg(float magicDmg) {
 		this.magicDmg = magicDmg;
-	}
-	
-	public void setUnmodifiedMagicDmg(float magicDmg) {
-		this.magicUnmodifiedDmg = magicDmg;
 	}
 
 }
