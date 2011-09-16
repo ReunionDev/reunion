@@ -1,13 +1,14 @@
-package com.googlecode.reunion.jreunion.game;
+package com.googlecode.reunion.jreunion.game.items.equipment;
 
-import com.googlecode.reunion.jreunion.game.items.SpecialItems;
+import com.googlecode.reunion.jreunion.game.items.PersonalOrnament;
+
 
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-public class StoneOfCalling extends SpecialItems {
-	public StoneOfCalling(int id) {
+public class Ring extends PersonalOrnament {
+	public Ring(int id) {
 		super(id);
 		loadFromReference(id);
 	}

@@ -1,13 +1,12 @@
-package com.googlecode.reunion.jreunion.game;
+package com.googlecode.reunion.jreunion.game.items;
 
-import com.googlecode.reunion.jreunion.game.items.SpecialItems;
 
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-public class ScrollAndSpellBoock extends SpecialItems {
-	public ScrollAndSpellBoock(int id) {
+public class MagicStone extends ReinforcingAgent {
+	public MagicStone(int id) {
 		super(id);
 		loadFromReference(id);
 	}

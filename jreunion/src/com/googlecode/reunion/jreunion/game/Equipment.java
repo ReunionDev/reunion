@@ -6,6 +6,7 @@ import com.googlecode.reunion.jreunion.game.items.equipment.Bracelet;
 import com.googlecode.reunion.jreunion.game.items.equipment.HeavyWeapon;
 import com.googlecode.reunion.jreunion.game.items.equipment.Mantle;
 import com.googlecode.reunion.jreunion.game.items.equipment.Necklace;
+import com.googlecode.reunion.jreunion.game.items.equipment.Ring;
 import com.googlecode.reunion.jreunion.game.items.equipment.Shield;
 import com.googlecode.reunion.jreunion.game.items.equipment.SlayerWeapon;
 import com.googlecode.reunion.jreunion.game.items.equipment.WandWeapon;
