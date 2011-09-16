@@ -79,7 +79,7 @@ public class Spawn {
 
 	protected Position spawn(LivingObject entity) {		
 	
-		Position position = null;
+		Position position = generateSpawnPosition();
 		Area entityArea = getPosition().getLocalMap().getArea(); 
 		
 		// TODO: Improve the mob spawn area?
@@ -87,8 +87,6 @@ public class Spawn {
 			while((!entityArea.get(position.getX() / 10, position.getY() / 10,Field.MOB))){
 				position = generateSpawnPosition();
 			}
-		} else {
-			position = generateSpawnPosition();
 		}
 		
 		entity.setPosition(position);
