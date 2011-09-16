@@ -207,8 +207,10 @@ public class DatabaseUtils extends Service {
 				+ " 1\n";
 				*/
 				charlist += "chars_exist " + slot + " "
-				+ rs.getString("name") + " " + rs.getString("race")
-				+ " " + rs.getString("sex") + " "
+				//+ rs.getString("id") + " " // the new version client have this extra value in the packet
+				+ rs.getString("name") + " "
+				+ rs.getString("race") + " "
+				+ rs.getString("sex") + " "
 				+ rs.getString("hair") + " "
 				+ rs.getString("level") + " "
 				+ 1 + " " //hp
@@ -231,7 +233,7 @@ public class DatabaseUtils extends Service {
 				+ eq.getType(Slot.SHOULDER)	+ " "
 				+ eq.getType(Slot.BOOTS) + " " 
 				+ eq.getType(Slot.OFFHAND) 
-				+ " 1\n";
+				+ " 0\n";
 				
 				//chars_exist 3 12341234 0 0 0 2 90 12 15 15 90 90 15 15 30 5 5 30 10 309 -1 -1 -1 -1 -1 1
 				// chars_exist [SlotNumber] [Name] [Race] [Sex] [HairStyle]
@@ -252,7 +254,7 @@ public class DatabaseUtils extends Service {
 		
 		
 		charlist += "chars_end\n"; // Old client version
-		//charlist += "chars_end 0 "+client.getAccountId()+"\n"; //New client version
+		//charlist += "chars_end 0 "+accountId+"\n"; //New client version
 		return charlist;
 	}
 	

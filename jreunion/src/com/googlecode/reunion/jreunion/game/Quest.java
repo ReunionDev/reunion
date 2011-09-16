@@ -2,6 +2,7 @@ package com.googlecode.reunion.jreunion.game;
 
 import com.googlecode.reunion.jreunion.server.Client;
 import com.googlecode.reunion.jreunion.server.ItemFactory;
+import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 import com.googlecode.reunion.jreunion.server.Server;
 
 /**
@@ -29,8 +30,8 @@ public class Quest {
 		}
 
 		player.setQuest(null);
-		String packetData = "qt get -1\n";
-				client.sendData(packetData);
+		client.sendPacket(Type.SAY, "Quest cancelled.");
+		client.sendPacket(Type.QT, "get -1");
 	}
 
 	/****** Update Quest Points Obtained ********/
@@ -41,11 +42,8 @@ public class Quest {
 		if (client == null) {
 			return;
 		}
-
-		String packetData = "qt pt " + remainPoints + " " + obtainedPoints
-				+ "\n";
 		
-				client.sendData(packetData);
+		client.sendPacket(Type.QT, "pt " + remainPoints + " " + obtainedPoints);
 
 		/****** Quest Points Reached Zero ********/
 		if (remainPoints == 0) {
@@ -55,10 +53,9 @@ public class Quest {
 			item.setGemNumber(0);
 
 			// QuestSecondFase(player);
-			packetData = "qt nt\n";
 			
-					client.sendData(packetData);
-			player.getInventory().addItem(item);
+			client.sendPacket(Type.QT, "nt");
+			player.getInventory().storeItem(item);
 			
 		}
 	}
@@ -70,10 +67,8 @@ public class Quest {
 		if (client == null) {
 			return;
 		}
-
-		String packetData = "qt tp " + tp + "\n";
 		
-				client.sendData(packetData);
+		client.sendPacket(Type.QT, "tp " + tp);
 	}
 
 	/****** Quest Points Reached Zero ********/
@@ -104,12 +99,12 @@ public class Quest {
 			return;
 		}
 
-		int questId = 669;// (int)Math.random()*669;
+		//int questId = 669;
+		int questId =  86 + (int)Math.random()*10;
 
 		QuickSlotItem qsItem = player.getQuickSlot().getItem(slot);
-		String packetData = "qt get " + questId + "\n";
 		
-				client.sendData(packetData);
+		client.sendPacket(Type.QT, "get " + questId);
 
 		if (questId == 669) {
 			double tp = Math.random() * 2000 + 300;
@@ -133,11 +128,8 @@ public class Quest {
 		if (client == null) {
 			return;
 		}
-
-		String packetData = "qt eff " + player.getPosition().getX() + " "
-				+ player.getPosition().getY() + " " + player.getEntityId() + "\n";
-		
-				client.sendData(packetData);
+		client.sendPacket(Type.QT, "eff " + player.getPosition().getX() + " "
+				+ player.getPosition().getY() + " " + player.getEntityId());
 	}
 
 	/****** Quest End ********/
@@ -147,11 +139,9 @@ public class Quest {
 		if (client == null) {
 			return;
 		}
-
 		player.setQuest(null);
-		String packetData = "qt end " + questId + "\n";
 		
-				client.sendData(packetData);
+		client.sendPacket(Type.QT, "end " + questId);
 	}
 
 	/****** Quest Kill ********/
@@ -164,10 +154,8 @@ public class Quest {
 
 		int pos = 0;
 		int ammount = 1;
-
-		String packetData = "qt kill " + pos + " " + ammount + "\n";
 		
-				client.sendData(packetData);
+		client.sendPacket(Type.QT, "kill " + pos + " " + ammount);
 		// S> qt kill [Pos] [Ammount]
 	}
 
@@ -207,8 +195,6 @@ public class Quest {
 		QuickSlotItem qsItem = player.getQuickSlot().getItem(slot);
 		qsItem.getItem().setExtraStats(missionsRemaining);
 
-		String packetData = "qt quick " + slot + " " + missionsRemaining + "\n";
-
-				client.sendData(packetData);
+		client.sendPacket(Type.QT, "quick " + slot + " " + missionsRemaining);
 	}
 }

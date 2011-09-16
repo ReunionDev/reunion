@@ -76,6 +76,7 @@ public class PacketFactory {
 		QUICK,
 		WEARING,
 		UPGRADE,
+		QT,
 		KILL
 	}
 	
@@ -540,6 +541,14 @@ public class PacketFactory {
 						+ eq.getGemNumber(Slot.RING) + " " + eq.getExtraStats(Slot.RING) + " " + eq.getEntityId(Slot.MAINHAND) + " "
 						+ eq.getType(Slot.MAINHAND) + " " + eq.getGemNumber(Slot.MAINHAND) + " " + eq.getExtraStats(Slot.MAINHAND);
 			
+			}
+			break;
+			
+		case QT:
+			if(args.length > 0){
+				String packetData = (String) args[0];
+				
+				return "qt " + packetData + "\n";
 			}
 			break;
 			

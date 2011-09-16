@@ -34,7 +34,7 @@ public abstract class Potion extends Etc implements Usable {
 	}
 	
 	@Override
-	public void use(final LivingObject user) {
+	public void use(final LivingObject user, int slot) {
 		final Timer timer = new Timer();
 		final long start = System.currentTimeMillis();
 		

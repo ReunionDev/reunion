@@ -103,9 +103,9 @@ public class QuickSlot {
 		
 		Item item = qsItem.getItem();
 		
-		Logger.getLogger(QuickSlot.class).info("using" +item);
+		Logger.getLogger(QuickSlot.class).info("USING: " +item);
 		
-		player.getPosition().getLocalMap().getWorld().getCommand().useItem(player, item);
+		player.getPosition().getLocalMap().getWorld().getCommand().useItem(player, item, slot);
 /*
 		if (qsItem.getItem().getType() == 175
 				|| qsItem.getItem().getType() == 1053) {
