@@ -1,5 +1,12 @@
 package com.googlecode.reunion.jreunion.game;
 
+import java.util.List;
+import java.util.Vector;
+
+import com.googlecode.reunion.jreunion.events.map.ItemDropEvent;
+import com.googlecode.reunion.jreunion.game.quests.objective.Objective;
+import com.googlecode.reunion.jreunion.game.quests.reward.Reward;
+import com.googlecode.reunion.jreunion.game.quests.type.QuestType;
 import com.googlecode.reunion.jreunion.server.Client;
 import com.googlecode.reunion.jreunion.server.ItemFactory;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
@@ -12,15 +19,133 @@ import com.googlecode.reunion.jreunion.server.Server;
 public class Quest {
 
 	private int id;
+	
+	private String description;
 
-	private int tp;
+	//TODO: move this to another location
+	private int tp; //total points
 
-	private int pt;
+	//TODO: move this to another location
+	private int pt; //obtained points
+	
+	private int minLevel;
+	
+	private int maxLevel;
+	
+	private QuestType type;
+	
+	private List<Objective> objectives;
+	
+	private List<Reward> rewards;
 
-	public Quest(Player player, int slot) {
-		getQuest(player, slot);
+	/*
+	public Quest(Player player, QuickSlotItem quickSlotItem) {
+		this.id = getQuest(player, quickSlotItem);
+		objectives = new Vector<Objective>();
+		rewards = new Vector<Reward>();
+	}
+	*/
+	
+	public Quest(int questId) {
+		this.id = questId;
+		objectives = new Vector<Objective>();
+		rewards = new Vector<Reward>();
+	}
+	
+	public int getId(){
+		return this.id;
 	}
 
+	public int getMinLevel(){
+		return this.minLevel;
+	}
+	
+	public int getMaxLevel(){
+		return this.maxLevel;
+	}
+	
+	public void setMinLevel(int minLevel){
+		this.minLevel = minLevel;
+	}
+	
+	public void setMaxLevel(int maxLevel){
+		this.maxLevel = maxLevel;
+	}
+	
+	public String getDescrition(){
+		return this.description;
+	}
+	
+	public QuestType getType(){
+		return this.type;
+	}
+	
+	public void setType(QuestType type){
+		this.type = type;
+	}
+	
+	public void setDescription(String description){
+		this.description = description;
+	}
+	
+	public void addObjective(Objective objective){
+		if(objective != null)
+			this.objectives.add(objective);
+	}
+	
+	public Objective getObjective(int id){
+		for(Objective objective: objectives){
+			if(objective.getId() == id)
+				return objective;
+		}
+		return null;
+	}
+	
+	public List<Objective> getObjectiveList(){
+		return this.objectives;
+	}
+	
+	public boolean deleteObjective(int id){
+		Objective objective = getObjective(id);
+		if(objective != null)
+			return objectives.remove(objective);
+		
+		return false;
+	}
+	
+	public boolean objectivesIsEmpty(){
+		return objectives.isEmpty();
+	}
+	
+	public void addReward(Reward reward){
+		if(reward != null)
+			this.rewards.add(reward);
+	}
+	
+	public Reward getReward(int id){
+		for(Reward reward: rewards){
+			if(reward.getId() == id)
+				return reward;
+		}
+		return null;
+	}
+	
+	public List<Reward> getRewardList(){
+		return this.rewards;
+	}
+	
+	public boolean deleteReward(int id){
+		Reward reward = getReward(id);
+		if(reward != null)
+			return rewards.remove(reward);
+		
+		return false;
+	}
+	
+	public boolean rewardsIsEmpty(){
+		return rewards.isEmpty();
+	}
+	
 	/****** Cancel the current player Quest ********/
 	public void cancelQuest(Player player) {
 		Client client = player.getClient();
@@ -91,30 +216,19 @@ public class Quest {
 		return pt;
 	}
 
-	/****** Get quest ********/
-	public void getQuest(Player player, int slot) {
+	/****** Handle client packets ********/
+	public boolean loadQuest(Player player, QuestType type, int slot) {
 		Client client = player.getClient();
 
 		if (client == null) {
-			return;
+			return false;
 		}
-
-		//int questId = 669;
-		int questId =  86 + (int)Math.random()*10;
-
-		QuickSlotItem qsItem = player.getQuickSlot().getItem(slot);
 		
-		client.sendPacket(Type.QT, "get " + questId);
-
-		if (questId == 669) {
-			double tp = Math.random() * 2000 + 300;
-
-			changeQuestTP(player, (int) tp);
-			changeQuestPT(player, (int) tp, 0);
-		}
-
-		updateMissionReceiver(player, slot,
-				qsItem.getItem().getExtraStats() - 1);
+		Item item = player.getQuickSlot().getItem(slot).getItem();
+		
+		client.sendPacket(Type.QT, "get " + getId());
+		client.sendPacket(Type.QT, "quick " + slot + " " + item.getExtraStats());
+		return true;
 	}
 
 	public int getTP() {
@@ -181,20 +295,5 @@ public class Quest {
 
 		String packetData = "usq succ " + slot + "\n";
 				client.sendData(packetData);
-	}
-
-	/****** Update the Mission Receiver in the Quick Slot ********/
-	public void updateMissionReceiver(Player player, int slot,
-			int missionsRemaining) {
-		Client client = player.getClient();
-
-		if (client == null) {
-			return;
-		}
-
-		QuickSlotItem qsItem = player.getQuickSlot().getItem(slot);
-		qsItem.getItem().setExtraStats(missionsRemaining);
-
-		client.sendPacket(Type.QT, "quick " + slot + " " + missionsRemaining);
 	}
 }

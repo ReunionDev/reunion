@@ -178,6 +178,6 @@ public class QuickSlot {
 		*/
 		
 		removeItem(qsItem);
-		DatabaseUtils.getInstance().deleteItem(qsItem.getItem());
+		DatabaseUtils.getDinamicInstance().deleteItem(qsItem.getItem());
 	}
 }

@@ -24,12 +24,12 @@ public class ItemFactory {
 		
 		item = (Item)ClassFactory.create(className, type);
 		
-		DatabaseUtils.getInstance().saveItem(item);
+		DatabaseUtils.getDinamicInstance().saveItem(item);
 		return item;
 	}
 
 	public static Item loadItem(int itemId) {		
-		return DatabaseUtils.getInstance().loadItem(itemId);
+		return DatabaseUtils.getDinamicInstance().loadItem(itemId);
 		
 	}
 

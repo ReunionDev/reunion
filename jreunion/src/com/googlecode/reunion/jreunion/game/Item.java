@@ -157,8 +157,8 @@ public class Item implements Entity {
 	public void upgrade(Player player, Slot slot)
 	{	
 		setGemNumber(getGemNumber()+1);
-		DatabaseUtils.getInstance().saveItem(this);
-		DatabaseUtils.getInstance().deleteItem(player.getInventory().getHoldingItem().getItem());
+		DatabaseUtils.getDinamicInstance().saveItem(this);
+		DatabaseUtils.getDinamicInstance().deleteItem(player.getInventory().getHoldingItem().getItem());
 		player.getInventory().setHoldingItem(null);
 		player.setDefense();
 		

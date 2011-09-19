@@ -235,7 +235,7 @@ public class LocalMap extends Map implements Runnable{
 		
 		synchronized(entities){
 		
-			List<RoamingItem> roamingItems = DatabaseUtils.getInstance().loadRoamingItems(this);
+			List<RoamingItem> roamingItems = DatabaseUtils.getDinamicInstance().loadRoamingItems(this);
 			for(RoamingItem roamingItem : roamingItems){
 				//TODO: A better way to manage items going in and out of the map
 				int id = createEntityId(roamingItem);
@@ -430,14 +430,13 @@ public class LocalMap extends Map implements Runnable{
 						
 						Player player = itemPickupEvent.getPlayer();
 						Item item = roamingItem.getItem();
-						DatabaseUtils.getInstance().deleteRoamingItem(item);
+						DatabaseUtils.getDinamicInstance().deleteRoamingItem(item);
 						player.pickItem(roamingItem.getItem());
 					}				
 				}				
 				roamingItem.getInterested().sendPacket(Type.OUT, roamingItem);
 				
-			}
-			
+			} else	
 			if(event instanceof PlayerLoginEvent){
 				
 				PlayerLoginEvent playerLoginEvent = (PlayerLoginEvent)event;
@@ -451,7 +450,7 @@ public class LocalMap extends Map implements Runnable{
 				} else {
 					new PlayerSpawn(position).spawn(player);					
 				}
-			}
+			} else
 			if(event instanceof PlayerLogoutEvent){
 				
 				PlayerLogoutEvent playerLogoutEvent = (PlayerLogoutEvent)event;
@@ -472,20 +471,18 @@ public class LocalMap extends Map implements Runnable{
 				list.exit(player, false);
 				list.sendPacket(Type.OUT, player);
 				
-				player.save();
-				
-			}
+				player.save();		
+			} else
+			if(event instanceof SessionEvent) {
 			
-		} else if(event instanceof SessionEvent) {
-			
-			Session session = ((SessionEvent)event).getSession();
-			if(event instanceof NewSessionEvent){
-				
-				NewSessionEvent newSessionEvent = (NewSessionEvent)event;
-				synchronized(sessions){
-					this.sessions.add(session);	
-				}				
-			}	
+				Session session = ((SessionEvent)event).getSession();
+				if(event instanceof NewSessionEvent){	
+					NewSessionEvent newSessionEvent = (NewSessionEvent)event;
+					synchronized(sessions){
+						this.sessions.add(session);	
+					}				
+				}	
+			} 
 		}
 	}
 

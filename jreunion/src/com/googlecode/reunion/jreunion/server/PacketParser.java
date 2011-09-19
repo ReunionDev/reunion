@@ -42,6 +42,7 @@ import com.googlecode.reunion.jreunion.game.Position;
 import com.googlecode.reunion.jreunion.game.Quest;
 import com.googlecode.reunion.jreunion.game.RoamingItem;
 import com.googlecode.reunion.jreunion.game.Skill;
+import com.googlecode.reunion.jreunion.game.items.Etc;
 import com.googlecode.reunion.jreunion.game.skills.BasicAttack;
 import com.googlecode.reunion.jreunion.game.skills.GroupedSkill;
 import com.googlecode.reunion.jreunion.game.Trader;
@@ -170,7 +171,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 			case CHAR_LIST: {
 	
 				if (message[0].equals("char_exist")) {
-					if (DatabaseUtils.getInstance().getCharNameFree(message[1])) {
+					if (DatabaseUtils.getDinamicInstance().getCharNameFree(message[1])) {
 						com.sendSuccess(client);
 					} else {
 						client.sendPacket(Type.FAIL);
@@ -247,7 +248,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 						return;
 					}
 					
-					Position savedPosition = DatabaseUtils.getInstance().getSavedPosition(player);
+					Position savedPosition = DatabaseUtils.getDinamicInstance().getSavedPosition(player);
 					
 					if(savedPosition != null) {
 						Map savedMap = savedPosition.getMap();
@@ -269,10 +270,10 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					player.getPosition().setMap((LocalMap)map);
 					world.getPlayerManager().addPlayer(player);
 					
-					DatabaseUtils.getInstance().loadStash(client);
-					DatabaseUtils.getInstance().loadQuickSlot(player);
-					DatabaseUtils.getInstance().loadInventory(player);
-					DatabaseUtils.getInstance().loadExchange(player);
+					DatabaseUtils.getDinamicInstance().loadStash(client);
+					DatabaseUtils.getDinamicInstance().loadQuickSlot(player);
+					DatabaseUtils.getDinamicInstance().loadInventory(player);
+					DatabaseUtils.getDinamicInstance().loadExchange(player);
 					player.loadInventory();
 					player.loadExchange();
 					player.loadQuickSlot();
@@ -564,9 +565,11 @@ public class PacketParser extends EventDispatcher implements EventListener{
 								client.getPlayer());
 					} else {
 						if (client.getPlayer().getQuest() == null) {
-							client.getPlayer().setQuest(new Quest(
-									client.getPlayer(), Integer
-											.parseInt(message[1])));
+							Etc etcItem = (Etc)player.getQuickSlot().getItem(Integer.parseInt(message[1])).getItem();
+							etcItem.use(player, Integer.parseInt(message[1]));
+							//client.getPlayer().setQuest(new Quest(
+							//		client.getPlayer(), player.getQuickSlot().getItem(Integer
+							//				.parseInt(message[1]))));
 						} else {
 							com.serverTell(client,
 									"Impossible to receive a quest");

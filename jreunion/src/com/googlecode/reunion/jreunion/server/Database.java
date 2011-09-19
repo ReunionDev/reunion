@@ -24,7 +24,9 @@ import org.apache.log4j.Logger;
  */
 public class Database {
 
-	public Connection conn = null;
+	public Connection dinamicConn = null; //reunion database
+	
+	public Connection staticConn = null; //reunionStatic database
 	
 	private PreparedStatement statement;
 
@@ -32,36 +34,68 @@ public class Database {
 		
 	}
 
-	public void connect() throws Exception {
-		Parser databaseConfigParser = new Parser();
-		databaseConfigParser.Parse("config/Database.dta");
+	public void connectDinamic() throws Exception {
+		Parser dinamicDatabaseConfigParser = new Parser();
+		dinamicDatabaseConfigParser.Parse("config/Database.dta");
 		String[] requiredMembers = { "address", "database", "username",
 				"password" };
-		ParsedItem databaseConfig = databaseConfigParser.getItem("Database");
+		ParsedItem dinamicDatabaseConfig = dinamicDatabaseConfigParser.getItem("Database");
 
-		if (databaseConfig == null
-				|| !databaseConfig.checkMembers(requiredMembers)) {
+		if (dinamicDatabaseConfig == null
+				|| !dinamicDatabaseConfig.checkMembers(requiredMembers)) {
 			Logger.getLogger(Database.class).info("Error loading database config");
 			return;
 		}
-		DatabaseUtils.getInstance().setDatabase(this); // link utils to
+		DatabaseUtils.getDinamicInstance().setDinamicDatabase(this); // link utils to
 															// this database
-		String userName = databaseConfig.getMemberValue("username");
-		String password = databaseConfig.getMemberValue("password");
-		String url = "jdbc:mysql://" + databaseConfig.getMemberValue("address")
-				+ "/" + databaseConfig.getMemberValue("database")
+		String userName = dinamicDatabaseConfig.getMemberValue("username");
+		String password = dinamicDatabaseConfig.getMemberValue("password");
+		String url = "jdbc:mysql://" + dinamicDatabaseConfig.getMemberValue("address")
+				+ "/" + dinamicDatabaseConfig.getMemberValue("database")
 				+ "?autoReconnect=true";
 		Driver driver = (Driver)ClassFactory.create("com.mysql.jdbc.Driver");
 		
-		conn = DriverManager.getConnection(url, userName, password);
-		Logger.getLogger(Database.class).info(getClass().getSimpleName() + " connection established");
+		dinamicConn = DriverManager.getConnection(url, userName, password);
+		Logger.getLogger(Database.class).info("Dinamic "+getClass().getSimpleName() + " connection established");
+
+	}
+	
+	public void connectStatic() throws Exception {
+		Parser staticDatabaseConfigParser = new Parser();
+		staticDatabaseConfigParser.Parse("config/Database_static.dta");
+		String[] requiredMembers = { "address", "database", "username",
+				"password" };
+		ParsedItem staticDatabaseConfig = staticDatabaseConfigParser.getItem("Database");
+
+		if (staticDatabaseConfig == null
+				|| !staticDatabaseConfig.checkMembers(requiredMembers)) {
+			Logger.getLogger(Database.class).info("Error loading database config");
+			return;
+		}
+		DatabaseUtils.getStaticInstance().setStaticDatabase(this); // link utils to
+															// this database
+		String userName = staticDatabaseConfig.getMemberValue("username");
+		String password = staticDatabaseConfig.getMemberValue("password");
+		String url = "jdbc:mysql://" + staticDatabaseConfig.getMemberValue("address")
+				+ "/" + staticDatabaseConfig.getMemberValue("database")
+				+ "?autoReconnect=true";
+		Driver driver = (Driver)ClassFactory.create("com.mysql.jdbc.Driver");
+		
+		staticConn = DriverManager.getConnection(url, userName, password);
+		Logger.getLogger(Database.class).info("Static "+getClass().getSimpleName() + " connection established");
 
 	}
 
 	public void start(){
 
 		try {
-			connect();
+			connectDinamic();
+		} catch (Exception e) {
+			Logger.getLogger(this.getClass()).warn("Exception",e);
+		}
+		
+		try {
+			connectStatic();
 		} catch (Exception e) {
 			Logger.getLogger(this.getClass()).warn("Exception",e);
 		}
@@ -70,9 +104,17 @@ public class Database {
 
 	public void stop() {
 
-		if (conn != null) {
+		if (dinamicConn != null) {
 			try {
-				conn.close();
+				dinamicConn.close();
+				Logger.getLogger(Database.class).info(getClass().getName()
+						+ " connection terminated");
+			} catch (Exception e) { /* ignore close errors */
+			}
+		}
+		if (staticConn != null) {
+			try {
+				staticConn.close();
 				Logger.getLogger(Database.class).info(getClass().getName()
 						+ " connection terminated");
 			} catch (Exception e) { /* ignore close errors */

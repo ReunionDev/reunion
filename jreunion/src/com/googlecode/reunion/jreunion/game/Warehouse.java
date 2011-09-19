@@ -58,7 +58,7 @@ public class Warehouse extends Npc {
 				player.setLime(player.getLime()-gems);			
 			}
 			
-			DatabaseUtils.getInstance().saveItem(stashItem.getItem());
+			DatabaseUtils.getDinamicInstance().saveItem(stashItem.getItem());
 			if (gems >= 0) {
 				packetData = "stash_to " + stashItem.getPos() + " "
 						+ stashItem.getItem().getType() + " "

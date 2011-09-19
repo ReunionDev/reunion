@@ -19,7 +19,10 @@ import com.googlecode.reunion.jreunion.game.Npc;
 import com.googlecode.reunion.jreunion.game.NpcSpawn;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Position;
+import com.googlecode.reunion.jreunion.game.Quest;
 import com.googlecode.reunion.jreunion.game.Skill;
+import com.googlecode.reunion.jreunion.game.quests.objective.Objective;
+import com.googlecode.reunion.jreunion.game.quests.reward.Reward;
 import com.googlecode.reunion.jreunion.game.skills.GroupedSkill;
 import com.googlecode.reunion.jreunion.server.Area.Field;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
@@ -109,11 +112,11 @@ public class MessageParser {
 				Area area = map.getArea();
 				
 				String s1 = ""
-						+ area.get(p.getPosition().getX() / 10 - 300, p.getPosition().getY() / 10,Field.PLAYER);
+						+ area.get(p.getPosition().getX() / 10, p.getPosition().getY() / 10,Field.PLAYER);
 				String s2 = ""
-						+ area.get(p.getPosition().getX() / 10 - 300, p.getPosition().getY() / 10,Field.MOB);
+						+ area.get(p.getPosition().getX() / 10, p.getPosition().getY() / 10,Field.MOB);
 				String s3 = ""
-						+ area.get(p.getPosition().getX() / 10 - 300, p.getPosition().getY() / 10,Field.PVP);
+						+ area.get(p.getPosition().getX() / 10, p.getPosition().getY() / 10,Field.PVP);
 
 				com.serverSay("(" + p.getPosition().getX() / 10 + "," + p.getPosition().getY() / 10
 						+ ")" + "collision test: " + s1 + " " + s2 + " " + s3);
@@ -235,13 +238,13 @@ public class MessageParser {
 				
 			}
 		}  else if (words[0].equals("@goto")) {
-			if (words[1].equals("pos")) {
+			if (words[1].equals("pos")) { //@goto pos [X] [Y]
 				Position position = player.getPosition().clone();
 				position.setX(Integer.parseInt(words[2]));
 				position.setY(Integer.parseInt(words[3]));
 				com.GoToPos(player, position);
 			}
-			if (words[1].equals("char")) {
+			if (words[1].equals("char")) { //@goto char
 				com.GoToChar(player, words[2]);
 			}
 			
@@ -390,6 +393,38 @@ public class MessageParser {
 					if(player.getHp() <= 0)
 						break;
 				}
+			}
+			else if (words[0].equals("@quest")) {
+				if(words.length == 2){
+					try{
+						int questId = Integer.parseInt(words[1]);
+						Quest quest = player.getQuest();
+					
+						if(quest != null)
+							quest.cancelQuest(player);
+					
+						//quest = new Quest(questId); //used only to send the quest id packet
+						quest = QuestFactory.loadQuest(questId); //load full quest from database
+						
+						player.setQuest(quest);	
+						
+						player.getClient().sendPacket(Type.QT, "get "+quest.getID());
+						
+						player.getClient().sendPacket(Type.SAY, "Quest: "+quest.getID()+" "+quest.getDescrition()+" ("+quest.getType().byValue()+")");		
+						for(Objective objective: quest.getObjectiveList()){
+							player.getClient().sendPacket(Type.SAY, "Objective: [ID] "+objective.getId()+" [QT] "+objective.getAmmount()+" [TYPE] "+objective.getType().byValue());
+						}
+						for(Reward reward: quest.getRewardList()){
+							player.getClient().sendPacket(Type.SAY, "Reward: [ID] "+reward.getId()+" [QT] "+reward.getAmmount()+" [TYPE] "+reward.getType().byValue());
+						}
+					
+					} catch (Exception e) {
+						client.sendPacket(Type.SAY, "@quest failed (ID:"+words[1]+")");
+					}
+				}else{
+					player.getClient().sendPacket(Type.SAY, "Correct usage: @quest [questID]");
+				}
+				
 			}
 		}
 

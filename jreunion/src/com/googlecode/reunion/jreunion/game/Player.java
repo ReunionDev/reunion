@@ -693,13 +693,13 @@ public abstract class Player extends LivingObject implements EventListener {
 	public synchronized void save() {
 
 		Logger.getLogger(Player.class).info("Player " + getName() + " saving...\n");
-		DatabaseUtils.getInstance().saveSkills(this);
-		DatabaseUtils.getInstance().saveInventory(this);
-		DatabaseUtils.getInstance().saveCharacter(this);
-		DatabaseUtils.getInstance().saveEquipment(this);
-		DatabaseUtils.getInstance().saveStash(client);
-		DatabaseUtils.getInstance().saveExchange(this);
-		DatabaseUtils.getInstance().saveQuickSlot(this);
+		DatabaseUtils.getDinamicInstance().saveSkills(this);
+		DatabaseUtils.getDinamicInstance().saveInventory(this);
+		DatabaseUtils.getDinamicInstance().saveCharacter(this);
+		DatabaseUtils.getDinamicInstance().saveEquipment(this);
+		DatabaseUtils.getDinamicInstance().saveStash(client);
+		DatabaseUtils.getDinamicInstance().saveExchange(this);
+		DatabaseUtils.getDinamicInstance().saveQuickSlot(this);
 		
 	}
 
@@ -1020,7 +1020,7 @@ public abstract class Player extends LivingObject implements EventListener {
 			setLevel(getLevel() + curr);
 			client.sendPacket(Type.STATUS, id, getLevel(), max);
 			
-			DatabaseUtils.getInstance()
+			DatabaseUtils.getDinamicInstance()
 					.updateCharStatus(this, id, getLevel());
 			
 			client.sendPacket(Type.LEVELUP, this);
@@ -1033,14 +1033,14 @@ public abstract class Player extends LivingObject implements EventListener {
 			setLime(getLime() + curr);
 			client.sendPacket(Type.STATUS, id, getLime(), max);
 			
-			DatabaseUtils.getInstance().updateCharStatus(this, id, getLime());
+			DatabaseUtils.getDinamicInstance().updateCharStatus(this, id, getLime());
 			break;
 		}
 		case 11: { // Player Total Exp Status
 			setTotalExp(getTotalExp() + curr);
 			client.sendPacket(Type.STATUS, id, getTotalExp(), max);
 	
-			DatabaseUtils.getInstance().updateCharStatus(this, id,
+			DatabaseUtils.getDinamicInstance().updateCharStatus(this, id,
 					getTotalExp());
 			break;
 		}
@@ -1056,14 +1056,14 @@ public abstract class Player extends LivingObject implements EventListener {
 				loadFromReference(getLevel());
 				client.sendPacket(Type.STATUS, id, getLevelUpExp(), max);
 						
-				DatabaseUtils.getInstance().updateCharStatus(this, id,
+				DatabaseUtils.getDinamicInstance().updateCharStatus(this, id,
 						getLevelUpExp());
 			} else {
 				setLevelUpExp(curr);
 				
 				client.sendPacket(Type.STATUS, id, getLevelUpExp(), max);
 						
-				DatabaseUtils.getInstance().updateCharStatus(this, id,
+				DatabaseUtils.getDinamicInstance().updateCharStatus(this, id,
 						getLevelUpExp());
 			}
 			break;
@@ -1074,7 +1074,7 @@ public abstract class Player extends LivingObject implements EventListener {
 			
 			
 			client.sendPacket(Type.STATUS, id, getStatusPoints(), max);
-			DatabaseUtils.getInstance().updateCharStatus(this, id,
+			DatabaseUtils.getDinamicInstance().updateCharStatus(this, id,
 					getStatusPoints());
 			break;
 		}
@@ -1085,7 +1085,7 @@ public abstract class Player extends LivingObject implements EventListener {
 			setStrength(getStrength() + curr);			
 			client.sendPacket(Type.STATUS, id, getStrength(), max);
 					
-			DatabaseUtils.getInstance().updateCharStatus(this, id, getStrength());
+			DatabaseUtils.getDinamicInstance().updateCharStatus(this, id, getStrength());
 
 			updateStatus(0, getHp(), getMaxHp() + (getStrength() / 50) + 1);
 			updateStatus(2, getStamina(), getMaxStamina() + (getStrength() / 60) + 1);
@@ -1100,7 +1100,7 @@ public abstract class Player extends LivingObject implements EventListener {
 			
 			client.sendPacket(Type.STATUS, id, getWisdom(), max);
 					
-			DatabaseUtils.getInstance().updateCharStatus(this, id, getWisdom());
+			DatabaseUtils.getDinamicInstance().updateCharStatus(this, id, getWisdom());
 
 			updateStatus(1, getMana(), getMaxMana() + (getWisdom() / 50) + 2);
 			updateStatus(3, getElectricity(), getMaxElectricity() + (getWisdom() / 50) + 1);
@@ -1115,7 +1115,7 @@ public abstract class Player extends LivingObject implements EventListener {
 
 			client.sendPacket(Type.STATUS, id, getDexterity(), max);
 					
-			DatabaseUtils.getInstance().updateCharStatus(this, id, getDexterity());
+			DatabaseUtils.getDinamicInstance().updateCharStatus(this, id, getDexterity());
 
 			updateStatus(1, getMana(), getMaxMana() + (getDexterity() / 50) + 1);
 			updateStatus(3, getElectricity(), getMaxElectricity() + (getDexterity() / 50) + 2);
@@ -1130,7 +1130,7 @@ public abstract class Player extends LivingObject implements EventListener {
 			
 			client.sendPacket(Type.STATUS, id, getConstitution(), max);
 					
-			DatabaseUtils.getInstance().updateCharStatus(this, id, getConstitution());
+			DatabaseUtils.getDinamicInstance().updateCharStatus(this, id, getConstitution());
 
 			updateStatus(0, getHp(), getMaxHp() + (getConstitution() / 50) + 2);
 			updateStatus(2, getStamina(), getMaxStamina() + (getConstitution() / 50) + 1);
@@ -1145,7 +1145,7 @@ public abstract class Player extends LivingObject implements EventListener {
 						
 			client.sendPacket(Type.STATUS, id, getLeadership(), max);
 					
-			DatabaseUtils.getInstance().updateCharStatus(this, id, getLeadership());
+			DatabaseUtils.getDinamicInstance().updateCharStatus(this, id, getLeadership());
 
 			if (getLeadership() % 2 == 0) {
 				updateStatus(0, getHp(), getMaxHp() + 1);
@@ -1161,7 +1161,7 @@ public abstract class Player extends LivingObject implements EventListener {
 	
 			client.sendPacket(Type.STATUS, id, curr, max);
 					
-			DatabaseUtils.getInstance().updateCharStatus(this, id,
+			DatabaseUtils.getDinamicInstance().updateCharStatus(this, id,
 					getPenaltyPoints());
 			break;
 		}

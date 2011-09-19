@@ -70,7 +70,7 @@ public class Command {
 			client.setPassword(password);
 		}
 		
-		int accountId = DatabaseUtils.getInstance().Auth(username, password);
+		int accountId = DatabaseUtils.getDinamicInstance().Auth(username, password);
 		if (accountId == -1) {
 			Logger.getLogger(Command.class).info("Invalid Login");
 			client.sendPacket(Type.FAIL,"Username and password combination is invalid");
@@ -101,14 +101,14 @@ public class Command {
 	public void createChar(Client client, int slotNumber, String charName,
 			Race race, Sex sex, int hair, int str, int intel, int dex, int con,
 			int lea) {
-		if (DatabaseUtils.getInstance().getCharNameFree(charName)) {
-			DatabaseUtils.getInstance().createChar(client, slotNumber,
+		if (DatabaseUtils.getDinamicInstance().getCharNameFree(charName)) {
+			DatabaseUtils.getDinamicInstance().createChar(client, slotNumber,
 					charName, race, sex, hair, str, intel, dex, con, lea);
 		}
 	}
 
 	public void delChar(int slotNumber, int accountId) {
-		DatabaseUtils.getInstance().delChar(slotNumber, accountId);
+		DatabaseUtils.getDinamicInstance().delChar(slotNumber, accountId);
 	}
 	
 	public RoamingItem dropItem(Position position, Item item) {
@@ -116,7 +116,7 @@ public class Command {
 		RoamingItem roamingItem = new RoamingItem(item);
 		roamingItem.setPosition(position);
 		
-		DatabaseUtils.getInstance().saveItem(roamingItem);
+		DatabaseUtils.getDinamicInstance().saveItem(roamingItem);
 		
 		LocalMap map = position.getLocalMap();
 		
@@ -176,14 +176,14 @@ public class Command {
 
 	public Player loginChar(int slotNumber, int accountId, Client client) {
 		
-		Player player = DatabaseUtils.getInstance().loadChar(slotNumber,
+		Player player = DatabaseUtils.getDinamicInstance().loadChar(slotNumber,
 				accountId, client);
 		
-		Equipment equipment = DatabaseUtils.getInstance().loadEquipment(player);
+		Equipment equipment = DatabaseUtils.getDinamicInstance().loadEquipment(player);
 		
 		world.getSkillManager().loadSkills(player);
-		DatabaseUtils.getInstance().loadSkills(player);	
-		player.loadEquipment(DatabaseUtils.getInstance().getSavedPosition(player).getLocalMap());
+		DatabaseUtils.getDinamicInstance().loadSkills(player);	
+		player.loadEquipment(DatabaseUtils.getDinamicInstance().getSavedPosition(player).getLocalMap());
 		player.setDefense();
 
 		serverSay(player.getName() + " is logging in (ID: "	+ player.getPlayerId() + ")\n");
@@ -229,7 +229,7 @@ public class Command {
 
 	void sendCharList(Client client) {
 
-		client.sendData(DatabaseUtils.getInstance().getCharList(client));
+		client.sendData(DatabaseUtils.getDinamicInstance().getCharList(client));
 
 		client.setState(Client.State.CHAR_LIST);
 		return;
@@ -376,7 +376,7 @@ public class Command {
 			((Usable)item).use(player, slot);
 			
 			player.getPosition().getLocalMap().removeEntity(item);			
-			DatabaseUtils.getInstance().deleteItem(item);
+			DatabaseUtils.getDinamicInstance().deleteItem(item);
 			return true;
 			
 		}

@@ -37,7 +37,7 @@ public class Trader extends Npc {
 		while (exchangeIter.hasNext()) {
 			ExchangeItem exchangeItem = exchangeIter.next();
 			Item item = exchangeItem.getItem();
-			DatabaseUtils.getInstance().deleteItem(item);
+			DatabaseUtils.getDinamicInstance().deleteItem(item);
 		}
 
 		player.getExchange().clearExchange();
@@ -103,7 +103,7 @@ public class Trader extends Npc {
 				return;
 			}
 
-			DatabaseUtils.getInstance().deleteItem(oldItem);
+			DatabaseUtils.getDinamicInstance().deleteItem(oldItem);
 			ExchangeItem newExchangeItem = new ExchangeItem(newItem, 0, 0);
 
 			player.getExchange().clearExchange();

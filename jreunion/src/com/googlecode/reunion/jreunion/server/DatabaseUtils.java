@@ -1,22 +1,17 @@
 package com.googlecode.reunion.jreunion.server;
 
-import java.net.Socket;
 import java.nio.channels.SocketChannel;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
+import java.util.Random;
 import java.util.Vector;
 
 import org.apache.log4j.Logger;
 
 import com.googlecode.reunion.jcommon.ParsedItem;
-import com.googlecode.reunion.jreunion.game.Entity;
 import com.googlecode.reunion.jreunion.game.Equipment;
 import com.googlecode.reunion.jreunion.game.Equipment.Slot;
 import com.googlecode.reunion.jreunion.game.ExchangeItem;
@@ -25,6 +20,7 @@ import com.googlecode.reunion.jreunion.game.Item;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Player.Race;
 import com.googlecode.reunion.jreunion.game.Player.Sex;
+import com.googlecode.reunion.jreunion.game.Quest;
 import com.googlecode.reunion.jreunion.game.items.equipment.Armor;
 import com.googlecode.reunion.jreunion.game.items.equipment.Axe;
 import com.googlecode.reunion.jreunion.game.items.equipment.GunWeapon;
@@ -33,15 +29,17 @@ import com.googlecode.reunion.jreunion.game.items.equipment.StaffWeapon;
 import com.googlecode.reunion.jreunion.game.items.equipment.Sword;
 import com.googlecode.reunion.jreunion.game.items.equipment.Weapon;
 import com.googlecode.reunion.jreunion.game.items.potion.Potion;
+import com.googlecode.reunion.jreunion.game.quests.objective.Objective;
+import com.googlecode.reunion.jreunion.game.quests.objective.type.ObjectiveType;
+import com.googlecode.reunion.jreunion.game.quests.reward.Reward;
+import com.googlecode.reunion.jreunion.game.quests.reward.type.RewardType;
+import com.googlecode.reunion.jreunion.game.quests.type.QuestType;
 import com.googlecode.reunion.jreunion.game.Position;
 import com.googlecode.reunion.jreunion.game.QuickSlotItem;
 import com.googlecode.reunion.jreunion.game.RoamingItem;
 import com.googlecode.reunion.jreunion.game.Skill;
 import com.googlecode.reunion.jreunion.game.StashItem;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
-import com.googlecode.reunion.jreunion.server.database.DatabaseAction;
-import com.googlecode.reunion.jreunion.server.database.SaveInventory;
-import com.mysql.jdbc.MySQLConnection;
 
 
 /**
@@ -52,49 +50,78 @@ public class DatabaseUtils extends Service {
 	
 	private DatabaseUtils() {
 		super();
-		database = null;
+		dinamicDatabase = null;
+		staticDatabase = null;
 	}
 	
-	private Database database;
+	private Database dinamicDatabase;
 	
-	public boolean checkDatabase() {
-		if (database != null)
+	private Database staticDatabase;
+	
+	public boolean checkDinamicDatabase() {
+		if (dinamicDatabase != null)
 			return true;
 		else
 			return false;
 	}
+	
+	public boolean checkStaticDatabase() {
+		if (staticDatabase != null)
+			return true;
+		else
+			return false;
+	}
+	
 	
 	/**
 	 * @param database
 	 *            The database to set.
 	 * @uml.property name="database"
 	 */
-	public void setDatabase(Database database) {
-		this.database = database;
+	public void setDinamicDatabase(Database dinamicDatabase) {
+		this.dinamicDatabase = dinamicDatabase;
 	}
 	
-	private static DatabaseUtils _instance = null;
+	public void setStaticDatabase(Database staticDatabase) {
+		this.staticDatabase = staticDatabase;
+	}
+	
+	private static DatabaseUtils _dinamicInstance = null;
+	
+	private static DatabaseUtils _staticInstance = null;
 
-	private synchronized static void createInstance() {
-		if (_instance == null) {
-			_instance = new DatabaseUtils();
+	private synchronized static void createDinamicInstance() {
+		if (_dinamicInstance == null) {
+			_dinamicInstance = new DatabaseUtils();
 		}
 	}
 	
-	public static DatabaseUtils getInstance() {
-		if (_instance == null)
-			createInstance();
-		return _instance;
+	private synchronized static void createStaticInstance() {
+		if (_staticInstance == null) {
+			_staticInstance = new DatabaseUtils();
+		}
+	}
+	
+	public static DatabaseUtils getDinamicInstance() {
+		if (_dinamicInstance == null)
+			createDinamicInstance();
+		return _dinamicInstance;
+	}
+	
+	public static DatabaseUtils getStaticInstance() {
+		if (_staticInstance == null)
+			createStaticInstance();
+		return _staticInstance;
 	}
 	
 	public int Auth(String username, String password) {
-		if (!checkDatabase())
+		if (!checkDinamicDatabase())
 			return -1;
 		
 		Statement stmt;
 		try {
 			
-			stmt = database.conn.createStatement();
+			stmt = dinamicDatabase.dinamicConn.createStatement();
 			ResultSet rs = stmt
 			.executeQuery("SELECT id FROM accounts WHERE username='"
 					+ username + "' and password='" + password + "'");
@@ -110,11 +137,11 @@ public class DatabaseUtils extends Service {
 	}
 	
 	public Position getSavedPosition(Player player){
-		if (!checkDatabase())
+		if (!checkDinamicDatabase())
 			return null;
 		Position position = null;
 		try {
-			Statement stmt = database.conn.createStatement();
+			Statement stmt = dinamicDatabase.dinamicConn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT `x`, `y`, `z`, `mapId` FROM `characters` WHERE `characters`.`id`="+player.getPlayerId()+" AND `mapId` IS NOT NULL AND `x` IS NOT NULL AND `y` IS NOT NULL AND `z` IS NOT NULL");
 			
 			if(rs.next()){
@@ -131,10 +158,10 @@ public class DatabaseUtils extends Service {
 	}
 	
 	public void setSavedPosition(Player player){
-		if (!checkDatabase())
+		if (!checkDinamicDatabase())
 			return;
 		try {
-			Statement stmt = database.conn.createStatement();
+			Statement stmt = dinamicDatabase.dinamicConn.createStatement();
 			Position position = player.getPosition();
 			if(position!=null&&position.getMap()!=null)
 				stmt.execute("UPDATE `characters` SET `x`="+position.getX()+", `y`="+position.getY()+", `z`="+position.getZ()+", `mapId`="+position.getMap().getId()+" WHERE `characters`.`id`="+player.getPlayerId());
@@ -145,14 +172,14 @@ public class DatabaseUtils extends Service {
 	}
 	
 	public String getCharList(Client client) {
-		if (!checkDatabase())
+		if (!checkDinamicDatabase())
 			return null;
 		
 		int accountId = client.getAccountId();
 		String charlist ="";
 		int chars = 0;
 		try {
-			Statement stmt = database.conn.createStatement();
+			Statement stmt = dinamicDatabase.dinamicConn.createStatement();
 			
 			ResultSet rs = stmt.executeQuery("SELECT * FROM `characters`,`slots` WHERE `characters`.`accountid`="+accountId+" AND `characters`.`id`=`slots`.`charid` ORDER BY `slot` ASC");
 			while (rs.next()) {
@@ -260,11 +287,11 @@ public class DatabaseUtils extends Service {
 	
 	public Equipment loadEquipment(Equipment equipment, int charid) {
 		
-		if (!checkDatabase())
+		if (!checkDinamicDatabase())
 			return null;
 		Statement stmt;
 		try {
-			stmt = database.conn.createStatement();
+			stmt = dinamicDatabase.dinamicConn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM equipment WHERE charid="+ charid + ";");
 			while(rs.next()) 
 			{
@@ -289,11 +316,11 @@ public class DatabaseUtils extends Service {
 	
 	public Player loadCharStatus(Client client, int charId){
 		Player player = null;
-		if (!checkDatabase())
+		if (!checkDinamicDatabase())
 			return null;
 		Statement stmt;		
 		try {
-			stmt = database.conn.createStatement();
+			stmt = dinamicDatabase.dinamicConn.createStatement();
 			ResultSet rs = stmt
 			.executeQuery("SELECT C.*,A.level AS userlevel FROM characters AS C, accounts AS A WHERE C.accountid=A.id AND C.id="
 					+ charId + ";");
@@ -337,13 +364,13 @@ public class DatabaseUtils extends Service {
 		if(client == null)
 			return;
 		
-		if (!checkDatabase())
+		if (!checkDinamicDatabase())
 			return;
 			
 		try {
 			
 			int charId = player.getPlayerId();
-			Statement stmt = database.conn.createStatement();
+			Statement stmt = dinamicDatabase.dinamicConn.createStatement();
 			
 			if(charId!=-1){				
 				stmt.execute("DELETE FROM characters WHERE id="+charId+";");				
@@ -388,7 +415,7 @@ public class DatabaseUtils extends Service {
 	
 	public void updateCharStatus(Player player, int id, int value)
 	{
-		if (!checkDatabase())
+		if (!checkDinamicDatabase())
 			return;
 
 		String status = "";
@@ -410,7 +437,7 @@ public class DatabaseUtils extends Service {
 					
 		Statement stmt;
 		try {
-			stmt  = database.conn.createStatement();
+			stmt  = dinamicDatabase.dinamicConn.createStatement();
 			
 			stmt.execute("UPDATE characters SET "+status+" = '"+value+"' WHERE id='"+player.getPlayerId()+"';");
 
@@ -424,11 +451,11 @@ public class DatabaseUtils extends Service {
 	}
 			
 	public boolean getCharNameFree(String charName) {
-		if (!checkDatabase())
+		if (!checkDinamicDatabase())
 			return false;
 		Statement stmt;
 		try {
-			stmt = database.conn.createStatement();
+			stmt = dinamicDatabase.dinamicConn.createStatement();
 			ResultSet rs = stmt
 			.executeQuery("SELECT id FROM characters WHERE name='"
 					+ charName + "';");
@@ -448,12 +475,12 @@ public class DatabaseUtils extends Service {
 	public void createChar(Client client, int slot, String charName,
 			Race race, Sex sex, int hairStyle, int str, int wis, int dex, int con,
 			int lead) {
-		if (!checkDatabase())
+		if (!checkDinamicDatabase())
 			return;
 		Statement stmt;
 		try {
 						
-			stmt = database.conn.createStatement();			
+			stmt = dinamicDatabase.dinamicConn.createStatement();			
 								
 			Player player = Player.createPlayer(client, race);
 						
@@ -528,11 +555,11 @@ public class DatabaseUtils extends Service {
 	}
 	
 	public void delChar(int slotNumber, int accountId) {
-		if (!checkDatabase())
+		if (!checkDinamicDatabase())
 			return;
 		Statement stmt;
 		try {
-			stmt = database.conn.createStatement();
+			stmt = dinamicDatabase.dinamicConn.createStatement();
 			stmt
 			.execute("DELETE FROM slots WHERE slot = "
 					+ slotNumber
@@ -549,12 +576,12 @@ public class DatabaseUtils extends Service {
 	public Player loadChar(int slot, int accountId, Client client) {
 		
 		Player player=null;
-		if (!checkDatabase())
+		if (!checkDinamicDatabase())
 			return null;
 		int characterId = -1;
 		Statement stmt;
 		try {
-			stmt = database.conn.createStatement();
+			stmt = dinamicDatabase.dinamicConn.createStatement();
 			ResultSet rs = stmt
 			.executeQuery("(SELECT charid FROM slots WHERE accountid ="
 					+ accountId
@@ -578,11 +605,11 @@ public class DatabaseUtils extends Service {
 	}
 	
 	public Player loadInventory(Player player){
-		if (!checkDatabase())
+		if (!checkDinamicDatabase())
 			return null;
 		Statement invStmt;
 		try {
-			invStmt = database.conn.createStatement();
+			invStmt = dinamicDatabase.dinamicConn.createStatement();
 			
 			ResultSet invTable = invStmt.executeQuery("SELECT * FROM inventory WHERE charid="+player.getPlayerId()+";");
 			
@@ -604,10 +631,10 @@ public class DatabaseUtils extends Service {
 	}
 		
 	public void saveInventory(Player player){
-		if (!checkDatabase())
+		if (!checkDinamicDatabase())
 			return;
 		
-		//SaveInventory saveInventory = new SaveInventory(database.conn);
+		//SaveInventory saveInventory = new SaveInventory(dinamicDatabase.dinamicConn);
 		/*
 		try {
 			saveInventory.getDeleteStatement().setInt(1, player.getEntityId());
@@ -619,7 +646,7 @@ public class DatabaseUtils extends Service {
 	
 		Statement stmt;
 		try {
-			stmt = database.conn.createStatement();
+			stmt = dinamicDatabase.dinamicConn.createStatement();
 			stmt.execute("DELETE FROM inventory WHERE charid="+player.getPlayerId()+";");
 		
 			String query = "INSERT INTO inventory (charid, itemid, tab, x, y) VALUES ";
@@ -663,7 +690,7 @@ public class DatabaseUtils extends Service {
 	public List<Integer> getUsedIds()
 	{
 		List<Integer> idList = new Vector<Integer>();
-		if (!checkDatabase())
+		if (!checkDinamicDatabase())
 		{
 			
 			return idList;
@@ -671,7 +698,7 @@ public class DatabaseUtils extends Service {
 		}
 		Statement stmt;
 		try {
-			stmt  = database.conn.createStatement();
+			stmt  = dinamicDatabase.dinamicConn.createStatement();
 			
 			ResultSet rs = stmt.executeQuery("SELECT id FROM characters WHERE 1;");
 			
@@ -699,11 +726,11 @@ public class DatabaseUtils extends Service {
 	}
 	public int getItemType(int uniqueid)
 	{
-		if (!checkDatabase())return -1;
+		if (!checkDinamicDatabase())return -1;
 				
 		Statement stmt;
 		try {
-			stmt  = database.conn.createStatement();
+			stmt  = dinamicDatabase.dinamicConn.createStatement();
 			
 			ResultSet rs = stmt.executeQuery("SELECT type FROM items WHERE id='"+uniqueid+"';");
 			
@@ -725,11 +752,11 @@ public class DatabaseUtils extends Service {
 	public Item loadItem(int itemId )
 	{
 		if (itemId==-1)return null;
-		if (!checkDatabase())return null;
+		if (!checkDinamicDatabase())return null;
 		
 		Statement stmt;
 		try {
-			stmt  = database.conn.createStatement();
+			stmt  = dinamicDatabase.dinamicConn.createStatement();
 			
 			ResultSet rs = stmt.executeQuery("SELECT * FROM items WHERE id='"+itemId+"';");
 			
@@ -768,11 +795,11 @@ public class DatabaseUtils extends Service {
 	}
 	
 	public boolean deleteRoamingItem(Item item){
-		if (!checkDatabase())
+		if (!checkDinamicDatabase())
 			return false ;
 		Statement stmt;
 		try {
-			stmt  = database.conn.createStatement();		
+			stmt  = dinamicDatabase.dinamicConn.createStatement();		
 			return stmt.execute("DELETE FROM `roaming` WHERE `itemid`="+item.getItemId()+";");
 			
 		}catch (Exception e) {
@@ -784,11 +811,11 @@ public class DatabaseUtils extends Service {
 	public List<RoamingItem> loadRoamingItems(LocalMap map){
 		
 		List<RoamingItem> items = new Vector<RoamingItem>();
-		synchronized(database) {
+		synchronized(dinamicDatabase) {
 		
 			Statement stmt;
 			try {
-				stmt = database.conn.createStatement();
+				stmt = dinamicDatabase.dinamicConn.createStatement();
 				
 				ResultSet rs = stmt.executeQuery("SELECT * FROM `roaming` WHERE `mapid` = "+map.getId()+";");
 				
@@ -817,7 +844,7 @@ public class DatabaseUtils extends Service {
 	}
 	
 	public void saveItem(RoamingItem roamingItem){
-		if (!checkDatabase())
+		if (!checkDinamicDatabase())
 			return ;
 		Item item = roamingItem.getItem();
 		Position position = roamingItem.getPosition();
@@ -828,7 +855,7 @@ public class DatabaseUtils extends Service {
 		try {
 				
 			deleteRoamingItem(item);
-			stmt  = database.conn.createStatement();
+			stmt  = dinamicDatabase.dinamicConn.createStatement();
 			String q = 
 			"INSERT INTO `roaming` (`itemid`,`mapid`,`x`,`y`,`z`,`rotation`) VALUES ("+
 			itemId+","+
@@ -845,12 +872,12 @@ public class DatabaseUtils extends Service {
 		}
 	}
 	public synchronized void saveItem(Item item){
-		if (!checkDatabase())
+		if (!checkDinamicDatabase())
 			return ;
 			
 		Statement stmt;
 		try {
-			stmt  = database.conn.createStatement();
+			stmt  = dinamicDatabase.dinamicConn.createStatement();
 			
 			int itemId = item.getItemId();
 			if(itemId!=-1){
@@ -880,12 +907,12 @@ public class DatabaseUtils extends Service {
 	public void deleteItem(Item item)
 	{
 		if (item==null)return;
-		if (!checkDatabase())return ;
+		if (!checkDinamicDatabase())return ;
 		
 		Statement stmt;
 		
 		try {
-			stmt  = database.conn.createStatement();
+			stmt  = dinamicDatabase.dinamicConn.createStatement();
 			
 			stmt.execute("DELETE FROM items WHERE id='"+item.getItemId()+"';");
 				
@@ -900,13 +927,13 @@ public class DatabaseUtils extends Service {
 	
 	public  void saveSkills(Player player) {
 		
-		if (!checkDatabase())
+		if (!checkDinamicDatabase())
 			return;
 		
 		Statement stmt;
 		
 		try {
-			stmt = database.conn.createStatement();
+			stmt = dinamicDatabase.dinamicConn.createStatement();
 			int playerId = player.getPlayerId();
 			stmt.execute("DELETE FROM `skills` WHERE `charid`="+playerId+";");
 
@@ -933,11 +960,11 @@ public class DatabaseUtils extends Service {
 	}
 	
 	public  void loadSkills(Player player) {
-		if (!checkDatabase())
+		if (!checkDinamicDatabase())
 			return;
 		Statement stmt;
 		try {
-			stmt = database.conn.createStatement();
+			stmt = dinamicDatabase.dinamicConn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT id,level FROM skills WHERE charid="+player.getPlayerId()+";");			
 			while (rs.next()) {
 				int id = rs.getInt("id");
@@ -955,13 +982,13 @@ public class DatabaseUtils extends Service {
 	}
 	
 	public void saveEquipment(Player player){
-		if (!checkDatabase())
+		if (!checkDinamicDatabase())
 			return;
 		if (player.getEquipment()==null)return;
 		
 		Statement stmt;
 		try {
-			stmt = database.conn.createStatement();
+			stmt = dinamicDatabase.dinamicConn.createStatement();
 			stmt.execute("DELETE FROM equipment WHERE charid="+player.getPlayerId()+";");
 			Equipment eq = player.getEquipment();
 			
@@ -988,11 +1015,11 @@ public class DatabaseUtils extends Service {
 	
 	public void loadStash(Client client){
 				
-		if (!checkDatabase())
+		if (!checkDinamicDatabase())
 			return;
 
 		try {
-			Statement invStmt = database.conn.createStatement();
+			Statement invStmt = dinamicDatabase.dinamicConn.createStatement();
 			
 			ResultSet stashTable = invStmt.executeQuery("SELECT * FROM warehouse WHERE accountid="+client.getAccountId()+";");
 			client.getPlayer().getStash().clearStash();
@@ -1022,11 +1049,11 @@ public class DatabaseUtils extends Service {
 	
 	public void saveStash(Client client){
 		
-		if (!checkDatabase())
+		if (!checkDinamicDatabase())
 			return;
 		
 		try {
-			Statement stmt = database.conn.createStatement();
+			Statement stmt = dinamicDatabase.dinamicConn.createStatement();
 			stmt.execute("DELETE FROM warehouse WHERE accountid="+client.getAccountId()+";");
 			Iterator<StashItem> stashIter = client.getPlayer().getStash().itemListIterator();
 			
@@ -1048,11 +1075,11 @@ public class DatabaseUtils extends Service {
 	
 	public void loadExchange(Player player){
 		
-		if (!checkDatabase())
+		if (!checkDinamicDatabase())
 			return;
 
 		try {
-			Statement invStmt = database.conn.createStatement();
+			Statement invStmt = dinamicDatabase.dinamicConn.createStatement();
 			
 			ResultSet exchangeTable = invStmt.executeQuery("SELECT * FROM exchange WHERE charid="+player.getPlayerId()+";");
 						
@@ -1073,11 +1100,11 @@ public class DatabaseUtils extends Service {
 	
 	public void saveExchange(Player player){
 		
-		if (!checkDatabase())
+		if (!checkDinamicDatabase())
 			return;
 		
 		try {
-			Statement stmt = database.conn.createStatement();
+			Statement stmt = dinamicDatabase.dinamicConn.createStatement();
 			stmt.execute("DELETE FROM exchange WHERE charid="+player.getPlayerId()+";");
 			
 			Iterator<ExchangeItem> exchangeIter = player.getExchange().itemListIterator();
@@ -1101,11 +1128,11 @@ public class DatabaseUtils extends Service {
 	
 	public void deleteGuild(int id)
 	{
-		if (!checkDatabase())return ;
+		if (!checkDinamicDatabase())return ;
 			
 		Statement stmt;
 		try {
-			stmt  = database.conn.createStatement();
+			stmt  = dinamicDatabase.dinamicConn.createStatement();
 			
 			stmt.execute("DELETE FROM guilds WHERE id='"+id+"';");
 				
@@ -1120,11 +1147,11 @@ public class DatabaseUtils extends Service {
 	
 	public void loadQuickSlot(Player player){
 		
-		if (!checkDatabase())
+		if (!checkDinamicDatabase())
 			return;
 
 		try {
-			Statement invStmt = database.conn.createStatement();
+			Statement invStmt = dinamicDatabase.dinamicConn.createStatement();
 			
 			ResultSet quickSlotTable = invStmt.executeQuery("SELECT * FROM quickslot WHERE charid="+player.getPlayerId()+";");
 						
@@ -1143,11 +1170,11 @@ public class DatabaseUtils extends Service {
 	
 	public void saveQuickSlot(Player player){
 		
-		if (!checkDatabase())
+		if (!checkDinamicDatabase())
 			return;
 		
 		try {
-			Statement stmt = database.conn.createStatement();
+			Statement stmt = dinamicDatabase.dinamicConn.createStatement();
 			stmt.execute("DELETE FROM quickslot WHERE charid="+player.getPlayerId()+";");
 			
 			Iterator<QuickSlotItem> qsIter = player.getQuickSlot().getQuickSlotIterator();
@@ -1165,6 +1192,189 @@ public class DatabaseUtils extends Service {
 			Logger.getLogger(this.getClass()).warn("Exception",e);
 			return;
 		  }
+	}
+	
+	public Quest getRandomQuest(Player player){
+		if (player == null) return null;
+		if (!checkStaticDatabase()) return null;
+		
+		//a quests list that will only contain quests of the player level
+		List<Quest> questsList = new Vector<Quest>();
+		int randQuestId = -1;
+		
+		Statement stmt;
+		try {
+			stmt  = staticDatabase.staticConn.createStatement();
+			
+			ResultSet rs = stmt.executeQuery("SELECT * FROM quests WHERE minlevel <= '"+player.getLevel()+
+												"' and maxlevel >= '"+player.getLevel()+"';");
+			
+			if (rs.next()) {	
+				do {
+					questsList.add(loadQuest(rs.getInt("id")));
+				} while(rs.next());
+			} else {		
+				return null;
+			}
+	
+			while( randQuestId > questsList.size()-1 || randQuestId == -1){
+				randQuestId = (int)(Math.random()*100);
+				//gets a random position from the available quests list.
+			}
+			//player.getClient().sendPacket(Type.SAY, "Random: "+randQuestId);
+		} 
+		catch (SQLException e) 
+		{
+			Logger.getLogger(this.getClass()).warn("Exception",e);
+		}
+		return questsList.get(randQuestId);
+	}
+	
+	public Quest loadQuest(int questId )
+	{
+		if (questId==-1)return null;
+		if (!checkStaticDatabase())return null;
+		
+		Statement stmt;
+		try {
+			stmt  = staticDatabase.staticConn.createStatement();
+			
+			ResultSet rs = stmt.executeQuery("SELECT * FROM quests WHERE id='"+questId+"';");
+			
+			if (!rs.next()) {				
+				Logger.getLogger(DatabaseUtils.class).info("Quest loaded failed, no such quest ID!");
+				return null;
+			}
+			
+			Quest quest = QuestFactory.create(questId);
+			quest.setDescription(rs.getString("name"));
+			quest.setType(new QuestType(rs.getInt("typeid")));
+			
+			if(!loadQuestObjectives(quest)){
+				Logger.getLogger(DatabaseUtils.class).info("Quest Objectives loaded failed!");
+				return null;
+			}
+			
+			if(!loadQuestRewards(quest)){
+				Logger.getLogger(DatabaseUtils.class).info("Quest Rewards loaded failed!");
+				return null;
+			}
+		
+			return quest;
+		} 
+		catch (SQLException e) 
+		{
+			Logger.getLogger(this.getClass()).warn("Exception",e);
+		}
+		return null;
+	}
+	
+	public boolean loadQuestObjectives(Quest quest)
+	{
+		if (quest == null) return false;
+		if (!checkStaticDatabase())return false;
+		
+		Statement stmt;
+		try {
+			stmt  = staticDatabase.staticConn.createStatement();
+			
+			ResultSet rs = stmt.executeQuery("SELECT * FROM quests_objective WHERE questid='"+quest.getID()+"';");
+			
+			if(rs.next()){
+				do {			
+					Objective objective = new Objective(rs.getInt("objectiveid"),rs.getInt("ammount"));
+					objective.setType(loadQuestObjectiveType(rs.getInt("objectivetype")));
+					quest.addObjective(objective);
+				} while(rs.next());
+			} else {
+				return false;
+			}
+		} 
+		catch (SQLException e) 
+		{
+			Logger.getLogger(this.getClass()).warn("Exception",e);
+		}
+		return true;
+	}
+	
+	public ObjectiveType loadQuestObjectiveType(int type)
+	{
+		//if (type == null) return null;
+		if (!checkStaticDatabase())return null;
+		
+		Statement stmt;
+		try {
+			stmt  = staticDatabase.staticConn.createStatement();
+			
+			ResultSet rs = stmt.executeQuery("SELECT * FROM quests_objective_type WHERE id='"+type+"';");
+			
+			if(!rs.next()) {				
+				Logger.getLogger(DatabaseUtils.class).info("Quest Objective Type loaded failed!");
+				return null;
+			}
+			String className = "com.googlecode.reunion.jreunion.game.quests.objective.type."+rs.getString("class");		
+		
+			return (ObjectiveType)ClassFactory.create(className, rs.getInt("id"));
+		} 
+		catch (SQLException e) 
+		{
+			Logger.getLogger(this.getClass()).warn("Exception",e);
+		}
+		return null;
+	}
+	
+	public boolean loadQuestRewards(Quest quest)
+	{
+		if (quest == null) return false;
+		if (!checkStaticDatabase())return false;
+		
+		Statement stmt;
+		try {
+			stmt  = staticDatabase.staticConn.createStatement();
+			
+			ResultSet rs = stmt.executeQuery("SELECT * FROM quests_reward WHERE questid='"+quest.getID()+"';");
+			
+			if(rs.next()){
+				do {	
+					Reward reward = new Reward(rs.getInt("rewardid"),rs.getInt("ammount"));
+					reward.setType(loadQuestRewardType(rs.getInt("rewardtype")));
+					quest.addReward(reward);
+				} while(rs.next());
+			} else {
+				return false;
+			}
+		} 
+		catch (SQLException e) 
+		{
+			Logger.getLogger(this.getClass()).warn("Exception",e);
+		}
+		return true;
+	}
+	
+	public RewardType loadQuestRewardType(int type)
+	{
+		//if (type == null) return null;
+		if (!checkStaticDatabase())return null;
+		
+		Statement stmt;
+		try {
+			stmt  = staticDatabase.staticConn.createStatement();
+			
+			ResultSet rs = stmt.executeQuery("SELECT * FROM quests_reward_type WHERE id='"+type+"';");
+			
+			if(!rs.next()) {				
+				Logger.getLogger(DatabaseUtils.class).info("Quest Reward Type loaded failed!");
+				return null;
+			}
+			String className = "com.googlecode.reunion.jreunion.game.quests.reward.type."+rs.getString("class");		
+		
+			return (RewardType)ClassFactory.create(className, rs.getInt("id"));
+		} 
+		catch (SQLException e) 
+		{
+			Logger.getLogger(this.getClass()).warn("Exception",e);
+		}
+		return null;
 	}
 	
 }
