@@ -40,6 +40,7 @@ public class Etc extends EtcItem implements Usable{
 			}
 			
 			setExtraStats(getExtraStats()-1);
+			DatabaseUtils.getDinamicInstance().saveItem(this);
 			//Quest quest = new Quest(player,quickSlotItem);
 			Quest quest = DatabaseUtils.getStaticInstance().getRandomQuest(player);
 			player.setQuest(quest);
