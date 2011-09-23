@@ -7511,7 +7511,7 @@ ReqStr = 1
 SizeX = 1
 SizeY = 1
 Price = 150
-Class = Etc
+Class = etc.MissionReceiver
 
 #######################
 ###### PET ITEMS ######
@@ -7899,7 +7899,7 @@ Type = 26
 SizeX = 1
 SizeY = 1
 Price = 50000
-Class = Etc
+Class = etc.AmplifiedMissionReceiver
 
 [WhiteTiger Summon Stone]
 ID = 956
