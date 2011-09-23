@@ -6,11 +6,6 @@ import java.util.Vector;
 
 import org.apache.log4j.Logger;
 
-import com.googlecode.reunion.jreunion.server.Client;
-import com.googlecode.reunion.jreunion.server.LocalMap;
-import com.googlecode.reunion.jreunion.server.Network;
-import com.googlecode.reunion.jreunion.server.Server;
-
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
@@ -42,10 +37,10 @@ public class Inventory {
 		
 		while (iter.hasNext()) {
 			InventoryItem item = iter.next();
-			if(item.getTab() == tab){
-				for (int x = item.getPosX(); x < item.getPosX()
+			if(item.getPosition().getTab() == tab){
+				for (int x = item.getPosition().getPosX(); x < item.getPosition().getPosX()
 						+ item.getItem().getSizeX(); x++) {
-					for (int y = item.getPosY(); y < item.getPosY()
+					for (int y = item.getPosition().getPosY(); y < item.getPosition().getPosY()
 							+ item.getItem().getSizeY(); y++) {
 						if (x == posX && y == posY) {
 							//Logger.getLogger(Inventory.class).debug("DETECETED ITEM COLISION: ["+x+"]["+y+"] "+item.getItem().getDescription());
@@ -145,14 +140,28 @@ public class Inventory {
 		while (iter.hasNext()) {
 			InventoryItem invItem = iter.next();
 			
-			for (int x = invItem.getPosX(); x < invItem.getPosX()
+			for (int x = invItem.getPosition().getPosX(); x < invItem.getPosition().getPosX()
 					+ invItem.getItem().getSizeX(); x++) {
-				for (int y = invItem.getPosY(); y < invItem.getPosY()
+				for (int y = invItem.getPosition().getPosY(); y < invItem.getPosition().getPosY()
 						+ invItem.getItem().getSizeY(); y++) {
-					if (x == posX && y == posY && invItem.getTab() == tab) {
+					if (x == posX && y == posY && invItem.getPosition().getTab() == tab) {
 						return invItem;
 					}
 				}
+			}
+		}
+		return null;
+	}
+	
+	public InventoryItem getItem(int itemId) {
+
+		Iterator<InventoryItem> iter = getInventoryIterator();
+		
+		while (iter.hasNext()) {
+			InventoryItem invItem = iter.next();
+
+			if (invItem.getItem().getEntityId() == itemId) {
+				return invItem;
 			}
 		}
 		return null;
@@ -166,7 +175,8 @@ public class Inventory {
 			int[] position = getFreeSlots(item);
 			if(position == null)
 				return null;
-			InventoryItem inventoryItem = new InventoryItem(item,position[1],position[2],position[0]);
+			InventoryItem inventoryItem = new InventoryItem(item,
+					new InventoryPosition(position[1],position[2],position[0]));
 			
 			addInventoryItem(inventoryItem);
 			return inventoryItem;
@@ -180,7 +190,7 @@ public class Inventory {
 		InventoryItem holdingItem = getHoldingItem();
 		
 		if(holdingItem != null){
-			addInventoryItem(new InventoryItem(holdingItem.getItem(),posX,posY,tab));
+			addInventoryItem(new InventoryItem(holdingItem.getItem(),new InventoryPosition(posX,posY,tab)));
 			setHoldingItem(null);
 			return true;
 		}
@@ -268,11 +278,11 @@ public class Inventory {
 		while (iter.hasNext()) {
 			InventoryItem item = iter.next();
 
-			for (int x = item.getPosX(); x < item.getPosX()
+			for (int x = item.getPosition().getPosX(); x < item.getPosition().getPosX()
 					+ item.getItem().getSizeX(); x++) {
-				for (int y = item.getPosY(); y < item.getPosY()
+				for (int y = item.getPosition().getPosY(); y < item.getPosition().getPosY()
 						+ item.getItem().getSizeY(); y++) {
-					if (item.getTab() == tab) {
+					if (item.getPosition().getTab() == tab) {
 						newInvMap[x][y] = true;
 					}
 				}
@@ -308,8 +318,7 @@ public class Inventory {
 	@Deprecated
 	public boolean addItem(int posX, int posY, Item item, int tab) {
 
-		InventoryItem inventoryItem = new InventoryItem(item, posX, posY,
-				tab);
+		InventoryItem inventoryItem = new InventoryItem(item, new InventoryPosition(posX, posY, tab));
 
 		if (itemFit(tab, posX, posY, item.getSizeX(), item.getSizeY()) == true) {
 			items.add(inventoryItem);
@@ -336,21 +345,6 @@ public class Inventory {
 			InventoryItem invItem = iter.next();
 
 			if (invItem.getItem() == item) {
-				return invItem;
-			}
-		}
-		return null;
-	}
-
-	@Deprecated
-	public InventoryItem getItem(int itemId) {
-
-		Iterator<InventoryItem> iter = getInventoryIterator();
-		
-		while (iter.hasNext()) {
-			InventoryItem invItem = iter.next();
-
-			if (invItem.getItem().getEntityId() == itemId) {
 				return invItem;
 			}
 		}

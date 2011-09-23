@@ -3,14 +3,11 @@ package com.googlecode.reunion.jreunion.game;
 import java.util.List;
 import java.util.Vector;
 
-import com.googlecode.reunion.jreunion.events.map.ItemDropEvent;
 import com.googlecode.reunion.jreunion.game.quests.objective.Objective;
 import com.googlecode.reunion.jreunion.game.quests.reward.Reward;
-import com.googlecode.reunion.jreunion.game.quests.type.QuestType;
 import com.googlecode.reunion.jreunion.server.Client;
 import com.googlecode.reunion.jreunion.server.ItemFactory;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
-import com.googlecode.reunion.jreunion.server.Server;
 
 /**
  * @author Aidamina
@@ -31,8 +28,6 @@ public class Quest {
 	private int minLevel;
 	
 	private int maxLevel;
-	
-	private QuestType type;
 	
 	private List<Objective> objectives;
 	
@@ -76,14 +71,6 @@ public class Quest {
 		return this.description;
 	}
 	
-	public QuestType getType(){
-		return this.type;
-	}
-	
-	public void setType(QuestType type){
-		this.type = type;
-	}
-	
 	public void setDescription(String description){
 		this.description = description;
 	}
@@ -101,7 +88,7 @@ public class Quest {
 		return null;
 	}
 	
-	public List<Objective> getObjectiveList(){
+	public List<Objective> getObjectives(){
 		return this.objectives;
 	}
 	
@@ -113,8 +100,8 @@ public class Quest {
 		return false;
 	}
 	
-	public boolean objectivesIsEmpty(){
-		return objectives.isEmpty();
+	public boolean hasObjectives(){
+		return !objectives.isEmpty();
 	}
 	
 	public void addReward(Reward reward){
@@ -130,7 +117,7 @@ public class Quest {
 		return null;
 	}
 	
-	public List<Reward> getRewardList(){
+	public List<Reward> getRewards(){
 		return this.rewards;
 	}
 	
@@ -142,12 +129,12 @@ public class Quest {
 		return false;
 	}
 	
-	public boolean rewardsIsEmpty(){
-		return rewards.isEmpty();
+	public boolean hasRewards(){
+		return !rewards.isEmpty();
 	}
 	
 	/****** Cancel the current player Quest ********/
-	public void cancelQuest(Player player) {
+	public void cancel(Player player) {
 		Client client = player.getClient();
 
 		if (client == null) {
@@ -160,7 +147,7 @@ public class Quest {
 	}
 
 	/****** Update Quest Points Obtained ********/
-	public void changeQuestPT(Player player, int remainPoints,
+	public void changePT(Player player, int remainPoints,
 			int obtainedPoints) {
 		Client client = player.getClient();
 
@@ -186,7 +173,7 @@ public class Quest {
 	}
 
 	/****** Update Quest Total points ********/
-	public void changeQuestTP(Player player, int tp) {
+	public void changeTP(Player player, int tp) {
 		Client client = player.getClient();
 
 		if (client == null) {
@@ -217,7 +204,7 @@ public class Quest {
 	}
 
 	/****** Handle client packets ********/
-	public boolean loadQuest(Player player, QuestType type, int slot) {
+	public boolean load(Player player, int slot) {
 		Client client = player.getClient();
 
 		if (client == null) {
@@ -236,7 +223,7 @@ public class Quest {
 	}
 
 	/****** Quest Eff ********/
-	public void questEff(Player player) {
+	public void eff(Player player) {
 		Client client = player.getClient();
 
 		if (client == null) {
@@ -247,7 +234,7 @@ public class Quest {
 	}
 
 	/****** Quest End ********/
-	public void questEnd(Player player, int questId) {
+	public void end(Player player, int questId) {
 		Client client = player.getClient();
 
 		if (client == null) {
@@ -259,7 +246,7 @@ public class Quest {
 	}
 
 	/****** Quest Kill ********/
-	public void questKill(Player player) {
+	public void kill(Player player) {
 		Client client = player.getClient();
 
 		if (client == null) {

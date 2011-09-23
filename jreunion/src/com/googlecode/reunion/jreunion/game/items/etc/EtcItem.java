@@ -1,4 +1,4 @@
-package com.googlecode.reunion.jreunion.game.items;
+package com.googlecode.reunion.jreunion.game.items.etc;
 
 import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jreunion.game.PlayerItem;

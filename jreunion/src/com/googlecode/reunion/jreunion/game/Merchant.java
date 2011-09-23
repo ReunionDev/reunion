@@ -130,7 +130,7 @@ public class Merchant extends Npc {
 	
 
 	/****** Buy items from merchant shop ******/
-	public void buyItem(Player player, int itemType, int tab, int quantity) {
+	public boolean buyItem(Player player, int itemType, int tab, int quantity) {
 
 		Client client = player.getClient();
 
@@ -140,21 +140,25 @@ public class Merchant extends Npc {
 
 		if (player.getLime() - item.getPrice() * quantity < 0) {
 			client.sendPacket(Type.MSG, "Not enough lime.");
-			return;
+			return false;
 		}
 
 		for (int i = 0; i < quantity; i++) {
-			if (player.getInventory().freeSlots(tab, item) == false) {
-				break;
-			}
+			
 			item = ItemFactory.create(itemType);
 			
+			if (player.getInventory().freeSlots(tab, item) == false) {
+				return false;
+			}
+			
 			if (item != null) {
+				player.getPosition().getLocalMap().createEntityId(item);
 				player.pickItem(item);
 				count++;
 			}
 			
 		}
+		
 		if (item != null) {
 			int cost = item.getPrice() * this.getBuyRate() / 100 * count;
 			synchronized(player) {
@@ -164,7 +168,7 @@ public class Merchant extends Npc {
 			//player.updateStatus(10, item.getPrice() * this.getBuyRate() / 100 * -1 * count, 0);
 		
 		}
-
+		return true;
 	}
 
 	/****** Open Merchant Shop ******/

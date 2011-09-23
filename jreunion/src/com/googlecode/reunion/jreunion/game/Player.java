@@ -551,8 +551,7 @@ public abstract class Player extends LivingObject implements EventListener {
 				return;
 			}
 
-			InventoryItem invItem = new InventoryItem(item.getItem(), 0, 0,
-					0);
+			InventoryItem invItem = new InventoryItem(item.getItem(), new InventoryPosition( 0, 0, 0));
 
 			getInventory().setHoldingItem(invItem);
 			getExchange().removeItem(item);
@@ -576,7 +575,7 @@ public abstract class Player extends LivingObject implements EventListener {
 				getInventory().setHoldingItem(null);
 			} else {
 				InventoryItem invItem = new InventoryItem(
-						oldExchangeItem.getItem(), 0, 0, 0);
+						oldExchangeItem.getItem(), new InventoryPosition( 0, 0, 0));
 				getInventory().setHoldingItem(invItem);
 				getExchange().removeItem(oldExchangeItem);
 			}
@@ -721,7 +720,7 @@ public abstract class Player extends LivingObject implements EventListener {
 		InventoryItem inventoryItem = getInventory().storeItem(item);
 		
 		if (inventoryItem == null) {
-			inventoryItem = new InventoryItem(item, 0, 0, 0);
+			inventoryItem = new InventoryItem(item, new InventoryPosition(0, 0, 0));
 			getInventory().setHoldingItem(inventoryItem);
 		}
 		
@@ -1179,8 +1178,7 @@ public abstract class Player extends LivingObject implements EventListener {
 			
 			getInventory()
 					.setHoldingItem(
-							new InventoryItem(getEquipment().getItem(slot),
-									0, 0, 0));
+							new InventoryItem(getEquipment().getItem(slot), new InventoryPosition(0, 0, 0)));
 			getEquipment().setItem(slot, null);
 			getInterested().sendPacket(Type.CHAR_REMOVE, this, slot);
 			
@@ -1204,7 +1202,7 @@ public abstract class Player extends LivingObject implements EventListener {
 				getInterested().sendPacket(Type.CHAR_REMOVE, this, slot);
 				getEquipment().setItem(slot, invItem.getItem());
 				getInventory().setHoldingItem(
-						new InventoryItem(currentItem, 0, 0, 0));
+						new InventoryItem(currentItem, new InventoryPosition(0, 0, 0)));
 				/*
 				if (getEquipment().getItem(slot) instanceof Weapon) {
 					Weapon weapon = (Weapon) getEquipment().getItem(slot);

@@ -66,8 +66,7 @@ public class QuickSlot {
 			QuickSlotItem qsItem = getItem(slot);
 			removeItem(qsItem);
 			
-			InventoryItem invItem = new InventoryItem(qsItem.getItem(), -1,
-					-1, -1);
+			InventoryItem invItem = new InventoryItem(qsItem.getItem(), new InventoryPosition(-1,-1, -1));
 			
 			player.getInventory().setHoldingItem(invItem);
 			
@@ -83,8 +82,7 @@ public class QuickSlot {
 			} else {
 				removeItem(oldQuickSlotItem);
 				addItem(newQuickSlotItem);
-				invItem = new InventoryItem(oldQuickSlotItem.getItem(), 0, 0,
-						0);
+				invItem = new InventoryItem(oldQuickSlotItem.getItem(), new InventoryPosition(0, 0,	0));
 				player.getInventory().setHoldingItem(invItem);
 			}
 		}

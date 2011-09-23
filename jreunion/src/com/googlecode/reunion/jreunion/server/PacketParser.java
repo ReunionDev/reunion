@@ -42,7 +42,8 @@ import com.googlecode.reunion.jreunion.game.Position;
 import com.googlecode.reunion.jreunion.game.Quest;
 import com.googlecode.reunion.jreunion.game.RoamingItem;
 import com.googlecode.reunion.jreunion.game.Skill;
-import com.googlecode.reunion.jreunion.game.items.Etc;
+import com.googlecode.reunion.jreunion.game.items.etc.Etc;
+import com.googlecode.reunion.jreunion.game.items.etc.MissionReceiver;
 import com.googlecode.reunion.jreunion.game.skills.BasicAttack;
 import com.googlecode.reunion.jreunion.game.skills.GroupedSkill;
 import com.googlecode.reunion.jreunion.game.Trader;
@@ -561,18 +562,18 @@ public class PacketParser extends EventDispatcher implements EventListener{
 							Integer.parseInt(message[3]));
 				} else if (message[0].equals("quest")) {
 					if (message[1].equals("cancel")) {
-						client.getPlayer().getQuest().cancelQuest(
+						client.getPlayer().getQuest().cancel(
 								client.getPlayer());
 					} else {
 						if (client.getPlayer().getQuest() == null) {
-							Etc etcItem = (Etc)player.getQuickSlot().getItem(Integer.parseInt(message[1])).getItem();
-							etcItem.use(player, Integer.parseInt(message[1]));
+							MissionReceiver item = (MissionReceiver)player.getQuickSlot().getItem(Integer.parseInt(message[1])).getItem();
+							item.use(player, Integer.parseInt(message[1]));
 							//client.getPlayer().setQuest(new Quest(
 							//		client.getPlayer(), player.getQuickSlot().getItem(Integer
 							//				.parseInt(message[1]))));
 						} else {
 							com.serverTell(client,
-									"Impossible to receive a quest");
+									"There is an ongoing quest. Impossible to receive quests.");
 						}
 					}
 				} else if (message[0].equals("stash_open")) {

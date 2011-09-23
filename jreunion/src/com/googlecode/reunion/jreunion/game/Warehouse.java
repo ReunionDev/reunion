@@ -77,7 +77,7 @@ public class Warehouse extends Npc {
 						.getEntityId());
 				stash.removeItem(stashItem);
 				player.getInventory().setHoldingItem(
-						new InventoryItem(item, 0, 0, 0));
+						new InventoryItem(item, new InventoryPosition(0, 0, 0)));
 
 				packetData = "stash_from " + stashItem.getPos() + " "
 						+ item.getEntityId() + " "

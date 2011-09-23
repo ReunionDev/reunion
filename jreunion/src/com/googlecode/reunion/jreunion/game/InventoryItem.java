@@ -6,31 +6,30 @@ package com.googlecode.reunion.jreunion.game;
  * Item wrapper for Inventory
  */
 public class InventoryItem {
+	
 	private Item item;
+	
+	private InventoryPosition position;
 
-	private int posX;
-
-	private int posY;
-
-	private int tab;
-
-	public InventoryItem(Item item, int posX, int posY, int tab) {
+	public InventoryItem(Item item, InventoryPosition position) {
 		this.item = item;
-		this.posX = posX;
-		this.posY = posY;
-		this.tab = tab; // 1,2 or 3
+		this.position = position;
 	}
 
 	public Item getItem() {
 		return item;
 	}
-
-	public int getPosX() {
-		return posX;
+	
+	public void setItem(Item item){
+		this.item = item;
 	}
 
-	public int getPosY() {
-		return posY;
+	public InventoryPosition getPosition() {
+		return position;
+	}
+	
+	public void setPosition(InventoryPosition position) {
+		this.position = position;
 	}
 
 	public int getSizeX() {
@@ -39,21 +38,5 @@ public class InventoryItem {
 
 	public int getSizeY() {
 		return item.getSizeY();
-	}
-
-	public int getTab() {
-		return tab;
-	}
-
-	public void setPosX(int posX) {
-		this.posX = posX;
-	}
-
-	public void setPosY(int posY) {
-		this.posY = posY;
-	}
-
-	public void setTab(int tab) {
-		this.tab = tab;
 	}
 }

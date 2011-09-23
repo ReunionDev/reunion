@@ -16,6 +16,7 @@ import com.googlecode.reunion.jreunion.game.Equipment;
 import com.googlecode.reunion.jreunion.game.Equipment.Slot;
 import com.googlecode.reunion.jreunion.game.ExchangeItem;
 import com.googlecode.reunion.jreunion.game.InventoryItem;
+import com.googlecode.reunion.jreunion.game.InventoryPosition;
 import com.googlecode.reunion.jreunion.game.Item;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Player.Race;
@@ -30,10 +31,7 @@ import com.googlecode.reunion.jreunion.game.items.equipment.Sword;
 import com.googlecode.reunion.jreunion.game.items.equipment.Weapon;
 import com.googlecode.reunion.jreunion.game.items.potion.Potion;
 import com.googlecode.reunion.jreunion.game.quests.objective.Objective;
-import com.googlecode.reunion.jreunion.game.quests.objective.type.ObjectiveType;
 import com.googlecode.reunion.jreunion.game.quests.reward.Reward;
-import com.googlecode.reunion.jreunion.game.quests.reward.type.RewardType;
-import com.googlecode.reunion.jreunion.game.quests.type.QuestType;
 import com.googlecode.reunion.jreunion.game.Position;
 import com.googlecode.reunion.jreunion.game.QuickSlotItem;
 import com.googlecode.reunion.jreunion.game.RoamingItem;
@@ -618,7 +616,8 @@ public class DatabaseUtils extends Service {
 				Item item = ItemFactory.loadItem(invTable.getInt("itemid"));	
 				
 				if (item!=null){
-					InventoryItem inventoryItem = new InventoryItem(item,invTable.getInt("x"), invTable.getInt("y"),invTable.getInt("tab"));
+					InventoryItem inventoryItem = new InventoryItem(item,
+							new InventoryPosition(invTable.getInt("x"), invTable.getInt("y"),invTable.getInt("tab")));
 					player.getInventory().addInventoryItem(inventoryItem);
 				}
 			}
@@ -670,8 +669,8 @@ public class DatabaseUtils extends Service {
 				statement.addBatch();				
 				*/
 				
-				data+="("+player.getPlayerId()+ ",'"+item.getItemId()+"',"+invItem.getTab()+
-					","+invItem.getPosX()+ ","+invItem.getPosY()+ ")";			
+				data+="("+player.getPlayerId()+ ",'"+item.getItemId()+"',"+invItem.getPosition().getTab()+
+					","+invItem.getPosition().getPosX()+ ","+invItem.getPosition().getPosY()+ ")";			
 				if(iter.hasNext())
 					data+= ", ";			
 			}
@@ -1116,8 +1115,8 @@ public class DatabaseUtils extends Service {
 				stmt.execute("INSERT INTO exchange (charid, itemid, x, y)" +
 						" VALUES ("+player.getPlayerId()+ ","
 								   +exchangeItem.getItem().getItemId()+","
-								   +exchangeItem.getPosX()+","
-								   +exchangeItem.getPosY()+");");
+								   +exchangeItem.getPosition().getPosX()+","
+								   +exchangeItem.getPosition().getPosY()+");");
 			}
 			
 		} catch (SQLException e) {
@@ -1214,6 +1213,7 @@ public class DatabaseUtils extends Service {
 					questsList.add(loadQuest(rs.getInt("id")));
 				} while(rs.next());
 			} else {		
+				Logger.getLogger(DatabaseUtils.class).debug("No quests found for the player level!");
 				return null;
 			}
 	
@@ -1221,7 +1221,6 @@ public class DatabaseUtils extends Service {
 				randQuestId = (int)(Math.random()*100);
 				//gets a random position from the available quests list.
 			}
-			//player.getClient().sendPacket(Type.SAY, "Random: "+randQuestId);
 		} 
 		catch (SQLException e) 
 		{
@@ -1232,34 +1231,39 @@ public class DatabaseUtils extends Service {
 	
 	public Quest loadQuest(int questId )
 	{
-		if (questId==-1)return null;
+		if (questId < 0)return null;
 		if (!checkStaticDatabase())return null;
 		
-		Statement stmt;
+		Statement questStmt;
+		Statement questTypeStmt;
 		try {
-			stmt  = staticDatabase.staticConn.createStatement();
+			questStmt  = staticDatabase.staticConn.createStatement();
+			questTypeStmt  = staticDatabase.staticConn.createStatement();
 			
-			ResultSet rs = stmt.executeQuery("SELECT * FROM quests WHERE id='"+questId+"';");
+			ResultSet questRs = questStmt.executeQuery("SELECT * FROM quests WHERE id='"+questId+"';");
 			
-			if (!rs.next()) {				
+			if (!questRs.next()) {				
 				Logger.getLogger(DatabaseUtils.class).info("Quest loaded failed, no such quest ID!");
 				return null;
 			}
 			
-			Quest quest = QuestFactory.create(questId);
-			quest.setDescription(rs.getString("name"));
-			quest.setType(new QuestType(rs.getInt("typeid")));
 			
-			if(!loadQuestObjectives(quest)){
-				Logger.getLogger(DatabaseUtils.class).info("Quest Objectives loaded failed!");
+			ResultSet questTypeRs = questTypeStmt.executeQuery("SELECT * FROM quests_type WHERE id='"+questRs.getInt("typeid")+"';");
+			
+			if(!questTypeRs.next()) {				
+				Logger.getLogger(DatabaseUtils.class).info("Quest Type loaded failed, no such quest type ID!");
 				return null;
 			}
 			
-			if(!loadQuestRewards(quest)){
-				Logger.getLogger(DatabaseUtils.class).info("Quest Rewards loaded failed!");
+			String className = "com.googlecode.reunion.jreunion.game.quests."+questTypeRs.getString("class");	
+			
+			Quest quest = (Quest)ClassFactory.create(className, questId);
+			quest.setDescription(questRs.getString("name"));
+			
+			if(!loadQuestObjectives(quest) || !loadQuestRewards(quest)){
 				return null;
 			}
-		
+			
 			return quest;
 		} 
 		catch (SQLException e) 
@@ -1274,19 +1278,31 @@ public class DatabaseUtils extends Service {
 		if (quest == null) return false;
 		if (!checkStaticDatabase())return false;
 		
-		Statement stmt;
+		Statement objectiveStmt;
+		Statement objectiveTypeStmt;
 		try {
-			stmt  = staticDatabase.staticConn.createStatement();
+			objectiveStmt  = staticDatabase.staticConn.createStatement();
+			objectiveTypeStmt  = staticDatabase.staticConn.createStatement();
 			
-			ResultSet rs = stmt.executeQuery("SELECT * FROM quests_objective WHERE questid='"+quest.getID()+"';");
+			ResultSet objectiveRs = objectiveStmt.executeQuery("SELECT * FROM quests_objective WHERE questid='"+quest.getID()+"';");
 			
-			if(rs.next()){
+			if(objectiveRs.next()){
 				do {			
-					Objective objective = new Objective(rs.getInt("objectiveid"),rs.getInt("ammount"));
-					objective.setType(loadQuestObjectiveType(rs.getInt("objectivetype")));
+					
+					ResultSet objectiveTypeRs = objectiveTypeStmt.executeQuery("SELECT * FROM quests_objective_type WHERE id='"+objectiveRs.getInt("objectivetype")+"';");
+					
+					if(!objectiveTypeRs.next()) {				
+						Logger.getLogger(DatabaseUtils.class).info("Quest Objective Type loaded failed, no such objective type ID!");
+						return false;
+					}
+					
+					String className = "com.googlecode.reunion.jreunion.game.quests.objective."+objectiveTypeRs.getString("class");
+					
+					Objective objective = (Objective)ClassFactory.create(className, objectiveRs.getInt("objectiveid"), objectiveRs.getInt("ammount"));
 					quest.addObjective(objective);
-				} while(rs.next());
+				} while(objectiveRs.next());
 			} else {
+				Logger.getLogger(DatabaseUtils.class).info("Quest Objectives loaded failed, no objectives found!");
 				return false;
 			}
 		} 
@@ -1294,33 +1310,8 @@ public class DatabaseUtils extends Service {
 		{
 			Logger.getLogger(this.getClass()).warn("Exception",e);
 		}
+		
 		return true;
-	}
-	
-	public ObjectiveType loadQuestObjectiveType(int type)
-	{
-		//if (type == null) return null;
-		if (!checkStaticDatabase())return null;
-		
-		Statement stmt;
-		try {
-			stmt  = staticDatabase.staticConn.createStatement();
-			
-			ResultSet rs = stmt.executeQuery("SELECT * FROM quests_objective_type WHERE id='"+type+"';");
-			
-			if(!rs.next()) {				
-				Logger.getLogger(DatabaseUtils.class).info("Quest Objective Type loaded failed!");
-				return null;
-			}
-			String className = "com.googlecode.reunion.jreunion.game.quests.objective.type."+rs.getString("class");		
-		
-			return (ObjectiveType)ClassFactory.create(className, rs.getInt("id"));
-		} 
-		catch (SQLException e) 
-		{
-			Logger.getLogger(this.getClass()).warn("Exception",e);
-		}
-		return null;
 	}
 	
 	public boolean loadQuestRewards(Quest quest)
@@ -1328,19 +1319,31 @@ public class DatabaseUtils extends Service {
 		if (quest == null) return false;
 		if (!checkStaticDatabase())return false;
 		
-		Statement stmt;
+		Statement rewardStmt;
+		Statement rewardTypeStmt;
 		try {
-			stmt  = staticDatabase.staticConn.createStatement();
+			rewardStmt  = staticDatabase.staticConn.createStatement();
+			rewardTypeStmt  = staticDatabase.staticConn.createStatement();
 			
-			ResultSet rs = stmt.executeQuery("SELECT * FROM quests_reward WHERE questid='"+quest.getID()+"';");
+			ResultSet rewardRs = rewardStmt.executeQuery("SELECT * FROM quests_reward WHERE questid='"+quest.getID()+"';");
 			
-			if(rs.next()){
+			if(rewardRs.next()){
 				do {	
-					Reward reward = new Reward(rs.getInt("rewardid"),rs.getInt("ammount"));
-					reward.setType(loadQuestRewardType(rs.getInt("rewardtype")));
+					
+					ResultSet rewardTypeRs = rewardTypeStmt.executeQuery("SELECT * FROM quests_reward_type WHERE id='"+rewardRs.getInt("rewardtype")+"';");
+					
+					if(!rewardTypeRs.next()) {				
+						Logger.getLogger(DatabaseUtils.class).info("Quest Reward Type loaded failed, no such reward type ID!");
+						return false;
+					}					
+					
+					String className = "com.googlecode.reunion.jreunion.game.quests.reward."+rewardTypeRs.getString("class");		
+					
+					Reward reward = (Reward)ClassFactory.create(className, rewardRs.getInt("rewardid"), rewardRs.getInt("ammount"));
 					quest.addReward(reward);
-				} while(rs.next());
+				} while(rewardRs.next());
 			} else {
+				Logger.getLogger(DatabaseUtils.class).info("Quest Rewards loaded failed, no rewards found!");
 				return false;
 			}
 		} 
@@ -1348,33 +1351,8 @@ public class DatabaseUtils extends Service {
 		{
 			Logger.getLogger(this.getClass()).warn("Exception",e);
 		}
+		
 		return true;
-	}
-	
-	public RewardType loadQuestRewardType(int type)
-	{
-		//if (type == null) return null;
-		if (!checkStaticDatabase())return null;
-		
-		Statement stmt;
-		try {
-			stmt  = staticDatabase.staticConn.createStatement();
-			
-			ResultSet rs = stmt.executeQuery("SELECT * FROM quests_reward_type WHERE id='"+type+"';");
-			
-			if(!rs.next()) {				
-				Logger.getLogger(DatabaseUtils.class).info("Quest Reward Type loaded failed!");
-				return null;
-			}
-			String className = "com.googlecode.reunion.jreunion.game.quests.reward.type."+rs.getString("class");		
-		
-			return (RewardType)ClassFactory.create(className, rs.getInt("id"));
-		} 
-		catch (SQLException e) 
-		{
-			Logger.getLogger(this.getClass()).warn("Exception",e);
-		}
-		return null;
 	}
 	
 }

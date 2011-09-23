@@ -336,10 +336,10 @@ public class Command {
 				item2.setExtraStats(1080);
 				item2.setGemNumber(0);
 
-				player.getInventory().addItem(item2);
+				player.getInventory().storeItem(item2);
 				//player.pickupItem(item);
-				player.getQuest().questEnd(player, 669);
-				player.getQuest().questEff(player);
+				player.getQuest().end(player, 669);
+				player.getQuest().eff(player);
 			//}
 		} else {
 			livingObject.setHp(newHp);

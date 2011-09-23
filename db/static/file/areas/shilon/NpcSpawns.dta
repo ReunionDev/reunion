@@ -77,3 +77,10 @@ Type = 141
 BuyRate = 95	# Value in %
 SellRate = 30	# Value in %
 Shop = areas/shilon/shop/npc2.dta
+
+#[Aisian Bandor]
+#ID = 9
+#X = 7665
+#Y = 11740
+#Rotation = 0.0
+#Type = 139

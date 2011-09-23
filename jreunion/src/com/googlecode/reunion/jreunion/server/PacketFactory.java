@@ -422,8 +422,9 @@ public class PacketFactory {
 				InventoryItem invItem = (InventoryItem)args[0];
 				Item item = invItem.getItem();
 				
-				return "pick " + item.getEntityId() + " " + item.getType()
-				+ " "+invItem.getPosX()+" "+invItem.getPosY()+" "+invItem.getTab()+" " + item.getGemNumber() + " "
+				return "pick " + item.getEntityId() + " " + item.getType() + " "
+				+ invItem.getPosition().getPosX()+" "+invItem.getPosition().getPosY() + " "
+				+ invItem.getPosition().getTab()+" " + item.getGemNumber() + " "
 				+ item.getExtraStats();
 			}
 			break;
@@ -461,10 +462,10 @@ public class PacketFactory {
 				InventoryItem invItem = (InventoryItem)args[0];
 				Item item = invItem.getItem();
 				
-				return "inven " + invItem.getTab() + " "
+				return "inven " + invItem.getPosition().getTab() + " "
 				+ item.getEntityId() + " "
-				+ item.getType() + " " + invItem.getPosX()
-				+ " " + invItem.getPosY() + " "
+				+ item.getType() + " " + invItem.getPosition().getPosX()
+				+ " " + invItem.getPosition().getPosY() + " "
 				+ item.getGemNumber() + " "
 				+ item.getExtraStats();
 			}

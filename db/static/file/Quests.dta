@@ -1,9 +1,95 @@
 ######## Quests ########
-[Test Quest #1]
+[S.King Chmero]
 ID = 1
-Lime = 1
-XP = 1
-MinLevel = 1
-MaxLevel = 250
+Lime = 0
+XP = 0
+MinLevel = 20
+MaxLevel = 25
+Type = Kill Mobs
+#Mobs = 228 King Chmero: 1
+#Item = 222 Amethyst
+#Location = 4 Laglamia
 
-Class = Quest
+[S. King Pro Giant]
+ID = 25
+Lime = 0
+XP = 0
+MinLevel = 35
+MaxLevel = 40
+Type = Cursed
+#Mobs = King Pro Giant
+#Item = Topaz
+#Location = Dekardi Field
+
+[S. Battle Giant]
+ID = 26
+Lime = 0
+XP = 0
+MinLevel = 50
+MaxLevel = 55
+Type = Cursed
+#Mobs = King Battle Giant
+#Item = Opal
+#Location = Dekardi Field
+
+[S. Dekadun Bracelet]
+ID = 27
+Lime = 0
+XP = 0
+MinLevel = 50
+MaxLevel = 100
+Type = Kill Mobs
+#Mobs = Master Kabal
+#Item = Dekadun Bracelet
+#Location = Dekadun
+
+[King Cobra of Dekardi]  #### NOT USED ####
+ID = 28
+Lime = 10000
+XP = 20000
+MinLevel = 0
+MaxLevel = 0
+Type = Cursed
+#Mobs = King Battle Giant
+#Item = Opal
+#Location = 0 Dekardi Field
+
+[S.Life Amulet]
+ID = 29
+Lime = 0
+XP = 300
+MinLevel = 26
+MaxLevel = 30
+Type = Kill Mobs
+#Mobs = 26 Hell Cobra: 50 ; 37 Oniam: 5 ; 41 Pro Giant: 2
+#Item = 939 Life Amulet
+#Location = 0 Dekardi Field
+
+[S.Seeking Strength Ring]
+ID = 30
+Lime = 0
+XP = 1000
+MinLevel = 40
+MaxLevel = 45
+Type = Kill Mobs
+#Mobs = Gremlin: 20 ; Battle Giant: 10 ; Brain Warrior: 5
+#Item = 937 Hercules Finger Ring
+#Location = 0 Dekardi Field
+
+
+######## Invalid Quests ID ########
+# ID = 2	Game.exe crash
+# ID = 3	Game.exe crash
+# ID = 4	Game.exe crash
+# ID = 5	Game.exe crash
+# ID = 6	Game.exe crash
+# ID = 7	Game.exe crash
+# ID = 8	Game.exe crash
+# ID = 9	Game.exe crash
+# ID = 10	Game.exe crash
+# ID = 11	Game.exe crash
+# ID = 20	Game.exe crash
+# ID = 21	Game.exe crash
+# ID = 22	Game.exe crash
+# ID = 23	Game.exe crash
+# ID = 24	Game.exe crash
