@@ -1,18 +1,9 @@
 package com.googlecode.reunion.jreunion.game;
 
-import java.io.IOException;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Vector;
-
-import org.apache.log4j.Logger;
-
 import com.googlecode.reunion.jcommon.ParsedItem;
-import com.googlecode.reunion.jcommon.Parser;
-import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 import com.googlecode.reunion.jreunion.server.ClassFactory;
+import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 import com.googlecode.reunion.jreunion.server.Reference;
-import com.googlecode.reunion.jreunion.server.Server;
 import com.googlecode.reunion.jreunion.server.Session;
 
 /**

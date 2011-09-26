@@ -1,12 +1,11 @@
 package com.googlecode.reunion.jreunion.server;
 
-import java.util.Vector;
+import java.util.LinkedList;
 
-import com.googlecode.reunion.jreunion.events.session.SessionEvent;
 import com.googlecode.reunion.jreunion.game.WorldObject;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 
-public class SessionList<T extends Session> extends Vector<T> implements Sendable{
+public class SessionList<T extends Session> extends LinkedList<T> implements Sendable{
 
 	public SessionList() {
 	}
@@ -19,7 +18,6 @@ public class SessionList<T extends Session> extends Vector<T> implements Sendabl
 	public void sendPacket(Type packetType, Object... args) {
 		synchronized(this){
 			for(Session session : this){
-				
 				session.getOwner().getClient().sendPacket(packetType, args);
 			}				
 		}

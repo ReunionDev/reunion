@@ -7,7 +7,7 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
 
-public abstract class Connection<T extends Connection<?>> {	
+public abstract class Connection<T extends Connection<T>> {	
 	
 	private ByteBuffer inputBuffer;
 	private ByteBuffer outputBuffer;	

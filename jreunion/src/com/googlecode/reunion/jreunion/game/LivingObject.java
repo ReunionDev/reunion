@@ -1,9 +1,5 @@
 package com.googlecode.reunion.jreunion.game;
 
-import com.googlecode.reunion.jcommon.ParsedItem;
-import com.googlecode.reunion.jreunion.server.LocalMap;
-import com.googlecode.reunion.jreunion.server.Reference;
-import com.googlecode.reunion.jreunion.server.Session;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 import com.googlecode.reunion.jreunion.server.Tools;
 

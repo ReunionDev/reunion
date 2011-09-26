@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Iterator;
 
 import org.apache.log4j.AppenderSkeleton;

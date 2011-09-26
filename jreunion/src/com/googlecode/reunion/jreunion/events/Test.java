@@ -1,22 +1,9 @@
 package com.googlecode.reunion.jreunion.events;
 
-import java.io.IOException;
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.UnknownHostException;
-import java.util.BitSet;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import com.googlecode.reunion.jreunion.events.client.ClientEvent.ClientFilter;
-import com.googlecode.reunion.jreunion.game.Player;
-import com.googlecode.reunion.jreunion.game.Player.Sex;
 import com.googlecode.reunion.jreunion.game.Position;
 /**
  * @author Aidamina

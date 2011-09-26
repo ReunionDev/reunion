@@ -405,7 +405,7 @@ public class MessageParser {
 						
 						player.setQuest(quest);	
 						
-						player.getClient().sendPacket(Type.QT, "get "+quest.getID());
+						player.getClient().sendPacket(Type.QT, "get "+quest.getId());
 						
 						/*
 						player.getClient().sendPacket(Type.SAY, "Quest: "+quest.getID()+" "+quest.getDescrition()+" ("+quest.getType().byValue()+")");		

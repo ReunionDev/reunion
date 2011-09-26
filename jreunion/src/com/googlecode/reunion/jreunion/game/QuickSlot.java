@@ -6,10 +6,8 @@ import java.util.Vector;
 
 import org.apache.log4j.Logger;
 
-import com.googlecode.reunion.jreunion.game.items.potion.Potion;
 import com.googlecode.reunion.jreunion.server.Client;
 import com.googlecode.reunion.jreunion.server.DatabaseUtils;
-import com.googlecode.reunion.jreunion.server.Server;
 
 /**
  * @author Aidamina

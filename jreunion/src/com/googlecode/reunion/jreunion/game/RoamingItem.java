@@ -1,8 +1,7 @@
 package com.googlecode.reunion.jreunion.game;
 
-import com.googlecode.reunion.jreunion.server.Server;
-import com.googlecode.reunion.jreunion.server.Session;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
+import com.googlecode.reunion.jreunion.server.Session;
 
 public class RoamingItem extends WorldObject{
 

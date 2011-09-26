@@ -9,8 +9,6 @@ import com.googlecode.reunion.jreunion.game.Skill;
 import com.googlecode.reunion.jreunion.game.items.equipment.RingWeapon;
 import com.googlecode.reunion.jreunion.game.items.equipment.Weapon;
 import com.googlecode.reunion.jreunion.game.skills.Modifier;
-import com.googlecode.reunion.jreunion.game.skills.Modifier.ModifierType;
-import com.googlecode.reunion.jreunion.game.skills.Modifier.ValueType;
 import com.googlecode.reunion.jreunion.server.SkillManager;
 
 public abstract class RingWeaponMastery extends Skill implements Modifier {

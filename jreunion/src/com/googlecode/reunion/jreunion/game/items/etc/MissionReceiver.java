@@ -4,6 +4,7 @@ import com.googlecode.reunion.jreunion.game.LivingObject;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Quest;
 import com.googlecode.reunion.jreunion.game.Usable;
+import com.googlecode.reunion.jreunion.server.Client;
 import com.googlecode.reunion.jreunion.server.DatabaseUtils;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 
@@ -60,7 +61,11 @@ public class MissionReceiver extends Etc implements Usable{
 			setExtraStats(getExtraStats()-1);
 			DatabaseUtils.getDinamicInstance().saveItem(this);
 			player.setQuest(quest);
-			player.getQuest().load(player, slot);
+			
+			Client client = player.getClient();
+			
+			client.sendPacket(Type.QT, "quick " + slot + " " + this.getExtraStats());
+			
 		}	
 	}
 

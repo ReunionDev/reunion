@@ -1,9 +1,6 @@
 package com.googlecode.reunion.jreunion.game.items.equipment;
 
-import org.apache.log4j.Logger;
-
 import com.googlecode.reunion.jcommon.ParsedItem;
-import com.googlecode.reunion.jreunion.game.Item;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.PlayerItem;
 import com.googlecode.reunion.jreunion.server.Reference;

@@ -1,11 +1,8 @@
 package com.googlecode.reunion.jreunion.events.session;
 
-import java.net.Socket;
-
 import com.googlecode.reunion.jreunion.events.Event;
 import com.googlecode.reunion.jreunion.events.Filter;
 import com.googlecode.reunion.jreunion.events.InvalidEventException;
-import com.googlecode.reunion.jreunion.server.Client;
 import com.googlecode.reunion.jreunion.server.Session;
 /**
  * @author Aidamina

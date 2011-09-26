@@ -1,12 +1,7 @@
 package com.googlecode.reunion.jreunion.game;
 
-import java.util.Iterator;
-
 import com.googlecode.reunion.jreunion.server.Client;
-import com.googlecode.reunion.jreunion.server.ItemFactory;
-import com.googlecode.reunion.jreunion.server.Server;
 import com.googlecode.reunion.jreunion.server.Tools;
-import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 
 /**
  * @author Aidamina

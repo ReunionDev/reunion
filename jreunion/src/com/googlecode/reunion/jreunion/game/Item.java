@@ -1,14 +1,10 @@
 package com.googlecode.reunion.jreunion.game;
 
-import org.apache.log4j.Logger;
-
 import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jreunion.game.Equipment.Slot;
-import com.googlecode.reunion.jreunion.game.items.equipment.Armor;
-import com.googlecode.reunion.jreunion.game.items.equipment.Weapon;
 import com.googlecode.reunion.jreunion.server.DatabaseUtils;
-import com.googlecode.reunion.jreunion.server.Reference;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
+import com.googlecode.reunion.jreunion.server.Reference;
 
 /**
  * @author Aidamina

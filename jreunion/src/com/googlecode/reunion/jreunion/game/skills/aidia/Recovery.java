@@ -5,7 +5,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.googlecode.reunion.jreunion.game.Castable;
-import com.googlecode.reunion.jreunion.game.Effectable;
 import com.googlecode.reunion.jreunion.game.LivingObject;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Skill;

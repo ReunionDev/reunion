@@ -10,7 +10,7 @@ import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.util.Set;
 
-public abstract class NetworkThread<T extends Connection<?>> extends Thread {
+public abstract class NetworkThread<T extends Connection<T>> extends Thread {
 
 	private Selector selector;
 	

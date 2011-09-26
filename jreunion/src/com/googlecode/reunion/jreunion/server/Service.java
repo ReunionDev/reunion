@@ -8,7 +8,7 @@ import com.googlecode.reunion.jreunion.events.EventDispatcher;
 import com.googlecode.reunion.jreunion.events.EventListener;
 
 public class Service extends EventDispatcher implements EventListener {
-	static List<Class> services = new ArrayList<Class>();
+	static List<Class<?>> services = new ArrayList<Class<?>>();
 	
 	
 	public String getName(){		
@@ -23,7 +23,7 @@ public class Service extends EventDispatcher implements EventListener {
 	}
 	
 	
-	static void registerService(Class cl){
+	static void registerService(Class<?> cl){
 		if(services.contains(cl))
 			return;		
 		services.add(cl);		

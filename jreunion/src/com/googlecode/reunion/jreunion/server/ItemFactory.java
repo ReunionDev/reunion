@@ -1,7 +1,5 @@
 package com.googlecode.reunion.jreunion.server;
 
-import org.apache.log4j.Logger;
-
 import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jreunion.game.Item;
 

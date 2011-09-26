@@ -1,7 +1,6 @@
 package com.googlecode.reunion.jreunion.game;
 
 import com.googlecode.reunion.jreunion.server.Client;
-import com.googlecode.reunion.jreunion.server.ItemFactory;
 import com.googlecode.reunion.jreunion.server.Tools;
 
 

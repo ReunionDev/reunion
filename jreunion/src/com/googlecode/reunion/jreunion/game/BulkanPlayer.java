@@ -1,9 +1,6 @@
 package com.googlecode.reunion.jreunion.game;
 
-import java.util.Iterator;
-
 import com.googlecode.reunion.jreunion.server.Client;
-import com.googlecode.reunion.jreunion.server.Server;
 import com.googlecode.reunion.jreunion.server.Tools;
 
 

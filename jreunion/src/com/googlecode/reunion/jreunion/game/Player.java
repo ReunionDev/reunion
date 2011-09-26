@@ -831,7 +831,6 @@ public abstract class Player extends LivingObject implements EventListener {
 	
 	@Override
 	public void setLevel(int level) {
-		int oldLevel = getLevel();
 		super.setLevel(level);
 		loadFromReference(level);
 		if(client.getState()==State.INGAME) {
@@ -894,6 +893,7 @@ public abstract class Player extends LivingObject implements EventListener {
 	}
 
 	public void setQuest(Quest quest) {
+		client.sendPacket(Type.QT, "get " + quest.getId());
 		this.quest = quest;
 	}
 

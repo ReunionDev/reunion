@@ -1,10 +1,8 @@
 package com.googlecode.reunion.jreunion.game.skills;
 
-import java.util.Iterator;
 import java.util.List;
 
 import com.googlecode.reunion.jreunion.game.Castable;
-import com.googlecode.reunion.jreunion.game.Effectable;
 import com.googlecode.reunion.jreunion.game.LivingObject;
 import com.googlecode.reunion.jreunion.game.Mob;
 import com.googlecode.reunion.jreunion.game.Player;

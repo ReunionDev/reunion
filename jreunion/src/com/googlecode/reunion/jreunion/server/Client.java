@@ -216,13 +216,11 @@ public class Client extends EventDispatcher implements EventListener,Sendable {
 	@Override
 	public void handleEvent(Event event) {
 		if(event instanceof NetworkEvent){
-			SocketChannel socketChannel =((NetworkEvent) event).getSocketChannel();
+			NetworkEvent networkEvent = (NetworkEvent) event;
 			if(event instanceof NetworkDataEvent) {
 				synchronized(this){
-					NetworkDataEvent networkDataEvent = (NetworkDataEvent) event;
-
+					NetworkDataEvent networkDataEvent = (NetworkDataEvent) networkEvent;
 					byte [] data = networkDataEvent.getData();
-					
 					if(protocol==null){
 						protocol = Protocol.find(this,data);
 						if(protocol==null) {							
@@ -231,7 +229,6 @@ public class Client extends EventDispatcher implements EventListener,Sendable {
 						}
 						Logger.getLogger(Client.class).debug(this + " protocol discovered: "+protocol);
 					}
-					
 					String decryptedData = protocol.decryptServer(data);
 					Logger.getLogger(Client.class).debug(this + " sends: \n" + decryptedData);
 					

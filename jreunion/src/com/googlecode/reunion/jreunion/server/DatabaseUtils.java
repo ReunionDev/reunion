@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Random;
 import java.util.Vector;
 
 import org.apache.log4j.Logger;
@@ -21,7 +20,12 @@ import com.googlecode.reunion.jreunion.game.Item;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Player.Race;
 import com.googlecode.reunion.jreunion.game.Player.Sex;
+import com.googlecode.reunion.jreunion.game.Position;
 import com.googlecode.reunion.jreunion.game.Quest;
+import com.googlecode.reunion.jreunion.game.QuickSlotItem;
+import com.googlecode.reunion.jreunion.game.RoamingItem;
+import com.googlecode.reunion.jreunion.game.Skill;
+import com.googlecode.reunion.jreunion.game.StashItem;
 import com.googlecode.reunion.jreunion.game.items.equipment.Armor;
 import com.googlecode.reunion.jreunion.game.items.equipment.Axe;
 import com.googlecode.reunion.jreunion.game.items.equipment.GunWeapon;
@@ -32,12 +36,6 @@ import com.googlecode.reunion.jreunion.game.items.equipment.Weapon;
 import com.googlecode.reunion.jreunion.game.items.potion.Potion;
 import com.googlecode.reunion.jreunion.game.quests.objective.Objective;
 import com.googlecode.reunion.jreunion.game.quests.reward.Reward;
-import com.googlecode.reunion.jreunion.game.Position;
-import com.googlecode.reunion.jreunion.game.QuickSlotItem;
-import com.googlecode.reunion.jreunion.game.RoamingItem;
-import com.googlecode.reunion.jreunion.game.Skill;
-import com.googlecode.reunion.jreunion.game.StashItem;
-import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 
 
 /**
@@ -1284,7 +1282,7 @@ public class DatabaseUtils extends Service {
 			objectiveStmt  = staticDatabase.staticConn.createStatement();
 			objectiveTypeStmt  = staticDatabase.staticConn.createStatement();
 			
-			ResultSet objectiveRs = objectiveStmt.executeQuery("SELECT * FROM quests_objective WHERE questid='"+quest.getID()+"';");
+			ResultSet objectiveRs = objectiveStmt.executeQuery("SELECT * FROM quests_objective WHERE questid='"+quest.getId()+"';");
 			
 			if(objectiveRs.next()){
 				do {			
@@ -1325,7 +1323,7 @@ public class DatabaseUtils extends Service {
 			rewardStmt  = staticDatabase.staticConn.createStatement();
 			rewardTypeStmt  = staticDatabase.staticConn.createStatement();
 			
-			ResultSet rewardRs = rewardStmt.executeQuery("SELECT * FROM quests_reward WHERE questid='"+quest.getID()+"';");
+			ResultSet rewardRs = rewardStmt.executeQuery("SELECT * FROM quests_reward WHERE questid='"+quest.getId()+"';");
 			
 			if(rewardRs.next()){
 				do {	

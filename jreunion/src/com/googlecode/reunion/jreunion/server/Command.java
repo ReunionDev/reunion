@@ -1,10 +1,6 @@
 package com.googlecode.reunion.jreunion.server;
 
-import java.net.InetSocketAddress;
-import java.net.Socket;
 import java.nio.channels.SocketChannel;
-import java.util.BitSet;
-import java.util.Iterator;
 
 import org.apache.log4j.Logger;
 
@@ -12,21 +8,15 @@ import com.googlecode.reunion.jreunion.events.map.ItemDropEvent;
 import com.googlecode.reunion.jreunion.game.Equipment;
 import com.googlecode.reunion.jreunion.game.Item;
 import com.googlecode.reunion.jreunion.game.LivingObject;
-import com.googlecode.reunion.jreunion.game.Mob;
-import com.googlecode.reunion.jreunion.game.Npc;
 import com.googlecode.reunion.jreunion.game.Player;
-import com.googlecode.reunion.jreunion.game.QuickSlot;
-import com.googlecode.reunion.jreunion.game.QuickSlotItem;
-import com.googlecode.reunion.jreunion.game.Usable;
-import com.googlecode.reunion.jreunion.game.Equipment.Slot;
 import com.googlecode.reunion.jreunion.game.Player.Race;
 import com.googlecode.reunion.jreunion.game.Player.Sex;
-import com.googlecode.reunion.jreunion.game.Player.Status;
-import com.googlecode.reunion.jreunion.game.items.equipment.SlayerWeapon;
-import com.googlecode.reunion.jreunion.game.items.equipment.Weapon;
 import com.googlecode.reunion.jreunion.game.Position;
+import com.googlecode.reunion.jreunion.game.QuickSlot;
 import com.googlecode.reunion.jreunion.game.RoamingItem;
 import com.googlecode.reunion.jreunion.game.Skill;
+import com.googlecode.reunion.jreunion.game.Usable;
+import com.googlecode.reunion.jreunion.game.items.equipment.SlayerWeapon;
 import com.googlecode.reunion.jreunion.server.Client.LoginType;
 import com.googlecode.reunion.jreunion.server.Client.State;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;

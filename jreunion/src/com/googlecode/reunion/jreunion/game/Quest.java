@@ -195,28 +195,10 @@ public class Quest {
 	 * (client.networkId,packetData); }
 	 */
 
-	public int getID() {
-		return id;
-	}
-
 	public int getPT() {
 		return pt;
 	}
 
-	/****** Handle client packets ********/
-	public boolean load(Player player, int slot) {
-		Client client = player.getClient();
-
-		if (client == null) {
-			return false;
-		}
-		
-		Item item = player.getQuickSlot().getItem(slot).getItem();
-		
-		client.sendPacket(Type.QT, "get " + getId());
-		client.sendPacket(Type.QT, "quick " + slot + " " + item.getExtraStats());
-		return true;
-	}
 
 	public int getTP() {
 		return tp;

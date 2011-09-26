@@ -8,9 +8,7 @@ import java.util.Map.Entry;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadFactory;
-import java.util.concurrent.ThreadPoolExecutor;
 
 import org.apache.log4j.Logger;
 /**
@@ -34,7 +32,7 @@ public class EventDispatcher{
 		return Event.<T>Create(eventClass, this, args);
 	}
 	
-	public <T extends Event> int fireEvent(Class<T> eventClass,Object... args){
+	public <T extends Event> int fireEvent(Class<T> eventClass, Object... args){
 		return this.fireEvent(this.createEvent(eventClass, args));
 	}
 	

@@ -3,7 +3,6 @@ package com.googlecode.reunion.jreunion.game;
 import com.googlecode.reunion.jreunion.events.EventDispatcher;
 import com.googlecode.reunion.jreunion.events.session.SendPacketSessionEvent;
 import com.googlecode.reunion.jreunion.server.LocalMap;
-import com.googlecode.reunion.jreunion.server.Map;
 import com.googlecode.reunion.jreunion.server.PacketFactory;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 import com.googlecode.reunion.jreunion.server.Sendable;

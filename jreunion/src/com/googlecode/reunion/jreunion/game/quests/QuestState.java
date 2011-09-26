@@ -1,7 +1,6 @@
 package com.googlecode.reunion.jreunion.game.quests;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import com.googlecode.reunion.jreunion.game.Quest;
@@ -14,13 +13,17 @@ public class QuestState {
 	
 	public QuestState(Quest quest) {
 		this.quest = quest;
-		loadObjectives(quest.getObjectives());
 	}
 	
-	public void loadObjectives(List<Objective> objectives){
-		for(Objective objective: objectives){
-			progression.put(objective, objective.getAmmount());
+	public void increase(Objective objective){
+		
+		if(!quest.getObjectives().contains(objective)){
+			throw new RuntimeException("Quest "+quest.getId()+" does not have objective "+objective.getId());
 		}
+		if(!progression.containsKey(objective)){
+			progression.put(objective, 0);
+		}
+		progression.put(objective, progression.get(objective) + 1);		
 	}
 	
 	public Quest getQuest(){

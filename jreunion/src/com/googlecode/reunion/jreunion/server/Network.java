@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.BindException;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
-import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.nio.channels.CancelledKeyException;
 import java.nio.channels.ClosedChannelException;
@@ -14,20 +13,13 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
-import java.util.Date;
-import java.util.Hashtable;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
-import java.util.Vector;
 
 import org.apache.log4j.Logger;
 
 import com.googlecode.reunion.jreunion.events.Event;
-import com.googlecode.reunion.jreunion.events.EventDispatcher;
 import com.googlecode.reunion.jreunion.events.EventListener;
-import com.googlecode.reunion.jreunion.events.client.ClientSendEvent;
 import com.googlecode.reunion.jreunion.events.network.NetworkAcceptEvent;
 import com.googlecode.reunion.jreunion.events.network.NetworkDataEvent;
 import com.googlecode.reunion.jreunion.events.network.NetworkDisconnectEvent;
@@ -35,14 +27,11 @@ import com.googlecode.reunion.jreunion.events.network.NetworkSendEvent;
 import com.googlecode.reunion.jreunion.events.server.ServerEvent;
 import com.googlecode.reunion.jreunion.events.server.ServerStartEvent;
 import com.googlecode.reunion.jreunion.events.server.ServerStopEvent;
-import com.googlecode.reunion.jreunion.game.Player;
 
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-
-
 
 public class Network extends Service implements Runnable, EventListener{
 	

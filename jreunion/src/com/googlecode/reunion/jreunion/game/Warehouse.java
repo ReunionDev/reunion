@@ -6,7 +6,6 @@ import com.googlecode.reunion.jreunion.server.Client;
 import com.googlecode.reunion.jreunion.server.DatabaseUtils;
 import com.googlecode.reunion.jreunion.server.ItemFactory;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
-import com.googlecode.reunion.jreunion.server.Server;
 
 /**
  * @author Aidamina

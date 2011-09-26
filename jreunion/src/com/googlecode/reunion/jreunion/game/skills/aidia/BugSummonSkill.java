@@ -1,8 +1,5 @@
 package com.googlecode.reunion.jreunion.game.skills.aidia;
 
-import com.googlecode.reunion.jreunion.game.LivingObject;
-import com.googlecode.reunion.jreunion.game.Player;
-import com.googlecode.reunion.jreunion.game.items.equipment.Weapon;
 import com.googlecode.reunion.jreunion.server.SkillManager;
 
 public class BugSummonSkill extends RingWeaponMastery {

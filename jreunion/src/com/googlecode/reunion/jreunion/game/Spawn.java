@@ -1,14 +1,12 @@
 package com.googlecode.reunion.jreunion.game;
 
 import java.util.Random;
-import java.util.TimerTask;
 
 import com.googlecode.reunion.jreunion.events.map.SpawnEvent;
 import com.googlecode.reunion.jreunion.server.Area;
-import com.googlecode.reunion.jreunion.server.LocalMap;
-import com.googlecode.reunion.jreunion.server.Map;
-import com.googlecode.reunion.jreunion.server.Server;
 import com.googlecode.reunion.jreunion.server.Area.Field;
+import com.googlecode.reunion.jreunion.server.LocalMap;
+import com.googlecode.reunion.jreunion.server.Server;
 
 /**
  * @author Aidamina

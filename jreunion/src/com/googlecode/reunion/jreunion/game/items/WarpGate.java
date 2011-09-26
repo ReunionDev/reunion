@@ -4,7 +4,6 @@ import com.googlecode.reunion.jreunion.game.LivingObject;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Usable;
 import com.googlecode.reunion.jreunion.game.items.etc.Etc;
-import com.googlecode.reunion.jreunion.server.Map;
 
 /**
  * @author Aidamina

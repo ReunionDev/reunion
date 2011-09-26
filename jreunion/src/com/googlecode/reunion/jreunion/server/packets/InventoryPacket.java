@@ -3,7 +3,6 @@ package com.googlecode.reunion.jreunion.server.packets;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.googlecode.reunion.jreunion.game.Inventory;
 import com.googlecode.reunion.jreunion.server.parser.Parseable;
 
 public class InventoryPacket extends Packet implements Parseable<InventoryPacket> {
