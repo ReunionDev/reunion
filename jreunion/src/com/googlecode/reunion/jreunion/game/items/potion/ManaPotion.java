@@ -1,13 +1,11 @@
 package com.googlecode.reunion.jreunion.game.items.potion;
 
-import com.googlecode.reunion.jreunion.game.LivingObject;
 import com.googlecode.reunion.jreunion.game.Player;
 
 public class ManaPotion extends Potion {
 
 	public ManaPotion(int id) {
 		super(id);
-		// TODO Auto-generated constructor stub
 	}
 
 
@@ -17,7 +15,5 @@ public class ManaPotion extends Potion {
 			target.setMana(target.getMana()+effect);
 		
 		}
-		
 	}
-
 }

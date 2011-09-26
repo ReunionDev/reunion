@@ -36,19 +36,16 @@ public abstract class Potion extends Etc implements Usable {
 	@Override
 	public void use(final LivingObject user, int slot) {
 		final Timer timer = new Timer();
-		final long start = System.currentTimeMillis();
 		
 		TimerTask o= new TimerTask(){
 			int left = getEffect();
 			int ticks = Potion.ticks;
 			Player player = (Player)user;
+			
 			@Override
 			public void run() {
-				
 				int effect = getEffect()/Potion.ticks;
-				
 				effect(player, Math.min(left, effect));
-				
 				left-=effect;
 				ticks--;
 				if(ticks==0)

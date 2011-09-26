@@ -17,16 +17,19 @@ public class Tools {
 	
 	/**
 	 * Normalize a value between upper and lower bounds 
-	 * TODO: Use Generics
 	 * @param current
 	 * @param min
 	 * @param max
 	 * @return
 	 */
-	public static int between(int current, int min, int max) {
-
-		return Math.max(Math.min(current, max), min);
-
+	public static <T extends Comparable<T>> T between(T current, T min, T max) {
+		T value = current;
+		if(value.compareTo(max)>0){
+			value = max;
+		}else if(value.compareTo(min)<0){
+			value = min;
+		}
+		return value;
 	}
 	
 	/**

@@ -406,7 +406,7 @@ public abstract class Player extends LivingObject implements EventListener {
 
 	public synchronized void setElectricity(int electricity) {
 		int before = this.electricity;
-		this.electricity = Tools.between(electricity,0,getMaxElectricity());
+		this.electricity = Tools.between(electricity, 0, getMaxElectricity());
 		if(this.electricity!=before)
 			sendStatus(Status.ELECTRICITY);
 	}	

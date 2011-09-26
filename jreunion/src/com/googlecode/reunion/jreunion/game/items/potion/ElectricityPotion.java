@@ -1,6 +1,5 @@
 package com.googlecode.reunion.jreunion.game.items.potion;
 
-import com.googlecode.reunion.jreunion.game.LivingObject;
 import com.googlecode.reunion.jreunion.game.Player;
 
 public class ElectricityPotion extends Potion {
@@ -15,7 +14,5 @@ public class ElectricityPotion extends Potion {
 			target.setElectricity(target.getElectricity()+effect);
 		
 		}
-		
 	}
-
 }

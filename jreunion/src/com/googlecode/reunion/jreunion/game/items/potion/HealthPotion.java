@@ -1,6 +1,5 @@
 package com.googlecode.reunion.jreunion.game.items.potion;
 
-import com.googlecode.reunion.jreunion.game.LivingObject;
 import com.googlecode.reunion.jreunion.game.Player;
 
 public class HealthPotion extends Potion {
@@ -16,7 +15,5 @@ public class HealthPotion extends Potion {
 			target.setHp(target.getHp()+effect);
 		
 		}
-		
 	}
-
 }
