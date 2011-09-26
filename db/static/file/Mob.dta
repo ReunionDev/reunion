@@ -2246,6 +2246,327 @@ Exp = 27671
 Lime = 415
 AllowedOnMap = 6
 
+###### Great White Horn ######################################
+
+[Ice Collector]
+Class = Mob
+ID = 295
+Level = 160
+Hp = 60000
+Dmg = 900
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 360
+AllowedOnMap = 7
+
+[Ice Halfer]
+Class = Mob
+ID = 298
+Level = 180
+Hp = 100000
+Dmg = 1100
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 440
+AllowedOnMap = 7
+
+###### Great White Horn & Genus Labor ######################################
+
+[Frozen Head]
+Class = Mob
+ID = 300
+Level = 190
+Hp = 130000
+Dmg = 1300
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 490
+AllowedOnMap = 7,8
+
+[Ice Cracker]
+Class = Mob
+ID = 296
+Level = 200
+Hp = 130000
+Dmg = 1300
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 490
+AllowedOnMap = 7,8
+
+[Clay Soul]
+Class = Mob
+ID = 299
+Level = 210
+Hp = 190000
+Dmg = 1700
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 590
+AllowedOnMap = 7,8
+
+[Ice Risk]
+Class = Mob
+ID = 302
+Level = 200
+Hp = 230000
+Dmg = 2000
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 650
+AllowedOnMap = 7,8
+
+[Hail Wizard]
+Class = Mob
+ID = 297
+Level = 230
+Hp = 270000
+Dmg = 2300
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 710
+AllowedOnMap = 7,8
+
+[Winter Knight]
+Class = Mob
+ID = 294
+Level = 260
+Hp = 410000
+Dmg = 3400
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 910
+AllowedOnMap = 7,8
+
+###### Genus Labor ######################################
+
+[Yeti]
+Class = Mob
+ID = 363
+Level = 210
+Hp = 190000
+Dmg = 1700
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 590
+AllowedOnMap = 8
+
+[Garpon Soldier]
+Class = Mob
+ID = 364
+Level = 231
+Hp = 415000
+Dmg = 2330
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 716
+AllowedOnMap = 8
+
+[Frozen Yeti]
+Class = Mob
+ID = 362
+Level = 244
+Hp = 330000
+Dmg = 2760
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 798
+AllowedOnMap = 8
+
+[Ice Tower]
+Class = Mob
+ID = 360
+Level = 245
+Hp = 335000
+Dmg = 2800
+Speed = 0
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 805
+AllowedOnMap = 8
+
+[Lightning Tower]
+Class = Mob
+ID = 361
+Level = 248
+Hp = 350000
+Dmg = 2920
+Speed = 0
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 826
+AllowedOnMap = 8
+
+[Garpon Spearman]
+Class = Mob
+ID = 359
+Level = 250
+Hp = 360000
+Dmg = 3000
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 840
+AllowedOnMap = 8
+
+[Garpon Guardman]
+Class = Mob
+ID = 357
+Level = 261
+Hp = 415000
+Dmg = 3440
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 917
+AllowedOnMap = 8
+
+[Garpon Spearhead]
+Class = Mob
+ID = 358
+Level = 254
+Hp = 380000
+Dmg = 3160
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 868
+AllowedOnMap = 8
+
+[Sicrin]
+Class = Mob
+ID = 354
+Level = 284
+Hp = 11184500
+Dmg = 6900
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 81375
+AllowedOnMap = 8
+
+[Sharklord]
+Class = Mob
+ID = 355
+Level = 285
+Hp = 11251000
+Dmg = 6974
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 82250
+AllowedOnMap = 8
+
+[Beradin]
+Class = Mob
+ID = 356
+Level = 287
+Hp = 11384000
+Dmg = 7123
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 84000
+AllowedOnMap = 8
+
+[Kisare]
+Class = Mob
+ID = 353
+Level = 291
+Hp = 11650000
+Dmg = 7420
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 87500
+AllowedOnMap = 8
+
+[Mouel]
+Class = Mob
+ID = 352
+Level = 300
+Hp = 30000000
+Dmg = 13600
+Speed = 20
+AttackType = 0
+DmgType = 0
+Mutant = 0
+NeoProgmare = 0
+Exp = 1
+Lime = 1
+AllowedOnMap = 8
+
 ###### Multiple Maps ######################################
 
 
@@ -2507,95 +2828,6 @@ Lime = 10
 AllowedOnMap = 4,0,3,5,6,2,1,7,8
 
 ##### Castle Gates ######
-[Mouel]
-Class = Mob
-ID = 352
-Level = 1
-Hp = 1
-Dmg = 1
-Speed = 20
-AttackType = 0
-DmgType = 0
-Mutant = 0
-NeoProgmare = 0
-Exp = 1
-Lime = 1
-AllowedOnMap = 4,0,3,5,6,2,1,7,8
-
-[Kisare]
-Class = Mob
-ID = 353
-Level = 1
-Hp = 1
-Dmg = 1
-Speed = 20
-AttackType = 0
-DmgType = 0
-Mutant = 0
-NeoProgmare = 0
-Exp = 1
-Lime = 1
-AllowedOnMap = 4,0,3,5,6,2,1,7,8
-
-[Sicrin]
-Class = Mob
-ID = 354
-Level = 1
-Hp = 1
-Dmg = 1
-Speed = 20
-AttackType = 0
-DmgType = 0
-Mutant = 0
-NeoProgmare = 0
-Exp = 1
-Lime = 1
-AllowedOnMap = 4,0,3,5,6,2,1,7,8
-
-[Shakload]
-Class = Mob
-ID = 355
-Level = 1
-Hp = 1
-Dmg = 1
-Speed = 20
-AttackType = 0
-DmgType = 0
-Mutant = 0
-NeoProgmare = 0
-Exp = 1
-Lime = 1
-AllowedOnMap = 4,0,3,5,6,2,1,7,8
-
-[Beradin]
-Class = Mob
-ID = 356
-Level = 1
-Hp = 1
-Dmg = 1
-Speed = 20
-AttackType = 0
-DmgType = 0
-Mutant = 0
-NeoProgmare = 0
-Exp = 1
-Lime = 1
-AllowedOnMap = 4,0,3,5,6,2,1,7,8
-
-[Garpon Soldier]
-Class = Mob
-ID = 364
-Level = 1
-Hp = 1
-Dmg = 1
-Speed = 20
-AttackType = 0
-DmgType = 0
-Mutant = 0
-NeoProgmare = 0
-Exp = 1
-Lime = 1
-AllowedOnMap = 4,0,3,5,6,2,1,7,8
 
 [Quake Stone]
 Class = Mob
