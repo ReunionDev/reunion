@@ -46,7 +46,7 @@ public abstract class Connection<T extends Connection<T>> {
 		}
 	}
 
-	public NetworkThread<?> getNetworkThread() {
+	public NetworkThread<T> getNetworkThread() {
 		return networkThread;
 	}
 

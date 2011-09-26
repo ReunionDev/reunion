@@ -1,6 +1,5 @@
 package com.googlecode.reunion.jreunion.game.skills.human;
 
-import com.googlecode.reunion.jreunion.game.Skill;
 import com.googlecode.reunion.jreunion.server.SkillManager;
 
 public class Marksmanship extends GunMastery {
@@ -19,6 +18,4 @@ public class Marksmanship extends GunMastery {
 		return 4+skillLevel;
 	}
 	
-	
-
 }

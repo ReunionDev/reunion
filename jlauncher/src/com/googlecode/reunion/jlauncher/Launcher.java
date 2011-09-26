@@ -13,6 +13,7 @@ import org.apache.log4j.spi.LoggingEvent;
 import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jcommon.Parser;
 import com.googlecode.reunion.jcommon.ServerList;
+import com.googlecode.reunion.jcommon.ServerList.ServerListItem;
 
 public class Launcher {
 	
@@ -33,7 +34,7 @@ public class Launcher {
 				return result;
 			}
 			
-		},ConsoleAppender.SYSTEM_OUT));
+		}, ConsoleAppender.SYSTEM_OUT));
 		Parser launcher = new Parser();
 		Parser servers = new Parser();
 		ServerList serverList = new ServerList();
@@ -43,7 +44,7 @@ public class Launcher {
 			Iterator<ParsedItem> iter = servers.getItemListIterator();
 			while(iter.hasNext()) {
 				ParsedItem server = iter.next();
-				serverList.getItems().add(serverList.new ServerListItem(server.getName(), InetAddress.getByName(server.getMemberValue("Address")), Integer.parseInt(server.getMemberValue("Port"))));				
+				serverList.getItems().add(new ServerListItem(server.getName(), InetAddress.getByName(server.getMemberValue("Address")), Integer.parseInt(server.getMemberValue("Port"))));				
 			}
 			serverList.Save("SvrList.dta");
 			

@@ -12,24 +12,24 @@ public class ServerList
 	private List<ServerListItem> items = new Vector<ServerListItem>();
 	public void Save(String filename) throws IOException{		
 		File file = new File(filename);
-		RandomAccessFile output = new RandomAccessFile(file,"rw");
+		RandomAccessFile output = new RandomAccessFile(file, "rw");
 		int e0,d4,a4;
 		byte fb,ef;	   
 	    output.write(new byte[6]);
 	    e0=30779;
 	    fb=75;
 	    d4=e0+getItems().size();	    
-	    output.write(getShort((short)e0));
+	    output.write(getBytes((short)e0));
 	    output.write(new byte[2]);
 	    output.writeByte(fb);
-	    output.write(getShort((short)d4));
+	    output.write(getBytes((short)d4));
 	    output.write(new byte[2]);
 	    for(ServerListItem item:getItems()) {
 	    	String line = item.getName()+" "+item.getAddress().getHostAddress()+" "+item.getPort();
 	      a4=line.length();
 	      e0=d4;
 	      d4=a4+e0;
-	      output.write(getShort((short)d4));	      
+	      output.write(getBytes((short)d4));	      
 	      output.write(new byte[2]);
 	      for (int j=0;j< a4;j++) {
 	        ef=(byte) (((byte)line.toCharArray()[j])+fb);
@@ -40,11 +40,11 @@ public class ServerList
 	  output.close();
 		 
 	}
-	public byte[] getShort(short input){
+	static byte[] getBytes(short input){
 		
 	    byte high = (byte)(input >>> 8);
 	    byte low = (byte)input;
-	    return new byte[] {low,high};		
+	    return new byte[] {low, high};		
 	}
 	
 	public void Load(String filename) throws IOException{
@@ -63,7 +63,7 @@ public class ServerList
 	    d4 = input.readByte();
 	    input.skipBytes(3);
 	  	int lines=d4-e0;
-	  	for (int i=0; i< lines;i++) {		
+	  	for (int i=0; i< lines; i++) {		
 		    e0=d4;
 		    line="";
 		    d4 = input.readByte();
@@ -90,7 +90,7 @@ public class ServerList
 		return items;
 	}
 
-	public class ServerListItem {
+	public static class ServerListItem {
 		public ServerListItem(String name, InetAddress address, int port) {
 			this.address = address;
 			this.port = port;

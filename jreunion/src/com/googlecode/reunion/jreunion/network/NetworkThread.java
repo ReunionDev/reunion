@@ -117,10 +117,10 @@ public abstract class NetworkThread<T extends Connection<T>> extends Thread {
 				}
 				keys.clear();				
 			} catch (Exception e) {
-				e.printStackTrace();
 				if(e instanceof ClosedSelectorException||e instanceof InterruptedException){
 					return;
 				}
+				e.printStackTrace();
 			}			
 		}		
 	}
