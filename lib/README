@@ -1,0 +1,11 @@
+Prerequisites:
+
+jreunion:
+mysql-connector-java-5.1.13-bin.jar from http://dev.mysql.com/downloads/connector/j/5.1.html
+
+jreunion, jcommon, jlauncher:
+log4j-1.2.16.jar from http://logging.apache.org/log4j/1.2/download.html
+
+Place the prerequisites this folder. (/trunk/lib)
+
+Aidamina

@@ -16,13 +16,11 @@ public class ParsedItem {
 
 	public ParsedItem() {
 		super();
-
 	}
 
 	public ParsedItem(String name) {
 		super();
 		setName(name);
-
 	}
 
 	public void addMember(ParsedItemMember member) {
