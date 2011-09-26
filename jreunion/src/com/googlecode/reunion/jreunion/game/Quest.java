@@ -242,7 +242,7 @@ public class Quest {
 		// S> qt kill [Pos] [Ammount]
 	}
 
-	public void setID(int id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

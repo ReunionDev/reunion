@@ -4,6 +4,7 @@ import java.nio.channels.SocketChannel;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
@@ -1191,40 +1192,33 @@ public class DatabaseUtils extends Service {
 		  }
 	}
 	
-	public Quest getRandomQuest(Player player){
-		if (player == null) return null;
+	public java.util.Map<Integer,Quest> loadAllQuests(){
 		if (!checkStaticDatabase()) return null;
 		
 		//a quests list that will only contain quests of the player level
-		List<Quest> questsList = new Vector<Quest>();
-		int randQuestId = -1;
+		java.util.Map<Integer,Quest> questsList = new HashMap<Integer,Quest>();
 		
 		Statement stmt;
 		try {
 			stmt  = staticDatabase.staticConn.createStatement();
 			
-			ResultSet rs = stmt.executeQuery("SELECT * FROM quests WHERE minlevel <= '"+player.getLevel()+
-												"' and maxlevel >= '"+player.getLevel()+"';");
+			ResultSet rs = stmt.executeQuery("SELECT * FROM quests;");
 			
 			if (rs.next()) {	
 				do {
-					questsList.add(loadQuest(rs.getInt("id")));
+					Quest quest = loadQuest(rs.getInt("id"));
+					questsList.put(quest.getId(), quest);
 				} while(rs.next());
 			} else {		
-				Logger.getLogger(DatabaseUtils.class).debug("No quests found for the player level!");
+				Logger.getLogger(DatabaseUtils.class).debug("Failed to get quests from the Static Database!");
 				return null;
-			}
-	
-			while( randQuestId > questsList.size()-1 || randQuestId == -1){
-				randQuestId = (int)(Math.random()*100);
-				//gets a random position from the available quests list.
 			}
 		} 
 		catch (SQLException e) 
 		{
 			Logger.getLogger(this.getClass()).warn("Exception",e);
 		}
-		return questsList.get(randQuestId);
+		return questsList;
 	}
 	
 	public Quest loadQuest(int questId )

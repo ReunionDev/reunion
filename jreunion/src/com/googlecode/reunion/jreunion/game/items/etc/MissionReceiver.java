@@ -51,10 +51,10 @@ public class MissionReceiver extends Etc implements Usable{
 				return;
 			}
 			
-			Quest quest = DatabaseUtils.getStaticInstance().getRandomQuest(player);
+			Quest quest = player.getClient().getWorld().getQuestManager().getRandomQuest(player);
 			
 			if(quest == null){
-				player.getClient().sendPacket(Type.SAY, "No quests available for your level.");
+				player.getClient().sendPacket(Type.SAY, "No quests available for character level.");
 				return;
 			} 
 			

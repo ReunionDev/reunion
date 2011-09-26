@@ -18,6 +18,7 @@ import com.googlecode.reunion.jreunion.events.network.NetworkAcceptEvent;
 import com.googlecode.reunion.jreunion.events.session.SessionEvent;
 import com.googlecode.reunion.jreunion.game.Equipment.Slot;
 import com.googlecode.reunion.jreunion.game.items.equipment.Armor;
+import com.googlecode.reunion.jreunion.game.quests.QuestState;
 import com.googlecode.reunion.jreunion.server.Client;
 import com.googlecode.reunion.jreunion.server.Client.State;
 import com.googlecode.reunion.jreunion.server.DatabaseUtils;
@@ -123,6 +124,8 @@ public abstract class Player extends LivingObject implements EventListener {
 	private QuickSlot quickSlot;
 
 	private Quest quest;
+	
+	private QuestState questState;
 
 	private Stash stash;
 
@@ -368,6 +371,10 @@ public abstract class Player extends LivingObject implements EventListener {
 
 	public Quest getQuest() {
 		return quest;
+	}
+	
+	public QuestState getQuestState() {
+		return questState;
 	}
 
 	public QuickSlot getQuickSlot() {
@@ -895,6 +902,10 @@ public abstract class Player extends LivingObject implements EventListener {
 	public void setQuest(Quest quest) {
 		client.sendPacket(Type.QT, "get " + quest.getId());
 		this.quest = quest;
+	}
+	
+	public void setQuestState(QuestState questState){
+		this.questState = questState;
 	}
 
 	public void setSession(Session session) {
