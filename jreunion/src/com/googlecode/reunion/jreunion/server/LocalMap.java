@@ -81,6 +81,8 @@ public class LocalMap extends Map implements Runnable{
 		this.addEventListener(PlayerLogoutEvent.class, this);
 		this.addEventListener(ItemDropEvent.class, this);
 		this.addEventListener(ItemPickupEvent.class, this);
+		
+		world.getQuestManager().loadQuests();
 	}
 	
 	public Entity getEntity(int id) {		

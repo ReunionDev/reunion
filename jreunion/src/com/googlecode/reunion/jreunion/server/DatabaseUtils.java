@@ -1192,7 +1192,7 @@ public class DatabaseUtils extends Service {
 		  }
 	}
 	
-	public java.util.Map<Integer,Quest> loadAllQuests(){
+	public java.util.Map<Integer,Quest> loadQuests(){
 		if (!checkStaticDatabase()) return null;
 		
 		//a quests list that will only contain quests of the player level
@@ -1251,6 +1251,8 @@ public class DatabaseUtils extends Service {
 			
 			Quest quest = (Quest)ClassFactory.create(className, questId);
 			quest.setDescription(questRs.getString("name"));
+			quest.setMinLevel(questRs.getInt("minlevel"));
+			quest.setMaxLevel(questRs.getInt("maxlevel"));
 			
 			if(!loadQuestObjectives(quest) || !loadQuestRewards(quest)){
 				return null;

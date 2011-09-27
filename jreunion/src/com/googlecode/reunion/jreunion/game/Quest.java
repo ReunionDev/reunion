@@ -19,11 +19,7 @@ public class Quest {
 	
 	private String description;
 
-	//TODO: move this to another location
-	private int tp; //total points
-
-	//TODO: move this to another location
-	private int pt; //obtained points
+	
 	
 	private int minLevel;
 	
@@ -135,15 +131,7 @@ public class Quest {
 	
 	/****** Cancel the current player Quest ********/
 	public void cancel(Player player) {
-		Client client = player.getClient();
-
-		if (client == null) {
-			return;
-		}
-
 		player.setQuest(null);
-		client.sendPacket(Type.SAY, "Quest cancelled.");
-		client.sendPacket(Type.QT, "get -1");
 	}
 
 	/****** Update Quest Points Obtained ********/
@@ -195,15 +183,6 @@ public class Quest {
 	 * (client.networkId,packetData); }
 	 */
 
-	public int getPT() {
-		return pt;
-	}
-
-
-	public int getTP() {
-		return tp;
-	}
-
 	/****** Quest Eff ********/
 	public void eff(Player player) {
 		Client client = player.getClient();
@@ -227,7 +206,11 @@ public class Quest {
 		client.sendPacket(Type.QT, "end " + questId);
 	}
 
-	/****** Quest Kill ********/
+	/**
+	 *  Quest Kill 
+	 * 
+	 * 
+	 */
 	public void kill(Player player) {
 		Client client = player.getClient();
 
@@ -236,23 +219,17 @@ public class Quest {
 		}
 
 		int pos = 0;
-		int ammount = 1;
+		int ammountRemaining = 1;
 		
-		client.sendPacket(Type.QT, "kill " + pos + " " + ammount);
-		// S> qt kill [Pos] [Ammount]
+		client.sendPacket(Type.QT, "kill " + pos + " " + ammountRemaining);
+		// S> qt kill [Pos(0,1,2...)] [AmmountRemaining]
 	}
 
 	public void setId(int id) {
 		this.id = id;
 	}
 
-	public void setPT(int pt) {
-		this.pt = pt;
-	}
 
-	public void setTP(int tp) {
-		this.tp = tp;
-	}
 
 	/****** Quest Spawn Of Ruin ********/
 	public void spawnOfRuin(Player player, int slot) {

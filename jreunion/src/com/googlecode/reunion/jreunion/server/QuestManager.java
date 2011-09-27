@@ -14,8 +14,13 @@ public class QuestManager {
 	java.util.Map<Integer,Quest> quests = new HashMap<Integer,Quest>();
 	
 	public QuestManager(){
-		quests = DatabaseUtils.getStaticInstance().loadAllQuests();
+		
 	}
+	
+	public void loadQuests(){
+		quests = DatabaseUtils.getStaticInstance().loadQuests();
+	}
+	
 	public Quest getQuest(int id){
 		
 		return quests.get(id);
@@ -23,14 +28,16 @@ public class QuestManager {
 	
 	public Quest getRandomQuest(Player player){
 		if (player == null) return null;
+		if (quests.isEmpty()) return null;
 		
 		//a quests list that will only contain quests of the player level
 		List<Quest> questsList = new Vector<Quest>();
 		int randQuestId = -1;
 		
-		for(Quest quest: quests.values()){
-			if(quest.getMinLevel() <= player.getLevel() &&
-					quest.getMaxLevel() >= player.getLevel())
+		for(int questId: quests.keySet()){
+			Quest quest = getQuest(questId);
+			
+			if(player.getLevel() >= quest.getMinLevel() && player.getLevel() <= quest.getMaxLevel())
 				questsList.add(quest);
 		} 
 		

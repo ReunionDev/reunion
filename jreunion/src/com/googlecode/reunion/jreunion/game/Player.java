@@ -900,7 +900,12 @@ public abstract class Player extends LivingObject implements EventListener {
 	}
 
 	public void setQuest(Quest quest) {
-		client.sendPacket(Type.QT, "get " + quest.getId());
+		if(quest == null){
+			client.sendPacket(Type.SAY, "Quest cancelled.");
+			client.sendPacket(Type.QT, "get -1");
+		} else{
+			client.sendPacket(Type.QT, "get " + quest.getId());
+		}
 		this.quest = quest;
 	}
 	
