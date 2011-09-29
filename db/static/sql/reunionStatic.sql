@@ -15,7 +15,6 @@ CREATE DATABASE `reunionStatic`
 USE `reunionStatic`;
 
 DROP TABLE IF EXISTS `quests`;
-
 CREATE TABLE IF NOT EXISTS `quests` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `typeid` int(11) NOT NULL DEFAULT '0',
@@ -25,6 +24,7 @@ CREATE TABLE IF NOT EXISTS `quests` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=31 ;
 
+
 INSERT INTO `quests` (`id`, `typeid`, `minlevel`, `maxlevel`, `name`) VALUES
 (1, 2, 20, 25, 'S.King Chmero'),
 (25, 1, 35, 40, 'S. King Pro Giant'),
@@ -33,8 +33,9 @@ INSERT INTO `quests` (`id`, `typeid`, `minlevel`, `maxlevel`, `name`) VALUES
 (29, 2, 26, 30, 'S.Life Amulet'),
 (30, 2, 40, 45, 'S.Seeking Strength Ring');
 
-DROP TABLE IF EXISTS `quests_objective`;
 
+
+DROP TABLE IF EXISTS `quests_objective`;
 CREATE TABLE IF NOT EXISTS `quests_objective` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `questid` int(11) NOT NULL,
@@ -43,6 +44,7 @@ CREATE TABLE IF NOT EXISTS `quests_objective` (
   `ammount` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=11 ;
+
 
 INSERT INTO `quests_objective` (`id`, `questid`, `objectivetype`, `objectiveid`, `ammount`) VALUES
 (1, 1, 1, 228, 1),
@@ -56,20 +58,23 @@ INSERT INTO `quests_objective` (`id`, `questid`, `objectivetype`, `objectiveid`,
 (9, 30, 1, 106, 10),
 (10, 30, 1, 48, 5);
 
-DROP TABLE IF EXISTS `quests_objective_type`;
 
+
+DROP TABLE IF EXISTS `quests_objective_type`;
 CREATE TABLE IF NOT EXISTS `quests_objective_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `class` varchar(256) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
 
+
 INSERT INTO `quests_objective_type` (`id`, `class`) VALUES
-(1, 'MobsObjective'),
+(1, 'MobObjective'),
 (2, 'PointsObjective');
 
-DROP TABLE IF EXISTS `quests_reward`;
 
+
+DROP TABLE IF EXISTS `quests_reward`;
 CREATE TABLE IF NOT EXISTS `quests_reward` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `questid` int(11) NOT NULL,
@@ -78,6 +83,7 @@ CREATE TABLE IF NOT EXISTS `quests_reward` (
   `ammount` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=9 ;
+
 
 INSERT INTO `quests_reward` (`id`, `questid`, `rewardtype`, `rewardid`, `ammount`) VALUES
 (1, 1, 3, 222, 1),
@@ -89,30 +95,35 @@ INSERT INTO `quests_reward` (`id`, `questid`, `rewardtype`, `rewardid`, `ammount
 (7, 30, 3, 937, 1),
 (8, 30, 1, 0, 1000);
 
-DROP TABLE IF EXISTS `quests_reward_type`;
 
+
+DROP TABLE IF EXISTS `quests_reward_type`;
 CREATE TABLE IF NOT EXISTS `quests_reward_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `class` varchar(256) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
+
 INSERT INTO `quests_reward_type` (`id`, `class`) VALUES
 (1, 'ExperienceReward'),
 (2, 'LimeReward'),
 (3, 'ItemReward');
 
-DROP TABLE IF EXISTS `quests_type`;
 
+
+DROP TABLE IF EXISTS `quests_type`;
 CREATE TABLE IF NOT EXISTS `quests_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `class` varchar(256) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=5 ;
 
+
 INSERT INTO `quests_type` (`id`, `class`) VALUES
-(1, 'CursedQuest'),
-(2, 'KillQuest'),
-(3, 'PointsQuest');
+(1, 'ExperienceQuest'),
+(2, 'LimeQuest'),
+(3, 'SpecialQuest'),
+(4, 'PointsQuest');
 
 COMMIT;
