@@ -89,19 +89,6 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 	}
 
 	/**
-	 * @return Returns the mobManager.
-	 */
-	/*
-	public MobManager getMobManager() {
-		return mobManager;
-	}
-	*/
-
-	/**
-	 * @return Returns the npcManager.
-	 */
-	
-	/**
 	 * @return Returns the playerManager.
 	 */
 	public PlayerManager getPlayerManager() {

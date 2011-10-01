@@ -31,9 +31,11 @@ public abstract class Connection<T extends Connection<T>> {
 		Selector selector = networkThread.getSelector();
 		socketChannel.configureBlocking(false);
 		synchronized(this.networkThread){
-			selector.wakeup();
-			SelectionKey key = socketChannel.register(selector, SelectionKey.OP_READ);		
-			key.attach(this);
+			if(selector.isOpen()){
+				selector.wakeup();
+				SelectionKey key = socketChannel.register(selector, SelectionKey.OP_READ);		
+				key.attach(this);
+			}
 		}
 	}
 	

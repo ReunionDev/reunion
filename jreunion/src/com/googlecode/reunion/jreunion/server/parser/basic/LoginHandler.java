@@ -5,7 +5,6 @@ import java.util.regex.Pattern;
 
 import com.googlecode.reunion.jreunion.server.Client;
 import com.googlecode.reunion.jreunion.server.parser.PacketHandler;
-import com.googlecode.reunion.jreunion.server.parser.Parser;
 
 public class LoginHandler extends PacketHandler {
 

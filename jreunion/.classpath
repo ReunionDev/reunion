@@ -3,6 +3,9 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/jcommon"/>
+	<classpathentry kind="lib" path="../lib/hibernate-jpa-2.0-api-1.0.1.Final.jar"/>
+	<classpathentry kind="lib" path="../lib/hibernate3.jar"/>
+	
 	<classpathentry kind="lib" path="../lib/log4j-1.2.16.jar"/>
 	<classpathentry kind="lib" path="../lib/mysql-connector-java-5.1.13-bin.jar"/>
 	<classpathentry kind="output" path="bin"/>

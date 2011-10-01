@@ -5,10 +5,8 @@ import java.sql.SQLException;
 
 import org.apache.log4j.Logger;
 
-import com.googlecode.reunion.jcommon.Parser;
 import com.mysql.jdbc.MySQLConnection;
 import com.mysql.jdbc.PreparedStatement;
-import com.mysql.jdbc.Statement;
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt

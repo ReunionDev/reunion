@@ -2,14 +2,13 @@ package com.googlecode.reunion.jreunion.server;
 
 import java.util.HashMap;
 import java.util.Random;
-import org.apache.log4j.*;
-import org.apache.log4j.net.SocketAppender;
+
+import org.apache.log4j.ConsoleAppender;
+import org.apache.log4j.Logger;
+import org.apache.log4j.PatternLayout;
 import org.apache.log4j.spi.LoggingEvent;
-import org.apache.log4j.xml.XMLLayout;
 
 import com.googlecode.reunion.jreunion.events.EventDispatcher;
-import com.googlecode.reunion.jreunion.events.Test;
-import com.googlecode.reunion.jreunion.events.network.NetworkDataEvent;
 import com.googlecode.reunion.jreunion.events.server.ServerStartEvent;
 import com.googlecode.reunion.jreunion.events.server.ServerStopEvent;
 import com.googlecode.reunion.jreunion.protocol.Protocol;
@@ -90,7 +89,6 @@ public class Server extends EventDispatcher {
 
 		try {
 
-			
 			server.database.start();
 
 			Logger.getLogger(Server.class).info("Server start");
@@ -101,14 +99,11 @@ public class Server extends EventDispatcher {
 								// ClassModule
 								// And put the put the parent in the constructor
 			
-			
-
 			System.gc();
 			server.setState(State.RUNNING);
 			synchronized(server){
 				server.wait();
 			}
-			
 			
 		} catch (Exception e) {
 			

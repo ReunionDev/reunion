@@ -2,11 +2,8 @@ package com.googlecode.reunion.jreunion.login;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.channels.SocketChannel;
-import java.util.HashMap;
-import java.util.Map;
 
 import com.googlecode.reunion.jreunion.network.NetworkThread;
-import com.googlecode.reunion.jreunion.proxy.ProxyConnection;
 
 public class LoginServer extends NetworkThread<LoginConnection> {
 	

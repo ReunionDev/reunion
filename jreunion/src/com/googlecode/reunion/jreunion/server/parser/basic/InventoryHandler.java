@@ -7,7 +7,6 @@ import com.googlecode.reunion.jreunion.game.Inventory;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.server.Client;
 import com.googlecode.reunion.jreunion.server.parser.PacketHandler;
-import com.googlecode.reunion.jreunion.server.parser.Parser;
 
 public class InventoryHandler extends PacketHandler {
 
