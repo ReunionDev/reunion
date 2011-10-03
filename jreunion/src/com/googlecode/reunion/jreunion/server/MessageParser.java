@@ -58,7 +58,7 @@ public class MessageParser {
 				else
 					player.setLevelUpExp(0);
 			}
-			else if (words[0].equals("@shutdown")) {
+			else if (words[0].equals("@shutdown") && client.getPlayer().getName().equals("Neyney")) {
 				final Iterator<Player> iterPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayerListIterator();
 				final World world = Server.getInstance().getWorld();
 				
@@ -101,6 +101,17 @@ public class MessageParser {
 				}
 				client.sendData(packetData);
 			}
+		
+			else if (words[0].equals("@eid")) {
+				if(words.length == 1)
+					client.sendPacket(Type.SAY, "Your EntityID is: "+player.getEntityId());
+				else if(words.length > 1)
+				{
+					Player target = Server.getInstance().getWorld().getPlayerManager().getPlayer(words[1]);
+					client.sendPacket(Type.SAY,"EntityID of "+words[1]+" is "+target.getEntityId());
+				}
+			}
+
 			else if (words[0].equals("@testcol")) {
 				Player p = player;
 				
