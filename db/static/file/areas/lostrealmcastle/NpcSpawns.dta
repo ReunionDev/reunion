@@ -1,0 +1,135 @@
+##################
+### LOST REALM ###
+##################
+
+#### Npcs ####
+[Aisian Bandor]
+ID = 1
+X = 6904
+Y = 5622
+Z = 220
+Rotation = 1.4921
+Type = 139
+
+[Human Bargirl 1]
+ID = 2
+X = 7455
+Y = 6161
+Z = 220
+Rotation = 1.4921
+Type = 66
+BuyRate = 120	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/lostrealmcastle/shop/Npc1.dta
+
+[Human Bargirl 2]
+ID = 3
+X = 6502
+Y = 5694
+Z = 220
+Rotation = 0.0
+Type = 66
+BuyRate = 120	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/lostrealmcastle/shop/Npc1.dta
+
+[Human Bargirl 3]
+ID = 4
+X = 5863
+Y = 6466
+Z = 219
+Rotation = 0.0
+Type = 66
+BuyRate = 120	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/lostrealmcastle/shop/Npc1.dta
+
+[Human Bargirl 4]
+ID = 5
+X = 6748
+Y = 6864
+Z = 220
+Rotation = 3.1415
+Type = 66
+BuyRate = 120	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/lostrealmcastle/shop/Npc1.dta
+
+[Human Bargirl 5]
+ID = 6
+X = 6012
+Y = 6867
+Z = 152
+Rotation = 3.1415
+Type = 66
+BuyRate = 120	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/lostrealmcastle/shop/Npc1.dta
+
+[Veterinary 1]
+ID = 7
+X = 6785
+Y = 5787
+Z = 106
+Rotation = 1.4921
+Type = 189
+
+[Kalipton Seller 1]
+ID = 8
+X = 7422
+Y = 6161
+Z = 220
+Rotation = 1.4921
+Type = 73
+BuyRate = 120	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/lostrealmcastle/shop/Npc6.dta
+
+[Kalipton Seller 2]
+ID = 11
+X = 7400
+Y = 6161
+Z = 220
+Rotation = 1.4921
+Type = 75
+BuyRate = 120	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/lostrealmcastle/shop/Npc5.dta
+
+[Bulkan Blacksmith 1]
+ID = 10
+X = 7102
+Y = 5976
+Z = 220
+Rotation = 1.4921
+Type = 71
+BuyRate = 120	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/lostrealmcastle/shop/Npc2.dta
+
+[Kalipton Seller 3]
+ID = 12
+X = 7172
+Y = 5976
+Z = 220
+Rotation = 1.4921
+Type = 75
+BuyRate = 120	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/lostrealmcastle/shop/Npc3.dta
+
+[Human Seller 1]
+ID = 13
+X = 7242
+Y = 5976
+Z = 220
+Rotation = 1.4921
+Type = 65
+BuyRate = 120	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/lostrealmcastle/shop/Npc4.dta
+
+
+
+
+

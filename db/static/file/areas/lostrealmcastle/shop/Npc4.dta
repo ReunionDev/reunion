@@ -1,0 +1,35 @@
+[Marine Cap]
+Type = 322
+
+[Marine Suit]
+Type = 338
+
+[Marine Pants]
+Type = 356
+
+[Marine Shoes]
+Type = 378
+
+[Scout Helmet]
+Type = 361
+
+[Scout Suit]
+Type = 339
+
+[Scout Pants]
+Type = 357
+
+[Scout Shoes]
+Type = 379
+
+[Bulleproof Helmet]
+Type = 362
+
+[Bulletproof Suit]
+Type = 340
+
+[Bulletproof Pants]
+Type = 358
+
+[Bulleproof Boots]
+Type = 380

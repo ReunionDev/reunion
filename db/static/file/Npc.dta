@@ -111,3 +111,29 @@ Class = Merchant
 ID = 96
 Hp = 100
 Class = Merchant
+
+[Human Seller]
+ID = 65
+Hp = 100
+Class = Merchant
+
+[Human Bargirl]
+ID = 66
+Hp = 100
+Class = Merchant
+
+[Bulkan Blacksmith]
+ID = 71
+Hp = 100
+Class = Merchant
+
+[Kalipton Seller 1]
+ID = 73
+Hp = 100
+Class = Merchant
+
+[Kalipton Seller 2]
+ID = 75
+Hp = 100
+Class = Merchant
+

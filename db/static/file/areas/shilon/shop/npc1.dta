@@ -1,0 +1,146 @@
+[Large Healing Potion]
+Type = 288
+
+[Mega Vitality Potion]
+Type = 470
+
+[Giga Vitality Potion]
+Type = 515
+
+[Instant Vitality Increaser]
+Type = 1044
+
+[Vitality Increaser]
+Type = 1040
+
+[Grindstone 500]
+Type = 739
+
+[Grindstone 1000]
+Type = 807
+
+[Chakuram Grindstone 500]
+Type = 1006
+
+[Chakuram Grindstone 1000]
+Type = 1005
+
+[Large Mana Potion]
+Type = 289
+
+[Mega Mana Potion]
+Type = 512
+
+[Giga Mana Potion]
+Type = 568
+
+[Instant Mana Increaser]
+Type = 1045
+
+[Mana Increaser]
+Type = 1041
+
+[Boldin Castle North Gate Warp Device]
+Type = 611
+
+[Boldin Castle South Gate Warp Device]
+Type = 612
+
+[Zone Warp Device]
+Type = 894
+
+[Transporting To The Selected Area]
+Type = 1015
+
+[Large Electric Power Potion]
+Type = 291
+
+[Mega Electric Power Potion]
+Type = 514
+
+[Giga Electric Power Potion]
+Type = 569
+
+[Instant Electricity Increaser]
+Type = 1046
+
+[Electricity Increaser]
+Type = 1042
+
+[White Tiger Summon Stone]
+Type = 861
+
+[Chmero Summon Stone]
+Type = 808
+
+[Devil Summon Stone]
+Type = 812
+
+[Jackal Summon Stone]
+Type = 810
+
+[Large Stamina Potion]
+Type = 290
+
+[Mega Stamina Potion]
+Type = 513
+
+[Giga Stamina Potion]
+Type = 1039
+
+[Instant Stamina Increaser]
+Type = 1047
+
+[Charging Shell]
+Type = 757
+
+[Charging Shell Set]
+Type = 758
+
+[Flame Capsule]
+Type = 759
+
+[Flame Capsule Set]
+Type = 760
+
+[Laser Capsule]
+Type = 761
+
+[Laser Capsule Set]
+Type = 762
+
+[Mini Mine]
+Type = 763
+
+[Mini Mine Set]
+Type = 764
+
+[Wand Charger 1]
+Type = 776
+
+[Accumulated Damage 1]
+Type = 780
+
+[Paralysis 1]
+Type = 783
+
+[Confusion 1]
+Type = 786
+
+[Petrifaction 2]
+Type = 795
+
+[Cold 2]
+Type = 792
+
+[Normal Book 1-4]
+Type = 801
+
+[Apple]
+Type = 618
+
+[Labiyoing recall device]
+Type = 968
+
+[Return Warp Device]
+Type = 175

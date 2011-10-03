@@ -1,0 +1,35 @@
+[Xeno Helmet]
+Type = 312
+
+[Xeno Armor]
+Type = 328
+
+[Xeno Pants]
+Type = 346
+
+[Xeno Shoes]
+Type = 368
+
+[Brino Helmet]
+Type = 313
+
+[Brino Armor]
+Type = 329
+
+[Brino Pants]
+Type = 347
+
+[Brino Shoes]
+Type = 369
+
+[Xeno Metal Helmet]
+Type = 314
+
+[Xeno Metal Armor]
+Type = 330
+
+[Xeno Metal Pants]
+Type = 348
+
+[Xeno Metal Boots]
+Type = 370
