@@ -3108,6 +3108,56 @@ SizeY = 3
 Price = 10000000
 Class = equipment.Sword
 
+##### Hybrider Dual Sword#####
+
+[Mystic dual sword]
+ID = 1142
+Type = 2
+Level = 200
+#Race = 
+MinDmg = 272
+MaxDmg = 301
+Speed = 2
+ReqStr = 157
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 50000
+Class = equipment.Sword
+
+[Grand dual sword]
+ID = 1146
+Type = 2
+Level = 210
+#Race = 
+MinDmg = 283
+MaxDmg = 315
+Speed = 2
+ReqStr = 168
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 100000
+Class = equipment.Sword
+
+[Blood Dual Sword]
+ID = 1147
+Type = 2
+Level = 261
+#Race = 
+MinDmg = 315
+MaxDmg = 352
+Speed = 2
+ReqStr = 181
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 10000000
+Class = equipment.Sword
+
 ####### Axes ########
 [Stone Axe]
 ID = 48
@@ -3454,6 +3504,56 @@ MinDmg = 364
 MaxDmg = 414
 Speed = 3
 ReqStr = 177
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 10000000
+Class = equipment.Axe
+
+##### Hybrider Hammers#####
+
+[Battle Hammer]
+ID = 1150
+Type = 3
+Level = 200
+#Race = 
+MinDmg = 316
+MaxDmg = 349
+Speed = 2
+ReqStr = 185
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 50000
+Class = equipment.Axe
+
+[Reverse Hammer]
+ID = 1151
+Type = 3
+Level = 210
+#Race = 
+MinDmg = 341
+MaxDmg = 388
+Speed = 2
+ReqStr = 201
+Position = 9
+Handed = 2
+SizeX = 2
+SizeY = 3
+Price = 100000
+Class = equipment.Axe
+
+[Spike Hammer]
+ID = 1152
+Type = 3
+Level = 261
+#Race = 
+MinDmg = 382
+MaxDmg = 434
+Speed = 2
+ReqStr = 224
 Position = 9
 Handed = 2
 SizeX = 2
