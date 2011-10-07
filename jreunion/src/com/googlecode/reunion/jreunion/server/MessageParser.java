@@ -408,7 +408,7 @@ public class MessageParser {
 						Quest quest = player.getQuest();
 					
 						if(quest != null)
-							quest.cancel(player);
+							player.setQuest(null);
 					
 						//quest = new Quest(questId); //used only to send the quest id packet
 						//quest = QuestFactory.loadQuest(questId); //load full quest from database

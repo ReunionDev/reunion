@@ -123,13 +123,7 @@ public class WhirlwindSlash extends WeaponAttack implements Castable{
 				
 			synchronized(victims){	
 				for(LivingObject victim : victims){ 
-					int newHp = victim.getHp() - (int) (damage);				
-					
-					if (newHp <= 0) {
-						((Mob)victim).kill(player);
-					} else {
-						victim.setHp(newHp);
-					}
+					victim.getsAttacked(player, (int)damage);
 				}
 				return true;
 			}

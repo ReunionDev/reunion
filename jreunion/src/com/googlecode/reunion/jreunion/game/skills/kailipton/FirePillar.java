@@ -122,13 +122,7 @@ public class FirePillar extends Tier2 implements Castable, Modifier {
 				for(LivingObject victim : victims){
 					//if its 1st victim apply 100% dmg, if not is only 70% dmg
 					magicDamage *= (victimCount++ == 2) ? 0.7 : 1;
-					int newHp = victim.getHp() - (int) (magicDamage);
-					
-					if (newHp <= 0) {
-						((Mob)victim).kill(player);
-					} else {
-						victim.setHp(newHp);
-					}
+					victim.getsAttacked(player, (int)magicDamage);
 				}
 				return true;
 			}	

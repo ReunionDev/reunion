@@ -1,5 +1,8 @@
 package com.googlecode.reunion.jreunion.game;
 
+import com.googlecode.reunion.jreunion.game.quests.ExperienceQuest;
+import com.googlecode.reunion.jreunion.game.quests.QuestState;
+import com.googlecode.reunion.jreunion.game.quests.objective.Objective;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 import com.googlecode.reunion.jreunion.server.Tools;
 
@@ -105,5 +108,38 @@ public abstract class LivingObject extends WorldObject {
 
 	public void setTarget(LivingObject target) {
 		this.target = target;
+	}
+	
+	public void getsAttacked(Player player, int damage){
+		
+		//Cursed quest Boss packet
+		if(this instanceof Mob){
+			Mob mob = (Mob)this;
+			QuestState questState = player.getQuestState();
+		
+			if(questState != null){
+				Quest quest = questState.getQuest();
+				if(quest instanceof ExperienceQuest){
+					Objective objective = quest.getObjective(mob.getType());
+					if(objective != null){
+							if(questState.getProgression(objective.getId()) == (objective.getAmmount()-1)){
+								if(!mob.getIsBoss()){
+									player.getClient().sendPacket(Type.QT, "king "+mob.getEntityId()+" 1");
+									mob.setBoss();
+								}
+							}
+					}
+				}
+			}
+		}
+		
+		int newHp = getHp() - damage;				
+		
+		if (newHp <= 0) {
+			if(this instanceof Mob)
+				((Mob)this).kill(player);
+		} else {
+			setHp(newHp);
+		}
 	}
 }

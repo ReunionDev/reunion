@@ -119,13 +119,7 @@ public class FireBall extends Tier1 implements Castable, Modifier {
 			//(Both targets receive 100% dmg)
 			synchronized(victims){
 				for(LivingObject victim : victims){ 
-					int newHp = victim.getHp() - (int) (magicDamage);				
-					
-					if (newHp <= 0) {
-						((Mob)victim).kill(player);
-					} else {
-						victim.setHp(newHp);
-					}
+					victim.getsAttacked(player, (int)magicDamage);
 				}
 				return true;
 			}

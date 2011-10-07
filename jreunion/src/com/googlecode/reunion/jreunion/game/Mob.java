@@ -10,6 +10,7 @@ import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jcommon.Parser;
 import com.googlecode.reunion.jreunion.server.Client;
 import com.googlecode.reunion.jreunion.server.ItemFactory;
+import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 import com.googlecode.reunion.jreunion.server.Reference;
 import com.googlecode.reunion.jreunion.server.Server;
 import com.googlecode.reunion.jreunion.server.Area.Field;
@@ -33,6 +34,8 @@ public class Mob extends Npc {
 	private boolean isMoving;
 
 	private boolean isAttacking;
+	
+	private boolean isBoss;
 
 
 	public Mob(int type) {
@@ -76,6 +79,10 @@ public class Mob extends Npc {
 
 	public boolean getIsAttacking() {
 		return isAttacking;
+	}
+	
+	public boolean getIsBoss(){
+		return isBoss;
 	}
 
 	public boolean getIsMoving() {
@@ -413,7 +420,10 @@ public class Mob extends Npc {
 			player.setLime(player.getLime()+this.getLime());
 			player.setTotalExp(player.getTotalExp()+this.getExp());
 			player.setLevelUpExp(player.getLevelUpExp()-this.getExp());
-		
+			
+			if(player.getQuestState() != null){
+				player.getQuestState().handleProgress(this, player);
+			}
 		}
 		
 		Parser dropList = Reference.getInstance().getDropListReference();
@@ -463,6 +473,10 @@ public class Mob extends Npc {
 	public void setIsAttacking(boolean isAttacking) {
 		this.isAttacking = isAttacking;
 	}
+	
+	public void setIsBoss(boolean isBoss){
+		this.isBoss = isBoss;
+	}
 
 	public void setIsMoving(boolean isMoving) {
 		this.isMoving = isMoving;
@@ -474,5 +488,16 @@ public class Mob extends Npc {
 
 	public void setSpeed(int speed) {
 		this.speed = speed;
+	}
+	
+	public void setBoss(){
+		if(!getIsBoss()){
+			setIsBoss(true);
+			setMaxHp(getMaxHp()*2);
+			setHp(getMaxHp());
+			setExp(getExp()*2);
+			setLime(getLime()*2);
+			setDmg(getDmg()*2);
+		}
 	}
 }

@@ -18,8 +18,6 @@ public class Quest {
 	private int id;
 	
 	private String description;
-
-	
 	
 	private int minLevel;
 	
@@ -84,6 +82,19 @@ public class Quest {
 		return null;
 	}
 	
+	public int getObjectiveSlot(int id){
+		
+		int position = -1;
+		
+		for(Objective objective: objectives){
+			position++;
+			if(objective.getId() == id)
+				return position;
+			
+		}
+		return position;
+	}
+	
 	public List<Objective> getObjectives(){
 		return this.objectives;
 	}
@@ -128,48 +139,6 @@ public class Quest {
 	public boolean hasRewards(){
 		return !rewards.isEmpty();
 	}
-	
-	/****** Cancel the current player Quest ********/
-	public void cancel(Player player) {
-		player.setQuest(null);
-	}
-
-	/****** Update Quest Points Obtained ********/
-	public void changePT(Player player, int remainPoints,
-			int obtainedPoints) {
-		Client client = player.getClient();
-
-		if (client == null) {
-			return;
-		}
-		
-		client.sendPacket(Type.QT, "pt " + remainPoints + " " + obtainedPoints);
-
-		/****** Quest Points Reached Zero ********/
-		if (remainPoints == 0) {
-			Item item = ItemFactory.create(1053);
-
-			item.setExtraStats(0);
-			item.setGemNumber(0);
-
-			// QuestSecondFase(player);
-			
-			client.sendPacket(Type.QT, "nt");
-			player.getInventory().storeItem(item);
-			
-		}
-	}
-
-	/****** Update Quest Total points ********/
-	public void changeTP(Player player, int tp) {
-		Client client = player.getClient();
-
-		if (client == null) {
-			return;
-		}
-		
-		client.sendPacket(Type.QT, "tp " + tp);
-	}
 
 	/****** Quest Points Reached Zero ********/
 	/*
@@ -204,25 +173,6 @@ public class Quest {
 		player.setQuest(null);
 		
 		client.sendPacket(Type.QT, "end " + questId);
-	}
-
-	/**
-	 *  Quest Kill 
-	 * 
-	 * 
-	 */
-	public void kill(Player player) {
-		Client client = player.getClient();
-
-		if (client == null) {
-			return;
-		}
-
-		int pos = 0;
-		int ammountRemaining = 1;
-		
-		client.sendPacket(Type.QT, "kill " + pos + " " + ammountRemaining);
-		// S> qt kill [Pos(0,1,2...)] [AmmountRemaining]
 	}
 
 	public void setId(int id) {

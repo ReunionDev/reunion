@@ -7639,6 +7639,24 @@ SizeY = 1
 Price = 150
 Class = etc.MissionReceiver
 
+[Amplified Mission Receiver]
+ID = 936
+Type = 26
+#ReqStr = 
+SizeX = 1
+SizeY = 1
+Price = 50000
+Class = etc.AmplifiedMissionReceiver
+
+[Scroll of N Agen]
+ID = 925
+Type = 26
+ReqStr = 1
+SizeX = 1
+SizeY = 1
+Price = 100
+Class = etc.ScrollOfNAgen
+
 #######################
 ###### PET ITEMS ######
 #######################
@@ -8017,15 +8035,6 @@ SizeX = 1
 SizeY = 1
 Price = 57000
 Class = Bullet
-
-[Amplified Mission Receiver]
-ID = 936
-Type = 26
-#ReqStr = 
-SizeX = 1
-SizeY = 1
-Price = 50000
-Class = etc.AmplifiedMissionReceiver
 
 [WhiteTiger Summon Stone]
 ID = 956

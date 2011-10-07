@@ -118,13 +118,7 @@ public class LightningBall extends Tier1 implements Castable, Modifier {
 			
 			synchronized(victims){
 				for(LivingObject victim : victims){
-					int newHp = victim.getHp() - (int) (magicDamage);				
-					
-					if (newHp <= 0) {
-						((Mob)victim).kill(player);
-					} else {
-						victim.setHp(newHp);
-					}
+					victim.getsAttacked(player, (int)magicDamage);
 				}
 				return true;
 			}

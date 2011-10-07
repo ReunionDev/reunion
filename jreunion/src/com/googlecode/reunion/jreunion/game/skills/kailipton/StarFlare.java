@@ -128,15 +128,7 @@ public class StarFlare extends Tier3 implements Castable {
 				for(LivingObject victim : victims){
 					//if its 1st victim apply 100% dmg, if not is only 80% dmg
 					magicDamage *= (victimCount++ == 2) ? 0.8 : 1;
-					int newHp = victim.getHp() - (int) (magicDamage);				
-					
-					player.getClient().sendPacket(Type.SAY, "Target "+victimCount+", Dmg: "+magicDamage+" HP: "+newHp);
-					
-					if (newHp <= 0) {
-						((Mob)victim).kill(player);
-					} else {
-						victim.setHp(newHp);
-					}
+					victim.getsAttacked(player, (int)magicDamage);
 				}
 				return true;
 			}

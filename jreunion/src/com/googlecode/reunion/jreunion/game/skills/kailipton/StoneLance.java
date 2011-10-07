@@ -122,13 +122,7 @@ public class StoneLance extends Tier3 implements Castable {
 			
 			synchronized(victims){
 				for(LivingObject victim : victims){ 
-					int newHp = victim.getHp() - (int) (magicDamage);				
-					
-					if (newHp <= 0) {
-						((Mob)victim).kill(player);
-					} else {
-						victim.setHp(newHp);
-					}
+					victim.getsAttacked(player, (int)magicDamage);
 				}
 				return true;
 			}

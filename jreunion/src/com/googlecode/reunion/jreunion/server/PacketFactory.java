@@ -71,7 +71,8 @@ public class PacketFactory {
 		WEARING,
 		UPGRADE,
 		QT,
-		KILL
+		KILL,
+		Q_EX
 	}
 	
 	public static String createPacket(Type packetType, Object... args) {
@@ -544,6 +545,14 @@ public class PacketFactory {
 				String packetData = (String) args[0];
 				
 				return "qt " + packetData + "\n";
+			}
+			break;
+			
+		case Q_EX:
+			if(args.length > 0){
+				Integer limeAmmount = (Integer) args[0];
+				
+				return "q_ex " + limeAmmount + "\n";
 			}
 			break;
 			

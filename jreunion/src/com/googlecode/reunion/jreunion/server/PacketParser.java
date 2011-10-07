@@ -2,6 +2,7 @@ package com.googlecode.reunion.jreunion.server;
 
 import java.nio.channels.SocketChannel;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -20,6 +21,7 @@ import com.googlecode.reunion.jreunion.game.Castable;
 import com.googlecode.reunion.jreunion.game.Effectable;
 import com.googlecode.reunion.jreunion.game.Equipment;
 import com.googlecode.reunion.jreunion.game.Equipment.Slot;
+import com.googlecode.reunion.jreunion.game.ExchangeItem;
 import com.googlecode.reunion.jreunion.game.Inventory;
 import com.googlecode.reunion.jreunion.game.InventoryItem;
 import com.googlecode.reunion.jreunion.game.Item;
@@ -35,6 +37,8 @@ import com.googlecode.reunion.jreunion.game.RoamingItem;
 import com.googlecode.reunion.jreunion.game.Skill;
 import com.googlecode.reunion.jreunion.game.Warehouse;
 import com.googlecode.reunion.jreunion.game.items.etc.MissionReceiver;
+import com.googlecode.reunion.jreunion.game.items.etc.ScrollOfNAgen;
+import com.googlecode.reunion.jreunion.game.quests.QuestState;
 import com.googlecode.reunion.jreunion.server.Client.LoginType;
 import com.googlecode.reunion.jreunion.server.Client.State;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
@@ -317,6 +321,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					player.sendStatus(Status.STATUSPOINTS);					
 					player.sendStatus(Status.LIME);
 					player.sendStatus(Status.PENALTYPOINTS);
+					player.setQuestState(DatabaseUtils.getDinamicInstance().loadQuestState(player));
 				}
 				break;
 			}
@@ -549,8 +554,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 							Integer.parseInt(message[3]));
 				} else if (message[0].equals("quest")) {
 					if (message[1].equals("cancel")) {
-						client.getPlayer().getQuest().cancel(
-								client.getPlayer());
+						client.getPlayer().setQuest(null);
 					} else {
 						if (client.getPlayer().getQuest() == null) {
 							MissionReceiver item = (MissionReceiver)player.getQuickSlot().getItem(Integer.parseInt(message[1])).getItem();
@@ -673,6 +677,27 @@ public class PacketParser extends EventDispatcher implements EventListener{
 								Integer.parseInt(message[1]));
 					}
 					*/
+				} else if (message[0].equals("q_ex")) {
+					if(player.getExchange().listSize() > 0){
+						
+						if(!player.getExchange().isAllInstanceOfScrollOfNAgen()){
+							player.getClient().sendPacket(Type.MSG, "Wrong item.");
+							return;
+						}
+						
+						int limeAmmount = 0;
+						Iterator<ExchangeItem> exchangeIter = player.getExchange().itemListIterator();
+						
+						while(exchangeIter.hasNext()){
+							ExchangeItem exchangeItem = exchangeIter.next();
+							limeAmmount += exchangeItem.getItem().getExtraStats();
+							DatabaseUtils.getDinamicInstance().deleteItem(exchangeItem.getItem());
+						}
+						
+						player.getExchange().clearExchange();
+						player.setLime(player.getLime() + limeAmmount);
+						player.getClient().sendPacket(Type.Q_EX, limeAmmount);
+					}
 				}
 	
 				break;

@@ -122,8 +122,6 @@ public abstract class Player extends LivingObject implements EventListener {
 	private List<Integer> attackQueue = new Vector<Integer>();
 
 	private QuickSlot quickSlot;
-
-	private Quest quest;
 	
 	private QuestState questState;
 
@@ -370,7 +368,10 @@ public abstract class Player extends LivingObject implements EventListener {
 	}
 
 	public Quest getQuest() {
-		return quest;
+		if(getQuestState()!=null){
+			return getQuestState().getQuest();
+		}
+		return null;
 	}
 	
 	public QuestState getQuestState() {
@@ -706,6 +707,7 @@ public abstract class Player extends LivingObject implements EventListener {
 		DatabaseUtils.getDinamicInstance().saveStash(client);
 		DatabaseUtils.getDinamicInstance().saveExchange(this);
 		DatabaseUtils.getDinamicInstance().saveQuickSlot(this);
+		DatabaseUtils.getDinamicInstance().saveQuest(this);
 		
 	}
 
@@ -771,11 +773,8 @@ public abstract class Player extends LivingObject implements EventListener {
 
 	/****** revive player when he dies ******/
 	public void revive() {
-		if(getLevel() <= 30)
-			setHp(getMaxHp());
-		else
-			setHp((int)(getMaxHp()*.1));
-		
+		int hp = getLevel() <= 30 ? getMaxHp() : (int)(getMaxHp()*.1);
+		setHp(hp);
 		spawn();
 	}
 	
@@ -901,12 +900,19 @@ public abstract class Player extends LivingObject implements EventListener {
 
 	public void setQuest(Quest quest) {
 		if(quest == null){
-			client.sendPacket(Type.SAY, "Quest cancelled.");
-			client.sendPacket(Type.QT, "get -1");
+			if (getQuestState()!=null){
+				if(getQuestState().isComplete()){
+					client.sendPacket(Type.QT, "end " + getQuest().getId());
+				}else{
+					client.sendPacket(Type.SAY, "Quest cancelled.");
+					client.sendPacket(Type.QT, "get -1");
+				}
+				setQuestState(null);
+			}
 		} else{
+			setQuestState(new QuestState(quest));
 			client.sendPacket(Type.QT, "get " + quest.getId());
-		}
-		this.quest = quest;
+		}		
 	}
 	
 	public void setQuestState(QuestState questState){

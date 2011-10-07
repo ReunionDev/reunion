@@ -35,8 +35,11 @@ import com.googlecode.reunion.jreunion.game.items.equipment.StaffWeapon;
 import com.googlecode.reunion.jreunion.game.items.equipment.Sword;
 import com.googlecode.reunion.jreunion.game.items.equipment.Weapon;
 import com.googlecode.reunion.jreunion.game.items.potion.Potion;
+import com.googlecode.reunion.jreunion.game.quests.LimeQuest;
+import com.googlecode.reunion.jreunion.game.quests.QuestState;
 import com.googlecode.reunion.jreunion.game.quests.objective.Objective;
 import com.googlecode.reunion.jreunion.game.quests.reward.Reward;
+import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 
 
 /**
@@ -1349,4 +1352,189 @@ public class DatabaseUtils extends Service {
 		return true;
 	}
 	
+	public QuestState loadQuestState(Player player) {
+		
+		if (!checkDinamicDatabase()) return null;
+		
+		Statement stmt;
+		QuestState questState = null;
+		Client client = player.getClient();
+		
+		if(client == null) return null;
+		
+		try {
+			stmt = dinamicDatabase.dinamicConn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM queststate WHERE charid="+ player.getPlayerId() + ";");
+			
+			if(rs.next()) {
+				Quest quest = player.getClient().getWorld().getQuestManager().getQuest(rs.getInt("questid"));
+				if(quest == null) return null;
+				
+				questState = new QuestState(quest);
+				client.sendPacket(Type.QT, "get "+quest.getId());
+				
+				for(Objective objective: quest.getObjectives()){
+					int ammount = loadQuestObjectiveState(rs.getInt("id"), objective);
+					questState.setProgression(objective, objective.getAmmount() - ammount);
+					
+					if(quest instanceof LimeQuest){
+						client.sendPacket(Type.QT, "kill "+quest.getObjectiveSlot(objective.getId())+
+												" "+ammount);
+					}
+				}
+			}
+			
+			
+		} catch (SQLException e1) {
+			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			
+		}
+		return questState;
+	}
+	
+	public int loadQuestObjectiveState(int questStateId, Objective objective) {
+		
+		if (!checkDinamicDatabase()) return 0;
+		
+		Statement stmt;
+		int ammount = 0;
+		
+		try {
+			stmt = dinamicDatabase.dinamicConn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM questobjectivestate WHERE queststateid='"+ questStateId + "' and objectiveid='"+ objective.getId() +"';");
+			
+			if(rs.next()) {
+				ammount = rs.getInt("ammount");
+			}
+			
+			
+		} catch (SQLException e1) {
+			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			
+		}
+		return ammount;
+	}
+	
+	public void saveQuest(Player player){
+		
+		int questStateId = deleteQuestState(player);
+		deleteQuestObjectiveState(questStateId);
+		
+		questStateId = saveQuestState(player);	
+		
+		if(questStateId > 0)
+			saveQuestObjectiveState(questStateId, player);
+	}
+	
+	public int saveQuestState(Player player) {
+		
+		if (!checkDinamicDatabase()) return 0;
+		
+		Statement stmt;
+		int questStateId = 0;
+		QuestState questState = player.getQuestState();
+		
+		if(questState == null)	return 0;
+		
+		try {
+			stmt = dinamicDatabase.dinamicConn.createStatement();
+			
+			String query = "INSERT INTO queststate (charid, questid) VALUES ";
+			String data = "('"+player.getPlayerId()+"','"+questState.getQuest().getId()+"')";
+
+			stmt.execute(query+data,Statement.RETURN_GENERATED_KEYS);
+			ResultSet res = stmt.getGeneratedKeys();
+			
+			if (res.next())
+				questStateId = res.getInt(1);
+				
+		} catch (SQLException e1) {
+			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			
+		}
+		return questStateId;
+	}
+	
+	public boolean saveQuestObjectiveState(int questStateId, Player player) {
+		
+		if (!checkDinamicDatabase()) return false;
+		
+		Statement stmt;
+		QuestState questState = player.getQuestState();
+		
+		if(questState == null) return false;
+		
+		Quest quest = questState.getQuest();
+		
+		try {
+			stmt = dinamicDatabase.dinamicConn.createStatement();
+			
+			String query = "INSERT INTO questobjectivestate (queststateid, objectiveid, ammount) VALUES ";
+			String data = "";
+			
+			Iterator<Objective> iter = quest.getObjectives().listIterator();
+			
+			while(iter.hasNext()){
+				Objective objective = (Objective)iter.next();
+				int ammount = objective.getAmmount() - questState.getProgression(objective.getId());
+				
+				data += "('"+questStateId+"','"+objective.getId()+"','"+ammount+"')";
+					
+				if(iter.hasNext())
+					data += ", ";
+				
+			}
+			
+			if(!data.isEmpty()){
+				stmt.execute(query+data);
+				
+			}
+		} catch (SQLException e1) {
+			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			
+		}
+		return true;
+		
+	}
+	
+	public int deleteQuestState(Player player) {
+		
+		if (!checkDinamicDatabase()) return 0;
+		
+		Statement stmt;
+		int questStateId = 0;
+		
+		try {
+			stmt = dinamicDatabase.dinamicConn.createStatement();
+			ResultSet res = stmt.executeQuery("SELECT * FROM queststate WHERE charid='"+player.getPlayerId()+"';");
+			
+			if(res.next())
+				questStateId = res.getInt("id");
+			
+			res.close();
+			stmt.execute("DELETE FROM queststate WHERE id="+questStateId+";");
+			
+		} catch (SQLException e1) {
+			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			
+		}
+		return questStateId;
+	}
+	
+	public boolean deleteQuestObjectiveState(int questStateId) {
+		
+		if (!checkDinamicDatabase()) return false;
+		
+		Statement stmt;
+		
+		try {
+			stmt = dinamicDatabase.dinamicConn.createStatement();
+			stmt.execute("DELETE FROM questobjectivestate WHERE queststateid='"+questStateId+"';");
+			
+		} catch (SQLException e1) {
+			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			
+		}
+		return true;
+	}
 }

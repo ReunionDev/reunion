@@ -4,6 +4,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
+import com.googlecode.reunion.jreunion.game.items.etc.ScrollOfNAgen;
+
+
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
@@ -20,6 +23,7 @@ public class Exchange {
 		if (itemList.contains(item)) {
 			return;
 		}
+		
 		itemList.add(item);
 	}
 
@@ -58,5 +62,14 @@ public class Exchange {
 			return;
 		}
 		itemList.remove(item);
+	}
+	
+	public boolean isAllInstanceOfScrollOfNAgen(){
+		for(ExchangeItem exchangeItem: itemList){
+			if(!(exchangeItem.getItem() instanceof ScrollOfNAgen)){
+				return false;
+			}
+		}
+		return true;
 	}
 }
