@@ -1186,6 +1186,19 @@ SizeY = 2
 Price = 162000
 Class = equipment.Armor
 
+[New Kimono Wear]
+ID = 923
+Type = 0
+Level = 1
+Race = -1
+Def = 2
+ReqStr = 5
+Position = 1
+SizeX = 2
+SizeY = 2
+Price = 10
+Class = equipment.Armor
+
 ######## PANTS ########
 [Leather Pants]
 ID = 343
@@ -1769,6 +1782,19 @@ Position = 2
 SizeX = 2
 SizeY = 3
 Price = 180000
+Class = equipment.Armor
+
+[New Kimono Pants]
+ID = 924
+Type = 0
+Level = 1
+Race = 1
+Def = 2
+ReqStr = 5
+Position = 2
+SizeX = 2
+SizeY = 3
+Price = 10
 Class = equipment.Armor
 
 ######## BOOTS ########
