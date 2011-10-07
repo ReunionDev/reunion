@@ -83,7 +83,6 @@ CREATE TABLE `guilds` (
   PRIMARY KEY  (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
 DROP TABLE IF EXISTS `inventory`;
 
 CREATE TABLE `inventory` (
@@ -104,6 +103,25 @@ CREATE TABLE `items` (
   `extrastats` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `questobjectivestate`;
+
+CREATE TABLE IF NOT EXISTS `questobjectivestate` (
+  `queststateid` int(11) NOT NULL,
+  `objectiveid` int(11) NOT NULL,
+  `ammount` int(11) NOT NULL,
+  PRIMARY KEY (`queststateid`,`objectiveid`)
+)  ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS `queststate`;
+
+CREATE TABLE IF NOT EXISTS `queststate` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `charid` int(11) NOT NULL,
+  `questid` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+)  ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `quickslot`;
 
