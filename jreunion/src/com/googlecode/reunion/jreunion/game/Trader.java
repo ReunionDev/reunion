@@ -5,7 +5,7 @@ import java.util.Iterator;
 import com.googlecode.reunion.jreunion.game.items.equipment.Armor;
 import com.googlecode.reunion.jreunion.server.Client;
 import com.googlecode.reunion.jreunion.server.DatabaseUtils;
-import com.googlecode.reunion.jreunion.server.ItemFactory;
+import com.googlecode.reunion.jreunion.server.ItemManager;
 
 /**
  * @author Aidamina
@@ -28,6 +28,7 @@ public class Trader extends Npc {
 			return;
 		}
 
+		ItemManager itemManager = client.getWorld().getItemManager();
 		int serverBetResult = (int) (Math.random() * 6);
 
 		Iterator<ExchangeItem> exchangeIter = player.getExchange()
@@ -35,7 +36,7 @@ public class Trader extends Npc {
 
 		while (exchangeIter.hasNext()) {
 			ExchangeItem exchangeItem = exchangeIter.next();
-			Item item = exchangeItem.getItem();
+			Item<?> item = exchangeItem.getItem();
 			DatabaseUtils.getDinamicInstance().deleteItem(item);
 		}
 
@@ -45,23 +46,23 @@ public class Trader extends Npc {
 
 		if (gemTraderType == 0) {
 			int newChipType = getNewChipTypeUp(chipType);
-			Item item = ItemFactory.create(newChipType);
+			Item<?> item = itemManager.create(newChipType);
 			ExchangeItem exchangeItem = new ExchangeItem(item, 0, 0);
 			player.getExchange().addItem(exchangeItem);
-			packetData = "chip_exchange 0 ok " + item.getType() + " "
+			packetData = "chip_exchange 0 ok " + item.getType().getTypeId() + " "
 					+ item.getEntityId() + "\n";
 		} else {
 			if (playerBet == serverBetResult) {
 				int newChipType = getNewChipTypeUp(chipType);
-				Item item = ItemFactory.create(newChipType);
+				Item<?> item = itemManager.create(newChipType);
 				ExchangeItem exchangeItem = new ExchangeItem(item, 0, 0);
 				player.getExchange().addItem(exchangeItem);
-				packetData = "chip_exchange 1 ok win " + item.getType() + " "
+				packetData = "chip_exchange 1 ok win " + item.getType().getTypeId() + " "
 						+ playerBet + " " + item.getEntityId() + "\n";
 			} else {
 				int newChipType = getNewChipTypeDown(chipType);
 				if (newChipType != -1) {
-					Item item = ItemFactory.create(newChipType);
+					Item<?> item = itemManager.create(newChipType);
 					ExchangeItem exchangeItem = new ExchangeItem(item, 0, 0);
 					player.getExchange().addItem(exchangeItem);
 				}
@@ -85,6 +86,7 @@ public class Trader extends Npc {
 			return;
 		}
 
+		ItemManager itemManager = client.getWorld().getItemManager();
 		String packetData = new String();
 
 		if (armorType == 0) {
@@ -93,12 +95,12 @@ public class Trader extends Npc {
 			Iterator<ExchangeItem> exchangeIter = player.getExchange()
 					.itemListIterator();
 			ExchangeItem oldExchangeItem = exchangeIter.next();
-			Armor newItem = (Armor) ItemFactory.create(armorType);
-			Armor oldItem = (Armor) ItemFactory.loadItem(oldExchangeItem
-					.getItem().getEntityId());
+			Item<?> newItem = itemManager.create(armorType);
+			Item<?> oldItem = Item.load(oldExchangeItem
+					.getItem().getItemId());
 
-			if (newItem instanceof Armor == false
-					|| newItem.getLevel() != oldItem.getLevel()) {
+			if (newItem.is(Armor.class) == false
+					|| ((Armor)newItem.getType()).getLevel() != ((Armor)oldItem.getType()).getLevel()) {
 				return;
 			}
 
@@ -107,13 +109,13 @@ public class Trader extends Npc {
 
 			player.getExchange().clearExchange();
 			player.getExchange().addItem(newExchangeItem);
-			int cost =  (int) (newItem.getPrice() * 0.333328);
+			int cost =  (int) (newItem.getType().getPrice() * 0.333328);
 			synchronized(player){							
 				player.setLime(player.getLime()-cost);
 
 			}
 			packetData = "ichange " + oldExchangeItem.getItem().getEntityId()
-					+ " " + newItem.getEntityId() + " " + newItem.getType()
+					+ " " + newItem.getEntityId() + " " + newItem.getType().getTypeId()
 					+ " " + newItem.getGemNumber() + " "
 					+ newItem.getExtraStats() + "\n";
 		}

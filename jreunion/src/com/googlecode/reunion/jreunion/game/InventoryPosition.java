@@ -1,6 +1,6 @@
 package com.googlecode.reunion.jreunion.game;
 
-public class InventoryPosition {
+public class InventoryPosition extends ItemPosition {
 	
 	private int posX;
 	private int posY;

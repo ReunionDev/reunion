@@ -82,7 +82,8 @@ public class LocalMap extends Map implements Runnable{
 		this.addEventListener(ItemDropEvent.class, this);
 		this.addEventListener(ItemPickupEvent.class, this);
 		
-		world.getQuestManager().loadQuests();
+		if(world.getQuestManager().isEmpty())
+			world.getQuestManager().loadQuests();
 	}
 	
 	public Entity getEntity(int id) {		
@@ -428,7 +429,7 @@ public class LocalMap extends Map implements Runnable{
 					if(roamingItem!=null) {
 						
 						Player player = itemPickupEvent.getPlayer();
-						Item item = roamingItem.getItem();
+						Item<?> item = roamingItem.getItem();
 						DatabaseUtils.getDinamicInstance().deleteRoamingItem(item);
 						player.pickItem(roamingItem.getItem());
 					}				

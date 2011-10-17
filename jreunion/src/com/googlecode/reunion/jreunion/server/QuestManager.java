@@ -11,7 +11,7 @@ import com.googlecode.reunion.jreunion.game.Quest;
 
 public class QuestManager {
 
-	java.util.Map<Integer,Quest> quests = new HashMap<Integer,Quest>();
+	private java.util.Map<Integer,Quest> quests = new HashMap<Integer,Quest>();
 	
 	public QuestManager(){
 		
@@ -19,11 +19,18 @@ public class QuestManager {
 	
 	public void loadQuests(){
 		quests = DatabaseUtils.getStaticInstance().loadQuests();
+		if(quests != null){
+			Logger.getLogger(QuestManager.class).info(quests.size()+" quests loaded.");
+		}
 	}
 	
 	public Quest getQuest(int id){
 		
 		return quests.get(id);
+	}
+	
+	public boolean isEmpty(){
+		return quests.isEmpty();
 	}
 	
 	public Quest getRandomQuest(Player player){

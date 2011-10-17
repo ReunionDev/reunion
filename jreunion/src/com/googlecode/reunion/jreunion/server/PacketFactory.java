@@ -136,9 +136,9 @@ public class PacketFactory {
 						+ player.getHairStyle() + " " + player.getPosition().getX()
 						+ " " + player.getPosition().getY() + " "
 						+ player.getPosition().getZ() + " "
-						+ player.getPosition().getRotation() + " " + eq.getType(Slot.HELMET) + " "
-						+ eq.getType(Slot.CHEST) + " " + eq.getType(Slot.PANTS) + " " + eq.getType(Slot.SHOULDER) + " "
-						+ eq.getType(Slot.BOOTS) + " " + eq.getType(Slot.OFFHAND) + " " + eq.getType(Slot.MAINHAND) + " "
+						+ player.getPosition().getRotation() + " " + eq.getTypeId(Slot.HELMET) + " "
+						+ eq.getTypeId(Slot.CHEST) + " " + eq.getTypeId(Slot.PANTS) + " " + eq.getTypeId(Slot.SHOULDER) + " "
+						+ eq.getTypeId(Slot.BOOTS) + " " + eq.getTypeId(Slot.OFFHAND) + " " + eq.getTypeId(Slot.MAINHAND) + " "
 						+ player.getPercentageHp() + " " + combat + " 0 0 0 0 0 0";
 				// in char [UniqueID] [Name] [Race] [Gender] [HairStyle] [XPos]
 				// [YPos] [ZPos] [Rotation] [Helm] [Armor] [Pants] [ShoulderMount]
@@ -183,9 +183,9 @@ public class PacketFactory {
 			if(args.length>0){
 				RoamingItem roamingItem = (RoamingItem)args[0];
 				Position position = roamingItem.getPosition();
-				Item item = roamingItem.getItem();
+				Item<?> item = roamingItem.getItem();
 				
-				return "drop " + roamingItem.getEntityId() + " " + item.getType() + " "
+				return "drop " + roamingItem.getEntityId() + " " + item.getType().getTypeId() + " "
 				+ position.getX() + " " + position.getY() + " " + position.getZ() + " "+position.getRotation()+" " + item.getGemNumber() + " "
 				+ item.getExtraStats();
 			}			
@@ -194,9 +194,9 @@ public class PacketFactory {
 		case IN_ITEM:
 			if(args.length>0){
 				RoamingItem roamingItem = (RoamingItem)args[0];
-				Item item = roamingItem.getItem();
+				Item<?> item = roamingItem.getItem();
 				Position position = roamingItem.getPosition();
-				return "in item " + roamingItem.getEntityId() + " " + item.getType() + " " + position.getX()
+				return "in item " + roamingItem.getEntityId() + " " + item.getType().getTypeId() + " " + position.getX()
 				+ " " + position.getY() + " " + position.getZ() + " " + position.getRotation() + " " + item.getGemNumber() + " "
 				+ item.getExtraStats();
 			}
@@ -371,9 +371,9 @@ public class PacketFactory {
 			if(args.length>1){
 				Player player = (Player)args[0];
 				Slot slot = (Slot)args[1];
-				Item item = (Item)args[2];
+				Item<?> item = (Item<?>)args[2];
 				return "char_wear " + player.getEntityId() + " " + slot.ordinal() + " "
-				+ item.getType() + " " + item.getGemNumber();
+				+ item.getType().getTypeId() + " " + item.getGemNumber();
 			}
 			break;
 			
@@ -415,9 +415,9 @@ public class PacketFactory {
 		case PICK:
 			if(args.length>0){
 				InventoryItem invItem = (InventoryItem)args[0];
-				Item item = invItem.getItem();
+				Item<?> item = invItem.getItem();
 				
-				return "pick " + item.getEntityId() + " " + item.getType() + " "
+				return "pick " + item.getEntityId() + " " + item.getType().getTypeId() + " "
 				+ invItem.getPosition().getPosX()+" "+invItem.getPosition().getPosY() + " "
 				+ invItem.getPosition().getTab()+" " + item.getGemNumber() + " "
 				+ item.getExtraStats();
@@ -441,9 +441,9 @@ public class PacketFactory {
 			if(args.length>1){
 				Player player = (Player) args[0];
 				StashItem stashItem = (StashItem)args[1];
-				Item item = stashItem.getItem();
+				Item<?> item = stashItem.getItem();
 				return "stash " + stashItem.getPos() + " "
-				+ item.getType() + " "
+				+ item.getType().getTypeId() + " "
 				+ item.getGemNumber() + " "
 				+ item.getExtraStats() + " "
 				+ player.getStash().getQuantity(stashItem.getPos());
@@ -455,11 +455,11 @@ public class PacketFactory {
 		case INVEN:
 			if(args.length > 0){
 				InventoryItem invItem = (InventoryItem)args[0];
-				Item item = invItem.getItem();
+				Item<?> item = invItem.getItem();
 				
 				return "inven " + invItem.getPosition().getTab() + " "
 				+ item.getEntityId() + " "
-				+ item.getType() + " " + invItem.getPosition().getPosX()
+				+ item.getType().getTypeId() + " " + invItem.getPosition().getPosX()
 				+ " " + invItem.getPosition().getPosY() + " "
 				+ item.getGemNumber() + " "
 				+ item.getExtraStats();
@@ -481,11 +481,11 @@ public class PacketFactory {
 		case QUICK:
 			if(args.length > 0){
 				QuickSlotItem qsItem = (QuickSlotItem)args[0];
-				Item item = qsItem.getItem();
+				Item<?> item = qsItem.getItem();
 				
-				return "quick " + qsItem.getSlot() + " "
+				return "quick " + qsItem.getPosition().getSlot() + " "
 						+ item.getEntityId() + " "
-						+ item.getType() + " "
+						+ item.getType().getTypeId() + " "
 						+ item.getGemNumber() + " "
 						+ item.getExtraStats() + "\n";
 			}
@@ -493,7 +493,7 @@ public class PacketFactory {
 		
 		case UPGRADE:
 			if(args.length > 0){
-				Item item = (Item) args[0];
+				Item<?> item = (Item<?>) args[0];
 				Slot slot = (Slot) args[1];
 				int upgraderesult = (Integer) args[2];
 				
@@ -521,21 +521,21 @@ public class PacketFactory {
 			if(args.length > 0){
 				Equipment eq = (Equipment)args[0];
 				
-				return "wearing " + eq.getEntityId(Slot.HELMET) + " " + eq.getType(Slot.HELMET) + " "
+				return "wearing " + eq.getEntityId(Slot.HELMET) + " " + eq.getTypeId(Slot.HELMET) + " "
 						+ eq.getGemNumber(Slot.HELMET) + " " + eq.getExtraStats(Slot.HELMET) + " " + eq.getEntityId(Slot.CHEST) + " "
-						+ eq.getType(Slot.CHEST) + " " + eq.getGemNumber(Slot.CHEST) + " " + eq.getExtraStats(Slot.CHEST) + " "
-						+ eq.getEntityId(Slot.PANTS) + " " + eq.getType(Slot.PANTS) + " " + eq.getGemNumber(Slot.PANTS) + " "
+						+ eq.getTypeId(Slot.CHEST) + " " + eq.getGemNumber(Slot.CHEST) + " " + eq.getExtraStats(Slot.CHEST) + " "
+						+ eq.getEntityId(Slot.PANTS) + " " + eq.getTypeId(Slot.PANTS) + " " + eq.getGemNumber(Slot.PANTS) + " "
 						+ eq.getExtraStats(Slot.PANTS) + " " + eq.getEntityId(Slot.SHOULDER) + " "
-						+ eq.getType(Slot.SHOULDER) + " " + eq.getGemNumber(Slot.SHOULDER) + " "
-						+ eq.getExtraStats(Slot.SHOULDER) + " " + eq.getEntityId(Slot.BOOTS) + " " + eq.getType(Slot.BOOTS)
+						+ eq.getTypeId(Slot.SHOULDER) + " " + eq.getGemNumber(Slot.SHOULDER) + " "
+						+ eq.getExtraStats(Slot.SHOULDER) + " " + eq.getEntityId(Slot.BOOTS) + " " + eq.getTypeId(Slot.BOOTS)
 						+ " " + eq.getGemNumber(Slot.BOOTS) + " " + eq.getExtraStats(Slot.BOOTS) + " " + eq.getEntityId(Slot.OFFHAND)
-						+ " " + eq.getType(Slot.OFFHAND) + " " + eq.getGemNumber(Slot.OFFHAND) + " " + eq.getExtraStats(Slot.OFFHAND)
-						+ " " + eq.getEntityId(Slot.NECKLACE) + " " + eq.getType(Slot.NECKLACE) + " "
+						+ " " + eq.getTypeId(Slot.OFFHAND) + " " + eq.getGemNumber(Slot.OFFHAND) + " " + eq.getExtraStats(Slot.OFFHAND)
+						+ " " + eq.getEntityId(Slot.NECKLACE) + " " + eq.getTypeId(Slot.NECKLACE) + " "
 						+ eq.getGemNumber(Slot.NECKLACE) + " " + eq.getExtraStats(Slot.NECKLACE) + " " + eq.getEntityId(Slot.BRACELET)
-						+ " " + eq.getType(Slot.BRACELET) + " " + eq.getGemNumber(Slot.BRACELET) + " "
-						+ eq.getExtraStats(Slot.BRACELET) + " " + eq.getEntityId(Slot.RING) + " " + eq.getType(Slot.RING) + " "
+						+ " " + eq.getTypeId(Slot.BRACELET) + " " + eq.getGemNumber(Slot.BRACELET) + " "
+						+ eq.getExtraStats(Slot.BRACELET) + " " + eq.getEntityId(Slot.RING) + " " + eq.getTypeId(Slot.RING) + " "
 						+ eq.getGemNumber(Slot.RING) + " " + eq.getExtraStats(Slot.RING) + " " + eq.getEntityId(Slot.MAINHAND) + " "
-						+ eq.getType(Slot.MAINHAND) + " " + eq.getGemNumber(Slot.MAINHAND) + " " + eq.getExtraStats(Slot.MAINHAND);
+						+ eq.getTypeId(Slot.MAINHAND) + " " + eq.getGemNumber(Slot.MAINHAND) + " " + eq.getExtraStats(Slot.MAINHAND);
 			
 			}
 			break;

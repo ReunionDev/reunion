@@ -7,12 +7,13 @@ import org.apache.log4j.Logger;
 import com.googlecode.reunion.jreunion.events.map.ItemDropEvent;
 import com.googlecode.reunion.jreunion.game.Equipment;
 import com.googlecode.reunion.jreunion.game.Item;
+import com.googlecode.reunion.jreunion.game.ItemType;
 import com.googlecode.reunion.jreunion.game.LivingObject;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Player.Race;
 import com.googlecode.reunion.jreunion.game.Player.Sex;
 import com.googlecode.reunion.jreunion.game.Position;
-import com.googlecode.reunion.jreunion.game.QuickSlot;
+import com.googlecode.reunion.jreunion.game.QuickSlotBar;
 import com.googlecode.reunion.jreunion.game.RoamingItem;
 import com.googlecode.reunion.jreunion.game.Skill;
 import com.googlecode.reunion.jreunion.game.Usable;
@@ -101,7 +102,7 @@ public class Command {
 		DatabaseUtils.getDinamicInstance().delChar(slotNumber, accountId);
 	}
 	
-	public RoamingItem dropItem(Position position, Item item) {
+	public RoamingItem dropItem(Position position, Item<?> item) {
 
 		RoamingItem roamingItem = new RoamingItem(item);
 		roamingItem.setPosition(position);
@@ -195,11 +196,11 @@ public class Command {
 
 	/****** Manages the player wear Weapon ******/
 	public void playerWeapon(Player player, int uniqueId) {
-		Client client = player.getClient();
+		//Client client = player.getClient();
 
 		Logger.getLogger(Command.class).info(uniqueId);
 
-		Item item = null;
+		ItemType item = null;
 		//TODO: FIX
 		//item = (Item) ItemManager.getEntityManager().getEnt(uniqueId);
 		if (item == null) {
@@ -273,15 +274,18 @@ public class Command {
 		if (client == null) {
 			return;
 		}
+		
+		ItemManager itemManager = client.getWorld().getItemManager();
 		Skill skill = world.getSkillManager().getSkill(40);
 
 		LivingObject livingObject = (LivingObject) player.getPosition().getLocalMap().getEntity(uniqueId);
-		Item item = player.getEquipment().getShoulderMount();
-		SlayerWeapon spWeapon = new SlayerWeapon(item.getType());
+		Item<?> item = player.getEquipment().getShoulderMount();
+		SlayerWeapon spWeapon = (SlayerWeapon)item.getType();
+		//SlayerWeapon spWeapon = new SlayerWeapon(item.getType().getTypeId());
 
-		item.setExtraStats(spWeapon.getExtraStats() - 20);
-		spWeapon.loadFromReference(item.getType());
-		spWeapon.setExtraStats(item.getExtraStats());
+		item.setExtraStats(item.getExtraStats() - 20);
+		//spWeapon.loadFromReference(item.getType().getTypeId());
+		//spWeapon.setExtraStats(item.getExtraStats());
 
 		double slayerDmg = 0;
 
@@ -322,7 +326,7 @@ public class Command {
 
 			//if (livingObject.getType() == 324) {
 				
-				Item item2 = ItemFactory.create(1054);
+				Item<?> item2 = itemManager.create(1054);
 				item2.setExtraStats(1080);
 				item2.setGemNumber(0);
 
@@ -358,12 +362,12 @@ public class Command {
 	*/
 	}
 
-	public boolean useItem(Player player ,Item item, int slot) {
+	public boolean useItem(Player player ,Item<?> item, int slot) {
 		
 		if(Usable.class.isInstance(item)){
 			
 			
-			((Usable)item).use(player, slot);
+			((Usable)item).use(item, player);
 			
 			player.getPosition().getLocalMap().removeEntity(item);			
 			DatabaseUtils.getDinamicInstance().deleteItem(item);
@@ -372,7 +376,7 @@ public class Command {
 		}
 		else{
 			
-			Logger.getLogger(QuickSlot.class).error(item+ " not Usable");
+			Logger.getLogger(QuickSlotBar.class).error(item+ " not Usable");
 			
 		}
 		return false;

@@ -9,8 +9,7 @@ import org.apache.log4j.Logger;
 import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jcommon.Parser;
 import com.googlecode.reunion.jreunion.server.Client;
-import com.googlecode.reunion.jreunion.server.ItemFactory;
-import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
+import com.googlecode.reunion.jreunion.server.ItemManager;
 import com.googlecode.reunion.jreunion.server.Reference;
 import com.googlecode.reunion.jreunion.server.Server;
 import com.googlecode.reunion.jreunion.server.Area.Field;
@@ -436,8 +435,9 @@ public class Mob extends Npc {
 				if( r.nextFloat()<rate){
 					Logger.getLogger(Mob.class).info(parsedItem.getMemberValue("Item"));
 					int itemType = Integer.parseInt(parsedItem.getMemberValue("Item"));
+					ItemManager itemManager = player.getClient().getWorld().getItemManager();
 					
-					Item item = ItemFactory.create(itemType);
+					Item<?> item = itemManager.create(itemType);
 					item.setExtraStats(0);
 					item.setGemNumber(0);					
 					

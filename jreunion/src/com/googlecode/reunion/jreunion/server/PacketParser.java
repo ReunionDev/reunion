@@ -37,8 +37,6 @@ import com.googlecode.reunion.jreunion.game.RoamingItem;
 import com.googlecode.reunion.jreunion.game.Skill;
 import com.googlecode.reunion.jreunion.game.Warehouse;
 import com.googlecode.reunion.jreunion.game.items.etc.MissionReceiver;
-import com.googlecode.reunion.jreunion.game.items.etc.ScrollOfNAgen;
-import com.googlecode.reunion.jreunion.game.quests.QuestState;
 import com.googlecode.reunion.jreunion.server.Client.LoginType;
 import com.googlecode.reunion.jreunion.server.Client.State;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
@@ -392,7 +390,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 				
 				else if (message[0].equals("upgrade")) {	
 					Slot slot = Slot.byValue(Integer.parseInt(message[1]));
-					Item item = player.getEquipment().getItem(slot);
+					Item<?> item = player.getEquipment().getItem(slot);
 					
 					item.upgrade(player,slot);
 				}
@@ -422,7 +420,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					roamingItem.getItem().setEntityId(roamingItem.getEntityId());
 					//ParsedItem parsedItem = Reference.getInstance().getItemReference().getItemById(itemId);
 					
-					Logger.getLogger(PacketParser.class).info(roamingItem.getItem().getDescription()+" "+itemId);
+					Logger.getLogger(PacketParser.class).info(roamingItem.getItem().getType().getDescription()+" "+itemId);
 					if(roamingItem!=null && player.getInventory().getHoldingItem()==null ){
 						client.getPlayer().pickupItem(roamingItem);							
 					}
@@ -435,7 +433,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					
 					Inventory inventory = player.getInventory();
 					InventoryItem inventoryItem = inventory.getItem(tab, x, y);
-					Item item = inventoryItem.getItem();
+					Item<?> item = inventoryItem.getItem();
 					com.useItem(player, item, -1);					
 					inventory.deleteInventoryItem(inventoryItem);
 					
@@ -557,8 +555,13 @@ public class PacketParser extends EventDispatcher implements EventListener{
 						client.getPlayer().setQuest(null);
 					} else {
 						if (client.getPlayer().getQuest() == null) {
-							MissionReceiver item = (MissionReceiver)player.getQuickSlot().getItem(Integer.parseInt(message[1])).getItem();
-							item.use(player, Integer.parseInt(message[1]));
+							Item<?> item = player.getQuickSlot().getItem(Integer.parseInt(message[1])).getItem();
+							if(item.is(MissionReceiver.class)){
+								((MissionReceiver)item.getType()).use(item, player);
+							}
+							//MissionReceiver missionReceiver = (MissionReceiver)item.getType();
+							//missionReceiver.setExtraStats(item);
+							//missionReceiver.use(player, Integer.parseInt(message[1]),item);
 							//client.getPlayer().setQuest(new Quest(
 							//		client.getPlayer(), player.getQuickSlot().getItem(Integer
 							//				.parseInt(message[1]))));
@@ -642,7 +645,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					npc.buyItem(client.getPlayer(), itemType, tab, quantity);
 					
 				} else if (message[0].equals("chip_exchange")) {
-					Npc[] npc;
+					//Npc[] npc;
 					/*
 					if (Integer.parseInt(message[1]) == 0) {
 						npc = world

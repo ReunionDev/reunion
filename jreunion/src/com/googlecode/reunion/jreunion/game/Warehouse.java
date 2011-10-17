@@ -4,7 +4,6 @@ import java.util.Iterator;
 
 import com.googlecode.reunion.jreunion.server.Client;
 import com.googlecode.reunion.jreunion.server.DatabaseUtils;
-import com.googlecode.reunion.jreunion.server.ItemFactory;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 
 /**
@@ -60,47 +59,46 @@ public class Warehouse extends Npc {
 			DatabaseUtils.getDinamicInstance().saveItem(stashItem.getItem());
 			if (gems >= 0) {
 				packetData = "stash_to " + stashItem.getPos() + " "
-						+ stashItem.getItem().getType() + " "
+						+ stashItem.getItem().getType().getTypeId() + " "
 						+ stashItem.getItem().getGemNumber() + " "
 						+ stashItem.getItem().getExtraStats() + "\n";
 			} else {
 				packetData = "stash_from " + stashItem.getPos() + " "
-						+ stashItem.getItem().getType() + " "
+						+ stashItem.getItem().getType().getTypeId() + " "
 						+ stashItem.getItem().getGemNumber() + " "
 						+ stashItem.getItem().getExtraStats() + "\n";
 			}
 		} else {
 			if (player.getInventory().getHoldingItem() == null) {
 				stashItem = stash.getItem(pos);
-				Item item = ItemFactory.loadItem(stashItem.getItem()
-						.getEntityId());
+				Item<?> item = Item.load(stashItem.getItem().getItemId());
 				stash.removeItem(stashItem);
 				player.getInventory().setHoldingItem(
 						new InventoryItem(item, new InventoryPosition(0, 0, 0)));
 
 				packetData = "stash_from " + stashItem.getPos() + " "
 						+ item.getEntityId() + " "
-						+ stashItem.getItem().getType() + " "
+						+ stashItem.getItem().getType().getTypeId() + " "
 						+ stashItem.getItem().getGemNumber() + " "
 						+ stashItem.getItem().getExtraStats() + " "
 						+ player.getStash().getQuantity(pos) + "\n";
 			} else {
 				if (stash.checkPosEmpty(pos)) {
-					Item item = player.getInventory().getHoldingItem()
+					Item<?> item = player.getInventory().getHoldingItem()
 							.getItem();
 					stashItem = new StashItem(pos, item);
 					stash.addItem(stashItem);
 					player.getInventory().setHoldingItem(null);
 
 					packetData = "stash_to " + stashItem.getPos() + " "
-							+ stashItem.getItem().getType() + " "
+							+ stashItem.getItem().getType().getTypeId() + " "
 							+ stashItem.getItem().getGemNumber() + " "
 							+ stashItem.getItem().getExtraStats() + " "
 							+ player.getStash().getQuantity(pos) + " 0\n";
 				} else {
 					stashItem = stash.getItem(pos);
 
-					if (stashItem.getItem().getType() == type
+					if (stashItem.getItem().getType().getTypeId() == type
 							&& stashItem.getItem().getGemNumber() == player
 									.getInventory().getHoldingItem().getItem()
 									.getGemNumber()
@@ -111,7 +109,7 @@ public class Warehouse extends Npc {
 						player.getInventory().setHoldingItem(null);
 
 						packetData = "stash_to " + stashItem.getPos() + " "
-								+ stashItem.getItem().getType() + " "
+								+ stashItem.getItem().getType().getTypeId() + " "
 								+ stashItem.getItem().getGemNumber() + " "
 								+ stashItem.getItem().getExtraStats() + " "
 								+ stash.getQuantity(pos) + " 0\n";

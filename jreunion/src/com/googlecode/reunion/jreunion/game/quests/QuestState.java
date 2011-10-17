@@ -3,10 +3,7 @@ package com.googlecode.reunion.jreunion.game.quests;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
-
 import com.googlecode.reunion.jreunion.game.InventoryItem;
-import com.googlecode.reunion.jreunion.game.InventoryPosition;
 import com.googlecode.reunion.jreunion.game.Item;
 import com.googlecode.reunion.jreunion.game.Mob;
 import com.googlecode.reunion.jreunion.game.Player;
@@ -14,7 +11,7 @@ import com.googlecode.reunion.jreunion.game.Quest;
 import com.googlecode.reunion.jreunion.game.quests.objective.*;
 import com.googlecode.reunion.jreunion.game.quests.reward.*;
 import com.googlecode.reunion.jreunion.server.Client;
-import com.googlecode.reunion.jreunion.server.ItemFactory;
+import com.googlecode.reunion.jreunion.server.ItemManager;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 
 public class QuestState {
@@ -140,13 +137,15 @@ public class QuestState {
 		Client client = player.getClient();
 		if(client == null) return false;
 		
+		ItemManager itemManager = client.getWorld().getItemManager();
+		
 		for(Reward reward: quest.getRewards()){
 			if(reward instanceof ExperienceReward){
 				player.setTotalExp(player.getTotalExp()+reward.getAmmount());
 				player.setLevelUpExp(player.getLevelUpExp()-reward.getAmmount());
 				client.sendPacket(Type.SAY, "Quest experience : "+reward.getAmmount());
 			} else {
-				Item item = ItemFactory.create(reward.getId());
+				Item<?> item = itemManager.create(reward.getId());
 				if(item == null) return false;
 				
 				InventoryItem inventoryItem = player.getInventory().storeItem(item);

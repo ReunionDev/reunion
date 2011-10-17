@@ -51,14 +51,8 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 	private SkillManager skillManager;
 	
 	private QuestManager questManager;
-
-	public SkillManager getSkillManager() {
-		return skillManager;
-	}
 	
-	public QuestManager getQuestManager() {
-		return questManager;
-	}
+	private ItemManager itemManager;
 
 	static public ServerSetings serverSetings;
 
@@ -68,12 +62,25 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 		skillManager = new SkillManager();
 		questManager = new QuestManager();
 		playerManager = new PlayerManager();
+		itemManager = new ItemManager();
 		serverHour = 4;
 		teleportManager = new TeleportManager();
 		serverSetings = new ServerSetings();		
 		server.addEventListener(ServerEvent.class, this);
 	}
 
+	public SkillManager getSkillManager() {
+		return skillManager;
+	}
+	
+	public QuestManager getQuestManager() {
+		return questManager;
+	}
+	
+	public ItemManager getItemManager() {
+		return itemManager;
+	}
+	
 	/**
 	 * @return Returns the mapManager.
 	 */

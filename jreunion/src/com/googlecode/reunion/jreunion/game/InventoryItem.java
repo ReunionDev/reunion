@@ -7,20 +7,20 @@ package com.googlecode.reunion.jreunion.game;
  */
 public class InventoryItem {
 	
-	private Item item;
+	private Item<?> item;
 	
 	private InventoryPosition position;
 
-	public InventoryItem(Item item, InventoryPosition position) {
+	public InventoryItem(Item<?> item, InventoryPosition position) {
 		this.item = item;
 		this.position = position;
 	}
 
-	public Item getItem() {
+	public Item<?> getItem() {
 		return item;
 	}
 	
-	public void setItem(Item item){
+	public void setItem(Item<?> item){
 		this.item = item;
 	}
 
@@ -33,10 +33,10 @@ public class InventoryItem {
 	}
 
 	public int getSizeX() {
-		return item.getSizeX();
+		return item.getType().getSizeX();
 	}
 
 	public int getSizeY() {
-		return item.getSizeY();
+		return item.getType().getSizeY();
 	}
 }

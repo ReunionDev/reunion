@@ -11,7 +11,7 @@ import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jcommon.Parser;
 import com.googlecode.reunion.jreunion.server.Client;
 import com.googlecode.reunion.jreunion.server.DatabaseUtils;
-import com.googlecode.reunion.jreunion.server.ItemFactory;
+import com.googlecode.reunion.jreunion.server.ItemManager;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 
 /**
@@ -131,19 +131,20 @@ public class Merchant extends Npc {
 	public boolean buyItem(Player player, int itemType, int tab, int quantity) {
 
 		Client client = player.getClient();
+		ItemManager itemManager = player.getClient().getWorld().getItemManager();
 
-		Item item = ItemFactory.create(itemType);
+		Item<?> item = itemManager.create(itemType);
 		
 		int count = 0;
 
-		if (player.getLime() - item.getPrice() * quantity < 0) {
+		if (player.getLime() - item.getType().getPrice() * quantity < 0) {
 			client.sendPacket(Type.MSG, "Not enough lime.");
 			return false;
 		}
 
 		for (int i = 0; i < quantity; i++) {
 			
-			item = ItemFactory.create(itemType);
+			item = itemManager.create(itemType);
 			
 			if (player.getInventory().freeSlots(tab, item) == false) {
 				return false;
@@ -158,7 +159,7 @@ public class Merchant extends Npc {
 		}
 		
 		if (item != null) {
-			int cost = item.getPrice() * this.getBuyRate() / 100 * count;
+			int cost = item.getType().getPrice() * this.getBuyRate() / 100 * count;
 			synchronized(player) {
 				player.setLime(player.getLime()-cost);
 			
@@ -189,10 +190,10 @@ public class Merchant extends Npc {
 	/****** Sell items to merchant shop ******/
 	public void sellItem(Player player) {
 		
-		Item item = player.getInventory().getHoldingItem().getItem();
+		Item<?> item = player.getInventory().getHoldingItem().getItem();
 	
 		if (item != null) {
-			int price = (int) (item.getPrice() * ((double)this.getSellRate() / 100));
+			int price = (int) (item.getType().getPrice() * ((double)this.getSellRate() / 100));
 			Logger.getLogger(Merchant.class).warn("Selling"+item+" for "+price);
 			synchronized(player){
 				player.setLime(player.getLime()+price);

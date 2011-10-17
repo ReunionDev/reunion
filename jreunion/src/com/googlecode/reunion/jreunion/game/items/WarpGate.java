@@ -1,5 +1,6 @@
 package com.googlecode.reunion.jreunion.game.items;
 
+import com.googlecode.reunion.jreunion.game.Item;
 import com.googlecode.reunion.jreunion.game.LivingObject;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Usable;
@@ -21,7 +22,7 @@ public class WarpGate extends Etc implements Usable{
 	}
 	
 	@Override
-	public void use(final LivingObject user, int slot) {
+	public void use(Item<?> item, LivingObject user) {
 		if(user instanceof Player){
 			((Player)user).spawn();
 		}

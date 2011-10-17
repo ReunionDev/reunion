@@ -1,6 +1,7 @@
 package com.googlecode.reunion.jreunion.game.items.equipment;
 
 import com.googlecode.reunion.jcommon.ParsedItem;
+import com.googlecode.reunion.jreunion.game.Item;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.PlayerItem;
 import com.googlecode.reunion.jreunion.server.Reference;
@@ -42,8 +43,8 @@ public abstract class Weapon extends PlayerItem {
 		return handed;
 	}
 
-	public float getMaxDamage() {
-		int gradeLevel = getGradeLevel();
+	public float getMaxDamage(Item<?> item) {
+		int gradeLevel = item.getGradeLevel();
 		
 		if(gradeLevel == 0)
 			return maxDamage;
@@ -58,8 +59,8 @@ public abstract class Weapon extends PlayerItem {
 		}
 	}
 
-	public float getMinDamage() {
-		int gradeLevel = getGradeLevel();
+	public float getMinDamage(Item<?> item) {
+		int gradeLevel = item.getGradeLevel();
 		
 		if(gradeLevel == 0)
 			return minDamge;
@@ -86,9 +87,9 @@ public abstract class Weapon extends PlayerItem {
 		return speed;
 	}
 	
-	public float getMagicDmg() {
+	public float getMagicDmg(Item<?> item) {
 		
-		int gradeLevel = getGradeLevel();
+		int gradeLevel = item.getGradeLevel();
 		
 		if(gradeLevel == 0)
 			return magicDmg;

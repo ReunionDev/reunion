@@ -19,90 +19,78 @@ import com.googlecode.reunion.jreunion.game.items.equipment.Wing;
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
 public class Equipment {
-	private Weapon weapon;
+	private Item<?> weapon;
 
-	private Armor helmet;
+	private Item<?> helmet;
 
-	private Armor armor;
+	private Item<?> armor;
 
-	private Armor pants;
+	private Item<?> pants;
 
-	private Armor boots;
+	private Item<?> boots;
 
-	private Shield shield;
+	private Item<?> shield;
 
-	private WandWeapon wand;
+	private Item<?> wand;
 
-	private SpecialWeapon specialWeapon;
+	private Item<?> specialWeapon;
 
-	private Mantle mantle;
+	private Item<?> mantle;
 
-	private Wing wings;
+	private Item<?> wings;
 
-	private Ring ring;
+	private Item<?> ring;
 
-	private Necklace necklace;
+	private Item<?> necklace;
 
-	private Bracelet bracelet;
+	private Item<?> bracelet;
 
 	public Equipment(Player player) {
-		weapon = null;
-		helmet = null;
-		armor = null;
-		pants = null;
-		boots = null;
-		shield = null;
-		wand = null;
-		wings = null;
-		mantle = null;
-		specialWeapon = null;
-		ring = null;
-		necklace = null;
-		bracelet = null;
+		
 	}
 
-	public Armor getArmor() {
+	public Item<?> getArmor() {
 		return armor;
 	}
 
-	public Armor getBoots() {
+	public Item<?> getBoots() {
 		return boots;
 	}
 
-	public Bracelet getBracelet() {
+	public Item<?> getBracelet() {
 		return bracelet;
 	}
 
-	public Weapon getMainHand() {
+	public Item<?> getMainHand() {
 		
 		return weapon;
 	}
 
-	public Armor getHelmet() {
+	public Item<?> getHelmet() {
 		return helmet;
 	}
 	
-	public int getType(Slot slot){
-		Item item = getItem(slot); 
-		return item == null ? -1 : item.getType();
+	public int getTypeId(Slot slot){
+		Item<?> item = getItem(slot); 
+		return item == null ? -1 : item.getType().getTypeId();
 	}
 	
 	public int getEntityId(Slot slot){
-		Item item = getItem(slot); 
+		Item<?> item = getItem(slot); 
 		return item == null ? -1 : item.getEntityId();
 	}
 	
 	public int getExtraStats(Slot slot){
-		Item item = getItem(slot); 
+		Item<?> item = getItem(slot); 
 		return item == null ? 0 : item.getExtraStats();
 	}
 	
 	public int getGemNumber(Slot slot){
-		Item item = getItem(slot); 
+		Item<?> item = getItem(slot); 
 		return item == null ? 0 : item.getGemNumber();
 	}
 
-	public Item getItem(Slot slot) {
+	public Item<?> getItem(Slot slot) {
 
 		switch (slot) {
 		case BRACELET:
@@ -130,23 +118,23 @@ public class Equipment {
 		return null;
 	}
 
-	private Mantle getMantle() {
+	private Item<?> getMantle() {
 		return mantle;
 	}
 
-	public Necklace getNecklace() {
+	public Item<?> getNecklace() {
 		return necklace;
 	}
 
-	public Armor getPants() {
+	public Item<?> getPants() {
 		return pants;
 	}
 
-	public Ring getRing() {
+	public Item<?> getRing() {
 		return ring;
 	}
 
-	public Item getOffHand() {
+	public Item<?> getOffHand() {
 
 		if (getShield() != null) {
 			return getShield();
@@ -156,11 +144,11 @@ public class Equipment {
 		return null;
 	}
 
-	private Shield getShield() {
+	private Item<?> getShield() {
 		return shield;
 	}
 
-	public Item getShoulderMount() {
+	public Item<?> getShoulderMount() {
 
 		if (getSpecialWeapon() != null) {
 			return getSpecialWeapon();
@@ -173,164 +161,139 @@ public class Equipment {
 		}
 	}
 
-	private SpecialWeapon getSpecialWeapon() {
+	private Item<?> getSpecialWeapon() {
 		return specialWeapon;
 	}
 
-	private WandWeapon getWand() {
+	private Item<?> getWand() {
 		return wand;
 	}
 
-	private Wing getWings() {
+	private Item<?> getWings() {
 		return wings;
 	}
 
-	public void setArmor(Armor armor) {
+	public void setArmor(Item<?> armor) {
+		if(armor!=null&&!armor.is(Armor.class)){
+			throw new IllegalArgumentException();
+		}
 		this.armor = armor;
 	}
 
-	public void setBoots(Armor boots) {
+	public void setBoots(Item<?> boots) {
+		if(boots!=null&&!boots.is(Armor.class)){
+			throw new IllegalArgumentException();
+		}
 		this.boots = boots;
 	}
 
-	public void setBracelet(Bracelet bracelet) {
+	public void setBracelet(Item<?> bracelet) {
+		if(bracelet!=null&&!bracelet.is(Bracelet.class)){
+			throw new IllegalArgumentException();
+		}
 		this.bracelet = bracelet;
 	}
 
-	public void setMainhand(Weapon weapon) {
+	public void setMainhand(Item<?> weapon) {
+		if(weapon!=null&&!weapon.is(Weapon.class)){
+			throw new IllegalArgumentException();
+		}
 		this.weapon = weapon;
 	}
 
-	public void setHelmet(Armor helmet) {
+	public void setHelmet(Item<?> helmet) {
+		if(helmet!=null&&!helmet.is(Armor.class)){
+			throw new IllegalArgumentException();
+		}
 		this.helmet = helmet;
 	}
 
-	public boolean setItem(Slot slot, Item item) {
-		switch (slot) {
-		case HELMET: {
-			if (item instanceof Armor || item == null) {
-				setHelmet((Armor) item);
-				return true;
-			} else {
-				return false;
+	public boolean setItem(Slot slot, Item<?> item) {
+		try{
+			switch (slot) {
+			case HELMET: {
+				setHelmet(item);
+				break;
 			}
-		}
-		case CHEST: {
-			if (item instanceof Armor || item == null) {
-				setArmor((Armor) item);
-				return true;
-			} else {
-				return false;
+			case CHEST: {
+				setArmor(item);
+				break;
 			}
-		}
-		case PANTS: {
-			if (item instanceof Armor || item == null) {
-				setPants((Armor) item);
-				return true;
-			} else {
-				return false;
+			case PANTS: {
+				setPants(item);
+				break;
 			}
-		}
-		case SHOULDER: {
-			if (item instanceof SpecialWeapon || item instanceof Mantle
-					|| item instanceof Wing || item == null) {
-				if (item instanceof SpecialWeapon) {
-					setShoulderMount(item);
-				} else if (item instanceof Mantle) {
-					setShoulderMount(item);
-				} else if (item instanceof Wing) {
-					setShoulderMount(item);
-				} else {
-					setShoulderMount(item);
-				}
-				return true;
-			} else {
-				return false;
+			case SHOULDER: {
+				setShoulderMount(item);
+				break;
 			}
-		}
-		case BOOTS: {
-			if (item instanceof Armor || item == null) {
-				setBoots((Armor) item);
-				return true;
-			} else {
-				return false;
+			case BOOTS: {
+				setBoots(item);
+				break;
 			}
-		}
-		case OFFHAND: {
-			if (item instanceof Shield || item instanceof WandWeapon
-					|| item == null) {
-				if (item instanceof Shield) {
-					setOffhand(item);
-				} else if (item instanceof WandWeapon) {
-					setOffhand(item);
-				} else {
-					setOffhand(item);
-				}
-				return true;
-			} else {
-				return false;
+			case OFFHAND: {
+				setOffhand(item);
+				break;
 			}
-		}
-		case NECKLACE: {
-			if (item instanceof Necklace || item == null) {
-				setNecklace((Necklace) item);
-				return true;
-			} else {
-				return false;
+			case NECKLACE: {
+				setNecklace(item);
+				break;
 			}
-		}
-		case RING: {
-			if (item instanceof Ring || item == null) {
-				setRing((Ring) item);
-				return true;
-			} else {
-				return false;
+			case RING: {
+				setRing(item);
+				break;
 			}
-		}
-		case BRACELET: {
-			if (item instanceof Bracelet || item == null) {
-				setBracelet((Bracelet) item);
-				return true;
-			} else {
-				return false;
+			case BRACELET: {
+				setBracelet(item);
+				break;
 			}
-		}
-		case MAINHAND: {
-			if (item instanceof Weapon || item == null) {
-				setMainhand((Weapon) item);
-				return true;
-			} else {
-				return false;
+			case MAINHAND: {
+				setMainhand(item);
+				break;
 			}
-		}
+			}
+		}catch(IllegalAccessError e){
+			return false;
 		}
 		return true;
 
 	}
 
-	private void setMantle(Mantle mantle) {
+	private void setMantle(Item<?> mantle) {
+		if(mantle!=null&&!mantle.is(Mantle.class)){
+			throw new IllegalArgumentException();
+		}
 		this.mantle = mantle;
 	}
 
-	public void setNecklace(Necklace necklace) {
+	public void setNecklace(Item<?> necklace) {
+		if(necklace!=null&&!necklace.is(Necklace.class)){
+			throw new IllegalArgumentException();
+		}
 		this.necklace = necklace;
 	}
 
-	public void setPants(Armor pants) {
+	public void setPants(Item<?> pants) {
+		if(pants!=null&&!pants.is(Armor.class)){
+			throw new IllegalArgumentException();
+		}
 		this.pants = pants;
 	}
 
-	public void setRing(Ring ring) {
+	public void setRing(Item<?> ring) {
+		if(ring!=null&&!ring.is(Ring.class)){
+			throw new IllegalArgumentException();
+		}
 		this.ring = ring;
 	}
 
-	public void setOffhand(Item secondHand) {
+	public void setOffhand(Item<?> secondHand) {
 
-		if (secondHand instanceof Shield) {
-			setShield((Shield) secondHand);
+		if (secondHand.is(Shield.class)) {
+			setShield(secondHand);
 			setWand(null);
-		} else if (secondHand instanceof WandWeapon) {
-			setWand((WandWeapon) secondHand);
+		} else if (secondHand.is(WandWeapon.class)) {
+			setWand(secondHand);
 			setShield(null);
 		} else {
 			setShield(null);
@@ -338,28 +301,31 @@ public class Equipment {
 		}
 	}
 
-	private void setShield(Shield shield) {
+	private void setShield(Item<?> shield) {
+		if(shield!=null&&!shield.is(Shield.class)){
+			throw new IllegalArgumentException();
+		}
 		this.shield = shield;
 	}
 
-	public void setShoulderMount(Item shoulderMount) {
+	public void setShoulderMount(Item<?> shoulderMount) {
 
-		if (shoulderMount instanceof SlayerWeapon) {
+		if (shoulderMount.is(SlayerWeapon.class)) {
 			setMantle(null);
 			setWings(null);
-			setSpecialWeapon((SpecialWeapon) shoulderMount);
-		} else if (shoulderMount instanceof HeavyWeapon) {
+			setSpecialWeapon(shoulderMount);
+		} else if (shoulderMount.is(HeavyWeapon.class)) {
 			setMantle(null);
 			setWings(null);
-			setSpecialWeapon((SpecialWeapon) shoulderMount);
-		} else if (shoulderMount instanceof Mantle) {
+			setSpecialWeapon(shoulderMount);
+		} else if (shoulderMount.is(Mantle.class)) {
 			setSpecialWeapon(null);
 			setWings(null);
-			setMantle((Mantle) shoulderMount);
-		} else if (shoulderMount instanceof Wing) {
+			setMantle(shoulderMount);
+		} else if (shoulderMount.is(Wing.class)) {
 			setSpecialWeapon(null);
 			setMantle(null);
-			setWings((Wing) shoulderMount);
+			setWings(shoulderMount);
 		} else {
 			setSpecialWeapon(null);
 			setMantle(null);
@@ -368,15 +334,24 @@ public class Equipment {
 
 	}
 
-	private void setSpecialWeapon(SpecialWeapon specialWeapon) {
+	private void setSpecialWeapon(Item<?> specialWeapon) {
+		if(specialWeapon!=null&&!specialWeapon.is(SpecialWeapon.class)){
+			throw new IllegalArgumentException();
+		}
 		this.specialWeapon = specialWeapon;
 	}
 
-	private void setWand(WandWeapon wand) {
+	private void setWand(Item<?> wand) {
+		if(wand!=null&&!wand.is(WandWeapon.class)){
+			throw new IllegalArgumentException();
+		}
 		this.wand = wand;
 	}
 
-	private void setWings(Wing wings) {
+	private void setWings(Item<?> wings) {
+		if(wings!=null&&!wings.is(Wing.class)){
+			throw new IllegalArgumentException();
+		}
 		this.wings = wings;
 	}
 	public static enum Slot

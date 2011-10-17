@@ -4,7 +4,6 @@ import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Player.Race;
 import com.googlecode.reunion.jreunion.game.items.potion.StaminaPotion;
 import com.googlecode.reunion.jreunion.server.Client;
-import com.googlecode.reunion.jreunion.server.ItemFactory;
 import com.googlecode.reunion.jreunion.server.Reference;
 import com.googlecode.reunion.jreunion.server.Tools;
 import com.googlecode.reunion.jreunion.server.World;
@@ -68,7 +67,7 @@ public class Test {
 				
 		
 		Reference.getInstance().Load();
-		StaminaPotion pot = (StaminaPotion) ItemFactory.create(142);
+		//StaminaPotion pot = (StaminaPotion) ItemFactory.create(142);
 		//pot.use(null);
 	}
 }

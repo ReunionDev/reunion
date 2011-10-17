@@ -39,9 +39,9 @@ public class Inventory {
 			InventoryItem item = iter.next();
 			if(item.getPosition().getTab() == tab){
 				for (int x = item.getPosition().getPosX(); x < item.getPosition().getPosX()
-						+ item.getItem().getSizeX(); x++) {
+						+ item.getItem().getType().getSizeX(); x++) {
 					for (int y = item.getPosition().getPosY(); y < item.getPosition().getPosY()
-							+ item.getItem().getSizeY(); y++) {
+							+ item.getItem().getType().getSizeY(); y++) {
 						if (x == posX && y == posY) {
 							//Logger.getLogger(Inventory.class).debug("DETECETED ITEM COLISION: ["+x+"]["+y+"] "+item.getItem().getDescription());
 							return false;
@@ -98,7 +98,7 @@ public class Inventory {
 	}
 	
 	//return the first free slot, of the item size
-	public int[] getFreeSlots(Item item){
+	public int[] getFreeSlots(Item<?> item){
 		
 		if(item == null)
 			return null;
@@ -109,7 +109,7 @@ public class Inventory {
 		for (int tab = 0; tab < 3; tab++) {
 			for (int posX = 0; posX < 8; posX++) {
 				for (int posY = 0; posY < 6; posY++) {
-					if (itemFit(tab, posX, posY, item.getSizeX(), item.getSizeY())) {
+					if (itemFit(tab, posX, posY, item.getType().getSizeX(), item.getType().getSizeY())) {
 						position[0] = tab;
 						position[1] = posX;
 						position[2] = posY;
@@ -121,10 +121,10 @@ public class Inventory {
 		return null;
 	}
 	
-	public boolean freeSlots(int tab, Item item) {
+	public boolean freeSlots(int tab, Item<?> item) {
 		for (int x = 0; x < 8; x++) {
 			for (int y = 0; y < 6; y++) {
-				if (itemFit(tab, x, y, item.getSizeX(), item.getSizeY())) {
+				if (itemFit(tab, x, y, item.getType().getSizeX(), item.getType().getSizeY())) {
 					return true;
 				}
 			}
@@ -141,9 +141,9 @@ public class Inventory {
 			InventoryItem invItem = iter.next();
 			
 			for (int x = invItem.getPosition().getPosX(); x < invItem.getPosition().getPosX()
-					+ invItem.getItem().getSizeX(); x++) {
+					+ invItem.getItem().getType().getSizeX(); x++) {
 				for (int y = invItem.getPosition().getPosY(); y < invItem.getPosition().getPosY()
-						+ invItem.getItem().getSizeY(); y++) {
+						+ invItem.getItem().getType().getSizeY(); y++) {
 					if (x == posX && y == posY && invItem.getPosition().getTab() == tab) {
 						return invItem;
 					}
@@ -169,7 +169,7 @@ public class Inventory {
 	
 	//stores an inventory item in the first free position.
 	//in this case, there is no item selected.
-	public InventoryItem storeItem(Item item){
+	public InventoryItem storeItem(Item<?> item){
 		if(item != null){
 			
 			int[] position = getFreeSlots(item);
@@ -279,9 +279,9 @@ public class Inventory {
 			InventoryItem item = iter.next();
 
 			for (int x = item.getPosition().getPosX(); x < item.getPosition().getPosX()
-					+ item.getItem().getSizeX(); x++) {
+					+ item.getItem().getType().getSizeX(); x++) {
 				for (int y = item.getPosition().getPosY(); y < item.getPosition().getPosY()
-						+ item.getItem().getSizeY(); y++) {
+						+ item.getItem().getType().getSizeY(); y++) {
 					if (item.getPosition().getTab() == tab) {
 						newInvMap[x][y] = true;
 					}
@@ -302,7 +302,7 @@ public class Inventory {
 	}
 	
 	@Deprecated
-	public boolean addItem(Item item) {
+	public boolean addItem(Item<?> item) {
 		
 		for (int tab = 0; tab < 3; tab++) {
 			for (int x = 0; x < 8; x++) {
@@ -316,11 +316,11 @@ public class Inventory {
 	}
 
 	@Deprecated
-	public boolean addItem(int posX, int posY, Item item, int tab) {
+	public boolean addItem(int posX, int posY, Item<?> item, int tab) {
 
 		InventoryItem inventoryItem = new InventoryItem(item, new InventoryPosition(posX, posY, tab));
 
-		if (itemFit(tab, posX, posY, item.getSizeX(), item.getSizeY()) == true) {
+		if (itemFit(tab, posX, posY, item.getType().getSizeX(), item.getType().getSizeY()) == true) {
 			items.add(inventoryItem);
 			return true;
 			// Logger.getLogger(Inventory.class).info("Item Inserted\n");
@@ -337,7 +337,7 @@ public class Inventory {
 	}
 	
 	@Deprecated
-	public InventoryItem getItem(Item item) {
+	public InventoryItem getItem(Item<?> item) {
 
 		Iterator<InventoryItem> iter = getInventoryIterator();
 		

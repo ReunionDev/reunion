@@ -8,14 +8,14 @@ public class StashItem {
 
 	private int pos;
 
-	private Item item;
+	private Item<?> item;
 
-	public StashItem(int pos, Item item) {
+	public StashItem(int pos, Item<?> item) {
 		setPos(pos);
 		setItem(item);
 	}
 
-	public Item getItem() {
+	public Item<?> getItem() {
 		return item;
 	}
 
@@ -23,7 +23,7 @@ public class StashItem {
 		return pos;
 	}
 
-	public void setItem(Item item) {
+	public void setItem(Item<?> item) {
 		this.item = item;
 	}
 

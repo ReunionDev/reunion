@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.googlecode.reunion.jreunion.game.BulkanPlayer;
 import com.googlecode.reunion.jreunion.game.Castable;
+import com.googlecode.reunion.jreunion.game.Item;
 import com.googlecode.reunion.jreunion.game.LivingObject;
-import com.googlecode.reunion.jreunion.game.Mob;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Skill;
 import com.googlecode.reunion.jreunion.game.items.equipment.Axe;
@@ -29,7 +29,7 @@ public class OverHeadBlow extends WeaponAttack implements Castable{
 		
 		float modifier = 1;
 		
-		Weapon weapon = player.getEquipment().getMainHand();
+		Item<?> weapon = player.getEquipment().getMainHand();
 		
 		if(weapon!=null&&getWeaponType().isInstance(weapon)){
 		
@@ -91,11 +91,12 @@ public class OverHeadBlow extends WeaponAttack implements Castable{
 			float baseDamage = player.getBaseDamage();
 			float skillDamage = getDamageModifier(player);
 			float weaponDamage = 0;
-			Weapon weapon = player.getEquipment().getMainHand();
+			Item<?> weapon = player.getEquipment().getMainHand();
 			
 			if( weapon != null)
-				weaponDamage += weapon.getMinDamage() + 
-						(Server.getRand().nextFloat()*(weapon.getMaxDamage()-weapon.getMinDamage()));
+				weaponDamage += ((Weapon)weapon.getType()).getMinDamage(weapon) + 
+						(Server.getRand().nextFloat()*(((Weapon)weapon.getType()).getMaxDamage(weapon)
+								- ((Weapon)weapon.getType()).getMinDamage(weapon)));
 			
 			float damage = (baseDamage +  weaponDamage) * skillDamage;
 			

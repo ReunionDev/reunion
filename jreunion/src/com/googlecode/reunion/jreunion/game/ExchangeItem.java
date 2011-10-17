@@ -6,7 +6,7 @@ package com.googlecode.reunion.jreunion.game;
  */
 public class ExchangeItem extends InventoryItem {
 
-	public ExchangeItem(Item item, int x, int y) {
+	public ExchangeItem(Item<?> item, int x, int y) {
 		super(item, new InventoryPosition(x, y, 3));
 	}
 	

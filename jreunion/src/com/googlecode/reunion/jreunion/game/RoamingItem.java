@@ -5,17 +5,17 @@ import com.googlecode.reunion.jreunion.server.Session;
 
 public class RoamingItem extends WorldObject{
 
-	private Item item;
+	private Item<?> item;
 	private Player owner;
 	
-	public RoamingItem(Item item) {
+	public RoamingItem(Item<?> item) {
 		this.setItem(item);
 	}	
 	
-	private void setItem(Item item) {
+	private void setItem(Item<?> item) {
 		this.item = item;
 	}
-	public Item getItem() {
+	public Item<?> getItem() {
 		return item;
 	}
 	@Override

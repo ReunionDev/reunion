@@ -2,6 +2,7 @@ package com.googlecode.reunion.jreunion.game.skills.bulkan;
 
 import java.util.List;
 
+import com.googlecode.reunion.jreunion.game.Item;
 import com.googlecode.reunion.jreunion.game.LivingObject;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.BulkanPlayer;
@@ -10,7 +11,6 @@ import com.googlecode.reunion.jreunion.game.items.equipment.Sword;
 import com.googlecode.reunion.jreunion.game.items.equipment.Weapon;
 import com.googlecode.reunion.jreunion.game.skills.Modifier;
 import com.googlecode.reunion.jreunion.game.Castable;
-import com.googlecode.reunion.jreunion.game.Mob;
 import com.googlecode.reunion.jreunion.server.Server;
 import com.googlecode.reunion.jreunion.server.SkillManager;
 
@@ -29,7 +29,7 @@ public class WhirlwindSlash extends WeaponAttack implements Castable{
 		
 		float modifier = 1;
 		
-		Weapon weapon = player.getEquipment().getMainHand();
+		Item<?> weapon = player.getEquipment().getMainHand();
 		
 		if(weapon!=null&&getWeaponType().isInstance(weapon)){
 		
@@ -90,11 +90,12 @@ public class WhirlwindSlash extends WeaponAttack implements Castable{
 			float baseDamage = player.getBaseDamage();
 			float skillDamage = getDamageModifier(player);
 			float weaponDamage = 0;
-			Weapon weapon = player.getEquipment().getMainHand();
+			Item<?> weapon = player.getEquipment().getMainHand();
 			
 			if( weapon != null)
-				weaponDamage += weapon.getMinDamage() + 
-						(Server.getRand().nextFloat()*(weapon.getMaxDamage()-weapon.getMinDamage()));
+				weaponDamage += ((Weapon)weapon.getType()).getMinDamage(weapon) + 
+						(Server.getRand().nextFloat()*(((Weapon)weapon.getType()).getMaxDamage(weapon)
+								- ((Weapon)weapon.getType()).getMinDamage(weapon)));
 			
 			float damage = (baseDamage +  weaponDamage) * skillDamage;
 			

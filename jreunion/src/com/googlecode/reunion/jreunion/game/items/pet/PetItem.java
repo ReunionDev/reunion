@@ -1,14 +1,14 @@
 package com.googlecode.reunion.jreunion.game.items.pet;
 
 import com.googlecode.reunion.jcommon.ParsedItem;
-import com.googlecode.reunion.jreunion.game.Item;
+import com.googlecode.reunion.jreunion.game.ItemType;
 import com.googlecode.reunion.jreunion.server.Reference;
 
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-public class PetItem extends Item {
+public class PetItem extends ItemType {
 	private int type;
 
 	private int buyExp;

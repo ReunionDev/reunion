@@ -37,8 +37,8 @@ public class Exchange {
 		while (exchangeIter.hasNext()) {
 			ExchangeItem exchangeItem = exchangeIter.next();
 
-			for (int x = 0; x < exchangeItem.getItem().getSizeX(); x++) {
-				for (int y = 0; y < exchangeItem.getItem().getSizeY(); y++) {
+			for (int x = 0; x < exchangeItem.getItem().getType().getSizeX(); x++) {
+				for (int y = 0; y < exchangeItem.getItem().getType().getSizeY(); y++) {
 					if (posX == x + exchangeItem.getPosition().getPosX()
 							&& posY == y + exchangeItem.getPosition().getPosY()) {
 						return exchangeItem;
@@ -66,7 +66,8 @@ public class Exchange {
 	
 	public boolean isAllInstanceOfScrollOfNAgen(){
 		for(ExchangeItem exchangeItem: itemList){
-			if(!(exchangeItem.getItem() instanceof ScrollOfNAgen)){
+			Item<?> item = exchangeItem.getItem();
+			if(!(item.is(ScrollOfNAgen.class))){
 				return false;
 			}
 		}

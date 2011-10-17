@@ -13,10 +13,21 @@ import com.googlecode.reunion.jreunion.server.DatabaseUtils;
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-public class QuickSlot {
+public class QuickSlotBar {
 	private List<QuickSlotItem> itemList = new Vector<QuickSlotItem>();
 
-	public QuickSlot(Player player) {
+	private Player player;
+	
+	public QuickSlotBar(Player player) {
+		setPlayer(player);
+	}
+
+	public Player getPlayer() {
+		return player;
+	}
+
+	private void setPlayer(Player player) {
+		this.player = player;
 	}
 
 	public void addItem(QuickSlotItem qsItem) {
@@ -31,7 +42,7 @@ public class QuickSlot {
 		while (iter.hasNext()) {
 			QuickSlotItem item = iter.next();
 
-			if (item.getSlot() == slot) {
+			if (item.getPosition().getSlot() == slot) {
 				return item;
 			}
 		}
@@ -46,13 +57,9 @@ public class QuickSlot {
 	public void MoveToQuick(Player player, int tab, int itemId, int slot) {
 		Client client = player.getClient();
 
-		if (client == null) {
-			return;
-		}
-
 		InventoryItem invItem = player.getInventory().getItem(itemId);
-		QuickSlotItem qsItem = new QuickSlotItem(invItem.getItem(), slot);
-
+		QuickSlotItem qsItem = new QuickSlotItem(invItem.getItem(), new QuickSlotPosition(this, slot));
+		
 		player.getInventory().deleteInventoryItem(invItem);
 		addItem(qsItem);
 	}
@@ -72,7 +79,7 @@ public class QuickSlot {
 		} else {
 			InventoryItem invItem = player.getInventory().getHoldingItem();
 			QuickSlotItem newQuickSlotItem = new QuickSlotItem(
-					invItem.getItem(), slot);
+					invItem.getItem(), new QuickSlotPosition(this, slot));
 			QuickSlotItem oldQuickSlotItem = getItem(slot);
 			if (oldQuickSlotItem == null) {
 				addItem(newQuickSlotItem);
@@ -97,9 +104,9 @@ public class QuickSlot {
 
 		QuickSlotItem qsItem = getItem(slot);
 		
-		Item item = qsItem.getItem();
+		Item<?> item = qsItem.getItem();
 		
-		Logger.getLogger(QuickSlot.class).info("USING: " +item);
+		Logger.getLogger(QuickSlotBar.class).info("USING: " +item);
 		
 		player.getPosition().getLocalMap().getWorld().getCommand().useItem(player, item, slot);
 /*

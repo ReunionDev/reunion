@@ -3,7 +3,7 @@ package com.googlecode.reunion.jreunion.game.quests.objective;
 import com.googlecode.reunion.jreunion.game.Item;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.server.Client;
-import com.googlecode.reunion.jreunion.server.ItemFactory;
+import com.googlecode.reunion.jreunion.server.ItemManager;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 
 public class PointsObjective extends Objective{
@@ -31,11 +31,12 @@ public class PointsObjective extends Objective{
 			return;
 		}
 		
+		ItemManager itemManager = client.getWorld().getItemManager();
 		client.sendPacket(Type.QT, "pt " + remainPoints + " " + obtainedPoints);
 
 		/****** Quest Points Reached Zero ********/
 		if (remainPoints == 0) {
-			Item item = ItemFactory.create(1053);
+			Item<?> item = itemManager.create(1053);
 
 			item.setExtraStats(0);
 			item.setGemNumber(0);

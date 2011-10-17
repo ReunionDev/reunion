@@ -3,14 +3,12 @@ package com.googlecode.reunion.jreunion.game.skills.human;
 import java.util.List;
 import java.util.Vector;
 
+import com.googlecode.reunion.jreunion.game.Item;
 import com.googlecode.reunion.jreunion.game.LivingObject;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Skill;
 import com.googlecode.reunion.jreunion.game.items.equipment.GunWeapon;
-import com.googlecode.reunion.jreunion.game.items.equipment.Weapon;
 import com.googlecode.reunion.jreunion.game.skills.Modifier;
-import com.googlecode.reunion.jreunion.game.skills.Modifier.ModifierType;
-import com.googlecode.reunion.jreunion.game.skills.Modifier.ValueType;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 import com.googlecode.reunion.jreunion.server.SkillManager;
 import com.googlecode.reunion.jreunion.server.Tools;
@@ -41,7 +39,7 @@ public class SemiAutomatic extends Skill implements Modifier{
 			Player player = (Player)owner;
 			if(player.getSkillLevel(this)==0)
 				return false;
-			Weapon weapon= player.getEquipment().getMainHand();
+			Item<?> weapon= player.getEquipment().getMainHand();
 			return weapon!=null && getWeaponType().isInstance(weapon);			
 		}		
 		return false;		
@@ -52,7 +50,7 @@ public class SemiAutomatic extends Skill implements Modifier{
 		float modifier = 1;
 		float successRate = 0;
 	
-		Weapon weapon = player.getEquipment().getMainHand();
+		Item<?> weapon = player.getEquipment().getMainHand();
 		
 		if(weapon!=null&&getWeaponType().isInstance(weapon)){
 		

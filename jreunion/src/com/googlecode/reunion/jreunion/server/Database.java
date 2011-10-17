@@ -2,18 +2,10 @@ package com.googlecode.reunion.jreunion.server;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.util.Random;
 
 import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jcommon.Parser;
-import com.googlecode.reunion.jreunion.events.Event;
-import com.googlecode.reunion.jreunion.events.EventListener;
-import com.googlecode.reunion.jreunion.events.client.ClientSendEvent;
-import com.googlecode.reunion.jreunion.events.server.ServerEvent;
-import com.googlecode.reunion.jreunion.events.server.ServerStartEvent;
-import com.googlecode.reunion.jreunion.events.server.ServerStopEvent;
 import com.mysql.jdbc.Driver;
-import com.mysql.jdbc.MySQLConnection;
 import java.sql.PreparedStatement;
 
 import org.apache.log4j.Logger;

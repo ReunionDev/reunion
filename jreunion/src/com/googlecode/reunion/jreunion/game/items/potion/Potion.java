@@ -4,6 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import com.googlecode.reunion.jcommon.ParsedItem;
+import com.googlecode.reunion.jreunion.game.Item;
 import com.googlecode.reunion.jreunion.game.LivingObject;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Usable;
@@ -34,7 +35,7 @@ public abstract class Potion extends Etc implements Usable {
 	}
 	
 	@Override
-	public void use(final LivingObject user, int slot) {
+	public void use(Item<?> item, final LivingObject user) {
 		final Timer timer = new Timer();
 		
 		TimerTask o= new TimerTask(){

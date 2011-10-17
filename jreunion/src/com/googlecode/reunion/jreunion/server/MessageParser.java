@@ -43,6 +43,7 @@ public class MessageParser {
 		Command com = Server.getInstance().getWorld()
 				.getCommand();
 		Client client = player.getClient();
+		ItemManager itemManager = client.getWorld().getItemManager();
 
 		if (userlvl > -1) {
 			
@@ -132,7 +133,7 @@ public class MessageParser {
 					try {
 						
 						int itemType = Integer.parseInt(words[1]);
-						Item item = ItemFactory.create(itemType);
+						Item<?> item = itemManager.create(itemType);
 						if (words.length >= 4) {							
 							int gemNumber = Integer.parseInt(words[2]);
 							int extraStats = Integer.parseInt(words[3]);
@@ -199,7 +200,7 @@ public class MessageParser {
 					}
 				
 				} else if (words.length == 6) {
-					LocalMap map = player.getPosition().getLocalMap();
+					//LocalMap map = player.getPosition().getLocalMap();
 					Mob mob = (Mob)Npc.create(Integer.parseInt(words[1]));
 					mob.getPosition().setX(player.getPosition().getX() + 10);
 					mob.getPosition().setY(player.getPosition().getY() + 10);
@@ -397,8 +398,9 @@ public class MessageParser {
 				for(int attacksCounter = numberOfAttacks; attacksCounter > 0; attacksCounter-- ){
 					mob.attack(player);
 					player.getClient().sendPacket(Type.ATTACK,mob,player);
-					if(player.getHp() <= 0)
+					if(player.getHp() <= 0){
 						break;
+					}
 				}
 			}
 			else if (words[0].equals("@quest")) {

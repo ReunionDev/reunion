@@ -6,7 +6,6 @@ import java.util.Vector;
 import com.googlecode.reunion.jreunion.game.quests.objective.Objective;
 import com.googlecode.reunion.jreunion.game.quests.reward.Reward;
 import com.googlecode.reunion.jreunion.server.Client;
-import com.googlecode.reunion.jreunion.server.ItemFactory;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 
 /**

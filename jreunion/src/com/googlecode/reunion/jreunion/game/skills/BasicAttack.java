@@ -3,8 +3,8 @@ package com.googlecode.reunion.jreunion.game.skills;
 import java.util.List;
 
 import com.googlecode.reunion.jreunion.game.Castable;
+import com.googlecode.reunion.jreunion.game.Item;
 import com.googlecode.reunion.jreunion.game.LivingObject;
-import com.googlecode.reunion.jreunion.game.Mob;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Skill;
 import com.googlecode.reunion.jreunion.game.items.equipment.Weapon;
@@ -24,13 +24,15 @@ public class BasicAttack extends Skill implements Castable{
 		
 		if (attacker instanceof Player){
 			Player player = (Player)attacker; 
-			Weapon weapon = player.getEquipment().getMainHand();
+			Item<?> item = player.getEquipment().getMainHand();
+			Weapon weapon = null;
 			float baseDamage = player.getBaseDamage();
 			float weaponDamage = 0;
 			
-			if(weapon!=null){
-				weaponDamage += weapon.getMinDamage() + 
-							(Server.getRand().nextFloat()*(weapon.getMaxDamage()-weapon.getMinDamage()));
+			if(item!=null){
+				weapon = (Weapon) item.getType();
+				weaponDamage += weapon.getMinDamage(item) + 
+							(Server.getRand().nextFloat()*(weapon.getMaxDamage(item)-weapon.getMinDamage(item)));
 				if(!weapon.use(player)){
 					return false;
 				}

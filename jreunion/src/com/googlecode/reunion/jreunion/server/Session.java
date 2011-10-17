@@ -77,7 +77,7 @@ public class Session extends EventDispatcher implements EventListener{
 	
 	public void exit(WorldObject entity, boolean defaultAction){
 
-		Logger.getLogger(Session.class).debug("exit "+getOwner()+" "+entity);
+		//Logger.getLogger(Session.class).debug("exit "+getOwner()+" "+entity);
 		synchronized(entities){
 			if (!entities.contains(entity)) {
 				return;

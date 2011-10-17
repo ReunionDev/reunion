@@ -2,16 +2,10 @@ package com.googlecode.reunion.jreunion.capture;
 
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
-import java.io.DataInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.IOException;
-import java.math.BigInteger;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.net.SocketAddress;
 import java.net.UnknownHostException;
 import java.nio.ByteBuffer;
 import java.nio.channels.SelectableChannel;

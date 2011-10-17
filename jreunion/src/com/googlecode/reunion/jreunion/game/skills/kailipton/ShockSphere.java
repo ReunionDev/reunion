@@ -3,9 +3,9 @@ package com.googlecode.reunion.jreunion.game.skills.kailipton;
 import java.util.List;
 
 import com.googlecode.reunion.jreunion.game.Castable;
+import com.googlecode.reunion.jreunion.game.Item;
 import com.googlecode.reunion.jreunion.game.KailiptonPlayer;
 import com.googlecode.reunion.jreunion.game.LivingObject;
-import com.googlecode.reunion.jreunion.game.Mob;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Skill;
 import com.googlecode.reunion.jreunion.game.items.equipment.StaffWeapon;
@@ -80,15 +80,17 @@ public class ShockSphere extends Tier3 implements Castable {
 			
 			player.setMana(currentMana - manaSpent);
 			
-			Weapon weapon = player.getEquipment().getMainHand();
+			Item<?> item = player.getEquipment().getMainHand();
 			float baseDamage = player.getBaseDamage();
 			float weaponDamage = 0;
 			double weaponMagicBoost=1;
+			Weapon weapon = null;
 			
-			if(weapon instanceof StaffWeapon){
-				weaponDamage += weapon.getMinDamage() + 
-						(Server.getRand().nextFloat()*(weapon.getMaxDamage()-weapon.getMinDamage()));
-				weaponMagicBoost += weapon.getMagicDmg(); // % of magic dmg boost
+			if(item.is(StaffWeapon.class)){
+				weapon = (Weapon) item.getType();
+				weaponDamage += weapon.getMinDamage(item) + 
+						(Server.getRand().nextFloat()*(weapon.getMaxDamage(item)-weapon.getMinDamage(item)));
+				weaponMagicBoost += weapon.getMagicDmg(item); // % of magic dmg boost
 			}
 			
 			float lightDamage = getDamageModifier(player);

@@ -51,6 +51,10 @@ public class Area {
 		int nbit = getPos(x, y, field);
 		int nbyte = nbit/8;
 		int noffset = nbit%8;
+		
+		if(nbyte < 0 || nbyte >= data.length)
+			return false;
+		
 		return (data[nbyte] & (1 << noffset)) != 0;
 	}
 

@@ -1,6 +1,7 @@
 package com.googlecode.reunion.jreunion.game.items.equipment;
 
 import com.googlecode.reunion.jcommon.ParsedItem;
+import com.googlecode.reunion.jreunion.game.Item;
 import com.googlecode.reunion.jreunion.game.PlayerItem;
 import com.googlecode.reunion.jreunion.server.Reference;
 
@@ -45,8 +46,8 @@ public class Armor extends PlayerItem {
 		return coldMagicDef;
 	}
 
-	public float getDef() {
-		int gradeLevel = getGradeLevel();
+	public float getDef(Item<?> item) {
+		int gradeLevel = item.getGradeLevel();
 		
 		if(gradeLevel == 0)
 			return def;
@@ -60,9 +61,9 @@ public class Armor extends PlayerItem {
 		}
 	}
 
-	public float getMagicDef() {
+	public float getMagicDef(Item<?> item) {
 
-		int gradeLevel = getGradeLevel();
+		int gradeLevel = item.getGradeLevel();
 		
 		if(gradeLevel == 0)
 			return magicDef;

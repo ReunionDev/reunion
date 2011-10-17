@@ -3,10 +3,10 @@ package com.googlecode.reunion.jreunion.game.skills.bulkan;
 import java.util.List;
 import java.util.Vector;
 
+import com.googlecode.reunion.jreunion.game.Item;
 import com.googlecode.reunion.jreunion.game.LivingObject;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Skill;
-import com.googlecode.reunion.jreunion.game.items.equipment.Weapon;
 import com.googlecode.reunion.jreunion.game.skills.Modifier;
 import com.googlecode.reunion.jreunion.server.SkillManager;
 
@@ -24,7 +24,7 @@ public abstract class WeaponMastery extends Skill implements Modifier {
 		
 		float modifier = 1;
 	
-		Weapon weapon = player.getEquipment().getMainHand();
+		Item<?> weapon = player.getEquipment().getMainHand();
 		
 		if(weapon!=null&&getWeaponType().isInstance(weapon)){
 		
@@ -58,7 +58,7 @@ public abstract class WeaponMastery extends Skill implements Modifier {
 			Player player = (Player)owner;
 			if(player.getSkillLevel(this)==0)
 				return false;
-			Weapon weapon= player.getEquipment().getMainHand();
+			Item<?> weapon= player.getEquipment().getMainHand();
 			return weapon!=null && getWeaponType().isInstance(weapon);			
 		}		
 		return false;		

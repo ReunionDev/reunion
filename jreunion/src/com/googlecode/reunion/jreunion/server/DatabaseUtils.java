@@ -21,20 +21,14 @@ import com.googlecode.reunion.jreunion.game.Item;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Player.Race;
 import com.googlecode.reunion.jreunion.game.Player.Sex;
+import com.googlecode.reunion.jreunion.game.ItemType;
 import com.googlecode.reunion.jreunion.game.Position;
 import com.googlecode.reunion.jreunion.game.Quest;
 import com.googlecode.reunion.jreunion.game.QuickSlotItem;
+import com.googlecode.reunion.jreunion.game.QuickSlotPosition;
 import com.googlecode.reunion.jreunion.game.RoamingItem;
 import com.googlecode.reunion.jreunion.game.Skill;
 import com.googlecode.reunion.jreunion.game.StashItem;
-import com.googlecode.reunion.jreunion.game.items.equipment.Armor;
-import com.googlecode.reunion.jreunion.game.items.equipment.Axe;
-import com.googlecode.reunion.jreunion.game.items.equipment.GunWeapon;
-import com.googlecode.reunion.jreunion.game.items.equipment.RingWeapon;
-import com.googlecode.reunion.jreunion.game.items.equipment.StaffWeapon;
-import com.googlecode.reunion.jreunion.game.items.equipment.Sword;
-import com.googlecode.reunion.jreunion.game.items.equipment.Weapon;
-import com.googlecode.reunion.jreunion.game.items.potion.Potion;
 import com.googlecode.reunion.jreunion.game.quests.LimeQuest;
 import com.googlecode.reunion.jreunion.game.quests.QuestState;
 import com.googlecode.reunion.jreunion.game.quests.objective.Objective;
@@ -254,12 +248,12 @@ public class DatabaseUtils extends Service {
 				+ rs.getString("constitution") + " " 
 				+ rs.getString("leadership") + " "
 				//+ "0" + " " // the new version client have this extra value in the packet
-				+ eq.getType(Slot.HELMET) + " " 
-				+ eq.getType(Slot.CHEST) + " " 
-				+ eq.getType(Slot.PANTS) + " " 
-				+ eq.getType(Slot.SHOULDER)	+ " "
-				+ eq.getType(Slot.BOOTS) + " " 
-				+ eq.getType(Slot.OFFHAND) 
+				+ eq.getTypeId(Slot.HELMET) + " " 
+				+ eq.getTypeId(Slot.CHEST) + " " 
+				+ eq.getTypeId(Slot.PANTS) + " " 
+				+ eq.getTypeId(Slot.SHOULDER)	+ " "
+				+ eq.getTypeId(Slot.BOOTS) + " " 
+				+ eq.getTypeId(Slot.OFFHAND) 
 				+ " 0\n";
 				
 				//chars_exist 3 12341234 0 0 0 2 90 12 15 15 90 90 15 15 30 5 5 30 10 309 -1 -1 -1 -1 -1 1
@@ -289,7 +283,9 @@ public class DatabaseUtils extends Service {
 		
 		if (!checkDinamicDatabase())
 			return null;
+		
 		Statement stmt;
+		
 		try {
 			stmt = dinamicDatabase.dinamicConn.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM equipment WHERE charid="+ charid + ";");
@@ -297,8 +293,10 @@ public class DatabaseUtils extends Service {
 			{
 				int slotId = rs.getInt("slot");
 				
+				Item<?> item = Item.load(rs.getInt("itemid"));
+				
 				Slot slot = Slot.byValue(slotId);
-				equipment.setItem(slot, ItemFactory.loadItem(rs.getInt("itemid")));
+				equipment.setItem(slot, item);
 			}
 			
 			
@@ -483,6 +481,7 @@ public class DatabaseUtils extends Service {
 			stmt = dinamicDatabase.dinamicConn.createStatement();			
 								
 			Player player = Player.createPlayer(client, race);
+			ItemManager itemManager = player.getClient().getWorld().getItemManager();
 						
 			player.setLevel(1);
 			player.setName(charName);
@@ -513,31 +512,32 @@ public class DatabaseUtils extends Service {
 					+ slot + ","
 					+ client.getAccountId() + "); ");
 			
-			Potion hpPot1 = (Potion)ItemFactory.create(145);
-			Potion hpPot2 = (Potion)ItemFactory.create(145);
-			Potion hpPot3 = (Potion)ItemFactory.create(145);
-			Potion hpPot4 = (Potion)ItemFactory.create(145);
-			Potion hpPot5 = (Potion)ItemFactory.create(145);
-			Potion hpPot6 = (Potion)ItemFactory.create(145);
-			Weapon weapon = null;
+			Item<?> hpPot1 = itemManager.create(145);
+			Item<?> hpPot2 = itemManager.create(145);
+			Item<?> hpPot3 = itemManager.create(145);
+			Item<?> hpPot4 = itemManager.create(145);
+			Item<?> hpPot5 = itemManager.create(145);
+			Item<?> hpPot6 = itemManager.create(145);
+			Item<?> weapon = null;
 			
 			switch(race){
-				case BULKAN: {weapon = (Axe)ItemFactory.create(48); break;}
-				case KAILIPTON: {weapon = (StaffWeapon)ItemFactory.create(171); break;}
-				case AIDIA: {weapon = (RingWeapon)ItemFactory.create(431); break;}
-				case HUMAN: {weapon = (GunWeapon)ItemFactory.create(204); break;}
-				case HYBRIDER: {weapon = (Sword)ItemFactory.create(168); break;}
+				case BULKAN: {weapon = itemManager.create(48); break;}
+				case KAILIPTON: {weapon = itemManager.create(171); break;}
+				case AIDIA: {weapon = itemManager.create(431); break;}
+				case HUMAN: {weapon = itemManager.create(204); break;}
+				case HYBRIDER: {weapon = itemManager.create(168); break;}
 				default: break;
 			}
 			Equipment equipment = player.getEquipment();
-			Armor chest = (Armor)ItemFactory.create(326);
-			Armor pants = (Armor)ItemFactory.create(343);
+			Item<?> chest = itemManager.create(326);
+			Item<?> pants = itemManager.create(343);
 			
 			equipment.setItem(Slot.CHEST, chest);
 			equipment.setItem(Slot.PANTS, pants);
 			saveEquipment(player);
 			
-			player.getQuickSlot().addItem(new QuickSlotItem(hpPot1,0));
+			QuickSlotPosition quickSlotPosition = new QuickSlotPosition(player.getQuickSlot(),0);
+			player.getQuickSlot().addItem(new QuickSlotItem(hpPot1,quickSlotPosition));
 			saveQuickSlot(player);
 			
 			player.getInventory().storeItem(weapon);
@@ -608,6 +608,7 @@ public class DatabaseUtils extends Service {
 		if (!checkDinamicDatabase())
 			return null;
 		Statement invStmt;
+
 		try {
 			invStmt = dinamicDatabase.dinamicConn.createStatement();
 			
@@ -615,7 +616,7 @@ public class DatabaseUtils extends Service {
 			
 			while (invTable.next()) 
 			{
-				Item item = ItemFactory.loadItem(invTable.getInt("itemid"));	
+				Item<?> item = Item.load(invTable.getInt("itemid"));	
 				
 				if (item!=null){
 					InventoryItem inventoryItem = new InventoryItem(item,
@@ -658,7 +659,7 @@ public class DatabaseUtils extends Service {
 			while(iter.hasNext())
 			{
 				InventoryItem invItem = iter.next();
-				Item item = invItem.getItem();
+				Item<?> item = invItem.getItem();
 				saveItem(item);
 				
 				/*
@@ -750,7 +751,7 @@ public class DatabaseUtils extends Service {
 		return -1;
 	}
 	
-	public Item loadItem(int itemId )
+	public Item<?> loadItem(int itemId )
 	{
 		if (itemId==-1)return null;
 		if (!checkDinamicDatabase())return null;
@@ -772,11 +773,8 @@ public class DatabaseUtils extends Service {
 					return null;
 				}
 				
-				String className = "com.googlecode.reunion.jreunion.game.items." + parseditem.getMemberValue("Class");		
-				
-				Item item = (Item)ClassFactory.create(className, type);
-				if(item==null)
-					return null;
+				ItemType itemType = Server.getInstance().getWorld().getItemManager().getItemType(type);
+				Item<?> item = new Item(itemType);
 				
 				item.setItemId(itemId);
 				
@@ -795,7 +793,7 @@ public class DatabaseUtils extends Service {
 		return null;
 	}
 	
-	public boolean deleteRoamingItem(Item item){
+	public boolean deleteRoamingItem(Item<?> item){
 		if (!checkDinamicDatabase())
 			return false ;
 		Statement stmt;
@@ -823,7 +821,7 @@ public class DatabaseUtils extends Service {
 				while (rs.next()) 
 				{
 					int itemid = rs.getInt("itemid");
-					Item item = ItemFactory.loadItem(itemid);
+					Item<?> item = Item.load(itemid);
 					
 					if (item==null)
 						stmt.execute("DELETE FROM `roaming` WHERE itemid="+itemid);
@@ -847,7 +845,7 @@ public class DatabaseUtils extends Service {
 	public void saveItem(RoamingItem roamingItem){
 		if (!checkDinamicDatabase())
 			return ;
-		Item item = roamingItem.getItem();
+		Item<?> item = roamingItem.getItem();
 		Position position = roamingItem.getPosition();
 		saveItem(item);
 		
@@ -872,7 +870,7 @@ public class DatabaseUtils extends Service {
 			Logger.getLogger(this.getClass()).warn("Exception",e);
 		}
 	}
-	public synchronized void saveItem(Item item){
+	public synchronized void saveItem(Item<?> item){
 		if (!checkDinamicDatabase())
 			return ;
 			
@@ -883,13 +881,13 @@ public class DatabaseUtils extends Service {
 			int itemId = item.getItemId();
 			if(itemId!=-1){
 				
-				int res = stmt.executeUpdate("UPDATE `items` SET `type`="+item.getType()+", `gemnumber`="+item.getGemNumber()+", `extrastats`="+item.getExtraStats()+" WHERE `Id` = "+itemId);
+				int res = stmt.executeUpdate("UPDATE `items` SET `type`="+item.getType().getTypeId()+", `gemnumber`="+item.getGemNumber()+", `extrastats`="+item.getExtraStats()+" WHERE `Id` = "+itemId);
 				if(res==0){
 					Logger.getLogger(DatabaseUtils.class).error("item not found: "+itemId);					
 				}
 			} else {
 				stmt.execute("INSERT INTO items (type, gemnumber, extrastats)" +
-						" VALUES ("+item.getType()+","
+						" VALUES ("+item.getType().getTypeId()+","
 						+item.getGemNumber()+","+item.getExtraStats()+");",Statement.RETURN_GENERATED_KEYS);
 				
 				ResultSet res = stmt.getGeneratedKeys();
@@ -905,7 +903,7 @@ public class DatabaseUtils extends Service {
 		
 	}
 	
-	public void deleteItem(Item item)
+	public void deleteItem(Item<?> item)
 	{
 		if (item==null)return;
 		if (!checkDinamicDatabase())return ;
@@ -998,7 +996,7 @@ public class DatabaseUtils extends Service {
 			int playerId = player.getPlayerId();
 			for(Slot slot: Slot.values())
 			{
-				Item item = eq.getItem(slot);
+				Item<?> item = eq.getItem(slot);
 				if(item!=null){
 					if(!data.isEmpty())
 						data+= ", ";
@@ -1018,13 +1016,13 @@ public class DatabaseUtils extends Service {
 				
 		if (!checkDinamicDatabase())
 			return;
-
+		
 		try {
 			Statement invStmt = dinamicDatabase.dinamicConn.createStatement();
 			
 			ResultSet stashTable = invStmt.executeQuery("SELECT * FROM warehouse WHERE accountid="+client.getAccountId()+";");
 			client.getPlayer().getStash().clearStash();
-			Item item = null;
+			Item<?> item = null;
 						
 			while (stashTable.next()) 
 			{
@@ -1036,7 +1034,7 @@ public class DatabaseUtils extends Service {
 					*/
 				}
 				else{ 
-					item = ItemFactory.loadItem(stashTable.getInt("itemid"));
+					item = Item.load(stashTable.getInt("itemid"));
 				}
 				StashItem stashItem =	new StashItem(stashTable.getInt("pos"), item);
 				client.getPlayer().getStash().addItem(stashItem);
@@ -1078,7 +1076,7 @@ public class DatabaseUtils extends Service {
 		
 		if (!checkDinamicDatabase())
 			return;
-
+		
 		try {
 			Statement invStmt = dinamicDatabase.dinamicConn.createStatement();
 			
@@ -1086,7 +1084,7 @@ public class DatabaseUtils extends Service {
 						
 			while (exchangeTable.next()) 
 			{
-				Item item = ItemFactory.loadItem(exchangeTable.getInt("itemid"));
+				Item<?> item = Item.load(exchangeTable.getInt("itemid"));
 				ExchangeItem exchangeItem = new ExchangeItem(item,
 						exchangeTable.getInt("x"), exchangeTable.getInt("y"));
 				
@@ -1150,7 +1148,7 @@ public class DatabaseUtils extends Service {
 		
 		if (!checkDinamicDatabase())
 			return;
-
+		
 		try {
 			Statement invStmt = dinamicDatabase.dinamicConn.createStatement();
 			
@@ -1158,8 +1156,9 @@ public class DatabaseUtils extends Service {
 						
 			while (quickSlotTable.next()) 
 			{
-				Item item = ItemFactory.loadItem(quickSlotTable.getInt("itemid"));
-				QuickSlotItem quickSlotItem = new QuickSlotItem(item,quickSlotTable.getInt("slot"));
+				Item<?> item = Item.load(quickSlotTable.getInt("itemid"));
+				QuickSlotPosition quickSlotPosition = new QuickSlotPosition(player.getQuickSlot(),quickSlotTable.getInt("slot"));
+				QuickSlotItem quickSlotItem = new QuickSlotItem(item,quickSlotPosition);
 				player.getQuickSlot().addItem(quickSlotItem);
 			}
 			
@@ -1186,7 +1185,7 @@ public class DatabaseUtils extends Service {
 				
 				stmt.execute("INSERT INTO quickslot (charid, itemid, slot)" +
 						" VALUES ("+player.getPlayerId()+ ","+qsItem.getItem().getItemId()+","
-						+qsItem.getSlot()+");");
+						+qsItem.getPosition().getSlot()+");");
 			}
 			
 		} catch (SQLException e) {

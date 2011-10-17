@@ -121,7 +121,7 @@ public abstract class Player extends LivingObject implements EventListener {
 
 	private List<Integer> attackQueue = new Vector<Integer>();
 
-	private QuickSlot quickSlot;
+	private QuickSlotBar quickSlot;
 	
 	private QuestState questState;
 
@@ -151,7 +151,7 @@ public abstract class Player extends LivingObject implements EventListener {
 		client.setPlayer(this);
 		inventory = new Inventory();
 		equipment = new Equipment(this);
-		quickSlot = new QuickSlot(this);
+		quickSlot = new QuickSlotBar(this);
 		stash = new Stash(this);
 		exchange = new Exchange(this);
 		
@@ -175,7 +175,7 @@ public abstract class Player extends LivingObject implements EventListener {
 	/****** Manages the Item Drop ******/
 	public void dropItem(int playerId) {
 		
-		Item item = getInventory().getHoldingItem().getItem();
+		Item<?> item = getInventory().getHoldingItem().getItem();
 		
 		if (item == null) {
 			return;
@@ -288,13 +288,13 @@ public abstract class Player extends LivingObject implements EventListener {
 		Iterator<Integer> iter = getAttackQueueIterator();
 
 		while (iter.hasNext()) {
-			int count = 1;
+			//int count = 1;
 			int attack = iter.next();
 
 			if (bestAttack < attack) {
 				bestAttack = attack;
 			}
-			count++;
+			//count++;
 		}
 		return bestAttack;
 	}
@@ -378,7 +378,7 @@ public abstract class Player extends LivingObject implements EventListener {
 		return questState;
 	}
 
-	public QuickSlot getQuickSlot() {
+	public QuickSlotBar getQuickSlot() {
 		return quickSlot;
 	}
 	
@@ -564,14 +564,14 @@ public abstract class Player extends LivingObject implements EventListener {
 			getInventory().setHoldingItem(invItem);
 			getExchange().removeItem(item);
 		} else {
-			Item item = getInventory().getHoldingItem().getItem();
+			Item<?> item = getInventory().getHoldingItem().getItem();
 			ExchangeItem newExchangeItem = new ExchangeItem(item, posX,
 					posY);
 			ExchangeItem oldExchangeItem = null;
 			int x = 0, y = 0;
 
-			while (oldExchangeItem == null && x < item.getSizeX()) {
-				while (oldExchangeItem == null && y < item.getSizeY()) {
+			while (oldExchangeItem == null && x < item.getType().getSizeX()) {
+				while (oldExchangeItem == null && y < item.getType().getSizeY()) {
 					oldExchangeItem = getExchange().getItem(posX + x, posY + y);
 					y++;
 				}
@@ -603,7 +603,7 @@ public abstract class Player extends LivingObject implements EventListener {
 				.itemListIterator();
 		while (exchangeIter.hasNext()) {
 			ExchangeItem exchangeItem = exchangeIter.next();
-			Item item = exchangeItem.getItem();
+			Item<?> item = exchangeItem.getItem();
 			
 			if(item.getEntityId()==-1){
 				client.getPlayer().getPosition().getLocalMap().createEntityId(item);
@@ -647,7 +647,7 @@ public abstract class Player extends LivingObject implements EventListener {
 				.getInventoryIterator();
 		while (invIter.hasNext()) {
 			InventoryItem invItem = invIter.next();
-			Item item = invItem.getItem();
+			Item<?> item = invItem.getItem();
 			if(item.getEntityId()==-1){
 				client.getPlayer().getPosition().getLocalMap().createEntityId(item);
 			}
@@ -668,7 +668,7 @@ public abstract class Player extends LivingObject implements EventListener {
 				.getQuickSlotIterator();
 		while (quickSlot.hasNext()) {
 			QuickSlotItem qsItem = quickSlot.next();
-			Item item = qsItem.getItem();
+			Item<?> item = qsItem.getItem();
 			
 			if(item.getEntityId()==-1){
 				client.getPlayer().getPosition().getLocalMap().createEntityId(item);
@@ -683,7 +683,7 @@ public abstract class Player extends LivingObject implements EventListener {
 		if(localMap == null)
 			return;
 		for(Equipment.Slot slot: Equipment.Slot.values()){
-			Item item = getEquipment().getItem(slot);
+			Item<?> item = getEquipment().getItem(slot);
 			
 			if(item == null)
 				continue;
@@ -718,7 +718,7 @@ public abstract class Player extends LivingObject implements EventListener {
 
 	/****** Manages the Pick command ******/
 	// When you pick up an item, or buy something from merchant
-	public void pickItem(Item item) {
+	public void pickItem(Item<?> item) {
 		Client client = getClient();
 				
 		if(item.getEntityId()==-1){
@@ -813,10 +813,13 @@ public abstract class Player extends LivingObject implements EventListener {
 		this.defense = 0;
 		
 		for(Equipment.Slot slot: Equipment.Slot.values()){
-			Item item = getEquipment().getItem(slot);
+			Item<?> item = getEquipment().getItem(slot);
 			
-			if(item instanceof Armor){
-				this.defense += ((Armor)item).getDef();
+			if(item==null)
+				continue;
+			
+			if(item.is(Armor.class)){
+				this.defense += ((Armor)item.getType()).getDef(item);
 			}
 		}
 	}
@@ -1206,7 +1209,7 @@ public abstract class Player extends LivingObject implements EventListener {
 			
 		} else {
 			if (getEquipment().getItem(slot) == null) {
-				Item item = invItem.getItem();
+				Item<?> item = invItem.getItem();
 				
 				getInterested().sendPacket(Type.CHAR_WEAR, this, slot, item);
 				
@@ -1220,7 +1223,7 @@ public abstract class Player extends LivingObject implements EventListener {
 				}
 				*/
 			} else {
-				Item currentItem = getEquipment().getItem(slot);
+				Item<?> currentItem = getEquipment().getItem(slot);
 				getInterested().sendPacket(Type.CHAR_REMOVE, this, slot);
 				getEquipment().setItem(slot, invItem.getItem());
 				getInventory().setHoldingItem(
@@ -1232,7 +1235,7 @@ public abstract class Player extends LivingObject implements EventListener {
 					setMaxDmg(weapon.getMaxDamage());
 				}
 				*/
-				Item item = getEquipment().getItem(slot);
+				Item<?> item = getEquipment().getItem(slot);
 
 				getInterested().sendPacket(Type.CHAR_WEAR, this, slot, item);
 				

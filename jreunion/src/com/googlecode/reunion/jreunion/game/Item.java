@@ -1,61 +1,54 @@
 package com.googlecode.reunion.jreunion.game;
 
-import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jreunion.game.Equipment.Slot;
 import com.googlecode.reunion.jreunion.server.DatabaseUtils;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
-import com.googlecode.reunion.jreunion.server.Reference;
 
-/**
- * @author Aidamina
- * @license http://reunion.googlecode.com/svn/trunk/license.txt
- */
-public class Item implements Entity {
+public class Item<T extends ItemType> implements Entity{
 	
-	private int price;
-
+	private T type;
+	
 	private int entityId = -1;
 	
 	private int itemId = -1; //for database;
 
-	private int sizeX; // number of cols
-
-	private int sizeY; // number of rows
-
 	private int gemNumber;
 
 	private int extraStats;
+	
+	private ItemPosition position;
+	
+	public ItemPosition getPosition() {
+		return position;
+	}
 
-	private int type;
+	public void setPosition(ItemPosition position) {
+		this.position = position;
+	}
 
-	private int rotation;
-
-	private String description;
-
-	public Item(int type) {
-		super();
-		this.type = type;
-		loadFromReference(type);
+	public Item(T itemType) {
+		
+		setType(itemType); 
 	}
 	
-	public int getItemId() {
-		return itemId;
-	}
-
-	public void setItemId(int itemId) {
-		this.itemId = itemId;
-	}
-	
-	public String getDescription() {
-		return description;
+	public T getType() {
+		return type;
 	}
 	
 	public int getEntityId() {
 		return entityId;
 	}
+	
+	public int getItemId() {
+		return itemId;
+	}
+	
+	public void setItemId(int itemId) {
+		this.itemId = itemId;
+	}
 
-	public void setEntityId(int id) {
-		this.entityId = id;
+	public void setEntityId(int entityId) {
+		this.entityId = entityId;
 	}
 
 	public int getExtraStats() {
@@ -66,83 +59,38 @@ public class Item implements Entity {
 		return gemNumber;
 	}
 
-	public int getPrice() {
-		return price;
-	}
-
-	public int getRotation() {
-		return rotation;
-	}
-
-	public int getSizeX() {
-		return sizeX;
-	}
-
-	public int getSizeY() {
-		return sizeY;
-	}
-
-	public int getType() {
-		return type;
+	private void setType(T type) {
+		this.type = type;
 	}
 	
-	public String getName(){		
-		return Reference.getInstance().getItemReference()
-		.getItemById(getType()).getName();
+	public void setExtraStats(int extraStats) {
+		this.extraStats = extraStats;
+		getType().setExtraStats(this);
+	}
+	
+	public boolean is(Class<?> itemType){
+		return itemType.isAssignableFrom(getType().getClass());
 	}
 
-	public void loadFromReference(int type) {		
+	public void setGemNumber(int gemNumber) {
+		this.gemNumber = gemNumber;
+		getType().setGemNumber(this);
+	}
+	
+	public void use(LivingObject livingObject){
 		
-		ParsedItem item = Reference.getInstance().getItemReference().getItemById(type);
-		
-		if (item == null) {
-			// cant find Item in the reference continue to load defaults:
-			setSizeX(1);
-			setSizeY(1);
-			setPrice(1);
-			setDescription("Unknown");
-		} else {
-
-			if (item.checkMembers(new String[] { "SizeX" })) {
-				// use member from file
-				setSizeX(Integer.parseInt(item.getMemberValue("SizeX")));
-			} else {
-				// use default
-				setSizeX(1);
-			}
-			if (item.checkMembers(new String[] { "SizeY" })) {
-				// use member from file
-				setSizeY(Integer.parseInt(item.getMemberValue("SizeY")));
-			} else {
-				// use default
-				setSizeY(1);
-			}
-			if (item.checkMembers(new String[] { "Price" })) {
-				// use member from file
-				setPrice(Integer.parseInt(item.getMemberValue("Price")));
-			} else {
-				// use default
-				setPrice(1);
-			}
-			if (item.checkMembers(new String[] { "Description" })) {
-				// use member from file
-				setDescription(item.getMemberValue("Description"));
-			} else {
-				// use default
-				setDescription(item.getName());
-			}
+		if(is(Usable.class)){
+			((Usable)getType()).use(this, livingObject);
+		}else{
+			throw new IllegalArgumentException(getType()+" is not Usable");
 		}
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
 	}
 	
 	public int getGradeLevel(){
 		
 		int gemNumber = getGemNumber();
 		
-		if(((PlayerItem)this).getLevel() < 181) {
+		if(((PlayerItem)getType()).getLevel() < 181) {
 			return (gemNumber/1>0?1:0)+(gemNumber/3>0?1:0)+(gemNumber/6>0?1:0)+(gemNumber/10>0?1:0)+(gemNumber/15>0?1:0);
 		}
 		else{
@@ -160,29 +108,11 @@ public class Item implements Entity {
 		
 		player.getClient().sendPacket(Type.UPGRADE, this, slot,1);
 	}
-
-	public void setExtraStats(int extraStats) {
-		this.extraStats = extraStats;
-	}
-
-	public void setGemNumber(int gemNumber) {
-		this.gemNumber = gemNumber;
-	}
-
-	public void setPrice(int price) {
-		this.price = price;
-	}
-
-	public void setRotation(int rotation) {
-		this.rotation = rotation;
-	}
-
-	public void setSizeX(int sizeX) {
-		this.sizeX = sizeX;
-	}
-
-	public void setSizeY(int sizeY) {
-		this.sizeY = sizeY;
+	
+	public static Item<?> load(int itemId){
+			
+		return DatabaseUtils.getDinamicInstance().loadItem(itemId);
+			
 	}
 
 }

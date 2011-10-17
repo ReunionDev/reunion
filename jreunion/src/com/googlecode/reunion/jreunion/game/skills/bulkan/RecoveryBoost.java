@@ -3,7 +3,6 @@ package com.googlecode.reunion.jreunion.game.skills.bulkan;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Skill;
 import com.googlecode.reunion.jreunion.server.SkillManager;
-import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 
 public class RecoveryBoost extends Skill {
 

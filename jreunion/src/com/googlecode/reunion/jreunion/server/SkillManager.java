@@ -6,6 +6,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
+import org.apache.log4j.Logger;
+
 import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jcommon.Parser;
 import com.googlecode.reunion.jreunion.game.Player;
@@ -173,6 +175,7 @@ public class SkillManager {
 			}
 			defaultSkills.put(race, raceSkillList);
 		}
+		Logger.getLogger(SkillManager.class).info(skills.size()+" skills loaded.");
 	}
 	public Skill getSkill(int id){
 		

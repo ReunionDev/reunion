@@ -3,11 +3,11 @@ package com.googlecode.reunion.jreunion.game.skills.aidia;
 import java.util.List;
 import java.util.Vector;
 
+import com.googlecode.reunion.jreunion.game.Item;
 import com.googlecode.reunion.jreunion.game.LivingObject;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Skill;
 import com.googlecode.reunion.jreunion.game.items.equipment.RingWeapon;
-import com.googlecode.reunion.jreunion.game.items.equipment.Weapon;
 import com.googlecode.reunion.jreunion.game.skills.Modifier;
 import com.googlecode.reunion.jreunion.server.SkillManager;
 
@@ -43,11 +43,9 @@ public abstract class RingWeaponMastery extends Skill implements Modifier {
 	public float getDamageModifier(Player player){
 		
 		float modifier = 1;
-	
-		Weapon weapon = player.getEquipment().getMainHand();
-		
-		if(weapon!=null&&getWeaponType().isInstance(weapon)){
-		
+		Item<?> weapon  = player.getEquipment().getMainHand();
+			
+		if(weapon != null&&getWeaponType().isInstance(weapon.getType())){		
 			int level = player.getSkillLevel(this);
 			if(level>0){
 				modifier += (0.1+((level-1)*getDamageModifier()));			
@@ -62,7 +60,7 @@ public abstract class RingWeaponMastery extends Skill implements Modifier {
 			Player player = (Player)owner;
 			if(player.getSkillLevel(this)==0)
 				return false;
-			Weapon weapon= player.getEquipment().getMainHand();
+			Item<?> weapon = player.getEquipment().getMainHand();
 			return weapon!=null && getWeaponType().isInstance(weapon);			
 		}		
 		return false;	
