@@ -10,12 +10,8 @@ public class SwordMastery extends WeaponMastery {
 		super(skillManager,id);
 		// TODO Auto-generated constructor stub
 	}
-
 	@Override
 	public Class<?> getWeaponType() {
 		return Sword.class;
 	}
-
-	
-
 }

@@ -75,7 +75,7 @@ public abstract class Connection<T extends Connection<T>> {
 		networkThread.onDisconnect((T)this);
 	}
 	
-	public byte [] getData(){
+	protected byte [] getData(){
 		synchronized(inputBuffer){
 			inputBuffer.flip();
 			byte [] data = new byte[inputBuffer.limit()];			

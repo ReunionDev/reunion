@@ -30,14 +30,10 @@ public class InventoryPacket extends Packet implements Parseable<InventoryPacket
 	public int getY() {
 		return y;
 	}
-
-	
 	
 	@Override
 	public Pattern[] getPatterns() {
-		
 		return new Pattern [] {Pattern.compile("^inven (\\d+) (\\d+) (\\d+)$")};
-		
 	}
 
 	@Override
@@ -46,8 +42,7 @@ public class InventoryPacket extends Packet implements Parseable<InventoryPacket
 		InventoryPacket packet = new InventoryPacket();
 		packet.tab = Integer.parseInt(matcher.group(1));
 		packet.x = Integer.parseInt(matcher.group(2));
-		packet.y = Integer.parseInt(matcher.group(3));			
-		
+		packet.y = Integer.parseInt(matcher.group(3));
 		return packet;
 	}
 

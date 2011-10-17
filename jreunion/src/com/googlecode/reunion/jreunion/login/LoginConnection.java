@@ -1,14 +1,12 @@
 package com.googlecode.reunion.jreunion.login;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.nio.ByteBuffer;
+import java.io.Serializable;
 import java.nio.channels.SocketChannel;
-import com.googlecode.reunion.jreunion.network.Connection;
-import com.googlecode.reunion.jreunion.server.packets.Packet;
 
-public class LoginConnection extends Connection<LoginConnection> {
+import com.googlecode.reunion.jreunion.network.PacketConnection;
+
+public class LoginConnection extends PacketConnection<LoginConnection> {
 
 	public LoginConnection(LoginServer loginServer,
 			SocketChannel socketChannel) throws IOException {
@@ -17,14 +15,7 @@ public class LoginConnection extends Connection<LoginConnection> {
 	}
 
 	@Override
-	public void onData(ByteBuffer inputBuffer) {
-		try {
-			byte [] data = getData();
-			ByteArrayInputStream bais = new ByteArrayInputStream(data);
-			ObjectInputStream ois = new ObjectInputStream(bais);
-			Packet packet = (Packet) ois.readObject();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public void onPacket(Serializable obj) {
+		LoginServer server = (LoginServer) getNetworkThread();
 	}
 }

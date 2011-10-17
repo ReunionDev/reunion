@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 import java.util.List;
-
 import com.googlecode.reunion.jreunion.network.Connection;
 import com.googlecode.reunion.jreunion.network.protocol.DefaultProtocol;
 import com.googlecode.reunion.jreunion.network.protocol.Protocol;
@@ -12,16 +11,16 @@ import com.googlecode.reunion.jreunion.proxy.parser.Parser;
 import com.googlecode.reunion.jreunion.server.packets.ClientSerializator;
 import com.googlecode.reunion.jreunion.server.packets.ForGameServer;
 import com.googlecode.reunion.jreunion.server.packets.ForLoginServer;
-import com.googlecode.reunion.jreunion.server.packets.LoginPacket;
 import com.googlecode.reunion.jreunion.server.packets.Packet;
 import com.googlecode.reunion.jreunion.server.packets.SessionPacket;
 import com.googlecode.reunion.jreunion.server.packets.StubPacket;
+import com.googlecode.reunion.jreunion.server.packets.login.LoginPacket;
 import com.googlecode.reunion.jreunion.server.packets.login.PassPacket;
 import com.googlecode.reunion.jreunion.server.packets.login.PlayPacket;
 import com.googlecode.reunion.jreunion.server.packets.login.UserPacket;
 import com.googlecode.reunion.jreunion.server.packets.login.VersionPacket;
 
-public class ProxyConnection extends Connection<ProxyConnection> {
+public class ProxyExternalConnection extends Connection<ProxyExternalConnection> {
 
 	public ConnectionState state;
 	
@@ -66,7 +65,7 @@ public class ProxyConnection extends Connection<ProxyConnection> {
 		this.write(data);
 	}
 	
-	public ProxyConnection( ProxyServer proxy,
+	public ProxyExternalConnection(ProxyExternalNetwork proxy,
 			SocketChannel socketChannel) throws IOException {
 		super(proxy, socketChannel);
 		setState(ConnectionState.ACCEPTED);
@@ -80,8 +79,8 @@ public class ProxyConnection extends Connection<ProxyConnection> {
 		return sessionId;
 	}
 
-	public ProxyServer getProxy(){
-		return (ProxyServer) getNetworkThread();		
+	public ProxyExternalNetwork getProxy(){
+		return (ProxyExternalNetwork) getNetworkThread();		
 	}
 	
 	public void onData(ByteBuffer inputBuffer) 
@@ -140,7 +139,7 @@ public class ProxyConnection extends Connection<ProxyConnection> {
 					break;
 				
 			}
-			ProxyServer server = getProxy();
+			ProxyExternalNetwork server = getProxy();
 			if(packet!=null)
 				packet.setSessionId(sessionId);
 			server.onPacketReceived(this, packet);

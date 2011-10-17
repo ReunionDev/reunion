@@ -1,5 +1,5 @@
 package com.googlecode.reunion.jreunion.server.packets;
 
-public interface ForLoginServer {
+public @ interface ForLoginServer {
 
 }

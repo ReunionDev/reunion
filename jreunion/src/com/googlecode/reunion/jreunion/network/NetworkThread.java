@@ -100,11 +100,12 @@ public abstract class NetworkThread<T extends Connection<T>> extends Thread {
 						if(connectable){
 							SocketChannel socketChannel = (SocketChannel)key.channel();
 							try {
-								socketChannel.finishConnect();
-							} catch(IOException e) {
+								if(socketChannel.finishConnect()){
+									connection.open();
+								}
+							} catch(Exception e) {
 								e.printStackTrace();
 							}
-							connection.open();
 							onConnect(connection);
 						}
 						if (writable) {

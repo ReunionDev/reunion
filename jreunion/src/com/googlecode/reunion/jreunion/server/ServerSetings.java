@@ -13,7 +13,6 @@ public class ServerSetings {
 
 	private float lime;
 	
-	
 	public ServerSetings() {
 		loadFromReference();
 	}

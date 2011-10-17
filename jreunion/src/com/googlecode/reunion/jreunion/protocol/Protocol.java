@@ -31,7 +31,6 @@ public abstract class Protocol {
 		return client;
 	}
 	
-	
 	public static boolean testLogin(String input) {
 		
 		System.out.println(input);
@@ -53,7 +52,6 @@ public abstract class Protocol {
 	}
 	
 	public static void main(String[] args) {
-		
 		
 		String input = "1111\nlogin\njake\ntest\n";
 

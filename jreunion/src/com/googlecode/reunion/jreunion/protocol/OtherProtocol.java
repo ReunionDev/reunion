@@ -170,7 +170,7 @@ public class OtherProtocol extends Protocol {
 				result = new String(data);
 				break;
 			case 3:
-				short magic6 = (short)(port + 3 * mapId + mapId % 3);
+				short magic6 = (short)((byte)port + 3 * mapId + mapId % 3);
 				for(int i = 0; i < data.length; i++){
 					data[i]=(byte)(((data[i]^magic6)^iterCheck)+4);
 				}
