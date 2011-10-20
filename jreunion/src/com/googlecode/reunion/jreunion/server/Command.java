@@ -364,10 +364,10 @@ public class Command {
 
 	public boolean useItem(Player player ,Item<?> item, int slot) {
 		
-		if(Usable.class.isInstance(item)){
+		if(Usable.class.isInstance(item.getType())){
 			
 			
-			((Usable)item).use(item, player);
+			((Usable)item.getType()).use(item, player);
 			
 			player.getPosition().getLocalMap().removeEntity(item);			
 			DatabaseUtils.getDinamicInstance().deleteItem(item);
@@ -376,7 +376,7 @@ public class Command {
 		}
 		else{
 			
-			Logger.getLogger(QuickSlotBar.class).error(item+ " not Usable");
+			Logger.getLogger(QuickSlotBar.class).error(item.getType().getDescription()+ " not Usable");
 			
 		}
 		return false;
