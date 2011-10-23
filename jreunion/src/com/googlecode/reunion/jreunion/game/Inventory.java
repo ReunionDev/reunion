@@ -142,7 +142,7 @@ public class Inventory {
 		Iterator<InventoryItem> iter = getInventoryIterator();
 		
 		while (iter.hasNext()) {
-			InventoryItem invItem = iter.next();
+			InventoryItem invItem = (InventoryItem) iter.next();
 			
 			for (int x = invItem.getPosition().getPosX(); x < invItem.getPosition().getPosX()
 					+ invItem.getItem().getType().getSizeX(); x++) {
@@ -196,10 +196,13 @@ public class Inventory {
 		if(handPosition != null){
 			InventoryItem inventoryItem = new InventoryItem(handPosition.getItem(),new InventoryPosition(posX,posY,tab)); 
 			addInventoryItem(inventoryItem);
+			
 			Item<?> item = inventoryItem.getItem();
-			Logger.getLogger(Inventory.class).info("Item {id:"+item.getEntityId()+"("+item.getItemId()+"), type:"+item.getType().getTypeId()+
-					", name:"+item.getType().getDescription()+"} stored in player {id:"+getPlayer().getEntityId()+"("+getPlayer().getPlayerId()+
-					"), name:"+ getPlayer().getName()+"} inventory at position {tab:"+tab+", x:"+posX+", y:"+posY+"}");
+			Logger.getLogger(Inventory.class).info("Item {id:"+item.getEntityId()+"("+item.getItemId()+
+					"), name:"+item.getType().getDescription()+"} stored in player {id:"+getPlayer().getEntityId()+
+					"("+getPlayer().getPlayerId()+"), name:"+ getPlayer().getName()+
+					"} inventory at position {tab:"+tab+", x:"+posX+", y:"+posY+"}");
+			
 			setHoldingItem(null);
 			return true;
 		}
@@ -210,17 +213,24 @@ public class Inventory {
 	public boolean removeInventoryItem(int tab, int posX, int posY){
 		
 		HandPosition handPosition = getHoldingItem();
-		int [] itemPosition = new int[3];
+		int [] itemPosition = null;
 		InventoryItem inventoryItem = null;
 		
 		if(handPosition != null){
-			itemPosition = getDetectedItemPosition(tab, posX, posY, handPosition.getItem().getType().getSizeX(),
-					handPosition.getItem().getType().getSizeY());
-			//itemPosition[0]=tab / itemPosition[1]=posX / itemPosition[2]=posY
+			Item<?> handItem = handPosition.getItem();
+			itemPosition = getDetectedItemPosition(tab, posX, posY, handItem.getType().getSizeX(),
+					handItem.getType().getSizeY());
 			inventoryItem = getItem(itemPosition[0], itemPosition[1], itemPosition[2]);
 		}else {
 			inventoryItem = getItem(tab,posX,posY);	
 		}
+		
+		Item<?> item = inventoryItem.getItem();
+		Logger.getLogger(Inventory.class).info("Item {id:"+item.getEntityId()+"("+item.getItemId()+
+				"), name:"+item.getType().getDescription()+"} removed from player {id:"+getPlayer().getEntityId()+
+				"("+getPlayer().getPlayerId()+"), name:"+ getPlayer().getName()+
+				"} inventory.");
+		
 		deleteInventoryItem(inventoryItem);
 		
 		if(handPosition != null){
