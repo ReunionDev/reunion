@@ -6,12 +6,12 @@ package com.googlecode.reunion.jreunion.game;
  */
 public class StashItem {
 
-	private int pos;
+	private StashPosition stashPosition;
 
 	private Item<?> item;
 
-	public StashItem(int pos, Item<?> item) {
-		setPos(pos);
+	public StashItem(StashPosition stashPosition, Item<?> item) {
+		setStashPosition(stashPosition);
 		setItem(item);
 	}
 
@@ -19,15 +19,15 @@ public class StashItem {
 		return item;
 	}
 
-	public int getPos() {
-		return pos;
+	public StashPosition getStashPosition() {
+		return stashPosition;
 	}
 
 	public void setItem(Item<?> item) {
 		this.item = item;
 	}
 
-	public void setPos(int pos) {
-		this.pos = pos;
+	public void setStashPosition(StashPosition stashPosition) {
+		this.stashPosition = stashPosition;
 	}
 }

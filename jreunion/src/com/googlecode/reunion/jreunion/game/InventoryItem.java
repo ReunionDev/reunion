@@ -7,13 +7,13 @@ package com.googlecode.reunion.jreunion.game;
  */
 public class InventoryItem {
 	
-	private Item<?> item;
+	private Item<?> item = null;
 	
-	private InventoryPosition position;
+	private InventoryPosition position = null;
 
 	public InventoryItem(Item<?> item, InventoryPosition position) {
-		this.item = item;
-		this.position = position;
+		setItem(item);
+		setPosition(position);
 	}
 
 	public Item<?> getItem() {

@@ -58,12 +58,12 @@ public class Warehouse extends Npc {
 			
 			DatabaseUtils.getDinamicInstance().saveItem(stashItem.getItem());
 			if (gems >= 0) {
-				packetData = "stash_to " + stashItem.getPos() + " "
+				packetData = "stash_to " + stashItem.getStashPosition().getSlot() + " "
 						+ stashItem.getItem().getType().getTypeId() + " "
 						+ stashItem.getItem().getGemNumber() + " "
 						+ stashItem.getItem().getExtraStats() + "\n";
 			} else {
-				packetData = "stash_from " + stashItem.getPos() + " "
+				packetData = "stash_from " + stashItem.getStashPosition().getSlot() + " "
 						+ stashItem.getItem().getType().getTypeId() + " "
 						+ stashItem.getItem().getGemNumber() + " "
 						+ stashItem.getItem().getExtraStats() + "\n";
@@ -73,10 +73,9 @@ public class Warehouse extends Npc {
 				stashItem = stash.getItem(pos);
 				Item<?> item = Item.load(stashItem.getItem().getItemId());
 				stash.removeItem(stashItem);
-				player.getInventory().setHoldingItem(
-						new InventoryItem(item, new InventoryPosition(0, 0, 0)));
+				player.getInventory().setHoldingItem(new HandPosition(item));
 
-				packetData = "stash_from " + stashItem.getPos() + " "
+				packetData = "stash_from " + stashItem.getStashPosition().getSlot() + " "
 						+ item.getEntityId() + " "
 						+ stashItem.getItem().getType().getTypeId() + " "
 						+ stashItem.getItem().getGemNumber() + " "
@@ -86,11 +85,11 @@ public class Warehouse extends Npc {
 				if (stash.checkPosEmpty(pos)) {
 					Item<?> item = player.getInventory().getHoldingItem()
 							.getItem();
-					stashItem = new StashItem(pos, item);
+					stashItem = new StashItem(new StashPosition(pos), item);
 					stash.addItem(stashItem);
 					player.getInventory().setHoldingItem(null);
 
-					packetData = "stash_to " + stashItem.getPos() + " "
+					packetData = "stash_to " + stashItem.getStashPosition().getSlot() + " "
 							+ stashItem.getItem().getType().getTypeId() + " "
 							+ stashItem.getItem().getGemNumber() + " "
 							+ stashItem.getItem().getExtraStats() + " "
@@ -103,12 +102,12 @@ public class Warehouse extends Npc {
 									.getInventory().getHoldingItem().getItem()
 									.getGemNumber()
 							&& stashItem.getItem().getExtraStats() == special) {
-						StashItem newStashItem = new StashItem(pos, player
+						StashItem newStashItem = new StashItem(new StashPosition(pos), player
 								.getInventory().getHoldingItem().getItem());
 						stash.addItem(newStashItem);
 						player.getInventory().setHoldingItem(null);
 
-						packetData = "stash_to " + stashItem.getPos() + " "
+						packetData = "stash_to " + stashItem.getStashPosition().getSlot() + " "
 								+ stashItem.getItem().getType().getTypeId() + " "
 								+ stashItem.getItem().getGemNumber() + " "
 								+ stashItem.getItem().getExtraStats() + " "

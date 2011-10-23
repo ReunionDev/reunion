@@ -10,6 +10,8 @@ import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.apache.log4j.Logger;
+
 import com.googlecode.reunion.jreunion.server.Client;
 import com.googlecode.reunion.jreunion.server.Map;
 import com.googlecode.reunion.jreunion.server.Server;
@@ -84,8 +86,15 @@ public class OtherProtocol extends Protocol {
 
 	@Override
 	public String decryptServer(byte[] data) {
-			
-		String result = decryptServer(data, iter, iterCheck);		
+		String result = decryptServer(data, iter, iterCheck);
+		
+		try {
+			bos.write(result.getBytes());
+			bos.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		handleChanges(result);
 		return result;
 	}
@@ -190,7 +199,6 @@ public class OtherProtocol extends Protocol {
 	
 	@Override
 	public String decryptClient(byte[] data){
-		
 		int magic4 = magic0 - port - mapId + version;
 		for(int i=0;i<data.length;i++){
 			
@@ -204,7 +212,6 @@ public class OtherProtocol extends Protocol {
 	
 	@Override
 	public byte[] encryptClient(String packet){
-		
 		byte[] result = encryptClient(packet, iter, iterCheck);
 		handleChanges(packet);
 		
@@ -251,7 +258,6 @@ public class OtherProtocol extends Protocol {
 	
 	@Override
 	public byte[] encryptServer(String packet) {
-	
 		//refresh version because its not always available on connect
 		if(getVersion() == -1 && getClient()!=null)
 			setVersion(getClient().getVersion());
@@ -260,6 +266,7 @@ public class OtherProtocol extends Protocol {
 		}
 		
 		int magic4 = magic0 - port - mapId + version;
+
 		byte [] data = packet.getBytes();
 		for(int i = 0; i<data.length; i++) {
 			int rstep3 = data[i] ^ magic4;
@@ -281,7 +288,7 @@ public class OtherProtocol extends Protocol {
 	}
 	
 	public static void main(String[] args)  {
-
+		
 		
 		String data = "walk 6926 5091 106 1\n"
 						+ "encrypt_add 11116034\n"

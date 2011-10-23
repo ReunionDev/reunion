@@ -30,32 +30,22 @@ public class MissionReceiver extends Etc implements Usable{
 		if(user instanceof Player){
 			Player player = (Player)user;
 			
-			if(this instanceof AmplifiedMissionReceiver){
-				if(player.getLevel() < 100){
-					player.getClient().sendPacket(Type.SAY, "Your level is to low to use this item.\n" +
-							"Please use the Mission Receiver.");
-					return;
-				}
-			} else {
-				if(player.getLevel() >= 100){
-					player.getClient().sendPacket(Type.SAY, "Your level is to high to use this item.\n" +
-							"Please use the Advanced Mission Receiver.");
-					return;
-				}
+			//check if player have the correct level to use this item.
+			if(player.getLevel() >= 100){
+				player.getClient().sendPacket(Type.SAY, "Your level is to high to use this item.\n" +
+						"Please use the Advanced Mission Receiver.");
+				return;
 			}
 			
+			//check if the MR has run out of quests.
 			if(item.getExtraStats() <= 0){
 				player.getClient().sendPacket(Type.SAY, "Mission Reciever run out of available quests.");
 				return;
 			}
 			
-			if(player.getQuest() != null){
-				player.getClient().sendPacket(Type.SAY, "Player already has an ongoing quest.");
-				return;
-			}
-			
 			Quest quest = player.getClient().getWorld().getQuestManager().getRandomQuest(player);
 			
+			//check if a quest for the player level have been found.
 			if(quest == null){
 				player.getClient().sendPacket(Type.SAY, "No quests available for character level.");
 				return;

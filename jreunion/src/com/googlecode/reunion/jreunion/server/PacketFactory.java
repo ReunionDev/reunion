@@ -442,11 +442,11 @@ public class PacketFactory {
 				Player player = (Player) args[0];
 				StashItem stashItem = (StashItem)args[1];
 				Item<?> item = stashItem.getItem();
-				return "stash " + stashItem.getPos() + " "
+				return "stash " + stashItem.getStashPosition().getSlot() + " "
 				+ item.getType().getTypeId() + " "
 				+ item.getGemNumber() + " "
 				+ item.getExtraStats() + " "
-				+ player.getStash().getQuantity(stashItem.getPos());
+				+ player.getStash().getQuantity(stashItem.getStashPosition().getSlot());
 			}
 			break;
 		case STASH_END:

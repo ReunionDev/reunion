@@ -3,6 +3,7 @@ package com.googlecode.reunion.jreunion.proxy;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -37,13 +38,16 @@ public class Proxy {
 	
 	public void connectToGameServers(){
 		Parser maps = new Parser();
+		Iterator<ParsedItem> mapsIter = maps.getItemListIterator();
 		try {
 			maps.Parse("config/Maps.dta");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		map_for:
-		for(ParsedItem item: maps){
+		while(mapsIter.hasNext()){
+			ParsedItem item = (ParsedItem)mapsIter.next();
+		//for(ParsedItem item: maps){
 			try {
 				String ip = item.getMemberValue("Ip");
 				int port = Integer.parseInt(item.getMemberValue("Port"));

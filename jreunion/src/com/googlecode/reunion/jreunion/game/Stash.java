@@ -29,7 +29,7 @@ public class Stash {
 		while (listIter.hasNext()) {
 			StashItem item = listIter.next();
 
-			if (item.getPos() == pos) {
+			if (item.getStashPosition().getSlot() == pos) {
 				return false;
 			}
 		}
@@ -46,7 +46,7 @@ public class Stash {
 		while (listIter.hasNext()) {
 			StashItem item = listIter.next();
 
-			if (item.getPos() == pos) {
+			if (item.getStashPosition().getSlot() == pos) {
 				return item;
 			}
 		}
@@ -61,7 +61,7 @@ public class Stash {
 		while (stashIter.hasNext()) {
 			StashItem stashItem = stashIter.next();
 
-			if (stashItem.getPos() == pos) {
+			if (stashItem.getStashPosition().getSlot() == pos) {
 				count++;
 			}
 		}

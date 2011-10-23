@@ -6,6 +6,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Vector;
 
+import org.apache.log4j.Logger;
+
+import com.googlecode.reunion.jreunion.protocol.OtherProtocol;
 import com.googlecode.reunion.jreunion.server.Client;
 
 public class DefaultProtocol extends Protocol 

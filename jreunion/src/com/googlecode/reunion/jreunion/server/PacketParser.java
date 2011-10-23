@@ -524,7 +524,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 				} else if (message[0].equals("revival")) {
 					client.getPlayer().revive();
 				} else if (message[0].equals("quick")) {
-					client.getPlayer().getQuickSlot().quickSlot(
+					client.getPlayer().getQuickSlotBar().quickSlot(
 							client.getPlayer(), Integer.parseInt(message[1]));
 				} else if (message[0].equals("go_world")) {
 					
@@ -543,11 +543,11 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					com.GoToPos(player, position);
 					
 				} else if (message[0].equals("use_quick")) {
-					client.getPlayer().getQuickSlot().useQuickSlot(
-							client.getPlayer(), Integer.parseInt(message[1]));
+					player.getQuickSlotBar().useQuickSlot(
+							player, Integer.parseInt(message[1]));
 				} else if (message[0].equals("move_to_quick")) {
-					client.getPlayer().getQuickSlot().MoveToQuick(
-							client.getPlayer(), Integer.parseInt(message[1]),
+					player.getQuickSlotBar().MoveToQuick(
+							player, Integer.parseInt(message[1]),
 							Integer.parseInt(message[2]),
 							Integer.parseInt(message[3]));
 				} else if (message[0].equals("quest")) {
@@ -555,19 +555,13 @@ public class PacketParser extends EventDispatcher implements EventListener{
 						client.getPlayer().setQuest(null);
 					} else {
 						if (client.getPlayer().getQuest() == null) {
-							Item<?> item = player.getQuickSlot().getItem(Integer.parseInt(message[1])).getItem();
+							Item<?> item = player.getQuickSlotBar().getItem(Integer.parseInt(message[1])).getItem();
+							
 							if(item.is(MissionReceiver.class)){
 								((MissionReceiver)item.getType()).use(item, player);
 							}
-							//MissionReceiver missionReceiver = (MissionReceiver)item.getType();
-							//missionReceiver.setExtraStats(item);
-							//missionReceiver.use(player, Integer.parseInt(message[1]),item);
-							//client.getPlayer().setQuest(new Quest(
-							//		client.getPlayer(), player.getQuickSlot().getItem(Integer
-							//				.parseInt(message[1]))));
 						} else {
-							com.serverTell(client,
-									"There is an ongoing quest. Impossible to receive quests.");
+							player.getClient().sendPacket(Type.SAY, "Player already has an ongoing quest.");
 						}
 					}
 				} else if (message[0].equals("stash_open")) {

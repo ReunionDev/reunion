@@ -6,24 +6,28 @@ import java.util.Vector;
 
 import org.apache.log4j.Logger;
 
+import com.googlecode.reunion.jreunion.server.Client;
+import com.googlecode.reunion.jreunion.server.Server;
+
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
 public class Inventory {
-	private List<InventoryItem> items;
 	
-	private InventoryItem holdingItem = null;
+	private List<InventoryItem> items = null;;
+	
+	private HandPosition holdingItem = null;
 
 	public Inventory() {
 		items = new Vector<InventoryItem>();
 	}
 	
-	public void setHoldingItem(InventoryItem holdingItem) {
+	public void setHoldingItem(HandPosition holdingItem) {
 		this.holdingItem = holdingItem;
 	}
 	
-	public InventoryItem getHoldingItem() {
+	public HandPosition getHoldingItem() {
 		return holdingItem;
 	}
 	
@@ -187,10 +191,15 @@ public class Inventory {
 	//stores an inventory item on the given position.
 	public boolean storeInventoryItem(int tab, int posX, int posY){
 		
-		InventoryItem holdingItem = getHoldingItem();
+		HandPosition handPosition = getHoldingItem();
 		
-		if(holdingItem != null){
-			addInventoryItem(new InventoryItem(holdingItem.getItem(),new InventoryPosition(posX,posY,tab)));
+		if(handPosition != null){
+			InventoryItem inventoryItem = new InventoryItem(handPosition.getItem(),new InventoryPosition(posX,posY,tab)); 
+			addInventoryItem(inventoryItem);
+			Item<?> item = inventoryItem.getItem();
+			Logger.getLogger(Inventory.class).info("Item {id:"+item.getEntityId()+"("+item.getItemId()+"), type:"+item.getType().getTypeId()+
+					", name:"+item.getType().getDescription()+"} stored in player {id:"+getPlayer().getEntityId()+"("+getPlayer().getPlayerId()+
+					"), name:"+ getPlayer().getName()+"} inventory at position {tab:"+tab+", x:"+posX+", y:"+posY+"}");
 			setHoldingItem(null);
 			return true;
 		}
@@ -200,12 +209,13 @@ public class Inventory {
 	//removes an inventory item from the given position.
 	public boolean removeInventoryItem(int tab, int posX, int posY){
 		
-		InventoryItem holdingItem = getHoldingItem();
+		HandPosition handPosition = getHoldingItem();
 		int [] itemPosition = new int[3];
 		InventoryItem inventoryItem = null;
 		
-		if(holdingItem != null){
-			itemPosition = getDetectedItemPosition(tab, posX, posY, holdingItem.getSizeX(), holdingItem.getSizeY());
+		if(handPosition != null){
+			itemPosition = getDetectedItemPosition(tab, posX, posY, handPosition.getItem().getType().getSizeX(),
+					handPosition.getItem().getType().getSizeY());
 			//itemPosition[0]=tab / itemPosition[1]=posX / itemPosition[2]=posY
 			inventoryItem = getItem(itemPosition[0], itemPosition[1], itemPosition[2]);
 		}else {
@@ -213,10 +223,10 @@ public class Inventory {
 		}
 		deleteInventoryItem(inventoryItem);
 		
-		if(holdingItem != null){
+		if(handPosition != null){
 			storeInventoryItem(tab,posX,posY);
 		}
-		setHoldingItem(inventoryItem);
+		setHoldingItem(new HandPosition(inventoryItem.getItem()));
 		
 		//when removing an item from the inventory, there must be an holding item.
 		if(getHoldingItem() == null)
@@ -242,11 +252,12 @@ public class Inventory {
 	/****** Manages the Items on the Inventory ******/
 	public void handleInventory(int tab, int posX, int posY) {
 
-		InventoryItem holdingItem = getHoldingItem();
+		HandPosition handPosition = getHoldingItem();
 
-		if(holdingItem != null){
+		if(handPosition != null){
 			//Logger.getLogger(Inventory.class).debug("ITEM STORED: "+holdingItem.getItem().getDescription());
-			if(itemFit(tab,posX,posY,holdingItem.getSizeX(),holdingItem.getSizeY())){
+			if(itemFit(tab,posX,posY,handPosition.getItem().getType().getSizeX(),
+					handPosition.getItem().getType().getSizeY())){
 				storeInventoryItem(tab,posX,posY);				
 			}else {
 				removeInventoryItem(tab, posX, posY);
@@ -261,7 +272,17 @@ public class Inventory {
 		}
 	}
 
-	
+	public Player getPlayer(){
+		Iterator<Player> playerIter = Server.getInstance().getWorld().getPlayerManager().getPlayerListIterator();
+		
+		while(playerIter.hasNext()){
+			Player player = (Player) playerIter.next();
+			
+			if(player.getInventory() == this)
+				return player;
+		}
+		return null;
+	}
 
 	@Deprecated
 	public void PrintInventoryMap(int tab) { // Debug Only

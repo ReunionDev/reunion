@@ -29,6 +29,7 @@ import com.googlecode.reunion.jreunion.game.QuickSlotPosition;
 import com.googlecode.reunion.jreunion.game.RoamingItem;
 import com.googlecode.reunion.jreunion.game.Skill;
 import com.googlecode.reunion.jreunion.game.StashItem;
+import com.googlecode.reunion.jreunion.game.StashPosition;
 import com.googlecode.reunion.jreunion.game.quests.LimeQuest;
 import com.googlecode.reunion.jreunion.game.quests.QuestState;
 import com.googlecode.reunion.jreunion.game.quests.objective.Objective;
@@ -536,8 +537,8 @@ public class DatabaseUtils extends Service {
 			equipment.setItem(Slot.PANTS, pants);
 			saveEquipment(player);
 			
-			QuickSlotPosition quickSlotPosition = new QuickSlotPosition(player.getQuickSlot(),0);
-			player.getQuickSlot().addItem(new QuickSlotItem(hpPot1,quickSlotPosition));
+			QuickSlotPosition quickSlotPosition = new QuickSlotPosition(player.getQuickSlotBar(),0);
+			player.getQuickSlotBar().addItem(new QuickSlotItem(hpPot1,quickSlotPosition));
 			saveQuickSlot(player);
 			
 			player.getInventory().storeItem(weapon);
@@ -1036,7 +1037,7 @@ public class DatabaseUtils extends Service {
 				else{ 
 					item = Item.load(stashTable.getInt("itemid"));
 				}
-				StashItem stashItem =	new StashItem(stashTable.getInt("pos"), item);
+				StashItem stashItem =	new StashItem(new StashPosition(stashTable.getInt("pos")), item);
 				client.getPlayer().getStash().addItem(stashItem);
 			}
 						
@@ -1062,7 +1063,7 @@ public class DatabaseUtils extends Service {
 				
 				stmt.execute("INSERT INTO warehouse (accountid, pos, itemid)" +
 						" VALUES ("+client.getAccountId()+ ","
-						+stashItem.getPos()+ ","
+						+stashItem.getStashPosition().getSlot()+ ","
 						+stashItem.getItem().getItemId()+ ");");
 			}
 			
@@ -1157,9 +1158,9 @@ public class DatabaseUtils extends Service {
 			while (quickSlotTable.next()) 
 			{
 				Item<?> item = Item.load(quickSlotTable.getInt("itemid"));
-				QuickSlotPosition quickSlotPosition = new QuickSlotPosition(player.getQuickSlot(),quickSlotTable.getInt("slot"));
+				QuickSlotPosition quickSlotPosition = new QuickSlotPosition(player.getQuickSlotBar(),quickSlotTable.getInt("slot"));
 				QuickSlotItem quickSlotItem = new QuickSlotItem(item,quickSlotPosition);
-				player.getQuickSlot().addItem(quickSlotItem);
+				player.getQuickSlotBar().addItem(quickSlotItem);
 			}
 			
 		} catch (SQLException e) {
@@ -1177,7 +1178,7 @@ public class DatabaseUtils extends Service {
 			Statement stmt = dinamicDatabase.dinamicConn.createStatement();
 			stmt.execute("DELETE FROM quickslot WHERE charid="+player.getPlayerId()+";");
 			
-			Iterator<QuickSlotItem> qsIter = player.getQuickSlot().getQuickSlotIterator();
+			Iterator<QuickSlotItem> qsIter = player.getQuickSlotBar().getQuickSlotIterator();
 			
 			while(qsIter.hasNext())
 			{
