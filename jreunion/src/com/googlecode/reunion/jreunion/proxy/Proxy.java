@@ -38,16 +38,13 @@ public class Proxy {
 	
 	public void connectToGameServers(){
 		Parser maps = new Parser();
-		Iterator<ParsedItem> mapsIter = maps.getItemListIterator();
 		try {
 			maps.Parse("config/Maps.dta");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		map_for:
-		while(mapsIter.hasNext()){
-			ParsedItem item = (ParsedItem)mapsIter.next();
-		//for(ParsedItem item: maps){
+		for(ParsedItem item: maps){
 			try {
 				String ip = item.getMemberValue("Ip");
 				int port = Integer.parseInt(item.getMemberValue("Port"));
