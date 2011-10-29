@@ -8,7 +8,7 @@ import java.util.Vector;
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-public class ParsedItem {
+public class ParsedItem implements Iterable<ParsedItemMember> {
 
 	private String name;
 
@@ -77,5 +77,10 @@ public class ParsedItem {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	@Override
+	public Iterator<ParsedItemMember> iterator() {
+		return getMemberListIterator();
 	}
 }

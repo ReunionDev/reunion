@@ -15,7 +15,7 @@ import org.apache.log4j.Logger;
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-public class Parser {
+public class Parser implements Iterable<ParsedItem> {
 
 	private List<ParsedItem> itemList = new Vector<ParsedItem>();
 
@@ -189,6 +189,11 @@ public class Parser {
 		parseErrorMessage = "Parsing error line " + linenr + " in " + filename
 				+ " (" + errorMessage + "): \"" + line + "\"";
 		return parseErrorMessage;
+	}
+
+	@Override
+	public Iterator<ParsedItem> iterator() {
+		return getItemListIterator();
 	}
 
 }
