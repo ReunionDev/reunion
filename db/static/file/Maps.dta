@@ -87,3 +87,13 @@ PlayerArea = areas/genuslabor/PlayerArea.bmp
 MobArea = areas/genuslabor/MobArea.bmp
 PvpArea = areas/genuslabor/PvpArea.bmp
 DefaultSpawnId = 1
+
+[Dimitron]
+ID = 9
+PlayerSpawn = areas/dimitron/PlayerSpawns.dta
+MobSpawn = areas/dimitron/MobSpawns.dta
+NpcSpawn = areas/dimitron/NpcSpawns.dta
+PlayerArea = areas/dimitron/PlayerArea.bmp
+MobArea = areas/dimitron/MobArea.bmp
+PvpArea = areas/dimitron/PvpArea.bmp
+DefaultSpawnId = 1

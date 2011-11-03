@@ -52,3 +52,8 @@ Ip = 127.0.0.1
 Port = 4009
 Location = Local
 
+[Dimitron]
+ID = 9
+Ip = 127.0.0.1
+Port = 4010
+Location = Local
