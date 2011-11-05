@@ -179,13 +179,13 @@ public class OtherProtocol extends Protocol {
 				result = new String(data);
 				break;
 			case 3:
-				short magic6 = (short)((byte)port + 3 * mapId + mapId % 3);
+				short magic6 = (short)((byte)(port + 3 * mapId + mapId % 3));
 				for(int i = 0; i < data.length; i++){
-					data[i]=(byte)(((data[i]^magic6)^iterCheck)+4);
+					data[i]=(byte)(((data[i]^magic6)+4)^iterCheck);
 				}
 				result = new String(data);
 				break;
-			case 4: 
+			case 4:
 				for(int i = 0; i < data.length; i++){
 					data[i]=(byte)(((data[i]^(iterCheck+111))+33)^version);
 				}
