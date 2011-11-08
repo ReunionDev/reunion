@@ -97,7 +97,7 @@ public class Session extends EventDispatcher implements EventListener{
 	}
 	public void enter(WorldObject entity, boolean defaultAction){
 		
-		Logger.getLogger(Session.class).debug("enter "+getOwner().getName()+" "+entity);
+		//Logger.getLogger(Session.class).debug("enter "+getOwner().getName()+" "+entity);
 		synchronized(entities){
 			if(this.contains(entity))
 				return;

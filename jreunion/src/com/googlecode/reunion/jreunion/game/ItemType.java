@@ -2,6 +2,7 @@ package com.googlecode.reunion.jreunion.game;
 
 import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jreunion.server.Reference;
+import com.googlecode.reunion.jreunion.server.Server;
 
 /**
  * @author Aidamina
@@ -17,7 +18,9 @@ public class ItemType{
 	
 	private int type;
 
-	private String description;
+	private String name;
+	
+	private int maxDurability;
 
 	public ItemType(int type) {
 		super();
@@ -25,8 +28,8 @@ public class ItemType{
 		loadFromReference(type);
 	}	
 	
-	public String getDescription() {
-		return description;
+	public String getName() {
+		return name;
 	}
 	
 	public int getPrice() {
@@ -45,10 +48,12 @@ public class ItemType{
 		return type;
 	}
 	
+	/*
 	public String getName(){		
 		return Reference.getInstance().getItemReference()
 		.getItemById(getTypeId()).getName();
 	}
+	*/
 
 	public void loadFromReference(int type) {		
 		
@@ -59,7 +64,7 @@ public class ItemType{
 			setSizeX(1);
 			setSizeY(1);
 			setPrice(1);
-			setDescription("Unknown");
+			setName("Unknown");
 		} else {
 
 			if (item.checkMembers(new String[] { "SizeX" })) {
@@ -83,18 +88,22 @@ public class ItemType{
 				// use default
 				setPrice(1);
 			}
-			if (item.checkMembers(new String[] { "Description" })) {
+			
+			if (item.checkMembers(new String[] { "Durability" })) {
 				// use member from file
-				setDescription(item.getMemberValue("Description"));
+				setMaxDurability(Integer.parseInt(item.getMemberValue("Durability")));
 			} else {
 				// use default
-				setDescription(item.getName());
+				setMaxDurability(0);
 			}
+			
+			setName(item.getName());
+			
 		}
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setName(String itemName) {
+		this.name = itemName;
 	}
 	
 	public void setPrice(int price) {
@@ -112,6 +121,7 @@ public class ItemType{
 	public Item<?> create(){
 		
 		Item<?> item = new Item(this);
+	
 		return item;
 	}
 	
@@ -121,5 +131,14 @@ public class ItemType{
 	public void setGemNumber(Item<?> item){
 	}
 
+	public int getMaxDurability() {
+		return maxDurability;
+	}
 
+	public void setMaxDurability(int maxDurability) {
+		this.maxDurability = maxDurability;
+	}
+
+	
+	
 }

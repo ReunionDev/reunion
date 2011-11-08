@@ -13,6 +13,7 @@ import com.googlecode.reunion.jreunion.server.ItemManager;
 import com.googlecode.reunion.jreunion.server.Reference;
 import com.googlecode.reunion.jreunion.server.Server;
 import com.googlecode.reunion.jreunion.server.Area.Field;
+import com.sun.xml.internal.bind.v2.ClassFactory;
 
 /**
  * @author Aidamina
@@ -116,6 +117,7 @@ public class Mob extends Npc {
 			setMutant(0);
 			setNeoProgmare(0);
 			setSpeed(1);
+			setName("Unknown");
 		} else {
 			
 			if (mob.checkMembers(new String[] { "Hp" })) {
@@ -198,7 +200,9 @@ public class Mob extends Npc {
 				// use default
 				setSpeed(1);
 			}
-						
+			
+			setName(mob.getName());
+					
 		}
 	}
 
@@ -439,7 +443,10 @@ public class Mob extends Npc {
 					
 					Item<?> item = itemManager.create(itemType);
 					item.setExtraStats(0);
-					item.setGemNumber(0);					
+					item.setGemNumber(0);
+					item.setDurability(item.getType().getMaxDurability());
+					item.setUnknown1(0);
+					item.setUnknown2(0);
 					
 					final RoamingItem roamingItem = getPosition().getLocalMap().getWorld().getCommand().dropItem(this.getPosition(), item);
 					roamingItem.setOwner(player);

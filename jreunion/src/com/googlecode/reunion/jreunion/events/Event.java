@@ -45,7 +45,7 @@ public class Event {
 				event.setSource(source);
 				return event;
 			} catch (Exception e) {
-				Logger.getLogger(Event.class).error("Exception",e);
+				Logger.getLogger(Event.class).error("Exception ",e);
 				throw new RuntimeException(e);
 			}	
 		}

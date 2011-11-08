@@ -248,7 +248,7 @@ public class DatabaseUtils extends Service {
 				+ rs.getString("dexterity") + " "
 				+ rs.getString("constitution") + " " 
 				+ rs.getString("leadership") + " "
-				//+ "0" + " " // the new version client have this extra value in the packet
+				+ "0" + " " // the new version client have this extra value in the packet
 				+ eq.getTypeId(Slot.HELMET) + " " 
 				+ eq.getTypeId(Slot.CHEST) + " " 
 				+ eq.getTypeId(Slot.PANTS) + " " 
@@ -275,8 +275,8 @@ public class DatabaseUtils extends Service {
 				+ " char(s) for Account(" + accountId + ")");	
 		
 		
-		charlist += "chars_end\n"; // Old client version
-		//charlist += "chars_end 0 "+accountId+"\n"; //New client version
+		//charlist += "chars_end\n"; // Old client version
+		charlist += "chars_end 0 "+accountId+"\n"; //New client version
 		return charlist;
 	}
 	
@@ -766,19 +766,22 @@ public class DatabaseUtils extends Service {
 			if (rs.next())
 			{				
 				int type = rs.getInt("type");
+				ItemType itemType = null;
 				ParsedItem parseditem = Reference.getInstance().getItemReference()
 				.getItemById(type);
 				
 				if (parseditem == null) {
-					Logger.getLogger(DatabaseUtils.class).info("Item loaded failed, no such item type!");
-					return null;
+					Logger.getLogger(DatabaseUtils.class).error("Item type "+type+" load failed, no such item type!");
+					Logger.getLogger(DatabaseUtils.class).info("Loading item type manually!");
+					itemType = new ItemType(type);;
+					//return null;
+				} else {
+					itemType = Server.getInstance().getWorld().getItemManager().getItemType(type);
 				}
 				
-				ItemType itemType = Server.getInstance().getWorld().getItemManager().getItemType(type);
 				Item<?> item = new Item(itemType);
 				
 				item.setItemId(itemId);
-				
 				item.setGemNumber(rs.getInt("gemnumber"));
 				item.setExtraStats(rs.getInt("extrastats"));
 				

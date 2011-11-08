@@ -16,6 +16,12 @@ public class Item<T extends ItemType> implements Entity{
 
 	private int extraStats;
 	
+	private int durability;
+	
+	private int unknown1;
+	
+	private int unknown2;
+	
 	private ItemPosition position;
 	
 	public ItemPosition getPosition() {
@@ -113,6 +119,30 @@ public class Item<T extends ItemType> implements Entity{
 			
 		return DatabaseUtils.getDinamicInstance().loadItem(itemId);
 			
+	}
+
+	public int getUnknown1() {
+		return unknown1;
+	}
+
+	public void setUnknown1(int unknown1) {
+		this.unknown1 = unknown1;
+	}
+
+	public int getUnknown2() {
+		return unknown2;
+	}
+
+	public void setUnknown2(int unknown2) {
+		this.unknown2 = unknown2;
+	}
+
+	public int getDurability() {
+		return durability;
+	}
+
+	public void setDurability(int durability) {
+		this.durability = durability;
 	}
 
 }

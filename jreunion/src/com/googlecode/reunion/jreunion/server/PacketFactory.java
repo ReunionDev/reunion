@@ -187,7 +187,7 @@ public class PacketFactory {
 				
 				return "drop " + roamingItem.getEntityId() + " " + item.getType().getTypeId() + " "
 				+ position.getX() + " " + position.getY() + " " + position.getZ() + " "+position.getRotation()+" " + item.getGemNumber() + " "
-				+ item.getExtraStats();
+				+ item.getExtraStats()+ " " + item.getUnknown1() + " " + item.getUnknown2();
 			}			
 			break;
 		
@@ -196,9 +196,11 @@ public class PacketFactory {
 				RoamingItem roamingItem = (RoamingItem)args[0];
 				Item<?> item = roamingItem.getItem();
 				Position position = roamingItem.getPosition();
+				
 				return "in item " + roamingItem.getEntityId() + " " + item.getType().getTypeId() + " " + position.getX()
-				+ " " + position.getY() + " " + position.getZ() + " " + position.getRotation() + " " + item.getGemNumber() + " "
-				+ item.getExtraStats();
+				+ " " + position.getY() + " " + position.getZ() + " " + position.getRotation() + " " + item.getGemNumber()
+				+ " " + item.getExtraStats()+ " " + item.getUnknown1() + " " + item.getDurability() + " "
+				+ item.getType().getMaxDurability();
 			}
 			break;
 		
@@ -211,13 +213,13 @@ public class PacketFactory {
 				}
 				int percentageHp = (int)(((double)npc.getHp()/ (double)npc.getMaxHp())* 100);
 				Position npcPosition = npc.getPosition();
-				return "in npc " + npc.getEntityId() + " " + npc.getType()
+				return "in n " + npc.getEntityId() + " " + npc.getType()
 						+ " " + npcPosition.getX() + " "
 						+ npcPosition.getY() + " "+npcPosition.getZ()+" "
 						+ (Double.isNaN(npcPosition.getRotation())?0.0:npcPosition.getRotation()) + " " + percentageHp + " "
 						+ npc.getMutant() + " " + npc.getUnknown1() + " "
-						+ npc.getNeoProgmare() + " 0 " + (spawn ? 1 : 0) + " "
-						+ npc.getUnknown2();
+						+ npc.getNeoProgmare() + " " + npc.getUnknown2() + " "+ (spawn ? 1 : 0) + " "
+						+ npc.getUnknown3();
 			}
 			break;
 			
@@ -420,7 +422,8 @@ public class PacketFactory {
 				return "pick " + item.getEntityId() + " " + item.getType().getTypeId() + " "
 				+ invItem.getPosition().getPosX()+" "+invItem.getPosition().getPosY() + " "
 				+ invItem.getPosition().getTab()+" " + item.getGemNumber() + " "
-				+ item.getExtraStats();
+				+ item.getExtraStats() + " " + item.getUnknown1() + " " + item.getDurability() + " "
+				+ item.getType().getMaxDurability();
 			}
 			break;
 		case SHOP_RATE:
@@ -442,11 +445,13 @@ public class PacketFactory {
 				Player player = (Player) args[0];
 				StashItem stashItem = (StashItem)args[1];
 				Item<?> item = stashItem.getItem();
+				
 				return "stash " + stashItem.getStashPosition().getSlot() + " "
-				+ item.getType().getTypeId() + " "
-				+ item.getGemNumber() + " "
-				+ item.getExtraStats() + " "
-				+ player.getStash().getQuantity(stashItem.getStashPosition().getSlot());
+				+ item.getType().getTypeId() + " " + item.getGemNumber() + " "
+				+ item.getExtraStats() + " " + item.getUnknown1() + " "
+				+ item.getDurability() + " " + item.getType().getMaxDurability() + " "
+				+ player.getStash().getQuantity(stashItem.getStashPosition().getSlot()) + " "
+				+ item.getUnknown2();
 			}
 			break;
 		case STASH_END:
@@ -458,11 +463,9 @@ public class PacketFactory {
 				Item<?> item = invItem.getItem();
 				
 				return "inven " + invItem.getPosition().getTab() + " "
-				+ item.getEntityId() + " "
-				+ item.getType().getTypeId() + " " + invItem.getPosition().getPosX()
-				+ " " + invItem.getPosition().getPosY() + " "
-				+ item.getGemNumber() + " "
-				+ item.getExtraStats();
+				+ item.getEntityId() + " "	+ item.getType().getTypeId() + " " + invItem.getPosition().getPosX() + " "
+				+ invItem.getPosition().getPosY() + " " + item.getGemNumber() + " "	+ item.getExtraStats() + " "
+				+ item.getUnknown1() + " " + item.getUnknown2();
 			}
 			break;
 			
@@ -487,7 +490,8 @@ public class PacketFactory {
 						+ item.getEntityId() + " "
 						+ item.getType().getTypeId() + " "
 						+ item.getGemNumber() + " "
-						+ item.getExtraStats() + "\n";
+						+ item.getExtraStats() + " "
+						+ item.getUnknown1();
 			}
 			break;
 		
@@ -500,7 +504,7 @@ public class PacketFactory {
 				return "upgrade " + upgraderesult + " "
 						+ slot.value() + " "
 						+ item.getEntityId() + " "
-						+ item.getGemNumber() + "\n";
+						+ item.getGemNumber();
 			}
 			break;
 			
@@ -521,21 +525,56 @@ public class PacketFactory {
 			if(args.length > 0){
 				Equipment eq = (Equipment)args[0];
 				
+				//return "wearing 1101 1214 13 4095 4260868 112 130 1102 1215 14 4095 1 113 130 1103 1216 14 4095 1 123 130 1104 752 334 41856 0 0 0 1105 1217 13 268439551 1 119 130 1106 876 0 255 0 0 0 1107 448 3 512 0 0 0 1108 453 0 192 0 0 0 1109 1087 1 38535169 0 0 0 1110 1321 6 50335743 262 110 110";
 				return "wearing " + eq.getEntityId(Slot.HELMET) + " " + eq.getTypeId(Slot.HELMET) + " "
-						+ eq.getGemNumber(Slot.HELMET) + " " + eq.getExtraStats(Slot.HELMET) + " " + eq.getEntityId(Slot.CHEST) + " "
-						+ eq.getTypeId(Slot.CHEST) + " " + eq.getGemNumber(Slot.CHEST) + " " + eq.getExtraStats(Slot.CHEST) + " "
-						+ eq.getEntityId(Slot.PANTS) + " " + eq.getTypeId(Slot.PANTS) + " " + eq.getGemNumber(Slot.PANTS) + " "
-						+ eq.getExtraStats(Slot.PANTS) + " " + eq.getEntityId(Slot.SHOULDER) + " "
-						+ eq.getTypeId(Slot.SHOULDER) + " " + eq.getGemNumber(Slot.SHOULDER) + " "
-						+ eq.getExtraStats(Slot.SHOULDER) + " " + eq.getEntityId(Slot.BOOTS) + " " + eq.getTypeId(Slot.BOOTS)
-						+ " " + eq.getGemNumber(Slot.BOOTS) + " " + eq.getExtraStats(Slot.BOOTS) + " " + eq.getEntityId(Slot.OFFHAND)
-						+ " " + eq.getTypeId(Slot.OFFHAND) + " " + eq.getGemNumber(Slot.OFFHAND) + " " + eq.getExtraStats(Slot.OFFHAND)
-						+ " " + eq.getEntityId(Slot.NECKLACE) + " " + eq.getTypeId(Slot.NECKLACE) + " "
-						+ eq.getGemNumber(Slot.NECKLACE) + " " + eq.getExtraStats(Slot.NECKLACE) + " " + eq.getEntityId(Slot.BRACELET)
-						+ " " + eq.getTypeId(Slot.BRACELET) + " " + eq.getGemNumber(Slot.BRACELET) + " "
-						+ eq.getExtraStats(Slot.BRACELET) + " " + eq.getEntityId(Slot.RING) + " " + eq.getTypeId(Slot.RING) + " "
-						+ eq.getGemNumber(Slot.RING) + " " + eq.getExtraStats(Slot.RING) + " " + eq.getEntityId(Slot.MAINHAND) + " "
-						+ eq.getTypeId(Slot.MAINHAND) + " " + eq.getGemNumber(Slot.MAINHAND) + " " + eq.getExtraStats(Slot.MAINHAND);
+						+ eq.getGemNumber(Slot.HELMET) + " " + eq.getExtraStats(Slot.HELMET) + " "
+						+ eq.getUnknown1(Slot.HELMET) + " " + eq.getDurability(Slot.HELMET) + " "
+						+ eq.getMaxDurability(Slot.HELMET) + " "
+						
+						+ eq.getEntityId(Slot.CHEST) + " " + eq.getTypeId(Slot.CHEST) + " "
+						+ eq.getGemNumber(Slot.CHEST) + " " + eq.getExtraStats(Slot.CHEST) + " "
+						+ eq.getUnknown1(Slot.CHEST) + " " + eq.getDurability(Slot.CHEST) + " "
+						+ eq.getMaxDurability(Slot.CHEST) + " "
+						
+						+ eq.getEntityId(Slot.PANTS) + " " + eq.getTypeId(Slot.PANTS) + " "
+						+ eq.getGemNumber(Slot.PANTS) + " " + eq.getExtraStats(Slot.PANTS) + " "
+						+ eq.getUnknown1(Slot.PANTS) + " " + eq.getDurability(Slot.PANTS) + " "
+						+ eq.getMaxDurability(Slot.PANTS) + " "
+						
+						+ eq.getEntityId(Slot.SHOULDER) + " " + eq.getTypeId(Slot.SHOULDER) + " "
+						+ eq.getGemNumber(Slot.SHOULDER) + " " + eq.getExtraStats(Slot.SHOULDER) + " "
+						+ eq.getUnknown1(Slot.SHOULDER) + " " + eq.getDurability(Slot.SHOULDER) + " "
+						+ eq.getMaxDurability(Slot.SHOULDER) + " "
+						
+						+ eq.getEntityId(Slot.BOOTS) + " " + eq.getTypeId(Slot.BOOTS)
+						+ " " + eq.getGemNumber(Slot.BOOTS) + " " + eq.getExtraStats(Slot.BOOTS) + " "
+						+ eq.getUnknown1(Slot.BOOTS) + " " + eq.getDurability(Slot.BOOTS) + " "
+						+ eq.getMaxDurability(Slot.BOOTS) + " "
+						
+						+ eq.getEntityId(Slot.OFFHAND) + " " + eq.getTypeId(Slot.OFFHAND) + " "
+						+ eq.getGemNumber(Slot.OFFHAND) + " " + eq.getExtraStats(Slot.OFFHAND) + " "
+						+ eq.getUnknown1(Slot.OFFHAND) + " " + eq.getDurability(Slot.OFFHAND) + " "
+						+ eq.getMaxDurability(Slot.OFFHAND) + " "
+						
+						+ eq.getEntityId(Slot.NECKLACE) + " " + eq.getTypeId(Slot.NECKLACE) + " "
+						+ eq.getGemNumber(Slot.NECKLACE) + " " + eq.getExtraStats(Slot.NECKLACE) + " "
+						+ eq.getUnknown1(Slot.NECKLACE) + " " + eq.getDurability(Slot.NECKLACE) + " "
+						+ eq.getMaxDurability(Slot.NECKLACE) + " "
+						
+						+ eq.getEntityId(Slot.RING) + " " + eq.getTypeId(Slot.RING) + " "
+						+ eq.getGemNumber(Slot.RING) + " " + eq.getExtraStats(Slot.RING) + " "
+						+ eq.getUnknown1(Slot.RING) + " " + eq.getDurability(Slot.RING) + " "
+						+ eq.getMaxDurability(Slot.RING) + " "
+						
+						+ eq.getEntityId(Slot.BRACELET)	+ " " + eq.getTypeId(Slot.BRACELET) + " "
+						+ eq.getGemNumber(Slot.BRACELET) + " " + eq.getExtraStats(Slot.BRACELET) + " "
+						+ eq.getUnknown1(Slot.BRACELET) + " " + eq.getDurability(Slot.BRACELET) + " "
+						+ eq.getMaxDurability(Slot.BRACELET) + " "
+						
+						+ eq.getEntityId(Slot.MAINHAND) + " " + eq.getTypeId(Slot.MAINHAND) + " "
+						+ eq.getGemNumber(Slot.MAINHAND) + " " + eq.getExtraStats(Slot.MAINHAND) + " "
+						+ eq.getUnknown1(Slot.MAINHAND) + " " + eq.getDurability(Slot.MAINHAND) + " "
+						+ eq.getMaxDurability(Slot.MAINHAND);
 			
 			}
 			break;

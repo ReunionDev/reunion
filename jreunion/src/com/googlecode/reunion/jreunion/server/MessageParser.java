@@ -13,6 +13,7 @@ import org.apache.log4j.Logger;
 import org.apache.log4j.net.SocketAppender;
 
 import com.googlecode.reunion.jreunion.game.Item;
+import com.googlecode.reunion.jreunion.game.ItemType;
 import com.googlecode.reunion.jreunion.game.Mob;
 import com.googlecode.reunion.jreunion.game.Npc;
 import com.googlecode.reunion.jreunion.game.NpcSpawn;
@@ -130,25 +131,40 @@ public class MessageParser {
 						+ ")" + "collision test: " + s1 + " " + s2 + " " + s3);
 			} else if (words[0].equals("@d")||words[0].equals("@drop")) { //Drop Item
 				if (words.length >= 2) {
-					try {
-						
-						int itemType = Integer.parseInt(words[1]);
-						Item<?> item = itemManager.create(itemType);
-						if (words.length >= 4) {							
-							int gemNumber = Integer.parseInt(words[2]);
-							int extraStats = Integer.parseInt(words[3]);
+						try {
+							Item<?> item = null;
+							if(words[0].equals("@d")){
+								item = itemManager.create(Integer.parseInt(words[1]));
+							} else if(words[0].equals("@drop")){
+								ItemType itemType = new ItemType(Integer.parseInt(words[1]));
+								item = itemType.create();
+							}
+							if (words.length == 5) {							
+								int gemNumber = Integer.parseInt(words[2]);
+								int extraStats = Integer.parseInt(words[3]);
+								int unknown1 = Integer.parseInt(words[4]);
+								int unknown2 = Integer.parseInt(words[5]);
+								
+								item.setGemNumber(gemNumber);
+								item.setExtraStats(extraStats);
+								item.setDurability(item.getType().getMaxDurability());
+								item.setUnknown1(unknown1);
+								item.setUnknown2(unknown2);
+							}else{
+								item.setGemNumber(0);
+								item.setExtraStats(0);
+								item.setDurability(0);
+								item.setUnknown1(0);
+								item.setUnknown2(0);
+							}
+							com.dropItem(player.getPosition(), item);
 							
-							item.setGemNumber(gemNumber);
-							item.setExtraStats(extraStats);
-						}else{
-							item.setGemNumber(0);
-							item.setExtraStats(0);
+						} catch (Exception e) {
+							client.sendPacket(Type.SAY, "@drop failed (ID:"+words[1]+")");
 						}
-						com.dropItem(player.getPosition(), item);
 						
-					} catch (Exception e) {
-						client.sendPacket(Type.SAY, "@drop failed (ID:"+words[1]+")");
-					}
+							
+						
 				}
 			}
 			else if (words[0].equals("@info")) {

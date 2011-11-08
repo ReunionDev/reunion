@@ -7,6 +7,7 @@ package com.googlecode.reunion.jreunion.game;
 public class PetAssistant extends Npc {
 	public PetAssistant(int id) {
 		super(id);
+		loadFromReference(id);
 	}
 
 }

@@ -54,8 +54,7 @@ public class QuickSlotBar {
 	}
 
 	/******* Place a item in the quick slot *********/
-	public void MoveToQuick(Player player, int tab, int itemId, int slot) {
-		Client client = player.getClient();
+	public void MoveToQuick(int tab, int itemId, int slot) {
 
 		InventoryItem invItem = player.getInventory().getItem(itemId);
 		QuickSlotItem qsItem = new QuickSlotItem(invItem.getItem(), new QuickSlotPosition(this, slot));
@@ -107,7 +106,7 @@ public class QuickSlotBar {
 		
 		Item<?> item = qsItem.getItem();
 		
-		Logger.getLogger(QuickSlotBar.class).info(player.getName()+" is using: " +item.getType().getDescription());
+		Logger.getLogger(QuickSlotBar.class).info(player.getName()+" is using: " +item.getType().getName());
 		
 		player.getPosition().getLocalMap().getWorld().getCommand().useItem(player, item, slot);
 		

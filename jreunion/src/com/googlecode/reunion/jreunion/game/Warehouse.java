@@ -14,6 +14,7 @@ public class Warehouse extends Npc {
 
 	public Warehouse(int id) {
 		super(id);
+		loadFromReference(id);
 	}
 
 	/****** Open stash ******/

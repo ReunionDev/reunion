@@ -15,6 +15,7 @@ public class Trader extends Npc {
 
 	public Trader(int id) {
 		super(id);
+		loadFromReference(id);
 	}
 
 	/****** Exchange 5 "grade n" gems for 1 "grade n-1" gem ******/

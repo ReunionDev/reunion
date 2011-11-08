@@ -40,6 +40,7 @@ import com.googlecode.reunion.jreunion.game.items.etc.MissionReceiver;
 import com.googlecode.reunion.jreunion.server.Client.LoginType;
 import com.googlecode.reunion.jreunion.server.Client.State;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
+import com.googlecode.reunion.jreunion.protocol.*;
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
@@ -91,6 +92,10 @@ public class PacketParser extends EventDispatcher implements EventListener{
 				*/
 				int version = Integer.parseInt(message[0]);
 				client.setVersion(version);
+				
+				if(client.getProtocol() instanceof OtherProtocol)
+					((OtherProtocol)client.getProtocol()).setVersion(version);
+				
 				Logger.getLogger(PacketParser.class).info("Got version");
 				client.setState(State.GOT_VERSION);
 				break;
@@ -420,7 +425,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					roamingItem.getItem().setEntityId(roamingItem.getEntityId());
 					//ParsedItem parsedItem = Reference.getInstance().getItemReference().getItemById(itemId);
 					
-					Logger.getLogger(PacketParser.class).info(roamingItem.getItem().getType().getDescription()+" "+itemId);
+					Logger.getLogger(PacketParser.class).info(player.getName() + " pick " + roamingItem.getItem().getType().getName()+"("+itemId+")");
 					if(roamingItem!=null && player.getInventory().getHoldingItem()==null ){
 						client.getPlayer().pickupItem(roamingItem);							
 					}
@@ -505,7 +510,9 @@ public class PacketParser extends EventDispatcher implements EventListener{
 								skill.effect(player, target);
 						}
 					} else{
-						throw new RuntimeException(skill+" is not Castable!");
+						client.sendPacket(Type.SAY, skill.getName()+" skill not implemented yet!");
+						Logger.getLogger(PacketParser.class).error(skill.getName()+" skill is not Castable!");
+						//throw new RuntimeException(skill.getName()+" skill is not Castable!");
 					}
 				} else if (message[0].equals("skillup")) {
 					
@@ -547,7 +554,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 							player, Integer.parseInt(message[1]));
 				} else if (message[0].equals("move_to_quick")) {
 					player.getQuickSlotBar().MoveToQuick(
-							player, Integer.parseInt(message[1]),
+							Integer.parseInt(message[1]),
 							Integer.parseInt(message[2]),
 							Integer.parseInt(message[3]));
 				} else if (message[0].equals("quest")) {
@@ -695,6 +702,8 @@ public class PacketParser extends EventDispatcher implements EventListener{
 						player.setLime(player.getLime() + limeAmmount);
 						player.getClient().sendPacket(Type.Q_EX, limeAmmount);
 					}
+				} else {
+					logUnknownCommand(message);
 				}
 	
 				break;
@@ -705,6 +714,16 @@ public class PacketParser extends EventDispatcher implements EventListener{
 			}
 			}
 		}
+	}
+	
+	public void logUnknownCommand(String[] message){
+		String command = "";
+		
+		for(String str: message){
+			command += str + " ";
+		}
+		
+		Logger.getLogger(PacketParser.class).error("Unknown command: "+command);
 	}
 
 	public void Parse(Client client, String packet) {

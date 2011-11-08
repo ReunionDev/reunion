@@ -13,6 +13,7 @@ import com.googlecode.reunion.jreunion.server.Client;
 import com.googlecode.reunion.jreunion.server.DatabaseUtils;
 import com.googlecode.reunion.jreunion.server.ItemManager;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
+import com.googlecode.reunion.jreunion.server.Server;
 
 /**
  * @author Aidamina
@@ -80,10 +81,9 @@ public class Merchant extends Npc {
 	public void loadFromReference(int type) {
 		super.loadFromReference(type);
 		
+		super.setHp(this.getMaxHp());
 		
 		ParsedItem npc = this.getPosition().getLocalMap().getNpcSpawnReference().getItemById(this.getSpawn().getId());
-		
-		this.setMaxHp(100);
 				
 		setSellRate(Integer.parseInt(npc.getMemberValue("SellRate")));
 		setBuyRate(Integer.parseInt(npc.getMemberValue("BuyRate")));

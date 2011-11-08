@@ -15,6 +15,8 @@ public abstract class LivingObject extends WorldObject {
 	private LivingObject target;
 	
 	private Position targetPosition;
+	
+	private String name;
 
 	public Position getTargetPosition() {
 		return targetPosition;
@@ -108,6 +110,14 @@ public abstract class LivingObject extends WorldObject {
 
 	public void setTarget(LivingObject target) {
 		this.target = target;
+	}
+	
+	public String getName(){
+		return this.name;
+	}
+	
+	public void setName(String livingObjectName){
+		this.name = livingObjectName;
 	}
 	
 	public void getsAttacked(Player player, int damage){

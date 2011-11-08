@@ -46,7 +46,8 @@ public class SkillManager {
 			Skill skill = (Skill) ClassFactory.create(className, this, id);
 			if(skill==null)
 				continue;
-				
+			
+			skill.setName(item.getName());
 			skills.put(id, skill);
 
 		

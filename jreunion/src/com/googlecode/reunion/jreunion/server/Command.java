@@ -40,8 +40,10 @@ public class Command {
 		String password = client.getPassword();
 		
 		//Handling for a client that doesn't want to behave
-		if(client.getVersion()==101&&client.getLoginType()!=LoginType.PLAY){
-			
+		int accountId = DatabaseUtils.getDinamicInstance().Auth(username, password);
+		
+		//if(client.getVersion()==101&&client.getLoginType()!=LoginType.PLAY){
+		if (accountId == -1 && client.getLoginType()!=LoginType.PLAY) {
 			byte key = 0x03;
 			byte [] input = username.getBytes();
 			byte [] output = new byte[input.length];
@@ -59,9 +61,10 @@ public class Command {
 			
 			client.setUsername(username);
 			client.setPassword(password);
+			accountId = DatabaseUtils.getDinamicInstance().Auth(username, password);
 		}
 		
-		int accountId = DatabaseUtils.getDinamicInstance().Auth(username, password);
+		//int accountId = DatabaseUtils.getDinamicInstance().Auth(username, password);
 		if (accountId == -1) {
 			Logger.getLogger(Command.class).info("Invalid Login");
 			client.sendPacket(Type.FAIL,"Username and password combination is invalid");
@@ -198,7 +201,7 @@ public class Command {
 	public void playerWeapon(Player player, int uniqueId) {
 		//Client client = player.getClient();
 
-		Logger.getLogger(Command.class).info(uniqueId);
+		//Logger.getLogger(Command.class).info(uniqueId);
 
 		ItemType item = null;
 		//TODO: FIX
@@ -376,7 +379,7 @@ public class Command {
 		}
 		else{
 			
-			Logger.getLogger(QuickSlotBar.class).error(item.getType().getDescription()+ " not Usable");
+			Logger.getLogger(QuickSlotBar.class).error(item.getType().getName()+ " not Usable");
 			
 		}
 		return false;

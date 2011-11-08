@@ -7,5 +7,6 @@ package com.googlecode.reunion.jreunion.game;
 public class StatsRedistributor extends Npc {
 	public StatsRedistributor(int id) {
 		super(id);
+		loadFromReference(id);
 	}
 }

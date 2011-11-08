@@ -20,6 +20,8 @@ public class Npc extends LivingObject {
 	private int unknown1;
 
 	private int unknown2;
+	
+	private int unknown3;
 
 	public NpcSpawn getSpawn() {
 		return spawn;
@@ -31,9 +33,7 @@ public class Npc extends LivingObject {
 
 	public Npc(int type) {
 		super();
-		this.setMaxHp(100);
-		this.setHp(this.getMaxHp());
-		this.type = type;
+		setType(type);
 	}
 	
 	private int mutant;
@@ -43,10 +43,13 @@ public class Npc extends LivingObject {
 	public int getMutant() {
 		return mutant;
 	}
+	
 	@Override
 	public void setHp(int hp){
 		super.setHp(hp);
-		this.getInterested().sendPacket(Type.ATTACK_VITAL, this);
+		
+		if(this instanceof Mob)
+			this.getInterested().sendPacket(Type.ATTACK_VITAL, this);
 	
 	}
 
@@ -66,6 +69,10 @@ public class Npc extends LivingObject {
 		return type;
 	}
 	
+	private void setType(int npcType){
+		this.type = npcType;
+	}
+	
 	public void setUnknown1(int unknown1) {
 		this.unknown1 = unknown1;
 	}
@@ -80,7 +87,16 @@ public class Npc extends LivingObject {
 
 	public int getUnknown2() {
 		return unknown2;
-		//this seems to be 10 for certain npcs and 1 for mobs
+		
+	}
+	
+	public int getUnknown3() {
+		return unknown3;
+	}
+
+	public void setUnknown3(int unknown3) {
+		this.unknown3 = unknown3;
+		//this seems to be 9 or 10 for certain npcs and 1 for mobs
 	}
 	
 	@Override
@@ -114,4 +130,31 @@ public class Npc extends LivingObject {
 	}
 	
 	
+	@Override
+	public void loadFromReference(int id) {
+		super.loadFromReference(id);
+
+		ParsedItem npc = Reference.getInstance().getNpcReference().getItemById(id);
+
+		if (npc == null) {
+			// cant find Item in the reference continue to load defaults:
+			setMaxHp(100);
+			setHp(100);
+			setName("Unknown");
+		} else {
+			
+			if (npc.checkMembers(new String[] { "Hp" })) {
+				// use member from file
+				setMaxHp(Integer.parseInt(npc.getMemberValue("Hp")));
+				setHp(getMaxHp());
+				
+			} else {
+				// use default
+				setMaxHp(100);
+				setHp(100);
+			}
+			
+			setName(npc.getName());
+		}
+	}
 }

@@ -14,6 +14,7 @@ import com.googlecode.reunion.jreunion.events.network.NetworkDisconnectEvent;
 import com.googlecode.reunion.jreunion.events.network.NetworkEvent;
 import com.googlecode.reunion.jreunion.events.network.NetworkSendEvent;
 import com.googlecode.reunion.jreunion.game.Player;
+import com.googlecode.reunion.jreunion.protocol.OtherProtocol;
 import com.googlecode.reunion.jreunion.protocol.Protocol;
 
 /**
@@ -72,6 +73,10 @@ public class Client extends EventDispatcher implements EventListener,Sendable {
 
 	public SocketChannel getSocketChannel() {
 		return socketChannel;
+	}
+	
+	public Protocol getProtocol(){
+		return this.protocol;
 	}
 	
 	private World world;
@@ -165,10 +170,17 @@ public class Client extends EventDispatcher implements EventListener,Sendable {
 		}
 		if(socketChannel!=null){
 			buffer.append("socket: ");
-			buffer.append(socketChannel);
+			//buffer.append(socketChannel);
+			buffer.append("local="+this.getSocketChannel().socket().getLocalSocketAddress()+
+					" remote="+this.getSocketChannel().socket().getRemoteSocketAddress());
 			buffer.append(", ");
 		}
 		
+		if(this.getProtocol()!=null){
+			buffer.append("encryption level: ");
+			buffer.append(getProtocol() instanceof OtherProtocol ? ((OtherProtocol)getProtocol()).getEncryptionLevel(): "Default");
+			buffer.append(", ");
+		}
 				
 		buffer.append("state: ");
 		buffer.append(getState());
@@ -209,7 +221,7 @@ public class Client extends EventDispatcher implements EventListener,Sendable {
 			return null;
 		String packetData = outputBuffer.toString();		
 		outputBuffer.setLength(0);
-		Logger.getLogger(Network.class).debug("Sending to "+this+":\n" + packetData);
+		Logger.getLogger(Network.class).info("Sending to "+this+":\n" + packetData);
 		return protocol.encryptServer(packetData);
 	}
 
@@ -227,20 +239,20 @@ public class Client extends EventDispatcher implements EventListener,Sendable {
 							this.disconnect();
 							throw new RuntimeException("Unknown Protocol");//TODO: Proper handling
 						}
-						Logger.getLogger(Client.class).debug(this + " protocol discovered: "+protocol);
+						Logger.getLogger(Client.class).info(this + " protocol discovered: "+protocol);
 					}
 					String decryptedData = protocol.decryptServer(data);
-					Logger.getLogger(Client.class).debug(this + " sends: \n" + decryptedData);
+					Logger.getLogger(Client.class).info(this + " sends: \n" + decryptedData);
 					
 					this.inputBuffer.append(decryptedData);
 					if(!decryptedData.endsWith("\n"))
 						inputBuffer.append("\n");
-					fireEvent(ClientReceiveEvent.class, this);			
+					fireEvent(ClientReceiveEvent.class, this);	
 				}
 			}
 			if(event instanceof NetworkDisconnectEvent){				
 				
-				Logger.getLogger(Client.class).debug(event);
+				//Logger.getLogger(Client.class).debug(event);
 				fireEvent(ClientDisconnectEvent.class, this);
 			}
 		}

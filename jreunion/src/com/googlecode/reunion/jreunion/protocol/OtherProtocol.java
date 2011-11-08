@@ -12,14 +12,17 @@ import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 
+import com.googlecode.reunion.jreunion.server.ClassFactory;
 import com.googlecode.reunion.jreunion.server.Client;
 import com.googlecode.reunion.jreunion.server.Map;
+import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
+import com.googlecode.reunion.jreunion.server.Reference;
 import com.googlecode.reunion.jreunion.server.Server;
 
 public class OtherProtocol extends Protocol {
 
 	public static Pattern locationRegex = Pattern.compile("(place|walk) (-?\\d+) (-?\\d+) (-?\\d+) (-?\\d+)(?: (?:-?\\d+) (?:-?\\d+))?\\n");
-
+		
 	short [] location = new short [4];
 	public short iter = -1;
 	public short iterCheck = -1;
@@ -38,7 +41,8 @@ public class OtherProtocol extends Protocol {
 		if(client!=null){
 			setAddress(getClient().getSocketChannel().socket().getLocalAddress());
 			setPort((short)getClient().getSocketChannel().socket().getLocalPort());
-			setVersion(getClient().getVersion());
+			//setVersion(getClient().getVersion());
+			setVersion(Integer.parseInt(Reference.getInstance().getServerReference().getItem("Server").getMemberValue("Version")));
 			for(Map map :Server.getInstance().getWorld().getMaps()){
 				if(map.getAddress().getAddress().equals(address)&&map.getAddress().getPort()==port) {
 					mapId = map.getId();
@@ -114,11 +118,11 @@ public class OtherProtocol extends Protocol {
 		}
 		
 		if(data.contains("encrypt_key")){
-			String debug = "data:\n";
-			debug+=data;
+			String debug = "data: ";
+			debug+=data+"\n";
 			debug+="isLastLocationPlace: "+isLastLocationPlace+"\n";
 			debug+="place: "+location[0] +" "+ location[1] +" "+ location[2]+"\n";
-			debug+="before: \n";
+			debug+="\nbefore: \n";
 			debug+="iter: "+iter+"\n";;
 			debug+="iterCheck: "+iterCheck+"\n";
 			
@@ -132,7 +136,7 @@ public class OtherProtocol extends Protocol {
 			}
 			
 			debug+="old magicx: "+magicx+"\n";
-			magicx = (short) func_unknown_encrypt_related(location[0], location[1], location[2], location[3],isLastLocationPlace);
+			magicx = (short) getMagicKey(location[0], location[1], location[2], location[3],isLastLocationPlace);
 			
 			
 			debug+="new magicx: "+magicx+"\n";
@@ -140,7 +144,7 @@ public class OtherProtocol extends Protocol {
 			iter =  (short)(magicx % 4);
 			iterCheck += (magic1 ^ (magicx + 2 * magic1 - mapId));
 			
-			debug+="after: \n";
+			debug+="\nafter: \n";
 			debug+="iter: "+iter+"\n";;
 			debug+="iterCheck: "+iterCheck+"\n";
 			
@@ -154,8 +158,14 @@ public class OtherProtocol extends Protocol {
 		}
 	}
 	
+	public int getEncryptionLevel(){
+		
+		return getClient()==null ? -1 : (iter+1);	
+	}
+	
 	public String decryptServer(byte[] data, short iter, short iterCheck) {
 		String result = null;
+		
 		switch(iter + 1){
 			case 0:
 				int magic3 = (port - 17) % 131;
@@ -289,29 +299,114 @@ public class OtherProtocol extends Protocol {
 	
 	public static void main(String[] args)  {
 		
-		
+		/*
 		String data = "walk 6926 5091 106 1\n"
 						+ "encrypt_add 11116034\n"
 						+ "encrypt_multi 11123587\n"
 						+ "encrypt_password 11140473\n"
 						+ "encrypt_key 11124185\n";
+						
+		String data =	"place 7053 5116 107 -14264 6 1" // enc level 0
+						+"encrypt_add 11114217"
+						+"encrypt_multi 11115541"
+						+"encrypt_password 11112959"
+						+"encrypt_key 11130211";
+						
+		*/
+		
+		String data3 =	"place 7063 5163 106 30972 4 1\n"+		// enc level 3
+						"encrypt_add 11113233\n"+
+						"encrypt_multi 11117922\n"+
+						"encrypt_password 11134444\n"+
+						"encrypt_key 11112074\n";
+		
+						/* before: 
+						 * iter: -1
+						 * iterCheck: -1
+						 * old magicx: 12246
+						 * new magicx: 12246
+						 * 
+						 * after: 
+						 * iter: 2
+						 * iterCheck: 12463
+						 */
+		
+		String data2 =  "place 6986 5087 106 -891 2 1\n"+		// enc level 2
+						"encrypt_add 11132182\n"+
+						"encrypt_multi 11123615\n"+
+						"encrypt_password 11129926\n"+
+						"encrypt_key 11126396\n";
+						
+						/* before: 
+						 * iter: -1
+						 * iterCheck: -1
+						 * old magicx: 12093
+						 * new magicx: 12093
+						 * 
+						 * after: 
+						 * iter: 1
+						 * iterCheck: 12362
+						 */
+						
+		
+		
+				// enc level 0
+		/* 2017
+		 * login 
+		 * admin
+		 * admin d c 
+		 */  byte[] encryptedPacket0 = new byte[] {87, 89, 90, 92, 127, -91, -92, -84, -94, -93, 127, -86,
+				-83, -90, -94, -93, 127, -86, -83, -90, -94, -93, 105, -83, 105, -88, 127};
+		
+		
+		// 		enc level 3
+		 
+		  //shop 13 6907 5041
+		  byte[] encryptedPacket3 = new byte[]{14, 101, 106, 13, 61, -52, -50, 61, 51, 52, -51, 50, 61, 48, -51, 49, -52, 7};
+		
+		  
+		 // byte[] encryptedPacket = new byte[] {106 101 14 105 57 38 41 39 37 57 36 40 39 42 57 40 41 39 57 42 41 32 38 43 19}; 
+		  //byte[] encryptedPacket = new byte[] {105 13 120 122 116 57 38 41 39 33 57 36 40 37 33 57 40 41 39 57 -52 40 43 33 43 32 57 39 57 40 19};
+		  //byte[] encryptedPacket = new byte[] {106 101 14 105 57 38 41 39 33 57 36 40 37 32 57 40 41 39 57 -52 40 43 33 42 41 19};
+		  //byte[] encryptedPacket = new byte[] {105 13 120 122 116 57 38 41 39 42 57 36 40 42 36 57 40 41 39 57 -52 40 32 42 37 43 57 36 57 40 19};
+		
+		
+		// 		enc level 2
+		
+		//	shop 13 6907 5041	 Decoded: [115, 104, 111, 112, 32, 49, 51, 32, 54, 57, 48, 55, 32, 53, 48, 11, 0, 105]
+			byte[] encryptedPacket2 = new byte[]{-62, 55, 54, -49, 127, 0, 2, 127, 13, 24, 15, 14, 127, 12, 15, 11, 0, 105};
+			
+		//	pulse 24706, -1, 0, 0, 0
+		//	byte[] encryptedPacket2 = new byte[]{-49 -52 51 -62 60 127 1 11 14 15 13 115 127 116 0 115 127 15 115 127 15 115 127 15 105};
 		
 		OtherProtocol op = new OtherProtocol(null);
 		
 		try {
-			op.setAddress(InetAddress.getByName("93.90.190.134"));
+			op.setAddress(InetAddress.getByName("127.0.0.1"));
 		} catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		op.setVersion(2000);
+		op.setVersion(2003);
 		op.setPort((short)4005);
 		op.setMapId(4);
+		//op.iter = 0;
 		
-		op.handleChanges(data);
+		System.out.println("Map: "+op.mapId+" Version: "+op.version+" Port: "+op.port+" SumIp: "+op.magic0+
+				" XorIp: "+op.magic1+" Iter: "+op.iter+" IterCheck: "+op.iterCheck);
+		
+		System.out.println("Packet decrypted:\n" + op.decryptServer(encryptedPacket3.clone())+"\n");
+		op.handleChanges(data3);
+		
+		System.out.println("Map: "+op.mapId+" Version: "+op.version+" Port: "+op.port+" SumIp: "+op.magic0+
+				" XorIp: "+op.magic1+" Iter: "+op.iter+" IterCheck: "+op.iterCheck);
+		
+		//System.out.println("Packet sent: " + encryptedPacket);
+		System.out.println("Packet decrypted:\n" + op.decryptServer(encryptedPacket3.clone()));
+		//op.handleChanges(data);
 	}
 	
-	int func_unknown_encrypt_related(int x, int y, int z, int rotation, boolean a6)
+	int getMagicKey(int x, int y, int z, int rotation, boolean isPlacePacket)
 	{
 		int magic;
 		int version;
@@ -326,7 +421,7 @@ public class OtherProtocol extends Protocol {
 
 		magic = rotation + x + y + z;
 		
-		if ( a6 )
+		if ( isPlacePacket )
 		{
 			version = 100;
 		}
@@ -340,7 +435,7 @@ public class OtherProtocol extends Protocol {
 		if ( v13 < 0 )
 			v12 = -v13;
 
-		if ( a6 )
+		if ( isPlacePacket )
 		{
 			v14 = v12 % 3;
 			if (v14==0 )
@@ -361,7 +456,7 @@ public class OtherProtocol extends Protocol {
 					z = v16;
 					//continue LABEL_12;
 					{
-						if ( a6 )
+						if ( isPlacePacket )
 						{
 							result = magic1 + x + y - z;
 						}
@@ -393,7 +488,7 @@ public class OtherProtocol extends Protocol {
 					z = v16;
 				//continue LABEL_12;
 				{
-					if ( a6 )
+					if ( isPlacePacket )
 					{
 						result = magic1 + x + y - z;
 					}
@@ -409,7 +504,7 @@ public class OtherProtocol extends Protocol {
 		if ( !v19 )
 		{
 			LABEL_12:
-				if ( a6 )
+				if ( isPlacePacket )
 				{
 					result = magic1 + x + y - z;
 				}
@@ -425,7 +520,7 @@ public class OtherProtocol extends Protocol {
 			{
 				v16 = v15 + 1;
 				z = v16;
-				if ( a6 )
+				if ( isPlacePacket )
 				{
 					result = magic1 + x + y - z;
 				}
@@ -442,7 +537,7 @@ public class OtherProtocol extends Protocol {
 			v16 = v15 - 1;	
 			z = v16;
 			
-			if ( a6 )
+			if ( isPlacePacket )
 			{
 				result = magic1 + x + y - z;
 			} else {

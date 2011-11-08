@@ -158,6 +158,8 @@ public class LocalMap extends Map implements Runnable{
 			
 			spawn.spawn();
 		}
+		
+		Logger.getLogger(LocalMap.class).info("Loaded "+npcSpawnList.size()+" mob spawns in "+getName());
 	}
 
 	public Parser getMobSpawnReference() {
@@ -170,6 +172,7 @@ public class LocalMap extends Map implements Runnable{
 	
 	private void createNpcSpawns() {
 		
+		int mobSpawnAmmount = npcSpawnList.size();
 		Iterator<ParsedItem> iter = npcSpawnReference.getItemListIterator();
 
 		while (iter.hasNext()) {
@@ -201,6 +204,7 @@ public class LocalMap extends Map implements Runnable{
 			
 			spawn.spawn();
 		}
+		Logger.getLogger(LocalMap.class).info("Loaded "+(npcSpawnList.size()-mobSpawnAmmount)+" npc spawns in "+getName());
 	}
 
 	/**

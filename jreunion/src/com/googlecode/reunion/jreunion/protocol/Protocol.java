@@ -96,5 +96,8 @@ public abstract class Protocol {
 		throw new UnsupportedOperationException();
 	}
 	
+	public String toString(){
+		return this instanceof OtherProtocol ? "OtherProtocol" : "DefaultProtocol";
+	}
 	
 }

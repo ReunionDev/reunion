@@ -205,7 +205,9 @@ public class Network extends Service implements Runnable, EventListener{
 		if(socketChannel.isConnected() && socketChannel.isOpen()) {
 			processOutput(socketChannel);
 		}
-		Logger.getLogger(Network.class).info("Disconnecting " + socketChannel);
+		Logger.getLogger(Network.class).info("Disconnecting {local=" 
+				+ socketChannel.socket().getLocalSocketAddress() + " remote="
+				+ socketChannel.socket().getRemoteSocketAddress() + "}\n");
 		fireEvent(NetworkDisconnectEvent.class, socketChannel);
 		
 		try {

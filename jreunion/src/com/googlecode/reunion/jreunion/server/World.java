@@ -228,7 +228,9 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 															
 				network.addEventListener(NetworkDataEvent.class, client, new NetworkEvent.NetworkFilter(socketChannel));
 				
-				Logger.getLogger(World.class).debug("Got connection from " + socketChannel+"\n");
+				Logger.getLogger(World.class).info("Got connection from {local="
+						+ socketChannel.socket().getLocalSocketAddress()+" remote="
+						+socketChannel.socket().getRemoteSocketAddress()+"}\n");
 				
 				client.setState(Client.State.ACCEPTED);
 				

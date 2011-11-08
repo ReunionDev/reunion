@@ -199,7 +199,7 @@ public class Inventory {
 			
 			Item<?> item = inventoryItem.getItem();
 			Logger.getLogger(Inventory.class).info("Item {id:"+item.getEntityId()+"("+item.getItemId()+
-					"), name:"+item.getType().getDescription()+"} stored in player {id:"+getPlayer().getEntityId()+
+					"), name:"+item.getType().getName()+"} stored in player {id:"+getPlayer().getEntityId()+
 					"("+getPlayer().getPlayerId()+"), name:"+ getPlayer().getName()+
 					"} inventory at position {tab:"+tab+", x:"+posX+", y:"+posY+"}");
 			
@@ -227,7 +227,7 @@ public class Inventory {
 		
 		Item<?> item = inventoryItem.getItem();
 		Logger.getLogger(Inventory.class).info("Item {id:"+item.getEntityId()+"("+item.getItemId()+
-				"), name:"+item.getType().getDescription()+"} removed from player {id:"+getPlayer().getEntityId()+
+				"), name:"+item.getType().getName()+"} removed from player {id:"+getPlayer().getEntityId()+
 				"("+getPlayer().getPlayerId()+"), name:"+ getPlayer().getName()+
 				"} inventory.");
 		

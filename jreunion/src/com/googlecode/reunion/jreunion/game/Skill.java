@@ -12,6 +12,8 @@ public abstract class Skill {
 
 	private int type; //0 - Permanent; 1 - Activation; 2 - Attack 
 	
+	private String name;
+	
 	private SkillManager skillManager;
 
 	public Skill(SkillManager skillManager, int id) {
@@ -93,5 +95,13 @@ public abstract class Skill {
 
 	private void setSkillManager(SkillManager skillManager) {
 		this.skillManager = skillManager;
+	}
+	
+	public String getName(){
+		return this.name;
+	}
+	
+	public void setName(String skillName){
+		this.name = skillName;
 	}
 }

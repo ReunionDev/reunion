@@ -107,8 +107,6 @@ public abstract class Player extends LivingObject implements EventListener {
 
 	private Inventory inventory;
 
-	private String name;
-
 	private int penaltyPoints;
 
 	private int adminState; // 0 - normal user; 255 - SuperGM
@@ -357,10 +355,6 @@ public abstract class Player extends LivingObject implements EventListener {
 
 	public int getLevelUpExp() {
 		return lvlUpExp;
-	}
-
-	public String getName() {
-		return name;
 	}
 
 	public int getPenaltyPoints() {
@@ -890,10 +884,6 @@ public abstract class Player extends LivingObject implements EventListener {
 				sendStatus(Status.LEVELUPEXP);
 			}
 		}
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public void setPenaltyPoints(int penaltyPoints) {

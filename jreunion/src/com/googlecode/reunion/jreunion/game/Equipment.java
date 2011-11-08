@@ -89,6 +89,21 @@ public class Equipment {
 		Item<?> item = getItem(slot); 
 		return item == null ? 0 : item.getGemNumber();
 	}
+	
+	public int getDurability(Slot slot){
+		Item<?> item = getItem(slot); 
+		return item == null ? 0 : item.getDurability();
+	}
+	
+	public int getMaxDurability(Slot slot){
+		Item<?> item = getItem(slot); 
+		return item == null ? 0 : item.getType().getMaxDurability();
+	}
+	
+	public int getUnknown1(Slot slot){
+		Item<?> item = getItem(slot); 
+		return item == null ? 0 : item.getUnknown1();
+	}
 
 	public Item<?> getItem(Slot slot) {
 
