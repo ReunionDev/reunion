@@ -180,8 +180,6 @@ public class Command {
 		player.loadStash(localMap);
 		player.setDefense();
 
-		serverSay(player.getName() + " is logging in (ID: "	+ player.getPlayerId() + ")\n");
-
 		client.sendPacket(Type.SKILLLEVEL_ALL,player);
 		
 		client.sendPacket(Type.A_, "idx", client.getAccountId());

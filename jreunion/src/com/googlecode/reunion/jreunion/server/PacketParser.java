@@ -315,6 +315,11 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					
 					client.setState(Client.State.INGAME);
 					
+					if(player.getPosition().getMap().getId() == 4)
+						client.sendPacket(Type.INFO, Reference.getInstance().getServerReference().getItem("Server").getMemberValue("WelcomeMsg"));
+					
+					world.sendPacket(Type.SAY, player.getName() + " (" +player.getPlayerId()+ ") logged in on Map "+player.getPosition().getMap().getName());
+
 					player.setHp(player.getMaxHp());
 					player.setStamina(player.getMaxStamina());				
 					player.setMana(player.getMaxMana());				

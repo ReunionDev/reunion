@@ -627,10 +627,16 @@ public abstract class Player extends LivingObject implements EventListener {
 			// cant find Item in the reference continue to load defaults:
 			setLevelUpExp(1000);
 		} else {
-
 			if (exp.checkMembers(new String[] { "Exp" })) {
 				// use member from file
-				setLevelUpExp(Integer.parseInt(exp.getMemberValue("Exp")));
+				try{
+					setLevelUpExp(Integer.parseInt(exp.getMemberValue("Exp")));
+				} 
+				catch(Exception NumerFormatException)
+				{
+					setLevelUpExp(1000);
+					Logger.getLogger(Player.class).info(this.getClient().getPlayer().getName()+" uses a to big EXP number. We need long instead of int");
+				}
 			} else {
 				// use default
 				setLevelUpExp(1000);

@@ -10,6 +10,7 @@ import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jcommon.Parser;
 import com.googlecode.reunion.jreunion.server.Client;
 import com.googlecode.reunion.jreunion.server.ItemManager;
+import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 import com.googlecode.reunion.jreunion.server.Reference;
 import com.googlecode.reunion.jreunion.server.Server;
 import com.googlecode.reunion.jreunion.server.Area.Field;
@@ -387,6 +388,7 @@ public class Mob extends Npc {
 							+ "\n";
 							*/
 					// S> walk npc [UniqueId] [Xpos] [Ypos] [ZPos] [Running]
+					this.setPosition(newPos);
 					this.walk(this.getPosition(), this.isRunning());
 					//client.sendPacket(Type.WALK, mob);
 					//client.sendData( packetData);
@@ -464,9 +466,7 @@ public class Mob extends Npc {
 				}
 			}			
 		}
-		this.getPosition().getLocalMap().getWorld().getCommand()
-				.serverSay("Experience: " + getExp() + " Lime: " + getLime());
-
+		player.getClient().sendPacket(Type.SAY, "Experience: " + getExp() + " Lime: " + getLime());
 	}
 
 	public void setDmg(int dmg) {

@@ -60,7 +60,7 @@ public class MessageParser {
 				else
 					player.setLevelUpExp(0);
 			}
-			else if (words[0].equals("@shutdown") && client.getPlayer().getName().equals("Neyney")) {
+			else if (words[0].equals("@shutdown")) {
 				final Iterator<Player> iterPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayerListIterator();
 				final World world = Server.getInstance().getWorld();
 				
@@ -82,9 +82,12 @@ public class MessageParser {
 							{
 								Player currplayer = iterPlayer.next();
 								Client pclient = currplayer.getClient();
-								currplayer.save();
-								pclient.sendPacket(Type.SAY, currplayer.getName()+" saved ...");
-								
+								try{
+									currplayer.save();
+									pclient.sendPacket(Type.SAY, currplayer.getName()+" saved ...");
+								}catch(Exception e){
+									pclient.sendPacket(Type.SAY, "Saving of "+currplayer.getName()+" failed ...");
+								}
 							}
 							world.sendPacket(Type.INFO, "Server is going down! (5 Seconds)");
 						}

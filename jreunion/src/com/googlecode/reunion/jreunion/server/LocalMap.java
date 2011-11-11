@@ -475,11 +475,9 @@ public class LocalMap extends Map implements Runnable{
 				list.exit(player, false);
 				list.sendPacket(Type.OUT, player);
 				
-				player.save();	
-				
-				
-			} else
-			if(event instanceof SessionEvent) {
+				player.save();
+				world.getPlayerManager().removePlayer(player);
+			} else if(event instanceof SessionEvent) {
 			
 				Session session = ((SessionEvent)event).getSession();
 				if(event instanceof NewSessionEvent){	
