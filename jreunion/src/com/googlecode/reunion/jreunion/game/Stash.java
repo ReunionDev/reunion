@@ -4,16 +4,20 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
+import com.googlecode.reunion.jreunion.server.Server;
+
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
 public class Stash {
 
-	private List<StashItem> itemList;
+	private List<StashItem> itemList = new Vector<StashItem>();
 
 	public Stash(Player player) {
-		itemList = new Vector<StashItem>();
+		StashItem lime = new StashItem(new StashPosition(12), Server.getInstance().getWorld().getItemManager().
+				getItemType(1014).create());
+		addItem(lime);
 	}
 
 	public void addItem(StashItem item) {

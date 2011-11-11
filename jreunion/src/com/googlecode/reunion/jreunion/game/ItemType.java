@@ -24,7 +24,7 @@ public class ItemType{
 
 	public ItemType(int type) {
 		super();
-		this.type = type;
+		setTypeId(type);
 		loadFromReference(type);
 	}	
 	
@@ -46,6 +46,10 @@ public class ItemType{
 
 	public int getTypeId() {
 		return type;
+	}
+	
+	private void setTypeId(int typeId){
+		this.type = typeId;
 	}
 	
 	/*

@@ -194,7 +194,7 @@ public class Merchant extends Npc {
 	
 		if (item != null) {
 			int price = (int) (item.getType().getPrice() * ((double)this.getSellRate() / 100));
-			Logger.getLogger(Merchant.class).warn("Selling"+item+" for "+price);
+			Logger.getLogger(Merchant.class).info("Player "+player+" sold item "+item+" for "+price+" Lime");
 			synchronized(player){
 				player.setLime(player.getLime()+price);
 			}
@@ -203,7 +203,7 @@ public class Merchant extends Npc {
 			DatabaseUtils.getDinamicInstance().deleteItem(item);
 		}
 		else{
-			Logger.getLogger(Merchant.class).warn("Sell failed, no item selected");			
+			Logger.getLogger(Merchant.class).error("Sell failed, no item selected");			
 		}		
 	}
 }

@@ -138,8 +138,9 @@ public class MessageParser {
 							} else if(words[0].equals("@drop")){
 								ItemType itemType = new ItemType(Integer.parseInt(words[1]));
 								item = itemType.create();
+								DatabaseUtils.getDinamicInstance().saveItem(item);
 							}
-							if (words.length == 5) {							
+							if (words.length == 6) {							
 								int gemNumber = Integer.parseInt(words[2]);
 								int extraStats = Integer.parseInt(words[3]);
 								int unknown1 = Integer.parseInt(words[4]);

@@ -61,6 +61,8 @@ public class PacketFactory {
 		SUCCESS,
 		MSG,
 		STASH,
+		STASH_TO,
+		STASH_FROM,
 		STASH_END,
 		INVEN,
 		SKILLLEVEL_ALL, 
@@ -454,6 +456,45 @@ public class PacketFactory {
 				+ item.getUnknown2();
 			}
 			break;
+			
+		case STASH_TO:
+			if(args.length>1){
+				Player player = (Player) args[0];
+				StashItem stashItem = (StashItem)args[1];
+				Item<?> item = stashItem.getItem();
+				String packet = "stash_to "+stashItem.getStashPosition().getSlot()+" ";
+				
+				/*int gemNumber = (Integer)args[2];
+				
+				if(stashItem.getStashPosition().getSlot() == 12){
+					packet += " 0 " + gemNumber + " 0";
+				} else {
+				*/
+				 packet += item.getType().getTypeId() + " " + item.getGemNumber() + " "
+				+ item.getExtraStats() + " " + item.getUnknown1() + " "
+				+ item.getDurability() + " " + item.getType().getMaxDurability() + " "
+				+ player.getStash().getQuantity(stashItem.getStashPosition().getSlot()) + " "
+				+ item.getUnknown2();
+				 
+				//}
+				
+				return packet;
+			}
+			break;
+		
+		case STASH_FROM:
+			if(args.length>0){
+				StashItem stashItem = (StashItem)args[0];
+				Item<?> item = stashItem.getItem();
+				
+				return "stash_from " + stashItem.getStashPosition().getSlot() + " "
+				+ item.getEntityId() + " " + item.getType().getTypeId() + " "
+				+ item.getGemNumber() + " "	+ item.getExtraStats() + " "
+				+ item.getUnknown1() + " " + item.getDurability() + " "
+				+ item.getType().getMaxDurability() + " " + item.getUnknown2();
+			}
+			break;
+			
 		case STASH_END:
 			return "stash_end";
 			

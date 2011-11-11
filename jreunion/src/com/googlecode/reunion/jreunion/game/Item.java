@@ -145,4 +145,20 @@ public class Item<T extends ItemType> implements Entity{
 		this.durability = durability;
 	}
 
+	public String toString(){
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("{");
+
+		buffer.append("id:");
+		buffer.append(getEntityId());
+		buffer.append("("+getItemId()+")");
+		buffer.append(", ");
+		
+		buffer.append("name:");
+		buffer.append(getType().getName());	
+				
+		buffer.append("}");
+		return buffer.toString();
+	}
+	
 }

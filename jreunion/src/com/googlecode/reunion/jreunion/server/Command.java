@@ -170,14 +170,14 @@ public class Command {
 
 	public Player loginChar(int slotNumber, int accountId, Client client) {
 		
-		Player player = DatabaseUtils.getDinamicInstance().loadChar(slotNumber,
-				accountId, client);
-		
+		Player player = DatabaseUtils.getDinamicInstance().loadChar(slotNumber, accountId, client);
 		Equipment equipment = DatabaseUtils.getDinamicInstance().loadEquipment(player);
+		LocalMap localMap = DatabaseUtils.getDinamicInstance().getSavedPosition(player).getLocalMap();
 		
 		world.getSkillManager().loadSkills(player);
 		DatabaseUtils.getDinamicInstance().loadSkills(player);	
-		player.loadEquipment(DatabaseUtils.getDinamicInstance().getSavedPosition(player).getLocalMap());
+		player.loadEquipment(localMap);
+		player.loadStash(localMap);
 		player.setDefense();
 
 		serverSay(player.getName() + " is logging in (ID: "	+ player.getPlayerId() + ")\n");

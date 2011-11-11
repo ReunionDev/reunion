@@ -173,12 +173,21 @@ public abstract class Player extends LivingObject implements EventListener {
 	/****** Manages the Item Drop ******/
 	public void dropItem(int playerId) {
 		
-		Item<?> item = getInventory().getHoldingItem().getItem();
+		HandPosition handPosition = getInventory().getHoldingItem();
 		
-		if (item == null) {
+		if (handPosition == null) {
+			Logger.getLogger(Player.class).error("Failed to get Player "+this+" holding item (HandPosition=NULL)");
 			return;
 		}
 		
+		Item<?> item = handPosition.getItem();
+		
+		if (item == null) {
+			Logger.getLogger(Player.class).error("Failed to get Player "+this+" holding item (Item=NULL)");
+			return;
+		}
+		
+		Logger.getLogger(Player.class).info("Player "+this+" droped item "+item);
 		LocalMap map = getPosition().getLocalMap();
 		map.getWorld().getCommand().dropItem(getPosition(), item);
 		getInventory().setHoldingItem(null);
@@ -688,7 +697,29 @@ public abstract class Player extends LivingObject implements EventListener {
 		}
 	}
 
+	/****** load Stash Items ******/
+	public void loadStash(LocalMap localMap) {
 		
+		if(localMap == null)
+			return;
+		
+		Iterator<StashItem> stashIter = getStash().itemListIterator();
+		int count = 0;
+		
+		while(stashIter.hasNext()){
+			StashItem stashItem = (StashItem) stashIter.next();
+			Item<?> item = stashItem.getItem();
+			
+			if(item == null)
+				continue;
+			
+			if(item.getEntityId()==-1){
+				localMap.createEntityId(item);
+			}
+			count++;
+		}
+		System.out.println("INFO: Stash items loaded: "+count);
+	}
 
 	/****** Manages the char Logout ******/
 	public synchronized void save() {
@@ -1187,16 +1218,19 @@ public abstract class Player extends LivingObject implements EventListener {
 
 	public void wearSlot(Slot slot) {
 	
-		InventoryItem invItem = new InventoryItem(getInventory().getHoldingItem().getItem(),
-				new InventoryPosition(0,0,0));
+		HandPosition handPosition = getInventory().getHoldingItem();
+		//InventoryItem invItem = new InventoryItem(getInventory().getHoldingItem().getItem(),
+		//		new InventoryPosition(0,0,0));
 
-		if (invItem.getItem() == null) {
+		if (handPosition == null) {
 			
 			getInventory().setHoldingItem(new HandPosition(getEquipment().getItem(slot)));
 			getEquipment().setItem(slot, null);
 			getInterested().sendPacket(Type.CHAR_REMOVE, this, slot);
 			
 		} else {
+			InventoryItem invItem = new InventoryItem(getInventory().getHoldingItem().getItem(),
+							new InventoryPosition(0,0,0));
 			if (getEquipment().getItem(slot) == null) {
 				Item<?> item = invItem.getItem();
 				
@@ -1281,19 +1315,20 @@ public abstract class Player extends LivingObject implements EventListener {
 		StringBuffer buffer = new StringBuffer();
 		buffer.append("{");
 
-		buffer.append("id: ");
-		buffer.append(getPlayerId());
+		buffer.append("id:");
+		buffer.append(getEntityId());
+		buffer.append("("+getPlayerId()+")");
 		buffer.append(", ");
 		
-		buffer.append("name: ");
+		buffer.append("name:");
 		buffer.append(getName());
 		buffer.append(", ");
 		
-		buffer.append("race: ");
+		buffer.append("race:");
 		buffer.append(getRace());
 		buffer.append(", ");
 		
-		buffer.append("level: ");
+		buffer.append("level:");
 		buffer.append(getLevel());		
 				
 		buffer.append("}");

@@ -416,7 +416,7 @@ public class LocalMap extends Map implements Runnable{
 				
 				synchronized(entities) {
 					createEntityId(roamingItem);
-					list.enter(roamingItem, false);					
+					list.enter(roamingItem, false);	
 				}
 								
 				list.sendPacket(Type.DROP, roamingItem);
@@ -475,7 +475,9 @@ public class LocalMap extends Map implements Runnable{
 				list.exit(player, false);
 				list.sendPacket(Type.OUT, player);
 				
-				player.save();		
+				player.save();	
+				
+				
 			} else
 			if(event instanceof SessionEvent) {
 			

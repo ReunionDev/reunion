@@ -274,7 +274,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					player.loadQuickSlot();
 					
 					
-					System.out.println(savedPosition);
+					//System.out.println(savedPosition);
 					map.fireEvent(PlayerLoginEvent.class, player, savedPosition);
 					
 					/*
@@ -572,39 +572,14 @@ public class PacketParser extends EventDispatcher implements EventListener{
 						}
 					}
 				} else if (message[0].equals("stash_open")) {
-					
-					/*
-					LocalMap map = player.getPosition().getLocalMap();
-					map.getEntity(id);
-					Npc[] npc = world.getNpcManager().getNpcList(139);
-					Warehouse warehouse = (Warehouse) npc[0];
-					warehouse.openStash(client.getPlayer());
-					*/
-					Warehouse warehouse = new Warehouse(139);
-					warehouse.openStash(client.getPlayer());
-					
+					if (message.length == 1) {
+						Warehouse warehouse = new Warehouse(139);
+						warehouse.openStash(client.getPlayer());
+					} else {
+						logUnknownCommand(message);
+					}
 				} else if (message[0].equals("stash_click")) {
-					/*
-					Npc[] npc = world
-							.getNpcManager().getNpcList(139);
-					Warehouse warehouse = (Warehouse) npc[0];
-	
-					if (message.length == 5) {
-						warehouse.stashClick(client.getPlayer(),
-								Integer.parseInt(message[1]),
-								Integer.parseInt(message[2]),
-								Integer.parseInt(message[3]),
-								Integer.parseInt(message[4]));
-					}
-					if (message.length == 4) {
-						warehouse.stashClick(client.getPlayer(),
-								Integer.parseInt(message[1]),
-								Integer.parseInt(message[2]),
-								Integer.parseInt(message[3]), 0);
-					}
-					*/
 					Warehouse warehouse = new Warehouse(139);
-					warehouse.openStash(client.getPlayer());
 					
 					if (message.length == 5) {
 						warehouse.stashClick(client.getPlayer(),
@@ -613,11 +588,20 @@ public class PacketParser extends EventDispatcher implements EventListener{
 								Integer.parseInt(message[3]),
 								Integer.parseInt(message[4]));
 					}
-					if (message.length == 4) {
+					else if (message.length == 4) {
 						warehouse.stashClick(client.getPlayer(),
 								Integer.parseInt(message[1]),
 								Integer.parseInt(message[2]),
 								Integer.parseInt(message[3]), 0);
+					} else
+						logUnknownCommand(message);
+				} else if (message[0].equals("stash_close")) {
+					//nothing is returned to the client here, so we can just save the stash in the DB.
+					if (message.length == 1) {
+						Logger.getLogger(PacketParser.class).info("Saving "+player+" stash...");
+						DatabaseUtils.getDinamicInstance().saveStash(client);
+					} else {
+						logUnknownCommand(message);
 					}
 				} else if (message[0].equals("shop")) {
 					int npcId = Integer.parseInt(message[1]);
@@ -702,7 +686,9 @@ public class PacketParser extends EventDispatcher implements EventListener{
 						player.setLime(player.getLime() + limeAmmount);
 						player.getClient().sendPacket(Type.Q_EX, limeAmmount);
 					}
-				} else {
+				} else if (message[0].equals("..")) {
+					//client keep alive
+				}else {
 					logUnknownCommand(message);
 				}
 	

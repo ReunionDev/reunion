@@ -1024,28 +1024,18 @@ public class DatabaseUtils extends Service {
 		try {
 			Statement invStmt = dinamicDatabase.dinamicConn.createStatement();
 			
-			ResultSet stashTable = invStmt.executeQuery("SELECT * FROM warehouse WHERE accountid="+client.getAccountId()+";");
+			ResultSet rs = invStmt.executeQuery("SELECT * FROM warehouse WHERE accountid="+client.getAccountId()+";");
 			client.getPlayer().getStash().clearStash();
-			Item<?> item = null;
 						
-			while (stashTable.next()) 
+			while (rs.next()) 
 			{
-				if(stashTable.getInt("pos") == 12){
-					/*
-					item = new Item(0);
-					com.googlecode.reunion.jreunion.server.ItemManager.getEntityManager().loadEntity(item,stashTable.getInt("uniqueitemid"));
-					DatabaseUtils.getInstance().loadItemInfo(item);
-					*/
-				}
-				else{ 
-					item = Item.load(stashTable.getInt("itemid"));
-				}
-				StashItem stashItem =	new StashItem(new StashPosition(stashTable.getInt("pos")), item);
+				Item<?> item = Item.load(rs.getInt("itemid"));
+				StashItem stashItem = new StashItem(new StashPosition(rs.getInt("pos")), item);
 				client.getPlayer().getStash().addItem(stashItem);
 			}
 						
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			Logger.getLogger(this.getClass()).warn("Exception ",e1);
 			return;
 		}
 	}
@@ -1071,7 +1061,7 @@ public class DatabaseUtils extends Service {
 			}
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			Logger.getLogger(this.getClass()).warn("Exception ",e1);
 			return;
 		  }
 	}

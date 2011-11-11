@@ -198,10 +198,8 @@ public class Inventory {
 			addInventoryItem(inventoryItem);
 			
 			Item<?> item = inventoryItem.getItem();
-			Logger.getLogger(Inventory.class).info("Item {id:"+item.getEntityId()+"("+item.getItemId()+
-					"), name:"+item.getType().getName()+"} stored in player {id:"+getPlayer().getEntityId()+
-					"("+getPlayer().getPlayerId()+"), name:"+ getPlayer().getName()+
-					"} inventory at position {tab:"+tab+", x:"+posX+", y:"+posY+"}");
+			Logger.getLogger(Inventory.class).info("Item "+item+" stored in player "+getPlayer()+
+					" inventory at position {tab:"+tab+", x:"+posX+", y:"+posY+"}");
 			
 			setHoldingItem(null);
 			return true;
@@ -226,10 +224,7 @@ public class Inventory {
 		}
 		
 		Item<?> item = inventoryItem.getItem();
-		Logger.getLogger(Inventory.class).info("Item {id:"+item.getEntityId()+"("+item.getItemId()+
-				"), name:"+item.getType().getName()+"} removed from player {id:"+getPlayer().getEntityId()+
-				"("+getPlayer().getPlayerId()+"), name:"+ getPlayer().getName()+
-				"} inventory.");
+		Logger.getLogger(Inventory.class).info("Item "+item+" removed from player "+getPlayer()+" inventory.");
 		
 		deleteInventoryItem(inventoryItem);
 		
