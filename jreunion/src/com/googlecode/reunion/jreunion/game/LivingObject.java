@@ -150,6 +150,7 @@ public abstract class LivingObject extends WorldObject {
 				((Mob)this).kill(player);
 		} else {
 			setHp(newHp);
+			this.getInterested().sendPacket(Type.ATTACK_VITAL, this);
 		}
 	}
 }

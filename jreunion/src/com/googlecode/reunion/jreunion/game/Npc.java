@@ -47,10 +47,6 @@ public class Npc extends LivingObject {
 	@Override
 	public void setHp(int hp){
 		super.setHp(hp);
-		
-		if(this instanceof Mob)
-			this.getInterested().sendPacket(Type.ATTACK_VITAL, this);
-	
 	}
 
 	public int getNeoProgmare() {

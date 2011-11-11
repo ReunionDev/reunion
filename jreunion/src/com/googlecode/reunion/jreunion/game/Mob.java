@@ -41,7 +41,6 @@ public class Mob extends Npc {
 
 	public Mob(int type) {
 		super(type);
-		
 		loadFromReference(type);
 	}
 
@@ -101,15 +100,15 @@ public class Mob extends Npc {
 
 	@Override
 	public void loadFromReference(int id) {
-		super.loadFromReference(id);
+		//super.loadFromReference(id);
 
 		ParsedItem mob = Reference.getInstance().getMobReference()
 				.getItemById(id);
 
 		if (mob == null) {
 			// cant find Item in the reference continue to load defaults:
-			setHp(1);
 			setMaxHp(1);
+			setHp(1);
 			setLevel(1);
 			setExp(1);
 			setLime(1);
@@ -123,8 +122,8 @@ public class Mob extends Npc {
 			
 			if (mob.checkMembers(new String[] { "Hp" })) {
 				// use member from file
-				setHp(Integer.parseInt(mob.getMemberValue("Hp")));
 				setMaxHp(Integer.parseInt(mob.getMemberValue("Hp")));
+				setHp(Integer.parseInt(mob.getMemberValue("Hp")));
 			} else {
 				// use default
 				setHp(1);

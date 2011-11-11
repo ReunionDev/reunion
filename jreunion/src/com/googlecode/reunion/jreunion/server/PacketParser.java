@@ -600,6 +600,10 @@ public class PacketParser extends EventDispatcher implements EventListener{
 								Integer.parseInt(message[3]), 0);
 					} else
 						logUnknownCommand(message);
+				} else if (message[0].equals("stash_put")) {
+					
+				} else if (message[0].equals("stash_get")) {
+					
 				} else if (message[0].equals("stash_close")) {
 					//nothing is returned to the client here, so we can just save the stash in the DB.
 					if (message.length == 1) {
