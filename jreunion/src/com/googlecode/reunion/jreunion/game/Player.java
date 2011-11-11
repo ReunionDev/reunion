@@ -730,15 +730,17 @@ public abstract class Player extends LivingObject implements EventListener {
 	/****** Manages the char Logout ******/
 	public synchronized void save() {
 
-		Logger.getLogger(Player.class).info("Player " + getName() + " saving...\n");
-		DatabaseUtils.getDinamicInstance().saveSkills(this);
-		DatabaseUtils.getDinamicInstance().saveInventory(this);
-		DatabaseUtils.getDinamicInstance().saveCharacter(this);
-		DatabaseUtils.getDinamicInstance().saveEquipment(this);
-		DatabaseUtils.getDinamicInstance().saveStash(client);
-		DatabaseUtils.getDinamicInstance().saveExchange(this);
-		DatabaseUtils.getDinamicInstance().saveQuickSlot(this);
-		DatabaseUtils.getDinamicInstance().saveQuest(this);
+		if(getEntityId() != -1){
+			Logger.getLogger(Player.class).info("Player " + getName() + " saving...\n");
+			DatabaseUtils.getDinamicInstance().saveSkills(this);
+			DatabaseUtils.getDinamicInstance().saveInventory(this);
+			DatabaseUtils.getDinamicInstance().saveCharacter(this);
+			DatabaseUtils.getDinamicInstance().saveEquipment(this);
+			DatabaseUtils.getDinamicInstance().saveStash(getClient());
+			DatabaseUtils.getDinamicInstance().saveExchange(this);
+			DatabaseUtils.getDinamicInstance().saveQuickSlot(this);
+			DatabaseUtils.getDinamicInstance().saveQuest(this);
+		}
 		
 	}
 
@@ -1286,7 +1288,7 @@ public abstract class Player extends LivingObject implements EventListener {
 	 */
 	public int getSessionRadius() {
 		if(Player.sessionRadius==null){
-			setSessionRadius(Integer.parseInt(Reference.getInstance().getServerReference().getItem("Server").getMemberValue("SessionRadius")));
+			setSessionRadius((int)getClient().getWorld().getServerSetings().getSessionRadius());
 		}
 		return Player.sessionRadius;
 	}

@@ -42,7 +42,7 @@ public class OtherProtocol extends Protocol {
 			setAddress(getClient().getSocketChannel().socket().getLocalAddress());
 			setPort((short)getClient().getSocketChannel().socket().getLocalPort());
 			//setVersion(getClient().getVersion());
-			setVersion(Integer.parseInt(Reference.getInstance().getServerReference().getItem("Server").getMemberValue("Version")));
+			setVersion((int)client.getWorld().getServerSetings().getDefaultVersion());
 			for(Map map :Server.getInstance().getWorld().getMaps()){
 				if(map.getAddress().getAddress().equals(address)&&map.getAddress().getPort()==port) {
 					mapId = map.getId();

@@ -111,6 +111,6 @@ public class QuickSlotBar {
 		player.getPosition().getLocalMap().getWorld().getCommand().useItem(player, item, slot);
 		
 		removeItem(qsItem);
-		DatabaseUtils.getDinamicInstance().deleteItem(qsItem.getItem());
+		DatabaseUtils.getDinamicInstance().deleteItem(qsItem.getItem().getItemId());
 	}
 }

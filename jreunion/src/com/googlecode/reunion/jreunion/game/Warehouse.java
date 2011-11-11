@@ -61,71 +61,13 @@ public class Warehouse extends Npc {
 			storeItem(player,stashItem);
 			
 		}
-		
-		
-		
-		
-//		if (pos == 12) {
-//			if (gems > player.getLime()) {
-//				//client.sendPacket(Type.MSG, "WARNING: Lime cheating detected!");
-//				return;
-//			}
-//			stashItem = stash.getItem(pos);
-//			stashItem.getItem().setGemNumber(
-//					stashItem.getItem().getGemNumber() + gems / 100);
-//			synchronized(player) {
-//				player.setLime(player.getLime()-gems);			
-//			}
-//			
-//			DatabaseUtils.getDinamicInstance().saveItem(stashItem.getItem());
-//			if (gems >= 0) {
-//				client.sendPacket(Type.STASH_TO, player, stashItem);
-//			} else {
-//				client.sendPacket(Type.STASH_FROM, stashItem);
-//			}
-//		} else {
-//			if (player.getInventory().getHoldingItem() == null) {
-//				stashItem = stash.getItem(pos);
-//				Item<?> item = Item.load(stashItem.getItem().getItemId());
-//				stash.removeItem(stashItem);
-//				player.getInventory().setHoldingItem(new HandPosition(item));
-//
-//				client.sendPacket(Type.STASH_FROM, stashItem);
-//			} else {
-//				if (stash.checkPosEmpty(pos)) {
-//					Item<?> item = player.getInventory().getHoldingItem()
-//							.getItem();
-//					stashItem = new StashItem(new StashPosition(pos), item);
-//					stash.addItem(stashItem);
-//					player.getInventory().setHoldingItem(null);
-//
-//					client.sendPacket(Type.STASH_TO, player, stashItem);
-//				} else {
-//					stashItem = stash.getItem(pos);
-//
-//					if (stashItem.getItem().getType().getTypeId() == type
-//							&& stashItem.getItem().getGemNumber() == player
-//									.getInventory().getHoldingItem().getItem()
-//									.getGemNumber()
-//							&& stashItem.getItem().getExtraStats() == special) {
-//						StashItem newStashItem = new StashItem(new StashPosition(pos), player
-//								.getInventory().getHoldingItem().getItem());
-//						stash.addItem(newStashItem);
-//						player.getInventory().setHoldingItem(null);
-//
-//						client.sendPacket(Type.STASH_TO, player, stashItem);
-//					}
-//				}
-//			}
-//		}
-
-		// S_DatabaseUtils.getInstance().saveStash(client);
 	}
 	
 	public void storeItem(Player player, StashItem stashItem){
 		player.getInventory().setHoldingItem(null);
 		player.getStash().addItem(stashItem);
 		player.getClient().sendPacket(Type.STASH_TO, player, stashItem);
+		Logger.getLogger(Warehouse.class).info("Player "+player+" stored item "+stashItem.getItem()+" in the warehouse");
 	}
 	
 	public void removeItem(Player player, StashItem stashItem){
@@ -137,6 +79,7 @@ public class Warehouse extends Npc {
 		player.getInventory().setHoldingItem(new HandPosition(item));
 		player.getStash().removeItem(stashItem);
 		player.getClient().sendPacket(Type.STASH_FROM, stashItem);
+		Logger.getLogger(Warehouse.class).info("Player "+player+" removed item "+item+" from the warehouse");
 	}
 	
 	public boolean storeLime(Player player, int pos, int limeAmmount){

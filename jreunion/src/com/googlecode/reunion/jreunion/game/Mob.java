@@ -453,7 +453,7 @@ public class Mob extends Npc {
 					roamingItem.setOwner(player);
 					
 					java.util.Timer timer = new java.util.Timer();
-					float dropExclusivity = Float.parseFloat(Reference.getInstance().getServerReference().getItem("Server").getMemberValue("DropExclusivity"));
+					float dropExclusivity = player.getClient().getWorld().getServerSetings().getDropExclusivity();
 					timer.schedule(new TimerTask() {
 						@Override
 						public void run() {

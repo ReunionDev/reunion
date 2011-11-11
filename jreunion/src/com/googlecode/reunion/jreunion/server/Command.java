@@ -102,7 +102,21 @@ public class Command {
 	}
 
 	public void delChar(int slotNumber, int accountId) {
-		DatabaseUtils.getDinamicInstance().delChar(slotNumber, accountId);
+		int charId = DatabaseUtils.getDinamicInstance().getCharId(slotNumber, accountId);
+		String charName = DatabaseUtils.getDinamicInstance().getCharName(charId);
+		
+		Logger.getLogger(Command.class).info("Player {id:"+charId+", name:"+charName+"} deleted from account {id:"
+				+accountId+"}");
+		
+		DatabaseUtils.getDinamicInstance().deleteCharSlot(charId);
+		DatabaseUtils.getDinamicInstance().deleteCharacter(charId);
+		DatabaseUtils.getDinamicInstance().deleteCharSkills(charId);
+		DatabaseUtils.getDinamicInstance().deleteCharQuickSlot(charId);
+		DatabaseUtils.getDinamicInstance().deleteCharQuestState(charId);
+		DatabaseUtils.getDinamicInstance().deleteCharInventory(charId);
+		DatabaseUtils.getDinamicInstance().deleteCharExchange(charId);
+		DatabaseUtils.getDinamicInstance().deleteCharEquipment(charId);
+		
 	}
 	
 	public RoamingItem dropItem(Position position, Item<?> item) {
@@ -171,8 +185,8 @@ public class Command {
 	public Player loginChar(int slotNumber, int accountId, Client client) {
 		
 		Player player = DatabaseUtils.getDinamicInstance().loadChar(slotNumber, accountId, client);
-		Equipment equipment = DatabaseUtils.getDinamicInstance().loadEquipment(player);
 		LocalMap localMap = DatabaseUtils.getDinamicInstance().getSavedPosition(player).getLocalMap();
+		Equipment equipment = DatabaseUtils.getDinamicInstance().loadEquipment(player);
 		
 		world.getSkillManager().loadSkills(player);
 		DatabaseUtils.getDinamicInstance().loadSkills(player);	
@@ -371,7 +385,7 @@ public class Command {
 			((Usable)item.getType()).use(item, player);
 			
 			player.getPosition().getLocalMap().removeEntity(item);			
-			DatabaseUtils.getDinamicInstance().deleteItem(item);
+			DatabaseUtils.getDinamicInstance().deleteItem(item.getItemId());
 			return true;
 			
 		}

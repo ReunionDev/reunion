@@ -195,6 +195,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					}
 					Race race = Race.values()[Integer.parseInt(message[3])];
 					Sex sex = Sex.values()[Integer.parseInt(message[4])];
+		
 					com.createChar(client, slot,
 							message[2], race,
 							sex,
@@ -316,7 +317,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					client.setState(Client.State.INGAME);
 					
 					if(player.getPosition().getMap().getId() == 4)
-						client.sendPacket(Type.INFO, Reference.getInstance().getServerReference().getItem("Server").getMemberValue("WelcomeMsg"));
+						client.sendPacket(Type.INFO, world.getServerSetings().getWelcomeMessage());
 					
 					world.sendPacket(Type.SAY, player.getName() + " (" +player.getPlayerId()+ ") logged in on Map "+player.getPosition().getMap().getName());
 
@@ -688,7 +689,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 						while(exchangeIter.hasNext()){
 							ExchangeItem exchangeItem = exchangeIter.next();
 							limeAmmount += exchangeItem.getItem().getExtraStats();
-							DatabaseUtils.getDinamicInstance().deleteItem(exchangeItem.getItem());
+							DatabaseUtils.getDinamicInstance().deleteItem(exchangeItem.getItem().getItemId());
 						}
 						
 						player.getExchange().clearExchange();

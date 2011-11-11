@@ -22,6 +22,7 @@ import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Player.Race;
 import com.googlecode.reunion.jreunion.game.Player.Sex;
 import com.googlecode.reunion.jreunion.game.ItemType;
+import com.googlecode.reunion.jreunion.game.PlayerSpawn;
 import com.googlecode.reunion.jreunion.game.Position;
 import com.googlecode.reunion.jreunion.game.Quest;
 import com.googlecode.reunion.jreunion.game.QuickSlotItem;
@@ -128,7 +129,7 @@ public class DatabaseUtils extends Service {
 		} catch (SQLException e) {
 			Logger.getLogger(this.getClass()).warn("Exception",e);
 			return -1;
-		}	
+		}
 	}
 	
 	public Position getSavedPosition(Player player){
@@ -375,9 +376,9 @@ public class DatabaseUtils extends Service {
 				stmt.execute("DELETE FROM characters WHERE id="+charId+";");				
 			}
 						
-			String q = "INSERT INTO characters ("+(charId==-1?"":"id,")+"accountid,name,level,strength,wisdom,dexterity,constitution,leadership,race,sex,hair," +
-												  "totalExp,levelUpExp,lime,statusPoints,penaltyPoints," +
-												  "guildid,guildlvl)" +
+			String q = "INSERT INTO characters ("+(charId==-1?"":"id,")+"accountid,name,level,strength,wisdom,dexterity," +
+												"constitution,leadership,race,sex,hair,totalExp,levelUpExp,lime," +
+												"statusPoints,penaltyPoints,guildid,guildlvl)" +
 						 " VALUES ("+(charId==-1?"":charId+",")+
 								    +client.getAccountId()+ ",'"
 								    +player.getName()+ "',"
@@ -403,6 +404,14 @@ public class DatabaseUtils extends Service {
 			ResultSet res = stmt.getGeneratedKeys();
 			if (res.next())
 			    player.setPlayerId(res.getInt(1));			
+			
+			if(player.getPosition().getMap() == null){ //used when player creates a new char
+				//TODO: better way to handle with the player default map, after char creation
+				int mapId = (int)player.getClient().getWorld().getServerSetings().getDefaultMapId();
+				Map map = player.getClient().getWorld().getMap(mapId);
+				Position position = new Position(7025,5225,106,map,0.00d);
+				player.setPosition(position);
+			}
 			
 			setSavedPosition(player);
 						
@@ -499,7 +508,7 @@ public class DatabaseUtils extends Service {
 			player.setElectricity(player.getMaxElectricity());			
 			player.setStamina(player.getMaxStamina());
 			
-			player.setLime(Integer.parseInt(Reference.getInstance().getServerReference().getItem("Server").getMemberValue("StartLime")));
+			player.setLime((int)client.getWorld().getServerSetings().getStartLime());
 			
 			client.setPlayer(player);
 		
@@ -549,25 +558,6 @@ public class DatabaseUtils extends Service {
 			player.getInventory().storeItem(hpPot6);
 			saveInventory(player);
 						
-		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
-			return;
-		}
-	}
-	
-	public void delChar(int slotNumber, int accountId) {
-		if (!checkDinamicDatabase())
-			return;
-		Statement stmt;
-		try {
-			stmt = dinamicDatabase.dinamicConn.createStatement();
-			stmt
-			.execute("DELETE FROM slots WHERE slot = "
-					+ slotNumber
-					+ " and accountid = "
-					+ accountId
-					+ ";");
-			
 		} catch (SQLException e1) {
 			Logger.getLogger(this.getClass()).warn("Exception",e1);
 			return;
@@ -907,9 +897,9 @@ public class DatabaseUtils extends Service {
 		
 	}
 	
-	public void deleteItem(Item<?> item)
+	public void deleteItem(int itemId)
 	{
-		if (item==null)return;
+		if (itemId==-1)return;
 		if (!checkDinamicDatabase())return ;
 		
 		Statement stmt;
@@ -917,7 +907,7 @@ public class DatabaseUtils extends Service {
 		try {
 			stmt  = dinamicDatabase.dinamicConn.createStatement();
 			
-			stmt.execute("DELETE FROM items WHERE id='"+item.getItemId()+"';");
+			stmt.execute("DELETE FROM items WHERE id='"+itemId+"';");
 				
 		} 
 		catch (SQLException e) 
@@ -1048,11 +1038,12 @@ public class DatabaseUtils extends Service {
 		try {
 			Statement stmt = dinamicDatabase.dinamicConn.createStatement();
 			stmt.execute("DELETE FROM warehouse WHERE accountid="+client.getAccountId()+";");
+			
 			Iterator<StashItem> stashIter = client.getPlayer().getStash().itemListIterator();
 			
 			while(stashIter.hasNext())
 			{
-				StashItem stashItem = stashIter.next();
+				StashItem stashItem = (StashItem) stashIter.next();
 				
 				stmt.execute("INSERT INTO warehouse (accountid, pos, itemid)" +
 						" VALUES ("+client.getAccountId()+ ","
@@ -1206,7 +1197,7 @@ public class DatabaseUtils extends Service {
 					questsList.put(quest.getId(), quest);
 				} while(rs.next());
 			} else {		
-				Logger.getLogger(DatabaseUtils.class).debug("Failed to get quests from the Static Database!");
+				Logger.getLogger(DatabaseUtils.class).error("Failed to get quests from the Static Database!");
 				return null;
 			}
 		} 
@@ -1292,7 +1283,7 @@ public class DatabaseUtils extends Service {
 					quest.addObjective(objective);
 				} while(objectiveRs.next());
 			} else {
-				Logger.getLogger(DatabaseUtils.class).info("Quest Objectives loaded failed, no objectives found!");
+				Logger.getLogger(DatabaseUtils.class).error("Quest Objectives loaded failed, no objectives found!");
 				return false;
 			}
 		} 
@@ -1323,7 +1314,7 @@ public class DatabaseUtils extends Service {
 					ResultSet rewardTypeRs = rewardTypeStmt.executeQuery("SELECT * FROM quests_reward_type WHERE id='"+rewardRs.getInt("rewardtype")+"';");
 					
 					if(!rewardTypeRs.next()) {				
-						Logger.getLogger(DatabaseUtils.class).info("Quest Reward Type loaded failed, no such reward type ID!");
+						Logger.getLogger(DatabaseUtils.class).error("Quest Reward Type loaded failed, no such reward type ID!");
 						return false;
 					}					
 					
@@ -1333,7 +1324,7 @@ public class DatabaseUtils extends Service {
 					quest.addReward(reward);
 				} while(rewardRs.next());
 			} else {
-				Logger.getLogger(DatabaseUtils.class).info("Quest Rewards loaded failed, no rewards found!");
+				Logger.getLogger(DatabaseUtils.class).error("Quest Rewards loaded failed, no rewards found!");
 				return false;
 			}
 		} 
@@ -1529,5 +1520,231 @@ public class DatabaseUtils extends Service {
 			
 		}
 		return true;
+	}
+	
+	public void deleteCharEquipment(int charId) {
+		if (!checkDinamicDatabase())
+			return;
+		Statement stmt;
+		Statement itemStmt;
+		
+		try {
+			stmt = dinamicDatabase.dinamicConn.createStatement();
+			itemStmt = dinamicDatabase.dinamicConn.createStatement();
+			
+			ResultSet rs = itemStmt.executeQuery("SELECT * FROM equipment WHERE charid = "+charId+ ";");
+			if(rs.next()){
+				do {
+					deleteItem(rs.getInt("itemid"));
+				} while(rs.next());
+			} else return;
+			
+			stmt
+			.execute("DELETE FROM equipment WHERE charid = "+charId+ ";");
+			
+		} catch (SQLException e1) {
+			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			return;
+		}
+	}
+	
+	public void deleteCharExchange(int charId) {
+		if (!checkDinamicDatabase())
+			return;
+		Statement stmt;
+		Statement itemStmt;
+		
+		try {
+			stmt = dinamicDatabase.dinamicConn.createStatement();
+			itemStmt = dinamicDatabase.dinamicConn.createStatement();
+			
+			ResultSet rs = itemStmt.executeQuery("SELECT * FROM exchange WHERE charid = "+charId+ ";");
+			if(rs.next()){
+				do {
+					deleteItem(rs.getInt("itemid"));
+				} while(rs.next());
+			} else return;
+			
+			stmt
+			.execute("DELETE FROM exchange WHERE charid = "+charId+ ";");
+			
+		} catch (SQLException e1) {
+			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			return;
+		}
+	}
+	
+	public void deleteCharInventory(int charId) {
+		if (!checkDinamicDatabase())
+			return;
+		Statement stmt;
+		Statement itemStmt;
+		
+		try {
+			stmt = dinamicDatabase.dinamicConn.createStatement();
+			itemStmt = dinamicDatabase.dinamicConn.createStatement();
+			
+			ResultSet rs = itemStmt.executeQuery("SELECT * FROM inventory WHERE charid = "+charId+ ";");
+			if(rs.next()){
+				do {
+					deleteItem(rs.getInt("itemid"));
+				} while(rs.next());
+			} else return;
+			
+			stmt
+			.execute("DELETE FROM inventory WHERE charid = "+charId+ ";");
+			
+		} catch (SQLException e1) {
+			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			return;
+		}
+	}
+	
+	public void deleteCharQuestState(int charId) {
+		if (!checkDinamicDatabase())
+			return;
+		Statement stmt;
+		Statement questStmt;
+		
+		try {
+			stmt = dinamicDatabase.dinamicConn.createStatement();
+			questStmt = dinamicDatabase.dinamicConn.createStatement();
+			
+			ResultSet rs = questStmt.executeQuery("SELECT * FROM queststate WHERE charid = "+charId+ ";");
+			if(rs.next()){
+				do {
+					deleteQuestObjectiveState(rs.getInt("id"));
+				} while(rs.next());
+			} else return;
+			
+			stmt
+			.execute("DELETE FROM queststate WHERE charid = "+charId+ ";");
+			
+		} catch (SQLException e1) {
+			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			return;
+		}
+	}
+	
+	public void deleteCharQuickSlot(int charId) {
+		if (!checkDinamicDatabase())
+			return;
+		Statement stmt;
+		Statement itemStmt;
+		
+		try {
+			stmt = dinamicDatabase.dinamicConn.createStatement();
+			itemStmt = dinamicDatabase.dinamicConn.createStatement();
+			
+			ResultSet rs = itemStmt.executeQuery("SELECT * FROM quickslot WHERE charid = "+charId+ ";");
+			if(rs.next()){
+				do {
+					deleteItem(rs.getInt("itemid"));
+				} while(rs.next());
+			} else return;
+			
+			stmt
+			.execute("DELETE FROM quickslot WHERE charid = "+charId+ ";");
+			
+		} catch (SQLException e1) {
+			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			return;
+		}
+	}
+	
+	public void deleteCharSkills(int charId) {
+		if (!checkDinamicDatabase())
+			return;
+		Statement stmt;
+		try {
+			stmt = dinamicDatabase.dinamicConn.createStatement();
+			stmt
+			.execute("DELETE FROM skills WHERE charid = "+charId+ ";");
+			
+		} catch (SQLException e1) {
+			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			return;
+		}
+	}
+	
+	public void deleteCharacter(int charId) {
+		if (!checkDinamicDatabase())
+			return;
+		Statement stmt;
+		try {
+			stmt = dinamicDatabase.dinamicConn.createStatement();
+			stmt
+			.execute("DELETE FROM characters WHERE id = "+charId+ ";");
+			
+		} catch (SQLException e1) {
+			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			return;
+		}
+	}
+	
+	public void deleteCharSlot(int charId) {
+		if (!checkDinamicDatabase())
+			return;
+		Statement stmt;
+		
+		try {
+			stmt = dinamicDatabase.dinamicConn.createStatement();
+			
+			stmt.execute("DELETE FROM slots WHERE charid = "+ charId + ";");
+			
+		} catch (SQLException e1) {
+			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			return;
+		}
+	}
+	
+	public int getCharId(int slotNumber, int accountId) {
+		if (!checkDinamicDatabase())
+			return -1;
+		
+		Statement stmt;
+		int charId = -1;
+		
+		try {
+			stmt = dinamicDatabase.dinamicConn.createStatement();
+			
+			ResultSet rs = stmt.executeQuery("SELECT charid FROM slots WHERE slot = "
+					+ slotNumber
+					+ " and accountid = "
+					+ accountId
+					+ ";");
+			
+			if(rs.next())
+				charId = rs.getInt("charid");
+			
+		} catch (SQLException e1) {
+			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			return -1;
+		}
+		
+		return charId;
+	}
+	
+	public String getCharName(int charId) {
+		if (!checkDinamicDatabase())
+			return "";
+		
+		Statement stmt;
+		String charName = "";
+		
+		try {
+			stmt = dinamicDatabase.dinamicConn.createStatement();
+			
+			ResultSet rs = stmt.executeQuery("SELECT * FROM characters WHERE id = "+ charId	+ ";");
+			
+			if(rs.next())
+				charName = rs.getString("name");
+			
+		} catch (SQLException e1) {
+			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			return "";
+		}
+		
+		return charName;
 	}
 }

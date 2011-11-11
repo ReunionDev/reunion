@@ -134,7 +134,7 @@ public class Client extends EventDispatcher implements EventListener,Sendable {
 	}
 
 	public void sendWrongVersion(int clientVersion) {
-		String requiredVersion = Reference.getInstance().getServerReference().getItem("Server").getMemberValue("Version");
+		String requiredVersion = Integer.toString((int)getWorld().getServerSetings().getDefaultVersion());
 		String message = "Wrong clientversion: current version "
 				+ clientVersion + " required version "
 				+ requiredVersion;

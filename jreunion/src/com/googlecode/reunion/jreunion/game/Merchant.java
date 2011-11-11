@@ -200,7 +200,7 @@ public class Merchant extends Npc {
 			}
 
 			player.getInventory().setHoldingItem(null);
-			DatabaseUtils.getDinamicInstance().deleteItem(item);
+			DatabaseUtils.getDinamicInstance().deleteItem(item.getItemId());
 		}
 		else{
 			Logger.getLogger(Merchant.class).error("Sell failed, no item selected");			

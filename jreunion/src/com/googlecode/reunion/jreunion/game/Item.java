@@ -108,7 +108,7 @@ public class Item<T extends ItemType> implements Entity{
 	{	
 		setGemNumber(getGemNumber()+1);
 		DatabaseUtils.getDinamicInstance().saveItem(this);
-		DatabaseUtils.getDinamicInstance().deleteItem(player.getInventory().getHoldingItem().getItem());
+		DatabaseUtils.getDinamicInstance().deleteItem(player.getInventory().getHoldingItem().getItem().getItemId());
 		player.getInventory().setHoldingItem(null);
 		player.setDefense();
 		
