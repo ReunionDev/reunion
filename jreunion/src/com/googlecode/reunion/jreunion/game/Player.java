@@ -710,7 +710,6 @@ public abstract class Player extends LivingObject implements EventListener {
 			return;
 		
 		Iterator<StashItem> stashIter = getStash().itemListIterator();
-		int count = 0;
 		
 		while(stashIter.hasNext()){
 			StashItem stashItem = (StashItem) stashIter.next();
@@ -722,9 +721,7 @@ public abstract class Player extends LivingObject implements EventListener {
 			if(item.getEntityId()==-1){
 				localMap.createEntityId(item);
 			}
-			count++;
 		}
-		System.out.println("INFO: Stash items loaded: "+count);
 	}
 
 	/****** Manages the char Logout ******/

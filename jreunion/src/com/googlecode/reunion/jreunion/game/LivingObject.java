@@ -1,5 +1,7 @@
 package com.googlecode.reunion.jreunion.game;
 
+import org.apache.log4j.Logger;
+
 import com.googlecode.reunion.jreunion.game.quests.ExperienceQuest;
 import com.googlecode.reunion.jreunion.game.quests.QuestState;
 import com.googlecode.reunion.jreunion.game.quests.objective.Objective;
@@ -143,14 +145,16 @@ public abstract class LivingObject extends WorldObject {
 			}
 		}
 		
-		int newHp = getHp() - damage;				
+		int newHp = Tools.between(getHp() - damage, 0, getMaxHp());				
 		
 		if (newHp <= 0) {
-			if(this instanceof Mob)
+			Logger.getLogger(LivingObject.class).info("Player "+player+" killed npc "+this);
+			if(this instanceof Mob){
 				((Mob)this).kill(player);
+			}
 		} else {
 			setHp(newHp);
-			this.getInterested().sendPacket(Type.ATTACK_VITAL, this);
 		}
+		this.getInterested().sendPacket(Type.ATTACK_VITAL, this);
 	}
 }

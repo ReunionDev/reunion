@@ -25,6 +25,8 @@ public class ServerSetings {
 	
 	private String welcomeMessage;
 	
+	private float spawnAttempts;
+	
 	public ServerSetings() {
 		loadFromReference();
 	}
@@ -49,6 +51,7 @@ public class ServerSetings {
 			setDefaultVersion(2000);
 			setSessionRadius(300);
 			setDropExclusivity(10);
+			setSpawnAttempts(1);
 			setWelcomeMessage("Hey, welcome on the Reunion Testserver");
 		} else {
 
@@ -103,10 +106,17 @@ public class ServerSetings {
 			}
 			if (server.checkMembers(new String[] { "DropExclusivity" })) {
 				// use member from file
-				setDropExclusivity(Float.parseFloat(server.getMemberValue("lime")));
+				setDropExclusivity(Float.parseFloat(server.getMemberValue("DropExclusivity")));
 			} else {
 				// use default
 				setDropExclusivity(10);
+			}
+			if (server.checkMembers(new String[] { "SpawnAttempts" })) {
+				// use member from file
+				setSpawnAttempts(Float.parseFloat(server.getMemberValue("SpawnAttempts")));
+			} else {
+				// use default
+				setSpawnAttempts(1);
 			}
 		}
 	}
@@ -165,5 +175,13 @@ public class ServerSetings {
 
 	public void setWelcomeMessage(String welcomeMessage) {
 		this.welcomeMessage = welcomeMessage;
+	}
+
+	public float getSpawnAttempts() {
+		return spawnAttempts;
+	}
+
+	public void setSpawnAttempts(float spawnAttempts) {
+		this.spawnAttempts = spawnAttempts;
 	}
 }

@@ -153,4 +153,23 @@ public class Npc extends LivingObject {
 			setName(npc.getName());
 		}
 	}
+	
+	public String toString(){
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("{");
+
+		buffer.append("id:");
+		buffer.append(getEntityId());
+		buffer.append(", ");
+		
+		buffer.append("type:");
+		buffer.append(getType());
+		buffer.append(", ");
+		
+		buffer.append("name:");
+		buffer.append(getName());	
+				
+		buffer.append("}");
+		return buffer.toString();
+	}
 }
