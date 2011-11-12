@@ -792,10 +792,10 @@ public abstract class Player extends LivingObject implements EventListener {
 		
 		setIsRunning(running);
 		
-		synchronized(this){
+		//synchronized(this){
 			setPosition(position);
 			setTargetPosition(position.clone());			
-		}
+		//}
 		
 		this.getInterested().sendPacket(Type.PLACE, this, unknown);
 		
@@ -908,7 +908,7 @@ public abstract class Player extends LivingObject implements EventListener {
 	}
 
 	public void setLevelUpExp(int lvlUpExp) {
-		synchronized(this) {
+		//synchronized(this) {
 			
 			if(lvlUpExp<=0){
 				this.setLevel(getLevel()+1);
@@ -919,7 +919,7 @@ public abstract class Player extends LivingObject implements EventListener {
 				this.lvlUpExp = lvlUpExp;
 				sendStatus(Status.LEVELUPEXP);
 			}
-		}
+		//}
 	}
 
 	public void setPenaltyPoints(int penaltyPoints) {
@@ -991,10 +991,10 @@ public abstract class Player extends LivingObject implements EventListener {
 
 	public void stop(Position position) {
 
-		synchronized(this) {
+		//synchronized(this) {
 			setPosition(position);	
 			setTargetPosition(position.clone());		
-		}
+		//}
 		
 		this.getInterested().sendPacket(Type.S_CHAR, this);
 	
@@ -1353,7 +1353,7 @@ public abstract class Player extends LivingObject implements EventListener {
 	}
 
 	public void addStatus(Status status) {
-		synchronized(this){
+		//synchronized(this){
 			int statusPoints = getStatusPoints();
 			if(getStatusPoints()>0){
 							
@@ -1379,6 +1379,6 @@ public abstract class Player extends LivingObject implements EventListener {
 				}
 				setStatusPoints(statusPoints-1);
 			}
-		}
+		//}
 	}
 }

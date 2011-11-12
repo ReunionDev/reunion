@@ -143,12 +143,12 @@ public class Client extends EventDispatcher implements EventListener,Sendable {
 	}
 	
 	public void sendData(String data) {
-		synchronized(this){
+		//synchronized(this){
 			this.outputBuffer.append(data);
 			if(!data.endsWith("\n")){
 				this.outputBuffer.append("\n");
 			}		
-		}
+		//}
 		this.fireEvent(NetworkSendEvent.class, this.getSocketChannel());
 	}
 	
@@ -230,7 +230,7 @@ public class Client extends EventDispatcher implements EventListener,Sendable {
 		if(event instanceof NetworkEvent){
 			NetworkEvent networkEvent = (NetworkEvent) event;
 			if(event instanceof NetworkDataEvent) {
-				synchronized(this){
+				//synchronized(this){
 					NetworkDataEvent networkDataEvent = (NetworkDataEvent) networkEvent;
 					byte [] data = networkDataEvent.getData();
 					if(protocol==null){
@@ -248,7 +248,7 @@ public class Client extends EventDispatcher implements EventListener,Sendable {
 					if(!decryptedData.endsWith("\n"))
 						inputBuffer.append("\n");
 					fireEvent(ClientReceiveEvent.class, this);	
-				}
+				//}
 			}
 			if(event instanceof NetworkDisconnectEvent){				
 				
