@@ -522,6 +522,10 @@ public abstract class Player extends LivingObject implements EventListener {
 	public int getStatusPoints() {
 		return statusPoints;
 	}
+	
+	public int getMaxStatusPoints() {
+		return (getLevel() <= 250) ? getLevel()*3 : 250*3+(getLevel()-250)*10;
+	}
 
 	public int getStrength() {
 		return strength;
@@ -809,9 +813,7 @@ public abstract class Player extends LivingObject implements EventListener {
 	}
 	
 	public int getSkillLevel(Skill skill){
-		
 		return skills.get(skill);
-		
 	}
 
 	public java.util.Map<Skill, Integer> getSkills() {
@@ -819,10 +821,24 @@ public abstract class Player extends LivingObject implements EventListener {
 	}
 
 	public void say(String text) {
-	
-		getPosition().getLocalMap().getWorld().getCommand().playerSay(this, text);
+		if(text.charAt(0) != '@')
+		{
+			getInterested().sendPacket(Type.SAY, text, this);
+			getClient().sendPacket(Type.SAY, text, this);
+		}
 	}
-
+	
+	public void resetSkills()
+	{
+		java.util.Map<Skill,Integer> playerSkills = new HashMap<Skill,Integer> ();
+		playerSkills = getSkills(); 
+		
+		// reset player skills to its minimum level
+		for(Skill skill: playerSkills.keySet()){
+			skill.reset(this);
+		}
+	}
+	
 	public void setAdminState(int adminState) {
 		this.adminState = adminState;
 	}
@@ -836,6 +852,7 @@ public abstract class Player extends LivingObject implements EventListener {
 		this.constitution = cons;
 		sendStatus(Status.CONSTITUTION);
 		sendStatus(Status.HP);
+		//sendStatus(Status.STAMINA);
 	}
 
 	public void setDefense() {
@@ -912,7 +929,11 @@ public abstract class Player extends LivingObject implements EventListener {
 			
 			if(lvlUpExp<=0){
 				this.setLevel(getLevel()+1);
-				this.setStatusPoints(this.getStatusPoints()+3);
+				if(this.getLevel() > 250)
+					this.setStatusPoints(this.getStatusPoints()+10);
+				else
+					this.setStatusPoints(this.getStatusPoints()+3);
+				
 				this.setLevelUpExp(this.getLevelUpExp()-Math.abs(lvlUpExp));
 			}
 			else{
@@ -1000,18 +1021,22 @@ public abstract class Player extends LivingObject implements EventListener {
 	
 	}
 
-	public void tell(Player targetPlayer, String text) {
+	public void tell(String targetName, String text) {
 
-		Client client = this.getClient();
-
+		if(targetName.equals(getName()))
+			return;
+		
+		Client client = getClient();
+		
+		Player targetPlayer = client.getWorld().getPlayerManager().getPlayer(targetName);
+		
 		if (targetPlayer == null) {
-			client.sendPacket(Type.MSG,"Player not online");
+			client.sendPacket(Type.SAY, targetName+" is not online!");
 			return;
 		}
-
-		String packetData = "say 1 " + getName() + " (PM) " + text + " 0\n";
 		
-		client.sendData(packetData);
+		client.sendPacket(Type.WISPER, text,""+getEntityId(), targetPlayer.getName(), "->Whisper*");
+		targetPlayer.getClient().sendPacket(Type.WISPER, text,""+getEntityId(),getName(), "<-Whisper*");
 	}
 	
 	public static enum Status {
@@ -1375,7 +1400,6 @@ public abstract class Player extends LivingObject implements EventListener {
 						break;
 					default:
 						throw new RuntimeException("Invalid Status: "+status);
-						
 				}
 				setStatusPoints(statusPoints-1);
 			}

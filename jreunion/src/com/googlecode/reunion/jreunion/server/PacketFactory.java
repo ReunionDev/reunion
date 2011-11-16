@@ -74,7 +74,9 @@ public class PacketFactory {
 		UPGRADE,
 		QT,
 		KILL,
-		Q_EX
+		Q_EX,
+		WISPER,
+		SECONDATACK
 	}
 	
 	public static String createPacket(Type packetType, Object... args) {
@@ -161,26 +163,36 @@ public class PacketFactory {
 		case SAY:
 			if(args.length>0){
 				String text = (String)args[0];
-				LivingObject from = null;
+				Player from = null;
 				if(args.length>1){
-					from = (LivingObject)args[1];
+					from = (Player)args[1];
 				}
 				
 				if(from==null) {
 					return "say "+ -1 +" "+text;
 				} else { 
-					if(args.length>2){
-						boolean admin = false;
-						String name = (String)args[2];
-						if(args.length>3) {
-							admin = (Boolean)args[3];
-							return "say "+from.getEntityId()+" "+name+" " + text + " "+(admin?1:0);	
-						}
+					if(args.length == 2){
+						boolean admin = from.getAdminState() == 255;
+						String name = from.getName();
+						if(admin)
+							name = "<GM>"+name;
+						return "say "+from.getEntityId()+" "+name+" " + text + " "+(admin ? 1 : 0);	
 					}
 				}				
 			}
 			break;
 		
+		case WISPER:
+			if(args.length == 4){
+				String text = (String)args[0];
+				String eintyID = (String)args[1];
+				String name = (String)args[2];
+				String direction = (String)args[3];
+				
+				return "say "+eintyID+" "+direction+name+" " + text + " 0";
+			}
+			break;
+			
 		case DROP:
 			if(args.length>0){
 				RoamingItem roamingItem = (RoamingItem)args[0];
@@ -348,6 +360,19 @@ public class PacketFactory {
 				+ target.getPercentageHp() + " 0 0";
 	
 				// S> effect [SkillID] char [charID] npc [npcID] [RemainNpcHP%] 0 0
+			}
+			break;
+			
+		case SECONDATACK: //or Subattack
+			//sa c 547782 c 589654 0 3 0 0 40
+			
+			if(args.length == 3)
+			{
+				LivingObject source = (LivingObject) args[0];				
+				LivingObject target = (LivingObject)args[1];
+				String effectid = (String)args[2];
+				
+				return "sa "+getObjectType(source)+" "+source.getEntityId()+" "+getObjectType(target)+" "+target.getEntityId()+" "+target.getPercentageHp()+" 3 0 0 "+effectid;
 			}
 			break;
 			
@@ -565,8 +590,29 @@ public class PacketFactory {
 		case WEARING:
 			if(args.length > 0){
 				Equipment eq = (Equipment)args[0];
+				/* 
+				 * NGA
+				 * [entity] [typeid] [gemnumber] [extrast] [unknown1] [unknown 2] [unknown 3] [cur_dur] [max_dur]
+				 * 1524774       318           2         0          0           0           0      4449      4453
+				 * 
+				 * wearing
+				 * 1524774 318 2 0 0 0 0 4449 4453  [Helmet]   0
+				 * 1524775 333 9 0 0 0 0 4322 4509  [Armor]    1
+				 * 1524776 351 15 0 0 0 0 3778 4029 [Pants]    2
+				 * 1524777 196 0 0 0 0 0 0 0        [Cloak]    3
+				 * 1524778 373 3 0 0 0 0 3113 3203  [Shoes]    4
+				 * 1524779 121 6 0 0 0 0 0 0        [Shield]   5
+				 * 1524780 445 6 1 0 0 0 0 0        [Necklace aka Amulet] 6
+				 * -1 -1 0 0 0 0 0 0 0              [Ring]     7
+				 * 1524781 455 1 1 0 0 0 0 0        [Bracelet] 8
+				 * -1 -1 0 0 0 0 0 0 0              [Weapon]   9
+				 * -1 -1 0 0 0 0 0 0 0              [?]        10 PET1 ?
+				 * -1 -1 0 0 0 0 0 0 0              [?]        11 PET2 ?
+				 * 
+				 */
 				
 				//return "wearing 1101 1214 13 4095 4260868 112 130 1102 1215 14 4095 1 113 130 1103 1216 14 4095 1 123 130 1104 752 334 41856 0 0 0 1105 1217 13 268439551 1 119 130 1106 876 0 255 0 0 0 1107 448 3 512 0 0 0 1108 453 0 192 0 0 0 1109 1087 1 38535169 0 0 0 1110 1321 6 50335743 262 110 110";
+				
 				return "wearing " + eq.getEntityId(Slot.HELMET) + " " + eq.getTypeId(Slot.HELMET) + " "
 						+ eq.getGemNumber(Slot.HELMET) + " " + eq.getExtraStats(Slot.HELMET) + " "
 						+ eq.getUnknown1(Slot.HELMET) + " " + eq.getDurability(Slot.HELMET) + " "

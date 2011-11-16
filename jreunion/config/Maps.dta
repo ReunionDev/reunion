@@ -57,3 +57,39 @@ ID = 9
 Ip = 127.0.0.1
 Port = 4010
 Location = Local
+
+[Turan]
+ID = 13
+Ip = 127.0.0.1
+Port = 4011
+Location = Local
+
+[Balkariya]
+ID = 14
+Ip = 127.0.0.1
+Port = 4012
+Location = Local
+
+[Barsha]
+ID = 15
+Ip = 127.0.0.1
+Port = 4013
+Location = Local
+
+[Queiz]
+ID = 16
+Ip = 127.0.0.1
+Port = 4014
+Location = Local
+
+[Beargrid]
+ID = 17
+Ip = 127.0.0.1
+Port = 4015
+Location = Local
+
+[Marboten]
+ID = 18
+Ip = 127.0.0.1
+Port = 4016
+Location = Local

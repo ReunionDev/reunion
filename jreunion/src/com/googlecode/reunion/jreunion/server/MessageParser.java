@@ -18,9 +18,11 @@ import com.googlecode.reunion.jreunion.game.Mob;
 import com.googlecode.reunion.jreunion.game.Npc;
 import com.googlecode.reunion.jreunion.game.NpcSpawn;
 import com.googlecode.reunion.jreunion.game.Player;
+import com.googlecode.reunion.jreunion.game.Player.Race;
 import com.googlecode.reunion.jreunion.game.Position;
 import com.googlecode.reunion.jreunion.game.Quest;
 import com.googlecode.reunion.jreunion.game.Skill;
+import com.googlecode.reunion.jreunion.game.Player.Status;
 import com.googlecode.reunion.jreunion.server.Area.Field;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 import com.googlecode.reunion.jcommon.ParsedItem;
@@ -50,17 +52,106 @@ public class MessageParser {
 			
 			if (words[0].equals("@levelup")) {
 				if (words.length > 1) {
-					int count=1;
-					while(count <= Integer.parseInt(words[1]))
-					{
-						player.setLevelUpExp(0);
-						count++;
+					
+					int lvlup = Integer.parseInt(words[1]);
+					
+					int pCurrLvl = player.getLevel();
+					int pSPup = 0;
+					
+					if(pCurrLvl < 250) {
+						if(pCurrLvl+lvlup > 250) {
+							int pLVLto250 = 250-pCurrLvl;
+							int pLVLupRest = lvlup-pLVLto250;
+							pSPup = pLVLto250*3+pLVLupRest*10;
+						}
+						else {
+							pSPup = lvlup*3;
+						}
 					}
+					else {
+						pSPup = lvlup*10;
+					}
+					
+					player.setLevel(player.getLevel()+lvlup);
+					player.setStatusPoints(player.getStatusPoints()+pSPup);
 				}
 				else
 					player.setLevelUpExp(0);
 			}
-			else if (words[0].equals("@shutdown")) {
+			else if (words[0].equals("@points"))
+			{
+				if(words.length == 3 && (words[1].equals("strength") || words[1].equals("wisdom") || words[1].equals("dex") || words[1].equals("strain") || words[1].equals("charisma"))) {
+					int pointsToUpgrade = Integer.parseInt(words[2]);
+					
+					if(pointsToUpgrade > 0) {
+						if(player.getStatusPoints() < pointsToUpgrade)
+							pointsToUpgrade = player.getStatusPoints();
+						
+						if(words[1].equals("strength"))
+							player.setStrength(player.getStrength() + pointsToUpgrade);
+						else if (words[1].equals("wisdom"))
+							player.setWisdom(player.getWisdom()+pointsToUpgrade);
+						else if (words[1].equals("dex"))
+							player.setDexterity(player.getDexterity()+pointsToUpgrade);
+						else if (words[1].equals("strain"))
+							player.setConstitution(player.getConstitution()+pointsToUpgrade);
+						else if (words[1].equals("charisma"))
+							player.setLeadership(player.getLeadership()+pointsToUpgrade);
+						
+						player.setStatusPoints(player.getStatusPoints()+pointsToUpgrade*-1);
+					}
+					else
+						client.sendPacket(Type.SAY, "You can't enter values < 0");
+				} else if(words[1].equals("reskill")) {
+					if(words.length == 7) {
+						int strength = Integer.parseInt(words[2]);
+						int wisdom   = Integer.parseInt(words[3]);
+						int dex      = Integer.parseInt(words[4]);
+						int strain   = Integer.parseInt(words[5]);
+						int charisma = Integer.parseInt(words[6]);
+						
+						int sumuSP = strength+wisdom+dex+strain+charisma;
+						
+						if(sumuSP <= 80 && sumuSP >= 25) {
+							player.setStrength(strength);
+							player.setWisdom(wisdom);
+							player.setDexterity(dex);
+							player.setConstitution(strain);
+							player.setLeadership(charisma);
+							
+							player.resetSkills();
+							
+							sumuSP = 80-sumuSP;
+							player.setStatusPoints(player.getMaxStatusPoints()+sumuSP);
+						}
+						else
+							client.sendPacket(Type.SAY, "Sum of Strength, Wisdom, Dex, Stain and charisma must be between 25 and 80");
+					}
+					else
+					{
+						player.setStrength(5);
+						player.setWisdom(5);
+						player.setDexterity(5);
+						player.setConstitution(5);
+						player.setLeadership(5);
+						
+						player.resetSkills();
+						
+						player.setStatusPoints(player.getMaxStatusPoints()+55);
+					}
+				}
+			}
+			else if (words[0].equals("@global")) //Global chat is with -[space]Your message
+			{
+				int lengthofinfo = words.length;
+				String data = "";
+				for(int i = 1; i < lengthofinfo;i++){
+					data+=" "+words[i];					
+				}
+				client.getWorld().sendPacket(Type.SAY, data,player);
+			}
+			
+			else if (words[0].equals("@shutdown") && client.getUsername().equals("Castiel") || words[0].equals("@shutdown") && client.getUsername().equals("Schwein4625")) {
 				final Iterator<Player> iterPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayerListIterator();
 				final World world = Server.getInstance().getWorld();
 				
@@ -97,6 +188,7 @@ public class MessageParser {
 					}
 				}, 0, 5000); //all 5 seconds
 			}
+			
 			else if (words[0].equals("@fp")) {
 				String packetData = "";
 				for (int i = 1; i <= (words.length-1);i++){
@@ -106,7 +198,7 @@ public class MessageParser {
 				}
 				client.sendData(packetData);
 			}
-		
+
 			else if (words[0].equals("@eid")) {
 				if(words.length == 1)
 					client.sendPacket(Type.SAY, "Your EntityID is: "+player.getEntityId());
@@ -166,9 +258,6 @@ public class MessageParser {
 						} catch (Exception e) {
 							client.sendPacket(Type.SAY, "@drop failed (ID:"+words[1]+")");
 						}
-						
-							
-						
 				}
 			}
 			else if (words[0].equals("@info")) {
@@ -207,6 +296,10 @@ public class MessageParser {
 					int count = 0;
 					try {
 						count = words.length == 3?Integer.parseInt(words[2]):1;
+						
+						if(count > 5)
+							count = 5;
+						
 						for (int x = 0; x < count; x++) {
 							NpcSpawn spawn = new NpcSpawn();
 							spawn.setPosition(player.getPosition().clone());
@@ -364,16 +457,6 @@ public class MessageParser {
 
 			    	  client.sendPacket(Type.SAY, "Spawnpoint cannot be added");
 			      }
-				
-			} else if (words[0].equals("@com")) {
-				String packetData = "";
-				for (int i = 1; i < words.length; i++) {
-					packetData = packetData + words[i];
-					if (i < words.length - 1) {
-						packetData = packetData + " ";
-					}
-				}
-				client.sendData( packetData + "\n");
 			} else if (words[0].equals("@spot")) {
 				client.sendPacket(Type.SAY, "{ X:" + player.getPosition().getX() + ", Y:"
 						+ player.getPosition().getY()+", Z:"+player.getPosition().getZ()+"}");

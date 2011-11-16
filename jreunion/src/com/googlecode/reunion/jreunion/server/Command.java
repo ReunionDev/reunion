@@ -136,9 +136,15 @@ public class Command {
 
 	/****** teleport player to player2 position ******/
 	public void GoToChar(Player player, String charName) {
-		Player target = Server.getInstance().getWorld()
-				.getPlayerManager().getPlayer(charName);
-		GoToPos(player,target.getPosition());
+		Player target = world.getPlayerManager().getPlayer(charName);
+		
+		Map mapTargetPlayer = target.getPosition().getMap();
+		Map currPlayer = player.getPosition().getMap();
+		
+		if(mapTargetPlayer.getId() == currPlayer.getId())
+			GoToPos(player,target.getPosition());
+		else
+			player.getClient().sendPacket(Type.SAY, "Player is on other map. You must teleport to "+mapTargetPlayer.getName());
 	}
 	
 	
@@ -156,7 +162,6 @@ public class Command {
 		entry.sendPacket(Type.IN_CHAR, player, true);
 		
 		client.sendPacket(Type.GOTO, position);
-		
 	}
 
 	/****** change map ******/
@@ -253,32 +258,19 @@ public class Command {
 
 	}
 	
-	public void playerSay(Player player, String text){
-		
-		boolean admin = player.getAdminState()==255;
-		String name = player.getName();		
-		if(admin)
-		{
-			name = "<GM>"+name;
-		}
-		world.sendPacket(Type.SAY, text, player, name, admin);
-		
-	}
-
 	public void serverTell(Sendable sendable, String text) {
 		
 		sendable.sendPacket(Type.SAY, text);
 	}
 
-	/****** player1 attacks player2 with Sub Attack ******/
-	public void subAttack(Player player, LivingObject target) {
+	/****** player1 attacks player2 with Sub Attack 
+	 * @param skillid ******/
+	public void subAttack(Player player, LivingObject target, String effectid) {
 		Client client = player.getClient();
 		
 		client.sendPacket(Type.ATTACK_VITAL, target);
 		
-		Skill skill = world.getSkillManager().getSkill(40);
-		
-		player.getInterested().sendPacket(Type.EFFECT, player, target, skill);
+		player.getInterested().sendPacket(Type.SECONDATACK,player,target,effectid);
 		
 	}
 	/*
@@ -290,7 +282,7 @@ public class Command {
 			return;
 		}
 		
-		ItemManager itemManager = client.getWorld().getItemManager();
+		ItemManager itemManager = world.getItemManager();
 		Skill skill = world.getSkillManager().getSkill(40);
 
 		LivingObject livingObject = (LivingObject) player.getPosition().getLocalMap().getEntity(uniqueId);

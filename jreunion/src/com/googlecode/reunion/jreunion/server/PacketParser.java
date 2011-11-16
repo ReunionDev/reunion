@@ -385,7 +385,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					client.getPlayer().stop(position);
 					client.getPlayer().update();
 				} else if (message[0].equals("stamina")) {
-					client.getPlayer().loseStamina(Integer.parseInt(message[1]));
+					client.getPlayer().loseStamina((Integer.parseInt(message[1]) > 0) ? Integer.parseInt(message[1]) : 2);
 				}
 	
 				else if (message[0].equals("say")) {
@@ -395,7 +395,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					}
 					text = messageParser.parse(client.getPlayer(), text);
 					if (text != null && text.length() > 0) {
-						client.getPlayer().say(text);
+						player.say(text);
 					}
 				}
 				
@@ -407,15 +407,11 @@ public class PacketParser extends EventDispatcher implements EventListener{
 				}
 				
 				else if (message[0].equals("tell")) {
-	
-					String text = message[2];
-	
-					for (int i = 3; i < message.length; i++) {
+					String text = "";
+					for (int i = 2; i < message.length; i++) {
 						text += " " + message[i];
 					}
-					
-	
-					// client.getPlayer()Object.tell(message[1], text);
+					player.tell(message[1], text); //message[1]: playername
 				} else if (message[0].equals("combat")) {
 					client.getPlayer().setIsInCombat(Integer.parseInt(message[1])==1);
 				} else if (message[0].equals("social")) {
@@ -461,9 +457,10 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					client.getPlayer().dropItem(Integer.parseInt(message[1]));
 							
 				} else if (message[0].equals("subat")) {
+					String effectid = message[3];
 					com.subAttack(player,
-							(LivingObject)player.getPosition().getLocalMap().getEntity(Integer.parseInt(message[2])));
-				
+							(LivingObject)player.getPosition().getLocalMap().getEntity(Integer.parseInt(message[2])),effectid);
+				//subat char 121 40 0
 				} else if (message[0].equals("pulse")) {
 					if (Integer.parseInt(message[2].substring(0,
 							message[2].length() - 1)) == -1) {
@@ -488,11 +485,18 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					LivingObject target = player;
 					int entityId=-1;
 					
-					if(message.length > 2) { //if length=2 then player is using skill on himself
+					if(message.length > 3) { //if length=3 then player is using skill on himself
 						
 						if(message[2].equals("npc") || message[2].equals("char")){ // LivingObject Skill attack
 							entityId = Integer.parseInt(message[3]);
+							
+							if(message[2].equals("char"))
+								client.sendPacket(Type.SAY, "No PVP implemented!");
 						}
+						
+						//SELF: use_skill 36 1
+						//attack char 44 0
+						//Other: use_skill 74 char 44 64
 						else{ // LivingOject Basic attack
 							entityId = Integer.parseInt(message[2]); 
 						}
@@ -500,6 +504,12 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					}
 					
 					Skill skill = player.getSkill(skillId);
+					
+					if(message[0].equals("use_skill"))
+						player.getInterested().sendPacket(Type.EFFECT, player, target ,skill);
+					else
+						player.getInterested().sendPacket(Type.ATTACK, player,target); //a n 141 c 554946 99 0 0 0
+					
 					List<LivingObject> victims = new LinkedList<LivingObject>(Arrays.asList(new LivingObject[]{target}));
 					
 					if(message.length > 4){ //multiple targets
@@ -513,7 +523,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					if(Castable.class.isInstance(skill)){
 						if(((Castable)skill).cast(player, victims)){
 							if(Effectable.class.isInstance(skill))
-								skill.effect(player, target);
+								skill.effect(player, target); //Figure out why this doesnt work on all things
 						}
 					} else{
 						client.sendPacket(Type.SAY, skill.getName()+" skill not implemented yet!");
@@ -521,7 +531,6 @@ public class PacketParser extends EventDispatcher implements EventListener{
 						//throw new RuntimeException(skill.getName()+" skill is not Castable!");
 					}
 				} else if (message[0].equals("skillup")) {
-					
 					synchronized(player) {
 						int statusPoints = player.getStatusPoints();
 						
@@ -533,7 +542,6 @@ public class PacketParser extends EventDispatcher implements EventListener{
 							}
 						}
 					}
-					
 				} else if (message[0].equals("revival")) {
 					client.getPlayer().revive();
 				} else if (message[0].equals("quick")) {
@@ -700,6 +708,13 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					//client keep alive
 				}else {
 					logUnknownCommand(message);
+					
+					String command = "";
+					for(String str: message){
+						command += str + " ";
+					}
+					if(!command.contains("encrypt_"))
+						client.sendPacket(Type.SAY,"Unknown: "+command);
 				}
 	
 				break;
@@ -718,7 +733,6 @@ public class PacketParser extends EventDispatcher implements EventListener{
 		for(String str: message){
 			command += str + " ";
 		}
-		
 		Logger.getLogger(PacketParser.class).error("Unknown command: "+command);
 	}
 

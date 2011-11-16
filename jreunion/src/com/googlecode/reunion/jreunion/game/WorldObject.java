@@ -71,8 +71,6 @@ public abstract class WorldObject extends EventDispatcher implements Entity {
 		public void sendPacket(Type packetType, Object... args) {
 			String data = PacketFactory.createPacket(packetType, args);
 			entity.fireEvent(SendPacketSessionEvent.class, null, data);
-			
 		}
-				
 	}
 }

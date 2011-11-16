@@ -1,5 +1,10 @@
 package com.googlecode.reunion.jreunion.game;
 
+import java.io.FileNotFoundException;
+
+import org.apache.log4j.Logger;
+
+import com.googlecode.reunion.jcommon.Parser;
 import com.googlecode.reunion.jreunion.game.items.SpecialWeapon;
 import com.googlecode.reunion.jreunion.game.items.equipment.Armor;
 import com.googlecode.reunion.jreunion.game.items.equipment.Bracelet;
@@ -303,16 +308,20 @@ public class Equipment {
 	}
 
 	public void setOffhand(Item<?> secondHand) {
-
-		if (secondHand.is(Shield.class)) {
-			setShield(secondHand);
-			setWand(null);
-		} else if (secondHand.is(WandWeapon.class)) {
-			setWand(secondHand);
-			setShield(null);
-		} else {
-			setShield(null);
-			setWand(null);
+		try{
+			if (secondHand.is(Shield.class)) {
+				setShield(secondHand);
+				setWand(null);
+			} else if (secondHand.is(WandWeapon.class)) {
+				setWand(secondHand);
+				setShield(null);
+			} else {
+				setShield(null);
+				setWand(null);
+			}
+		} catch (NullPointerException e)
+		{
+			Logger.getLogger(Equipment.class).error("Player has wrong item");
 		}
 	}
 

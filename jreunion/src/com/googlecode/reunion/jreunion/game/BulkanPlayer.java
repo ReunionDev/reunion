@@ -29,7 +29,7 @@ public class BulkanPlayer extends Player {
 	}
 	
 	public int getMaxStamina(){
-		return Tools.statCalc(getStrength(), 60) + (getLeadership() / 2);
+		return Tools.statCalc(getStrength(), 60) + (getLeadership() / 2)+ getConstitution();
 	}	
 	
 	@Override

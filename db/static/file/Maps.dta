@@ -97,3 +97,63 @@ PlayerArea = areas/dimitron/PlayerArea.bmp
 MobArea = areas/dimitron/MobArea.bmp
 PvpArea = areas/dimitron/PvpArea.bmp
 DefaultSpawnId = 1
+
+[Turan]
+ID = 13
+PlayerSpawn = areas/turan/PlayerSpawns.dta
+MobSpawn = areas/turan/MobSpawns.dta
+NpcSpawn = areas/turan/NpcSpawns.dta
+PlayerArea = areas/turan/PlayerArea.bmp
+MobArea = areas/turan/MobArea.bmp
+PvpArea = areas/turan/PvpArea.bmp
+DefaultSpawnId = 1
+
+[Balkariya]
+ID = 14
+PlayerSpawn = areas/balkariya/PlayerSpawns.dta
+MobSpawn = areas/balkariya/MobSpawns.dta
+NpcSpawn = areas/balkariya/NpcSpawns.dta
+PlayerArea = areas/balkariya/PlayerArea.bmp
+MobArea = areas/balkariya/MobArea.bmp
+PvpArea = areas/balkariya/PvpArea.bmp
+DefaultSpawnId = 1
+
+[Barsha]
+ID = 15
+PlayerSpawn = areas/barsha/PlayerSpawns.dta
+MobSpawn = areas/barsha/MobSpawns.dta
+NpcSpawn = areas/barsha/NpcSpawns.dta
+PlayerArea = areas/barsha/PlayerArea.bmp
+MobArea = areas/barsha/MobArea.bmp
+PvpArea = areas/barsha/PvpArea.bmp
+DefaultSpawnId = 1
+
+[Queiz]
+ID = 16
+PlayerSpawn = areas/queiz/PlayerSpawns.dta
+MobSpawn = areas/queiz/MobSpawns.dta
+NpcSpawn = areas/queiz/NpcSpawns.dta
+PlayerArea = areas/queiz/PlayerArea.bmp
+MobArea = areas/queiz/MobArea.bmp
+PvpArea = areas/queiz/PvpArea.bmp
+DefaultSpawnId = 1
+
+[Beargrid]
+ID = 17
+PlayerSpawn = areas/beargrid/PlayerSpawns.dta
+MobSpawn = areas/beargrid/MobSpawns.dta
+NpcSpawn = areas/beargrid/NpcSpawns.dta
+PlayerArea = areas/beargrid/PlayerArea.bmp
+MobArea = areas/beargrid/MobArea.bmp
+PvpArea = areas/beargrid/PvpArea.bmp
+DefaultSpawnId = 1
+
+[Marboten]
+ID = 18
+PlayerSpawn = areas/marboten/PlayerSpawns.dta
+MobSpawn = areas/marboten/MobSpawns.dta
+NpcSpawn = areas/marboten/NpcSpawns.dta
+PlayerArea = areas/marboten/PlayerArea.bmp
+MobArea = areas/marboten/MobArea.bmp
+PvpArea = areas/marboten/PvpArea.bmp
+DefaultSpawnId = 1
