@@ -1,0 +1,140 @@
+[L Health Pot-1]
+Type = 288
+
+[M Vitality Pot-2]
+Type = 470
+
+[G Vitality Pot-3]
+Type = 515
+
+[Vitality Amp.-4]
+Type = 1044
+
+[Vitality Amp.-5]
+Type = 1040
+
+[Grindstone(500)-6]
+Type = 739
+
+[Gindstone-7]
+Type = 807
+
+[Charkam Grinder-8]
+Type = 1006
+
+[Chakrum Grinder-9]
+Type = 1005
+
+[L Mana Potion-10]
+Type = 289
+
+[M Mana Potion-11]
+Type = 512
+
+[G Mana Potion-12]
+Type = 568
+
+[Mana Boost-13]
+Type = 1045
+
+[Mana Amplifier-14]
+Type = 1041
+
+[Boldin Castle N-15]
+Type = 611
+
+[Boldin Castle S-16]
+Type = 612
+
+[Boldin Castle-17]
+Type = 516
+
+[Energy Ball-18]
+Type = 613
+
+[Large E. Pot-19]
+Type = 291
+
+[Mega E. Power-20]
+Type = 514
+
+[Giga E. Power-21]
+Type = 569
+
+[E. Power Amp-22]
+Type = 1046
+
+[E.Power Amplifier-23]
+Type = 1042
+
+[W. Tiger Rune-24]
+Type = 861
+
+[Chmero Rune-25]
+Type = 808
+
+[Devil Rune-26]
+Type = 812
+
+[Jackal Rune-27]
+Type = 810
+
+[L Stamina Pot-28]
+Type = 290
+
+[M Stamina Pot-29]
+Type = 513
+
+[Stamina Amp.-30]
+Type = 1039
+
+[Stamina Amp.-31]
+Type = 1047
+
+[Charging Shell-32]
+Type = 757
+
+[Charging Shells-33]
+Type = 758
+
+[Flame Capsule-34]
+Type = 759
+
+[Flame Capsules-35]
+Type = 760
+
+[Laser Capsule-36]
+Type = 761
+
+[Laser Capsules-37]
+Type = 762
+
+[Mini Mine-38]
+Type = 763
+
+[Mini Mine Set-39]
+Type = 764
+
+[Charger Lv.1-40]
+Type = 776
+
+[DoT Damage Lv.1-41]
+Type = 780
+
+[Paralysis Lv.1-42]
+Type = 783
+
+[Confusion Lv.1-43]
+Type = 786
+
+[Stunlock Lv.2-44]
+Type = 795
+
+[Cold Lv.2-45]
+Type = 792
+
+[Book (1~4)-46]
+Type = 801
+
+[Apple-47]
+Type = 618
