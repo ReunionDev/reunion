@@ -1,0 +1,38 @@
+[Ranger-1]
+Type = 465
+
+[Blaster Pistol-2]
+Type = 60
+
+[Laser Shot Gun-3]
+Type = 466
+
+[Blaster Rifle-4]
+Type = 61
+
+[Killer Rifle-5]
+Type = 467
+
+[Machine Gun-6]
+Type = 286
+
+[Bio Rifle-7]
+Type = 287
+
+[Plasma Rifle-8]
+Type = 305
+
+[Collector-9]
+Type = 695
+
+[Assembly Kit-10]
+Type = 855
+
+[Processor Kit-11]
+Type = 845
+
+[Gem Cutting Kit-12]
+Type = 229
+
+[Mission Machine-13]
+Type = 926

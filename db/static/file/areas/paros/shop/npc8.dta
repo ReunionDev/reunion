@@ -1,0 +1,83 @@
+[L Health Pot-1]
+Type = 288
+
+[M Vitality Pot-2]
+Type = 470
+
+[G Vitality Pot-3]
+Type = 515
+
+[Vitality Amp.-4]
+Type = 1044
+
+[Vitality Amp.-5]
+Type = 1040
+
+[Grindstone(500)-6]
+Type = 739
+
+[Gindstone-7]
+Type = 807
+
+[Charkam Grinder-8]
+Type = 1006
+
+[Chakrum Grinder-9]
+Type = 1005
+
+[M Mana Potion-10]
+Type = 512
+
+[G Mana Potion-11]
+Type = 568
+
+[Mana Boost-12]
+Type = 1045
+
+[Mana Amplifier-13]
+Type = 1041
+
+[Apple-14]
+Type = 618
+
+[Labiyong Recall-15]
+Type = 968
+
+[Return to Town-16]
+Type = 175
+
+[Zone Warp-17]
+Type = 894
+
+[Memory Warp-18]
+Type = 1015
+
+[Mega E. Power-19]
+Type = 514
+
+[Giga E. Power-20]
+Type = 569
+
+[E. Power Amp-21]
+Type = 1046
+
+[E.Power Amplifier-22]
+Type = 1042
+
+[Stamina Potion-23]
+Type = 144
+
+[L Stamina Pot-24]
+Type = 290
+
+[M Stamina Pot-25]
+Type = 513
+
+[Stamina Amp.-26]
+Type = 1039
+
+[Stamina Amp.-27]
+Type = 1047
+
+[Gem Cutting Kit-28]
+Type = 229

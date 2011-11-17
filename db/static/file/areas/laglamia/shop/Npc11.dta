@@ -1,26 +1,35 @@
-[Stone Axe]
-Type = 48
+[Short Sword-1]
+Type = 168
 
-[Bulkan Axe]
-Type = 49
+[Long Sword-2]
+Type = 37
 
-[Big Bulkan Axe]
-Type = 155
+[Righteous Blade-3]
+Type = 154
 
-[Wooden Horn Axe]
-Type = 167
+[Curved Blade-4]
+Type = 163
 
-[Blood Axe]
-Type = 461
+[Victory Blade-5]
+Type = 459
 
-[Double Edge Axe]
-Type = 156
+[B Crystal Sword-6]
+Type = 152
 
-[Half Moon Axe]
-Type = 462
+[Golden Sword-7]
+Type = 150
 
-[Warrior Axe]
-Type = 157
+[Wing Sword-8]
+Type = 460
 
-[Knife Edge Axe]
-Type = 463
+[Sonic Sword-9]
+Type = 212
+
+[Broad Sword-10]
+Type = 162
+
+[Mystical Swords-11]
+Type = 1142
+
+[Battle hammer-12]
+Type = 1150

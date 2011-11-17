@@ -1,135 +1,354 @@
-##################
-### LOST REALM ###
-##################
-
-#### Npcs ####
-[Aisian Bandor]
+[Human Bargirl-1]
 ID = 1
-X = 6904
-Y = 5622
-Z = 220
-Rotation = 1.4921
+X = 7450
+Y = 6165
+Z = 0
+Rotation = 1.5707
+Type = 66
+BuyRate = 110	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/lostrealmcastle/shop/npc1.dta
+
+
+[Robe Shopkeeper-2]
+ID = 2
+X = 7415
+Y = 6165
+Z = 0
+Rotation = 1.5707
+Type = 73
+BuyRate = 100	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/lostrealmcastle/shop/npc2.dta
+
+
+[Staff Merchant-3]
+ID = 3
+X = 7395
+Y = 6165
+Z = 0
+Rotation = 1.5707
+Type = 75
+BuyRate = 100	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/lostrealmcastle/shop/npc3.dta
+
+
+[Mech Merchant-4]
+ID = 4
+X = 7240
+Y = 5975
+Z = 0
+Rotation = 1.5707
+Type = 65
+BuyRate = 100	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/lostrealmcastle/shop/npc4.dta
+
+
+[Staff Merchant-5]
+ID = 5
+X = 7170
+Y = 5975
+Z = 0
+Rotation = 1.5707
+Type = 75
+BuyRate = 100	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/lostrealmcastle/shop/npc5.dta
+
+
+[Blacksmith (B)-6]
+ID = 6
+X = 7100
+Y = 5975
+Z = 0
+Rotation = 1.5707
+Type = 71
+BuyRate = 100	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/lostrealmcastle/shop/npc6.dta
+
+
+[Aisian Bandor-7]
+ID = 7
+X = 6895
+Y = 5625
+Z = 0
+Rotation = 1.5707
 Type = 139
 
-[Human Bargirl 1]
-ID = 2
-X = 7455
-Y = 6161
-Z = 220
-Rotation = 1.4921
-Type = 66
-BuyRate = 120	# Value in %
-SellRate = 30	# Value in %
-Shop = areas/lostrealmcastle/shop/Npc1.dta
+[Pet Researcher-8]
+ID = 8
+X = 6805
+Y = 5625
+Z = 0
+Rotation = 1.5707
+Type = 67
 
-[Human Bargirl 2]
-ID = 3
-X = 6502
-Y = 5694
-Z = 220
-Rotation = 0.0
-Type = 66
-BuyRate = 120	# Value in %
-SellRate = 30	# Value in %
-Shop = areas/lostrealmcastle/shop/Npc1.dta
-
-[Human Bargirl 3]
-ID = 4
-X = 5863
-Y = 6466
-Z = 219
-Rotation = 0.0
-Type = 66
-BuyRate = 120	# Value in %
-SellRate = 30	# Value in %
-Shop = areas/lostrealmcastle/shop/Npc1.dta
-
-[Human Bargirl 4]
-ID = 5
-X = 6748
-Y = 6864
-Z = 220
+[Constructer-9]
+ID = 9
+X = 6990
+Y = 5795
+Z = 0
 Rotation = 3.1415
-Type = 66
-BuyRate = 120	# Value in %
-SellRate = 30	# Value in %
-Shop = areas/lostrealmcastle/shop/Npc1.dta
+Type = 191
 
-[Human Bargirl 5]
-ID = 6
-X = 6012
-Y = 6867
-Z = 152
+[Drill Instructor-10]
+ID = 10
+X = 6836
+Y = 5769
+Z = 0
+Rotation = 4.7123
+Type = 190
+
+[Egg Seller-11]
+ID = 11
+X = 6990
+Y = 5730
+Z = 0
 Rotation = 3.1415
-Type = 66
-BuyRate = 120	# Value in %
-SellRate = 30	# Value in %
-Shop = areas/lostrealmcastle/shop/Npc1.dta
+Type = 188
 
-[Veterinary 1]
-ID = 7
-X = 6785
-Y = 5787
-Z = 106
-Rotation = 1.4921
+[Hairia-12]
+ID = 12
+X = 6835
+Y = 5625
+Z = 0
+Rotation = 1.5707
+Type = 176
+
+[Tragates-13]
+ID = 13
+X = 6865
+Y = 5625
+Z = 0
+Rotation = 1.5707
+Type = 175
+
+[Potion Merchant-14]
+ID = 14
+X = 7035
+Y = 5975
+Z = 0
+Rotation = 1.5707
+Type = 53
+BuyRate = 100	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/lostrealmcastle/shop/npc14.dta
+
+
+[Dekardi GMaster-15]
+ID = 15
+X = 6745
+Y = 5625
+Z = 0
+Rotation = 1.5707
+Type = 303
+
+[Platinum maker-16]
+ID = 16
+X = 6775
+Y = 5625
+Z = 0
+Rotation = 1.5707
+Type = 76
+
+[Veterinary-17]
+ID = 17
+X = 6794
+Y = 5780
+Z = 0
+Rotation = 4.7123
 Type = 189
 
-[Kalipton Seller 1]
-ID = 8
-X = 7422
-Y = 6161
-Z = 220
-Rotation = 1.4921
+[Human Bargirl-18]
+ID = 18
+X = 6500
+Y = 5695
+Z = 0
+Rotation = 0.0
+Type = 66
+BuyRate = 110	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/lostrealmcastle/shop/npc18.dta
+
+
+[Human Bargirl-19]
+#ID = 19
+#X = 5885
+#Y = 6460
+#Z = 0
+#Rotation = 0.0
+#Type = 66
+#BuyRate = 	# Value in %
+#SellRate = 0	# Value in %
+#Shop = areas/lostrealmcastle/shop/npc19.dta
+
+
+[Potion Merchant-20]
+ID = 20
+X = 6130
+Y = 6775
+Z = 0
+Rotation = 3.1415
+Type = 53
+BuyRate = 100	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/lostrealmcastle/shop/npc20.dta
+
+
+[Robe Shopkeeper-21]
+ID = 21
+X = 6130
+Y = 6785
+Z = 0
+Rotation = 3.1415
 Type = 73
-BuyRate = 120	# Value in %
+BuyRate = 100	# Value in %
 SellRate = 30	# Value in %
-Shop = areas/lostrealmcastle/shop/Npc6.dta
+Shop = areas/lostrealmcastle/shop/npc21.dta
 
-[Kalipton Seller 2]
-ID = 11
-X = 7400
-Y = 6161
-Z = 220
-Rotation = 1.4921
+
+[Staff Merchant-22]
+ID = 22
+X = 6130
+Y = 6795
+Z = 0
+Rotation = 3.1415
 Type = 75
-BuyRate = 120	# Value in %
+BuyRate = 100	# Value in %
 SellRate = 30	# Value in %
-Shop = areas/lostrealmcastle/shop/Npc5.dta
+Shop = areas/lostrealmcastle/shop/npc22.dta
 
-[Bulkan Blacksmith 1]
-ID = 10
-X = 7102
-Y = 5976
-Z = 220
-Rotation = 1.4921
-Type = 71
-BuyRate = 120	# Value in %
+
+[Potion Merchant-23]
+ID = 23
+X = 6130
+Y = 6805
+Z = 0
+Rotation = 3.1415
+Type = 53
+BuyRate = 100	# Value in %
 SellRate = 30	# Value in %
-Shop = areas/lostrealmcastle/shop/Npc2.dta
+Shop = areas/lostrealmcastle/shop/npc23.dta
 
-[Kalipton Seller 3]
-ID = 12
-X = 7172
-Y = 5976
-Z = 220
-Rotation = 1.4921
-Type = 75
-BuyRate = 120	# Value in %
+
+[Human Bargirl-24]
+ID = 24
+X = 6010
+Y = 6870
+Z = 0
+Rotation = 4.7123
+Type = 66
+BuyRate = 110	# Value in %
 SellRate = 30	# Value in %
-Shop = areas/lostrealmcastle/shop/Npc3.dta
+Shop = areas/lostrealmcastle/shop/npc24.dta
 
-[Human Seller 1]
-ID = 13
-X = 7242
-Y = 5976
-Z = 220
-Rotation = 1.4921
+
+[Mech Merchant-25]
+ID = 25
+X = 5778
+Y = 6805
+Z = 0
+Rotation = 0.0
 Type = 65
-BuyRate = 120	# Value in %
+BuyRate = 100	# Value in %
 SellRate = 30	# Value in %
-Shop = areas/lostrealmcastle/shop/Npc4.dta
+Shop = areas/lostrealmcastle/shop/npc25.dta
 
 
+[Blacksmith (B)-26]
+ID = 26
+X = 5778
+Y = 6793
+Z = 0
+Rotation = 0.0
+Type = 71
+BuyRate = 100	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/lostrealmcastle/shop/npc26.dta
 
 
+[Master Smith-27]
+ID = 27
+X = 5778
+Y = 6780
+Z = 0
+Rotation = 0.0
+Type = 52
+BuyRate = 100	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/lostrealmcastle/shop/npc27.dta
 
+
+[Human Bargirl-28]
+ID = 28
+X = 6745
+Y = 6865
+Z = 0
+Rotation = 3.1415
+Type = 66
+BuyRate = 110	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/lostrealmcastle/shop/npc28.dta
+
+
+[Armor Merchant-29]
+ID = 29
+X = 7210
+Y = 6740
+Z = 0
+Rotation = 4.7123
+Type = 70
+BuyRate = 100	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/lostrealmcastle/shop/npc29.dta
+
+
+[Blacksmith (B)-30]
+ID = 30
+X = 7230
+Y = 6740
+Z = 0
+Rotation = 4.7123
+Type = 71
+BuyRate = 100	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/lostrealmcastle/shop/npc30.dta
+
+
+[Mech Merchant-31]
+ID = 31
+X = 7250
+Y = 6740
+Z = 0
+Rotation = 4.7123
+Type = 65
+BuyRate = 100	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/lostrealmcastle/shop/npc31.dta
+
+
+[Human Bargirl-32]
+ID = 32
+X = 12143
+Y = 10651
+Z = 0
+Rotation = 3.1415
+Type = 66
+BuyRate = 110	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/lostrealmcastle/shop/npc32.dta
+
+
+[Human Bargirl-33]
+ID = 33
+X = 2027
+Y = 3252
+Z = 0
+Rotation = 0.0
+Type = 66
+BuyRate = 110	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/lostrealmcastle/shop/npc33.dta

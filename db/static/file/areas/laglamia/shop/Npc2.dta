@@ -1,122 +1,77 @@
-[Recovery Potion]
-Type = 145
+[L Health Pot-1]
+Type = 288
 
-[Small Healing Potion]
-Type = 140
+[Stamina Potion-2]
+Type = 144
 
-[Healing Potion]
-Type = 133
+[L Stamina Pot-3]
+Type = 290
 
-[Grindstone(500)]
-Type = 739
-
-[Grindstone(1000)]
-Type = 807
-
-[Chakuram Grindstone(500)]
-Type = 1006
-
-[Chakuram Grindstone(1000)]
-Type = 10005
-
-[Mission Reciver]
-Type = 926
-
-[Transporting to the selected area device]
-Type = 1015
-
-[Mana Recovery Potion]
-Type = 1048
-
-[Small Mana Potion]
-Type = 146
-
-[Mana Potion]
+[Mana Potion-4]
 Type = 147
 
-[White Tiger Summon Stone]
-Type = 861
+[Large E. Pot-5]
+Type = 291
 
-[Chmero Summon Stone]
-Type = 808
+[L Mana Potion-6]
+Type = 289
 
-[Devil Summon Stone]
-Type = 812
+[S Mana Potion-7]
+Type = 146
 
-[Laglamia Square Warp Device]
-Type = 307
-
-[Coliseum Warp Device]
-Type = 308
-
-[Return Warp Device]
-Type = 175
-
-[Mini Cell]
-Type = 209
-
-[Battery]
-Type = 210
-
-[Charging Pack]
-Type = 211
-
-[wand charger lv.1]
+[Charger Lv.1-8]
 Type = 776
 
-[Accumulated Damage lv.1]
+[DoT Damage Lv.1-9]
 Type = 780
 
-[Paralysis lv.1]
+[Paralysis Lv.1-10]
 Type = 783
 
-[Confusion lv.1]
+[Confusion Lv.1-11]
 Type = 786
 
-[Cold lv.2]
+[Cold Lv.2-12]
 Type = 792
 
-[Petrifacaion lv.2]
+[Stunlock Lv.2-13]
 Type = 795
 
-[Wolf Meat]
-Type = 142
-
-[Tiger Meat]
-Type = 143
-
-[Charging Shell]
-Type = 757
-
-[Charging Shell Set]
-Type = 758
-
-[Flame Capsule]
-Type = 759
-
-[Flame Capsule Set]
-Type = 760
-
-[Laser Capsule]
-Type = 761
-
-[Laser Capsule Set]
-Type = 762
-
-[Normal Book(1~4)]
+[Book (1~4)-14]
 Type = 801
 
-[Mini Mine]
-Type = 763
+[W. Tiger Rune-15]
+Type = 861
 
-[Mini Mine Set]
-Type = 764
+[Chmero Rune-16]
+Type = 808
 
-[Apple]
-Type = 618
+[Devil Rune-17]
+Type = 812
 
-[Labiyoing recall device]
-Type = 968
+[Red Staff-18]
+Type = 171
 
-[Zone Warp Device]
-Type = 894
+[God Staff-19]
+Type = 170
+
+[Evil Staff-20]
+Type = 181
+
+[Emerald Staff-21]
+Type = 182
+
+[King Staff-22]
+Type = 159
+
+[One-eyed Staff-23]
+Type = 160
+
+[Skeleton Staff-24]
+Type = 161
+
+[Eagle Staff-25]
+Type = 169
+
+[Mission Machine-26]
+Type = 926

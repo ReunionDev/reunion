@@ -1,20 +1,26 @@
-[Shot Gun]
-Type = 204
+[Stone Axe-1]
+Type = 48
 
-[Air Hand Gun]
-Type = 203
+[Bulkan Axe-2]
+Type = 49
 
-[Power Gun]
-Type = 464
+[Big Bulkan Axe-3]
+Type = 155
 
-[Air Gun]
-Type = 55
+[Wooden Horn Axe-4]
+Type = 167
 
-[Ranger]
-Type = 465
+[Blood Axe-5]
+Type = 461
 
-[Blaster Pistol]
-Type = 60
+[Double Edge Axe-6]
+Type = 156
 
-[Laser Shot Gun]
-Type = 466
+[Half Moon Axe-7]
+Type = 462
+
+[Warrior Axe-8]
+Type = 157
+
+[Knife Edge Axe-9]
+Type = 463

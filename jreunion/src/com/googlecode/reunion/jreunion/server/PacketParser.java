@@ -713,7 +713,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					for(String str: message){
 						command += str + " ";
 					}
-					if(!command.contains("encrypt_") & player.getAdminState()==255)
+					if(!command.contains("encrypt_") && player.getAdminState()==255)
 						client.sendPacket(Type.SAY,"Unknown: "+command);
 				}
 	

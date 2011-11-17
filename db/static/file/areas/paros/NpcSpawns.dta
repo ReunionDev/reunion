@@ -1,0 +1,94 @@
+[Veterinary-1]
+ID = 1
+X = 11750
+Y = 11450
+Z = 332
+Rotation = 1.5707
+Type = 189
+
+[Paros Grocer-2]
+ID = 2
+X = 11700
+Y = 11450
+Z = 332
+Rotation = 1.5707
+Type = 238
+BuyRate = 130	# Value in %
+SellRate = 20	# Value in %
+Shop = areas/paros/shop/npc2.dta
+
+
+[Paros Magician-3]
+ID = 3
+X = 11650
+Y = 11450
+Z = 332
+Rotation = 1.5707
+Type = 241
+BuyRate = 130	# Value in %
+SellRate = 20	# Value in %
+Shop = areas/paros/shop/npc3.dta
+
+
+[Paros Ammo-4]
+ID = 4
+X = 11600
+Y = 11450
+Z = 332
+Rotation = 1.5707
+Type = 240
+BuyRate = 130	# Value in %
+SellRate = 20	# Value in %
+Shop = areas/paros/shop/npc4.dta
+
+
+[Aisian Bandor-5]
+ID = 5
+X = 1560
+Y = 1425
+Z = 332
+Rotation = 3.1415
+Type = 139
+
+[Veterinary-6]
+ID = 6
+X = 1285
+Y = 1530
+Z = 332
+Rotation = 0.0
+Type = 189
+
+[Paros Ammo-7]
+ID = 7
+X = 1285
+Y = 1370
+Z = 332
+Rotation = 0.0
+Type = 240
+BuyRate = 130	# Value in %
+SellRate = 20	# Value in %
+Shop = areas/paros/shop/npc7.dta
+
+
+[Paros Grocer-8]
+ID = 8
+X = 1283
+Y = 1425
+Z = 332
+Rotation = 0.0
+Type = 238
+BuyRate = 130	# Value in %
+SellRate = 20	# Value in %
+Shop = areas/paros/shop/npc8.dta
+
+
+[Paros Magician-9]
+ID = 9
+X = 1285
+Y = 1480
+Z = 332
+Rotation = 0.0
+Type = 241
+BuyRate = 130	# Value in %
+SellRate = 20	# Value in %
+Shop = areas/paros/shop/npc9.dta

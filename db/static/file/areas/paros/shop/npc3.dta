@@ -1,0 +1,47 @@
+[Book (1~4)-1]
+Type = 801
+
+[Charger Lv.1-2]
+Type = 776
+
+[Charger Lv.2-3]
+Type = 777
+
+[DoT Damage Lv.1-4]
+Type = 780
+
+[Stunlock Lv.2-5]
+Type = 795
+
+[Stunlock Lv.6-6]
+Type = 797
+
+[Paralysis Lv.1-7]
+Type = 783
+
+[Paralysis Lv.5-8]
+Type = 785
+
+[Confusion Lv.1-9]
+Type = 786
+
+[Confusion Lv.5-10]
+Type = 788
+
+[Cold Lv.2-11]
+Type = 792
+
+[Cold Lv.6-12]
+Type = 794
+
+[Chmero Rune-13]
+Type = 808
+
+[W. Tiger Rune-14]
+Type = 861
+
+[Devil Rune-15]
+Type = 812
+
+[Death Flower-16]
+Type = 1331

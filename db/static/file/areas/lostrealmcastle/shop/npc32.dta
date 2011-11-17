@@ -1,0 +1,83 @@
+[Recovery Potion-1]
+Type = 145
+
+[S Health Pot-2]
+Type = 140
+
+[Healing Potion-3]
+Type = 133
+
+[L Health Pot-4]
+Type = 288
+
+[M Vitality Pot-5]
+Type = 470
+
+[CLR Warp Device-6]
+Type = 172
+
+[Return to Town-7]
+Type = 175
+
+[Memory Warp-8]
+Type = 1015
+
+[Mission Machine-9]
+Type = 926
+
+[Mana Potion-10]
+Type = 1048
+
+[S Mana Potion-11]
+Type = 146
+
+[Mana Potion-12]
+Type = 147
+
+[L Mana Potion-13]
+Type = 289
+
+[M Mana Potion-14]
+Type = 512
+
+[Apple-15]
+Type = 618
+
+[Pet Name Tag-16]
+Type = 620
+
+[Labiyong Recall-17]
+Type = 968
+
+[Labiyong Trans.-18]
+Type = 969
+
+[Mini Cell-19]
+Type = 209
+
+[Battery-20]
+Type = 210
+
+[Charging Pack-21]
+Type = 211
+
+[Large E. Pot-22]
+Type = 291
+
+[Mega E. Power-23]
+Type = 514
+
+[Wolf Meat-24]
+Type = 142
+
+[Tiger Meat-25]
+Type = 143
+
+[Stamina Potion-26]
+Type = 144
+
+[L Stamina Pot-27]
+Type = 290
+
+[N Hyper Capsule-28]
+Type = 970

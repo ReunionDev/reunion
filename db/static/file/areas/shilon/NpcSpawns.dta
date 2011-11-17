@@ -1,86 +1,191 @@
-[Magican 1]
+[Veterinary-1]
 ID = 1
-X = 7845
-Y = 11845
-Rotation = 1.57075
-Type = 140
-BuyRate = 95	# Value in %
-SellRate = 30	# Value in %
-Shop = areas/shilon/shop/npc1.dta
+X = 7278
+Y = 11749
+Z = 0
+Rotation = 4.7123
+Type = 189
 
-[Magican 2]
+[TeamBattle Manager-2]
 ID = 2
-X = 7475
-Y = 11715
-Rotation = 1.57075
-Type = 140
-BuyRate = 95	# Value in %
-SellRate = 30	# Value in %
-Shop = areas/shilon/shop/npc1.dta
+X = 7730
+Y = 11380
+Z = 0
+Rotation = 3.1415
+Type = 336
 
-[Magican 3]
+[Aisian Bandor-3]
 ID = 3
-X = 6955
-Y = 11865
-Rotation = 0.0
-Type = 140
-BuyRate = 95	# Value in %
-SellRate = 30	# Value in %
-Shop = areas/shilon/shop/npc1.dta
+X = 7660
+Y = 11750
+Z = 0
+Rotation = 4.7123
+Type = 139
 
-[Magican 4]
+[Magician-4]
 ID = 4
-X = 7725
-Y = 11365
-Rotation = 0.0
+X = 7475
+Y = 11711
+Z = 0
+Rotation = 4.7123
 Type = 140
-BuyRate = 95	# Value in %
+BuyRate = 110	# Value in %
 SellRate = 30	# Value in %
-Shop = areas/shilon/shop/npc1.dta
+Shop = areas/shilon/shop/npc4.dta
 
-[Gypsy 1]
+
+[Magician-5]
 ID = 5
 X = 7846
-Y = 11575
-Rotation = 0.0
-Type = 141
-BuyRate = 95	# Value in %
+Y = 11842
+Z = 0
+Rotation = 4.7123
+Type = 140
+BuyRate = 110	# Value in %
 SellRate = 30	# Value in %
-Shop = areas/shilon/shop/npc2.dta
+Shop = areas/shilon/shop/npc5.dta
 
-[Gypsy 2]
+
+[Gypsy-6]
 ID = 6
-X = 7275
-Y = 11295
-Rotation = 0.0
+X = 7850
+Y = 11580
+Z = 0
+Rotation = 3.1415
 Type = 141
-BuyRate = 95	# Value in %
+BuyRate = 110	# Value in %
 SellRate = 30	# Value in %
-Shop = areas/shilon/shop/npc2.dta
+Shop = areas/shilon/shop/npc6.dta
 
-[Gypsy 3]
+
+[Magician-7]
 ID = 7
-X = 6958
-Y = 11285
-Rotation = 0.0
-Type = 141
-BuyRate = 95	# Value in %
+X = 7730
+Y = 11360
+Z = 0
+Rotation = 3.1415
+Type = 140
+BuyRate = 110	# Value in %
 SellRate = 30	# Value in %
-Shop = areas/shilon/shop/npc2.dta
+Shop = areas/shilon/shop/npc7.dta
 
-[Gypsy 4]
+
+[Gypsy-8]
 ID = 8
-X = 6965
-Y = 11645
+X = 7275
+Y = 11293
+Z = 0
+Rotation = 1.5707
+Type = 141
+BuyRate = 110	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/shilon/shop/npc8.dta
+
+
+[Gypsy-9]
+ID = 9
+X = 6982
+Y = 11286
+Z = 0
 Rotation = 0.0
 Type = 141
-BuyRate = 95	# Value in %
+BuyRate = 110	# Value in %
 SellRate = 30	# Value in %
-Shop = areas/shilon/shop/npc2.dta
+Shop = areas/shilon/shop/npc9.dta
 
-#[Aisian Bandor]
-#ID = 9
-#X = 7665
-#Y = 11740
-#Rotation = 0.0
-#Type = 139
+
+[Gypsy-10]
+ID = 10
+X = 6950
+Y = 11650
+Z = 0
+Rotation = 0.0
+Type = 141
+BuyRate = 110	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/shilon/shop/npc10.dta
+
+
+[Magician-11]
+ID = 11
+X = 6958
+Y = 11866
+Z = 0
+Rotation = 4.7123
+Type = 140
+BuyRate = 110	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/shilon/shop/npc11.dta
+
+
+[Gypsy-12]
+ID = 12
+X = 6025
+Y = 5110
+Z = 0
+Rotation = 0.0
+Type = 141
+BuyRate = 310	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/shilon/shop/npc12.dta
+
+
+[Shilon Keeper-13]
+ID = 13
+X = 3270
+Y = 10040
+Z = 0
+Rotation = 0.0
+Type = 136
+
+[Shilon Keeper-14]
+ID = 14
+X = 3070
+Y = 10040
+Z = 0
+Rotation = 3.1415
+Type = 136
+
+[Guard Captain-15]
+ID = 15
+X = 3040
+Y = 8930
+Z = 0
+Rotation = 4.0
+Type = 57
+
+[Tragates-16]
+ID = 16
+X = 3314
+Y = 8850
+Z = 0
+Rotation = 3.1415
+Type = 175
+
+[Hairia-17]
+ID = 17
+X = 3394
+Y = 8704
+Z = 0
+Rotation = 1.5707
+Type = 176
+
+[Gypsy-18]
+ID = 18
+X = 3332
+Y = 8932
+Z = 0
+Rotation = 3.1415
+Type = 141
+BuyRate = 110	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/shilon/shop/npc18.dta
+
+
+[Battle Manager-19]
+ID = 19
+X = 7520
+Y = 2517
+Z = 0
+Rotation = 4.7123
+Type = 211

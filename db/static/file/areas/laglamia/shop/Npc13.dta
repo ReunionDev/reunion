@@ -1,14 +1,20 @@
-[Collecting Device]
-Type = 695
+[Tiger Mantle-1]
+Type = 191
 
-[Assembly Kit]
-Type = 855
+[Hurricane Cloak-2]
+Type = 192
 
-[Processor Kit]
-Type = 845
+[Peace Mantle-3]
+Type = 193
 
-[Gem Cutting Kit]
-Type = 229
+[Wiseman Mantle-4]
+Type = 194
 
-[Mission Receiver]
-Type = 926
+[Spirit Wing-5]
+Type = 915
+
+[Lake Wing-6]
+Type = 916
+
+[Purity Wing-7]
+Type = 902

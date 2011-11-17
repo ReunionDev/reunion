@@ -1,35 +1,23 @@
-[Air Hand Gun]
-Type = 203
+[Red Staff-1]
+Type = 171
 
-[Air Gun]
-Type = 55
+[God Staff-2]
+Type = 170
 
-[Chakuram]
-Type = 693
+[Eagle Staff-3]
+Type = 169
 
-[Short Sword]
-Type = 168
+[King Staff-4]
+Type = 159
 
-[Wooden Horn Axe]
-Type = 167
+[Skeleton Staff-5]
+Type = 161
 
-[Golden Sword]
-Type = 150
+[Wiseman Staff-6]
+Type = 468
 
-[Curved Blade]
-Type = 163
+[One-eyed Staff-7]
+Type = 160
 
-[Warrior Axe]
-Type = 157
-
-[Big Bulkan Axe]
-Type = 155
-
-[Long Sword]
-Type = 37
-
-[Stone Axe]
-Type = 48
-
-[Bulkan Axe]
-Type = 49
+[Evil Staff-8]
+Type = 181

@@ -1,0 +1,123 @@
+[TeamBattle Manager-1]
+ID = 1
+X = 8925
+Y = 8050
+Z = 0
+Rotation = 4.7123
+Type = 336
+
+[Aisian Bandor-2]
+ID = 2
+X = 9025
+Y = 8050
+Z = 0
+Rotation = 4.7123
+Type = 139
+
+[Veterinary-3]
+ID = 3
+X = 9000
+Y = 8050
+Z = 0
+Rotation = 4.7123
+Type = 189
+
+[Staff Merchant-4]
+ID = 4
+X = 8975
+Y = 8050
+Z = 0
+Rotation = 4.7123
+Type = 75
+BuyRate = 110	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/greatewhitehorn/shop/npc4.dta
+
+
+[A Gorgeous Girl-5]
+ID = 5
+X = 8950
+Y = 8050
+Z = 0
+Rotation = 4.7123
+Type = 320
+BuyRate = 140	# Value in %
+SellRate = 20	# Value in %
+Shop = areas/greatewhitehorn/shop/npc5.dta
+
+
+[Potion Merchant-6]
+ID = 6
+X = 8900
+Y = 8050
+Z = 0
+Rotation = 4.7123
+Type = 53
+BuyRate = 100	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/greatewhitehorn/shop/npc6.dta
+
+
+[Potion Merchant-7]
+ID = 7
+X = 8875
+Y = 8050
+Z = 0
+Rotation = 4.7123
+Type = 53
+BuyRate = 100	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/greatewhitehorn/shop/npc7.dta
+
+
+[WH Gatekeeper-8]
+ID = 8
+X = 9514
+Y = 5905
+Z = 0
+Rotation = 3.1415
+Type = 319
+
+[WH Gatekeeper-9]
+ID = 9
+X = 9520
+Y = 5736
+Z = 0
+Rotation = 3.1415
+Type = 319
+
+[Guard Captain-10]
+ID = 10
+X = 9980
+Y = 5770
+Z = 0
+Rotation = 0.0
+Type = 57
+
+[Gypsy-11]
+ID = 11
+X = 10029
+Y = 6184
+Z = 0
+Rotation = 4.7123
+Type = 141
+BuyRate = 110	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/greatewhitehorn/shop/npc11.dta
+
+
+[Hairia-12]
+ID = 12
+X = 10106
+Y = 6564
+Z = 0
+Rotation = 4.7123
+Type = 176
+
+[Tragates-13]
+ID = 13
+X = 10136
+Y = 6565
+Z = 0
+Rotation = 4.7123
+Type = 175

@@ -1,20 +1,35 @@
-[Wiseman Staff]
-Type = 468
+[Hurricane Hat-1]
+Type = 317
 
-[One-eyed Staff]
-Type = 160
+[Hurricane Armor-2]
+Type = 333
 
-[Evil Wizard Staff]
-Type = 181
+[Hurricane Skirt-3]
+Type = 351
 
-[Crystal Staff]
-Type = 469
+[Hurricane Shoes-4]
+Type = 373
 
-[Emerald Staff]
-Type = 182
+[Cloud Cap-5]
+Type = 318
 
-[Mystery Staff]
-Type = 284
+[Cloud Ware-6]
+Type = 334
 
-[Fan Staff]
-Type = 285
+[Cloud Pants-7]
+Type = 352
+
+[Cloud Shoes-8]
+Type = 374
+
+[Tranquility Hat-9]
+Type = 319
+
+[Tranquil Shirt-10]
+Type = 335
+
+[Tranquil Skirt-11]
+Type = 353
+
+[Tranquil Shoes-12]
+Type = 375

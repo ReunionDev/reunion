@@ -1,0 +1,119 @@
+[L Health Pot-1]
+Type = 288
+
+[M Vitality Pot-2]
+Type = 470
+
+[G Vitality Pot-3]
+Type = 515
+
+[Grindstone(500)-4]
+Type = 739
+
+[Gindstone-5]
+Type = 807
+
+[Charkam Grinder-6]
+Type = 1006
+
+[Chakrum Grinder-7]
+Type = 1005
+
+[Zone Warp-8]
+Type = 894
+
+[Memory Warp-9]
+Type = 1015
+
+[L Mana Potion-10]
+Type = 289
+
+[M Mana Potion-11]
+Type = 512
+
+[G Mana Potion-12]
+Type = 568
+
+[Charger Lv.1-13]
+Type = 776
+
+[DoT Damage Lv.1-14]
+Type = 780
+
+[Paralysis Lv.1-15]
+Type = 783
+
+[Confusion Lv.1-16]
+Type = 786
+
+[Stunlock Lv.2-17]
+Type = 795
+
+[Cold Lv.2-18]
+Type = 792
+
+[Large E. Pot-19]
+Type = 291
+
+[Mega E. Power-20]
+Type = 514
+
+[Giga E. Power-21]
+Type = 569
+
+[Book (1~4)-22]
+Type = 801
+
+[Charging Shell-23]
+Type = 757
+
+[Charging Shells-24]
+Type = 758
+
+[Flame Capsule-25]
+Type = 759
+
+[Flame Capsules-26]
+Type = 760
+
+[Return to Town-27]
+Type = 175
+
+[Stamina Potion-28]
+Type = 144
+
+[L Stamina Pot-29]
+Type = 290
+
+[M Stamina Pot-30]
+Type = 513
+
+[Stamina Amp.-31]
+Type = 1039
+
+[Laser Capsule-32]
+Type = 761
+
+[Laser Capsules-33]
+Type = 762
+
+[Mini Mine-34]
+Type = 763
+
+[Mini Mine Set-35]
+Type = 764
+
+[Mission Machine-36]
+Type = 926
+
+[W. Tiger Rune-37]
+Type = 861
+
+[Chmero Rune-38]
+Type = 808
+
+[Devil Rune-39]
+Type = 812
+
+[Gem Cutting Kit-40]
+Type = 229

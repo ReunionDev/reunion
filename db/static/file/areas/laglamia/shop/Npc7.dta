@@ -1,35 +1,35 @@
-[Hair Band]
+[Hair Band-1]
 Type = 309
 
-[Leather Jacket]
+[Leather Jacket-2]
 Type = 326
 
-[Leather Pants]
+[Leather Pants-3]
 Type = 343
 
-[Leather Boots]
+[Leather Boots-4]
 Type = 365
 
-[Warrior Helmet]
+[Warrior Helmet-5]
 Type = 310
 
-[Warrior Armour]
+[Warrior Armor-6]
 Type = 325
 
-[Warrior Pants]
+[Warrior Pants-7]
 Type = 344
 
-[Warrior Boots]
+[Warrior Boots-8]
 Type = 366
 
-[Iron Shield]
-Type = 34
+[Iron Helmet-9]
+Type = 311
 
-[Brince Shield]
-Type = 187
+[Iron Armor-10]
+Type = 327
 
-[Xeno Shield]
-Type = 188
+[Iron Pants-11]
+Type = 345
 
-[Skull Shield]
-Type = 189
+[Iron Boots-12]
+Type = 367

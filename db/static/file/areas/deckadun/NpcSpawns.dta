@@ -1,0 +1,46 @@
+[Merchant-1]
+ID = 1
+X = 151
+Y = 685
+Z = 0
+Rotation = 0.0
+Type = 64
+BuyRate = 100	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/deckadun/shop/npc1.dta
+
+
+[Merchant-2]
+ID = 2
+X = 1725
+Y = 4991
+Z = 0
+Rotation = 0.0
+Type = 64
+BuyRate = 110	# Value in %
+SellRate = 25	# Value in %
+Shop = areas/deckadun/shop/npc2.dta
+
+
+[Merchant-3]
+ID = 3
+X = 2973
+Y = 1750
+Z = 0
+Rotation = 0.0
+Type = 64
+BuyRate = 120	# Value in %
+SellRate = 20	# Value in %
+Shop = areas/deckadun/shop/npc3.dta
+
+
+[Merchant-4]
+ID = 4
+X = 4890
+Y = 3820
+Z = 0
+Rotation = 1.5707
+Type = 64
+BuyRate = 120	# Value in %
+SellRate = 20	# Value in %
+Shop = areas/deckadun/shop/npc4.dta

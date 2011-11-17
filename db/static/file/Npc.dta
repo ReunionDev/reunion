@@ -7,6 +7,11 @@ ID = 330
 Hp = 100
 Class = Trader
 
+#[Castlesiege NPC]
+#ID = 136
+#Hp = 100
+#Class = Trader
+
 [Aisian Bandor]
 ID = 139
 Hp = 100
@@ -17,12 +22,22 @@ ID = 257
 Hp = 100
 Class = Trader
 
-[Assistant] ##
+[Assistant]
 ID = 95
 Hp = 100
 Class = Merchant
 
-[Barmaid] ##
+[Paros Grocer]
+ID = 238
+Hp = 100
+Class = Merchant
+
+[Paros Ammo]
+ID = 240
+Hp = 100
+Class = Merchant
+
+[Barmaid]
 ID = 92
 Hp = 100
 Class = Merchant
@@ -92,6 +107,21 @@ ID = 94
 Hp = 100
 Class = Merchant
 
+[Staff Merchant]
+ID = 75
+Hp = 100
+Class = Merchant
+
+[Potion Merchant]
+Type = 53
+Hp = 100
+Class = Merchant
+
+[A Gorgeous Girl]
+ID = 320
+Hp = 100
+Class = Merchant
+
 [Veterinary]
 ID = 189
 Hp = 100
@@ -102,7 +132,7 @@ ID = 140
 Hp = 100
 Class = Merchant
 
-[Gypsy] ##
+[Paros Magician]
 ID = 141
 Hp = 100
 Class = Merchant
@@ -137,3 +167,87 @@ ID = 75
 Hp = 100
 Class = Merchant
 
+[Merchant Searost]
+ID = 64
+Hp = 100
+Class = Merchant
+
+[TeamBattle Manager]
+ID = 336
+Hp = 100
+Class = NpcPlaceHolder
+
+[Shilon Keeper]
+ID = 136
+Hp = 100
+Class = NpcPlaceHolder
+
+[Tragates]
+ID = 175
+Hp = 100
+Class = NpcPlaceHolder
+
+[Hairia]
+ID = 176
+Hp = 100
+Class = NpcPlaceHolder
+
+[Battle Manager]
+ID = 211
+Hp = 100
+Class = NpcPlaceHolder
+
+[WH Gatekeeper]
+ID = 319
+Hp = 100
+Class = NpcPlaceHolder
+
+[Egg Seller]
+ID = 188
+Hp = 100
+Class = NpcPlaceHolder
+
+[Pet Researcher]
+ID = 67
+Hp = 100
+Class = NpcPlaceHolder
+
+[Constructer]
+ID = 191
+Hp = 100
+Class = NpcPlaceHolder
+
+[Drill Instructor]
+ID = 190
+Hp = 100
+Class = NpcPlaceHolder
+
+[Dekardi GMaster]
+ID = 303
+Hp = 100
+Class = NpcPlaceHolder
+
+[Platinum maker]
+ID = 76
+Hp = 100
+Class = NpcPlaceHolder
+
+[Potion Merchant 2]
+ID = 53
+Hp = 100
+Class = Merchant
+
+[Master Smith]
+ID = 52
+Hp = 100
+Class = Merchant
+
+[Armor Merchant]
+ID = 70
+Hp = 100
+Class = Merchant
+
+[Magician Shop]
+ID = 94
+Hp = 100
+Class = Merchant

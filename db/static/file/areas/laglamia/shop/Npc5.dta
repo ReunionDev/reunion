@@ -1,14 +1,35 @@
-[Iron Shield]
-Type = 34
+[Air Hand Gun-1]
+Type = 203
 
-[Brince Shield]
-Type = 187
+[Air Gun-2]
+Type = 55
 
-[Xeno Shield]
-Type = 188
+[Chakuram-3]
+Type = 693
 
-[Skull Shield]
-Type = 189
+[Short Sword-4]
+Type = 168
 
-[Hell Shield]
-Type = 190
+[Wooden Horn Axe-5]
+Type = 167
+
+[Golden Sword-6]
+Type = 150
+
+[Curved Blade-7]
+Type = 163
+
+[Warrior Axe-8]
+Type = 157
+
+[Big Bulkan Axe-9]
+Type = 155
+
+[Long Sword-10]
+Type = 37
+
+[Stone Axe-11]
+Type = 48
+
+[Bulkan Axe-12]
+Type = 49

@@ -1,17 +1,35 @@
-[Tiger Mantle]
-Type = 191
+[Xeno Helmet-1]
+Type = 312
 
-[Hurricane Mantle]
-Type = 192
+[Xeno Armor-2]
+Type = 328
 
-[Peace Mantle]
-Type = 193
+[Xeno Pants-3]
+Type = 346
 
-[Wiseman Mantle]
-Type = 194
+[Xeno Shoes-4]
+Type = 368
 
-[Prosperity Wing]
-Type = 903
+[Brino Helmet-5]
+Type = 313
 
-[Mercy Wing]
-Type = 904
+[Brino Armor-6]
+Type = 329
+
+[Brino Pants-7]
+Type = 347
+
+[Brino Shoes-8]
+Type = 369
+
+[Xeno Metal Helmet-9]
+Type = 314
+
+[Xeno Metal Armor-10]
+Type = 330
+
+[Xeno Metal Pants-11]
+Type = 348
+
+[Xeno Metal Boots-12]
+Type = 370

@@ -1,0 +1,50 @@
+[Veterinary-1]
+ID = 1
+X = 10960
+Y = 6620
+Z = 0
+Rotation = 3.1415
+Type = 189
+
+[Aisian Bandor-2]
+ID = 2
+X = 10960
+Y = 6640
+Z = 0
+Rotation = 3.1415
+Type = 139
+
+[A Gorgeous Girl-3]
+ID = 3
+X = 10960
+Y = 6660
+Z = 0
+Rotation = 3.1415
+Type = 320
+BuyRate = 120	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/dimitron/shop/npc3.dta
+
+
+[Robe Shopkeeper-4]
+ID = 4
+X = 10960
+Y = 6680
+Z = 0
+Rotation = 3.1415
+Type = 73
+BuyRate = 120	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/dimitron/shop/npc4.dta
+
+
+[Human Bargirl-5]
+ID = 5
+X = 10960
+Y = 6700
+Z = 0
+Rotation = 3.1415
+Type = 66
+BuyRate = 120	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/dimitron/shop/npc5.dta

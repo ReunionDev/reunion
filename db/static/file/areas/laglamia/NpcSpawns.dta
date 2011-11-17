@@ -1,301 +1,294 @@
-##################
-#### LAGLAMIA ####
-##################
-
-#### Npcs ####
-[Assistant 1]
+[Archeologist-1]
 ID = 1
+X = 7190
+Y = 5096
+Z = 0
+Rotation = 1.5707
+Type = 257
+
+[Magician Shop-2]
+ID = 2
+X = 7145
+Y = 5410
+Z = 0
+Rotation = 3.1415
+Type = 94
+BuyRate = 100	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/laglamia/shop/npc2.dta
+
+
+[Blacksmith-3]
+ID = 3
+X = 6935
+Y = 5368
+Z = 0
+Rotation = 4.7123
+Type = 90
+BuyRate = 90	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/laglamia/shop/npc3.dta
+
+
+[Assistant-4]
+ID = 4
 X = 6841
 Y = 5349
-Z = 106
+Z = 0
 Rotation = 4.7123
 Type = 95
 BuyRate = 95	# Value in %
 SellRate = 30	# Value in %
-Shop = areas/laglamia/shop/npc1.dta
-
-[Assistant 2]
-ID = 2
-X = 6833
-Y = 6800
-Z = 106
-Rotation = 0.0
-Type = 95
-BuyRate = 95	# Value in %
-SellRate = 30	# Value in %
-Shop = areas/laglamia/shop/npc2.dta
-
-[Assistant 3]
-ID = 3
-X = 10275
-Y = 5200
-Z = 106
-Rotation = 0.0
-Type = 95
-BuyRate = 120	# Value in %
-SellRate = 30	# Value in %
-Shop = areas/laglamia/shop/npc3.dta
-
-[Barmaid 1]
-ID = 4
-X = 8398
-Y = 5289
-Z = 106
-Rotation = 3.1415
-Type = 92
-BuyRate = 95	# Value in %
-SellRate = 30	# Value in %
 Shop = areas/laglamia/shop/npc4.dta
 
-[Blacksmith 1]
+
+[Machine Dealer-5]
 ID = 5
-X = 6774
-Y = 5126
-Z = 106
-Rotation = 1.4921
-Type = 90
+X = 6907
+Y = 5041
+Z = 0
+Rotation = 0.0
+Type = 91
 BuyRate = 100	# Value in %
 SellRate = 30	# Value in %
 Shop = areas/laglamia/shop/npc5.dta
 
-[Blacksmith 2]
+
+[Blacksmith-6]
 ID = 6
-X = 6759
+X = 6774
 Y = 5126
-Z = 106
-Rotation = 1.4921
+Z = 0
+Rotation = 1.5707
 Type = 90
 BuyRate = 100	# Value in %
 SellRate = 30	# Value in %
 Shop = areas/laglamia/shop/npc6.dta
 
-[Blacksmith 3]
+
+[Blacksmith-7]
 ID = 7
-X = 6935
-Y = 5368
-Z = 106
-Rotation = 4.7123
+X = 6759
+Y = 5126
+Z = 0
+Rotation = 1.5707
 Type = 90
-BuyRate = 90	# Value in %
+BuyRate = 100	# Value in %
 SellRate = 30	# Value in %
 Shop = areas/laglamia/shop/npc7.dta
 
-[Doctor 1]
+
+[Magician Shop-8]
 ID = 8
-X = 6358
-Y = 5397
-Z = 106
-Rotation = 4.7123
-Type = 93
-BuyRate = 90	# Value in %
+X = 6744
+Y = 5129
+Z = 0
+Rotation = 1.5707
+Type = 94
+BuyRate = 100	# Value in %
 SellRate = 30	# Value in %
 Shop = areas/laglamia/shop/npc8.dta
 
-[Doctor 2]
+
+[Machine Dealer-9]
 ID = 9
-X = 8112
-Y = 6615
-Z = 106
-Rotation = 0.0
-Type = 93
-BuyRate = 70	# Value in %
+X = 6729
+Y = 5129
+Z = 0
+Rotation = 1.5707
+Type = 91
+BuyRate = 100	# Value in %
 SellRate = 30	# Value in %
 Shop = areas/laglamia/shop/npc9.dta
 
-[Machine Dealer 1]
+
+[Machine Dealer-10]
 ID = 10
-X = 6729
-Y = 5129
-Z = 106
-Rotation = 1.4921
+X = 6629
+Y = 5126
+Z = 0
+Rotation = 1.5707
 Type = 91
 BuyRate = 100	# Value in %
 SellRate = 30	# Value in %
 Shop = areas/laglamia/shop/npc10.dta
 
-[Machine Dealer 2]
+
+[Machine Dealer-11]
 ID = 11
-X = 6629
+X = 6608
 Y = 5126
-Z = 106
-Rotation = 1.4921
+Z = 0
+Rotation = 1.5707
 Type = 91
 BuyRate = 100	# Value in %
 SellRate = 30	# Value in %
 Shop = areas/laglamia/shop/npc11.dta
 
-[Machine Dealer 3]
-ID = 12
-X = 6608
-Y = 5126
-Z = 106
-Rotation = 1.4921
-Type = 91
-BuyRate = 100	# Value in %
-SellRate = 30	# Value in %
-Shop = areas/laglamia/shop/npc12.dta
 
-[Machine Dealer 4]
-ID = 13
-X = 6141
-Y = 5287
-Z = 106
+[Veterinary-12]
+ID = 12
+X = 6372
+Y = 5044
+Z = 0
 Rotation = 1.5707
-Type = 91
-BuyRate = 105	# Value in %
+Type = 189
+
+[Magician Shop-13]
+ID = 13
+X = 6500
+Y = 5126
+Z = 0
+Rotation = 1.5707
+Type = 94
+BuyRate = 100	# Value in %
 SellRate = 30	# Value in %
 Shop = areas/laglamia/shop/npc13.dta
 
-[Machine Dealer 5]
+
+[Magician Shop-14]
 ID = 14
-X = 6907
-Y = 5041
-Z = 106
-Rotation = 0.0
-Type = 91
+X = 6485
+Y = 5126
+Z = 0
+Rotation = 1.5707
+Type = 94
 BuyRate = 100	# Value in %
 SellRate = 30	# Value in %
 Shop = areas/laglamia/shop/npc14.dta
 
-[Magic Shopkeeper 1]
+
+[Aisian Bandor-15]
 ID = 15
-X = 6500
-Y = 5126
-Z = 106
-Rotation = 1.4921
-Type = 94
-BuyRate = 100	# Value in %
-SellRate = 30	# Value in %
-Shop = areas/laglamia/shop/npc15.dta
-
-[Magic Shopkeeper 2]
-ID = 16
-X = 6485
-Y = 5126
-Z = 106
-Rotation = 1.4921
-Type = 94
-BuyRate = 100	# Value in %
-SellRate = 30	# Value in %
-Shop = areas/laglamia/shop/npc16.dta
-
-[Magic Shopkeeper 3]
-ID = 17
-X = 6744
-Y = 5129
-Z = 106
-Rotation = 1.4921
-Type = 94
-BuyRate = 100	# Value in %
-SellRate = 30	# Value in %
-Shop = areas/laglamia/shop/npc17.dta
-
-[Magic Shopkeeper 4]
-ID = 18
-X = 6195
-Y = 5215
-Z = 106
-Rotation = 0.0
-Type = 94
-BuyRate = 100	# Value in %
-SellRate = 30	# Value in %
-Shop = areas/laglamia/shop/npc18.dta
-
-[Magic Shopkeeper 5]
-ID = 19
-X = 7145
-Y = 5410
-Z = 106
-Rotation = 3.1415
-Type = 94
-BuyRate = 100	# Value in %
-SellRate = 30	# Value in %
-Shop = areas/laglamia/shop/npc19.dta
-
-[Archeologist 1]
-ID = 20
-X = 7190
-Y = 5096
-Z = 106
-Rotation = 1.5707
-Type = 257
-
-[Aisian Bandor 1]
-ID = 21
 X = 6198
 Y = 5090
-Z = 106
+Z = 0
 Rotation = 0.0
 Type = 139
 
-[Gem Shopkeeper A 1]
-ID = 22
+[Guard Captain-16]
+ID = 16
 X = 6195
-Y = 5235
-Z = 106
+Y = 5300
+Z = 0
 Rotation = 0.0
-Type = 166
-
-[Guard Captain 1]
-ID = 23
-X = 6220
-Y = 5360
-Z = 106
-Rotation = 5.5
 Type = 57
 
-[Guard Master 1]
-ID = 24
-X = 6410
-Y = 5360
-Z = 106
-Rotation = 3.6
+[Guard Master-17]
+ID = 17
+X = 6195
+Y = 5315
+Z = 0
+Rotation = 0.0
 Type = 117
 
-[Machine Shop Owner 1]
-ID = 25
-X = 6310
-Y = 5360
-Z = 106
-Rotation = 4.7123
+[Machine Owner-18]
+ID = 18
+X = 6195
+Y = 5330
+Z = 0
+Rotation = 0.0
 Type = 51
 
-[Veterinary 1]
-ID = 26
-X = 6372
-Y = 5044
-Z = 106
-Rotation = 1.5707
-Type = 189
-
-[Gem Gambler]
-ID = 27
+[Gem Shopkeeper-19]
+ID = 19
 X = 6195
-Y = 5200
-Z = 106
+Y = 5250
+Z = 0
+Rotation = 0.0
+Type = 293
+
+[Gem Gambler-20]
+ID = 20
+X = 6195
+Y = 5201
+Z = 0
 Rotation = 0.0
 Type = 167
 
-#[Aidia Mixing Merchant 1]
-#ID = 27
-#X = 6265
-#Y = 5400
-#Z = 106
-#Rotation = 4.7123
-#Type = 330
+[Gem Shopkeeper-21]
+ID = 21
+X = 6195
+Y = 5235
+Z = 0
+Rotation = 0.0
+Type = 166
 
-#[Gem Shopkeeper B 1]
-#ID = 28
-#X = 6195
-#Y = 5250
-#Z = 106
-#Rotation = 0.0
-#Type = 293
+[Platinum maker-22]
+ID = 22
+X = 6270
+Y = 5400
+Z = 0
+Rotation = 4.7123
+Type = 330
 
-#[Host]
-#ID = 29
-#X = 7200
-#Y = 5330
-#Z = 106
-#Rotation = 4.7123
-#Type = 169
+[Magician Shop-23]
+ID = 23
+X = 6195
+Y = 5215
+Z = 0
+Rotation = 0.0
+Type = 94
+BuyRate = 100	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/laglamia/shop/npc23.dta
+
+
+[Doctor-24]
+ID = 24
+X = 6358
+Y = 5397
+Z = 0
+Rotation = 4.7123
+Type = 93
+BuyRate = 90	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/laglamia/shop/npc24.dta
+
+
+[Barmaid-25]
+ID = 25
+X = 8398
+Y = 5289
+Z = 0
+Rotation = 3.1415
+Type = 92
+BuyRate = 95	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/laglamia/shop/npc25.dta
+
+
+[Assistant-26]
+ID = 26
+X = 10275
+Y = 5200
+Z = 0
+Rotation = 0.0
+Type = 95
+BuyRate = 120	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/laglamia/shop/npc26.dta
+
+
+[Assistant-27]
+ID = 27
+X = 6830
+Y = 6803
+Z = 0
+Rotation = 0.0
+Type = 95
+BuyRate = 95	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/laglamia/shop/npc27.dta
+
+
+[Doctor-28]
+ID = 28
+X = 8112
+Y = 6615
+Z = 0
+Rotation = 0.0
+Type = 93
+BuyRate = 70	# Value in %
+SellRate = 30	# Value in %
+Shop = areas/laglamia/shop/npc28.dta
