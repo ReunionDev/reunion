@@ -136,7 +136,7 @@ MinSecondRange = 0
 MaxSecondRange = 0
 StatusUsed = 1
 Type = 1
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Fire Pillar]
 ID = 10
@@ -234,7 +234,7 @@ MinSecondRange = 0
 MaxSecondRange = 0
 StatusUsed = 1
 Type = 1
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Iron Skin]
 ID = 17
@@ -248,7 +248,7 @@ MinSecondRange = 0
 MaxSecondRange = 0
 StatusUsed = 2
 Type = 1
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [OverHead Blow]
 ID = 18
@@ -332,7 +332,7 @@ MinSecondRange = 0
 MaxSecondRange = 0
 StatusUsed = 1
 Type = 1
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Bug Summon Skill]
 ID = 24
@@ -360,7 +360,7 @@ MinSecondRange = 100
 MaxSecondRange = 120
 StatusUsed = 1
 Type = 1
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Star Flare]
 ID = 26
@@ -486,7 +486,7 @@ MinSecondRange = 0
 MaxSecondRange = 0
 StatusUsed = -1
 Type = 0
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Sniper Skill]
 ID = 35
@@ -500,7 +500,7 @@ MinSecondRange = 20
 MaxSecondRange = 90
 StatusUsed = -1
 Type = 0
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Stealth Skill]
 ID = 36
@@ -514,7 +514,7 @@ MinSecondRange = 20
 MaxSecondRange = 100
 StatusUsed = 3
 Type = 1
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Body of Steel]
 ID = 37
@@ -528,7 +528,7 @@ MinSecondRange = 15
 MaxSecondRange = 75
 StatusUsed = 2
 Type = 1
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Exploding Rage]
 ID = 38
@@ -542,7 +542,7 @@ MinSecondRange = 6
 MaxSecondRange = 60
 StatusUsed = 2
 Type = 1
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Eye of Insight]
 ID = 39
@@ -556,7 +556,7 @@ MinSecondRange = 4
 MaxSecondRange = 40
 StatusUsed = -1
 Type = 0
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Second Attack]
 ID = 40
@@ -570,7 +570,7 @@ MinSecondRange = 20
 MaxSecondRange = 500
 StatusUsed = 2
 Type = 2
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Concentrated Attack]
 ID = 41
@@ -584,7 +584,7 @@ MinSecondRange = 18
 MaxSecondRange = 90
 StatusUsed = -1
 Type = 0
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Marksmanship Skill]
 ID = 42
@@ -598,7 +598,7 @@ MinSecondRange = 15
 MaxSecondRange = 60
 StatusUsed = 3
 Type = 1
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Pierce]
 ID = 43
@@ -612,7 +612,7 @@ MinSecondRange = 3
 MaxSecondRange = 15
 StatusUsed = 3
 Type = 1
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Machine Operation Skill]
 ID = 44
@@ -626,7 +626,7 @@ MinSecondRange = 40
 MaxSecondRange = 200
 StatusUsed = 3
 Type = 1
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Assembly Skill]
 ID = 45
@@ -640,7 +640,7 @@ MinSecondRange = 0
 MaxSecondRange = 0
 StatusUsed = -1
 Type = 0
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Absorb Magic]
 ID = 46
@@ -654,7 +654,7 @@ MinSecondRange = 6
 MaxSecondRange = 60
 StatusUsed = 3
 Type = 1
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Concentration]
 ID = 47
@@ -668,7 +668,7 @@ MinSecondRange = 0
 MaxSecondRange = 0
 StatusUsed = -1
 Type = 0
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Hurricane of Psychokinetic Energy]
 ID = 48
@@ -682,7 +682,7 @@ MinSecondRange = 7
 MaxSecondRange = 70
 StatusUsed = 1
 Type = 1
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Translate Ancient Languages]
 ID = 49
@@ -696,7 +696,7 @@ MinSecondRange = 170
 MaxSecondRange = 170
 StatusUsed = -1
 Type = 0
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Transfer Magical Power]
 ID = 50
@@ -710,7 +710,7 @@ MinSecondRange = 5
 MaxSecondRange = 200
 StatusUsed = 1
 Type = 1
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Confusion]
 ID = 51
@@ -724,7 +724,7 @@ MinSecondRange = 3
 MaxSecondRange = 45
 StatusUsed = -1
 Type = 0
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Regain]
 ID = 52
@@ -738,7 +738,7 @@ MinSecondRange = 9
 MaxSecondRange = 90
 StatusUsed = 1
 Type = 1
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Blessing from the Earth]
 ID = 53
@@ -752,7 +752,7 @@ MinSecondRange = 4
 MaxSecondRange = 40
 StatusUsed = 1
 Type = 1
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Share Vitality]
 ID = 54
@@ -766,7 +766,7 @@ MinSecondRange = 180
 MaxSecondRange = 180
 StatusUsed = 1
 Type = 1
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Wind of Enchantment]
 ID = 55
@@ -780,7 +780,7 @@ MinSecondRange = 0
 MaxSecondRange = 0
 StatusUsed = -1
 Type = 0
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Obedience]
 ID = 56
@@ -794,7 +794,7 @@ MinSecondRange = 5
 MaxSecondRange = 100
 StatusUsed = -1
 Type = 0
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Glow of Life]
 ID = 57
@@ -808,7 +808,7 @@ MinSecondRange = 6
 MaxSecondRange = 30
 StatusUsed = 1
 Type = 1
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Tranquility]
 ID = 58
@@ -822,7 +822,7 @@ MinSecondRange = 0
 MaxSecondRange = 0
 StatusUsed = 1
 Type = 1
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Sub Attack]
 ID = 59
@@ -836,7 +836,7 @@ MinSecondRange = -1
 MaxSecondRange = -1
 StatusUsed = -1
 Type = 1
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Force attack]
 ID = 60
@@ -845,7 +845,7 @@ MaxLevel = 20
 StartAmmount = 1	#value in %
 IncAmmount = 1		#value in %
 EndAmmount = 1		#value in %
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Force control]
 ID = 61
@@ -854,7 +854,7 @@ MaxLevel = 20
 StartAmmount = 1	#value in %
 IncAmmount = 1		#value in %
 EndAmmount = 1		#value in %
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Bloody Mana]
 ID = 62
@@ -863,7 +863,7 @@ MaxLevel = 25
 StartAmmount = 1	#value in %
 IncAmmount = 1		#value in %
 EndAmmount = 1		#value in %
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Vampire's touch]
 ID = 63
@@ -872,7 +872,7 @@ MaxLevel = 25
 StartAmmount = 1	#value in %
 IncAmmount = 1		#value in %
 EndAmmount = 1		#value in %
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Hell's touch]
 ID = 64
@@ -881,7 +881,7 @@ MaxLevel = 25
 StartAmmount = 1	#value in %
 IncAmmount = 1		#value in %
 EndAmmount = 1		#value in %
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Deep attack]
 ID = 65
@@ -890,7 +890,7 @@ MaxLevel = 25
 StartAmmount = 1	#value in %
 IncAmmount = 1		#value in %
 EndAmmount = 1		#value in %
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Chain attack]
 ID = 66
@@ -899,7 +899,7 @@ MaxLevel = 25
 StartAmmount = 1	#value in %
 IncAmmount = 1		#value in %
 EndAmmount = 1		#value in %
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Scales of protection]
 ID = 67
@@ -908,7 +908,7 @@ MaxLevel = 25
 StartAmmount = 1	#value in %
 IncAmmount = 1		#value in %
 EndAmmount = 1		#value in %
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Scales of guardian]
 ID = 68
@@ -917,7 +917,7 @@ MaxLevel = 25
 StartAmmount = 1	#value in %
 IncAmmount = 1		#value in %
 EndAmmount = 1		#value in %
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Passion of Music]
 ID = 69
@@ -926,7 +926,7 @@ MaxLevel = 25
 StartAmmount = 1	#value in %
 IncAmmount = 1		#value in %
 EndAmmount = 1		#value in %
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Scales of Fighting Spirit]
 ID = 70
@@ -935,7 +935,7 @@ MaxLevel = 25
 StartAmmount = 1	#value in %
 IncAmmount = 1		#value in %
 EndAmmount = 1		#value in %
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Hell Cry]
 ID = 71
@@ -944,7 +944,7 @@ MaxLevel = 25
 StartAmmount = 1	#value in %
 IncAmmount = 1		#value in %
 EndAmmount = 1		#value in %
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Tornado Ruin]
 ID = 72
@@ -953,7 +953,7 @@ MaxLevel = 25
 StartAmmount = 1	#value in %
 IncAmmount = 1		#value in %
 EndAmmount = 1		#value in %
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Summon Fission]
 ID = 73
@@ -962,7 +962,7 @@ MaxLevel = 25
 StartAmmount = 1	#value in %
 IncAmmount = 1		#value in %
 EndAmmount = 1		#value in %
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Air Raid]
 ID = 74
@@ -971,7 +971,7 @@ MaxLevel = 25
 StartAmmount = 1	#value in %
 IncAmmount = 1		#value in %
 EndAmmount = 1		#value in %
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Hell Cry control]
 ID = 75
@@ -980,7 +980,7 @@ MaxLevel = 25
 StartAmmount = 1	#value in %
 IncAmmount = 1		#value in %
 EndAmmount = 1		#value in %
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Tornado Operation]
 ID = 76
@@ -989,7 +989,7 @@ MaxLevel = 25
 StartAmmount = 1	#value in %
 IncAmmount = 1		#value in %
 EndAmmount = 1		#value in %
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Air Raid Concent]
 ID = 77
@@ -998,7 +998,7 @@ MaxLevel = 25
 StartAmmount = 1	#value in %
 IncAmmount = 1		#value in %
 EndAmmount = 1		#value in %
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Fission Control]
 ID = 78
@@ -1007,7 +1007,7 @@ MaxLevel = 25
 StartAmmount = 1	#value in %
 IncAmmount = 1		#value in %
 EndAmmount = 1		#value in %
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Dual Sword Mastery]
 ID = 79
@@ -1016,7 +1016,7 @@ MaxLevel = 25
 StartAmmount = 1	#value in %
 IncAmmount = 1		#value in %
 EndAmmount = 1		#value in %
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Recovery power increase]
 ID = 80
@@ -1025,7 +1025,7 @@ MaxLevel = 25
 StartAmmount = 1	#value in %
 IncAmmount = 1		#value in %
 EndAmmount = 1		#value in %
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Haste]
 ID = 81
@@ -1034,7 +1034,7 @@ MaxLevel = 25
 StartAmmount = 1	#value in %
 IncAmmount = 1		#value in %
 EndAmmount = 1		#value in %
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Double Slash]
 ID = 82
@@ -1043,7 +1043,7 @@ MaxLevel = 25
 StartAmmount = 1	#value in %
 IncAmmount = 1		#value in %
 EndAmmount = 1		#value in %
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Evasion]
 ID = 83
@@ -1052,7 +1052,7 @@ MaxLevel = 25
 StartAmmount = 1	#value in %
 IncAmmount = 1		#value in %
 EndAmmount = 1		#value in %
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Bleed]
 ID = 84
@@ -1061,7 +1061,7 @@ MaxLevel = 25
 StartAmmount = 1	#value in %
 IncAmmount = 1		#value in %
 EndAmmount = 1		#value in %
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Dash]
 ID = 85
@@ -1070,7 +1070,7 @@ MaxLevel = 25
 StartAmmount = 1	#value in %
 IncAmmount = 1		#value in %
 EndAmmount = 1		#value in %
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Assault]
 ID = 86
@@ -1079,7 +1079,7 @@ MaxLevel = 25
 StartAmmount = 1	#value in %
 IncAmmount = 1		#value in %
 EndAmmount = 1		#value in %
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Dual Assault]
 ID = 87
@@ -1088,7 +1088,7 @@ MaxLevel = 25
 StartAmmount = 1	#value in %
 IncAmmount = 1		#value in %
 EndAmmount = 1		#value in %
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Hide]
 ID = 88
@@ -1097,7 +1097,7 @@ MaxLevel = 25
 StartAmmount = 1	#value in %
 IncAmmount = 1		#value in %
 EndAmmount = 1		#value in %
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Hammer Mastery]
 ID = 89
@@ -1106,7 +1106,7 @@ MaxLevel = 25
 StartAmmount = 1	#value in %
 IncAmmount = 1		#value in %
 EndAmmount = 1		#value in %
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Vital Expansion]
 ID = 90
@@ -1115,7 +1115,7 @@ MaxLevel = 25
 StartAmmount = 1	#value in %
 IncAmmount = 1		#value in %
 EndAmmount = 1		#value in %
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Heavy Mastery]
 ID = 91
@@ -1124,7 +1124,7 @@ MaxLevel = 25
 StartAmmount = 1	#value in %
 IncAmmount = 1		#value in %
 EndAmmount = 1		#value in %
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Bash]
 ID = 92
@@ -1133,7 +1133,7 @@ MaxLevel = 25
 StartAmmount = 1	#value in %
 IncAmmount = 1		#value in %
 EndAmmount = 1		#value in %
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Iron Skin Double?]
 ID = 93
@@ -1142,7 +1142,7 @@ MaxLevel = 25
 StartAmmount = 1	#value in %
 IncAmmount = 1		#value in %
 EndAmmount = 1		#value in %
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Divine Stone]
 ID = 94
@@ -1151,7 +1151,7 @@ MaxLevel = 25
 StartAmmount = 1	#value in %
 IncAmmount = 1		#value in %
 EndAmmount = 1		#value in %
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Stone Increase]
 ID = 95
@@ -1160,7 +1160,7 @@ MaxLevel = 25
 StartAmmount = 1	#value in %
 IncAmmount = 1		#value in %
 EndAmmount = 1		#value in %
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Time Charge]
 ID = 96
@@ -1169,7 +1169,7 @@ MaxLevel = 25
 StartAmmount = 1	#value in %
 IncAmmount = 1		#value in %
 EndAmmount = 1		#value in %
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Stone Brust]
 ID = 97
@@ -1178,7 +1178,7 @@ MaxLevel = 25
 StartAmmount = 1	#value in %
 IncAmmount = 1		#value in %
 EndAmmount = 1		#value in %
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 [Reflection]
 ID = 98
@@ -1187,7 +1187,7 @@ MaxLevel = 25
 StartAmmount = 1	#value in %
 IncAmmount = 1		#value in %
 EndAmmount = 1		#value in %
-Class = PlaceHolder
+Class = SkillPlaceHolder
 
 ##########################
 ###### SKILL TYPES #######

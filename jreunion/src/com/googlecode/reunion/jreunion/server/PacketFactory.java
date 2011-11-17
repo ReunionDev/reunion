@@ -333,8 +333,8 @@ public class PacketFactory {
 		case STATUS:
 			if(args.length>1){
 				int id = (Integer)args[0];
-				float arg1 = (Long)args[1];
-				float arg2 = 0;
+				long arg1 = (Long)args[1];
+				long arg2 = 0;
 				if(args.length > 2){
 					arg2 = (Long)args[2];
 				}
