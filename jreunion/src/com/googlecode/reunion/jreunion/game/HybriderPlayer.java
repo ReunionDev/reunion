@@ -15,25 +15,25 @@ public class HybriderPlayer extends Player {
 		
 	}
 	
-	public int getMaxElectricity(){
+	public long getMaxElectricity(){
 		return Tools.statCalc(getDexterity(), 50) +(getLeadership() / 2);
 	}
 	
-	public int getMaxHp(){
+	public long getMaxHp(){
 		return Tools.statCalc(getStrength(), 60) + Tools.statCalc(getConstitution(), 30)+ (getLeadership() / 2);		
 	}
 
-	public int getMaxMana(){
+	public long getMaxMana(){
 		return Tools.statCalc(getWisdom(), 55) + (getLeadership() / 2);		
 	}
 	
-	public int getMaxStamina(){
+	public long getMaxStamina(){
 		return Tools.statCalc(getStrength(), 90) + (getLeadership() / 2);		
 		
 	}
 	
 	@Override
-	public float getBaseDamage() {
+	public long getBaseDamage() {
 		return (getLevel() / 6) + (getStrength() / 5) + (getWisdom()/ 4) + (getDexterity() / 3);
 	}
 	

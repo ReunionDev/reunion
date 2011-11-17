@@ -60,6 +60,8 @@ public class LocalMap extends Map implements Runnable{
 	private Parser npcSpawnReference;
 	
 	private PlayerSpawn defaultSpawn;
+	
+	private List<RoamingItem> roamingItemsList;
 
 	World world;
 
@@ -170,6 +172,10 @@ public class LocalMap extends Map implements Runnable{
 		return npcSpawnReference;
 	}
 	
+	public List<RoamingItem> getRoamingItems() {
+		return roamingItemsList;
+	}
+	
 	private void createNpcSpawns() {
 		
 		int mobSpawnAmmount = npcSpawnList.size();
@@ -239,8 +245,9 @@ public class LocalMap extends Map implements Runnable{
 		
 		synchronized(entities){
 		
-			List<RoamingItem> roamingItems = DatabaseUtils.getDinamicInstance().loadRoamingItems(this);
-			for(RoamingItem roamingItem : roamingItems){
+			//List<RoamingItem> roamingItems = DatabaseUtils.getDinamicInstance().loadRoamingItems(this);
+			roamingItemsList = DatabaseUtils.getDinamicInstance().loadRoamingItems(this);
+			for(RoamingItem roamingItem : roamingItemsList){
 				//TODO: A better way to manage items going in and out of the map
 				int id = createEntityId(roamingItem);
 				
@@ -435,7 +442,7 @@ public class LocalMap extends Map implements Runnable{
 						Player player = itemPickupEvent.getPlayer();
 						Item<?> item = roamingItem.getItem();
 						DatabaseUtils.getDinamicInstance().deleteRoamingItem(item);
-						player.pickItem(roamingItem.getItem());
+						player.pickItem(roamingItem.getItem(), -1);
 					}				
 				}				
 				roamingItem.getInterested().sendPacket(Type.OUT, roamingItem);

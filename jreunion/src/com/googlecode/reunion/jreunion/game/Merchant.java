@@ -152,7 +152,7 @@ public class Merchant extends Npc {
 			
 			if (item != null) {
 				player.getPosition().getLocalMap().createEntityId(item);
-				player.pickItem(item);
+				player.pickItem(item, tab);
 				count++;
 			}
 			

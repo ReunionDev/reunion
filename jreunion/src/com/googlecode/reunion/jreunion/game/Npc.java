@@ -45,7 +45,7 @@ public class Npc extends LivingObject {
 	}
 	
 	@Override
-	public void setHp(int hp){
+	public void setHp(long hp){
 		super.setHp(hp);
 	}
 

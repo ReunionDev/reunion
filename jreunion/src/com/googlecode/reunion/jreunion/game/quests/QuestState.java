@@ -152,7 +152,7 @@ public class QuestState {
 				Item<?> item = itemManager.create(reward.getId());
 				if(item == null) return false;
 				
-				InventoryItem inventoryItem = player.getInventory().storeItem(item);
+				InventoryItem inventoryItem = player.getInventory().storeItem(item, -1);
 				
 				player.getPosition().getLocalMap().createEntityId(item);
 				if(reward instanceof LimeReward){

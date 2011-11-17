@@ -99,8 +99,8 @@ public class ElectricShield extends Skill implements Castable, Effectable {
 		return 50f/(getMaxLevel()-1);
 	}
 	
-	float getElectricModifier(Player player){
-		float modifier = 0;
+	public long getElectricModifier(Player player){
+		long modifier = 0;
 		int level = player.getSkillLevel(this);
 		
 		if(level>0){
@@ -121,8 +121,8 @@ public class ElectricShield extends Skill implements Castable, Effectable {
 		return 24f/(getMaxLevel()-1);
 	}
 	
-	float getDurationModifier(Player player){
-		float modifier = 0;
+	public long getDurationModifier(Player player){
+		long modifier = 0;
 		int level = player.getSkillLevel(this);
 		
 		if(level>0){
@@ -143,8 +143,8 @@ public class ElectricShield extends Skill implements Castable, Effectable {
 		return 240f/(getMaxLevel()-1);
 	}
 	
-	float getAccumulatedTimeModifier(Player player){
-		float modifier = 0;
+	public long getAccumulatedTimeModifier(Player player){
+		long modifier = 0;
 		int level = player.getSkillLevel(this);
 		
 		if(level>0){
@@ -160,9 +160,9 @@ public class ElectricShield extends Skill implements Castable, Effectable {
 		
 		if(caster instanceof HumanPlayer){
 			final Player player = (Player) caster;
-			int newElectric = player.getElectricity() - (int) getElectricModifier(player);
+			long newElectric = player.getElectricity() - getElectricModifier(player);
 			
-			if(getEffectModifier() == (int)getAccumulatedTimeModifier(player)){
+			if(getEffectModifier() == getAccumulatedTimeModifier(player)){
 				player.getClient().sendPacket(Type.SAY, "ElectricShield skill acumulated time, already at maximum.");
 				return false;
 			}

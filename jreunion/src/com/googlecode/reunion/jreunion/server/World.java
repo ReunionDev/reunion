@@ -167,8 +167,8 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 						synchronized(player){
 							float statusModifier = 0.1f; //increase 10% of status 
 							
-							int maxHp = player.getMaxHp();
-							int hpModifier = (int)(maxHp * statusModifier); //increase 10% of Hp
+							long maxHp = player.getMaxHp();
+							long hpModifier = (long)(maxHp * statusModifier); //increase 10% of Hp
 					
 							if(player instanceof BulkanPlayer){
 								RecoveryBoost recoveryBoost = (RecoveryBoost)player.getSkill(19);
@@ -177,16 +177,16 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 							
 							player.setHp(player.getHp()+hpModifier);
 							
-							int maxMana = player.getMaxMana();
-							int manaModifier = (int)(maxMana * statusModifier); //increase 10% of Mana
-							player.setMana(player.getMana()+manaModifier);	
+							long maxMana = player.getMaxMana();
+							long manaModifier = (long)(maxMana * statusModifier); //increase 10% of Mana
+							player.setMana(player.getMana()+ manaModifier);	
 							
-							int maxStamina = player.getMaxStamina();
-							int staminaModifier = (int)(maxStamina * statusModifier); //increase 10% of Stamina
+							long maxStamina = player.getMaxStamina();
+							long staminaModifier = (long)(maxStamina * statusModifier); //increase 10% of Stamina
 							player.setStamina(player.getStamina()+staminaModifier);	
 							
-							int maxElectricity = player.getMaxElectricity();
-							int electricityModifier = (int)(maxElectricity * statusModifier); //increase 10% of Electricity
+							long maxElectricity = player.getMaxElectricity();
+							long electricityModifier = (long)(maxElectricity * statusModifier); //increase 10% of Electricity
 							player.setElectricity(player.getElectricity()+electricityModifier);	
 						}
 					}

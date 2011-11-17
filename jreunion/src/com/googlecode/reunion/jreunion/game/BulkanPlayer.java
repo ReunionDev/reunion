@@ -15,25 +15,25 @@ public class BulkanPlayer extends Player {
 		super(client);
 	}
 
-	public int getMaxElectricity(){
+	public long getMaxElectricity(){
 		return Tools.statCalc(getDexterity(), 50) +(getLeadership() / 2);
 	}
 	
-	public int getMaxMana(){
-		return Tools.statCalc(getWisdom(), 80) + (getLeadership() / 2);		
+	public long getMaxMana(){
+		return Tools.statCalc((int)getWisdom(), 80) + (getLeadership() / 2);		
 	}
 	
 	@Override
-	public int getMaxHp(){
-		return Tools.statCalc(getStrength(), 50) + Tools.statCalc(getConstitution(), 20)+ (getLeadership() / 2);		
+	public long getMaxHp(){
+		return (Tools.statCalc(getStrength(), 50) + Tools.statCalc((int)getConstitution(), 20)+ (getLeadership() / 2));		
 	}
 	
-	public int getMaxStamina(){
+	public long getMaxStamina(){
 		return Tools.statCalc(getStrength(), 60) + (getLeadership() / 2)+ getConstitution();
 	}	
 	
 	@Override
-	public float getBaseDamage() {
+	public long getBaseDamage() {
 		return (getLevel()/6) + (getStrength()/4) + (getDexterity()/4) + (getConstitution()/8);
 	}
 }

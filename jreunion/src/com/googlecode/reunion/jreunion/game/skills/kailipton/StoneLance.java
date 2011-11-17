@@ -37,9 +37,9 @@ public class StoneLance extends Tier3 implements Castable {
 		
 	}
 	
-	public float getDamageModifier(Player player){
+	public long getDamageModifier(Player player){
 		
-		float modifier = 0;
+		long modifier = 0;
 		int level = player.getSkillLevel(this);
 		
 		if(level>0){
@@ -60,8 +60,8 @@ public class StoneLance extends Tier3 implements Castable {
 		return 24f/(getMaxLevel()-1);
 	}
 	
-	float getManaModifier(Player player){
-		float modifier = 0;
+	public long getManaModifier(Player player){
+		long modifier = 0;
 		int level = player.getSkillLevel(this);
 		
 		if(level>0){
@@ -75,14 +75,14 @@ public class StoneLance extends Tier3 implements Castable {
 	public boolean cast(LivingObject caster, List<LivingObject> victims) {
 		if(caster instanceof KailiptonPlayer){
 			Player player = (Player)caster;
-			int currentMana = player.getMana();
-			int manaSpent = (int) getManaModifier(player);
+			long currentMana = player.getMana();
+			long manaSpent = getManaModifier(player);
 			
 			player.setMana(currentMana - manaSpent);
 			
 			Item<?> item = player.getEquipment().getMainHand();
-			float baseDamage = player.getBaseDamage();
-			float weaponDamage = 0;
+			long baseDamage = player.getBaseDamage();
+			long weaponDamage = 0;
 			double weaponMagicBoost=1;
 			Weapon weapon = null;
 			
@@ -93,7 +93,7 @@ public class StoneLance extends Tier3 implements Castable {
 				weaponMagicBoost += weapon.getMagicDmg(item); // % of magic dmg boost
 			}
 			
-			float stoneDamage = getDamageModifier(player);
+			long stoneDamage = getDamageModifier(player);
 			float stoneMasteryDamage = 1;
 			
 			// calculate damage of skill PebbleShot, Hail and StoneMastery
@@ -120,11 +120,11 @@ public class StoneLance extends Tier3 implements Castable {
 				}
 			}
 			
-			float magicDamage = (float)((baseDamage + weaponDamage + stoneDamage) * stoneMasteryDamage * weaponMagicBoost);
+			long magicDamage = (long)((baseDamage + weaponDamage + stoneDamage) * stoneMasteryDamage * weaponMagicBoost);
 			
 			synchronized(victims){
 				for(LivingObject victim : victims){ 
-					victim.getsAttacked(player, (int)magicDamage);
+					victim.getsAttacked(player, magicDamage);
 				}
 				return true;
 			}

@@ -321,7 +321,7 @@ public class Command {
 
 		player.clearAttackQueue();
 
-		int newHp = livingObject.getHp() - (int) dmg;
+		long newHp = livingObject.getHp() - (long)dmg;
 
 		if (newHp <= 0) {
 			livingObject.setHp(0);
@@ -337,7 +337,7 @@ public class Command {
 				item2.setExtraStats(1080);
 				item2.setGemNumber(0);
 
-				player.getInventory().storeItem(item2);
+				player.getInventory().storeItem(item2, -1);
 				//player.pickupItem(item);
 				player.getQuest().end(player, 669);
 				player.getQuest().eff(player);

@@ -41,13 +41,13 @@ public class Lightning extends Tier2 implements Castable, Modifier {
 		 * level 25 = 150
 		 */
 		
-		return (float)144/(getMaxLevel()-1);
+		return 144f/(getMaxLevel()-1);
 		
 	}
 	
-	public float getDamageModifier(Player player){
+	public long getDamageModifier(Player player){
 		
-		float modifier = 0;
+		long modifier = 0;
 		int level = player.getSkillLevel(this);
 		
 		if(level>0){
@@ -68,8 +68,8 @@ public class Lightning extends Tier2 implements Castable, Modifier {
 		return 20f/(getMaxLevel()-1);
 	}
 	
-	float getManaModifier(Player player){
-		float modifier = 0;
+	public long getManaModifier(Player player){
+		long modifier = 0;
 		int level = player.getSkillLevel(this);
 		
 		if(level>0){
@@ -83,14 +83,14 @@ public class Lightning extends Tier2 implements Castable, Modifier {
 	public boolean cast(LivingObject caster, List<LivingObject> victims) {
 		if(caster instanceof KailiptonPlayer){
 			Player player = (Player)caster;
-			int currentMana = player.getMana();
-			int manaSpent = (int) getManaModifier(player);
+			long currentMana = player.getMana();
+			long manaSpent = getManaModifier(player);
 			
 			player.setMana(currentMana - manaSpent);
 			
 			Item<?> item = player.getEquipment().getMainHand();
-			float baseDamage = player.getBaseDamage();
-			float weaponDamage = 0;
+			long baseDamage = player.getBaseDamage();
+			long weaponDamage = 0;
 			double weaponMagicBoost=1;
 			Weapon weapon = null;
 			
@@ -101,7 +101,7 @@ public class Lightning extends Tier2 implements Castable, Modifier {
 				weaponMagicBoost += weapon.getMagicDmg(item); // % of magic dmg boost
 			}
 			
-			float lightDamage = getDamageModifier(player);
+			long lightDamage = getDamageModifier(player);
 			float lightningMasteryDamage = 1;
 			
 			// calculate damage for skills LightningBall and LightningMastery
@@ -123,12 +123,12 @@ public class Lightning extends Tier2 implements Castable, Modifier {
 				}
 			}
 			
-			float magicDamage = (float)((baseDamage + weaponDamage + lightDamage)
+			long magicDamage = (long)((baseDamage + weaponDamage + lightDamage)
 					* lightningMasteryDamage * weaponMagicBoost);
 			
 			synchronized(victims){
 				for(LivingObject victim : victims){
-					victim.getsAttacked(player, (int)magicDamage);
+					victim.getsAttacked(player, magicDamage);
 				}
 				return true;
 			}

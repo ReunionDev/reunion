@@ -36,8 +36,8 @@ public class Recovery extends Skill implements Castable{
 		return 20f/(getMaxLevel()-1);
 	}
 	
-	float getManaModifier(Player player){
-		float modifier = 0;
+	public long getManaModifier(Player player){
+		long modifier = 0;
 		int level = player.getSkillLevel(this);
 		
 		if(level>0){
@@ -58,8 +58,8 @@ public class Recovery extends Skill implements Castable{
 		return 60f/(getMaxLevel()-1);
 	}
 	
-	float getHpModifier(Player player){
-		float modifier = 0;
+	long getHpModifier(Player player){
+		long modifier = 0;
 		int level = player.getSkillLevel(this);
 		
 		if(level>0){
@@ -80,11 +80,11 @@ public class Recovery extends Skill implements Castable{
 			LivingObject victim = (LivingObject)victimsIterator.next(); 
 			if(victim == null && caster instanceof Player) {
 				Player player = (Player)caster;
-				int playerHp = player.getHp();
+				long playerHp = player.getHp();
 				if(playerHp < player.getMaxHp()) {
-					int mana = (int) getManaModifier(player); //mana usage
-					int hp = (int) getHpModifier(player); //hp recovery
-					int playerMana = player.getMana();
+					long mana = getManaModifier(player); //mana usage
+					long hp = getHpModifier(player); //hp recovery
+					long playerMana = player.getMana();
 					if(playerMana >= mana) {
 						player.setMana(playerMana - mana);
 						player.setHp(playerHp + hp);

@@ -421,7 +421,7 @@ public class DatabaseUtils extends Service {
 		}
 	}
 	
-	public void updateCharStatus(Player player, int id, int value)
+	public void updateCharStatus(Player player, int id, long value)
 	{
 		if (!checkDinamicDatabase())
 			return;
@@ -550,12 +550,12 @@ public class DatabaseUtils extends Service {
 			player.getQuickSlotBar().addItem(new QuickSlotItem(hpPot1,quickSlotPosition));
 			saveQuickSlot(player);
 			
-			player.getInventory().storeItem(weapon);
-			player.getInventory().storeItem(hpPot2);
-			player.getInventory().storeItem(hpPot3);
-			player.getInventory().storeItem(hpPot4);
-			player.getInventory().storeItem(hpPot5);
-			player.getInventory().storeItem(hpPot6);
+			player.getInventory().storeItem(weapon, -1);
+			player.getInventory().storeItem(hpPot2, -1);
+			player.getInventory().storeItem(hpPot3, -1);
+			player.getInventory().storeItem(hpPot4, -1);
+			player.getInventory().storeItem(hpPot5, -1);
+			player.getInventory().storeItem(hpPot6, -1);
 			saveInventory(player);
 						
 		} catch (SQLException e1) {
@@ -756,18 +756,13 @@ public class DatabaseUtils extends Service {
 			if (rs.next())
 			{				
 				int type = rs.getInt("type");
-				ItemType itemType = null;
-				ParsedItem parseditem = Reference.getInstance().getItemReference()
-				.getItemById(type);
+				ItemType itemType = Server.getInstance().getWorld().getItemManager().getItemType(type);
 				
-				if (parseditem == null) {
+				if (itemType == null) {
 					Logger.getLogger(DatabaseUtils.class).error("Item type "+type+" load failed, no such item type!");
 					Logger.getLogger(DatabaseUtils.class).info("Loading item type manually!");
 					itemType = new ItemType(type);;
-					//return null;
-				} else {
-					itemType = Server.getInstance().getWorld().getItemManager().getItemType(type);
-				}
+				} 
 				
 				Item<?> item = new Item(itemType);
 				

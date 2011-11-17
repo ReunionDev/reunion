@@ -1703,7 +1703,7 @@ Effect = 1
 Price = 60000
 SizeX = 1
 SizeY = 1 
-Class = potion.AbsorbPotion
+Class = capsule.AbsorptionCapsule
 
 [Curse Remover]
 ID = 975
@@ -1712,7 +1712,7 @@ Effect = 1
 Price = 110000
 SizeX = 1
 SizeY = 1 
-Class = potion.RemoverPotion
+Class = capsule.RemoverCapsule
 
 [Thanks]
 ID = 1007
@@ -16913,7 +16913,7 @@ ReqStr = 5
 Price = 10000000
 SizeX = 2
 SizeY = 3 
-Class = item.Pet.PetEgg
+Class = pet.PetEgg
 
 [Egg Wrapper-1]
 ID = 615
@@ -16926,7 +16926,7 @@ ReqStr = 5
 Price = 10000000
 SizeX = 2
 SizeY = 3 
-Class = item.Pet.PetEgg
+Class = pet.PetEgg
 
 [Meta Cape]
 ID = 573
@@ -17732,7 +17732,7 @@ ReqStr = 5
 Price = 10000000
 SizeX = 2
 SizeY = 3 
-Class = item.Pet.PetEgg
+Class = pet.PetEgg
 
 [Hope Wing]
 ID = 905
@@ -17901,7 +17901,7 @@ ReqStr = 5
 Price = 10000000
 SizeX = 2
 SizeY = 3 
-Class = item.Pet.PetEgg
+Class = pet.PetEgg
 
 [Human Meta Cape]
 ID = 574
@@ -17940,7 +17940,7 @@ ReqStr = 5
 Price = 10000000
 SizeX = 2
 SizeY = 3 
-Class = item.Pet.PetEgg
+Class = pet.PetEgg
 
 [Hybrid Muffler]
 ID = 1236
@@ -18993,7 +18993,7 @@ ReqStr = 5
 Price = 1000
 SizeX = 2
 SizeY = 3 
-Class = items.equipment.Flag
+Class = equipment.Flag
 
 [Flag (Hawk)]
 ID = 1411
@@ -19006,7 +19006,7 @@ ReqStr = 5
 Price = 1000
 SizeX = 2
 SizeY = 3 
-Class = items.equipment.Flag
+Class = equipment.Flag
 
 [Flag (Shiver)]
 ID = 1412
@@ -19019,7 +19019,7 @@ ReqStr = 5
 Price = 1000
 SizeX = 2
 SizeY = 3 
-Class = items.equipment.Flag
+Class = equipment.Flag
 
 [Flag (Korea)]
 ID = 1825
@@ -19032,7 +19032,7 @@ ReqStr = 5
 Price = 1000
 SizeX = 2
 SizeY = 3 
-Class = items.equipment.Flag
+Class = equipment.Flag
 
 [Flag (Japan)]
 ID = 1826
@@ -19045,7 +19045,7 @@ ReqStr = 5
 Price = 1000
 SizeX = 2
 SizeY = 3 
-Class = items.equipment.Flag
+Class = equipment.Flag
 
 [Laghaim Press]
 ID = 2048
@@ -19058,7 +19058,7 @@ ReqStr = 5
 Price = 5000
 SizeX = 2
 SizeY = 3 
-Class = items.equipment.Flag
+Class = equipment.Flag
 
 [Press of Laghaim]
 ID = 2535
@@ -19071,7 +19071,7 @@ ReqStr = 5
 Price = 5000
 SizeX = 2
 SizeY = 3 
-Class = items.equipment.Flag
+Class = equipment.Flag
 
 [Press of Laghaim-1]
 ID = 2536
@@ -19084,7 +19084,7 @@ ReqStr = 5
 Price = 5000
 SizeX = 2
 SizeY = 3 
-Class = items.equipment.Flag
+Class = equipment.Flag
 
 [Press of Laghaim-2]
 ID = 2537
@@ -19097,7 +19097,7 @@ ReqStr = 5
 Price = 5000
 SizeX = 2
 SizeY = 3 
-Class = items.equipment.Flag
+Class = equipment.Flag
 
 [Press of Laghaim-3]
 ID = 2538
@@ -19110,7 +19110,7 @@ ReqStr = 5
 Price = 5000
 SizeX = 2
 SizeY = 3 
-Class = items.equipment.Flag
+Class = equipment.Flag
 
 [Flag of WhiteTiger]
 ID = 2547
@@ -19123,7 +19123,7 @@ ReqStr = 5
 Price = 1000
 SizeX = 2
 SizeY = 3 
-Class = items.equipment.Flag
+Class = equipment.Flag
 
 [Flag of Dragon]
 ID = 2548
@@ -19136,7 +19136,7 @@ ReqStr = 5
 Price = 1000
 SizeX = 2
 SizeY = 3 
-Class = items.equipment.Flag
+Class = equipment.Flag
 
 [Flag of Jujak]
 ID = 2549
@@ -19149,7 +19149,7 @@ ReqStr = 5
 Price = 1000
 SizeX = 2
 SizeY = 3 
-Class = items.equipment.Flag
+Class = equipment.Flag
 
 [Flag of Hyunmoo]
 ID = 2550
@@ -19162,7 +19162,7 @@ ReqStr = 5
 Price = 1000
 SizeX = 2
 SizeY = 3 
-Class = items.equipment.Flag
+Class = equipment.Flag
 
 [Flag of DevilWing]
 ID = 2551
@@ -19175,7 +19175,7 @@ ReqStr = 5
 Price = 1000
 SizeX = 2
 SizeY = 3 
-Class = items.equipment.Flag
+Class = equipment.Flag
 
 [Flag of AngelWing]
 ID = 2552
@@ -19188,7 +19188,7 @@ ReqStr = 5
 Price = 5000
 SizeX = 2
 SizeY = 3 
-Class = items.equipment.Flag
+Class = equipment.Flag
 
 [Flag of Katana]
 ID = 2553
@@ -19201,7 +19201,7 @@ ReqStr = 5
 Price = 5000
 SizeX = 2
 SizeY = 3 
-Class = items.equipment.Flag
+Class = equipment.Flag
 
 [Flag of CherryBlossom]
 ID = 2554
@@ -19214,7 +19214,7 @@ ReqStr = 5
 Price = 5000
 SizeX = 2
 SizeY = 3 
-Class = items.equipment.Flag
+Class = equipment.Flag
 
 [Flag of Lotus]
 ID = 2555
@@ -19227,7 +19227,7 @@ ReqStr = 5
 Price = 5000
 SizeX = 2
 SizeY = 3 
-Class = items.equipment.Flag
+Class = equipment.Flag
 
 [Flag of Crown]
 ID = 2556
@@ -19240,7 +19240,7 @@ ReqStr = 5
 Price = 5000
 SizeX = 2
 SizeY = 3 
-Class = items.equipment.Flag
+Class = equipment.Flag
 
 [Flag of Unicorn]
 ID = 2557
@@ -19253,7 +19253,7 @@ ReqStr = 5
 Price = 5000
 SizeX = 2
 SizeY = 3 
-Class = items.equipment.Flag
+Class = equipment.Flag
 
 [Flag of Pegasus]
 ID = 2558
@@ -19266,7 +19266,7 @@ ReqStr = 5
 Price = 5000
 SizeX = 2
 SizeY = 3 
-Class = items.equipment.Flag
+Class = equipment.Flag
 
 [White Knight Cloak]
 ID = 1509
@@ -19435,7 +19435,7 @@ ReqStr = 5
 Price = 20000000
 SizeX = 2
 SizeY = 3 
-Class = item.Pet.PetEgg
+Class = pet.PetEgg
 
 [Cape of yellow dragon-11]
 ID = 1852

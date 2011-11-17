@@ -35,15 +35,15 @@ import com.googlecode.reunion.jreunion.server.Tools;
  */
 public abstract class Player extends LivingObject implements EventListener {
 
-	private int defense = 0;
+	private long defense = 0;
 	
 	java.util.Map<Skill,Integer> skills = new HashMap<Skill,Integer> ();
 
-	private int totalExp;
+	private long totalExp;
 
-	private int lvlUpExp;
+	private long lvlUpExp;
 
-	private int lime; // Gold
+	private long lime; // Gold
 	
 	private int slot;
 	
@@ -89,31 +89,31 @@ public abstract class Player extends LivingObject implements EventListener {
 
 	private boolean isInCombat; // 0 - Peace Mode; 1 - Attack Mode
 
-	private int strength;
+	private long strength;
 
-	private int wisdom;
+	private long wisdom;
 
-	private int dexterity;
+	private long dexterity;
 
-	private int constitution;
+	private long constitution;
 
-	private int leadership;
+	private long leadership;
 
 	private Sex sex; // 0 - Male; 1 - Female
 
-	private int speed;
+	private long speed;
 
-	private int statusPoints;
+	private long statusPoints;
 
 	private Inventory inventory;
 
-	private int penaltyPoints;
+	private long penaltyPoints;
 
-	private int adminState; // 0 - normal user; 255 - SuperGM
+	private long adminState; // 0 - normal user; 255 - SuperGM
 
 	private Session playerSession;
 
-	private int hairStyle;
+	private long hairStyle;
 
 	private Equipment equipment;
 
@@ -127,9 +127,9 @@ public abstract class Player extends LivingObject implements EventListener {
 
 	private Exchange exchange;
 
-	private int guildId;
+	private long guildId;
 
-	private int guildLevel;
+	private long guildLevel;
 	
 	private Client client;
 	
@@ -194,13 +194,13 @@ public abstract class Player extends LivingObject implements EventListener {
 	}
 	
 
-	public int getAdminState() {
+	public long getAdminState() {
 		return adminState;
 	}
 	
 	@Override
-	public synchronized void setHp(int hp){
-		int before = this.getHp();
+	public synchronized void setHp(long hp){
+		long before = this.getHp();
 		super.setHp(hp);	
 		if(before!=this.getHp())
 			this.sendStatus(Status.HP);
@@ -208,7 +208,7 @@ public abstract class Player extends LivingObject implements EventListener {
 	
 	public void sendStatus(Status status) {
 		if(client.getState()==State.INGAME||client.getState()==State.LOADED){
-			int min=0,max=0;
+			long min=0,max=0;
 			switch (status) {
 				case HP: //0
 					min = getHp();
@@ -267,36 +267,36 @@ public abstract class Player extends LivingObject implements EventListener {
 		}
 	}
 
-	public abstract int getMaxElectricity();
+	public abstract long getMaxElectricity();
 	
 
-	public abstract int getMaxMana();
+	public abstract long getMaxMana();
 	
 
-	public abstract int getMaxStamina();
+	public abstract long getMaxStamina();
 	
 
-	public synchronized void setStamina(int stamina){
-		int before = this.stamina;
-		this.stamina = Tools.between(stamina, 0, getMaxStamina());
+	public synchronized void setStamina(long stamina){
+		long before = this.stamina;
+		this.stamina = Tools.between(stamina, 0l, getMaxStamina());
 		if(before!=this.stamina)
 			this.sendStatus(Status.STAMINA);
 	}
 	
-	public abstract float getBaseDamage();
+	public abstract long getBaseDamage();
 	
 
 	public Iterator<Integer> getAttackQueueIterator() {
 		return attackQueue.iterator();
 	}
 
-	public int getBestAttack() {
-		int bestAttack = 0;
+	public long getBestAttack() {
+		long bestAttack = 0;
 		Iterator<Integer> iter = getAttackQueueIterator();
 
 		while (iter.hasNext()) {
 			//int count = 1;
-			int attack = iter.next();
+			long attack = iter.next();
 
 			if (bestAttack < attack) {
 				bestAttack = attack;
@@ -310,24 +310,24 @@ public abstract class Player extends LivingObject implements EventListener {
 		return isInCombat;
 	}
 
-	public int getConstitution() {
+	public long getConstitution() {
 		return constitution;
 	}
 
-	public int getDef() {
+	public long getDef() {
 		return defense;
 	}
 
-	public int getDexterity() {
+	public long getDexterity() {
 		return dexterity;
 	}
 
 	/*** Return the distance between the player and the living object ***/
-	public int getDistance(LivingObject livingObject) {
+	public long getDistance(LivingObject livingObject) {
 		double xcomp = Math.pow(livingObject.getPosition().getX() - getPosition().getX(), 2);
 		double ycomp = Math.pow(livingObject.getPosition().getY() - getPosition().getY(), 2);
 		double distance = Math.sqrt(xcomp + ycomp);
-		return (int) distance;
+		return (long)distance;
 	}
 
 	public Equipment getEquipment() {
@@ -338,15 +338,15 @@ public abstract class Player extends LivingObject implements EventListener {
 		return exchange;
 	}
 
-	public int getGuildId() {
+	public long getGuildId() {
 		return guildId;
 	}
 
-	public int getGuildLvl() {
+	public long getGuildLvl() {
 		return guildLevel;
 	}
 
-	public int getHairStyle() {
+	public long getHairStyle() {
 		return hairStyle;
 	}
 
@@ -354,19 +354,19 @@ public abstract class Player extends LivingObject implements EventListener {
 		return inventory;
 	}
 
-	public int getLeadership() {
+	public long getLeadership() {
 		return leadership;
 	}
 
-	public int getLime() {
+	public long getLime() {
 		return lime;
 	}
 
-	public int getLevelUpExp() {
+	public long getLevelUpExp() {
 		return lvlUpExp;
 	}
 
-	public int getPenaltyPoints() {
+	public long getPenaltyPoints() {
 		return penaltyPoints;
 	}
 
@@ -385,39 +385,35 @@ public abstract class Player extends LivingObject implements EventListener {
 		return quickSlotBar;
 	}
 	
-	private int mana;
+	private long mana;
 
-	private int electricity;
+	private long electricity;
 
-	private int stamina;
+	private long stamina;
 
-	
-
-	public int getElectricity() {
+	public long getElectricity() {
 		return electricity;
 	}	
 	
-	public int getStamina() {
+	public long getStamina() {
 		return stamina;
 	}
 	
 	
-	public int getMana() {
+	public long getMana() {
 		return mana;
 	}
 
-	
-	public synchronized void setMana(int mana) {
-		int before = this.mana;
-		this.mana = Tools.between(mana, 0, getMaxMana());
+	public synchronized void setMana(long mana) {
+		long before = this.mana;
+		this.mana = Tools.between(mana, 0l, getMaxMana());
 		if(before!=this.mana)
 			sendStatus(Status.MANA);
 	}
 
-
-	public synchronized void setElectricity(int electricity) {
-		int before = this.electricity;
-		this.electricity = Tools.between(electricity, 0, getMaxElectricity());
+	public synchronized void setElectricity(long electricity) {
+		long before = this.electricity;
+		this.electricity = Tools.between(electricity, 0l, getMaxElectricity());
 		if(this.electricity!=before)
 			sendStatus(Status.ELECTRICITY);
 	}	
@@ -511,7 +507,7 @@ public abstract class Player extends LivingObject implements EventListener {
 		return sex;
 	}
 
-	public int getSpeed() {
+	public long getSpeed() {
 		return speed;
 	}
 
@@ -519,23 +515,23 @@ public abstract class Player extends LivingObject implements EventListener {
 		return stash;
 	}
 
-	public int getStatusPoints() {
+	public long getStatusPoints() {
 		return statusPoints;
 	}
 	
-	public int getMaxStatusPoints() {
+	public long getMaxStatusPoints() {
 		return (getLevel() <= 250) ? getLevel()*3 : 250*3+(getLevel()-250)*10;
 	}
 
-	public int getStrength() {
+	public long getStrength() {
 		return strength;
 	}
 
-	public int getTotalExp() {
+	public long getTotalExp() {
 		return totalExp;
 	}
 
-	public int getWisdom() {
+	public long getWisdom() {
 		return wisdom;
 	}
 
@@ -624,22 +620,23 @@ public abstract class Player extends LivingObject implements EventListener {
 
 	@Override
 	public void loadFromReference(int id) {
-		ParsedItem exp = Reference.getInstance().getExpReference()
+		ParsedItem parsedItem = Reference.getInstance().getExpReference()
 				.getItemById(id);
 
-		if (exp == null) {
+		if (parsedItem == null) {
 			// cant find Item in the reference continue to load defaults:
 			setLevelUpExp(1000);
 		} else {
-			if (exp.checkMembers(new String[] { "Exp" })) {
+			if (parsedItem.checkMembers(new String[] { "Exp" })) {
 				// use member from file
 				try{
-					setLevelUpExp(Integer.parseInt(exp.getMemberValue("Exp")));
+					setLevelUpExp(Long.parseLong(parsedItem.getMemberValue("Exp")));
 				} 
 				catch(Exception NumerFormatException)
 				{
 					setLevelUpExp(1000);
-					Logger.getLogger(Player.class).info(this.getClient().getPlayer().getName()+" uses a to big EXP number. We need long instead of int");
+					Logger.getLogger(Player.class).info(getName()+
+							" level up experience value, not supported by LONG");
 				}
 			} else {
 				// use default
@@ -745,14 +742,14 @@ public abstract class Player extends LivingObject implements EventListener {
 		
 	}
 
-	public void loseStamina(int ammount) {	
+	public void loseStamina(long ammount) {	
 		setStamina(getStamina() - ammount);		
 	}
 
 
 	/****** Manages the Pick command ******/
 	// When you pick up an item, or buy something from merchant
-	public void pickItem(Item<?> item) {
+	public void pickItem(Item<?> item, int neededTab) {
 		Client client = getClient();
 				
 		if(item.getEntityId()==-1){
@@ -760,7 +757,7 @@ public abstract class Player extends LivingObject implements EventListener {
 			return;
 		}
 		
-		InventoryItem inventoryItem = getInventory().storeItem(item);
+		InventoryItem inventoryItem = getInventory().storeItem(item, neededTab);
 		
 		if (inventoryItem == null) {
 			inventoryItem = new InventoryItem(item, new InventoryPosition(0, 0, 0));
@@ -807,7 +804,7 @@ public abstract class Player extends LivingObject implements EventListener {
 
 	/****** revive player when he dies ******/
 	public void revive() {
-		int hp = getLevel() <= 30 ? getMaxHp() : (int)(getMaxHp()*.1);
+		long hp = getLevel() <= 30 ? getMaxHp() : (long)(getMaxHp()*.1);
 		setHp(hp);
 		spawn();
 	}
@@ -839,7 +836,7 @@ public abstract class Player extends LivingObject implements EventListener {
 		}
 	}
 	
-	public void setAdminState(int adminState) {
+	public void setAdminState(long adminState) {
 		this.adminState = adminState;
 	}
 
@@ -848,7 +845,7 @@ public abstract class Player extends LivingObject implements EventListener {
 		getInterested().sendPacket(Type.COMBAT, this);
 	}
 
-	public void setConstitution(int cons) {
+	public void setConstitution(long cons) {
 		this.constitution = cons;
 		sendStatus(Status.CONSTITUTION);
 		sendStatus(Status.HP);
@@ -871,7 +868,7 @@ public abstract class Player extends LivingObject implements EventListener {
 		}
 	}
 
-	public void setDexterity(int dex) {
+	public void setDexterity(long dex) {
 		this.dexterity = dex;
 		sendStatus(Status.DEXTERITY);
 		sendStatus(Status.ELECTRICITY);
@@ -881,7 +878,7 @@ public abstract class Player extends LivingObject implements EventListener {
 		this.equipment = equipment;
 	}
 
-	public void setGuildId(int guildId) {
+	public void setGuildId(long guildId) {
 		this.guildId = guildId;
 	}
 	
@@ -902,15 +899,15 @@ public abstract class Player extends LivingObject implements EventListener {
 		}
 	}
 
-	public void setGuildLevel(int guildLevel) {
+	public void setGuildLevel(long guildLevel) {
 		this.guildLevel = guildLevel;
 	}
 
-	public void setHairStyle(int hairStyle) {
+	public void setHairStyle(long hairStyle) {
 		this.hairStyle = hairStyle;
 	}
 
-	public void setLeadership(int lead) {
+	public void setLeadership(long lead) {
 		this.leadership = lead;
 		sendStatus(Status.LEADERSHIP);
 		sendStatus(Status.HP);
@@ -919,21 +916,21 @@ public abstract class Player extends LivingObject implements EventListener {
 		sendStatus(Status.ELECTRICITY);
 	}
 
-	public void setLime(int lime) {
+	public void setLime(long lime) {
 		this.lime = lime;
 		this.sendStatus(Status.LIME);
 	}
 
-	public void setLevelUpExp(int lvlUpExp) {
+	public void setLevelUpExp(long lvlUpExp) {
 		//synchronized(this) {
 			
 			if(lvlUpExp<=0){
 				this.setLevel(getLevel()+1);
-				if(this.getLevel() > 250)
+				if(this.getLevel() > 250){
 					this.setStatusPoints(this.getStatusPoints()+10);
-				else
+				} else {
 					this.setStatusPoints(this.getStatusPoints()+3);
-				
+				}
 				this.setLevelUpExp(this.getLevelUpExp()-Math.abs(lvlUpExp));
 			}
 			else{
@@ -943,7 +940,7 @@ public abstract class Player extends LivingObject implements EventListener {
 		//}
 	}
 
-	public void setPenaltyPoints(int penaltyPoints) {
+	public void setPenaltyPoints(long penaltyPoints) {
 		this.penaltyPoints = penaltyPoints;
 		sendStatus(Status.PENALTYPOINTS);
 	}
@@ -977,34 +974,34 @@ public abstract class Player extends LivingObject implements EventListener {
 		this.sex = sex;
 	}
 
-	public void setSpeed(int speed) {
+	public void setSpeed(long speed) {
 		this.speed = speed;
 	}
 
-	public void setStatusPoints(int statusPoints) {
+	public void setStatusPoints(long statusPoints) {
 		this.statusPoints = statusPoints;
 		sendStatus(Status.STATUSPOINTS);
 	}
 
-	public void setStrength(int str) {
+	public void setStrength(long str) {
 		this.strength = str;
 		sendStatus(Status.STRENGTH);
 		sendStatus(Status.HP);
 		sendStatus(Status.STAMINA);
 	}
 
-	public void setTotalExp(int totalExp) {
+	public void setTotalExp(long totalExp) {
 		this.totalExp = totalExp;
 		sendStatus(Status.TOTALEXP);
 	}
 
-	public void setWisdom(int wisdom) {
+	public void setWisdom(long wisdom) {
 		this.wisdom = wisdom;
 		sendStatus(Status.WISDOM);
 		sendStatus(Status.MANA);
 	}
 
-	public void social(int emotionId) {
+	public void social(long emotionId) {
 
 		getInterested().sendPacket(Type.SOCIAL, this, emotionId);
 		
@@ -1034,7 +1031,7 @@ public abstract class Player extends LivingObject implements EventListener {
 			client.sendPacket(Type.SAY, targetName+" is not online!");
 			return;
 		}
-		
+
 		client.sendPacket(Type.WISPER, text,""+getEntityId(), targetPlayer.getName(), "->Whisper*");
 		targetPlayer.getClient().sendPacket(Type.WISPER, text,""+getEntityId(),getName(), "<-Whisper*");
 	}
@@ -1081,7 +1078,7 @@ public abstract class Player extends LivingObject implements EventListener {
 	}
 	
 	/****** Handles all the Status Updates ******/
-	public void updateStatus(int id, int curr, int max) {
+	public void updateStatus(int id, long curr, long max) {
 		Client client = this.getClient();
 
 		if (client == null) {
@@ -1092,7 +1089,7 @@ public abstract class Player extends LivingObject implements EventListener {
 
 
 		case 4: { // Player Level Status
-			setLevel(getLevel() + curr);
+			setLevel(getLevel() + (int)curr);
 			client.sendPacket(Type.STATUS, id, getLevel(), max);
 			
 			DatabaseUtils.getDinamicInstance()
@@ -1379,7 +1376,7 @@ public abstract class Player extends LivingObject implements EventListener {
 
 	public void addStatus(Status status) {
 		//synchronized(this){
-			int statusPoints = getStatusPoints();
+			long statusPoints = getStatusPoints();
 			if(getStatusPoints()>0){
 							
 				switch(status){

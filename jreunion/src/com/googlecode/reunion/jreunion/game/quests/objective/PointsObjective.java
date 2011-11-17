@@ -44,7 +44,7 @@ public class PointsObjective extends Objective{
 			// QuestSecondFase(player);
 			
 			client.sendPacket(Type.QT, "nt");
-			player.getInventory().storeItem(item);
+			player.getInventory().storeItem(item, -1);
 			
 		}
 	}

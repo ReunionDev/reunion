@@ -8,9 +8,9 @@ public class Tools {
 	 * @param count increment boundary
 	 * @return increased value
 	 */
-	public static int statCalc(int n, int count) {
-		int coef = (n / count);
-		return (int) ((0.5 * coef * (1 + coef)) * count) + (coef + 1)
+	public static long statCalc(long n, long count) {
+		long coef = (n / count);
+		return (long) ((0.5 * coef * (1 + coef)) * count) + (coef + 1)
 				* (n % count);
 	}
 

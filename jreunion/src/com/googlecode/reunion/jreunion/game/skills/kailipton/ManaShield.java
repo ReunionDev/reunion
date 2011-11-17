@@ -100,8 +100,8 @@ public class ManaShield extends Skill implements Castable, Effectable {
 		return 50f/(getMaxLevel()-1);
 	}
 	
-	float getManaModifier(Player player){
-		float modifier = 0;
+	public long getManaModifier(Player player){
+		long modifier = 0;
 		int level = player.getSkillLevel(this);
 		
 		if(level>0){
@@ -122,8 +122,8 @@ public class ManaShield extends Skill implements Castable, Effectable {
 		return 24f/(getMaxLevel()-1);
 	}
 	
-	float getDurationModifier(Player player){
-		float modifier = 0;
+	public long getDurationModifier(Player player){
+		long modifier = 0;
 		int level = player.getSkillLevel(this);
 		
 		if(level>0){
@@ -144,8 +144,8 @@ public class ManaShield extends Skill implements Castable, Effectable {
 		return 240f/(getMaxLevel()-1);
 	}
 	
-	float getAccumulatedTimeModifier(Player player){
-		float modifier = 0;
+	public long getAccumulatedTimeModifier(Player player){
+		long modifier = 0;
 		int level = player.getSkillLevel(this);
 		
 		if(level>0){
@@ -161,7 +161,7 @@ public class ManaShield extends Skill implements Castable, Effectable {
 		
 		if(caster instanceof KailiptonPlayer){
 			final Player player = (Player) caster;
-			int newMana = player.getMana() - (int) getManaModifier(player);
+			long newMana = player.getMana() - getManaModifier(player);
 			
 			if(getEffectModifier() == (int)getAccumulatedTimeModifier(player)){
 				player.getClient().sendPacket(Type.SAY, "ManaShield skill acumulated time, already at maximum.");

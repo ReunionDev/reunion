@@ -532,7 +532,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					}
 				} else if (message[0].equals("skillup")) {
 					synchronized(player) {
-						int statusPoints = player.getStatusPoints();
+						float statusPoints = player.getStatusPoints();
 						
 						if(statusPoints>0){
 							int skillId = Integer.parseInt(message[1]);
@@ -713,7 +713,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					for(String str: message){
 						command += str + " ";
 					}
-					if(!command.contains("encrypt_"))
+					if(!command.contains("encrypt_") & player.getAdminState()==255)
 						client.sendPacket(Type.SAY,"Unknown: "+command);
 				}
 	

@@ -3,9 +3,9 @@ package com.googlecode.reunion.jreunion.game.skills;
 import com.googlecode.reunion.jreunion.game.Skill;
 import com.googlecode.reunion.jreunion.server.SkillManager;
 
-public class PlaceHolder extends Skill{
+public class SkillPlaceHolder extends Skill{
 
-	public PlaceHolder(SkillManager skillManager,int id) {
+	public SkillPlaceHolder(SkillManager skillManager,int id) {
 		super(skillManager,id);
 	}
 

@@ -40,7 +40,7 @@ public class MessageParser {
 	}
 
 	String parse(Player player, String text) {
-		int userlvl = player.getAdminState();
+		float userlvl = player.getAdminState();
 		text = text.trim();
 		String words[] = text.split(" ");
 		Command com = Server.getInstance().getWorld()
@@ -81,7 +81,7 @@ public class MessageParser {
 			else if (words[0].equals("@points"))
 			{
 				if(words.length == 3 && (words[1].equals("strength") || words[1].equals("wisdom") || words[1].equals("dex") || words[1].equals("strain") || words[1].equals("charisma"))) {
-					int pointsToUpgrade = Integer.parseInt(words[2]);
+					long pointsToUpgrade = Integer.parseInt(words[2]);
 					
 					if(pointsToUpgrade > 0) {
 						if(player.getStatusPoints() < pointsToUpgrade)
@@ -151,7 +151,7 @@ public class MessageParser {
 				client.getWorld().sendPacket(Type.SAY, data,player);
 			}
 			
-			else if (words[0].equals("@shutdown") && client.getUsername().equals("Castiel") || words[0].equals("@shutdown") && client.getUsername().equals("Schwein4625")) {
+			else if (player.getAdminState() == 255) {
 				final Iterator<Player> iterPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayerListIterator();
 				final World world = Server.getInstance().getWorld();
 				

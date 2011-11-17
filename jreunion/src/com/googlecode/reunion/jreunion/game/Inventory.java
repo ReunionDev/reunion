@@ -102,15 +102,22 @@ public class Inventory {
 	}
 	
 	//return the first free slot, of the item size
-	public int[] getFreeSlots(Item<?> item){
+	public int[] getFreeSlots(Item<?> item, int neededTab){
 		
 		if(item == null)
 			return null;
 		
 		int[] position = new int[3];
+		int firstTab = 0;
+		int lastTab = 2;
+		
+		if(neededTab > -1){
+			firstTab = neededTab;
+			lastTab= neededTab;
+		}
 		
 		//checks what is the first free position, where the item fits and returns it.
-		for (int tab = 0; tab < 3; tab++) {
+		for (int tab = firstTab; tab <= lastTab; tab++) {
 			for (int posX = 0; posX < 8; posX++) {
 				for (int posY = 0; posY < 6; posY++) {
 					if (itemFit(tab, posX, posY, item.getType().getSizeX(), item.getType().getSizeY())) {
@@ -173,10 +180,10 @@ public class Inventory {
 	
 	//stores an inventory item in the first free position.
 	//in this case, there is no item selected.
-	public InventoryItem storeItem(Item<?> item){
+	public InventoryItem storeItem(Item<?> item, int neededTab){
 		if(item != null){
 			
-			int[] position = getFreeSlots(item);
+			int[] position = getFreeSlots(item, neededTab);
 			if(position == null)
 				return null;
 			InventoryItem inventoryItem = new InventoryItem(item,

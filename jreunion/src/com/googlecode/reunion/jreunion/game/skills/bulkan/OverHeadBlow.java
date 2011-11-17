@@ -67,8 +67,8 @@ public class OverHeadBlow extends WeaponAttack implements Castable{
 		return 30f/(getMaxLevel()-1);
 	}
 	
-	float getStaminaModifier(Player player){
-		float modifier = 0;
+	long getStaminaModifier(Player player){
+		long modifier = 0;
 		int level = player.getSkillLevel(this);
 		
 		if(level>0){
@@ -83,14 +83,14 @@ public class OverHeadBlow extends WeaponAttack implements Castable{
 		
 		if(caster instanceof BulkanPlayer){	
 			Player player = (Player)caster;
-			int currentStamina = ((BulkanPlayer) caster).getStamina();
-			int staminaSpent = (int) getStaminaModifier(player); 
+			long currentStamina = ((BulkanPlayer) caster).getStamina();
+			long staminaSpent = getStaminaModifier(player); 
 					
 			player.setStamina(currentStamina - staminaSpent);
 			
-			float baseDamage = player.getBaseDamage();
+			long baseDamage = player.getBaseDamage();
 			float skillDamage = getDamageModifier(player);
-			float weaponDamage = 0;
+			long weaponDamage = 0;
 			Item<?> weapon = player.getEquipment().getMainHand();
 			
 			if( weapon != null)
@@ -98,7 +98,7 @@ public class OverHeadBlow extends WeaponAttack implements Castable{
 						(Server.getRand().nextFloat()*(((Weapon)weapon.getType()).getMaxDamage(weapon)
 								- ((Weapon)weapon.getType()).getMinDamage(weapon)));
 			
-			float damage = (baseDamage +  weaponDamage) * skillDamage;
+			long damage = (long)((baseDamage +  weaponDamage) * skillDamage);
 			
 			for(Skill skill: player.getSkills().keySet()){
 				if (Modifier.class.isInstance(skill)){
@@ -125,7 +125,7 @@ public class OverHeadBlow extends WeaponAttack implements Castable{
 	
 			synchronized(victims){
 				for(LivingObject victim : victims){
-					victim.getsAttacked(player, (int)damage);		
+					victim.getsAttacked(player, damage);		
 				}
 				return true;
 			}

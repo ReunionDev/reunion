@@ -14,25 +14,25 @@ public class AidiaPlayer extends Player {
 		super(client);
 	}
 			
-	public int getMaxElectricity(){
+	public long getMaxElectricity(){
 		return Tools.statCalc(getDexterity(), 80) +(getLeadership() / 2);
 	}
 	
 	@Override
-	public int getMaxHp(){
+	public long getMaxHp(){
 		return Tools.statCalc(getStrength(), 80) + Tools.statCalc(getConstitution(), 40)+((getLeadership() / 2) * 5);		
 	}
 	
-	public int getMaxMana(){
+	public long getMaxMana(){
 		return Tools.statCalc(getWisdom(), 30) + ((getLeadership() / 2) * 5);		
 	}
 	
-	public int getMaxStamina(){
+	public long getMaxStamina(){
 		return getStrength() + (getLeadership() / 2);
 	}
 
 	@Override
-	public float getBaseDamage() {
+	public long getBaseDamage() {
 		
 		return (getLevel() / 5) + (getWisdom() / 3) + getLeadership();
 	}

@@ -21,15 +21,19 @@ public class ItemManager {
 	
 	public void loadItemsList(){
 		
+		/*
 		Parser parser = new Parser();
 		
 		try {
 			parser.Parse("data/Items.dta");
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
 		}
+		*/
 		
+		Parser parser = Reference.getInstance().getItemReference();
 		Iterator<ParsedItem> iter = parser.getItemListIterator();
 		
 		while(iter.hasNext()){

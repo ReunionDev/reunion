@@ -68,9 +68,9 @@ public abstract class LivingObject extends WorldObject {
 		return running;
 	}
 
-	private int hp;
+	private long hp;
 
-	private int maxHp;
+	private long maxHp;
 
 	private int level;
 
@@ -78,7 +78,7 @@ public abstract class LivingObject extends WorldObject {
 		super();
 	}
 
-	public int getHp() {
+	public long getHp() {
 		return hp;
 	}
 
@@ -86,7 +86,7 @@ public abstract class LivingObject extends WorldObject {
 		return level;
 	}
 
-	public int getMaxHp() {
+	public long getMaxHp() {
 		return maxHp;
 	}
 
@@ -98,15 +98,15 @@ public abstract class LivingObject extends WorldObject {
 
 	}
 
-	public void setHp(int hp) {
-		this.hp = Tools.between(hp, 0, getMaxHp());		
+	public void setHp(long hp) {
+		this.hp = Tools.between(hp, 0l, getMaxHp());		
 	}
 
 	public void setLevel(int level) {
 		this.level = level;
 	}
 
-	public void setMaxHp(int maxHp) {
+	public void setMaxHp(long maxHp) {
 		this.maxHp = maxHp;
 	}
 
@@ -122,7 +122,7 @@ public abstract class LivingObject extends WorldObject {
 		this.name = livingObjectName;
 	}
 	
-	public void getsAttacked(Player player, int damage){
+	public void getsAttacked(Player player, long damage){
 		
 		//Cursed quest Boss packet
 		if(this instanceof Mob){
@@ -145,7 +145,7 @@ public abstract class LivingObject extends WorldObject {
 			}
 		}
 		
-		int newHp = Tools.between(getHp() - damage, 0, getMaxHp());				
+		long newHp = Tools.between(getHp() - damage, 0l, getMaxHp());				
 		
 		if (newHp <= 0) {
 			Logger.getLogger(LivingObject.class).info("Player "+player+" killed npc "+this);
