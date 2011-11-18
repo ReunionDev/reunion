@@ -831,12 +831,15 @@ public class DatabaseUtils extends Service {
 		return items;		
 	}
 	
-	public void saveItem(RoamingItem roamingItem){
+	public void saveRoamingItem(RoamingItem roamingItem){
 		if (!checkDinamicDatabase())
 			return ;
 		Item<?> item = roamingItem.getItem();
 		Position position = roamingItem.getPosition();
-		saveItem(item);
+		
+		if(item.getItemId() == -1){
+			saveItem(item);
+		}
 		
 		int itemId = item.getItemId();
 		Statement stmt;

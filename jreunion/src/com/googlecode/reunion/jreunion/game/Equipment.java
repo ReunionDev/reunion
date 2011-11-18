@@ -334,7 +334,11 @@ public class Equipment {
 
 	public void setShoulderMount(Item<?> shoulderMount) {
 
-		if (shoulderMount.is(SlayerWeapon.class)) {
+		if(shoulderMount == null) {
+			setSpecialWeapon(null);
+			setMantle(null);
+			setWings(null);
+		} else if (shoulderMount.is(SlayerWeapon.class)) {
 			setMantle(null);
 			setWings(null);
 			setSpecialWeapon(shoulderMount);
@@ -350,10 +354,6 @@ public class Equipment {
 			setSpecialWeapon(null);
 			setMantle(null);
 			setWings(shoulderMount);
-		} else {
-			setSpecialWeapon(null);
-			setMantle(null);
-			setWings(null);
 		}
 
 	}

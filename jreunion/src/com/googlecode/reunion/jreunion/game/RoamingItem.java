@@ -1,5 +1,7 @@
 package com.googlecode.reunion.jreunion.game;
 
+import com.googlecode.reunion.jreunion.server.DatabaseUtils;
+import com.googlecode.reunion.jreunion.server.LocalMap;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 import com.googlecode.reunion.jreunion.server.Session;
 
@@ -37,4 +39,37 @@ public class RoamingItem extends WorldObject{
 		return owner;
 	}
 
+	public String toString(){
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("{");
+
+		buffer.append("id:");
+		buffer.append(getEntityId());
+		buffer.append(", ");
+		
+		buffer.append("item: ");
+		buffer.append("{");
+		
+		buffer.append("id:");
+		buffer.append(getItem().getEntityId());
+		buffer.append("("+getItem().getItemId()+")");
+		buffer.append(", ");
+		
+		buffer.append("name:");
+		buffer.append(getItem().getType().getName());	
+				
+		buffer.append("} ");
+				
+		buffer.append("}");
+		return buffer.toString();
+	}
+	
+	public void delete(){
+		LocalMap map = getPosition().getLocalMap();
+		
+		map.removeRoamingItem(this);
+		map.removeEntity(map.getEntity(getItem().getEntityId()));
+		DatabaseUtils.getDinamicInstance().deleteItem(getItem().getItemId());
+		getInterested().sendPacket(Type.OUT, this);
+	}
 }

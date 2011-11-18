@@ -172,8 +172,18 @@ public class LocalMap extends Map implements Runnable{
 		return npcSpawnReference;
 	}
 	
-	public List<RoamingItem> getRoamingItems() {
+	public List<RoamingItem> getRoamingItemsList() {
 		return roamingItemsList;
+	}
+	
+	public RoamingItem getRoamingItem(int entityId) {
+		
+		for(RoamingItem roamingItem : getRoamingItemsList()){
+			if(roamingItem.getEntityId() == entityId)
+				return roamingItem;
+		}
+		
+		return null;
 	}
 	
 	private void createNpcSpawns() {
@@ -187,8 +197,8 @@ public class LocalMap extends Map implements Runnable{
 
 			if (!item.checkMembers(new String[] { "ID", "X", "Y",
 					"Rotation", "Type" })) {
-				Logger.getLogger(LocalMap.class).info("Error loading a npc spawn on map: "
-						+ getId());
+				Logger.getLogger(LocalMap.class).error("Failed to load npc spawn {name:"+item.getName()+"} on map "
+						+ this);
 				continue;
 			}
 			
@@ -249,10 +259,13 @@ public class LocalMap extends Map implements Runnable{
 			roamingItemsList = DatabaseUtils.getDinamicInstance().loadRoamingItems(this);
 			for(RoamingItem roamingItem : roamingItemsList){
 				//TODO: A better way to manage items going in and out of the map
-				int id = createEntityId(roamingItem);
+				int itemEntityId = createEntityId(roamingItem.getItem());
+				int roamingItemEntityId = createEntityId(roamingItem);
 				
 			}
 		}
+		
+		Logger.getLogger(LocalMap.class).info("Loaded "+roamingItemsList.size()+" roaming items in "+getName());
 		
 		executorService.scheduleAtFixedRate(new Runnable() {
 			
@@ -420,12 +433,16 @@ public class LocalMap extends Map implements Runnable{
 				
 				SessionList<Session> list = GetSessions(roamingItem.getPosition());
 				
+				Item<?> item = roamingItem.getItem();
 				
 				synchronized(entities) {
 					createEntityId(roamingItem);
+					if(item.getEntityId() == -1){
+						createEntityId(item);
+					}
 					list.enter(roamingItem, false);	
 				}
-								
+				addRoamingItem(roamingItem);
 				list.sendPacket(Type.DROP, roamingItem);
 			} else
 			if(event instanceof ItemPickupEvent){
@@ -437,16 +454,17 @@ public class LocalMap extends Map implements Runnable{
 				synchronized(entities) {
 					
 					roamingItem = (RoamingItem) this.entities.remove(roamingItem.getEntityId());
+					
 					if(roamingItem!=null) {
-						
 						Player player = itemPickupEvent.getPlayer();
 						Item<?> item = roamingItem.getItem();
-						DatabaseUtils.getDinamicInstance().deleteRoamingItem(item);
-						player.pickItem(roamingItem.getItem(), -1);
+						player.pickItem(roamingItem.getItem(), roamingItem.getEntityId(), -1);
+						player.getClient().sendPacket(Type.PICKUP, player);
+						player.getInterested().sendPacket(Type.PICKUP, player);
 					}				
 				}				
+				removeRoamingItem(roamingItem);
 				roamingItem.getInterested().sendPacket(Type.OUT, roamingItem);
-				
 			} else	
 			if(event instanceof PlayerLoginEvent){
 				
@@ -567,7 +585,47 @@ public class LocalMap extends Map implements Runnable{
 		}
 	}
 	
+	public void addRoamingItem(RoamingItem roamingItem){
+		if(!(roamingItemsList.contains(roamingItem))){
+			roamingItemsList.add(roamingItem);
+			DatabaseUtils.getDinamicInstance().saveRoamingItem(roamingItem);
+		}
+	}
+	
+	public void removeRoamingItem(RoamingItem roamingItem){
+		if(roamingItemsList.contains(roamingItem)){
+			roamingItemsList.remove(roamingItem);
+			DatabaseUtils.getDinamicInstance().deleteRoamingItem(roamingItem.getItem());
+		}
+	}
+	
+	public void removeAllRoamingItem(){
+		for(RoamingItem roamingItem : getRoamingItemsList()){
+			removeEntity(getEntity(roamingItem.getItem().getEntityId()));
+			DatabaseUtils.getDinamicInstance().deleteItem(roamingItem.getItem().getItemId());
+			DatabaseUtils.getDinamicInstance().deleteRoamingItem(roamingItem.getItem());
+			roamingItem.getInterested().sendPacket(Type.OUT, roamingItem);
+		}
+		getRoamingItemsList().clear();
+	}
+	
 	public PlayerSpawn getDefaultSpawn(){
 		return defaultSpawn;
 	}
+	
+	public String toString(){
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("{");
+
+		buffer.append("id:");
+		buffer.append(getId());
+		buffer.append(", ");
+		
+		buffer.append("name:");
+		buffer.append(getName());		
+				
+		buffer.append("}");
+		return buffer.toString();
+	}
+
 }

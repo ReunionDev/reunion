@@ -444,9 +444,10 @@ public class PacketFactory {
 		case PICK:
 			if(args.length>0){
 				InventoryItem invItem = (InventoryItem)args[0];
+				int itemEntityId = (Integer)args[1];
 				Item<?> item = invItem.getItem();
-				
-				return "pick " + item.getEntityId() + " " + item.getType().getTypeId() + " "
+							
+				return "pick " + itemEntityId + " " + item.getType().getTypeId() + " "
 				+ invItem.getPosition().getPosX()+" "+invItem.getPosition().getPosY() + " "
 				+ invItem.getPosition().getTab()+" " + item.getGemNumber() + " "
 				+ item.getExtraStats() + " " + item.getUnknown1() + " " + item.getDurability() + " "

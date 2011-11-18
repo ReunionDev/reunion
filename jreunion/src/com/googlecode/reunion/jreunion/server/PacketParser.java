@@ -420,14 +420,10 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					Status status = Status.byValue(Integer.parseInt(message[1])+10);
 					player.addStatus(status);
 				} else if (message[0].equals("pick")) {
-					
-					int itemId = Integer.parseInt(message[1]);
+					int roamingItemEntityId = Integer.parseInt(message[1]);
 					LocalMap map = player.getPosition().getLocalMap();
-					RoamingItem roamingItem = (RoamingItem)map.getEntity(itemId);
-					roamingItem.getItem().setEntityId(roamingItem.getEntityId());
-					//ParsedItem parsedItem = Reference.getInstance().getItemReference().getItemById(itemId);
+					RoamingItem roamingItem = (RoamingItem)map.getEntity(roamingItemEntityId);
 					
-					Logger.getLogger(PacketParser.class).info(player.getName() + " pick " + roamingItem.getItem().getType().getName()+"("+itemId+")");
 					if(roamingItem!=null && player.getInventory().getHoldingItem()==null ){
 						client.getPlayer().pickupItem(roamingItem);							
 					}

@@ -124,8 +124,6 @@ public class Command {
 		RoamingItem roamingItem = new RoamingItem(item);
 		roamingItem.setPosition(position);
 		
-		DatabaseUtils.getDinamicInstance().saveItem(roamingItem);
-		
 		LocalMap map = position.getLocalMap();
 		
 		map.fireEvent(ItemDropEvent.class, roamingItem);

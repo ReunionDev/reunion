@@ -6,6 +6,7 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -21,6 +22,7 @@ import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Player.Race;
 import com.googlecode.reunion.jreunion.game.Position;
 import com.googlecode.reunion.jreunion.game.Quest;
+import com.googlecode.reunion.jreunion.game.RoamingItem;
 import com.googlecode.reunion.jreunion.game.Skill;
 import com.googlecode.reunion.jreunion.game.Player.Status;
 import com.googlecode.reunion.jreunion.server.Area.Field;
@@ -151,7 +153,7 @@ public class MessageParser {
 				client.getWorld().sendPacket(Type.SAY, data,player);
 			}
 			
-			else if (player.getAdminState() == 255) {
+			else if (words[0].equals("@shutdown") && player.getAdminState() == 255) {
 				final Iterator<Player> iterPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayerListIterator();
 				final World world = Server.getInstance().getWorld();
 				
@@ -224,17 +226,20 @@ public class MessageParser {
 
 				com.serverSay("(" + p.getPosition().getX() / 10 + "," + p.getPosition().getY() / 10
 						+ ")" + "collision test: " + s1 + " " + s2 + " " + s3);
-			} else if (words[0].equals("@d")||words[0].equals("@drop")) { //Drop Item
+			} else if (words[0].equals("@d") || words[0].equals("@drop")) { //Drop Item
 				if (words.length >= 2) {
 						try {
-							Item<?> item = null;
-							if(words[0].equals("@d")){
+							/*if(words[0].equals("@d")){
 								item = itemManager.create(Integer.parseInt(words[1]));
 							} else if(words[0].equals("@drop")){
 								ItemType itemType = new ItemType(Integer.parseInt(words[1]));
 								item = itemType.create();
 								DatabaseUtils.getDinamicInstance().saveItem(item);
-							}
+							}*/
+							
+							//System.out.println("Entity list size before: "+player.getPosition().getLocalMap().getEntityListSize());
+							Item<?> item = itemManager.create(Integer.parseInt(words[1]));
+							
 							if (words.length == 6) {							
 								int gemNumber = Integer.parseInt(words[2]);
 								int extraStats = Integer.parseInt(words[3]);
@@ -253,7 +258,8 @@ public class MessageParser {
 								item.setUnknown1(0);
 								item.setUnknown2(0);
 							}
-							com.dropItem(player.getPosition(), item);
+							RoamingItem roamingItem = com.dropItem(player.getPosition(), item);
+							Logger.getLogger(MessageParser.class).info("Player "+player+" droped roaming item "+roamingItem);
 							
 						} catch (Exception e) {
 							client.sendPacket(Type.SAY, "@drop failed (ID:"+words[1]+")");
@@ -536,9 +542,25 @@ public class MessageParser {
 					} catch (Exception e) {
 						client.sendPacket(Type.SAY, "@quest failed (ID:"+words[1]+")");
 					}
-				}else{
+				} else{
 					player.getClient().sendPacket(Type.SAY, "Correct usage: @quest [questID]");
 				}
+				
+			}
+			else if (words[0].equals("@delete")) {
+					if(words[1].equals("item")){
+						LocalMap localMap = player.getPosition().getLocalMap();
+	
+						if(words.length == 2){	//deletes all RoamingItems from LocalMap
+							localMap.removeAllRoamingItem();
+							Logger.getLogger(MessageParser.class).info("Player "+player+" deleted all roaming items");
+						} else {	//deletes only the given RoamingItem from LocalMap
+							int roamingItementityId = Integer.parseInt(words[2]);
+							RoamingItem roamingItem = localMap.getRoamingItem(roamingItementityId);
+							roamingItem.delete();
+							Logger.getLogger(MessageParser.class).info("Player "+player+" deleted roaming item "+roamingItem);
+						}
+					}
 				
 			}
 		}

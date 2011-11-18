@@ -23,6 +23,7 @@ import com.googlecode.reunion.jreunion.server.Client;
 import com.googlecode.reunion.jreunion.server.Client.State;
 import com.googlecode.reunion.jreunion.server.DatabaseUtils;
 import com.googlecode.reunion.jreunion.server.LocalMap;
+import com.googlecode.reunion.jreunion.server.PacketParser;
 import com.googlecode.reunion.jreunion.server.Reference;
 import com.googlecode.reunion.jreunion.server.Server;
 import com.googlecode.reunion.jreunion.server.Session;
@@ -187,9 +188,9 @@ public abstract class Player extends LivingObject implements EventListener {
 			return;
 		}
 		
-		Logger.getLogger(Player.class).info("Player "+this+" droped item "+item);
 		LocalMap map = getPosition().getLocalMap();
-		map.getWorld().getCommand().dropItem(getPosition(), item);
+		RoamingItem roamingItem = map.getWorld().getCommand().dropItem(getPosition(), item);
+		Logger.getLogger(Player.class).info("Player "+this+" droped roaming item "+roamingItem);
 		getInventory().setHoldingItem(null);
 	}
 	
@@ -749,13 +750,9 @@ public abstract class Player extends LivingObject implements EventListener {
 
 	/****** Manages the Pick command ******/
 	// When you pick up an item, or buy something from merchant
-	public void pickItem(Item<?> item, int neededTab) {
+	public void pickItem(Item<?> item, int roamingItemEntityId, int neededTab) {
+		
 		Client client = getClient();
-				
-		if(item.getEntityId()==-1){
-			Logger.getLogger(Player.class).error("Player tries to pick up item without a valid entity id");
-			return;
-		}
 		
 		InventoryItem inventoryItem = getInventory().storeItem(item, neededTab);
 		
@@ -764,29 +761,24 @@ public abstract class Player extends LivingObject implements EventListener {
 			getInventory().setHoldingItem(new HandPosition(inventoryItem.getItem()));
 		}
 		
-		client.sendPacket(Type.PICK, inventoryItem);
+		client.sendPacket(Type.PICK, inventoryItem, roamingItemEntityId==-1 ? item.getEntityId() : roamingItemEntityId);
 		
 	}
 
 	/****** Manages the Pickup command ******/
 	public void pickupItem(RoamingItem roamingItem) {
+		
 		Client client = getClient();
-		
-		//Item item = roamingItem.getItem();
-		
 		Player owner = roamingItem.getOwner();
+		
 		if(owner!=null && owner!=this) {
-			getClient().sendPacket(Type.SAY, "This item belongs to " + owner.getName());
+			client.sendPacket(Type.SAY, "This item belongs to " + owner.getName());
 			return;
 		}		
 		
-		client.sendPacket(Type.PICKUP, this);
-		this.getInterested().sendPacket(Type.PICKUP, this);
-				
 		getPosition().getLocalMap().fireEvent(ItemPickupEvent.class, this, roamingItem);
+		Logger.getLogger(PacketParser.class).info("Player "+this+ " picked up roaming item " + roamingItem);
 		// S> pickup [CharID]
-
-		//pickItem(roamingItem.getItem());
 	}
 
 	public void place(Position position, int unknown, boolean running) {
@@ -1254,10 +1246,27 @@ public abstract class Player extends LivingObject implements EventListener {
 			getInventory().setHoldingItem(new HandPosition(getEquipment().getItem(slot)));
 			getEquipment().setItem(slot, null);
 			getInterested().sendPacket(Type.CHAR_REMOVE, this, slot);
+			Logger.getLogger(Player.class).info("Player "+this+" removed equipment "
+					+getInventory().getHoldingItem().getItem());
 			
 		} else {
 			InventoryItem invItem = new InventoryItem(getInventory().getHoldingItem().getItem(),
 							new InventoryPosition(0,0,0));
+			Item<?> wearingItem = getEquipment().getItem(slot);
+			
+			if( (wearingItem != null) ){
+				getInventory().setHoldingItem(new HandPosition(wearingItem));
+				getInterested().sendPacket(Type.CHAR_REMOVE, this, slot);
+				Logger.getLogger(Player.class).info("Player "+this+" removed equipment "+wearingItem);
+			} else {
+				getInventory().setHoldingItem(null);
+			}
+			
+			getEquipment().setItem(slot, invItem.getItem());
+			getInterested().sendPacket(Type.CHAR_WEAR, this, slot, invItem.getItem());
+			Logger.getLogger(Player.class).info("Player "+this+" equiped item "+invItem.getItem());
+			
+			/*
 			if (getEquipment().getItem(slot) == null) {
 				Item<?> item = invItem.getItem();
 				
@@ -1265,30 +1274,33 @@ public abstract class Player extends LivingObject implements EventListener {
 				
 				getEquipment().setItem(slot, item);
 				getInventory().setHoldingItem(null);
+				Logger.getLogger(Player.class).info("Player "+this+" equiped item "+item);
 				/*
 				if (getEquipment().getItem(slot) instanceof Weapon) {
 					Weapon weapon = (Weapon) getEquipment().getItem(slot);
 					setMinDmg(weapon.getMinDamage());
 					setMaxDmg(weapon.getMaxDamage());
 				}
-				*/
+				
 			} else {
 				Item<?> currentItem = getEquipment().getItem(slot);
 				getInterested().sendPacket(Type.CHAR_REMOVE, this, slot);
 				getEquipment().setItem(slot, invItem.getItem());
 				getInventory().setHoldingItem(new HandPosition(currentItem));
-				/*
+				
 				if (getEquipment().getItem(slot) instanceof Weapon) {
 					Weapon weapon = (Weapon) getEquipment().getItem(slot);
 					setMinDmg(weapon.getMinDamage());
 					setMaxDmg(weapon.getMaxDamage());
 				}
-				*/
+				
 				Item<?> item = getEquipment().getItem(slot);
 
 				getInterested().sendPacket(Type.CHAR_WEAR, this, slot, item);
 				
+				
 			}
+		*/
 
 		}
 		// DatabaseUtils.getInstance().saveEquipment(this);
