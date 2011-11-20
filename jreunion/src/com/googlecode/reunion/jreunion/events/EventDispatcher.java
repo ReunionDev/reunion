@@ -16,6 +16,9 @@ import org.apache.log4j.Logger;
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
 public class EventDispatcher{
+	
+	private Object sync = new Object();
+
 	private static ExecutorService tpe = Executors.newCachedThreadPool(new ThreadFactory() {
 		
 		@Override
@@ -39,7 +42,7 @@ public class EventDispatcher{
 	private  Map<Class<? extends Event>,Map<EventListener,Filter>> listeners;
 	
 	public Map<Class<? extends Event>, Map<EventListener,Filter>> getListeners() {
-		synchronized (this){
+		synchronized (sync){
 			if(listeners==null)
 				listeners = new HashMap<Class<? extends Event>,Map<EventListener,Filter>>();			
 		}
@@ -52,7 +55,7 @@ public class EventDispatcher{
 	
 	public void addEventListener(Class<? extends Event> c, EventListener listener, Filter filter){
 		Map<Class<? extends Event>,Map<EventListener,Filter>> listeners = this.getListeners();
-		synchronized(listeners){
+		synchronized(sync){
 			Map<EventListener, Filter> list = null;
 			if(listeners.containsKey(c)){
 				list = listeners.get(c);
@@ -68,7 +71,7 @@ public class EventDispatcher{
 	
 	public void  removeEventListener(Class<? extends Event> c, EventListener listener){
 		Map<Class<? extends Event>,Map<EventListener,Filter>> listeners = this.getListeners();
-		synchronized(listeners){
+		synchronized(sync){
 			if(c==null){
 				Iterator<Entry<Class<? extends Event>, Map<EventListener,Filter>>> iter = listeners.entrySet().iterator();
 				while(iter.hasNext()){
@@ -103,7 +106,7 @@ public class EventDispatcher{
 		Map<Class<? extends Event>,Map<EventListener,Filter>> listeners = this.getListeners();
 			
 		List<Entry<EventListener,Filter>> entries = new LinkedList<Entry<EventListener,Filter>>();		
-		synchronized(listeners){
+		synchronized(sync){
 			for(Class<? extends Event> c :listeners.keySet()){
 				if(c.isInstance(event)){
 					for(Entry<EventListener,Filter> entry: listeners.get(c).entrySet()){
