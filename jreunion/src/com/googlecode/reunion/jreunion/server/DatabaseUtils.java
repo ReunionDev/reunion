@@ -230,7 +230,7 @@ public class DatabaseUtils extends Service {
 				+ " 1\n";
 				*/
 				charlist += "chars_exist " + slot + " "
-				//+ rs.getString("id") + " " // the new version client have this extra value in the packet
+				//+ rs.getString("id") + " " // nga client have this extra value in the packet
 				+ rs.getString("name") + " "
 				+ rs.getString("race") + " "
 				+ rs.getString("sex") + " "
@@ -249,14 +249,14 @@ public class DatabaseUtils extends Service {
 				+ rs.getString("dexterity") + " "
 				+ rs.getString("constitution") + " " 
 				+ rs.getString("leadership") + " "
-				+ "0" + " " // the new version client have this extra value in the packet
+				+ "0" + " " // unknown value
 				+ eq.getTypeId(Slot.HELMET) + " " 
 				+ eq.getTypeId(Slot.CHEST) + " " 
 				+ eq.getTypeId(Slot.PANTS) + " " 
 				+ eq.getTypeId(Slot.SHOULDER)	+ " "
 				+ eq.getTypeId(Slot.BOOTS) + " " 
 				+ eq.getTypeId(Slot.OFFHAND) 
-				+ " 0\n";
+				+ " 0\n"; //unknown value
 				
 				//chars_exist 3 12341234 0 0 0 2 90 12 15 15 90 90 15 15 30 5 5 30 10 309 -1 -1 -1 -1 -1 1
 				// chars_exist [SlotNumber] [Name] [Race] [Sex] [HairStyle]
@@ -275,9 +275,7 @@ public class DatabaseUtils extends Service {
 		Logger.getLogger(DatabaseUtils.class).info("found " + chars
 				+ " char(s) for Account(" + accountId + ")");	
 		
-		
-		//charlist += "chars_end\n"; // Old client version
-		charlist += "chars_end 0 "+accountId+"\n"; //New client version
+		charlist += "chars_end 0 "+accountId+"\n";
 		return charlist;
 	}
 	
@@ -329,23 +327,23 @@ public class DatabaseUtils extends Service {
 				Race race = Race.values()[raceId];
 				player = Player.createPlayer(client, race);
 				player.setPlayerId(charId);				
-				player.setStrength(rs.getInt("strength"));
-				player.setWisdom(rs.getInt("wisdom"));
-				player.setDexterity(rs.getInt("dexterity"));
-				player.setConstitution(rs.getInt("constitution"));
-				player.setLeadership(rs.getInt("leadership"));
+				player.setStrength(rs.getLong("strength"));
+				player.setWisdom(rs.getLong("wisdom"));
+				player.setDexterity(rs.getLong("dexterity"));
+				player.setConstitution(rs.getLong("constitution"));
+				player.setLeadership(rs.getLong("leadership"));
 				player.setLevel(rs.getInt("level"));
-				player.setTotalExp(rs.getInt("totalExp"));
-				player.setLevelUpExp(rs.getInt("levelUpExp"));
-				player.setLime(rs.getInt("lime"));
-				player.setStatusPoints(rs.getInt("statusPoints"));
-				player.setPenaltyPoints(rs.getInt("penaltyPoints"));
+				player.setTotalExp(rs.getLong("totalExp"));
+				player.setLevelUpExp(rs.getLong("levelUpExp"));
+				player.setLime(rs.getLong("lime"));
+				player.setStatusPoints(rs.getLong("statusPoints"));
+				player.setPenaltyPoints(rs.getLong("penaltyPoints"));
 				player.setSex(Sex.values()[rs.getInt("sex")]);
 				player.setName(rs.getString("name"));
-				player.setGuildId(rs.getInt("guildid"));
-				player.setGuildLevel(rs.getInt("guildlvl"));
-				player.setAdminState(rs.getInt("userlevel"));
-				player.setHairStyle(rs.getInt("hair"));
+				player.setGuildId(rs.getLong("guildid"));
+				player.setGuildLevel(rs.getLong("guildlvl"));
+				player.setAdminState(rs.getLong("userlevel"));
+				player.setHairStyle(rs.getLong("hair"));
 							
 				
 				return player;

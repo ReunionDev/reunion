@@ -343,7 +343,7 @@ public class MessageParser {
 				}
 				} catch (Exception e) {
 					//TODO: Fix the Mob id error server crash
-					Logger.getLogger(MessageParser.class).info("Mob id error detected");
+					Logger.getLogger(MessageParser.class).error("Mob id error detected");
 				}
 			} else if (words[0].equals("@tele")) {
 			try {
@@ -552,11 +552,13 @@ public class MessageParser {
 						LocalMap localMap = player.getPosition().getLocalMap();
 	
 						if(words.length == 2){	//deletes all RoamingItems from LocalMap
-							localMap.removeAllRoamingItem();
-							Logger.getLogger(MessageParser.class).info("Player "+player+" deleted all roaming items");
+							for(RoamingItem roamingItem : localMap.getRoamingItemsList()){
+								roamingItem.delete();
+								Logger.getLogger(MessageParser.class).info("Player "+player+" deleted roaming item "+roamingItem);
+							}
 						} else {	//deletes only the given RoamingItem from LocalMap
 							int roamingItementityId = Integer.parseInt(words[2]);
-							RoamingItem roamingItem = localMap.getRoamingItem(roamingItementityId);
+							RoamingItem roamingItem = (RoamingItem)localMap.getEntity(roamingItementityId);
 							roamingItem.delete();
 							Logger.getLogger(MessageParser.class).info("Player "+player+" deleted roaming item "+roamingItem);
 						}

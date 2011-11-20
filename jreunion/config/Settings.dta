@@ -8,4 +8,5 @@ Version = 2003
 WelcomeMsg = Hey, welcome on the Reunion Testserver
 SessionRadius = 300
 DropExclusivity = 10
+DropTimeOut = 600
 SpawnAttempts = 3

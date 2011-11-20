@@ -10,6 +10,9 @@ import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jcommon.Parser;
 import com.googlecode.reunion.jreunion.server.Client;
 import com.googlecode.reunion.jreunion.server.ItemManager;
+import com.googlecode.reunion.jreunion.server.LocalMap;
+import com.googlecode.reunion.jreunion.server.Session;
+import com.googlecode.reunion.jreunion.server.SessionList;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 import com.googlecode.reunion.jreunion.server.Reference;
 import com.googlecode.reunion.jreunion.server.Server;
@@ -409,10 +412,13 @@ public class Mob extends Npc {
 	}
 
 	public void kill(Player player) {
-		setHp(0);
-
-		this.getPosition().getLocalMap().removeEntity(this);
 		
+		LocalMap localMap = getPosition().getLocalMap();
+		SessionList<Session> list = localMap.GetSessions(getPosition());
+		
+		setHp(0);
+		localMap.removeEntity(this);
+		list.exit(this, false);
 		
 		NpcSpawn spawn = this.getSpawn();
 		if (spawn != null) {
@@ -452,15 +458,14 @@ public class Mob extends Npc {
 					final RoamingItem roamingItem = getPosition().getLocalMap().getWorld().getCommand().dropItem(this.getPosition(), item);
 					roamingItem.setOwner(player);
 					
-					java.util.Timer timer = new java.util.Timer();
-					float dropExclusivity = player.getClient().getWorld().getServerSetings().getDropExclusivity();
-					timer.schedule(new TimerTask() {
+					java.util.Timer dropExclusivityTimer = new java.util.Timer();
+					long dropExclusivity = player.getClient().getWorld().getServerSetings().getDropExclusivity();
+					dropExclusivityTimer.schedule(new TimerTask() {
 						@Override
 						public void run() {
 							roamingItem.setOwner(null);
-							
 						}
-					},(long)(dropExclusivity*1000));
+					},dropExclusivity*1000);
 					
 				}
 			}			

@@ -1,6 +1,7 @@
 package com.googlecode.reunion.jreunion.server;
 
 import java.nio.channels.SocketChannel;
+import java.util.TimerTask;
 
 import org.apache.log4j.Logger;
 
@@ -128,6 +129,8 @@ public class Command {
 		
 		map.fireEvent(ItemDropEvent.class, roamingItem);
 		
+		roamingItem.startDeleteTimer(false);
+				
 		return roamingItem;
 	
 	}

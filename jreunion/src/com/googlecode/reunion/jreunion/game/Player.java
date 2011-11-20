@@ -776,6 +776,7 @@ public abstract class Player extends LivingObject implements EventListener {
 			return;
 		}		
 		
+		roamingItem.stopDeleteTimer();
 		getPosition().getLocalMap().fireEvent(ItemPickupEvent.class, this, roamingItem);
 		Logger.getLogger(PacketParser.class).info("Player "+this+ " picked up roaming item " + roamingItem);
 		// S> pickup [CharID]

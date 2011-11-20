@@ -9,33 +9,35 @@ import com.googlecode.reunion.jcommon.ParsedItem;
  */
 public class ServerSetings {
 
-	private float xp;
+	private long xp;
 
-	private float lime;
+	private long lime;
 	
-	private float startLime;
+	private long startLime;
 	
-	private float defaultMapId;
+	private long defaultMapId;
 	
-	private float defaultVersion;
+	private long defaultVersion;
 	
-	private float sessionRadius;
+	private long sessionRadius;
 	
-	private float dropExclusivity;
+	private long dropExclusivity;
 	
 	private String welcomeMessage;
 	
-	private float spawnAttempts;
+	private long spawnAttempts;
+	
+	private long dropTimeOut;
 	
 	public ServerSetings() {
 		loadFromReference();
 	}
 
-	public float getLime() {
+	public long getLime() {
 		return lime;
 	}
 
-	public float getXp() {
+	public long getXp() {
 		return xp;
 	}
 
@@ -52,40 +54,41 @@ public class ServerSetings {
 			setSessionRadius(300);
 			setDropExclusivity(10);
 			setSpawnAttempts(1);
+			setDropTimeOut(600);
 			setWelcomeMessage("Hey, welcome on the Reunion Testserver");
 		} else {
 
 			if (server.checkMembers(new String[] { "xp" })) {
 				// use member from file
-				setXp(Float.parseFloat(server.getMemberValue("xp")));
+				setXp(Long.parseLong(server.getMemberValue("xp")));
 			} else {
 				// use default
 				setXp(1);
 			}
 			if (server.checkMembers(new String[] { "lime" })) {
 				// use member from file
-				setLime(Float.parseFloat(server.getMemberValue("lime")));
+				setLime(Long.parseLong(server.getMemberValue("lime")));
 			} else {
 				// use default
 				setLime(1);
 			}
 			if (server.checkMembers(new String[] { "DefaultMap" })) {
 				// use member from file
-				setDefaultMapId(Float.parseFloat(server.getMemberValue("DefaultMap")));
+				setDefaultMapId(Long.parseLong(server.getMemberValue("DefaultMap")));
 			} else {
 				// use default
 				setDefaultMapId(4);
 			}
 			if (server.checkMembers(new String[] { "StartLime" })) {
 				// use member from file
-				setStartLime(Float.parseFloat(server.getMemberValue("StartLime")));
+				setStartLime(Long.parseLong(server.getMemberValue("StartLime")));
 			} else {
 				// use default
 				setStartLime(100);
 			}
 			if (server.checkMembers(new String[] { "Version" })) {
 				// use member from file
-				setDefaultVersion(Float.parseFloat(server.getMemberValue("Version")));
+				setDefaultVersion(Long.parseLong(server.getMemberValue("Version")));
 			} else {
 				// use default
 				setDefaultVersion(2000);
@@ -99,73 +102,80 @@ public class ServerSetings {
 			}
 			if (server.checkMembers(new String[] { "SessionRadius" })) {
 				// use member from file
-				setSessionRadius(Float.parseFloat(server.getMemberValue("SessionRadius")));
+				setSessionRadius(Long.parseLong(server.getMemberValue("SessionRadius")));
 			} else {
 				// use default
 				setSessionRadius(300);
 			}
 			if (server.checkMembers(new String[] { "DropExclusivity" })) {
 				// use member from file
-				setDropExclusivity(Float.parseFloat(server.getMemberValue("DropExclusivity")));
+				setDropExclusivity(Long.parseLong(server.getMemberValue("DropExclusivity")));
 			} else {
 				// use default
 				setDropExclusivity(10);
 			}
 			if (server.checkMembers(new String[] { "SpawnAttempts" })) {
 				// use member from file
-				setSpawnAttempts(Float.parseFloat(server.getMemberValue("SpawnAttempts")));
+				setSpawnAttempts(Long.parseLong(server.getMemberValue("SpawnAttempts")));
 			} else {
 				// use default
 				setSpawnAttempts(1);
 			}
+			if (server.checkMembers(new String[] { "DropTimeOut" })) {
+				// use member from file
+				setDropTimeOut(Long.parseLong(server.getMemberValue("DropTimeOut")));
+			} else {
+				// use default
+				setDropTimeOut(600);
+			}
 		}
 	}
 
-	public void setLime(float lime) {
+	public void setLime(long lime) {
 		this.lime = lime;
 	}
 
-	public void setXp(float xp) {
+	public void setXp(long xp) {
 		this.xp = xp;
 	}
 
-	public float getStartLime() {
+	public long getStartLime() {
 		return startLime;
 	}
 
-	public void setStartLime(float startLime) {
+	public void setStartLime(long startLime) {
 		this.startLime = startLime;
 	}
 
-	public float getDefaultMapId() {
+	public long getDefaultMapId() {
 		return defaultMapId;
 	}
 
-	public void setDefaultMapId(float defaultMapId) {
+	public void setDefaultMapId(long defaultMapId) {
 		this.defaultMapId = defaultMapId;
 	}
 
-	public float getDefaultVersion() {
+	public long getDefaultVersion() {
 		return defaultVersion;
 	}
 
-	public void setDefaultVersion(float defaultVersion) {
+	public void setDefaultVersion(long defaultVersion) {
 		this.defaultVersion = defaultVersion;
 	}
 
-	public float getSessionRadius() {
+	public long getSessionRadius() {
 		return sessionRadius;
 	}
 
-	public void setSessionRadius(float sessionRadius) {
+	public void setSessionRadius(long sessionRadius) {
 		this.sessionRadius = sessionRadius;
 	}
 
-	public float getDropExclusivity() {
+	public long getDropExclusivity() {
 		return dropExclusivity;
 	}
 
-	public void setDropExclusivity(float dropExclusivity) {
+	public void setDropExclusivity(long dropExclusivity) {
 		this.dropExclusivity = dropExclusivity;
 	}
 
@@ -177,11 +187,19 @@ public class ServerSetings {
 		this.welcomeMessage = welcomeMessage;
 	}
 
-	public float getSpawnAttempts() {
+	public long getSpawnAttempts() {
 		return spawnAttempts;
 	}
 
-	public void setSpawnAttempts(float spawnAttempts) {
+	public void setSpawnAttempts(long spawnAttempts) {
 		this.spawnAttempts = spawnAttempts;
+	}
+
+	public long getDropTimeOut() {
+		return dropTimeOut;
+	}
+
+	public void setDropTimeOut(long dropTimeOut) {
+		this.dropTimeOut = dropTimeOut;
 	}
 }

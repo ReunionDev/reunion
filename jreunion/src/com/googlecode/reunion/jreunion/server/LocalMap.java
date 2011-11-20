@@ -3,6 +3,7 @@ package com.googlecode.reunion.jreunion.server;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.TimerTask;
 import java.util.Vector;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -60,8 +61,6 @@ public class LocalMap extends Map implements Runnable{
 	private Parser npcSpawnReference;
 	
 	private PlayerSpawn defaultSpawn;
-	
-	private List<RoamingItem> roamingItemsList;
 
 	World world;
 
@@ -94,6 +93,7 @@ public class LocalMap extends Map implements Runnable{
 		}
 	}
 	private int entityIter = 0;
+	
 	public synchronized int createEntityId(Entity obj){
 		synchronized(this.entities){
 			if(!entities.containsValue(obj)){
@@ -173,17 +173,14 @@ public class LocalMap extends Map implements Runnable{
 	}
 	
 	public List<RoamingItem> getRoamingItemsList() {
-		return roamingItemsList;
-	}
+		List<RoamingItem> roamingItemList = new Vector<RoamingItem>();
 	
-	public RoamingItem getRoamingItem(int entityId) {
-		
-		for(RoamingItem roamingItem : getRoamingItemsList()){
-			if(roamingItem.getEntityId() == entityId)
-				return roamingItem;
+		for(Entity entity: entities.values()){
+			if(entity instanceof RoamingItem){
+				roamingItemList.add(((RoamingItem)entity));
+			}
 		}
-		
-		return null;
+		return roamingItemList;
 	}
 	
 	private void createNpcSpawns() {
@@ -255,17 +252,17 @@ public class LocalMap extends Map implements Runnable{
 		
 		synchronized(entities){
 		
-			//List<RoamingItem> roamingItems = DatabaseUtils.getDinamicInstance().loadRoamingItems(this);
-			roamingItemsList = DatabaseUtils.getDinamicInstance().loadRoamingItems(this);
+			List<RoamingItem> roamingItemsList = DatabaseUtils.getDinamicInstance().loadRoamingItems(this);
 			for(RoamingItem roamingItem : roamingItemsList){
 				//TODO: A better way to manage items going in and out of the map
 				int itemEntityId = createEntityId(roamingItem.getItem());
 				int roamingItemEntityId = createEntityId(roamingItem);
 				
+				roamingItem.startDeleteTimer(true);
 			}
 		}
 		
-		Logger.getLogger(LocalMap.class).info("Loaded "+roamingItemsList.size()+" roaming items in "+getName());
+		Logger.getLogger(LocalMap.class).info("Loaded "+getRoamingItemsList().size()+" roaming items in "+getName());
 		
 		executorService.scheduleAtFixedRate(new Runnable() {
 			
@@ -428,28 +425,25 @@ public class LocalMap extends Map implements Runnable{
 			if(event instanceof ItemDropEvent){
 				
 				ItemDropEvent itemDropEvent = (ItemDropEvent)event;
-				
 				RoamingItem roamingItem = itemDropEvent.getRoamingItem();
-				
 				SessionList<Session> list = GetSessions(roamingItem.getPosition());
-				
 				Item<?> item = roamingItem.getItem();
 				
 				synchronized(entities) {
-					createEntityId(roamingItem);
 					if(item.getEntityId() == -1){
 						createEntityId(item);
 					}
+					createEntityId(roamingItem);
 					list.enter(roamingItem, false);	
 				}
-				addRoamingItem(roamingItem);
+				DatabaseUtils.getDinamicInstance().saveRoamingItem(roamingItem);
 				list.sendPacket(Type.DROP, roamingItem);
 			} else
 			if(event instanceof ItemPickupEvent){
 				
 				ItemPickupEvent itemPickupEvent = (ItemPickupEvent)event;
-				
 				RoamingItem roamingItem = itemPickupEvent.getRoamingItem();
+				SessionList<Session> list = GetSessions(roamingItem.getPosition());
 				
 				synchronized(entities) {
 					
@@ -457,13 +451,13 @@ public class LocalMap extends Map implements Runnable{
 					
 					if(roamingItem!=null) {
 						Player player = itemPickupEvent.getPlayer();
-						Item<?> item = roamingItem.getItem();
 						player.pickItem(roamingItem.getItem(), roamingItem.getEntityId(), -1);
 						player.getClient().sendPacket(Type.PICKUP, player);
 						player.getInterested().sendPacket(Type.PICKUP, player);
+						list.exit(roamingItem, false);
 					}				
-				}				
-				removeRoamingItem(roamingItem);
+				}
+				DatabaseUtils.getDinamicInstance().deleteRoamingItem(roamingItem.getItem());
 				roamingItem.getInterested().sendPacket(Type.OUT, roamingItem);
 			} else	
 			if(event instanceof PlayerLoginEvent){
@@ -583,30 +577,6 @@ public class LocalMap extends Map implements Runnable{
 			if(entities.containsKey(entitiId))
 				entities.remove(entitiId);
 		}
-	}
-	
-	public void addRoamingItem(RoamingItem roamingItem){
-		if(!(roamingItemsList.contains(roamingItem))){
-			roamingItemsList.add(roamingItem);
-			DatabaseUtils.getDinamicInstance().saveRoamingItem(roamingItem);
-		}
-	}
-	
-	public void removeRoamingItem(RoamingItem roamingItem){
-		if(roamingItemsList.contains(roamingItem)){
-			roamingItemsList.remove(roamingItem);
-			DatabaseUtils.getDinamicInstance().deleteRoamingItem(roamingItem.getItem());
-		}
-	}
-	
-	public void removeAllRoamingItem(){
-		for(RoamingItem roamingItem : getRoamingItemsList()){
-			removeEntity(getEntity(roamingItem.getItem().getEntityId()));
-			DatabaseUtils.getDinamicInstance().deleteItem(roamingItem.getItem().getItemId());
-			DatabaseUtils.getDinamicInstance().deleteRoamingItem(roamingItem.getItem());
-			roamingItem.getInterested().sendPacket(Type.OUT, roamingItem);
-		}
-		getRoamingItemsList().clear();
 	}
 	
 	public PlayerSpawn getDefaultSpawn(){
