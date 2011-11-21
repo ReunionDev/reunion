@@ -5,9 +5,9 @@ import java.util.Map;
 
 import com.googlecode.reunion.jreunion.game.InventoryItem;
 import com.googlecode.reunion.jreunion.game.Item;
-import com.googlecode.reunion.jreunion.game.Mob;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Quest;
+import com.googlecode.reunion.jreunion.game.npc.Mob;
 import com.googlecode.reunion.jreunion.game.quests.objective.MobObjective;
 import com.googlecode.reunion.jreunion.game.quests.objective.Objective;
 import com.googlecode.reunion.jreunion.game.quests.objective.PointsObjective;

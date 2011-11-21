@@ -3,6 +3,7 @@ package com.googlecode.reunion.jreunion.game;
 import java.util.Random;
 
 import com.googlecode.reunion.jreunion.events.map.SpawnEvent;
+import com.googlecode.reunion.jreunion.game.npc.Mob;
 import com.googlecode.reunion.jreunion.server.Area;
 import com.googlecode.reunion.jreunion.server.Area.Field;
 import com.googlecode.reunion.jreunion.server.LocalMap;

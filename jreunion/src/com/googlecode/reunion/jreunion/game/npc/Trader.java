@@ -1,7 +1,11 @@
-package com.googlecode.reunion.jreunion.game;
+package com.googlecode.reunion.jreunion.game.npc;
 
 import java.util.Iterator;
 
+import com.googlecode.reunion.jreunion.game.ExchangeItem;
+import com.googlecode.reunion.jreunion.game.Item;
+import com.googlecode.reunion.jreunion.game.Npc;
+import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.items.equipment.Armor;
 import com.googlecode.reunion.jreunion.server.Client;
 import com.googlecode.reunion.jreunion.server.DatabaseUtils;

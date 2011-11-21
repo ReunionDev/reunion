@@ -1,5 +1,7 @@
 package com.googlecode.reunion.jreunion.game;
 
+import org.apache.log4j.Logger;
+
 import com.googlecode.reunion.jreunion.game.Equipment.Slot;
 import com.googlecode.reunion.jreunion.server.DatabaseUtils;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
@@ -88,7 +90,8 @@ public class Item<T extends ItemType> implements Entity{
 		if(is(Usable.class)){
 			((Usable)getType()).use(this, livingObject);
 		}else{
-			throw new IllegalArgumentException(getType()+" is not Usable");
+			Logger.getLogger(Item.class).error("Item "+this+" is not usable");
+			//throw new IllegalArgumentException(getType()+" is not Usable");
 		}
 	}
 	

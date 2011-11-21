@@ -5,249 +5,249 @@
 [Aidia Mixing Merchant]
 ID = 330
 Hp = 100
-Class = Trader
+Class = npc.Trader
 
 #[Castlesiege NPC]
 #ID = 136
 #Hp = 100
-#Class = Trader
+#Class = npc.Trader
 
 [Aisian Bandor]
 ID = 139
 Hp = 100
-Class = Warehouse
+Class = npc.Warehouse
 
 [Archeologist]
 ID = 257
 Hp = 100
-Class = Trader
+Class = npc.Trader
 
 [Assistant]
 ID = 95
 Hp = 100
-Class = Merchant
+Class = npc.Merchant
 
 [Paros Grocer]
 ID = 238
 Hp = 100
-Class = Merchant
+Class = npc.Merchant
 
 [Paros Ammo]
 ID = 240
 Hp = 100
-Class = Merchant
+Class = npc.Merchant
 
 [Barmaid]
 ID = 92
 Hp = 100
-Class = Merchant
+Class = npc.Merchant
 
 [Blacksmith] ##
 ID = 90
 Hp = 100
-Class = Merchant
+Class = npc.Merchant
 
 [Bunny Girl 1]
 ID = 322
 Hp = 100
-Class = Merchant
+Class = npc.Merchant
 
 [Bunny Girl 2]
 ID = 321
 Hp = 100
-Class = Merchant
+Class = npc.Merchant
 
 [Doctor] ##
 ID = 93
 Hp = 100
-Class = Merchant
+Class = npc.Merchant
 
 [Gem Gambler]
 ID = 167
 Hp = 100
-Class = Trader
+Class = npc.Trader
 
 [Gem Shopkeeper A]
 ID = 166
 Hp = 100
-Class = Trader
+Class = npc.Trader
 
 [Gem Shopkeeper B]
 ID = 293
 Hp = 100
-Class = Trader
+Class = npc.Trader
 
 [Guard Captain]
 ID = 57
 Hp = 100
-Class = StatsRedistributor
+Class = npc.StatsRedistributor
 
 [Guard Master]
 ID = 117
 Hp = 100
-Class = Trader
+Class = npc.Trader
 
 [Host]
 ID = 169
 Hp = 100
-Class = Trader
+Class = npc.Trader
 
 [Machine Dealer] ##
 ID = 91
 Hp = 100
-Class = Merchant
+Class = npc.Merchant
 
 [Machine Shop Owner]
 ID = 51
 Hp = 100
-Class = Trader
+Class = npc.Trader
 
 [Magic Shopkeeper] ##
 ID = 94
 Hp = 100
-Class = Merchant
+Class = npc.Merchant
 
 [Staff Merchant]
 ID = 75
 Hp = 100
-Class = Merchant
+Class = npc.Merchant
 
 [Potion Merchant]
 Type = 53
 Hp = 100
-Class = Merchant
+Class = npc.Merchant
 
 [A Gorgeous Girl]
 ID = 320
 Hp = 100
-Class = Merchant
+Class = npc.Merchant
 
 [Veterinary]
 ID = 189
 Hp = 100
-Class = PetAssistant
+Class = npc.PetAssistant
 
 [Magican] ##
 ID = 140
 Hp = 100
-Class = Merchant
+Class = npc.Merchant
 
 [Paros Magician]
 ID = 141
 Hp = 100
-Class = Merchant
+Class = npc.Merchant
 
 [x_0 Trader]
 ID = 96
 Hp = 100
-Class = Merchant
+Class = npc.Merchant
 
 [Human Seller]
 ID = 65
 Hp = 100
-Class = Merchant
+Class = npc.Merchant
 
 [Human Bargirl]
 ID = 66
 Hp = 100
-Class = Merchant
+Class = npc.Merchant
 
 [Bulkan Blacksmith]
 ID = 71
 Hp = 100
-Class = Merchant
+Class = npc.Merchant
 
 [Kalipton Seller 1]
 ID = 73
 Hp = 100
-Class = Merchant
+Class = npc.Merchant
 
 [Kalipton Seller 2]
 ID = 75
 Hp = 100
-Class = Merchant
+Class = npc.Merchant
 
 [Merchant Searost]
 ID = 64
 Hp = 100
-Class = Merchant
+Class = npc.Merchant
 
 [TeamBattle Manager]
 ID = 336
 Hp = 100
-Class = NpcPlaceHolder
+Class = npc.NpcPlaceHolder
 
 [Shilon Keeper]
 ID = 136
 Hp = 100
-Class = NpcPlaceHolder
+Class = npc.NpcPlaceHolder
 
 [Tragates]
 ID = 175
 Hp = 100
-Class = NpcPlaceHolder
+Class = npc.NpcPlaceHolder
 
 [Hairia]
 ID = 176
 Hp = 100
-Class = NpcPlaceHolder
+Class = npc.NpcPlaceHolder
 
 [Battle Manager]
 ID = 211
 Hp = 100
-Class = NpcPlaceHolder
+Class = npc.NpcPlaceHolder
 
 [WH Gatekeeper]
 ID = 319
 Hp = 100
-Class = NpcPlaceHolder
+Class = npc.NpcPlaceHolder
 
 [Egg Seller]
 ID = 188
 Hp = 100
-Class = NpcPlaceHolder
+Class = npc.NpcPlaceHolder
 
 [Pet Researcher]
 ID = 67
 Hp = 100
-Class = NpcPlaceHolder
+Class = npc.NpcPlaceHolder
 
 [Constructer]
 ID = 191
 Hp = 100
-Class = NpcPlaceHolder
+Class = npc.NpcPlaceHolder
 
 [Drill Instructor]
 ID = 190
 Hp = 100
-Class = NpcPlaceHolder
+Class = npc.NpcPlaceHolder
 
 [Dekardi GMaster]
 ID = 303
 Hp = 100
-Class = NpcPlaceHolder
+Class = npc.NpcPlaceHolder
 
 [Platinum maker]
 ID = 76
 Hp = 100
-Class = NpcPlaceHolder
+Class = npc.NpcPlaceHolder
 
 [Potion Merchant 2]
 ID = 53
 Hp = 100
-Class = Merchant
+Class = npc.Merchant
 
 [Master Smith]
 ID = 52
 Hp = 100
-Class = Merchant
+Class = npc.Merchant
 
 [Armor Merchant]
 ID = 70
 Hp = 100
-Class = Merchant
+Class = npc.Merchant
 
 [Magician Shop]
 ID = 94
 Hp = 100
-Class = Merchant
+Class = npc.Merchant

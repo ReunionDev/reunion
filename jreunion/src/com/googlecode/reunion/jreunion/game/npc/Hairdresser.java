@@ -1,4 +1,6 @@
-package com.googlecode.reunion.jreunion.game;
+package com.googlecode.reunion.jreunion.game.npc;
+
+import com.googlecode.reunion.jreunion.game.Npc;
 
 /**
  * @author Aidamina

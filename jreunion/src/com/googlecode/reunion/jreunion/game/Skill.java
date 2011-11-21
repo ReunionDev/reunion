@@ -1,5 +1,7 @@
 package com.googlecode.reunion.jreunion.game;
 
+import java.util.List;
+
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 import com.googlecode.reunion.jreunion.server.SkillManager;
 
@@ -82,7 +84,7 @@ public abstract class Skill {
 			target.getInterested().sendPacket(Type.EFFECT, source, target, this);
 		}
 	}
-
+	
 	public abstract int getLevelRequirement(int skillLevel);	
 
 	public void setType(int type) {

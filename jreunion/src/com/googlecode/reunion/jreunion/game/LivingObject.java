@@ -2,6 +2,7 @@ package com.googlecode.reunion.jreunion.game;
 
 import org.apache.log4j.Logger;
 
+import com.googlecode.reunion.jreunion.game.npc.Mob;
 import com.googlecode.reunion.jreunion.game.quests.ExperienceQuest;
 import com.googlecode.reunion.jreunion.game.quests.QuestState;
 import com.googlecode.reunion.jreunion.game.quests.objective.Objective;
@@ -123,6 +124,8 @@ public abstract class LivingObject extends WorldObject {
 	}
 	
 	public void getsAttacked(Player player, long damage){
+		
+		player.addAttack(damage);
 		
 		//Cursed quest Boss packet
 		if(this instanceof Mob){

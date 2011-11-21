@@ -20,6 +20,8 @@ public class ItemType{
 
 	private String name;
 	
+	private int maxExtraStats;
+	
 	private int maxDurability;
 
 	public ItemType(int type) {
@@ -68,6 +70,8 @@ public class ItemType{
 			setSizeX(1);
 			setSizeY(1);
 			setPrice(1);
+			setMaxExtraStats(0);
+			setMaxDurability(0);
 			setName("Unknown");
 		} else {
 
@@ -92,7 +96,13 @@ public class ItemType{
 				// use default
 				setPrice(1);
 			}
-			
+			if (item.checkMembers(new String[] { "ExtraStats" })) {
+				// use member from file
+				setMaxExtraStats(Integer.parseInt(item.getMemberValue("ExtraStats")));
+			} else {
+				// use default
+				setMaxExtraStats(0);
+			}
 			if (item.checkMembers(new String[] { "Durability" })) {
 				// use member from file
 				setMaxDurability(Integer.parseInt(item.getMemberValue("Durability")));
@@ -141,6 +151,14 @@ public class ItemType{
 
 	public void setMaxDurability(int maxDurability) {
 		this.maxDurability = maxDurability;
+	}
+
+	public int getMaxExtraStats() {
+		return maxExtraStats;
+	}
+
+	public void setMaxExtraStats(int maxExtraStats) {
+		this.maxExtraStats = maxExtraStats;
 	}
 
 	

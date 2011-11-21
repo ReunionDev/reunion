@@ -5,10 +5,10 @@ import java.net.InetSocketAddress;
 import com.googlecode.reunion.jreunion.game.Effectable;
 import com.googlecode.reunion.jreunion.game.Equipment;
 import com.googlecode.reunion.jreunion.game.Equipment.Slot;
+import com.googlecode.reunion.jreunion.game.npc.Merchant;
 import com.googlecode.reunion.jreunion.game.InventoryItem;
 import com.googlecode.reunion.jreunion.game.Item;
 import com.googlecode.reunion.jreunion.game.LivingObject;
-import com.googlecode.reunion.jreunion.game.Merchant;
 import com.googlecode.reunion.jreunion.game.Npc;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Position;
@@ -76,7 +76,8 @@ public class PacketFactory {
 		KILL,
 		Q_EX,
 		WISPER,
-		SECONDATACK
+		SECONDATACK,
+		SAV
 	}
 	
 	public static String createPacket(Type packetType, Object... args) {
@@ -370,9 +371,21 @@ public class PacketFactory {
 			{
 				LivingObject source = (LivingObject) args[0];				
 				LivingObject target = (LivingObject)args[1];
-				String effectid = (String)args[2];
+				int skillId = (Integer)args[2];
 				
-				return "sa "+getObjectType(source)+" "+source.getEntityId()+" "+getObjectType(target)+" "+target.getEntityId()+" "+target.getPercentageHp()+" 3 0 0 "+effectid;
+				return "sa "+getObjectType(source)+" "+source.getEntityId()+" "+getObjectType(target)+" "+target.getEntityId()+" "+target.getPercentageHp()+" 0 0 0 "+skillId;
+			}
+			break;
+			
+		case SAV: 
+			//sav n 26128 75 2 0 4900 3
+			
+			if(args.length == 2)
+			{
+				LivingObject target = (LivingObject) args[0];				
+				Item<?> item = (Item<?>)args[1];
+				
+				return "sav "+getObjectType(target)+" "+target.getEntityId()+" "+target.getPercentageHp()+" 0 0 "+item.getExtraStats()+" 3";
 			}
 			break;
 			
@@ -692,13 +705,13 @@ public class PacketFactory {
 	
 	private static String getObjectType(WorldObject object){
 		if (object instanceof Player){
-			return "char";
+			return "c";
 		}
 		if(object instanceof RoamingItem){
 			return "item";			
 		}
 		else if (object instanceof Npc) {
-			return "npc";
+			return "n";
 		}
 		
 		throw new RuntimeException("Invalid Object: "+object);

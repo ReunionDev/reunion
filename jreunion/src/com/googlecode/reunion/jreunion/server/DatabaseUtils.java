@@ -758,7 +758,6 @@ public class DatabaseUtils extends Service {
 				
 				if (itemType == null) {
 					Logger.getLogger(DatabaseUtils.class).error("Item type "+type+" load failed, no such item type!");
-					Logger.getLogger(DatabaseUtils.class).info("Loading item type manually!");
 					itemType = new ItemType(type);;
 				} 
 				
@@ -767,6 +766,9 @@ public class DatabaseUtils extends Service {
 				item.setItemId(itemId);
 				item.setGemNumber(rs.getInt("gemnumber"));
 				item.setExtraStats(rs.getInt("extrastats"));
+				item.setDurability(rs.getInt("durability"));
+				item.setUnknown1(rs.getInt("unknown1"));
+				item.setUnknown2(rs.getInt("unknown2"));
 				
 				return item;
 			}
@@ -835,9 +837,7 @@ public class DatabaseUtils extends Service {
 		Item<?> item = roamingItem.getItem();
 		Position position = roamingItem.getPosition();
 		
-		if(item.getItemId() == -1){
-			saveItem(item);
-		}
+		saveItem(item);
 		
 		int itemId = item.getItemId();
 		Statement stmt;
@@ -871,14 +871,25 @@ public class DatabaseUtils extends Service {
 			int itemId = item.getItemId();
 			if(itemId!=-1){
 				
-				int res = stmt.executeUpdate("UPDATE `items` SET `type`="+item.getType().getTypeId()+", `gemnumber`="+item.getGemNumber()+", `extrastats`="+item.getExtraStats()+" WHERE `Id` = "+itemId);
+				int res = stmt.executeUpdate("UPDATE `items` SET `type`="+item.getType().getTypeId()+
+											 ", `gemnumber`="+item.getGemNumber()+
+											 ", `extrastats`="+item.getExtraStats()+
+											 ", `durability`="+item.getDurability()+
+											 ", `unknown1`="+item.getUnknown1()+
+											 ", `unknown2`="+item.getUnknown2()+
+											 " WHERE `Id` = "+itemId);
 				if(res==0){
 					Logger.getLogger(DatabaseUtils.class).error("item not found: "+itemId);					
 				}
 			} else {
-				stmt.execute("INSERT INTO items (type, gemnumber, extrastats)" +
+				stmt.execute("INSERT INTO items (type, gemnumber, extrastats, durability, unknown1, unknown2)" +
 						" VALUES ("+item.getType().getTypeId()+","
-						+item.getGemNumber()+","+item.getExtraStats()+");",Statement.RETURN_GENERATED_KEYS);
+								   +item.getGemNumber()+","
+								   +item.getExtraStats()+","
+								   +item.getDurability()+","
+								   +item.getUnknown1()+","
+								   +item.getUnknown2()+
+								   ");",Statement.RETURN_GENERATED_KEYS);
 				
 				ResultSet res = stmt.getGeneratedKeys();
 				if (res.next())

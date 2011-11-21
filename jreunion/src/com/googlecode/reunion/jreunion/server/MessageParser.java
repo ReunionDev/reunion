@@ -15,7 +15,6 @@ import org.apache.log4j.net.SocketAppender;
 
 import com.googlecode.reunion.jreunion.game.Item;
 import com.googlecode.reunion.jreunion.game.ItemType;
-import com.googlecode.reunion.jreunion.game.Mob;
 import com.googlecode.reunion.jreunion.game.Npc;
 import com.googlecode.reunion.jreunion.game.NpcSpawn;
 import com.googlecode.reunion.jreunion.game.Player;
@@ -25,6 +24,7 @@ import com.googlecode.reunion.jreunion.game.Quest;
 import com.googlecode.reunion.jreunion.game.RoamingItem;
 import com.googlecode.reunion.jreunion.game.Skill;
 import com.googlecode.reunion.jreunion.game.Player.Status;
+import com.googlecode.reunion.jreunion.game.npc.Mob;
 import com.googlecode.reunion.jreunion.server.Area.Field;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
 import com.googlecode.reunion.jcommon.ParsedItem;
@@ -253,8 +253,8 @@ public class MessageParser {
 								item.setUnknown2(unknown2);
 							}else{
 								item.setGemNumber(0);
-								item.setExtraStats(0);
-								item.setDurability(0);
+								item.setExtraStats(item.getType().getMaxExtraStats());
+								item.setDurability(item.getType().getMaxDurability());
 								item.setUnknown1(0);
 								item.setUnknown2(0);
 							}

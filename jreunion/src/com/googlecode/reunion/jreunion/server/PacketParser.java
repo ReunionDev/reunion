@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Vector;
 import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
@@ -26,8 +27,6 @@ import com.googlecode.reunion.jreunion.game.Inventory;
 import com.googlecode.reunion.jreunion.game.InventoryItem;
 import com.googlecode.reunion.jreunion.game.Item;
 import com.googlecode.reunion.jreunion.game.LivingObject;
-import com.googlecode.reunion.jreunion.game.Merchant;
-import com.googlecode.reunion.jreunion.game.Npc;
 import com.googlecode.reunion.jreunion.game.Player;
 import com.googlecode.reunion.jreunion.game.Player.Race;
 import com.googlecode.reunion.jreunion.game.Player.Sex;
@@ -35,12 +34,13 @@ import com.googlecode.reunion.jreunion.game.Player.Status;
 import com.googlecode.reunion.jreunion.game.Position;
 import com.googlecode.reunion.jreunion.game.RoamingItem;
 import com.googlecode.reunion.jreunion.game.Skill;
-import com.googlecode.reunion.jreunion.game.Warehouse;
 import com.googlecode.reunion.jreunion.game.items.etc.MissionReceiver;
+import com.googlecode.reunion.jreunion.game.npc.Merchant;
+import com.googlecode.reunion.jreunion.game.npc.Warehouse;
 import com.googlecode.reunion.jreunion.server.Client.LoginType;
 import com.googlecode.reunion.jreunion.server.Client.State;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
-import com.googlecode.reunion.jreunion.protocol.*;
+import com.googlecode.reunion.jreunion.protocol.OtherProtocol;
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
@@ -453,10 +453,13 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					client.getPlayer().dropItem(Integer.parseInt(message[1]));
 							
 				} else if (message[0].equals("subat")) {
-					String effectid = message[3];
-					com.subAttack(player,
-							(LivingObject)player.getPosition().getLocalMap().getEntity(Integer.parseInt(message[2])),effectid);
-				//subat char 121 40 0
+					List<LivingObject> targets = new Vector<LivingObject>();
+					LivingObject singleTarget = (LivingObject)player.getPosition().getLocalMap().getEntity(Integer.parseInt(message[2]));
+					int skillId = Integer.parseInt(message[3]);
+					
+					targets.add(singleTarget);
+					
+					com.subAttack(player,targets,skillId);
 				} else if (message[0].equals("pulse")) {
 					if (Integer.parseInt(message[2].substring(0,
 							message[2].length() - 1)) == -1) {

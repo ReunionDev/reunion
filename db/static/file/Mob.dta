@@ -34,7 +34,7 @@ StarFlare = 4
 #### Laglamia ##########################################
 
 [Wolf]
-Class = Mob
+Class = npc.Mob
 ID = 23
 Level = 3
 Hp = 50
@@ -49,7 +49,7 @@ Lime = 2
 AllowedOnMap = 4
 
 [White Tiger]
-Class = Mob
+Class = npc.Mob
 ID = 24
 Level = 12
 Hp = 157
@@ -64,7 +64,7 @@ Lime = 7
 AllowedOnMap = 4
 
 [Lada]
-Class = Mob
+Class = npc.Mob
 ID = 25
 Level = 5
 Hp = 71
@@ -79,7 +79,7 @@ Lime = 3
 AllowedOnMap = 4
 
 [Armored Mouse]
-Class = Mob
+Class = npc.Mob
 ID = 97
 Level = 1
 Hp = 30
@@ -94,7 +94,7 @@ Lime = 1
 AllowedOnMap = 4
 
 [Armored Crab]
-Class = Mob
+Class = npc.Mob
 ID = 98
 Level = 8
 Hp = 105
@@ -109,7 +109,7 @@ Lime = 4
 AllowedOnMap = 4
 
 [Poison Crab]
-Class = Mob
+Class = npc.Mob
 ID = 99
 Level = 10
 Hp = 130
@@ -124,7 +124,7 @@ Lime = 6
 AllowedOnMap = 4
 
 [Sea Scorpion]
-Class = Mob
+Class = npc.Mob
 ID = 100
 Level = 22
 Hp = 346
@@ -139,7 +139,7 @@ Lime = 11
 AllowedOnMap = 4
 
 [Poison Scorpion]
-Class = Mob
+Class = npc.Mob
 ID = 101
 Level = 30
 Hp = 590
@@ -154,7 +154,7 @@ Lime = 19
 AllowedOnMap = 4
 
 [Chmero]
-Class = Mob
+Class = npc.Mob
 ID = 102
 Level = 35
 Hp = 799
@@ -169,7 +169,7 @@ Lime = 25
 AllowedOnMap = 4
 
 [Mace Kabal]
-Class = Mob
+Class = npc.Mob
 ID = 108
 Level = 105
 Hp = 29086
@@ -184,7 +184,7 @@ Lime = 498
 AllowedOnMap = 4
 
 [Mad Cyborg 2]
-Class = Mob
+Class = npc.Mob
 ID = 109
 Level = 70
 Hp = 4150
@@ -199,7 +199,7 @@ Lime = 148
 AllowedOnMap = 4
 
 [Skewer Halfer]
-Class = Mob
+Class = npc.Mob
 ID = 110
 Level = 65
 Hp = 7514
@@ -214,7 +214,7 @@ Lime = 121
 AllowedOnMap = 4
 
 [Drakion Sword]
-Class = Mob
+Class = npc.Mob
 ID = 111
 Level = 125
 Hp = 249610
@@ -229,7 +229,7 @@ Lime = 4362
 AllowedOnMap = 4
 
 [Drakion Magic]
-Class = Mob
+Class = npc.Mob
 ID = 112
 Level = 120
 Hp = 127650
@@ -244,7 +244,7 @@ Lime = 2220
 AllowedOnMap = 4
 
 [Armor Rat ot Contrition]
-Class = Mob
+Class = npc.Mob
 ID = 226
 Level = 0
 Hp = 15
@@ -260,7 +260,7 @@ AllowedOnMap = 4
 
 ### Wather ###
 [Blue Guphy]
-Class = Mob
+Class = npc.Mob
 ID = 234
 Level = 0
 Hp = 15
@@ -275,7 +275,7 @@ Lime = 1
 AllowedOnMap = 4
 
 [Dolphine]
-Class = Mob
+Class = npc.Mob
 ID = 235
 Level = 0
 Hp = 15
@@ -290,7 +290,7 @@ Lime = 1
 AllowedOnMap = 4
 
 [Shark]
-Class = Mob
+Class = npc.Mob
 ID = 236
 Level = 0
 Hp = 15
@@ -306,7 +306,7 @@ AllowedOnMap = 4
 
 ## Unspawned but only Lag ##
 [Iron Dragon_Lag]
-Class = Mob
+Class = npc.Mob
 ID = 264
 Level = 0
 Hp = 15
@@ -321,7 +321,7 @@ Lime = 1
 AllowedOnMap = 4
 
 [Earth Dragon_Lag]
-Class = Mob
+Class = npc.Mob
 ID = 265
 Level = 0
 Hp = 15
@@ -337,7 +337,7 @@ AllowedOnMap = 4
 
 #### Lag Quests ####
 [King Chmero]
-Class = Mob
+Class = npc.Mob
 ID = 228
 Level = 0
 Hp = 100
@@ -355,7 +355,7 @@ AllowedOnMap = 4
 #### Dekardi - Lost Realm Castle ###########################
 
 [Hell Cobra]
-Class = Mob
+Class = npc.Mob
 ID = 26
 Level = 25
 Hp = 1
@@ -370,7 +370,7 @@ Lime = 1
 AllowedOnMap = 0
 
 [Dino]
-Class = Mob
+Class = npc.Mob
 ID = 31
 Level = 30
 Hp = 1
@@ -385,7 +385,7 @@ Lime = 1
 AllowedOnMap = 0
 
 [Oniam]
-Class = Mob
+Class = npc.Mob
 ID = 37
 Level = 35
 Hp = 1
@@ -400,7 +400,7 @@ Lime = 1
 AllowedOnMap = 0
 
 [Moke]
-Class = Mob
+Class = npc.Mob
 ID = 39
 Level = 25
 Hp = 1
@@ -415,7 +415,7 @@ Lime = 1
 AllowedOnMap = 0
 
 [Pro Giant]
-Class = Mob
+Class = npc.Mob
 ID = 41
 Level = 50
 Hp = 1
@@ -430,7 +430,7 @@ Lime = 1
 AllowedOnMap = 0
 
 [Brain Warrior]
-Class = Mob
+Class = npc.Mob
 ID = 48
 Level = 55
 Hp = 1
@@ -445,7 +445,7 @@ Lime = 1
 AllowedOnMap = 0
 
 [Dark Soldier]
-Class = Mob
+Class = npc.Mob
 ID = 104
 Level = 47
 Hp = 1
@@ -460,7 +460,7 @@ Lime = 1
 AllowedOnMap = 0
 
 [Battle Giant]
-Class = Mob
+Class = npc.Mob
 ID = 106
 Level = 72
 Hp = 1
@@ -475,7 +475,7 @@ Lime = 1
 AllowedOnMap = 0
 
 [Mad Cyborg]
-Class = Mob
+Class = npc.Mob
 ID = 107
 Level = 70
 Hp = 1
@@ -491,7 +491,7 @@ AllowedOnMap = 0
 
 ####Quest Monsters####
 [King Pro Giant]
-Class = Mob
+Class = npc.Mob
 ID = 229
 Level = 35
 Hp = 1
@@ -506,7 +506,7 @@ Lime = 1
 AllowedOnMap = 0
 
 [King Battle Giant]
-Class = Mob
+Class = npc.Mob
 ID = 230
 Level = 50
 Hp = 1
@@ -524,7 +524,7 @@ AllowedOnMap = 0
 ####### Dekaran # Dungeon ##############################
 
 [Zombie]
-Class = Mob
+Class = npc.Mob
 ID = 58
 Level = 61
 Hp = 4150
@@ -539,7 +539,7 @@ Lime = 135
 AllowedOnMap = 1
 
 [Horn Beast]
-Class = Mob
+Class = npc.Mob
 ID = 62
 Level = 110
 Hp = 43290
@@ -554,7 +554,7 @@ Lime = 993
 AllowedOnMap = 1
 
 [Drarion]
-Class = Mob
+Class = npc.Mob
 ID = 63
 Level = 120
 Hp = 92500
@@ -569,7 +569,7 @@ Lime = 1287
 AllowedOnMap = 1
 
 [Ark Jackal]
-Class = Mob
+Class = npc.Mob
 ID = 119
 Level = 105
 Hp = 10594
@@ -584,7 +584,7 @@ Lime = 394
 AllowedOnMap = 1
 
 [Claw Jackal]
-Class = Mob
+Class = npc.Mob
 ID = 120
 Level = 107
 Hp = 2724
@@ -599,7 +599,7 @@ Lime = 105
 AllowedOnMap = 1
 
 [Gonetor]
-Class = Mob
+Class = npc.Mob
 ID = 121
 Level = 114
 Hp = 27545
@@ -614,7 +614,7 @@ Lime = 667
 AllowedOnMap = 1
 
 [Wolfen]
-Class = Mob
+Class = npc.Mob
 ID = 122
 Level = 120
 Hp = 42378
@@ -629,7 +629,7 @@ Lime = 326
 AllowedOnMap = 1
 
 [Gonma]
-Class = Mob
+Class = npc.Mob
 ID = 123
 Level = 120
 Hp = 37695
@@ -644,7 +644,7 @@ Lime = 812
 AllowedOnMap = 1
 
 [Cutter Khan]
-Class = Mob
+Class = npc.Mob
 ID = 124
 Level = 120
 Hp = 22976
@@ -659,7 +659,7 @@ Lime = 848
 AllowedOnMap = 1
 
 [Sickie Khan]
-Class = Mob
+Class = npc.Mob
 ID = 126
 Level = 145
 Hp = 39908
@@ -674,7 +674,7 @@ Lime = 351
 AllowedOnMap = 1
 
 [Skull Fighter]
-Class = Mob
+Class = npc.Mob
 ID = 127
 Level = 120
 Hp = 29215
@@ -689,7 +689,7 @@ Lime = 949
 AllowedOnMap = 1
 
 [Sad Shadow]
-Class = Mob
+Class = npc.Mob
 ID = 128
 Level = 120
 Hp = 7638
@@ -704,7 +704,7 @@ Lime = 394
 AllowedOnMap = 1
 
 [Wild Skull]
-Class = Mob
+Class = npc.Mob
 ID = 130
 Level = 150
 Hp = 71033
@@ -719,7 +719,7 @@ Lime = 1762
 AllowedOnMap = 1
 
 [Gondra]
-Class = Mob
+Class = npc.Mob
 ID = 132
 Level = 150
 Hp = 166140
@@ -734,7 +734,7 @@ Lime = 1544
 AllowedOnMap = 1
 
 [Kahn]
-Class = Mob
+Class = npc.Mob
 ID = 133
 Level = 170
 Hp = 1368120
@@ -752,7 +752,7 @@ AllowedOnMap = 1
 ####### Dekadun # Dungeon ##############################
 
 [Heblossom]
-Class = Mob
+Class = npc.Mob
 ID = 77
 Level = 32
 Hp = 426
@@ -767,7 +767,7 @@ Lime = 14
 AllowedOnMap = 2
 
 [Blossom]
-Class = Mob
+Class = npc.Mob
 ID = 78
 Level = 32
 Hp = 668
@@ -782,7 +782,7 @@ Lime = 21
 AllowedOnMap = 2
 
 [X-Kabal]
-Class = Mob
+Class = npc.Mob
 ID = 79
 Level = 75
 Hp = 4989
@@ -797,7 +797,7 @@ Lime = 163
 AllowedOnMap = 2
 
 [Horn Fist Kabal]
-Class = Mob
+Class = npc.Mob
 ID = 80
 Level = 70
 Hp = 4150
@@ -812,7 +812,7 @@ Lime = 135
 AllowedOnMap = 2
 
 [Xpier Kabal]
-Class = Mob
+Class = npc.Mob
 ID = 81
 Level = 85
 Hp = 7011
@@ -827,7 +827,7 @@ Lime = 233
 AllowedOnMap = 2
 
 [Mace Kabal 2]
-Class = Mob
+Class = npc.Mob
 ID = 82
 Level = 56
 Hp = 1
@@ -842,7 +842,7 @@ Lime = 1
 AllowedOnMap = 2
 
 [Hammer Kabal]
-Class = Mob
+Class = npc.Mob
 ID = 83
 Level = 56
 Hp = 1
@@ -857,7 +857,7 @@ Lime = 1
 AllowedOnMap = 2
 
 [Hell Scissor Kabal]
-Class = Mob
+Class = npc.Mob
 ID = 84
 Level = 56
 Hp = 1
@@ -872,7 +872,7 @@ Lime = 1
 AllowedOnMap = 2
 
 [Triple Spear Halfer]
-Class = Mob
+Class = npc.Mob
 ID = 85
 Level = 56
 Hp = 1
@@ -887,7 +887,7 @@ Lime = 1
 AllowedOnMap = 2
 
 [Round Saw Halfer]
-Class = Mob
+Class = npc.Mob
 ID = 86
 Level = 56
 Hp = 1
@@ -902,7 +902,7 @@ Lime = 1
 AllowedOnMap = 2
 
 [Steel Pliers Halfer]
-Class = Mob
+Class = npc.Mob
 ID = 87
 Level = 56
 Hp = 1
@@ -917,7 +917,7 @@ Lime = 1
 AllowedOnMap = 2
 
 [Dupe Rack Harpoon]
-Class = Mob
+Class = npc.Mob
 ID = 88
 Level = 56
 Hp = 1
@@ -932,7 +932,7 @@ Lime = 1
 AllowedOnMap = 2
 
 [Iron Bug]
-Class = Mob
+Class = npc.Mob
 ID = 89
 Level = 56
 Hp = 1
@@ -947,7 +947,7 @@ Lime = 1
 AllowedOnMap = 2
 
 [Master Kabal]
-Class = Mob
+Class = npc.Mob
 ID = 253
 Level = 56
 Hp = 1
@@ -962,7 +962,7 @@ Lime = 1
 AllowedOnMap = 2
 
 [Guard Halfer]
-Class = Mob
+Class = npc.Mob
 ID = 254
 Level = 56
 Hp = 1
@@ -980,7 +980,7 @@ AllowedOnMap = 2
 
 
 [Shilon Master]
-Class = Mob
+Class = npc.Mob
 ID = 135
 Level = 170
 Hp = 1
@@ -995,7 +995,7 @@ Lime = 1
 AllowedOnMap = 3
 
 [Shilon Sorcerer 1]
-Class = Mob
+Class = npc.Mob
 ID = 137
 Level = 120
 Hp = 1
@@ -1010,7 +1010,7 @@ Lime = 1
 AllowedOnMap = 3
 
 [Shilon Swordsman 1]
-Class = Mob
+Class = npc.Mob
 ID = 142
 Level = 150
 Hp = 1
@@ -1025,7 +1025,7 @@ Lime = 1
 AllowedOnMap = 3
 
 [Shilon Spear Man 1]
-Class = Mob
+Class = npc.Mob
 ID = 143
 Level = 120
 Hp = 1
@@ -1040,7 +1040,7 @@ Lime = 1
 AllowedOnMap = 3
 
 [Shilon Swordsman 2]
-Class = Mob
+Class = npc.Mob
 ID = 144
 Level = 150
 Hp = 1
@@ -1055,7 +1055,7 @@ Lime = 1
 AllowedOnMap = 3
 
 [Shilon Spear Man 2]
-Class = Mob
+Class = npc.Mob
 ID = 145
 Level = 120
 Hp = 1
@@ -1070,7 +1070,7 @@ Lime = 1
 AllowedOnMap = 3
 
 [Shilon Sorcerer 2]
-Class = Mob
+Class = npc.Mob
 ID = 146
 Level = 120
 Hp = 1
@@ -1085,7 +1085,7 @@ Lime = 1
 AllowedOnMap = 3
 
 [Shilon Swordsman 3]
-Class = Mob
+Class = npc.Mob
 ID = 162
 Level = 150
 Hp = 1
@@ -1100,7 +1100,7 @@ Lime = 1
 AllowedOnMap = 3
 
 [Shilon Spear Man 3]
-Class = Mob
+Class = npc.Mob
 ID = 163
 Level = 120
 Hp = 1
@@ -1115,7 +1115,7 @@ Lime = 1
 AllowedOnMap = 3
 
 [Shilon Magician]
-Class = Mob
+Class = npc.Mob
 ID = 164
 Level = 120
 Hp = 1
@@ -1130,7 +1130,7 @@ Lime = 1
 AllowedOnMap = 3
 
 [Tyranorid]
-Class = Mob
+Class = npc.Mob
 ID = 147
 Level = 170
 Hp = 850000
@@ -1145,7 +1145,7 @@ Lime = 1890
 AllowedOnMap = 3
 
 [Parkikepaloid]
-Class = Mob
+Class = npc.Mob
 ID = 148
 Level = 150
 Hp = 275000
@@ -1160,7 +1160,7 @@ Lime = 675
 AllowedOnMap = 3
 
 [Uokepaloid]
-Class = Mob
+Class = npc.Mob
 ID = 149
 Level = 150
 Hp = 500000
@@ -1175,7 +1175,7 @@ Lime = 1275
 AllowedOnMap = 3
 
 [Raptoroid]
-Class = Mob
+Class = npc.Mob
 ID = 150
 Level = 120
 Hp = 180000
@@ -1190,7 +1190,7 @@ Lime = 675
 AllowedOnMap = 3
 
 [Styrokonoid]
-Class = Mob
+Class = npc.Mob
 ID = 151
 Level = 150
 Hp = 1100000
@@ -1205,7 +1205,7 @@ Lime = 3450
 AllowedOnMap = 3
 
 [Karmaroid]
-Class = Mob
+Class = npc.Mob
 ID = 152
 Level = 150
 Hp = 1400000
@@ -1220,7 +1220,7 @@ Lime = 5100
 AllowedOnMap = 3
 
 [Cutter Lizard]
-Class = Mob
+Class = npc.Mob
 ID = 153
 Level = 0
 Hp = 4500
@@ -1235,7 +1235,7 @@ Lime = 150
 AllowedOnMap = 3
 
 [Horror Lizard]
-Class = Mob
+Class = npc.Mob
 ID = 154
 Level = 120
 Hp = 75500
@@ -1250,7 +1250,7 @@ Lime = 300
 AllowedOnMap = 3
 
 [Torres]
-Class = Mob
+Class = npc.Mob
 ID = 155
 Level = 120
 Hp = 145000
@@ -1265,7 +1265,7 @@ Lime = 675
 AllowedOnMap = 3
 
 [Minot]
-Class = Mob
+Class = npc.Mob
 ID = 156
 Level = 120
 Hp = 230000
@@ -1280,7 +1280,7 @@ Lime = 1050
 AllowedOnMap = 3
 
 [X-Lizard]
-Class = Mob
+Class = npc.Mob
 ID = 157
 Level = 0
 Hp = 71000
@@ -1295,7 +1295,7 @@ Lime = 300
 AllowedOnMap = 3
 
 [Tauron]
-Class = Mob
+Class = npc.Mob
 ID = 159
 Level = 170
 Hp = 760000
@@ -1310,7 +1310,7 @@ Lime = 3450
 AllowedOnMap = 3
 
 [Rexroid]
-Class = Mob
+Class = npc.Mob
 ID = 160
 Level = 170
 Hp = 1900000
@@ -1325,7 +1325,7 @@ Lime = 11325
 AllowedOnMap = 3
 
 [Fire Clay Guard Tower]
-Class = Mob
+Class = npc.Mob
 ID = 179
 Level = 170
 Hp = 1
@@ -1340,7 +1340,7 @@ Lime = 1
 AllowedOnMap = 3
 
 [Fire Stone Guard Tower]
-Class = Mob
+Class = npc.Mob
 ID = 180
 Level = 170
 Hp = 1
@@ -1355,7 +1355,7 @@ Lime = 1
 AllowedOnMap = 3
 
 [Fire Steel Guard Tower]
-Class = Mob
+Class = npc.Mob
 ID = 181
 Level = 170
 Hp = 1
@@ -1370,7 +1370,7 @@ Lime = 1
 AllowedOnMap = 3
 
 [Lightning Clay Guard Tower]
-Class = Mob
+Class = npc.Mob
 ID = 182
 Level = 170
 Hp = 1
@@ -1385,7 +1385,7 @@ Lime = 1
 AllowedOnMap = 3
 
 [Lightning Stone Guard Tower]
-Class = Mob
+Class = npc.Mob
 ID = 183
 Level = 170
 Hp = 1
@@ -1400,7 +1400,7 @@ Lime = 1
 AllowedOnMap = 3
 
 [Lightning Stone Guard Tower 2]
-Class = Mob
+Class = npc.Mob
 ID = 183
 Level = 170
 Hp = 1
@@ -1415,7 +1415,7 @@ Lime = 1
 AllowedOnMap = 3
 
 [Lightning Steel Guard Tower]
-Class = Mob
+Class = npc.Mob
 ID = 184
 Level = 170
 Hp = 1
@@ -1430,7 +1430,7 @@ Lime = 1
 AllowedOnMap = 3
 
 [Stone Clay Guard Tower]
-Class = Mob
+Class = npc.Mob
 ID = 185
 Level = 170
 Hp = 1
@@ -1445,7 +1445,7 @@ Lime = 1
 AllowedOnMap = 3
 
 [Stone Stone Guard Tower]
-Class = Mob
+Class = npc.Mob
 ID = 186
 Level = 170
 Hp = 1
@@ -1460,7 +1460,7 @@ Lime = 1
 AllowedOnMap = 3
 
 [Stone Steel Guard Tower]
-Class = Mob
+Class = npc.Mob
 ID = 187
 Level = 170
 Hp = 1
@@ -1475,7 +1475,7 @@ Lime = 1
 AllowedOnMap = 3
 
 [Jailer Khan]
-Class = Mob
+Class = npc.Mob
 ID = 227
 Level = 170
 Hp = 1
@@ -1490,7 +1490,7 @@ Lime = 1
 AllowedOnMap = 3
 
 [Angler]
-Class = Mob
+Class = npc.Mob
 ID = 251
 Level = 170
 Hp = 1
@@ -1505,7 +1505,7 @@ Lime = 1
 AllowedOnMap = 3
 
 [Piranha]
-Class = Mob
+Class = npc.Mob
 ID = 252
 Level = 170
 Hp = 1
@@ -1520,7 +1520,7 @@ Lime = 1
 AllowedOnMap = 3
 
 [Matrix Death Tower]
-Class = Mob
+Class = npc.Mob
 ID = 272
 Level = 170
 Hp = 1
@@ -1538,7 +1538,7 @@ AllowedOnMap = 3
 
 
 [Giant Worm]
-Class = Mob
+Class = npc.Mob
 ID = 193
 Level = 174
 Hp = 67600
@@ -1553,7 +1553,7 @@ Lime = 725
 AllowedOnMap = 5
 
 [Shining Jackal]
-Class = Mob
+Class = npc.Mob
 ID = 194
 Level = 190
 Hp = 945471
@@ -1569,7 +1569,7 @@ AllowedOnMap = 5
 #atk direct on shield (mana shield etc)#
 
 [Magma Punch]
-Class = Mob
+Class = npc.Mob
 ID = 195
 Level = 186
 Hp = 74300
@@ -1584,7 +1584,7 @@ Lime = 950
 AllowedOnMap = 5
 
 [Spit worm]
-Class = Mob
+Class = npc.Mob
 ID = 196
 Level = 0
 Hp = 5080000
@@ -1599,7 +1599,7 @@ Lime = 1
 AllowedOnMap = 5
 
 [Shock Rinch]
-Class = Mob
+Class = npc.Mob
 ID = 197
 Level = 160
 Hp = 58100
@@ -1614,7 +1614,7 @@ Lime = 550
 AllowedOnMap = 5
 
 [A Falling Rock]
-Class = Mob
+Class = npc.Mob
 ID = 198
 Level = 162
 Hp = 6010000
@@ -1629,7 +1629,7 @@ Lime = 1
 AllowedOnMap = 5
 
 [Big Thorn]
-Class = Mob
+Class = npc.Mob
 ID = 199
 Level = 166
 Hp = 6230000
@@ -1644,7 +1644,7 @@ Lime = 1
 AllowedOnMap = 5
 
 [Dart Pitcher]
-Class = Mob
+Class = npc.Mob
 ID = 202
 Level = 162
 Hp = 59200
@@ -1659,7 +1659,7 @@ Lime = 575
 AllowedOnMap = 5
 
 [Volcanic Punch]
-Class = Mob
+Class = npc.Mob
 ID = 203
 Level = 166
 Hp = 61500
@@ -1674,7 +1674,7 @@ Lime = 625
 AllowedOnMap = 5
 
 [Volt Rinch]
-Class = Mob
+Class = npc.Mob
 ID = 204
 Level = 138
 Hp = 76000
@@ -1689,7 +1689,7 @@ Lime = 3450
 AllowedOnMap = 5
 
 [Volcanic risk]
-Class = Mob
+Class = npc.Mob
 ID = 205
 Level = 176
 Hp = 61000
@@ -1704,7 +1704,7 @@ Lime = 750
 AllowedOnMap = 5
 
 [Antros]
-Class = Mob
+Class = npc.Mob
 ID = 206
 Level = 182
 Hp = 72500
@@ -1719,7 +1719,7 @@ Lime = 850
 AllowedOnMap = 5
 
 [King Antros]
-Class = Mob
+Class = npc.Mob
 ID = 207
 Level = 200
 Hp = 2579985
@@ -1734,7 +1734,7 @@ Lime = 9516
 AllowedOnMap = 5
 
 [Devil King]
-Class = Mob
+Class = npc.Mob
 ID = 208
 Level = 210
 Hp = 6738609
@@ -1749,7 +1749,7 @@ Lime = 13500
 AllowedOnMap = 5
 
 [Dread Knight]
-Class = Mob
+Class = npc.Mob
 ID = 209
 Level = 190
 Hp = 78800
@@ -1764,7 +1764,7 @@ Lime = 1050
 AllowedOnMap = 5
 
 [Dread Templar]
-Class = Mob
+Class = npc.Mob
 ID = 210
 Level = 194
 Hp = 80300
@@ -1779,7 +1779,7 @@ Lime = 1150
 AllowedOnMap = 5
 
 [Pitcher]
-Class = Mob
+Class = npc.Mob
 ID = 258
 Level = 0
 Hp = 1
@@ -1794,7 +1794,7 @@ Lime = 1
 AllowedOnMap = 5
 
 [Pitcher 2]
-Class = Mob
+Class = npc.Mob
 ID = 258
 Level = 142
 Hp = 44300
@@ -1809,7 +1809,7 @@ Lime = 325
 AllowedOnMap = 5
 
 [Rinch]
-Class = Mob
+Class = npc.Mob
 ID = 259
 Level = 0
 Hp = 1
@@ -1824,7 +1824,7 @@ Lime = 1
 AllowedOnMap = 5
 
 [Risk]
-Class = Mob
+Class = npc.Mob
 ID = 260
 Level = 0
 Hp = 1
@@ -1839,7 +1839,7 @@ Lime = 1
 AllowedOnMap = 5
 
 [Punch]
-Class = Mob
+Class = npc.Mob
 ID = 261
 Level = 146
 Hp = 47300
@@ -1854,7 +1854,7 @@ Lime = 375
 AllowedOnMap = 5
 
 [Ant]
-Class = Mob
+Class = npc.Mob
 ID = 262
 Level = 158
 Hp = 56900
@@ -1869,7 +1869,7 @@ Lime = 525
 AllowedOnMap = 5
 
 [Templar]
-Class = Mob
+Class = npc.Mob
 ID = 263
 Level = 170
 Hp = 65300
@@ -1884,7 +1884,7 @@ Lime = 675
 AllowedOnMap = 5
 
 [Giant Reaper]
-Class = Mob
+Class = npc.Mob
 ID = 278
 Level = 184
 Hp = 1950
@@ -1899,7 +1899,7 @@ Lime = 1
 AllowedOnMap = 5
 
 [Sickle Reaper]
-Class = Mob
+Class = npc.Mob
 ID = 279
 Level = 178
 Hp = 1
@@ -1914,7 +1914,7 @@ Lime = 1700
 AllowedOnMap = 5
 
 [Ebony Assassin]
-Class = Mob
+Class = npc.Mob
 ID = 280
 Level = 172
 Hp = 1
@@ -1929,7 +1929,7 @@ Lime = 700
 AllowedOnMap = 5
 
 [Soul Reaper]
-Class = Mob
+Class = npc.Mob
 ID = 281
 Level = 206
 Hp = 1
@@ -1947,7 +1947,7 @@ AllowedOnMap = 5
 
 
 [Raven Mage]
-Class = Mob
+Class = npc.Mob
 ID = 219
 Level = 160
 Hp = 58440
@@ -1962,7 +1962,7 @@ Lime = 310
 AllowedOnMap = 6
 
 [Head Dragon]
-Class = Mob
+Class = npc.Mob
 ID = 220
 Level = 168
 Hp = 64445
@@ -1977,7 +1977,7 @@ Lime = 352
 AllowedOnMap = 6
 
 [Iron Dragon]
-Class = Mob
+Class = npc.Mob
 ID = 221
 Level = 180
 Hp = 79427
@@ -1992,7 +1992,7 @@ Lime = 458
 AllowedOnMap = 6
 
 [Earth Dragon]
-Class = Mob
+Class = npc.Mob
 ID = 222
 Level = 200
 Hp = 3000000
@@ -2007,7 +2007,7 @@ Lime = 1903
 AllowedOnMap = 6
 
 [Sky Dragon]
-Class = Mob
+Class = npc.Mob
 ID = 223
 Level = 205
 Hp = 4000000
@@ -2022,7 +2022,7 @@ Lime = 2028
 AllowedOnMap = 6
 
 [Mother Dragon]
-Class = Mob
+Class = npc.Mob
 ID = 224
 Level = 220
 Hp = 10000000
@@ -2037,7 +2037,7 @@ Lime = 4860
 AllowedOnMap = 6
 
 [Ghost Hydra]
-Class = Mob
+Class = npc.Mob
 ID = 243
 Level = 160
 Hp = 34891
@@ -2052,7 +2052,7 @@ Lime = 263
 AllowedOnMap = 6
 
 [Raven Valkyrie]
-Class = Mob
+Class = npc.Mob
 ID = 244
 Level = 168
 Hp = 45390
@@ -2067,7 +2067,7 @@ Lime = 593
 AllowedOnMap = 6
 
 [Bat Dragon]
-Class = Mob
+Class = npc.Mob
 ID = 245
 Level = 175
 Hp = 70395
@@ -2082,7 +2082,7 @@ Lime = 406
 AllowedOnMap = 6
 
 [Ghost Raven]
-Class = Mob
+Class = npc.Mob
 ID = 247
 Level = 175
 Hp = 79427
@@ -2097,7 +2097,7 @@ Lime = 458
 AllowedOnMap = 6
 
 [Flying Devil King]
-Class = Mob
+Class = npc.Mob
 ID = 249
 Level = 186
 Hp = 1800000
@@ -2112,7 +2112,7 @@ Lime = 1200
 AllowedOnMap = 6
 
 [Shadow Armor Dragon]
-Class = Mob
+Class = npc.Mob
 ID = 250
 Level = 1
 Hp = 1
@@ -2127,7 +2127,7 @@ Lime = 1
 AllowedOnMap = 6
 
 [Wolf Wing]
-Class = Mob
+Class = npc.Mob
 ID = 285
 Level = 92
 Hp = 23000
@@ -2142,7 +2142,7 @@ Lime = 330
 AllowedOnMap = 6
 
 [Rapier Fencer]
-Class = Mob
+Class = npc.Mob
 ID = 286
 Level = 103
 Hp = 40000
@@ -2157,7 +2157,7 @@ Lime = 300
 AllowedOnMap = 6
 
 [Axe Wing]
-Class = Mob
+Class = npc.Mob
 ID = 287
 Level = 158
 Hp = 225000
@@ -2172,7 +2172,7 @@ Lime = 400
 AllowedOnMap = 6
 
 [Sorceress Wing]
-Class = Mob
+Class = npc.Mob
 ID = 288
 Level = 125
 Hp = 110000
@@ -2187,7 +2187,7 @@ Lime = 350
 AllowedOnMap = 6
 
 [Storm Fencer]
-Class = Mob
+Class = npc.Mob
 ID = 289
 Level = 125
 Hp = 725000
@@ -2202,7 +2202,7 @@ Lime = 480
 AllowedOnMap = 6
 
 [Hell Wing]
-Class = Mob
+Class = npc.Mob
 ID = 290
 Level = 158
 Hp = 110000
@@ -2217,7 +2217,7 @@ Lime = 400
 AllowedOnMap = 6
 
 [Battle Dragon]
-Class = Mob
+Class = npc.Mob
 ID = 291
 Level = 169
 Hp = 1800000
@@ -2232,7 +2232,7 @@ Lime = 1000
 AllowedOnMap = 6
 
 [Wolf Dragon]
-Class = Mob
+Class = npc.Mob
 ID = 292
 Level = 158
 Hp = 138000
@@ -2249,7 +2249,7 @@ AllowedOnMap = 6
 ###### Great White Horn ######################################
 
 [Ice Collector]
-Class = Mob
+Class = npc.Mob
 ID = 295
 Level = 160
 Hp = 60000
@@ -2264,7 +2264,7 @@ Lime = 360
 AllowedOnMap = 7
 
 [Ice Halfer]
-Class = Mob
+Class = npc.Mob
 ID = 298
 Level = 180
 Hp = 100000
@@ -2281,7 +2281,7 @@ AllowedOnMap = 7
 ###### Great White Horn & Genus Labor ######################################
 
 [Frozen Head]
-Class = Mob
+Class = npc.Mob
 ID = 300
 Level = 190
 Hp = 130000
@@ -2296,7 +2296,7 @@ Lime = 490
 AllowedOnMap = 7,8
 
 [Ice Cracker]
-Class = Mob
+Class = npc.Mob
 ID = 296
 Level = 200
 Hp = 130000
@@ -2311,7 +2311,7 @@ Lime = 490
 AllowedOnMap = 7,8
 
 [Clay Soul]
-Class = Mob
+Class = npc.Mob
 ID = 299
 Level = 210
 Hp = 190000
@@ -2326,7 +2326,7 @@ Lime = 590
 AllowedOnMap = 7,8
 
 [Ice Risk]
-Class = Mob
+Class = npc.Mob
 ID = 302
 Level = 200
 Hp = 230000
@@ -2341,7 +2341,7 @@ Lime = 650
 AllowedOnMap = 7,8
 
 [Hail Wizard]
-Class = Mob
+Class = npc.Mob
 ID = 297
 Level = 230
 Hp = 270000
@@ -2356,7 +2356,7 @@ Lime = 710
 AllowedOnMap = 7,8
 
 [Winter Knight]
-Class = Mob
+Class = npc.Mob
 ID = 294
 Level = 260
 Hp = 410000
@@ -2373,7 +2373,7 @@ AllowedOnMap = 7,8
 ###### Genus Labor ######################################
 
 [Yeti]
-Class = Mob
+Class = npc.Mob
 ID = 363
 Level = 210
 Hp = 190000
@@ -2388,7 +2388,7 @@ Lime = 590
 AllowedOnMap = 8
 
 [Garpon Soldier]
-Class = Mob
+Class = npc.Mob
 ID = 364
 Level = 231
 Hp = 415000
@@ -2403,7 +2403,7 @@ Lime = 716
 AllowedOnMap = 8
 
 [Frozen Yeti]
-Class = Mob
+Class = npc.Mob
 ID = 362
 Level = 244
 Hp = 330000
@@ -2418,7 +2418,7 @@ Lime = 798
 AllowedOnMap = 8
 
 [Ice Tower]
-Class = Mob
+Class = npc.Mob
 ID = 360
 Level = 245
 Hp = 335000
@@ -2433,7 +2433,7 @@ Lime = 805
 AllowedOnMap = 8
 
 [Lightning Tower]
-Class = Mob
+Class = npc.Mob
 ID = 361
 Level = 248
 Hp = 350000
@@ -2448,7 +2448,7 @@ Lime = 826
 AllowedOnMap = 8
 
 [Garpon Spearman]
-Class = Mob
+Class = npc.Mob
 ID = 359
 Level = 250
 Hp = 360000
@@ -2463,7 +2463,7 @@ Lime = 840
 AllowedOnMap = 8
 
 [Garpon Guardman]
-Class = Mob
+Class = npc.Mob
 ID = 357
 Level = 261
 Hp = 415000
@@ -2478,7 +2478,7 @@ Lime = 917
 AllowedOnMap = 8
 
 [Garpon Spearhead]
-Class = Mob
+Class = npc.Mob
 ID = 358
 Level = 254
 Hp = 380000
@@ -2493,7 +2493,7 @@ Lime = 868
 AllowedOnMap = 8
 
 [Sicrin]
-Class = Mob
+Class = npc.Mob
 ID = 354
 Level = 284
 Hp = 11184500
@@ -2508,7 +2508,7 @@ Lime = 81375
 AllowedOnMap = 8
 
 [Sharklord]
-Class = Mob
+Class = npc.Mob
 ID = 355
 Level = 285
 Hp = 11251000
@@ -2523,7 +2523,7 @@ Lime = 82250
 AllowedOnMap = 8
 
 [Beradin]
-Class = Mob
+Class = npc.Mob
 ID = 356
 Level = 287
 Hp = 11384000
@@ -2538,7 +2538,7 @@ Lime = 84000
 AllowedOnMap = 8
 
 [Kisare]
-Class = Mob
+Class = npc.Mob
 ID = 353
 Level = 291
 Hp = 11650000
@@ -2553,7 +2553,7 @@ Lime = 87500
 AllowedOnMap = 8
 
 [Mouel]
-Class = Mob
+Class = npc.Mob
 ID = 352
 Level = 300
 Hp = 30000000
@@ -2571,7 +2571,7 @@ AllowedOnMap = 8
 
 
 [Grem]
-Class = Mob
+Class = npc.Mob
 ID = 40
 Level = 45
 Hp = 1
@@ -2585,7 +2585,7 @@ Exp = 1
 Lime = 1
 
 [Gremlin]
-Class = Mob
+Class = npc.Mob
 ID = 54
 Level = 40
 Hp = 1
@@ -2600,7 +2600,7 @@ Lime = 1
 AllowedOnMap = 0,2
 
 [Devil Giant]
-Class = Mob
+Class = npc.Mob
 ID = 105
 Level = 65
 Hp = 1
@@ -2615,7 +2615,7 @@ Lime = 1
 AllowedOnMap = 0,3
 
 [Skeleton Captain]
-Class = Mob
+Class = npc.Mob
 ID = 59
 Level = 100
 Hp = 11020
@@ -2630,7 +2630,7 @@ Lime = 163
 AllowedOnMap = 1,2
 
 [Skeleton Soldier]
-Class = Mob
+Class = npc.Mob
 ID = 60
 Level =75
 Hp = 4989
@@ -2645,7 +2645,7 @@ Lime = 163
 AllowedOnMap = 1,2
 
 [Skeleton Wizard]
-Class = Mob
+Class = npc.Mob
 ID = 61
 Level =70
 Hp = 4150
@@ -2660,7 +2660,7 @@ Lime = 135
 AllowedOnMap = 1,2
 
 [Dark Soul]
-Class = Mob
+Class = npc.Mob
 ID = 125
 Level = 100
 Hp = 11652
@@ -2675,7 +2675,7 @@ Lime = 210
 AllowedOnMap = 1,3
 
 [Sauron]
-Class = Mob
+Class = npc.Mob
 ID = 158
 Level = 150
 Hp = 420000
@@ -2693,7 +2693,7 @@ AllowedOnMap = 3,5
 
 
 [Sheep]
-Class = Mob
+Class = npc.Mob
 ID = 161
 Level = 35
 Hp = 1
@@ -2708,7 +2708,7 @@ Lime = 1
 AllowedOnMap = 4,0,3,5,6,2,1,7,8
 
 [Small Mine]
-Class = Mob
+Class = npc.Mob
 ID = 218
 Level = 35
 Hp = 1
@@ -2723,7 +2723,7 @@ Lime = 1
 AllowedOnMap = 4,0,3,5,6,2,1,7,8
 
 [Perky Socks]
-Class = Mob
+Class = npc.Mob
 ID = 304
 Level = 35
 Hp = 1
@@ -2738,7 +2738,7 @@ Lime = 1
 AllowedOnMap = 4,0,3,5,6,2,1,7,8
 
 [Snowman]
-Class = Mob
+Class = npc.Mob
 ID = 305
 Level = 35
 Hp = 1
@@ -2753,7 +2753,7 @@ Lime = 1
 AllowedOnMap = 4,0,3,5,6,2,1,7,8
 
 [Monkey]
-Class = Mob
+Class = npc.Mob
 ID = 315
 Level = 35
 Hp = 1
@@ -2768,7 +2768,7 @@ Lime = 1
 AllowedOnMap = 4,0,3,5,6,2,1,7,8
 
 [An Old Man]
-Class = Mob
+Class = npc.Mob
 ID = 317
 Level = 35
 Hp = 1
@@ -2783,7 +2783,7 @@ Lime = 1
 AllowedOnMap = 4,0,3,5,6,2,1,7,8
 
 [An Old Lady]
-Class = Mob
+Class = npc.Mob
 ID = 318
 Level = 35
 Hp = 1
@@ -2798,7 +2798,7 @@ Lime = 1
 AllowedOnMap = 4,0,3,5,6,2,1,7,8
 
 [Bunnygirl]
-Class = Mob
+Class = npc.Mob
 ID = 321
 Level = 35
 Hp = 1
@@ -2813,7 +2813,7 @@ Lime = 1
 AllowedOnMap = 4,0,3,5,6,2,1,7,8
 
 [War Giant]
-Class = Mob
+Class = npc.Mob
 ID = 38
 Level = 190
 Hp = 3500000
@@ -2830,7 +2830,7 @@ AllowedOnMap = 4,0,3,5,6,2,1,7,8
 ##### Castle Gates ######
 
 [Quake Stone]
-Class = Mob
+Class = npc.Mob
 ID = 367
 Level = 1
 Hp = 1
@@ -2845,7 +2845,7 @@ Lime = 1
 AllowedOnMap = 4,0,3,5,6,2,1,7,8
 
 [Life Stone]
-Class = Mob
+Class = npc.Mob
 ID = 368
 Level = 1
 Hp = 1
@@ -2860,7 +2860,7 @@ Lime = 1
 AllowedOnMap = 4,0,3,5,6,2,1,7,8
 
 [Tiger Bunny]
-Class = Mob
+Class = npc.Mob
 ID = 370
 Level = 1
 Hp = 1
@@ -2875,7 +2875,7 @@ Lime = 1
 AllowedOnMap = 4,0,3,5,6,2,1,7,8
 
 [x_0 Nose Santa]
-Class = Mob
+Class = npc.Mob
 ID = 382
 Level = 1
 Hp = 1
@@ -2891,7 +2891,7 @@ AllowedOnMap = 4,0,3,5,6,2,1,7,8
 
 ######## Quests #####################################
 [Devil Dyor]
-Class = Mob
+Class = npc.Mob
 ID = 324
 Level = 0
 Hp = 100

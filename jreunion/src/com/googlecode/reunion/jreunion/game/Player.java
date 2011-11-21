@@ -118,7 +118,7 @@ public abstract class Player extends LivingObject implements EventListener {
 
 	private Equipment equipment;
 
-	private List<Integer> attackQueue = new Vector<Integer>();
+	private List<Long> attackQueue = new Vector<Long>();
 
 	private QuickSlotBar quickSlotBar;
 	
@@ -158,7 +158,7 @@ public abstract class Player extends LivingObject implements EventListener {
 
 	}
 	
-	public void addAttack(int attack) {
+	public void addAttack(long attack) {
 		if (attackQueue.size() >= 5) {
 			attackQueue.remove(0);
 		}
@@ -166,9 +166,7 @@ public abstract class Player extends LivingObject implements EventListener {
 	}
 	
 	public void clearAttackQueue() {
-		for (int i = 0; i < attackQueue.size(); i++) {
-			attackQueue.remove(i);
-		}
+		attackQueue.clear();
 	}
 
 	/****** Manages the Item Drop ******/
@@ -287,23 +285,19 @@ public abstract class Player extends LivingObject implements EventListener {
 	public abstract long getBaseDamage();
 	
 
-	public Iterator<Integer> getAttackQueueIterator() {
-		return attackQueue.iterator();
+	public List<Long> getAttackQueue() {
+		return attackQueue;
 	}
 
 	public long getBestAttack() {
+		
 		long bestAttack = 0;
-		Iterator<Integer> iter = getAttackQueueIterator();
-
-		while (iter.hasNext()) {
-			//int count = 1;
-			long attack = iter.next();
-
-			if (bestAttack < attack) {
-				bestAttack = attack;
-			}
-			//count++;
+		
+		for(long queuedAttack : getAttackQueue()){
+			if(queuedAttack > bestAttack)
+				bestAttack = queuedAttack;
 		}
+	
 		return bestAttack;
 	}
 	

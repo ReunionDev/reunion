@@ -1,6 +1,7 @@
 package com.googlecode.reunion.jreunion.server;
 
 import java.nio.channels.SocketChannel;
+import java.util.List;
 import java.util.TimerTask;
 
 import org.apache.log4j.Logger;
@@ -19,6 +20,7 @@ import com.googlecode.reunion.jreunion.game.RoamingItem;
 import com.googlecode.reunion.jreunion.game.Skill;
 import com.googlecode.reunion.jreunion.game.Usable;
 import com.googlecode.reunion.jreunion.game.items.equipment.SlayerWeapon;
+import com.googlecode.reunion.jreunion.game.skills.bulkan.SecondAttack;
 import com.googlecode.reunion.jreunion.server.Client.LoginType;
 import com.googlecode.reunion.jreunion.server.Client.State;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
@@ -264,14 +266,18 @@ public class Command {
 		sendable.sendPacket(Type.SAY, text);
 	}
 
-	/****** player1 attacks player2 with Sub Attack 
+	/****** player1 attacks with second weapon 
 	 * @param skillid ******/
-	public void subAttack(Player player, LivingObject target, String effectid) {
+	public void subAttack(Player player, List<LivingObject> targets, int skillId) {
 		Client client = player.getClient();
+		Skill skill = world.getSkillManager().getSkill(skillId);
 		
-		client.sendPacket(Type.ATTACK_VITAL, target);
+		if(skill instanceof SecondAttack)
+			((SecondAttack)skill).cast(player, targets);
+	
 		
-		player.getInterested().sendPacket(Type.SECONDATACK,player,target,effectid);
+		//client.sendPacket(Type.ATTACK_VITAL, targets.get(0));
+		//player.getInterested().sendPacket(Type.SECONDATACK,player,targets.get(0),skillId);
 		
 	}
 	/*

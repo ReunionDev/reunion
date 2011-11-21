@@ -1,4 +1,4 @@
-package com.googlecode.reunion.jreunion.game;
+package com.googlecode.reunion.jreunion.game.npc;
 
 import java.util.Iterator;
 import java.util.Random;
@@ -8,6 +8,15 @@ import org.apache.log4j.Logger;
 
 import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jcommon.Parser;
+import com.googlecode.reunion.jreunion.game.Enums;
+import com.googlecode.reunion.jreunion.game.Item;
+import com.googlecode.reunion.jreunion.game.LivingObject;
+import com.googlecode.reunion.jreunion.game.Npc;
+import com.googlecode.reunion.jreunion.game.NpcSpawn;
+import com.googlecode.reunion.jreunion.game.Player;
+import com.googlecode.reunion.jreunion.game.Position;
+import com.googlecode.reunion.jreunion.game.RoamingItem;
+import com.googlecode.reunion.jreunion.game.Spawn;
 import com.googlecode.reunion.jreunion.server.Client;
 import com.googlecode.reunion.jreunion.server.ItemManager;
 import com.googlecode.reunion.jreunion.server.LocalMap;
@@ -444,19 +453,19 @@ public class Mob extends Npc {
 			if(parsedItem.getMemberValue("Mob").equals(""+this.getType())){
 				float rate = Float.parseFloat(parsedItem.getMemberValue("Rate"));
 				if( r.nextFloat()<rate){
-					Logger.getLogger(Mob.class).info(parsedItem.getMemberValue("Item"));
 					int itemType = Integer.parseInt(parsedItem.getMemberValue("Item"));
 					ItemManager itemManager = player.getClient().getWorld().getItemManager();
 					
 					Item<?> item = itemManager.create(itemType);
-					item.setExtraStats(0);
 					item.setGemNumber(0);
+					item.setExtraStats(item.getType().getMaxExtraStats());
 					item.setDurability(item.getType().getMaxDurability());
 					item.setUnknown1(0);
 					item.setUnknown2(0);
 					
 					final RoamingItem roamingItem = getPosition().getLocalMap().getWorld().getCommand().dropItem(this.getPosition(), item);
 					roamingItem.setOwner(player);
+					Logger.getLogger(Mob.class).info("Mob "+this+" droped roaming item "+roamingItem);
 					
 					java.util.Timer dropExclusivityTimer = new java.util.Timer();
 					long dropExclusivity = player.getClient().getWorld().getServerSetings().getDropExclusivity();

@@ -570,7 +570,7 @@ MinSecondRange = 20
 MaxSecondRange = 500
 StatusUsed = 2
 Type = 2
-Class = SkillPlaceHolder
+Class = bulkan.SecondAttack
 
 [Concentrated Attack]
 ID = 41

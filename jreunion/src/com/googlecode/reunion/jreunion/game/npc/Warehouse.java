@@ -1,9 +1,16 @@
-package com.googlecode.reunion.jreunion.game;
+package com.googlecode.reunion.jreunion.game.npc;
 
 import java.util.Iterator;
 
 import org.apache.log4j.Logger;
 
+import com.googlecode.reunion.jreunion.game.HandPosition;
+import com.googlecode.reunion.jreunion.game.Item;
+import com.googlecode.reunion.jreunion.game.ItemType;
+import com.googlecode.reunion.jreunion.game.Npc;
+import com.googlecode.reunion.jreunion.game.Player;
+import com.googlecode.reunion.jreunion.game.StashItem;
+import com.googlecode.reunion.jreunion.game.StashPosition;
 import com.googlecode.reunion.jreunion.server.Client;
 import com.googlecode.reunion.jreunion.server.DatabaseUtils;
 import com.googlecode.reunion.jreunion.server.PacketFactory.Type;
@@ -33,7 +40,7 @@ public class Warehouse extends Npc {
 		client.sendPacket(Type.STASH_END);
 	}
 
-	/****** Add/Remove items from stash ******/
+	/****** Add/Remove single items to/from stash ******/
 	public void stashClick(Player player, int pos, int type, int gems, int special) {
 		
 		Client client = player.getClient();
@@ -61,6 +68,16 @@ public class Warehouse extends Npc {
 			storeItem(player,stashItem);
 			
 		}
+	}
+	
+	/****** Add multiple items to stash ******/
+	public void stashPut(Player player, int pos, int type, int gems, int special) {
+		
+	}
+	
+	/****** Remove multiple items from stash ******/
+	public void stashGet(Player player, int pos, int type, int gems, int special) {
+		
 	}
 	
 	public void storeItem(Player player, StashItem stashItem){

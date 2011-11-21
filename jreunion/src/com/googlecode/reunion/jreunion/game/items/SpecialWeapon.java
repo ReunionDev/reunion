@@ -2,6 +2,7 @@ package com.googlecode.reunion.jreunion.game.items;
 
 import com.googlecode.reunion.jcommon.ParsedItem;
 import com.googlecode.reunion.jreunion.game.PlayerItem;
+import com.googlecode.reunion.jreunion.game.Skill;
 import com.googlecode.reunion.jreunion.server.Reference;
 
 /**
@@ -9,13 +10,10 @@ import com.googlecode.reunion.jreunion.server.Reference;
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
 public class SpecialWeapon extends PlayerItem {
-	private int speed; // 0 - Very Slow; 1 - Slow; 2 - Normal; 3 - Fast; 4 -
-
-	// Very Fast
+	
+	private int speed; // 0 - Very Slow; 1 - Slow; 2 - Normal; 3 - Fast; 4 - Very Fast
 
 	private int minDamge;
-
-	// Very Fast
 
 	private int maxDamage;
 
@@ -23,9 +21,7 @@ public class SpecialWeapon extends PlayerItem {
 
 	// 4 - Shield; 5 - Cape/Wings/Special Weapon; 6 - weapon
 
-	private int race; // -1 - Common; 0 - Bulkan; 1 - Kailipton; 2 - Aidia;
-
-	// 3 - Human
+	private int race; // -1 - Common; 0 - Bulkan; 1 - Kailipton; 2 - Aidia; 3 - Human
 
 	private int stmUsed;
 
@@ -256,4 +252,9 @@ public class SpecialWeapon extends PlayerItem {
 	public void setStmUsed(int stmUsed) {
 		this.stmUsed = stmUsed;
 	}
+	
+	public long getDamage(){
+		return (long)(getMinDamage() + ((getMaxDamage()-getMinDamage())*Math.random()));
+	}
+
 }
