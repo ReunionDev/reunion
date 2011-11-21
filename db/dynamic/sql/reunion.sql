@@ -30,7 +30,7 @@ CREATE TABLE `accounts` (
 DROP TABLE IF EXISTS `characters`;
 
 CREATE TABLE `characters` (
-  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+ `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `accountid` int(11) DEFAULT NULL,
   `name` varchar(32) DEFAULT NULL,
   `level` int(11) DEFAULT NULL,
@@ -42,9 +42,9 @@ CREATE TABLE `characters` (
   `race` int(11) DEFAULT NULL,
   `sex` int(11) DEFAULT NULL,
   `hair` int(11) DEFAULT NULL,
-  `totalExp` int(11) DEFAULT NULL,
-  `levelUpExp` int(11) DEFAULT NULL,
-  `lime` int(11) DEFAULT NULL,
+  `totalExp` bigint(20) DEFAULT NULL,
+  `levelUpExp` bigint(20) DEFAULT NULL,
+  `lime` bigint(20) DEFAULT NULL,
   `statusPoints` int(11) DEFAULT NULL,
   `penaltyPoints` int(11) DEFAULT NULL,
   `guildid` int(11) DEFAULT NULL,
@@ -99,8 +99,11 @@ DROP TABLE IF EXISTS `items`;
 CREATE TABLE `items` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `type` int(11) DEFAULT NULL,
-  `gemnumber` int(11) DEFAULT NULL,
-  `extrastats` int(11) DEFAULT NULL,
+  `gemnumber` int(11) NOT NULL DEFAULT '0',
+  `extrastats` int(11) NOT NULL DEFAULT '0',
+  `durability` int(11) NOT NULL DEFAULT '0',
+  `unknown1` int(11) NOT NULL DEFAULT '0',
+  `unknown2` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
