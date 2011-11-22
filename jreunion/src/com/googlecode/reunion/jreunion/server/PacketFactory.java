@@ -77,7 +77,8 @@ public class PacketFactory {
 		Q_EX,
 		WISPER,
 		SECONDATACK,
-		SAV
+		SAV,
+		K
 	}
 	
 	public static String createPacket(Type packetType, Object... args) {
@@ -693,6 +694,16 @@ public class PacketFactory {
 				Integer limeAmmount = (Integer) args[0];
 				
 				return "q_ex " + limeAmmount + "\n";
+			}
+			break;
+			
+		case K:
+			if(args.length > 0){
+				int isActivated = (Integer) args[0];
+				LivingObject livingObject = (LivingObject) args[1];
+				int typeId = (Integer) args[2];
+				
+				return "k "+isActivated+" "+getObjectType(livingObject)+" "+livingObject.getEntityId()+" "+typeId;
 			}
 			break;
 			

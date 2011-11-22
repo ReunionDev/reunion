@@ -194,7 +194,7 @@ public class LocalMap extends Map implements Runnable{
 
 			if (!item.checkMembers(new String[] { "ID", "X", "Y",
 					"Rotation", "Type" })) {
-				Logger.getLogger(LocalMap.class).error("Failed to load npc spawn {name:"+item.getName()+"} on map "
+				Logger.getLogger(LocalMap.class).warn("Failed to load npc spawn {name:"+item.getName()+"} on map "
 						+ this);
 				continue;
 			}

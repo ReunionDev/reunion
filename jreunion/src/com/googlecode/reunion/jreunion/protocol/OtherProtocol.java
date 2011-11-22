@@ -27,16 +27,17 @@ public class OtherProtocol extends Protocol {
 	public short iter = -1;
 	public short iterCheck = -1;
 	
-	private BufferedOutputStream bos;
+	//private BufferedOutputStream bos;
 	
 	public OtherProtocol(Client client) {
 		super(client);
 		
+		/*
 		try {
 			bos = new BufferedOutputStream(new FileOutputStream("OtherProtocol-"+(new Date().getTime()/1000)+".txt", true));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-		}
+		}*/
 		
 		if(client!=null){
 			setAddress(getClient().getSocketChannel().socket().getLocalAddress());
@@ -92,12 +93,14 @@ public class OtherProtocol extends Protocol {
 	public String decryptServer(byte[] data) {
 		String result = decryptServer(data, iter, iterCheck);
 		
+		/*
 		try {
 			bos.write(result.getBytes());
 			bos.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		*/
 		
 		handleChanges(result);
 		return result;
@@ -148,12 +151,14 @@ public class OtherProtocol extends Protocol {
 			debug+="iter: "+iter+"\n";;
 			debug+="iterCheck: "+iterCheck+"\n";
 			
+			/*
 			try {
 				bos.write(debug.getBytes());
 				bos.flush();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+			*/
 			System.out.println(debug);
 		}
 	}

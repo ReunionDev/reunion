@@ -198,6 +198,7 @@ public class MessageParser {
 					if(i < (words.length-1))
 						packetData = packetData+" ";
 				}
+				
 				client.sendData(packetData);
 			}
 
@@ -564,6 +565,51 @@ public class MessageParser {
 						}
 					}
 				
+			} else if (words[0].equals("@special")) {
+				int isActivated = 1;
+				int typeId = 0;
+				int[] availableTypeId = {10003,10011,10012,10013,10014,10015,10016,10017,10018,10019,
+						10020,10021,10022,10023,10024,10025,10026,10027,10028};
+				
+				if(words.length == 3){
+					typeId = Integer.parseInt(words[1]);
+					isActivated = Integer.parseInt(words[2]);
+				} else if(words.length == 2){
+					if(words[1].equals("all")){
+						for(int id : availableTypeId){
+							player.getClient().sendPacket(Type.K, 1, player, id);
+							player.getInterested().sendPacket(Type.K, 1, player, id);
+						}
+					}
+				} else if(words.length == 1){
+					int typeIdPos = 100;
+					while(typeIdPos > 18)
+						typeIdPos = (int)(Math.random()*100);
+					typeId = availableTypeId[typeIdPos];
+				}
+				
+//				(10003: fairy)
+//				(10011: gold pig)
+//				(10012: pink pig)
+//				(10013: black pig)
+//				(10014: yellow pig)
+//				(10015: red ghost)
+//				(10016: blue ghost)
+//				(10017: yellow ghost)
+//				(10018: red bat)
+//				(10019: red reindeer)
+//				(10020: ring of white light)
+//				(10021: ring of purple light)
+//				(10022: ring of red light)
+//				(10023: ring of blue light)
+//				(10024: ring of green light)
+//				(10025: black reindeer)
+//				(10026: blue reindeer)
+//				(10027: green reindeer)
+//				(10028: yellow reindeer)
+				
+				player.getClient().sendPacket(Type.K, isActivated, player, typeId);
+				player.getInterested().sendPacket(Type.K, isActivated, player, typeId);
 			}
 		}
 
