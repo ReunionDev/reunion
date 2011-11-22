@@ -575,12 +575,12 @@ public class MessageParser {
 					typeId = Integer.parseInt(words[1]);
 					isActivated = Integer.parseInt(words[2]);
 				} else if(words.length == 2){
-					if(words[1].equals("all")){
+					if(words[1].equals("alladd")) isActivated = 1;
+					if(words[1].equals("allremove")) isActivated = 0;
 						for(int id : availableTypeId){
-							player.getClient().sendPacket(Type.K, 1, player, id);
-							player.getInterested().sendPacket(Type.K, 1, player, id);
+							player.getClient().sendPacket(Type.K, isActivated, player, id);
+							player.getInterested().sendPacket(Type.K, isActivated, player, id);
 						}
-					}
 				} else if(words.length == 1){
 					int typeIdPos = 100;
 					while(typeIdPos > 18)
