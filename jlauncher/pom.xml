@@ -3,4 +3,16 @@
   <groupId>org.reunionemu</groupId>
   <artifactId>jlauncher</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <dependencies>
+  	<dependency>
+  		<groupId>org.reunionemu</groupId>
+  		<artifactId>jcommon</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>log4j</groupId>
+  		<artifactId>log4j</artifactId>
+  		<version>1.2.16</version>
+  	</dependency>
+  </dependencies>
 </project>

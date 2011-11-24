@@ -58,15 +58,15 @@
   		<version>1.2.16</version>
   	</dependency>
   	<dependency>
+  		<groupId>org.reunionemu</groupId>
+  		<artifactId>jcommon</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
+  	</dependency>
+  	<dependency>
   		<groupId>org.hibernate</groupId>
   		<artifactId>hibernate</artifactId>
   		<version>3.5.4-Final</version>
   		<type>pom</type>
-  	</dependency>
-  	<dependency>
-  		<groupId>org.reunionemu</groupId>
-  		<artifactId>jcommon</artifactId>
-  		<version>0.0.1-SNAPSHOT</version>
   	</dependency>
   </dependencies>
 </project>
