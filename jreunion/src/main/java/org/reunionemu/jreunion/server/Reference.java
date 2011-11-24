@@ -94,15 +94,14 @@ public class Reference {
 
 	public void Load() throws Exception {
 		clear();
-		
-		itemReference.Parse("data/Items.dta");
-		mobReference.Parse("data/Mob.dta");
-		expReference.Parse("data/ExpTable.dta");
-		mapReference.Parse("data/Maps.dta");
+		itemReference.Parse("data/static/file/Items.dta");
+		mobReference.Parse("data/static/file/Mob.dta");
+		expReference.Parse("data/static/file/ExpTable.dta");
+		mapReference.Parse("data/static/file/Maps.dta");
+		npcReference.Parse("data/static/file/Npc.dta");
+		dropListReference.Parse("data/static/file/DropList.dta");
 		mapConfigReference.Parse("config/Maps.dta");
-		npcReference.Parse("data/Npc.dta");
 		serverReference.Parse("config/Settings.dta");
-		dropListReference.Parse("data/DropList.dta");
 		
 	}
 }

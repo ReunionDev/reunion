@@ -1,0 +1,238 @@
+<log4j:event logger="org.reunionemu.jreunion.server.Debug" timestamp="1322150707075" level="INFO" thread="main">
+<log4j:message><![CDATA[Logger XML File Logger started]]></log4j:message>
+</log4j:event>
+
+<log4j:event logger="org.reunionemu.jreunion.server.Debug" timestamp="1322150707080" level="INFO" thread="main">
+<log4j:message><![CDATA[Logger HTML File Logger started]]></log4j:message>
+</log4j:event>
+
+<log4j:event logger="org.reunionemu.jreunion.server.RemoteAdmin" timestamp="1322150707081" level="INFO" thread="main">
+<log4j:message><![CDATA[Started Remote Admin]]></log4j:message>
+</log4j:event>
+
+<log4j:event logger="org.reunionemu.jreunion.server.Server" timestamp="1322150707083" level="WARN" thread="main">
+<log4j:message><![CDATA[Exception]]></log4j:message>
+<log4j:throwable><![CDATA[java.lang.ClassNotFoundException: com.googlecode.reunion.jreunion.protocol.OtherProtocol
+	at java.net.URLClassLoader$1.run(Unknown Source)
+	at java.net.URLClassLoader$1.run(Unknown Source)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at java.net.URLClassLoader.findClass(Unknown Source)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	at java.lang.ClassLoader.loadClass(Unknown Source)
+	at java.lang.Class.forName0(Native Method)
+	at java.lang.Class.forName(Unknown Source)
+	at org.reunionemu.jreunion.protocol.Protocol.load(Protocol.java:71)
+	at org.reunionemu.jreunion.server.Server.<init>(Server.java:140)
+	at org.reunionemu.jreunion.server.Server.getInstance(Server.java:50)
+	at org.reunionemu.jreunion.server.Server.main(Server.java:87)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.codehaus.mojo.exec.ExecJavaMojo$1.run(ExecJavaMojo.java:297)
+	at java.lang.Thread.run(Unknown Source)
+]]></log4j:throwable>
+</log4j:event>
+
+<log4j:event logger="org.reunionemu.jreunion.server.Server" timestamp="1322150707085" level="WARN" thread="main">
+<log4j:message><![CDATA[Exception]]></log4j:message>
+<log4j:throwable><![CDATA[java.lang.NullPointerException
+	at org.reunionemu.jreunion.server.Server.main(Server.java:92)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.codehaus.mojo.exec.ExecJavaMojo$1.run(ExecJavaMojo.java:297)
+	at java.lang.Thread.run(Unknown Source)
+]]></log4j:throwable>
+</log4j:event>
+
+<log4j:event logger="org.reunionemu.jreunion.server.Debug" timestamp="1322150770444" level="INFO" thread="main">
+<log4j:message><![CDATA[Logger XML File Logger started]]></log4j:message>
+</log4j:event>
+
+<log4j:event logger="org.reunionemu.jreunion.server.Debug" timestamp="1322150770448" level="INFO" thread="main">
+<log4j:message><![CDATA[Logger HTML File Logger started]]></log4j:message>
+</log4j:event>
+
+<log4j:event logger="org.reunionemu.jreunion.server.RemoteAdmin" timestamp="1322150770449" level="INFO" thread="main">
+<log4j:message><![CDATA[Started Remote Admin]]></log4j:message>
+</log4j:event>
+
+<log4j:event logger="org.reunionemu.jcommon.Parser" timestamp="1322150770472" level="INFO" thread="main">
+<log4j:message><![CDATA[Parsing error: 'C:\workspaces\reunion\jreunion\data\Skills.dta' does not exist]]></log4j:message>
+</log4j:event>
+
+<log4j:event logger="org.reunionemu.jreunion.server.Server" timestamp="1322150770474" level="WARN" thread="main">
+<log4j:message><![CDATA[Exception]]></log4j:message>
+<log4j:throwable><![CDATA[java.lang.RuntimeException: java.io.FileNotFoundException: C:\workspaces\reunion\jreunion\data\Skills.dta
+	at org.reunionemu.jreunion.server.SkillManager.<init>(SkillManager.java:30)
+	at org.reunionemu.jreunion.server.World.<init>(World.java:61)
+	at org.reunionemu.jreunion.server.Server.<init>(Server.java:144)
+	at org.reunionemu.jreunion.server.Server.getInstance(Server.java:50)
+	at org.reunionemu.jreunion.server.Server.main(Server.java:87)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.codehaus.mojo.exec.ExecJavaMojo$1.run(ExecJavaMojo.java:297)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.io.FileNotFoundException: C:\workspaces\reunion\jreunion\data\Skills.dta
+	at org.reunionemu.jcommon.Parser.Parse(Parser.java:116)
+	at org.reunionemu.jreunion.server.SkillManager.<init>(SkillManager.java:27)
+	... 10 more
+]]></log4j:throwable>
+</log4j:event>
+
+<log4j:event logger="org.reunionemu.jreunion.server.Server" timestamp="1322150770476" level="WARN" thread="main">
+<log4j:message><![CDATA[Exception]]></log4j:message>
+<log4j:throwable><![CDATA[java.lang.NullPointerException
+	at org.reunionemu.jreunion.server.Server.main(Server.java:92)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.codehaus.mojo.exec.ExecJavaMojo$1.run(ExecJavaMojo.java:297)
+	at java.lang.Thread.run(Unknown Source)
+]]></log4j:throwable>
+</log4j:event>
+
+<log4j:event logger="org.reunionemu.jreunion.server.Debug" timestamp="1322150797214" level="INFO" thread="main">
+<log4j:message><![CDATA[Logger XML File Logger started]]></log4j:message>
+</log4j:event>
+
+<log4j:event logger="org.reunionemu.jreunion.server.Debug" timestamp="1322150797218" level="INFO" thread="main">
+<log4j:message><![CDATA[Logger HTML File Logger started]]></log4j:message>
+</log4j:event>
+
+<log4j:event logger="org.reunionemu.jreunion.server.RemoteAdmin" timestamp="1322150797219" level="INFO" thread="main">
+<log4j:message><![CDATA[Started Remote Admin]]></log4j:message>
+</log4j:event>
+
+<log4j:event logger="org.reunionemu.jreunion.server.SkillManager" timestamp="1322150797261" level="INFO" thread="main">
+<log4j:message><![CDATA[99 skills loaded.]]></log4j:message>
+</log4j:event>
+
+<log4j:event logger="org.reunionemu.jreunion.server.ItemManager" timestamp="1322150798894" level="INFO" thread="main">
+<log4j:message><![CDATA[1747 item types loaded.]]></log4j:message>
+</log4j:event>
+
+<log4j:event logger="org.reunionemu.jreunion.server.Database" timestamp="1322150803032" level="WARN" thread="main">
+<log4j:message><![CDATA[Exception]]></log4j:message>
+<log4j:throwable><![CDATA[com.mysql.jdbc.exceptions.jdbc4.MySQLNonTransientConnectionException: Could not create connection to database server. Attempted reconnect 3 times. Giving up.
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:411)
+	at com.mysql.jdbc.Util.getInstance(Util.java:386)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:1013)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:987)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:982)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:927)
+	at com.mysql.jdbc.ConnectionImpl.connectWithRetries(ConnectionImpl.java:2237)
+	at com.mysql.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:2158)
+	at com.mysql.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:792)
+	at com.mysql.jdbc.JDBC4Connection.<init>(JDBC4Connection.java:47)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:411)
+	at com.mysql.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:381)
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:305)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at org.reunionemu.jreunion.server.Database.connectDinamic(Database.java:50)
+	at org.reunionemu.jreunion.server.Database.start(Database.java:84)
+	at org.reunionemu.jreunion.server.Server.main(Server.java:92)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.codehaus.mojo.exec.ExecJavaMojo$1.run(ExecJavaMojo.java:297)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:1073)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3609)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3541)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:943)
+	at com.mysql.jdbc.MysqlIO.secureAuth411(MysqlIO.java:4113)
+	at com.mysql.jdbc.MysqlIO.doHandshake(MysqlIO.java:1308)
+	at com.mysql.jdbc.ConnectionImpl.coreConnect(ConnectionImpl.java:2336)
+	at com.mysql.jdbc.ConnectionImpl.connectWithRetries(ConnectionImpl.java:2176)
+	... 21 more
+]]></log4j:throwable>
+</log4j:event>
+
+<log4j:event logger="org.reunionemu.jreunion.server.Database" timestamp="1322150807058" level="WARN" thread="main">
+<log4j:message><![CDATA[Exception]]></log4j:message>
+<log4j:throwable><![CDATA[com.mysql.jdbc.exceptions.jdbc4.MySQLNonTransientConnectionException: Could not create connection to database server. Attempted reconnect 3 times. Giving up.
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:411)
+	at com.mysql.jdbc.Util.getInstance(Util.java:386)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:1013)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:987)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:982)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:927)
+	at com.mysql.jdbc.ConnectionImpl.connectWithRetries(ConnectionImpl.java:2237)
+	at com.mysql.jdbc.ConnectionImpl.createNewIO(ConnectionImpl.java:2158)
+	at com.mysql.jdbc.ConnectionImpl.<init>(ConnectionImpl.java:792)
+	at com.mysql.jdbc.JDBC4Connection.<init>(JDBC4Connection.java:47)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(Unknown Source)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(Unknown Source)
+	at java.lang.reflect.Constructor.newInstance(Unknown Source)
+	at com.mysql.jdbc.Util.handleNewInstance(Util.java:411)
+	at com.mysql.jdbc.ConnectionImpl.getInstance(ConnectionImpl.java:381)
+	at com.mysql.jdbc.NonRegisteringDriver.connect(NonRegisteringDriver.java:305)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at java.sql.DriverManager.getConnection(Unknown Source)
+	at org.reunionemu.jreunion.server.Database.connectStatic(Database.java:76)
+	at org.reunionemu.jreunion.server.Database.start(Database.java:90)
+	at org.reunionemu.jreunion.server.Server.main(Server.java:92)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.codehaus.mojo.exec.ExecJavaMojo$1.run(ExecJavaMojo.java:297)
+	at java.lang.Thread.run(Unknown Source)
+Caused by: java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES)
+	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:1073)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3609)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:3541)
+	at com.mysql.jdbc.MysqlIO.checkErrorPacket(MysqlIO.java:943)
+	at com.mysql.jdbc.MysqlIO.secureAuth411(MysqlIO.java:4113)
+	at com.mysql.jdbc.MysqlIO.doHandshake(MysqlIO.java:1308)
+	at com.mysql.jdbc.ConnectionImpl.coreConnect(ConnectionImpl.java:2336)
+	at com.mysql.jdbc.ConnectionImpl.connectWithRetries(ConnectionImpl.java:2176)
+	... 21 more
+]]></log4j:throwable>
+</log4j:event>
+
+<log4j:event logger="org.reunionemu.jreunion.server.Server" timestamp="1322150807059" level="INFO" thread="main">
+<log4j:message><![CDATA[Server start]]></log4j:message>
+</log4j:event>
+
+<log4j:event logger="org.reunionemu.jreunion.server.Server" timestamp="1322150807067" level="ERROR" thread="main">
+<log4j:message><![CDATA[Exception]]></log4j:message>
+<log4j:throwable><![CDATA[java.lang.NullPointerException
+	at org.reunionemu.jreunion.server.DatabaseUtils.loadQuests(DatabaseUtils.java:1194)
+	at org.reunionemu.jreunion.server.QuestManager.loadQuests(QuestManager.java:20)
+	at org.reunionemu.jreunion.server.LocalMap.<init>(LocalMap.java:87)
+	at org.reunionemu.jreunion.server.World.start(World.java:131)
+	at org.reunionemu.jreunion.server.World.handleEvent(World.java:209)
+	at org.reunionemu.jreunion.events.EventDispatcher.fireEvent(EventDispatcher.java:130)
+	at org.reunionemu.jreunion.server.Server.main(Server.java:95)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)
+	at java.lang.reflect.Method.invoke(Unknown Source)
+	at org.codehaus.mojo.exec.ExecJavaMojo$1.run(ExecJavaMojo.java:297)
+	at java.lang.Thread.run(Unknown Source)
+]]></log4j:throwable>
+</log4j:event>
+

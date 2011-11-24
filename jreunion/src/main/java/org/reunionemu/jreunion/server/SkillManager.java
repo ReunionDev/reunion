@@ -24,7 +24,7 @@ public class SkillManager {
 
 		Parser parser = new Parser();
 		try {
-			parser.Parse("data/Skills.dta");
+			parser.Parse("data/static/file/Skills.dta");
 		} catch (IOException e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
