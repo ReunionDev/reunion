@@ -1,0 +1,153 @@
+package org.reunionemu.jreunion.proxy;
+
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.channels.SocketChannel;
+import java.util.List;
+import org.reunionemu.jreunion.network.Connection;
+import org.reunionemu.jreunion.network.protocol.DefaultProtocol;
+import org.reunionemu.jreunion.network.protocol.Protocol;
+import org.reunionemu.jreunion.proxy.parser.Parser;
+import org.reunionemu.jreunion.server.packets.ClientSerializator;
+import org.reunionemu.jreunion.server.packets.ForGameServer;
+import org.reunionemu.jreunion.server.packets.ForLoginServer;
+import org.reunionemu.jreunion.server.packets.Packet;
+import org.reunionemu.jreunion.server.packets.SessionPacket;
+import org.reunionemu.jreunion.server.packets.StubPacket;
+import org.reunionemu.jreunion.server.packets.login.LoginPacket;
+import org.reunionemu.jreunion.server.packets.login.PassPacket;
+import org.reunionemu.jreunion.server.packets.login.PlayPacket;
+import org.reunionemu.jreunion.server.packets.login.UserPacket;
+import org.reunionemu.jreunion.server.packets.login.VersionPacket;
+
+public class ProxyExternalConnection extends Connection<ProxyExternalConnection> {
+
+	public ConnectionState state;
+	
+	Protocol protocol;
+	
+	Parser parser;
+	
+	public Parser getParser() {
+		return parser;
+	}
+
+	public void setParser(Parser parser) {
+		this.parser = parser;
+	}
+
+	public ConnectionState getState() {
+		return state;
+	}
+
+	public void setState(ConnectionState state) {
+		this.state = state;
+	}
+
+	enum ConnectionState{
+		ACCEPTED,
+		EXPECTING_LOGIN,
+		EXPECTING_USERNAME,
+		EXPECTING_PASSWORD,
+		LOGIN_SERVER,
+		GAME_SERVER,
+	}
+	
+	private int sessionId;
+	
+	void setSessionId(int sessionId) {
+		this.sessionId = sessionId;
+	}
+
+	public void write(ClientSerializator packet){
+		List<String> packets = packet.readClientPacket();
+		byte [] data = protocol.encryptServer(packets);
+		this.write(data);
+	}
+	
+	public ProxyExternalConnection(ProxyExternalNetwork proxy,
+			SocketChannel socketChannel) throws IOException {
+		super(proxy, socketChannel);
+		setState(ConnectionState.ACCEPTED);
+	}
+	
+	public Protocol getProtocol() {
+		return protocol;
+	}
+
+	public int getSessionId() {
+		return sessionId;
+	}
+
+	public ProxyExternalNetwork getProxy(){
+		return (ProxyExternalNetwork) getNetworkThread();		
+	}
+	
+	public void onData(ByteBuffer inputBuffer) 
+	{
+		if(protocol==null){
+			protocol = new DefaultProtocol();
+		}
+		byte [] data = getData();
+		
+		List<String> packets = protocol.decryptServer(data);
+		for(String packetData: packets){
+			SessionPacket packet = null;
+			switch (state) {
+				case ACCEPTED:
+					short version = Short.parseShort(packetData);
+					packet = new VersionPacket(version);
+					setState(ConnectionState.EXPECTING_LOGIN);
+					break;
+				case EXPECTING_LOGIN:
+					if(packetData=="login"){
+						packet =new LoginPacket();
+					}else if(packetData=="play"){
+						packet = new PlayPacket();
+					}
+					if (packet!=null)
+					{
+						setState(ConnectionState.EXPECTING_USERNAME);
+					}
+					break;
+				case EXPECTING_USERNAME:
+					packet = new UserPacket(packetData);
+					setState(ConnectionState.EXPECTING_PASSWORD);
+					break;
+				case EXPECTING_PASSWORD:
+					packet = new PassPacket(packetData);
+					break;
+				default:
+					if(parser!=null){
+						List<Packet> parsedPackets = parser.parse(packetData);
+						for(Packet parsedPacket: parsedPackets){
+							if(parsedPacket instanceof SessionPacket){
+								SessionPacket sessionPacket = (SessionPacket)parsedPacket;
+								sessionPacket.setSessionId(sessionId);
+							}
+							if(parsedPacket instanceof ForLoginServer){
+								//send to login server
+							}else if(parsedPacket instanceof ForGameServer){
+								//send to game server
+							}else{
+								throw new RuntimeException("No handler");
+							}
+						}
+					}else{
+						throw new RuntimeException("No parser set");
+					}
+					break;
+				
+			}
+			ProxyExternalNetwork server = getProxy();
+			if(packet!=null)
+				packet.setSessionId(sessionId);
+			server.onPacketReceived(this, packet);
+				
+		}
+		write(new StubPacket("char_list"));
+		//write(new FailPacket("derp"));
+		
+	}
+
+}
