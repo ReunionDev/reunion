@@ -1,0 +1,20 @@
+[Local Socket Logger]
+Type=Socket
+Host=localhost
+Port=4560
+Reconnect=3000
+
+[Remote Socket Logger]
+Type=Socket
+Host=debug.example.com
+Port=4560
+
+[XML File Logger]
+Type=XML
+Path=logs/%y-%m-%d.xml
+
+[HTML File Logger]
+Type=HTML
+Path=logs/%y-%m-%d.html
+
+
