@@ -1,4 +1,4 @@
-package com.googlecode.reunion.jcommon;
+package org.reunionemu.jcommon;
 
 /**
  * @author Aidamina

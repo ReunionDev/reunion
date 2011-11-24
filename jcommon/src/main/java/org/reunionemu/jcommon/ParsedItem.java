@@ -1,4 +1,4 @@
-package com.googlecode.reunion.jcommon;
+package org.reunionemu.jcommon;
 
 import java.util.Iterator;
 import java.util.List;

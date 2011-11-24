@@ -1,4 +1,4 @@
-package com.googlecode.reunion.jcommon;
+package org.reunionemu.jcommon;
 
 import java.io.File;
 import java.io.IOException;
