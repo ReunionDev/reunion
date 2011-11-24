@@ -57,5 +57,11 @@
   		<artifactId>ant-apache-log4j</artifactId>
   		<version>1.6.5</version>
   	</dependency>
+  	<dependency>
+  		<groupId>org.hibernate</groupId>
+  		<artifactId>hibernate</artifactId>
+  		<version>3.5.4-Final</version>
+  		<type>pom</type>
+  	</dependency>
   </dependencies>
 </project>
