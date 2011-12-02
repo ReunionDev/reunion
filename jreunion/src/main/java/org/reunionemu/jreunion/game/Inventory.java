@@ -36,7 +36,6 @@ public class Inventory {
 	public boolean posEmpty(int tab, int posX, int posY) {
 
 		Iterator<InventoryItem> iter = getInventoryIterator();
-		
 		while (iter.hasNext()) {
 			InventoryItem item = iter.next();
 			if(item.getPosition().getTab() == tab){
