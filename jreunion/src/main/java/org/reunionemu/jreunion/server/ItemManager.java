@@ -19,18 +19,6 @@ public class ItemManager {
 	
 	public void loadItemsList(){
 		
-		/*
-		Parser parser = new Parser();
-		
-		try {
-			parser.Parse("data/Items.dta");
-			
-		} catch (IOException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		}
-		*/
-		
 		Parser parser = Reference.getInstance().getItemReference();
 		Iterator<ParsedItem> iter = parser.getItemListIterator();
 		
@@ -41,19 +29,20 @@ public class ItemManager {
 				continue;
 			
 			int id = Integer.parseInt(parsedItem.getMemberValue("Id"));
-			String className = "org.reunionemu.jreunion.game.items."+parsedItem.getMemberValue("Class");
-			
+			String className = "org.reunionemu.jreunion.game.items."+parsedItem.getMemberValue("Class");		
 			
 			ItemType itemType = (ItemType)ClassFactory.create(className, id);
 			
-			if(itemType == null)
+			if(itemType == null){
+				Logger.getLogger(ItemManager.class).warn("Failed to load Item type {id:"+id+" name:"
+						+parsedItem.getName()+"}");
 				continue;
-			
+			}
 			
 			itemsList.put(id, itemType);
 		}
 		parser.clear();
-		Logger.getLogger(ItemManager.class).info(itemsList.size()+" item types loaded.");
+		Logger.getLogger(ItemManager.class).info(itemsList.size()+" items loaded.");
 	}
 	
 	public ItemType getItemType(int type){

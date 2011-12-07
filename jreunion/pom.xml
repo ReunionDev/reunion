@@ -26,7 +26,9 @@
       <name>Jake</name>
     </developer>
     <developer>
-      <name>Sam</name>
+      <name>Samuel</name>
+      <email>samuel.basto@gmail.com</email>
+      <id>bigsam</id>
     </developer>
   </developers>
   <organization>

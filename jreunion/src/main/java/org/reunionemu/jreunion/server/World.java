@@ -52,19 +52,24 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 	private QuestManager questManager;
 	
 	private ItemManager itemManager;
+	
+	private NpcManager npcManager;
 
 	static public ServerSetings serverSetings;
 
 	public World(Server server) {
 		
+		serverSetings = new ServerSetings();
 		worldCommand = new Command(this);
 		skillManager = new SkillManager();
 		questManager = new QuestManager();
+		questManager.loadQuests();
 		playerManager = new PlayerManager();
 		itemManager = new ItemManager();
+		npcManager = new NpcManager();
 		serverHour = 4;
 		teleportManager = new TeleportManager();
-		serverSetings = new ServerSetings();		
+				
 		server.addEventListener(ServerEvent.class, this);
 	}
 
@@ -78,6 +83,10 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 	
 	public ItemManager getItemManager() {
 		return itemManager;
+	}
+	
+	public NpcManager getNpcManager() {
+		return npcManager;
 	}
 	
 	/**

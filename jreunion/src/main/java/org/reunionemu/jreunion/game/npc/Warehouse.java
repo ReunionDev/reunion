@@ -7,7 +7,7 @@ import org.apache.log4j.Logger;
 import org.reunionemu.jreunion.game.HandPosition;
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.ItemType;
-import org.reunionemu.jreunion.game.Npc;
+import org.reunionemu.jreunion.game.NpcType;
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.StashItem;
 import org.reunionemu.jreunion.game.StashPosition;
@@ -19,11 +19,11 @@ import org.reunionemu.jreunion.server.PacketFactory.Type;
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-public class Warehouse extends Npc {
+public class Warehouse extends NpcType {
 	
 	public Warehouse(int id) {
 		super(id);
-		loadFromReference(id);
+		//loadFromReference(id);
 	}
 
 	/****** Open stash ******/

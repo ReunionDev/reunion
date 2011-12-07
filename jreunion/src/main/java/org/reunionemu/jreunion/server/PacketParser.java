@@ -27,6 +27,7 @@ import org.reunionemu.jreunion.game.Inventory;
 import org.reunionemu.jreunion.game.InventoryItem;
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.LivingObject;
+import org.reunionemu.jreunion.game.Npc;
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.Player.Race;
 import org.reunionemu.jreunion.game.Player.Sex;
@@ -622,30 +623,57 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					}
 				} else if (message[0].equals("shop")) {
 					int npcId = Integer.parseInt(message[1]);
-					Merchant npc = (Merchant) player.getPosition().getLocalMap().getEntity(npcId);
-					
+					Npc<?> npc = (Npc<?>) player.getPosition().getLocalMap().getEntity(npcId);
+			
 					if (npc!=null) {
-						npc.openShop(client.getPlayer());
+						if(npc.getType() instanceof Merchant){
+							npc.getShop().openShop(client.getPlayer());
+							//((Merchant)npc.getType()).openShop(client.getPlayer());
+						}
 					} else {
-						Logger.getLogger(PacketParser.class).error("Npc not found: " + npcId);				
+						Logger.getLogger(PacketParser.class).warn("Npc not found: " + npcId);				
 					}
 				} else if (message[0].equals("buy")) {
-					Merchant npc = (Merchant) player.getPosition().getLocalMap().getEntity(Integer.parseInt(message[1]));
+					int npcId = Integer.parseInt(message[1]);
+					Npc<?> npc = (Npc<?>) player.getPosition().getLocalMap().getEntity(npcId);
 							
-					npc.buyItem(client.getPlayer(), Integer.parseInt(message[4]),
-							Integer.parseInt(message[5]),
-							1);
+					if (npc!=null) {
+						if(npc.getType() instanceof Merchant){
+							npc.getShop().buyItem(client.getPlayer(), Integer.parseInt(message[4]),
+											Integer.parseInt(message[5]), 1);
+								//((Merchant)npc.getType()).buyItem(client.getPlayer(), Integer.parseInt(message[4]),
+								//		Integer.parseInt(message[5]), 1);
+						}
+					} else {
+						Logger.getLogger(PacketParser.class).warn("Npc not found: " + npcId);				
+					}
 				} else if (message[0].equals("sell")) {
-					Merchant npc = (Merchant) player.getPosition().getLocalMap().getEntity(Integer.parseInt(message[1]));
-					npc.sellItem(client.getPlayer());
+					int npcId = Integer.parseInt(message[1]);
+					Npc<?> npc = (Npc<?>) player.getPosition().getLocalMap().getEntity(npcId);
+					
+					if (npc!=null) {
+						if(npc.getType() instanceof Merchant){
+							npc.getShop().sellItem(client.getPlayer());
+							//((Merchant)npc.getType()).sellItem(client.getPlayer());
+						}
+					} else {
+						Logger.getLogger(PacketParser.class).warn("Npc not found: " + npcId);				
+					}
 				} else if (message[0].equals("pbuy")) {
-					Merchant npc = (Merchant) player.getPosition().getLocalMap().getEntity(Integer.parseInt(message[1]));
+					int npcId = Integer.parseInt(message[1]);
+					Npc<?> npc = (Npc<?>) player.getPosition().getLocalMap().getEntity(npcId);
 					int itemType = Integer.parseInt(message[2]);
-					int tab = Integer.parseInt(message[2]);
+					int tab = Integer.parseInt(message[3]);
 					int quantity = 10;
 					
-					npc.buyItem(client.getPlayer(), itemType, tab, quantity);
-					
+					if (npc!=null) {
+						if(npc.getType() instanceof Merchant){
+							npc.getShop().buyItem(client.getPlayer(), itemType, tab, quantity);
+							//((Merchant)npc.getType()).buyItem(client.getPlayer(), itemType, tab, quantity);
+						}
+					} else {
+						Logger.getLogger(PacketParser.class).warn("Npc not found: " + npcId);				
+					}
 				} else if (message[0].equals("chip_exchange")) {
 					//Npc[] npc;
 					/*

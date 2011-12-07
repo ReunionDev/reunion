@@ -6,6 +6,7 @@ import org.reunionemu.jreunion.game.Effectable;
 import org.reunionemu.jreunion.game.Equipment;
 import org.reunionemu.jreunion.game.Equipment.Slot;
 import org.reunionemu.jreunion.game.npc.Merchant;
+import org.reunionemu.jreunion.game.npc.NpcShop;
 import org.reunionemu.jreunion.game.InventoryItem;
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.LivingObject;
@@ -222,19 +223,20 @@ public class PacketFactory {
 		
 		case IN_NPC:			
 			if(args.length>0){
-				Npc npc = (Npc)args[0];
+				Npc<?> npc = (Npc<?>)args[0];
 				Boolean spawn = false;
 				if(args.length>1){
 					spawn = (Boolean)args[1];
 				}
 				int percentageHp = (int)(((double)npc.getHp()/ (double)npc.getMaxHp())* 100);
 				Position npcPosition = npc.getPosition();
-				return "in n " + npc.getEntityId() + " " + npc.getType()
+				return "in n " + npc.getEntityId() + " " + npc.getType().getTypeId()
 						+ " " + npcPosition.getX() + " "
 						+ npcPosition.getY() + " "+npcPosition.getZ()+" "
-						+ (Double.isNaN(npcPosition.getRotation())?0.0:npcPosition.getRotation()) + " " + percentageHp + " "
-						+ npc.getMutant() + " " + npc.getUnknown1() + " "
-						+ npc.getNeoProgmare() + " " + npc.getUnknown2() + " "+ (spawn ? 1 : 0) + " "
+						+ (Double.isNaN(npcPosition.getRotation())?0.0:npcPosition.getRotation()) + " "
+						+ percentageHp + " "
+						+ npc.getType().getMutant() + " " + npc.getUnknown1() + " "
+						+ npc.getType().getNeoProgmare() + " " + npc.getUnknown2() + " "+ (spawn ? 1 : 0) + " "
 						+ npc.getUnknown3();
 			}
 			break;
@@ -470,8 +472,8 @@ public class PacketFactory {
 			break;
 		case SHOP_RATE:
 			if(args.length>0){
-				Merchant merchant = (Merchant)args[0];
-				return "shop_rate " + merchant.getBuyRate() + " "+ merchant.getSellRate();
+				NpcShop npcShop = (NpcShop)args[0];
+				return "shop_rate " + npcShop.getBuyRate() + " "+ npcShop.getSellRate();
 			}
 			break;
 			

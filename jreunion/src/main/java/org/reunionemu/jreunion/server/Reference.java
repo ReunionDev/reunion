@@ -27,6 +27,7 @@ public class Reference {
 	private Parser expReference;
 	private Parser npcReference;
 	private Parser dropListReference;
+	private Parser skillReference;
 
 	private Parser mapReference;
 	private Parser mapConfigReference;
@@ -44,6 +45,7 @@ public class Reference {
 		npcReference = new Parser();
 		serverReference = new Parser();
 		dropListReference = new Parser();
+		skillReference = new Parser();
 	}
 
 	public void clear() {
@@ -55,6 +57,7 @@ public class Reference {
 		npcReference.clear();
 		serverReference.clear();
 		dropListReference.clear();
+		skillReference.clear();
 	}
 
 	public Parser getExpReference() {
@@ -91,6 +94,14 @@ public class Reference {
 	public Parser getDropListReference() {
 		return dropListReference;
 	}
+	
+	public Parser getSkillReference() {
+		return skillReference;
+	}
+
+	public void setSkillReference(Parser skillReference) {
+		this.skillReference = skillReference;
+	}
 
 	public void Load() throws Exception {
 		clear();
@@ -98,10 +109,11 @@ public class Reference {
 		mobReference.Parse("data/static/file/Mob.dta");
 		expReference.Parse("data/static/file/ExpTable.dta");
 		mapReference.Parse("data/static/file/Maps.dta");
-		npcReference.Parse("data/static/file/Npc.dta");
-		dropListReference.Parse("data/static/file/DropList.dta");
 		mapConfigReference.Parse("config/Maps.dta");
+		npcReference.Parse("data/static/file/Npc.dta");
 		serverReference.Parse("config/Settings.dta");
+		dropListReference.Parse("data/static/file/DropList.dta");
+		skillReference.Parse("data/static/file/Skills.dta");
 		
 	}
 }

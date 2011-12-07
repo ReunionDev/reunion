@@ -83,8 +83,8 @@ public class LocalMap extends Map implements Runnable{
 		this.addEventListener(ItemDropEvent.class, this);
 		this.addEventListener(ItemPickupEvent.class, this);
 		
-		if(world.getQuestManager().isEmpty())
-			world.getQuestManager().loadQuests();
+		//if(world.getQuestManager().isEmpty())
+		//	world.getQuestManager().loadQuests();
 	}
 	
 	public Entity getEntity(int id) {		
@@ -338,29 +338,30 @@ public class LocalMap extends Map implements Runnable{
 		}
 	}
 
+
 	public void loadFromReference(int id) {
 		try{
-			playerSpawnReference.Parse("data/"+Reference.getInstance().getMapReference()
+			playerSpawnReference.Parse("data/static/file/"+Reference.getInstance().getMapReference()
 					.getItemById(id).getMemberValue("PlayerSpawn"));		
-			mobSpawnReference.Parse("data/"+Reference.getInstance().getMapReference()
+			mobSpawnReference.Parse("data/static/file/"+Reference.getInstance().getMapReference()
 					.getItemById(id).getMemberValue("MobSpawn"));
-			npcSpawnReference.Parse("data/"+Reference.getInstance().getMapReference()
+			npcSpawnReference.Parse("data/static/file/"+Reference.getInstance().getMapReference()
 					.getItemById(id).getMemberValue("NpcSpawn"));
 			
 		} catch(Exception e){			
 			Logger.getLogger(this.getClass()).warn("Exception",e);			
 		}
 		Area area = getArea();
-		area.load("data/"+Reference.getInstance().getMapReference()
+		area.load("data/static/file/"+Reference.getInstance().getMapReference()
 				.getItemById(id).getMemberValue("PlayerArea"),Field.PLAYER);
-		area.load("data/"+Reference.getInstance().getMapReference()
+		area.load("data/static/file/"+Reference.getInstance().getMapReference()
 				.getItemById(id).getMemberValue("MobArea"),Field.MOB);
-		area.load("data/"+Reference.getInstance().getMapReference()
+		area.load("data/static/file/"+Reference.getInstance().getMapReference()
 				.getItemById(id).getMemberValue("PvpArea"),Field.PVP);
 	}
 
 	
-	public SessionList<Session> GetSessions(Position position){
+public SessionList<Session> GetSessions(Position position){
 		
 		SessionList<Session> results = new SessionList<Session>();
 		synchronized(sessions){			

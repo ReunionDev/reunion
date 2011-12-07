@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
 
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.LivingObject;
+import org.reunionemu.jreunion.game.Npc;
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.Skill;
 import org.reunionemu.jreunion.game.items.equipment.Axe;
@@ -92,8 +93,8 @@ public class SecondAttack extends Skill {
 				
 				if (newHp <= 0) {
 					Logger.getLogger(LivingObject.class).info("Player "+player+" killed npc "+this);
-					if(target instanceof Mob){
-						((Mob)target).kill(player);
+					if(target instanceof Npc){
+						((Npc)target).kill(player);
 					}
 				} else {
 					target.setHp(newHp);

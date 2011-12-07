@@ -1,6 +1,5 @@
 package org.reunionemu.jreunion.server;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -21,35 +20,29 @@ public class SkillManager {
 	
 	public SkillManager(){
 		
-
-		Parser parser = new Parser();
-		try {
-			parser.Parse("data/static/file/Skills.dta");
-		} catch (IOException e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		}
-		
+		Parser parser = Reference.getInstance().getSkillReference();
 		Iterator<ParsedItem> iter = parser.getItemListIterator();
 		
 		while(iter.hasNext()){
 			
 			ParsedItem item = iter.next();
-			if(!item.checkMembers(new String[]{"Id","Class"}))
+			if(!item.checkMembers(new String[]{"Id","Class"})){
 				continue;
+			}
 			
 			int id = Integer.parseInt(item.getMemberValue("Id"));
 			String className = "org.reunionemu.jreunion.game.skills."+item.getMemberValue("Class");
 			
-			
 			Skill skill = (Skill) ClassFactory.create(className, this, id);
-			if(skill==null)
+			
+			if(skill==null){
+				Logger.getLogger(SkillManager.class).warn("Failed to load Skill {id:"+id+" name:"
+						+item.getName()+"}");
 				continue;
+			}
 			
 			skill.setName(item.getName());
 			skills.put(id, skill);
-
-		
 		}
 		parser.clear();
 		

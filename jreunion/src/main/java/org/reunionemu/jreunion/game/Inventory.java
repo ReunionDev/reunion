@@ -98,7 +98,7 @@ public class Inventory {
 		return null;
 	}
 	
-	//return the first free slot, of the item size
+	//return the first free slot, of the item size, from a specified tab
 	public int[] getFreeSlots(Item<?> item, int neededTab){
 		
 		if(item == null)

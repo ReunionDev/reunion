@@ -81,15 +81,16 @@ public class Server extends EventDispatcher {
 		Thread.currentThread().setName("main");
 		
 		PrintStream.useFileLogging();
-		Reference.getInstance().Load();
+		//Reference.getInstance().Load();
+		
 		
 		
 		Server server = Server.getInstance();
-		
 
 		try {
 
-			server.database.start();
+			//server.database.start();
+			
 
 			Logger.getLogger(Server.class).info("Server start");
 			server.fireEvent(server.createEvent(ServerStartEvent.class, server));			
@@ -140,9 +141,14 @@ public class Server extends EventDispatcher {
 		Protocol.load();
 		
 		database = new Database(this);
+		database.start();
+		
+		Logger.getLogger(Server.class).info("Loading server objects...");
+		Reference.getInstance().Load();
 		network = new Network(this);
 		world = new World(this);
 		packetParser = new PacketParser();
+		
 		
 		//network.addEventListener(NetworkDataEvent.class, packetParser);
 	}

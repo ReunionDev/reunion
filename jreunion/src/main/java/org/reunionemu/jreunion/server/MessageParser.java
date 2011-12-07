@@ -17,6 +17,7 @@ import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.ItemType;
 import org.reunionemu.jreunion.game.Npc;
 import org.reunionemu.jreunion.game.NpcSpawn;
+import org.reunionemu.jreunion.game.NpcType;
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.Player.Race;
 import org.reunionemu.jreunion.game.Position;
@@ -321,13 +322,15 @@ public class MessageParser {
 				
 				} else if (words.length == 6) {
 					//LocalMap map = player.getPosition().getLocalMap();
-					Mob mob = (Mob)Npc.create(Integer.parseInt(words[1]));
+					//Mob mobType = (Mob)Npc.create(Integer.parseInt(words[1]));
+					Npc<?> mob = client.getWorld().getNpcManager().create(Integer.parseInt(words[1]));
+					
 					mob.getPosition().setX(player.getPosition().getX() + 10);
 					mob.getPosition().setY(player.getPosition().getY() + 10);
 					mob.setIsRunning(true);
-					mob.setMutant(Integer.parseInt(words[2]));
+					mob.getType().setMutant(Integer.parseInt(words[2]));
 					mob.setUnknown1(Integer.parseInt(words[3]));
-					mob.setNeoProgmare(Integer.parseInt(words[4]));
+					mob.getType().setNeoProgmare(Integer.parseInt(words[4]));
 					mob.setUnknown2(Integer.parseInt(words[5]));
 					//Server.getInstance().getWorld().getMobManager().addMob(mob);
 				}
@@ -588,17 +591,20 @@ public class MessageParser {
 					typeId = availableTypeId[typeIdPos];
 				}
 				
-//				(10003: fairy)
-//				(10011: gold pig)
-//				(10012: pink pig)
+				player.getClient().sendPacket(Type.K, isActivated, player, typeId);
+				player.getInterested().sendPacket(Type.K, isActivated, player, typeId);
+				
+//				(10003: fairy)**
+//				(10011: gold pig)*
+//				(10012: pink pig)*
 //				(10013: black pig)
 //				(10014: yellow pig)
-//				(10015: red ghost)
+//				(10015: red ghost)**
 //				(10016: blue ghost)
 //				(10017: yellow ghost)
-//				(10018: red bat)
-//				(10019: red reindeer)
-//				(10020: ring of white light)
+//				(10018: red bat)**
+//				(10019: red reindeer)**
+//				(10020: ring of white light)**
 //				(10021: ring of purple light)
 //				(10022: ring of red light)
 //				(10023: ring of blue light)
@@ -607,9 +613,6 @@ public class MessageParser {
 //				(10026: blue reindeer)
 //				(10027: green reindeer)
 //				(10028: yellow reindeer)
-				
-				player.getClient().sendPacket(Type.K, isActivated, player, typeId);
-				player.getInterested().sendPacket(Type.K, isActivated, player, typeId);
 			}
 		}
 

@@ -1,0 +1,208 @@
+package org.reunionemu.jreunion.game.npc;
+
+import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Vector;
+
+import org.apache.log4j.Logger;
+
+import org.reunionemu.jcommon.ParsedItem;
+import org.reunionemu.jcommon.Parser;
+import org.reunionemu.jreunion.game.Item;
+import org.reunionemu.jreunion.game.Npc;
+import org.reunionemu.jreunion.game.NpcType;
+import org.reunionemu.jreunion.game.Player;
+import org.reunionemu.jreunion.game.VendorItem;
+import org.reunionemu.jreunion.server.Client;
+import org.reunionemu.jreunion.server.DatabaseUtils;
+import org.reunionemu.jreunion.server.ItemManager;
+import org.reunionemu.jreunion.server.PacketFactory.Type;
+
+/**
+ * @author Aidamina
+ * @license http://reunion.googlecode.com/svn/trunk/license.txt
+ */
+public class NpcShop {
+
+	private String shop;
+
+	private Parser shopReference;
+
+	private List<VendorItem> itemsList = new Vector<VendorItem>();
+	
+	private int sellRate;
+
+	private int buyRate;
+	
+	public NpcShop(Npc<?> npc) {
+		shopReference = new Parser();
+		shop = null;
+		loadShop(npc);
+	}
+	
+	public void addItem(VendorItem item) {
+		itemsList.add(item);
+	}
+
+	public Iterator<VendorItem> itemsListIterator() {
+		return itemsList.iterator();
+	}
+	
+	public List<VendorItem> getItemsList(){
+		return itemsList;
+	}
+
+	public void setBuyRate(int buyRate) {
+		this.buyRate = buyRate;
+	}
+
+	public void setSellRate(int sellRate) {
+		this.sellRate = sellRate;
+	}
+	
+
+	public int getBuyRate() {
+		return buyRate;
+	}
+	public int getSellRate() {
+		return sellRate;
+	}
+	
+
+	public String getShop() {
+		return shop;
+	}
+	
+	public void setShop(String shop) {
+		this.shop = shop;
+	}
+	
+	
+	public void loadShop(Npc<?> npc) {
+		
+		ParsedItem parsedNpc = npc.getPosition().getLocalMap().getNpcSpawnReference().getItemById(npc.getSpawn().getId());
+				
+		setSellRate(Integer.parseInt(parsedNpc.getMemberValue("SellRate")));
+		setBuyRate(Integer.parseInt(parsedNpc.getMemberValue("BuyRate")));
+		setShop(parsedNpc.getMemberValue("Shop"));
+		
+		
+		try {
+			shopReference.Parse("data/static/file/"+getShop());
+		} catch (IOException e) {
+			Logger.getLogger(this.getClass()).warn("Exception",e);
+		}
+		loadItemList(npc);
+	}
+
+	public void loadItemList(Npc<?> npc) {
+
+		
+		if (shopReference != null) {
+	
+			Iterator<ParsedItem> iter = shopReference.getItemListIterator();
+	
+			while (iter.hasNext()) {
+	
+				ParsedItem i = iter.next();
+	
+				if (!i.checkMembers(new String[] { "Type" })) {
+					Logger.getLogger(Merchant.class).warn("Failed to load a Npc Shop Item on map: "
+							+ npc.getPosition().getLocalMap());
+					continue;
+				}
+				
+				VendorItem item = new VendorItem(Integer.parseInt(i.getMemberValue("Type")));
+				addItem(item);
+			}
+		}
+	}
+
+	/*
+	public void load(){
+		itemsList.clear();
+		shopReference = new Parser();
+	}*/
+	
+
+	/****** Buy items from merchant shop ******/
+	public boolean buyItem(Player player, int itemType, int tab, int quantity) {
+
+		Client client = player.getClient();
+		ItemManager itemManager = player.getClient().getWorld().getItemManager();
+
+		Item<?> item = itemManager.create(itemType);
+		
+		int count = 0;
+
+		if (player.getLime() - item.getType().getPrice() * quantity < 0) {
+			client.sendPacket(Type.MSG, "Not enough lime.");
+			return false;
+		}
+
+		for (int i = 0; i < quantity; i++) {
+			
+			item = itemManager.create(itemType);
+			
+			if (player.getInventory().freeSlots(tab, item) == false) {
+				return false;
+			}
+			
+			if (item != null) {
+				player.getPosition().getLocalMap().createEntityId(item);
+				player.pickItem(item, -1, tab);
+				count++;
+			}
+			
+		}
+		
+		if (item != null) {
+			int cost = item.getType().getPrice() * this.getBuyRate() / 100 * count;
+			synchronized(player) {
+				player.setLime(player.getLime()-cost);
+			
+			}
+			//player.updateStatus(10, item.getPrice() * this.getBuyRate() / 100 * -1 * count, 0);
+		
+		}
+		return true;
+	}
+
+	/****** Open Merchant Shop ******/
+	public void openShop(Player player) {
+
+		Client client = player.getClient();
+
+		client.sendPacket(Type.SHOP_RATE, this);
+		
+		Iterator<VendorItem> itemListIter = this.itemsListIterator();
+
+		while (itemListIter.hasNext()) {
+			VendorItem vendorItem = itemListIter.next();
+			
+			client.sendPacket(Type.SHOP_ITEM, vendorItem);
+
+		}
+	}
+
+	/****** Sell items to merchant shop ******/
+	public void sellItem(Player player) {
+		
+		Item<?> item = player.getInventory().getHoldingItem().getItem();
+	
+		if (item != null) {
+			int price = (int) (item.getType().getPrice() * ((double)this.getSellRate() / 100));
+			Logger.getLogger(Merchant.class).info("Player "+player+" sold item "+item+" for "+price+" Lime");
+			synchronized(player){
+				player.setLime(player.getLime()+price);
+			}
+
+			player.getInventory().setHoldingItem(null);
+			DatabaseUtils.getDinamicInstance().deleteItem(item.getItemId());
+		}
+		else{
+			Logger.getLogger(Merchant.class).error("Sell failed, no item selected");			
+		}		
+	}
+}

@@ -83,9 +83,11 @@ public class Spawn {
 		int spawnAttempts = (int)Server.getInstance().getWorld().getServerSetings().getSpawnAttempts();
 		
 		// TODO: Improve the mob spawn area
-		if( entity instanceof Mob){
-			while((!entityArea.get(position.getX() / 10, position.getY() / 10,Field.MOB)) && (spawnAttempts-- > 0)){
-				position = generateSpawnPosition();
+		if( entity instanceof Npc){
+			if(((Npc<?>)entity).getType() instanceof Mob){
+				while((!entityArea.get(position.getX() / 10, position.getY() / 10,Field.MOB)) && (spawnAttempts-- > 0)){
+					position = generateSpawnPosition();
+				}
 			}
 		}
 		

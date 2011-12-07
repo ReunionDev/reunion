@@ -4,7 +4,7 @@ import java.util.Iterator;
 
 import org.reunionemu.jreunion.game.ExchangeItem;
 import org.reunionemu.jreunion.game.Item;
-import org.reunionemu.jreunion.game.Npc;
+import org.reunionemu.jreunion.game.NpcType;
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.items.equipment.Armor;
 import org.reunionemu.jreunion.server.Client;
@@ -15,11 +15,11 @@ import org.reunionemu.jreunion.server.ItemManager;
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-public class Trader extends Npc {
+public class Trader extends NpcType {
 
 	public Trader(int id) {
 		super(id);
-		loadFromReference(id);
+		//loadFromReference(id);
 	}
 
 	/****** Exchange 5 "grade n" gems for 1 "grade n-1" gem ******/

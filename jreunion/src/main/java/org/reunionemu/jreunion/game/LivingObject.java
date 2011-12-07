@@ -19,6 +19,14 @@ public abstract class LivingObject extends WorldObject {
 	private Position targetPosition;
 	
 	private String name;
+	
+	private long hp;
+
+	private long maxHp;
+
+	private int level;
+	
+	private int dmgType;
 
 	public Position getTargetPosition() {
 		return targetPosition;
@@ -48,8 +56,6 @@ public abstract class LivingObject extends WorldObject {
 				
 	}
 	
-	private int dmgType;
-	
 	public int getDmgType() {
 		return dmgType;
 	}
@@ -67,12 +73,6 @@ public abstract class LivingObject extends WorldObject {
 	public boolean isRunning() {
 		return running;
 	}
-
-	private long hp;
-
-	private long maxHp;
-
-	private int level;
 
 	public LivingObject() {
 		super();
@@ -127,21 +127,24 @@ public abstract class LivingObject extends WorldObject {
 		player.addAttack(damage);
 		
 		//Cursed quest Boss packet
-		if(this instanceof Mob){
-			Mob mob = (Mob)this;
-			QuestState questState = player.getQuestState();
-		
-			if(questState != null){
-				Quest quest = questState.getQuest();
-				if(quest instanceof ExperienceQuest){
-					Objective objective = quest.getObjective(mob.getType());
-					if(objective != null){
-							if(questState.getProgression(objective.getId()) == (objective.getAmmount()-1)){
-								if(!mob.getIsBoss()){
-									player.getClient().sendPacket(Type.QT, "king "+mob.getEntityId()+" 1");
-									mob.setBoss();
+		if(this instanceof Npc){
+			Npc<?> npc = (Npc<?>)this;
+			if(npc.getType() instanceof Mob){
+				//Mob mob = (Mob)((Npc<?>)this).getType();
+				QuestState questState = player.getQuestState();
+			
+				if(questState != null){
+					Quest quest = questState.getQuest();
+					if(quest instanceof ExperienceQuest){
+						Objective objective = quest.getObjective(npc.getType().getTypeId());
+						if(objective != null){
+								if(questState.getProgression(objective.getId()) == (objective.getAmmount()-1)){
+									if(!npc.isBoss()){
+										player.getClient().sendPacket(Type.QT, "king "+this.getEntityId()+" 1");
+										npc.setBoss();
+									}
 								}
-							}
+						}
 					}
 				}
 			}
@@ -151,8 +154,8 @@ public abstract class LivingObject extends WorldObject {
 		
 		if (newHp <= 0) {
 			Logger.getLogger(LivingObject.class).info("Player "+player+" killed npc "+this);
-			if(this instanceof Mob){
-				((Mob)this).kill(player);
+			if(this instanceof Npc){
+					((Npc<?>)this).kill(player);
 			}
 		} else {
 			setHp(newHp);

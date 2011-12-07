@@ -2,6 +2,7 @@ package org.reunionemu.jreunion.game;
 
 import java.util.TimerTask;
 
+import org.reunionemu.jreunion.game.npc.Merchant;
 import org.reunionemu.jreunion.server.LocalMap;
 
 public class NpcSpawn extends Spawn 
@@ -40,18 +41,22 @@ public class NpcSpawn extends Spawn
 		
 		LocalMap map = getPosition().getLocalMap();
 		
-		Npc npc = null;
+		Npc<?> npc = null;
 		
-		int npcType = getNpcType();
-		npc = Npc.create(npcType);
+		//npc = Npc.create(npcType);
+		npc = map.getWorld().getNpcManager().create(getNpcType());
 		
 		if(npc==null)
 			return null;
+		
 		npc.setSpawn(this);
 		
 		Position position = super.spawn(npc);
 		
-		npc.loadFromReference(npcType);
+		if(npc.getType() instanceof Merchant){
+			npc.loadShop();
+			//((Merchant)npc.getType()).loadShop(npc);
+		}
 		
 		return position;
 		

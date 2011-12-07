@@ -5,9 +5,9 @@ import java.util.Map;
 
 import org.reunionemu.jreunion.game.InventoryItem;
 import org.reunionemu.jreunion.game.Item;
+import org.reunionemu.jreunion.game.Npc;
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.Quest;
-import org.reunionemu.jreunion.game.npc.Mob;
 import org.reunionemu.jreunion.game.quests.objective.MobObjective;
 import org.reunionemu.jreunion.game.quests.objective.Objective;
 import org.reunionemu.jreunion.game.quests.objective.PointsObjective;
@@ -68,7 +68,7 @@ public class QuestState {
 		return 0;
 	}
 	
-	public void handleProgress(Mob mob, Player player){
+	public void handleProgress(Npc<?> mob, Player player){
 		for(Objective objective: getQuest().getObjectives()){
 			if(objective instanceof MobObjective){
 				handleMobProgress(objective, mob, player);
@@ -80,10 +80,11 @@ public class QuestState {
 		}
 	}
 	
-	public void handleMobProgress(Objective objective, Mob mob, Player player){
-		int mobType = objective.getId();
+	public void handleMobProgress(Objective objective, Npc<?> mob, Player player){
 		
-		if(mobType == mob.getType()){
+		int objectiveMobType = objective.getId();
+		
+		if(objectiveMobType == mob.getType().getTypeId()){
 			
 			if(!progression.containsKey(objective)) //we need to make sure the HashMap is not empty
 				increase(objective);
@@ -95,7 +96,7 @@ public class QuestState {
 				
 				increase(objective);
 
-				int slot = quest.getObjectiveSlot(mobType);
+				int slot = quest.getObjectiveSlot(objectiveMobType);
 				int ammountRemaining = objective.getAmmount() - progression.get(objective);
 				
 				if(!(quest instanceof ExperienceQuest)){
@@ -114,7 +115,7 @@ public class QuestState {
 		}
 	}
 	
-	public void handlePointsProgress(Mob mob){
+	public void handlePointsProgress(Npc<?> mob){
 		
 	}
 	
@@ -135,7 +136,7 @@ public class QuestState {
 		return true;
 	}
 	
-	public boolean endQuest(Player player, Mob mob){
+	public boolean endQuest(Player player, Npc<?> mob){
 		
 		if(player == null) return false;
 		Client client = player.getClient();
