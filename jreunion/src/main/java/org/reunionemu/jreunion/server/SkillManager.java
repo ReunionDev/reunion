@@ -168,7 +168,7 @@ public class SkillManager {
 			}
 			defaultSkills.put(race, raceSkillList);
 		}
-		Logger.getLogger(SkillManager.class).info(skills.size()+" skills loaded.");
+		Logger.getLogger(SkillManager.class).info("Loaded "+skills.size()+" skills");
 	}
 	public Skill getSkill(int id){
 		

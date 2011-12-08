@@ -42,7 +42,7 @@ public class ItemManager {
 			itemsList.put(id, itemType);
 		}
 		parser.clear();
-		Logger.getLogger(ItemManager.class).info(itemsList.size()+" items loaded.");
+		Logger.getLogger(ItemManager.class).info("Loaded "+itemsList.size()+" item types");
 	}
 	
 	public ItemType getItemType(int type){

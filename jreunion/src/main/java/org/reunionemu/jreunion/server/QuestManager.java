@@ -19,7 +19,7 @@ public class QuestManager {
 	public void loadQuests(){
 		quests = DatabaseUtils.getStaticInstance().loadQuests();
 		if(quests != null){
-			Logger.getLogger(QuestManager.class).info(quests.size()+" quests loaded.");
+			Logger.getLogger(QuestManager.class).info("Loaded "+quests.size()+" quests");
 		}
 	}
 	

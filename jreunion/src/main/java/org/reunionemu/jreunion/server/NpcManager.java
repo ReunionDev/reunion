@@ -44,7 +44,7 @@ public class NpcManager {
 			npcList.put(id, npcType);
 		}
 		npcParser.clear();
-		Logger.getLogger(ItemManager.class).info(npcList.size()+" npc loaded.");
+		Logger.getLogger(ItemManager.class).info("Loaded "+npcList.size()+" npc types");
 		
 		
 		Parser mobParser = Reference.getInstance().getMobReference();
@@ -68,7 +68,7 @@ public class NpcManager {
 			
 			npcList.put(id, npcType);
 		}
-		Logger.getLogger(ItemManager.class).info(getMobList().size()+" mobs loaded.");
+		Logger.getLogger(ItemManager.class).info("Loaded "+getMobList().size()+" mob types");
 		mobParser.clear();
 		
 	}
