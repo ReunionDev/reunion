@@ -13,10 +13,11 @@ public class RoamingItem extends WorldObject{
 
 	private Item<?> item;
 	private Player owner;
-	private java.util.Timer deleteRoamingItemTimer = new java.util.Timer();
+	private java.util.Timer deleteTimer = new java.util.Timer();
 	
 	public RoamingItem(Item<?> item) {
 		this.setItem(item);
+		this.setEntityId(item.getEntityId());
 	}	
 	
 	private void setItem(Item<?> item) {
@@ -83,7 +84,7 @@ public class RoamingItem extends WorldObject{
 			extraTime = (long)(dropTimeOut * Math.random());
 		}
 		
-		deleteRoamingItemTimer.schedule(new TimerTask() {
+		deleteTimer.schedule(new TimerTask() {
 			@Override
 			public void run() {
 				Logger.getLogger(RoamingItem.class).info("Server deleted roaming item {id:"
@@ -95,6 +96,6 @@ public class RoamingItem extends WorldObject{
 	}
 	
 	public void stopDeleteTimer(){
-		deleteRoamingItemTimer.cancel();
+		deleteTimer.cancel();
 	}
 }

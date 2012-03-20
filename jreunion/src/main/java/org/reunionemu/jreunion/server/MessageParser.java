@@ -556,7 +556,7 @@ public class MessageParser {
 						LocalMap localMap = player.getPosition().getLocalMap();
 	
 						if(words.length == 2){	//deletes all RoamingItems from LocalMap
-							for(RoamingItem roamingItem : localMap.getRoamingItemsList()){
+							for(RoamingItem roamingItem : localMap.getRoamingItemList()){
 								roamingItem.delete();
 								Logger.getLogger(MessageParser.class).info("Player "+player+" deleted roaming item "+roamingItem);
 							}

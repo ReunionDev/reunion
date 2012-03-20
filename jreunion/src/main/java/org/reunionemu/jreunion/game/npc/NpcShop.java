@@ -151,7 +151,7 @@ public class NpcShop {
 			
 			if (item != null) {
 				player.getPosition().getLocalMap().createEntityId(item);
-				player.pickItem(item, -1, tab);
+				player.pickItem(item, tab);
 				count++;
 			}
 			

@@ -560,10 +560,10 @@ public abstract class Player extends LivingObject implements EventListener {
 
 			getInventory().setHoldingItem(new HandPosition(invItem.getItem()));
 			getExchange().removeItem(item);
+			Logger.getLogger(Player.class).info("Item "+item+" removed from exchange inventory of Player "+this);
 		} else {
 			Item<?> item = getInventory().getHoldingItem().getItem();
-			ExchangeItem newExchangeItem = new ExchangeItem(item, posX,
-					posY);
+			ExchangeItem newExchangeItem = new ExchangeItem(item, posX,	posY);
 			ExchangeItem oldExchangeItem = null;
 			int x = 0, y = 0;
 
@@ -583,8 +583,11 @@ public abstract class Player extends LivingObject implements EventListener {
 						oldExchangeItem.getItem(), new InventoryPosition( 0, 0, 0));
 				getInventory().setHoldingItem(new HandPosition(invItem.getItem()));
 				getExchange().removeItem(oldExchangeItem);
+				Logger.getLogger(Player.class).info("Item "+oldExchangeItem.getItem()+" removed from exchange inventory of Player "+this);
 			}
 			getExchange().addItem(newExchangeItem);
+			Logger.getLogger(Player.class).info("Item "+newExchangeItem.getItem()+
+					" stored in Player "+this+" exchange inventory at position {x:"+x+", y:"+y+"}");
 		}
 	}
 
@@ -743,7 +746,7 @@ public abstract class Player extends LivingObject implements EventListener {
 
 	/****** Manages the Pick command ******/
 	// When you pick up an item, or buy something from merchant
-	public void pickItem(Item<?> item, int roamingItemEntityId, int neededTab) {
+	public void pickItem(Item<?> item, int neededTab) {
 		
 		Client client = getClient();
 		
@@ -754,7 +757,7 @@ public abstract class Player extends LivingObject implements EventListener {
 			getInventory().setHoldingItem(new HandPosition(inventoryItem.getItem()));
 		}
 		
-		client.sendPacket(Type.PICK, inventoryItem, roamingItemEntityId==-1 ? item.getEntityId() : roamingItemEntityId);
+		client.sendPacket(Type.PICK, inventoryItem);
 		
 	}
 

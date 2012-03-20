@@ -28,6 +28,7 @@ import org.reunionemu.jreunion.game.InventoryItem;
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.LivingObject;
 import org.reunionemu.jreunion.game.Npc;
+import org.reunionemu.jreunion.game.NpcType;
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.Player.Race;
 import org.reunionemu.jreunion.game.Player.Sex;
@@ -37,6 +38,7 @@ import org.reunionemu.jreunion.game.RoamingItem;
 import org.reunionemu.jreunion.game.Skill;
 import org.reunionemu.jreunion.game.items.etc.MissionReceiver;
 import org.reunionemu.jreunion.game.npc.Merchant;
+import org.reunionemu.jreunion.game.npc.Trader;
 import org.reunionemu.jreunion.game.npc.Warehouse;
 import org.reunionemu.jreunion.server.Client.LoginType;
 import org.reunionemu.jreunion.server.Client.State;
@@ -421,9 +423,9 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					Status status = Status.byValue(Integer.parseInt(message[1])+10);
 					player.addStatus(status);
 				} else if (message[0].equals("pick")) {
-					int roamingItemEntityId = Integer.parseInt(message[1]);
+					int entityId = Integer.parseInt(message[1]);
 					LocalMap map = player.getPosition().getLocalMap();
-					RoamingItem roamingItem = (RoamingItem)map.getEntity(roamingItemEntityId);
+					RoamingItem roamingItem = (RoamingItem)map.getRoamingItem(entityId);
 					
 					if(roamingItem!=null && player.getInventory().getHoldingItem()==null ){
 						client.getPlayer().pickupItem(roamingItem);							
@@ -574,6 +576,8 @@ public class PacketParser extends EventDispatcher implements EventListener{
 				} else if (message[0].equals("quest")) {
 					if (message[1].equals("cancel")) {
 						client.getPlayer().setQuest(null);
+					} else if (message[1].equals("click")) {
+						//TODO: use archeologist (npcType=257) to give quest scroll to meta players
 					} else {
 						if (client.getPlayer().getQuest() == null) {
 							Item<?> item = player.getQuickSlotBar().getItem(Integer.parseInt(message[1])).getItem();
@@ -675,41 +679,31 @@ public class PacketParser extends EventDispatcher implements EventListener{
 						Logger.getLogger(PacketParser.class).warn("Npc not found: " + npcId);				
 					}
 				} else if (message[0].equals("chip_exchange")) {
-					//Npc[] npc;
-					/*
-					if (Integer.parseInt(message[1]) == 0) {
-						npc = world
-								.getNpcManager().getNpcList(166);
-						Trader trader = (Trader) npc[0];
-						trader.chipExchange(client.getPlayer(),
+					
+					Trader trader = (Trader)world.getNpcManager().getNpcType(Trader.class);
+					
+					if (message.length == 3) {
+						trader.chipExchange(player,
 								Integer.parseInt(message[1]),
-								Integer.parseInt(message[2]), 0);
+								Integer.parseInt(message[2]),
+								-1);
 					} else {
-						npc = world
-								.getNpcManager().getNpcList(167);
-						Trader trader = (Trader) npc[0];
-						trader.chipExchange(client.getPlayer(),
+						trader.chipExchange(player,
 								Integer.parseInt(message[1]),
 								Integer.parseInt(message[2]),
 								Integer.parseInt(message[3]));
 					}
-					*/
 				} else if (message[0].equals("exch")) {
 					client.getPlayer().itemExchange(Integer.parseInt(message[2]),
 							Integer.parseInt(message[3]));
-				} else if (message[0].equals("ichange")) {
-					/*
-					Npc[] npc = world
-							.getNpcManager().getNpcList(117);
-					Trader trader = (Trader) npc[0];
-	
+				} else if (message[0].equals("ichange")) {		
+					Trader trader = (Trader)world.getNpcManager().getNpcType(Trader.class);
+					
 					if (message.length == 1) {
-						trader.exchangeArmor(client.getPlayer(), 0);
+						trader.exchangeArmor(player, 0);
 					} else {
-						trader.exchangeArmor(client.getPlayer(),
-								Integer.parseInt(message[1]));
+						trader.exchangeArmor(player, Integer.parseInt(message[1]));
 					}
-					*/
 				} else if (message[0].equals("q_ex")) {
 					if(player.getExchange().listSize() > 0){
 						

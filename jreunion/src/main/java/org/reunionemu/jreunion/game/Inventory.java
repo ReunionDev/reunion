@@ -264,18 +264,15 @@ public class Inventory {
 		HandPosition handPosition = getHoldingItem();
 
 		if(handPosition != null){
-			//Logger.getLogger(Inventory.class).debug("ITEM STORED: "+holdingItem.getItem().getDescription());
 			if(itemFit(tab,posX,posY,handPosition.getItem().getType().getSizeX(),
 					handPosition.getItem().getType().getSizeY())){
 				storeInventoryItem(tab,posX,posY);				
 			}else {
 				removeInventoryItem(tab, posX, posY);
-				//Logger.getLogger(Inventory.class).debug("ITEM REMOVED: "+getHoldingItem().getItem().getDescription());
 			}
 		}else {
 			if(!posEmpty(tab, posX, posY)){
 				removeInventoryItem(tab, posX, posY);
-				//Logger.getLogger(Inventory.class).debug("ITEM REMOVED: "+getHoldingItem().getItem().getDescription());
 			}
 			
 		}

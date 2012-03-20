@@ -79,7 +79,9 @@ public class PacketFactory {
 		WISPER,
 		SECONDATACK,
 		SAV,
-		K
+		K,
+		ICHANGE,
+		CHIP_EXCHANGE
 	}
 	
 	public static String createPacket(Type packetType, Object... args) {
@@ -138,7 +140,7 @@ public class PacketFactory {
 				
 				String packetData = warping?"appear ":"in ";
 
-				packetData += "char " + player.getEntityId() + " " + player.getName()
+				packetData += "c " + player.getEntityId() + " " + player.getName()
 						+ " " + player.getRace().ordinal() + " " + player.getSex().ordinal() + " "
 						+ player.getHairStyle() + " " + player.getPosition().getX()
 						+ " " + player.getPosition().getY() + " "
@@ -159,6 +161,7 @@ public class PacketFactory {
 		case OUT:
 			if(args.length>0){
 				WorldObject object = (WorldObject)args[0];
+					
 				return "out "+getObjectType(object)+" " + object.getEntityId();
 			}
 			break;
@@ -202,7 +205,7 @@ public class PacketFactory {
 				Position position = roamingItem.getPosition();
 				Item<?> item = roamingItem.getItem();
 				
-				return "drop " + roamingItem.getEntityId() + " " + item.getType().getTypeId() + " "
+				return "drop " + item.getEntityId() + " " + item.getType().getTypeId() + " "
 				+ position.getX() + " " + position.getY() + " " + position.getZ() + " "+position.getRotation()+" " + item.getGemNumber() + " "
 				+ item.getExtraStats()+ " " + item.getUnknown1() + " " + item.getUnknown2();
 			}			
@@ -214,7 +217,7 @@ public class PacketFactory {
 				Item<?> item = roamingItem.getItem();
 				Position position = roamingItem.getPosition();
 				
-				return "in item " + roamingItem.getEntityId() + " " + item.getType().getTypeId() + " " + position.getX()
+				return "in item " + item.getEntityId() + " " + item.getType().getTypeId() + " " + position.getX()
 				+ " " + position.getY() + " " + position.getZ() + " " + position.getRotation() + " " + item.getGemNumber()
 				+ " " + item.getExtraStats()+ " " + item.getUnknown1() + " " + item.getDurability() + " "
 				+ item.getType().getMaxDurability();
@@ -267,7 +270,7 @@ public class PacketFactory {
 			if(args.length>0){
 				Player player = (Player)args[0];
 				Position position = player.getPosition();
-				return "s char " + player.getEntityId() + " " + position.getX()
+				return "s c " + player.getEntityId() + " " + position.getX()
 					+ " " + position.getY() + " " + position.getZ() + " " + position.getRotation();
 			}
 			break;
@@ -460,10 +463,9 @@ public class PacketFactory {
 		case PICK:
 			if(args.length>0){
 				InventoryItem invItem = (InventoryItem)args[0];
-				int itemEntityId = (Integer)args[1];
 				Item<?> item = invItem.getItem();
 							
-				return "pick " + itemEntityId + " " + item.getType().getTypeId() + " "
+				return "pick " + item.getEntityId() + " " + item.getType().getTypeId() + " "
 				+ invItem.getPosition().getPosX()+" "+invItem.getPosition().getPosY() + " "
 				+ invItem.getPosition().getTab()+" " + item.getGemNumber() + " "
 				+ item.getExtraStats() + " " + item.getUnknown1() + " " + item.getDurability() + " "
@@ -595,12 +597,8 @@ public class PacketFactory {
 			if(args.length > 0){ //Kill is used on 2007+ client
 				LivingObject target = (LivingObject) args[0];
 				
-				if(target instanceof Player)
-				{
-					return "kill c " + target.getEntityId() + "\n";
-				}
-				else
-					return "kill n " + target.getEntityId() + "\n";
+				return "kill " +getObjectType(target)+ " " + target.getEntityId() + "\n";
+				
 			}
 			break;
 			
@@ -706,6 +704,39 @@ public class PacketFactory {
 				int typeId = (Integer) args[2];
 				
 				return "k "+isActivated+" "+getObjectType(livingObject)+" "+livingObject.getEntityId()+" "+typeId;
+			}
+			break;
+			
+		case ICHANGE:
+			if(args.length > 0){
+				Item<?> oldItem = (Item<?>) args[0];
+				Item<?> newItem = (Item<?>) args[1];
+				
+				if(oldItem == null || newItem == null)
+					return "ichange 0 0 0 0 0 0 0 0";
+				else {
+					return "ichange "
+						+ oldItem.getEntityId() + " "
+						+ newItem.getEntityId() + " "
+						+ newItem.getType().getTypeId() + " " 
+						+ newItem.getGemNumber() + " "
+						+ newItem.getExtraStats() + " 0 0 0";
+				}
+			}
+			break;
+			
+		case CHIP_EXCHANGE:
+			if(args.length > 0){
+				int gemTraderType = (Integer) args[0];
+				String betResult = (String) args[1];
+				Item<?> item = (Item<?>) args[2];
+				String serverBet = ((String) args[3]);
+				
+				if(item == null)
+					return "chip_exchange "+gemTraderType+" ok "+betResult+"-1 "+serverBet;
+				else
+					return "chip_exchange "+gemTraderType+" ok "+betResult+""
+						+item.getType().getTypeId()+" "+serverBet+""+item.getEntityId();
 			}
 			break;
 			
