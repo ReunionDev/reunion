@@ -7,7 +7,6 @@ import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import org.reunionemu.jcommon.ParsedItem;
 import org.reunionemu.jcommon.Parser;
