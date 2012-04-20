@@ -8,8 +8,6 @@
   		<groupId>org.reunionemu</groupId>
   		<artifactId>jcommon</artifactId>
   		<version>0.0.1-SNAPSHOT</version>
-  		<type>pom</type>
-  		<scope>import</scope>
   	</dependency>
   	<dependency>
   		<groupId>log4j</groupId>
