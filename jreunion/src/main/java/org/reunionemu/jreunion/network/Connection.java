@@ -12,7 +12,12 @@ public abstract class Connection<T extends Connection<T>> {
 	private ByteBuffer inputBuffer;
 	private ByteBuffer outputBuffer;	
 	private SocketChannel socketChannel;
+	private boolean open = false;
 	
+	public boolean isOpen() {
+		return open;
+	}
+
 	public SocketChannel getSocketChannel() {
 		return socketChannel;
 	}
@@ -37,6 +42,8 @@ public abstract class Connection<T extends Connection<T>> {
 				key.attach(this);
 			}
 		}
+		
+		open = true;
 	}
 	
 	public void close(){
@@ -70,8 +77,11 @@ public abstract class Connection<T extends Connection<T>> {
 	}
 	
 	void handleDisconnect(){
-		SelectionKey key = socketChannel.keyFor(networkThread.getSelector());	
-		key.cancel();
+		open = false;
+		SelectionKey key = socketChannel.keyFor(networkThread.getSelector());
+		if(key!=null){
+			key.cancel();
+		}
 		networkThread.onDisconnect((T)this);
 	}
 	

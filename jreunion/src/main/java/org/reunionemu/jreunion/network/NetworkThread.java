@@ -58,6 +58,7 @@ public abstract class NetworkThread<T extends Connection<T>> extends Thread {
 		SocketChannel socketChannel = SocketChannel.open();
 		socketChannel.configureBlocking(false);
 		T connection = createConnection(socketChannel);
+		
 		synchronized(this){
 			selector.wakeup();
 			SelectionKey key = socketChannel.register(selector, SelectionKey.OP_CONNECT);
@@ -103,10 +104,11 @@ public abstract class NetworkThread<T extends Connection<T>> extends Thread {
 								if(socketChannel.finishConnect()){
 									connection.open();
 								}
+								onConnect(connection);
 							} catch(Exception e) {
 								e.printStackTrace();
 							}
-							onConnect(connection);
+							
 						}
 						if (writable) {
 							connection.handleOutput();
