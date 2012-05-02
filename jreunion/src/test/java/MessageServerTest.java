@@ -5,7 +5,7 @@ import java.io.ObjectOutputStream;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.reunionemu.jreunion.messages.MessageServer;
+//import org.reunionemu.jreunion.messages.MessageServer;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
@@ -44,9 +44,9 @@ public class MessageServerTest {
 		
 		//System.out.println(" [x] Sent '" + message + "'");
 	    
-	    MessageServer server = new MessageServer();
+	    //MessageServer server = new MessageServer();
 	    
-	    Thread t = new Thread(server);
+	    Thread t = new Thread();
 	    t.start();
 	    channel.exchangeDeclare("all", "fanout");
 	    

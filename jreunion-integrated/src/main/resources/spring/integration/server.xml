@@ -1,0 +1,49 @@
+<beans:beans xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:ip="http://www.springframework.org/schema/integration/ip"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:int-amqp="http://www.springframework.org/schema/integration/amqp"
+	xmlns:int-stream="http://www.springframework.org/schema/integration/stream"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd 
+	http://www.springframework.org/schema/integration 
+	http://www.springframework.org/schema/integration/spring-integration.xsd 
+	http://www.springframework.org/schema/integration/ip 
+	http://www.springframework.org/schema/integration/ip/spring-integration-ip.xsd
+	http://www.springframework.org/schema/integration/amqp 
+	http://www.springframework.org/schema/integration/amqp/spring-integration-amqp.xsd
+	http://www.springframework.org/schema/integration/stream 
+	http://www.springframework.org/schema/integration/stream/spring-integration-stream.xsd
+	http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+	<!-- Server side -->
+	
+	<ip:tcp-connection-factory id="tcpConnectionFactory" type="server" port="4005" using-nio="true"/>
+	  <!--
+	<ip:tcp-inbound-gateway id="tcpGateway" 
+		connection-factory="tcpConnectionFactory" request-channel="toDecrypter"
+		error-channel="errorChannel" />
+		-->
+		
+	<ip:tcp-inbound-channel-adapter id="inAdapter.server"
+		channel="toDecrypter"
+		connection-factory="tcpConnectionFactory" />
+		
+	<ip:tcp-outbound-channel-adapter id="outAdapter.server"
+		channel="replyGateway"
+		connection-factory="tcpConnectionFactory" />	
+		
+	<int:channel id="replyGateway" />
+	<int:service-activator input-channel="toTcpService" output-channel="toEncrypter" ref="tcpService" method="test" />
+	<beans:bean id="tcpService"
+		class="org.springframework.integration.samples.tcpclientserver.TcpService" />
+	
+	<int:transformer id="decrypter" input-channel="toDecrypter"
+		output-channel="toTcpService" method="decrypt" ref="crypto"/>
+	<int:transformer id="encrypter" input-channel="toEncrypter"
+		output-channel="replyGateway" method="encrypt" ref="crypto"/>
+		
+</beans:beans>
+
