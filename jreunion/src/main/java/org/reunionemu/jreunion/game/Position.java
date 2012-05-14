@@ -41,7 +41,7 @@ public class Position {
 		
 		double zd = this.getZ() - position.getZ();
 		
-		return  Math.sqrt((xd * xd) + (yd * yd)  + (zd * zd));
+		return  Math.sqrt((xd * xd) + (yd * yd));
 		
 	}
 	// *within* doesn't use distance because Math.sqrt is expensive and unnecesary for this

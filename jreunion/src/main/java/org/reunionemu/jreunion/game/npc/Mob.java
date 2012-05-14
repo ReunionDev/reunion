@@ -1,11 +1,18 @@
 package org.reunionemu.jreunion.game.npc;
 
+import java.util.Iterator;
+
+import org.apache.log4j.Logger;
 import org.reunionemu.jcommon.ParsedItem;
 import org.reunionemu.jreunion.game.Enums;
 import org.reunionemu.jreunion.game.LivingObject;
 import org.reunionemu.jreunion.game.NpcType;
 import org.reunionemu.jreunion.game.Player;
+import org.reunionemu.jreunion.game.Position;
+import org.reunionemu.jreunion.game.Spawn;
+import org.reunionemu.jreunion.server.Client;
 import org.reunionemu.jreunion.server.Reference;
+import org.reunionemu.jreunion.server.Server;
 
 /**
  * @author Aidamina
@@ -19,7 +26,7 @@ public class Mob extends NpcType {
 
 	private int lime;
 
-	private int attackType;	
+	private int attackType;
 
 	private int speed;
 
@@ -170,8 +177,6 @@ public class Mob extends NpcType {
 					
 		}
 	}
-
-	
 
 	private void rangeMagicAttackPlayer(Player player) {
 

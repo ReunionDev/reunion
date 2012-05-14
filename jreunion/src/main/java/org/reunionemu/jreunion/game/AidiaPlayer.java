@@ -34,6 +34,6 @@ public class AidiaPlayer extends Player {
 	@Override
 	public long getBaseDamage() {
 		
-		return (getLevel() / 5) + (getWisdom() / 3) + getLeadership();
+		return (getLevel() / 4) + (getWisdom() / 2) + (getLeadership()/3);
 	}
 }

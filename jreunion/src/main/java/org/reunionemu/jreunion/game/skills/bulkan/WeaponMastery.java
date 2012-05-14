@@ -46,9 +46,20 @@ public abstract class WeaponMastery extends Skill implements Modifier {
 		 * 
 		 * 1.90 = 200% - 10%
 		 * 24 = m
+		 * 
+		 * 
+		 * 200% = 25
+		 * ?    = 1
+		 * 
 		 */
+		/*double percent = 0;
 		
-		return 1.90f/(getMaxLevel()-1);		
+		for(int i = 1; i <= getMaxLevel(); i++)
+			percent += 10 - ((i == 1) ? 0 : ((i == 2) ? 3 : ((i == 14) ? 3 : 2)));
+		return ((percent/100)+1);*/
+		
+		return 1.90f/(getMaxLevel()-1);	
+		//f l2 1.90 / (2-1)
 		
 	}
 	

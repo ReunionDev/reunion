@@ -23,7 +23,9 @@ import org.reunionemu.jreunion.events.session.SessionEvent;
 import org.reunionemu.jreunion.game.Entity;
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.LivingObject;
+import org.reunionemu.jreunion.game.Npc;
 import org.reunionemu.jreunion.game.NpcSpawn;
+import org.reunionemu.jreunion.game.NpcType;
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.PlayerSpawn;
 import org.reunionemu.jreunion.game.Position;
@@ -159,6 +161,12 @@ public class LocalMap extends Map implements Runnable{
 			spawn.setRespawnTime(Integer.parseInt(item
 					.getMemberValue("RespawnTime")));
 			
+			if(100*Math.random() < 25)
+			{
+				//((Mob) spawn).setMutant((int)(Math.random() * 3 + 1));
+				
+			}
+			
 			npcSpawnList.add(spawn);
 			
 			spawn.spawn();
@@ -281,20 +289,19 @@ public class LocalMap extends Map implements Runnable{
 			
 			@Override
 			public void run() {
-
 				List<Entity> objects = null;
 				synchronized(entities){			
 					objects = new Vector<Entity>(entities.values());
 				}
 				for(Entity entity: objects){
-					if(entity instanceof Mob){
-						Mob mob = (Mob)entity;	
-						//mob.workMob();
+					if(entity instanceof Npc){
+						if(((Npc)entity).getType().getClass() == Mob.class)
+							((Npc<NpcType>)entity).work();
 					}
 				}
 			}
 			
-		}, 0, 2, TimeUnit.SECONDS);
+		}, 0, 1, TimeUnit.SECONDS);
 		
 		Logger.getLogger(LocalMap.class).info(getName()+" running on "+getAddress());
 		
@@ -474,12 +481,15 @@ public SessionList<Session> GetSessions(Position position){
 						player.pickItem(item, -1);
 						player.getClient().sendPacket(Type.PICKUP, player);
 						player.getInterested().sendPacket(Type.PICKUP, player);
+						//player.getClient().sendPacket(Type.OUT, )
+						//player.getClient().sendPacket(Type.OUT, roamingItem);
 						removeRoamingItem(roamingItem);
 						list.exit(roamingItem, false);
 					}				
 				}
 				DatabaseUtils.getDinamicInstance().deleteRoamingItem(item);
 				roamingItem.getInterested().sendPacket(Type.OUT, roamingItem);
+				
 			} else	
 			if(event instanceof PlayerLoginEvent){
 				

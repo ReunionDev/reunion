@@ -264,7 +264,8 @@ public abstract class Player extends LivingObject implements EventListener {
 			client.sendPacket(Type.STATUS, status.value(), min, max);
 		}
 	}
-
+	
+	
 	public abstract long getMaxElectricity();
 	
 

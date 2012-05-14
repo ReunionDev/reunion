@@ -222,7 +222,6 @@ public class Npc<T extends NpcType> extends LivingObject {
 		}
 		
 		synchronized(player){
-			
 			player.setLime(player.getLime()+(npcLime*serverLimeRate));
 			player.setTotalExp(player.getTotalExp()+(npcExp*serverXpRate));
 			player.setLevelUpExp(player.getLevelUpExp()-(npcExp*serverXpRate));
@@ -262,7 +261,6 @@ public class Npc<T extends NpcType> extends LivingObject {
 							roamingItem.setOwner(null);
 						}
 					},dropExclusivity*1000);
-					
 				}
 			}			
 		}
@@ -270,128 +268,96 @@ public class Npc<T extends NpcType> extends LivingObject {
 	}
 	
 	public void moveToPlayer(Player player, double distance) {
-		
 		Client client = player.getClient();
 
-		if (client == null || !(getType() instanceof Mob)) {
+		if (client == null) {
 			return;
 		}
 		
-		Mob mob = (Mob)getType();
-/*
-		if (time.getTimeElapsedSeconds() > 1) {
-			time.Stop();
-			time.Reset();
-			setIsAttacking(false);
-		}
-		if (time.getTimeElapsedSeconds() < 1 && time.isRunning()) {
-			return;
-		}
-		if (!time.isRunning()) {
-			time.Start();
-		}
-
-		if (distance < 100) {
-			if (getAttackType() == 1 || getAttackType() == 2) {
-				setIsAttacking(true);
-				this.getPosition().getLocalMap().getWorld().getCommand()
-						.NpcAttackChar(player, this);
-				return;
-			} else if (distance < 20) {
-				setIsAttacking(true);
-				this.getPosition().getLocalMap().getWorld().getCommand()
-						.NpcAttackChar(player, this);
-				return;
-			}
-		}
-		*/
-
-		//player.getPosition().
+		double pPosX = player.getPosition().getX();
+		double pPosY = player.getPosition().getY();
 		
-		double xcomp = player.getPosition().getX() - getPosition().getX();
-		double ycomp = player.getPosition().getY() - getPosition().getY();
-
-		// Huh?
-		if (xcomp >= 0 && ycomp >= 0) {
-			xcomp = Math.pow(xcomp, 1.1);
-			ycomp = Math.pow(ycomp, 1.1);
-		}
-
-		xcomp = xcomp / (distance / mob.getSpeed());
-		ycomp = ycomp / (distance / mob.getSpeed());
-
-		int newPosX = (int) (getPosition().getX() + xcomp);
-		int newPosY = (int) (getPosition().getY() + ycomp);
+		double nPosX = getPosition().getX();
+		double nPosY = getPosition().getY();
 		
-		if (getPosition().getLocalMap()
-				.getArea().get((newPosX / 10 - 300), (newPosY / 10), Field.MOB) == true) {
-			Position newPosition = getPosition().clone();
-			newPosition.setX(newPosX);
-			newPosition.setY(newPosY);
-			walk(getPosition(), isRunning());
-			
-		} 
+		double nSpeed = ((Mob)this.getType()).getSpeed();
+		double percent = ((100*nSpeed)/distance);
+		
+		//xLen = (xLen < 0) ? xLen*(-1) : xLen;
+		//yLen = (yLen < 0) ? yLen*(-1) : yLen;
+		
+		int newPosX = (int) ((((pPosX-nPosX)*percent)/100)+nPosX);
+		int newPosY = (int) ((((pPosY-nPosY)*percent)/100)+nPosY);
+		
+		//player.getClient().sendPacket(Type.SAY,(pPosX-nPosX)+"Player:"+pPosX+"x"+pPosY);
+		//player.getClient().sendPacket(Type.SAY,"MobOld:"+nPosX+"x"+nPosY);
+		//player.getClient().sendPacket(Type.SAY,"MobNew:"+newPosX+"x"+newPosY+"@"+nSpeed);
+		
+		//double xcomp = xLen / (distance / ((Mob)this.getType()).getSpeed());
+		//double ycomp = yLen / (distance / ((Mob)this.getType()).getSpeed());
+
+		//int newPosX = (int) (getPosition().getX() + xcomp);
+		//int newPosY = (int) (getPosition().getY() + ycomp);
+		
+		Position newPosition = getPosition().clone();
+		newPosition.setX(newPosX);
+		newPosition.setY(newPosY);
+		
+		walk(newPosition, isRunning());
+		setIsRunning(false);
+	}
+	
+	public void attackPlayer(Player player)
+	{
+		this.getInterested().sendPacket(Type.ATTACK,this,player);
+		
+		int npcDmg = (int) (((((Mob)this.getType()).getDmg()* (int)(60 + 40*Math.random())) / 100)-(player.getDef()/2));
+		
+		if(npcDmg < 0)
+		{
+			npcDmg = (int) (((((Mob)this.getType()).getDmg()* (int)(60 + 40*Math.random())) / 100));
+		}
+		
+		player.getClient().sendPacket(Type.SAY, "MobDmg:" + npcDmg + " Original: "+((Mob)this.getType()).getDmg());
+		player.setHp(player.getHp() - npcDmg);
 	}
 	
 	public int getDirectionX() {
 
-		if(!(getType() instanceof Mob))
+		if(((Npc)this).getType().getClass() != Mob.class)
 			return 0;
-		
-		Mob mob = (Mob)getType();
 		
 		double directionX = Math.random() * 2;
 
+		//System.out.println("Speed of "+this.getEntityId()+" ("+((Mob) this.getType()).getSpeed()+")");
+		
 		if (directionX >= 1.5) {
-			return this.getPosition().getX() + (int) (directionX * mob.getSpeed());
+			return this.getPosition().getX() + (int) (directionX * ((Mob) this.getType()).getSpeed());
 		} else {
-			return this.getPosition().getX() + (int) (-directionX * mob.getSpeed());
+			return this.getPosition().getX() + (int) (-directionX * ((Mob) this.getType()).getSpeed());
 		}
 	}
 
 	public int getDirectionY() {
 
-		if(!(getType() instanceof Mob))
+		if(((Npc)this).getType().getClass() != Mob.class)
 			return 0;
-		
-		Mob mob = (Mob)getType();
 		
 		double directionY = Math.random() * 2;
 
 		if (directionY >= 1.5) {
-			return this.getPosition().getY() + (int) (directionY * mob.getSpeed());
+			return this.getPosition().getY() + (int) (directionY * ((Mob) this.getType()).getSpeed());
 		} else {
-			return this.getPosition().getY() + (int) (-directionY * mob.getSpeed());
+			return this.getPosition().getY() + (int) (-directionY * ((Mob) this.getType()).getSpeed());
 		}
 	}
 	
 	public void work() {
-
-		// int newPosX,newPosY;
-		// double directionX=0, directionY=0;
-	
-
-		Position newPos = this.getPosition().clone();
-		// Members of the new position to where the mob should move
-		newPos.setX(getDirectionX());
-		newPos.setY(getDirectionY());
-
-		// Members for the random direction of mob
-		/*
-		 * directionX = Math.random()*2; directionY = Math.random()*2;
-		 * 
-		 * if(directionX >= 1.5) newPosX =
-		 * mob.getPosX()+(int)(directionX*mob.getSpeed()); else newPosX =
-		 * mob.getPosX()+(int)(-directionX*mob.getSpeed());
-		 * 
-		 * if(directionY >= 1.5) newPosY =
-		 * mob.getPosY()+(int)(directionY*mob.getSpeed()); else newPosY =
-		 * mob.getPosY()+(int)(-directionY*mob.getSpeed());
-		 */
-
-		Iterator<Player> iterPlayer = Server.getInstance().getWorld()
-				.getPlayerManager().getPlayerListIterator();
-
+		Iterator<Player> iterPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayerListIterator();
+		
+		if(isRunning())
+			return;
+		
 		while (iterPlayer.hasNext()) {
 			Player player = iterPlayer.next();
 			Client client = player.getClient();
@@ -402,15 +368,12 @@ public class Npc<T extends NpcType> extends LivingObject {
 					|| this.getPosition().getLocalMap() != player.getPosition().getLocalMap()) {
 				continue;
 			}
-
+			
 			double distance = this.getPosition().distance(player.getPosition());
-
-			/*
-			 * double xcomp = Math.pow(player.getPosX() - mob.getPosX(), 2);
-			 * double ycomp = Math.pow(player.getPosY() - mob.getPosY(), 2);
-			 * double distance = Math.sqrt(xcomp + ycomp);
-			 */
-
+			
+			/*if(distance <= 100)
+				client.sendPacket(Type.SAY, "Distance to "+((Mob) this.getType()).getName()+" ("+this.getEntityId()+") is "+distance);
+			*/
 			// Condition that verify if the mob can move freely or not.
 			// If the distance between the mob and the player is less or equal
 			// then 150 (distance that makes the mob move to the player
@@ -421,12 +384,19 @@ public class Npc<T extends NpcType> extends LivingObject {
 			
 			if (distance <= 150) {
 				try {
-				if (this.getPosition().getLocalMap()
-						.getArea()
-						.get((player.getPosition().getX() / 10 - 300),
-								(player.getPosition().getY() / 10),Field.MOB) == true) {
-					
-				}
+					if(distance > 40 && !isRunning())
+					{
+						setIsRunning(true);
+						moveToPlayer(player,distance);
+					} else if(distance <= 40) {
+						setAttacking(true);
+						attackPlayer(player);
+					}
+					else
+					{
+						setAttacking(false);
+						setIsRunning(false);
+					}
 				} catch (Exception e) {
 					Logger.getLogger(Mob.class).info("Mob Bug");
 					//TODO: Fix Mob move bug
@@ -436,39 +406,22 @@ public class Npc<T extends NpcType> extends LivingObject {
 			// Condition that detects that the mob its out of player session
 			// range
 			if (distance >= player.getSessionRadius()) {
-				//player.getSession().exit(mob);
+				player.getSession().exit(this);
 			}
-			
-
+		
 			if (distance < player.getSessionRadius()) {
 				if (!this.isAttacking()) {
-					
-					
-					/*
-					String packetData = "walk npc " + mob.getId() + " "
-							+ mob.getPosition().getX() + " " + mob.getPosition().getY() + " 0 " + (mob.isRunning()?1:0)
-							+ "\n";
-							*/
 					// S> walk npc [UniqueId] [Xpos] [Ypos] [ZPos] [Running]
-					this.setPosition(newPos);
-					this.walk(this.getPosition(), this.isRunning());
-					//client.sendPacket(Type.WALK, mob);
-					//client.sendData( packetData);
+					Position newPos = getPosition().clone();
+					// Members of the new position to where the mob should move
+					
+					newPos.setX(getDirectionX());
+					newPos.setY(getDirectionY());
+					walk(newPos, isRunning());
+					
 				}
 			}
 		}
-
-			Spawn spawn = this.getSpawn();
-			if(spawn!=null){
-				
-				double distance = spawn.getPosition().distance(newPos);
-			
-				if (distance <= spawn.getRadius()) {
-					// Logger.getLogger(MobManager.class).info("Distance <= Radius\n");					
-					this.setPosition(newPos);
-				}
-			}
-		
 	}
 	
 	public String toString(){

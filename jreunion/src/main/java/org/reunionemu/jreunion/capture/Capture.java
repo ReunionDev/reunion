@@ -104,17 +104,6 @@ public class Capture extends Thread{
 							protocol.setPort(port);
 							protocols.put(port, protocol);
 						}
-						/*
-						{
-							OtherProtocol protocol = new OtherProtocol(null);
-							protocol.setAddress(address);
-							protocol.setVersion(version);
-							protocol.setMapId(mapId);
-							protocol.setPort(port);
-							remoteProtocols.put(port, protocol);
-						
-						}
-						*/
 
 						socketChannel.configureBlocking(false);
 						socketChannel.register(selector, SelectionKey.OP_READ);
@@ -151,16 +140,20 @@ public class Capture extends Thread{
 							OtherProtocol protocol = protocols.get(port);
 							//OtherProtocol protocol = local?remoteProtocols.get(port):localProtocols.get(port);
 							String output = null;
+							
+							
 							if(local){								
 
-								output = "From client:\n"+protocol.decryptServer(data.clone());								
+								output = "From client:\n"+protocol.decryptServer(data.clone());
 							} else {
 								String cd = protocol.decryptClient(data.clone());
+								
+								
 								output = "From server:\n"+cd;
 
 								//(go_world) ([0-9]{1,3}\.){3}[0-9]{1,3} (-?\d+) (-?\d+) (-?\d+)
-
-								if(protocol.decryptClient(data.clone()).contains("go_world "))
+								
+								if(cd.contains("go_world "))
 								{
 									String[] sp = cd.split("go_world ");
 
@@ -209,6 +202,7 @@ public class Capture extends Thread{
 							}
 
 							System.out.println(output);
+							
 							if(started==false)
 							{
 								bos = new BufferedOutputStream(new FileOutputStream("packetlog-"+(new Date().getTime()/1000)+".txt", true));
@@ -216,7 +210,7 @@ public class Capture extends Thread{
 							}
 							bos.write(output.getBytes());
 							bos.flush();
-
+						
 
 						}else if ((key.readyOps() & SelectionKey.OP_WRITE) == SelectionKey.OP_WRITE) {
 

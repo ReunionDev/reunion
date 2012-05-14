@@ -25,15 +25,15 @@ public class BulkanPlayer extends Player {
 	
 	@Override
 	public long getMaxHp(){
-		return (Tools.statCalc(getStrength(), 50) + Tools.statCalc((int)getConstitution(), 20)+ (getLeadership() / 2));		
+		return Tools.statCalc(getStrength(), 49) + Tools.statCalc((int)getConstitution(), 20)+ (getLeadership() / 2);		
 	}
 	
 	public long getMaxStamina(){
 		return Tools.statCalc(getStrength(), 60) + (getLeadership() / 2)+ getConstitution();
-	}	
+	}
 	
 	@Override
 	public long getBaseDamage() {
-		return (getLevel()/6) + (getStrength()/4) + (getDexterity()/4) + (getConstitution()/8);
+		return getLevel()/6+(getStrength()/4)+(getConstitution()/5)+(getDexterity()/4);
 	}
 }

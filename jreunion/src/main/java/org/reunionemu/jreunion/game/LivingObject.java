@@ -47,7 +47,7 @@ public abstract class LivingObject extends WorldObject {
 	
 	public void walk(Position position, boolean running) {
 
-		setIsRunning(running);
+		//setIsRunning(running);
 		synchronized(this) {
 			setPosition(position);
 			setTargetPosition(position.clone());			

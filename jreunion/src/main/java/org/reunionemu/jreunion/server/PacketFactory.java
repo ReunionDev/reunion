@@ -279,7 +279,7 @@ public class PacketFactory {
 			if(args.length>1){
 				LivingObject livingObject = (LivingObject)args[0];
 				Position position = (Position)args[1];
-					
+				
 				return "walk "+getObjectType(livingObject)+" " + livingObject.getEntityId() + " " + position.getX()
 				+ " " + position.getY() + " " + position.getZ() + " " + (livingObject.isRunning()?1:0);
 			}

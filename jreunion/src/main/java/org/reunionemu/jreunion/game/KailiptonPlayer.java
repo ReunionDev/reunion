@@ -32,7 +32,7 @@ public class KailiptonPlayer extends Player {
 
 	@Override
 	public long getBaseDamage() {
-		return (getLevel() / 5) + (getWisdom() / 2);
+		return (getLevel() / 5) + (getWisdom() / 4);
 	}
 
 }

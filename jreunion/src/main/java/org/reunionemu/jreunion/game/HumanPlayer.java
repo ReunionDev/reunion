@@ -32,7 +32,6 @@ public class HumanPlayer extends Player {
 
 	@Override
 	public long getBaseDamage() {
-		return (getLevel() / 6) + (getDexterity() / 4)+ getStrength();
-		
+		return (getLevel() / 6) + (getDexterity() / 2)+ (getStrength()/3);
 	}
 }
