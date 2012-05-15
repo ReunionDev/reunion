@@ -15,7 +15,7 @@ public class Event {
 	}
 	EventDispatcher source;
 	
-	private void setSource(EventDispatcher source) {
+	protected void setSource(EventDispatcher source) {
 		this.source = source;
 	}
 

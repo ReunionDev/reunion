@@ -9,6 +9,7 @@ import org.reunionemu.jcommon.ParsedItem;
 import org.reunionemu.jcommon.Parser;
 import org.reunionemu.jreunion.game.npc.Mob;
 import org.reunionemu.jreunion.game.npc.NpcShop;
+import org.reunionemu.jreunion.server.Area;
 import org.reunionemu.jreunion.server.ItemManager;
 import org.reunionemu.jreunion.server.LocalMap;
 import org.reunionemu.jreunion.server.Area.Field;
@@ -383,23 +384,28 @@ public class Npc<T extends NpcType> extends LivingObject {
 			// mob will chase the player, else the mob will move freely.
 			
 			if (distance <= 150) {
-				try {
-					if(distance > 40 && !isRunning())
-					{
-						setIsRunning(true);
-						moveToPlayer(player,distance);
-					} else if(distance <= 40) {
-						setAttacking(true);
-						attackPlayer(player);
-					}
-					else
-					{
-						setAttacking(false);
-						setIsRunning(false);
-					}
-				} catch (Exception e) {
-					Logger.getLogger(Mob.class).info("Mob Bug");
+				Area playerArea = player.getPosition().getLocalMap().getArea(); 
+				
+				if(playerArea.get(player.getPosition().getX() / 10, player.getPosition().getY() / 10,Field.MOB)) {
+					try {
+						if(distance > 40 && !isRunning())
+						{
+							setIsRunning(true);
+							moveToPlayer(player,distance);
+						} else if(distance <= 40) {
+							setAttacking(true);
+							attackPlayer(player);
+						}
+						else
+						{
+							setAttacking(false);
+							setIsRunning(false);
+						}
+					
+					} catch (Exception e) {
+					Logger.getLogger(Mob.class).info("Mob Bug"+e);
 					//TODO: Fix Mob move bug
+					}
 				}
 			}
 
@@ -411,12 +417,22 @@ public class Npc<T extends NpcType> extends LivingObject {
 		
 			if (distance < player.getSessionRadius()) {
 				if (!this.isAttacking()) {
+					Area npcArea = this.getPosition().getLocalMap().getArea();
 					// S> walk npc [UniqueId] [Xpos] [Ypos] [ZPos] [Running]
-					Position newPos = getPosition().clone();
+					Position newPos =  getPosition().clone();
 					// Members of the new position to where the mob should move
-					
 					newPos.setX(getDirectionX());
 					newPos.setY(getDirectionY());
+					
+					while((!npcArea.get(newPos.getX() / 10, newPos.getY() / 10,Field.MOB))) {
+						newPos.setX(getDirectionX());
+						newPos.setY(getDirectionY());
+					}
+					
+					// Members of the new position to where the mob should move
+					
+					//newPos.setX(getDirectionX());
+					//newPos.setY(getDirectionY());
 					walk(newPos, isRunning());
 					
 				}
