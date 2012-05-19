@@ -241,6 +241,7 @@ public class MessageParser {
 							
 							//System.out.println("Entity list size before: "+player.getPosition().getLocalMap().getEntityListSize());
 							Item<?> item = itemManager.create(Integer.parseInt(words[1]));
+							player.getPosition().getLocalMap().createEntityId(item);
 							
 							if (words.length == 6) {							
 								int gemNumber = Integer.parseInt(words[2]);
