@@ -64,6 +64,7 @@ public abstract class LivingObject extends WorldObject {
 		this.dmgType = dmgType;
 	}
 	
+	//players: 0-walking 1-running ; npc: 0-stoped 1-moving
 	private boolean running;
 
 	public void setIsRunning(boolean running) {

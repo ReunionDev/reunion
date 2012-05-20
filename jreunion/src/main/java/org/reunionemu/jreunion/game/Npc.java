@@ -155,13 +155,11 @@ public class Npc<T extends NpcType> extends LivingObject {
 	
 	@Override
 	public void enter(Session session) {
-		
 		session.getOwner().getClient().sendPacket(Type.IN_NPC, this);
 	}
 
 	@Override
 	public void exit(Session session) {
-		
 		session.getOwner().getClient().sendPacket(Type.OUT, this);
 	}
 	
@@ -268,12 +266,36 @@ public class Npc<T extends NpcType> extends LivingObject {
 		player.getClient().sendPacket(Type.SAY, "Experience: " + npcExp + " Lime: " + npcLime);
 	}
 	
+	public void moveFree() {
+		
+		if(isRunning())
+			return;
+		
+		setIsRunning(true);
+		
+		Area npcArea = getPosition().getLocalMap().getArea();
+		Position newPos =  getPosition().clone();
+		
+		// Members of the new position to where the mob should move
+		newPos.setX(getDirectionX());
+		newPos.setY(getDirectionY());
+		
+		while((!npcArea.get(newPos.getX() / 10, newPos.getY() / 10,Field.MOB))) {
+			newPos.setX(getDirectionX());
+			newPos.setY(getDirectionY());
+		}
+		
+		walk(newPos, isRunning());
+		setIsRunning(false);
+	}
+	
 	public void moveToPlayer(Player player, double distance) {
 		Client client = player.getClient();
-
-		if (client == null) {
+		
+		if(client==null || isRunning())
 			return;
-		}
+		
+		setIsRunning(true);
 		
 		double pPosX = player.getPosition().getX();
 		double pPosY = player.getPosition().getY();
@@ -308,24 +330,29 @@ public class Npc<T extends NpcType> extends LivingObject {
 		setIsRunning(false);
 	}
 	
-	public void attackPlayer(Player player)
-	{
-		this.getInterested().sendPacket(Type.ATTACK,this,player);
+	public void attackPlayer(Player player) {
+		Client client = player.getClient();
+		
+		if(client==null || isAttacking())
+			return;
+		
+		setAttacking(true);
 		
 		int npcDmg = (int) (((((Mob)this.getType()).getDmg()* (int)(60 + 40*Math.random())) / 100)-(player.getDef()/2));
 		
-		if(npcDmg < 0)
-		{
+		if(npcDmg < 0) {
 			npcDmg = (int) (((((Mob)this.getType()).getDmg()* (int)(60 + 40*Math.random())) / 100));
 		}
 		
 		player.getClient().sendPacket(Type.SAY, "MobDmg:" + npcDmg + " Original: "+((Mob)this.getType()).getDmg());
 		player.setHp(player.getHp() - npcDmg);
+		this.getInterested().sendPacket(Type.ATTACK,this,player);
+		setAttacking(false);
 	}
 	
 	public int getDirectionX() {
 
-		if(((Npc)this).getType().getClass() != Mob.class)
+		if(((Npc<?>)this).getType().getClass() != Mob.class)
 			return 0;
 		
 		double directionX = Math.random() * 2;
@@ -341,7 +368,7 @@ public class Npc<T extends NpcType> extends LivingObject {
 
 	public int getDirectionY() {
 
-		if(((Npc)this).getType().getClass() != Mob.class)
+		if(((Npc<?>)this).getType().getClass() != Mob.class)
 			return 0;
 		
 		double directionY = Math.random() * 2;
@@ -372,70 +399,42 @@ public class Npc<T extends NpcType> extends LivingObject {
 			
 			double distance = this.getPosition().distance(player.getPosition());
 			
-			/*if(distance <= 100)
-				client.sendPacket(Type.SAY, "Distance to "+((Mob) this.getType()).getName()+" ("+this.getEntityId()+") is "+distance);
-			*/
+			// Condition that detects if the mob its outside or inside
+			// player session range.
+			
+			if (distance >= player.getSessionRadius()) {
+				player.getSession().exit(this);
+				continue;
+			} else {
+				player.getSession().enter(this);
+			}
+			
 			// Condition that verify if the mob can move freely or not.
 			// If the distance between the mob and the player is less or equal
 			// then 150 (distance that makes the mob move to the player
-			// direction)
-			// and if the player position is a walkable position for mob then
-			// the
-			// mob will chase the player, else the mob will move freely.
+			// direction) and if the player position is a walkable position
+			// for mob then the  mob will chase the player, else the mob will
+			// move freely.
 			
-			if (distance <= 150) {
-				Area playerArea = player.getPosition().getLocalMap().getArea(); 
+			try {
+				if (distance <= 150) {
+					Area playerArea = player.getPosition().getLocalMap().getArea(); 
 				
-				if(playerArea.get(player.getPosition().getX() / 10, player.getPosition().getY() / 10,Field.MOB)) {
-					try {
-						if(distance > 40 && !isRunning())
-						{
-							setIsRunning(true);
+					if(playerArea.get(player.getPosition().getX() / 10, player.getPosition().getY() / 10,Field.MOB)) {
+						if(distance > 40) {
 							moveToPlayer(player,distance);
-						} else if(distance <= 40) {
-							setAttacking(true);
+						} else {
 							attackPlayer(player);
 						}
-						else
-						{
-							setAttacking(false);
-							setIsRunning(false);
-						}
-					
-					} catch (Exception e) {
-					Logger.getLogger(Mob.class).info("Mob Bug"+e);
-					//TODO: Fix Mob move bug
+					} else {
+						moveFree();
 					}
+				} else {
+					moveFree();
 				}
-			}
-
-			// Condition that detects that the mob its out of player session
-			// range
-			if (distance >= player.getSessionRadius()) {
-				player.getSession().exit(this);
-			}
-		
-			if (distance < player.getSessionRadius()) {
-				if (!this.isAttacking()) {
-					Area npcArea = this.getPosition().getLocalMap().getArea();
-					// S> walk npc [UniqueId] [Xpos] [Ypos] [ZPos] [Running]
-					Position newPos =  getPosition().clone();
-					// Members of the new position to where the mob should move
-					newPos.setX(getDirectionX());
-					newPos.setY(getDirectionY());
-					
-					while((!npcArea.get(newPos.getX() / 10, newPos.getY() / 10,Field.MOB))) {
-						newPos.setX(getDirectionX());
-						newPos.setY(getDirectionY());
-					}
-					
-					// Members of the new position to where the mob should move
-					
-					//newPos.setX(getDirectionX());
-					//newPos.setY(getDirectionY());
-					walk(newPos, isRunning());
-					
-				}
+			} catch (Exception e) {
+				Logger.getLogger(Mob.class).info("Mob Bug "+e);
+				//TODO: Fix Mob move bug
 			}
 		}
 	}
