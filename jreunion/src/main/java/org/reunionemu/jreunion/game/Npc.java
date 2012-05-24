@@ -338,18 +338,30 @@ public class Npc<T extends NpcType> extends LivingObject {
 		
 		setAttacking(true);
 		
+		/*
 		int npcDmg = (int) (((((Mob)this.getType()).getDmg()* (int)(60 + 40*Math.random())) / 100)-(player.getDef()/2));
-		
+		 
 		if(npcDmg < 0) {
 			npcDmg = (int) (((((Mob)this.getType()).getDmg()* (int)(60 + 40*Math.random())) / 100));
 		}
+		*/
 		
-		player.getClient().sendPacket(Type.SAY, "MobDmg:" + npcDmg + " Original: "+((Mob)this.getType()).getDmg());
+		int npcDmg = getDamage((int)player.getDef());
+		npcDmg = (npcDmg < 0) ? 0 : npcDmg;
+		
+		//player.getClient().sendPacket(Type.SAY, "MobDmg:" + npcDmg + " Original: "+((Mob)this.getType()).getDmg());
 		player.setHp(player.getHp() - npcDmg);
 		this.getInterested().sendPacket(Type.ATTACK,this,player);
 		setAttacking(false);
 	}
 	
+	public int getDamage(int playerDef){
+		if(this.getType() instanceof Mob)
+			return (int) (((Mob)this.getType()).getDmg() - (playerDef/2 + ((playerDef/2)*Math.random())));
+		else
+			return 0;
+	}
+
 	public int getDirectionX() {
 
 		if(((Npc<?>)this).getType().getClass() != Mob.class)
@@ -365,7 +377,7 @@ public class Npc<T extends NpcType> extends LivingObject {
 			return this.getPosition().getX() + (int) (-directionX * ((Mob) this.getType()).getSpeed());
 		}
 	}
-
+	
 	public int getDirectionY() {
 
 		if(((Npc<?>)this).getType().getClass() != Mob.class)
@@ -424,7 +436,11 @@ public class Npc<T extends NpcType> extends LivingObject {
 						if(distance > 40) {
 							moveToPlayer(player,distance);
 						} else {
-							attackPlayer(player);
+							if(player.getHp() <= 0) {
+								moveFree();
+							} else {
+								attackPlayer(player);
+							}
 						}
 					} else {
 						moveFree();
