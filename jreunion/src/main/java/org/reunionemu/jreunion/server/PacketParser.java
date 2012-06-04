@@ -334,6 +334,10 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					player.sendStatus(Status.LIME);
 					player.sendStatus(Status.PENALTYPOINTS);
 					player.setQuestState(DatabaseUtils.getDinamicInstance().loadQuestState(player));
+					if(map.getId() == 6){
+						int flyStatus = player.getEquipment().getBoots().getExtraStats() >= 268435456 ? 1 : 0;
+						player.getClient().sendPacket(Type.SKY, player, flyStatus);
+					}
 				}
 				break;
 			}
@@ -724,6 +728,13 @@ public class PacketParser extends EventDispatcher implements EventListener{
 						player.getExchange().clearExchange();
 						player.setLime(player.getLime() + limeAmmount);
 						player.getClient().sendPacket(Type.Q_EX, limeAmmount);
+					}
+				} else if (message[0].equals("up_sky")) {
+					Item<?> boots = player.getEquipment().getBoots();
+					if(boots != null){
+						boots.update(player, Slot.BOOTS);
+						if(player.getPosition().getLocalMap().getId() == 6)
+							client.sendPacket(Type.SKY, player, 1);
 					}
 				} else if (message[0].equals("..")) {
 					//client keep alive

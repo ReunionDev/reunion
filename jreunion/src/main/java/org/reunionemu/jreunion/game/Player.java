@@ -17,6 +17,7 @@ import org.reunionemu.jreunion.events.network.NetworkAcceptEvent;
 import org.reunionemu.jreunion.events.session.SessionEvent;
 import org.reunionemu.jreunion.game.Equipment.Slot;
 import org.reunionemu.jreunion.game.items.equipment.Armor;
+import org.reunionemu.jreunion.game.items.equipment.Shield;
 import org.reunionemu.jreunion.game.quests.QuestState;
 import org.reunionemu.jreunion.server.Client;
 import org.reunionemu.jreunion.server.Client.State;
@@ -1235,18 +1236,17 @@ public abstract class Player extends LivingObject implements EventListener {
 
 	public void wearSlot(Slot slot) {
 	
+		int flyStatus = 0;
 		HandPosition handPosition = getInventory().getHoldingItem();
 		//InventoryItem invItem = new InventoryItem(getInventory().getHoldingItem().getItem(),
 		//		new InventoryPosition(0,0,0));
 
 		if (handPosition == null) {
-			
 			getInventory().setHoldingItem(new HandPosition(getEquipment().getItem(slot)));
 			getEquipment().setItem(slot, null);
 			getInterested().sendPacket(Type.CHAR_REMOVE, this, slot);
 			Logger.getLogger(Player.class).info("Player "+this+" removed equipment "
 					+getInventory().getHoldingItem().getItem());
-			
 		} else {
 			InventoryItem invItem = new InventoryItem(getInventory().getHoldingItem().getItem(),
 							new InventoryPosition(0,0,0));
@@ -1263,6 +1263,7 @@ public abstract class Player extends LivingObject implements EventListener {
 			getEquipment().setItem(slot, invItem.getItem());
 			getInterested().sendPacket(Type.CHAR_WEAR, this, slot, invItem.getItem());
 			Logger.getLogger(Player.class).info("Player "+this+" equiped item "+invItem.getItem());
+			flyStatus = invItem.getItem().getExtraStats() >= 268435456 ? 1 : 0;
 			
 			/*
 			if (getEquipment().getItem(slot) == null) {
@@ -1302,8 +1303,8 @@ public abstract class Player extends LivingObject implements EventListener {
 
 		}
 		// DatabaseUtils.getInstance().saveEquipment(this);
+		getClient().sendPacket(Type.SKY, this, flyStatus);
 		setDefense();
-
 	}
 	/**
 	 * @param sessionRadius the sessionRadius to set

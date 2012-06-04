@@ -81,7 +81,9 @@ public class PacketFactory {
 		SAV,
 		K,
 		ICHANGE,
-		CHIP_EXCHANGE
+		CHIP_EXCHANGE,
+		SKY,
+		UPDATE_ITEM
 	}
 	
 	public static String createPacket(Type packetType, Object... args) {
@@ -739,7 +741,26 @@ public class PacketFactory {
 						+item.getType().getTypeId()+" "+serverBet+""+item.getEntityId();
 			}
 			break;
-			
+		
+		case SKY:
+			if(args.length == 2){
+				Player player = (Player) args[0];
+				int state = (Integer) args[1];
+				
+				return "sky "+player.getEntityId()+" "+state;
+			}
+			break;
+				
+		case UPDATE_ITEM:
+			if(args.length > 0){
+				Item<?> item = (Item<?>) args[0];
+				int upgraderesult = (Integer) args[1];
+				
+				return "update_item " + item.getEntityId() +" "+ upgraderesult + " "
+						+ item.getGemNumber() + " "
+						+ item.getExtraStats();
+			}
+			break;
 			
 		default:			
 			throw new UnsupportedOperationException();

@@ -117,6 +117,19 @@ public class Item<T extends ItemType> implements Entity{
 		player.getClient().sendPacket(Type.UPGRADE, this, slot,1);
 	}
 	
+	public void update(Player player, Slot slot){
+		Item<?> holdingItem = player.getInventory().getHoldingItem().getItem();
+		
+		if(holdingItem != null){
+			setExtraStats(getExtraStats() + holdingItem.getType().getMaxExtraStats());
+			DatabaseUtils.getDinamicInstance().deleteItem(holdingItem.getItemId());
+			player.getInventory().setHoldingItem(null);
+			player.save();
+			DatabaseUtils.getDinamicInstance().saveItem(this);
+			player.getClient().sendPacket(Type.UPDATE_ITEM, this, 1);
+		}
+	}
+	
 	public static Item<?> load(int itemId){
 			
 		return DatabaseUtils.getDinamicInstance().loadItem(itemId);
