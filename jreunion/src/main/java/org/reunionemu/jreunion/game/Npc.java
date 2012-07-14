@@ -231,17 +231,18 @@ public class Npc<T extends NpcType> extends LivingObject {
 		}
 		
 		Parser dropList = Reference.getInstance().getDropListReference();
-		Iterator<ParsedItem> iter =dropList.getItemListIterator();
+		Iterator<ParsedItem> iter = dropList.getItemListIterator();
 		Random r = new Random();
 		while(iter.hasNext()) {			
 			ParsedItem parsedItem = iter.next();
-			if(parsedItem.getMemberValue("Mob").equals(""+this.getType())){
+			if(Integer.parseInt(parsedItem.getMemberValue("Mob")) == this.getType().getTypeId()){
 				float rate = Float.parseFloat(parsedItem.getMemberValue("Rate"));
 				if( r.nextFloat()<rate){
 					int itemType = Integer.parseInt(parsedItem.getMemberValue("Item"));
 					ItemManager itemManager = player.getClient().getWorld().getItemManager();
 					
 					Item<?> item = itemManager.create(itemType);
+					
 					item.setGemNumber(0);
 					item.setExtraStats(item.getType().getMaxExtraStats());
 					item.setDurability(item.getType().getMaxDurability());

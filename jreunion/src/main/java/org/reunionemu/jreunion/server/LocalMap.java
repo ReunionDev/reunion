@@ -457,6 +457,7 @@ public SessionList<Session> GetSessions(Position position){
 					createEntityId(roamingItem);
 					*/
 					createEntityId(item);
+					roamingItem.setEntityId(item.getEntityId());
 					addRoamingItem(roamingItem);
 					list.enter(roamingItem, false);	
 				}
