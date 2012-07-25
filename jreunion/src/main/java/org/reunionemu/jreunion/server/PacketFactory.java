@@ -83,7 +83,8 @@ public class PacketFactory {
 		ICHANGE,
 		CHIP_EXCHANGE,
 		SKY,
-		UPDATE_ITEM
+		UPDATE_ITEM,
+		USQ
 	}
 	
 	public static String createPacket(Type packetType, Object... args) {
@@ -328,7 +329,8 @@ public class PacketFactory {
 			if(args.length>0){
 				Player player = (Player)args[0];
 				return "jump " + player.getPosition().getX() + " "
-				+ player.getPosition().getY() + " " + player.getEntityId();
+								+ player.getPosition().getY() + " "
+								+ player.getEntityId();
 			}
 			break;
 				
@@ -393,7 +395,11 @@ public class PacketFactory {
 				LivingObject target = (LivingObject) args[0];				
 				Item<?> item = (Item<?>)args[1];
 				
-				return "sav "+getObjectType(target)+" "+target.getEntityId()+" "+target.getPercentageHp()+" 0 0 "+item.getExtraStats()+" 3";
+				return "sav "+getObjectType(target)+" "
+							+target.getEntityId()+" "
+							+target.getPercentageHp()+" 0 "
+							+item.getGemNumber()+" "
+							+item.getExtraStats()+" 3";
 			}
 			break;
 			
@@ -579,6 +585,7 @@ public class PacketFactory {
 						+ item.getGemNumber() + " "
 						+ item.getExtraStats() + " "
 						+ item.getUnknown1();
+
 			}
 			break;
 		
@@ -759,6 +766,18 @@ public class PacketFactory {
 				return "update_item " + item.getEntityId() +" "+ upgraderesult + " "
 						+ item.getGemNumber() + " "
 						+ item.getExtraStats();
+			}
+			break;
+		case USQ:
+			if(args.length > 0){
+				int quickSlotPosition = (Integer) args[0];
+				int equipmentPosition = (Integer) args[1];
+				int equipmentGemNumber = (Integer) args[2];
+				int equipmentExtraStatus = (Integer) args[3];
+				
+				return "usq remain " + quickSlotPosition +" "+ equipmentPosition + " "
+						+ equipmentGemNumber + " "
+						+ equipmentExtraStatus;
 			}
 			break;
 			

@@ -26,7 +26,7 @@ public class MissionReceiver extends Etc implements Usable{
 	}
 	
 	@Override
-	public void use(Item<?> item, LivingObject user) {
+	public void use(Item<?> item, LivingObject user, int slot) {
 		if(user instanceof Player){
 			Player player = (Player)user;
 			

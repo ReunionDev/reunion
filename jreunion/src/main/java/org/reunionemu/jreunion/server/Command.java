@@ -19,6 +19,7 @@ import org.reunionemu.jreunion.game.Skill;
 import org.reunionemu.jreunion.game.Usable;
 import org.reunionemu.jreunion.game.items.equipment.SlayerWeapon;
 import org.reunionemu.jreunion.game.skills.bulkan.SecondAttack;
+import org.reunionemu.jreunion.game.skills.kailipton.TransferMagicalPower;
 import org.reunionemu.jreunion.server.Client.LoginType;
 import org.reunionemu.jreunion.server.Client.State;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
@@ -121,9 +122,10 @@ public class Command {
 	}
 	
 	public RoamingItem dropItem(Position position, Item<?> item) {
-
+		
 		RoamingItem roamingItem = new RoamingItem(item);
 		roamingItem.setPosition(position);
+		
 		
 		LocalMap map = position.getLocalMap();
 		
@@ -170,7 +172,7 @@ public class Command {
 		Client client = player.getClient();
 		
 		//Disband party
-		client.sendPacket(Type.PARTY_DISBAND);
+		//client.sendPacket(Type.PARTY_DISBAND);
 				
 		client.sendPacket(Type.JUMP, player);
 		
@@ -273,6 +275,8 @@ public class Command {
 		if(skill instanceof SecondAttack)
 			((SecondAttack)skill).cast(player, targets);
 	
+		if(skill instanceof TransferMagicalPower) 
+			((TransferMagicalPower)skill).cast(player, targets);
 		
 		//client.sendPacket(Type.ATTACK_VITAL, targets.get(0));
 		//player.getInterested().sendPacket(Type.SECONDATACK,player,targets.get(0),skillId);
@@ -379,10 +383,10 @@ public class Command {
 		if(Usable.class.isInstance(item.getType())){
 			
 			
-			((Usable)item.getType()).use(item, player);
+			((Usable)item.getType()).use(item, player, slot);
 			
 			player.getPosition().getLocalMap().removeEntity(item);			
-			DatabaseUtils.getDinamicInstance().deleteItem(item.getItemId());
+			//DatabaseUtils.getDinamicInstance().deleteItem(item.getItemId());
 			return true;
 			
 		}

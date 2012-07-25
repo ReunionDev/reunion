@@ -104,11 +104,13 @@ public class QuickSlotBar {
 		
 		Item<?> item = qsItem.getItem();
 		
-		Logger.getLogger(QuickSlotBar.class).info(player.getName()+" is using: " +item.getType().getName());
-		
 		player.getPosition().getLocalMap().getWorld().getCommand().useItem(player, item, slot);
 		
+		Logger.getLogger(QuickSlotBar.class).info(player.getName()+" used item: " +item.getType().getName());
+		
 		removeItem(qsItem);
-		DatabaseUtils.getDinamicInstance().deleteItem(qsItem.getItem().getItemId());
+		DatabaseUtils.getDinamicInstance().deleteQuickSlotItem(item);
+		DatabaseUtils.getDinamicInstance().deleteItem(item.getItemId());
+		
 	}
 }

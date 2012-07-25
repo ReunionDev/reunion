@@ -22,6 +22,8 @@ public class ItemType{
 	private int maxExtraStats;
 	
 	private int maxDurability;
+	
+	private int maxGemNumber;
 
 	public ItemType(int type) {
 		super();
@@ -71,6 +73,7 @@ public class ItemType{
 			setPrice(1);
 			setMaxExtraStats(0);
 			setMaxDurability(0);
+			setMaxGemNumber(0);
 			setName("Unknown");
 		} else {
 
@@ -108,6 +111,13 @@ public class ItemType{
 			} else {
 				// use default
 				setMaxDurability(0);
+			}
+			if (item.checkMembers(new String[] { "GemNumber" })) {
+				// use member from file
+				setMaxGemNumber(Integer.parseInt(item.getMemberValue("GemNumber")));
+			} else {
+				// use default
+				setMaxGemNumber(0);
 			}
 			
 			setName(item.getName());
@@ -160,6 +170,12 @@ public class ItemType{
 		this.maxExtraStats = maxExtraStats;
 	}
 
-	
+	public int getMaxGemNumber() {
+		return maxGemNumber;
+	}
+
+	public void setMaxGemNumber(int maxGemNumber) {
+		this.maxGemNumber = maxGemNumber;
+	}
 	
 }

@@ -1183,6 +1183,20 @@ public class DatabaseUtils extends Service {
 		  }
 	}
 	
+	public boolean deleteQuickSlotItem(Item<?> item){
+		if (!checkDinamicDatabase())
+			return false ;
+		Statement stmt;
+		try {
+			stmt  = dinamicDatabase.dinamicConn.createStatement();		
+			return stmt.execute("DELETE FROM `quickslot` WHERE `itemid`="+item.getItemId()+";");
+			
+		}catch (Exception e) {
+			Logger.getLogger(this.getClass()).warn("Exception",e);
+		}
+		return false;
+	}
+	
 	public java.util.Map<Integer,Quest> loadQuests(){
 		if (!checkStaticDatabase()) return null;
 		

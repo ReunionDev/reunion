@@ -36,6 +36,7 @@ import org.reunionemu.jreunion.game.Player.Status;
 import org.reunionemu.jreunion.game.Position;
 import org.reunionemu.jreunion.game.RoamingItem;
 import org.reunionemu.jreunion.game.Skill;
+import org.reunionemu.jreunion.game.Usable;
 import org.reunionemu.jreunion.game.items.etc.MissionReceiver;
 import org.reunionemu.jreunion.game.npc.Merchant;
 import org.reunionemu.jreunion.game.npc.Trader;
@@ -587,7 +588,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 							Item<?> item = player.getQuickSlotBar().getItem(Integer.parseInt(message[1])).getItem();
 							
 							if(item.is(MissionReceiver.class)){
-								((MissionReceiver)item.getType()).use(item, player);
+								((MissionReceiver)item.getType()).use(item, player,Integer.parseInt(message[1]));
 							}
 						} else {
 							player.getClient().sendPacket(Type.SAY, "Player already has an ongoing quest.");
@@ -735,6 +736,17 @@ public class PacketParser extends EventDispatcher implements EventListener{
 						boots.update(player, Slot.BOOTS);
 						if(player.getPosition().getLocalMap().getId() == 6)
 							client.sendPacket(Type.SKY, player, 1);
+					}
+				} else if (message[0].equals("use_sub")) {
+					if (message.length == 2) {
+						player.getQuickSlotBar().useQuickSlot(player, Integer.parseInt(message[1]));
+					}
+				} else if (message[0].equals("go_zone")) {
+					if (message.length == 4) {
+						Item<?> item = player.getQuickSlotBar().getItem(Integer.parseInt(message[1])).getItem();
+						item.setGemNumber(Integer.parseInt(message[2]));
+						item.setExtraStats(Integer.parseInt(message[3]));
+						player.getQuickSlotBar().useQuickSlot(player, Integer.parseInt(message[1]));
 					}
 				} else if (message[0].equals("..")) {
 					//client keep alive

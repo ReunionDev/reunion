@@ -84,10 +84,10 @@ public class Item<T extends ItemType> implements Entity{
 		getType().setGemNumber(this);
 	}
 	
-	public void use(LivingObject livingObject){
+	public void use(LivingObject livingObject, int slot){
 		
 		if(is(Usable.class)){
-			((Usable)getType()).use(this, livingObject);
+			((Usable)getType()).use(this, livingObject, slot);
 		}else{
 			Logger.getLogger(Item.class).error("Item "+this+" is not usable");
 			//throw new IllegalArgumentException(getType()+" is not Usable");

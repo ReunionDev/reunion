@@ -71,7 +71,7 @@ public class SecondAttack extends Skill {
 		}
 		
 		Item<?> shoulderMount = player.getEquipment().getShoulderMount();
-		shoulderMount.use(caster);
+		shoulderMount.use(caster, -1);
 		
 		SlayerWeapon slayerWeapon = null;
 		
@@ -92,7 +92,7 @@ public class SecondAttack extends Skill {
 				long newHp = Tools.between(target.getHp() - damage, 0l, target.getMaxHp());				
 				
 				if (newHp <= 0) {
-					Logger.getLogger(LivingObject.class).info("Player "+player+" killed npc "+this);
+					Logger.getLogger(SecondAttack.class).info("Player "+player+" killed npc "+target);
 					if(target instanceof Npc){
 						((Npc)target).kill(player);
 					}

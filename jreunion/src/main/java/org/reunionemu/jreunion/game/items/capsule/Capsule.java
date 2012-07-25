@@ -32,7 +32,7 @@ public abstract class Capsule extends Etc implements Usable {
 	}
 	
 	@Override
-	public void use(Item<?> item, final LivingObject user) {
+	public void use(Item<?> item, final LivingObject user, int slot) {
 		//TODO: implement capsule effect	
 	}
 

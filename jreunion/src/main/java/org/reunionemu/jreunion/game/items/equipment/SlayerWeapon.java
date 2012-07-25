@@ -1,11 +1,13 @@
 package org.reunionemu.jreunion.game.items.equipment;
 
+import org.apache.log4j.Logger;
 import org.reunionemu.jcommon.ParsedItem;
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.LivingObject;
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.Usable;
 import org.reunionemu.jreunion.game.items.SpecialWeapon;
+import org.reunionemu.jreunion.server.DatabaseUtils;
 import org.reunionemu.jreunion.server.Reference;
 
 /**
@@ -87,14 +89,20 @@ public class SlayerWeapon extends SpecialWeapon implements Usable {
 	}
 
 	@Override
-	public void use(Item<?> item, LivingObject user) {
+	public void use(Item<?> slayerWeapon, LivingObject user, int slot) {
 		
 		Player player = null;
 		
 		if(user instanceof Player)
 			player = (Player) user;
 		
-		item.setExtraStats(item.getExtraStats() - 20);
+		if(slayerWeapon.getExtraStats() <= 0){
+			Logger.getLogger(WandWeapon.class).warn("Possible cheat detected: player "+player+" is trying to use empty "+this.getName()+".");
+			return;
+		}
+		
+		slayerWeapon.setExtraStats(slayerWeapon.getExtraStats() - 20);
 		player.setStamina(player.getStamina() - getStmUsed());
+		DatabaseUtils.getDinamicInstance().saveItem(slayerWeapon);
 	}
 }
