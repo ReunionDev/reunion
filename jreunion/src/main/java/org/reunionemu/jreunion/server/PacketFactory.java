@@ -1,6 +1,8 @@
 package org.reunionemu.jreunion.server;
 
 import java.net.InetSocketAddress;
+import java.util.List;
+import java.util.Map;
 
 import org.reunionemu.jreunion.game.Effectable;
 import org.reunionemu.jreunion.game.Equipment;
@@ -64,6 +66,8 @@ public class PacketFactory {
 		STASH,
 		STASH_TO,
 		STASH_FROM,
+		STASH_GET,
+		STASH_PUT,
 		STASH_END,
 		INVEN,
 		SKILLLEVEL_ALL, 
@@ -84,7 +88,10 @@ public class PacketFactory {
 		CHIP_EXCHANGE,
 		SKY,
 		UPDATE_ITEM,
-		USQ
+		USQ,				// old 2007 client
+		UQ_ITEM,
+		MT_ITEM,
+		AV
 	}
 	
 	public static String createPacket(Type packetType, Object... args) {
@@ -390,16 +397,21 @@ public class PacketFactory {
 		case SAV: 
 			//sav n 26128 75 2 0 4900 3
 			
-			if(args.length == 2)
+			if(args.length == 5)
 			{
 				LivingObject target = (LivingObject) args[0];				
-				Item<?> item = (Item<?>)args[1];
+				int isCritical = (Integer)args[1];
+				int unknown1 = (Integer)args[2];
+				int itemStatusRemain = (Integer)args[3];
+				int unknown2 = (Integer)args[4];
 				
-				return "sav "+getObjectType(target)+" "
-							+target.getEntityId()+" "
-							+target.getPercentageHp()+" 0 "
-							+item.getGemNumber()+" "
-							+item.getExtraStats()+" 3";
+				return "sav "+ getObjectType(target) + " "
+							+ target.getEntityId() + " "
+							+ target.getPercentageHp() + " "
+							+ isCritical + " "
+							+ unknown1 + " "
+							+ itemStatusRemain + " "
+							+ unknown2;
 			}
 			break;
 			
@@ -437,11 +449,14 @@ public class PacketFactory {
 			if(args.length>1){
 				LivingObject source = (LivingObject) args[0];				
 				LivingObject target = (LivingObject)args[1];
+				int isCritical = (Integer)args[2];
 				
-				return "attack "+getObjectType(source)+" " +
-					  source.getEntityId() + " "+getObjectType(target)+" " + target.getEntityId() + " " + target.getPercentageHp() +
-					  " "+source.getDmgType()+" 0 0 0";
-					  // S> attack char [CharID] npc [NpcID] [RemainHP%] 0 0 0 0
+				return "attack " + getObjectType(source) + " "
+						+ source.getEntityId() + " " + getObjectType(target)
+						+ " " + target.getEntityId() + " "
+						+ target.getPercentageHp() + " " + isCritical
+						+ " 0 0 0 0";
+					  // S> attack c [CharEntityID] npc [NpcEntityID] [RemainHP%] [isCritical] 0 0 0 0
 			}
 			break;
 		
@@ -496,54 +511,127 @@ public class PacketFactory {
 			
 		case STASH:
 			if(args.length>1){
-				Player player = (Player) args[0];
-				StashItem stashItem = (StashItem)args[1];
+				StashItem stashItem = (StashItem)args[0];
+				int itemQuantity = (Integer)args[1];
 				Item<?> item = stashItem.getItem();
+				int slot = stashItem.getStashPosition().getSlot();
 				
-				return "stash " + stashItem.getStashPosition().getSlot() + " "
-				+ item.getType().getTypeId() + " " + item.getGemNumber() + " "
-				+ item.getExtraStats() + " " + item.getUnknown1() + " "
-				+ item.getDurability() + " " + item.getType().getMaxDurability() + " "
-				+ player.getStash().getQuantity(stashItem.getStashPosition().getSlot()) + " "
-				+ item.getUnknown2();
+				if(slot == 12)
+					return "stash " + slot + " 0 " + (item.getGemNumber()/100) + " 0 0"; 
+				else
+					return "stash "
+							+ slot + " "
+							+ item.getType().getTypeId() + " "
+							+ item.getGemNumber() + " "
+							+ item.getExtraStats() + " "
+							+ item.getUnknown1() + " "
+							+ item.getDurability() + " "
+							+ item.getType().getMaxDurability() + " "
+							+ itemQuantity + " "
+							+ item.getUnknown2();
 			}
 			break;
 			
 		case STASH_TO:
 			if(args.length>1){
-				Player player = (Player) args[0];
-				StashItem stashItem = (StashItem)args[1];
+				StashItem stashItem = (StashItem)args[0];
+				int itemQuantity = (Integer)args[1];
 				Item<?> item = stashItem.getItem();
-				String packet = "stash_to "+stashItem.getStashPosition().getSlot()+" ";
+				int slot = stashItem.getStashPosition().getSlot();
 				
-				/*int gemNumber = (Integer)args[2];
-				
-				if(stashItem.getStashPosition().getSlot() == 12){
-					packet += " 0 " + gemNumber + " 0";
-				} else {
-				*/
-				 packet += item.getType().getTypeId() + " " + item.getGemNumber() + " "
-				+ item.getExtraStats() + " " + item.getUnknown1() + " "
-				+ item.getDurability() + " " + item.getType().getMaxDurability() + " "
-				+ player.getStash().getQuantity(stashItem.getStashPosition().getSlot()) + " "
-				+ item.getUnknown2();
-				 
-				//}
-				
-				return packet;
+				if(slot == 12)
+					return "stash_to "
+							+ slot + " 0 "
+							+ (item.getGemNumber()/100) + " 0";
+				else
+					return "stash_to "
+							+ slot + " "
+							+ item.getType().getTypeId() + " "
+							+ item.getGemNumber() + " "
+							+ item.getExtraStats() + " "
+							+ item.getUnknown1() + " "
+							+ item.getDurability() + " "
+							+ item.getType().getMaxDurability()	+ " "
+							+ itemQuantity + " "
+							+ item.getUnknown2();
 			}
 			break;
 		
 		case STASH_FROM:
 			if(args.length>0){
 				StashItem stashItem = (StashItem)args[0];
+				int itemQuantity = (Integer)args[1];
 				Item<?> item = stashItem.getItem();
+				int slot = stashItem.getStashPosition().getSlot();
 				
-				return "stash_from " + stashItem.getStashPosition().getSlot() + " "
-				+ item.getEntityId() + " " + item.getType().getTypeId() + " "
-				+ item.getGemNumber() + " "	+ item.getExtraStats() + " "
-				+ item.getUnknown1() + " " + item.getDurability() + " "
-				+ item.getType().getMaxDurability() + " " + item.getUnknown2();
+				if(slot == 12)
+					return "stash_from "
+							+ slot + " 0 "
+							+ (item.getGemNumber()/100) + " 0";
+				else
+					return "stash_from "
+							+ slot + " "
+							+ item.getEntityId() + " "
+							+ item.getType().getTypeId() + " "
+							+ item.getGemNumber() + " "
+							+ item.getExtraStats() + " "
+							+ item.getUnknown1() + " "
+							+ item.getDurability() + " "
+							+ item.getType().getMaxDurability() + " "
+							+ itemQuantity;
+			}
+			break;
+			
+		case STASH_GET:
+			if(args.length>0){
+				List<int[]> itemList = (List<int[]>)args[0];
+				int itemTypeId = (Integer)args[1];
+				int inventoryTab = (Integer)args[2];
+				int unknown2 = (Integer)args[3];
+				int slot = (Integer)args[4];
+				int itemQuantity = (Integer)args[5];
+				int unknown1 = 1;
+
+				String packet = "stash_get "
+						+ unknown1 + " "
+						+ itemTypeId + " "
+						+ inventoryTab + " "
+						+ unknown2 + " "
+						+ slot + " "
+						+ itemQuantity;
+				
+				for(int[] itemData : itemList){
+					packet += " " + itemData[0] + " "
+								+ itemData[1] + " "
+								+ itemData[2];
+				}
+				
+				return packet;
+			}
+			break;
+		case STASH_PUT:
+			if(args.length>1){
+				//stash_put [?] [TypeId] [InvTab] [StashTab] [StashPos] [ItemAmmount] [InvPosX] [InvPosY]
+				int itemTypeId = (Integer)args[0];
+				int invTab = (Integer)args[1];
+				int stashTab = (Integer)args[2];
+				int stashPos = (Integer)args[3];
+				int itemAmmount = (Integer)args[4];
+				int[] itemsData = (int[])args[5];
+				int index = 3;
+				
+				String packet = "stash_put 1 "
+							+ itemTypeId + " "
+							+ invTab + " "
+							+ stashTab + " "
+							+ stashPos + " "
+							+ itemAmmount;
+							
+				while(index < itemsData.length){
+					packet += " " + itemsData[index++];
+				}
+				
+				return packet;
 			}
 			break;
 			
@@ -553,12 +641,13 @@ public class PacketFactory {
 		case INVEN:
 			if(args.length > 0){
 				InventoryItem invItem = (InventoryItem)args[0];
+				int version = (Integer)args[1];
 				Item<?> item = invItem.getItem();
 				
 				return "inven " + invItem.getPosition().getTab() + " "
 				+ item.getEntityId() + " "	+ item.getType().getTypeId() + " " + invItem.getPosition().getPosX() + " "
 				+ invItem.getPosition().getPosY() + " " + item.getGemNumber() + " "	+ item.getExtraStats() + " "
-				+ item.getUnknown1() + " " + item.getUnknown2();
+				+ item.getUnknown1() + (version >= 2000 ? " " + item.getUnknown2() + " " + item.getUnknown3() : "");
 			}
 			break;
 			
@@ -614,8 +703,9 @@ public class PacketFactory {
 		case WEARING:
 			if(args.length > 0){
 				Equipment eq = (Equipment)args[0];
+				int version = (Integer)args[1];
+				
 				/* 
-				 * NGA
 				 * [entity] [typeid] [gemnumber] [extrast] [unknown1] [unknown 2] [unknown 3] [cur_dur] [max_dur]
 				 * 1524774       318           2         0          0           0           0      4449      4453
 				 * 
@@ -626,7 +716,7 @@ public class PacketFactory {
 				 * 1524777 196 0 0 0 0 0 0 0        [Cloak]    3
 				 * 1524778 373 3 0 0 0 0 3113 3203  [Shoes]    4
 				 * 1524779 121 6 0 0 0 0 0 0        [Shield]   5
-				 * 1524780 445 6 1 0 0 0 0 0        [Necklace aka Amulet] 6
+				 * 1524780 445 6 1 0 0 0 0 0        [Necklace] 6
 				 * -1 -1 0 0 0 0 0 0 0              [Ring]     7
 				 * 1524781 455 1 1 0 0 0 0 0        [Bracelet] 8
 				 * -1 -1 0 0 0 0 0 0 0              [Weapon]   9
@@ -635,58 +725,78 @@ public class PacketFactory {
 				 * 
 				 */
 				
-				//return "wearing 1101 1214 13 4095 4260868 112 130 1102 1215 14 4095 1 113 130 1103 1216 14 4095 1 123 130 1104 752 334 41856 0 0 0 1105 1217 13 268439551 1 119 130 1106 876 0 255 0 0 0 1107 448 3 512 0 0 0 1108 453 0 192 0 0 0 1109 1087 1 38535169 0 0 0 1110 1321 6 50335743 262 110 110";
-				
 				return "wearing " + eq.getEntityId(Slot.HELMET) + " " + eq.getTypeId(Slot.HELMET) + " "
 						+ eq.getGemNumber(Slot.HELMET) + " " + eq.getExtraStats(Slot.HELMET) + " "
-						+ eq.getUnknown1(Slot.HELMET) + " " + eq.getDurability(Slot.HELMET) + " "
-						+ eq.getMaxDurability(Slot.HELMET) + " "
+						+ eq.getUnknown1(Slot.HELMET) + " " 
+						//+ (version >= 2000 ? eq.getUnknown2(Slot.HELMET) + " " : "")
+						//+ (version >= 2000 ? eq.getUnknown3(Slot.HELMET) + " " : "") 
+						+ eq.getDurability(Slot.HELMET) + " " + eq.getMaxDurability(Slot.HELMET) + " "
 						
 						+ eq.getEntityId(Slot.CHEST) + " " + eq.getTypeId(Slot.CHEST) + " "
 						+ eq.getGemNumber(Slot.CHEST) + " " + eq.getExtraStats(Slot.CHEST) + " "
-						+ eq.getUnknown1(Slot.CHEST) + " " + eq.getDurability(Slot.CHEST) + " "
-						+ eq.getMaxDurability(Slot.CHEST) + " "
+						+ eq.getUnknown1(Slot.CHEST) + " " 
+						//+ (version >= 2000 ? eq.getUnknown2(Slot.CHEST) + " " : "")
+						//+ (version >= 2000 ? eq.getUnknown3(Slot.CHEST) + " " :"") 
+						+ eq.getDurability(Slot.CHEST) + " " + eq.getMaxDurability(Slot.CHEST) + " "
 						
 						+ eq.getEntityId(Slot.PANTS) + " " + eq.getTypeId(Slot.PANTS) + " "
 						+ eq.getGemNumber(Slot.PANTS) + " " + eq.getExtraStats(Slot.PANTS) + " "
-						+ eq.getUnknown1(Slot.PANTS) + " " + eq.getDurability(Slot.PANTS) + " "
-						+ eq.getMaxDurability(Slot.PANTS) + " "
+						+ eq.getUnknown1(Slot.PANTS) + " " 
+						//+ (version >= 2000 ? eq.getUnknown2(Slot.PANTS) + " " : "")
+						//+ (version >= 2000 ? eq.getUnknown3(Slot.PANTS) + " " : "") 
+						+ eq.getDurability(Slot.PANTS) + " " + eq.getMaxDurability(Slot.PANTS) + " "
 						
 						+ eq.getEntityId(Slot.SHOULDER) + " " + eq.getTypeId(Slot.SHOULDER) + " "
 						+ eq.getGemNumber(Slot.SHOULDER) + " " + eq.getExtraStats(Slot.SHOULDER) + " "
-						+ eq.getUnknown1(Slot.SHOULDER) + " " + eq.getDurability(Slot.SHOULDER) + " "
-						+ eq.getMaxDurability(Slot.SHOULDER) + " "
+						+ eq.getUnknown1(Slot.SHOULDER) + " " 
+						//+ (version >= 2000 ? eq.getUnknown2(Slot.SHOULDER) + " " : "")
+						//+ (version >= 2000 ? eq.getUnknown3(Slot.SHOULDER) + " " : "") 
+						+ eq.getDurability(Slot.SHOULDER) + " "	+ eq.getMaxDurability(Slot.SHOULDER) + " "
 						
 						+ eq.getEntityId(Slot.BOOTS) + " " + eq.getTypeId(Slot.BOOTS)
 						+ " " + eq.getGemNumber(Slot.BOOTS) + " " + eq.getExtraStats(Slot.BOOTS) + " "
-						+ eq.getUnknown1(Slot.BOOTS) + " " + eq.getDurability(Slot.BOOTS) + " "
-						+ eq.getMaxDurability(Slot.BOOTS) + " "
+						+ eq.getUnknown1(Slot.BOOTS) + " " 
+						//+ (version >= 2000 ? eq.getUnknown2(Slot.BOOTS) + " " : "")
+						//+ (version >= 2000 ? eq.getUnknown3(Slot.BOOTS) + " " : "") 
+						+ eq.getDurability(Slot.BOOTS) + " " + eq.getMaxDurability(Slot.BOOTS) + " "
 						
 						+ eq.getEntityId(Slot.OFFHAND) + " " + eq.getTypeId(Slot.OFFHAND) + " "
 						+ eq.getGemNumber(Slot.OFFHAND) + " " + eq.getExtraStats(Slot.OFFHAND) + " "
-						+ eq.getUnknown1(Slot.OFFHAND) + " " + eq.getDurability(Slot.OFFHAND) + " "
-						+ eq.getMaxDurability(Slot.OFFHAND) + " "
+						+ eq.getUnknown1(Slot.OFFHAND) + " " 
+						//+ (version >= 2000 ? eq.getUnknown2(Slot.OFFHAND) + " " : "")
+						//+ (version >= 2000 ? eq.getUnknown3(Slot.OFFHAND) + " " : "") 
+						+ eq.getDurability(Slot.OFFHAND) + " " + eq.getMaxDurability(Slot.OFFHAND) + " "
 						
 						+ eq.getEntityId(Slot.NECKLACE) + " " + eq.getTypeId(Slot.NECKLACE) + " "
 						+ eq.getGemNumber(Slot.NECKLACE) + " " + eq.getExtraStats(Slot.NECKLACE) + " "
-						+ eq.getUnknown1(Slot.NECKLACE) + " " + eq.getDurability(Slot.NECKLACE) + " "
-						+ eq.getMaxDurability(Slot.NECKLACE) + " "
+						+ eq.getUnknown1(Slot.NECKLACE) + " " 
+						//+ (version >= 2000 ? eq.getUnknown2(Slot.NECKLACE) + " " : "")
+						//+ (version >= 2000 ? eq.getUnknown3(Slot.NECKLACE) + " " : "") 
+						+ eq.getDurability(Slot.NECKLACE) + " "	+ eq.getMaxDurability(Slot.NECKLACE) + " "
 						
 						+ eq.getEntityId(Slot.RING) + " " + eq.getTypeId(Slot.RING) + " "
 						+ eq.getGemNumber(Slot.RING) + " " + eq.getExtraStats(Slot.RING) + " "
-						+ eq.getUnknown1(Slot.RING) + " " + eq.getDurability(Slot.RING) + " "
-						+ eq.getMaxDurability(Slot.RING) + " "
+						+ eq.getUnknown1(Slot.RING) + " " 
+						//+ (version >= 2000 ? eq.getUnknown2(Slot.RING) + " " : "")
+						//+ (version >= 2000 ? eq.getUnknown3(Slot.RING) + " " : "") 
+						+ eq.getDurability(Slot.RING) + " "	+ eq.getMaxDurability(Slot.RING) + " "
 						
 						+ eq.getEntityId(Slot.BRACELET)	+ " " + eq.getTypeId(Slot.BRACELET) + " "
 						+ eq.getGemNumber(Slot.BRACELET) + " " + eq.getExtraStats(Slot.BRACELET) + " "
-						+ eq.getUnknown1(Slot.BRACELET) + " " + eq.getDurability(Slot.BRACELET) + " "
-						+ eq.getMaxDurability(Slot.BRACELET) + " "
+						+ eq.getUnknown1(Slot.BRACELET) + " " 
+						//+ (version >= 2000 ? eq.getUnknown2(Slot.BRACELET) + " " : "")
+						//+ (version >= 2000 ? eq.getUnknown3(Slot.BRACELET) + " " : "") 
+						+ eq.getDurability(Slot.BRACELET) + " "	+ eq.getMaxDurability(Slot.BRACELET) + " "
 						
 						+ eq.getEntityId(Slot.MAINHAND) + " " + eq.getTypeId(Slot.MAINHAND) + " "
 						+ eq.getGemNumber(Slot.MAINHAND) + " " + eq.getExtraStats(Slot.MAINHAND) + " "
-						+ eq.getUnknown1(Slot.MAINHAND) + " " + eq.getDurability(Slot.MAINHAND) + " "
-						+ eq.getMaxDurability(Slot.MAINHAND);
-			
+						+ eq.getUnknown1(Slot.MAINHAND) + " " 
+						//+ (version >= 2000 ? eq.getUnknown2(Slot.MAINHAND) + " " : "")
+						//+ (version >= 2000 ? eq.getUnknown3(Slot.MAINHAND) + " " : "") 
+						+ eq.getDurability(Slot.MAINHAND) + " "	+ eq.getMaxDurability(Slot.MAINHAND)
+						
+						+ " -1 -1 0 0 0 0 0 0 0"
+						+ " -1 -1 0 0 0 0 0 0 0";
 			}
 			break;
 			
@@ -778,6 +888,51 @@ public class PacketFactory {
 				return "usq remain " + quickSlotPosition +" "+ equipmentPosition + " "
 						+ equipmentGemNumber + " "
 						+ equipmentExtraStatus;
+			}
+			break;
+		case UQ_ITEM:
+			if(args.length > 0){
+					int updateResult = (Integer) args[0]; //need confirmation about this
+					int quickSlotPosition = (Integer) args[1];
+					int itemEntityId = (Integer) args[2];
+					
+					String serverPacket = "uq_item " + updateResult + " " + quickSlotPosition
+							+ " " + itemEntityId;
+
+				if (args.length == 4) {
+					
+					int unknown = (Integer) args[3];
+
+					serverPacket += " " + unknown;
+				}
+				if (args.length == 6) {
+					int gemNumber = (Integer) args[3];
+					int extraStats = (Integer) args[4];
+					int unknown = (Integer) args[5];
+
+					serverPacket += " " + gemNumber + " " + extraStats + " " + unknown;
+				}
+				return serverPacket;
+			}
+			break;
+		case MT_ITEM:
+			if(args.length > 0){
+				int updateResult = (Integer) args[0]; 
+				int quickSlotPosition = (Integer) args[1];
+				int itemEntityId = (Integer) args[2];
+				int unknown = (Integer) args[2];
+
+				return "mt_item " + updateResult + " " + quickSlotPosition + " "
+						+ itemEntityId + " " + unknown;
+			}
+			break;
+		case AV:
+			if(args.length > 0){
+				LivingObject victim = (LivingObject) args[0];
+				int isCritical = (Integer) args[1];
+
+				return "av " + getObjectType(victim) + " " + victim.getEntityId() + " "
+						+ victim.getPercentageHp() + " " + isCritical + " 0";
 			}
 			break;
 			

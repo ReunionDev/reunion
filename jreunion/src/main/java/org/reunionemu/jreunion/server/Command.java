@@ -210,9 +210,9 @@ public class Command {
 		
 		client.sendPacket(Type.A_, "lev", player.getAdminState());
 
-		client.sendPacket(Type.WEARING, equipment);
+		client.sendPacket(Type.WEARING, equipment, player.getClient().getVersion());
 
-		client.sendPacket(PacketFactory.Type.OK);
+		//client.sendPacket(PacketFactory.Type.OK);
 
 		return player;
 	}
@@ -268,15 +268,15 @@ public class Command {
 
 	/****** player1 attacks with second weapon 
 	 * @param skillid ******/
-	public void subAttack(Player player, List<LivingObject> targets, int skillId) {
+	public void subAttack(Player player, List<LivingObject> targets, int skillId, int unknown1) {
 		Client client = player.getClient();
 		Skill skill = world.getSkillManager().getSkill(skillId);
 		
 		if(skill instanceof SecondAttack)
-			((SecondAttack)skill).cast(player, targets);
+			((SecondAttack)skill).cast(player, targets, unknown1);
 	
 		if(skill instanceof TransferMagicalPower) 
-			((TransferMagicalPower)skill).cast(player, targets);
+			((TransferMagicalPower)skill).cast(player, targets, unknown1);
 		
 		//client.sendPacket(Type.ATTACK_VITAL, targets.get(0));
 		//player.getInterested().sendPacket(Type.SECONDATACK,player,targets.get(0),skillId);
@@ -377,13 +377,34 @@ public class Command {
 		}
 	*/
 	}
-
-	public boolean useItem(Player player ,Item<?> item, int slot) {
+	
+	public boolean useItem(Player player ,Item<?> item, int quickSlotBarPosition, int unknown) {
 		
 		if(Usable.class.isInstance(item.getType())){
 			
 			
-			((Usable)item.getType()).use(item, player, slot);
+			((Usable)item.getType()).use(item, player, quickSlotBarPosition, unknown);
+			
+			player.getPosition().getLocalMap().removeEntity(item);			
+			//DatabaseUtils.getDinamicInstance().deleteItem(item.getItemId());
+			return true;
+			
+		}
+		else{
+			
+			Logger.getLogger(QuickSlotBar.class).error(item.getType().getName()+ " not Usable");
+			
+		}
+		return false;
+		
+	}
+
+	public boolean useItem(Player player ,Item<?> item, int quickSlotBarPosition) {
+		
+		if(Usable.class.isInstance(item.getType())){
+			
+			
+			((Usable)item.getType()).use(item, player, quickSlotBarPosition, 0);
 			
 			player.getPosition().getLocalMap().removeEntity(item);			
 			//DatabaseUtils.getDinamicInstance().deleteItem(item.getItemId());

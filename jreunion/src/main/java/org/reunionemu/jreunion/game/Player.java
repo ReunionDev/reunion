@@ -73,19 +73,34 @@ public abstract class Player extends LivingObject implements EventListener {
 	}
 	
 	public static enum Race{
-		BULKAN, //0
-
-		KAILIPTON, //1
-
-		AIDIA, //2
-
-		HUMAN, //3
-
-		HYBRIDER, //4
+		BULKAN(0), //0
+		KAILIPTON(1), //1
+		AIDIA(2), //2
+		HUMAN(3), //3
+		HYBRIDER(4), //4
+		RACE_PET(5), //5
+		UNDEFINED(6); //6
 		
-		RACE_PET, //5
+		int value;
+		Race(int value){
+			this.value = value;
+			
+		}
+		public int value(){
+			return value;			
 		
-		UNDEFINED; //6
+		}
+		
+		public static Race byValue(int raceId){
+			
+			for(Race race:Race.values())
+			{
+				if(race.value()==raceId){					
+					return race;
+				}
+			}
+			return null;
+		}		
 	}
 
 	private boolean isInCombat; // 0 - Peace Mode; 1 - Attack Mode
@@ -611,7 +626,7 @@ public abstract class Player extends LivingObject implements EventListener {
 				client.getPlayer().getPosition().getLocalMap().createEntityId(item);
 			}
 			
-			client.sendPacket(Type.INVEN, exchangeItem);
+			client.sendPacket(Type.INVEN, exchangeItem, client.getVersion());
 
 			// inven [Tab] [UniqueId] [Type] [PosX] [PosY] [Gems] [Special]
 		}
@@ -660,7 +675,7 @@ public abstract class Player extends LivingObject implements EventListener {
 			if(item.getEntityId()==-1){
 				client.getPlayer().getPosition().getLocalMap().createEntityId(item);
 			}
-			client.sendPacket(Type.INVEN, invItem);
+			client.sendPacket(Type.INVEN, invItem, client.getVersion());
 
 		}
 	}

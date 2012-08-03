@@ -28,11 +28,12 @@ public class BasicAttack extends Skill implements Castable{
 			Weapon weapon = null;
 			float baseDamage = player.getBaseDamage();
 			float weaponDamage = 0;
+			float criticalMultiplier = 0;
 			
-			if(item!=null){
+			if(item!=null){ // confirm if player is wearing a weapon
 				weapon = (Weapon) item.getType();
-				weaponDamage += weapon.getMinDamage(item) + 
-							(Server.getRand().nextFloat()*(weapon.getMaxDamage(item)-weapon.getMinDamage(item)));
+				weaponDamage += weapon.getDamage(item);
+				criticalMultiplier = weapon.getCritical();
 				if(!weapon.use(player)){
 					return false;
 				}
@@ -62,9 +63,14 @@ public class BasicAttack extends Skill implements Castable{
 				}
 			}
 			
+			damage += (long)(damage*criticalMultiplier);
+			
 			synchronized(victims){
 				for(LivingObject victim : victims){
 					victim.getsAttacked(player, (int)damage);
+					player.getClient().sendPacket(Type.ATTACK, player,victim,criticalMultiplier > 0 ? 1 : 0);
+					player.getInterested().sendPacket(Type.ATTACK, player, victim, criticalMultiplier > 0 ? 1 : 0);
+					
 					return true;
 				}
 			}
@@ -76,7 +82,6 @@ public class BasicAttack extends Skill implements Castable{
 	public void effect(LivingObject source, LivingObject target){	
 		
 		//TODO merge interested of source and target
-		source.getInterested().sendPacket(Type.ATTACK, source, target);		
 		
 	}
 	

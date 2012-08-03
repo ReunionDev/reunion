@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Vector;
 
 import org.reunionemu.jreunion.game.Castable;
+import org.reunionemu.jreunion.game.Effectable;
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.KailiptonPlayer;
 import org.reunionemu.jreunion.game.LivingObject;
@@ -14,8 +15,9 @@ import org.reunionemu.jreunion.game.items.equipment.Weapon;
 import org.reunionemu.jreunion.game.skills.Modifier;
 import org.reunionemu.jreunion.server.Server;
 import org.reunionemu.jreunion.server.SkillManager;
+import org.reunionemu.jreunion.server.PacketFactory.Type;
 
-public class FireBall extends Tier1 implements Castable, Modifier {
+public class FireBall extends Tier1 implements Castable, Modifier, Effectable {
 
 	public FireBall(SkillManager skillManager,int id) {
 		super(skillManager,id);
@@ -84,13 +86,13 @@ public class FireBall extends Tier1 implements Castable, Modifier {
 			long baseDamage = player.getBaseDamage();
 			long weaponDamage = 0;
 			double weaponMagicBoost=1;
+			float criticalMultiplier = 0;
 			Weapon weapon = null;
 			
 			if(item.is(StaffWeapon.class)){
 				weapon = (Weapon)item.getType();
-				weaponDamage += weapon.getMinDamage(item) + 
-						(Server.getRand().nextFloat()*(weapon.getMaxDamage(item)
-								- weapon.getMinDamage(item)));
+				criticalMultiplier = weapon.getCritical();
+				weaponDamage += weapon.getDamage(item);
 				weaponMagicBoost += weapon.getMagicDmg(item); // % of magic dmg boost
 			}
 			
@@ -116,13 +118,15 @@ public class FireBall extends Tier1 implements Castable, Modifier {
 				}
 			}
 			
-			long magicDamage = (long)((baseDamage + weaponDamage + fireDamage) * fireMasteryDamage * weaponMagicBoost);
+			long magicDamage = (long) ((baseDamage + weaponDamage + fireDamage)
+					* fireMasteryDamage * weaponMagicBoost * (criticalMultiplier+1));
 			
 			//This skill can target up to 2 targets
 			//(Both targets receive 100% dmg)
 			synchronized(victims){
 				for(LivingObject victim : victims){ 
 					victim.getsAttacked(player, magicDamage);
+					player.getClient().sendPacket(Type.AV, victim, criticalMultiplier > 0 ? 1 : 0);
 				}
 				return true;
 			}
@@ -168,4 +172,11 @@ public class FireBall extends Tier1 implements Castable, Modifier {
 		return getDamageModifier((Player)livingObject);
 	}
 
+	public void effect(LivingObject source, LivingObject target){
+		source.getInterested().sendPacket(Type.EFFECT, source, target , this);
+	}
+	
+	public int getEffectModifier() {
+		return 0;
+	}
 }

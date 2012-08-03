@@ -9,6 +9,7 @@ import org.reunionemu.jreunion.game.Usable;
 import org.reunionemu.jreunion.game.items.SpecialWeapon;
 import org.reunionemu.jreunion.server.DatabaseUtils;
 import org.reunionemu.jreunion.server.Reference;
+import org.reunionemu.jreunion.server.PacketFactory.Type;
 
 /**
  * @author Aidamina
@@ -89,20 +90,28 @@ public class SlayerWeapon extends SpecialWeapon implements Usable {
 	}
 
 	@Override
-	public void use(Item<?> slayerWeapon, LivingObject user, int slot) {
+	public void use(Item<?> slayerWeapon, LivingObject user, int quickSlotPosition, int unknown) {
+				
+		if(user instanceof Player) {
+			Player player = (Player) user;
 		
-		Player player = null;
-		
-		if(user instanceof Player)
-			player = (Player) user;
-		
-		if(slayerWeapon.getExtraStats() <= 0){
-			Logger.getLogger(WandWeapon.class).warn("Possible cheat detected: player "+player+" is trying to use empty "+this.getName()+".");
-			return;
+			if (slayerWeapon.getExtraStats() <= 0) {
+				Logger.getLogger(WandWeapon.class).warn(
+						"Possible cheat detected: player " + player
+								+ " is trying to use empty " + this.getName()
+								+ ".");
+				return;
+			}
+
+			slayerWeapon.setExtraStats(slayerWeapon.getExtraStats() - 20);
+			player.setStamina(player.getStamina() - getStmUsed());
+			DatabaseUtils.getDinamicInstance().saveItem(slayerWeapon);
+			
+			if (player.getClient().getVersion() >= 2000)
+				player.getClient().sendPacket(Type.UQ_ITEM, 1, quickSlotPosition,
+						slayerWeapon.getEntityId(), unknown);
 		}
-		
-		slayerWeapon.setExtraStats(slayerWeapon.getExtraStats() - 20);
-		player.setStamina(player.getStamina() - getStmUsed());
-		DatabaseUtils.getDinamicInstance().saveItem(slayerWeapon);
+		else
+			Logger.getLogger(SlayerWeapon.class).warn(this.getName() + " not implemented for " + user.getName());
 	}
 }

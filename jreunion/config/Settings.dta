@@ -4,9 +4,11 @@ xp = 2		# 1=1x, 2=2x, 3=3x...
 lime = 3	# 1=1x, 2=2x, 3=3x...
 DefaultMap = 4
 StartLime = 100
-Version = 2003
+Version = 1999
 WelcomeMsg = Hey, welcome on the Reunion Testserver
 SessionRadius = 300
 DropExclusivity = 10
 DropTimeOut = 600
 SpawnAttempts = 3
+CriticalMultiplier = 1  # 1 = 100%
+CriticalChance = 0.5    # 1 = 100%

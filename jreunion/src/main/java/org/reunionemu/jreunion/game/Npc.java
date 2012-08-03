@@ -352,7 +352,7 @@ public class Npc<T extends NpcType> extends LivingObject {
 		
 		//player.getClient().sendPacket(Type.SAY, "MobDmg:" + npcDmg + " Original: "+((Mob)this.getType()).getDmg());
 		player.setHp(player.getHp() - npcDmg);
-		this.getInterested().sendPacket(Type.ATTACK,this,player);
+		this.getInterested().sendPacket(Type.ATTACK,this,player,0);
 		setAttacking(false);
 	}
 	

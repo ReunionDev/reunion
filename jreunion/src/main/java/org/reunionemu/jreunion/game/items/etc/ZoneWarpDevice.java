@@ -1,11 +1,14 @@
 package org.reunionemu.jreunion.game.items.etc;
 
+import org.apache.log4j.Logger;
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.LivingObject;
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.Usable;
+import org.reunionemu.jreunion.game.items.equipment.ChakuranWeapon;
 import org.reunionemu.jreunion.server.Map;
 import org.reunionemu.jreunion.server.World;
+import org.reunionemu.jreunion.server.PacketFactory.Type;
 
 /**
  * @author Aidamina
@@ -24,16 +27,24 @@ public class ZoneWarpDevice extends Etc implements Usable{
 	}
 	
 	@Override
-	public void use(Item<?> item, LivingObject user, int slot) {
+	public void use(Item<?> item, LivingObject user, int quickSlotPosition, int unknown) {
 		/* item.gemNumber 	it's teleport Map ID
 		 * item.extrastatus it's teleport unknown value
 		 */
+		
 		if(user instanceof Player){
 			Player player = (Player)user;
 			World world = player.getClient().getWorld();
 			Map map = world.getMap(item.getGemNumber());
-			world.getCommand().GoToWorld((Player)user, map, item.getExtraStats());
+			
+			world.getCommand().GoToWorld((Player) user, map,
+					item.getExtraStats());
+
+			if (player.getClient().getVersion() >= 2000)
+				player.getClient().sendPacket(Type.UQ_ITEM, 1,
+						quickSlotPosition, item.getEntityId(), unknown);
 		}
-		
+		else
+			Logger.getLogger(ZoneWarpDevice.class).warn(this.getName() + " not implemented for " + user.getName());
 	}
 }

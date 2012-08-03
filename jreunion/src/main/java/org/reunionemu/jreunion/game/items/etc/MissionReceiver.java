@@ -1,5 +1,6 @@
 package org.reunionemu.jreunion.game.items.etc;
 
+import org.apache.log4j.Logger;
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.ItemPosition;
 import org.reunionemu.jreunion.game.LivingObject;
@@ -7,6 +8,7 @@ import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.Quest;
 import org.reunionemu.jreunion.game.QuickSlotPosition;
 import org.reunionemu.jreunion.game.Usable;
+import org.reunionemu.jreunion.game.items.equipment.ChakuranWeapon;
 import org.reunionemu.jreunion.server.Client;
 import org.reunionemu.jreunion.server.DatabaseUtils;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
@@ -26,7 +28,7 @@ public class MissionReceiver extends Etc implements Usable{
 	}
 	
 	@Override
-	public void use(Item<?> item, LivingObject user, int slot) {
+	public void use(Item<?> item, LivingObject user, int quickSlotPosition, int unknown) {
 		if(user instanceof Player){
 			Player player = (Player)user;
 			
@@ -54,7 +56,9 @@ public class MissionReceiver extends Etc implements Usable{
 			item.setExtraStats(item.getExtraStats()-1);
 			DatabaseUtils.getDinamicInstance().saveItem(item);
 			player.setQuest(quest);
-		}	
+		}
+		else
+			Logger.getLogger(MissionReceiver.class).warn(this.getName() + " not implemented for " + user.getName());
 	}
 	
 	@Override

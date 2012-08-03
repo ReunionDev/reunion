@@ -1,5 +1,6 @@
 package org.reunionemu.jreunion.game.items.equipment;
 
+import org.apache.log4j.Logger;
 import org.reunionemu.jcommon.ParsedItem;
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.LivingObject;
@@ -8,6 +9,7 @@ import org.reunionemu.jreunion.game.Usable;
 import org.reunionemu.jreunion.game.items.SpecialWeapon;
 import org.reunionemu.jreunion.server.DatabaseUtils;
 import org.reunionemu.jreunion.server.Reference;
+import org.reunionemu.jreunion.server.PacketFactory.Type;
 
 /**
  * @author Aidamina
@@ -88,15 +90,20 @@ public class ChakuranWeapon extends SpecialWeapon implements Usable{
 	}
 
 	@Override
-	public void use(Item<?> chakuranWeapon, LivingObject user, int slot) {
+	public void use(Item<?> chakuranWeapon, LivingObject user, int quickSlotPosition, int unknown) {
 		
-		Player player = null;
+		if(user instanceof Player) {
+			Player player = (Player) user;
 		
-		if(user instanceof Player)
-			player = (Player) user;
-		
-		chakuranWeapon.setExtraStats(chakuranWeapon.getExtraStats() - 20);
-		player.setStamina(player.getStamina() - getStmUsed());
-		DatabaseUtils.getDinamicInstance().saveItem(chakuranWeapon);
+			chakuranWeapon.setExtraStats(chakuranWeapon.getExtraStats() - 20);
+			player.setStamina(player.getStamina() - getStmUsed());
+			DatabaseUtils.getDinamicInstance().saveItem(chakuranWeapon);
+			
+			if (player.getClient().getVersion() >= 2000)
+				player.getClient().sendPacket(Type.UQ_ITEM, 1, quickSlotPosition,
+						chakuranWeapon.getEntityId(), unknown);
+		}
+		else
+			Logger.getLogger(ChakuranWeapon.class).warn(this.getName() + " not implemented for " + user.getName());
 	}
 }

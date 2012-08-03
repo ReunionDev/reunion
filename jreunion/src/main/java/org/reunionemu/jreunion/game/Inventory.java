@@ -161,14 +161,14 @@ public class Inventory {
 		return null;
 	}
 	
-	public InventoryItem getItem(int itemId) {
+	public InventoryItem getItem(int itemEntityId) {
 
 		Iterator<InventoryItem> iter = getInventoryIterator();
 		
 		while (iter.hasNext()) {
 			InventoryItem invItem = iter.next();
 
-			if (invItem.getItem().getEntityId() == itemId) {
+			if (invItem.getItem().getEntityId() == itemEntityId) {
 				return invItem;
 			}
 		}

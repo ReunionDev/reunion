@@ -53,7 +53,7 @@ public class TransferMagicalPower extends Skill {
 		return modifier;
 	}
 
-	public boolean cast(LivingObject caster, List<LivingObject> targets) {
+	public boolean cast(LivingObject caster, List<LivingObject> targets, int unknown1) {
 
 		Player player = null;
 
@@ -66,7 +66,7 @@ public class TransferMagicalPower extends Skill {
 			Logger.getLogger(TransferMagicalPower.class).error("It wasn't possible to get player OffHand equipment.");
 			return false;
 		}
-		offHandEquipment.use(caster, -1);
+		offHandEquipment.use(caster, -1, 0);
 
 		WandWeapon wandWeapon = null;
 
@@ -80,14 +80,18 @@ public class TransferMagicalPower extends Skill {
 		long bestAttack = player.getBestAttack();
 		long wandDmg = wandWeapon.getDamage();
 		float accumulatedDmg = wandWeapon.getAccumulatedDmg();
+		float criticalMultiplier = wandWeapon.getCritical();
 		
 
 		// not sure of this formula : damage wand = Attack + Wand dmg + Acumulated Damage
 		//long damage = bestAttack + wandDmg + (long) (accumulatedDmg);
 		long damage = (bestAttack + wandDmg) * (long)getDamageModifier(player);
+		
 		if(damage > accumulatedDmg){
 			damage = (long)accumulatedDmg;
 		}
+		
+		damage += (long)(damage * criticalMultiplier);
 
 		// now increasing accumulated damage (max should be 20 * original_accu_damage)
 		//if (accumulatedDmg < (20 * accumulatedDmg_original)) {
@@ -107,7 +111,10 @@ public class TransferMagicalPower extends Skill {
 				} else {
 					target.setHp(newHp);
 				}
-				player.getClient().sendPacket(Type.SAV, target, offHandEquipment);
+				
+				player.getClient().sendPacket(Type.SAV, target,
+						criticalMultiplier > 0 ? 1 : 0, unknown1,
+								offHandEquipment.getGemNumber(), 10);
 			}
 		}
 

@@ -19,7 +19,6 @@ import org.reunionemu.jreunion.server.Reference;
 public class WandWeapon extends SpecialWeapon implements Usable{
 	
 	private float accumulatedDmg;
-	private float accumulatedDmg_original;
 	private int skillLevel;
 	
 	public WandWeapon(int id) {
@@ -74,22 +73,30 @@ public class WandWeapon extends SpecialWeapon implements Usable{
 	}
 	 
 	@Override
-	public void use(Item<?> wandWeapon, LivingObject user, int slot) {
+	public void use(Item<?> wandWeapon, LivingObject user, int quickSlotPosition, int unknown) {
 		
-		Player player = null;
-		
-		if(user instanceof Player)
-			player = (Player) user;
+		if(user instanceof Player) {
+			Player player = (Player) user;
 
-		if(wandWeapon.getGemNumber() <= 0){
-			Logger.getLogger(WandWeapon.class).warn("Possible cheat detected: player "+player+" is trying to use empty "+this.getName()+".");
-			return;
+			if (wandWeapon.getGemNumber() <= 0) {
+				Logger.getLogger(WandWeapon.class).warn(
+						"Possible cheat detected: player " + player
+								+ " is trying to use empty " + this.getName()
+								+ ".");
+				return;
+			}
+
+			wandWeapon.setGemNumber(wandWeapon.getGemNumber() - 1);
+			player.setMana(player.getMana() - getManaUsed());
+			DatabaseUtils.getDinamicInstance().saveItem(wandWeapon);
+			
+			/*if (player.getClient().getVersion() >= 2000)
+				player.getClient().sendPacket(Type.UQ_ITEM, 1,
+						quickSlotPosition, wandWeapon.getEntityId(), unknown);
+			*/
 		}
-		
-		wandWeapon.setGemNumber(wandWeapon.getGemNumber() - 1);
-		player.setMana(player.getMana() - getManaUsed());
-		DatabaseUtils.getDinamicInstance().saveItem(wandWeapon);
-		player.getClient().sendPacket(Type.UPDATE_ITEM, wandWeapon, 1);
+		else
+			Logger.getLogger(WandWeapon.class).warn(this.getName() + " not implemented for " + user.getName());
 	}
 	
 }

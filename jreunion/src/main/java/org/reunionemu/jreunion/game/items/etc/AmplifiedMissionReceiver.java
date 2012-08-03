@@ -22,7 +22,7 @@ public class AmplifiedMissionReceiver extends MissionReceiver{
 	}
 	
 	@Override
-	public void use(Item<?> item, LivingObject user, int slot) {
+	public void use(Item<?> item, LivingObject user, int slot, int unknown) {
 		if(user instanceof Player){
 			Player player = (Player)user;
 			

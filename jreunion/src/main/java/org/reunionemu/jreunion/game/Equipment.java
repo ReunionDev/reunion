@@ -105,6 +105,16 @@ public class Equipment {
 		Item<?> item = getItem(slot); 
 		return item == null ? 0 : item.getUnknown1();
 	}
+	
+	public int getUnknown2(Slot slot){
+		Item<?> item = getItem(slot); 
+		return item == null ? 0 : item.getUnknown2();
+	}
+	
+	public int getUnknown3(Slot slot){
+		Item<?> item = getItem(slot); 
+		return item == null ? 0 : item.getUnknown3();
+	}
 
 	public Item<?> getItem(Slot slot) {
 

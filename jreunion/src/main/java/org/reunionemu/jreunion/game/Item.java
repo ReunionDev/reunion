@@ -23,6 +23,8 @@ public class Item<T extends ItemType> implements Entity{
 	
 	private int unknown2;
 	
+	private int unknown3;
+	
 	private ItemPosition position;
 	
 	public ItemPosition getPosition() {
@@ -84,10 +86,10 @@ public class Item<T extends ItemType> implements Entity{
 		getType().setGemNumber(this);
 	}
 	
-	public void use(LivingObject livingObject, int slot){
+	public void use(LivingObject livingObject, int quickSlotBarPosition, int unknown){
 		
 		if(is(Usable.class)){
-			((Usable)getType()).use(this, livingObject, slot);
+			((Usable)getType()).use(this, livingObject, quickSlotBarPosition, unknown);
 		}else{
 			Logger.getLogger(Item.class).error("Item "+this+" is not usable");
 			//throw new IllegalArgumentException(getType()+" is not Usable");
@@ -150,6 +152,14 @@ public class Item<T extends ItemType> implements Entity{
 
 	public void setUnknown2(int unknown2) {
 		this.unknown2 = unknown2;
+	}
+	
+	public int getUnknown3() {
+		return unknown3;
+	}
+
+	public void setUnknown3(int unknown3) {
+		this.unknown3 = unknown3;
 	}
 
 	public int getDurability() {

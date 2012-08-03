@@ -62,7 +62,7 @@ public class SecondAttack extends Skill {
 		return modifier;
 	}
 	
-	public boolean cast(LivingObject caster, List<LivingObject> targets){
+	public boolean cast(LivingObject caster, List<LivingObject> targets, int unknown1){
 		
 		Player player = null;
 		
@@ -71,7 +71,7 @@ public class SecondAttack extends Skill {
 		}
 		
 		Item<?> shoulderMount = player.getEquipment().getShoulderMount();
-		shoulderMount.use(caster, -1);
+		shoulderMount.use(caster, -1, 0);
 		
 		SlayerWeapon slayerWeapon = null;
 		
@@ -82,10 +82,12 @@ public class SecondAttack extends Skill {
 		long slayerDmg = slayerWeapon.getDamage();
 		float slayerMemoryDmg = slayerWeapon.getMemoryDmg();
 		float skillDmg = getDamageModifier(); 
-		float slayerDemolitionDmg = slayerWeapon.getMemoryDmg();
+		float slayerDemolitionDmg = slayerWeapon.getDemolitionDmg();
+		float criticalMultiplier = slayerWeapon.getCritical();
 		
 		long damage = bestAttack + slayerDmg + (long)(bestAttack*slayerMemoryDmg*skillDmg);
 		damage += (long)(damage*slayerDemolitionDmg);
+		damage += (long)(damage*criticalMultiplier);
 		
 		synchronized(targets){
 			for(LivingObject target : targets){ 
@@ -94,12 +96,14 @@ public class SecondAttack extends Skill {
 				if (newHp <= 0) {
 					Logger.getLogger(SecondAttack.class).info("Player "+player+" killed npc "+target);
 					if(target instanceof Npc){
-						((Npc)target).kill(player);
+						((Npc<?>)target).kill(player);
 					}
 				} else {
 					target.setHp(newHp);
 				}
-				player.getClient().sendPacket(Type.SAV, target, shoulderMount);
+				player.getClient().sendPacket(Type.SAV, target,
+						criticalMultiplier > 0 ? 1 : 0, unknown1,
+						shoulderMount.getExtraStats(), 3);
 			}
 		}
 		

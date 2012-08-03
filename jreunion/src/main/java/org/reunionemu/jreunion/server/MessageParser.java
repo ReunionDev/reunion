@@ -511,7 +511,7 @@ public class MessageParser {
 				// sends the several mob attack packets
 				for(int attacksCounter = numberOfAttacks; attacksCounter > 0; attacksCounter-- ){
 					mob.attack(player);
-					player.getClient().sendPacket(Type.ATTACK,mob,player);
+					player.getClient().sendPacket(Type.ATTACK,mob,player,0);
 					if(player.getHp() <= 0){
 						break;
 					}

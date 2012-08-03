@@ -6,6 +6,7 @@ import java.util.Vector;
 
 import org.apache.log4j.Logger;
 import org.reunionemu.jreunion.server.DatabaseUtils;
+import org.reunionemu.jreunion.server.PacketFactory.Type;
 
 /**
  * @author Aidamina
@@ -52,6 +53,16 @@ public class QuickSlotBar {
 	}
 
 	/******* Place a item in the quick slot *********/
+	public void MovingItem(int quickSlotBarPosition, int unknown, int itemEntityId) {
+
+		InventoryItem invItem = player.getInventory().getItem(itemEntityId);
+		QuickSlotItem qsItem = new QuickSlotItem(invItem.getItem(), new QuickSlotPosition(this, quickSlotBarPosition));
+		
+		player.getInventory().deleteInventoryItem(invItem);
+		addItem(qsItem);
+		player.getClient().sendPacket(Type.MT_ITEM, 1, quickSlotBarPosition, itemEntityId, 0);
+	}
+	
 	public void MoveToQuick(int tab, int itemId, int slot) {
 
 		InventoryItem invItem = player.getInventory().getItem(itemId);
@@ -98,6 +109,23 @@ public class QuickSlotBar {
 	}
 
 	/****** Use Quick Slot Items ******/
+	public void useQuickSlot(Player player, int quickSlotBarPosition, int unknown, int itemEntityId) {
+
+		int n;
+		QuickSlotItem qsItem = getItem(quickSlotBarPosition);
+		
+		Item<?> item = qsItem.getItem();
+		
+		player.getPosition().getLocalMap().getWorld().getCommand().useItem(player, item, quickSlotBarPosition, unknown);
+		
+		Logger.getLogger(QuickSlotBar.class).info(player.getName()+" used item: " +item.getType().getName());
+		
+		removeItem(qsItem);
+		DatabaseUtils.getDinamicInstance().deleteQuickSlotItem(item);
+		DatabaseUtils.getDinamicInstance().deleteItem(item.getItemId());
+		
+	}
+	
 	public void useQuickSlot(Player player, int slot) {
 
 		QuickSlotItem qsItem = getItem(slot);

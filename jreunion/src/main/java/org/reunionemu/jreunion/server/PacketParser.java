@@ -277,6 +277,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					player.loadInventory();
 					player.loadExchange();
 					player.loadQuickSlot();
+					client.sendPacket(PacketFactory.Type.OK);
 					
 					
 					//System.out.println(savedPosition);
@@ -461,13 +462,15 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					client.getPlayer().dropItem(Integer.parseInt(message[1]));
 							
 				} else if (message[0].equals("subat")) {
-					List<LivingObject> targets = new Vector<LivingObject>();
 					LivingObject singleTarget = (LivingObject)player.getPosition().getLocalMap().getEntity(Integer.parseInt(message[2]));
 					int skillId = Integer.parseInt(message[3]);
+					int unknown1 = Integer.parseInt(message[4]);
+					
+					List<LivingObject> targets = new Vector<LivingObject>(); //TODO: add several targets
 					
 					targets.add(singleTarget);
+					com.subAttack(player,targets,skillId,unknown1);
 					
-					com.subAttack(player,targets,skillId);
 				} else if (message[0].equals("pulse")) {
 					if (Integer.parseInt(message[2].substring(0,
 							message[2].length() - 1)) == -1) {
@@ -487,7 +490,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					
 				} else if (message[0].equals("use_skill") || message[0].equals("attack")) {
 					// if attack command sent, then use SkillID 0 (Basic Attack)
-					int skillId = message[0].equals("attack")?0:Integer.parseInt(message[1]);
+					int skillId = message[0].equals("attack") ? 0 : Integer.parseInt(message[1]);
 					
 					LivingObject target = player;
 					int entityId=-1;
@@ -512,10 +515,12 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					
 					Skill skill = player.getSkill(skillId);
 					
+					/*
 					if(message[0].equals("use_skill"))
 						player.getInterested().sendPacket(Type.EFFECT, player, target ,skill);
 					else
 						player.getInterested().sendPacket(Type.ATTACK, player,target); //a n 141 c 554946 99 0 0 0
+					*/
 					
 					List<LivingObject> victims = new LinkedList<LivingObject>(Arrays.asList(new LivingObject[]{target}));
 					
@@ -570,11 +575,25 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					position.setY(posy);
 					com.GoToPos(player, position);
 					
-				} else if (message[0].equals("use_quick")) {
+				} else if (message[0].equals("use_quick")) { //2007 client
 					player.getQuickSlotBar().useQuickSlot(
-							player, Integer.parseInt(message[1]));
-				} else if (message[0].equals("move_to_quick")) {
+							player, Integer.parseInt(message[1]));	
+				} else if (message[0].equals("using_item")) {
+					int unknown = Integer.parseInt(message[1]);
+					int quickSlotBarPosition = Integer.parseInt(message[2]);
+					int itemEntityId = Integer.parseInt(message[3]);
+					int unknown2 = message.length == 5 ? Integer.parseInt(message[4]): 0;
+					
+					player.getQuickSlotBar().useQuickSlot(
+							player, quickSlotBarPosition, unknown2, itemEntityId);
+					
+				} else if (message[0].equals("move_to_quick")) { // old 2007 client
 					player.getQuickSlotBar().MoveToQuick(
+							Integer.parseInt(message[1]),
+							Integer.parseInt(message[2]),
+							Integer.parseInt(message[3]));
+				} else if (message[0].equals("moving_item")) {
+					player.getQuickSlotBar().MovingItem(
 							Integer.parseInt(message[1]),
 							Integer.parseInt(message[2]),
 							Integer.parseInt(message[3]));
@@ -588,7 +607,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 							Item<?> item = player.getQuickSlotBar().getItem(Integer.parseInt(message[1])).getItem();
 							
 							if(item.is(MissionReceiver.class)){
-								((MissionReceiver)item.getType()).use(item, player,Integer.parseInt(message[1]));
+								((MissionReceiver)item.getType()).use(item, player,Integer.parseInt(message[1]),0);
 							}
 						} else {
 							player.getClient().sendPacket(Type.SAY, "Player already has an ongoing quest.");
@@ -596,37 +615,49 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					}
 				} else if (message[0].equals("stash_open")) {
 					if (message.length == 1) {
-						Warehouse warehouse = new Warehouse(139);
+						Warehouse warehouse = (Warehouse)client.getWorld().getNpcManager().getNpcType(Warehouse.class);
 						warehouse.openStash(client.getPlayer());
 					} else {
 						logUnknownCommand(message);
 					}
 				} else if (message[0].equals("stash_click")) {
-					Warehouse warehouse = new Warehouse(139);
+					if(message.length >= 4){
+						Warehouse warehouse = (Warehouse)client.getWorld().getNpcManager().getNpcType(Warehouse.class);
+						int special = message.length == 5 ? Integer.parseInt(message[4]) : 0;
 					
-					if (message.length == 5) {
 						warehouse.stashClick(client.getPlayer(),
+								Integer.parseInt(message[1]),
+								Integer.parseInt(message[2]),
+								Integer.parseInt(message[3]),
+								special);
+					}
+				} else if (message[0].equals("stash_put")) {
+					Warehouse warehouse = (Warehouse)client.getWorld().getNpcManager().getNpcType(Warehouse.class);
+					int length = message.length > 23 ? 23 : message.length;
+					int[] packetData = new int[length];
+					int index = 0;
+					
+					while(index < packetData.length -1){
+						packetData[index] = Integer.parseInt(message[index++ + 1]);
+					}
+					
+					warehouse.stashPut(player, packetData);
+					
+				} else if (message[0].equals("stash_get")) {
+					if(message.length >= 5){
+						Warehouse warehouse = (Warehouse)client.getWorld().getNpcManager().getNpcType(Warehouse.class);
+						warehouse.stashGet(player,
 								Integer.parseInt(message[1]),
 								Integer.parseInt(message[2]),
 								Integer.parseInt(message[3]),
 								Integer.parseInt(message[4]));
 					}
-					else if (message.length == 4) {
-						warehouse.stashClick(client.getPlayer(),
-								Integer.parseInt(message[1]),
-								Integer.parseInt(message[2]),
-								Integer.parseInt(message[3]), 0);
-					} else
-						logUnknownCommand(message);
-				} else if (message[0].equals("stash_put")) {
-					
-				} else if (message[0].equals("stash_get")) {
-					
 				} else if (message[0].equals("stash_close")) {
 					//nothing is returned to the client here, so we can just save the stash in the DB.
 					if (message.length == 1) {
-						Logger.getLogger(PacketParser.class).info("Saving "+player+" stash...");
-						DatabaseUtils.getDinamicInstance().saveStash(client);
+						//Logger.getLogger(PacketParser.class).info("Saving "+player+" stash...");
+						//DatabaseUtils.getDinamicInstance().saveStash(client);
+						player.save();
 					} else {
 						logUnknownCommand(message);
 					}

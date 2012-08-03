@@ -171,6 +171,7 @@ public class DatabaseUtils extends Service {
 		int accountId = client.getAccountId();
 		String charlist ="";
 		int chars = 0;
+		
 		try {
 			Statement stmt = dinamicDatabase.dinamicConn.createStatement();
 			
@@ -198,36 +199,9 @@ public class DatabaseUtils extends Service {
 					continue;
 				
 				Equipment eq = loadEquipment(new Equipment(null), rs.getInt("id"));
-		
-				/*
+				
 				charlist += "chars_exist " + slot + " "
-				+ rs.getString("name") + " " + rs.getString("race")
-				+ " " + rs.getString("sex") + " "
-				+ rs.getString("hair") + " "
-				+ rs.getString("level") + " "
-				+ rs.getString("currHp") + " "
-				+ rs.getString("currStm") + " "
-				+ rs.getString("currMana") + " "
-				+ rs.getString("currElect") + " "
-				+ rs.getString("maxHp") + " "
-				+ rs.getString("maxStm") + " "
-				+ rs.getString("maxMana") + " "
-				+ rs.getString("maxElect") + " "
-				+ rs.getString("str") + " " 
-				+ rs.getString("wis") + " " 
-				+ rs.getString("dex") + " "
-				+ rs.getString("con") + " " 
-				+ rs.getString("lea") + " "
-				+ eq.getType(Slot.HELMET) + " " 
-				+ eq.getType(Slot.CHEST) + " " 
-				+ eq.getType(Slot.PANTS) + " " 
-				+ eq.getType(Slot.SHOULDER)	+ " "
-				+ eq.getType(Slot.BOOTS) + " " 
-				+ eq.getType(Slot.OFFHAND) 
-				+ " 1\n";
-				*/
-				charlist += "chars_exist " + slot + " "
-				//+ rs.getString("id") + " " // nga client have this extra value in the packet
+				+ (client.getVersion() >= 2000 ? rs.getString("id") + " " : "") // nga client have this extra value in the packet
 				+ rs.getString("name") + " "
 				+ rs.getString("race") + " "
 				+ rs.getString("sex") + " "
@@ -621,16 +595,6 @@ public class DatabaseUtils extends Service {
 	public void saveInventory(Player player){
 		if (!checkDinamicDatabase())
 			return;
-		
-		//SaveInventory saveInventory = new SaveInventory(dinamicDatabase.dinamicConn);
-		/*
-		try {
-			saveInventory.getDeleteStatement().setInt(1, player.getEntityId());
-			
-		} catch (SQLException e) {
-			Logger.getLogger(this.getClass()).warn("Exception",e);
-		}
-		*/
 	
 		Statement stmt;
 		try {
@@ -647,16 +611,6 @@ public class DatabaseUtils extends Service {
 				InventoryItem invItem = iter.next();
 				Item<?> item = invItem.getItem();
 				saveItem(item);
-				
-				/*
-				PreparedStatement statement = saveInventory.getInsertStatement();
-				statement.setInt(1,player.getEntityId());
-				statement.setInt(2,item.getEntityId());
-				statement.setInt(3,invItem.getTab());
-				statement.setInt(4,invItem.getPosX());
-				statement.setInt(5,invItem.getPosY());
-				statement.addBatch();				
-				*/
 				
 				data+="("+player.getPlayerId()+ ",'"+item.getItemId()+"',"+invItem.getPosition().getTab()+
 					","+invItem.getPosition().getPosX()+ ","+invItem.getPosition().getPosY()+ ")";			
@@ -766,6 +720,7 @@ public class DatabaseUtils extends Service {
 				item.setDurability(rs.getInt("durability"));
 				item.setUnknown1(rs.getInt("unknown1"));
 				item.setUnknown2(rs.getInt("unknown2"));
+				item.setUnknown3(rs.getInt("unknown3"));
 				
 				return item;
 			}
@@ -874,18 +829,20 @@ public class DatabaseUtils extends Service {
 											 ", `durability`="+item.getDurability()+
 											 ", `unknown1`="+item.getUnknown1()+
 											 ", `unknown2`="+item.getUnknown2()+
+											 ", `unknown3`="+item.getUnknown3()+
 											 " WHERE `Id` = "+itemId);
 				if(res==0){
 					Logger.getLogger(DatabaseUtils.class).error("item not found: "+itemId);					
 				}
 			} else {
-				stmt.execute("INSERT INTO items (type, gemnumber, extrastats, durability, unknown1, unknown2)" +
+				stmt.execute("INSERT INTO items (type, gemnumber, extrastats, durability, unknown1, unknown2, unknown3)" +
 						" VALUES ("+item.getType().getTypeId()+","
 								   +item.getGemNumber()+","
 								   +item.getExtraStats()+","
 								   +item.getDurability()+","
 								   +item.getUnknown1()+","
-								   +item.getUnknown2()+
+								   +item.getUnknown2()+","
+								   +item.getUnknown3()+
 								   ");",Statement.RETURN_GENERATED_KEYS);
 				
 				ResultSet res = stmt.getGeneratedKeys();

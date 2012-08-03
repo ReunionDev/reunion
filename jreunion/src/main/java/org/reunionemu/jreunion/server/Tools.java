@@ -20,7 +20,7 @@ public class Tools {
 	 * @param current
 	 * @param min
 	 * @param max
-	 * @return
+	 * @return normalized value
 	 */
 	public static <T extends Comparable<T>> T between(T current, T min, T max) {
 		T value = current;

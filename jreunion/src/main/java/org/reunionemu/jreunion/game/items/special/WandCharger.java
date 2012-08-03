@@ -6,6 +6,7 @@ import org.reunionemu.jreunion.game.LivingObject;
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.Usable;
 import org.reunionemu.jreunion.game.Equipment.Slot;
+import org.reunionemu.jreunion.game.items.equipment.ChakuranWeapon;
 import org.reunionemu.jreunion.game.items.equipment.WandWeapon;
 import org.reunionemu.jreunion.server.DatabaseUtils;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
@@ -24,7 +25,7 @@ public class WandCharger extends ScrollAndSpellBook implements Usable{
 	}
 	
 	@Override
-	public void use(Item<?> wandCharger, LivingObject user, int quickSlotPosition){
+	public void use(Item<?> wandCharger, LivingObject user, int quickSlotPosition, int unknown){
 		if (user instanceof Player) {
 			Player player = ((Player) user);
 			Item<?> wandWeapon = player.getEquipment().getItem(Slot.OFFHAND);
@@ -37,11 +38,13 @@ public class WandCharger extends ScrollAndSpellBook implements Usable{
 			}
 			wandWeapon.setGemNumber(wandWeapon.getType().getMaxGemNumber());
 			DatabaseUtils.getDinamicInstance().saveItem(wandWeapon);
-			player.getClient().sendPacket(Type.USQ,
-											quickSlotPosition,
-											Slot.OFFHAND.value(),
-											wandWeapon.getGemNumber(),
-											wandWeapon.getExtraStats());
+			if(player.getClient().getVersion() < 2000)
+				player.getClient().sendPacket(Type.USQ,quickSlotPosition,Slot.OFFHAND.value(),wandWeapon.getGemNumber(),wandWeapon.getExtraStats());
+			else
+				player.getClient().sendPacket(Type.UQ_ITEM, 1, quickSlotPosition, wandCharger.getEntityId(),
+						wandCharger.getGemNumber(), wandCharger.getExtraStats(), 5);
 		}
+		else
+			Logger.getLogger(WandCharger.class).warn(this.getName() + " not implemented for " + user.getName());
 	}
 }

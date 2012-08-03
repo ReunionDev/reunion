@@ -29,6 +29,10 @@ public class ServerSetings {
 	
 	private long dropTimeOut;
 	
+	private float criticalMultiplier;
+	
+	private float criticalChance;
+	
 	public ServerSetings() {
 		loadFromReference();
 	}
@@ -55,6 +59,8 @@ public class ServerSetings {
 			setDropExclusivity(10);
 			setSpawnAttempts(1);
 			setDropTimeOut(600);
+			setCriticalMultiplier(1);
+			setCriticalChance((float)0.5);
 			setWelcomeMessage("Hey, welcome on the Reunion Testserver");
 		} else {
 
@@ -127,6 +133,20 @@ public class ServerSetings {
 			} else {
 				// use default
 				setDropTimeOut(600);
+			}
+			if (server.checkMembers(new String[] { "CriticalMultiplier" })) {
+				// use member from file
+				setCriticalMultiplier(Float.parseFloat(server.getMemberValue("CriticalMultiplier")));
+			} else {
+				// use default
+				setCriticalMultiplier(1);
+			}
+			if (server.checkMembers(new String[] { "CriticalChance" })) {
+				// use member from file
+				setCriticalChance(Float.parseFloat(server.getMemberValue("CriticalChance")));
+			} else {
+				// use default
+				setCriticalChance((float)0.5);
 			}
 		}
 	}
@@ -201,5 +221,21 @@ public class ServerSetings {
 
 	public void setDropTimeOut(long dropTimeOut) {
 		this.dropTimeOut = dropTimeOut;
+	}
+	
+	public float getCriticalMultiplier() {
+		return criticalMultiplier;
+	}
+
+	public void setCriticalMultiplier(float criticalMultiplier) {
+		this.criticalMultiplier = criticalMultiplier;
+	}
+	
+	public float getCriticalChance() {
+		return criticalChance;
+	}
+
+	public void setCriticalChance(float criticalChance) {
+		this.criticalChance = criticalChance;
 	}
 }
