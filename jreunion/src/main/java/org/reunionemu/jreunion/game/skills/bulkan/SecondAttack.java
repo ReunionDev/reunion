@@ -10,6 +10,7 @@ import org.reunionemu.jreunion.game.Npc;
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.Skill;
 import org.reunionemu.jreunion.game.items.equipment.Axe;
+import org.reunionemu.jreunion.game.items.equipment.DemolitionWeapon;
 import org.reunionemu.jreunion.game.items.equipment.SlayerWeapon;
 import org.reunionemu.jreunion.game.npc.Mob;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
@@ -86,8 +87,10 @@ public class SecondAttack extends Skill {
 		float criticalMultiplier = slayerWeapon.getCritical();
 		
 		long damage = bestAttack + slayerDmg + (long)(bestAttack*slayerMemoryDmg*skillDmg);
-		damage += (long)(damage*slayerDemolitionDmg);
 		damage += (long)(damage*criticalMultiplier);
+		damage += (long)(damage*slayerDemolitionDmg);
+		
+		int damageType = slayerWeapon instanceof DemolitionWeapon ? 2 : (criticalMultiplier > 0 ? 1 : 0);
 		
 		synchronized(targets){
 			for(LivingObject target : targets){ 
@@ -101,8 +104,7 @@ public class SecondAttack extends Skill {
 				} else {
 					target.setHp(newHp);
 				}
-				player.getClient().sendPacket(Type.SAV, target,
-						criticalMultiplier > 0 ? 1 : 0, unknown1,
+				player.getClient().sendPacket(Type.SAV, target,	damageType, unknown1,
 						shoulderMount.getExtraStats(), 3);
 			}
 		}

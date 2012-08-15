@@ -48,6 +48,7 @@ public abstract class Player extends LivingObject implements EventListener {
 	
 	private int slot;
 	
+	private Pet pet;
 	
 	public int playerId = -1 ; //id used for database storage
 
@@ -78,7 +79,7 @@ public abstract class Player extends LivingObject implements EventListener {
 		AIDIA(2), //2
 		HUMAN(3), //3
 		HYBRIDER(4), //4
-		RACE_PET(5), //5
+		PET(5), //5
 		UNDEFINED(6); //6
 		
 		int value;
@@ -168,6 +169,7 @@ public abstract class Player extends LivingObject implements EventListener {
 		quickSlotBar = new QuickSlotBar(this);
 		stash = new Stash(this);
 		exchange = new Exchange(this);
+		//pet = new Pet(this);
 		
 		client.addEventListener(ClientDisconnectEvent.class, this, new ClientFilter(client));
 
@@ -202,7 +204,7 @@ public abstract class Player extends LivingObject implements EventListener {
 		}
 		
 		LocalMap map = getPosition().getLocalMap();
-		RoamingItem roamingItem = map.getWorld().getCommand().dropItem(getPosition(), item);
+		RoamingItem roamingItem = map.getWorld().getCommand().dropItem(getPosition(), item, this);
 		Logger.getLogger(Player.class).info("Player "+this+" droped roaming item "+roamingItem);
 		getInventory().setHoldingItem(null);
 	}
@@ -1427,5 +1429,13 @@ public abstract class Player extends LivingObject implements EventListener {
 				setStatusPoints(statusPoints-1);
 			}
 		//}
+	}
+
+	public Pet getPet() {
+		return pet;
+	}
+
+	public void setPet(Pet pet) {
+		this.pet = pet;
 	}
 }

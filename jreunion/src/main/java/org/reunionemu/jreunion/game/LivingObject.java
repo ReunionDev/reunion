@@ -5,6 +5,7 @@ import org.reunionemu.jreunion.game.npc.Mob;
 import org.reunionemu.jreunion.game.quests.ExperienceQuest;
 import org.reunionemu.jreunion.game.quests.QuestState;
 import org.reunionemu.jreunion.game.quests.objective.Objective;
+import org.reunionemu.jreunion.server.PacketFactory;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
 import org.reunionemu.jreunion.server.Tools;
 
@@ -45,9 +46,9 @@ public abstract class LivingObject extends WorldObject {
 		return (int) percentageHp;		
 	}
 	
-	public void walk(Position position, boolean running) {
+	public void walk(Position position, boolean isRuning) {
 
-		//setIsRunning(running);
+		//setIsRunning(isRunning);
 		synchronized(this) {
 			setPosition(position);
 			setTargetPosition(position.clone());			

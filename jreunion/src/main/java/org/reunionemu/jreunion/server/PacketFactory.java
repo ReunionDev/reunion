@@ -7,12 +7,15 @@ import java.util.Map;
 import org.reunionemu.jreunion.game.Effectable;
 import org.reunionemu.jreunion.game.Equipment;
 import org.reunionemu.jreunion.game.Equipment.Slot;
+import org.reunionemu.jreunion.game.items.pet.PetEquipment;
+import org.reunionemu.jreunion.game.items.pet.PetEquipment.PetSlot;
 import org.reunionemu.jreunion.game.npc.Merchant;
 import org.reunionemu.jreunion.game.npc.NpcShop;
 import org.reunionemu.jreunion.game.InventoryItem;
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.LivingObject;
 import org.reunionemu.jreunion.game.Npc;
+import org.reunionemu.jreunion.game.Pet;
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.Position;
 import org.reunionemu.jreunion.game.QuickSlotItem;
@@ -91,7 +94,9 @@ public class PacketFactory {
 		USQ,				// old 2007 client
 		UQ_ITEM,
 		MT_ITEM,
-		AV
+		AV,
+		PSTATUS,
+		MYPET
 	}
 	
 	public static String createPacket(Type packetType, Object... args) {
@@ -124,7 +129,8 @@ public class PacketFactory {
 		case GOTO:
 			if(args.length>0){
 				Position position = (Position)args[0];
-				return "goto " + position.getX() + " " + position.getY() + " "+position.getZ()+" "	+ position.getRotation();
+				return "goto " + position.getX() + " " + position.getY() + " "+position.getZ()+" "	
+						+ (position.getRotation()*1000)/1000;
 			}
 			break;
 		
@@ -155,7 +161,7 @@ public class PacketFactory {
 						+ player.getHairStyle() + " " + player.getPosition().getX()
 						+ " " + player.getPosition().getY() + " "
 						+ player.getPosition().getZ() + " "
-						+ player.getPosition().getRotation() + " " + eq.getTypeId(Slot.HELMET) + " "
+						+ (player.getPosition().getRotation()*1000)/1000 + " " + eq.getTypeId(Slot.HELMET) + " "
 						+ eq.getTypeId(Slot.CHEST) + " " + eq.getTypeId(Slot.PANTS) + " " + eq.getTypeId(Slot.SHOULDER) + " "
 						+ eq.getTypeId(Slot.BOOTS) + " " + eq.getTypeId(Slot.OFFHAND) + " " + eq.getTypeId(Slot.MAINHAND) + " "
 						+ player.getPercentageHp() + " " + combat + " 0 0 0 0 0 0";
@@ -216,8 +222,8 @@ public class PacketFactory {
 				Item<?> item = roamingItem.getItem();
 				
 				return "drop " + item.getEntityId() + " " + item.getType().getTypeId() + " "
-				+ position.getX() + " " + position.getY() + " " + position.getZ() + " "+position.getRotation()+" " + item.getGemNumber() + " "
-				+ item.getExtraStats()+ " " + item.getUnknown1() + " " + item.getUnknown2();
+				+ position.getX() + " " + position.getY() + " " + position.getZ() + " "+(position.getRotation()*1000)/1000
+				+" " + item.getGemNumber() + " "+ item.getExtraStats()+ " " + item.getUnknown1() + " " + item.getUnknown2();
 			}			
 			break;
 		
@@ -228,7 +234,7 @@ public class PacketFactory {
 				Position position = roamingItem.getPosition();
 				
 				return "in item " + item.getEntityId() + " " + item.getType().getTypeId() + " " + position.getX()
-				+ " " + position.getY() + " " + position.getZ() + " " + position.getRotation() + " " + item.getGemNumber()
+				+ " " + position.getY() + " " + position.getZ() + " " + (position.getRotation()*1000)/1000 + " " + item.getGemNumber()
 				+ " " + item.getExtraStats()+ " " + item.getUnknown1() + " " + item.getDurability() + " "
 				+ item.getType().getMaxDurability();
 			}
@@ -246,7 +252,7 @@ public class PacketFactory {
 				return "in n " + npc.getEntityId() + " " + npc.getType().getTypeId()
 						+ " " + npcPosition.getX() + " "
 						+ npcPosition.getY() + " "+npcPosition.getZ()+" "
-						+ (Double.isNaN(npcPosition.getRotation())?0.0:npcPosition.getRotation()) + " "
+						+ (Double.isNaN(npcPosition.getRotation())?0.0:(npcPosition.getRotation()*1000)/1000) + " "
 						+ percentageHp + " "
 						+ npc.getType().getMutant() + " " + npc.getUnknown1() + " "
 						+ npc.getType().getNeoProgmare() + " " + npc.getUnknown2() + " "+ (spawn ? 1 : 0) + " "
@@ -271,7 +277,7 @@ public class PacketFactory {
 			
 			int unknown = (Integer)args[1];
 			return "place char " + player.getEntityId() + " " + position.getX()
-			+ " " + position.getY() + " " + position.getZ() + " " + position.getRotation() + " "
+			+ " " + position.getY() + " " + position.getZ() + " " + (position.getRotation()*1000)/1000 + " "
 			+ unknown + " " + (player.isRunning()?1:0);
 			}
 			break;
@@ -281,16 +287,16 @@ public class PacketFactory {
 				Player player = (Player)args[0];
 				Position position = player.getPosition();
 				return "s c " + player.getEntityId() + " " + position.getX()
-					+ " " + position.getY() + " " + position.getZ() + " " + position.getRotation();
+					+ " " + position.getY() + " " + position.getZ() + " " + (position.getRotation()*1000)/1000;
 			}
 			break;
 			
-		case WALK:
+		case WALK: 
 			if(args.length>1){
 				LivingObject livingObject = (LivingObject)args[0];
 				Position position = (Position)args[1];
 				
-				return "walk "+getObjectType(livingObject)+" " + livingObject.getEntityId() + " " + position.getX()
+				return "w "+getObjectType(livingObject)+" " + livingObject.getEntityId() + " " + position.getX()
 				+ " " + position.getY() + " " + position.getZ() + " " + (livingObject.isRunning()?1:0);
 			}
 			break;
@@ -400,7 +406,7 @@ public class PacketFactory {
 			if(args.length == 5)
 			{
 				LivingObject target = (LivingObject) args[0];				
-				int isCritical = (Integer)args[1];
+				int damageType = (Integer)args[1];
 				int unknown1 = (Integer)args[2];
 				int itemStatusRemain = (Integer)args[3];
 				int unknown2 = (Integer)args[4];
@@ -408,7 +414,7 @@ public class PacketFactory {
 				return "sav "+ getObjectType(target) + " "
 							+ target.getEntityId() + " "
 							+ target.getPercentageHp() + " "
-							+ isCritical + " "
+							+ damageType + " "
 							+ unknown1 + " "
 							+ itemStatusRemain + " "
 							+ unknown2;
@@ -935,6 +941,39 @@ public class PacketFactory {
 						+ victim.getPercentageHp() + " " + isCritical + " 0";
 			}
 			break;
+		case PSTATUS:
+			if(args.length>1){
+				int id = (Integer)args[0];
+				long arg1 = (Long)args[1];
+				long arg2 = (Long)args[2];
+				int arg3 = (Integer)args[3];
+				
+				return "pstatus " + id + " " + arg1 + " " + arg2 + " " + arg3;
+			}
+			break;
+		case MYPET:
+			if(args.length>1){
+				Player player = (Player)args[0];
+				Pet pet = (Pet)args[1];
+				PetEquipment equipment = pet.getEquipment();
+				
+				return "mypet " 
+				+ pet.getEntityId() + " " 
+				+ pet.getName() + " " 
+				+ (player.getClient().getVersion()>=2000 ? "0 " : "") 
+				+ pet.getPosition().getX() + " "
+				+ pet.getPosition().getY() + " " 
+				+ (pet.getPosition().getRotation()*1000)/1000 + " "
+				+ equipment.getTypeId(PetSlot.HORN) + " "
+				+ equipment.getTypeId(PetSlot.HEAD) + " "
+				+ equipment.getTypeId(PetSlot.BODY) + " "
+				+ equipment.getTypeId(PetSlot.WING) + " "
+				+ equipment.getTypeId(PetSlot.FOOT) + " "
+				+ equipment.getTypeId(PetSlot.TAIL) + " "
+				+ pet.getHp() + " "
+				+ pet.getMaxHp();
+			}
+			break;
 			
 		default:			
 			throw new UnsupportedOperationException();
@@ -946,11 +985,14 @@ public class PacketFactory {
 		if (object instanceof Player){
 			return "c";
 		}
-		if(object instanceof RoamingItem){
-			return "item";			
+		else if(object instanceof RoamingItem){
+			return "i";			
 		}
 		else if (object instanceof Npc) {
 			return "n";
+		}
+		else if (object instanceof Pet) {
+			return "p";
 		}
 		
 		throw new RuntimeException("Invalid Object: "+object);

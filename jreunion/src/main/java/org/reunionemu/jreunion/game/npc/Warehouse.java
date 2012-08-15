@@ -97,7 +97,7 @@ public class Warehouse extends NpcType {
 		}
 		Logger.getLogger(Warehouse.class).info(
 				"Player " + player + " stored " + (packetData.length - 3) / 2
-						+ " item(s) " + stashItem.getItem()	+ " in the warehouse slot" + stashPosition.getSlot());
+						+ " item(s) " + stashItem.getItem()	+ " in the warehouse slot " + (stashPosition.getSlot()+1));
 		player.getClient().sendPacket(Type.STASH_PUT, itemTypeId, invTab,
 				stashTab, stashPosition.getSlot(), (packetData.length - 3) / 2, packetData);
 	}
@@ -123,7 +123,7 @@ public class Warehouse extends NpcType {
 			itemList.add(itemData);
 		}
 		Logger.getLogger(Warehouse.class).info("Player " + player + " removed " + itemList.size()
-						+ " item(s) " + stashItem.getItem()	+ " from the warehouse slot " + pos);
+						+ " item(s) " + stashItem.getItem()	+ " from the warehouse slot " + (pos+1));
 		player.getClient().sendPacket(Type.STASH_GET, itemList, type, inventoryTab, unknown1, pos, itemList.size());
 		
 	}

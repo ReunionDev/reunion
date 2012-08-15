@@ -51,7 +51,7 @@ public class MessageParser {
 		Client client = player.getClient();
 		ItemManager itemManager = client.getWorld().getItemManager();
 
-		if (userlvl > -1) {
+		if (userlvl == 255) {
 			
 			if (words[0].equals("@levelup")) {
 				if (words.length > 1) {
@@ -239,7 +239,6 @@ public class MessageParser {
 								DatabaseUtils.getDinamicInstance().saveItem(item);
 							}*/
 							
-							//System.out.println("Entity list size before: "+player.getPosition().getLocalMap().getEntityListSize());
 							Item<?> item = itemManager.create(Integer.parseInt(words[1]));
 							player.getPosition().getLocalMap().createEntityId(item);
 							
@@ -261,7 +260,7 @@ public class MessageParser {
 								item.setUnknown1(0);
 								item.setUnknown2(0);
 							}
-							RoamingItem roamingItem = com.dropItem(player.getPosition(), item);
+							RoamingItem roamingItem = com.dropItem(player.getPosition(), item, player);
 							Logger.getLogger(MessageParser.class).info("Player "+player+" droped roaming item "+roamingItem);
 							
 						} catch (Exception e) {
@@ -286,21 +285,7 @@ public class MessageParser {
 				return null;
 				//client.SendPacket(Type.SAY, words[3],Integer.parseInt(words[2]),Integer.parseInt(words[1]));
 			
-			/* not sure what is this (SAM)
-			} else if (words[0].equals("@p")) { //Adds a NPC
-				String data = "";
-				for(int i = 1 ;i<words.length;i++){
-					if(!data.isEmpty())
-						data+=" ";
-					data+=words[i];
-					
-					
-				}
-				if(data.isEmpty())
-					client.sendData(data);
-				return null;
-			*/
-			} else if (words[0].equals("@addmob")) { //Adds a NPC 
+			} else if (words[0].equals("@addmob")) { //Adds a mob type NPC 
 				if (words.length == 2||words.length == 3) {
 					int count = 0;
 					try {

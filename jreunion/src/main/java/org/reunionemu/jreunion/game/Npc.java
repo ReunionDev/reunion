@@ -249,7 +249,8 @@ public class Npc<T extends NpcType> extends LivingObject {
 					item.setUnknown1(0);
 					item.setUnknown2(0);
 					
-					final RoamingItem roamingItem = getPosition().getLocalMap().getWorld().getCommand().dropItem(this.getPosition(), item);
+					final RoamingItem roamingItem = 
+							getPosition().getLocalMap().getWorld().getCommand().dropItem(this.getPosition(), item, player);
 					roamingItem.setOwner(player);
 					Logger.getLogger(Mob.class).info("Mob "+this+" droped roaming item "+roamingItem);
 					
@@ -261,8 +262,10 @@ public class Npc<T extends NpcType> extends LivingObject {
 							roamingItem.setOwner(null);
 						}
 					},dropExclusivity*1000);
+					break;
 				}
-			}			
+			}	
+			
 		}
 		player.getClient().sendPacket(Type.SAY, "Experience: " + npcExp + " Lime: " + npcLime);
 	}
@@ -415,12 +418,14 @@ public class Npc<T extends NpcType> extends LivingObject {
 			// Condition that detects if the mob its outside or inside
 			// player session range.
 			
+			/*
 			if (distance >= player.getSessionRadius()) {
 				player.getSession().exit(this);
 				continue;
 			} else {
 				player.getSession().enter(this);
 			}
+			*/
 			
 			// Condition that verify if the mob can move freely or not.
 			// If the distance between the mob and the player is less or equal

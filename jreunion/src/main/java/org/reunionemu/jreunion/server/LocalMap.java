@@ -277,14 +277,15 @@ public class LocalMap extends Map implements Runnable{
 			roamingItemList = DatabaseUtils.getDinamicInstance().loadRoamingItems(this);
 			for(RoamingItem roamingItem : roamingItemList){
 				//TODO: A better way to manage items going in and out of the map
-				int itemEntityId = createEntityId(roamingItem.getItem());
+				int itemEntityId = createEntityId(roamingItem);
 				
+				roamingItem.getItem().setEntityId(itemEntityId);
 				roamingItem.startDeleteTimer(true);
 			}
 		}
 		
 		Logger.getLogger(LocalMap.class).info("Loaded "+getRoamingItemList().size()+" roaming items in "+getName());
-		
+			
 		executorService.scheduleAtFixedRate(new Runnable() {
 			
 			@Override
@@ -293,15 +294,17 @@ public class LocalMap extends Map implements Runnable{
 				synchronized(entities){			
 					objects = new Vector<Entity>(entities.values());
 				}
-				for(Entity entity: objects){
-					if(entity instanceof Npc){
-						if(((Npc)entity).getType().getClass() == Mob.class)
-							((Npc<NpcType>)entity).work();
+				
+				for (Entity entity : objects) {
+					if (entity instanceof Npc) {
+						if (((Npc<?>) entity).getType() instanceof Mob) {
+							((Npc<?>) entity).work();
+						}
 					}
 				}
 			}
 			
-		}, 0, 1, TimeUnit.SECONDS);
+		}, 0, 2, TimeUnit.SECONDS);
 		
 		Logger.getLogger(LocalMap.class).info(getName()+" running on "+getAddress());
 		
@@ -449,20 +452,18 @@ public SessionList<Session> GetSessions(Position position){
 				RoamingItem roamingItem = itemDropEvent.getRoamingItem();
 				SessionList<Session> list = GetSessions(roamingItem.getPosition());
 				Item<?> item = roamingItem.getItem();
+				Player player = itemDropEvent.getPlayer();
 				
 				synchronized(entities) {
-					/*if(item.getEntityId() == -1){
-						createEntityId(item);
-					}
 					createEntityId(roamingItem);
-					*/
-					createEntityId(item);
-					roamingItem.setEntityId(item.getEntityId());
+					item.setEntityId(roamingItem.getEntityId());
 					addRoamingItem(roamingItem);
 					list.enter(roamingItem, false);	
 				}
 				DatabaseUtils.getDinamicInstance().saveRoamingItem(roamingItem);
-				list.sendPacket(Type.DROP, roamingItem);
+				player.getClient().sendPacket(Type.DROP, roamingItem); //sent to the client owner only
+				player.getInterested().sendPacket(Type.IN_ITEM, roamingItem); //sent to other clients
+				
 			} else
 			if(event instanceof ItemPickupEvent){
 				
@@ -470,26 +471,17 @@ public SessionList<Session> GetSessions(Position position){
 				RoamingItem roamingItem = itemPickupEvent.getRoamingItem();
 				SessionList<Session> list = GetSessions(roamingItem.getPosition());
 				Item<?> item = roamingItem.getItem();
+				Player player = itemPickupEvent.getPlayer();
 				
 				synchronized(entities) {
-					
-					//roamingItem = (RoamingItem) this.entities.remove(roamingItem.getEntityId());
-					//roamingItem = (RoamingItem) removeEntity(roamingItem);
-					
-					if(roamingItem!=null) {
-						Player player = itemPickupEvent.getPlayer();
-						//player.pickItem(roamingItem.getItem(), roamingItem.getEntityId(), -1);
-						player.pickItem(item, -1);
-						player.getClient().sendPacket(Type.PICKUP, player);
-						player.getInterested().sendPacket(Type.PICKUP, player);
-						//player.getClient().sendPacket(Type.OUT, )
-						//player.getClient().sendPacket(Type.OUT, roamingItem);
-						removeRoamingItem(roamingItem);
-						list.exit(roamingItem, false);
-					}				
+					player.pickItem(item, -1);
+					removeRoamingItem(roamingItem);
+					list.exit(roamingItem, false);
 				}
 				DatabaseUtils.getDinamicInstance().deleteRoamingItem(item);
-				roamingItem.getInterested().sendPacket(Type.OUT, roamingItem);
+				removeEntity(roamingItem);
+				player.getClient().sendPacket(Type.PICKUP, player); //sent to the client owner only
+				list.sendPacket(Type.OUT, roamingItem); //sent to other clients
 				
 			} else	
 			if(event instanceof PlayerLoginEvent){
@@ -573,13 +565,11 @@ public SessionList<Session> GetSessions(Position position){
 								
 								boolean within = owner.getPosition().within(object.getPosition(), owner.getSessionRadius());
 								boolean contains = session.contains(object);
-								
-								if(contains && !within) {
 									
+								if(contains && !within) {
 									session.exit(object);	
 									
 								} else if(!contains && within) {
-														
 									session.enter(object);
 															
 								}			
@@ -604,8 +594,10 @@ public SessionList<Session> GetSessions(Position position){
 	}
 	
 	public void addEntity(Entity entity) {
-		if(!entities.containsValue(entity)){
-			entities.put(entity.getEntityId(), entity);
+		synchronized(entities){
+			if (!entities.containsValue(entity)) {
+				entities.put(entity.getEntityId(), entity);
+			}
 		}
 	}
 

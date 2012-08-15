@@ -121,7 +121,7 @@ public class Command {
 		
 	}
 	
-	public RoamingItem dropItem(Position position, Item<?> item) {
+	public RoamingItem dropItem(Position position, Item<?> item, Player player) {
 		
 		RoamingItem roamingItem = new RoamingItem(item);
 		roamingItem.setPosition(position);
@@ -129,7 +129,7 @@ public class Command {
 		
 		LocalMap map = position.getLocalMap();
 		
-		map.fireEvent(ItemDropEvent.class, roamingItem);
+		map.fireEvent(ItemDropEvent.class, roamingItem, player);
 		
 		roamingItem.startDeleteTimer(false);
 				

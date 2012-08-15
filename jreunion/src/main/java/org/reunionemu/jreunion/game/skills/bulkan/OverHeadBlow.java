@@ -13,6 +13,7 @@ import org.reunionemu.jreunion.game.items.equipment.Weapon;
 import org.reunionemu.jreunion.game.skills.Modifier;
 import org.reunionemu.jreunion.server.Server;
 import org.reunionemu.jreunion.server.SkillManager;
+import org.reunionemu.jreunion.server.PacketFactory.Type;
 
 public class OverHeadBlow extends WeaponAttack implements Castable{
 
@@ -91,12 +92,13 @@ public class OverHeadBlow extends WeaponAttack implements Castable{
 			long baseDamage = player.getBaseDamage();
 			float skillDamage = getDamageModifier(player);
 			long weaponDamage = 0;
+			float criticalMultiplier = 0;
 			Item<?> weapon = player.getEquipment().getMainHand();
 			
-			if( weapon != null)
-				weaponDamage += ((Weapon)weapon.getType()).getMinDamage(weapon) + 
-						(Server.getRand().nextFloat()*(((Weapon)weapon.getType()).getMaxDamage(weapon)
-								- ((Weapon)weapon.getType()).getMinDamage(weapon)));
+			if( weapon != null && weapon.getType() instanceof Weapon){
+				weaponDamage += ((Weapon)weapon.getType()).getDamage(weapon);
+				criticalMultiplier = ((Weapon)weapon.getType()).getCritical();
+			}
 			
 			long damage = (long)((baseDamage +  weaponDamage) * skillDamage);
 			
@@ -122,10 +124,13 @@ public class OverHeadBlow extends WeaponAttack implements Castable{
 				}
 			}
 			
+			damage += (long)(damage*criticalMultiplier);
 	
 			synchronized(victims){
 				for(LivingObject victim : victims){
-					victim.getsAttacked(player, damage);		
+					victim.getsAttacked(player, damage);
+					player.getClient().sendPacket(Type.AV, victim, criticalMultiplier > 0 ? 1 : 0);
+					player.getInterested().sendPacket(Type.AV, victim, criticalMultiplier > 0 ? 1 : 0);
 				}
 				return true;
 			}
