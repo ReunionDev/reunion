@@ -7,8 +7,8 @@ import java.util.Map;
 import org.reunionemu.jreunion.game.Effectable;
 import org.reunionemu.jreunion.game.Equipment;
 import org.reunionemu.jreunion.game.Equipment.Slot;
-import org.reunionemu.jreunion.game.items.pet.PetEquipment;
-import org.reunionemu.jreunion.game.items.pet.PetEquipment.PetSlot;
+//import org.reunionemu.jreunion.game.items.pet.PetEquipment;
+//import org.reunionemu.jreunion.game.items.pet.PetEquipment.PetSlot;
 import org.reunionemu.jreunion.game.npc.Merchant;
 import org.reunionemu.jreunion.game.npc.NpcShop;
 import org.reunionemu.jreunion.game.InventoryItem;
@@ -941,6 +941,7 @@ public class PacketFactory {
 						+ victim.getPercentageHp() + " " + isCritical + " 0";
 			}
 			break;
+	/*
 		case PSTATUS:
 			if(args.length>1){
 				int id = (Integer)args[0];
@@ -974,6 +975,7 @@ public class PacketFactory {
 				+ pet.getMaxHp();
 			}
 			break;
+		*/
 			
 		default:			
 			throw new UnsupportedOperationException();
