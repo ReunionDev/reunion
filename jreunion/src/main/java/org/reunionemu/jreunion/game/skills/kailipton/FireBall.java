@@ -89,7 +89,7 @@ public class FireBall extends Tier1 implements Castable, Modifier, Effectable {
 			float criticalMultiplier = 0;
 			Weapon weapon = null;
 			
-			if(item.is(StaffWeapon.class)){
+			if(item!=null && item.is(StaffWeapon.class)){
 				weapon = (Weapon)item.getType();
 				criticalMultiplier = weapon.getCritical();
 				weaponDamage += weapon.getDamage(item);
@@ -121,12 +121,14 @@ public class FireBall extends Tier1 implements Castable, Modifier, Effectable {
 			long magicDamage = (long) ((baseDamage + weaponDamage + fireDamage)
 					* fireMasteryDamage * weaponMagicBoost * (criticalMultiplier+1));
 			
+			player.setDmgType(criticalMultiplier > 0 ? 1 : 0);
+			
 			//This skill can target up to 2 targets
 			//(Both targets receive 100% dmg)
 			synchronized(victims){
 				for(LivingObject victim : victims){ 
 					victim.getsAttacked(player, magicDamage);
-					player.getClient().sendPacket(Type.AV, victim, criticalMultiplier > 0 ? 1 : 0);
+					player.getClient().sendPacket(Type.AV, victim, player.getDmgType());
 				}
 				return true;
 			}
@@ -173,7 +175,7 @@ public class FireBall extends Tier1 implements Castable, Modifier, Effectable {
 	}
 
 	public void effect(LivingObject source, LivingObject target){
-		source.getInterested().sendPacket(Type.EFFECT, source, target , this);
+		source.getInterested().sendPacket(Type.EFFECT, source, target , this, source.getDmgType());
 	}
 	
 	public int getEffectModifier() {

@@ -98,4 +98,15 @@ public class RoamingItem extends WorldObject{
 	public void stopDeleteTimer(){
 		deleteTimer.cancel();
 	}
+	
+	public void setDropExclusivity(Player player){
+		java.util.Timer dropExclusivityTimer = new java.util.Timer();
+		long dropExclusivity = player.getClient().getWorld().getServerSetings().getDropExclusivity();
+		dropExclusivityTimer.schedule(new TimerTask() {
+			@Override
+			public void run() {
+				setOwner(null);
+			}
+		},dropExclusivity*1000);
+	}
 }

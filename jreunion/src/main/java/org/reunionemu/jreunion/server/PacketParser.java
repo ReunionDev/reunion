@@ -26,9 +26,11 @@ import org.reunionemu.jreunion.game.ExchangeItem;
 import org.reunionemu.jreunion.game.Inventory;
 import org.reunionemu.jreunion.game.InventoryItem;
 import org.reunionemu.jreunion.game.Item;
+import org.reunionemu.jreunion.game.items.pet.PetEgg;
 import org.reunionemu.jreunion.game.LivingObject;
 import org.reunionemu.jreunion.game.Npc;
-import org.reunionemu.jreunion.game.NpcType;
+import org.reunionemu.jreunion.game.Pet;
+import org.reunionemu.jreunion.game.Pet.PetStatus;
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.Player.Race;
 import org.reunionemu.jreunion.game.Player.Sex;
@@ -36,7 +38,6 @@ import org.reunionemu.jreunion.game.Player.Status;
 import org.reunionemu.jreunion.game.Position;
 import org.reunionemu.jreunion.game.RoamingItem;
 import org.reunionemu.jreunion.game.Skill;
-import org.reunionemu.jreunion.game.Usable;
 import org.reunionemu.jreunion.game.items.etc.MissionReceiver;
 import org.reunionemu.jreunion.game.npc.Merchant;
 import org.reunionemu.jreunion.game.npc.Trader;
@@ -266,7 +267,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 						}
 							
 					}
-
+					
 					player.getPosition().setMap((LocalMap)map);
 					world.getPlayerManager().addPlayer(player);
 					
@@ -274,6 +275,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					DatabaseUtils.getDinamicInstance().loadQuickSlot(player);
 					DatabaseUtils.getDinamicInstance().loadInventory(player);
 					DatabaseUtils.getDinamicInstance().loadExchange(player);
+					
 					player.loadInventory();
 					player.loadExchange();
 					player.loadQuickSlot();
@@ -336,6 +338,28 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					player.sendStatus(Status.LIME);
 					player.sendStatus(Status.PENALTYPOINTS);
 					player.setQuestState(DatabaseUtils.getDinamicInstance().loadQuestState(player));
+					
+					//handle with player pet loading
+					Pet pet = world.getPetManager().getPet(player);
+					if(pet != null){
+						Item<?> item = player.getEquipment().getShoulderMount();
+						player.setPet(pet);
+						pet.setOwner(player);
+						pet.sendStatus(PetStatus.STATE);
+						if(pet.getState() > 1){
+							pet.setEquipment(DatabaseUtils.getDinamicInstance().loadPetEquipment(player));
+						
+							if(pet.getState() == 12){
+								pet.load();
+							}
+						} else if(item != null && item.getType() instanceof PetEgg){
+							pet.setBreeding(true);
+							pet.startBreeding();
+						}
+					} else {
+						player.getClient().sendPacket(Type.PSTATUS, 13, 0l, 0l, 0);
+					}
+		
 					if(map.getId() == 6){
 						int flyStatus = player.getEquipment().getBoots().getExtraStats() >= 268435456 ? 1 : 0;
 						player.getClient().sendPacket(Type.SKY, player, flyStatus);
@@ -363,6 +387,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					client.getPlayer().walk(position,
 							Integer.parseInt(message[4])==1);
 					client.getPlayer().update();
+					
 				} else if (message[0].equals("place")) {
 	
 					double rotation = Double.parseDouble(message[4]);
@@ -371,7 +396,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 							Integer.parseInt(message[2]),
 							Integer.parseInt(message[3]),
 							 player.getPosition().getLocalMap(),
-							 rotation / 1000
+							 rotation/10000
 					);
 									
 					client.getPlayer().place(position,
@@ -387,8 +412,8 @@ public class PacketParser extends EventDispatcher implements EventListener{
 							Integer.parseInt(message[1]),
 							Integer.parseInt(message[2]),
 							Integer.parseInt(message[3]),
-							 player.getPosition().getLocalMap(),
-							 rotation / 1000
+							player.getPosition().getLocalMap(),
+							rotation/10000
 					);
 	
 					client.getPlayer().stop(position);
@@ -501,7 +526,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 							entityId = Integer.parseInt(message[3]);
 							
 							if(message[2].equals("char"))
-								client.sendPacket(Type.SAY, "No PVP implemented!");
+								client.sendPacket(Type.SAY, "No PVP implemented yet!");
 						}
 						
 						//SELF: use_skill 36 1
@@ -514,14 +539,6 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					}
 					
 					Skill skill = player.getSkill(skillId);
-					
-					/*
-					if(message[0].equals("use_skill"))
-						player.getInterested().sendPacket(Type.EFFECT, player, target ,skill);
-					else
-						player.getInterested().sendPacket(Type.ATTACK, player,target); //a n 141 c 554946 99 0 0 0
-					*/
-					
 					List<LivingObject> victims = new LinkedList<LivingObject>(Arrays.asList(new LivingObject[]{target}));
 					
 					if(message.length > 4){ //multiple targets
@@ -532,15 +549,17 @@ public class PacketParser extends EventDispatcher implements EventListener{
 						}
 					}
 					
+					//cast attacks/skills and send effects to other clients.
 					if(Castable.class.isInstance(skill)){
 						if(((Castable)skill).cast(player, victims)){
 							if(Effectable.class.isInstance(skill))
-								skill.effect(player, target); //Figure out why this doesnt work on all things
+								for(LivingObject victim : victims){
+									skill.effect(player, victim);
+								}
 						}
 					} else{
 						client.sendPacket(Type.SAY, skill.getName()+" skill not implemented yet!");
 						Logger.getLogger(PacketParser.class).error(skill.getName()+" skill is not Castable!");
-						//throw new RuntimeException(skill.getName()+" skill is not Castable!");
 					}
 				} else if (message[0].equals("skillup")) {
 					synchronized(player) {
@@ -714,7 +733,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					} else {
 						Logger.getLogger(PacketParser.class).warn("Npc not found: " + npcId);				
 					}
-				} else if (message[0].equals("chip_exchange")) {
+				} else if (message[0].equals("chip_exchange")) { //exchange 5 chips any grade
 					
 					Trader trader = (Trader)world.getNpcManager().getNpcType(Trader.class);
 					
@@ -729,10 +748,10 @@ public class PacketParser extends EventDispatcher implements EventListener{
 								Integer.parseInt(message[2]),
 								Integer.parseInt(message[3]));
 					}
-				} else if (message[0].equals("exch")) {
+				} else if (message[0].equals("exch")) { //exchange inventory click
 					client.getPlayer().itemExchange(Integer.parseInt(message[2]),
 							Integer.parseInt(message[3]));
-				} else if (message[0].equals("ichange")) {		
+				} else if (message[0].equals("ichange")) {	//armor exchange	
 					Trader trader = (Trader)world.getNpcManager().getNpcType(Trader.class);
 					
 					if (message.length == 1) {
@@ -779,9 +798,89 @@ public class PacketParser extends EventDispatcher implements EventListener{
 						item.setExtraStats(Integer.parseInt(message[3]));
 						player.getQuickSlotBar().useQuickSlot(player, Integer.parseInt(message[1]));
 					}
+				} else if (message[0].equals("p_walk")) {
+					if (message.length == 5) {
+						Position position = new Position(
+								Integer.parseInt(message[1]),
+								Integer.parseInt(message[2]),
+								Integer.parseInt(message[3]),
+								 player.getPosition().getLocalMap(),
+								 Double.NaN
+						);
+						
+						client.getPlayer().getPet().walk(position,
+								Integer.parseInt(message[4])==1);
+					}
+				} else if (message[0].equals("p_drop")) {
+					if (message.length == 2) {
+						Pet pet = player.getPet();
+						pet.getPosition().getLocalMap().removeEntity(pet);
+						world.getPetManager().removePet(pet);
+						player.setPet(null);
+						DatabaseUtils.getDinamicInstance().deletePet(pet);
+						client.sendPacket(Type.MYPET, "del");
+						player.getInterested().sendPacket(Type.OUT, pet);
+						
+						int tab = Integer.parseInt(message[1]);
+						pet = new Pet(player, 1);
+						world.getPetManager().buyEgg(pet, tab);
+					}
+				} else if (message[0].equals("p_keep")) {
+					if (message.length == 2) {
+						Pet pet = world.getPetManager().getPet(player);
+						if(message[1].equals("open")){
+							if(pet != null){
+								if(pet.getState() == 1){
+									client.sendPacket(Type.P_KEEP, "fail", pet);
+								} else if(pet.getState() >= 2){
+									client.sendPacket(Type.P_KEEP, "info", pet);
+								}
+							}
+						} else if(message[1].equals("in")){
+							pet.setState(2);
+							
+							pet.getPosition().getLocalMap().removeEntity(pet);
+							client.sendPacket(Type.MYPET, "del");
+							pet.sendStatus(PetStatus.STATE);
+							player.getInterested().sendPacket(Type.OUT, pet);
+						}else if(message[1].equals("out")){
+							player.setLime(player.getLime()-15000);
+							pet.setState(12);
+							pet.setSatiety(100);
+							pet.setHp(pet.getMaxHp());
+							pet.load();
+							player.getInterested().sendPacket(Type.IN_PET, player, true);
+						}
+					}
+				} else if (message[0].equals("buy_egg")) {
+					if (message.length == 2) {
+						int tab = Integer.parseInt(message[1]);
+						Pet pet = new Pet(player, 1);
+						world.getPetManager().buyEgg(pet, tab);
+					}
+				} else if (message[0].equals("party")) {
+					if(message.length > 1){
+						if(message[1].equals("request")){ //party invitation
+							LocalMap map = player.getPosition().getLocalMap();
+							Player newMember = map.getWorld().getPlayerManager().getPlayer(message[2]);
+							map.inviteParty(player, newMember, Integer.parseInt(message[3]), Integer.parseInt(message[4]));
+						} else if(message[1].equals("consist")){ //party invitation accepted
+							int inviterEntityId = Integer.parseInt(message[3]);
+							LocalMap map = player.getPosition().getLocalMap();
+							Player inviterPlayer = (Player)map.getEntity(inviterEntityId);
+							inviterPlayer.getParty().accept(inviterEntityId, player);
+						} else if (message[1].equals("secession")){
+							if(message.length > 2){ // party invitation rejected
+								int inviterEntityId = Integer.parseInt(message[2]);
+								player.getPosition().getLocalMap().getParty(inviterEntityId).reject(inviterEntityId, player);
+							} else{ //request party exit
+								player.getParty().exit(player);
+							}
+						}
+					}
 				} else if (message[0].equals("..")) {
 					//client keep alive
-				}else {
+				} else {
 					logUnknownCommand(message);
 					
 					String command = "";

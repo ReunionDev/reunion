@@ -33,7 +33,7 @@ public class GrindStone extends WhetStone implements Usable{
 			DatabaseUtils.getDinamicInstance().saveItem(slayerWeapon);
 			
 			if(player.getClient().getVersion() < 2000)
-				player.getClient().sendPacket(Type.USQ, quickSlotPosition, Slot.SHOULDER.value(), slayerWeapon.getGemNumber(),slayerWeapon.getExtraStats());
+				player.getClient().sendPacket(Type.USQ, "remain", quickSlotPosition, Slot.SHOULDER.value(), slayerWeapon);
 			else 
 				player.getClient().sendPacket(Type.UQ_ITEM, 1, quickSlotPosition, grindStone.getEntityId(), unknown, slayerWeapon.getExtraStats(), 3);
 		}

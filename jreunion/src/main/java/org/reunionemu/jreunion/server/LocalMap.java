@@ -26,6 +26,8 @@ import org.reunionemu.jreunion.game.LivingObject;
 import org.reunionemu.jreunion.game.Npc;
 import org.reunionemu.jreunion.game.NpcSpawn;
 import org.reunionemu.jreunion.game.NpcType;
+import org.reunionemu.jreunion.game.Party;
+import org.reunionemu.jreunion.game.Pet;
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.PlayerSpawn;
 import org.reunionemu.jreunion.game.Position;
@@ -56,7 +58,7 @@ public class LocalMap extends Map implements Runnable{
 
 	private ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
 
-	Thread thread;
+	private Thread thread;
 
 	private Parser mobSpawnReference;
 
@@ -64,15 +66,15 @@ public class LocalMap extends Map implements Runnable{
 	
 	private PlayerSpawn defaultSpawn;
 
-	World world;
+	private World world;
 	
 	private List<RoamingItem> roamingItemList = new Vector<RoamingItem>();
+	
+	private List<Party> parties = new Vector<Party>();
 
 	public World getWorld() {
 		return world;
 	}
-	
-
 
 	public LocalMap(World world, int id) {
 		super(id);
@@ -96,6 +98,11 @@ public class LocalMap extends Map implements Runnable{
 			return (Entity) entities.get(id);
 		}
 	}
+	
+	public int getEntitiesListSize(){
+		return entities.size();
+	}
+	
 	private int entityIter = 0;
 	
 	public synchronized int createEntityId(Entity obj){
@@ -158,21 +165,14 @@ public class LocalMap extends Map implements Runnable{
 			spawn.setPosition(position);
 			spawn.setRadius(Integer.parseInt(item.getMemberValue("Radius")));
 			spawn.setNpcType(Integer.parseInt(item.getMemberValue("Type")));
-			spawn.setRespawnTime(Integer.parseInt(item
-					.getMemberValue("RespawnTime")));
+			spawn.setRespawnTime(Integer.parseInt(item.getMemberValue("RespawnTime")));
 			
-			if(100*Math.random() < 25)
-			{
-				//((Mob) spawn).setMutant((int)(Math.random() * 3 + 1));
-				
-			}
-			
-			npcSpawnList.add(spawn);
+			getNpcSpawnList().add(spawn);
 			
 			spawn.spawn();
 		}
 		
-		Logger.getLogger(LocalMap.class).info("Loaded "+npcSpawnList.size()+" mob spawns in "+getName());
+		Logger.getLogger(LocalMap.class).info("Loaded "+getNpcSpawnList().size()+" mob spawns in "+getName());
 	}
 
 	public Parser getMobSpawnReference() {
@@ -205,9 +205,21 @@ public class LocalMap extends Map implements Runnable{
 		roamingItemList.remove(roamingItem);
 	}
 	
+	public List<Spawn> getNpcSpawnList(){
+		return npcSpawnList;
+	}
+	
+	public List<Spawn> getPlayerSpawnList(){
+		return playerSpawnList;
+	}
+	
+	public List<Entity> getEntities(){
+		return new Vector<Entity>(entities.values());
+	}
+	
 	private void createNpcSpawns() {
 		
-		int mobSpawnAmmount = npcSpawnList.size();
+		int mobSpawnAmmount = getNpcSpawnList().size();
 		Iterator<ParsedItem> iter = npcSpawnReference.getItemListIterator();
 
 		while (iter.hasNext()) {
@@ -235,11 +247,11 @@ public class LocalMap extends Map implements Runnable{
 			
 			spawn.setPosition(position);
 			spawn.setNpcType(Integer.parseInt(item.getMemberValue("Type")));
-			npcSpawnList.add(spawn);
+			getNpcSpawnList().add(spawn);
 			
 			spawn.spawn();
 		}
-		Logger.getLogger(LocalMap.class).info("Loaded "+(npcSpawnList.size()-mobSpawnAmmount)+" npc spawns in "+getName());
+		Logger.getLogger(LocalMap.class).info("Loaded "+(getNpcSpawnList().size()-mobSpawnAmmount)+" npc spawns in "+getName());
 	}
 
 	/**
@@ -267,7 +279,7 @@ public class LocalMap extends Map implements Runnable{
 		mobSpawnReference = new Parser();
 		npcSpawnReference = new Parser();
 		loadFromReference(getId());
-		npcSpawnList.clear();
+		getNpcSpawnList().clear();
 		createMobSpawns();
 		createNpcSpawns();
 		createPlayerSpawns();
@@ -286,6 +298,9 @@ public class LocalMap extends Map implements Runnable{
 		
 		Logger.getLogger(LocalMap.class).info("Loaded "+getRoamingItemList().size()+" roaming items in "+getName());
 			
+		//startMobsAI(1000);
+		
+		/*
 		executorService.scheduleAtFixedRate(new Runnable() {
 			
 			@Override
@@ -303,16 +318,42 @@ public class LocalMap extends Map implements Runnable{
 					}
 				}
 			}
-			
-		}, 0, 2, TimeUnit.SECONDS);
+		}, 0, 1500, TimeUnit.MILLISECONDS);
+		*/
 		
 		Logger.getLogger(LocalMap.class).info(getName()+" running on "+getAddress());
 		
 	}
+	
+	public void startMobsAI(long period){
+			
+		executorService.scheduleAtFixedRate(new Runnable() {
+			@Override
+			public void run() {
+				List<Entity> objects = null;
+				synchronized(entities){			
+					objects = new Vector<Entity>(entities.values());
+				}
+				for (Entity entity : objects) {
+					if (entity instanceof Npc) {
+						Npc<?> npc = (Npc<?>)entity;
+						if (npc.getType() instanceof Mob) {
+							npc.work();
+						}
+					}
+				}
+			}
+		}, 0, period, TimeUnit.MILLISECONDS);
+	}
 
+	public void stopMobsAI(){
+		executorService.shutdown();
+		executorService = Executors.newScheduledThreadPool(1);
+	}
+	
 	private void createPlayerSpawns() {
 		int defaultSpawnId = Integer.parseInt(Reference.getInstance().getMapReference().getItemById(this.getId()).getMemberValue("DefaultSpawnId"));
-		playerSpawnList.clear();
+		getPlayerSpawnList().clear();
 
 		Iterator<ParsedItem> iter = playerSpawnReference.getItemListIterator();
 
@@ -331,6 +372,7 @@ public class LocalMap extends Map implements Runnable{
 			
 			int posZ = item.getMemberValue("Z") == null ? 0 : Integer.parseInt(item.getMemberValue("Z"));
 			double rotation = item.getMemberValue("Rotation") == null ? Double.NaN : Double.parseDouble(item.getMemberValue("Rotation"));
+
 			Position position = new Position(
 					Integer.parseInt(item.getMemberValue("X")),
 					Integer.parseInt(item.getMemberValue("Y")),
@@ -357,7 +399,7 @@ public class LocalMap extends Map implements Runnable{
 				
 				this.defaultSpawn = spawn;
 			}
-			playerSpawnList.add(spawn);
+			getPlayerSpawnList().add(spawn);
 		}
 	}
 
@@ -437,10 +479,15 @@ public SessionList<Session> GetSessions(Position position){
 						//TODO: Gracefully handle respawn
 						throw new RuntimeException("This should never happen! 2");
 					}
-
 					list.sendPacket(Type.IN_CHAR, player, true);
-				}else{
-					
+				
+				} else if(entity instanceof Pet){
+					Pet pet = (Pet)entity;
+					if(pet.getState() == 12){
+						list.sendPacket(Type.IN_PET, pet.getOwner(), true);
+					}
+				
+				} else {
 					list.sendPacket(Type.IN_NPC, entity);				
 				}
 				entity.update();
@@ -497,12 +544,19 @@ public SessionList<Session> GetSessions(Position position){
 				} else {
 					new PlayerSpawn(position).spawn(player);					
 				}
+				
+				if(getPlayerList().size() == 1){
+					stopMobsAI();
+					startMobsAI(1000);
+				}
 			} else
 			if(event instanceof PlayerLogoutEvent){
 				
 				PlayerLogoutEvent playerLogoutEvent = (PlayerLogoutEvent)event;
 				
 				Player player = playerLogoutEvent.getPlayer();
+				
+				Pet pet = player.getPet();
 				
 				Session session = player.getSession();
 				if(session!=null){
@@ -512,11 +566,18 @@ public SessionList<Session> GetSessions(Position position){
 				synchronized(entities) {
 					sessions.remove(session);
 					entities.remove(player.getEntityId());
-					
+					if(pet != null && pet.getState() == 12){
+						entities.remove(pet.getEntityId());
+					}
 				}	
 				SessionList<Session> list = player.getInterested().getSessions();
 				list.exit(player, false);
 				list.sendPacket(Type.OUT, player);
+				
+				if(pet != null && pet.getState() == 12){
+					list.exit(pet, false);
+					list.sendPacket(Type.OUT, pet);
+				}
 				
 				player.save();
 				world.getPlayerManager().removePlayer(player);
@@ -543,7 +604,6 @@ public SessionList<Session> GetSessions(Position position){
 				
 				//Logger.getLogger(LocalMap.class).info(this+" work");
 				
-				
 				List<Entity> objects = null;
 				SessionList<Session> sessionList = null;
 				synchronized(this.entities){			
@@ -552,16 +612,23 @@ public SessionList<Session> GetSessions(Position position){
 				synchronized(this.sessions){			
 					sessionList = (SessionList<Session>) this.sessions.clone();
 				}
-				
-				for(Session session: sessionList){
-					
-					Player owner = session.getOwner();
-					for(Entity entity: objects){
-						if(entity instanceof WorldObject){
-							WorldObject object = (WorldObject)entity;
-							try{
+				for(Entity entity: objects){
+					try{
+						for(Session session: sessionList){
+							Player owner = session.getOwner();
+							if(entity instanceof WorldObject){
+								WorldObject object = (WorldObject)entity;
+							
 								if(owner.equals(entity))
 									continue;
+								
+								
+								if(entity instanceof Pet){
+									if(((Pet)entity).getOwner() == owner){
+										continue;
+									}
+								}
+								
 								
 								boolean within = owner.getPosition().within(object.getPosition(), owner.getSessionRadius());
 								boolean contains = session.contains(object);
@@ -571,17 +638,28 @@ public SessionList<Session> GetSessions(Position position){
 									
 								} else if(!contains && within) {
 									session.enter(object);
-															
 								}			
-							}catch(Exception e ){
-								Logger.getLogger(this.getClass()).warn("Exception in mapworker", e);
-								
-								
 							}
 						}
+						
+						/*
+						if(entity instanceof Npc){
+							if(((Npc<?>)entity).getType() instanceof Mob){
+								Npc<?> npc = (Npc<?>)entity;
+								SessionList<Session> list = GetSessions(npc.getPosition());
+								if(list.size() > 0){
+									scheduleServiceOnce(npc, 1000);
+								}
+							}
+						}
+						*/
+						
+					}catch(Exception e ){
+						Logger.getLogger(this.getClass()).warn("Exception in mapworker", e);
 					}
 				}
-				//Logger.getLogger(LocalMap.class).info(timer.getTimeElapsedSeconds());
+				
+				
 			
 			} catch (Exception e) {
 				Logger.getLogger(this.getClass()).warn("Exception",e);
@@ -613,6 +691,17 @@ public SessionList<Session> GetSessions(Position position){
 		return null;
 	}
 	
+	public List<Player> getPlayerList(){
+		List<Player> playerList = new Vector<Player> ();
+		
+		for(Entity entity : entities.values()){
+			if(entity instanceof Player){
+				playerList.add((Player)entity);
+			}
+		}
+		return playerList;
+	}
+	
 	public PlayerSpawn getDefaultSpawn(){
 		return defaultSpawn;
 	}
@@ -632,4 +721,38 @@ public SessionList<Session> GetSessions(Position position){
 		return buffer.toString();
 	}
 
+	public List<Party> getPartiesList() {
+		return parties;
+	}
+
+	public void inviteParty(Player member, Player newMember, int expOption, int itemOption){
+		
+		if(member.getParty() == null){
+			addParty(new Party(member, expOption, itemOption));
+		}
+		member.getParty().request(newMember);
+	}
+	
+	public void addParty(Party party){
+		if(!parties.contains(party)){
+			parties.add(party);
+		}
+	}
+	
+	public void removeParty(Party party){
+		while(parties.contains(party)){
+			parties.remove(party);
+		}
+	}
+	
+	public Party getParty(int memberEntityId){
+		for(Party party : parties){
+			for(Player member : party.getMembers()){
+				if(member.getEntityId() == memberEntityId)
+					return party;
+			}
+		}
+		
+		return null;
+	}
 }

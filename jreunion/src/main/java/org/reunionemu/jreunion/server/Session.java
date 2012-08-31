@@ -11,9 +11,14 @@ import org.reunionemu.jreunion.events.EventListener;
 import org.reunionemu.jreunion.events.map.MapEvent;
 import org.reunionemu.jreunion.events.session.SendPacketSessionEvent;
 import org.reunionemu.jreunion.events.session.SessionEvent;
+import org.reunionemu.jreunion.game.Entity;
+import org.reunionemu.jreunion.game.Item;
+import org.reunionemu.jreunion.game.LivingObject;
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.Position;
+import org.reunionemu.jreunion.game.RoamingItem;
 import org.reunionemu.jreunion.game.WorldObject;
+import org.reunionemu.jreunion.game.Npc;
 
 /**
  * @author Aidamina
@@ -138,4 +143,5 @@ public class Session extends EventDispatcher implements EventListener{
 			}
 		}		
 	}
+	
 }

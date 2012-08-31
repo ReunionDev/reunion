@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import org.reunionemu.jreunion.game.Castable;
+import org.reunionemu.jreunion.game.Effectable;
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.LivingObject;
 import org.reunionemu.jreunion.game.Npc;
@@ -17,7 +19,7 @@ import org.reunionemu.jreunion.server.PacketFactory.Type;
 import org.reunionemu.jreunion.server.SkillManager;
 import org.reunionemu.jreunion.server.Tools;
 
-public class SecondAttack extends Skill {
+public class SecondAttack extends Skill{
 	
 	
 	public SecondAttack(SkillManager skillManager,int id) {
@@ -64,7 +66,6 @@ public class SecondAttack extends Skill {
 	}
 	
 	public boolean cast(LivingObject caster, List<LivingObject> targets, int unknown1){
-		
 		Player player = null;
 		
 		if(caster instanceof Player){
@@ -76,7 +77,7 @@ public class SecondAttack extends Skill {
 		
 		SlayerWeapon slayerWeapon = null;
 		
-		if(shoulderMount.getType() instanceof SlayerWeapon)
+		if(shoulderMount!=null && shoulderMount.getType() instanceof SlayerWeapon)
 			slayerWeapon = (SlayerWeapon) shoulderMount.getType();
 		
 		long bestAttack = player.getBestAttack();
@@ -90,7 +91,7 @@ public class SecondAttack extends Skill {
 		damage += (long)(damage*criticalMultiplier);
 		damage += (long)(damage*slayerDemolitionDmg);
 		
-		int damageType = slayerWeapon instanceof DemolitionWeapon ? 2 : (criticalMultiplier > 0 ? 1 : 0);
+		player.setDmgType(slayerWeapon instanceof DemolitionWeapon ? 2 : (criticalMultiplier > 0 ? 1 : 0));
 		
 		synchronized(targets){
 			for(LivingObject target : targets){ 
@@ -104,8 +105,9 @@ public class SecondAttack extends Skill {
 				} else {
 					target.setHp(newHp);
 				}
-				player.getClient().sendPacket(Type.SAV, target,	damageType, unknown1,
+				player.getClient().sendPacket(Type.SAV, target,	player.getDmgType(), 0,
 						shoulderMount.getExtraStats(), 3);
+				player.getInterested().sendPacket(Type.SECONDATTACK, player, target, getId());
 			}
 		}
 		

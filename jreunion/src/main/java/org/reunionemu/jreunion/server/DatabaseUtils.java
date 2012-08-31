@@ -13,10 +13,13 @@ import org.apache.log4j.Logger;
 import org.reunionemu.jreunion.game.Equipment;
 import org.reunionemu.jreunion.game.Equipment.Slot;
 import org.reunionemu.jreunion.game.ExchangeItem;
+import org.reunionemu.jreunion.game.HandPosition;
 import org.reunionemu.jreunion.game.InventoryItem;
 import org.reunionemu.jreunion.game.InventoryPosition;
 import org.reunionemu.jreunion.game.Item;
+import org.reunionemu.jreunion.game.items.pet.PetEgg;
 import org.reunionemu.jreunion.game.ItemType;
+import org.reunionemu.jreunion.game.Pet;
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.Player.Race;
 import org.reunionemu.jreunion.game.Player.Sex;
@@ -28,6 +31,8 @@ import org.reunionemu.jreunion.game.RoamingItem;
 import org.reunionemu.jreunion.game.Skill;
 import org.reunionemu.jreunion.game.StashItem;
 import org.reunionemu.jreunion.game.StashPosition;
+import org.reunionemu.jreunion.game.items.pet.PetEquipment;
+import org.reunionemu.jreunion.game.items.pet.PetEquipment.PetSlot;
 import org.reunionemu.jreunion.game.quests.LimeQuest;
 import org.reunionemu.jreunion.game.quests.QuestState;
 import org.reunionemu.jreunion.game.quests.objective.Objective;
@@ -140,7 +145,7 @@ public class DatabaseUtils extends Service {
 			if(rs.next()){
 				Map map = Server.getInstance().getWorld().getMap(rs.getInt("mapId"));
 				if(map != null){
-					position = new Position(rs.getInt("x"),rs.getInt("y"),rs.getInt("z"), map, 0.0d);
+					position = new Position(rs.getInt("x"),rs.getInt("y"),rs.getInt("z"), map, Double.NaN);
 				}
 			}
 			rs.close();
@@ -283,6 +288,38 @@ public class DatabaseUtils extends Service {
 		return loadEquipment(player.getEquipment(), player.getPlayerId());
 	}
 	
+	public PetEquipment loadPetEquipment(PetEquipment equipment, int petid) {
+		
+		if (!checkDinamicDatabase())
+			return null;
+		
+		Statement stmt;
+		
+		try {
+			stmt = dinamicDatabase.dinamicConn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM petequipment WHERE petid="+ petid + ";");
+			while(rs.next()) 
+			{
+				int slotId = rs.getInt("slot");
+				
+				Item<?> item = Item.load(rs.getInt("itemid"));
+				
+				PetSlot petSlot = PetSlot.byValue(slotId);
+				equipment.setItem(petSlot, item);
+			}
+			
+			
+		} catch (SQLException e1) {
+			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			
+		}
+		return equipment;
+	}
+	
+	public PetEquipment loadPetEquipment(Player player) {		
+		return loadPetEquipment(new PetEquipment(), player.getPet().getId());
+	}
+	
 	public Player loadCharStatus(Client client, int charId){
 		Player player = null;
 		if (!checkDinamicDatabase())
@@ -315,7 +352,8 @@ public class DatabaseUtils extends Service {
 				player.setGuildLevel(rs.getLong("guildlvl"));
 				player.setAdminState(rs.getLong("userlevel"));
 				player.setHairStyle(rs.getLong("hair"));
-							
+				player.setPetId(rs.getInt("petid"));
+				
 				
 				return player;
 			} else
@@ -344,10 +382,12 @@ public class DatabaseUtils extends Service {
 			if(charId!=-1){				
 				stmt.execute("DELETE FROM characters WHERE id="+charId+";");				
 			}
+			
+			Pet pet = player.getPet();
 						
 			String q = "INSERT INTO characters ("+(charId==-1?"":"id,")+"accountid,name,level,strength,wisdom,dexterity," +
 												"constitution,leadership,race,sex,hair,totalExp,levelUpExp,lime," +
-												"statusPoints,penaltyPoints,guildid,guildlvl)" +
+												"statusPoints,penaltyPoints,guildid,guildlvl,petid)" +
 						 " VALUES ("+(charId==-1?"":charId+",")+
 								    +client.getAccountId()+ ",'"
 								    +player.getName()+ "',"
@@ -366,7 +406,8 @@ public class DatabaseUtils extends Service {
 								    +player.getStatusPoints()+ ","
 								    +player.getPenaltyPoints()+ ","
 								    +player.getGuildId()+ ","
-								    +player.getGuildLvl()+ ");";
+								    +player.getGuildLvl()+ ","
+								    +(pet == null ? -1 : pet.getId())+");";
 			
 			stmt.execute(q,Statement.RETURN_GENERATED_KEYS);
 			
@@ -374,11 +415,12 @@ public class DatabaseUtils extends Service {
 			if (res.next())
 			    player.setPlayerId(res.getInt(1));			
 			
-			if(player.getPosition().getMap() == null){ //used when player creates a new char
+			//used when player creates a new char
+			if(player.getPosition().getMap() == null){ 
 				//TODO: better way to handle with the player default map, after char creation
 				int mapId = (int)player.getClient().getWorld().getServerSetings().getDefaultMapId();
 				Map map = player.getClient().getWorld().getMap(mapId);
-				Position position = new Position(7025,5225,106,map,0.00d);
+				Position position = new Position(7025,5225,106,map,Double.NaN);
 				player.setPosition(position);
 			}
 			
@@ -389,6 +431,159 @@ public class DatabaseUtils extends Service {
 			return;
 		}
 	}
+	
+	public java.util.List<Pet> loadPets() {
+		
+		if (!checkDinamicDatabase())
+			return null;
+		
+		Statement stmt;		
+		java.util.List<Pet> petList = new Vector<Pet>();
+		
+		try {
+			stmt = dinamicDatabase.dinamicConn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM pet;");
+			
+			if (rs.next()) {
+				do {
+					Pet pet = loadPet(rs.getInt("id"));
+					petList.add(pet);
+				} while(rs.next());
+			}
+		} catch (SQLException e1) {
+			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			return null;
+		}
+		return petList;
+	}
+	
+	public Pet loadPet(int petId){
+		
+		if (!checkDinamicDatabase())
+			return null;
+		
+		Statement stmt;		
+		try {
+			stmt = dinamicDatabase.dinamicConn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM pet WHERE id="+ petId + ";");
+			
+			if (rs.next()) {
+					
+				//Pet pet = new Pet(rs.getInt("charid"), breedTime == 0 ? true : false);
+				Pet pet = new Pet();
+				
+				pet.setId(rs.getInt("id"));
+				pet.setMaxHp(rs.getInt("hp"));
+				pet.setHp(rs.getInt("hp"));
+				pet.setCloseDefence(rs.getInt("closeDefence"));
+				pet.setDistantDefence(rs.getInt("distantDefence"));
+				pet.setCloseAttack(rs.getInt("closeAttack"));
+				pet.setDistantAttack(rs.getInt("distantAttack"));
+				pet.setExp(rs.getLong("exp"));
+				pet.setLoyalty(rs.getInt("loyalty"));
+				pet.setAmulet(loadItem(rs.getInt("amulet")));
+				pet.setName(rs.getString("name"));
+				pet.setLevel(rs.getInt("level"));
+				pet.setBasket(loadItem(rs.getInt("basket")));
+				pet.setState(rs.getInt("state"));
+				pet.setBreederTimer(rs.getInt("breedtime"));
+				
+				return pet;
+			} else
+				return null;
+		} catch (SQLException e1) {
+			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			return null;
+		}
+	}
+	
+	public void savePet(Player player){
+		
+		if (!checkDinamicDatabase())
+			return;
+			
+		try {
+			Pet pet = player.getPet();
+			if(pet == null)
+				return;
+			
+			Statement stmt = dinamicDatabase.dinamicConn.createStatement();
+			int petId = pet.getId();
+			
+			Item<?> amulet = pet.getAmulet();
+			Item<?> basket = pet.getBasket();
+			
+			if(petId!=-1){				
+				stmt.execute("DELETE FROM pet WHERE id="+petId+";");				
+			}
+						
+			String q = "INSERT INTO pet ("+(petId==-1?"":"id,")+"hp,closeDefence,distantDefence,closeAttack,distantAttack,"+
+										"exp,loyalty,amulet,name,level,basket,state,breedtime)" +
+						 " VALUES ("+(petId==-1?"":petId+",")+
+								    +pet.getMaxHp()+ ","
+								    +pet.getCloseDefence()+ ","
+								    +pet.getDistantDefence()+ ","
+								    +pet.getCloseAttack()+ ","
+								    +pet.getDistantAttack()+ ","
+								    +pet.getExp()+ ","
+								    +pet.getLoyalty()+ ","
+								    +(amulet == null ? -1 : amulet.getItemId())+ ",'"
+								    +pet.getName()+ "',"
+								    +pet.getLevel()+ ","								   
+								    +(basket == null ? -1 : basket.getItemId())+ ","
+								    +pet.getState() + ","
+								    +pet.getBreederTimer()+");";
+			
+			stmt.execute(q,Statement.RETURN_GENERATED_KEYS);
+			
+			ResultSet res = stmt.getGeneratedKeys();
+			if (res.next())
+			    pet.setId(res.getInt(1));			
+			
+		} catch (Exception e) {
+			Logger.getLogger(this.getClass()).warn("Exception",e);
+			return;
+		}
+	}
+	
+	public void deletePet(Pet pet) {
+		
+		if (!checkDinamicDatabase() || pet == null)
+			return;
+		
+		Statement deleteStmt;
+		Statement selectStmt;
+		ResultSet rs;
+		
+		try {
+			deleteStmt = dinamicDatabase.dinamicConn.createStatement();
+			selectStmt = dinamicDatabase.dinamicConn.createStatement();
+			
+			//delete pet equipment from DB
+			rs = selectStmt.executeQuery("SELECT * FROM petequipment WHERE petid = "+pet.getId()+ ";");
+			if(rs.next()){
+				do {
+					deleteItem(rs.getInt("itemid"));
+				} while(rs.next());
+				deleteStmt.execute("DELETE FROM petequipment WHERE petid = "+pet.getId()+ ";");
+			}
+			
+			//delete pet from DB
+			rs = selectStmt.executeQuery("SELECT * FROM pet WHERE id = "+pet.getId()+ ";");
+			if(rs.next()){
+				deleteItem(rs.getInt("amulet"));
+				deleteItem(rs.getInt("basket"));
+				deleteStmt.execute("DELETE FROM pet WHERE id = "+pet.getId()+ ";");
+			}
+			
+			selectStmt.execute("UPDATE characters SET petid = -1 WHERE id = "+pet.getOwner().getPlayerId()+";");
+			
+		} catch (SQLException e1) {
+			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			return;
+		}
+	}
+			
 	
 	public void updateCharStatus(Player player, int id, long value)
 	{
@@ -579,9 +774,14 @@ public class DatabaseUtils extends Service {
 				Item<?> item = Item.load(invTable.getInt("itemid"));	
 				
 				if (item!=null){
-					InventoryItem inventoryItem = new InventoryItem(item,
-							new InventoryPosition(invTable.getInt("x"), invTable.getInt("y"),invTable.getInt("tab")));
-					player.getInventory().addInventoryItem(inventoryItem);
+					if(invTable.getInt("tab") == -1 && invTable.getInt("x") == -1 && invTable.getInt("y") == -1){
+						HandPosition handPosition = new HandPosition(item);
+						player.getInventory().setHoldingItem(handPosition);
+					} else {
+						InventoryItem inventoryItem = new InventoryItem(item,
+								new InventoryPosition(invTable.getInt("x"), invTable.getInt("y"),invTable.getInt("tab")));
+						player.getInventory().addInventoryItem(inventoryItem);
+					}
 				}
 			}
 			
@@ -605,6 +805,7 @@ public class DatabaseUtils extends Service {
 			String data = "";
 			
 			Iterator<InventoryItem> iter = player.getInventory().getInventoryIterator();
+			HandPosition handPosition = player.getInventory().getHoldingItem();
 			
 			while(iter.hasNext())
 			{
@@ -612,11 +813,16 @@ public class DatabaseUtils extends Service {
 				Item<?> item = invItem.getItem();
 				saveItem(item);
 				
-				data+="("+player.getPlayerId()+ ",'"+item.getItemId()+"',"+invItem.getPosition().getTab()+
+				data += "("+player.getPlayerId()+ ","+item.getItemId()+","+invItem.getPosition().getTab()+
 					","+invItem.getPosition().getPosX()+ ","+invItem.getPosition().getPosY()+ ")";			
 				if(iter.hasNext())
 					data+= ", ";			
 			}
+			
+			if(handPosition != null){
+				data += ", (" + player.getPlayerId() + "," + handPosition.getItem().getItemId() + ",-1,-1,-1)"; 
+			}
+			
 			if(!data.isEmpty()){
 				stmt.execute(query+data);
 				
@@ -956,6 +1162,42 @@ public class DatabaseUtils extends Service {
 					if(!data.isEmpty())
 						data+= ", ";
 					data+="("+playerId+","+slot.value()+","+item.getItemId()+")";		
+				}
+			}							
+			if(!data.isEmpty())
+				stmt.execute(query+data);
+			
+		} catch (SQLException e1) {
+			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			return;
+		}
+	}
+	
+	public void savePetEquipment(Pet pet){
+		if (!checkDinamicDatabase() || pet == null)
+			return;
+
+		if (pet.getEquipment() == null)
+			return;
+		
+		Statement stmt;
+		try {
+			int petId = pet.getId();
+			stmt = dinamicDatabase.dinamicConn.createStatement();
+			stmt.execute("DELETE FROM petequipment WHERE petid="+petId+";");
+			
+			PetEquipment eq = pet.getEquipment();
+			
+			String query = "INSERT INTO petequipment (petid, slot, itemid) VALUES ";
+			String data = "";
+			
+			for(PetSlot slot: PetSlot.values())
+			{
+				Item<?> item = eq.getItem(slot);
+				if(item != null){
+					if(!data.isEmpty())
+						data+= ", ";
+					data+="("+petId+","+slot.value()+","+item.getItemId()+")";		
 				}
 			}							
 			if(!data.isEmpty())

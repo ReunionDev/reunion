@@ -71,6 +71,16 @@ public class ItemManager {
 		return item;
 	}
 	
-	
+	public Item<?> create(int type, int gemNumber, int extraStats, int durability, int unknown1, int unknown2) {
+		Item<?> item = create(type);
+		
+		item.setGemNumber(gemNumber);
+		item.setExtraStats(extraStats);
+		item.setDurability(durability);
+		item.setUnknown1(unknown1);
+		item.setUnknown2(unknown2);
+		
+		return item;
+	}
 	
 }

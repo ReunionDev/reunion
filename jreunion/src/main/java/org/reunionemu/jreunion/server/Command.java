@@ -9,7 +9,10 @@ import org.reunionemu.jreunion.game.Equipment;
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.ItemType;
 import org.reunionemu.jreunion.game.LivingObject;
+import org.reunionemu.jreunion.game.Party;
+import org.reunionemu.jreunion.game.Pet;
 import org.reunionemu.jreunion.game.Player;
+import org.reunionemu.jreunion.game.Pet.PetStatus;
 import org.reunionemu.jreunion.game.Player.Race;
 import org.reunionemu.jreunion.game.Player.Sex;
 import org.reunionemu.jreunion.game.Position;
@@ -170,9 +173,12 @@ public class Command {
 	/****** change map ******/
 	public void GoToWorld(Player player, Map map, int unknown) {
 		Client client = player.getClient();
+		Party party = player.getParty();
 		
 		//Disband party
-		//client.sendPacket(Type.PARTY_DISBAND);
+		if(party != null){
+			party.exit(player);
+		}
 				
 		client.sendPacket(Type.JUMP, player);
 		
@@ -419,5 +425,5 @@ public class Command {
 		return false;
 		
 	}
-
+	
 }

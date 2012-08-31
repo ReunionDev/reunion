@@ -17,7 +17,7 @@ import org.reunionemu.jreunion.events.network.NetworkAcceptEvent;
 import org.reunionemu.jreunion.events.session.SessionEvent;
 import org.reunionemu.jreunion.game.Equipment.Slot;
 import org.reunionemu.jreunion.game.items.equipment.Armor;
-import org.reunionemu.jreunion.game.items.equipment.Shield;
+import org.reunionemu.jreunion.game.items.pet.PetEgg;
 import org.reunionemu.jreunion.game.quests.QuestState;
 import org.reunionemu.jreunion.server.Client;
 import org.reunionemu.jreunion.server.Client.State;
@@ -47,6 +47,8 @@ public abstract class Player extends LivingObject implements EventListener {
 	private long lime; // Gold
 	
 	private int slot;
+	
+	private int petId; //used during server loading
 	
 	private Pet pet;
 	
@@ -150,6 +152,8 @@ public abstract class Player extends LivingObject implements EventListener {
 	
 	private Client client;
 	
+	private Party party;
+	
 	public Client getClient() {
 		return client;
 	}
@@ -169,7 +173,6 @@ public abstract class Player extends LivingObject implements EventListener {
 		quickSlotBar = new QuickSlotBar(this);
 		stash = new Stash(this);
 		exchange = new Exchange(this);
-		//pet = new Pet(this);
 		
 		client.addEventListener(ClientDisconnectEvent.class, this, new ClientFilter(client));
 
@@ -680,6 +683,12 @@ public abstract class Player extends LivingObject implements EventListener {
 			client.sendPacket(Type.INVEN, invItem, client.getVersion());
 
 		}
+		
+		if(getInventory().getHoldingItem() != null){
+			Item<?> holdingItem = getInventory().getHoldingItem().getItem();
+			getPosition().getLocalMap().createEntityId(holdingItem);
+			getClient().sendPacket(Type.EXTRA, holdingItem);
+		}
 	}
 
 	/****** load Quick Slot Items ******/
@@ -748,12 +757,15 @@ public abstract class Player extends LivingObject implements EventListener {
 			Logger.getLogger(Player.class).info("Player " + getName() + " saving...\n");
 			DatabaseUtils.getDinamicInstance().saveSkills(this);
 			DatabaseUtils.getDinamicInstance().saveInventory(this);
+			DatabaseUtils.getDinamicInstance().savePet(this);
+			DatabaseUtils.getDinamicInstance().savePetEquipment(getPet());
 			DatabaseUtils.getDinamicInstance().saveCharacter(this);
 			DatabaseUtils.getDinamicInstance().saveEquipment(this);
 			DatabaseUtils.getDinamicInstance().saveStash(getClient());
 			DatabaseUtils.getDinamicInstance().saveExchange(this);
 			DatabaseUtils.getDinamicInstance().saveQuickSlot(this);
 			DatabaseUtils.getDinamicInstance().saveQuest(this);
+			
 		}
 		
 	}
@@ -1258,17 +1270,27 @@ public abstract class Player extends LivingObject implements EventListener {
 		//InventoryItem invItem = new InventoryItem(getInventory().getHoldingItem().getItem(),
 		//		new InventoryPosition(0,0,0));
 
+		//player removed wearing equipment.
 		if (handPosition == null) {
 			getInventory().setHoldingItem(new HandPosition(getEquipment().getItem(slot)));
 			getEquipment().setItem(slot, null);
 			getInterested().sendPacket(Type.CHAR_REMOVE, this, slot);
 			Logger.getLogger(Player.class).info("Player "+this+" removed equipment "
 					+getInventory().getHoldingItem().getItem());
-		} else {
+			
+			//check if the removed equipment is a PetEgg.
+			if(getInventory().getHoldingItem().getItem().getType() instanceof PetEgg){
+				getPet().setBreeding(false);
+				getPet().stopBreeding();
+			}
+		} 
+		//player is equipping an item.
+		else {
 			InventoryItem invItem = new InventoryItem(getInventory().getHoldingItem().getItem(),
 							new InventoryPosition(0,0,0));
 			Item<?> wearingItem = getEquipment().getItem(slot);
 			
+			//check if the equipment slot is already occupied and replace it.
 			if( (wearingItem != null) ){
 				getInventory().setHoldingItem(new HandPosition(wearingItem));
 				getInterested().sendPacket(Type.CHAR_REMOVE, this, slot);
@@ -1282,41 +1304,11 @@ public abstract class Player extends LivingObject implements EventListener {
 			Logger.getLogger(Player.class).info("Player "+this+" equiped item "+invItem.getItem());
 			flyStatus = invItem.getItem().getExtraStats() >= 268435456 ? 1 : 0;
 			
-			/*
-			if (getEquipment().getItem(slot) == null) {
-				Item<?> item = invItem.getItem();
-				
-				getInterested().sendPacket(Type.CHAR_WEAR, this, slot, item);
-				
-				getEquipment().setItem(slot, item);
-				getInventory().setHoldingItem(null);
-				Logger.getLogger(Player.class).info("Player "+this+" equiped item "+item);
-				/*
-				if (getEquipment().getItem(slot) instanceof Weapon) {
-					Weapon weapon = (Weapon) getEquipment().getItem(slot);
-					setMinDmg(weapon.getMinDamage());
-					setMaxDmg(weapon.getMaxDamage());
-				}
-				
-			} else {
-				Item<?> currentItem = getEquipment().getItem(slot);
-				getInterested().sendPacket(Type.CHAR_REMOVE, this, slot);
-				getEquipment().setItem(slot, invItem.getItem());
-				getInventory().setHoldingItem(new HandPosition(currentItem));
-				
-				if (getEquipment().getItem(slot) instanceof Weapon) {
-					Weapon weapon = (Weapon) getEquipment().getItem(slot);
-					setMinDmg(weapon.getMinDamage());
-					setMaxDmg(weapon.getMaxDamage());
-				}
-				
-				Item<?> item = getEquipment().getItem(slot);
-
-				getInterested().sendPacket(Type.CHAR_WEAR, this, slot, item);
-				
-				
+			//check if the equipped item is a PetEgg.
+			if(invItem.getItem().getType() instanceof PetEgg){
+				getPet().setBreeding(true);
+				getPet().startBreeding();
 			}
-		*/
 
 		}
 		// DatabaseUtils.getInstance().saveEquipment(this);
@@ -1437,5 +1429,29 @@ public abstract class Player extends LivingObject implements EventListener {
 
 	public void setPet(Pet pet) {
 		this.pet = pet;
+	}
+
+	public Party getParty() {
+		return party;
+	}
+
+	public void setParty(Party party) {
+		this.party = party;
+	}
+	
+	public int isMeta(){
+		return (getLevel() >= 250 ? 1 : 0);
+	}
+	
+	public int isHiMeta(){
+		return (getLevel() >= 300 ? 1 : 0);
+	}
+
+	public int getPetId() {
+		return petId;
+	}
+
+	public void setPetId(int petId) {
+		this.petId = petId;
 	}
 }

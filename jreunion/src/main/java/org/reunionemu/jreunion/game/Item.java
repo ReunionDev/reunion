@@ -1,5 +1,7 @@
 package org.reunionemu.jreunion.game;
 
+import java.util.TimerTask;
+
 import org.apache.log4j.Logger;
 import org.reunionemu.jreunion.game.Equipment.Slot;
 import org.reunionemu.jreunion.server.DatabaseUtils;
@@ -169,7 +171,7 @@ public class Item<T extends ItemType> implements Entity{
 	public void setDurability(int durability) {
 		this.durability = durability;
 	}
-
+	
 	public String toString(){
 		StringBuffer buffer = new StringBuffer();
 		buffer.append("{");

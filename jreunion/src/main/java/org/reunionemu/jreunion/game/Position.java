@@ -119,7 +119,7 @@ public class Position {
 	}
 	
 	public double getRotation() {
-		return rotation;
+		return this.rotation;
 	}
 
 	public void setRotation(double rotation) {

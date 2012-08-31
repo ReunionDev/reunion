@@ -89,7 +89,7 @@ public class FirePillar extends Tier2 implements Castable, Modifier, Effectable 
 			float criticalMultiplier = 0;
 			Weapon weapon = null;
 			
-			if(item.is(StaffWeapon.class)){
+			if(item!=null && item.is(StaffWeapon.class)){
 				weapon = (Weapon)item.getType();
 				criticalMultiplier = weapon.getCritical();
 				weaponDamage += weapon.getDamage(item);
@@ -121,6 +121,8 @@ public class FirePillar extends Tier2 implements Castable, Modifier, Effectable 
 			long magicDamage = (long) ((baseDamage + weaponDamage + fireDamage)
 					* fireMasteryDamage * weaponMagicBoost * (criticalMultiplier+1));
 			
+			player.setDmgType(criticalMultiplier > 0 ? 1 : 0);
+			
 			//This skill can target up to 4 targets
 			//(Main target 100% damage, other targets 70% damage)
 			synchronized(victims){
@@ -129,7 +131,7 @@ public class FirePillar extends Tier2 implements Castable, Modifier, Effectable 
 					//if its 1st victim apply 100% dmg, if not is only 70% dmg
 					magicDamage *= (victimCount++ == 2) ? 0.7 : 1;
 					victim.getsAttacked(player, magicDamage);
-					player.getClient().sendPacket(Type.AV, victim, criticalMultiplier > 0 ? 1 : 0);
+					player.getClient().sendPacket(Type.AV, victim, player.getDmgType());
 				}
 				return true;
 			}	

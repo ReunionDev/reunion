@@ -13,6 +13,7 @@ import org.reunionemu.jreunion.game.items.equipment.SlayerWeapon;
 import org.reunionemu.jreunion.game.items.equipment.WandWeapon;
 import org.reunionemu.jreunion.game.items.equipment.Weapon;
 import org.reunionemu.jreunion.game.items.equipment.Wing;
+import org.reunionemu.jreunion.game.items.pet.PetEgg;
 
 
 /**
@@ -45,9 +46,13 @@ public class Equipment {
 	private Item<?> necklace;
 
 	private Item<?> bracelet;
+	
+	private Item<?> egg;
+	
+	private Player owner;
 
 	public Equipment(Player player) {
-		
+		setOwner(player);
 	}
 
 	public Item<?> getArmor() {
@@ -182,6 +187,8 @@ public class Equipment {
 			return getMantle();
 		} else if (getWings() != null) {
 			return getWings();
+		} else if (getEgg() != null) {
+			return getEgg();
 		} else {
 			return null;
 		}
@@ -344,22 +351,32 @@ public class Equipment {
 			setSpecialWeapon(null);
 			setMantle(null);
 			setWings(null);
+			setEgg(null);
 		} else if (shoulderMount.is(SlayerWeapon.class)) {
 			setMantle(null);
 			setWings(null);
 			setSpecialWeapon(shoulderMount);
+			setEgg(null);
 		} else if (shoulderMount.is(HeavyWeapon.class)) {
 			setMantle(null);
 			setWings(null);
 			setSpecialWeapon(shoulderMount);
+			setEgg(null);
 		} else if (shoulderMount.is(Mantle.class)) {
 			setSpecialWeapon(null);
 			setWings(null);
 			setMantle(shoulderMount);
+			setEgg(null);
 		} else if (shoulderMount.is(Wing.class)) {
 			setSpecialWeapon(null);
 			setMantle(null);
 			setWings(shoulderMount);
+			setEgg(null);
+		} else if (shoulderMount.is(PetEgg.class)) {
+			setSpecialWeapon(null);
+			setMantle(null);
+			setWings(null);
+			setEgg(shoulderMount);
 		}
 
 	}
@@ -383,6 +400,23 @@ public class Equipment {
 			throw new IllegalArgumentException();
 		}
 		this.wings = wings;
+	}
+	public Item<?> getEgg() {
+		return egg;
+	}
+
+	public void setEgg(Item<?> egg) {
+		if(egg!=null&&!egg.is(PetEgg.class)){
+			throw new IllegalArgumentException();
+		}
+		this.egg = egg;
+	}
+	public Player getOwner() {
+		return owner;
+	}
+
+	public void setOwner(Player owner) {
+		this.owner = owner;
 	}
 	public static enum Slot
 	{

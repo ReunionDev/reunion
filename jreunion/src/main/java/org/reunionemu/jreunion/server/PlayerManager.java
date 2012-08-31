@@ -28,11 +28,33 @@ public class PlayerManager {
 		return playerList.size();
 	}
 
-	public Player getPlayer(int id) {
+	/**
+	 * Returns a player by it's Entity Id.
+	 * @param entityId
+	 * @return Player
+	 */
+	public Player getPlayer(int entityId) {
 		Iterator<Player> iter = getPlayerListIterator();
 		while (iter.hasNext()) {
 			Player player = iter.next();
-			if (player.getEntityId() == id) {
+			if (player.getEntityId() == entityId) {
+				return player;
+			}
+
+		}
+		return null;
+	}
+	
+	/**
+	 * Returns a player by it's DB Id.
+	 * @param id
+	 * @return Player
+	 */
+	public Player getPlayerByDbId(int id) {
+		Iterator<Player> iter = getPlayerListIterator();
+		while (iter.hasNext()) {
+			Player player = iter.next();
+			if (player.getPlayerId() == id) {
 				return player;
 			}
 

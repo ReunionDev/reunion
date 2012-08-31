@@ -39,7 +39,7 @@ public class WandCharger extends ScrollAndSpellBook implements Usable{
 			wandWeapon.setGemNumber(wandWeapon.getType().getMaxGemNumber());
 			DatabaseUtils.getDinamicInstance().saveItem(wandWeapon);
 			if(player.getClient().getVersion() < 2000)
-				player.getClient().sendPacket(Type.USQ,quickSlotPosition,Slot.OFFHAND.value(),wandWeapon.getGemNumber(),wandWeapon.getExtraStats());
+				player.getClient().sendPacket(Type.USQ,"remain",quickSlotPosition,Slot.OFFHAND.value(),wandWeapon);
 			else
 				player.getClient().sendPacket(Type.UQ_ITEM, 1, quickSlotPosition, wandCharger.getEntityId(),
 						wandCharger.getGemNumber(), wandCharger.getExtraStats(), 5);

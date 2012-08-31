@@ -3,6 +3,7 @@ package org.reunionemu.jreunion.game.skills;
 import java.util.List;
 
 import org.reunionemu.jreunion.game.Castable;
+import org.reunionemu.jreunion.game.Effectable;
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.LivingObject;
 import org.reunionemu.jreunion.game.Player;
@@ -12,7 +13,7 @@ import org.reunionemu.jreunion.server.PacketFactory.Type;
 import org.reunionemu.jreunion.server.Server;
 import org.reunionemu.jreunion.server.SkillManager;
 
-public class BasicAttack extends Skill implements Castable{
+public class BasicAttack extends Skill implements Castable, Effectable{
 	
 	public BasicAttack(SkillManager skillManager,int id) {
 		super(skillManager,id);
@@ -65,11 +66,13 @@ public class BasicAttack extends Skill implements Castable{
 			
 			damage += (long)(damage*criticalMultiplier);
 			
+			player.setDmgType(criticalMultiplier > 0 ? 1 : 0);
+			
 			synchronized(victims){
 				for(LivingObject victim : victims){
 					victim.getsAttacked(player, (int)damage);
-					player.getClient().sendPacket(Type.ATTACK, player,victim,criticalMultiplier > 0 ? 1 : 0);
-					player.getInterested().sendPacket(Type.ATTACK, player, victim, criticalMultiplier > 0 ? 1 : 0);
+					player.getClient().sendPacket(Type.ATTACK, player,victim,player.getDmgType());
+					//player.getInterested().sendPacket(Type.ATTACK, player, victim, criticalMultiplier > 0 ? 1 : 0);
 					
 					return true;
 				}
@@ -80,9 +83,7 @@ public class BasicAttack extends Skill implements Castable{
 	
 	@Override 
 	public void effect(LivingObject source, LivingObject target){	
-		
-		//TODO merge interested of source and target
-		
+		source.getInterested().sendPacket(Type.ATTACK, source, target, source.getDmgType());
 	}
 	
 	@Override
@@ -94,6 +95,11 @@ public class BasicAttack extends Skill implements Castable{
 	@Override
 	public int getLevelRequirement(int skillLevel) {
 
+		return 0;
+	}
+
+	@Override
+	public int getEffectModifier() {
 		return 0;
 	}
 }

@@ -92,7 +92,6 @@ public class Mob extends NpcType {
 			setLime(1);
 			setDmg(0);
 			setAttackType(0);
-			setMutant(0);
 			setNeoProgmare(0);
 			setSpeed(1);
 			setName("Unknown");
@@ -149,13 +148,6 @@ public class Mob extends NpcType {
 			} else {
 				// use default
 				setDmgType(0);
-			}
-			if (mob.checkMembers(new String[] { "Mutant" })) {
-				// use member from file
-				setMutant(Integer.parseInt(mob.getMemberValue("Mutant")));
-			} else {
-				// use default
-				setMutant(0);
 			}
 			if (mob.checkMembers(new String[] { "NeoProgmare" })) {
 				// use member from file

@@ -89,7 +89,7 @@ public class StoneLance extends Tier3 implements Castable, Effectable {
 			float criticalMultiplier = 0;
 			Weapon weapon = null;
 			
-			if(item.is(StaffWeapon.class)){
+			if(item!=null && item.is(StaffWeapon.class)){
 				weapon = (Weapon)item.getType();
 				criticalMultiplier = weapon.getCritical();
 				weaponDamage += weapon.getDamage(item);
@@ -126,10 +126,12 @@ public class StoneLance extends Tier3 implements Castable, Effectable {
 			long magicDamage = (long) ((baseDamage + weaponDamage + stoneDamage)
 					* stoneMasteryDamage * weaponMagicBoost * (criticalMultiplier+1));
 			
+			player.setDmgType(criticalMultiplier > 0 ? 1 : 0);
+			
 			synchronized(victims){
 				for(LivingObject victim : victims){ 
 					victim.getsAttacked(player, magicDamage);
-					player.getClient().sendPacket(Type.AV, victim, criticalMultiplier > 0 ? 1 : 0);
+					player.getClient().sendPacket(Type.AV, victim, player.getDmgType());
 				}
 				return true;
 			}

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.reunionemu.jreunion.game.BulkanPlayer;
 import org.reunionemu.jreunion.game.Castable;
+import org.reunionemu.jreunion.game.Effectable;
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.LivingObject;
 import org.reunionemu.jreunion.game.Player;
@@ -15,7 +16,7 @@ import org.reunionemu.jreunion.server.Server;
 import org.reunionemu.jreunion.server.SkillManager;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
 
-public class OverHeadBlow extends WeaponAttack implements Castable{
+public class OverHeadBlow extends WeaponAttack implements Castable, Effectable{
 
 	public OverHeadBlow(SkillManager skillManager,int id) {
 		super(skillManager,id);
@@ -126,15 +127,26 @@ public class OverHeadBlow extends WeaponAttack implements Castable{
 			
 			damage += (long)(damage*criticalMultiplier);
 	
+			player.setDmgType(criticalMultiplier > 0 ? 1 : 0);
+			
 			synchronized(victims){
 				for(LivingObject victim : victims){
 					victim.getsAttacked(player, damage);
-					player.getClient().sendPacket(Type.AV, victim, criticalMultiplier > 0 ? 1 : 0);
-					player.getInterested().sendPacket(Type.AV, victim, criticalMultiplier > 0 ? 1 : 0);
+					player.getClient().sendPacket(Type.AV, victim, player.getDmgType());
+					//player.getInterested().sendPacket(Type.AV, victim, criticalMultiplier > 0 ? 1 : 0);
 				}
 				return true;
 			}
 		}		
 		return false;
+	}
+
+	public void effect(LivingObject source, LivingObject target){
+		source.getInterested().sendPacket(Type.EFFECT, source, target , this);
+	}
+	
+	@Override
+	public int getEffectModifier() {
+		return 0;
 	}
 }

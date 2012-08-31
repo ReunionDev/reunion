@@ -314,7 +314,7 @@ public class MessageParser {
 					mob.getPosition().setX(player.getPosition().getX() + 10);
 					mob.getPosition().setY(player.getPosition().getY() + 10);
 					mob.setIsRunning(true);
-					mob.getType().setMutant(Integer.parseInt(words[2]));
+					mob.setMutantType(Integer.parseInt(words[2]));
 					mob.setUnknown1(Integer.parseInt(words[3]));
 					mob.getType().setNeoProgmare(Integer.parseInt(words[4]));
 					mob.setUnknown2(Integer.parseInt(words[5]));
@@ -532,10 +532,25 @@ public class MessageParser {
 					} catch (Exception e) {
 						client.sendPacket(Type.SAY, "@quest failed (ID:"+words[1]+")");
 					}
-				} else{
+				}
+				else {
 					player.getClient().sendPacket(Type.SAY, "Correct usage: @quest [questID]");
 				}
-				
+			}
+			else if (words[0].equals("@mobs_movement")) {
+				if(words.length == 2){
+					if(words[1].equals("enable") || words[1].equals("1")){
+						Server.getInstance().getWorld().getServerSetings().setMobsMovement(1);
+					} else if(words[1].equals("disable") || words[1].equals("0")){
+						Server.getInstance().getWorld().getServerSetings().setMobsMovement(0);
+					} else {
+						player.getClient().sendPacket(Type.SAY, 
+								"USAGE: @mobs_movement [enable/disable] / @mobs_movement [0/1]");
+					}
+				} else {
+					player.getClient().sendPacket(Type.SAY, 
+							"USAGE: @mobs_movement [enable/disable] / @mobs_movement [0/1]");
+				}
 			}
 			else if (words[0].equals("@delete")) {
 					if(words[1].equals("item")){

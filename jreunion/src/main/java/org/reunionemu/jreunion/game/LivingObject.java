@@ -1,6 +1,7 @@
 package org.reunionemu.jreunion.game;
 
 import org.apache.log4j.Logger;
+import org.reunionemu.jreunion.game.Player.Status;
 import org.reunionemu.jreunion.game.npc.Mob;
 import org.reunionemu.jreunion.game.quests.ExperienceQuest;
 import org.reunionemu.jreunion.game.quests.QuestState;
@@ -27,7 +28,7 @@ public abstract class LivingObject extends WorldObject {
 
 	private int level;
 	
-	private int dmgType;
+	private int dmgType;	//0-normal; 1-critical; 2-demolition
 
 	public Position getTargetPosition() {
 		return targetPosition;
@@ -126,37 +127,47 @@ public abstract class LivingObject extends WorldObject {
 	
 	public void getsAttacked(Player player, long damage){
 		
+		Npc<?> npc = null;
+		Mob mob = null;
+		
+		if(this instanceof Npc){
+			npc = (Npc<?>)this;
+			if(npc.getType() instanceof Mob){
+				mob = (Mob) npc.getType();
+			}
+		}
+		
 		player.addAttack(damage);
 		
 		//Cursed quest Boss packet
-		if(this instanceof Npc){
-			Npc<?> npc = (Npc<?>)this;
-			if(npc.getType() instanceof Mob){
-				//Mob mob = (Mob)((Npc<?>)this).getType();
-				QuestState questState = player.getQuestState();
+		if(mob != null){
+			QuestState questState = player.getQuestState();
 			
-				if(questState != null){
-					Quest quest = questState.getQuest();
-					if(quest instanceof ExperienceQuest){
-						Objective objective = quest.getObjective(npc.getType().getTypeId());
-						if(objective != null){
-								if(questState.getProgression(objective.getId()) == (objective.getAmmount()-1)){
-									if(!npc.isBoss()){
-										player.getClient().sendPacket(Type.QT, "king "+this.getEntityId()+" 1");
-										npc.setBoss();
-									}
+			if(questState != null){
+				Quest quest = questState.getQuest();
+				if(quest instanceof ExperienceQuest){
+					Objective objective = quest.getObjective(npc.getType().getTypeId());
+					if(objective != null){
+							if(questState.getProgression(objective.getId()) == (objective.getAmmount()-1)){
+								if(!npc.isBoss()){
+									player.getClient().sendPacket(Type.QT, "king "+this.getEntityId()+" 1");
+									npc.setBoss();
 								}
-						}
+							}
 					}
 				}
 			}
+		}
+		
+		if(npc.isMutant()){
+			damage = (long)(damage * npc.getMutantResistance(player));
 		}
 		
 		long newHp = Tools.between(getHp() - damage, 0l, getMaxHp());				
 		
 		if (newHp <= 0) {
 			Logger.getLogger(LivingObject.class).info("Player "+player+" killed npc "+this);
-			if(this instanceof Npc){
+			if(npc != null){
 					((Npc<?>)this).kill(player);
 			}
 		} else {

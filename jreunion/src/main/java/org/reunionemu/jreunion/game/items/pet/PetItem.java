@@ -33,43 +33,43 @@ public class PetItem extends ItemType {
 		super(type);
 	}
 
-	public int getPetItemAssembLevel() {
+	public int getAssembLevel() {
 		return assembLevel;
 	}
 
-	public int getPetItemBuyExp() {
+	public int getBuyExp() {
 		return buyExp;
 	}
 
-	public int getPetItemCloseAtk() {
+	public int getCloseAtk() {
 		return closeAtk;
 	}
 
-	public int getPetItemCloseDef() {
+	public int getCloseDef() {
 		return closeDef;
 	}
 
-	public int getPetItemDistAtk() {
+	public int getDistAtk() {
 		return distAtk;
 	}
 
-	public int getPetItemDistDef() {
+	public int getDistDef() {
 		return distDef;
 	}
 
-	public int getPetItemHp() {
+	public int getHp() {
 		return hp;
 	}
 
-	public int getPetItemReqLevel() {
+	public int getReqLevel() {
 		return reqLevel;
 	}
 
-	public int getPetItemSpeed() {
+	public int getSpeed() {
 		return speed;
 	}
 
-	public int getPetItemType() {
+	public int getType() {
 		return type;
 	}
 
@@ -82,122 +82,122 @@ public class PetItem extends ItemType {
 
 		if (item == null) {
 			// cant find Item in the reference continue to load defaults:
-			setPetItemHp(0);
-			setPetItemBuyExp(0);
-			setPetItemCloseDef(0);
-			setPetItemDistDef(0);
-			setPetItemCloseAtk(0);
-			setPetItemDistAtk(0);
-			setPetItemSpeed(0);
-			setPetItemAssembLevel(0);
-			setPetItemReqLevel(0);
+			setHp(0);
+			setBuyExp(0);
+			setCloseDef(0);
+			setDistDef(0);
+			setCloseAtk(0);
+			setDistAtk(0);
+			setSpeed(0);
+			setAssembLevel(0);
+			setReqLevel(0);
 		} else {
 			if (item.checkMembers(new String[] { "Hp" })) {
 				// use member from file
-				setPetItemHp(Integer.parseInt(item.getMemberValue("Hp")));
+				setHp(Integer.parseInt(item.getMemberValue("Hp")));
 			} else {
 				// use default
-				setPetItemHp(0);
+				setHp(0);
 			}
 			if (item.checkMembers(new String[] { "BuyExp" })) {
 				// use member from file
-				setPetItemBuyExp(Integer
+				setBuyExp(Integer
 						.parseInt(item.getMemberValue("BuyExp")));
 			} else {
 				// use default
-				setPetItemBuyExp(0);
+				setBuyExp(0);
 			}
 			if (item.checkMembers(new String[] { "CloseDef" })) {
 				// use member from file
-				setPetItemCloseDef(Integer.parseInt(item
+				setCloseDef(Integer.parseInt(item
 						.getMemberValue("CloseDef")));
 			} else {
 				// use default
-				setPetItemCloseDef(0);
+				setCloseDef(0);
 			}
 			if (item.checkMembers(new String[] { "DistDef" })) {
 				// use member from file
-				setPetItemDistDef(Integer.parseInt(item
+				setDistDef(Integer.parseInt(item
 						.getMemberValue("DistDef")));
 			} else {
 				// use default
-				setPetItemDistDef(0);
+				setDistDef(0);
 			}
 			if (item.checkMembers(new String[] { "CloseAtk" })) {
 				// use member from file
-				setPetItemCloseAtk(Integer.parseInt(item
+				setCloseAtk(Integer.parseInt(item
 						.getMemberValue("CloseAtk")));
 			} else {
 				// use default
-				setPetItemCloseAtk(0);
+				setCloseAtk(0);
 			}
 			if (item.checkMembers(new String[] { "DistAtk" })) {
 				// use member from file
-				setPetItemDistAtk(Integer.parseInt(item
+				setDistAtk(Integer.parseInt(item
 						.getMemberValue("DistAtk")));
 			} else {
 				// use default
-				setPetItemDistAtk(0);
+				setDistAtk(0);
 			}
 			if (item.checkMembers(new String[] { "Speed" })) {
 				// use member from file
-				setPetItemSpeed(Integer.parseInt(item.getMemberValue("Speed")));
+				setSpeed(Integer.parseInt(item.getMemberValue("Speed")));
 			} else {
 				// use default
-				setPetItemSpeed(0);
+				setSpeed(0);
 			}
 			if (item.checkMembers(new String[] { "AssembLevel" })) {
 				// use member from file
-				setPetItemAssembLevel(Integer.parseInt(item
+				setAssembLevel(Integer.parseInt(item
 						.getMemberValue("AssembLevel")));
 			} else {
 				// use default
-				setPetItemAssembLevel(0);
+				setAssembLevel(0);
 			}
 			if (item.checkMembers(new String[] { "ReqLevel" })) {
 				// use member from file
-				setPetItemReqLevel(Integer.parseInt(item
+				setReqLevel(Integer.parseInt(item
 						.getMemberValue("ReqLevel")));
 			} else {
 				// use default
-				setPetItemReqLevel(0);
+				setReqLevel(0);
 			}
 		}
 	}
 
-	public void setPetItemAssembLevel(int assembLevel) {
+	public void setAssembLevel(int assembLevel) {
 		this.assembLevel = assembLevel;
 	}
 
-	public void setPetItemBuyExp(int buyExp) {
+	public void setBuyExp(int buyExp) {
 		this.buyExp = buyExp;
 	}
 
-	public void setPetItemCloseAtk(int closeAtk) {
+	public void setCloseAtk(int closeAtk) {
 		this.closeAtk = closeAtk;
 	}
 
-	public void setPetItemCloseDef(int closeDef) {
+	public void setCloseDef(int closeDef) {
 		this.closeDef = closeDef;
 	}
 
-	public void setPetItemDistAtk(int distAtk) {
+	public void setDistAtk(int distAtk) {
 		this.distAtk = distAtk;
 	}
 
-	public void setPetItemDistDef(int distDef) {
+	public void setDistDef(int distDef) {
 		this.distDef = distDef;
 	}
 
-	public void setPetItemHp(int hp) {
+	public void setHp(int hp) {
 		this.hp = hp;
 	}
 
-	public void setPetItemReqLevel(int reqLevel) {
+	public void setReqLevel(int reqLevel) {
 		this.reqLevel = reqLevel;
 	}
 
-	public void setPetItemSpeed(int speed) {
+	public void setSpeed(int speed) {
 		this.speed = speed;
 	}
 }
