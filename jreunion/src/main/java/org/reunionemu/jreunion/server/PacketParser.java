@@ -364,6 +364,15 @@ public class PacketParser extends EventDispatcher implements EventListener{
 						int flyStatus = player.getEquipment().getBoots().getExtraStats() >= 268435456 ? 1 : 0;
 						player.getClient().sendPacket(Type.SKY, player, flyStatus);
 					}
+					
+					Player playerobj = client.getPlayer();
+					
+					if(playerobj.getGuildId() != 0)
+					{
+						client.sendPacket(Type.GUILD_NAME, playerobj);
+						client.sendPacket(Type.GUILD_GRADE, playerobj);
+						client.sendPacket(Type.GUILD_LEVEL, playerobj);
+					}
 				}
 				break;
 			}

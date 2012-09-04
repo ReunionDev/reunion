@@ -354,6 +354,13 @@ public class DatabaseUtils extends Service {
 				player.setHairStyle(rs.getLong("hair"));
 				player.setPetId(rs.getInt("petid"));
 				
+				if(player.getGuildLvl() != -1)
+				{
+					ResultSet rsGuildName = stmt
+							.executeQuery("SELECT name FROM guilds WHERE id='"+player.getGuildId()+"';");
+					if(rsGuildName.next())
+						player.setGuildName(rsGuildName.getString("name"));
+				}
 				
 				return player;
 			} else
