@@ -108,7 +108,15 @@ public class PacketFactory {
 		PARTY_CHANGE,
 		P_KEEP,
 		IN_PET,
-		EXTRA
+		EXTRA,
+	 	G_POS_START,
+	 	G_POS_BODY,
+	 	G_POS_END,
+	 	EVENTNOTICE,
+		GUILD_SAY, 
+		GUILD_LEVEL, 
+		GUILD_GRADE, 
+		GUILD_NAME,
 	}
 	
 	public static String createPacket(Type packetType, Object... args) {
@@ -143,6 +151,16 @@ public class PacketFactory {
 				Position position = (Position)args[0];
 				return "goto " + position.getX() + " " + position.getY() + " "+position.getZ()+" "	
 						+ (position.getRotation()*1000)/1000;
+			}
+			break;
+
+		case EVENTNOTICE:
+			if(args.length>0){
+				String msg = "";
+				for(Object o: args){
+					msg+=" "+o;
+				}
+				return "event"+msg;
 			}
 			break;
 		
@@ -182,6 +200,14 @@ public class PacketFactory {
 				// [Boots] [Shield] [Weapon] [Hp%] [CombatMode] 0 0 0 [Boosted] [PKMode]
 				// 0 [Guild]
 				// [MemberType] 1
+				
+				if(player.getGuildId() != 0)
+				{
+					String[] guildLevelText = {"","Member","","","","","","Sub-General","General","Sub-Master","Master"};
+					
+					packetData += " "+player.getGuildName()+" "+guildLevelText[(int) player.getGuildLvl()]+" "+player.getGuildLvl();
+				}
+				
 				return packetData;
 			}
 			break;
@@ -215,7 +241,41 @@ public class PacketFactory {
 				}				
 			}
 			break;
-		
+			case GUILD_SAY:
+				if(args.length>0){
+					String text = (String)args[0];
+					Player from = (Player)args[1];
+					
+					return "say "+from.getEntityId()+" *GUILD*"+from.getName()+" "+text;
+					
+				}
+				break;
+				
+			case GUILD_NAME:
+				if(args.length == 1){
+					Player player = (Player)args[0];
+					return "guild_name "+player.getEntityId()+" "+player.getGuildName();
+				}
+				break;
+				
+			case GUILD_GRADE:
+				if(args.length == 1){
+					
+					String[] guildLevelText = {"","Member","","","","","","Sub-General","General","Sub-Master","Master"};
+					
+					
+					Player player = (Player)args[0];
+					return "guild_grade "+player.getEntityId()+" 0 "+guildLevelText[(int) player.getGuildLvl()] + " "+player.getGuildLvl();
+				}
+				break;
+				
+			case GUILD_LEVEL:
+				if(args.length == 1){
+					Player player = (Player)args[0];
+					return "guild_level "+player.getGuildLvl();
+				}
+				break;
+				
 		case WISPER:
 			if(args.length == 4){
 				String text = (String)args[0];
@@ -1103,6 +1163,22 @@ public class PacketFactory {
 			}
 			break;
 			
+		case G_POS_START:
+			if(args.length == 0){
+				return "g_pos start";
+			}
+			break;
+		case G_POS_BODY:
+			if(args.length == 1){
+				Player player = (Player)args[0];
+				return "g_pos body "+player.getEntityId()+" "+player.getName()+" "+player.getPosition().getX()+" "+player.getPosition().getY();
+			}
+			break;
+		case G_POS_END:
+			if(args.length == 0){
+				return "g_pos end";
+			}
+			break;
 		default:			
 			throw new UnsupportedOperationException();
 		}

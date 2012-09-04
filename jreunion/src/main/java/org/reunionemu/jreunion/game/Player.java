@@ -152,6 +152,8 @@ public abstract class Player extends LivingObject implements EventListener {
 	
 	private Client client;
 	
+	private String requestedToGuild;
+	
 	private Party party;
 	
 	public Client getClient() {
@@ -164,6 +166,16 @@ public abstract class Player extends LivingObject implements EventListener {
 	
 	private static Integer sessionRadius;
 
+	public String getGuildRequestName()
+	{
+		return requestedToGuild;
+	}
+	
+	public void setGuildRequestName(String name)
+	{
+		this.requestedToGuild = name;
+	}
+	
 	public Player(Client client) {
 		super();
 		this.setClient(client);
@@ -406,6 +418,8 @@ public abstract class Player extends LivingObject implements EventListener {
 	private long electricity;
 
 	private long stamina;
+	
+	private String guildName;
 
 	public long getElectricity() {
 		return electricity;
@@ -911,6 +925,26 @@ public abstract class Player extends LivingObject implements EventListener {
 			sendStatus(Status.LEVEL);
 			client.sendPacket(Type.LEVELUP, this);		
 			getInterested().sendPacket(Type.LEVELUP, this);
+			
+			if(getLevel() < 250 && level == 250)
+			{
+				client.sendPacket(Type.EVENTNOTICE, getName()+" reached Meta level");		
+				getInterested().sendPacket(Type.EVENTNOTICE, getName()+" reached Meta level");	
+			}
+			else if(level > 250 && level < 300 && level % 10 == 0)
+			{
+				client.sendPacket(Type.EVENTNOTICE, getName()+" reached level "+level+" of the Meta level");		
+				getInterested().sendPacket(Type.EVENTNOTICE, getName()+" reached level "+level+" of the Meta level");
+			}
+			else if(getLevel() < 300 && level == 300)
+			{
+				client.sendPacket(Type.EVENTNOTICE, getName()+" reached High-Meta level");		
+				getInterested().sendPacket(Type.EVENTNOTICE, getName()+" reached High-Meta level");
+			} else if (level > 300 &&level % 10 == 0)
+			{
+				client.sendPacket(Type.EVENTNOTICE, getName()+" reached lvl "+ level+" of the High-Meta level");		
+				getInterested().sendPacket(Type.EVENTNOTICE, getName()+" reached lvl "+ level+" of the High-Meta level");	
+			}
 			
 			setHp(this.getMaxHp());
 			setMana(this.getMaxHp());
@@ -1423,6 +1457,15 @@ public abstract class Player extends LivingObject implements EventListener {
 		//}
 	}
 
+	public void setGuildName(String name) {
+		guildName = name;
+	}
+	
+	public String getGuildName()
+	{
+		return guildName;
+	}
+	
 	public Pet getPet() {
 		return pet;
 	}

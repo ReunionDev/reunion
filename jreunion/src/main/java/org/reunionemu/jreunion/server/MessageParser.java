@@ -144,6 +144,243 @@ public class MessageParser {
 					}
 				}
 			}
+			else if (words[0].equals("@guild"))
+			{
+				if(words[1].equals("create") && player.getAdminState() >= 200) {
+					if(words.length == 3)
+					{
+						String name = (String)words[2];
+						
+						int guildId = DatabaseUtils.getDinamicInstance().addGuild(name);
+						if(guildId != 0)
+						{
+							player.setGuildId(guildId);
+							player.setGuildLevel(10);
+							player.setGuildName(name);
+							
+							player.getClient().sendPacket(Type.GUILD_NAME, player);
+							player.getClient().sendPacket(Type.GUILD_GRADE, player);
+							player.getClient().sendPacket(Type.GUILD_LEVEL, player);
+							
+							player.getInterested().sendPacket(Type.GUILD_NAME, player);
+							player.getInterested().sendPacket(Type.GUILD_GRADE, player);
+							player.getInterested().sendPacket(Type.GUILD_LEVEL, player);
+						}
+					}
+					else if(words.length == 4)
+					{
+						String name = (String)words[2];
+						
+						int guildId = DatabaseUtils.getDinamicInstance().addGuild(name);
+						if(guildId != 0)
+						{
+							Player targetPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayer(words[3]);
+							
+							targetPlayer.setGuildId(guildId);
+							targetPlayer.setGuildLevel(10);
+							targetPlayer.setGuildName(name);
+							
+							targetPlayer.getClient().sendPacket(Type.GUILD_NAME, targetPlayer);
+							targetPlayer.getClient().sendPacket(Type.GUILD_GRADE, targetPlayer);
+							targetPlayer.getClient().sendPacket(Type.GUILD_LEVEL, targetPlayer);
+							
+							targetPlayer.getInterested().sendPacket(Type.GUILD_NAME, targetPlayer);
+							targetPlayer.getInterested().sendPacket(Type.GUILD_GRADE, targetPlayer);
+							targetPlayer.getInterested().sendPacket(Type.GUILD_LEVEL, targetPlayer);
+						}
+					}
+				}
+				else if(words[1].equals("add")) {
+					if(player.getGuildId() != 0 && player.getGuildLvl() > 1)
+					{
+						Player targetPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayer(words[2]);
+						
+						//client.sendPacket(Type.SAY, "Your Guild: "+player.getGuildName()+" req:"+targetPlayer.getGuildRequestName());
+						
+						if(targetPlayer.getGuildRequestName().equals(player.getGuildName()))
+						{
+							targetPlayer.setGuildId(player.getGuildId());
+							targetPlayer.setGuildName(player.getGuildName());
+							
+							if(words.length == 4)
+								targetPlayer.setGuildLevel(Integer.parseInt(words[3]));
+							else
+								targetPlayer.setGuildLevel(1);
+							
+							targetPlayer.getClient().sendPacket(Type.GUILD_NAME, targetPlayer);
+							targetPlayer.getClient().sendPacket(Type.GUILD_GRADE, targetPlayer);
+							targetPlayer.getClient().sendPacket(Type.GUILD_LEVEL, targetPlayer);
+							
+							targetPlayer.getInterested().sendPacket(Type.GUILD_NAME, targetPlayer);
+							targetPlayer.getInterested().sendPacket(Type.GUILD_GRADE, targetPlayer);
+							targetPlayer.getInterested().sendPacket(Type.GUILD_LEVEL, targetPlayer);
+							
+							targetPlayer.getClient().sendPacket(Type.SAY, "You've been accepted to join guild");
+							
+							client.sendPacket(Type.SAY, "Added Player "+targetPlayer.getName()+" to guild ");
+						}
+						else
+						{
+							client.sendPacket(Type.SAY, "Player "+targetPlayer.getName()+" didnt requested membership");
+						}
+					}
+					else {
+						client.sendPacket(Type.SAY, "You are not in a guild or you dont have permission to add member");
+					}
+				}
+				else if (words[1].equals("req"))
+				{
+					if(words.length == 3)
+					{
+						if(player.getGuildId() != 0)
+						{
+							client.sendPacket(Type.SAY, "You are allready in guild "+player.getGuildName()+" leave that first");
+						}
+						else
+						{
+							player.setGuildRequestName(words[2]);
+							client.sendPacket(Type.SAY, "You applyed for guild membership on "+words[2]);
+						}
+					}
+					
+				}
+				
+				else if(words[1].equals("leave"))
+				{
+					if(words.length == 2 && player.getGuildId() != -1)
+					{
+						player.setGuildId(0);
+						player.setGuildLevel(0);
+						player.setGuildName("");
+						
+						client.sendPacket(Type.GUILD_NAME, player);
+						player.getInterested().sendPacket(Type.GUILD_NAME, player);
+						
+						client.sendPacket(Type.SAY,"You left your guild");
+					}
+					else
+					{
+						client.sendPacket(Type.SAY,"You are in no guild");
+					}
+				}
+				
+				else if(words[1].equals("kick"))
+				{
+					if(words.length == 3)
+					{
+						if(player.getGuildLvl() > 1)
+						{
+							Player targetPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayer(words[2]);
+							
+							if(targetPlayer.getGuildId() == player.getGuildId())
+							{
+								if(player.getGuildLvl() > 8)
+								{
+									targetPlayer.setGuildId(0);
+									targetPlayer.setGuildLevel(0);
+									targetPlayer.setGuildName("");
+
+									targetPlayer.getInterested().sendPacket(Type.GUILD_NAME, targetPlayer);
+									targetPlayer.getClient().sendPacket(Type.GUILD_NAME, targetPlayer);
+									targetPlayer.getClient().sendPacket(Type.SAY, "You've got kicked out of guild");
+									client.sendPacket(Type.SAY, "You've kicked "+targetPlayer.getName()+" out of guild");
+								}
+							}
+						}
+						else
+						{
+							client.sendPacket(Type.SAY, "You don't have the right to kick players out of guild!");
+						}
+					}
+					
+				}
+				else if(words[1].equals("info"))
+				{
+					Iterator<Player> iterPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayerListIterator();
+					
+					long guildId = player.getGuildId();
+					
+					String gPlayer = "";
+					
+					boolean online = false;
+					
+					if(guildId != 0)
+					{
+						client.sendPacket(Type.SAY, "Who is online in your guild ("+player.getGuildName()+"):");
+						while(iterPlayer.hasNext())
+						{
+							Player currplayer = iterPlayer.next();
+							
+							if(currplayer.getGuildId() == guildId)
+							{
+								online = true;
+								gPlayer = currplayer.getName()+" (Lv."+currplayer.getLevel()+" Map:"+currplayer.getPosition().getMap().getName()+")";
+								
+								client.sendPacket(Type.SAY, gPlayer);
+							}
+						}
+						if(!online)
+							client.sendPacket(Type.SAY, "No guild member online!");
+					}
+				}
+				
+				//client.getWorld().sendPacket(Type.GUILD_SAY, data,player);
+			}
+			else if (words[0].equals("@online"))
+			{
+				if(player.getAdminState() >= 200) {
+					Iterator<Player> iterPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayerListIterator();
+					
+					if(player.getAdminState() >= 200) {
+						client.sendPacket(Type.G_POS_START);
+					}
+					while(iterPlayer.hasNext())
+					{
+						Player currplayer = iterPlayer.next();
+					
+						if(currplayer.getPosition().getMap() == player.getPosition().getMap() && currplayer != player)
+							client.sendPacket(Type.G_POS_BODY, currplayer);
+					}
+					if(player.getAdminState() >= 200) {
+						client.sendPacket(Type.G_POS_END);
+					}
+				}
+				client.sendPacket(Type.SAY, "Online Players: "+Server.getInstance().getWorld().getPlayerManager().getNumberOfPlayers());
+			}
+			else if (words[0].equals("@event") && player.getAdminState() >= 150)
+			{
+				if(words.length == 3)
+				{
+					if(words[1].equals("exp"))
+					{
+						if(Server.getInstance().getWorld().getServerSetings().getXp() < Long.parseLong(words[2]))
+							Server.getInstance().getWorld().sendPacket(Type.INFO, "EXP Event (x"+words[2]+") started!");
+						else if(Server.getInstance().getWorld().getServerSetings().getXp() > Long.parseLong(words[2]))
+							Server.getInstance().getWorld().sendPacket(Type.INFO, "EXP Event has ended!");
+						Server.getInstance().getWorld().getServerSetings().setXp(Long.parseLong(words[2]));
+					}
+					else if(words[1].equals("lime"))
+					{
+						if(Server.getInstance().getWorld().getServerSetings().getLime() < Long.parseLong(words[2]))
+							Server.getInstance().getWorld().sendPacket(Type.INFO, "Lime Event (x"+words[2]+") started!");
+						else if(Server.getInstance().getWorld().getServerSetings().getLime() > Long.parseLong(words[2]))
+							Server.getInstance().getWorld().sendPacket(Type.INFO, "Lime Event has ended!");
+						Server.getInstance().getWorld().getServerSetings().setLime(Long.parseLong(words[2]));
+						
+					}
+				}
+			}
+			else if (words[0].equals("@kick") && player.getAdminState() >= 200)
+			{
+				if(words.length == 2)
+				{
+					Player targetPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayer(words[1]);
+					
+					client.sendPacket(Type.SAY, "Player "+targetPlayer.getName()+" kicked");
+					
+					targetPlayer.getClient().disconnect();
+				}
+			}
 			else if (words[0].equals("@global")) //Global chat is with -[space]Your message
 			{
 				int lengthofinfo = words.length;

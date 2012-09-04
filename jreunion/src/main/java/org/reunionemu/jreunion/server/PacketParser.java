@@ -446,6 +446,38 @@ public class PacketParser extends EventDispatcher implements EventListener{
 						text += " " + message[i];
 					}
 					player.tell(message[1], text); //message[1]: playername
+				}  else if (message[0].equals(":")) {
+					Iterator<Player> iterPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayerListIterator();
+					
+					long guildId = player.getGuildId();
+					
+					if(guildId != 0)
+					{
+						String text = "";
+						for (int i = 1; i < message.length; i++) {
+							text += " " + message[i];
+						}
+						boolean guildmemberonline = false;
+						while(iterPlayer.hasNext())
+						{
+							Player currplayer = iterPlayer.next();
+							
+							if(currplayer.getGuildId() == guildId && currplayer != player)
+							{
+								guildmemberonline = true;
+								currplayer.getClient().sendPacket(Type.GUILD_SAY, text, player);
+							}
+						}
+						if(guildmemberonline)
+							client.sendPacket(Type.GUILD_SAY, text, player);
+						else
+							client.sendPacket(Type.SAY, "Currently there is no online guild member");
+					}
+					else
+					{
+						client.sendPacket(Type.SAY, "You dont have a guild");
+					}
+				
 				} else if (message[0].equals("combat")) {
 					client.getPlayer().setIsInCombat(Integer.parseInt(message[1])==1);
 				} else if (message[0].equals("social")) {
@@ -575,6 +607,35 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					}
 				} else if (message[0].equals("revival")) {
 					client.getPlayer().revive();
+				} else if (message[0].equals("g_pos")) {
+					if(message[1].equals("req"))
+					{
+						Iterator<Player> iterPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayerListIterator();
+						
+						long guildId = player.getGuildId();
+						
+						client.sendPacket(Type.G_POS_START);
+						
+						if(guildId != 0)
+						{
+							while(iterPlayer.hasNext())
+							{
+								Player currplayer = iterPlayer.next();
+								
+								if(currplayer.getGuildId() == guildId)
+								{
+									if(currplayer.getPosition().getMap() == player.getPosition().getMap() && currplayer != player)
+										client.sendPacket(Type.G_POS_BODY, currplayer);
+								}
+							}
+
+							client.sendPacket(Type.G_POS_END);
+						}
+						else
+						{
+							client.sendPacket(Type.SAY, "You dont have a guild");
+						}
+					}
 				} else if (message[0].equals("quick")) {
 					client.getPlayer().getQuickSlotBar().quickSlot(
 							client.getPlayer(), Integer.parseInt(message[1]));

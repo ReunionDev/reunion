@@ -331,10 +331,10 @@ public class Npc<T extends NpcType> extends LivingObject {
 			}
 			
 			for(Player member : playerList){
-				member.setLime(member.getLime()+npcLime);
-				member.setTotalExp(member.getTotalExp()+npcExp);
-				member.setLevelUpExp(member.getLevelUpExp()-npcExp);
-				member.getClient().sendPacket(Type.SAY, "Experience: " + npcExp + " Lime: " + npcLime);
+				member.setLime(member.getLime()+(npcLime));
+				member.setTotalExp(member.getTotalExp()+(npcExp));
+				member.setLevelUpExp(member.getLevelUpExp()-(npcExp));
+				member.getClient().sendPacket(Type.SAY, "Experience"+ ((serverXpRate != 1) ? "(x"+serverXpRate+")" : "")+": " + (npcExp) + " Lime"+ ((serverLimeRate != 1) ? "(x"+serverLimeRate+")" : "")+": " + (npcLime));
 				if(member.getQuestState() != null){
 					player.getQuestState().handleProgress(this, player);
 				}

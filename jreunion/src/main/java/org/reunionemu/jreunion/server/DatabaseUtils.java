@@ -1964,4 +1964,29 @@ public class DatabaseUtils extends Service {
 		
 		return charName;
 	}
+	
+	public int addGuild (String name)
+	{
+		if (!checkDinamicDatabase())
+			return 0;
+		
+		Statement stmt;
+		int guildId = 0;
+		
+		try {
+			stmt = dinamicDatabase.dinamicConn.createStatement();
+			
+			boolean rs = stmt.execute("INSERT INTO guilds SET Name = '"+ name+ "';");
+			
+			ResultSet rsId = stmt.executeQuery("SELECT id FROM guilds WHERE name = '"+name+"'");
+			
+			if(rsId.next())
+				guildId = Integer.parseInt(rsId.getString("id"));
+			
+		} catch (SQLException e1) {
+			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			return 0;
+		}
+		return guildId;
+	}
 }
