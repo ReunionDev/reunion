@@ -277,13 +277,13 @@ public class PacketFactory {
 				break;
 				
 		case WISPER:
-			if(args.length == 4){
+			if(args.length == 3)
+			{
 				String text = (String)args[0];
-				String eintyID = (String)args[1];
-				String name = (String)args[2];
-				String direction = (String)args[3];
+				Player player = (Player)args[1];
+				String direction = (String)args[2];
 				
-				return "say "+eintyID+" "+direction+name+" " + text + " 0";
+				return "say "+player.getEntityId()+" "+direction+player.getName()+" " + text + " "+((player.getAdminState() >= 200) ? 1 : 0);
 			}
 			break;
 			

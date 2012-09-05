@@ -1086,8 +1086,8 @@ public abstract class Player extends LivingObject implements EventListener {
 			return;
 		}
 
-		client.sendPacket(Type.WISPER, text,""+getEntityId(), targetPlayer.getName(), "->Whisper*");
-		targetPlayer.getClient().sendPacket(Type.WISPER, text,""+getEntityId(),getName(), "<-Whisper*");
+		client.sendPacket(Type.WISPER, text, this ,"->Whisper*");
+		targetPlayer.getClient().sendPacket(Type.WISPER, text, this, "<-Whisper*");
 	}
 	
 	public static enum Status {

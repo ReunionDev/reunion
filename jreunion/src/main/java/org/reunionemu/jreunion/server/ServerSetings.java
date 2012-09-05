@@ -48,6 +48,10 @@ public class ServerSetings {
 	private long mobRadiusArea; //mob area radius.
 	
 	private int mobsMovement;	//Enable/Disable movements from mobs.
+
+	private int expPlayermMobDifference; //lvl difference between mob and player, after that difference exp starts dropping
+
+	private int expLowerStep; //its % value
 	
 	public ServerSetings() {
 		loadFromReference();
@@ -227,6 +231,22 @@ public class ServerSetings {
 				// use default
 				setMobsMovement(1);
 			}
+			
+			if (server.checkMembers(new String[] { "ExpPlayerMobDifference" })) {
+				// use member from file
+				setExpPlayerMobDifference(Integer.parseInt(server.getMemberValue("ExpPlayerMobDifference")));
+			} else {
+				// use default
+				setExpPlayerMobDifference(5);
+			}
+
+			if (server.checkMembers(new String[] { "ExpLowerStep" })) {
+				// use member from file
+				setExpLowerStep(Integer.parseInt(server.getMemberValue("ExpLowerStep")));
+			} else {
+				// use default
+				setExpLowerStep(5);
+			}
 		}
 	}
 
@@ -325,7 +345,23 @@ public class ServerSetings {
 	public void setPetEquipmentCompensation(float petEquipmentCompensation) {
 		this.petEquipmentCompensation = petEquipmentCompensation;
 	}
+	
+	public int getExpPlayerMobDifference() {
+		return expPlayermMobDifference;
+	}
 
+	public void setExpPlayerMobDifference(int mobPlayerDiff) {
+		this.expPlayermMobDifference = mobPlayerDiff;
+	}
+
+	public int getExpLowerStep() {
+		return expLowerStep;
+	}
+
+	public void setExpLowerStep(int expLowerStep) {
+		this.expLowerStep = expLowerStep;
+	}
+	
 	public float getItemPlusByOne() {
 		return itemPlusByOne;
 	}
