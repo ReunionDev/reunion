@@ -710,11 +710,26 @@ public class DatabaseUtils extends Service {
 				default: break;
 			}
 			Equipment equipment = player.getEquipment();
-			Item<?> chest = itemManager.create(326);
-			Item<?> pants = itemManager.create(343);
-			
-			equipment.setItem(Slot.CHEST, chest);
-			equipment.setItem(Slot.PANTS, pants);
+			if(race == Race.HYBRIDER)
+			{
+				Item<?> helmet = itemManager.create(1162);
+				Item<?> chest = itemManager.create(1163);
+				Item<?> pants = itemManager.create(1164);
+				Item<?> boots = itemManager.create(1165);
+				
+				equipment.setItem(Slot.HELMET, helmet);
+				equipment.setItem(Slot.CHEST, chest);
+				equipment.setItem(Slot.PANTS, pants);
+				equipment.setItem(Slot.BOOTS, boots);
+			}
+			else
+			{
+				Item<?> chest = itemManager.create(326);
+				Item<?> pants = itemManager.create(343);
+				
+				equipment.setItem(Slot.CHEST, chest);
+				equipment.setItem(Slot.PANTS, pants);
+			}
 			saveEquipment(player);
 			
 			QuickSlotPosition quickSlotPosition = new QuickSlotPosition(player.getQuickSlotBar(),0);

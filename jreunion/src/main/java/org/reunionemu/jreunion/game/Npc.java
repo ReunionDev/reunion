@@ -288,27 +288,34 @@ public class Npc<T extends NpcType> extends LivingObject {
 		long serverXpRate = Server.getInstance().getWorld().getServerSetings().getXp();
 		long serverLimeRate = Server.getInstance().getWorld().getServerSetings().getLime();
 		float mutantModifier = Server.getInstance().getWorld().getServerSetings().getMobMutantModifier();
+		int expPlayerMobDifference = Server.getInstance().getWorld().getServerSetings().getExpPlayerMobDifference();
+		int expLowerStep = Server.getInstance().getWorld().getServerSetings().getExpLowerStep();
+		
 		long npcLime = 0;
 		long npcExp = 0;
 		float modifier = 1;
 		
-	
-		if(player.getLevel() >= this.getLevel()+5){
-			modifier = (this.getLevel()+5)/player.getLevel();
+		if(this.getLevel()/player.getLevel() >=1)
+			modifier = 1;
+		else if((player.getLevel()-this.getLevel()) > expPlayerMobDifference)
+		{
+			modifier = (((player.getLevel()-this.getLevel()-expPlayerMobDifference)*expLowerStep)-100)*(-1);
+			modifier /= 100;
 		}
 		
 		if(this.getType() instanceof Mob){
-			npcLime = (long)(((Mob)this.getType()).getLime()*serverLimeRate*modifier);
+			npcLime = (long)(((Mob)this.getType()).getLime()*serverLimeRate); //on lime no modifier is needed
 			npcExp = (long)(((Mob)this.getType()).getExp()*serverXpRate*modifier);
 		}
+		
 		
 		if(isMutant()){
 			npcLime = (long) (npcLime * mutantModifier);
 			npcExp = (long) (npcLime * mutantModifier);
 		}
 		
-		npcExp = (npcExp == 0) ? 1 : npcExp;	//check that player will receive a minimum ammount of exp
-		npcLime = (npcLime == 0) ? 1 : npcLime; //check that player will receive a minimum ammount of lime
+		npcExp = (npcExp <= 0) ? 1 : npcExp;	//check that player will receive a minimum ammount of exp
+		npcLime = (npcLime <= 0) ? 1 : npcLime; //check that player will receive a minimum ammount of lime
 		
 		setHp(0);
 		localMap.removeEntity(this);
