@@ -552,7 +552,7 @@ public class Npc<T extends NpcType> extends LivingObject {
 	}
 	
 	public void work() {
-		Iterator<Player> iterPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayerListIterator();
+		//Iterator<Player> iterPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayerListIterator();
 		int isMovementEnabled = Server.getInstance().getWorld().getServerSetings().getMobsMovement();
 		
 		if(isRunning() || getHp() == 0 || isMovementEnabled == 0)
@@ -563,8 +563,9 @@ public class Npc<T extends NpcType> extends LivingObject {
 		Area mobArea = getPosition().getLocalMap().getArea(); 
 		boolean moveFree = false;
 		
-		while (iterPlayer.hasNext()) {
-			Player player = iterPlayer.next();
+		//while (iterPlayer.hasNext()) {
+		for(Player player : getPosition().getLocalMap().getPlayerList()) {
+			//Player player = iterPlayer.next();
 			Position position = player.getPosition();
 			double distance = getPosition().distance(player.getPosition());
 			
