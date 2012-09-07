@@ -175,4 +175,62 @@ public abstract class LivingObject extends WorldObject {
 		}
 		this.getInterested().sendPacket(Type.ATTACK_VITAL, this);
 	}
+	
+	public static enum AttackType {
+		
+		NO_ATTACK(-1),
+		CLOSE_MELEE(0),
+		RANGE_MELEE(1),
+		RANGE_MAGIC(2);
+		
+		int value;
+		AttackType(int value){
+			this.value = value;
+		}
+		
+		public int value(){
+			return value;
+		}
+		
+		public static AttackType byValue(int attackTypeId){			
+			for(AttackType attackType:AttackType.values())
+			{
+				if(attackType.value()==attackTypeId){					
+					return attackType;
+				}
+			}
+			return null;
+		}
+	}
+	
+	public static enum DamageType {
+		
+		NO_DAMAGE(-1),
+		NORMAL(0),
+		CRITICAL(1),
+		DEMOLITION(2),
+		FIREBALL(3),
+		LIGHTNING(4),
+		LIGHTNINGBALL(5),
+		STARFLARE(6);
+		
+		int value;
+		DamageType(int value){
+			this.value = value;
+		}
+		
+		public int value(){
+			return value;
+		}
+		
+		public static DamageType byValue(int damageTypeId){			
+			for(DamageType damageType:DamageType.values())
+			{
+				if(damageType.value()==damageTypeId){					
+					return damageType;
+				}
+			}
+			return null;
+		}
+	}
 }

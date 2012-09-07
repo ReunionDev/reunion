@@ -49,7 +49,9 @@ public class Npc<T extends NpcType> extends LivingObject {
 	
 	private NpcShop shop;
 	
-	private long radiusArea;
+	private long areaRadius;
+	
+	private long attackRadius;
 
 	public Npc(T type) {
 		super();
@@ -59,8 +61,15 @@ public class Npc<T extends NpcType> extends LivingObject {
 		
 		setMaxHp(type.getMaxHp());
 		setHp(type.getMaxHp());
-		setRadiusArea(Server.getInstance().getWorld().getServerSetings().getMobRadiusArea());
+		setAreaRadius(Server.getInstance().getWorld().getServerSetings().getMobRadiusArea());
 		setLevel(getType().getLevel());
+		if(this.getType() instanceof Mob){
+			if(((Mob)this.getType()).getAttackType() == AttackType.CLOSE_MELEE.value){
+				setAttackRadius(Server.getInstance().getWorld().getServerSetings().getCloseAttackRadius());
+			} else {
+				setAttackRadius(Server.getInstance().getWorld().getServerSetings().getRangeAttackRadius());
+			}
+		}
 	}
 		
 	@Override
@@ -161,12 +170,12 @@ public class Npc<T extends NpcType> extends LivingObject {
 		shop = new NpcShop(this);
 	}
 	
-	public long getRadiusArea() {
-		return radiusArea;
+	public long getAreaRadius() {
+		return areaRadius;
 	}
 
-	public void setRadiusArea(long radiusArea) {
-		this.radiusArea = radiusArea;
+	public void setAreaRadius(long areaRadius) {
+		this.areaRadius = areaRadius;
 	}
 	
 	@Override
@@ -421,7 +430,7 @@ public class Npc<T extends NpcType> extends LivingObject {
 				continue;
 			}
 			Npc<?> npc = (Npc<?>)entity;
-			if(position.within(npc.getPosition(), getRadiusArea())){
+			if(position.within(npc.getPosition(), getAreaRadius())){
 				return true;
 			}
 		}
@@ -606,7 +615,7 @@ public class Npc<T extends NpcType> extends LivingObject {
 		
 		try {
 			if (smallestDistance < 150) {
-				if(smallestDistance > 20) {
+				if(smallestDistance > getAttackRadius()) {
 					moveToPlayer(closestPlayer);
 				} else {
 					attackPlayer(closestPlayer);
@@ -637,5 +646,13 @@ public class Npc<T extends NpcType> extends LivingObject {
 				
 		buffer.append("}");
 		return buffer.toString();
+	}
+
+	public long getAttackRadius() {
+		return attackRadius;
+	}
+
+	public void setAttackRadius(long attackRadius) {
+		this.attackRadius = attackRadius;
 	}
 }

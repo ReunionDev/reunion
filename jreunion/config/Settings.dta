@@ -20,6 +20,8 @@ ItemPlusByTwo = 0.01		# 0.01 = 1%
 MobMutantChance = 0.1		# 0.1 = 10%
 MobMutantModifier = 0.5		# 0.5 = 50%
 MobsMovement = 1		# 0=Disabled 1=Enabled
+CloseAttackRadius = 20
+RangeAttackRadius = 100
 
 #Enhanced Exp Config
 ExpPlayerMobDifference = 5

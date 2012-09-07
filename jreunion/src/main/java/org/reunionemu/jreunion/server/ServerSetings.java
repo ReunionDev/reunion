@@ -53,6 +53,10 @@ public class ServerSetings {
 
 	private int expLowerStep; //its % value
 	
+	private int closeAttackRadius;	//Minimum distance when close attack mobs will start attacking 
+	
+	private int rangeAttackRadius;	//Minimum distance when range attack mobs will start attacking
+	
 	public ServerSetings() {
 		loadFromReference();
 	}
@@ -88,6 +92,8 @@ public class ServerSetings {
 			setMobRadiusArea(10);
 			setPetBreedTime(72000);
 			setMobsMovement(1);
+			setCloseAttackRadius(20);
+			setRangeAttackRadius(100);
 			setWelcomeMessage("Hey, welcome on the Reunion Testserver");
 		} else {
 
@@ -247,6 +253,23 @@ public class ServerSetings {
 				// use default
 				setExpLowerStep(5);
 			}
+			
+			if (server.checkMembers(new String[] { "CloseAttackRadius" })) {
+				// use member from file
+				setCloseAttackRadius(Integer.parseInt(server.getMemberValue("CloseAttackRadius")));
+			} else {
+				// use default
+				setCloseAttackRadius(20);
+			}
+			
+			if (server.checkMembers(new String[] { "RangeAttackRadius" })) {
+				// use member from file
+				setRangeAttackRadius(Integer.parseInt(server.getMemberValue("RangeAttackRadius")));
+			} else {
+				// use default
+				setRangeAttackRadius(100);
+			}
+			
 		}
 	}
 
@@ -416,5 +439,21 @@ public class ServerSetings {
 
 	public void setMobsMovement(int mobsMovement) {
 		this.mobsMovement = mobsMovement;
+	}
+
+	public int getCloseAttackRadius() {
+		return closeAttackRadius;
+	}
+
+	public void setCloseAttackRadius(int closeAttackRadius) {
+		this.closeAttackRadius = closeAttackRadius;
+	}
+
+	public int getRangeAttackRadius() {
+		return rangeAttackRadius;
+	}
+
+	public void setRangeAttackRadius(int rangeAttackRadius) {
+		this.rangeAttackRadius = rangeAttackRadius;
 	}
 }
