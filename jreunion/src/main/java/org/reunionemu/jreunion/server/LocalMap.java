@@ -298,7 +298,7 @@ public class LocalMap extends Map implements Runnable{
 		
 		Logger.getLogger(LocalMap.class).info("Loaded "+getRoamingItemList().size()+" roaming items in "+getName());
 			
-		//startMobsAI(1000);
+		startMobsAI(1000);
 		
 		/*
 		executorService.scheduleAtFixedRate(new Runnable() {
@@ -327,7 +327,7 @@ public class LocalMap extends Map implements Runnable{
 	
 	public void startMobsAI(long period){
 			
-		executorService.scheduleAtFixedRate(new Runnable() {
+		executorService.scheduleAtFixedRate(new REHandler(new Runnable() {
 			@Override
 			public void run() {
 				List<Entity> objects = null;
@@ -343,12 +343,11 @@ public class LocalMap extends Map implements Runnable{
 					}
 				}
 			}
-		}, 0, period, TimeUnit.MILLISECONDS);
+		}), 0, period, TimeUnit.MILLISECONDS);
 	}
 
 	public void stopMobsAI(){
 		executorService.shutdown();
-		executorService = Executors.newScheduledThreadPool(1);
 	}
 	
 	private void createPlayerSpawns() {
@@ -545,10 +544,9 @@ public SessionList<Session> GetSessions(Position position){
 					new PlayerSpawn(position).spawn(player);					
 				}
 				
-				if(getPlayerList().size() == 1){
-					stopMobsAI();
-					startMobsAI(1000);
-				}
+				//if(getPlayerList().size() == 1){
+				//	startMobsAI(1000);
+				//}
 			} else
 			if(event instanceof PlayerLogoutEvent){
 				
@@ -578,6 +576,10 @@ public SessionList<Session> GetSessions(Position position){
 					list.exit(pet, false);
 					list.sendPacket(Type.OUT, pet);
 				}
+				
+				//if(getPlayerList().size() == 0){
+				//	stopMobsAI();
+				//}
 				
 				player.save();
 				world.getPlayerManager().removePlayer(player);

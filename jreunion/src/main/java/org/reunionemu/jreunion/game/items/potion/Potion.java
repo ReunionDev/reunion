@@ -9,11 +9,10 @@ import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.LivingObject;
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.Usable;
-import org.reunionemu.jreunion.game.items.equipment.ChakuranWeapon;
 import org.reunionemu.jreunion.game.items.etc.Etc;
+import org.reunionemu.jreunion.server.REHandler;
 import org.reunionemu.jreunion.server.Reference;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
-import org.reunionemu.jreunion.server.Tools;
 
 /**
  * @author Aidamina
@@ -21,8 +20,8 @@ import org.reunionemu.jreunion.server.Tools;
  */
 public abstract class Potion extends Etc implements Usable {
 	
-	public static int ticks = 4;
-	public static int tickLength = 500;
+	private static int ticks = 4;
+	private static int tickLength = 500;
 
 	public Potion(int id) {
 		super(id);
@@ -39,29 +38,14 @@ public abstract class Potion extends Etc implements Usable {
 	}
 	
 	@Override
-	public void use(Item<?> item, final LivingObject user, int quickSlotPosition, int unknown) {
-		final Timer timer = new Timer();
-		
+	public void use(final Item<?> item, final LivingObject user, int quickSlotPosition, int unknown) {
+	
 		if(user instanceof Player){
-			TimerTask o = new TimerTask() {
-				int left = getEffect();
-				int ticks = Potion.ticks;
-				Player player = (Player) user;
+			Player player = (Player)user;
+			item.startJob(getJob(player, item), Potion.tickLength);
 
-				@Override
-				public void run() {
-					int effect = getEffect() / Potion.ticks;
-					effect(player, Math.min(left, effect));
-					left -= effect;
-					ticks--;
-					if (ticks == 0)
-						timer.cancel();
-				}
-			};
-			timer.schedule(o, 0, Potion.tickLength);
-
-			if (((Player) user).getClient().getVersion() >= 2000)
-				((Player) user).getClient().sendPacket(Type.UQ_ITEM, 1,
+			if (player.getClient().getVersion() >= 2000)
+				player.getClient().sendPacket(Type.UQ_ITEM, 1,
 						quickSlotPosition, item.getEntityId(), unknown);
 		}
 		else
@@ -80,4 +64,22 @@ public abstract class Potion extends Etc implements Usable {
 	
 	public abstract void effect(Player target, int effect);
 	
+	public Runnable getJob(final Player player, final Item<?> item){
+		return  new REHandler(new Runnable() {
+			int left = getEffect();
+			int ticks = Potion.ticks;
+
+			@Override
+			public void run() {
+				if(ticks > 0) {
+					int effect = getEffect() / Potion.ticks;
+					effect(player, Math.min(left, effect));
+					left -= effect;
+					ticks--;
+				} else {
+					item.stopJob();
+				}
+			}
+		});
+	}
 }

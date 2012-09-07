@@ -1,6 +1,8 @@
 package org.reunionemu.jreunion.game;
 
-import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
 import org.reunionemu.jreunion.game.Equipment.Slot;
@@ -28,6 +30,8 @@ public class Item<T extends ItemType> implements Entity{
 	private int unknown3;
 	
 	private ItemPosition position;
+	
+	private ScheduledExecutorService jobService = Executors.newScheduledThreadPool(1);
 	
 	public ItemPosition getPosition() {
 		return position;
@@ -170,6 +174,14 @@ public class Item<T extends ItemType> implements Entity{
 
 	public void setDurability(int durability) {
 		this.durability = durability;
+	}
+	
+	public void startJob(Runnable job, long period){
+		jobService.scheduleAtFixedRate(job, 0l, period, TimeUnit.MILLISECONDS);
+	}
+	
+	public void stopJob(){
+		jobService.shutdown();
 	}
 	
 	public String toString(){
