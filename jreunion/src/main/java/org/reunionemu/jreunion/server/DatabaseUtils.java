@@ -664,7 +664,15 @@ public class DatabaseUtils extends Service {
 			Player player = Player.createPlayer(client, race);
 			ItemManager itemManager = player.getClient().getWorld().getItemManager();
 						
-			player.setLevel(1);
+			if(race == Race.HYBRIDER)
+			{
+				player.setLevel(200);
+			}
+			else
+			{
+				player.setLevel(1);
+			}
+			
 			player.setName(charName);
 			player.setSex(sex);
 			player.setHairStyle(hairStyle);
