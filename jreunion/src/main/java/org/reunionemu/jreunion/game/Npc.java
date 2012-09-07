@@ -407,10 +407,11 @@ public class Npc<T extends NpcType> extends LivingObject {
 		
 		setIsRunning(true);
 		
-		Area npcArea = getPosition().getLocalMap().getArea();
+		//Area npcArea = getPosition().getLocalMap().getArea();
 		Position newPos =  getRandomPosition();
 		
-		while((!npcArea.get(newPos.getX() / 10, newPos.getY() / 10,Field.MOB))){ 
+		//while((!npcArea.get(newPos.getX() / 10, newPos.getY() / 10,Field.MOB))){
+		while(!isPathWalkable(newPos)) {
 			newPos =  getRandomPosition();
 		}
 		
@@ -501,12 +502,6 @@ public class Npc<T extends NpcType> extends LivingObject {
 		
 		setIsRunning(true);
 		
-		if(!isPathWalkable(player)){
-			setIsRunning(false);
-			moveFree();
-			return;
-		}
-		
 		double distance = this.getPosition().distance(player.getPosition());
 		int newPosX = getNewPosX(player.getPosition(), distance);
 		int newPosY = getNewPosY(player.getPosition(), distance);
@@ -515,18 +510,24 @@ public class Npc<T extends NpcType> extends LivingObject {
 		newPosition.setX(newPosX);
 		newPosition.setY(newPosY);
 		
+		if(!isPathWalkable(newPosition)){
+			setIsRunning(false);
+			moveFree();
+			return;
+		}
+		
 		walk(newPosition, isRunning());
 		setIsRunning(false);
 	}
 	
-	public boolean isPathWalkable(Player player){
+	public boolean isPathWalkable(Position position){
 		Area mobArea = this.getPosition().getLocalMap().getArea(); 
-		double distance = this.getPosition().distance(player.getPosition());
+		double distance = this.getPosition().distance(position);
 		Position newPos = getPosition().clone();
 		
 		while(distance > 0){
-			int posX = getNewPosX(player.getPosition().clone(), distance);
-			int posY = getNewPosY(player.getPosition().clone(), distance);
+			int posX = getNewPosX(position.clone(), distance);
+			int posY = getNewPosY(position.clone(), distance);
 			
 			newPos.setX(posX);
 			newPos.setY(posY);
