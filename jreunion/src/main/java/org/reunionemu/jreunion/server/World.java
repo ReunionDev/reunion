@@ -156,7 +156,7 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 			maps.put(mapId, map);
 		}
 		
-		executorService.scheduleAtFixedRate(new Runnable() {
+		executorService.scheduleAtFixedRate(new REHandler(new Runnable() {
 			
 			@Override
 			public void run() {
@@ -171,10 +171,10 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 					}
 				}				
 			}
-		}, 0, 60, TimeUnit.SECONDS);		
+		}), 0, 60, TimeUnit.SECONDS);		
 		
 		//work player stats
-		executorService.scheduleAtFixedRate(new Runnable() {
+		executorService.scheduleAtFixedRate(new REHandler(new Runnable() {
 			
 			@Override
 			public void run() {
@@ -211,7 +211,7 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 					}
 				}				
 			}
-		}, 0, 10, TimeUnit.SECONDS);
+		}), 0, 10, TimeUnit.SECONDS);
 	
 		//work pet stats
 		executorService.scheduleAtFixedRate(new Runnable() {

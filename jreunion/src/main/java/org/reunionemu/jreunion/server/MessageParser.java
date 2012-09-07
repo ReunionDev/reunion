@@ -536,7 +536,7 @@ public class MessageParser {
 							spawn.setPosition(player.getPosition().clone());
 							spawn.setNpcType(Integer.parseInt(words[1]));
 							spawn.setRadius(300);
-							spawn.setRespawnTime(10);
+							spawn.setRespawnTime(-1);
 							spawn.spawn();
 						}
 					} catch (Exception NumberFormatException) {
@@ -570,7 +570,7 @@ public class MessageParser {
 				}
 				} catch (Exception e) {
 					//TODO: Fix the Mob id error server crash
-					Logger.getLogger(MessageParser.class).error("Mob id error detected");
+					Logger.getLogger(this.getClass()).error("Npc id error detected");
 				}
 			} else if (words[0].equals("@tele")) {
 			try {
@@ -780,6 +780,9 @@ public class MessageParser {
 						Server.getInstance().getWorld().getServerSetings().setMobsMovement(1);
 					} else if(words[1].equals("disable") || words[1].equals("0")){
 						Server.getInstance().getWorld().getServerSetings().setMobsMovement(0);
+					} else if(words[1].equals("restart") || words[1].equals("2")){
+						player.getPosition().getLocalMap().stopMobsAI();
+						player.getPosition().getLocalMap().startMobsAI(1000);
 					} else {
 						player.getClient().sendPacket(Type.SAY, 
 								"USAGE: @mobs_movement [enable/disable] / @mobs_movement [0/1]");

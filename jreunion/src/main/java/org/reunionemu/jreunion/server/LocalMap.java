@@ -347,7 +347,10 @@ public class LocalMap extends Map implements Runnable{
 	}
 
 	public void stopMobsAI(){
+		if(executorService.isShutdown())
+			return;
 		executorService.shutdown();
+		executorService = Executors.newScheduledThreadPool(1);
 	}
 	
 	private void createPlayerSpawns() {

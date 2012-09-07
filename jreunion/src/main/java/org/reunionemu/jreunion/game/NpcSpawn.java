@@ -65,6 +65,9 @@ public class NpcSpawn extends Spawn
 	
 	public void kill() {
 		
+		if(getRespawnTime() == -1)
+			return;
+		
 		java.util.Timer timer = new java.util.Timer();
 		timer.schedule(new TimerTask() {
 			@Override

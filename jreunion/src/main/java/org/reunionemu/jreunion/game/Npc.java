@@ -525,6 +525,9 @@ public class Npc<T extends NpcType> extends LivingObject {
 		double distance = this.getPosition().distance(position);
 		Position newPos = getPosition().clone();
 		
+		if(distance > this.getSpawn().getRadius())
+			return false;
+		
 		while(distance > 0){
 			int posX = getNewPosX(position.clone(), distance);
 			int posY = getNewPosY(position.clone(), distance);
