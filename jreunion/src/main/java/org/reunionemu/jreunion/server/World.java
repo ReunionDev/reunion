@@ -43,7 +43,7 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 
 	private PlayerManager playerManager;
 	
-	private ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
+	private ScheduledExecutorService executorService = Executors.newScheduledThreadPool(3);
 	
 	private TeleportManager teleportManager;
 	
@@ -213,31 +213,33 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 			}
 		}), 0, 10, TimeUnit.SECONDS);
 	
-		//work pet stats
-		executorService.scheduleAtFixedRate(new Runnable() {
-			
-			@Override
-			public void run() {
-				List<Pet> petList = null;
-				synchronized(petManager){
-					petList = new Vector<Pet>(petManager.getList());
-				}		
-				
-				for(Pet pet : petList){
-					if(pet.getState() == 12){
-						long petMaxHp = pet.getMaxHp();
-						long petHpModifier = (long)(petMaxHp * 0.1); //increase 10% of hp
-						pet.setHp(pet.getHp()+ petHpModifier);	
-						pet.setLoyalty(pet.getLoyalty());
-						pet.setSatiety(pet.getSatiety());
-						
-						pet.sendStatus(PetStatus.HP);
-						pet.sendStatus(PetStatus.LOYALTY);
-						pet.sendStatus(PetStatus.SATIETY);
+		if(playerManager.getNumberOfPlayers() > 0){
+			// work pet stats
+			executorService.scheduleAtFixedRate(new REHandler(new Runnable() {
+
+				@Override
+				public void run() {
+					List<Pet> petList = null;
+					synchronized (petManager) {
+						petList = new Vector<Pet>(petManager.getList());
 					}
-				}				
-			}
-		}, 0, 10, TimeUnit.SECONDS);
+
+					for (Pet pet : petList) {
+						if (playerManager.isPetOwnerOnline(pet.id) && pet.getState() == 12) {
+							long petMaxHp = pet.getMaxHp();
+							long petHpModifier = (long) (petMaxHp * 0.1); // increase 10% of hp
+							pet.setHp(pet.getHp() + petHpModifier);
+							pet.setLoyalty(pet.getLoyalty());
+							pet.setSatiety(pet.getSatiety());
+
+							pet.sendStatus(PetStatus.HP);
+							pet.sendStatus(PetStatus.LOYALTY);
+							pet.sendStatus(PetStatus.SATIETY);
+						}
+					}
+				}
+			}), 0, 10, TimeUnit.SECONDS);
+		}
 	}
 
 	public void stop() {

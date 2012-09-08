@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.Vector;
 
 import org.reunionemu.jreunion.game.Player;
+import org.reunionemu.jreunion.server.Client.State;
 
 /**
  * @author Aidamina
@@ -80,5 +81,14 @@ public class PlayerManager {
 
 	public void removePlayer(Player player) {
 		playerList.remove(player);
+	}
+	
+	public boolean isPetOwnerOnline(int petId){
+		for(Player player : playerList){
+			if (player.getPetId() == petId && player.getClient() != null
+					&& player.getClient().getState() == State.INGAME)
+				return true;
+		}
+		return false;
 	}
 }
