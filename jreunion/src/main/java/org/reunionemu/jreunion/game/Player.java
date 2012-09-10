@@ -585,7 +585,7 @@ public abstract class Player extends LivingObject implements EventListener {
 			return;
 		}
 
-		if (getInventory().getHoldingItem() == null) {
+		if (getInventory().getHoldingItem() == null) {// removing exchange item
 			ExchangeItem item = getExchange().getItem(posX, posY);
 
 			if (item == null) {
@@ -596,8 +596,8 @@ public abstract class Player extends LivingObject implements EventListener {
 
 			getInventory().setHoldingItem(new HandPosition(invItem.getItem()));
 			getExchange().removeItem(item);
-			Logger.getLogger(Player.class).info("Item "+item+" removed from exchange inventory of Player "+this);
-		} else {
+			Logger.getLogger(Player.class).info("Item "+item.getItem()+" removed from exchange inventory of Player "+this);
+		} else { //adding exchange item
 			Item<?> item = getInventory().getHoldingItem().getItem();
 			ExchangeItem newExchangeItem = new ExchangeItem(item, posX,	posY);
 			ExchangeItem oldExchangeItem = null;
@@ -614,13 +614,14 @@ public abstract class Player extends LivingObject implements EventListener {
 
 			if (oldExchangeItem == null) {
 				getInventory().setHoldingItem(null);
-			} else {
+			} else { //if player is holding an item then store it at the exchange
 				InventoryItem invItem = new InventoryItem(
 						oldExchangeItem.getItem(), new InventoryPosition( 0, 0, 0));
 				getInventory().setHoldingItem(new HandPosition(invItem.getItem()));
 				getExchange().removeItem(oldExchangeItem);
 				Logger.getLogger(Player.class).info("Item "+oldExchangeItem.getItem()+" removed from exchange inventory of Player "+this);
 			}
+			//get (remove) the item from the exchange
 			getExchange().addItem(newExchangeItem);
 			Logger.getLogger(Player.class).info("Item "+newExchangeItem.getItem()+
 					" stored in Player "+this+" exchange inventory at position {x:"+x+", y:"+y+"}");
@@ -767,21 +768,24 @@ public abstract class Player extends LivingObject implements EventListener {
 	/****** Manages the char Logout ******/
 	public synchronized void save() {
 
-		if(getEntityId() != -1){
-			Logger.getLogger(Player.class).info("Player " + getName() + " saving...\n");
-			DatabaseUtils.getDinamicInstance().saveSkills(this);
-			DatabaseUtils.getDinamicInstance().saveInventory(this);
-			DatabaseUtils.getDinamicInstance().savePet(this);
-			DatabaseUtils.getDinamicInstance().savePetEquipment(getPet());
-			DatabaseUtils.getDinamicInstance().saveCharacter(this);
-			DatabaseUtils.getDinamicInstance().saveEquipment(this);
-			DatabaseUtils.getDinamicInstance().saveStash(getClient());
-			DatabaseUtils.getDinamicInstance().saveExchange(this);
-			DatabaseUtils.getDinamicInstance().saveQuickSlot(this);
-			DatabaseUtils.getDinamicInstance().saveQuest(this);
-			
+		try {
+			if(getEntityId() != -1){
+				Logger.getLogger(this.getClass()).info("Player " + getName() + " saving...\n");
+				DatabaseUtils.getDinamicInstance().saveSkills(this);
+				DatabaseUtils.getDinamicInstance().saveInventory(this);
+				DatabaseUtils.getDinamicInstance().savePet(this);
+				DatabaseUtils.getDinamicInstance().savePetEquipment(getPet());
+				DatabaseUtils.getDinamicInstance().saveCharacter(this);
+				DatabaseUtils.getDinamicInstance().saveEquipment(this);
+				DatabaseUtils.getDinamicInstance().saveStash(getClient());
+				DatabaseUtils.getDinamicInstance().saveExchange(this);
+				DatabaseUtils.getDinamicInstance().saveQuickSlot(this);
+				DatabaseUtils.getDinamicInstance().saveQuest(this);
 		}
-		
+		}catch(Exception e){
+			Logger.getLogger(this.getClass()).info("Saving of "+getName()+" failed ...");
+		}
+		Logger.getLogger(this.getClass()).info("Player " + getName() + " saving complete!\n");
 	}
 
 	public void loseStamina(long ammount) {	
@@ -1393,6 +1397,7 @@ public abstract class Player extends LivingObject implements EventListener {
 	}
 	
 	public String toString(){
+		int debugMode = Server.getInstance().getWorld().getServerSetings().getDebugMode();
 		StringBuffer buffer = new StringBuffer();
 		buffer.append("{");
 
@@ -1403,14 +1408,17 @@ public abstract class Player extends LivingObject implements EventListener {
 		
 		buffer.append("name:");
 		buffer.append(getName());
-		buffer.append(", ");
 		
-		buffer.append("race:");
-		buffer.append(getRace());
-		buffer.append(", ");
-		
-		buffer.append("level:");
-		buffer.append(getLevel());		
+		if(debugMode == 1){
+			buffer.append(", ");
+
+			buffer.append("race:");
+			buffer.append(getRace());
+			buffer.append(", ");
+
+			buffer.append("level:");
+			buffer.append(getLevel());	
+		}
 				
 		buffer.append("}");
 		return buffer.toString();

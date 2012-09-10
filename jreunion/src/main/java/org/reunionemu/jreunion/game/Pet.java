@@ -7,6 +7,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.log4j.Logger;
 import org.reunionemu.jreunion.game.Equipment.Slot;
 import org.reunionemu.jreunion.game.Player.Race;
 import org.reunionemu.jreunion.game.Player.Status;
@@ -90,7 +91,7 @@ public class Pet extends LivingObject {
 		super();
 		setOwner(owner);
 		setName(getOwner().getName() + "_Labiyong");
-		setBreeding(false);
+		//setBreeding(false);
 		setState(state);
 		setBreederTimer(getState()>1 ? 0 : getDefaultBreedTime());
 		create();
@@ -387,7 +388,7 @@ public class Pet extends LivingObject {
 					max = getEntityId()==-1 ? 0 : getEntityId();
 					break;
 				case BASKET: //15
-					min = (getBasket()==null ? getBasket().getType().getTypeId() : 0);
+					min = (getBasket()==null ? 0 : getBasket().getType().getTypeId());
 					break;
 				case APPLES: //16
 					min = getAplesStored();
@@ -396,7 +397,7 @@ public class Pet extends LivingObject {
 					min = getLevelUpLime();
 					break;
 				case AMULET: //18
-					min = (getAmulet()==null ? getAmulet().getType().getTypeId() : 0);
+					min = (getAmulet()==null ? 0 : getAmulet().getType().getTypeId());
 					break;
 				default:
 					throw new RuntimeException(status+" not implemented yet");
@@ -418,6 +419,7 @@ public class Pet extends LivingObject {
 		setEquipment(new PetEquipment(getOwner()));
 		load();
 		getOwner().save();
+		Logger.getLogger(this.getClass()).info("Pet: "+this+" as borned!");
 	}
 	
 	public void load(){
@@ -488,6 +490,9 @@ public class Pet extends LivingObject {
 	}
 
 	public void setBreeding(boolean isBreeding) {
+		String breedingState = isBreeding ? "started" : "stoped";
+		Logger.getLogger(this.getClass()).info("Player: "+getOwner()+" "+breedingState+" breeding Pet: "+this);
+		
 		this.isBreeding = isBreeding;
 	}
 	
@@ -509,5 +514,29 @@ public class Pet extends LivingObject {
 	public void stopBreeding(){
 		executorService.shutdown();
 		executorService = Executors.newScheduledThreadPool(1);
+	}
+	
+	public String toString(){
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("{");
+
+		buffer.append("id:");
+		buffer.append(getEntityId());
+		buffer.append("("+getId()+")");
+		buffer.append(", ");
+		
+		buffer.append("name:");
+		buffer.append(getName());
+		buffer.append(", ");
+		
+		buffer.append("level:");
+		buffer.append(getLevel());	
+		buffer.append(", ");
+		
+		buffer.append("owner:");
+		buffer.append(getOwner().getName());
+				
+		buffer.append("}");
+		return buffer.toString();
 	}
 }

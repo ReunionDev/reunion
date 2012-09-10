@@ -161,31 +161,40 @@ public class Client extends EventDispatcher implements EventListener, Sendable {
 		this.state = state;
 	}
 	public String toString(){
+		int debugMode = Server.getInstance().getWorld().getServerSetings().getDebugMode(); 
 		StringBuffer buffer = new StringBuffer();
 		buffer.append("{");
 
 		if(player!=null) {
 			buffer.append("player: ");
 			buffer.append(player);
-			buffer.append(", ");
-		}
-		if(socketChannel!=null){
-			buffer.append("socket: ");
-			//buffer.append(socketChannel);
-			buffer.append("local="+this.getSocketChannel().socket().getLocalSocketAddress()+
-					" remote="+this.getSocketChannel().socket().getRemoteSocketAddress());
-			buffer.append(", ");
+			buffer.append(debugMode == 1 ? ", " : "");
 		}
 		
-		if(this.getProtocol()!=null){
-			buffer.append("encryption level: ");
-			buffer.append(getProtocol() instanceof OtherProtocol ? ((OtherProtocol)getProtocol()).getEncryptionLevel(): "Default");
-			buffer.append(", ");
-		}
-				
-		buffer.append("state: ");
-		buffer.append(getState());
+		if(getState() != State.INGAME || debugMode == 1){
+			if (socketChannel != null) {
+				buffer.append("socket: ");
+				// buffer.append(socketChannel);
+				buffer.append("local="
+						+ this.getSocketChannel().socket()
+								.getLocalSocketAddress()
+						+ " remote="
+						+ this.getSocketChannel().socket()
+								.getRemoteSocketAddress());
+				buffer.append(", ");
+			}
+
+			if (this.getProtocol() != null) {
+				buffer.append("encryption level: ");
+				buffer.append(getProtocol() instanceof OtherProtocol ? ((OtherProtocol) getProtocol())
+						.getEncryptionLevel() : "Default");
+				buffer.append(", ");
+			}
+
+			buffer.append("state: ");
+			buffer.append(getState());
 		
+		}
 		buffer.append("}");
 		return buffer.toString();
 	}

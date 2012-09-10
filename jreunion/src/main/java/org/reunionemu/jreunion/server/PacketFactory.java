@@ -13,6 +13,7 @@ import org.reunionemu.jreunion.game.items.pet.PetEquipment;
 import org.reunionemu.jreunion.game.items.pet.PetEquipment.PetSlot;
 import org.reunionemu.jreunion.game.npc.Merchant;
 import org.reunionemu.jreunion.game.npc.NpcShop;
+import org.reunionemu.jreunion.game.ExchangeItem;
 import org.reunionemu.jreunion.game.InventoryItem;
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.LivingObject;
@@ -117,6 +118,12 @@ public class PacketFactory {
 		GUILD_LEVEL, 
 		GUILD_GRADE, 
 		GUILD_NAME,
+		EXCH,
+		EXCH_ASK,
+		EXCH_START,
+		EXCH_INVEN_TO,
+		EXCH_INVEN_FROM,
+		EXCH_MONEY
 	}
 	
 	public static String createPacket(Type packetType, Object... args) {
@@ -1179,6 +1186,62 @@ public class PacketFactory {
 				return "g_pos end";
 			}
 			break;
+		case EXCH:
+			if(args.length==1){
+				String exchType = (String)args[0];	/*	TYPES:
+													 *	cancel
+													 *	trade
+													 *	disable
+													 */
+				return "exch " + exchType;
+			}
+			break;
+		case EXCH_ASK:
+			if(args.length==1){
+				Player source = (Player)args[0];
+								
+				return "exch_ask "+source.getName();
+			}
+			break;
+		case EXCH_START:
+			if(args.length==1){
+				Player player = (Player)args[0];
+								
+				return "exch_start "+player.getName()+" "+player.getLevel();
+			}
+			break;
+		case EXCH_INVEN_TO:
+			if(args.length==1){
+				ExchangeItem exchangeItem = (ExchangeItem)args[0];
+				Item<?> item = exchangeItem.getItem();
+								
+				return "exch_inven_to " + item.getEntityId() + " "
+										+ item.getType().getTypeId() + " "
+										+ exchangeItem.getPosition().getPosX() + " "
+										+ exchangeItem.getPosition().getPosY() + " "
+										+ item.getGemNumber() +  " "
+										+ item.getExtraStats()+ " "
+										+ item.getUnknown1() + " "
+										+ item.getDurability() + " "
+										+ item.getType().getMaxDurability();
+			}
+			break;
+		case EXCH_INVEN_FROM:
+			if(args.length==1){
+				ExchangeItem exchangeItem = (ExchangeItem)args[0];
+								
+				return "exch_inven_from " + exchangeItem.getPosition().getPosX() + " "
+										  + exchangeItem.getPosition().getPosY();
+			}
+			break;
+		case EXCH_MONEY:
+			if(args.length==1){
+				long money = (long)args[0];
+								
+				return "exch_money "+money;
+			}
+			break;
+			
 		default:			
 			throw new UnsupportedOperationException();
 		}

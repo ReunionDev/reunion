@@ -105,5 +105,6 @@ public class PetManager {
 		player.save();
 		player.setPetId(pet.getId());
 		addPet(pet);
+		Logger.getLogger(this.getClass()).info("Player: "+player+" bought Pet Egg: "+pet);
 	}
 }

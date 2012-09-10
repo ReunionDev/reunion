@@ -46,10 +46,9 @@ public class MessageParser {
 		float userlvl = player.getAdminState();
 		text = text.trim();
 		String words[] = text.split(" ");
-		Command com = Server.getInstance().getWorld()
-				.getCommand();
 		Client client = player.getClient();
-		ItemManager itemManager = client.getWorld().getItemManager();
+		World world = client.getWorld();
+		Command com = world.getCommand();
 
 		if (userlvl == 255) {
 			
@@ -391,40 +390,31 @@ public class MessageParser {
 				client.getWorld().sendPacket(Type.SAY, data,player);
 			}
 			
-			else if (words[0].equals("@shutdown") && player.getAdminState() == 255) {
+			else if (words[0].equals("@shutdown")) {
 				final Iterator<Player> iterPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayerListIterator();
-				final World world = Server.getInstance().getWorld();
+				final World worldShutdown = world;
 				
-				world.sendPacket(Type.INFO, "Server shutdown immediately! (25 Seconds)");
 				Timer t = new Timer();
 				t.schedule(new TimerTask(){
-					int counter = 0;
+					int counter = 30;
 					@Override
 					public void run() {
-						if(counter == 1)
-						world.sendPacket(Type.INFO, "Server shutdown immediately! (20 Seconds)");
-						if(counter == 2)
-						world.sendPacket(Type.INFO, "Server shutdown immediately! (15 Seconds)");
-						if(counter == 3)
-						world.sendPacket(Type.INFO, "Server shutdown immediately! (10 Seconds)");
-						if(counter == 4)
-						{
-							while(iterPlayer.hasNext())
-							{
-								Player currplayer = iterPlayer.next();
-								Client pclient = currplayer.getClient();
-								try{
-									currplayer.save();
-									pclient.sendPacket(Type.SAY, currplayer.getName()+" saved ...");
-								}catch(Exception e){
-									pclient.sendPacket(Type.SAY, "Saving of "+currplayer.getName()+" failed ...");
-								}
-							}
-							world.sendPacket(Type.INFO, "Server is going down! (5 Seconds)");
+						if(counter > 0) {
+							worldShutdown.sendPacket(Type.INFO, "Server shutdown immediately! ("+counter+" Seconds)");
 						}
-						if(counter == 5)
+						
+						if(counter == 5) {
+							while(iterPlayer.hasNext())	{
+								Player currplayer = iterPlayer.next();
+								Client pClient = currplayer.getClient();
+								currplayer.save();
+								pClient.sendPacket(Type.SAY, currplayer.getName()+" saved ...");	
+							}
+						}
+						else if(counter <= 0) {
 							System.exit(1);
-						counter++;
+						}
+						counter -= 5;
 					}
 				}, 0, 5000); //all 5 seconds
 			}
@@ -467,15 +457,9 @@ public class MessageParser {
 						+ ")" + "collision test: " + s1 + " " + s2 + " " + s3);
 			} else if (words[0].equals("@d") || words[0].equals("@drop")) { //Drop Item
 				if (words.length >= 2) {
+					ItemManager itemManager = world.getItemManager();
 						try {
-							/*if(words[0].equals("@d")){
-								item = itemManager.create(Integer.parseInt(words[1]));
-							} else if(words[0].equals("@drop")){
-								ItemType itemType = new ItemType(Integer.parseInt(words[1]));
-								item = itemType.create();
-								DatabaseUtils.getDinamicInstance().saveItem(item);
-							}*/
-							
+			
 							Item<?> item = itemManager.create(Integer.parseInt(words[1]));
 							player.getPosition().getLocalMap().createEntityId(item);
 							

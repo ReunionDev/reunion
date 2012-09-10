@@ -818,9 +818,26 @@ public class PacketParser extends EventDispatcher implements EventListener{
 								Integer.parseInt(message[2]),
 								Integer.parseInt(message[3]));
 					}
-				} else if (message[0].equals("exch")) { //exchange inventory click
-					client.getPlayer().itemExchange(Integer.parseInt(message[2]),
-							Integer.parseInt(message[3]));
+				} else if (message[0].equals("exch")) {	//handles exchange inventory
+					if (message.length == 2) {
+						if(message[1].equals("cancel")){	// cancel request
+							player.getExchange().cancelRequest();
+						} else if(message[1].equals("ok")) {	//accept request
+							player.getExchange().acceptRequest();
+						} else if(message[1].equals("trade")) {	//trade confirmation
+							player.getExchange().tradeConfirmation();
+						}
+					} else if (message.length == 3) {
+						if(message[1].equals("money")){	// add money
+							long money = Long.parseLong(message[2]);
+							player.getExchange().setMoney(money);
+						}
+					} else if (message.length == 4) {  
+						if(message[1].equals("inven")){ //exchange inventory click
+								client.getPlayer().itemExchange(Integer.parseInt(message[2]),
+										Integer.parseInt(message[3]));
+						}
+					}
 				} else if (message[0].equals("ichange")) {	//armor exchange	
 					Trader trader = (Trader)world.getNpcManager().getNpcType(Trader.class);
 					
@@ -832,7 +849,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 				} else if (message[0].equals("q_ex")) {
 					if(player.getExchange().listSize() > 0){
 						
-						if(!player.getExchange().isAllInstanceOfScrollOfNAgen()){
+						if(!player.getExchange().isItemsScrolls()){
 							player.getClient().sendPacket(Type.MSG, "Wrong item.");
 							return;
 						}
@@ -890,6 +907,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 						DatabaseUtils.getDinamicInstance().deletePet(pet);
 						client.sendPacket(Type.MYPET, "del");
 						player.getInterested().sendPacket(Type.OUT, pet);
+						Logger.getLogger(this.getClass()).info("Player: "+player+" deleted Pet: "+pet);
 						
 						int tab = Integer.parseInt(message[1]);
 						pet = new Pet(player, 1);
@@ -913,6 +931,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 							client.sendPacket(Type.MYPET, "del");
 							pet.sendStatus(PetStatus.STATE);
 							player.getInterested().sendPacket(Type.OUT, pet);
+							Logger.getLogger(this.getClass()).info("Pet: "+pet+" stored at Npc.");
 						}else if(message[1].equals("out")){
 							player.setLime(player.getLime()-15000);
 							pet.setState(12);
@@ -920,6 +939,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 							pet.setHp(pet.getMaxHp());
 							pet.load();
 							player.getInterested().sendPacket(Type.IN_PET, player, true);
+							Logger.getLogger(this.getClass()).info("Pet: "+pet+" removed from Npc.");
 						}
 					}
 				} else if (message[0].equals("buy_egg")) {
@@ -947,6 +967,14 @@ public class PacketParser extends EventDispatcher implements EventListener{
 								player.getParty().exit(player);
 							}
 						}
+					}
+				} else if (message[0].equals("exchange")) {	//exchange request with another player
+					if (message.length == 2) {
+						String targetName = message[1];
+						Player target = world.getPlayerManager().getPlayer(targetName);
+						
+						player.getExchange().request(target);
+						
 					}
 				} else if (message[0].equals("..")) {
 					//client keep alive
