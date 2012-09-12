@@ -96,7 +96,7 @@ public class SlayerWeapon extends SpecialWeapon implements Usable {
 			Player player = (Player) user;
 		
 			if (slayerWeapon.getExtraStats() <= 0) {
-				Logger.getLogger(WandWeapon.class).warn(
+				Logger.getLogger(this.getClass()).warn(
 						"Possible cheat detected: player " + player
 								+ " is trying to use empty " + this.getName()
 								+ ".");

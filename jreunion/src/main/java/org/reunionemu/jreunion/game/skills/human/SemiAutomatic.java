@@ -28,6 +28,11 @@ public class SemiAutomatic extends Skill implements Modifier{
 	public int getLevelRequirement(int skillLevel) {
 		return 4+skillLevel;
 	}
+	
+	@Override
+	public int getAffectedTargets() {
+		return 1;
+	}
 
 	public Class<?> getWeaponType() {
 		return GunWeapon.class;

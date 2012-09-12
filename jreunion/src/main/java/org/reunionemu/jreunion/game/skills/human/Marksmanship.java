@@ -18,4 +18,9 @@ public class Marksmanship extends GunMastery {
 		return 4+skillLevel;
 	}
 	
+	@Override
+	public int getAffectedTargets() {
+		return 1;
+	}
+	
 }

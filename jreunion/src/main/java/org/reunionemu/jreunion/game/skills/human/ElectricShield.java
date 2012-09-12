@@ -34,6 +34,11 @@ public class ElectricShield extends Skill implements Castable, Effectable {
 		return 14+skillLevel;
 	}
 	
+	@Override
+	public int getAffectedTargets() {
+		return 1;
+	}
+	
 	public int getEffectModifier(){
 		return effectModifier;
 	}

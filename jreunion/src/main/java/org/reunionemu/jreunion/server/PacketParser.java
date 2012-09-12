@@ -580,6 +580,12 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					}
 					
 					Skill skill = player.getSkill(skillId);
+					
+					//if is last step (255) of a stepable skill, do nothing and return
+					if(message.length == 5 && skill.getAffectedTargets() == 1 && Integer.parseInt(message[4])==255){
+						return;
+					}
+					
 					List<LivingObject> victims = new LinkedList<LivingObject>(Arrays.asList(new LivingObject[]{target}));
 					
 					if(message.length > 4){ //multiple targets
@@ -830,7 +836,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					} else if (message.length == 3) {
 						if(message[1].equals("money")){	// add money
 							long money = Long.parseLong(message[2]);
-							player.getExchange().setMoney(money);
+							player.getExchange().addMoney(money);
 						}
 					} else if (message.length == 4) {  
 						if(message[1].equals("inven")){ //exchange inventory click

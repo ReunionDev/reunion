@@ -102,4 +102,9 @@ public class BasicAttack extends Skill implements Castable, Effectable{
 	public int getEffectModifier() {
 		return 0;
 	}
+	
+	@Override
+	public int getAffectedTargets() {
+		return 1;
+	}
 }

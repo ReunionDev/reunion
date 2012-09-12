@@ -18,5 +18,10 @@ public class SkillPlaceHolder extends Skill{
 	public int getLevelRequirement(int level) {
 		return 0;
 	}
+	
+	@Override
+	public int getAffectedTargets() {
+		return 1;
+	}
 
 }

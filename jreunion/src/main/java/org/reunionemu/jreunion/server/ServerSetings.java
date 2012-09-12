@@ -57,8 +57,6 @@ public class ServerSetings {
 	
 	private int rangeAttackRadius;	//Minimum distance when range attack mobs will start attacking
 	
-	private int debugMode; //Enable/Disable extra log
-	
 	public ServerSetings() {
 		loadFromReference();
 	}
@@ -96,7 +94,6 @@ public class ServerSetings {
 			setMobsMovement(1);
 			setCloseAttackRadius(20);
 			setRangeAttackRadius(100);
-			setDebugMode(0);
 			setWelcomeMessage("Hey, welcome on the Reunion Testserver");
 		} else {
 
@@ -271,14 +268,6 @@ public class ServerSetings {
 			} else {
 				// use default
 				setRangeAttackRadius(100);
-			}
-			
-			if (server.checkMembers(new String[] { "DebugMode" })) {
-				// use member from file
-				setDebugMode(Integer.parseInt(server.getMemberValue("DebugMode")));
-			} else {
-				// use default
-				setDebugMode(0);
 			}
 			
 		}
@@ -466,13 +455,5 @@ public class ServerSetings {
 
 	public void setRangeAttackRadius(int rangeAttackRadius) {
 		this.rangeAttackRadius = rangeAttackRadius;
-	}
-
-	public int getDebugMode() {
-		return debugMode;
-	}
-
-	public void setDebugMode(int debugMode) {
-		this.debugMode = debugMode;
 	}
 }

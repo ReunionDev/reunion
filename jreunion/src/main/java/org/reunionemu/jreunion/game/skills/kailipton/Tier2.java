@@ -23,4 +23,12 @@ public class Tier2 extends GroupedSkill{
 	public int getLevelRequirement(int level) {
 		return 37+level;
 	}
+	
+	@Override
+	public int getAffectedTargets() {
+		if(this instanceof FirePillar){
+			return 4;
+		}
+		else return 1;
+	}
 }

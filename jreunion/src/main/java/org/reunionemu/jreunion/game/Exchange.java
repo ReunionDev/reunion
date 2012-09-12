@@ -148,6 +148,8 @@ public class Exchange {
 	public void disable(){
 		setAccepted(false);
 		getOtherTrader().getExchange().setAccepted(false);
+		setMoney(0);
+		getOtherTrader().getExchange().setMoney(0);
 		getOwner().getClient().sendPacket(Type.EXCH, "disable");
 		getOtherTrader().getClient().sendPacket(Type.EXCH, "disable");
 	}
@@ -213,14 +215,22 @@ public class Exchange {
 		return money;
 	}
 
-	public void setMoney(long money) {
-		if(getOtherTrader() == null)
-			return;
-		
+	public void setMoney(long money) {	
 		getOtherTrader().getClient().sendPacket(Type.EXCH_MONEY, money);
 		this.money = money;
 	}
 
+	public void addMoney(long money){
+		if(getOtherTrader() == null)
+			return;
+		
+		if(getOtherTrader().getExchange().isAccepted()){
+			disable();
+			return;
+		}
+		setMoney(money);
+	}
+	
 	public boolean isAccepted() {
 		return isAccepted;
 	}

@@ -140,7 +140,7 @@ public class ShockSphere extends Tier3 implements Castable, Effectable {
 	}
 	
 	public void effect(LivingObject source, LivingObject target){
-		source.getInterested().sendPacket(Type.EFFECT, source, target , this);
+		source.getInterested().sendPacket(Type.EFFECT, source, target , this,0,0,0);
 	}
 	
 	public int getEffectModifier() {

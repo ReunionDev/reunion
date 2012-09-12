@@ -23,4 +23,12 @@ public class Tier3 extends GroupedSkill{
 	public int getLevelRequirement(int level) {
 		return 49+level;
 	}
+	
+	@Override
+	public int getAffectedTargets() {
+		if(this instanceof StarFlare){
+			return 5;
+		}
+		else return 1;
+	}
 }

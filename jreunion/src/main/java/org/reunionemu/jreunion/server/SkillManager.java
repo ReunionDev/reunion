@@ -69,6 +69,7 @@ public class SkillManager {
 				raceSkillList.add(skills.get(61));
 				raceSkillList.add(skills.get(71));
 				raceSkillList.add(skills.get(75));
+				raceSkillList.add(skills.get(100));
 				break;
 			}
 			case KAILIPTON: {

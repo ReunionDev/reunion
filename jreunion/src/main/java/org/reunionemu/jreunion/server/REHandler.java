@@ -17,7 +17,7 @@ public class REHandler implements Runnable {
         try {
             delegate.run ();
         } catch (RuntimeException e) {
-            Logger.getLogger(this.getClass()).error(e);
+            Logger.getLogger(this.getClass()).error(e.getMessage(),e);
         }
     }
 }

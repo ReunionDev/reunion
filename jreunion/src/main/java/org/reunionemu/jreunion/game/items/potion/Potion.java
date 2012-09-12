@@ -2,6 +2,7 @@ package org.reunionemu.jreunion.game.items.potion;
 
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.ScheduledFuture;
 
 import org.apache.log4j.Logger;
 import org.reunionemu.jcommon.ParsedItem;
@@ -22,6 +23,7 @@ public abstract class Potion extends Etc implements Usable {
 	
 	private static int ticks = 4;
 	private static int tickLength = 500;
+	
 
 	public Potion(int id) {
 		super(id);
@@ -42,7 +44,7 @@ public abstract class Potion extends Etc implements Usable {
 	
 		if(user instanceof Player){
 			Player player = (Player)user;
-			item.startJob(getJob(player, item), Potion.tickLength);
+			item.startJob(createJob(player, item), Potion.tickLength);
 
 			if (player.getClient().getVersion() >= 2000)
 				player.getClient().sendPacket(Type.UQ_ITEM, 1,
@@ -64,7 +66,7 @@ public abstract class Potion extends Etc implements Usable {
 	
 	public abstract void effect(Player target, int effect);
 	
-	public Runnable getJob(final Player player, final Item<?> item){
+	public Runnable createJob(final Player player, final Item<?> item){
 		return  new REHandler(new Runnable() {
 			int left = getEffect();
 			int ticks = Potion.ticks;

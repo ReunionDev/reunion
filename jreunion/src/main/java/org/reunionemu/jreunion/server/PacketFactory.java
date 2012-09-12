@@ -457,10 +457,14 @@ public class PacketFactory {
 				LivingObject source = (LivingObject) args[0];				
 				LivingObject target = (LivingObject)args[1];
 				Skill skill = (Skill)args[2];
+				int unknown1 = (Integer)args[3];
+				int unknown2 = (Integer)args[4];
+				int unknown3 = (Integer)args[5];
 				
 				return "effect " + skill.getId() + " "+getObjectType(source)+" "
 				+ source.getEntityId() + " "+getObjectType(target)+" " + target.getEntityId() + " "
-				+ target.getPercentageHp() + " " + source.getDmgType() + " 0 0 0";
+				+ target.getPercentageHp() + " " + source.getDmgType() + " "
+				+ unknown1 + " " + unknown2 + " " +unknown3;
 	
 				// S> effect [SkillID] [n/c] [1STEntityId] [n/c] [2NDEntityID] [RemainingHP%] [Critical] 0 0 0
 			}
@@ -491,9 +495,9 @@ public class PacketFactory {
 				int itemStatusRemain = (Integer)args[3];
 				int unknown2 = (Integer)args[4];
 				
-				return "sav "+ getObjectType(target) + " "
-							+ target.getEntityId() + " "
-							+ target.getPercentageHp() + " "
+				return "sav "+ (target==null ? -1 : getObjectType(target)) + " "
+							+ (target==null ? -1 : target.getEntityId()) + " "
+							+ (target==null ? -1 : target.getPercentageHp()) + " "
 							+ damageType + " "
 							+ unknown1 + " "
 							+ itemStatusRemain + " "
@@ -1018,10 +1022,10 @@ public class PacketFactory {
 		case AV:
 			if(args.length > 0){
 				LivingObject victim = (LivingObject) args[0];
-				int isCritical = (Integer) args[1];
+				int damageType = (Integer) args[1];
 
 				return "av " + getObjectType(victim) + " " + victim.getEntityId() + " "
-						+ victim.getPercentageHp() + " " + isCritical + " 0";
+						+ victim.getPercentageHp() + " " + damageType + " 0";
 			}
 			break;
 		case PARTY_REQUEST:

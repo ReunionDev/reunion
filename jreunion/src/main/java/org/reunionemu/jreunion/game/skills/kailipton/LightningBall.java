@@ -174,7 +174,7 @@ public class LightningBall extends Tier1 implements Castable, Modifier, Effectab
 	}
 	
 	public void effect(LivingObject source, LivingObject target){
-		source.getInterested().sendPacket(Type.EFFECT, source, target , this);
+		source.getInterested().sendPacket(Type.EFFECT, source, target , this,0,0,0);
 	}
 	
 	public int getEffectModifier() {

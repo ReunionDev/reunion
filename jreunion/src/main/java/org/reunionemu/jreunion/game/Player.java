@@ -35,7 +35,7 @@ import org.reunionemu.jreunion.server.Tools;
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
 public abstract class Player extends LivingObject implements EventListener {
-
+	
 	private long defense = 0;
 	
 	java.util.Map<Skill,Integer> skills = new HashMap<Skill,Integer> ();
@@ -1409,7 +1409,7 @@ public abstract class Player extends LivingObject implements EventListener {
 		buffer.append("name:");
 		buffer.append(getName());
 		
-		if(debugMode == 1){
+		if(Server.logger.isDebugEnabled()){
 			buffer.append(", ");
 
 			buffer.append("race:");

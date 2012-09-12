@@ -60,7 +60,7 @@ public class OverHeadBlow extends WeaponAttack implements Castable, Effectable{
 	}
 	
 	public float getStaminaModifier(){
-		/* mana spent:
+		/* stamina spent:
 		 * level 1 = 10
 		 * level 2 = 11
 		 * ...
@@ -133,7 +133,6 @@ public class OverHeadBlow extends WeaponAttack implements Castable, Effectable{
 				for(LivingObject victim : victims){
 					victim.getsAttacked(player, damage);
 					player.getClient().sendPacket(Type.AV, victim, player.getDmgType());
-					//player.getInterested().sendPacket(Type.AV, victim, criticalMultiplier > 0 ? 1 : 0);
 				}
 				return true;
 			}
@@ -142,7 +141,7 @@ public class OverHeadBlow extends WeaponAttack implements Castable, Effectable{
 	}
 
 	public void effect(LivingObject source, LivingObject target){
-		source.getInterested().sendPacket(Type.EFFECT, source, target , this);
+		source.getInterested().sendPacket(Type.EFFECT, source, target , this, 0, 0, 0);
 	}
 	
 	@Override

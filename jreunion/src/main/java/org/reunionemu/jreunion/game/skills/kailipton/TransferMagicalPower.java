@@ -29,6 +29,11 @@ public class TransferMagicalPower extends Skill {
 	public int getLevelRequirement(int skillLevel) {
 		return 159+skillLevel;
 	}
+	
+	@Override
+	public int getAffectedTargets() {
+		return 1;
+	}
 
 	public float getDamageModifier() {
 		/*

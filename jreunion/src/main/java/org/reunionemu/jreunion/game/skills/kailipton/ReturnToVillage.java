@@ -28,6 +28,11 @@ public class ReturnToVillage extends Skill implements Castable {
 		return 34 + skillLevel;
 	}
 	
+	@Override
+	public int getAffectedTargets() {
+		return 1;
+	}
+	
 	public float getSuccessRateModifier(){
 		/* level 1 = 20%
 		 * level 2 = 40%

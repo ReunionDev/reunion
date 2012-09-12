@@ -174,7 +174,7 @@ public class Hail extends Tier2 implements Castable, Modifier, Effectable {
 	}
 	
 	public void effect(LivingObject source, LivingObject target){
-		source.getInterested().sendPacket(Type.EFFECT, source, target , this);
+		source.getInterested().sendPacket(Type.EFFECT, source, target , this,0,0,0);
 	}
 	
 	public int getEffectModifier() {

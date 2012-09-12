@@ -26,6 +26,11 @@ public class GemCutting extends Skill implements Castable{
 	public int getLevelRequirement(int skillLevel) {
 		return 19+skillLevel;
 	}
+	
+	@Override
+	public int getAffectedTargets() {
+		return 1;
+	}
 
 	public float getSuccessRateModifier(){
 		/* level 1 = 5%

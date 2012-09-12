@@ -36,6 +36,11 @@ public class SecondAttack extends Skill{
 		return 149+skillLevel;
 	}
 	
+	@Override
+	public int getAffectedTargets() {
+		return 1;
+	}
+	
 	public float getDamageModifier(){
 		/*
 		 * lvl 1 = 20%
@@ -65,7 +70,7 @@ public class SecondAttack extends Skill{
 		return modifier;
 	}
 	
-	public boolean cast(LivingObject caster, List<LivingObject> targets, int unknown1){
+	public boolean cast(LivingObject caster, List<LivingObject> victims, int unknown1){
 		Player player = null;
 		
 		if(caster instanceof Player){
@@ -93,21 +98,12 @@ public class SecondAttack extends Skill{
 		
 		player.setDmgType(slayerWeapon instanceof DemolitionWeapon ? 2 : (criticalMultiplier > 0 ? 1 : 0));
 		
-		synchronized(targets){
-			for(LivingObject target : targets){ 
-				long newHp = Tools.between(target.getHp() - damage, 0l, target.getMaxHp());				
-				
-				if (newHp <= 0) {
-					Logger.getLogger(SecondAttack.class).info("Player "+player+" killed npc "+target);
-					if(target instanceof Npc){
-						((Npc<?>)target).kill(player);
-					}
-				} else {
-					target.setHp(newHp);
-				}
-				player.getClient().sendPacket(Type.SAV, target,	player.getDmgType(), 0,
+		synchronized(victims){
+			for(LivingObject victim : victims){
+				victim.getsAttacked(player, damage);
+				player.getClient().sendPacket(Type.SAV, victim,	player.getDmgType(), 0,
 						shoulderMount.getExtraStats(), 3);
-				player.getInterested().sendPacket(Type.SECONDATTACK, player, target, getId());
+				player.getInterested().sendPacket(Type.SECONDATTACK, player, victim, getId());
 			}
 		}
 		

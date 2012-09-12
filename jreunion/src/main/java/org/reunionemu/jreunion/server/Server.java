@@ -24,6 +24,8 @@ public class Server extends EventDispatcher {
 	
 	private static Random rand = new Random(System.currentTimeMillis());
 	
+	public static Logger logger = Logger.getLogger(Server.class);
+	
 	public static Random getRand() {
 		return rand;
 	}

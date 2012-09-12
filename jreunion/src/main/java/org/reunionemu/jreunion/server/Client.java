@@ -168,10 +168,10 @@ public class Client extends EventDispatcher implements EventListener, Sendable {
 		if(player!=null) {
 			buffer.append("player: ");
 			buffer.append(player);
-			buffer.append(debugMode == 1 ? ", " : "");
+			buffer.append(Server.logger.isDebugEnabled() ? ", " : "");
 		}
 		
-		if(getState() != State.INGAME || debugMode == 1){
+		if(getState() != State.INGAME || Server.logger.isDebugEnabled()){
 			if (socketChannel != null) {
 				buffer.append("socket: ");
 				// buffer.append(socketChannel);

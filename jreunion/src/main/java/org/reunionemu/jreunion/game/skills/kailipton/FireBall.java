@@ -175,7 +175,7 @@ public class FireBall extends Tier1 implements Castable, Modifier, Effectable {
 	}
 
 	public void effect(LivingObject source, LivingObject target){
-		source.getInterested().sendPacket(Type.EFFECT, source, target , this, source.getDmgType());
+		source.getInterested().sendPacket(Type.EFFECT, source, target , this, source.getDmgType(),0,0,0);
 	}
 	
 	public int getEffectModifier() {

@@ -16,5 +16,10 @@ public class Teleport extends Skill {
 	public int getLevelRequirement(int skillLevel) {
 		return 54+skillLevel;
 	}
+	
+	@Override
+	public int getAffectedTargets() {
+		return 1;
+	}
 
 }

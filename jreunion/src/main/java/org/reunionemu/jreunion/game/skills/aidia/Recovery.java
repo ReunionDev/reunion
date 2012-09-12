@@ -25,6 +25,11 @@ public class Recovery extends Skill implements Castable{
 		return 4+skillLevel;
 	}
 	
+	@Override
+	public int getAffectedTargets() {
+		return 1;
+	}
+	
 	public float getManaModifier(){
 		/* mana spent:
 		 * level 1 = 10

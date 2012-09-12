@@ -10,7 +10,7 @@ import org.reunionemu.jreunion.server.SkillManager;
 public abstract class Skill {
 	private int id;
 
-	private int type; //0 - Permanent; 1 - Activation; 2 - Attack 
+	private int type; //0 - Passive; 1 - Activation; 2 - Attack 
 	
 	private String name;
 	
@@ -26,6 +26,8 @@ public abstract class Skill {
 	}
 
 	public abstract int  getMaxLevel();
+	
+	public abstract int  getAffectedTargets();
 	
 	public int getMinLevel(){
 		return 0;
@@ -78,8 +80,8 @@ public abstract class Skill {
 			((Player)source).getClient().sendPacket(Type.SKILL, source, this);
 		}
 		else {
-			source.getInterested().sendPacket(Type.EFFECT, source, target, this);
-			target.getInterested().sendPacket(Type.EFFECT, source, target, this);
+			source.getInterested().sendPacket(Type.EFFECT, source, target, this, 0, 0, 0);
+			target.getInterested().sendPacket(Type.EFFECT, source, target, this, 0, 0, 0);
 		}
 	}
 	

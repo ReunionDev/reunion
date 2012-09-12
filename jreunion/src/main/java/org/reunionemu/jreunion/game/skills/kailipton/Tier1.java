@@ -29,4 +29,12 @@ public class Tier1 extends GroupedSkill{
 		return 0+level;
 	}
 	
+	@Override
+	public int getAffectedTargets() {
+		if(this instanceof FireBall){
+			return 2;
+		}
+		else return 1;
+	}
+	
 }
