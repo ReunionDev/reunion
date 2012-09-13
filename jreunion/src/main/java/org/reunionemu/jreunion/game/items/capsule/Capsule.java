@@ -33,8 +33,9 @@ public abstract class Capsule extends Etc implements Usable {
 	}
 	
 	@Override
-	public void use(Item<?> item, final LivingObject user, int quickSlotPosition, int unknown) {
+	public boolean use(Item<?> item, final LivingObject user, int quickSlotPosition, int unknown) {
 		//TODO: implement capsule effect	
+		return false;
 	}
 
 	@Override

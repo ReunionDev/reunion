@@ -24,18 +24,22 @@ public class WarpGate extends Etc implements Usable{
 	}
 	
 	@Override
-	public void use(Item<?> item, LivingObject user, int quickSlotPosition, int unknown) {
+	public boolean use(Item<?> item, LivingObject user, int quickSlotPosition, int unknown) {
 		if(user instanceof Player){
 			Player player = (Player)user; 
 			
 			player.spawn();
 
-			if (player.getClient().getVersion() >= 2000)
+			if (player.getClient().getVersion() >= 2000) {
 				player.getClient().sendPacket(Type.UQ_ITEM, 1,
 						quickSlotPosition, item.getEntityId());
+			}
+			
+			return true;
+		} else {
+			Logger.getLogger(this.getClass()).warn(this.getName() + " not implemented for " + user.getName());
 		}
-		else
-			Logger.getLogger(WarpGate.class).warn(this.getName() + " not implemented for " + user.getName());
 		
+		return false;
 	}
 }

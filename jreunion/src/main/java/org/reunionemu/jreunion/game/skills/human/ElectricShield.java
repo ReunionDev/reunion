@@ -161,7 +161,7 @@ public class ElectricShield extends Skill implements Castable, Effectable {
 	
 	@Override
 	//TODO: handle with DefenceBonus and DamageAbsorb
-	public boolean cast(LivingObject caster, List<LivingObject> victims) {
+	public boolean cast(LivingObject caster, List<LivingObject> victims, int castStep) {
 		
 		if(caster instanceof HumanPlayer){
 			final Player player = (Player) caster;

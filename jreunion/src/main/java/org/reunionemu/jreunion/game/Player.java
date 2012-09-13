@@ -1397,7 +1397,6 @@ public abstract class Player extends LivingObject implements EventListener {
 	}
 	
 	public String toString(){
-		int debugMode = Server.getInstance().getWorld().getServerSetings().getDebugMode();
 		StringBuffer buffer = new StringBuffer();
 		buffer.append("{");
 

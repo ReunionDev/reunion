@@ -73,7 +73,7 @@ public class WandWeapon extends SpecialWeapon implements Usable{
 	}
 	 
 	@Override
-	public void use(Item<?> wandWeapon, LivingObject user, int quickSlotPosition, int unknown) {
+	public boolean use(Item<?> wandWeapon, LivingObject user, int quickSlotPosition, int unknown) {
 		
 		if(user instanceof Player) {
 			Player player = (Player) user;
@@ -83,20 +83,35 @@ public class WandWeapon extends SpecialWeapon implements Usable{
 						"Possible cheat detected: player " + player
 								+ " is trying to use empty " + this.getName()
 								+ ".");
-				return;
+				return false;
 			}
 
-			wandWeapon.setGemNumber(wandWeapon.getGemNumber() - 1);
-			player.setMana(player.getMana() - getManaUsed());
+			//update WandWeapon uses remain
+			int usesRemain = wandWeapon.getGemNumber() - 1;
+			if(usesRemain < 0){
+				return false;
+			}
+			wandWeapon.setGemNumber(usesRemain);
 			DatabaseUtils.getDinamicInstance().saveItem(wandWeapon);
+			
+			//update player mana
+			long manaRemain = player.getMana() - getManaUsed();
+			if(manaRemain < 0){
+				return false;
+			}
+			player.setMana(manaRemain);
+			
 			
 			/*if (player.getClient().getVersion() >= 2000)
 				player.getClient().sendPacket(Type.UQ_ITEM, 1,
 						quickSlotPosition, wandWeapon.getEntityId(), unknown);
 			*/
-		}
-		else
+			return true;
+		} else {
 			Logger.getLogger(WandWeapon.class).warn(this.getName() + " not implemented for " + user.getName());
+		}
+		
+		return false;
 	}
 	
 }

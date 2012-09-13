@@ -73,7 +73,7 @@ public abstract class Skill {
 		}
 	}
 	
-	public void effect(LivingObject source, LivingObject target){
+	public void effect(LivingObject source, LivingObject target, int castStep){
 		if(target == source){ //self usable skill
 			//TODO: figure out why this is not working
 			//source.getInterested().sendPacket(Type.SKILL, source, this);

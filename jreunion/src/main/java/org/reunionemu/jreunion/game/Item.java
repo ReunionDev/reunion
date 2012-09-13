@@ -95,12 +95,13 @@ public class Item<T extends ItemType> implements Entity{
 		getType().setGemNumber(this);
 	}
 	
-	public void use(LivingObject livingObject, int quickSlotBarPosition, int unknown){
+	public boolean use(LivingObject livingObject, int quickSlotBarPosition, int unknown){
 		
 		if(is(Usable.class)){
-			((Usable)getType()).use(this, livingObject, quickSlotBarPosition, unknown);
+			return ((Usable)getType()).use(this, livingObject, quickSlotBarPosition, unknown);
 		}else{
 			Logger.getLogger(Item.class).error("Item "+this+" is not usable");
+			return false;
 			//throw new IllegalArgumentException(getType()+" is not Usable");
 		}
 	}

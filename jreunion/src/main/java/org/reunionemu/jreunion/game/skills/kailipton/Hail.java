@@ -74,7 +74,7 @@ public class Hail extends Tier2 implements Castable, Modifier, Effectable {
 	}
 	
 	@Override
-	public boolean cast(LivingObject caster, List<LivingObject> victims) {
+	public boolean cast(LivingObject caster, List<LivingObject> victims, int castStep) {
 		if(caster instanceof KailiptonPlayer){
 			Player player = (Player)caster;
 			long currentMana = player.getMana();
@@ -125,7 +125,7 @@ public class Hail extends Tier2 implements Castable, Modifier, Effectable {
 			
 			synchronized(victims){
 				for(LivingObject victim : victims){
-					victim.getsAttacked(player, magicDamage);
+					victim.getsAttacked(player, magicDamage, true);
 					player.getClient().sendPacket(Type.AV, victim, player.getDmgType());
 				}
 				return true;
@@ -173,7 +173,7 @@ public class Hail extends Tier2 implements Castable, Modifier, Effectable {
 		return getDamageModifier((Player)livingObject);
 	}
 	
-	public void effect(LivingObject source, LivingObject target){
+	public void effect(LivingObject source, LivingObject target, int castStep){
 		source.getInterested().sendPacket(Type.EFFECT, source, target , this,0,0,0);
 	}
 	

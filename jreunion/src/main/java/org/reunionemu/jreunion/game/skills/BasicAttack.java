@@ -19,7 +19,7 @@ public class BasicAttack extends Skill implements Castable, Effectable{
 		super(skillManager,id);
 	}
 	
-	public boolean cast(LivingObject attacker, List<LivingObject> victims) {
+	public boolean cast(LivingObject attacker, List<LivingObject> victims, int castStep) {
 		
 		float damage = 0;
 		
@@ -70,7 +70,7 @@ public class BasicAttack extends Skill implements Castable, Effectable{
 			
 			synchronized(victims){
 				for(LivingObject victim : victims){
-					victim.getsAttacked(player, (int)damage);
+					victim.getsAttacked(player, (int)damage, true);
 					player.getClient().sendPacket(Type.ATTACK, player,victim,player.getDmgType());
 					//player.getInterested().sendPacket(Type.ATTACK, player, victim, criticalMultiplier > 0 ? 1 : 0);
 					
@@ -82,7 +82,7 @@ public class BasicAttack extends Skill implements Castable, Effectable{
 	}
 	
 	@Override 
-	public void effect(LivingObject source, LivingObject target){	
+	public void effect(LivingObject source, LivingObject target, int castStep){	
 		source.getInterested().sendPacket(Type.ATTACK, source, target, source.getDmgType());
 	}
 	

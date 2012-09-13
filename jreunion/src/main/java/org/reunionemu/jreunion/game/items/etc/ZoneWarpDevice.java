@@ -27,7 +27,7 @@ public class ZoneWarpDevice extends Etc implements Usable{
 	}
 	
 	@Override
-	public void use(Item<?> item, LivingObject user, int quickSlotPosition, int unknown) {
+	public boolean use(Item<?> item, LivingObject user, int quickSlotPosition, int unknown) {
 		/* item.gemNumber 	it's teleport Map ID
 		 * item.extrastatus it's teleport unknown value
 		 */
@@ -40,11 +40,16 @@ public class ZoneWarpDevice extends Etc implements Usable{
 			world.getCommand().GoToWorld((Player) user, map,
 					item.getExtraStats());
 
-			if (player.getClient().getVersion() >= 2000)
+			if (player.getClient().getVersion() >= 2000) {
 				player.getClient().sendPacket(Type.UQ_ITEM, 1,
 						quickSlotPosition, item.getEntityId(), unknown);
+			}
+			
+			return true;
+		} else {
+			Logger.getLogger(this.getClass()).warn(this.getName() + " not implemented for " + user.getName());
 		}
-		else
-			Logger.getLogger(ZoneWarpDevice.class).warn(this.getName() + " not implemented for " + user.getName());
+		
+		return false;
 	}
 }

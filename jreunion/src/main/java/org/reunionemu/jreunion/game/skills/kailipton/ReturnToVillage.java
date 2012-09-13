@@ -59,7 +59,7 @@ public class ReturnToVillage extends Skill implements Castable {
 	//Teleports player to town.
 	//If there isn't enough mana then the client wont allow to use the skill.
 	@Override
-	public boolean cast(LivingObject caster, List<LivingObject> victims) {
+	public boolean cast(LivingObject caster, List<LivingObject> victims, int castStep) {
 		if(caster instanceof KailiptonPlayer){
 			Player player = (Player)caster;
 			int manaSpent = 10; //mana spent is the same in every skill level

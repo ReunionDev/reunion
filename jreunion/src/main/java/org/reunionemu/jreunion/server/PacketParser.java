@@ -560,6 +560,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					
 					LivingObject target = player;
 					int entityId=-1;
+					int castStep = 1;
 					
 					if(message.length > 3) { //if length=3 then player is using skill on himself
 						
@@ -581,14 +582,14 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					
 					Skill skill = player.getSkill(skillId);
 					
-					//if is last step (255) of a stepable skill, do nothing and return
-					if(message.length == 5 && skill.getAffectedTargets() == 1 && Integer.parseInt(message[4])==255){
-						return;
+					//if is a stepable skill, get the current step
+					if(message.length == 5 && skill.getAffectedTargets() == 1 ){
+						castStep = Integer.parseInt(message[4]);
 					}
 					
 					List<LivingObject> victims = new LinkedList<LivingObject>(Arrays.asList(new LivingObject[]{target}));
 					
-					if(message.length > 4){ //multiple targets
+					if(message.length > 4 && skill.getAffectedTargets() > 1){ //multiple targets
 						for(int messageIndex=4; messageIndex < message.length; messageIndex++){
 							entityId = Integer.parseInt(message[messageIndex]);
 							target = (LivingObject) player.getPosition().getLocalMap().getEntity(entityId);
@@ -598,10 +599,10 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					
 					//cast attacks/skills and send effects to other clients.
 					if(Castable.class.isInstance(skill)){
-						if(((Castable)skill).cast(player, victims)){
+						if(((Castable)skill).cast(player, victims, castStep)){
 							if(Effectable.class.isInstance(skill))
 								for(LivingObject victim : victims){
-									skill.effect(player, victim);
+									skill.effect(player, victim, castStep);
 								}
 						}
 					} else{

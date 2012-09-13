@@ -24,21 +24,30 @@ public class GrindStone extends WhetStone implements Usable{
 	}
 	
 	@Override
-	public void use(Item<?> grindStone, LivingObject user, int quickSlotPosition, int unknown){
+	public boolean use(Item<?> grindStone, LivingObject user, int quickSlotPosition, int unknown){
 		if (user instanceof Player) {
 			Player player = ((Player) user);
 			Item<?> slayerWeapon = player.getEquipment().getItem(Slot.SHOULDER);
 			
-			slayerWeapon.setExtraStats(slayerWeapon.getExtraStats() + this.getMaxExtraStats());
+			//update Slayer uses remain
+			int usesRemain = slayerWeapon.getExtraStats() + this.getMaxExtraStats();
+			if(usesRemain > slayerWeapon.getType().getMaxExtraStats()){
+				usesRemain = slayerWeapon.getType().getMaxExtraStats();
+			}
+			slayerWeapon.setExtraStats(usesRemain);
 			DatabaseUtils.getDinamicInstance().saveItem(slayerWeapon);
 			
-			if(player.getClient().getVersion() < 2000)
+			if(player.getClient().getVersion() < 2000){
 				player.getClient().sendPacket(Type.USQ, "remain", quickSlotPosition, Slot.SHOULDER.value(), slayerWeapon);
-			else 
+			} else { 
 				player.getClient().sendPacket(Type.UQ_ITEM, 1, quickSlotPosition, grindStone.getEntityId(), unknown, slayerWeapon.getExtraStats(), 3);
-		}
-		else
-			Logger.getLogger(GrindStone.class).warn(this.getName() + " not implemented for " + user.getName());
+			}
 			
+			return true;
+		} else {
+			Logger.getLogger(GrindStone.class).warn(this.getName() + " not implemented for " + user.getName());
+		}
+		
+		return false;
 	}
 }

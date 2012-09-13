@@ -25,26 +25,32 @@ public class WandCharger extends ScrollAndSpellBook implements Usable{
 	}
 	
 	@Override
-	public void use(Item<?> wandCharger, LivingObject user, int quickSlotPosition, int unknown){
+	public boolean use(Item<?> wandCharger, LivingObject user, int quickSlotPosition, int unknown){
 		if (user instanceof Player) {
 			Player player = ((Player) user);
 			Item<?> wandWeapon = player.getEquipment().getItem(Slot.OFFHAND);
 			if(wandWeapon.getType() instanceof WandWeapon){
 				if(((WandWeapon)wandWeapon.getType()).getSkillLevel() != this.getSkillLevel()){
-					Logger.getLogger(WandCharger.class).warn("POSSIBLE CHEAT DETECTED: used Wand Charger level "+this.getSkillLevel()+
+					Logger.getLogger(this.getClass()).warn("POSSIBLE CHEAT DETECTED: used Wand Charger level "+this.getSkillLevel()+
 							" with wand weapon level "+((WandWeapon)wandWeapon.getType()).getSkillLevel());
-					return;
+					return false;
 				}
 			}
 			wandWeapon.setGemNumber(wandWeapon.getType().getMaxGemNumber());
 			DatabaseUtils.getDinamicInstance().saveItem(wandWeapon);
-			if(player.getClient().getVersion() < 2000)
+			
+			if(player.getClient().getVersion() < 2000){
 				player.getClient().sendPacket(Type.USQ,"remain",quickSlotPosition,Slot.OFFHAND.value(),wandWeapon);
-			else
+			} else {
 				player.getClient().sendPacket(Type.UQ_ITEM, 1, quickSlotPosition, wandCharger.getEntityId(),
 						wandCharger.getGemNumber(), wandCharger.getExtraStats(), 5);
+			}
+			
+			return true;
+		} else {
+			Logger.getLogger(this.getClass()).warn(this.getName() + " not implemented for " + user.getName());
 		}
-		else
-			Logger.getLogger(WandCharger.class).warn(this.getName() + " not implemented for " + user.getName());
+		
+		return false;
 	}
 }

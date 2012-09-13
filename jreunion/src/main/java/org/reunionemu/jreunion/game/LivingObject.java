@@ -28,7 +28,7 @@ public abstract class LivingObject extends WorldObject {
 
 	private int level;
 	
-	private int dmgType;	//0-normal; 1-critical; 2-demolition
+	private int dmgType;	// 0-normal; 1-critical; 2-demolition; 3-super critical; 4-Explosion;
 
 	public Position getTargetPosition() {
 		return targetPosition;
@@ -125,7 +125,7 @@ public abstract class LivingObject extends WorldObject {
 		this.name = livingObjectName;
 	}
 	
-	public void getsAttacked(Player player, long damage){
+	public void getsAttacked(Player player, long damage, boolean addAttack){
 		
 		Npc<?> npc = null;
 		Mob mob = null;
@@ -137,7 +137,9 @@ public abstract class LivingObject extends WorldObject {
 			}
 		}
 		
-		player.addAttack(damage);
+		if(addAttack){
+			player.addAttack(damage);
+		}
 		
 		//Cursed quest Boss packet
 		if(mob != null){

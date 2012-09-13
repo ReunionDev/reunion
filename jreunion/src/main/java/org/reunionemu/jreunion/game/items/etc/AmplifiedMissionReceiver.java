@@ -22,7 +22,7 @@ public class AmplifiedMissionReceiver extends MissionReceiver{
 	}
 	
 	@Override
-	public void use(Item<?> item, LivingObject user, int slot, int unknown) {
+	public boolean use(Item<?> item, LivingObject user, int slot, int unknown) {
 		if(user instanceof Player){
 			Player player = (Player)user;
 			
@@ -30,13 +30,13 @@ public class AmplifiedMissionReceiver extends MissionReceiver{
 			if(player.getLevel() < 100){
 				player.getClient().sendPacket(Type.SAY, "Your level is to low to use this item.\n" +
 						"Please use the Mission Receiver.");
-				return;
+				return false;
 			}
 			
 			//check if the AMR has run out of quests.
 			if(item.getExtraStats() <= 0){
 				player.getClient().sendPacket(Type.SAY, "Mission Reciever run out of available quests.");
-				return;
+				return false;
 			}
 			
 			Quest quest = player.getClient().getWorld().getQuestManager().getRandomQuest(player);
@@ -44,13 +44,16 @@ public class AmplifiedMissionReceiver extends MissionReceiver{
 			//check if a quest for the player level have been found.
 			if(quest == null){
 				player.getClient().sendPacket(Type.SAY, "No quests available for character level.");
-				return;
+				return false;
 			} 
 			
 			item.setExtraStats(item.getExtraStats()-1);
 			DatabaseUtils.getDinamicInstance().saveItem(item);
 			player.setQuest(quest);
+			
+			return true;
 		}	
+		return false;
 	}
 
 }

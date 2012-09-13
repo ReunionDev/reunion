@@ -8,6 +8,7 @@ import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.LivingObject;
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.Skill;
+import org.reunionemu.jreunion.game.items.equipment.DemolitionWeapon;
 import org.reunionemu.jreunion.game.items.equipment.SlayerWeapon;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
 import org.reunionemu.jreunion.server.SkillManager;
@@ -44,19 +45,6 @@ public class BurningCrash extends Skill implements Castable, Effectable{
 		 */
 
 		return (long)290000/(getMaxLevel()-1); 
-	}
-	
-	public float getModifier(){
-		/*
-		 * lvl 1 = 20
-		 * lvl 2 = 19
-		 * lvl 3 = 19
-		 * lvl 4 = 18
-		 * 
-		 * lvl 30 = 6
-		 */
-
-		return 14f/(getMaxLevel()-1); 
 	}
 	
 	public float getDamageModifier(){
@@ -100,8 +88,11 @@ public class BurningCrash extends Skill implements Castable, Effectable{
 		return modifier;
 	}
 
-	public boolean cast(LivingObject caster, List<LivingObject> victims){
+	public boolean cast(LivingObject caster, List<LivingObject> victims, int castStep){
 
+		if(castStep == 255)
+			return true;
+		
 		Player player = null;
 
 		if(caster instanceof Player){
@@ -109,7 +100,9 @@ public class BurningCrash extends Skill implements Castable, Effectable{
 		}
 
 		Item<?> shoulderMount = player.getEquipment().getShoulderMount();
-		shoulderMount.use(caster, -1, 0);
+		if(!shoulderMount.use(caster, -1, 0)){
+			return false;
+		}
 
 		SlayerWeapon slayerWeapon = null;
 
@@ -120,36 +113,43 @@ public class BurningCrash extends Skill implements Castable, Effectable{
 		long slayerDmg = slayerWeapon.getDamage();
 		float slayerMemoryDmg = slayerWeapon.getMemoryDmg();
 		float skillDmg = getDamageModifier(player); 
-		float slayerDemolitionDmg = slayerWeapon.getDemolitionDmg();
+		float slayerDemolitionDmg = slayerWeapon.getDemolition();
+		float criticalMultiplier = slayerWeapon.getCritical();
 
-		long damage = bestAttack + slayerDmg + (long)(bestAttack*slayerMemoryDmg*skillDmg);
-		damage += (long)(damage*slayerDemolitionDmg);
+		long damage = bestAttack + slayerDmg + (long)(bestAttack*slayerMemoryDmg);
+		damage = damage + (long)(damage*criticalMultiplier); //add critical damage
+		damage = damage + (long)(damage*skillDmg);	//add skill damage increase
+		damage = damage + (long)(damage*slayerDemolitionDmg); //add slayer demolition damage
 
+		player.setDmgType(slayerWeapon instanceof DemolitionWeapon ? 2 : (criticalMultiplier > 0 ? 1 : 0));
+		
 		synchronized(victims){
 			for(LivingObject victim : victims){
-				if(victim.getPercentageHp() == 100){
-					player.getClient().sendPacket(Type.EFFECT, player, victim , this, 0, 1, 30);
-				}
-				victim.getsAttacked(player, damage);
+				victim.getsAttacked(player, damage, false);
+				
+				int unknown = victim.getHp() <= 0 ? -1 : castStep==1 ? 1 : 0;
+				
 				player.getClient().sendPacket(Type.SAV, null,-1, -1, shoulderMount.getExtraStats(), 3);
-				if(victim.getHp() == 0){
-					player.getClient().sendPacket(Type.EFFECT, player, victim , this, 0, -1, 30);
+				if(unknown != 0){
+					player.getClient().sendPacket(Type.EFFECT, player, victim , this, 0, unknown, 30);
 				}
-				player.getClient().sendPacket(Type.AV, victim, player.getDmgType());		
+				player.getClient().sendPacket(Type.AV, victim, player.getDmgType());	
+				
+				if(victim.getHp() <= 0){
+					player.clearAttackQueue();
+				}
 			}
 		}
-
-		player.clearAttackQueue();
-
-
 		return true;
 	}
 	
-	public void effect(LivingObject source, LivingObject target){
-		if(target.getPercentageHp() == 100){
-			source.getInterested().sendPacket(Type.EFFECT, source, target , this, 0, 1, 30);
-		} else 	if(target.getHp() == 0){
-			source.getInterested().sendPacket(Type.EFFECT, source, target , this, 0, -1, 30);
+	public void effect(LivingObject source, LivingObject target, int castStep){
+		if(source == null || target == null)
+			return;
+		
+		int unknown = target.getHp() <= 0 ? -1 : 1;
+		if(castStep==1 || target.getHp()==0){
+			source.getInterested().sendPacket(Type.EFFECT, source, target , this, 0, unknown, 30);
 		}
 	}
 	

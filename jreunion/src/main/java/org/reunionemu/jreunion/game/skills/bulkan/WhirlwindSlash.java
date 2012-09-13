@@ -80,7 +80,7 @@ public class WhirlwindSlash extends WeaponAttack implements Castable, Effectable
 	}
 	
 	@Override
-	public boolean cast(LivingObject caster, List<LivingObject> victims) {
+	public boolean cast(LivingObject caster, List<LivingObject> victims, int castStep) {
 		
 		if(caster instanceof BulkanPlayer){	
 			Player player = (Player)caster;
@@ -130,7 +130,7 @@ public class WhirlwindSlash extends WeaponAttack implements Castable, Effectable
 			
 			synchronized(victims){	
 				for(LivingObject victim : victims){ 
-					victim.getsAttacked(player, damage);
+					victim.getsAttacked(player, damage, true);
 					player.getClient().sendPacket(Type.AV, victim, player.getDmgType());
 					//player.getInterested().sendPacket(Type.AV, victim, criticalMultiplier > 0 ? 1 : 0);
 				}
@@ -140,7 +140,7 @@ public class WhirlwindSlash extends WeaponAttack implements Castable, Effectable
 		return false;
 	}
 
-	public void effect(LivingObject source, LivingObject target){
+	public void effect(LivingObject source, LivingObject target, int castStep){
 		source.getInterested().sendPacket(Type.EFFECT, source, target , this, 0, 0, 0);
 	}
 	

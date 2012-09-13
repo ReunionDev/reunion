@@ -100,7 +100,7 @@ public class SecondAttack extends Skill{
 		
 		synchronized(victims){
 			for(LivingObject victim : victims){
-				victim.getsAttacked(player, damage);
+				victim.getsAttacked(player, damage, false);
 				player.getClient().sendPacket(Type.SAV, victim,	player.getDmgType(), 0,
 						shoulderMount.getExtraStats(), 3);
 				player.getInterested().sendPacket(Type.SECONDATTACK, player, victim, getId());

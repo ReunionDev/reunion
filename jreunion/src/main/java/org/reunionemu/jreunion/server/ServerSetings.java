@@ -57,6 +57,8 @@ public class ServerSetings {
 	
 	private int rangeAttackRadius;	//Minimum distance when range attack mobs will start attacking
 	
+	private float demolitionModifier; //% of damage increase of demolition attacks from Slayer weapon
+	
 	public ServerSetings() {
 		loadFromReference();
 	}
@@ -94,6 +96,7 @@ public class ServerSetings {
 			setMobsMovement(1);
 			setCloseAttackRadius(20);
 			setRangeAttackRadius(100);
+			setDemolitionModifier(0.5f);
 			setWelcomeMessage("Hey, welcome on the Reunion Testserver");
 		} else {
 
@@ -268,6 +271,14 @@ public class ServerSetings {
 			} else {
 				// use default
 				setRangeAttackRadius(100);
+			}
+			
+			if (server.checkMembers(new String[] { "DemolitionModifier" })) {
+				// use member from file
+				setDemolitionModifier(Float.parseFloat(server.getMemberValue("DemolitionModifier")));
+			} else {
+				// use default
+				setDemolitionModifier(0.5f);
 			}
 			
 		}
@@ -455,5 +466,13 @@ public class ServerSetings {
 
 	public void setRangeAttackRadius(int rangeAttackRadius) {
 		this.rangeAttackRadius = rangeAttackRadius;
+	}
+
+	public float getDemolitionModifier() {
+		return demolitionModifier;
+	}
+
+	public void setDemolitionModifier(float demolitionModifier) {
+		this.demolitionModifier = demolitionModifier;
 	}
 }

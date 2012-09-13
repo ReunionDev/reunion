@@ -10,6 +10,7 @@ import org.reunionemu.jreunion.game.items.SpecialWeapon;
 import org.reunionemu.jreunion.server.DatabaseUtils;
 import org.reunionemu.jreunion.server.Reference;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
+import org.reunionemu.jreunion.server.Server;
 
 /**
  * @author Aidamina
@@ -76,6 +77,11 @@ public class SlayerWeapon extends SpecialWeapon implements Usable {
 	public float getDemolitionDmg() {
 		return demolitionDmg;
 	}
+	
+	public float getDemolition() {
+		return Server.getRand().nextFloat() <= this.getDemolitionDmg() ? 
+				Server.getInstance().getWorld().getServerSetings().getDemolitionModifier() : 1;
+	}
 
 	public void setDemolitionDmg(float demolitionDmg) {
 		this.demolitionDmg = demolitionDmg;
@@ -90,7 +96,7 @@ public class SlayerWeapon extends SpecialWeapon implements Usable {
 	}
 
 	@Override
-	public void use(Item<?> slayerWeapon, LivingObject user, int quickSlotPosition, int unknown) {
+	public boolean use(Item<?> slayerWeapon, LivingObject user, int quickSlotPosition, int unknown) {
 				
 		if(user instanceof Player) {
 			Player player = (Player) user;
@@ -98,20 +104,33 @@ public class SlayerWeapon extends SpecialWeapon implements Usable {
 			if (slayerWeapon.getExtraStats() <= 0) {
 				Logger.getLogger(this.getClass()).warn(
 						"Possible cheat detected: player " + player
-								+ " is trying to use empty " + this.getName()
-								+ ".");
-				return;
+								+ " is trying to use empty " + this.getName() + ".");
+				return false;
 			}
 
-			slayerWeapon.setExtraStats(slayerWeapon.getExtraStats() - 20);
-			player.setStamina(player.getStamina() - getStmUsed());
+			//update Slayer uses remain
+			int usesRemain = slayerWeapon.getExtraStats() - 20;
+			if(usesRemain < 0){
+				return false;
+			}
+			slayerWeapon.setExtraStats(usesRemain);
 			DatabaseUtils.getDinamicInstance().saveItem(slayerWeapon);
+			
+			//update player stamina
+			long staminaRemain = player.getStamina() - getStmUsed();
+			if(staminaRemain < 0){
+				return false;
+			}
+			player.setStamina(staminaRemain);
 			
 			if (player.getClient().getVersion() >= 2000)
 				player.getClient().sendPacket(Type.UQ_ITEM, 1, quickSlotPosition,
 						slayerWeapon.getEntityId(), unknown);
-		}
-		else
+			return true;
+		} else {
 			Logger.getLogger(SlayerWeapon.class).warn(this.getName() + " not implemented for " + user.getName());
+		}
+		
+		return false;
 	}
 }

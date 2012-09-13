@@ -162,7 +162,7 @@ public class SafetyShield extends Skill implements Castable, Effectable{
 	@Override
 	//TODO: handle with DefenceBonus and DamageAbsorb
 	//TODO: implement damage reflection
-	public boolean cast(LivingObject caster, List<LivingObject> victims) {
+	public boolean cast(LivingObject caster, List<LivingObject> victims, int castStep) {
 		
 		if(caster instanceof AidiaPlayer){
 			final Player player = (Player) caster;

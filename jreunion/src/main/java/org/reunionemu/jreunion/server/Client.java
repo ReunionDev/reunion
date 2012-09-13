@@ -161,7 +161,6 @@ public class Client extends EventDispatcher implements EventListener, Sendable {
 		this.state = state;
 	}
 	public String toString(){
-		int debugMode = Server.getInstance().getWorld().getServerSetings().getDebugMode(); 
 		StringBuffer buffer = new StringBuffer();
 		buffer.append("{");
 

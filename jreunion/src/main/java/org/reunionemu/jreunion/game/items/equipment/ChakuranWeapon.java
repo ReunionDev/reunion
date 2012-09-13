@@ -90,20 +90,41 @@ public class ChakuranWeapon extends SpecialWeapon implements Usable{
 	}
 
 	@Override
-	public void use(Item<?> chakuranWeapon, LivingObject user, int quickSlotPosition, int unknown) {
+	public boolean use(Item<?> chakuranWeapon, LivingObject user, int quickSlotPosition, int unknown) {
 		
 		if(user instanceof Player) {
 			Player player = (Player) user;
 		
-			chakuranWeapon.setExtraStats(chakuranWeapon.getExtraStats() - 20);
-			player.setStamina(player.getStamina() - getStmUsed());
+			if (chakuranWeapon.getExtraStats() <= 0) {
+				Logger.getLogger(this.getClass()).warn(
+						"Possible cheat detected: player " + player
+								+ " is trying to use empty " + this.getName() + ".");
+				return false;
+			}
+			
+			//update Chakuran uses remain
+			int usesRemain = chakuranWeapon.getExtraStats() - 20;
+			if(usesRemain < 0){
+				return false;
+			}
+			chakuranWeapon.setExtraStats(usesRemain);
 			DatabaseUtils.getDinamicInstance().saveItem(chakuranWeapon);
+			
+			//update player stamina
+			long staminaRemain = player.getStamina() - getStmUsed();
+			if(staminaRemain < 0){
+				return false;
+			}
+			player.setStamina(staminaRemain);
 			
 			if (player.getClient().getVersion() >= 2000)
 				player.getClient().sendPacket(Type.UQ_ITEM, 1, quickSlotPosition,
 						chakuranWeapon.getEntityId(), unknown);
-		}
-		else
+			return true;
+		} else {
 			Logger.getLogger(ChakuranWeapon.class).warn(this.getName() + " not implemented for " + user.getName());
+		}
+		
+		return false;
 	}
 }

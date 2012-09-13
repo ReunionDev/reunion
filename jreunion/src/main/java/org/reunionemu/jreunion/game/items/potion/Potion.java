@@ -40,19 +40,23 @@ public abstract class Potion extends Etc implements Usable {
 	}
 	
 	@Override
-	public void use(final Item<?> item, final LivingObject user, int quickSlotPosition, int unknown) {
+	public boolean use(final Item<?> item, final LivingObject user, int quickSlotPosition, int unknown) {
 	
 		if(user instanceof Player){
 			Player player = (Player)user;
 			item.startJob(createJob(player, item), Potion.tickLength);
 
-			if (player.getClient().getVersion() >= 2000)
+			if (player.getClient().getVersion() >= 2000) {
 				player.getClient().sendPacket(Type.UQ_ITEM, 1,
 						quickSlotPosition, item.getEntityId(), unknown);
+			}
+			
+			return true;
+		} else {
+			Logger.getLogger(this.getClass()).warn(this.getName() + " not implemented for " + user.getName());
 		}
-		else
-			Logger.getLogger(Potion.class).warn(this.getName() + " not implemented for " + user.getName());
 	
+		return false;
 	}
 
 	@Override

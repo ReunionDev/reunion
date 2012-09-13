@@ -77,7 +77,7 @@ public class Recovery extends Skill implements Castable{
 	//when casted, this skill will only send to the client
 	//the new hp and mana values.
 	@Override
-	public boolean cast(LivingObject caster, List<LivingObject> victims) {
+	public boolean cast(LivingObject caster, List<LivingObject> victims, int castStep) {
 
 		Iterator<LivingObject> victimsIterator = victims.iterator();
 		

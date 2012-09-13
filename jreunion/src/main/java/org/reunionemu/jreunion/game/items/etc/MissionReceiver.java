@@ -28,7 +28,7 @@ public class MissionReceiver extends Etc implements Usable{
 	}
 	
 	@Override
-	public void use(Item<?> item, LivingObject user, int quickSlotPosition, int unknown) {
+	public boolean use(Item<?> item, LivingObject user, int quickSlotPosition, int unknown) {
 		if(user instanceof Player){
 			Player player = (Player)user;
 			
@@ -36,13 +36,13 @@ public class MissionReceiver extends Etc implements Usable{
 			if(player.getLevel() >= 100){
 				player.getClient().sendPacket(Type.SAY, "Your level is to high to use this item.\n" +
 						"Please use the Advanced Mission Receiver.");
-				return;
+				return false;
 			}
 			
 			//check if the MR has run out of quests.
 			if(item.getExtraStats() <= 0){
 				player.getClient().sendPacket(Type.SAY, "Mission Reciever run out of available quests.");
-				return;
+				return false;
 			}
 			
 			Quest quest = player.getClient().getWorld().getQuestManager().getRandomQuest(player);
@@ -50,15 +50,19 @@ public class MissionReceiver extends Etc implements Usable{
 			//check if a quest for the player level have been found.
 			if(quest == null){
 				player.getClient().sendPacket(Type.SAY, "No quests available for character level.");
-				return;
+				return false;
 			} 
 			
 			item.setExtraStats(item.getExtraStats()-1);
 			DatabaseUtils.getDinamicInstance().saveItem(item);
 			player.setQuest(quest);
-		}
-		else
+			
+			return true;
+		} else {
 			Logger.getLogger(MissionReceiver.class).warn(this.getName() + " not implemented for " + user.getName());
+		}
+		
+		return false;
 	}
 	
 	@Override

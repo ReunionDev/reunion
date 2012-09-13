@@ -81,7 +81,7 @@ public class OverHeadBlow extends WeaponAttack implements Castable, Effectable{
 	}
 	
 	@Override
-	public boolean cast(LivingObject caster, List<LivingObject> victims) {
+	public boolean cast(LivingObject caster, List<LivingObject> victims, int castStep) {
 		
 		if(caster instanceof BulkanPlayer){	
 			Player player = (Player)caster;
@@ -131,7 +131,7 @@ public class OverHeadBlow extends WeaponAttack implements Castable, Effectable{
 			
 			synchronized(victims){
 				for(LivingObject victim : victims){
-					victim.getsAttacked(player, damage);
+					victim.getsAttacked(player, damage, true);
 					player.getClient().sendPacket(Type.AV, victim, player.getDmgType());
 				}
 				return true;
@@ -140,7 +140,7 @@ public class OverHeadBlow extends WeaponAttack implements Castable, Effectable{
 		return false;
 	}
 
-	public void effect(LivingObject source, LivingObject target){
+	public void effect(LivingObject source, LivingObject target, int castStep){
 		source.getInterested().sendPacket(Type.EFFECT, source, target , this, 0, 0, 0);
 	}
 	
