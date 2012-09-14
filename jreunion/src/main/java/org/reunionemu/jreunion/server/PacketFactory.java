@@ -1240,7 +1240,7 @@ public class PacketFactory {
 			break;
 		case EXCH_MONEY:
 			if(args.length==1){
-				long money = (long)args[0];
+				long money = (Long)args[0];
 								
 				return "exch_money "+money;
 			}
