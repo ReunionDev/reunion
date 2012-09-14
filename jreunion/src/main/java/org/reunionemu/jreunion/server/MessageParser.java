@@ -619,7 +619,7 @@ public class MessageParser {
 				
 			} catch (UnknownHostException e) {
 				
-				Logger.getLogger(Debug.class).warn("host("+host+") not found in @debug",e);
+				Logger.getLogger(MessageParser.class).warn("host("+host+") not found in @debug",e);
 				com.serverTell(client, "Host not found");
 			}
 			 client.sendPacket(Type.SAY, "Spawnpoint cannot be added");
