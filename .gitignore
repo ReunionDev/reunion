@@ -1,4 +1,6 @@
 .*
+!.gitignore
 target
+*.log
 /jreunion/logs/*
 /jreunion/data
