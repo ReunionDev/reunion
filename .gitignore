@@ -1,6 +1,4 @@
-
-/*/.settings
-/*/target
-/.metadata
+.*
+target
 /jreunion/logs/*
 /jreunion/data
