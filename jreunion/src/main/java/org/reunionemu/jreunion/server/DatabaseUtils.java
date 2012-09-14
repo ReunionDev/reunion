@@ -9,7 +9,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.reunionemu.jreunion.game.Equipment;
 import org.reunionemu.jreunion.game.Equipment.Slot;
 import org.reunionemu.jreunion.game.ExchangeItem;
@@ -129,7 +130,7 @@ public class DatabaseUtils extends Service {
 			}
 			return -1;
 		} catch (SQLException e) {
-			Logger.getLogger(this.getClass()).warn("Exception",e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 			return -1;
 		}
 	}
@@ -150,7 +151,7 @@ public class DatabaseUtils extends Service {
 			}
 			rs.close();
 		} catch (SQLException e) {
-			Logger.getLogger(this.getClass()).error("Exception", e);
+			LoggerFactory.getLogger(this.getClass()).error("Exception", e);
 		}
 		return position;
 	}
@@ -165,7 +166,7 @@ public class DatabaseUtils extends Service {
 				stmt.execute("UPDATE `characters` SET `x`="+position.getX()+", `y`="+position.getY()+", `z`="+position.getZ()+", `mapId`="+position.getMap().getId()+" WHERE `characters`.`id`="+player.getPlayerId());
 			
 		} catch (SQLException e) {
-			Logger.getLogger(this.getClass()).error("Exception", e);
+			LoggerFactory.getLogger(this.getClass()).error("Exception", e);
 		}
 	}
 	
@@ -244,11 +245,11 @@ public class DatabaseUtils extends Service {
 			}
 			
 		} catch (SQLException e) {
-			Logger.getLogger(this.getClass()).warn("Exception",e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 			return null;
 		}
 		
-		Logger.getLogger(DatabaseUtils.class).info("found " + chars
+		LoggerFactory.getLogger(DatabaseUtils.class).info("found " + chars
 				+ " char(s) for Account(" + accountId + ")");	
 		
 		charlist += "chars_end 0 "+accountId+"\n";
@@ -277,7 +278,7 @@ public class DatabaseUtils extends Service {
 			
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			
 		}
 		return equipment;
@@ -310,7 +311,7 @@ public class DatabaseUtils extends Service {
 			
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			
 		}
 		return equipment;
@@ -366,7 +367,7 @@ public class DatabaseUtils extends Service {
 			} else
 				return null;
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			return null;
 		}
 	}
@@ -434,7 +435,7 @@ public class DatabaseUtils extends Service {
 			setSavedPosition(player);
 						
 		} catch (Exception e) {
-			Logger.getLogger(this.getClass()).warn("Exception",e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 			return;
 		}
 	}
@@ -458,7 +459,7 @@ public class DatabaseUtils extends Service {
 				} while(rs.next());
 			}
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			return null;
 		}
 		return petList;
@@ -499,7 +500,7 @@ public class DatabaseUtils extends Service {
 			} else
 				return null;
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			return null;
 		}
 	}
@@ -548,7 +549,7 @@ public class DatabaseUtils extends Service {
 			    pet.setId(res.getInt(1));			
 			
 		} catch (Exception e) {
-			Logger.getLogger(this.getClass()).warn("Exception",e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 			return;
 		}
 	}
@@ -586,7 +587,7 @@ public class DatabaseUtils extends Service {
 			selectStmt.execute("UPDATE characters SET petid = -1 WHERE id = "+pet.getOwner().getPlayerId()+";");
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			return;
 		}
 	}
@@ -624,7 +625,7 @@ public class DatabaseUtils extends Service {
 		catch (SQLException e) 
 		{
 			
-			Logger.getLogger(this.getClass()).warn("Exception",e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 			
 		}
 	}
@@ -644,7 +645,7 @@ public class DatabaseUtils extends Service {
 			} else
 				return true;
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			return false;
 		}
 	}
@@ -694,7 +695,7 @@ public class DatabaseUtils extends Service {
 			saveCharacter(player);
 			int charId = player.getPlayerId();
 			
-			Logger.getLogger(DatabaseUtils.class).info(charId);
+			LoggerFactory.getLogger(DatabaseUtils.class).info(""+charId);
 			
 			stmt.execute("INSERT INTO slots (charid, slot, accountid) VALUES ("
 					+ charId + ","
@@ -753,7 +754,7 @@ public class DatabaseUtils extends Service {
 			saveInventory(player);
 						
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			return;
 		}
 	}
@@ -779,11 +780,11 @@ public class DatabaseUtils extends Service {
 				player = loadCharStatus(client, characterId);
 				player.setSlot(slot);
 				
-				Logger.getLogger(DatabaseUtils.class).info("Loaded: " + player.getName());
+				LoggerFactory.getLogger(DatabaseUtils.class).info("Loaded: " + player.getName());
 			}
 			
 		} catch (SQLException e) {
-			Logger.getLogger(this.getClass()).warn("Exception", e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception", e);
 		}
 		
 		return player;
@@ -816,7 +817,7 @@ public class DatabaseUtils extends Service {
 			}
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			return null;
 		}
 		return player;
@@ -861,7 +862,7 @@ public class DatabaseUtils extends Service {
 			//queue.add(saveInventory);
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			return;
 		}
 	}
@@ -897,7 +898,7 @@ public class DatabaseUtils extends Service {
 		} catch (SQLException e) 
 		{
 			
-			Logger.getLogger(this.getClass()).warn("Exception",e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 			return idList;
 		}
 		return idList;
@@ -921,7 +922,7 @@ public class DatabaseUtils extends Service {
 		catch (SQLException e) 
 		{
 			
-			Logger.getLogger(this.getClass()).warn("Exception",e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 			
 		}
 		return -1;
@@ -944,7 +945,7 @@ public class DatabaseUtils extends Service {
 				ItemType itemType = Server.getInstance().getWorld().getItemManager().getItemType(type);
 				
 				if (itemType == null) {
-					Logger.getLogger(DatabaseUtils.class).error("Item type "+type+" load failed, no such item type!");
+					LoggerFactory.getLogger(DatabaseUtils.class).error("Item type "+type+" load failed, no such item type!");
 					itemType = new ItemType(type);;
 				} 
 				
@@ -964,7 +965,7 @@ public class DatabaseUtils extends Service {
 		catch (SQLException e) 
 		{
 			
-			Logger.getLogger(this.getClass()).warn("Exception",e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 			
 		}
 		return null;
@@ -979,7 +980,7 @@ public class DatabaseUtils extends Service {
 			return stmt.execute("DELETE FROM `roaming` WHERE `itemid`="+item.getItemId()+";");
 			
 		}catch (Exception e) {
-			Logger.getLogger(this.getClass()).warn("Exception",e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 		}
 		return false;
 	}
@@ -1011,7 +1012,7 @@ public class DatabaseUtils extends Service {
 				}
 				
 			} catch (SQLException e) {
-				Logger.getLogger(this.getClass()).warn("Exception",e);
+				LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 				return null;
 			}
 		
@@ -1045,7 +1046,7 @@ public class DatabaseUtils extends Service {
 		
 		} 
 		catch (Exception e) {
-			Logger.getLogger(this.getClass()).warn("Exception",e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 		}
 	}
 	public synchronized void saveItem(Item<?> item){
@@ -1068,7 +1069,7 @@ public class DatabaseUtils extends Service {
 											 ", `unknown3`="+item.getUnknown3()+
 											 " WHERE `Id` = "+itemId);
 				if(res==0){
-					Logger.getLogger(DatabaseUtils.class).error("item not found: "+itemId);					
+					LoggerFactory.getLogger(DatabaseUtils.class).error("item not found: "+itemId);					
 				}
 			} else {
 				stmt.execute("INSERT INTO items (type, gemnumber, extrastats, durability, unknown1, unknown2, unknown3)" +
@@ -1089,7 +1090,7 @@ public class DatabaseUtils extends Service {
 			
 		} 
 		catch (Exception e) {
-			Logger.getLogger(this.getClass()).warn("Exception",e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 		}
 		
 	}
@@ -1110,7 +1111,7 @@ public class DatabaseUtils extends Service {
 		catch (SQLException e) 
 		{
 			
-			Logger.getLogger(this.getClass()).warn("Exception",e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 			
 		}
 	}
@@ -1144,7 +1145,7 @@ public class DatabaseUtils extends Service {
 				stmt.execute(query+data);
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			return;
 		}
 	}
@@ -1166,7 +1167,7 @@ public class DatabaseUtils extends Service {
 			}
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			return;
 		}
 	}
@@ -1198,7 +1199,7 @@ public class DatabaseUtils extends Service {
 				stmt.execute(query+data);
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			return;
 		}
 	}
@@ -1234,7 +1235,7 @@ public class DatabaseUtils extends Service {
 				stmt.execute(query+data);
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			return;
 		}
 	}
@@ -1258,7 +1259,7 @@ public class DatabaseUtils extends Service {
 			}
 						
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception ",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception ",e1);
 			return;
 		}
 	}
@@ -1285,7 +1286,7 @@ public class DatabaseUtils extends Service {
 			}
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception ",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception ",e1);
 			return;
 		  }
 	}
@@ -1310,7 +1311,7 @@ public class DatabaseUtils extends Service {
 			}
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			return;
 		}
 	}
@@ -1338,7 +1339,7 @@ public class DatabaseUtils extends Service {
 			}
 			
 		} catch (SQLException e) {
-			Logger.getLogger(this.getClass()).warn("Exception", e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception", e);
 			return;
 		}
 	}
@@ -1357,7 +1358,7 @@ public class DatabaseUtils extends Service {
 		catch (SQLException e) 
 		{
 			
-			Logger.getLogger(this.getClass()).warn("Exception",e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 			
 		}
 	}
@@ -1381,7 +1382,7 @@ public class DatabaseUtils extends Service {
 			}
 			
 		} catch (SQLException e) {
-			Logger.getLogger(this.getClass()).warn("Exception", e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception", e);
 			return;
 		}
 	}
@@ -1407,7 +1408,7 @@ public class DatabaseUtils extends Service {
 			}
 			
 		} catch (SQLException e) {
-			Logger.getLogger(this.getClass()).warn("Exception",e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 			return;
 		  }
 	}
@@ -1421,7 +1422,7 @@ public class DatabaseUtils extends Service {
 			return stmt.execute("DELETE FROM `quickslot` WHERE `itemid`="+item.getItemId()+";");
 			
 		}catch (Exception e) {
-			Logger.getLogger(this.getClass()).warn("Exception",e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 		}
 		return false;
 	}
@@ -1444,13 +1445,13 @@ public class DatabaseUtils extends Service {
 					questsList.put(quest.getId(), quest);
 				} while(rs.next());
 			} else {		
-				Logger.getLogger(DatabaseUtils.class).error("Failed to get quests from the Static Database!");
+				LoggerFactory.getLogger(DatabaseUtils.class).error("Failed to get quests from the Static Database!");
 				return null;
 			}
 		} 
 		catch (SQLException e) 
 		{
-			Logger.getLogger(this.getClass()).warn("Exception",e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 		}
 		return questsList;
 	}
@@ -1469,7 +1470,7 @@ public class DatabaseUtils extends Service {
 			ResultSet questRs = questStmt.executeQuery("SELECT * FROM quests WHERE id='"+questId+"';");
 			
 			if (!questRs.next()) {				
-				Logger.getLogger(DatabaseUtils.class).info("Quest loaded failed, no such quest ID!");
+				LoggerFactory.getLogger(DatabaseUtils.class).info("Quest loaded failed, no such quest ID!");
 				return null;
 			}
 			
@@ -1477,7 +1478,7 @@ public class DatabaseUtils extends Service {
 			ResultSet questTypeRs = questTypeStmt.executeQuery("SELECT * FROM quests_type WHERE id='"+questRs.getInt("typeid")+"';");
 			
 			if(!questTypeRs.next()) {				
-				Logger.getLogger(DatabaseUtils.class).info("Quest Type loaded failed, no such quest type ID!");
+				LoggerFactory.getLogger(DatabaseUtils.class).info("Quest Type loaded failed, no such quest type ID!");
 				return null;
 			}
 			
@@ -1496,7 +1497,7 @@ public class DatabaseUtils extends Service {
 		} 
 		catch (SQLException e) 
 		{
-			Logger.getLogger(this.getClass()).warn("Exception",e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 		}
 		return null;
 	}
@@ -1520,7 +1521,7 @@ public class DatabaseUtils extends Service {
 					ResultSet objectiveTypeRs = objectiveTypeStmt.executeQuery("SELECT * FROM quests_objective_type WHERE id='"+objectiveRs.getInt("objectivetype")+"';");
 					
 					if(!objectiveTypeRs.next()) {				
-						Logger.getLogger(DatabaseUtils.class).info("Quest Objective Type loaded failed, no such objective type ID!");
+						LoggerFactory.getLogger(DatabaseUtils.class).info("Quest Objective Type loaded failed, no such objective type ID!");
 						return false;
 					}
 					
@@ -1530,13 +1531,13 @@ public class DatabaseUtils extends Service {
 					quest.addObjective(objective);
 				} while(objectiveRs.next());
 			} else {
-				Logger.getLogger(DatabaseUtils.class).error("Quest Objectives loaded failed, no objectives found!");
+				LoggerFactory.getLogger(DatabaseUtils.class).error("Quest Objectives loaded failed, no objectives found!");
 				return false;
 			}
 		} 
 		catch (SQLException e) 
 		{
-			Logger.getLogger(this.getClass()).warn("Exception",e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 		}
 		
 		return true;
@@ -1561,7 +1562,7 @@ public class DatabaseUtils extends Service {
 					ResultSet rewardTypeRs = rewardTypeStmt.executeQuery("SELECT * FROM quests_reward_type WHERE id='"+rewardRs.getInt("rewardtype")+"';");
 					
 					if(!rewardTypeRs.next()) {				
-						Logger.getLogger(DatabaseUtils.class).error("Quest Reward Type loaded failed, no such reward type ID!");
+						LoggerFactory.getLogger(DatabaseUtils.class).error("Quest Reward Type loaded failed, no such reward type ID!");
 						return false;
 					}					
 					
@@ -1571,13 +1572,13 @@ public class DatabaseUtils extends Service {
 					quest.addReward(reward);
 				} while(rewardRs.next());
 			} else {
-				Logger.getLogger(DatabaseUtils.class).error("Quest Rewards loaded failed, no rewards found!");
+				LoggerFactory.getLogger(DatabaseUtils.class).error("Quest Rewards loaded failed, no rewards found!");
 				return false;
 			}
 		} 
 		catch (SQLException e) 
 		{
-			Logger.getLogger(this.getClass()).warn("Exception",e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 		}
 		
 		return true;
@@ -1617,7 +1618,7 @@ public class DatabaseUtils extends Service {
 			
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			
 		}
 		return questState;
@@ -1640,7 +1641,7 @@ public class DatabaseUtils extends Service {
 			
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			
 		}
 		return ammount;
@@ -1680,7 +1681,7 @@ public class DatabaseUtils extends Service {
 				questStateId = res.getInt(1);
 				
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			
 		}
 		return questStateId;
@@ -1721,7 +1722,7 @@ public class DatabaseUtils extends Service {
 				
 			}
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			
 		}
 		return true;
@@ -1746,7 +1747,7 @@ public class DatabaseUtils extends Service {
 			stmt.execute("DELETE FROM queststate WHERE id="+questStateId+";");
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			
 		}
 		return questStateId;
@@ -1763,7 +1764,7 @@ public class DatabaseUtils extends Service {
 			stmt.execute("DELETE FROM questobjectivestate WHERE queststateid='"+questStateId+"';");
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			
 		}
 		return true;
@@ -1790,7 +1791,7 @@ public class DatabaseUtils extends Service {
 			.execute("DELETE FROM equipment WHERE charid = "+charId+ ";");
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			return;
 		}
 	}
@@ -1816,7 +1817,7 @@ public class DatabaseUtils extends Service {
 			.execute("DELETE FROM exchange WHERE charid = "+charId+ ";");
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			return;
 		}
 	}
@@ -1842,7 +1843,7 @@ public class DatabaseUtils extends Service {
 			.execute("DELETE FROM inventory WHERE charid = "+charId+ ";");
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			return;
 		}
 	}
@@ -1868,7 +1869,7 @@ public class DatabaseUtils extends Service {
 			.execute("DELETE FROM queststate WHERE charid = "+charId+ ";");
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			return;
 		}
 	}
@@ -1894,7 +1895,7 @@ public class DatabaseUtils extends Service {
 			.execute("DELETE FROM quickslot WHERE charid = "+charId+ ";");
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			return;
 		}
 	}
@@ -1909,7 +1910,7 @@ public class DatabaseUtils extends Service {
 			.execute("DELETE FROM skills WHERE charid = "+charId+ ";");
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			return;
 		}
 	}
@@ -1924,7 +1925,7 @@ public class DatabaseUtils extends Service {
 			.execute("DELETE FROM characters WHERE id = "+charId+ ";");
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			return;
 		}
 	}
@@ -1940,7 +1941,7 @@ public class DatabaseUtils extends Service {
 			stmt.execute("DELETE FROM slots WHERE charid = "+ charId + ";");
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			return;
 		}
 	}
@@ -1965,7 +1966,7 @@ public class DatabaseUtils extends Service {
 				charId = rs.getInt("charid");
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			return -1;
 		}
 		
@@ -1988,7 +1989,7 @@ public class DatabaseUtils extends Service {
 				charName = rs.getString("name");
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			return "";
 		}
 		
@@ -2014,7 +2015,7 @@ public class DatabaseUtils extends Service {
 				guildId = Integer.parseInt(rsId.getString("id"));
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			return 0;
 		}
 		return guildId;

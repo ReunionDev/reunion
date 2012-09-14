@@ -8,7 +8,8 @@ import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Aidamina
@@ -61,7 +62,7 @@ public class Area {
 	public boolean load(String filename, Field field) {
 		File file = new File(filename);
 		if(!file.exists()){
-			Logger.getLogger(this.getClass()).error("File not found: "+file);
+			LoggerFactory.getLogger(this.getClass()).error("File not found: "+file);
 			return false;			
 		}
 
@@ -92,12 +93,12 @@ public class Area {
             } else {
             	throw new Exception("No valid reader found for file: " + file);            	
             }
-			//Logger.getLogger(Area.class).info("done loading: " + file);
+			//LoggerFactory.getLogger(Area.class).info("done loading: " + file);
 
 			return true;
 
 		} catch (Exception e) {
-			Logger.getLogger(this.getClass()).error("Exception",e);
+			LoggerFactory.getLogger(this.getClass()).error("Exception",e);
 			return false;
 		}
 	}

@@ -5,7 +5,8 @@ import java.util.List;
 import java.util.TimerTask;
 import java.util.Vector;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.reunionemu.jcommon.ParsedItem;
 import org.reunionemu.jcommon.Parser;
 import org.reunionemu.jreunion.game.items.equipment.*;
@@ -396,7 +397,7 @@ public class Npc<T extends NpcType> extends LivingObject {
 					getCommand().dropItem(this.getPosition(), item, player);
 			roamingItem.setOwner(player);
 			roamingItem.setDropExclusivity(player);
-			Logger.getLogger(Npc.class).info("Mob "+this+" droped roaming item "+roamingItem);
+			LoggerFactory.getLogger(Npc.class).info("Mob "+this+" droped roaming item "+roamingItem);
 		}
 	}
 	
@@ -628,7 +629,7 @@ public class Npc<T extends NpcType> extends LivingObject {
 				moveFree();
 			}
 		} catch (Exception e) {
-			Logger.getLogger(this.getClass()).info("Mob Bug "+e);
+			LoggerFactory.getLogger(this.getClass()).info("Mob Bug "+e);
 			//TODO: Fix Mob move bug
 		}
 	}

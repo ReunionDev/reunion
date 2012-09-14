@@ -4,7 +4,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.reunionemu.jreunion.server.DatabaseUtils;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
 
@@ -118,7 +119,7 @@ public class QuickSlotBar {
 		
 		player.getPosition().getLocalMap().getWorld().getCommand().useItem(player, item, quickSlotBarPosition, unknown);
 		
-		Logger.getLogger(QuickSlotBar.class).info(player.getName()+" used item: " +item.getType().getName());
+		LoggerFactory.getLogger(QuickSlotBar.class).info(player.getName()+" used item: " +item.getType().getName());
 		
 		removeItem(qsItem);
 		DatabaseUtils.getDinamicInstance().deleteQuickSlotItem(item);
@@ -134,7 +135,7 @@ public class QuickSlotBar {
 		
 		player.getPosition().getLocalMap().getWorld().getCommand().useItem(player, item, slot);
 		
-		Logger.getLogger(QuickSlotBar.class).info(player.getName()+" used item: " +item.getType().getName());
+		LoggerFactory.getLogger(QuickSlotBar.class).info(player.getName()+" used item: " +item.getType().getName());
 		
 		removeItem(qsItem);
 		DatabaseUtils.getDinamicInstance().deleteQuickSlotItem(item);

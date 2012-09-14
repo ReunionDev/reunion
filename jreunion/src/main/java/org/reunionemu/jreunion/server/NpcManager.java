@@ -4,7 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.reunionemu.jcommon.ParsedItem;
 import org.reunionemu.jcommon.Parser;
@@ -36,7 +37,7 @@ public class NpcManager {
 			NpcType npcType = (NpcType)ClassFactory.create(className, id);
 			
 			if(npcType == null){
-				Logger.getLogger(NpcManager.class).warn("Failed to load Npc type {id:"+id+" name:"
+				LoggerFactory.getLogger(NpcManager.class).warn("Failed to load Npc type {id:"+id+" name:"
 						+parsedItem.getName()+"}");
 				continue;
 			}
@@ -44,7 +45,7 @@ public class NpcManager {
 			npcList.put(id, npcType);
 		}
 		npcParser.clear();
-		Logger.getLogger(ItemManager.class).info("Loaded "+npcList.size()+" npc types");
+		LoggerFactory.getLogger(ItemManager.class).info("Loaded "+npcList.size()+" npc types");
 		
 		
 		Parser mobParser = Reference.getInstance().getMobReference();
@@ -61,14 +62,14 @@ public class NpcManager {
 			NpcType npcType = (NpcType)ClassFactory.create(className, id);
 			
 			if(npcType == null){
-				Logger.getLogger(NpcManager.class).warn("Failed to load Mob type {id:"+id+" name:"
+				LoggerFactory.getLogger(NpcManager.class).warn("Failed to load Mob type {id:"+id+" name:"
 						+parsedItem.getName()+"}");
 				continue;
 			}
 			
 			npcList.put(id, npcType);
 		}
-		Logger.getLogger(ItemManager.class).info("Loaded "+getMobList().size()+" mob types");
+		LoggerFactory.getLogger(ItemManager.class).info("Loaded "+getMobList().size()+" mob types");
 		mobParser.clear();
 		
 	}

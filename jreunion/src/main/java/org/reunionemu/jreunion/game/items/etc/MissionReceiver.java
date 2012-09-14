@@ -1,6 +1,7 @@
 package org.reunionemu.jreunion.game.items.etc;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.ItemPosition;
 import org.reunionemu.jreunion.game.LivingObject;
@@ -59,7 +60,7 @@ public class MissionReceiver extends Etc implements Usable{
 			
 			return true;
 		} else {
-			Logger.getLogger(MissionReceiver.class).warn(this.getName() + " not implemented for " + user.getName());
+			LoggerFactory.getLogger(MissionReceiver.class).warn(this.getName() + " not implemented for " + user.getName());
 		}
 		
 		return false;

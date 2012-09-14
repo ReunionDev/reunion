@@ -1,6 +1,7 @@
 package org.reunionemu.jreunion.server;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Aidamina
@@ -17,7 +18,7 @@ public class REHandler implements Runnable {
         try {
             delegate.run ();
         } catch (RuntimeException e) {
-            Logger.getLogger(this.getClass()).error(e.getMessage(),e);
+            LoggerFactory.getLogger(this.getClass()).error(e.getMessage(),e);
         }
     }
 }

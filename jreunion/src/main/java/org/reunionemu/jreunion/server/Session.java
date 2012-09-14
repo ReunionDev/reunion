@@ -3,7 +3,8 @@ package org.reunionemu.jreunion.server;
 import java.util.List;
 import java.util.Vector;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.reunionemu.jreunion.events.Event;
 import org.reunionemu.jreunion.events.EventDispatcher;
@@ -82,7 +83,7 @@ public class Session extends EventDispatcher implements EventListener{
 	
 	public void exit(WorldObject entity, boolean defaultAction){
 
-		//Logger.getLogger(Session.class).debug("exit "+getOwner()+" "+entity);
+		//LoggerFactory.getLogger(Session.class).debug("exit "+getOwner()+" "+entity);
 		synchronized(entities){
 			if (!entities.contains(entity)) {
 				return;
@@ -102,7 +103,7 @@ public class Session extends EventDispatcher implements EventListener{
 	}
 	public void enter(WorldObject entity, boolean defaultAction){
 		
-		//Logger.getLogger(Session.class).debug("enter "+getOwner().getName()+" "+entity);
+		//LoggerFactory.getLogger(Session.class).debug("enter "+getOwner().getName()+" "+entity);
 		synchronized(entities){
 			if(this.contains(entity))
 				return;

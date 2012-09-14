@@ -2,7 +2,8 @@ package org.reunionemu.jreunion.game.npc;
 
 import java.util.Iterator;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.reunionemu.jcommon.ParsedItem;
 import org.reunionemu.jreunion.game.Enums;
 import org.reunionemu.jreunion.game.LivingObject;

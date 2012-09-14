@@ -5,7 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.reunionemu.jcommon.ParsedItem;
 import org.reunionemu.jcommon.Parser;
@@ -91,7 +92,7 @@ public class NpcShop {
 		try {
 			shopReference.Parse("data/static/file/"+getShop());
 		} catch (IOException e) {
-			Logger.getLogger(this.getClass()).warn("Exception",e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 		}
 		loadItemList(npc);
 	}
@@ -108,7 +109,7 @@ public class NpcShop {
 				ParsedItem i = iter.next();
 	
 				if (!i.checkMembers(new String[] { "Type" })) {
-					Logger.getLogger(Merchant.class).warn("Failed to load a Npc Shop Item on map: "
+					LoggerFactory.getLogger(Merchant.class).warn("Failed to load a Npc Shop Item on map: "
 							+ npc.getPosition().getLocalMap());
 					continue;
 				}
@@ -193,7 +194,7 @@ public class NpcShop {
 	
 		if (item != null) {
 			int price = (int) (item.getType().getPrice() * ((double)this.getSellRate() / 100));
-			Logger.getLogger(Merchant.class).info("Player "+player+" sold item "+item+" for "+price+" Lime");
+			LoggerFactory.getLogger(Merchant.class).info("Player "+player+" sold item "+item+" for "+price+" Lime");
 			synchronized(player){
 				player.setLime(player.getLime()+price);
 			}
@@ -202,7 +203,7 @@ public class NpcShop {
 			DatabaseUtils.getDinamicInstance().deleteItem(item.getItemId());
 		}
 		else{
-			Logger.getLogger(Merchant.class).error("Sell failed, no item selected");			
+			LoggerFactory.getLogger(Merchant.class).error("Sell failed, no item selected");			
 		}		
 	}
 }

@@ -2,7 +2,8 @@ package org.reunionemu.jreunion.game;
 
 import java.util.TimerTask;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.reunionemu.jreunion.server.DatabaseUtils;
 import org.reunionemu.jreunion.server.LocalMap;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
@@ -87,7 +88,7 @@ public class RoamingItem extends WorldObject{
 		deleteTimer.schedule(new TimerTask() {
 			@Override
 			public void run() {
-				Logger.getLogger(RoamingItem.class).info("Server deleted roaming item {id:"
+				LoggerFactory.getLogger(RoamingItem.class).info("Server deleted roaming item {id:"
 						+getEntityId()+", item:"+getItem()+", map:"+getPosition().getLocalMap()+"}");
 				delete();
 				

@@ -6,7 +6,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.Pet;
 import org.reunionemu.jreunion.game.Player;
@@ -24,7 +25,7 @@ public class PetManager {
 	public void loadPets(){
 		petList = DatabaseUtils.getDinamicInstance().loadPets();
 		if(petList != null){
-			Logger.getLogger(this.getClass()).info("Loaded "+petList.size()+" pets");
+			LoggerFactory.getLogger(this.getClass()).info("Loaded "+petList.size()+" pets");
 		}
 	}
 	
@@ -105,6 +106,6 @@ public class PetManager {
 		player.save();
 		player.setPetId(pet.getId());
 		addPet(pet);
-		Logger.getLogger(this.getClass()).info("Player: "+player+" bought Pet Egg: "+pet);
+		LoggerFactory.getLogger(this.getClass()).info("Player: "+player+" bought Pet Egg: "+pet);
 	}
 }

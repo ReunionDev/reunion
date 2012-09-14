@@ -7,7 +7,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.reunionemu.jreunion.game.Equipment.Slot;
 import org.reunionemu.jreunion.game.Player.Race;
 import org.reunionemu.jreunion.game.Player.Status;
@@ -419,7 +420,7 @@ public class Pet extends LivingObject {
 		setEquipment(new PetEquipment(getOwner()));
 		load();
 		getOwner().save();
-		Logger.getLogger(this.getClass()).info("Pet: "+this+" as borned!");
+		LoggerFactory.getLogger(this.getClass()).info("Pet: "+this+" as borned!");
 	}
 	
 	public void load(){
@@ -491,7 +492,7 @@ public class Pet extends LivingObject {
 
 	public void setBreeding(boolean isBreeding) {
 		String breedingState = isBreeding ? "started" : "stoped";
-		Logger.getLogger(this.getClass()).info("Player: "+getOwner()+" "+breedingState+" breeding Pet: "+this);
+		LoggerFactory.getLogger(this.getClass()).info("Player: "+getOwner()+" "+breedingState+" breeding Pet: "+this);
 		
 		this.isBreeding = isBreeding;
 	}

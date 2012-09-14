@@ -4,7 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.reunionemu.jcommon.ParsedItem;
 import org.reunionemu.jcommon.Parser;
 
@@ -35,7 +36,7 @@ public class Database {
 
 		if (dinamicDatabaseConfig == null
 				|| !dinamicDatabaseConfig.checkMembers(requiredMembers)) {
-			Logger.getLogger(Database.class).info("Error loading database config");
+			LoggerFactory.getLogger(Database.class).info("Error loading database config");
 			return;
 		}
 		DatabaseUtils.getDinamicInstance().setDinamicDatabase(this); // link utils to
@@ -48,7 +49,7 @@ public class Database {
 		Driver driver = (Driver)ClassFactory.create("com.mysql.jdbc.Driver");
 		
 		dinamicConn = DriverManager.getConnection(url, userName, password);
-		Logger.getLogger(Database.class).info("Dinamic "+getClass().getSimpleName() + " connection established");
+		LoggerFactory.getLogger(Database.class).info("Dinamic "+getClass().getSimpleName() + " connection established");
 
 	}
 	
@@ -61,7 +62,7 @@ public class Database {
 
 		if (staticDatabaseConfig == null
 				|| !staticDatabaseConfig.checkMembers(requiredMembers)) {
-			Logger.getLogger(Database.class).info("Error loading database config");
+			LoggerFactory.getLogger(Database.class).info("Error loading database config");
 			return;
 		}
 		DatabaseUtils.getStaticInstance().setStaticDatabase(this); // link utils to
@@ -74,7 +75,7 @@ public class Database {
 		Driver driver = (Driver)ClassFactory.create("com.mysql.jdbc.Driver");
 		
 		staticConn = DriverManager.getConnection(url, userName, password);
-		Logger.getLogger(Database.class).info("Static "+getClass().getSimpleName() + " connection established");
+		LoggerFactory.getLogger(Database.class).info("Static "+getClass().getSimpleName() + " connection established");
 
 	}
 
@@ -83,13 +84,13 @@ public class Database {
 		try {
 			connectDinamic();
 		} catch (Exception e) {
-			Logger.getLogger(this.getClass()).warn("Exception",e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 		}
 		
 		try {
 			connectStatic();
 		} catch (Exception e) {
-			Logger.getLogger(this.getClass()).warn("Exception",e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 		}
 	
 	}
@@ -99,7 +100,7 @@ public class Database {
 		if (dinamicConn != null) {
 			try {
 				dinamicConn.close();
-				Logger.getLogger(Database.class).info(getClass().getName()
+				LoggerFactory.getLogger(Database.class).info(getClass().getName()
 						+ " connection terminated");
 			} catch (Exception e) { /* ignore close errors */
 			}
@@ -107,7 +108,7 @@ public class Database {
 		if (staticConn != null) {
 			try {
 				staticConn.close();
-				Logger.getLogger(Database.class).info(getClass().getName()
+				LoggerFactory.getLogger(Database.class).info(getClass().getName()
 						+ " connection terminated");
 			} catch (Exception e) { /* ignore close errors */
 			}

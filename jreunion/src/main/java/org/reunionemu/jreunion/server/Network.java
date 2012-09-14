@@ -16,7 +16,8 @@ import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.reunionemu.jreunion.events.Event;
 import org.reunionemu.jreunion.events.EventListener;
@@ -106,7 +107,7 @@ public class Network extends Service implements Runnable, EventListener{
 							// If the connection is dead, then remove it
 							// from the selector and close it
 							if (!ok) {
-								Logger.getLogger(Network.class).info("Client Connection Lost");
+								LoggerFactory.getLogger(Network.class).info("Client Connection Lost");
 								key.cancel();
 								disconnect(socketChannel);
 							}
@@ -127,7 +128,7 @@ public class Network extends Service implements Runnable, EventListener{
 			} catch (Exception e) {
 				if(e instanceof ClosedSelectorException||e instanceof InterruptedException)
 					return;
-				Logger.getLogger(Network.class).error("Error in network",e);
+				LoggerFactory.getLogger(Network.class).error("Error in network",e);
 			}
 		}
 	
@@ -157,7 +158,7 @@ public class Network extends Service implements Runnable, EventListener{
 			client = Server.getInstance().getWorld().getClients().get(socketChannel);
 		}
 		catch(IOException e) {
-			Logger.getLogger(this.getClass()).error("Exception",e);
+			LoggerFactory.getLogger(this.getClass()).error("Exception",e);
 		}
 		
 		// If no data or client, close the connection
@@ -194,7 +195,7 @@ public class Network extends Service implements Runnable, EventListener{
 		try {
 			socketChannel.write(buffer);
 		} catch (IOException e) {
-			Logger.getLogger(this.getClass()).error("Exception", e);
+			LoggerFactory.getLogger(this.getClass()).error("Exception", e);
 			disconnect(socketChannel);
 			return false;
 		}
@@ -205,7 +206,7 @@ public class Network extends Service implements Runnable, EventListener{
 		if(socketChannel.isConnected() && socketChannel.isOpen()) {
 			processOutput(socketChannel);
 		}
-		Logger.getLogger(Network.class).info("Disconnecting {local=" 
+		LoggerFactory.getLogger(Network.class).info("Disconnecting {local=" 
 				+ socketChannel.socket().getLocalSocketAddress() + " remote="
 				+ socketChannel.socket().getRemoteSocketAddress() + "}\n");
 		fireEvent(NetworkDisconnectEvent.class, socketChannel);
@@ -213,7 +214,7 @@ public class Network extends Service implements Runnable, EventListener{
 		try {
 			socketChannel.close();
 		} catch (IOException e) {
-			 Logger.getLogger(this.getClass()).warn("Exception",e);
+			 LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 		}
 	}
 	
@@ -233,7 +234,7 @@ public class Network extends Service implements Runnable, EventListener{
 		
 		}catch(Exception e){
 			
-			Logger.getLogger(this.getClass()).error("Exception",e);
+			LoggerFactory.getLogger(this.getClass()).error("Exception",e);
 			
 		}
 	}
@@ -257,7 +258,7 @@ public class Network extends Service implements Runnable, EventListener{
 			
 		} catch (Exception e) {
 			if (e instanceof BindException) {
-				Logger.getLogger(Network.class).error("Port " + address.getPort()
+				LoggerFactory.getLogger(Network.class).error("Port " + address.getPort()
 						+ " not available. Is the server already running?",e);
 				return false;
 			}
@@ -267,11 +268,11 @@ public class Network extends Service implements Runnable, EventListener{
 
 	public void stop() {
 		try {
-			Logger.getLogger(Network.class).info("net stop");
+			LoggerFactory.getLogger(Network.class).info("net stop");
 			selector.close();
 			thread.interrupt();
 		} catch (IOException e) {
-			Logger.getLogger(this.getClass()).warn("Exception",e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 		}
 	}
 

@@ -4,7 +4,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.reunionemu.jreunion.server.Server;
 
 /**
@@ -44,7 +45,7 @@ public class Inventory {
 					for (int y = item.getPosition().getPosY(); y < item.getPosition().getPosY()
 							+ item.getItem().getType().getSizeY(); y++) {
 						if (x == posX && y == posY) {
-							//Logger.getLogger(Inventory.class).debug("DETECETED ITEM COLISION: ["+x+"]["+y+"] "+item.getItem().getDescription());
+							//LoggerFactory.getLogger(Inventory.class).debug("DETECETED ITEM COLISION: ["+x+"]["+y+"] "+item.getItem().getDescription());
 							return false;
 						}
 					}
@@ -65,7 +66,7 @@ public class Inventory {
 		//checks if every position occupied by the item, in the inventory, is free 
 		for (int x = posX; x < posX + sizeX; x++) {
 			for (int y = posY; y < posY + sizeY; y++) {
-				//Logger.getLogger(Inventory.class).debug("CHECKING FIT POSITION ["+x+"]["+y+"]");
+				//LoggerFactory.getLogger(Inventory.class).debug("CHECKING FIT POSITION ["+x+"]["+y+"]");
 				if (posEmpty(tab, x, y) == false) {
 					return false;
 				}
@@ -202,7 +203,7 @@ public class Inventory {
 			addInventoryItem(inventoryItem);
 			
 			Item<?> item = inventoryItem.getItem();
-			Logger.getLogger(Inventory.class).info("Item "+item+" stored in player "+getPlayer()+
+			LoggerFactory.getLogger(Inventory.class).info("Item "+item+" stored in player "+getPlayer()+
 					" inventory at position {tab:"+tab+", x:"+posX+", y:"+posY+"}");
 			
 			setHoldingItem(null);
@@ -228,7 +229,7 @@ public class Inventory {
 		}
 		
 		Item<?> item = inventoryItem.getItem();
-		Logger.getLogger(Inventory.class).info("Item "+item+" removed from player "+getPlayer()+" inventory.");
+		LoggerFactory.getLogger(Inventory.class).info("Item "+item+" removed from player "+getPlayer()+" inventory.");
 		
 		deleteInventoryItem(inventoryItem);
 		
@@ -300,7 +301,7 @@ public class Inventory {
 			}
 		}
 
-		Logger.getLogger(Inventory.class).debug("Tab " + tab + ": \n");
+		LoggerFactory.getLogger(Inventory.class).debug("Tab " + tab + ": \n");
 		Iterator<InventoryItem> iter = getInventoryIterator();
 		while (iter.hasNext()) {
 			InventoryItem item = iter.next();
@@ -319,10 +320,10 @@ public class Inventory {
 		for (int y = 0; y < 6; y++) {
 			for (int x = 0; x < 8; x++) {
 				if (newInvMap[x][y] == false) {
-					Logger.getLogger(Inventory.class).debug("0");
+					LoggerFactory.getLogger(Inventory.class).debug("0");
 				}
 				if (newInvMap[x][y] == true) {
-					Logger.getLogger(Inventory.class).debug("1");
+					LoggerFactory.getLogger(Inventory.class).debug("1");
 				}
 			}
 		}
@@ -350,7 +351,7 @@ public class Inventory {
 		if (itemFit(tab, posX, posY, item.getType().getSizeX(), item.getType().getSizeY()) == true) {
 			items.add(inventoryItem);
 			return true;
-			// Logger.getLogger(Inventory.class).info("Item Inserted\n");
+			// LoggerFactory.getLogger(Inventory.class).info("Item Inserted\n");
 			// PrintInventoryMap(0);
 			// PrintInventoryMap(1);
 			// PrintInventoryMap(2);

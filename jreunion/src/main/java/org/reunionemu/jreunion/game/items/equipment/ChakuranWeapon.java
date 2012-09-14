@@ -1,6 +1,7 @@
 package org.reunionemu.jreunion.game.items.equipment;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.reunionemu.jcommon.ParsedItem;
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.LivingObject;
@@ -96,7 +97,7 @@ public class ChakuranWeapon extends SpecialWeapon implements Usable{
 			Player player = (Player) user;
 		
 			if (chakuranWeapon.getExtraStats() <= 0) {
-				Logger.getLogger(this.getClass()).warn(
+				LoggerFactory.getLogger(this.getClass()).warn(
 						"Possible cheat detected: player " + player
 								+ " is trying to use empty " + this.getName() + ".");
 				return false;
@@ -122,7 +123,7 @@ public class ChakuranWeapon extends SpecialWeapon implements Usable{
 						chakuranWeapon.getEntityId(), unknown);
 			return true;
 		} else {
-			Logger.getLogger(ChakuranWeapon.class).warn(this.getName() + " not implemented for " + user.getName());
+			LoggerFactory.getLogger(ChakuranWeapon.class).warn(this.getName() + " not implemented for " + user.getName());
 		}
 		
 		return false;

@@ -1,6 +1,7 @@
 package org.reunionemu.jreunion.game.items.etc;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.LivingObject;
 import org.reunionemu.jreunion.game.Player;
@@ -37,7 +38,7 @@ public class WarpGate extends Etc implements Usable{
 			
 			return true;
 		} else {
-			Logger.getLogger(this.getClass()).warn(this.getName() + " not implemented for " + user.getName());
+			LoggerFactory.getLogger(this.getClass()).warn(this.getName() + " not implemented for " + user.getName());
 		}
 		
 		return false;

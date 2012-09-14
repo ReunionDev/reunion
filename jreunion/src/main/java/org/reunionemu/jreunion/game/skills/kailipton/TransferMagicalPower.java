@@ -2,7 +2,8 @@ package org.reunionemu.jreunion.game.skills.kailipton;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.LivingObject;
@@ -68,7 +69,7 @@ public class TransferMagicalPower extends Skill {
 
 		Item<?> offHandEquipment = player.getEquipment().getOffHand();
 		if(offHandEquipment == null){
-			Logger.getLogger(TransferMagicalPower.class).error("It wasn't possible to get player OffHand equipment.");
+			LoggerFactory.getLogger(TransferMagicalPower.class).error("It wasn't possible to get player OffHand equipment.");
 			return false;
 		}
 		offHandEquipment.use(caster, -1, 0);
@@ -78,7 +79,7 @@ public class TransferMagicalPower extends Skill {
 		if (offHandEquipment.getType() instanceof WandWeapon) {
 			wandWeapon = (WandWeapon) offHandEquipment.getType();
 		} else {
-			Logger.getLogger(TransferMagicalPower.class).error("It's not possible to cast. Not wearing a wand.");
+			LoggerFactory.getLogger(TransferMagicalPower.class).error("It's not possible to cast. Not wearing a wand.");
 			return false;
 		}
 		
@@ -109,7 +110,7 @@ public class TransferMagicalPower extends Skill {
 				long newHp = Tools.between(target.getHp() - damage, 0l,	target.getMaxHp());
 
 				if (newHp <= 0) {
-					Logger.getLogger(TransferMagicalPower.class).info("Player " + player + " killed npc " + target);
+					LoggerFactory.getLogger(TransferMagicalPower.class).info("Player " + player + " killed npc " + target);
 					if (target instanceof Npc) {
 						((Npc<?>) target).kill(player);
 					}
