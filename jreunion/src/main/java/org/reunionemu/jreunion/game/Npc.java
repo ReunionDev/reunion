@@ -418,7 +418,7 @@ public class Npc<T extends NpcType> extends LivingObject {
 		}
 		
 		if(newPositionTries < 0){
-			Logger.getLogger(this.getClass()).warn("Mob "+this+" couldn't move.");
+			LoggerFactory.getLogger(this.getClass()).warn("Mob "+this+" couldn't move.");
 			setIsRunning(false);
 			return;
 		}
