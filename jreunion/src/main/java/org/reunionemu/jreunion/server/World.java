@@ -179,10 +179,11 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 			@Override
 			public void run() {
 				synchronized(playerManager){
-					Iterator<Player> iter = playerManager.getPlayerListIterator();
-					while (iter.hasNext()) {
-						Player player = iter.next();
-						
+					//Iterator<Player> iter = playerManager.getPlayerListIterator();
+					//while (iter.hasNext()) {
+					//	Player player = iter.next();
+					List<Player> playersList = playerManager.getPlayerList();	
+					for(Player player : playersList){
 						synchronized(player){
 							float statusModifier = 0.1f; //increase 10% of status 
 							
@@ -213,8 +214,8 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 			}
 		}), 0, 10, TimeUnit.SECONDS);
 	
+		// work pet stats
 		if(playerManager.getNumberOfPlayers() > 0){
-			// work pet stats
 			executorService.scheduleAtFixedRate(new REHandler(new Runnable() {
 
 				@Override

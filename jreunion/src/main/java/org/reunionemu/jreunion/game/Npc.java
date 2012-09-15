@@ -409,10 +409,17 @@ public class Npc<T extends NpcType> extends LivingObject {
 		
 		//Area npcArea = getPosition().getLocalMap().getArea();
 		Position newPos =  getRandomPosition();
+		int newPositionTries = 10;
 		
 		//while((!npcArea.get(newPos.getX() / 10, newPos.getY() / 10,Field.MOB))){
-		while(!isPathWalkable(newPos)) {
+		while(!isPathWalkable(newPos) && newPositionTries-- > 0) {
 			newPos =  getRandomPosition();
+		}
+		
+		if(newPositionTries < 0){
+			Logger.getLogger(this.getClass()).warn("Mob "+this+" couldn't move.");
+			setIsRunning(false);
+			return;
 		}
 		
 		walk(newPos, isRunning());
@@ -572,20 +579,22 @@ public class Npc<T extends NpcType> extends LivingObject {
 	}
 	
 	public void work() {
-		//Iterator<Player> iterPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayerListIterator();
+		try {
+			
 		int isMovementEnabled = Server.getInstance().getWorld().getServerSetings().getMobsMovement();
 		
 		if(isRunning() || getHp() == 0 || isMovementEnabled == 0)
 			return;
 		
+		Iterator<Player> iterPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayerListIterator();
 		double smallestDistance = 150;
 		Player closestPlayer = null;
 		Area mobArea = getPosition().getLocalMap().getArea(); 
 		boolean moveFree = false;
 		
-		//while (iterPlayer.hasNext()) {
-		for(Player player : getPosition().getLocalMap().getPlayerList()) {
-			//Player player = iterPlayer.next();
+		while (iterPlayer.hasNext()) {
+		//for(Player player : getPosition().getLocalMap().getPlayerList()) {
+			Player player = iterPlayer.next();
 			Position position = player.getPosition();
 			double distance = getPosition().distance(player.getPosition());
 			
@@ -617,7 +626,7 @@ public class Npc<T extends NpcType> extends LivingObject {
 		// for mob then the  mob will chase or attack the player, else the mob will
 		// move freely.
 		
-		try {
+		//try {
 			if (smallestDistance < 150) {
 				if(smallestDistance > getAttackRadius()) {
 					moveToPlayer(closestPlayer);
@@ -627,7 +636,7 @@ public class Npc<T extends NpcType> extends LivingObject {
 			} else if(moveFree){
 				moveFree();
 			}
-		} catch (Exception e) {
+		} catch (Throwable  e) {
 			Logger.getLogger(this.getClass()).info("Mob Bug "+e);
 			//TODO: Fix Mob move bug
 		}
@@ -647,6 +656,10 @@ public class Npc<T extends NpcType> extends LivingObject {
 		
 		buffer.append("name:");
 		buffer.append(getName());	
+		buffer.append(", ");
+		
+		buffer.append("spawn:");
+		buffer.append(getSpawn().getId());
 				
 		buffer.append("}");
 		return buffer.toString();

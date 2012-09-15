@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Vector;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
@@ -57,6 +58,8 @@ public class LocalMap extends Map implements Runnable{
 	private Parser playerSpawnReference;
 
 	private ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
+	
+	 private ScheduledFuture<?> mobsAI;
 
 	private Thread thread;
 
@@ -298,7 +301,7 @@ public class LocalMap extends Map implements Runnable{
 		
 		Logger.getLogger(LocalMap.class).info("Loaded "+getRoamingItemList().size()+" roaming items in "+getName());
 			
-		startMobsAI(1000);
+		//startMobsAI(1000);
 		
 		/*
 		executorService.scheduleAtFixedRate(new Runnable() {
@@ -326,31 +329,35 @@ public class LocalMap extends Map implements Runnable{
 	}
 	
 	public void startMobsAI(long period){
-			
-		executorService.scheduleAtFixedRate(new REHandler(new Runnable() {
+		mobsAI = executorService.scheduleAtFixedRate(createMobsAI(), 0, period, TimeUnit.MILLISECONDS);
+	}
+
+	public void stopMobsAI(){
+		mobsAI.cancel(false);
+	}
+	
+	public ScheduledFuture<?> getMobsAI(){
+		return mobsAI;
+	}
+	
+	public Runnable createMobsAI(){
+		return new REHandler(new Runnable() {
 			@Override
 			public void run() {
 				List<Entity> objects = null;
-				synchronized(entities){			
+				synchronized (entities) {
 					objects = new Vector<Entity>(entities.values());
 				}
 				for (Entity entity : objects) {
 					if (entity instanceof Npc) {
-						Npc<?> npc = (Npc<?>)entity;
+						Npc<?> npc = (Npc<?>) entity;
 						if (npc.getType() instanceof Mob) {
 							npc.work();
 						}
 					}
 				}
 			}
-		}), 0, period, TimeUnit.MILLISECONDS);
-	}
-
-	public void stopMobsAI(){
-		if(executorService.isShutdown())
-			return;
-		executorService.shutdown();
-		executorService = Executors.newScheduledThreadPool(1);
+		});
 	}
 	
 	private void createPlayerSpawns() {
@@ -547,9 +554,12 @@ public SessionList<Session> GetSessions(Position position){
 					new PlayerSpawn(position).spawn(player);					
 				}
 				
-				//if(getPlayerList().size() == 1){
-				//	startMobsAI(1000);
-				//}
+				if(mobsAI == null){
+					startMobsAI(1000);
+				} else if(mobsAI.isCancelled()){
+					startMobsAI(1000);
+				}
+				
 			} else
 			if(event instanceof PlayerLogoutEvent){
 				
@@ -580,12 +590,15 @@ public SessionList<Session> GetSessions(Position position){
 					list.sendPacket(Type.OUT, pet);
 				}
 				
-				//if(getPlayerList().size() == 0){
-				//	stopMobsAI();
-				//}
-				
 				player.save();
 				world.getPlayerManager().removePlayer(player);
+				
+				if(mobsAI != null && !mobsAI.isCancelled()){
+					if(this.getPlayerList().size() == 0){
+						stopMobsAI();
+					}
+				}
+				
 			} else if(event instanceof SessionEvent) {
 			
 				Session session = ((SessionEvent)event).getSession();
@@ -617,6 +630,7 @@ public SessionList<Session> GetSessions(Position position){
 				synchronized(this.sessions){			
 					sessionList = (SessionList<Session>) this.sessions.clone();
 				}
+				
 				for(Entity entity: objects){
 					try{
 						for(Session session: sessionList){
@@ -660,14 +674,14 @@ public SessionList<Session> GetSessions(Position position){
 						*/
 						
 					}catch(Exception e ){
-						Logger.getLogger(this.getClass()).warn("Exception in mapworker", e);
+						Logger.getLogger(this.getClass()).warn("Exception in mapworker ", e);
 					}
 				}
 				
 				
 			
 			} catch (Exception e) {
-				Logger.getLogger(this.getClass()).warn("Exception",e);
+				Logger.getLogger(this.getClass()).warn("Exception ",e);
 				throw new RuntimeException(e);
 			}
 			finally{			
@@ -697,9 +711,10 @@ public SessionList<Session> GetSessions(Position position){
 	}
 	
 	public List<Player> getPlayerList(){
+		List<Entity> entitiesList = new Vector<Entity> (entities.values());
 		List<Player> playerList = new Vector<Player> ();
 		
-		for(Entity entity : entities.values()){
+		for(Entity entity : entitiesList){
 			if(entity instanceof Player){
 				playerList.add((Player)entity);
 			}

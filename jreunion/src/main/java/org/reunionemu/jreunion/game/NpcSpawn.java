@@ -42,11 +42,7 @@ public class NpcSpawn extends Spawn
 	public Position spawn() {
 		
 		LocalMap map = getPosition().getLocalMap();
-		
-		Npc<?> npc = null;
-		
-		//npc = Npc.create(npcType);
-		npc = map.getWorld().getNpcManager().create(getNpcType());
+		Npc<?> npc = map.getWorld().getNpcManager().create(getNpcType());
 		
 		if(npc==null)
 			return null;
@@ -57,6 +53,11 @@ public class NpcSpawn extends Spawn
 		
 		if(npc.getType() instanceof Merchant){
 			npc.loadShop();
+		} else if(npc.getType() instanceof Mob){
+			if(position.getLocalMap().getMobsAI() != null){
+				position.getLocalMap().stopMobsAI();
+				position.getLocalMap().startMobsAI(1000);
+			}
 		}
 		
 		return position;

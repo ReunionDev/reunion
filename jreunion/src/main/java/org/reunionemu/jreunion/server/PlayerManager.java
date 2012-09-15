@@ -79,6 +79,10 @@ public class PlayerManager {
 		return playerList.iterator();
 	}
 
+	public java.util.List<Player> getPlayerList(){
+		return new Vector<Player>(playerList);
+	}
+	
 	public void removePlayer(Player player) {
 		playerList.remove(player);
 	}
