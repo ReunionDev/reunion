@@ -10,7 +10,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadFactory;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
@@ -129,7 +130,7 @@ public class EventDispatcher{
 				if(filter==null || filter.filter(event))
 					listener.handleEvent(event);
 			}catch(Exception e){
-				Logger.getLogger(this.getClass()).error("Exception",e);
+				LoggerFactory.getLogger(this.getClass()).error("Exception",e);
 			}
 		}
 		return counter;
@@ -149,7 +150,7 @@ public class EventDispatcher{
 						if(filter==null||filter.filter(event))
 							listener.handleEvent(event);
 						}catch(Exception e){
-							Logger.getLogger(this.getClass()).warn("Exception",e);
+							LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 							throw new RuntimeException(e);
 						}
 					return null;

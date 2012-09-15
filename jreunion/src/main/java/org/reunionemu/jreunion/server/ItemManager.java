@@ -3,7 +3,8 @@ package org.reunionemu.jreunion.server;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.reunionemu.jcommon.ParsedItem;
 import org.reunionemu.jcommon.Parser;
 import org.reunionemu.jreunion.game.Item;
@@ -34,7 +35,7 @@ public class ItemManager {
 			ItemType itemType = (ItemType)ClassFactory.create(className, id);
 			
 			if(itemType == null){
-				Logger.getLogger(ItemManager.class).warn("Failed to load Item type {id:"+id+" name:"
+				LoggerFactory.getLogger(ItemManager.class).warn("Failed to load Item type {id:"+id+" name:"
 						+parsedItem.getName()+"}");
 				continue;
 			}
@@ -42,7 +43,7 @@ public class ItemManager {
 			itemsList.put(id, itemType);
 		}
 		parser.clear();
-		Logger.getLogger(ItemManager.class).info("Loaded "+itemsList.size()+" item types");
+		LoggerFactory.getLogger(ItemManager.class).info("Loaded "+itemsList.size()+" item types");
 	}
 	
 	public ItemType getItemType(int type){

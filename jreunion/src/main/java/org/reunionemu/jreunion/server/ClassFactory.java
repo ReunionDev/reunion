@@ -1,6 +1,7 @@
 package org.reunionemu.jreunion.server;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.reunionemu.jreunion.game.items.ItemPlaceHolder;
 
 public class ClassFactory {
@@ -13,12 +14,12 @@ public class ClassFactory {
 
 		} catch (Exception e) {
 			if(className.contains("items")){
-				Logger.getLogger(ClassFactory.class).error("Failed to load item class: "+className+
+				LoggerFactory.getLogger(ClassFactory.class).error("Failed to load item class: "+className+
 						" using ItemPlaceHolder");
 				ItemPlaceHolder itemPlaceHolder = new ItemPlaceHolder(Integer.parseInt(args[0]+""));
 				return itemPlaceHolder;
 			}
-			Logger.getLogger(ClassFactory.class).error("Cannot create class: " + className, e);
+			LoggerFactory.getLogger(ClassFactory.class).error("Cannot create class: " + className, e);
 			return null;
 		}		
 	}
@@ -29,7 +30,7 @@ public class ClassFactory {
 			return c.getConstructors()[0].newInstance(args);
 
 		} catch (Exception e) {
-			Logger.getLogger(ClassFactory.class).error("Cannot create class: " + c, e);
+			LoggerFactory.getLogger(ClassFactory.class).error("Cannot create class: " + c, e);
 			return null;
 		}		
 	}

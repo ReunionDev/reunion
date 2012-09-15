@@ -5,7 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.reunionemu.jcommon.ParsedItem;
 import org.reunionemu.jcommon.Parser;
 import org.reunionemu.jreunion.game.Player;
@@ -36,7 +37,7 @@ public class SkillManager {
 			Skill skill = (Skill) ClassFactory.create(className, this, id);
 			
 			if(skill==null){
-				Logger.getLogger(SkillManager.class).warn("Failed to load Skill {id:"+id+" name:"
+				LoggerFactory.getLogger(SkillManager.class).warn("Failed to load Skill {id:"+id+" name:"
 						+item.getName()+"}");
 				continue;
 			}
@@ -169,7 +170,7 @@ public class SkillManager {
 			}
 			defaultSkills.put(race, raceSkillList);
 		}
-		Logger.getLogger(SkillManager.class).info("Loaded "+skills.size()+" skills");
+		LoggerFactory.getLogger(SkillManager.class).info("Loaded "+skills.size()+" skills");
 	}
 	public Skill getSkill(int id){
 		

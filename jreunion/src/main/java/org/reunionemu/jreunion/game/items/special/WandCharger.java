@@ -1,6 +1,7 @@
 package org.reunionemu.jreunion.game.items.special;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.LivingObject;
 import org.reunionemu.jreunion.game.Player;
@@ -31,7 +32,7 @@ public class WandCharger extends ScrollAndSpellBook implements Usable{
 			Item<?> wandWeapon = player.getEquipment().getItem(Slot.OFFHAND);
 			if(wandWeapon.getType() instanceof WandWeapon){
 				if(((WandWeapon)wandWeapon.getType()).getSkillLevel() != this.getSkillLevel()){
-					Logger.getLogger(this.getClass()).warn("POSSIBLE CHEAT DETECTED: used Wand Charger level "+this.getSkillLevel()+
+					LoggerFactory.getLogger(this.getClass()).warn("POSSIBLE CHEAT DETECTED: used Wand Charger level "+this.getSkillLevel()+
 							" with wand weapon level "+((WandWeapon)wandWeapon.getType()).getSkillLevel());
 					return false;
 				}
@@ -48,7 +49,7 @@ public class WandCharger extends ScrollAndSpellBook implements Usable{
 			
 			return true;
 		} else {
-			Logger.getLogger(this.getClass()).warn(this.getName() + " not implemented for " + user.getName());
+			LoggerFactory.getLogger(this.getClass()).warn(this.getName() + " not implemented for " + user.getName());
 		}
 		
 		return false;

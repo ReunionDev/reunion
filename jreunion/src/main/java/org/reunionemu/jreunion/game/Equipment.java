@@ -1,6 +1,7 @@
 package org.reunionemu.jreunion.game;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.reunionemu.jreunion.game.items.SpecialWeapon;
 import org.reunionemu.jreunion.game.items.equipment.Armor;
 import org.reunionemu.jreunion.game.items.equipment.Bracelet;
@@ -334,7 +335,7 @@ public class Equipment {
 			}
 		} catch (NullPointerException e)
 		{
-			Logger.getLogger(Equipment.class).error("Player has wrong item");
+			LoggerFactory.getLogger(Equipment.class).error("Player has wrong item");
 		}
 	}
 

@@ -5,7 +5,8 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.reunionemu.jreunion.game.Equipment.Slot;
 import org.reunionemu.jreunion.server.DatabaseUtils;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
@@ -100,7 +101,7 @@ public class Item<T extends ItemType> implements Entity{
 		if(is(Usable.class)){
 			return ((Usable)getType()).use(this, livingObject, quickSlotBarPosition, unknown);
 		}else{
-			Logger.getLogger(Item.class).error("Item "+this+" is not usable");
+			LoggerFactory.getLogger(Item.class).error("Item "+this+" is not usable");
 			return false;
 			//throw new IllegalArgumentException(getType()+" is not Usable");
 		}

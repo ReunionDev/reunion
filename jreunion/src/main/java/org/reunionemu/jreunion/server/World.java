@@ -10,7 +10,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.reunionemu.jcommon.ParsedItem;
 import org.reunionemu.jreunion.events.Event;
 import org.reunionemu.jreunion.events.EventDispatcher;
@@ -275,7 +276,7 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 															
 				network.addEventListener(NetworkDataEvent.class, client, new NetworkEvent.NetworkFilter(socketChannel));
 				
-				Logger.getLogger(World.class).info("Got connection from {local="
+				LoggerFactory.getLogger(World.class).info("Got connection from {local="
 						+ socketChannel.socket().getLocalSocketAddress()+" remote="
 						+socketChannel.socket().getRemoteSocketAddress()+"}\n");
 				

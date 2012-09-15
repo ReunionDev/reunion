@@ -4,7 +4,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ScheduledFuture;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.reunionemu.jcommon.ParsedItem;
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.LivingObject;
@@ -53,7 +54,7 @@ public abstract class Potion extends Etc implements Usable {
 			
 			return true;
 		} else {
-			Logger.getLogger(this.getClass()).warn(this.getName() + " not implemented for " + user.getName());
+			LoggerFactory.getLogger(this.getClass()).warn(this.getName() + " not implemented for " + user.getName());
 		}
 	
 		return false;

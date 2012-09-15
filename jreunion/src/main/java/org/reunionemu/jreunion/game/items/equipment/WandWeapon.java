@@ -1,6 +1,7 @@
 package org.reunionemu.jreunion.game.items.equipment;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.reunionemu.jcommon.ParsedItem;
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.LivingObject;
@@ -79,7 +80,7 @@ public class WandWeapon extends SpecialWeapon implements Usable{
 			Player player = (Player) user;
 
 			if (wandWeapon.getGemNumber() <= 0) {
-				Logger.getLogger(WandWeapon.class).warn(
+				LoggerFactory.getLogger(WandWeapon.class).warn(
 						"Possible cheat detected: player " + player
 								+ " is trying to use empty " + this.getName()
 								+ ".");
@@ -108,7 +109,7 @@ public class WandWeapon extends SpecialWeapon implements Usable{
 			*/
 			return true;
 		} else {
-			Logger.getLogger(WandWeapon.class).warn(this.getName() + " not implemented for " + user.getName());
+			LoggerFactory.getLogger(WandWeapon.class).warn(this.getName() + " not implemented for " + user.getName());
 		}
 		
 		return false;

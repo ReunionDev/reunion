@@ -1,6 +1,7 @@
 package org.reunionemu.jreunion.server;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Aidamina
@@ -26,10 +27,10 @@ public class RemoteAdmin {
 	static void enableRemoteAdmin() {
 		if (remoteAdmin == null) {
 			remoteAdmin = new RemoteAdmin();
-			Logger.getLogger(RemoteAdmin.class).info("Started Remote Admin");
+			LoggerFactory.getLogger(RemoteAdmin.class).info("Started Remote Admin");
 
 		} else {
-			Logger.getLogger(RemoteAdmin.class).info("Remote Admin already running");
+			LoggerFactory.getLogger(RemoteAdmin.class).info("Remote Admin already running");
 
 		}
 

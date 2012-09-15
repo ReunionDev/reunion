@@ -9,7 +9,8 @@ import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Aidamina
@@ -74,7 +75,7 @@ public class PrintStream extends java.io.PrintStream {
 			filebuffer = new BufferedWriter(new FileWriter(logfilename, true));
 		} catch (IOException e) {
 
-			Logger.getLogger(this.getClass()).warn("Exception",e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 		}
 	}
 
@@ -111,7 +112,7 @@ public class PrintStream extends java.io.PrintStream {
 			filebuffer.flush();
 		} catch (IOException e) {
 
-			Logger.getLogger(this.getClass()).warn("Exception",e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 		}
 
 	}

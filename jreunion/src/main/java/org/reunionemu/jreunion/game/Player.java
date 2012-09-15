@@ -5,7 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.reunionemu.jcommon.ParsedItem;
 import org.reunionemu.jreunion.events.Event;
 import org.reunionemu.jreunion.events.EventListener;
@@ -207,20 +208,20 @@ public abstract class Player extends LivingObject implements EventListener {
 		HandPosition handPosition = getInventory().getHoldingItem();
 		
 		if (handPosition == null) {
-			Logger.getLogger(Player.class).error("Failed to get Player "+this+" holding item (HandPosition=NULL)");
+			LoggerFactory.getLogger(Player.class).error("Failed to get Player "+this+" holding item (HandPosition=NULL)");
 			return;
 		}
 		
 		Item<?> item = handPosition.getItem();
 		
 		if (item == null) {
-			Logger.getLogger(Player.class).error("Failed to get Player "+this+" holding item (Item=NULL)");
+			LoggerFactory.getLogger(Player.class).error("Failed to get Player "+this+" holding item (Item=NULL)");
 			return;
 		}
 		
 		LocalMap map = getPosition().getLocalMap();
 		RoamingItem roamingItem = map.getWorld().getCommand().dropItem(getPosition(), item, this);
-		Logger.getLogger(Player.class).info("Player "+this+" droped roaming item "+roamingItem);
+		LoggerFactory.getLogger(Player.class).info("Player "+this+" droped roaming item "+roamingItem);
 		getInventory().setHoldingItem(null);
 	}
 	
@@ -596,7 +597,7 @@ public abstract class Player extends LivingObject implements EventListener {
 
 			getInventory().setHoldingItem(new HandPosition(invItem.getItem()));
 			getExchange().removeItem(item);
-			Logger.getLogger(Player.class).info("Item "+item.getItem()+" removed from exchange inventory of Player "+this);
+			LoggerFactory.getLogger(Player.class).info("Item "+item.getItem()+" removed from exchange inventory of Player "+this);
 		} else { //adding exchange item
 			Item<?> item = getInventory().getHoldingItem().getItem();
 			ExchangeItem newExchangeItem = new ExchangeItem(item, posX,	posY);
@@ -619,11 +620,11 @@ public abstract class Player extends LivingObject implements EventListener {
 						oldExchangeItem.getItem(), new InventoryPosition( 0, 0, 0));
 				getInventory().setHoldingItem(new HandPosition(invItem.getItem()));
 				getExchange().removeItem(oldExchangeItem);
-				Logger.getLogger(Player.class).info("Item "+oldExchangeItem.getItem()+" removed from exchange inventory of Player "+this);
+				LoggerFactory.getLogger(Player.class).info("Item "+oldExchangeItem.getItem()+" removed from exchange inventory of Player "+this);
 			}
 			//get (remove) the item from the exchange
 			getExchange().addItem(newExchangeItem);
-			Logger.getLogger(Player.class).info("Item "+newExchangeItem.getItem()+
+			LoggerFactory.getLogger(Player.class).info("Item "+newExchangeItem.getItem()+
 					" stored in Player "+this+" exchange inventory at position {x:"+x+", y:"+y+"}");
 		}
 	}
@@ -669,7 +670,7 @@ public abstract class Player extends LivingObject implements EventListener {
 				catch(Exception NumerFormatException)
 				{
 					setLevelUpExp(1000);
-					Logger.getLogger(Player.class).info(getName()+
+					LoggerFactory.getLogger(Player.class).info(getName()+
 							" level up experience value, not supported by LONG");
 				}
 			} else {
@@ -770,7 +771,7 @@ public abstract class Player extends LivingObject implements EventListener {
 
 		try {
 			if(getEntityId() != -1){
-				Logger.getLogger(this.getClass()).info("Player " + getName() + " saving...\n");
+				LoggerFactory.getLogger(this.getClass()).info("Player " + getName() + " saving...\n");
 				DatabaseUtils.getDinamicInstance().saveSkills(this);
 				DatabaseUtils.getDinamicInstance().saveInventory(this);
 				DatabaseUtils.getDinamicInstance().savePet(this);
@@ -783,9 +784,9 @@ public abstract class Player extends LivingObject implements EventListener {
 				DatabaseUtils.getDinamicInstance().saveQuest(this);
 		}
 		}catch(Exception e){
-			Logger.getLogger(this.getClass()).info("Saving of "+getName()+" failed ...");
+			LoggerFactory.getLogger(this.getClass()).info("Saving of "+getName()+" failed ...");
 		}
-		Logger.getLogger(this.getClass()).info("Player " + getName() + " saving complete!\n");
+		LoggerFactory.getLogger(this.getClass()).info("Player " + getName() + " saving complete!\n");
 	}
 
 	public void loseStamina(long ammount) {	
@@ -823,7 +824,7 @@ public abstract class Player extends LivingObject implements EventListener {
 		
 		roamingItem.stopDeleteTimer();
 		getPosition().getLocalMap().fireEvent(ItemPickupEvent.class, this, roamingItem);
-		Logger.getLogger(PacketParser.class).info("Player "+this+ " picked up roaming item " + roamingItem);
+		LoggerFactory.getLogger(PacketParser.class).info("Player "+this+ " picked up roaming item " + roamingItem);
 		// S> pickup [CharID]
 	}
 
@@ -1313,7 +1314,7 @@ public abstract class Player extends LivingObject implements EventListener {
 			getInventory().setHoldingItem(new HandPosition(getEquipment().getItem(slot)));
 			getEquipment().setItem(slot, null);
 			getInterested().sendPacket(Type.CHAR_REMOVE, this, slot);
-			Logger.getLogger(Player.class).info("Player "+this+" removed equipment "
+			LoggerFactory.getLogger(Player.class).info("Player "+this+" removed equipment "
 					+getInventory().getHoldingItem().getItem());
 			
 			//check if the removed equipment is a PetEgg.
@@ -1332,14 +1333,14 @@ public abstract class Player extends LivingObject implements EventListener {
 			if( (wearingItem != null) ){
 				getInventory().setHoldingItem(new HandPosition(wearingItem));
 				getInterested().sendPacket(Type.CHAR_REMOVE, this, slot);
-				Logger.getLogger(Player.class).info("Player "+this+" removed equipment "+wearingItem);
+				LoggerFactory.getLogger(Player.class).info("Player "+this+" removed equipment "+wearingItem);
 			} else {
 				getInventory().setHoldingItem(null);
 			}
 			
 			getEquipment().setItem(slot, invItem.getItem());
 			getInterested().sendPacket(Type.CHAR_WEAR, this, slot, invItem.getItem());
-			Logger.getLogger(Player.class).info("Player "+this+" equiped item "+invItem.getItem());
+			LoggerFactory.getLogger(Player.class).info("Player "+this+" equiped item "+invItem.getItem());
 			flyStatus = invItem.getItem().getExtraStats() >= 268435456 ? 1 : 0;
 			
 			//check if the equipped item is a PetEgg.
@@ -1384,7 +1385,7 @@ public abstract class Player extends LivingObject implements EventListener {
 		Server.getInstance().getNetwork().addEventListener(NetworkAcceptEvent.class, this);
 		if(event instanceof ClientDisconnectEvent){
 			ClientDisconnectEvent clientDisconnectEvent = (ClientDisconnectEvent) event;
-			Logger.getLogger(Player.class).debug(clientDisconnectEvent.getSource());
+			LoggerFactory.getLogger(Player.class).debug(""+clientDisconnectEvent.getSource());
 			Position position = getPosition();
 			if(position!=null&&position.getMap()!=null){
 				LocalMap map = getPosition().getLocalMap();

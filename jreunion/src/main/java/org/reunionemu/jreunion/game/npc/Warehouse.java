@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.reunionemu.jreunion.game.HandPosition;
 import org.reunionemu.jreunion.game.InventoryItem;
@@ -68,12 +69,12 @@ public class Warehouse extends NpcType {
 		if(handPosition == null){
 			stashItem = player.getStash().getItem(pos);
 			player.getInventory().setHoldingItem(new HandPosition(removeItem(player, stashItem)));
-			Logger.getLogger(Warehouse.class).info("Player "+player+" removed item "+stashItem.getItem()+" from the warehouse");
+			LoggerFactory.getLogger(Warehouse.class).info("Player "+player+" removed item "+stashItem.getItem()+" from the warehouse");
 			player.getClient().sendPacket(Type.STASH_FROM, stashItem, player.getStash().getQuantity(pos));
 		} else { //store item on stash
 			stashItem = new StashItem(new StashPosition(pos), handPosition.getItem());
 			storeItem(player,stashItem);	
-			Logger.getLogger(Warehouse.class).info("Player "+player+" stored item "+stashItem.getItem()+" in the warehouse");
+			LoggerFactory.getLogger(Warehouse.class).info("Player "+player+" stored item "+stashItem.getItem()+" in the warehouse");
 		}
 	}
 	
@@ -95,7 +96,7 @@ public class Warehouse extends NpcType {
 			player.getStash().addItem(stashItem);
 			player.getInventory().deleteInventoryItem(player.getInventory().getItem(invTab, posX, posY));
 		}
-		Logger.getLogger(Warehouse.class).info(
+		LoggerFactory.getLogger(Warehouse.class).info(
 				"Player " + player + " stored " + (packetData.length - 3) / 2
 						+ " item(s) " + stashItem.getItem()	+ " in the warehouse slot " + (stashPosition.getSlot()+1));
 		player.getClient().sendPacket(Type.STASH_PUT, itemTypeId, invTab,
@@ -122,7 +123,7 @@ public class Warehouse extends NpcType {
 			itemData[0] = item.getEntityId(); //store item entity Id
 			itemList.add(itemData);
 		}
-		Logger.getLogger(Warehouse.class).info("Player " + player + " removed " + itemList.size()
+		LoggerFactory.getLogger(Warehouse.class).info("Player " + player + " removed " + itemList.size()
 						+ " item(s) " + stashItem.getItem()	+ " from the warehouse slot " + (pos+1));
 		player.getClient().sendPacket(Type.STASH_GET, itemList, type, inventoryTab, unknown1, pos, itemList.size());
 		
@@ -133,7 +134,7 @@ public class Warehouse extends NpcType {
 		player.getInventory().setHoldingItem(null);
 		player.getStash().addItem(stashItem);
 		player.getClient().sendPacket(Type.STASH_TO, stashItem, player.getStash().getQuantity(slot));
-		//Logger.getLogger(Warehouse.class).info("Player "+player+" stored item "+stashItem.getItem()+" in the warehouse");
+		//LoggerFactory.getLogger(Warehouse.class).info("Player "+player+" stored item "+stashItem.getItem()+" in the warehouse");
 	}
 	
 	public Item<?> removeItem(Player player, StashItem stashItem){
@@ -145,7 +146,7 @@ public class Warehouse extends NpcType {
 		
 		//player.getInventory().setHoldingItem(new HandPosition(item));
 		player.getStash().removeItem(stashItem);
-		//Logger.getLogger(Warehouse.class).info("Player "+player+" removed item "+item+" from the warehouse");
+		//LoggerFactory.getLogger(Warehouse.class).info("Player "+player+" removed item "+item+" from the warehouse");
 		return item;
 	}
 	
@@ -166,7 +167,7 @@ public class Warehouse extends NpcType {
 		if ((player.getLime() - limeAmmount) >= 0)
 			player.setLime(player.getLime() - limeAmmount);
 		else {
-			Logger.getLogger(Warehouse.class).warn(
+			LoggerFactory.getLogger(Warehouse.class).warn(
 					"Player " + player + " is trying to remove " + limeAmmount
 							+ " lime from character. " + "Lime available " + player.getLime());
 			return false;
@@ -185,7 +186,7 @@ public class Warehouse extends NpcType {
 		Item<?> limeItem = null;
 		
 		if(stashItem == null){
-			Logger.getLogger(Warehouse.class).warn(
+			LoggerFactory.getLogger(Warehouse.class).warn(
 					"Player " + player + " is trying to remove " + limeAmmount
 							+ " lime from Warehouse. " + "But there is no lim available.");
 			return false;
@@ -197,7 +198,7 @@ public class Warehouse extends NpcType {
 		if ((limeItem.getGemNumber() - limeAmmount) >= 0)
 			limeItem.setGemNumber(limeItem.getGemNumber() + limeAmmount);
 		else {
-			Logger.getLogger(Warehouse.class).warn(
+			LoggerFactory.getLogger(Warehouse.class).warn(
 					"Player " + player + " is trying to remove " + limeAmmount
 							+ " lime from Warehouse. " + "Lime available " + player.getLime());
 			return false;

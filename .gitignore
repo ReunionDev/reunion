@@ -1,6 +1,6 @@
-
-/*/.settings
-/*/target
-/.metadata
+.*
+!.gitignore
+target
+*.log
 /jreunion/logs/*
 /jreunion/data

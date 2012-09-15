@@ -60,7 +60,7 @@ public class QuestState {
 	public int getProgression(int id){
 		
 		for( Objective objective: progression.keySet()){
-			//Logger.getLogger(QuestState.class).debug("OBJECTIVE ID: "+objective.getId());
+			//LoggerFactory.getLogger(QuestState.class).debug("OBJECTIVE ID: "+objective.getId());
 			if(objective.getId() == id)
 				return getProgression(objective);
 		}

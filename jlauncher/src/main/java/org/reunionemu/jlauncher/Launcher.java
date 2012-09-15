@@ -4,35 +4,23 @@ import java.io.File;
 import java.net.InetAddress;
 import java.util.Iterator;
 
-import org.apache.log4j.ConsoleAppender;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PatternLayout;
-import org.apache.log4j.spi.LoggingEvent;
+import org.apache.log4j.BasicConfigurator;
 import org.reunionemu.jcommon.ParsedItem;
 import org.reunionemu.jcommon.Parser;
 import org.reunionemu.jcommon.ServerList;
 import org.reunionemu.jcommon.ServerList.ServerListItem;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class Launcher {
 	
+	static Logger logger = LoggerFactory.getLogger(Launcher.class);
+
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Logger logger = Logger.getRootLogger();
-		logger.addAppender(new ConsoleAppender(new PatternLayout("%-5p [%t]: %m\r\n"){			
-			@Override
-			public String format(LoggingEvent event) {
-
-				String result = super.format(event);
-				if(result.endsWith("\n\r\n")){
-					
-					result = result.substring(0, result.length()-2);
-				}
-				return result;
-			}
-			
-		}, ConsoleAppender.SYSTEM_OUT));
+		BasicConfigurator.configure();
 		Parser launcher = new Parser();
 		Parser servers = new Parser();
 		ServerList serverList = new ServerList();
@@ -59,7 +47,7 @@ public class Launcher {
 			
 			
 		} catch (Exception e) {
-			Logger.getLogger(Launcher.class).warn("Exception",e);
+			logger.warn("Exception",e);
 		}
 
 	}

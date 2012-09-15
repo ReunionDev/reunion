@@ -2,7 +2,8 @@ package org.reunionemu.jreunion.events;
 
 import java.lang.reflect.Constructor;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Aidamina
@@ -45,7 +46,7 @@ public class Event {
 				event.setSource(source);
 				return event;
 			} catch (Exception e) {
-				Logger.getLogger(Event.class).error("Exception ",e);
+				LoggerFactory.getLogger(Event.class).error("Exception ",e);
 				throw new RuntimeException(e);
 			}	
 		}

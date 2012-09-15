@@ -1,6 +1,7 @@
 package org.reunionemu.jreunion.game;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.reunionemu.jreunion.game.Player.Status;
 import org.reunionemu.jreunion.game.npc.Mob;
 import org.reunionemu.jreunion.game.quests.ExperienceQuest;
@@ -168,7 +169,7 @@ public abstract class LivingObject extends WorldObject {
 		long newHp = Tools.between(getHp() - damage, 0l, getMaxHp());				
 		
 		if (newHp <= 0) {
-			Logger.getLogger(LivingObject.class).info("Player "+player+" killed npc "+this);
+			LoggerFactory.getLogger(LivingObject.class).info("Player "+player+" killed npc "+this);
 			if(npc != null){
 					((Npc<?>)this).kill(player);
 			}

@@ -6,7 +6,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Vector;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.reunionemu.jreunion.protocol.OtherProtocol;
 import org.reunionemu.jreunion.server.Client;

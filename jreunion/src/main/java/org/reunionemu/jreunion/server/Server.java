@@ -3,15 +3,13 @@ package org.reunionemu.jreunion.server;
 import java.util.HashMap;
 import java.util.Random;
 
-import org.apache.log4j.ConsoleAppender;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PatternLayout;
-import org.apache.log4j.spi.LoggingEvent;
-
+import org.apache.log4j.BasicConfigurator;
 import org.reunionemu.jreunion.events.EventDispatcher;
 import org.reunionemu.jreunion.events.server.ServerStartEvent;
 import org.reunionemu.jreunion.events.server.ServerStopEvent;
 import org.reunionemu.jreunion.protocol.Protocol;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -24,7 +22,8 @@ public class Server extends EventDispatcher {
 	
 	private static Random rand = new Random(System.currentTimeMillis());
 	
-	public static Logger logger = Logger.getLogger(Server.class);
+	
+	public static Logger logger = LoggerFactory.getLogger(Server.class);
 	
 	public static Random getRand() {
 		return rand;
@@ -51,7 +50,7 @@ public class Server extends EventDispatcher {
 			try {
 				_instance = new Server();
 			} catch (Exception e) {
-				Logger.getLogger(Server.class).warn("Exception",e);
+				logger.warn("Exception",e);
 				return null;
 			}
 		}
@@ -63,6 +62,10 @@ public class Server extends EventDispatcher {
 	 * @throws Throwable
 	 */
 	public static void main(String[] args) throws Exception {
+		
+		logger.debug("test");
+	     //BasicConfigurator.configure();
+		/*
 		Logger logger = Logger.getRootLogger();
 		logger.addAppender(new ConsoleAppender(new PatternLayout("%-5p [%t]: %m\r\n"){
 			
@@ -78,7 +81,7 @@ public class Server extends EventDispatcher {
 			}
 			
 		},ConsoleAppender.SYSTEM_OUT));
-
+		*/
 		
 		Thread.currentThread().setName("main");
 		
@@ -94,7 +97,7 @@ public class Server extends EventDispatcher {
 			//server.database.start();
 			
 
-			Logger.getLogger(Server.class).info("Server start");
+			logger.info("Server start");
 			server.fireEvent(server.createEvent(ServerStartEvent.class, server));			
 			
 								// modules
@@ -110,14 +113,15 @@ public class Server extends EventDispatcher {
 			
 		} catch (Exception e) {
 			
-			Logger.getLogger(Server.class).warn("Exception",e);
+			logger.error("Exception",e);
 			
 		}
 		finally {
+			
 			server.setState(State.CLOSING);
 			server.fireEvent(server.createEvent(ServerStopEvent.class, server));
 			
-			Logger.getLogger(Server.class).info("Server stop");
+			logger.info("Server stop");
 			
 			EventDispatcher.shutdown();
 			server.database.stop();
@@ -137,7 +141,7 @@ public class Server extends EventDispatcher {
 
 		super();
 		
-		new Debug();
+		//new Debug();
 		RemoteAdmin.enableRemoteAdmin();
 		
 		Protocol.load();
@@ -145,7 +149,7 @@ public class Server extends EventDispatcher {
 		database = new Database(this);
 		database.start();
 		
-		Logger.getLogger(Server.class).info("Loading server objects...");
+		logger.info("Loading server objects...");
 		Reference.getInstance().Load();
 		network = new Network(this);
 		world = new World(this);

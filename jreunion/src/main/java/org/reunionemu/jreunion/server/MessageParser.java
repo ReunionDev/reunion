@@ -10,7 +10,8 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.apache.log4j.net.SocketAppender;
 
 import org.reunionemu.jreunion.game.Item;
@@ -482,7 +483,7 @@ public class MessageParser {
 								item.setUnknown2(0);
 							}
 							RoamingItem roamingItem = com.dropItem(player.getPosition(), item, player);
-							Logger.getLogger(MessageParser.class).info("Player "+player+" droped roaming item "+roamingItem);
+							LoggerFactory.getLogger(MessageParser.class).info("Player "+player+" droped roaming item "+roamingItem);
 							
 						} catch (Exception e) {
 							client.sendPacket(Type.SAY, "@drop failed (ID:"+words[1]+")");
@@ -554,7 +555,7 @@ public class MessageParser {
 				}
 				} catch (Exception e) {
 					//TODO: Fix the Mob id error server crash
-					Logger.getLogger(this.getClass()).error("Npc id error detected");
+					LoggerFactory.getLogger(this.getClass()).error("Npc id error detected");
 				}
 			} else if (words[0].equals("@tele")) {
 			try {
@@ -606,7 +607,7 @@ public class MessageParser {
 			}
 		} else if (words[0].equals("@debug")) {
 			
-			Logger logger = Logger.getRootLogger();
+			org.apache.log4j.Logger root = org.apache.log4j.Logger.getRootLogger();
 			
 			String host = words[1];
 			InetAddress address = null;
@@ -615,11 +616,11 @@ public class MessageParser {
 				int port = Integer.parseInt(words[2]);
 				SocketAppender socketAppender = new SocketAppender(address, port);			
 				socketAppender.setReconnectionDelay(10);			
-				logger.addAppender(socketAppender);
+				root.addAppender(socketAppender);
 				
 			} catch (UnknownHostException e) {
 				
-				Logger.getLogger(Debug.class).warn("host("+host+") not found in @debug",e);
+				LoggerFactory.getLogger(MessageParser.class).warn("host("+host+") not found in @debug",e);
 				com.serverTell(client, "Host not found");
 			}
 			 client.sendPacket(Type.SAY, "Spawnpoint cannot be added");
@@ -670,7 +671,7 @@ public class MessageParser {
 					client.sendPacket(Type.SAY,  "Spawnpoint succesfully added");
 			      }catch(Exception e){
 			    	  com.serverTell(player.getClient(),e.getMessage());
-			    	  Logger.getLogger(this.getClass()).warn("Exception",e);
+			    	  LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 
 			    	  client.sendPacket(Type.SAY, "Spawnpoint cannot be added");
 			      }
@@ -783,13 +784,13 @@ public class MessageParser {
 						if(words.length == 2){	//deletes all RoamingItems from LocalMap
 							for(RoamingItem roamingItem : localMap.getRoamingItemList()){
 								roamingItem.delete();
-								Logger.getLogger(MessageParser.class).info("Player "+player+" deleted roaming item "+roamingItem);
+								LoggerFactory.getLogger(MessageParser.class).info("Player "+player+" deleted roaming item "+roamingItem);
 							}
 						} else {	//deletes only the given RoamingItem from LocalMap
 							int roamingItementityId = Integer.parseInt(words[2]);
 							RoamingItem roamingItem = (RoamingItem)localMap.getEntity(roamingItementityId);
 							roamingItem.delete();
-							Logger.getLogger(MessageParser.class).info("Player "+player+" deleted roaming item "+roamingItem);
+							LoggerFactory.getLogger(MessageParser.class).info("Player "+player+" deleted roaming item "+roamingItem);
 						}
 					}
 				

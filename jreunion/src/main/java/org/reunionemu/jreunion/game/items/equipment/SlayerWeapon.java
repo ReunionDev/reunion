@@ -1,6 +1,7 @@
 package org.reunionemu.jreunion.game.items.equipment;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.reunionemu.jcommon.ParsedItem;
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.LivingObject;
@@ -102,7 +103,7 @@ public class SlayerWeapon extends SpecialWeapon implements Usable {
 			Player player = (Player) user;
 		
 			if (slayerWeapon.getExtraStats() <= 0) {
-				Logger.getLogger(this.getClass()).warn(
+				LoggerFactory.getLogger(this.getClass()).warn(
 						"Possible cheat detected: player " + player
 								+ " is trying to use empty " + this.getName() + ".");
 				return false;
@@ -128,7 +129,7 @@ public class SlayerWeapon extends SpecialWeapon implements Usable {
 						slayerWeapon.getEntityId(), unknown);
 			return true;
 		} else {
-			Logger.getLogger(SlayerWeapon.class).warn(this.getName() + " not implemented for " + user.getName());
+			LoggerFactory.getLogger(SlayerWeapon.class).warn(this.getName() + " not implemented for " + user.getName());
 		}
 		
 		return false;

@@ -9,7 +9,8 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.reunionemu.jcommon.ParsedItem;
 import org.reunionemu.jcommon.Parser;
 import org.reunionemu.jreunion.events.Event;
@@ -146,7 +147,7 @@ public class LocalMap extends Map implements Runnable{
 
 			if (!item.checkMembers(new String[] { "ID", "X", "Y",
 					"Radius", "RespawnTime", "Type" })) {
-				Logger.getLogger(LocalMap.class).info("Error loading a mob spawn on map: "
+				LoggerFactory.getLogger(LocalMap.class).info("Error loading a mob spawn on map: "
 						+ getId());
 				continue;
 			}
@@ -175,7 +176,7 @@ public class LocalMap extends Map implements Runnable{
 			spawn.spawn();
 		}
 		
-		Logger.getLogger(LocalMap.class).info("Loaded "+getNpcSpawnList().size()+" mob spawns in "+getName());
+		LoggerFactory.getLogger(LocalMap.class).info("Loaded "+getNpcSpawnList().size()+" mob spawns in "+getName());
 	}
 
 	public Parser getMobSpawnReference() {
@@ -231,7 +232,7 @@ public class LocalMap extends Map implements Runnable{
 
 			if (!item.checkMembers(new String[] { "ID", "X", "Y",
 					"Rotation", "Type" })) {
-				Logger.getLogger(LocalMap.class).warn("Failed to load npc spawn {name:"+item.getName()+"} on map "
+				LoggerFactory.getLogger(LocalMap.class).warn("Failed to load npc spawn {name:"+item.getName()+"} on map "
 						+ this);
 				continue;
 			}
@@ -254,7 +255,7 @@ public class LocalMap extends Map implements Runnable{
 			
 			spawn.spawn();
 		}
-		Logger.getLogger(LocalMap.class).info("Loaded "+(getNpcSpawnList().size()-mobSpawnAmmount)+" npc spawns in "+getName());
+		LoggerFactory.getLogger(LocalMap.class).info("Loaded "+(getNpcSpawnList().size()-mobSpawnAmmount)+" npc spawns in "+getName());
 	}
 
 	/**
@@ -272,7 +273,7 @@ public class LocalMap extends Map implements Runnable{
 		super.load();
 		thread.setName("Map: "+getName());
 		
-		Logger.getLogger(LocalMap.class).info("Loading "+getName());
+		LoggerFactory.getLogger(LocalMap.class).info("Loading "+getName());
 		if(!Server.getInstance().getNetwork().register(getAddress())){
 			System.out.println("huh?");
 			return;
@@ -299,7 +300,7 @@ public class LocalMap extends Map implements Runnable{
 			}
 		}
 		
-		Logger.getLogger(LocalMap.class).info("Loaded "+getRoamingItemList().size()+" roaming items in "+getName());
+		LoggerFactory.getLogger(LocalMap.class).info("Loaded "+getRoamingItemList().size()+" roaming items in "+getName());
 			
 		//startMobsAI(1000);
 		
@@ -324,7 +325,7 @@ public class LocalMap extends Map implements Runnable{
 		}, 0, 1500, TimeUnit.MILLISECONDS);
 		*/
 		
-		Logger.getLogger(LocalMap.class).info(getName()+" running on "+getAddress());
+		LoggerFactory.getLogger(LocalMap.class).info(getName()+" running on "+getAddress());
 		
 	}
 	
@@ -372,7 +373,7 @@ public class LocalMap extends Map implements Runnable{
 
 			if (!item.checkMembers(new String[] { "ID", "X", "Y"
 					})) {
-				Logger.getLogger(LocalMap.class).info("Error loading a player spawn on map: "
+				LoggerFactory.getLogger(LocalMap.class).info("Error loading a player spawn on map: "
 						+ getId());
 				continue;
 			}			
@@ -423,7 +424,7 @@ public class LocalMap extends Map implements Runnable{
 					.getItemById(id).getMemberValue("NpcSpawn"));
 			
 		} catch(Exception e){			
-			Logger.getLogger(this.getClass()).warn("Exception",e);			
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);			
 		}
 		Area area = getArea();
 		area.load("data/static/file/"+Reference.getInstance().getMapReference()
@@ -463,7 +464,7 @@ public SessionList<Session> GetSessions(Position position){
 	
 	@Override
 	public void handleEvent(Event event) {
-		//Logger.getLogger(LocalMap.class).info(event);
+		//LoggerFactory.getLogger(LocalMap.class).info(event);
 		if(event instanceof MapEvent){
 			LocalMap map = ((MapEvent)event).getMap();
 			
@@ -620,7 +621,7 @@ public SessionList<Session> GetSessions(Position position){
 					this.wait();
 				}
 				
-				//Logger.getLogger(LocalMap.class).info(this+" work");
+				//LoggerFactory.getLogger(LocalMap.class).info(this+" work");
 				
 				List<Entity> objects = null;
 				SessionList<Session> sessionList = null;
@@ -674,14 +675,14 @@ public SessionList<Session> GetSessions(Position position){
 						*/
 						
 					}catch(Exception e ){
-						Logger.getLogger(this.getClass()).warn("Exception in mapworker ", e);
+						LoggerFactory.getLogger(this.getClass()).warn("Exception in mapworker", e);
 					}
 				}
 				
 				
 			
 			} catch (Exception e) {
-				Logger.getLogger(this.getClass()).warn("Exception ",e);
+				LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 				throw new RuntimeException(e);
 			}
 			finally{			

@@ -3,7 +3,8 @@ package org.reunionemu.jreunion.server;
 import java.nio.channels.SocketChannel;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.reunionemu.jreunion.events.map.ItemDropEvent;
 import org.reunionemu.jreunion.game.Equipment;
 import org.reunionemu.jreunion.game.Item;
@@ -71,12 +72,12 @@ public class Command {
 		
 		//int accountId = DatabaseUtils.getDinamicInstance().Auth(username, password);
 		if (accountId == -1) {
-			Logger.getLogger(Command.class).info("Invalid Login");
+			LoggerFactory.getLogger(Command.class).info("Invalid Login");
 			client.sendPacket(Type.FAIL,"Username and password combination is invalid");
 			client.disconnect();
 		} else {
 			
-			Logger.getLogger(Command.class).info("" + client + " authed as account(" + accountId + ")");
+			LoggerFactory.getLogger(Command.class).info("" + client + " authed as account(" + accountId + ")");
 			client.setAccountId(accountId);
 			
 			java.util.Map<SocketChannel,Client> clients = world.getClients();
@@ -110,7 +111,7 @@ public class Command {
 		int charId = DatabaseUtils.getDinamicInstance().getCharId(slotNumber, accountId);
 		String charName = DatabaseUtils.getDinamicInstance().getCharName(charId);
 		
-		Logger.getLogger(Command.class).info("Player {id:"+charId+", name:"+charName+"} deleted from account {id:"
+		LoggerFactory.getLogger(Command.class).info("Player {id:"+charId+", name:"+charName+"} deleted from account {id:"
 				+accountId+"}");
 		
 		DatabaseUtils.getDinamicInstance().deleteCharSlot(charId);
@@ -227,7 +228,7 @@ public class Command {
 	public void playerWeapon(Player player, int uniqueId) {
 		//Client client = player.getClient();
 
-		//Logger.getLogger(Command.class).info(uniqueId);
+		//LoggerFactory.getLogger(Command.class).info(uniqueId);
 
 		ItemType item = null;
 		//TODO: FIX
@@ -317,7 +318,7 @@ public class Command {
 					+ spWeapon.getMinDamage();
 		}
 /*
-		Logger.getLogger(Command.class).info("Skill Level: "
+		LoggerFactory.getLogger(Command.class).info("Skill Level: "
 				+ player.getCharSkill().getSkill(40).getCurrLevel() + "\n");
 */
 		// Max normal attack damage * memory of the slayer * % skill (40)
@@ -398,7 +399,7 @@ public class Command {
 		}
 		else{
 			
-			Logger.getLogger(QuickSlotBar.class).error(item.getType().getName()+ " not Usable");
+			LoggerFactory.getLogger(QuickSlotBar.class).error(item.getType().getName()+ " not Usable");
 			
 		}
 		return false;
@@ -419,7 +420,7 @@ public class Command {
 		}
 		else{
 			
-			Logger.getLogger(QuickSlotBar.class).error(item.getType().getName()+ " not Usable");
+			LoggerFactory.getLogger(QuickSlotBar.class).error(item.getType().getName()+ " not Usable");
 			
 		}
 		return false;
