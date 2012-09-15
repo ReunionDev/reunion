@@ -44,520 +44,508 @@ public class MessageParser {
 	}
 
 	String parse(Player player, String text) {
-		float userlvl = player.getAdminState();
 		text = text.trim();
 		String words[] = text.split(" ");
 		Client client = player.getClient();
 		World world = client.getWorld();
 		Command com = world.getCommand();
-
-		if (userlvl == 255) {
-			
-			if (words[0].equals("@levelup")) {
-				if (words.length > 1) {
-					
-					int lvlup = Integer.parseInt(words[1]);
-					
-					int pCurrLvl = player.getLevel();
-					int pSPup = 0;
-					
-					if(pCurrLvl < 250) {
-						if(pCurrLvl+lvlup > 250) {
-							int pLVLto250 = 250-pCurrLvl;
-							int pLVLupRest = lvlup-pLVLto250;
-							pSPup = pLVLto250*3+pLVLupRest*10;
-						}
-						else {
-							pSPup = lvlup*3;
-						}
+		
+		if (words[0].equals("@levelup")) {
+			if (words.length > 1) {
+				
+				int lvlup = Integer.parseInt(words[1]);
+				
+				int pCurrLvl = player.getLevel();
+				int pSPup = 0;
+				
+				if(pCurrLvl < 250) {
+					if(pCurrLvl+lvlup > 250) {
+						int pLVLto250 = 250-pCurrLvl;
+						int pLVLupRest = lvlup-pLVLto250;
+						pSPup = pLVLto250*3+pLVLupRest*10;
 					}
 					else {
-						pSPup = lvlup*10;
+						pSPup = lvlup*3;
 					}
+				}
+				else {
+					pSPup = lvlup*10;
+				}
+				
+				player.setLevel(player.getLevel()+lvlup);
+				player.setStatusPoints(player.getStatusPoints()+pSPup);
+			}
+			else
+				player.setLevelUpExp(0);
+		}
+		else if (words[0].equals("@points"))
+		{
+			if(words.length == 3 && (words[1].equals("strength") || words[1].equals("wisdom") || words[1].equals("dex") || words[1].equals("strain") || words[1].equals("charisma"))) {
+				long pointsToUpgrade = Integer.parseInt(words[2]);
+				
+				if(pointsToUpgrade > 0) {
+					if(player.getStatusPoints() < pointsToUpgrade)
+						pointsToUpgrade = player.getStatusPoints();
 					
-					player.setLevel(player.getLevel()+lvlup);
-					player.setStatusPoints(player.getStatusPoints()+pSPup);
+					if(words[1].equals("strength"))
+						player.setStrength(player.getStrength() + pointsToUpgrade);
+					else if (words[1].equals("wisdom"))
+						player.setWisdom(player.getWisdom()+pointsToUpgrade);
+					else if (words[1].equals("dex"))
+						player.setDexterity(player.getDexterity()+pointsToUpgrade);
+					else if (words[1].equals("strain"))
+						player.setConstitution(player.getConstitution()+pointsToUpgrade);
+					else if (words[1].equals("charisma"))
+						player.setLeadership(player.getLeadership()+pointsToUpgrade);
+					
+					player.setStatusPoints(player.getStatusPoints()+pointsToUpgrade*-1);
 				}
 				else
-					player.setLevelUpExp(0);
-			}
-			else if (words[0].equals("@points"))
-			{
-				if(words.length == 3 && (words[1].equals("strength") || words[1].equals("wisdom") || words[1].equals("dex") || words[1].equals("strain") || words[1].equals("charisma"))) {
-					long pointsToUpgrade = Integer.parseInt(words[2]);
+					client.sendPacket(Type.SAY, "You can't enter values < 0");
+			} else if(words[1].equals("reskill")) {
+				if(words.length == 7) {
+					int strength = Integer.parseInt(words[2]);
+					int wisdom   = Integer.parseInt(words[3]);
+					int dex      = Integer.parseInt(words[4]);
+					int strain   = Integer.parseInt(words[5]);
+					int charisma = Integer.parseInt(words[6]);
 					
-					if(pointsToUpgrade > 0) {
-						if(player.getStatusPoints() < pointsToUpgrade)
-							pointsToUpgrade = player.getStatusPoints();
-						
-						if(words[1].equals("strength"))
-							player.setStrength(player.getStrength() + pointsToUpgrade);
-						else if (words[1].equals("wisdom"))
-							player.setWisdom(player.getWisdom()+pointsToUpgrade);
-						else if (words[1].equals("dex"))
-							player.setDexterity(player.getDexterity()+pointsToUpgrade);
-						else if (words[1].equals("strain"))
-							player.setConstitution(player.getConstitution()+pointsToUpgrade);
-						else if (words[1].equals("charisma"))
-							player.setLeadership(player.getLeadership()+pointsToUpgrade);
-						
-						player.setStatusPoints(player.getStatusPoints()+pointsToUpgrade*-1);
-					}
-					else
-						client.sendPacket(Type.SAY, "You can't enter values < 0");
-				} else if(words[1].equals("reskill")) {
-					if(words.length == 7) {
-						int strength = Integer.parseInt(words[2]);
-						int wisdom   = Integer.parseInt(words[3]);
-						int dex      = Integer.parseInt(words[4]);
-						int strain   = Integer.parseInt(words[5]);
-						int charisma = Integer.parseInt(words[6]);
-						
-						int sumuSP = strength+wisdom+dex+strain+charisma;
-						
-						if(sumuSP <= 80 && sumuSP >= 25) {
-							player.setStrength(strength);
-							player.setWisdom(wisdom);
-							player.setDexterity(dex);
-							player.setConstitution(strain);
-							player.setLeadership(charisma);
-							
-							player.resetSkills();
-							
-							sumuSP = 80-sumuSP;
-							player.setStatusPoints(player.getMaxStatusPoints()+sumuSP);
-						}
-						else
-							client.sendPacket(Type.SAY, "Sum of Strength, Wisdom, Dex, Stain and charisma must be between 25 and 80");
-					}
-					else
-					{
-						player.setStrength(5);
-						player.setWisdom(5);
-						player.setDexterity(5);
-						player.setConstitution(5);
-						player.setLeadership(5);
+					int sumuSP = strength+wisdom+dex+strain+charisma;
+					
+					if(sumuSP <= 80 && sumuSP >= 25) {
+						player.setStrength(strength);
+						player.setWisdom(wisdom);
+						player.setDexterity(dex);
+						player.setConstitution(strain);
+						player.setLeadership(charisma);
 						
 						player.resetSkills();
 						
-						player.setStatusPoints(player.getMaxStatusPoints()+55);
+						sumuSP = 80-sumuSP;
+						player.setStatusPoints(player.getMaxStatusPoints()+sumuSP);
+					}
+					else
+						client.sendPacket(Type.SAY, "Sum of Strength, Wisdom, Dex, Stain and charisma must be between 25 and 80");
+				}
+				else
+				{
+					player.setStrength(5);
+					player.setWisdom(5);
+					player.setDexterity(5);
+					player.setConstitution(5);
+					player.setLeadership(5);
+					
+					player.resetSkills();
+					
+					player.setStatusPoints(player.getMaxStatusPoints()+55);
+				}
+			}
+		}
+		else if (words[0].equals("@guild"))
+		{
+			if(words[1].equals("create") && player.getAdminState() >= 200) {
+				if(words.length == 3)
+				{
+					String name = (String)words[2];
+					
+					int guildId = DatabaseUtils.getDinamicInstance().addGuild(name);
+					if(guildId != 0)
+					{
+						player.setGuildId(guildId);
+						player.setGuildLevel(10);
+						player.setGuildName(name);
+						
+						player.getClient().sendPacket(Type.GUILD_NAME, player);
+						player.getClient().sendPacket(Type.GUILD_GRADE, player);
+						player.getClient().sendPacket(Type.GUILD_LEVEL, player);
+						
+						player.getInterested().sendPacket(Type.GUILD_NAME, player);
+						player.getInterested().sendPacket(Type.GUILD_GRADE, player);
+						player.getInterested().sendPacket(Type.GUILD_LEVEL, player);
+					}
+				}
+				else if(words.length == 4)
+				{
+					String name = (String)words[2];
+					
+					int guildId = DatabaseUtils.getDinamicInstance().addGuild(name);
+					if(guildId != 0)
+					{
+						Player targetPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayer(words[3]);
+						
+						targetPlayer.setGuildId(guildId);
+						targetPlayer.setGuildLevel(10);
+						targetPlayer.setGuildName(name);
+						
+						targetPlayer.getClient().sendPacket(Type.GUILD_NAME, targetPlayer);
+						targetPlayer.getClient().sendPacket(Type.GUILD_GRADE, targetPlayer);
+						targetPlayer.getClient().sendPacket(Type.GUILD_LEVEL, targetPlayer);
+						
+						targetPlayer.getInterested().sendPacket(Type.GUILD_NAME, targetPlayer);
+						targetPlayer.getInterested().sendPacket(Type.GUILD_GRADE, targetPlayer);
+						targetPlayer.getInterested().sendPacket(Type.GUILD_LEVEL, targetPlayer);
 					}
 				}
 			}
-			else if (words[0].equals("@guild"))
-			{
-				if(words[1].equals("create") && player.getAdminState() >= 200) {
-					if(words.length == 3)
-					{
-						String name = (String)words[2];
-						
-						int guildId = DatabaseUtils.getDinamicInstance().addGuild(name);
-						if(guildId != 0)
-						{
-							player.setGuildId(guildId);
-							player.setGuildLevel(10);
-							player.setGuildName(name);
-							
-							player.getClient().sendPacket(Type.GUILD_NAME, player);
-							player.getClient().sendPacket(Type.GUILD_GRADE, player);
-							player.getClient().sendPacket(Type.GUILD_LEVEL, player);
-							
-							player.getInterested().sendPacket(Type.GUILD_NAME, player);
-							player.getInterested().sendPacket(Type.GUILD_GRADE, player);
-							player.getInterested().sendPacket(Type.GUILD_LEVEL, player);
-						}
-					}
-					else if(words.length == 4)
-					{
-						String name = (String)words[2];
-						
-						int guildId = DatabaseUtils.getDinamicInstance().addGuild(name);
-						if(guildId != 0)
-						{
-							Player targetPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayer(words[3]);
-							
-							targetPlayer.setGuildId(guildId);
-							targetPlayer.setGuildLevel(10);
-							targetPlayer.setGuildName(name);
-							
-							targetPlayer.getClient().sendPacket(Type.GUILD_NAME, targetPlayer);
-							targetPlayer.getClient().sendPacket(Type.GUILD_GRADE, targetPlayer);
-							targetPlayer.getClient().sendPacket(Type.GUILD_LEVEL, targetPlayer);
-							
-							targetPlayer.getInterested().sendPacket(Type.GUILD_NAME, targetPlayer);
-							targetPlayer.getInterested().sendPacket(Type.GUILD_GRADE, targetPlayer);
-							targetPlayer.getInterested().sendPacket(Type.GUILD_LEVEL, targetPlayer);
-						}
-					}
-				}
-				else if(words[1].equals("add")) {
-					if(player.getGuildId() != 0 && player.getGuildLvl() > 1)
-					{
-						Player targetPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayer(words[2]);
-						
-						//client.sendPacket(Type.SAY, "Your Guild: "+player.getGuildName()+" req:"+targetPlayer.getGuildRequestName());
-						
-						if(targetPlayer.getGuildRequestName().equals(player.getGuildName()))
-						{
-							targetPlayer.setGuildId(player.getGuildId());
-							targetPlayer.setGuildName(player.getGuildName());
-							
-							if(words.length == 4)
-								targetPlayer.setGuildLevel(Integer.parseInt(words[3]));
-							else
-								targetPlayer.setGuildLevel(1);
-							
-							targetPlayer.getClient().sendPacket(Type.GUILD_NAME, targetPlayer);
-							targetPlayer.getClient().sendPacket(Type.GUILD_GRADE, targetPlayer);
-							targetPlayer.getClient().sendPacket(Type.GUILD_LEVEL, targetPlayer);
-							
-							targetPlayer.getInterested().sendPacket(Type.GUILD_NAME, targetPlayer);
-							targetPlayer.getInterested().sendPacket(Type.GUILD_GRADE, targetPlayer);
-							targetPlayer.getInterested().sendPacket(Type.GUILD_LEVEL, targetPlayer);
-							
-							targetPlayer.getClient().sendPacket(Type.SAY, "You've been accepted to join guild");
-							
-							client.sendPacket(Type.SAY, "Added Player "+targetPlayer.getName()+" to guild ");
-						}
-						else
-						{
-							client.sendPacket(Type.SAY, "Player "+targetPlayer.getName()+" didnt requested membership");
-						}
-					}
-					else {
-						client.sendPacket(Type.SAY, "You are not in a guild or you dont have permission to add member");
-					}
-				}
-				else if (words[1].equals("req"))
+			else if(words[1].equals("add")) {
+				if(player.getGuildId() != 0 && player.getGuildLvl() > 1)
 				{
-					if(words.length == 3)
-					{
-						if(player.getGuildId() != 0)
-						{
-							client.sendPacket(Type.SAY, "You are allready in guild "+player.getGuildName()+" leave that first");
-						}
-						else
-						{
-							player.setGuildRequestName(words[2]);
-							client.sendPacket(Type.SAY, "You applyed for guild membership on "+words[2]);
-						}
-					}
+					Player targetPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayer(words[2]);
 					
-				}
-				
-				else if(words[1].equals("leave"))
-				{
-					if(words.length == 2 && player.getGuildId() != -1)
+					//client.sendPacket(Type.SAY, "Your Guild: "+player.getGuildName()+" req:"+targetPlayer.getGuildRequestName());
+					
+					if(targetPlayer.getGuildRequestName().equals(player.getGuildName()))
 					{
-						player.setGuildId(0);
-						player.setGuildLevel(0);
-						player.setGuildName("");
+						targetPlayer.setGuildId(player.getGuildId());
+						targetPlayer.setGuildName(player.getGuildName());
 						
-						client.sendPacket(Type.GUILD_NAME, player);
-						player.getInterested().sendPacket(Type.GUILD_NAME, player);
+						if(words.length == 4)
+							targetPlayer.setGuildLevel(Integer.parseInt(words[3]));
+						else
+							targetPlayer.setGuildLevel(1);
 						
-						client.sendPacket(Type.SAY,"You left your guild");
+						targetPlayer.getClient().sendPacket(Type.GUILD_NAME, targetPlayer);
+						targetPlayer.getClient().sendPacket(Type.GUILD_GRADE, targetPlayer);
+						targetPlayer.getClient().sendPacket(Type.GUILD_LEVEL, targetPlayer);
+						
+						targetPlayer.getInterested().sendPacket(Type.GUILD_NAME, targetPlayer);
+						targetPlayer.getInterested().sendPacket(Type.GUILD_GRADE, targetPlayer);
+						targetPlayer.getInterested().sendPacket(Type.GUILD_LEVEL, targetPlayer);
+						
+						targetPlayer.getClient().sendPacket(Type.SAY, "You've been accepted to join guild");
+						
+						client.sendPacket(Type.SAY, "Added Player "+targetPlayer.getName()+" to guild ");
 					}
 					else
 					{
-						client.sendPacket(Type.SAY,"You are in no guild");
+						client.sendPacket(Type.SAY, "Player "+targetPlayer.getName()+" didnt requested membership");
 					}
 				}
-				
-				else if(words[1].equals("kick"))
-				{
-					if(words.length == 3)
-					{
-						if(player.getGuildLvl() > 1)
-						{
-							Player targetPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayer(words[2]);
-							
-							if(targetPlayer.getGuildId() == player.getGuildId())
-							{
-								if(player.getGuildLvl() > 8)
-								{
-									targetPlayer.setGuildId(0);
-									targetPlayer.setGuildLevel(0);
-									targetPlayer.setGuildName("");
-
-									targetPlayer.getInterested().sendPacket(Type.GUILD_NAME, targetPlayer);
-									targetPlayer.getClient().sendPacket(Type.GUILD_NAME, targetPlayer);
-									targetPlayer.getClient().sendPacket(Type.SAY, "You've got kicked out of guild");
-									client.sendPacket(Type.SAY, "You've kicked "+targetPlayer.getName()+" out of guild");
-								}
-							}
-						}
-						else
-						{
-							client.sendPacket(Type.SAY, "You don't have the right to kick players out of guild!");
-						}
-					}
-					
+				else {
+					client.sendPacket(Type.SAY, "You are not in a guild or you dont have permission to add member");
 				}
-				else if(words[1].equals("info"))
-				{
-					Iterator<Player> iterPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayerListIterator();
-					
-					long guildId = player.getGuildId();
-					
-					String gPlayer = "";
-					
-					boolean online = false;
-					
-					if(guildId != 0)
-					{
-						client.sendPacket(Type.SAY, "Who is online in your guild ("+player.getGuildName()+"):");
-						while(iterPlayer.hasNext())
-						{
-							Player currplayer = iterPlayer.next();
-							
-							if(currplayer.getGuildId() == guildId)
-							{
-								online = true;
-								gPlayer = currplayer.getName()+" (Lv."+currplayer.getLevel()+" Map:"+currplayer.getPosition().getMap().getName()+")";
-								
-								client.sendPacket(Type.SAY, gPlayer);
-							}
-						}
-						if(!online)
-							client.sendPacket(Type.SAY, "No guild member online!");
-					}
-				}
-				
-				//client.getWorld().sendPacket(Type.GUILD_SAY, data,player);
 			}
-			else if (words[0].equals("@online"))
-			{
-				if(player.getAdminState() >= 200) {
-					Iterator<Player> iterPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayerListIterator();
-					
-					if(player.getAdminState() >= 200) {
-						client.sendPacket(Type.G_POS_START);
-					}
-					while(iterPlayer.hasNext())
-					{
-						Player currplayer = iterPlayer.next();
-					
-						if(currplayer.getPosition().getMap() == player.getPosition().getMap() && currplayer != player)
-							client.sendPacket(Type.G_POS_BODY, currplayer);
-					}
-					if(player.getAdminState() >= 200) {
-						client.sendPacket(Type.G_POS_END);
-					}
-				}
-				client.sendPacket(Type.SAY, "Online Players: "+Server.getInstance().getWorld().getPlayerManager().getNumberOfPlayers());
-			}
-			else if (words[0].equals("@event") && player.getAdminState() >= 150)
+			else if (words[1].equals("req"))
 			{
 				if(words.length == 3)
 				{
-					if(words[1].equals("exp"))
+					if(player.getGuildId() != 0)
 					{
-						if(Server.getInstance().getWorld().getServerSetings().getXp() < Long.parseLong(words[2]))
-							Server.getInstance().getWorld().sendPacket(Type.INFO, "EXP Event (x"+words[2]+") started!");
-						else if(Server.getInstance().getWorld().getServerSetings().getXp() > Long.parseLong(words[2]))
-							Server.getInstance().getWorld().sendPacket(Type.INFO, "EXP Event has ended!");
-						Server.getInstance().getWorld().getServerSetings().setXp(Long.parseLong(words[2]));
+						client.sendPacket(Type.SAY, "You are allready in guild "+player.getGuildName()+" leave that first");
 					}
-					else if(words[1].equals("lime"))
+					else
 					{
-						if(Server.getInstance().getWorld().getServerSetings().getLime() < Long.parseLong(words[2]))
-							Server.getInstance().getWorld().sendPacket(Type.INFO, "Lime Event (x"+words[2]+") started!");
-						else if(Server.getInstance().getWorld().getServerSetings().getLime() > Long.parseLong(words[2]))
-							Server.getInstance().getWorld().sendPacket(Type.INFO, "Lime Event has ended!");
-						Server.getInstance().getWorld().getServerSetings().setLime(Long.parseLong(words[2]));
-						
+						player.setGuildRequestName(words[2]);
+						client.sendPacket(Type.SAY, "You applyed for guild membership on "+words[2]);
 					}
 				}
 			}
-			else if (words[0].equals("@kick") && player.getAdminState() >= 200)
+			else if(words[1].equals("leave"))
 			{
-				if(words.length == 2)
+				if(words.length == 2 && player.getGuildId() != -1)
 				{
-					Player targetPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayer(words[1]);
+					player.setGuildId(0);
+					player.setGuildLevel(0);
+					player.setGuildName("");
 					
-					client.sendPacket(Type.SAY, "Player "+targetPlayer.getName()+" kicked");
+					client.sendPacket(Type.GUILD_NAME, player);
+					player.getInterested().sendPacket(Type.GUILD_NAME, player);
 					
-					targetPlayer.getClient().disconnect();
+					client.sendPacket(Type.SAY,"You left your guild");
+				}
+				else
+				{
+					client.sendPacket(Type.SAY,"You are in no guild");
 				}
 			}
-			else if (words[0].equals("@global")) //Global chat is with -[space]Your message
+			else if(words[1].equals("kick"))
 			{
-				int lengthofinfo = words.length;
-				String data = "";
-				for(int i = 1; i < lengthofinfo;i++){
-					data+=" "+words[i];					
+				if(words.length == 3)
+				{
+					if(player.getGuildLvl() > 1)
+					{
+						Player targetPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayer(words[2]);
+						
+						if(targetPlayer.getGuildId() == player.getGuildId())
+						{
+							if(player.getGuildLvl() > 8)
+							{
+								targetPlayer.setGuildId(0);
+								targetPlayer.setGuildLevel(0);
+								targetPlayer.setGuildName("");
+	
+								targetPlayer.getInterested().sendPacket(Type.GUILD_NAME, targetPlayer);
+								targetPlayer.getClient().sendPacket(Type.GUILD_NAME, targetPlayer);
+								targetPlayer.getClient().sendPacket(Type.SAY, "You've got kicked out of guild");
+								client.sendPacket(Type.SAY, "You've kicked "+targetPlayer.getName()+" out of guild");
+							}
+						}
+					}
+					else
+					{
+						client.sendPacket(Type.SAY, "You don't have the right to kick players out of guild!");
+					}
 				}
-				client.getWorld().sendPacket(Type.SAY, data,player);
+			}
+			else if(words[1].equals("info"))
+			{
+				Iterator<Player> iterPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayerListIterator();
+				
+				long guildId = player.getGuildId();
+				
+				String gPlayer = "";
+				
+				boolean online = false;
+				
+				if(guildId != 0)
+				{
+					client.sendPacket(Type.SAY, "Who is online in your guild ("+player.getGuildName()+"):");
+					while(iterPlayer.hasNext())
+					{
+						Player currplayer = iterPlayer.next();
+						
+						if(currplayer.getGuildId() == guildId)
+						{
+							online = true;
+							gPlayer = currplayer.getName()+" (Lv."+currplayer.getLevel()+" Map:"+currplayer.getPosition().getMap().getName()+")";
+							
+							client.sendPacket(Type.SAY, gPlayer);
+						}
+					}
+					if(!online)
+						client.sendPacket(Type.SAY, "No guild member online!");
+				}
 			}
 			
-			else if (words[0].equals("@shutdown")) {
-				final Iterator<Player> iterPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayerListIterator();
-				final World worldShutdown = world;
+			//client.getWorld().sendPacket(Type.GUILD_SAY, data,player);
+		}
+		else if (words[0].equals("@online"))
+		{
+			if(player.getAdminState() >= 200) {
+				Iterator<Player> iterPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayerListIterator();
 				
-				Timer t = new Timer();
-				t.schedule(new TimerTask(){
-					int counter = 30;
-					@Override
-					public void run() {
-						if(counter > 0) {
-							worldShutdown.sendPacket(Type.INFO, "Server shutdown immediately! ("+counter+" Seconds)");
-						}
-						
-						if(counter == 5) {
-							while(iterPlayer.hasNext())	{
-								Player currplayer = iterPlayer.next();
-								Client pClient = currplayer.getClient();
+				if(player.getAdminState() >= 200) {
+					client.sendPacket(Type.G_POS_START);
+				}
+				while(iterPlayer.hasNext())
+				{
+					Player currplayer = iterPlayer.next();
+				
+					if(currplayer.getPosition().getMap() == player.getPosition().getMap() && currplayer != player)
+						client.sendPacket(Type.G_POS_BODY, currplayer);
+				}
+				if(player.getAdminState() >= 200) {
+					client.sendPacket(Type.G_POS_END);
+				}
+			}
+			client.sendPacket(Type.SAY, "Online Players: "+Server.getInstance().getWorld().getPlayerManager().getNumberOfPlayers());
+		}
+		else if (words[0].equals("@event") && player.getAdminState() >= 150)
+		{
+			if(words.length == 3)
+			{
+				if(words[1].equals("exp"))
+				{
+					if(Server.getInstance().getWorld().getServerSetings().getXp() < Long.parseLong(words[2]))
+						Server.getInstance().getWorld().sendPacket(Type.INFO, "EXP Event (x"+words[2]+") started!");
+					else if(Server.getInstance().getWorld().getServerSetings().getXp() > Long.parseLong(words[2]))
+						Server.getInstance().getWorld().sendPacket(Type.INFO, "EXP Event has ended!");
+					Server.getInstance().getWorld().getServerSetings().setXp(Long.parseLong(words[2]));
+				}
+				else if(words[1].equals("lime"))
+				{
+					if(Server.getInstance().getWorld().getServerSetings().getLime() < Long.parseLong(words[2]))
+						Server.getInstance().getWorld().sendPacket(Type.INFO, "Lime Event (x"+words[2]+") started!");
+					else if(Server.getInstance().getWorld().getServerSetings().getLime() > Long.parseLong(words[2]))
+						Server.getInstance().getWorld().sendPacket(Type.INFO, "Lime Event has ended!");
+					Server.getInstance().getWorld().getServerSetings().setLime(Long.parseLong(words[2]));
+					
+				}
+			}
+		}
+		else if (words[0].equals("@kick") && player.getAdminState() >= 200)
+		{
+			if(words.length == 2)
+			{
+				Player targetPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayer(words[1]);
+				
+				client.sendPacket(Type.SAY, "Player "+targetPlayer.getName()+" kicked");
+				
+				targetPlayer.getClient().disconnect();
+			}
+		}
+		else if (words[0].equals("@global")) //Global chat is with -[space]Your message
+		{
+			int lengthofinfo = words.length;
+			String data = "";
+			for(int i = 1; i < lengthofinfo;i++){
+				data+=" "+words[i];					
+			}
+			client.getWorld().sendPacket(Type.SAY, data,player);
+		}
+		
+		else if (words[0].equals("@shutdown") && player.getAdminState() >= 260) {
+			final Iterator<Player> iterPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayerListIterator();
+			final World worldShutdown = world;
+			
+			final Client clientU = client;
+			Timer t = new Timer();
+			t.schedule(new TimerTask(){
+				int counter = 30;
+				@Override
+				public void run() {
+					if(counter > 0) {
+						worldShutdown.sendPacket(Type.INFO, "Server shutdown immediately! ("+counter+" Seconds)");
+					}
+					if(counter == 5) {
+						while(iterPlayer.hasNext())	{
+							Player currplayer = iterPlayer.next();
+							Client pClient = currplayer.getClient();
+							try {
 								currplayer.save();
 								pClient.sendPacket(Type.SAY, currplayer.getName()+" saved ...");	
+							} catch (Exception e)
+							{
+								clientU.sendPacket(Type.SAY, "Player saving of "+ currplayer.getName()+" failed..");
 							}
 						}
-						else if(counter <= 0) {
-							System.exit(1);
-						}
-						counter -= 5;
 					}
-				}, 0, 5000); //all 5 seconds
+					else if(counter <= 0) {
+						System.exit(1);
+					}
+					counter -= 5;
+				}
+			}, 0, 5000); //all 5 seconds
+		}
+		
+		else if (words[0].equals("@fp") && player.getAdminState() >= 260) {
+			String packetData = "";
+			for (int i = 1; i <= (words.length-1);i++){
+				packetData = packetData+words[i];
+				if(i < (words.length-1))
+					packetData = packetData+" ";
 			}
 			
-			else if (words[0].equals("@fp")) {
-				String packetData = "";
-				for (int i = 1; i <= (words.length-1);i++){
-					packetData = packetData+words[i];
-					if(i < (words.length-1))
-						packetData = packetData+" ";
-				}
-				
-				client.sendData(packetData);
+			client.sendData(packetData);
+		}
+	
+		else if (words[0].equals("@eid") && player.getAdminState() >= 260) {
+			if(words.length == 1)
+				client.sendPacket(Type.SAY, "Your EntityID is: "+player.getEntityId());
+			else if(words.length > 1)
+			{
+				Player target = Server.getInstance().getWorld().getPlayerManager().getPlayer(words[1]);
+				client.sendPacket(Type.SAY,"EntityID of "+words[1]+" is "+target.getEntityId());
 			}
-
-			else if (words[0].equals("@eid")) {
-				if(words.length == 1)
-					client.sendPacket(Type.SAY, "Your EntityID is: "+player.getEntityId());
-				else if(words.length > 1)
-				{
-					Player target = Server.getInstance().getWorld().getPlayerManager().getPlayer(words[1]);
-					client.sendPacket(Type.SAY,"EntityID of "+words[1]+" is "+target.getEntityId());
-				}
-			}
-
-			else if (words[0].equals("@testcol")) {
-				Player p = player;
-				
-				LocalMap map = p.getPosition().getLocalMap();
-				Area area = map.getArea();
-				
-				String s1 = ""
-						+ area.get(p.getPosition().getX() / 10, p.getPosition().getY() / 10,Field.PLAYER);
-				String s2 = ""
-						+ area.get(p.getPosition().getX() / 10, p.getPosition().getY() / 10,Field.MOB);
-				String s3 = ""
-						+ area.get(p.getPosition().getX() / 10, p.getPosition().getY() / 10,Field.PVP);
-
-				com.serverSay("(" + p.getPosition().getX() / 10 + "," + p.getPosition().getY() / 10
-						+ ")" + "collision test: " + s1 + " " + s2 + " " + s3);
-			} else if (words[0].equals("@d") || words[0].equals("@drop")) { //Drop Item
-				if (words.length >= 2) {
-					ItemManager itemManager = world.getItemManager();
-						try {
+		}
+	
+		else if (words[0].equals("@testcol") && player.getAdminState() >= 260) {
+			Player p = player;
 			
-							Item<?> item = itemManager.create(Integer.parseInt(words[1]));
-							player.getPosition().getLocalMap().createEntityId(item);
-							
-							if (words.length == 6) {							
-								int gemNumber = Integer.parseInt(words[2]);
-								int extraStats = Integer.parseInt(words[3]);
-								int unknown1 = Integer.parseInt(words[4]);
-								int unknown2 = Integer.parseInt(words[5]);
-								
-								item.setGemNumber(gemNumber);
-								item.setExtraStats(extraStats);
-								item.setDurability(item.getType().getMaxDurability());
-								item.setUnknown1(unknown1);
-								item.setUnknown2(unknown2);
-							}else{
-								item.setGemNumber(0);
-								item.setExtraStats(item.getType().getMaxExtraStats());
-								item.setDurability(item.getType().getMaxDurability());
-								item.setUnknown1(0);
-								item.setUnknown2(0);
-							}
-							RoamingItem roamingItem = com.dropItem(player.getPosition(), item, player);
-							LoggerFactory.getLogger(MessageParser.class).info("Player "+player+" droped roaming item "+roamingItem);
-							
-						} catch (Exception e) {
-							client.sendPacket(Type.SAY, "@drop failed (ID:"+words[1]+")");
-						}
-				}
-			}
-			else if (words[0].equals("@info")) {
-				int lengthofinfo = words.length;
-				String data = "";
-				for(int i = 1; i < lengthofinfo;i++){
-					data+=" "+words[i];					
-				}
-				client.getWorld().sendPacket(Type.INFO, "- "+data+" -");
-			}
-			else if (words[0].equals("@say")) {
-				String data = "";
-				for(String word: words){
-					data+=" "+word;					
-				}
-				client.sendPacket(Type.SAY, data.substring(2));	
-				return null;
-				//client.SendPacket(Type.SAY, words[3],Integer.parseInt(words[2]),Integer.parseInt(words[1]));
+			LocalMap map = p.getPosition().getLocalMap();
+			Area area = map.getArea();
 			
-			} else if (words[0].equals("@addmob")) { //Adds a mob type NPC 
-				if (words.length == 2||words.length == 3) {
-					int count = 0;
+			String s1 = ""
+					+ area.get(p.getPosition().getX() / 10, p.getPosition().getY() / 10,Field.PLAYER);
+			String s2 = ""
+					+ area.get(p.getPosition().getX() / 10, p.getPosition().getY() / 10,Field.MOB);
+			String s3 = ""
+					+ area.get(p.getPosition().getX() / 10, p.getPosition().getY() / 10,Field.PVP);
+	
+			com.serverSay("(" + p.getPosition().getX() / 10 + "," + p.getPosition().getY() / 10
+					+ ")" + "collision test: " + s1 + " " + s2 + " " + s3);
+		} else if (words[0].equals("@d") || words[0].equals("@drop")) { //Drop Item
+			if (words.length >= 2) {
+				ItemManager itemManager = world.getItemManager();
 					try {
-						count = words.length == 3?Integer.parseInt(words[2]):1;
+		
+						Item<?> item = itemManager.create(Integer.parseInt(words[1]));
+						player.getPosition().getLocalMap().createEntityId(item);
 						
-						if(count > 5)
-							count = 5;
-						
-						for (int x = 0; x < count; x++) {
-							NpcSpawn spawn = new NpcSpawn();
-							spawn.setPosition(player.getPosition().clone());
-							spawn.setNpcType(Integer.parseInt(words[1]));
-							spawn.setRadius(300);
-							spawn.setRespawnTime(-1);
-							spawn.spawn();
+						if (words.length == 6) {							
+							int gemNumber = Integer.parseInt(words[2]);
+							int extraStats = Integer.parseInt(words[3]);
+							int unknown1 = Integer.parseInt(words[4]);
+							int unknown2 = Integer.parseInt(words[5]);
+							
+							item.setGemNumber(gemNumber);
+							item.setExtraStats(extraStats);
+							item.setDurability(item.getType().getMaxDurability());
+							item.setUnknown1(unknown1);
+							item.setUnknown2(unknown2);
+						}else{
+							item.setGemNumber(0);
+							item.setExtraStats(item.getType().getMaxExtraStats());
+							item.setDurability(item.getType().getMaxDurability());
+							item.setUnknown1(0);
+							item.setUnknown2(0);
 						}
-					} catch (Exception NumberFormatException) {
-						client.sendPacket(Type.SAY,  "@addmob with "+count+" mob failed");
+						RoamingItem roamingItem = com.dropItem(player.getPosition(), item, player);
+						LoggerFactory.getLogger(MessageParser.class).info("Player "+player+" droped roaming item "+roamingItem);
+						
+					} catch (Exception e) {
+						client.sendPacket(Type.SAY, "@drop failed (ID:"+words[1]+")");
 					}
-				
-				} else if (words.length == 6) {
-					//LocalMap map = player.getPosition().getLocalMap();
-					//Mob mobType = (Mob)Npc.create(Integer.parseInt(words[1]));
-					Npc<?> mob = client.getWorld().getNpcManager().create(Integer.parseInt(words[1]));
-					
-					mob.getPosition().setX(player.getPosition().getX() + 10);
-					mob.getPosition().setY(player.getPosition().getY() + 10);
-					mob.setIsRunning(true);
-					mob.setMutantType(Integer.parseInt(words[2]));
-					mob.setUnknown1(Integer.parseInt(words[3]));
-					mob.getType().setNeoProgmare(Integer.parseInt(words[4]));
-					mob.setUnknown2(Integer.parseInt(words[5]));
-					//Server.getInstance().getWorld().getMobManager().addMob(mob);
-				}
-			} else if (words[0].equals("@addnpc")) { //adds a NPC
+			}
+		}
+		else if (words[0].equals("@info") && player.getAdminState() >= 200) {
+			int lengthofinfo = words.length;
+			String data = "";
+			for(int i = 1; i < lengthofinfo;i++){
+				data+=" "+words[i];					
+			}
+			client.getWorld().sendPacket(Type.INFO, "- "+data+" -");
+		}
+		else if (words[0].equals("@addmob") && player.getAdminState() >= 200) { //Adds a mob type NPC 
+			if (words.length == 2||words.length == 3) {
+				int count = 0;
 				try {
-				if (words.length == 2) {
+					count = words.length == 3?Integer.parseInt(words[2]):1;
 					
-					NpcSpawn spawn = new NpcSpawn();
+					if(count > 5)
+						count = 5;
 					
-					spawn.setPosition(player.getPosition().clone());
-					spawn.setNpcType(Integer.parseInt(words[1]));
-					spawn.spawn();
-					
+					for (int x = 0; x < count; x++) {
+						NpcSpawn spawn = new NpcSpawn();
+						spawn.setPosition(player.getPosition().clone());
+						spawn.setNpcType(Integer.parseInt(words[1]));
+						spawn.setRadius(300);
+						spawn.setRespawnTime(-1);
+						spawn.spawn();
+					}
+				} catch (Exception NumberFormatException) {
+					client.sendPacket(Type.SAY,  "@addmob with "+count+" mob failed");
 				}
-				} catch (Exception e) {
-					//TODO: Fix the Mob id error server crash
-					LoggerFactory.getLogger(this.getClass()).error("Npc id error detected");
-				}
-			} else if (words[0].equals("@tele")) {
+			} else if (words.length == 6) {
+				//LocalMap map = player.getPosition().getLocalMap();
+				//Mob mobType = (Mob)Npc.create(Integer.parseInt(words[1]));
+				Npc<?> mob = client.getWorld().getNpcManager().create(Integer.parseInt(words[1]));
+				
+				mob.getPosition().setX(player.getPosition().getX() + 10);
+				mob.getPosition().setY(player.getPosition().getY() + 10);
+				mob.setIsRunning(true);
+				mob.setMutantType(Integer.parseInt(words[2]));
+				mob.setUnknown1(Integer.parseInt(words[3]));
+				mob.getType().setNeoProgmare(Integer.parseInt(words[4]));
+				mob.setUnknown2(Integer.parseInt(words[5]));
+				//Server.getInstance().getWorld().getMobManager().addMob(mob);
+			}
+		} else if (words[0].equals("@addnpc") && player.getAdminState() >= 200) { //adds a NPC
+			try {
+			if (words.length == 2) {
+				
+				NpcSpawn spawn = new NpcSpawn();
+				
+				spawn.setPosition(player.getPosition().clone());
+				spawn.setNpcType(Integer.parseInt(words[1]));
+				spawn.spawn();
+				
+			}
+			} catch (Exception e) {
+				//TODO: Fix the Mob id error server crash
+				LoggerFactory.getLogger(this.getClass()).error("Npc id error detected");
+			}
+		} else if (words[0].equals("@tele")) {
 			try {
 				String worldname = words[1];	
 				ParsedItem mapref = Reference.getInstance().getMapConfigReference().getItem(worldname);
@@ -576,7 +564,7 @@ public class MessageParser {
 			} catch (Exception e) {
 				
 			}
-		}  else if (words[0].equals("@goto")) {
+		}  else if (words[0].equals("@goto") && player.getAdminState() >= 150) {
 			if (words[1].equals("pos")) { //@goto pos [X] [Y]
 				Position position = player.getPosition().clone();
 				position.setX(Integer.parseInt(words[2]));
@@ -586,7 +574,7 @@ public class MessageParser {
 			if (words[1].equals("char")) { //@goto char
 				com.GoToChar(player, words[2]);
 			}
-			
+		
 		} else if (words[0].equals("@save")) {
 			if(words.length == 1)
 			{
@@ -605,7 +593,7 @@ public class MessageParser {
 					pclient.sendPacket(Type.SAY, currplayer.getName()+" saved ...");
 				}	
 			}
-		} else if (words[0].equals("@debug")) {
+		} else if (words[0].equals("@debug") && player.getAdminState() >= 260) {
 			
 			org.apache.log4j.Logger root = org.apache.log4j.Logger.getRootLogger();
 			
@@ -624,222 +612,167 @@ public class MessageParser {
 				com.serverTell(client, "Host not found");
 			}
 			 client.sendPacket(Type.SAY, "Spawnpoint cannot be added");
-			com.serverTell(client, "Logger connected");
-			
-			
-			
-		} else if (words[0].equals("@spawn")||words[0].equals("@s")) {
-				//@spawn mobid mobtypecount radius
-				BufferedWriter bw = null;
-			      try {	    	  
-					bw = new BufferedWriter(new FileWriter("OutSpawns.dta", true));
-					int mobid = Integer.parseInt(words[1]);
-					ParsedItem mob = Reference.getInstance().getMobReference()
-							.getItemById(mobid);
-					
-					String mobname = mob.getName();
-					int typecount = Integer.parseInt(words[2]);
-					
-					bw.write("["+mobname+" "+typecount+"]");			         
-					bw.newLine();
-					bw.write("ID = "+ ++spawnCounter);
-					bw.newLine();
-					bw.write("X = "+player.getPosition().getX());
-					bw.newLine();
-					bw.write("Y = "+player.getPosition().getY());
-					bw.newLine();
-					bw.write("Z = "+player.getPosition().getZ());
-					bw.newLine();
-					bw.write("Radius = "+words[3]);
-					bw.newLine();
-					bw.write("Rotation = "+player.getPosition().getRotation());
-					bw.newLine();
-					bw.write("RespawnTime = 10");
-					bw.newLine();
-					bw.write("Type = "+words[1]);
-					bw.newLine();			      
-					bw.newLine();
-					bw.flush();
-			    	 
-					NpcSpawn spawn = new NpcSpawn();
-					spawn.setPosition(player.getPosition().clone());
-					spawn.setNpcType(Integer.parseInt(words[1]));
-					spawn.setRadius(Integer.parseInt(words[3]));
-					spawn.setRespawnTime(10);
-					spawn.spawn();
-
-					client.sendPacket(Type.SAY,  "Spawnpoint succesfully added");
-			      }catch(Exception e){
-			    	  com.serverTell(player.getClient(),e.getMessage());
-			    	  LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
-
-			    	  client.sendPacket(Type.SAY, "Spawnpoint cannot be added");
-			      }
-			} else if (words[0].equals("@spot")) {
+			com.serverTell(client, "Logger connected");	
+		} else if (words[0].equals("@spot")) {
 				client.sendPacket(Type.SAY, "{ X:" + player.getPosition().getX() + ", Y:"
 						+ player.getPosition().getY()+", Z:"+player.getPosition().getZ()+"}");
 			}
-			// resets all the skill from player: @resetskills [skillID]
-			else if (words[0].equals("@resetskills")) {
-						
-				java.util.Map<Skill,Integer> affectedSkills = new HashMap<Skill,Integer> ();
+		
+		else if (words[0].equals("@resetskills")) {
+			java.util.Map<Skill,Integer> affectedSkills = new HashMap<Skill,Integer> ();
+			
+			if (words.length == 2) { //@resetskills [skillID]
+				int skillId = Integer.parseInt(words[1]);
+				Skill skill = player.getSkill(skillId);
 				
-				if (words.length == 2) { //@resetskills [skillID]
-					int skillId = Integer.parseInt(words[1]);
-					Skill skill = player.getSkill(skillId);
-					
-					if(skill == null){
-						client.sendPacket(Type.SAY, "SkillID "+skillId+" don't bellong to "+player.getRace());
-						return null;
-					}
-					
-					affectedSkills.put(skill, player.getSkillLevel(skill));
-					
-				} else //@resetskills
-					affectedSkills = player.getSkills(); 
-					
-					// reset player skills to its minimum level
-					for(Skill skill: affectedSkills.keySet()){
-						skill.reset(player);
+				if(skill == null){
+					client.sendPacket(Type.SAY, "SkillID "+skillId+" don't bellong to "+player.getRace());
+					return null;
 				}
+				
+				affectedSkills.put(skill, player.getSkillLevel(skill));
+				
+			} else //@resetskills
+				affectedSkills = player.getSkills(); 
+				
+				// reset player skills to its minimum level
+				for(Skill skill: affectedSkills.keySet()){
+					skill.reset(player);
 			}
+		}
 			// order a mob to attack player several times: @mobattack [mobUniqueID] [numberOfattacks]
-			else if (words[0].equals("@mobattack")) {
-				if(words.length < 2){ // command to short
-					client.sendPacket(Type.SAY, "USAGE: @mobattack [mobUniqueID] / @mobattack [mobUniqueID] [numberOfAttacks]");
-					return "";
-				}
-				int numberOfAttacks = 1;
-				// get mob by entity
-				Mob mob = (Mob)player.getPosition().getLocalMap().getEntity(Integer.parseInt(words[1]));
-				if (words.length == 3) { // get number of attacks
-					numberOfAttacks = Integer.parseInt(words[2]);
-				}
-				// sends the several mob attack packets
-				for(int attacksCounter = numberOfAttacks; attacksCounter > 0; attacksCounter-- ){
-					mob.attack(player);
-					player.getClient().sendPacket(Type.ATTACK,mob,player,0);
-					if(player.getHp() <= 0){
-						break;
-					}
+		else if (words[0].equals("@mobattack")) {
+			if(words.length < 2){ // command to short
+				client.sendPacket(Type.SAY, "USAGE: @mobattack [mobUniqueID] / @mobattack [mobUniqueID] [numberOfAttacks]");
+				return "";
+			}
+			int numberOfAttacks = 1;
+			// get mob by entity
+			Mob mob = (Mob)player.getPosition().getLocalMap().getEntity(Integer.parseInt(words[1]));
+			if (words.length == 3) { // get number of attacks
+				numberOfAttacks = Integer.parseInt(words[2]);
+			}
+			// sends the several mob attack packets
+			for(int attacksCounter = numberOfAttacks; attacksCounter > 0; attacksCounter-- ){
+				mob.attack(player);
+				player.getClient().sendPacket(Type.ATTACK,mob,player,0);
+				if(player.getHp() <= 0){
+					break;
 				}
 			}
-			else if (words[0].equals("@quest")) {
-				if(words.length == 2){
-					try{
-						int questId = Integer.parseInt(words[1]);
-						Quest quest = player.getQuest();
+		} else if (words[0].equals("@quest")) {
+			if(words.length == 2){
+				try{
+					int questId = Integer.parseInt(words[1]);
+					Quest quest = player.getQuest();
+				
+					if(quest != null)
+						player.setQuest(null);
+				
+					//quest = new Quest(questId); //used only to send the quest id packet
+					//quest = QuestFactory.loadQuest(questId); //load full quest from database
+					quest = DatabaseUtils.getStaticInstance().loadQuest(questId);
 					
-						if(quest != null)
-							player.setQuest(null);
+					player.setQuest(quest);	
 					
-						//quest = new Quest(questId); //used only to send the quest id packet
-						//quest = QuestFactory.loadQuest(questId); //load full quest from database
-						quest = DatabaseUtils.getStaticInstance().loadQuest(questId);
-						
-						player.setQuest(quest);	
-						
-						player.getClient().sendPacket(Type.QT, "get "+quest.getId());
-						
-						/*
-						player.getClient().sendPacket(Type.SAY, "Quest: "+quest.getID()+" "+quest.getDescrition()+" ("+quest.getType().byValue()+")");		
-						for(Objective objective: quest.getObjectives()){
-							player.getClient().sendPacket(Type.SAY, "Objective: [ID] "+objective.getId()+" [QT] "+objective.getAmmount()+" [TYPE] "+objective.getType().byValue());
-						}
-						for(Reward reward: quest.getRewards()){
-							player.getClient().sendPacket(Type.SAY, "Reward: [ID] "+reward.getId()+" [QT] "+reward.getAmmount()+" [TYPE] "+reward.getType().byValue());
-						}
-						*/
+					player.getClient().sendPacket(Type.QT, "get "+quest.getId());
 					
-					} catch (Exception e) {
-						client.sendPacket(Type.SAY, "@quest failed (ID:"+words[1]+")");
+					/*
+					player.getClient().sendPacket(Type.SAY, "Quest: "+quest.getID()+" "+quest.getDescrition()+" ("+quest.getType().byValue()+")");		
+					for(Objective objective: quest.getObjectives()){
+						player.getClient().sendPacket(Type.SAY, "Objective: [ID] "+objective.getId()+" [QT] "+objective.getAmmount()+" [TYPE] "+objective.getType().byValue());
 					}
-				}
-				else {
-					player.getClient().sendPacket(Type.SAY, "Correct usage: @quest [questID]");
+					for(Reward reward: quest.getRewards()){
+						player.getClient().sendPacket(Type.SAY, "Reward: [ID] "+reward.getId()+" [QT] "+reward.getAmmount()+" [TYPE] "+reward.getType().byValue());
+					}
+					*/
+				
+				} catch (Exception e) {
+					client.sendPacket(Type.SAY, "@quest failed (ID:"+words[1]+")");
 				}
 			}
-			else if (words[0].equals("@mobs_movement")) {
-				if(words.length == 2){
-					if(words[1].equals("enable") || words[1].equals("1")){
-						Server.getInstance().getWorld().getServerSetings().setMobsMovement(1);
-					} else if(words[1].equals("disable") || words[1].equals("0")){
-						Server.getInstance().getWorld().getServerSetings().setMobsMovement(0);
-					} else if(words[1].equals("restart") || words[1].equals("2")){
-						player.getPosition().getLocalMap().stopMobsAI();
-						player.getPosition().getLocalMap().startMobsAI(1000);
-					} else {
-						player.getClient().sendPacket(Type.SAY, 
-								"USAGE: @mobs_movement [enable/disable] / @mobs_movement [0/1]");
-					}
+			else {
+				player.getClient().sendPacket(Type.SAY, "Correct usage: @quest [questID]");
+			}
+		} else if (words[0].equals("@mobs_movement")) {
+			if(words.length == 2){
+				if(words[1].equals("enable") || words[1].equals("1")){
+					Server.getInstance().getWorld().getServerSetings().setMobsMovement(1);
+				} else if(words[1].equals("disable") || words[1].equals("0")){
+					Server.getInstance().getWorld().getServerSetings().setMobsMovement(0);
+				} else if(words[1].equals("restart") || words[1].equals("2")){
+					player.getPosition().getLocalMap().stopMobsAI();
+					player.getPosition().getLocalMap().startMobsAI(1000);
 				} else {
 					player.getClient().sendPacket(Type.SAY, 
 							"USAGE: @mobs_movement [enable/disable] / @mobs_movement [0/1]");
 				}
+			} else {
+				player.getClient().sendPacket(Type.SAY, 
+						"USAGE: @mobs_movement [enable/disable] / @mobs_movement [0/1]");
 			}
-			else if (words[0].equals("@delete")) {
-					if(words[1].equals("item")){
-						LocalMap localMap = player.getPosition().getLocalMap();
-	
-						if(words.length == 2){	//deletes all RoamingItems from LocalMap
-							for(RoamingItem roamingItem : localMap.getRoamingItemList()){
-								roamingItem.delete();
-								LoggerFactory.getLogger(MessageParser.class).info("Player "+player+" deleted roaming item "+roamingItem);
-							}
-						} else {	//deletes only the given RoamingItem from LocalMap
-							int roamingItementityId = Integer.parseInt(words[2]);
-							RoamingItem roamingItem = (RoamingItem)localMap.getEntity(roamingItementityId);
-							roamingItem.delete();
-							LoggerFactory.getLogger(MessageParser.class).info("Player "+player+" deleted roaming item "+roamingItem);
-						}
+		} else if (words[0].equals("@delete")) {
+			if(words[1].equals("item")){
+				LocalMap localMap = player.getPosition().getLocalMap();
+
+				if(words.length == 2){	//deletes all RoamingItems from LocalMap
+					for(RoamingItem roamingItem : localMap.getRoamingItemList()){
+						roamingItem.delete();
+						LoggerFactory.getLogger(MessageParser.class).info("Player "+player+" deleted roaming item "+roamingItem);
 					}
-				
-			} else if (words[0].equals("@special")) {
-				int isActivated = 1;
-				int typeId = 0;
-				int[] availableTypeId = {10003,10011,10012,10013,10014,10015,10016,10017,10018,10019,
-						10020,10021,10022,10023,10024,10025,10026,10027,10028};
-				
-				if(words.length == 3){
-					typeId = Integer.parseInt(words[1]);
-					isActivated = Integer.parseInt(words[2]);
-				} else if(words.length == 2){
-					if(words[1].equals("alladd")) isActivated = 1;
-					if(words[1].equals("allremove")) isActivated = 0;
-						for(int id : availableTypeId){
-							player.getClient().sendPacket(Type.K, isActivated, player, id);
-							player.getInterested().sendPacket(Type.K, isActivated, player, id);
-						}
-				} else if(words.length == 1){
-					int typeIdPos = 100;
-					while(typeIdPos > 18)
-						typeIdPos = (int)(Math.random()*100);
-					typeId = availableTypeId[typeIdPos];
+				} else {	//deletes only the given RoamingItem from LocalMap
+					int roamingItementityId = Integer.parseInt(words[2]);
+					RoamingItem roamingItem = (RoamingItem)localMap.getEntity(roamingItementityId);
+					roamingItem.delete();
+					LoggerFactory.getLogger(MessageParser.class).info("Player "+player+" deleted roaming item "+roamingItem);
 				}
-				
-				player.getClient().sendPacket(Type.K, isActivated, player, typeId);
-				player.getInterested().sendPacket(Type.K, isActivated, player, typeId);
-				
-//				(10003: fairy)**
-//				(10011: gold pig)*
-//				(10012: pink pig)*
-//				(10013: black pig)
-//				(10014: yellow pig)
-//				(10015: red ghost)**
-//				(10016: blue ghost)
-//				(10017: yellow ghost)
-//				(10018: red bat)**
-//				(10019: red reindeer)**
-//				(10020: ring of white light)**
-//				(10021: ring of purple light)
-//				(10022: ring of red light)
-//				(10023: ring of blue light)
-//				(10024: ring of green light)
-//				(10025: black reindeer)
-//				(10026: blue reindeer)
-//				(10027: green reindeer)
-//				(10028: yellow reindeer)
 			}
+		
+		} else if (words[0].equals("@special")) {
+			int isActivated = 1;
+			int typeId = 0;
+			int[] availableTypeId = {10003,10011,10012,10013,10014,10015,10016,10017,10018,10019,
+					10020,10021,10022,10023,10024,10025,10026,10027,10028};
+			
+			if(words.length == 3){
+				typeId = Integer.parseInt(words[1]);
+				isActivated = Integer.parseInt(words[2]);
+			} else if(words.length == 2){
+				if(words[1].equals("alladd")) isActivated = 1;
+				if(words[1].equals("allremove")) isActivated = 0;
+					for(int id : availableTypeId){
+						player.getClient().sendPacket(Type.K, isActivated, player, id);
+						player.getInterested().sendPacket(Type.K, isActivated, player, id);
+					}
+			} else if(words.length == 1){
+				int typeIdPos = 100;
+				while(typeIdPos > 18)
+					typeIdPos = (int)(Math.random()*100);
+				typeId = availableTypeId[typeIdPos];
+			}
+			
+			player.getClient().sendPacket(Type.K, isActivated, player, typeId);
+			player.getInterested().sendPacket(Type.K, isActivated, player, typeId);
+			
+			// (10003: fairy)**
+			// (10011: gold pig)*
+			// (10012: pink pig)*
+			// (10013: black pig)
+			// (10014: yellow pig)
+			// (10015: red ghost)**
+			// (10016: blue ghost)
+			// (10017: yellow ghost)
+			// (10018: red bat)**
+			// (10019: red reindeer)**
+			// (10020: ring of white light)**
+			// (10021: ring of purple light)
+			// (10022: ring of red light)
+			// (10023: ring of blue light)
+			// (10024: ring of green light)
+			// (10025: black reindeer)
+			// (10026: blue reindeer)
+			// (10027: green reindeer)
+			// (10028: yellow reindeer)
 		}
 
 		return text;

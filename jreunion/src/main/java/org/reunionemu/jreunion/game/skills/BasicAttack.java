@@ -1,5 +1,6 @@
 package org.reunionemu.jreunion.game.skills;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.reunionemu.jreunion.game.Castable;
@@ -9,15 +10,48 @@ import org.reunionemu.jreunion.game.LivingObject;
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.Skill;
 import org.reunionemu.jreunion.game.items.equipment.Weapon;
+import org.reunionemu.jreunion.server.Client;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
-import org.reunionemu.jreunion.server.Server;
 import org.reunionemu.jreunion.server.SkillManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class BasicAttack extends Skill implements Castable, Effectable{
 	
 	public BasicAttack(SkillManager skillManager,int id) {
 		super(skillManager,id);
 	}
+	private static Logger logger = LoggerFactory.getLogger(BasicAttack.class);
+	
+	@Override
+	public void handle(Player player, String[] arguments) {
+
+		Client client = player.getClient();
+		int entityId = Integer.parseInt(arguments[2]);
+
+		LivingObject target = (LivingObject) player.getPosition().getLocalMap().getEntity(entityId);
+
+			
+		if(arguments[1].equals("npc")||arguments[1].equals("n")){			
+
+			
+		}else if(arguments[1].equals("char")||arguments[1].equals("c")){
+			
+			client.sendPacket(Type.SAY, "No PVP implemented yet!");
+			
+		}else{
+			
+			logger.error("invalid attack arguments");
+		}		
+		
+		List<LivingObject> victims = Collections.singletonList(target);		
+				
+		if(this.cast(player, victims, 0)){
+			this.effect(player, target, 0);
+		}	
+		
+	}
+	
 	
 	public boolean cast(LivingObject attacker, List<LivingObject> victims, int castStep) {
 		
