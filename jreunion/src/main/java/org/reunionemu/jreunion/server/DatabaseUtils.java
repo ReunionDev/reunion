@@ -1353,7 +1353,8 @@ public class DatabaseUtils extends Service {
 			stmt  = dinamicDatabase.dinamicConn.createStatement();
 			
 			stmt.execute("DELETE FROM guilds WHERE id='"+id+"';");
-				
+			
+			stmt.execute("Update characters SET guildid = '0', guildlvl = '0' WHERE guildid = "+id+";");
 		} 
 		catch (SQLException e) 
 		{

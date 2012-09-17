@@ -225,6 +225,61 @@ public class MessageParser {
 					client.sendPacket(Type.SAY, "You are not in a guild or you dont have permission to add member");
 				}
 			}
+			else if(words[1].equals("changeMember")) {
+				if(words.length == 4){
+					try {
+						Player targetPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayer(words[2]);
+						
+						if(targetPlayer.getGuildId() == player.getGuildId() && (player.getGuildLvl() > targetPlayer.getGuildLvl() || player.getGuildLvl() == 10 ))
+						{
+							targetPlayer.setGuildLevel(Integer.parseInt(words[3]));
+							
+							targetPlayer.getClient().sendPacket(Type.GUILD_GRADE, targetPlayer);
+							targetPlayer.getInterested().sendPacket(Type.GUILD_GRADE, targetPlayer);
+							targetPlayer.getClient().sendPacket(Type.GUILD_LEVEL, targetPlayer);
+							targetPlayer.getInterested().sendPacket(Type.GUILD_LEVEL, targetPlayer);
+							
+							client.sendPacket(Type.SAY, "Guildlevel of Player "+words[2]+" changed to "+words[3]);
+							targetPlayer.getClient().sendPacket(Type.SAY, "Your Guildlevel changed by "+player.getName()+" to "+words[3]);
+						}
+					} catch (Exception e)
+					{
+						client.sendPacket(Type.SAY, "Player "+words[2]+" is not online!");
+					}
+				}
+				else
+					client.sendPacket(Type.SAY, "Wrong Parameters, @guild changeUser Name Level");
+			}
+			else if(words[1].equals("close")) {
+				if(player.getGuildId() != 0 && player.getGuildLvl() == 10)
+				{
+					DatabaseUtils.getDinamicInstance().deleteGuild((int)player.getGuildId());
+					
+					Iterator<Player> iterPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayerListIterator();
+					
+					long guildId = player.getGuildId();
+					
+					while(iterPlayer.hasNext())
+					{
+						Player currplayer = iterPlayer.next();
+						
+						if(currplayer.getGuildId() == guildId)
+						{
+							currplayer.setGuildId(0);
+							currplayer.setGuildName("");
+							currplayer.setGuildLevel(0);
+							
+							currplayer.getClient().sendPacket(Type.GUILD_NAME, currplayer);
+							
+							currplayer.getInterested().sendPacket(Type.GUILD_NAME, currplayer);
+						}
+					}
+				}
+				else
+				{
+					client.sendPacket(Type.SAY, "You dont have a guild");
+				}
+			}
 			else if (words[1].equals("req"))
 			{
 				if(words.length == 3)
