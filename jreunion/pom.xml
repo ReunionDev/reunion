@@ -96,14 +96,23 @@
   		<version>2.1.1.RELEASE</version>
   	</dependency>
   	<dependency>
-			<groupId>javassist</groupId>
-			<artifactId>javassist</artifactId>
-			<version>3.12.1.GA</version>
-		</dependency>
+		<groupId>javassist</groupId>
+		<artifactId>javassist</artifactId>
+		<version>3.12.1.GA</version>
+	</dependency>
+	<dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>jreunion-data</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+      <classifier>resources</classifier>
+      <type>zip</type>
+      <!-- Make sure this isn't included on any classpath-->
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
   <build>
 	  <plugins>
-	  <plugin>
+  		<plugin>
 			<groupId>org.apache.maven.plugins</groupId>
 			<artifactId>maven-compiler-plugin</artifactId>
 			<version>2.5.1</version>
@@ -111,8 +120,8 @@
 			  <source>1.6</source>
 			  <target>1.6</target>
 			</configuration>
-	  </plugin>
-	  	<plugin>
+	  	</plugin>
+  			<plugin>
 	        <groupId>org.codehaus.mojo</groupId>
 	        <artifactId>exec-maven-plugin</artifactId>
 	        <version>1.2.1</version>
@@ -128,9 +137,69 @@
 	          <arguments>
 	          </arguments>
 	        </configuration>
-	      </plugin> 
+	      </plugin>
+	      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>unpack-shared-resources</id>
+            <goals>
+              <goal>unpack</goal>
+            </goals>
+            <phase>generate-resources</phase>
+            <configuration>
+             	<outputDirectory>data</outputDirectory>
+            	<artifactItems>
+            		<artifactItem>
+            		 	<groupId>${project.groupId}</groupId>
+            		 	<artifactId>jreunion-data</artifactId>
+            		 	<classifier>resources</classifier>
+            		 	<type>zip</type>            		
+            		</artifactItem>            	
+            	</artifactItems>
+             	<excludeTransitive>true</excludeTransitive>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
 	      
 	  </plugins>
-	  
+
+	  <pluginManagement>
+	  	<plugins>
+	  		<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+	  		<plugin>
+	  			<groupId>org.eclipse.m2e</groupId>
+	  			<artifactId>lifecycle-mapping</artifactId>
+	  			<version>1.0.0</version>
+	  			<configuration>
+	  				<lifecycleMappingMetadata>
+	  					<pluginExecutions>
+	  						<pluginExecution>
+	  							<pluginExecutionFilter>
+	  								<groupId>
+	  									org.apache.maven.plugins
+	  								</groupId>
+	  								<artifactId>
+	  									maven-dependency-plugin
+	  								</artifactId>
+	  								<versionRange>
+	  									[2.1,)
+	  								</versionRange>
+	  								<goals>
+	  									<goal>unpack</goal>
+	  								</goals>
+	  							</pluginExecutionFilter>
+	  							<action>
+	  								<ignore></ignore>
+	  							</action>
+	  						</pluginExecution>
+	  					</pluginExecutions>
+	  				</lifecycleMappingMetadata>
+	  			</configuration>
+	  		</plugin>
+	  	</plugins>
+	  </pluginManagement>
   </build>
 </project>
