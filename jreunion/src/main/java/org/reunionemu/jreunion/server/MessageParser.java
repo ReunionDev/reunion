@@ -577,6 +577,7 @@ public class MessageParser {
 				   } else {
 				       player.getClient().sendPacket(Type.SAY, "Inventory full. Please get some space available.");
 				       player.getPosition().getLocalMap().removeEntity(item);
+				       DatabaseUtils.getDinamicInstance().deleteItem(item.getItemId());
 				       return null;
 				   }
 				} else {
