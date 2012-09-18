@@ -1,5 +1,7 @@
 package org.reunionemu.jreunion.server;
 
+import java.io.File;
+
 import org.reunionemu.jcommon.Parser;
 
 
@@ -105,15 +107,24 @@ public class Reference {
 
 	public void Load() throws Exception {
 		clear();
-		itemReference.Parse("data/static/file/Items.dta");
-		mobReference.Parse("data/static/file/Mob.dta");
-		expReference.Parse("data/static/file/ExpTable.dta");
-		mapReference.Parse("data/static/file/Maps.dta");
-		mapConfigReference.Parse("config/Maps.dta");
-		npcReference.Parse("data/static/file/Npc.dta");
 		serverReference.Parse("config/Settings.dta");
-		dropListReference.Parse("data/static/file/DropList.dta");
-		skillReference.Parse("data/static/file/Skills.dta");
+		mapConfigReference.Parse("config/Maps.dta");
+
+		itemReference.Parse(getDataPathFile("Items.dta"));
+		mobReference.Parse(getDataPathFile("Mob.dta"));
+		expReference.Parse(getDataPathFile("ExpTable.dta"));
+		mapReference.Parse(getDataPathFile("Maps.dta"));
+		npcReference.Parse(getDataPathFile("Npc.dta"));
+		dropListReference.Parse(getDataPathFile("DropList.dta"));
+		skillReference.Parse(getDataPathFile("Skills.dta"));
+
+	}
+	
+	public static String getDataPathFile(String filename){
+		String dataPath = getInstance().getServerReference().getItem("Server").getMemberValue("DataPath");
+		
+		return new File(dataPath, filename).getPath();
+		
 		
 	}
 }

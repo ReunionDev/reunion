@@ -18,6 +18,7 @@ import org.reunionemu.jreunion.game.VendorItem;
 import org.reunionemu.jreunion.server.Client;
 import org.reunionemu.jreunion.server.DatabaseUtils;
 import org.reunionemu.jreunion.server.ItemManager;
+import org.reunionemu.jreunion.server.Reference;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
 
 /**
@@ -90,7 +91,7 @@ public class NpcShop {
 		
 		
 		try {
-			shopReference.Parse("data/static/file/"+getShop());
+			shopReference.Parse(Reference.getDataPathFile(getShop()));
 		} catch (IOException e) {
 			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 		}
