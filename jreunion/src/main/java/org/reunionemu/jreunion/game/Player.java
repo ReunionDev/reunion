@@ -867,7 +867,7 @@ public abstract class Player extends LivingObject implements EventListener {
 	public void resetSkills()
 	{
 		java.util.Map<Skill,Integer> playerSkills = new HashMap<Skill,Integer> ();
-		playerSkills = getSkills(); 
+		playerSkills = getSkills();
 		
 		// reset player skills to its minimum level
 		for(Skill skill: playerSkills.keySet()){

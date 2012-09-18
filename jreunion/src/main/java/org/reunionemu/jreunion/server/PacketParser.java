@@ -3,13 +3,9 @@ package org.reunionemu.jreunion.server;
 import java.nio.channels.SocketChannel;
 import java.util.Arrays;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Vector;
 import java.util.regex.Pattern;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import org.reunionemu.jreunion.events.Event;
 import org.reunionemu.jreunion.events.EventDispatcher;
@@ -19,15 +15,12 @@ import org.reunionemu.jreunion.events.client.ClientDisconnectEvent;
 import org.reunionemu.jreunion.events.client.ClientEvent;
 import org.reunionemu.jreunion.events.client.ClientReceiveEvent;
 import org.reunionemu.jreunion.events.map.PlayerLoginEvent;
-import org.reunionemu.jreunion.game.Castable;
-import org.reunionemu.jreunion.game.Effectable;
 import org.reunionemu.jreunion.game.Equipment;
 import org.reunionemu.jreunion.game.Equipment.Slot;
 import org.reunionemu.jreunion.game.ExchangeItem;
 import org.reunionemu.jreunion.game.Inventory;
 import org.reunionemu.jreunion.game.InventoryItem;
 import org.reunionemu.jreunion.game.Item;
-import org.reunionemu.jreunion.game.items.pet.PetEgg;
 import org.reunionemu.jreunion.game.LivingObject;
 import org.reunionemu.jreunion.game.Npc;
 import org.reunionemu.jreunion.game.Pet;
@@ -40,13 +33,16 @@ import org.reunionemu.jreunion.game.Position;
 import org.reunionemu.jreunion.game.RoamingItem;
 import org.reunionemu.jreunion.game.Skill;
 import org.reunionemu.jreunion.game.items.etc.MissionReceiver;
+import org.reunionemu.jreunion.game.items.pet.PetEgg;
 import org.reunionemu.jreunion.game.npc.Merchant;
 import org.reunionemu.jreunion.game.npc.Trader;
 import org.reunionemu.jreunion.game.npc.Warehouse;
+import org.reunionemu.jreunion.protocol.OtherProtocol;
 import org.reunionemu.jreunion.server.Client.LoginType;
 import org.reunionemu.jreunion.server.Client.State;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
-import org.reunionemu.jreunion.protocol.OtherProtocol;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
@@ -54,6 +50,9 @@ import org.reunionemu.jreunion.protocol.OtherProtocol;
 public class PacketParser extends EventDispatcher implements EventListener{
 
 	private MessageParser messageParser;
+	
+	private static Logger logger = LoggerFactory.getLogger(PacketParser.class);				
+
 
 	public PacketParser() {
 		super();
@@ -559,57 +558,16 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					// if attack command sent, then use SkillID 0 (Basic Attack)
 					int skillId = message[0].equals("attack") ? 0 : Integer.parseInt(message[1]);
 					
-					LivingObject target = player;
-					int entityId=-1;
-					int castStep = 1;
-					
-					if(message.length > 3) { //if length=3 then player is using skill on himself
-						
-						if(message[2].equals("npc") || message[2].equals("char")){ // LivingObject Skill attack
-							entityId = Integer.parseInt(message[3]);
-							
-							if(message[2].equals("char"))
-								client.sendPacket(Type.SAY, "No PVP implemented yet!");
-						}
-						
-						//SELF: use_skill 36 1
-						//attack char 44 0
-						//Other: use_skill 74 char 44 64
-						else{ // LivingOject Basic attack
-							entityId = Integer.parseInt(message[2]); 
-						}
-						target = (LivingObject) player.getPosition().getLocalMap().getEntity(entityId);
-					}
-					
 					Skill skill = player.getSkill(skillId);
-					
-					//if is a stepable skill, get the current step
-					if(message.length == 5 && skill.getAffectedTargets() == 1 ){
-						castStep = Integer.parseInt(message[4]);
+					if(skill!=null){
+						
+						skill.handle(player, message);
+					}
+					else{
+						logger.error("Skill with id %d not found.", skillId);
+						
 					}
 					
-					List<LivingObject> victims = new LinkedList<LivingObject>(Arrays.asList(new LivingObject[]{target}));
-					
-					if(message.length > 4 && skill.getAffectedTargets() > 1){ //multiple targets
-						for(int messageIndex=4; messageIndex < message.length; messageIndex++){
-							entityId = Integer.parseInt(message[messageIndex]);
-							target = (LivingObject) player.getPosition().getLocalMap().getEntity(entityId);
-							victims.add(target);
-						}
-					}
-					
-					//cast attacks/skills and send effects to other clients.
-					if(Castable.class.isInstance(skill)){
-						if(((Castable)skill).cast(player, victims, castStep)){
-							if(Effectable.class.isInstance(skill))
-								for(LivingObject victim : victims){
-									skill.effect(player, victim, castStep);
-								}
-						}
-					} else{
-						client.sendPacket(Type.SAY, skill.getName()+" skill not implemented yet!");
-						LoggerFactory.getLogger(PacketParser.class).error(skill.getName()+" skill is not Castable!");
-					}
 				} else if (message[0].equals("skillup")) {
 					synchronized(player) {
 						float statusPoints = player.getStatusPoints();
