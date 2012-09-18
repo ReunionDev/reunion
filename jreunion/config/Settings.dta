@@ -27,5 +27,5 @@ DemolitionModifier = 0.5	#0.5 = 50%
 PlayerMaxLevel = 500		# if 0 then unlimited lvls
 
 #Enhanced Exp Config
-ExpPlayerMobDifference = 450
+ExpPlayerMobDifference = 250
 ExpLowerStep = 1
