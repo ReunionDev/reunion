@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.apache.log4j.net.SocketAppender;
 
+import org.reunionemu.jreunion.game.HandPosition;
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.ItemType;
 import org.reunionemu.jreunion.game.Npc;
@@ -570,7 +571,12 @@ public class MessageParser {
 				}
 				//player.getInventory().storeItem(item, -1);
 				int[] tabPosition = player.getInventory().getFreeSlots(item,-1);
-				player.pickItem(item, tabPosition[0]);
+				if(tabPosition == null) {
+				      player.getInventory().setHoldingItem(new HandPosition(item));
+				      player.getClient().sendPacket(Type.EXTRA,item);
+				} else {
+				      player.pickItem(item, tabPosition[0]);
+				}
 			} catch (Exception e) {
 				client.sendPacket(Type.SAY, "@drop failed (ID:"+words[1]+")");
 			}
