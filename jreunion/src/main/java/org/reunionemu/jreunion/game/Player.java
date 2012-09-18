@@ -982,10 +982,15 @@ public abstract class Player extends LivingObject implements EventListener {
 
 	public void setLevelUpExp(long lvlUpExp) {
 		//synchronized(this) {
-			
+		int maxLevel = Server.getInstance().getWorld().getServerSetings().getPlayerMaxLevel();
+		
+		boolean hasMaxLevel = ((maxLevel != 0) ? true : false);
+		
+		if(!hasMaxLevel || maxLevel > getLevel())
+		{
 			if(lvlUpExp<=0){
 				this.setLevel(getLevel()+1);
-				if(this.getLevel() > 250){
+				if(this.getLevel() > 250) {
 					this.setStatusPoints(this.getStatusPoints()+10);
 				} else {
 					this.setStatusPoints(this.getStatusPoints()+3);
@@ -996,6 +1001,7 @@ public abstract class Player extends LivingObject implements EventListener {
 				this.lvlUpExp = lvlUpExp;
 				sendStatus(Status.LEVELUPEXP);
 			}
+		}
 		//}
 	}
 

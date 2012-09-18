@@ -58,6 +58,8 @@ public class ServerSetings {
 	private int rangeAttackRadius;	//Minimum distance when range attack mobs will start attacking
 	
 	private float demolitionModifier; //% of damage increase of demolition attacks from Slayer weapon
+
+	private int playerMaxLevel;
 	
 	public ServerSetings() {
 		loadFromReference();
@@ -281,11 +283,22 @@ public class ServerSetings {
 				setDemolitionModifier(0.5f);
 			}
 			
+			if (server.checkMembers(new String[] { "PlayerMaxLevel" })) {
+				// use member from file
+				setPlayerMaxLevel(Integer.parseInt(server.getMemberValue("PlayerMaxLevel")));
+			} else {
+				// use default
+				setPlayerMaxLevel(0);
+			}
 		}
 	}
 
 	public void setLime(long lime) {
 		this.lime = lime;
+	}
+	
+	public void setPlayerMaxLevel(int level) {
+		this.playerMaxLevel = level;
 	}
 
 	public void setXp(long xp) {
@@ -318,6 +331,10 @@ public class ServerSetings {
 
 	public long getSessionRadius() {
 		return sessionRadius;
+	}
+	
+	public int getPlayerMaxLevel() {
+		return playerMaxLevel;
 	}
 
 	public void setSessionRadius(long sessionRadius) {

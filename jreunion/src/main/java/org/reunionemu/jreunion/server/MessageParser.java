@@ -54,8 +54,16 @@ public class MessageParser {
 		if (words[0].equals("@levelup")) {
 			if (words.length > 1) {
 				
+				int maxLevel = world.getServerSetings().getPlayerMaxLevel();
+				
+				boolean hasMaxLevel = ((maxLevel != 0) ? true : false);
+				
 				int lvlup = Integer.parseInt(words[1]);
 				
+				if(hasMaxLevel && maxLevel < (player.getLevel()+lvlup))
+				{
+					lvlup = maxLevel-player.getLevel();
+				}
 				int pCurrLvl = player.getLevel();
 				int pSPup = 0;
 				

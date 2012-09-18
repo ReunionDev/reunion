@@ -1,6 +1,6 @@
 #Server configuration object
 [Server]
-DataPath=data/static/file
+DataPath=data/file
 xp = 1				# 1=1x, 2=2x, 3=3x...
 lime = 1			# 1=1x, 2=2x, 3=3x...
 DefaultMap = 4
@@ -24,7 +24,8 @@ MobsMovement = 1		# 0=Disabled 1=Enabled
 CloseAttackRadius = 20
 RangeAttackRadius = 100
 DemolitionModifier = 0.5	#0.5 = 50%
+PlayerMaxLevel = 500		# if 0 then unlimited lvls
 
 #Enhanced Exp Config
-ExpPlayerMobDifference = 5
-ExpLowerStep = 5
+ExpPlayerMobDifference = 450
+ExpLowerStep = 1
