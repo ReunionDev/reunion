@@ -128,7 +128,9 @@
 	          <arguments>
 	          </arguments>
 	        </configuration>
-	      </plugin>  
+	      </plugin> 
+	      
 	  </plugins>
+	  
   </build>
 </project>

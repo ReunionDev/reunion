@@ -1,4 +1,7 @@
+import static org.junit.Assume.assumeTrue;
+
 import org.junit.After;
+import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,12 +20,17 @@ public class RabbitTest {
 	@Before
 	public void setUp() throws Exception {
 		
-		ConnectionFactory factory = new ConnectionFactory();
-	    factory.setHost("localhost");
-	    connection = factory.newConnection();
-	    channel = connection.createChannel();	    
-	    channel.queueDeclare(QUEUE_NAME, false, false, false, null);
-	    
+		try{
+			ConnectionFactory factory = new ConnectionFactory();
+		    factory.setHost("localhost");
+	        connection = factory.newConnection();
+		    channel = connection.createChannel();	    
+		    channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+		    assumeTrue(connection.isOpen());
+	    }catch(Exception e){
+		    Assume.assumeNoException(e);
+	    	
+	    }
 	}
 
 	@After
@@ -33,6 +41,7 @@ public class RabbitTest {
 
 	@Test
 	public void test() throws Exception {
+	    assumeTrue(connection.isOpen());
 		
 		long start = System.currentTimeMillis();
 		String message = "Hello World!";
