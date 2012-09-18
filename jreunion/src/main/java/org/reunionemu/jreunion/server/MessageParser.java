@@ -543,6 +543,38 @@ public class MessageParser {
 					}
 			}
 		}
+		else if (words[0].equals("@gi") || words[0].equals("@getitem"))
+		{
+			ItemManager itemManager = world.getItemManager();
+			try {
+				Item<?> item = itemManager.create(Integer.parseInt(words[1]));
+				player.getPosition().getLocalMap().createEntityId(item);
+				
+				if (words.length == 6) {							
+					int gemNumber = Integer.parseInt(words[2]);
+					int extraStats = Integer.parseInt(words[3]);
+					int unknown1 = Integer.parseInt(words[4]);
+					int unknown2 = Integer.parseInt(words[5]);
+					
+					item.setGemNumber(gemNumber);
+					item.setExtraStats(extraStats);
+					item.setDurability(item.getType().getMaxDurability());
+					item.setUnknown1(unknown1);
+					item.setUnknown2(unknown2);
+				}else{
+					item.setGemNumber(0);
+					item.setExtraStats(item.getType().getMaxExtraStats());
+					item.setDurability(item.getType().getMaxDurability());
+					item.setUnknown1(0);
+					item.setUnknown2(0);
+				}
+				//player.getInventory().storeItem(item, -1);
+				int[] tabPosition = player.getInventory().getFreeSlots(item,-1);
+				player.pickItem(item, tabPosition[0]);
+			} catch (Exception e) {
+				client.sendPacket(Type.SAY, "@drop failed (ID:"+words[1]+")");
+			}
+		}
 		else if (words[0].equals("@info") && player.getAdminState() >= 200) {
 			int lengthofinfo = words.length;
 			String data = "";
