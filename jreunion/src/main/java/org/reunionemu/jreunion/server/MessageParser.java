@@ -569,11 +569,16 @@ public class MessageParser {
 					item.setUnknown1(0);
 					item.setUnknown2(0);
 				}
-				//player.getInventory().storeItem(item, -1);
 				int[] tabPosition = player.getInventory().getFreeSlots(item,-1);
 				if(tabPosition == null) {
+				   if(player.getInventory().getHoldingItem() == null){
 				      player.getInventory().setHoldingItem(new HandPosition(item));
 				      player.getClient().sendPacket(Type.EXTRA,item);
+				   } else {
+				       player.getClient().sendPacket(Type.SAY, "Inventory full. Please get some space available.");
+				       player.getPosition().getLocalMap().removeEntity(item);
+				       return null;
+				   }
 				} else {
 				      player.pickItem(item, tabPosition[0]);
 				}
