@@ -1,11 +1,10 @@
-import static org.junit.Assume.assumeTrue;
+import static org.junit.Assume.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
 import org.junit.After;
-import org.junit.Assume;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -21,29 +20,35 @@ public class MessageServerTest {
 	private Connection connection;
 	private Channel channel;
 	@Before
-	public void setUp() throws Exception {
+	public void setUp(){
 		try {
 			ConnectionFactory factory = new ConnectionFactory();
 			factory.setHost("localhost");
 		    connection = factory.newConnection();
 		    channel = connection.createChannel();	    
 		    channel.queueDeclare(QUEUE_NAME, false, false, false, null);
-		    assumeTrue(connection.isOpen());
+		    //assumeTrue(connection.isOpen());
 	    } catch(Exception e) {
-		    Assume.assumeNoException(e);
+		    //Assume.assumeNoException(e);
 	    	
 	    }
 	}
 
 	@After
 	public void tearDown() throws Exception {
-		channel.close();
-	    connection.close();
+		if(channel!=null){
+			channel.close();
+		}
+		if(connection!=null){
+			connection.close();
+		}
 	}
 
 	@Test
 	public void test() throws Exception {
-		
+		assumeNotNull(connection);
+	    assumeTrue(connection.isOpen());
+
 		long start = System.currentTimeMillis();
 		String message = "Hello World!";
 		
