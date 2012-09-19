@@ -3,22 +3,26 @@ package org.reunionemu.jreunion.server;
 import java.util.HashMap;
 import java.util.Random;
 
-import org.apache.log4j.BasicConfigurator;
 import org.reunionemu.jreunion.events.EventDispatcher;
 import org.reunionemu.jreunion.events.server.ServerStartEvent;
 import org.reunionemu.jreunion.events.server.ServerStopEvent;
 import org.reunionemu.jreunion.protocol.Protocol;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Service;
 
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
+@Service
 public class Server extends EventDispatcher {
 
 	private static Server _instance = null;	
+	
+	private static AbstractApplicationContext context;
 	
 	private static Random rand = new Random(System.currentTimeMillis());
 	
@@ -48,9 +52,9 @@ public class Server extends EventDispatcher {
 	public synchronized static Server getInstance() {
 		if (_instance == null) {
 			try {
-				_instance = new Server();
+				_instance = context.getBean(Server.class);
 			} catch (Exception e) {
-				logger.warn("Exception",e);
+				logger.error("Exception",e);
 				return null;
 			}
 		}
@@ -63,29 +67,14 @@ public class Server extends EventDispatcher {
 	 */
 	public static void main(String[] args) throws Exception {
 		
-		logger.debug("test");
-	     //BasicConfigurator.configure();
-		/*
-		Logger logger = Logger.getRootLogger();
-		logger.addAppender(new ConsoleAppender(new PatternLayout("%-5p [%t]: %m\r\n"){
-			
-			@Override
-			public String format(LoggingEvent event) {
+		context = new ClassPathXmlApplicationContext("classpath*:/META-INF/spring/**/*-context.xml");
 
-				String result = super.format(event);
-				if(result.endsWith("\n\r\n")){
-					
-					result = result.substring(0, result.length()-2);
-				}
-				return result;
-			}
-			
-		},ConsoleAppender.SYSTEM_OUT));
-		*/
+		context.registerShutdownHook();
+		
+		
 		
 		Thread.currentThread().setName("main");
 		
-		PrintStream.useFileLogging();
 		//Reference.getInstance().Load();
 		
 		
@@ -140,9 +129,6 @@ public class Server extends EventDispatcher {
 	private Server() throws Exception {
 
 		super();
-		
-		//new Debug();
-		RemoteAdmin.enableRemoteAdmin();
 		
 		Protocol.load();
 		
@@ -199,7 +185,6 @@ public class Server extends EventDispatcher {
 
 	
 	public static enum State{
-		
 		LOADING,
 		RUNNING,
 		CLOSING
