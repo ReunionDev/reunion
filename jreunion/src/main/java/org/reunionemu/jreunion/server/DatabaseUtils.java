@@ -1475,7 +1475,6 @@ public class DatabaseUtils extends Service {
 				return null;
 			}
 			
-			
 			ResultSet questTypeRs = questTypeStmt.executeQuery("SELECT * FROM quests_type WHERE id='"+questRs.getInt("typeid")+"';");
 			
 			if(!questTypeRs.next()) {				

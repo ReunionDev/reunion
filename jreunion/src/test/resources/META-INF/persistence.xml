@@ -3,7 +3,7 @@
 	<persistence-unit name="test" transaction-type="RESOURCE_LOCAL">
     <provider>com.objectdb.jpa.Provider</provider>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="$objectdb/db/jreunion.odb"/>
+      <property name="javax.persistence.jdbc.url" value="$objectdb/db/reunion.odb"/>
       <property name="javax.persistence.jdbc.user" value="admin"/>
       <property name="javax.persistence.jdbc.password" value="admin"/>
     </properties>
