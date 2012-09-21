@@ -556,40 +556,43 @@ public class MessageParser {
 		{
 			ItemManager itemManager = world.getItemManager();
 			try {
-				Item<?> item = itemManager.create(Integer.parseInt(words[1]));
-				player.getPosition().getLocalMap().createEntityId(item);
-				
-				if (words.length == 6) {							
-					int gemNumber = Integer.parseInt(words[2]);
-					int extraStats = Integer.parseInt(words[3]);
-					int unknown1 = Integer.parseInt(words[4]);
-					int unknown2 = Integer.parseInt(words[5]);
-					
-					item.setGemNumber(gemNumber);
-					item.setExtraStats(extraStats);
-					item.setDurability(item.getType().getMaxDurability());
-					item.setUnknown1(unknown1);
-					item.setUnknown2(unknown2);
-				}else{
-					item.setGemNumber(0);
-					item.setExtraStats(item.getType().getMaxExtraStats());
-					item.setDurability(item.getType().getMaxDurability());
-					item.setUnknown1(0);
-					item.setUnknown2(0);
-				}
-				int[] tabPosition = player.getInventory().getFreeSlots(item,-1);
-				if(tabPosition == null) {
-				   if(player.getInventory().getHoldingItem() == null){
-				      player.getInventory().setHoldingItem(new HandPosition(item));
-				      player.getClient().sendPacket(Type.EXTRA,item);
-				   } else {
-				       player.getClient().sendPacket(Type.SAY, "Inventory full. Please get some space available.");
-				       player.getPosition().getLocalMap().removeEntity(item);
-				       DatabaseUtils.getDinamicInstance().deleteItem(item.getItemId());
-				       return null;
-				   }
-				} else {
-				      player.pickItem(item, tabPosition[0]);
+				int amount = Integer.parseInt(words[2]);
+				for(int i = 1; i <= amount; i++)
+				{
+					Item<?> item = itemManager.create(Integer.parseInt(words[1]));
+					player.getPosition().getLocalMap().createEntityId(item);
+					if (words.length == 7) {							
+						int gemNumber = Integer.parseInt(words[3]);
+						int extraStats = Integer.parseInt(words[4]);
+						int unknown1 = Integer.parseInt(words[5]);
+						int unknown2 = Integer.parseInt(words[6]);
+						
+						item.setGemNumber(gemNumber);
+						item.setExtraStats(extraStats);
+						item.setDurability(item.getType().getMaxDurability());
+						item.setUnknown1(unknown1);
+						item.setUnknown2(unknown2);
+					} else {
+						item.setGemNumber(0);
+						item.setExtraStats(item.getType().getMaxExtraStats());
+						item.setDurability(item.getType().getMaxDurability());
+						item.setUnknown1(0);
+						item.setUnknown2(0);
+					}
+					int[] tabPosition = player.getInventory().getFreeSlots(item,-1);
+					if(tabPosition == null) {
+					   if(player.getInventory().getHoldingItem() == null){
+					      player.getInventory().setHoldingItem(new HandPosition(item));
+					      player.getClient().sendPacket(Type.EXTRA,item);
+					   } else {
+					       player.getClient().sendPacket(Type.SAY, "Inventory full. Please get some space available.");
+					       player.getPosition().getLocalMap().removeEntity(item);
+					       DatabaseUtils.getDinamicInstance().deleteItem(item.getItemId());
+					       return null;
+					   }
+					} else {
+					      player.pickItem(item, tabPosition[0]);
+					}
 				}
 			} catch (Exception e) {
 				client.sendPacket(Type.SAY, "@drop failed (ID:"+words[1]+")");
