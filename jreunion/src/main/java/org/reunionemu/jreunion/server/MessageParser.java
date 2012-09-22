@@ -150,6 +150,39 @@ public class MessageParser {
 				}
 			}
 		}
+		else if (words[0].equals("@getlime") || words[0].equals("@gl"))
+		{
+			if(words.length == 2)
+			{
+				try {
+					long playerAddLime = Long.parseLong(words[1]);
+					long newLime = player.getLime()+playerAddLime;
+					
+					if(newLime > Integer.MAX_VALUE)
+					{
+						newLime = Integer.MAX_VALUE;
+					}
+					
+					if(newLime > 0)
+					{
+						player.setLime(newLime);
+						client.sendPacket(Type.SAY, "New Lime :"+newLime);
+					}
+					else
+					{
+						client.sendPacket(Type.SAY, "Your new Lime value cant be negative!");
+					}
+				}
+				catch (Exception e)
+				{
+					client.sendPacket(Type.SAY, "Wrong Lime Value");
+				}
+			}
+			else
+			{
+				client.sendPacket(Type.SAY, "You have "+player.getLime()+" Lime");
+			}
+		}
 		else if (words[0].equals("@guild"))
 		{
 			if(words[1].equals("create") && player.getAdminState() >= 200) {

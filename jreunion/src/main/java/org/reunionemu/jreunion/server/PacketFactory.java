@@ -239,7 +239,7 @@ public class PacketFactory {
 					return "say "+ -1 +" "+text;
 				} else { 
 					if(args.length == 2){
-						boolean admin = from.getAdminState() == 255;
+						boolean admin = from.getAdminState() >= 100;
 						String name = from.getName();
 						if(admin)
 							name = "<GM>"+name;
@@ -253,7 +253,7 @@ public class PacketFactory {
 					String text = (String)args[0];
 					Player from = (Player)args[1];
 					
-					return "say "+from.getEntityId()+" *GUILD*"+from.getName()+" "+text;
+					return "say "+from.getEntityId()+" *GUILD*"+from.getName()+text;
 					
 				}
 				break;
