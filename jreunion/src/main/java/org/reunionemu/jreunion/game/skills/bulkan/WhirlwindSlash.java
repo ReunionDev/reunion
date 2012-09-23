@@ -1,6 +1,5 @@
 package org.reunionemu.jreunion.game.skills.bulkan;
 
-import java.util.List;
 
 import org.reunionemu.jreunion.game.Effectable;
 import org.reunionemu.jreunion.game.Item;
@@ -80,7 +79,7 @@ public class WhirlwindSlash extends WeaponAttack implements Castable, Effectable
 	}
 	
 	@Override
-	public boolean cast(LivingObject caster, List<LivingObject> victims, int castStep) {
+	public boolean cast(LivingObject caster, LivingObject victim, String[] arguments) {
 		
 		if(caster instanceof BulkanPlayer){	
 			Player player = (Player)caster;
@@ -128,19 +127,16 @@ public class WhirlwindSlash extends WeaponAttack implements Castable, Effectable
 				
 			player.setDmgType(criticalMultiplier > 0 ? 1 : 0);
 			
-			synchronized(victims){	
-				for(LivingObject victim : victims){ 
-					victim.getsAttacked(player, damage, true);
-					player.getClient().sendPacket(Type.AV, victim, player.getDmgType());
-					//player.getInterested().sendPacket(Type.AV, victim, criticalMultiplier > 0 ? 1 : 0);
-				}
+			synchronized(victim){	
+				victim.getsAttacked(player, damage, true);
+				player.getClient().sendPacket(Type.AV, victim, player.getDmgType());
 				return true;
 			}
 		}		
 		return false;
 	}
 
-	public void effect(LivingObject source, LivingObject target, int castStep){
+	public void effect(LivingObject source, LivingObject target, String[] arguments){
 		source.getInterested().sendPacket(Type.EFFECT, source, target , this, 0, 0, 0);
 	}
 	

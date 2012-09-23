@@ -273,8 +273,10 @@ public class Command {
 		sendable.sendPacket(Type.SAY, text);
 	}
 
+	
 	/****** player1 attacks with second weapon 
 	 * @param skillid ******/
+	/*
 	public void subAttack(Player player, List<LivingObject> targets, int skillId, int unknown1) {
 		Client client = player.getClient();
 		Skill skill = world.getSkillManager().getSkill(skillId);
@@ -289,7 +291,8 @@ public class Command {
 		//player.getInterested().sendPacket(Type.SECONDATACK,player,targets.get(0),skillId);
 		
 	}
-	/*
+	*/
+	
 	/****** player attacks mob with Sub Attack ******/
 	public void subAttackNpc(Player player, int uniqueId) {
 		Client client = player.getClient();

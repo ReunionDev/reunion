@@ -1,5 +1,6 @@
 package org.reunionemu.jreunion.game.skills.kailipton;
 
+
 import java.util.List;
 
 import org.reunionemu.jreunion.game.Castable;
@@ -13,6 +14,7 @@ import org.reunionemu.jreunion.game.items.equipment.StaffWeapon;
 import org.reunionemu.jreunion.game.items.equipment.Weapon;
 import org.reunionemu.jreunion.game.skills.Modifier;
 import org.reunionemu.jreunion.game.skills.Modifier.ValueType;
+import org.reunionemu.jreunion.server.LocalMap;
 import org.reunionemu.jreunion.server.Server;
 import org.reunionemu.jreunion.server.SkillManager;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
@@ -74,7 +76,7 @@ public class StarFlare extends Tier3 implements Castable, Effectable {
 	}
 	
 	@Override
-	public boolean cast(LivingObject caster, List<LivingObject> victims, int castStep) {
+	public boolean cast(LivingObject caster, LivingObject victim, String[] arguments) {
 		if(caster instanceof KailiptonPlayer){
 			Player player = (Player)caster;
 			long currentMana = player.getMana();
@@ -128,27 +130,38 @@ public class StarFlare extends Tier3 implements Castable, Effectable {
 			
 			player.setDmgType(criticalMultiplier > 0 ? 1 : 0);
 			
-			//Todo: this skill can target up to 5 targets
-			//(Main target 100% damage, other targets 80% damage)
-			synchronized(victims){
-				int victimCount = 1;
-				for(LivingObject victim : victims){
-					//if its 1st victim apply 100% dmg, if not is only 80% dmg
-					magicDamage *= (victimCount++ == 2) ? 0.8 : 1;
-					victim.getsAttacked(player, magicDamage, true);
-					player.getClient().sendPacket(Type.AV, victim, player.getDmgType());
+			int victimTarget = 1;
+			
+			for(int i=3; i < arguments.length-1; i++){
+				if(victim.getEntityId() == Integer.parseInt(arguments[i])){
+					break;
 				}
+				victimTarget++;
+			}
+			
+			//This skill can target up to 5 targets
+			//(Main target 100% damage, other targets 80% damage)
+			synchronized(victim){
+				//if its 1st victim apply 100% dmg, if not, apply only 80% dmg
+				magicDamage *= (victimTarget > 1 ? 0.8 : 1);
+				victim.getsAttacked(player, magicDamage, true);
+				player.getClient().sendPacket(Type.AV, victim, player.getDmgType());
 				return true;
 			}
 		}		
 		return false;
 	}
 	
-	public void effect(LivingObject source, LivingObject target, int castStep){
+	public void effect(LivingObject source, LivingObject target, String[] arguments){
 		source.getInterested().sendPacket(Type.EFFECT, source, target , this,0,0,0);
 	}
 	
 	public int getEffectModifier() {
 		return 0;
+	}
+	
+	@Override
+	public List<LivingObject> getTargets(String[] arguments, LocalMap map){
+		return getMultipleTargets(arguments, 3, arguments.length-1, map);
 	}
 }

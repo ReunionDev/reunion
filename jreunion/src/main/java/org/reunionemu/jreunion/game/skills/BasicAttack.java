@@ -1,7 +1,7 @@
 package org.reunionemu.jreunion.game.skills;
 
-import java.util.Collections;
 import java.util.List;
+import java.util.Vector;
 
 import org.reunionemu.jreunion.game.Castable;
 import org.reunionemu.jreunion.game.Effectable;
@@ -11,6 +11,7 @@ import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.Skill;
 import org.reunionemu.jreunion.game.items.equipment.Weapon;
 import org.reunionemu.jreunion.server.Client;
+import org.reunionemu.jreunion.server.LocalMap;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
 import org.reunionemu.jreunion.server.SkillManager;
 import org.slf4j.Logger;
@@ -44,16 +45,16 @@ public class BasicAttack extends Skill implements Castable, Effectable{
 			logger.error("invalid attack arguments");
 		}		
 		
-		List<LivingObject> victims = Collections.singletonList(target);		
+		//List<LivingObject> victims = Collections.singletonList(target);		
 				
-		if(this.cast(player, victims, 0)){
-			this.effect(player, target, 0);
+		if(this.cast(player, target, arguments)){
+			this.effect(player, target, arguments);
 		}	
 		
 	}
 	
-	
-	public boolean cast(LivingObject attacker, List<LivingObject> victims, int castStep) {
+	@Override
+	public boolean cast(LivingObject attacker, LivingObject victim, String[] arguments) {
 		
 		float damage = 0;
 		
@@ -102,21 +103,17 @@ public class BasicAttack extends Skill implements Castable, Effectable{
 			
 			player.setDmgType(criticalMultiplier > 0 ? 1 : 0);
 			
-			synchronized(victims){
-				for(LivingObject victim : victims){
-					victim.getsAttacked(player, (int)damage, true);
-					player.getClient().sendPacket(Type.ATTACK, player,victim,player.getDmgType());
-					//player.getInterested().sendPacket(Type.ATTACK, player, victim, criticalMultiplier > 0 ? 1 : 0);
-					
-					return true;
-				}
+			synchronized(victim){
+				victim.getsAttacked(player, (int)damage, true);
+				player.getClient().sendPacket(Type.ATTACK, player,victim,player.getDmgType());
+				return true;
 			}
 		}
 		return false;
 	}
 	
-	@Override 
-	public void effect(LivingObject source, LivingObject target, int castStep){	
+	@Override
+	public void effect(LivingObject source, LivingObject target, String[] arguments){	
 		source.getInterested().sendPacket(Type.ATTACK, source, target, source.getDmgType());
 	}
 	
@@ -131,14 +128,22 @@ public class BasicAttack extends Skill implements Castable, Effectable{
 
 		return 0;
 	}
-
-	@Override
-	public int getEffectModifier() {
-		return 0;
-	}
 	
 	@Override
 	public int getAffectedTargets() {
 		return 1;
+	}
+	
+	@Override
+	public List<LivingObject> getTargets(String[] arguments, LocalMap map){
+		List<LivingObject> targets = new Vector<LivingObject>();
+		targets.add(getSingleTarget(Integer.parseInt(arguments[3]), map));
+		return targets;
+	}
+
+	@Override
+	public int getEffectModifier() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

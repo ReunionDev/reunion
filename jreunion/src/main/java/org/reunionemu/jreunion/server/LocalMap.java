@@ -586,6 +586,10 @@ public SessionList<Session> GetSessions(Position position){
 				list.exit(player, false);
 				list.sendPacket(Type.OUT, player);
 				
+				if(player.getParty() != null){
+					player.getParty().exit(player);
+				}
+				
 				if(pet != null && pet.getState() == 12){
 					list.exit(pet, false);
 					list.sendPacket(Type.OUT, pet);

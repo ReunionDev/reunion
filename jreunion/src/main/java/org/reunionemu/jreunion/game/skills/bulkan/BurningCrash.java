@@ -1,6 +1,8 @@
 package org.reunionemu.jreunion.game.skills.bulkan;
 
+
 import java.util.List;
+import java.util.Vector;
 
 import org.reunionemu.jreunion.game.Castable;
 import org.reunionemu.jreunion.game.Effectable;
@@ -11,6 +13,7 @@ import org.reunionemu.jreunion.game.Skill;
 import org.reunionemu.jreunion.game.items.equipment.DemolitionWeapon;
 import org.reunionemu.jreunion.game.items.equipment.SlayerWeapon;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
+import org.reunionemu.jreunion.server.LocalMap;
 import org.reunionemu.jreunion.server.SkillManager;
 
 public class BurningCrash extends Skill implements Castable, Effectable{
@@ -88,8 +91,10 @@ public class BurningCrash extends Skill implements Castable, Effectable{
 		return modifier;
 	}
 
-	public boolean cast(LivingObject caster, List<LivingObject> victims, int castStep){
+	public boolean cast(LivingObject caster, LivingObject victim, String[] arguments){
 
+		int castStep = Integer.parseInt(arguments[4]);
+		
 		if(castStep == 255)
 			return true;
 		
@@ -123,32 +128,36 @@ public class BurningCrash extends Skill implements Castable, Effectable{
 
 		player.setDmgType(slayerWeapon instanceof DemolitionWeapon ? 2 : (criticalMultiplier > 0 ? 1 : 0));
 		
-		synchronized(victims){
-			for(LivingObject victim : victims){
-				victim.getsAttacked(player, damage, false);
-				
-				int unknown = victim.getHp() <= 0 ? -1 : castStep==1 ? 1 : 0;
-				
-				player.getClient().sendPacket(Type.SAV, null,-1, -1, shoulderMount.getExtraStats(), 3);
-				if(unknown != 0){
-					player.getClient().sendPacket(Type.EFFECT, player, victim , this, 0, unknown, 30);
-				}
-				player.getClient().sendPacket(Type.AV, victim, player.getDmgType());	
-				
-				if(victim.getHp() <= 0){
-					player.clearAttackQueue();
-				}
+		synchronized (victim) {
+			victim.getsAttacked(player, damage, false);
+
+			int unknown = victim.getHp() <= 0 ? -1 : castStep == 1 ? 1 : 0;
+
+			player.getClient().sendPacket(Type.SAV, null, -1, -1, shoulderMount.getExtraStats(), 3);
+			if (unknown != 0) {
+				player.getClient().sendPacket(Type.EFFECT, player, victim, this, 0, unknown, 30);
+			}
+			player.getClient().sendPacket(Type.AV, victim, player.getDmgType());
+
+			if (victim.getHp() <= 0) {
+				player.clearAttackQueue();
 			}
 		}
 		return true;
 	}
 	
-	public void effect(LivingObject source, LivingObject target, int castStep){
-		if(source == null || target == null)
+	public void effect(LivingObject source, LivingObject target, String[] arguments){
+		
+		if(source == null || arguments == null)
+			return;
+		
+		int castStep = Integer.parseInt(arguments[4]);
+		
+		if(castStep == 255)
 			return;
 		
 		int unknown = target.getHp() <= 0 ? -1 : 1;
-		if(castStep==1 || target.getHp()==0){
+		if(Integer.parseInt(arguments[4])==1 || target.getHp()==0){
 			source.getInterested().sendPacket(Type.EFFECT, source, target , this, 0, unknown, 30);
 		}
 	}
@@ -158,5 +167,11 @@ public class BurningCrash extends Skill implements Castable, Effectable{
 		return 0;
 	}
 	
+	@Override
+	public List<LivingObject> getTargets(String[] arguments, LocalMap map){
+		List<LivingObject> targets = new Vector<LivingObject>();
+		targets.add(getSingleTarget(Integer.parseInt(arguments[3]), map));
+		return targets;
+	}
 	
 }

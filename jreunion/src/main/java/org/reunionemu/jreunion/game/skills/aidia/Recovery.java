@@ -3,11 +3,13 @@ package org.reunionemu.jreunion.game.skills.aidia;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Vector;
 
 import org.reunionemu.jreunion.game.Castable;
 import org.reunionemu.jreunion.game.LivingObject;
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.Skill;
+import org.reunionemu.jreunion.server.LocalMap;
 import org.reunionemu.jreunion.server.SkillManager;
 public class Recovery extends Skill implements Castable{
 
@@ -77,13 +79,9 @@ public class Recovery extends Skill implements Castable{
 	//when casted, this skill will only send to the client
 	//the new hp and mana values.
 	@Override
-	public boolean cast(LivingObject caster, List<LivingObject> victims, int castStep) {
+	public boolean cast(LivingObject caster, LivingObject victim, String[] arguments) {
 
-		Iterator<LivingObject> victimsIterator = victims.iterator();
-		
-		while(victimsIterator.hasNext()){
-			LivingObject victim = (LivingObject)victimsIterator.next(); 
-			if(victim == null && caster instanceof Player) {
+			if(caster instanceof Player) {
 				Player player = (Player)caster;
 				long playerHp = player.getHp();
 				if(playerHp < player.getMaxHp()) {
@@ -98,7 +96,6 @@ public class Recovery extends Skill implements Castable{
 				}
 				return true;
 			}
-		}
 		return false;
 	}
 }

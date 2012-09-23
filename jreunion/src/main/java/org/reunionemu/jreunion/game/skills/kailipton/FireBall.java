@@ -13,6 +13,7 @@ import org.reunionemu.jreunion.game.Skill;
 import org.reunionemu.jreunion.game.items.equipment.StaffWeapon;
 import org.reunionemu.jreunion.game.items.equipment.Weapon;
 import org.reunionemu.jreunion.game.skills.Modifier;
+import org.reunionemu.jreunion.server.LocalMap;
 import org.reunionemu.jreunion.server.Server;
 import org.reunionemu.jreunion.server.SkillManager;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
@@ -74,7 +75,7 @@ public class FireBall extends Tier1 implements Castable, Modifier, Effectable {
 	}
 	
 	@Override
-	public boolean cast(LivingObject caster, List<LivingObject> victims, int castStep) {
+	public boolean cast(LivingObject caster, LivingObject victim, String[] arguments) {
 		if(caster instanceof KailiptonPlayer){
 			Player player = (Player)caster;
 			long currentMana = player.getMana();
@@ -125,11 +126,9 @@ public class FireBall extends Tier1 implements Castable, Modifier, Effectable {
 			
 			//This skill can target up to 2 targets
 			//(Both targets receive 100% dmg)
-			synchronized(victims){
-				for(LivingObject victim : victims){ 
-					victim.getsAttacked(player, magicDamage, true);
-					player.getClient().sendPacket(Type.AV, victim, player.getDmgType());
-				}
+			synchronized(victim){
+				victim.getsAttacked(player, magicDamage, true);
+				player.getClient().sendPacket(Type.AV, victim, player.getDmgType());
 				return true;
 			}
 		}		
@@ -174,11 +173,16 @@ public class FireBall extends Tier1 implements Castable, Modifier, Effectable {
 		return getDamageModifier((Player)livingObject);
 	}
 
-	public void effect(LivingObject source, LivingObject target, int castStep){
+	public void effect(LivingObject source, LivingObject target, String[] arguments){
 		source.getInterested().sendPacket(Type.EFFECT, source, target , this, source.getDmgType(),0,0,0);
 	}
 	
 	public int getEffectModifier() {
 		return 0;
+	}
+	
+	@Override
+	public List<LivingObject> getTargets(String[] arguments, LocalMap map){
+		return getMultipleTargets(arguments, 3, arguments.length-1, map);
 	}
 }

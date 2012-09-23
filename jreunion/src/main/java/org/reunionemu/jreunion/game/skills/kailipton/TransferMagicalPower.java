@@ -1,21 +1,25 @@
 package org.reunionemu.jreunion.game.skills.kailipton;
 
 import java.util.List;
+import java.util.Vector;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import org.reunionemu.jreunion.game.Castable;
+import org.reunionemu.jreunion.game.Effectable;
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.LivingObject;
 import org.reunionemu.jreunion.game.Npc;
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.Skill;
+import org.reunionemu.jreunion.server.LocalMap;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
 import org.reunionemu.jreunion.server.SkillManager;
 import org.reunionemu.jreunion.server.Tools;
 import org.reunionemu.jreunion.game.items.equipment.WandWeapon;
 
-public class TransferMagicalPower extends Skill {
+public class TransferMagicalPower extends Skill implements Castable, Effectable{
 
 	public TransferMagicalPower(SkillManager skillManager, int id) {
 		super(skillManager, id);
@@ -59,7 +63,7 @@ public class TransferMagicalPower extends Skill {
 		return modifier;
 	}
 
-	public boolean cast(LivingObject caster, List<LivingObject> targets, int unknown1) {
+	public boolean cast(LivingObject caster, LivingObject target, String[] arguments) {
 
 		Player player = null;
 
@@ -105,8 +109,8 @@ public class TransferMagicalPower extends Skill {
 		//	wandWeapon.setAccumulatedDmg(new_value);
 		//}
 
-		synchronized (targets) {
-			for (LivingObject target : targets) {
+		synchronized (target) {
+			//for (LivingObject target : targets) {
 				long newHp = Tools.between(target.getHp() - damage, 0l,	target.getMaxHp());
 
 				if (newHp <= 0) {
@@ -119,14 +123,32 @@ public class TransferMagicalPower extends Skill {
 				}
 				
 				player.getClient().sendPacket(Type.SAV, target,
-						criticalMultiplier > 0 ? 1 : 0, unknown1,
+						criticalMultiplier > 0 ? 1 : 0, Integer.parseInt(arguments[4]),
 								offHandEquipment.getGemNumber(), 10);
-			}
+			//}
 		}
 
 		player.clearAttackQueue();
 
 		return true;
 
+	}
+	
+	@Override
+	public void effect(LivingObject source, LivingObject target, String[] arguments){
+			source.getInterested().sendPacket(Type.SECONDATTACK, source, target, getId());
+	}
+
+	@Override
+	public int getEffectModifier() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<LivingObject> getTargets(String[] arguments, LocalMap map){
+		List<LivingObject> targets = new Vector<LivingObject>();
+		targets.add(getSingleTarget(Integer.parseInt(arguments[3]), map));
+		return targets;
 	}
 }

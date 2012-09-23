@@ -1,6 +1,7 @@
 package org.reunionemu.jreunion.game.skills.bulkan;
 
 import java.util.List;
+import java.util.Vector;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,10 +18,11 @@ import org.reunionemu.jreunion.game.items.equipment.DemolitionWeapon;
 import org.reunionemu.jreunion.game.items.equipment.SlayerWeapon;
 import org.reunionemu.jreunion.game.npc.Mob;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
+import org.reunionemu.jreunion.server.LocalMap;
 import org.reunionemu.jreunion.server.SkillManager;
 import org.reunionemu.jreunion.server.Tools;
 
-public class SecondAttack extends Skill{
+public class SecondAttack extends Skill implements Castable, Effectable{
 	
 	
 	public SecondAttack(SkillManager skillManager,int id) {
@@ -71,7 +73,8 @@ public class SecondAttack extends Skill{
 		return modifier;
 	}
 	
-	public boolean cast(LivingObject caster, List<LivingObject> victims, int unknown1){
+	@Override
+	public boolean cast(LivingObject caster, LivingObject victim, String[] arguments){
 		Player player = null;
 		
 		if(caster instanceof Player){
@@ -99,18 +102,32 @@ public class SecondAttack extends Skill{
 		
 		player.setDmgType(slayerWeapon instanceof DemolitionWeapon ? 2 : (criticalMultiplier > 0 ? 1 : 0));
 		
-		synchronized(victims){
-			for(LivingObject victim : victims){
-				victim.getsAttacked(player, damage, false);
-				player.getClient().sendPacket(Type.SAV, victim,	player.getDmgType(), 0,
-						shoulderMount.getExtraStats(), 3);
-				player.getInterested().sendPacket(Type.SECONDATTACK, player, victim, getId());
-			}
+		synchronized(victim){
+			victim.getsAttacked(player, damage, false);
+			player.getClient().sendPacket(Type.SAV, victim,	player.getDmgType(), 0,	shoulderMount.getExtraStats(), 3);
 		}
 		
 		player.clearAttackQueue();
 		
 		
 		return true;
+	}
+	
+	@Override
+	public void effect(LivingObject source, LivingObject target, String[] arguments){
+			source.getInterested().sendPacket(Type.SECONDATTACK, source, target, getId());
+	}
+	
+	@Override
+	public List<LivingObject> getTargets(String[] arguments, LocalMap map){
+		List<LivingObject> targets = new Vector<LivingObject>();
+		targets.add(getSingleTarget(Integer.parseInt(arguments[3]), map));
+		return targets;
+	}
+
+	@Override
+	public int getEffectModifier() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

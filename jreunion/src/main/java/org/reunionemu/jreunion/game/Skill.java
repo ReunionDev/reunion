@@ -3,8 +3,11 @@ package org.reunionemu.jreunion.game;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Vector;
 
 import org.reunionemu.jreunion.server.Client;
+import org.reunionemu.jreunion.server.LocalMap;
+import org.reunionemu.jreunion.server.Server;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
 import org.reunionemu.jreunion.server.SkillManager;
 import org.slf4j.LoggerFactory;
@@ -59,6 +62,24 @@ public abstract class Skill {
 	
 	public void handle(Player player, String [] arguments){
 		
+		List<LivingObject> targets = getTargets(arguments, player.getPosition().getLocalMap());
+		
+		for(LivingObject target : targets){
+			if (Castable.class.isInstance(this)) {
+				if (((Castable) this).cast(player, target, arguments)) {
+					if (Effectable.class.isInstance(this)) {
+						((Effectable) this).effect(player, target, arguments);
+					}
+				}
+			} else {
+				player.getClient().sendPacket(Type.SAY,
+						"Skill " + this.getName() + " not implemented yet!");
+				LoggerFactory.getLogger(Skill.class).error(
+						"Skill %s is not Castable!", this);
+			}
+		}
+		
+		/*
 		Client client = player.getClient();
 		LivingObject target = null;
 		int entityId=-1;
@@ -101,8 +122,10 @@ public abstract class Skill {
 				victims.add(target);
 			}
 		}
+		*/
 		
 		//cast attacks/skills and send effects to other clients.
+		/*
 		if(Castable.class.isInstance(this)){
 			if(((Castable)this).cast(player, victims, castStep)){
 				if(Effectable.class.isInstance(this))
@@ -114,6 +137,7 @@ public abstract class Skill {
 			client.sendPacket(Type.SAY, this.getName()+" skill not implemented yet!");
 			LoggerFactory.getLogger(Skill.class).error(this.getName()+" skill is not Castable!");
 		}
+		*/
 		
 	}
 
@@ -139,16 +163,8 @@ public abstract class Skill {
 		}
 	}
 	
-	public void effect(LivingObject source, LivingObject target, int castStep){
-		if(target == source){ //self usable skill
-			//TODO: figure out why this is not working
-			//source.getInterested().sendPacket(Type.SKILL, source, this);
-			((Player)source).getClient().sendPacket(Type.SKILL, source, this);
-		}
-		else {
-			source.getInterested().sendPacket(Type.EFFECT, source, target, this, 0, 0, 0);
-			target.getInterested().sendPacket(Type.EFFECT, source, target, this, 0, 0, 0);
-		}
+	public void effect(LivingObject source, LivingObject target, String[] arguments){
+		source.getInterested().sendPacket(Type.EFFECT, source, target , this, source.getDmgType(),0,0,0);
 	}
 	
 	public abstract int getLevelRequirement(int skillLevel);	
@@ -171,5 +187,37 @@ public abstract class Skill {
 	
 	public void setName(String skillName){
 		this.name = skillName;
+	}
+	
+	public List<LivingObject> getTargets(String[] arguments, LocalMap map){
+		return null;
+	}
+	
+	public LivingObject getSingleTarget(int entityId, LocalMap map){
+		return (LivingObject)map.getEntity(entityId);
+	}
+	
+	public List<LivingObject> getMultipleTargets(String [] arguments, int firstTargetPos, int lastTargetPos, LocalMap map){
+		List<LivingObject> targets = new Vector<LivingObject>();
+		for(int i=firstTargetPos; i<=lastTargetPos; i++){
+			targets.add(getSingleTarget(Integer.parseInt(arguments[i]), map));
+		}
+		return targets;
+	}
+	
+	public String toString(){
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("{");
+
+		buffer.append("id:");
+		buffer.append(getId());
+		buffer.append(", ");
+		
+		buffer.append("name:");
+		buffer.append(getName());
+		
+				
+		buffer.append("}");
+		return buffer.toString();
 	}
 }

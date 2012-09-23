@@ -1,6 +1,5 @@
 package org.reunionemu.jreunion.game.skills.kailipton;
 
-import java.util.List;
 
 import org.reunionemu.jreunion.game.Castable;
 import org.reunionemu.jreunion.game.Effectable;
@@ -74,7 +73,7 @@ public class ShockSphere extends Tier3 implements Castable, Effectable {
 	}
 	
 	@Override
-	public boolean cast(LivingObject caster, List<LivingObject> victims, int castStep) {
+	public boolean cast(LivingObject caster, LivingObject victim, String[] arguments) {
 		if(caster instanceof KailiptonPlayer){
 			Player player = (Player)caster;
 			long currentMana = player.getMana();
@@ -128,18 +127,16 @@ public class ShockSphere extends Tier3 implements Castable, Effectable {
 			
 			player.setDmgType(criticalMultiplier > 0 ? 1 : 0);
 			
-			synchronized(victims){
-				for(LivingObject victim : victims){
-					victim.getsAttacked(player, magicDamage, true);
-					player.getClient().sendPacket(Type.AV, victim, player.getDmgType());
-				}
+			synchronized(victim){
+				victim.getsAttacked(player, magicDamage, true);
+				player.getClient().sendPacket(Type.AV, victim, player.getDmgType());
 				return true;
 			}
 		}		
 		return false;
 	}
 	
-	public void effect(LivingObject source, LivingObject target, int castStep){
+	public void effect(LivingObject source, LivingObject target, String[] arguments){
 		source.getInterested().sendPacket(Type.EFFECT, source, target , this,0,0,0);
 	}
 	

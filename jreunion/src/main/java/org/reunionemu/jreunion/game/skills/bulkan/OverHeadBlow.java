@@ -1,7 +1,5 @@
 package org.reunionemu.jreunion.game.skills.bulkan;
 
-import java.util.List;
-
 import org.reunionemu.jreunion.game.BulkanPlayer;
 import org.reunionemu.jreunion.game.Castable;
 import org.reunionemu.jreunion.game.Effectable;
@@ -12,7 +10,6 @@ import org.reunionemu.jreunion.game.Skill;
 import org.reunionemu.jreunion.game.items.equipment.Axe;
 import org.reunionemu.jreunion.game.items.equipment.Weapon;
 import org.reunionemu.jreunion.game.skills.Modifier;
-import org.reunionemu.jreunion.server.Server;
 import org.reunionemu.jreunion.server.SkillManager;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
 
@@ -81,7 +78,7 @@ public class OverHeadBlow extends WeaponAttack implements Castable, Effectable{
 	}
 	
 	@Override
-	public boolean cast(LivingObject caster, List<LivingObject> victims, int castStep) {
+	public boolean cast(LivingObject caster, LivingObject victim, String[] arguments) {
 		
 		if(caster instanceof BulkanPlayer){	
 			Player player = (Player)caster;
@@ -129,19 +126,18 @@ public class OverHeadBlow extends WeaponAttack implements Castable, Effectable{
 	
 			player.setDmgType(criticalMultiplier > 0 ? 1 : 0);
 			
-			synchronized(victims){
-				for(LivingObject victim : victims){
-					victim.getsAttacked(player, damage, true);
-					player.getClient().sendPacket(Type.AV, victim, player.getDmgType());
-				}
+			synchronized(victim){
+				victim.getsAttacked(player, damage, true);
+				player.getClient().sendPacket(Type.AV, victim, player.getDmgType());
 				return true;
 			}
 		}		
 		return false;
 	}
 
-	public void effect(LivingObject source, LivingObject target, int castStep){
-		source.getInterested().sendPacket(Type.EFFECT, source, target , this, 0, 0, 0);
+	@Override
+	public void effect(LivingObject source, LivingObject target, String[] arguments){
+			source.getInterested().sendPacket(Type.EFFECT, source, target , this, 0, 0, 0);
 	}
 	
 	@Override

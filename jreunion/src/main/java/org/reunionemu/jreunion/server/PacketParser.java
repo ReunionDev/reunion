@@ -1,7 +1,6 @@
 package org.reunionemu.jreunion.server;
 
 import java.nio.channels.SocketChannel;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
@@ -528,6 +527,10 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					client.getPlayer().dropItem(Integer.parseInt(message[1]));
 							
 				} else if (message[0].equals("subat")) {
+					Skill skill = world.getSkillManager().getSkill(Integer.parseInt(message[3]));
+					skill.handle(player, message);
+					
+					/*
 					LivingObject singleTarget = (LivingObject)player.getPosition().getLocalMap().getEntity(Integer.parseInt(message[2]));
 					int skillId = Integer.parseInt(message[3]);
 					int unknown1 = Integer.parseInt(message[4]);
@@ -536,6 +539,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					
 					targets.add(singleTarget);
 					com.subAttack(player,targets,skillId,unknown1);
+					*/
 					
 				} else if (message[0].equals("pulse")) {
 					if (Integer.parseInt(message[2].substring(0,

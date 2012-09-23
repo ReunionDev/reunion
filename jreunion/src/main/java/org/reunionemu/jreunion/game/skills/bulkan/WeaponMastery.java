@@ -123,4 +123,5 @@ public abstract class WeaponMastery extends Skill implements Modifier {
 		return getDamageModifier((Player)livingObject);
 	}
 
+	
 }

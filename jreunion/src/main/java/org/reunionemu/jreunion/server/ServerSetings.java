@@ -99,6 +99,7 @@ public class ServerSetings {
 			setCloseAttackRadius(20);
 			setRangeAttackRadius(100);
 			setDemolitionModifier(0.5f);
+			setPlayerMaxLevel(0);
 			setWelcomeMessage("Hey, welcome on the Reunion Testserver");
 		} else {
 

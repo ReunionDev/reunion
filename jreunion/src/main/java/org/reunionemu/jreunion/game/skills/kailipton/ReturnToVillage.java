@@ -1,6 +1,5 @@
 package org.reunionemu.jreunion.game.skills.kailipton;
 
-import java.util.List;
 
 import org.reunionemu.jreunion.game.Castable;
 import org.reunionemu.jreunion.game.KailiptonPlayer;
@@ -59,7 +58,7 @@ public class ReturnToVillage extends Skill implements Castable {
 	//Teleports player to town.
 	//If there isn't enough mana then the client wont allow to use the skill.
 	@Override
-	public boolean cast(LivingObject caster, List<LivingObject> victims, int castStep) {
+	public boolean cast(LivingObject caster, LivingObject victim, String[] arguments) {
 		if(caster instanceof KailiptonPlayer){
 			Player player = (Player)caster;
 			int manaSpent = 10; //mana spent is the same in every skill level

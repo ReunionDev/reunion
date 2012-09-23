@@ -1,6 +1,5 @@
 package org.reunionemu.jreunion.game.skills.kailipton;
 
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -162,7 +161,7 @@ public class ManaShield extends Skill implements Castable, Effectable {
 	
 	@Override
 	//TODO: handle with DefenceBonus and DamageAbsorb
-	public boolean cast(LivingObject caster, List<LivingObject> victims, int castStep) {
+	public boolean cast(LivingObject caster, LivingObject victim, String[] arguments) {
 		
 		if(caster instanceof KailiptonPlayer){
 			final Player player = (Player) caster;
