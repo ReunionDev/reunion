@@ -7,7 +7,6 @@ import org.reunionemu.jreunion.server.LocalMap;
 import org.reunionemu.jreunion.server.Map;
 import org.reunionemu.jreunion.server.Server;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.converter.xml.Jaxb2RootElementHttpMessageConverter;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
