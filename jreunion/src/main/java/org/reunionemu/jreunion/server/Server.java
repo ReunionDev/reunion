@@ -1,7 +1,9 @@
 package org.reunionemu.jreunion.server;
 
-import java.util.HashMap;
 import java.util.Random;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
 import org.reunionemu.jreunion.events.EventDispatcher;
 import org.reunionemu.jreunion.events.server.ServerStartEvent;
@@ -9,6 +11,9 @@ import org.reunionemu.jreunion.events.server.ServerStopEvent;
 import org.reunionemu.jreunion.protocol.Protocol;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
@@ -17,15 +22,15 @@ import org.springframework.stereotype.Service;
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
+
 @Service
-public class Server extends EventDispatcher {
+public class Server extends EventDispatcher implements ApplicationContextAware{
 
 	private static Server _instance = null;	
 	
-	private static AbstractApplicationContext context;
+	private static ApplicationContext context;
 	
 	private static Random rand = new Random(System.currentTimeMillis());
-	
 	
 	public static Logger logger = LoggerFactory.getLogger(Server.class);
 	
@@ -43,12 +48,6 @@ public class Server extends EventDispatcher {
 		this.state = state;
 	}
 
-	private HashMap<String,Service> services = new HashMap<String,Service>();
-
-	public HashMap<String, Service> getServices() {
-		return services;
-	}
-
 	public synchronized static Server getInstance() {
 		if (_instance == null) {
 			try {
@@ -60,75 +59,13 @@ public class Server extends EventDispatcher {
 		}
 		return _instance;
 	}
+	
+	@PostConstruct
+	public void initIt() throws Exception {
 
-	/**
-	 * @param args
-	 * @throws Throwable
-	 */
-	public static void main(String[] args) throws Exception {
-		
-		context = new ClassPathXmlApplicationContext("classpath*:/META-INF/spring/**/*-context.xml");
-
-		context.registerShutdownHook();
-		
-		
-		
 		Thread.currentThread().setName("main");
-		
-		//Reference.getInstance().Load();
-		
-		
-		
-		Server server = Server.getInstance();
 
-		try {
-
-			//server.database.start();
-			
-
-			logger.info("Server start");
-			server.fireEvent(server.createEvent(ServerStartEvent.class, server));			
-			
-								// modules
-								// Load a module by extending it from
-								// ClassModule
-								// And put the put the parent in the constructor
-			
-			System.gc();
-			server.setState(State.RUNNING);
-			synchronized(server){
-				server.wait();
-			}
-			
-		} catch (Exception e) {
-			
-			logger.error("Exception",e);
-			
-		}
-		finally {
-			
-			server.setState(State.CLOSING);
-			server.fireEvent(server.createEvent(ServerStopEvent.class, server));
-			
-			logger.info("Server stop");
-			
-			EventDispatcher.shutdown();
-			server.database.stop();
-			System.exit(-1);
-		}
-	}
-
-	private Network network;
-
-	private PacketParser packetParser;
-
-	private World world;
-
-	private Database database;
-
-	private Server() throws Exception {
-
-		super();
+		logger.info("Server start");
 		
 		Protocol.load();
 		
@@ -141,11 +78,73 @@ public class Server extends EventDispatcher {
 		world = new World(this);
 		packetParser = new PacketParser();
 		
+		this.fireEvent(this.createEvent(ServerStartEvent.class, this));			
 		
-		//network.addEventListener(NetworkDataEvent.class, packetParser);
+		this.setState(State.RUNNING);
+	
 	}
 	
-	
+	@PreDestroy
+	public void cleanUp() {
+		this.setState(State.CLOSING);
+		this.fireEvent(this.createEvent(ServerStopEvent.class, this));
+		
+		logger.info("Server stop");
+		
+		EventDispatcher.shutdown();
+		this.database.stop();
+	}
+
+	/**
+	 * @param args
+	 * @throws Throwable
+	 */
+	public static void main(String[] args) throws Exception {
+		
+		context = new ClassPathXmlApplicationContext("classpath*:/META-INF/spring/**/*-context.xml");
+
+		((AbstractApplicationContext) context).registerShutdownHook();
+		
+		
+		//Reference.getInstance().Load();
+		
+		Server server = Server.getInstance();
+
+		try {
+
+			//server.database.start();
+		
+			//server.fireEvent(server.createEvent(ServerStartEvent.class, server));			
+			
+								// modules
+								// Load a module by extending it from
+								// ClassModule
+								// And put the put the parent in the constructor
+			
+			System.gc();
+			//server.setState(State.RUNNING);
+			synchronized(server){
+				server.wait();
+			}
+			
+		} catch (Exception e) {
+			
+			logger.error("Exception",e);
+			
+		}
+	}
+
+	private Network network;
+
+	private PacketParser packetParser;
+
+	private World world;
+
+	private Database database;
+
+	private Server() {
+
+	}
 
 	/**
 	 * @return Returns the databaseModule.
@@ -182,13 +181,17 @@ public class Server extends EventDispatcher {
 	public void setDatabaseModule(Database databaseModule) {
 		this.database = databaseModule;
 	}
-
 	
 	public static enum State{
 		LOADING,
 		RUNNING,
 		CLOSING
-		
+	}
+
+	@Override
+	public void setApplicationContext(ApplicationContext context)
+			throws BeansException {
+		Server.context = context;
 	}
 
 }

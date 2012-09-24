@@ -273,7 +273,7 @@ public class LocalMap extends Map implements Runnable{
 		super.load();
 		thread.setName("Map: "+getName());
 		
-		LoggerFactory.getLogger(LocalMap.class).info("Loading "+getName());
+		LoggerFactory.getLogger(LocalMap.class).info("Loading "+getName()+"["+getId()+"]");
 		if(!Server.getInstance().getNetwork().register(getAddress())){
 			System.out.println("huh?");
 			return;
