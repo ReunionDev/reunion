@@ -1,27 +1,31 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <artifactId>jlauncher</artifactId>
-  <dependencies>
-  	<dependency>
-  		<groupId>org.reunionemu</groupId>
-  		<artifactId>jcommon</artifactId>
-  		<version>0.0.1-SNAPSHOT</version>
-  	</dependency>
-  	<dependency>
-  		<groupId>log4j</groupId>
-  		<artifactId>log4j</artifactId>
-  		<version>1.2.17</version>
-  	</dependency>
-  	<dependency>
-		<groupId>org.slf4j</groupId>
-		<artifactId>slf4j-log4j12</artifactId>
-		<version>1.6.6</version>
-	</dependency>
-  </dependencies>
-  <parent>
-  	<groupId>org.reunionemu</groupId>
-  	<artifactId>jreunion-parent</artifactId>
-  	<version>0.0.1-SNAPSHOT</version>
-  	<relativePath>..</relativePath>
-  </parent>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>jlauncher</artifactId>
+	<properties>
+		<workspace.basedir>${project.basedir}/../../</workspace.basedir>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>org.reunionemu</groupId>
+			<artifactId>jcommon</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.6.6</version>
+		</dependency>
+	</dependencies>
+	<parent>
+		<groupId>org.reunionemu</groupId>
+		<artifactId>jreunion-parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+		<relativePath>..</relativePath>
+	</parent>
 </project>

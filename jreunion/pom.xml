@@ -6,7 +6,7 @@
 	<name>jreunion</name>
 	<url>http://reunionemu.org</url>
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<workspace.basedir>${project.basedir}/../../</workspace.basedir>
 	</properties>
 	<scm>
 		<url>scm:git:git@github.com:ReunionDev/reunion.git</url>
@@ -125,7 +125,7 @@
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-jpa</artifactId>
-			<version>1.1.1.RELEASE</version>
+			<version>1.1.2.RELEASE</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -163,18 +163,18 @@
 			<version>1.9.9</version>
 		</dependency>
 		<dependency>
-		    <groupId>javax.servlet</groupId>
-		    <artifactId>servlet-api</artifactId>
-		    <version>2.5</version>
-		    <scope>test</scope>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>javax.xml.bind</groupId>
 			<artifactId>jaxb-api</artifactId>
 			<version>2.2.7</version>
 		</dependency>
-            
-            
+
+
 
 	</dependencies>
 	<repositories>
@@ -237,21 +237,21 @@
 					</execution>
 				</executions>
 			</plugin>
-       		<plugin>            
-			  <groupId>org.apache.maven.plugins</groupId>
-			  <artifactId>maven-war-plugin</artifactId>
-			  <configuration>
-			    <webXml>src\main\webapp\WEB-INF\web.xml</webXml>        
-			  </configuration>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+					<webXml>src\main\webapp\WEB-INF\web.xml</webXml>
+				</configuration>
 			</plugin>
-			 <plugin>
-		        <groupId>org.apache.tomcat.maven</groupId>
-		        <artifactId>tomcat7-maven-plugin</artifactId>
-		        <version>2.0</version>
-		        <configuration>
-		          <path>/${project.build.finalName}</path>
-		        </configuration>
-		      </plugin>
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.0</version>
+				<configuration>
+					<path>/${project.build.finalName}</path>
+				</configuration>
+			</plugin>
 		</plugins>
 
 		<pluginManagement>

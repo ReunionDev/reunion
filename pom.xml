@@ -1,14 +1,31 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>org.reunionemu</groupId>
-  <artifactId>jreunion-parent</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  <packaging>pom</packaging>
-  <modules>
-  	<module>jcommon</module>
-  	<module>jlauncher</module>
-  	<module>jreunion</module>
-  	<module>jreunion-integrated</module>
-  	<module>../reunion-data</module>
-  </modules>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.reunionemu</groupId>
+	<artifactId>jreunion-parent</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<modules>
+		<module>jcommon</module>
+		<module>jlauncher</module>
+		<module>jreunion</module>
+		<module>../reunion-data</module>
+	</modules>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<workspace.basedir>${project.basedir}/../</workspace.basedir>
+	</properties>
+	<repositories>
+		<repository>
+			<id>reunion-maven-repository</id>
+			<name>reunion-maven-repository repository on GitHub</name>
+			<url>http://reuniondev.github.com/reunion-maven-repository/repository/</url>
+		</repository>
+	</repositories>
+	<distributionManagement>
+		<repository>
+			<id>reunion-maven-repository</id>
+			<url>file:///${workspace.basedir}/reunion-maven-repository-pages/repository/</url>
+		</repository>
+	</distributionManagement>
 </project>
