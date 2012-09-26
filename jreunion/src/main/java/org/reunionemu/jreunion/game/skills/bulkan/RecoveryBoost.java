@@ -20,6 +20,10 @@ public class RecoveryBoost extends Skill {
 		return 4+skillLevel;
 	}
 
+	@Override
+	public int getAffectedTargets() {
+		return 1;
+	}
 	
 	public float getRecoveryBoostModifier(Player player){
 		return (1 + (player.getSkillLevel(this) * getRecoveryBoostModifier()));

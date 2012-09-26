@@ -3,6 +3,7 @@ package org.reunionemu.jreunion.game.items;
 import org.reunionemu.jcommon.ParsedItem;
 import org.reunionemu.jreunion.game.PlayerItem;
 import org.reunionemu.jreunion.server.Reference;
+import org.reunionemu.jreunion.server.World;
 
 /**
  * @author Aidamina
@@ -254,6 +255,10 @@ public class SpecialWeapon extends PlayerItem {
 	
 	public long getDamage(){
 		return (long)(getMinDamage() + ((getMaxDamage()-getMinDamage())*Math.random()));
+	}
+	
+	public float getCritical(){
+		return (float)Math.random() < World.serverSetings.getCriticalChance() ? World.serverSetings.getCriticalMultiplier() : 0;
 	}
 
 }

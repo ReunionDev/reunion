@@ -2,6 +2,7 @@ package org.reunionemu.jreunion.game;
 
 import org.reunionemu.jcommon.ParsedItem;
 import org.reunionemu.jreunion.server.Reference;
+import org.reunionemu.jreunion.server.Server;
 
 /**
  * @author Aidamina
@@ -12,8 +13,6 @@ public class NpcType{
 	private int type;
 	
 	private long maxHp;
-	
-	private int mutant;
 
 	private int neoProgmare;
 	
@@ -51,14 +50,6 @@ public class NpcType{
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public int getMutant() {
-		return mutant;
-	}
-
-	public void setMutant(int mutant) {
-		this.mutant = mutant;
 	}
 
 	public int getNeoProgmare() {

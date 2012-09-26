@@ -1,14 +1,10 @@
 package org.reunionemu.jreunion.server;
 
 import java.nio.channels.SocketChannel;
-import java.util.Arrays;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Vector;
 import java.util.regex.Pattern;
-
-import org.apache.log4j.Logger;
 
 import org.reunionemu.jreunion.events.Event;
 import org.reunionemu.jreunion.events.EventDispatcher;
@@ -18,8 +14,6 @@ import org.reunionemu.jreunion.events.client.ClientDisconnectEvent;
 import org.reunionemu.jreunion.events.client.ClientEvent;
 import org.reunionemu.jreunion.events.client.ClientReceiveEvent;
 import org.reunionemu.jreunion.events.map.PlayerLoginEvent;
-import org.reunionemu.jreunion.game.Castable;
-import org.reunionemu.jreunion.game.Effectable;
 import org.reunionemu.jreunion.game.Equipment;
 import org.reunionemu.jreunion.game.Equipment.Slot;
 import org.reunionemu.jreunion.game.ExchangeItem;
@@ -28,7 +22,8 @@ import org.reunionemu.jreunion.game.InventoryItem;
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.LivingObject;
 import org.reunionemu.jreunion.game.Npc;
-import org.reunionemu.jreunion.game.NpcType;
+import org.reunionemu.jreunion.game.Pet;
+import org.reunionemu.jreunion.game.Pet.PetStatus;
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.Player.Race;
 import org.reunionemu.jreunion.game.Player.Sex;
@@ -37,13 +32,16 @@ import org.reunionemu.jreunion.game.Position;
 import org.reunionemu.jreunion.game.RoamingItem;
 import org.reunionemu.jreunion.game.Skill;
 import org.reunionemu.jreunion.game.items.etc.MissionReceiver;
+import org.reunionemu.jreunion.game.items.pet.PetEgg;
 import org.reunionemu.jreunion.game.npc.Merchant;
 import org.reunionemu.jreunion.game.npc.Trader;
 import org.reunionemu.jreunion.game.npc.Warehouse;
+import org.reunionemu.jreunion.protocol.OtherProtocol;
 import org.reunionemu.jreunion.server.Client.LoginType;
 import org.reunionemu.jreunion.server.Client.State;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
-import org.reunionemu.jreunion.protocol.OtherProtocol;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
@@ -51,6 +49,9 @@ import org.reunionemu.jreunion.protocol.OtherProtocol;
 public class PacketParser extends EventDispatcher implements EventListener{
 
 	private MessageParser messageParser;
+	
+	private static Logger logger = LoggerFactory.getLogger(PacketParser.class);				
+
 
 	public PacketParser() {
 		super();
@@ -64,7 +65,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 			World world = client.getWorld();
 			Command com = world.getCommand();			
 			
-			Logger.getLogger(PacketParser.class).info("Parsing " + message[0] + " command on client: "
+			LoggerFactory.getLogger(PacketParser.class).info("Parsing " + message[0] + " command on client: "
 					+ client);
 			switch (client.getState()) {
 			case DISCONNECTED: {
@@ -77,11 +78,11 @@ public class PacketParser extends EventDispatcher implements EventListener{
 				try{
 					
 				if (message[0].equals(Reference.getInstance().getServerReference().getItem("Server").getMemberValue("Version"))) {
-					Logger.getLogger(PacketParser.class).info("Got Version");
+					LoggerFactory.getLogger(PacketParser.class).info("Got Version");
 					client.setState(Client.State.GOT_VERSION);
 					break;
 				} else {
-					Logger.getLogger(PacketParser.class).info("Inconsistent version (err 1) detected on: "
+					LoggerFactory.getLogger(PacketParser.class).info("Inconsistent version (err 1) detected on: "
 							+ client);
 					client.sendWrongVersion(Integer.parseInt(message[0]));
 					client.setState(Client.State.DISCONNECTED);
@@ -89,7 +90,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 				}
 				}catch(Exception e)
 				{
-					Logger.getLogger(this.getClass()).warn("Exception",e);
+					LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 					client.disconnect();
 				}
 				*/
@@ -99,24 +100,24 @@ public class PacketParser extends EventDispatcher implements EventListener{
 				if(client.getProtocol() instanceof OtherProtocol)
 					((OtherProtocol)client.getProtocol()).setVersion(version);
 				
-				Logger.getLogger(PacketParser.class).info("Got version");
+				LoggerFactory.getLogger(PacketParser.class).info("Got version");
 				client.setState(State.GOT_VERSION);
 				break;
 	
 			}
 			case GOT_VERSION: {
 				if (message[0].equals("login")) {
-					Logger.getLogger(PacketParser.class).info("Got login");
+					LoggerFactory.getLogger(PacketParser.class).info("Got login");
 					client.setState(State.GOT_LOGIN);
 					client.setLoginType(LoginType.LOGIN);
 					break;
 				} else if(message[0].equals("play")) {
-					Logger.getLogger(PacketParser.class).info("Got play");
+					LoggerFactory.getLogger(PacketParser.class).info("Got play");
 					client.setState(State.GOT_LOGIN);
 					client.setLoginType(LoginType.PLAY);
 					break;
 				} else {
-					Logger.getLogger(PacketParser.class).info("Inconsistent protocol (err 2) detected on: "
+					LoggerFactory.getLogger(PacketParser.class).info("Inconsistent protocol (err 2) detected on: "
 							+ client);
 					client.setState(State.DISCONNECTED);
 					break;
@@ -126,11 +127,11 @@ public class PacketParser extends EventDispatcher implements EventListener{
 			case GOT_LOGIN: {
 				if (message[0].length() < 28) {
 					client.setUsername(new String(message[0]));
-					Logger.getLogger(PacketParser.class).info("Got Username");
+					LoggerFactory.getLogger(PacketParser.class).info("Got Username");
 					client.setState(State.GOT_USERNAME);
 					break;
 				} else {
-					Logger.getLogger(PacketParser.class).info("Inconsistent protocol (err 3) detected on: "
+					LoggerFactory.getLogger(PacketParser.class).info("Inconsistent protocol (err 3) detected on: "
 							+ client);
 					client.setState(State.DISCONNECTED);
 					break;
@@ -155,12 +156,12 @@ public class PacketParser extends EventDispatcher implements EventListener{
 				
 				if (message[0].length() < 28) {
 					client.setPassword(new String(message[0]));
-					Logger.getLogger(PacketParser.class).info("Got Password");
+					LoggerFactory.getLogger(PacketParser.class).info("Got Password");
 					client.setState(State.GOT_PASSWORD);
 					com.authClient(client);
 					break;
 				} else {
-					Logger.getLogger(PacketParser.class).info("Inconsistent protocol (err 4) detected on: "
+					LoggerFactory.getLogger(PacketParser.class).info("Inconsistent protocol (err 4) detected on: "
 							+ client);
 					client.setState(State.DISCONNECTED);
 					break;
@@ -242,7 +243,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					}
 					
 					if (map == null || !map.isLocal()) {
-						Logger.getLogger(Command.class).error("Invalid Map: " + map);
+						LoggerFactory.getLogger(Command.class).error("Invalid Map: " + map);
 						player.getClient().disconnect();
 						return;
 					}
@@ -265,7 +266,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 						}
 							
 					}
-
+					
 					player.getPosition().setMap((LocalMap)map);
 					world.getPlayerManager().addPlayer(player);
 					
@@ -273,9 +274,11 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					DatabaseUtils.getDinamicInstance().loadQuickSlot(player);
 					DatabaseUtils.getDinamicInstance().loadInventory(player);
 					DatabaseUtils.getDinamicInstance().loadExchange(player);
+					
 					player.loadInventory();
 					player.loadExchange();
 					player.loadQuickSlot();
+					client.sendPacket(PacketFactory.Type.OK);
 					
 					
 					//System.out.println(savedPosition);
@@ -334,11 +337,46 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					player.sendStatus(Status.LIME);
 					player.sendStatus(Status.PENALTYPOINTS);
 					player.setQuestState(DatabaseUtils.getDinamicInstance().loadQuestState(player));
+					
+					//handle with player pet loading
+					Pet pet = world.getPetManager().getPet(player);
+					if(pet != null){
+						Item<?> item = player.getEquipment().getShoulderMount();
+						player.setPet(pet);
+						pet.setOwner(player);
+						pet.sendStatus(PetStatus.STATE);
+						if(pet.getState() > 1){
+							pet.setEquipment(DatabaseUtils.getDinamicInstance().loadPetEquipment(player));
+						
+							if(pet.getState() == 12){
+								pet.load();
+							}
+						} else if(item != null && item.getType() instanceof PetEgg){
+							pet.setBreeding(true);
+							pet.startBreeding();
+						}
+					} else {
+						player.getClient().sendPacket(Type.PSTATUS, 13, 0l, 0l, 0);
+					}
+		
+					if(map.getId() == 6){
+						int flyStatus = player.getEquipment().getBoots().getExtraStats() >= 268435456 ? 1 : 0;
+						player.getClient().sendPacket(Type.SKY, player, flyStatus);
+					}
+					
+					Player playerobj = client.getPlayer();
+					
+					if(playerobj.getGuildId() != 0)
+					{
+						client.sendPacket(Type.GUILD_NAME, playerobj);
+						client.sendPacket(Type.GUILD_GRADE, playerobj);
+						client.sendPacket(Type.GUILD_LEVEL, playerobj);
+					}
 				}
 				break;
 			}
 			case LOADED: {
-				Logger.getLogger(PacketParser.class).info("Received" +message[0]+" while loaded state");
+				LoggerFactory.getLogger(PacketParser.class).info("Received" +message[0]+" while loaded state");
 				
 				
 				break;
@@ -357,6 +395,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					client.getPlayer().walk(position,
 							Integer.parseInt(message[4])==1);
 					client.getPlayer().update();
+					
 				} else if (message[0].equals("place")) {
 	
 					double rotation = Double.parseDouble(message[4]);
@@ -365,7 +404,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 							Integer.parseInt(message[2]),
 							Integer.parseInt(message[3]),
 							 player.getPosition().getLocalMap(),
-							 rotation / 1000
+							 rotation/10000
 					);
 									
 					client.getPlayer().place(position,
@@ -381,8 +420,8 @@ public class PacketParser extends EventDispatcher implements EventListener{
 							Integer.parseInt(message[1]),
 							Integer.parseInt(message[2]),
 							Integer.parseInt(message[3]),
-							 player.getPosition().getLocalMap(),
-							 rotation / 1000
+							player.getPosition().getLocalMap(),
+							rotation/10000
 					);
 	
 					client.getPlayer().stop(position);
@@ -415,6 +454,38 @@ public class PacketParser extends EventDispatcher implements EventListener{
 						text += " " + message[i];
 					}
 					player.tell(message[1], text); //message[1]: playername
+				}  else if (message[0].equals(":")) {
+					Iterator<Player> iterPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayerListIterator();
+					
+					long guildId = player.getGuildId();
+					
+					if(guildId != 0)
+					{
+						String text = "";
+						for (int i = 1; i < message.length; i++) {
+							text += " " + message[i];
+						}
+						boolean guildmemberonline = false;
+						while(iterPlayer.hasNext())
+						{
+							Player currplayer = iterPlayer.next();
+							
+							if(currplayer.getGuildId() == guildId && currplayer != player)
+							{
+								guildmemberonline = true;
+								currplayer.getClient().sendPacket(Type.GUILD_SAY, text, player);
+							}
+						}
+						if(guildmemberonline)
+							client.sendPacket(Type.GUILD_SAY, text, player);
+						else
+							client.sendPacket(Type.SAY, "Currently there is no online guild member");
+					}
+					else
+					{
+						client.sendPacket(Type.SAY, "You dont have a guild");
+					}
+				
 				} else if (message[0].equals("combat")) {
 					client.getPlayer().setIsInCombat(Integer.parseInt(message[1])==1);
 				} else if (message[0].equals("social")) {
@@ -456,13 +527,20 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					client.getPlayer().dropItem(Integer.parseInt(message[1]));
 							
 				} else if (message[0].equals("subat")) {
-					List<LivingObject> targets = new Vector<LivingObject>();
+					Skill skill = world.getSkillManager().getSkill(Integer.parseInt(message[3]));
+					skill.handle(player, message);
+					
+					/*
 					LivingObject singleTarget = (LivingObject)player.getPosition().getLocalMap().getEntity(Integer.parseInt(message[2]));
 					int skillId = Integer.parseInt(message[3]);
+					int unknown1 = Integer.parseInt(message[4]);
+					
+					List<LivingObject> targets = new Vector<LivingObject>(); //TODO: add several targets
 					
 					targets.add(singleTarget);
+					com.subAttack(player,targets,skillId,unknown1);
+					*/
 					
-					com.subAttack(player,targets,skillId);
 				} else if (message[0].equals("pulse")) {
 					if (Integer.parseInt(message[2].substring(0,
 							message[2].length() - 1)) == -1) {
@@ -482,56 +560,18 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					
 				} else if (message[0].equals("use_skill") || message[0].equals("attack")) {
 					// if attack command sent, then use SkillID 0 (Basic Attack)
-					int skillId = message[0].equals("attack")?0:Integer.parseInt(message[1]);
-					
-					LivingObject target = player;
-					int entityId=-1;
-					
-					if(message.length > 3) { //if length=3 then player is using skill on himself
-						
-						if(message[2].equals("npc") || message[2].equals("char")){ // LivingObject Skill attack
-							entityId = Integer.parseInt(message[3]);
-							
-							if(message[2].equals("char"))
-								client.sendPacket(Type.SAY, "No PVP implemented!");
-						}
-						
-						//SELF: use_skill 36 1
-						//attack char 44 0
-						//Other: use_skill 74 char 44 64
-						else{ // LivingOject Basic attack
-							entityId = Integer.parseInt(message[2]); 
-						}
-						target = (LivingObject) player.getPosition().getLocalMap().getEntity(entityId);
-					}
+					int skillId = message[0].equals("attack") ? 0 : Integer.parseInt(message[1]);
 					
 					Skill skill = player.getSkill(skillId);
-					
-					if(message[0].equals("use_skill"))
-						player.getInterested().sendPacket(Type.EFFECT, player, target ,skill);
-					else
-						player.getInterested().sendPacket(Type.ATTACK, player,target); //a n 141 c 554946 99 0 0 0
-					
-					List<LivingObject> victims = new LinkedList<LivingObject>(Arrays.asList(new LivingObject[]{target}));
-					
-					if(message.length > 4){ //multiple targets
-						for(int messageIndex=4; messageIndex < message.length; messageIndex++){
-							entityId = Integer.parseInt(message[messageIndex]);
-							target = (LivingObject) player.getPosition().getLocalMap().getEntity(entityId);
-							victims.add(target);
-						}
+					if(skill!=null){
+						
+						skill.handle(player, message);
+					}
+					else{
+						logger.error("Skill with id %d not found.", skillId);
+						
 					}
 					
-					if(Castable.class.isInstance(skill)){
-						if(((Castable)skill).cast(player, victims)){
-							if(Effectable.class.isInstance(skill))
-								skill.effect(player, target); //Figure out why this doesnt work on all things
-						}
-					} else{
-						client.sendPacket(Type.SAY, skill.getName()+" skill not implemented yet!");
-						Logger.getLogger(PacketParser.class).error(skill.getName()+" skill is not Castable!");
-						//throw new RuntimeException(skill.getName()+" skill is not Castable!");
-					}
 				} else if (message[0].equals("skillup")) {
 					synchronized(player) {
 						float statusPoints = player.getStatusPoints();
@@ -546,6 +586,35 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					}
 				} else if (message[0].equals("revival")) {
 					client.getPlayer().revive();
+				} else if (message[0].equals("g_pos")) {
+					if(message[1].equals("req"))
+					{
+						Iterator<Player> iterPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayerListIterator();
+						
+						long guildId = player.getGuildId();
+						
+						client.sendPacket(Type.G_POS_START);
+						
+						if(guildId != 0)
+						{
+							while(iterPlayer.hasNext())
+							{
+								Player currplayer = iterPlayer.next();
+								
+								if(currplayer.getGuildId() == guildId)
+								{
+									if(currplayer.getPosition().getMap() == player.getPosition().getMap() && currplayer != player)
+										client.sendPacket(Type.G_POS_BODY, currplayer);
+								}
+							}
+
+							client.sendPacket(Type.G_POS_END);
+						}
+						else
+						{
+							client.sendPacket(Type.SAY, "You dont have a guild");
+						}
+					}
 				} else if (message[0].equals("quick")) {
 					client.getPlayer().getQuickSlotBar().quickSlot(
 							client.getPlayer(), Integer.parseInt(message[1]));
@@ -565,11 +634,25 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					position.setY(posy);
 					com.GoToPos(player, position);
 					
-				} else if (message[0].equals("use_quick")) {
+				} else if (message[0].equals("use_quick")) { //2007 client
 					player.getQuickSlotBar().useQuickSlot(
-							player, Integer.parseInt(message[1]));
-				} else if (message[0].equals("move_to_quick")) {
+							player, Integer.parseInt(message[1]));	
+				} else if (message[0].equals("using_item")) {
+					int unknown = Integer.parseInt(message[1]);
+					int quickSlotBarPosition = Integer.parseInt(message[2]);
+					int itemEntityId = Integer.parseInt(message[3]);
+					int unknown2 = message.length == 5 ? Integer.parseInt(message[4]): 0;
+					
+					player.getQuickSlotBar().useQuickSlot(
+							player, quickSlotBarPosition, unknown2, itemEntityId);
+					
+				} else if (message[0].equals("move_to_quick")) { // old 2007 client
 					player.getQuickSlotBar().MoveToQuick(
+							Integer.parseInt(message[1]),
+							Integer.parseInt(message[2]),
+							Integer.parseInt(message[3]));
+				} else if (message[0].equals("moving_item")) {
+					player.getQuickSlotBar().MovingItem(
 							Integer.parseInt(message[1]),
 							Integer.parseInt(message[2]),
 							Integer.parseInt(message[3]));
@@ -583,7 +666,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 							Item<?> item = player.getQuickSlotBar().getItem(Integer.parseInt(message[1])).getItem();
 							
 							if(item.is(MissionReceiver.class)){
-								((MissionReceiver)item.getType()).use(item, player);
+								((MissionReceiver)item.getType()).use(item, player,Integer.parseInt(message[1]),0);
 							}
 						} else {
 							player.getClient().sendPacket(Type.SAY, "Player already has an ongoing quest.");
@@ -591,37 +674,49 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					}
 				} else if (message[0].equals("stash_open")) {
 					if (message.length == 1) {
-						Warehouse warehouse = new Warehouse(139);
+						Warehouse warehouse = (Warehouse)client.getWorld().getNpcManager().getNpcType(Warehouse.class);
 						warehouse.openStash(client.getPlayer());
 					} else {
 						logUnknownCommand(message);
 					}
 				} else if (message[0].equals("stash_click")) {
-					Warehouse warehouse = new Warehouse(139);
+					if(message.length >= 4){
+						Warehouse warehouse = (Warehouse)client.getWorld().getNpcManager().getNpcType(Warehouse.class);
+						int special = message.length == 5 ? Integer.parseInt(message[4]) : 0;
 					
-					if (message.length == 5) {
 						warehouse.stashClick(client.getPlayer(),
+								Integer.parseInt(message[1]),
+								Integer.parseInt(message[2]),
+								Integer.parseInt(message[3]),
+								special);
+					}
+				} else if (message[0].equals("stash_put")) {
+					Warehouse warehouse = (Warehouse)client.getWorld().getNpcManager().getNpcType(Warehouse.class);
+					int length = message.length > 23 ? 23 : message.length;
+					int[] packetData = new int[length];
+					int index = 0;
+					
+					while(index < packetData.length -1){
+						packetData[index] = Integer.parseInt(message[index++ + 1]);
+					}
+					
+					warehouse.stashPut(player, packetData);
+					
+				} else if (message[0].equals("stash_get")) {
+					if(message.length >= 5){
+						Warehouse warehouse = (Warehouse)client.getWorld().getNpcManager().getNpcType(Warehouse.class);
+						warehouse.stashGet(player,
 								Integer.parseInt(message[1]),
 								Integer.parseInt(message[2]),
 								Integer.parseInt(message[3]),
 								Integer.parseInt(message[4]));
 					}
-					else if (message.length == 4) {
-						warehouse.stashClick(client.getPlayer(),
-								Integer.parseInt(message[1]),
-								Integer.parseInt(message[2]),
-								Integer.parseInt(message[3]), 0);
-					} else
-						logUnknownCommand(message);
-				} else if (message[0].equals("stash_put")) {
-					
-				} else if (message[0].equals("stash_get")) {
-					
 				} else if (message[0].equals("stash_close")) {
 					//nothing is returned to the client here, so we can just save the stash in the DB.
 					if (message.length == 1) {
-						Logger.getLogger(PacketParser.class).info("Saving "+player+" stash...");
-						DatabaseUtils.getDinamicInstance().saveStash(client);
+						//LoggerFactory.getLogger(PacketParser.class).info("Saving "+player+" stash...");
+						//DatabaseUtils.getDinamicInstance().saveStash(client);
+						player.save();
 					} else {
 						logUnknownCommand(message);
 					}
@@ -635,7 +730,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 							//((Merchant)npc.getType()).openShop(client.getPlayer());
 						}
 					} else {
-						Logger.getLogger(PacketParser.class).warn("Npc not found: " + npcId);				
+						LoggerFactory.getLogger(PacketParser.class).warn("Npc not found: " + npcId);				
 					}
 				} else if (message[0].equals("buy")) {
 					int npcId = Integer.parseInt(message[1]);
@@ -649,7 +744,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 								//		Integer.parseInt(message[5]), 1);
 						}
 					} else {
-						Logger.getLogger(PacketParser.class).warn("Npc not found: " + npcId);				
+						LoggerFactory.getLogger(PacketParser.class).warn("Npc not found: " + npcId);				
 					}
 				} else if (message[0].equals("sell")) {
 					int npcId = Integer.parseInt(message[1]);
@@ -661,7 +756,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 							//((Merchant)npc.getType()).sellItem(client.getPlayer());
 						}
 					} else {
-						Logger.getLogger(PacketParser.class).warn("Npc not found: " + npcId);				
+						LoggerFactory.getLogger(PacketParser.class).warn("Npc not found: " + npcId);				
 					}
 				} else if (message[0].equals("pbuy")) {
 					int npcId = Integer.parseInt(message[1]);
@@ -676,9 +771,9 @@ public class PacketParser extends EventDispatcher implements EventListener{
 							//((Merchant)npc.getType()).buyItem(client.getPlayer(), itemType, tab, quantity);
 						}
 					} else {
-						Logger.getLogger(PacketParser.class).warn("Npc not found: " + npcId);				
+						LoggerFactory.getLogger(PacketParser.class).warn("Npc not found: " + npcId);				
 					}
-				} else if (message[0].equals("chip_exchange")) {
+				} else if (message[0].equals("chip_exchange")) { //exchange 5 chips any grade
 					
 					Trader trader = (Trader)world.getNpcManager().getNpcType(Trader.class);
 					
@@ -693,10 +788,27 @@ public class PacketParser extends EventDispatcher implements EventListener{
 								Integer.parseInt(message[2]),
 								Integer.parseInt(message[3]));
 					}
-				} else if (message[0].equals("exch")) {
-					client.getPlayer().itemExchange(Integer.parseInt(message[2]),
-							Integer.parseInt(message[3]));
-				} else if (message[0].equals("ichange")) {		
+				} else if (message[0].equals("exch")) {	//handles exchange inventory
+					if (message.length == 2) {
+						if(message[1].equals("cancel")){	// cancel request
+							player.getExchange().cancelRequest();
+						} else if(message[1].equals("ok")) {	//accept request
+							player.getExchange().acceptRequest();
+						} else if(message[1].equals("trade")) {	//trade confirmation
+							player.getExchange().tradeConfirmation();
+						}
+					} else if (message.length == 3) {
+						if(message[1].equals("money")){	// add money
+							long money = Long.parseLong(message[2]);
+							player.getExchange().addMoney(money);
+						}
+					} else if (message.length == 4) {  
+						if(message[1].equals("inven")){ //exchange inventory click
+								client.getPlayer().itemExchange(Integer.parseInt(message[2]),
+										Integer.parseInt(message[3]));
+						}
+					}
+				} else if (message[0].equals("ichange")) {	//armor exchange	
 					Trader trader = (Trader)world.getNpcManager().getNpcType(Trader.class);
 					
 					if (message.length == 1) {
@@ -707,7 +819,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 				} else if (message[0].equals("q_ex")) {
 					if(player.getExchange().listSize() > 0){
 						
-						if(!player.getExchange().isAllInstanceOfScrollOfNAgen()){
+						if(!player.getExchange().isItemsScrolls()){
 							player.getClient().sendPacket(Type.MSG, "Wrong item.");
 							return;
 						}
@@ -725,9 +837,118 @@ public class PacketParser extends EventDispatcher implements EventListener{
 						player.setLime(player.getLime() + limeAmmount);
 						player.getClient().sendPacket(Type.Q_EX, limeAmmount);
 					}
+				} else if (message[0].equals("up_sky")) {
+					Item<?> boots = player.getEquipment().getBoots();
+					if(boots != null){
+						boots.update(player, Slot.BOOTS);
+						if(player.getPosition().getLocalMap().getId() == 6)
+							client.sendPacket(Type.SKY, player, 1);
+					}
+				} else if (message[0].equals("use_sub")) {
+					if (message.length == 2) {
+						player.getQuickSlotBar().useQuickSlot(player, Integer.parseInt(message[1]));
+					}
+				} else if (message[0].equals("go_zone")) {
+					if (message.length == 4) {
+						Item<?> item = player.getQuickSlotBar().getItem(Integer.parseInt(message[1])).getItem();
+						item.setGemNumber(Integer.parseInt(message[2]));
+						item.setExtraStats(Integer.parseInt(message[3]));
+						player.getQuickSlotBar().useQuickSlot(player, Integer.parseInt(message[1]));
+					}
+				} else if (message[0].equals("p_walk")) {
+					if (message.length == 5) {
+						Position position = new Position(
+								Integer.parseInt(message[1]),
+								Integer.parseInt(message[2]),
+								Integer.parseInt(message[3]),
+								 player.getPosition().getLocalMap(),
+								 Double.NaN
+						);
+						
+						client.getPlayer().getPet().walk(position,
+								Integer.parseInt(message[4])==1);
+					}
+				} else if (message[0].equals("p_drop")) {
+					if (message.length == 2) {
+						Pet pet = player.getPet();
+						pet.getPosition().getLocalMap().removeEntity(pet);
+						world.getPetManager().removePet(pet);
+						player.setPet(null);
+						DatabaseUtils.getDinamicInstance().deletePet(pet);
+						client.sendPacket(Type.MYPET, "del");
+						player.getInterested().sendPacket(Type.OUT, pet);
+						LoggerFactory.getLogger(this.getClass()).info("Player: "+player+" deleted Pet: "+pet);
+						
+						int tab = Integer.parseInt(message[1]);
+						pet = new Pet(player, 1);
+						world.getPetManager().buyEgg(pet, tab);
+					}
+				} else if (message[0].equals("p_keep")) {
+					if (message.length == 2) {
+						Pet pet = world.getPetManager().getPet(player);
+						if(message[1].equals("open")){
+							if(pet != null){
+								if(pet.getState() == 1){
+									client.sendPacket(Type.P_KEEP, "fail", pet);
+								} else if(pet.getState() >= 2){
+									client.sendPacket(Type.P_KEEP, "info", pet);
+								}
+							}
+						} else if(message[1].equals("in")){
+							pet.setState(2);
+							
+							pet.getPosition().getLocalMap().removeEntity(pet);
+							client.sendPacket(Type.MYPET, "del");
+							pet.sendStatus(PetStatus.STATE);
+							player.getInterested().sendPacket(Type.OUT, pet);
+							LoggerFactory.getLogger(this.getClass()).info("Pet: "+pet+" stored at Npc.");
+						}else if(message[1].equals("out")){
+							player.setLime(player.getLime()-15000);
+							pet.setState(12);
+							pet.setSatiety(100);
+							pet.setHp(pet.getMaxHp());
+							pet.load();
+							player.getInterested().sendPacket(Type.IN_PET, player, true);
+							LoggerFactory.getLogger(this.getClass()).info("Pet: "+pet+" removed from Npc.");
+						}
+					}
+				} else if (message[0].equals("buy_egg")) {
+					if (message.length == 2) {
+						int tab = Integer.parseInt(message[1]);
+						Pet pet = new Pet(player, 1);
+						world.getPetManager().buyEgg(pet, tab);
+					}
+				} else if (message[0].equals("party")) {
+					if(message.length > 1){
+						if(message[1].equals("request")){ //party invitation
+							LocalMap map = player.getPosition().getLocalMap();
+							Player newMember = map.getWorld().getPlayerManager().getPlayer(message[2]);
+							map.inviteParty(player, newMember, Integer.parseInt(message[3]), Integer.parseInt(message[4]));
+						} else if(message[1].equals("consist")){ //party invitation accepted
+							int inviterEntityId = Integer.parseInt(message[3]);
+							LocalMap map = player.getPosition().getLocalMap();
+							Player inviterPlayer = (Player)map.getEntity(inviterEntityId);
+							inviterPlayer.getParty().accept(inviterEntityId, player);
+						} else if (message[1].equals("secession")){
+							if(message.length > 2){ // party invitation rejected
+								int inviterEntityId = Integer.parseInt(message[2]);
+								player.getPosition().getLocalMap().getParty(inviterEntityId).reject(inviterEntityId, player);
+							} else{ //request party exit
+								player.getParty().exit(player);
+							}
+						}
+					}
+				} else if (message[0].equals("exchange")) {	//exchange request with another player
+					if (message.length == 2) {
+						String targetName = message[1];
+						Player target = world.getPlayerManager().getPlayer(targetName);
+						
+						player.getExchange().request(target);
+						
+					}
 				} else if (message[0].equals("..")) {
 					//client keep alive
-				}else {
+				} else {
 					logUnknownCommand(message);
 					
 					String command = "";
@@ -741,7 +962,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 				break;
 			}
 			default: {
-				Logger.getLogger(PacketParser.class).info("State Conflict: "+client.getState());
+				LoggerFactory.getLogger(PacketParser.class).info("State Conflict: "+client.getState());
 				client.setState(Client.State.DISCONNECTED);
 			}
 			}
@@ -754,7 +975,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 		for(String str: message){
 			command += str + " ";
 		}
-		Logger.getLogger(PacketParser.class).error("Unknown command: "+command);
+		LoggerFactory.getLogger(PacketParser.class).error("Unknown command: "+command);
 	}
 
 	public void Parse(Client client, String packet) {

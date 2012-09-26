@@ -3,7 +3,8 @@ package org.reunionemu.jreunion.server;
 import java.util.List;
 import java.util.Vector;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import org.reunionemu.jreunion.events.Event;
 import org.reunionemu.jreunion.events.EventDispatcher;
@@ -11,9 +12,14 @@ import org.reunionemu.jreunion.events.EventListener;
 import org.reunionemu.jreunion.events.map.MapEvent;
 import org.reunionemu.jreunion.events.session.SendPacketSessionEvent;
 import org.reunionemu.jreunion.events.session.SessionEvent;
+import org.reunionemu.jreunion.game.Entity;
+import org.reunionemu.jreunion.game.Item;
+import org.reunionemu.jreunion.game.LivingObject;
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.Position;
+import org.reunionemu.jreunion.game.RoamingItem;
 import org.reunionemu.jreunion.game.WorldObject;
+import org.reunionemu.jreunion.game.Npc;
 
 /**
  * @author Aidamina
@@ -77,7 +83,7 @@ public class Session extends EventDispatcher implements EventListener{
 	
 	public void exit(WorldObject entity, boolean defaultAction){
 
-		//Logger.getLogger(Session.class).debug("exit "+getOwner()+" "+entity);
+		//LoggerFactory.getLogger(Session.class).debug("exit "+getOwner()+" "+entity);
 		synchronized(entities){
 			if (!entities.contains(entity)) {
 				return;
@@ -97,7 +103,7 @@ public class Session extends EventDispatcher implements EventListener{
 	}
 	public void enter(WorldObject entity, boolean defaultAction){
 		
-		//Logger.getLogger(Session.class).debug("enter "+getOwner().getName()+" "+entity);
+		//LoggerFactory.getLogger(Session.class).debug("enter "+getOwner().getName()+" "+entity);
 		synchronized(entities){
 			if(this.contains(entity))
 				return;
@@ -138,4 +144,5 @@ public class Session extends EventDispatcher implements EventListener{
 			}
 		}		
 	}
+	
 }

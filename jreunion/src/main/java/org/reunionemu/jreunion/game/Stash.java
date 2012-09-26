@@ -57,9 +57,51 @@ public class Stash {
 		return null;
 	}
 
+	public int getItemSlot(int stashTab, int itemTypeId) {
+		int indexSlot = getTabFirstSlot(stashTab);
+		int lastSlot = getTabLastSlot(stashTab);
+		int freeSlot = -1;
+		
+		while(indexSlot < lastSlot){
+			if(!checkPosEmpty(indexSlot)){
+				StashItem stashItem = getItem(indexSlot);
+				if(stashItem.getItem().getType().getTypeId() == itemTypeId)
+					return stashItem.getStashPosition().getSlot();		//if exist same type item, return its slot
+				
+			} else if(freeSlot == -1){
+				freeSlot = indexSlot; //store only the first free slot
+			}
+			indexSlot++;	
+		}
+		return freeSlot;
+	}
+	
+	public int getTabFirstSlot(int stashTab){
+		
+		switch (stashTab) {
+			case 0: { return 0; }
+			case 1: { return 20; }
+			case 2: { return 40; }
+			default: { return 0; }
+		}
+	}
+	
+	public int getTabLastSlot(int stashTab){
+		
+		switch (stashTab) {
+			case 0: { return 11; }
+			case 1: { return 31; }
+			case 2: { return 51; }
+			default: { return 0; }
+		}
+	}
+	
 	public int getQuantity(int pos) {
 		int count = 0;
 
+		if(pos == 12)
+			return 0;
+		
 		Iterator<StashItem> stashIter = itemListIterator();
 
 		while (stashIter.hasNext()) {

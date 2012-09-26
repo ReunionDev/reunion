@@ -1,6 +1,5 @@
 package org.reunionemu.jreunion.game.skills.human;
 
-import java.util.List;
 
 import org.reunionemu.jreunion.game.Castable;
 import org.reunionemu.jreunion.game.HumanPlayer;
@@ -25,6 +24,11 @@ public class GemCutting extends Skill implements Castable{
 	@Override
 	public int getLevelRequirement(int skillLevel) {
 		return 19+skillLevel;
+	}
+	
+	@Override
+	public int getAffectedTargets() {
+		return 1;
 	}
 
 	public float getSuccessRateModifier(){
@@ -54,7 +58,7 @@ public class GemCutting extends Skill implements Castable{
 	//when casted, this skill only consume the item "Gem Cutting Kit".
 	//TODO: Consume the "Gem Cutting Kit" item, and exchange brute stone with perfect stone.
 	@Override
-	public boolean cast(LivingObject caster, List<LivingObject> victims) {
+	public boolean cast(LivingObject caster, LivingObject victim, String[] arguments) {
 		if(caster instanceof HumanPlayer){
 			Player player = (Player)caster;
 			

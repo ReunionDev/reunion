@@ -1,6 +1,7 @@
 package org.reunionemu.jreunion.server;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.reunionemu.jreunion.events.Event;
 
 public class RemoteMap extends Map {
@@ -13,7 +14,7 @@ public class RemoteMap extends Map {
 	@Override
 	public void load() {
 		super.load();
-		Logger.getLogger(RemoteMap.class).info("Remote server registered on "+getAddress().getHostName()+":"+getAddress().getPort()+" for "+this.getName());
+		LoggerFactory.getLogger(RemoteMap.class).info("Remote server registered on "+getAddress().getHostName()+":"+getAddress().getPort()+" for "+this.getName());
 	}
 
 

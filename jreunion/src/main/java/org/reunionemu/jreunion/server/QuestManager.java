@@ -4,7 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.Quest;
 
@@ -19,7 +20,7 @@ public class QuestManager {
 	public void loadQuests(){
 		quests = DatabaseUtils.getStaticInstance().loadQuests();
 		if(quests != null){
-			Logger.getLogger(QuestManager.class).info("Loaded "+quests.size()+" quests");
+			LoggerFactory.getLogger(QuestManager.class).info("Loaded "+quests.size()+" quests");
 		}
 	}
 	
@@ -48,7 +49,7 @@ public class QuestManager {
 		} 
 		
 		if(questsList.isEmpty()){
-			Logger.getLogger(QuestManager.class).debug("No quests found for the player level!");
+			LoggerFactory.getLogger(QuestManager.class).debug("No quests found for the player level!");
 			return null;
 		}
 		

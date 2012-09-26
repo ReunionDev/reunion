@@ -3,7 +3,8 @@ package org.reunionemu.jreunion.server;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.reunionemu.jcommon.ParsedItem;
 import org.reunionemu.jcommon.Parser;
 import org.reunionemu.jreunion.game.Item;
@@ -34,7 +35,7 @@ public class ItemManager {
 			ItemType itemType = (ItemType)ClassFactory.create(className, id);
 			
 			if(itemType == null){
-				Logger.getLogger(ItemManager.class).warn("Failed to load Item type {id:"+id+" name:"
+				LoggerFactory.getLogger(ItemManager.class).warn("Failed to load Item type {id:"+id+" name:"
 						+parsedItem.getName()+"}");
 				continue;
 			}
@@ -42,7 +43,7 @@ public class ItemManager {
 			itemsList.put(id, itemType);
 		}
 		parser.clear();
-		Logger.getLogger(ItemManager.class).info("Loaded "+itemsList.size()+" item types");
+		LoggerFactory.getLogger(ItemManager.class).info("Loaded "+itemsList.size()+" item types");
 	}
 	
 	public ItemType getItemType(int type){
@@ -71,6 +72,16 @@ public class ItemManager {
 		return item;
 	}
 	
-	
+	public Item<?> create(int type, int gemNumber, int extraStats, int durability, int unknown1, int unknown2) {
+		Item<?> item = create(type);
+		
+		item.setGemNumber(gemNumber);
+		item.setExtraStats(extraStats);
+		item.setDurability(durability);
+		item.setUnknown1(unknown1);
+		item.setUnknown2(unknown2);
+		
+		return item;
+	}
 	
 }

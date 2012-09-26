@@ -2,7 +2,8 @@ package org.reunionemu.jreunion.events;
 
 import java.net.Socket;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.reunionemu.jreunion.game.Position;
 /**
  * @author Aidamina
@@ -27,7 +28,7 @@ public class Test extends EventDispatcher implements EventListener,Runnable {
 		try{
 			throw new Exception("lalalala");
 		}catch(Exception e){
-			Logger.getLogger(Test.class).warn(e);
+			LoggerFactory.getLogger(Test.class).warn(e.getMessage(), e);
 		}
 		int a = 0;
 		System.out.println(++a);
@@ -39,9 +40,9 @@ public class Test extends EventDispatcher implements EventListener,Runnable {
 		position2.setX(10);
 		position2.setY(10);
 		
-		Logger.getLogger(Test.class).info(position1.distance(position2));
-		Logger.getLogger(Test.class).info(position1.distance(position2));
-		Logger.getLogger(Test.class).info(position1.within(position2,15));
+		LoggerFactory.getLogger(Test.class).info(""+position1.distance(position2));
+		LoggerFactory.getLogger(Test.class).info(""+position1.distance(position2));
+		LoggerFactory.getLogger(Test.class).info(""+position1.within(position2,15));
 		
 		/*
 		int port = 4009;
@@ -50,7 +51,7 @@ public class Test extends EventDispatcher implements EventListener,Runnable {
 		Thread thread = new Thread(t);
 		thread.start();
 		Socket cl = socket.accept();
-		Logger.getLogger(Parser.class).info(cl.getLocalSocketAddress());		
+		LoggerFactory.getLogger(Parser.class).info(cl.getLocalSocketAddress());		
 		*/
 		
 		{
@@ -58,17 +59,17 @@ public class Test extends EventDispatcher implements EventListener,Runnable {
 			for(int i =0;i<10000;i++){
 				t.fireEvent(t.createEvent(TestEvent.class));
 			}
-			Logger.getLogger(Test.class).info(System.currentTimeMillis()-start);
+			LoggerFactory.getLogger(Test.class).info(""+(System.currentTimeMillis()-start));
 		}
-		Logger.getLogger(Test.class).info(count);
+		LoggerFactory.getLogger(Test.class).info(""+count);
 		
 		EventDispatcher.shutdown();
-		Logger.getLogger(Test.class).info(count);
+		LoggerFactory.getLogger(Test.class).info(""+count);
 	}
 
 	@Override
 	public void handleEvent(Event event) {
-		//Logger.getLogger(Test.class).info("ohai!"+event.getClass());
+		//LoggerFactory.getLogger(Test.class).info("ohai!"+event.getClass());
 		synchronized(this){
 			count++;
 		}
@@ -78,11 +79,11 @@ public class Test extends EventDispatcher implements EventListener,Runnable {
 	public void run() {
 		try {
 			Socket socket = new Socket("home.aidamina.org",4009);
-			Logger.getLogger(Test.class).info(socket);
+			LoggerFactory.getLogger(Test.class).info(socket.toString());
 			
 		} catch (Exception e) {
 
-			Logger.getLogger(Test.class).warn(e);
+			LoggerFactory.getLogger(Test.class).warn(e.toString());
 		}
 	}
 }

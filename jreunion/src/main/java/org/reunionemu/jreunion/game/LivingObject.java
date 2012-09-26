@@ -1,10 +1,13 @@
 package org.reunionemu.jreunion.game;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.reunionemu.jreunion.game.Player.Status;
 import org.reunionemu.jreunion.game.npc.Mob;
 import org.reunionemu.jreunion.game.quests.ExperienceQuest;
 import org.reunionemu.jreunion.game.quests.QuestState;
 import org.reunionemu.jreunion.game.quests.objective.Objective;
+import org.reunionemu.jreunion.server.PacketFactory;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
 import org.reunionemu.jreunion.server.Tools;
 
@@ -26,7 +29,7 @@ public abstract class LivingObject extends WorldObject {
 
 	private int level;
 	
-	private int dmgType;
+	private int dmgType;	// 0-normal; 1-critical; 2-demolition; 3-super critical; 4-Explosion;
 
 	public Position getTargetPosition() {
 		return targetPosition;
@@ -45,9 +48,9 @@ public abstract class LivingObject extends WorldObject {
 		return (int) percentageHp;		
 	}
 	
-	public void walk(Position position, boolean running) {
+	public void walk(Position position, boolean isRuning) {
 
-		//setIsRunning(running);
+		//setIsRunning(isRunning);
 		synchronized(this) {
 			setPosition(position);
 			setTargetPosition(position.clone());			
@@ -64,6 +67,7 @@ public abstract class LivingObject extends WorldObject {
 		this.dmgType = dmgType;
 	}
 	
+	//players: 0-walking 1-running ; npc: 0-stoped 1-moving
 	private boolean running;
 
 	public void setIsRunning(boolean running) {
@@ -122,44 +126,114 @@ public abstract class LivingObject extends WorldObject {
 		this.name = livingObjectName;
 	}
 	
-	public void getsAttacked(Player player, long damage){
+	public void getsAttacked(Player player, long damage, boolean addAttack){
 		
-		player.addAttack(damage);
+		Npc<?> npc = null;
+		Mob mob = null;
+		
+		if(this instanceof Npc){
+			npc = (Npc<?>)this;
+			if(npc.getType() instanceof Mob){
+				mob = (Mob) npc.getType();
+			}
+		}
+		
+		if(addAttack){
+			player.addAttack(damage);
+		}
 		
 		//Cursed quest Boss packet
-		if(this instanceof Npc){
-			Npc<?> npc = (Npc<?>)this;
-			if(npc.getType() instanceof Mob){
-				//Mob mob = (Mob)((Npc<?>)this).getType();
-				QuestState questState = player.getQuestState();
+		if(mob != null){
+			QuestState questState = player.getQuestState();
 			
-				if(questState != null){
-					Quest quest = questState.getQuest();
-					if(quest instanceof ExperienceQuest){
-						Objective objective = quest.getObjective(npc.getType().getTypeId());
-						if(objective != null){
-								if(questState.getProgression(objective.getId()) == (objective.getAmmount()-1)){
-									if(!npc.isBoss()){
-										player.getClient().sendPacket(Type.QT, "king "+this.getEntityId()+" 1");
-										npc.setBoss();
-									}
+			if(questState != null){
+				Quest quest = questState.getQuest();
+				if(quest instanceof ExperienceQuest){
+					Objective objective = quest.getObjective(npc.getType().getTypeId());
+					if(objective != null){
+							if(questState.getProgression(objective.getId()) == (objective.getAmmount()-1)){
+								if(!npc.isBoss()){
+									player.getClient().sendPacket(Type.QT, "king "+this.getEntityId()+" 1");
+									npc.setBoss();
 								}
-						}
+							}
 					}
 				}
 			}
 		}
 		
+		if(npc.isMutant()){
+			damage = (long)(damage * npc.getMutantResistance(player));
+		}
+		
 		long newHp = Tools.between(getHp() - damage, 0l, getMaxHp());				
 		
 		if (newHp <= 0) {
-			Logger.getLogger(LivingObject.class).info("Player "+player+" killed npc "+this);
-			if(this instanceof Npc){
+			LoggerFactory.getLogger(LivingObject.class).info("Player "+player+" killed npc "+this);
+			if(npc != null){
 					((Npc<?>)this).kill(player);
 			}
 		} else {
 			setHp(newHp);
 		}
 		this.getInterested().sendPacket(Type.ATTACK_VITAL, this);
+	}
+	
+	public static enum AttackType {
+		
+		NO_ATTACK(-1),
+		CLOSE_MELEE(0),
+		RANGE_MELEE(1),
+		RANGE_MAGIC(2);
+		
+		int value;
+		AttackType(int value){
+			this.value = value;
+		}
+		
+		public int value(){
+			return value;
+		}
+		
+		public static AttackType byValue(int attackTypeId){			
+			for(AttackType attackType:AttackType.values())
+			{
+				if(attackType.value()==attackTypeId){					
+					return attackType;
+				}
+			}
+			return null;
+		}
+	}
+	
+	public static enum DamageType {
+		
+		NO_DAMAGE(-1),
+		NORMAL(0),
+		CRITICAL(1),
+		DEMOLITION(2),
+		FIREBALL(3),
+		LIGHTNING(4),
+		LIGHTNINGBALL(5),
+		STARFLARE(6);
+		
+		int value;
+		DamageType(int value){
+			this.value = value;
+		}
+		
+		public int value(){
+			return value;
+		}
+		
+		public static DamageType byValue(int damageTypeId){			
+			for(DamageType damageType:DamageType.values())
+			{
+				if(damageType.value()==damageTypeId){					
+					return damageType;
+				}
+			}
+			return null;
+		}
 	}
 }

@@ -3,26 +3,31 @@ package org.reunionemu.jreunion.server;
 import java.util.HashMap;
 import java.util.Random;
 
-import org.apache.log4j.ConsoleAppender;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PatternLayout;
-import org.apache.log4j.spi.LoggingEvent;
-
 import org.reunionemu.jreunion.events.EventDispatcher;
 import org.reunionemu.jreunion.events.server.ServerStartEvent;
 import org.reunionemu.jreunion.events.server.ServerStopEvent;
 import org.reunionemu.jreunion.protocol.Protocol;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Service;
 
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
+@Service
 public class Server extends EventDispatcher {
 
 	private static Server _instance = null;	
 	
+	private static AbstractApplicationContext context;
+	
 	private static Random rand = new Random(System.currentTimeMillis());
+	
+	
+	public static Logger logger = LoggerFactory.getLogger(Server.class);
 	
 	public static Random getRand() {
 		return rand;
@@ -47,9 +52,9 @@ public class Server extends EventDispatcher {
 	public synchronized static Server getInstance() {
 		if (_instance == null) {
 			try {
-				_instance = new Server();
+				_instance = context.getBean(Server.class);
 			} catch (Exception e) {
-				Logger.getLogger(Server.class).warn("Exception",e);
+				logger.error("Exception",e);
 				return null;
 			}
 		}
@@ -61,26 +66,15 @@ public class Server extends EventDispatcher {
 	 * @throws Throwable
 	 */
 	public static void main(String[] args) throws Exception {
-		Logger logger = Logger.getRootLogger();
-		logger.addAppender(new ConsoleAppender(new PatternLayout("%-5p [%t]: %m\r\n"){
-			
-			@Override
-			public String format(LoggingEvent event) {
+		
+		context = new ClassPathXmlApplicationContext("classpath*:/META-INF/spring/**/*-context.xml");
 
-				String result = super.format(event);
-				if(result.endsWith("\n\r\n")){
-					
-					result = result.substring(0, result.length()-2);
-				}
-				return result;
-			}
-			
-		},ConsoleAppender.SYSTEM_OUT));
-
+		context.registerShutdownHook();
+		
+		
 		
 		Thread.currentThread().setName("main");
 		
-		PrintStream.useFileLogging();
 		//Reference.getInstance().Load();
 		
 		
@@ -92,7 +86,7 @@ public class Server extends EventDispatcher {
 			//server.database.start();
 			
 
-			Logger.getLogger(Server.class).info("Server start");
+			logger.info("Server start");
 			server.fireEvent(server.createEvent(ServerStartEvent.class, server));			
 			
 								// modules
@@ -108,14 +102,15 @@ public class Server extends EventDispatcher {
 			
 		} catch (Exception e) {
 			
-			Logger.getLogger(Server.class).warn("Exception",e);
+			logger.error("Exception",e);
 			
 		}
 		finally {
+			
 			server.setState(State.CLOSING);
 			server.fireEvent(server.createEvent(ServerStopEvent.class, server));
 			
-			Logger.getLogger(Server.class).info("Server stop");
+			logger.info("Server stop");
 			
 			EventDispatcher.shutdown();
 			server.database.stop();
@@ -135,15 +130,12 @@ public class Server extends EventDispatcher {
 
 		super();
 		
-		new Debug();
-		RemoteAdmin.enableRemoteAdmin();
-		
 		Protocol.load();
 		
 		database = new Database(this);
 		database.start();
 		
-		Logger.getLogger(Server.class).info("Loading server objects...");
+		logger.info("Loading server objects...");
 		Reference.getInstance().Load();
 		network = new Network(this);
 		world = new World(this);
@@ -193,7 +185,6 @@ public class Server extends EventDispatcher {
 
 	
 	public static enum State{
-		
 		LOADING,
 		RUNNING,
 		CLOSING

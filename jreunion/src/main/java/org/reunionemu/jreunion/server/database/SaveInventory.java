@@ -3,7 +3,8 @@ package org.reunionemu.jreunion.server.database;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.mysql.jdbc.MySQLConnection;
 import com.mysql.jdbc.PreparedStatement;
@@ -38,7 +39,7 @@ public class SaveInventory extends DatabaseAction {
 	}
 
 	public void perform() throws SQLException {
-		Logger.getLogger(SaveInventory.class).info("perform");
+		LoggerFactory.getLogger(SaveInventory.class).info("perform");
 		deleteStatement.execute();
 		insertStatement.executeBatch();
 	}

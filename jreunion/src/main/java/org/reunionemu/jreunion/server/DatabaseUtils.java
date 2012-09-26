@@ -9,14 +9,18 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.reunionemu.jreunion.game.Equipment;
 import org.reunionemu.jreunion.game.Equipment.Slot;
 import org.reunionemu.jreunion.game.ExchangeItem;
+import org.reunionemu.jreunion.game.HandPosition;
 import org.reunionemu.jreunion.game.InventoryItem;
 import org.reunionemu.jreunion.game.InventoryPosition;
 import org.reunionemu.jreunion.game.Item;
+import org.reunionemu.jreunion.game.items.pet.PetEgg;
 import org.reunionemu.jreunion.game.ItemType;
+import org.reunionemu.jreunion.game.Pet;
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.Player.Race;
 import org.reunionemu.jreunion.game.Player.Sex;
@@ -28,6 +32,8 @@ import org.reunionemu.jreunion.game.RoamingItem;
 import org.reunionemu.jreunion.game.Skill;
 import org.reunionemu.jreunion.game.StashItem;
 import org.reunionemu.jreunion.game.StashPosition;
+import org.reunionemu.jreunion.game.items.pet.PetEquipment;
+import org.reunionemu.jreunion.game.items.pet.PetEquipment.PetSlot;
 import org.reunionemu.jreunion.game.quests.LimeQuest;
 import org.reunionemu.jreunion.game.quests.QuestState;
 import org.reunionemu.jreunion.game.quests.objective.Objective;
@@ -124,7 +130,7 @@ public class DatabaseUtils extends Service {
 			}
 			return -1;
 		} catch (SQLException e) {
-			Logger.getLogger(this.getClass()).warn("Exception",e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 			return -1;
 		}
 	}
@@ -140,12 +146,12 @@ public class DatabaseUtils extends Service {
 			if(rs.next()){
 				Map map = Server.getInstance().getWorld().getMap(rs.getInt("mapId"));
 				if(map != null){
-					position = new Position(rs.getInt("x"),rs.getInt("y"),rs.getInt("z"), map, 0.0d);
+					position = new Position(rs.getInt("x"),rs.getInt("y"),rs.getInt("z"), map, Double.NaN);
 				}
 			}
 			rs.close();
 		} catch (SQLException e) {
-			Logger.getLogger(this.getClass()).error("Exception", e);
+			LoggerFactory.getLogger(this.getClass()).error("Exception", e);
 		}
 		return position;
 	}
@@ -160,7 +166,7 @@ public class DatabaseUtils extends Service {
 				stmt.execute("UPDATE `characters` SET `x`="+position.getX()+", `y`="+position.getY()+", `z`="+position.getZ()+", `mapId`="+position.getMap().getId()+" WHERE `characters`.`id`="+player.getPlayerId());
 			
 		} catch (SQLException e) {
-			Logger.getLogger(this.getClass()).error("Exception", e);
+			LoggerFactory.getLogger(this.getClass()).error("Exception", e);
 		}
 	}
 	
@@ -171,6 +177,7 @@ public class DatabaseUtils extends Service {
 		int accountId = client.getAccountId();
 		String charlist ="";
 		int chars = 0;
+		
 		try {
 			Statement stmt = dinamicDatabase.dinamicConn.createStatement();
 			
@@ -198,36 +205,9 @@ public class DatabaseUtils extends Service {
 					continue;
 				
 				Equipment eq = loadEquipment(new Equipment(null), rs.getInt("id"));
-		
-				/*
+				
 				charlist += "chars_exist " + slot + " "
-				+ rs.getString("name") + " " + rs.getString("race")
-				+ " " + rs.getString("sex") + " "
-				+ rs.getString("hair") + " "
-				+ rs.getString("level") + " "
-				+ rs.getString("currHp") + " "
-				+ rs.getString("currStm") + " "
-				+ rs.getString("currMana") + " "
-				+ rs.getString("currElect") + " "
-				+ rs.getString("maxHp") + " "
-				+ rs.getString("maxStm") + " "
-				+ rs.getString("maxMana") + " "
-				+ rs.getString("maxElect") + " "
-				+ rs.getString("str") + " " 
-				+ rs.getString("wis") + " " 
-				+ rs.getString("dex") + " "
-				+ rs.getString("con") + " " 
-				+ rs.getString("lea") + " "
-				+ eq.getType(Slot.HELMET) + " " 
-				+ eq.getType(Slot.CHEST) + " " 
-				+ eq.getType(Slot.PANTS) + " " 
-				+ eq.getType(Slot.SHOULDER)	+ " "
-				+ eq.getType(Slot.BOOTS) + " " 
-				+ eq.getType(Slot.OFFHAND) 
-				+ " 1\n";
-				*/
-				charlist += "chars_exist " + slot + " "
-				//+ rs.getString("id") + " " // nga client have this extra value in the packet
+				+ (client.getVersion() >= 2000 ? rs.getString("id") + " " : "") // nga client have this extra value in the packet
 				+ rs.getString("name") + " "
 				+ rs.getString("race") + " "
 				+ rs.getString("sex") + " "
@@ -265,11 +245,11 @@ public class DatabaseUtils extends Service {
 			}
 			
 		} catch (SQLException e) {
-			Logger.getLogger(this.getClass()).warn("Exception",e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 			return null;
 		}
 		
-		Logger.getLogger(DatabaseUtils.class).info("found " + chars
+		LoggerFactory.getLogger(DatabaseUtils.class).info("found " + chars
 				+ " char(s) for Account(" + accountId + ")");	
 		
 		charlist += "chars_end 0 "+accountId+"\n";
@@ -298,7 +278,7 @@ public class DatabaseUtils extends Service {
 			
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			
 		}
 		return equipment;
@@ -307,6 +287,38 @@ public class DatabaseUtils extends Service {
 
 	public Equipment loadEquipment(Player player) {		
 		return loadEquipment(player.getEquipment(), player.getPlayerId());
+	}
+	
+	public PetEquipment loadPetEquipment(PetEquipment equipment, int petid) {
+		
+		if (!checkDinamicDatabase())
+			return null;
+		
+		Statement stmt;
+		
+		try {
+			stmt = dinamicDatabase.dinamicConn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM petequipment WHERE petid="+ petid + ";");
+			while(rs.next()) 
+			{
+				int slotId = rs.getInt("slot");
+				
+				Item<?> item = Item.load(rs.getInt("itemid"));
+				
+				PetSlot petSlot = PetSlot.byValue(slotId);
+				equipment.setItem(petSlot, item);
+			}
+			
+			
+		} catch (SQLException e1) {
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
+			
+		}
+		return equipment;
+	}
+	
+	public PetEquipment loadPetEquipment(Player player) {		
+		return loadPetEquipment(new PetEquipment(), player.getPet().getId());
 	}
 	
 	public Player loadCharStatus(Client client, int charId){
@@ -341,13 +353,21 @@ public class DatabaseUtils extends Service {
 				player.setGuildLevel(rs.getLong("guildlvl"));
 				player.setAdminState(rs.getLong("userlevel"));
 				player.setHairStyle(rs.getLong("hair"));
-							
+				player.setPetId(rs.getInt("petid"));
+				
+				if(player.getGuildLvl() != -1)
+				{
+					ResultSet rsGuildName = stmt
+							.executeQuery("SELECT name FROM guilds WHERE id='"+player.getGuildId()+"';");
+					if(rsGuildName.next())
+						player.setGuildName(rsGuildName.getString("name"));
+				}
 				
 				return player;
 			} else
 				return null;
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			return null;
 		}
 	}
@@ -370,10 +390,12 @@ public class DatabaseUtils extends Service {
 			if(charId!=-1){				
 				stmt.execute("DELETE FROM characters WHERE id="+charId+";");				
 			}
+			
+			Pet pet = player.getPet();
 						
 			String q = "INSERT INTO characters ("+(charId==-1?"":"id,")+"accountid,name,level,strength,wisdom,dexterity," +
 												"constitution,leadership,race,sex,hair,totalExp,levelUpExp,lime," +
-												"statusPoints,penaltyPoints,guildid,guildlvl)" +
+												"statusPoints,penaltyPoints,guildid,guildlvl,petid)" +
 						 " VALUES ("+(charId==-1?"":charId+",")+
 								    +client.getAccountId()+ ",'"
 								    +player.getName()+ "',"
@@ -392,7 +414,8 @@ public class DatabaseUtils extends Service {
 								    +player.getStatusPoints()+ ","
 								    +player.getPenaltyPoints()+ ","
 								    +player.getGuildId()+ ","
-								    +player.getGuildLvl()+ ");";
+								    +player.getGuildLvl()+ ","
+								    +(pet == null ? -1 : pet.getId())+");";
 			
 			stmt.execute(q,Statement.RETURN_GENERATED_KEYS);
 			
@@ -400,21 +423,175 @@ public class DatabaseUtils extends Service {
 			if (res.next())
 			    player.setPlayerId(res.getInt(1));			
 			
-			if(player.getPosition().getMap() == null){ //used when player creates a new char
+			//used when player creates a new char
+			if(player.getPosition().getMap() == null){ 
 				//TODO: better way to handle with the player default map, after char creation
 				int mapId = (int)player.getClient().getWorld().getServerSetings().getDefaultMapId();
 				Map map = player.getClient().getWorld().getMap(mapId);
-				Position position = new Position(7025,5225,106,map,0.00d);
+				Position position = new Position(7025,5225,106,map,Double.NaN);
 				player.setPosition(position);
 			}
 			
 			setSavedPosition(player);
 						
 		} catch (Exception e) {
-			Logger.getLogger(this.getClass()).warn("Exception",e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 			return;
 		}
 	}
+	
+	public java.util.List<Pet> loadPets() {
+		
+		if (!checkDinamicDatabase())
+			return null;
+		
+		Statement stmt;		
+		java.util.List<Pet> petList = new Vector<Pet>();
+		
+		try {
+			stmt = dinamicDatabase.dinamicConn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM pet;");
+			
+			if (rs.next()) {
+				do {
+					Pet pet = loadPet(rs.getInt("id"));
+					petList.add(pet);
+				} while(rs.next());
+			}
+		} catch (SQLException e1) {
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
+			return null;
+		}
+		return petList;
+	}
+	
+	public Pet loadPet(int petId){
+		
+		if (!checkDinamicDatabase())
+			return null;
+		
+		Statement stmt;		
+		try {
+			stmt = dinamicDatabase.dinamicConn.createStatement();
+			ResultSet rs = stmt.executeQuery("SELECT * FROM pet WHERE id="+ petId + ";");
+			
+			if (rs.next()) {
+					
+				//Pet pet = new Pet(rs.getInt("charid"), breedTime == 0 ? true : false);
+				Pet pet = new Pet();
+				
+				pet.setId(rs.getInt("id"));
+				pet.setMaxHp(rs.getInt("hp"));
+				pet.setHp(rs.getInt("hp"));
+				pet.setCloseDefence(rs.getInt("closeDefence"));
+				pet.setDistantDefence(rs.getInt("distantDefence"));
+				pet.setCloseAttack(rs.getInt("closeAttack"));
+				pet.setDistantAttack(rs.getInt("distantAttack"));
+				pet.setExp(rs.getLong("exp"));
+				pet.setLoyalty(rs.getInt("loyalty"));
+				pet.setAmulet(loadItem(rs.getInt("amulet")));
+				pet.setName(rs.getString("name"));
+				pet.setLevel(rs.getInt("level"));
+				pet.setBasket(loadItem(rs.getInt("basket")));
+				pet.setState(rs.getInt("state"));
+				pet.setBreederTimer(rs.getInt("breedtime"));
+				
+				return pet;
+			} else
+				return null;
+		} catch (SQLException e1) {
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
+			return null;
+		}
+	}
+	
+	public void savePet(Player player){
+		
+		if (!checkDinamicDatabase())
+			return;
+			
+		try {
+			Pet pet = player.getPet();
+			if(pet == null)
+				return;
+			
+			Statement stmt = dinamicDatabase.dinamicConn.createStatement();
+			int petId = pet.getId();
+			
+			Item<?> amulet = pet.getAmulet();
+			Item<?> basket = pet.getBasket();
+			
+			if(petId!=-1){				
+				stmt.execute("DELETE FROM pet WHERE id="+petId+";");				
+			}
+						
+			String q = "INSERT INTO pet ("+(petId==-1?"":"id,")+"hp,closeDefence,distantDefence,closeAttack,distantAttack,"+
+										"exp,loyalty,amulet,name,level,basket,state,breedtime)" +
+						 " VALUES ("+(petId==-1?"":petId+",")+
+								    +pet.getMaxHp()+ ","
+								    +pet.getCloseDefence()+ ","
+								    +pet.getDistantDefence()+ ","
+								    +pet.getCloseAttack()+ ","
+								    +pet.getDistantAttack()+ ","
+								    +pet.getExp()+ ","
+								    +pet.getLoyalty()+ ","
+								    +(amulet == null ? -1 : amulet.getItemId())+ ",'"
+								    +pet.getName()+ "',"
+								    +pet.getLevel()+ ","								   
+								    +(basket == null ? -1 : basket.getItemId())+ ","
+								    +pet.getState() + ","
+								    +pet.getBreederTimer()+");";
+			
+			stmt.execute(q,Statement.RETURN_GENERATED_KEYS);
+			
+			ResultSet res = stmt.getGeneratedKeys();
+			if (res.next())
+			    pet.setId(res.getInt(1));			
+			
+		} catch (Exception e) {
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
+			return;
+		}
+	}
+	
+	public void deletePet(Pet pet) {
+		
+		if (!checkDinamicDatabase() || pet == null)
+			return;
+		
+		Statement deleteStmt;
+		Statement selectStmt;
+		ResultSet rs;
+		
+		try {
+			deleteStmt = dinamicDatabase.dinamicConn.createStatement();
+			selectStmt = dinamicDatabase.dinamicConn.createStatement();
+			
+			//delete pet equipment from DB
+			rs = selectStmt.executeQuery("SELECT * FROM petequipment WHERE petid = "+pet.getId()+ ";");
+			if(rs.next()){
+				do {
+					deleteItem(rs.getInt("itemid"));
+				} while(rs.next());
+				deleteStmt.execute("DELETE FROM petequipment WHERE petid = "+pet.getId()+ ";");
+			}
+			
+			//delete pet from DB
+			rs = selectStmt.executeQuery("SELECT * FROM pet WHERE id = "+pet.getId()+ ";");
+			if(rs.next()){
+				deleteItem(rs.getInt("amulet"));
+				deleteItem(rs.getInt("basket"));
+				deleteStmt.execute("DELETE FROM pet WHERE id = "+pet.getId()+ ";");
+			}
+			
+			selectStmt.execute("UPDATE characters SET petid = -1 WHERE id = "+pet.getOwner().getPlayerId()+";");
+			
+		} catch (SQLException e1) {
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
+			return;
+		}
+	}
+			
 	
 	public void updateCharStatus(Player player, int id, long value)
 	{
@@ -448,7 +625,7 @@ public class DatabaseUtils extends Service {
 		catch (SQLException e) 
 		{
 			
-			Logger.getLogger(this.getClass()).warn("Exception",e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 			
 		}
 	}
@@ -468,7 +645,7 @@ public class DatabaseUtils extends Service {
 			} else
 				return true;
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			return false;
 		}
 	}
@@ -488,7 +665,15 @@ public class DatabaseUtils extends Service {
 			Player player = Player.createPlayer(client, race);
 			ItemManager itemManager = player.getClient().getWorld().getItemManager();
 						
-			player.setLevel(1);
+			if(race == Race.HYBRIDER)
+			{
+				player.setLevel(200);
+			}
+			else
+			{
+				player.setLevel(1);
+			}
+			
 			player.setName(charName);
 			player.setSex(sex);
 			player.setHairStyle(hairStyle);
@@ -510,7 +695,7 @@ public class DatabaseUtils extends Service {
 			saveCharacter(player);
 			int charId = player.getPlayerId();
 			
-			Logger.getLogger(DatabaseUtils.class).info(charId);
+			LoggerFactory.getLogger(DatabaseUtils.class).info(""+charId);
 			
 			stmt.execute("INSERT INTO slots (charid, slot, accountid) VALUES ("
 					+ charId + ","
@@ -534,11 +719,26 @@ public class DatabaseUtils extends Service {
 				default: break;
 			}
 			Equipment equipment = player.getEquipment();
-			Item<?> chest = itemManager.create(326);
-			Item<?> pants = itemManager.create(343);
-			
-			equipment.setItem(Slot.CHEST, chest);
-			equipment.setItem(Slot.PANTS, pants);
+			if(race == Race.HYBRIDER)
+			{
+				Item<?> helmet = itemManager.create(1162);
+				Item<?> chest = itemManager.create(1163);
+				Item<?> pants = itemManager.create(1164);
+				Item<?> boots = itemManager.create(1165);
+				
+				equipment.setItem(Slot.HELMET, helmet);
+				equipment.setItem(Slot.CHEST, chest);
+				equipment.setItem(Slot.PANTS, pants);
+				equipment.setItem(Slot.BOOTS, boots);
+			}
+			else
+			{
+				Item<?> chest = itemManager.create(326);
+				Item<?> pants = itemManager.create(343);
+				
+				equipment.setItem(Slot.CHEST, chest);
+				equipment.setItem(Slot.PANTS, pants);
+			}
 			saveEquipment(player);
 			
 			QuickSlotPosition quickSlotPosition = new QuickSlotPosition(player.getQuickSlotBar(),0);
@@ -554,7 +754,7 @@ public class DatabaseUtils extends Service {
 			saveInventory(player);
 						
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			return;
 		}
 	}
@@ -580,11 +780,11 @@ public class DatabaseUtils extends Service {
 				player = loadCharStatus(client, characterId);
 				player.setSlot(slot);
 				
-				Logger.getLogger(DatabaseUtils.class).info("Loaded: " + player.getName());
+				LoggerFactory.getLogger(DatabaseUtils.class).info("Loaded: " + player.getName());
 			}
 			
 		} catch (SQLException e) {
-			Logger.getLogger(this.getClass()).warn("Exception", e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception", e);
 		}
 		
 		return player;
@@ -605,14 +805,19 @@ public class DatabaseUtils extends Service {
 				Item<?> item = Item.load(invTable.getInt("itemid"));	
 				
 				if (item!=null){
-					InventoryItem inventoryItem = new InventoryItem(item,
-							new InventoryPosition(invTable.getInt("x"), invTable.getInt("y"),invTable.getInt("tab")));
-					player.getInventory().addInventoryItem(inventoryItem);
+					if(invTable.getInt("tab") == -1 && invTable.getInt("x") == -1 && invTable.getInt("y") == -1){
+						HandPosition handPosition = new HandPosition(item);
+						player.getInventory().setHoldingItem(handPosition);
+					} else {
+						InventoryItem inventoryItem = new InventoryItem(item,
+								new InventoryPosition(invTable.getInt("x"), invTable.getInt("y"),invTable.getInt("tab")));
+						player.getInventory().addInventoryItem(inventoryItem);
+					}
 				}
 			}
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			return null;
 		}
 		return player;
@@ -621,16 +826,6 @@ public class DatabaseUtils extends Service {
 	public void saveInventory(Player player){
 		if (!checkDinamicDatabase())
 			return;
-		
-		//SaveInventory saveInventory = new SaveInventory(dinamicDatabase.dinamicConn);
-		/*
-		try {
-			saveInventory.getDeleteStatement().setInt(1, player.getEntityId());
-			
-		} catch (SQLException e) {
-			Logger.getLogger(this.getClass()).warn("Exception",e);
-		}
-		*/
 	
 		Statement stmt;
 		try {
@@ -641,6 +836,7 @@ public class DatabaseUtils extends Service {
 			String data = "";
 			
 			Iterator<InventoryItem> iter = player.getInventory().getInventoryIterator();
+			HandPosition handPosition = player.getInventory().getHoldingItem();
 			
 			while(iter.hasNext())
 			{
@@ -648,21 +844,16 @@ public class DatabaseUtils extends Service {
 				Item<?> item = invItem.getItem();
 				saveItem(item);
 				
-				/*
-				PreparedStatement statement = saveInventory.getInsertStatement();
-				statement.setInt(1,player.getEntityId());
-				statement.setInt(2,item.getEntityId());
-				statement.setInt(3,invItem.getTab());
-				statement.setInt(4,invItem.getPosX());
-				statement.setInt(5,invItem.getPosY());
-				statement.addBatch();				
-				*/
-				
-				data+="("+player.getPlayerId()+ ",'"+item.getItemId()+"',"+invItem.getPosition().getTab()+
+				data += "("+player.getPlayerId()+ ","+item.getItemId()+","+invItem.getPosition().getTab()+
 					","+invItem.getPosition().getPosX()+ ","+invItem.getPosition().getPosY()+ ")";			
 				if(iter.hasNext())
 					data+= ", ";			
 			}
+			
+			if(handPosition != null){
+				data += ", (" + player.getPlayerId() + "," + handPosition.getItem().getItemId() + ",-1,-1,-1)"; 
+			}
+			
 			if(!data.isEmpty()){
 				stmt.execute(query+data);
 				
@@ -671,7 +862,7 @@ public class DatabaseUtils extends Service {
 			//queue.add(saveInventory);
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			return;
 		}
 	}
@@ -707,7 +898,7 @@ public class DatabaseUtils extends Service {
 		} catch (SQLException e) 
 		{
 			
-			Logger.getLogger(this.getClass()).warn("Exception",e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 			return idList;
 		}
 		return idList;
@@ -731,7 +922,7 @@ public class DatabaseUtils extends Service {
 		catch (SQLException e) 
 		{
 			
-			Logger.getLogger(this.getClass()).warn("Exception",e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 			
 		}
 		return -1;
@@ -754,7 +945,7 @@ public class DatabaseUtils extends Service {
 				ItemType itemType = Server.getInstance().getWorld().getItemManager().getItemType(type);
 				
 				if (itemType == null) {
-					Logger.getLogger(DatabaseUtils.class).error("Item type "+type+" load failed, no such item type!");
+					LoggerFactory.getLogger(DatabaseUtils.class).error("Item type "+type+" load failed, no such item type!");
 					itemType = new ItemType(type);;
 				} 
 				
@@ -766,6 +957,7 @@ public class DatabaseUtils extends Service {
 				item.setDurability(rs.getInt("durability"));
 				item.setUnknown1(rs.getInt("unknown1"));
 				item.setUnknown2(rs.getInt("unknown2"));
+				item.setUnknown3(rs.getInt("unknown3"));
 				
 				return item;
 			}
@@ -773,7 +965,7 @@ public class DatabaseUtils extends Service {
 		catch (SQLException e) 
 		{
 			
-			Logger.getLogger(this.getClass()).warn("Exception",e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 			
 		}
 		return null;
@@ -788,7 +980,7 @@ public class DatabaseUtils extends Service {
 			return stmt.execute("DELETE FROM `roaming` WHERE `itemid`="+item.getItemId()+";");
 			
 		}catch (Exception e) {
-			Logger.getLogger(this.getClass()).warn("Exception",e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 		}
 		return false;
 	}
@@ -820,7 +1012,7 @@ public class DatabaseUtils extends Service {
 				}
 				
 			} catch (SQLException e) {
-				Logger.getLogger(this.getClass()).warn("Exception",e);
+				LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 				return null;
 			}
 		
@@ -854,7 +1046,7 @@ public class DatabaseUtils extends Service {
 		
 		} 
 		catch (Exception e) {
-			Logger.getLogger(this.getClass()).warn("Exception",e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 		}
 	}
 	public synchronized void saveItem(Item<?> item){
@@ -874,18 +1066,20 @@ public class DatabaseUtils extends Service {
 											 ", `durability`="+item.getDurability()+
 											 ", `unknown1`="+item.getUnknown1()+
 											 ", `unknown2`="+item.getUnknown2()+
+											 ", `unknown3`="+item.getUnknown3()+
 											 " WHERE `Id` = "+itemId);
 				if(res==0){
-					Logger.getLogger(DatabaseUtils.class).error("item not found: "+itemId);					
+					LoggerFactory.getLogger(DatabaseUtils.class).error("item not found: "+itemId);					
 				}
 			} else {
-				stmt.execute("INSERT INTO items (type, gemnumber, extrastats, durability, unknown1, unknown2)" +
+				stmt.execute("INSERT INTO items (type, gemnumber, extrastats, durability, unknown1, unknown2, unknown3)" +
 						" VALUES ("+item.getType().getTypeId()+","
 								   +item.getGemNumber()+","
 								   +item.getExtraStats()+","
 								   +item.getDurability()+","
 								   +item.getUnknown1()+","
-								   +item.getUnknown2()+
+								   +item.getUnknown2()+","
+								   +item.getUnknown3()+
 								   ");",Statement.RETURN_GENERATED_KEYS);
 				
 				ResultSet res = stmt.getGeneratedKeys();
@@ -896,7 +1090,7 @@ public class DatabaseUtils extends Service {
 			
 		} 
 		catch (Exception e) {
-			Logger.getLogger(this.getClass()).warn("Exception",e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 		}
 		
 	}
@@ -917,7 +1111,7 @@ public class DatabaseUtils extends Service {
 		catch (SQLException e) 
 		{
 			
-			Logger.getLogger(this.getClass()).warn("Exception",e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 			
 		}
 	}
@@ -951,7 +1145,7 @@ public class DatabaseUtils extends Service {
 				stmt.execute(query+data);
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			return;
 		}
 	}
@@ -973,7 +1167,7 @@ public class DatabaseUtils extends Service {
 			}
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			return;
 		}
 	}
@@ -1005,7 +1199,43 @@ public class DatabaseUtils extends Service {
 				stmt.execute(query+data);
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
+			return;
+		}
+	}
+	
+	public void savePetEquipment(Pet pet){
+		if (!checkDinamicDatabase() || pet == null)
+			return;
+
+		if (pet.getEquipment() == null)
+			return;
+		
+		Statement stmt;
+		try {
+			int petId = pet.getId();
+			stmt = dinamicDatabase.dinamicConn.createStatement();
+			stmt.execute("DELETE FROM petequipment WHERE petid="+petId+";");
+			
+			PetEquipment eq = pet.getEquipment();
+			
+			String query = "INSERT INTO petequipment (petid, slot, itemid) VALUES ";
+			String data = "";
+			
+			for(PetSlot slot: PetSlot.values())
+			{
+				Item<?> item = eq.getItem(slot);
+				if(item != null){
+					if(!data.isEmpty())
+						data+= ", ";
+					data+="("+petId+","+slot.value()+","+item.getItemId()+")";		
+				}
+			}							
+			if(!data.isEmpty())
+				stmt.execute(query+data);
+			
+		} catch (SQLException e1) {
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			return;
 		}
 	}
@@ -1029,7 +1259,7 @@ public class DatabaseUtils extends Service {
 			}
 						
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception ",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception ",e1);
 			return;
 		}
 	}
@@ -1056,7 +1286,7 @@ public class DatabaseUtils extends Service {
 			}
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception ",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception ",e1);
 			return;
 		  }
 	}
@@ -1081,7 +1311,7 @@ public class DatabaseUtils extends Service {
 			}
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			return;
 		}
 	}
@@ -1109,7 +1339,7 @@ public class DatabaseUtils extends Service {
 			}
 			
 		} catch (SQLException e) {
-			Logger.getLogger(this.getClass()).warn("Exception", e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception", e);
 			return;
 		}
 	}
@@ -1123,12 +1353,13 @@ public class DatabaseUtils extends Service {
 			stmt  = dinamicDatabase.dinamicConn.createStatement();
 			
 			stmt.execute("DELETE FROM guilds WHERE id='"+id+"';");
-				
+			
+			stmt.execute("Update characters SET guildid = '0', guildlvl = '0' WHERE guildid = "+id+";");
 		} 
 		catch (SQLException e) 
 		{
 			
-			Logger.getLogger(this.getClass()).warn("Exception",e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 			
 		}
 	}
@@ -1152,7 +1383,7 @@ public class DatabaseUtils extends Service {
 			}
 			
 		} catch (SQLException e) {
-			Logger.getLogger(this.getClass()).warn("Exception", e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception", e);
 			return;
 		}
 	}
@@ -1178,9 +1409,23 @@ public class DatabaseUtils extends Service {
 			}
 			
 		} catch (SQLException e) {
-			Logger.getLogger(this.getClass()).warn("Exception",e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 			return;
 		  }
+	}
+	
+	public boolean deleteQuickSlotItem(Item<?> item){
+		if (!checkDinamicDatabase())
+			return false ;
+		Statement stmt;
+		try {
+			stmt  = dinamicDatabase.dinamicConn.createStatement();		
+			return stmt.execute("DELETE FROM `quickslot` WHERE `itemid`="+item.getItemId()+";");
+			
+		}catch (Exception e) {
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
+		}
+		return false;
 	}
 	
 	public java.util.Map<Integer,Quest> loadQuests(){
@@ -1201,13 +1446,13 @@ public class DatabaseUtils extends Service {
 					questsList.put(quest.getId(), quest);
 				} while(rs.next());
 			} else {		
-				Logger.getLogger(DatabaseUtils.class).error("Failed to get quests from the Static Database!");
+				LoggerFactory.getLogger(DatabaseUtils.class).error("Failed to get quests from the Static Database!");
 				return null;
 			}
 		} 
 		catch (SQLException e) 
 		{
-			Logger.getLogger(this.getClass()).warn("Exception",e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 		}
 		return questsList;
 	}
@@ -1226,15 +1471,14 @@ public class DatabaseUtils extends Service {
 			ResultSet questRs = questStmt.executeQuery("SELECT * FROM quests WHERE id='"+questId+"';");
 			
 			if (!questRs.next()) {				
-				Logger.getLogger(DatabaseUtils.class).info("Quest loaded failed, no such quest ID!");
+				LoggerFactory.getLogger(DatabaseUtils.class).info("Quest loaded failed, no such quest ID!");
 				return null;
 			}
-			
 			
 			ResultSet questTypeRs = questTypeStmt.executeQuery("SELECT * FROM quests_type WHERE id='"+questRs.getInt("typeid")+"';");
 			
 			if(!questTypeRs.next()) {				
-				Logger.getLogger(DatabaseUtils.class).info("Quest Type loaded failed, no such quest type ID!");
+				LoggerFactory.getLogger(DatabaseUtils.class).info("Quest Type loaded failed, no such quest type ID!");
 				return null;
 			}
 			
@@ -1253,7 +1497,7 @@ public class DatabaseUtils extends Service {
 		} 
 		catch (SQLException e) 
 		{
-			Logger.getLogger(this.getClass()).warn("Exception",e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 		}
 		return null;
 	}
@@ -1277,7 +1521,7 @@ public class DatabaseUtils extends Service {
 					ResultSet objectiveTypeRs = objectiveTypeStmt.executeQuery("SELECT * FROM quests_objective_type WHERE id='"+objectiveRs.getInt("objectivetype")+"';");
 					
 					if(!objectiveTypeRs.next()) {				
-						Logger.getLogger(DatabaseUtils.class).info("Quest Objective Type loaded failed, no such objective type ID!");
+						LoggerFactory.getLogger(DatabaseUtils.class).info("Quest Objective Type loaded failed, no such objective type ID!");
 						return false;
 					}
 					
@@ -1287,13 +1531,13 @@ public class DatabaseUtils extends Service {
 					quest.addObjective(objective);
 				} while(objectiveRs.next());
 			} else {
-				Logger.getLogger(DatabaseUtils.class).error("Quest Objectives loaded failed, no objectives found!");
+				LoggerFactory.getLogger(DatabaseUtils.class).error("Quest Objectives loaded failed, no objectives found!");
 				return false;
 			}
 		} 
 		catch (SQLException e) 
 		{
-			Logger.getLogger(this.getClass()).warn("Exception",e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 		}
 		
 		return true;
@@ -1318,7 +1562,7 @@ public class DatabaseUtils extends Service {
 					ResultSet rewardTypeRs = rewardTypeStmt.executeQuery("SELECT * FROM quests_reward_type WHERE id='"+rewardRs.getInt("rewardtype")+"';");
 					
 					if(!rewardTypeRs.next()) {				
-						Logger.getLogger(DatabaseUtils.class).error("Quest Reward Type loaded failed, no such reward type ID!");
+						LoggerFactory.getLogger(DatabaseUtils.class).error("Quest Reward Type loaded failed, no such reward type ID!");
 						return false;
 					}					
 					
@@ -1328,13 +1572,13 @@ public class DatabaseUtils extends Service {
 					quest.addReward(reward);
 				} while(rewardRs.next());
 			} else {
-				Logger.getLogger(DatabaseUtils.class).error("Quest Rewards loaded failed, no rewards found!");
+				LoggerFactory.getLogger(DatabaseUtils.class).error("Quest Rewards loaded failed, no rewards found!");
 				return false;
 			}
 		} 
 		catch (SQLException e) 
 		{
-			Logger.getLogger(this.getClass()).warn("Exception",e);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 		}
 		
 		return true;
@@ -1374,7 +1618,7 @@ public class DatabaseUtils extends Service {
 			
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			
 		}
 		return questState;
@@ -1397,7 +1641,7 @@ public class DatabaseUtils extends Service {
 			
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			
 		}
 		return ammount;
@@ -1437,7 +1681,7 @@ public class DatabaseUtils extends Service {
 				questStateId = res.getInt(1);
 				
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			
 		}
 		return questStateId;
@@ -1478,7 +1722,7 @@ public class DatabaseUtils extends Service {
 				
 			}
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			
 		}
 		return true;
@@ -1503,7 +1747,7 @@ public class DatabaseUtils extends Service {
 			stmt.execute("DELETE FROM queststate WHERE id="+questStateId+";");
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			
 		}
 		return questStateId;
@@ -1520,7 +1764,7 @@ public class DatabaseUtils extends Service {
 			stmt.execute("DELETE FROM questobjectivestate WHERE queststateid='"+questStateId+"';");
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			
 		}
 		return true;
@@ -1547,7 +1791,7 @@ public class DatabaseUtils extends Service {
 			.execute("DELETE FROM equipment WHERE charid = "+charId+ ";");
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			return;
 		}
 	}
@@ -1573,7 +1817,7 @@ public class DatabaseUtils extends Service {
 			.execute("DELETE FROM exchange WHERE charid = "+charId+ ";");
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			return;
 		}
 	}
@@ -1599,7 +1843,7 @@ public class DatabaseUtils extends Service {
 			.execute("DELETE FROM inventory WHERE charid = "+charId+ ";");
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			return;
 		}
 	}
@@ -1625,7 +1869,7 @@ public class DatabaseUtils extends Service {
 			.execute("DELETE FROM queststate WHERE charid = "+charId+ ";");
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			return;
 		}
 	}
@@ -1651,7 +1895,7 @@ public class DatabaseUtils extends Service {
 			.execute("DELETE FROM quickslot WHERE charid = "+charId+ ";");
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			return;
 		}
 	}
@@ -1666,7 +1910,7 @@ public class DatabaseUtils extends Service {
 			.execute("DELETE FROM skills WHERE charid = "+charId+ ";");
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			return;
 		}
 	}
@@ -1681,7 +1925,7 @@ public class DatabaseUtils extends Service {
 			.execute("DELETE FROM characters WHERE id = "+charId+ ";");
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			return;
 		}
 	}
@@ -1697,7 +1941,7 @@ public class DatabaseUtils extends Service {
 			stmt.execute("DELETE FROM slots WHERE charid = "+ charId + ";");
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			return;
 		}
 	}
@@ -1722,7 +1966,7 @@ public class DatabaseUtils extends Service {
 				charId = rs.getInt("charid");
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			return -1;
 		}
 		
@@ -1745,10 +1989,35 @@ public class DatabaseUtils extends Service {
 				charName = rs.getString("name");
 			
 		} catch (SQLException e1) {
-			Logger.getLogger(this.getClass()).warn("Exception",e1);
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			return "";
 		}
 		
 		return charName;
+	}
+	
+	public int addGuild (String name)
+	{
+		if (!checkDinamicDatabase())
+			return 0;
+		
+		Statement stmt;
+		int guildId = 0;
+		
+		try {
+			stmt = dinamicDatabase.dinamicConn.createStatement();
+			
+			boolean rs = stmt.execute("INSERT INTO guilds SET Name = '"+ name+ "';");
+			
+			ResultSet rsId = stmt.executeQuery("SELECT id FROM guilds WHERE name = '"+name+"'");
+			
+			if(rsId.next())
+				guildId = Integer.parseInt(rsId.getString("id"));
+			
+		} catch (SQLException e1) {
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
+			return 0;
+		}
+		return guildId;
 	}
 }

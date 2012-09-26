@@ -19,7 +19,11 @@ public abstract class WeaponMastery extends Skill implements Modifier {
 	
 	public abstract Class<?> getWeaponType();
 	
-
+	@Override
+	public int getAffectedTargets() {
+		return 1;
+	}
+	
 	public float getDamageModifier(Player player){
 		
 		float modifier = 1;
@@ -119,4 +123,5 @@ public abstract class WeaponMastery extends Skill implements Modifier {
 		return getDamageModifier((Player)livingObject);
 	}
 
+	
 }

@@ -4,7 +4,8 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.reunionemu.jreunion.game.ExchangeItem;
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.NpcType;
@@ -120,7 +121,7 @@ public class Trader extends NpcType {
 
 			if ((newItem.is(Armor.class) == false) ||
 				((Armor)newItem.getType()).getLevel() != ((Armor)oldItem.getType()).getLevel()) {
-				Logger.getLogger(Trader.class).warn("Player "+player+" tried to exchange item "
+				LoggerFactory.getLogger(Trader.class).warn("Player "+player+" tried to exchange item "
 						+oldItem+" for item "+newItem);
 				return;
 			}

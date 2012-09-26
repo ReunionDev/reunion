@@ -1,5 +1,7 @@
 package org.reunionemu.jreunion.game.items.etc;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.ItemPosition;
 import org.reunionemu.jreunion.game.LivingObject;
@@ -7,6 +9,7 @@ import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.Quest;
 import org.reunionemu.jreunion.game.QuickSlotPosition;
 import org.reunionemu.jreunion.game.Usable;
+import org.reunionemu.jreunion.game.items.equipment.ChakuranWeapon;
 import org.reunionemu.jreunion.server.Client;
 import org.reunionemu.jreunion.server.DatabaseUtils;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
@@ -26,7 +29,7 @@ public class MissionReceiver extends Etc implements Usable{
 	}
 	
 	@Override
-	public void use(Item<?> item, LivingObject user) {
+	public boolean use(Item<?> item, LivingObject user, int quickSlotPosition, int unknown) {
 		if(user instanceof Player){
 			Player player = (Player)user;
 			
@@ -34,13 +37,13 @@ public class MissionReceiver extends Etc implements Usable{
 			if(player.getLevel() >= 100){
 				player.getClient().sendPacket(Type.SAY, "Your level is to high to use this item.\n" +
 						"Please use the Advanced Mission Receiver.");
-				return;
+				return false;
 			}
 			
 			//check if the MR has run out of quests.
 			if(item.getExtraStats() <= 0){
 				player.getClient().sendPacket(Type.SAY, "Mission Reciever run out of available quests.");
-				return;
+				return false;
 			}
 			
 			Quest quest = player.getClient().getWorld().getQuestManager().getRandomQuest(player);
@@ -48,13 +51,19 @@ public class MissionReceiver extends Etc implements Usable{
 			//check if a quest for the player level have been found.
 			if(quest == null){
 				player.getClient().sendPacket(Type.SAY, "No quests available for character level.");
-				return;
+				return false;
 			} 
 			
 			item.setExtraStats(item.getExtraStats()-1);
 			DatabaseUtils.getDinamicInstance().saveItem(item);
 			player.setQuest(quest);
-		}	
+			
+			return true;
+		} else {
+			LoggerFactory.getLogger(MissionReceiver.class).warn(this.getName() + " not implemented for " + user.getName());
+		}
+		
+		return false;
 	}
 	
 	@Override

@@ -7,8 +7,10 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.ConsoleAppender;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.apache.log4j.PatternLayout;
 import org.apache.log4j.spi.LoggingEvent;
 
@@ -73,17 +75,7 @@ public class Proxy {
 	 */
 	public static void main(String[] args) throws Exception {
 		
-		Logger logger = Logger.getRootLogger();
-		logger.addAppender(new ConsoleAppender(new PatternLayout("%-5p [%t]: %m\r\n"){
-			@Override
-			public String format(LoggingEvent event) {
-				String result = super.format(event);
-				if(result.endsWith("\n\r\n")){
-					result = result.substring(0, result.length()-2);
-				}
-				return result;
-			}
-		}, ConsoleAppender.SYSTEM_OUT));
+		BasicConfigurator.configure();
 		
 		Proxy proxy = new Proxy(new InetSocketAddress(InetAddress.getByName("192.168.1.199"), 4005), new InetSocketAddress(4005), new InetSocketAddress(5001));
 		

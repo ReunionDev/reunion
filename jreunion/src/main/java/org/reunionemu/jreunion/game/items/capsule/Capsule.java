@@ -7,6 +7,7 @@ import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.Usable;
 import org.reunionemu.jreunion.game.items.etc.Etc;
 import org.reunionemu.jreunion.server.Reference;
+import org.reunionemu.jreunion.server.PacketFactory.Type;
 
 /**
  * @author Aidamina
@@ -32,8 +33,9 @@ public abstract class Capsule extends Etc implements Usable {
 	}
 	
 	@Override
-	public void use(Item<?> item, final LivingObject user) {
+	public boolean use(Item<?> item, final LivingObject user, int quickSlotPosition, int unknown) {
 		//TODO: implement capsule effect	
+		return false;
 	}
 
 	@Override
@@ -42,7 +44,7 @@ public abstract class Capsule extends Etc implements Usable {
 		
 		ParsedItem item = Reference.getInstance().getItemReference().getItemById(id);
 		
-		this.setEffect(Integer.parseInt(item.getMemberValue("Effect")));		
+		this.setEffect(Integer.parseInt(item.getMemberValue("Effect")));
 	}
 	
 	public abstract void effect(Player target, int effect);

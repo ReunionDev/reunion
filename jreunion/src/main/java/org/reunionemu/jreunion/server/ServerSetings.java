@@ -29,6 +29,38 @@ public class ServerSetings {
 	
 	private long dropTimeOut;
 	
+	private float criticalMultiplier; //% ammount of critical damage increase. 
+	
+	private float criticalChance; //% chance to get a critical damage
+	
+	private float petEquipmentCompensation; //% of exp compensation when changing pet equipment at npc.
+	
+	private int petBreedTime; //Time it will take to breed a pet (in seconds).
+	
+	private float itemPlusByOne; //% chance to drop a +1 item.
+	
+	private float itemPlusByTwo; //% chance to drop a +2 item.
+	
+	private float mobMutantChance; //% chance to spawn mutant mob.
+	
+	private float mobMutantModifier; //modifier to aply on mob stats.
+	
+	private long mobRadiusArea; //mob area radius.
+	
+	private int mobsMovement;	//Enable/Disable movements from mobs.
+
+	private int expPlayermMobDifference; //lvl difference between mob and player, after that difference exp starts dropping
+
+	private int expLowerStep; //its % value
+	
+	private int closeAttackRadius;	//Minimum distance when close attack mobs will start attacking 
+	
+	private int rangeAttackRadius;	//Minimum distance when range attack mobs will start attacking
+	
+	private float demolitionModifier; //% of damage increase of demolition attacks from Slayer weapon
+
+	private int playerMaxLevel;
+	
 	public ServerSetings() {
 		loadFromReference();
 	}
@@ -55,6 +87,19 @@ public class ServerSetings {
 			setDropExclusivity(10);
 			setSpawnAttempts(1);
 			setDropTimeOut(600);
+			setCriticalMultiplier(1);
+			setCriticalChance((float)0.5);
+			setPetEquipmentCompensation((float)0.3);
+			setItemPlusByOne((float)0.05);
+			setItemPlusByTwo((float)0.01);
+			setMobMutantChance((float)0.1);
+			setMobRadiusArea(10);
+			setPetBreedTime(72000);
+			setMobsMovement(1);
+			setCloseAttackRadius(20);
+			setRangeAttackRadius(100);
+			setDemolitionModifier(0.5f);
+			setPlayerMaxLevel(0);
 			setWelcomeMessage("Hey, welcome on the Reunion Testserver");
 		} else {
 
@@ -128,11 +173,133 @@ public class ServerSetings {
 				// use default
 				setDropTimeOut(600);
 			}
+			if (server.checkMembers(new String[] { "CriticalMultiplier" })) {
+				// use member from file
+				setCriticalMultiplier(Float.parseFloat(server.getMemberValue("CriticalMultiplier")));
+			} else {
+				// use default
+				setCriticalMultiplier(1);
+			}
+			if (server.checkMembers(new String[] { "CriticalChance" })) {
+				// use member from file
+				setCriticalChance(Float.parseFloat(server.getMemberValue("CriticalChance")));
+			} else {
+				// use default
+				setCriticalChance((float)0.5);
+			}
+			if (server.checkMembers(new String[] { "PetEquipmentCompensation" })) {
+				// use member from file
+				setPetEquipmentCompensation(Float.parseFloat(server.getMemberValue("PetEquipmentCompensation")));
+			} else {
+				// use default
+				setPetEquipmentCompensation((float)0.3);
+			}
+			if (server.checkMembers(new String[] { "ItemPlusByOne" })) {
+				// use member from file
+				setItemPlusByOne(Float.parseFloat(server.getMemberValue("ItemPlusByOne")));
+			} else {
+				// use default
+				setItemPlusByOne((float)0.05);
+			}
+			if (server.checkMembers(new String[] { "ItemPlusByTwo" })) {
+				// use member from file
+				setItemPlusByTwo(Float.parseFloat(server.getMemberValue("ItemPlusByTwo")));
+			} else {
+				// use default
+				setItemPlusByTwo((float)0.01);
+			}
+			if (server.checkMembers(new String[] { "MobMutantChance" })) {
+				// use member from file
+				setMobMutantChance(Float.parseFloat(server.getMemberValue("MobMutantChance")));
+			} else {
+				// use default
+				setMobMutantChance((float)0.1);
+			}
+			if (server.checkMembers(new String[] { "MobRadiusArea" })) {
+				// use member from file
+				setMobRadiusArea(Long.parseLong(server.getMemberValue("MobRadiusArea")));
+			} else {
+				// use default
+				setMobRadiusArea(10);
+			}
+			if (server.checkMembers(new String[] { "MobMutantModifier" })) {
+				// use member from file
+				setMobMutantModifier(Float.parseFloat(server.getMemberValue("MobMutantModifier")));
+			} else {
+				// use default
+				setMobMutantModifier((float)0.5);
+			}
+			if (server.checkMembers(new String[] { "PetBreedTime" })) {
+				// use member from file
+				setPetBreedTime(Integer.parseInt(server.getMemberValue("PetBreedTime")));
+			} else {
+				// use default
+				setPetBreedTime(72000);
+			}
+			if (server.checkMembers(new String[] { "MobsMovement" })) {
+				// use member from file
+				setMobsMovement(Integer.parseInt(server.getMemberValue("MobsMovement")));
+			} else {
+				// use default
+				setMobsMovement(1);
+			}
+			
+			if (server.checkMembers(new String[] { "ExpPlayerMobDifference" })) {
+				// use member from file
+				setExpPlayerMobDifference(Integer.parseInt(server.getMemberValue("ExpPlayerMobDifference")));
+			} else {
+				// use default
+				setExpPlayerMobDifference(5);
+			}
+
+			if (server.checkMembers(new String[] { "ExpLowerStep" })) {
+				// use member from file
+				setExpLowerStep(Integer.parseInt(server.getMemberValue("ExpLowerStep")));
+			} else {
+				// use default
+				setExpLowerStep(5);
+			}
+			
+			if (server.checkMembers(new String[] { "CloseAttackRadius" })) {
+				// use member from file
+				setCloseAttackRadius(Integer.parseInt(server.getMemberValue("CloseAttackRadius")));
+			} else {
+				// use default
+				setCloseAttackRadius(20);
+			}
+			
+			if (server.checkMembers(new String[] { "RangeAttackRadius" })) {
+				// use member from file
+				setRangeAttackRadius(Integer.parseInt(server.getMemberValue("RangeAttackRadius")));
+			} else {
+				// use default
+				setRangeAttackRadius(100);
+			}
+			
+			if (server.checkMembers(new String[] { "DemolitionModifier" })) {
+				// use member from file
+				setDemolitionModifier(Float.parseFloat(server.getMemberValue("DemolitionModifier")));
+			} else {
+				// use default
+				setDemolitionModifier(0.5f);
+			}
+			
+			if (server.checkMembers(new String[] { "PlayerMaxLevel" })) {
+				// use member from file
+				setPlayerMaxLevel(Integer.parseInt(server.getMemberValue("PlayerMaxLevel")));
+			} else {
+				// use default
+				setPlayerMaxLevel(0);
+			}
 		}
 	}
 
 	public void setLime(long lime) {
 		this.lime = lime;
+	}
+	
+	public void setPlayerMaxLevel(int level) {
+		this.playerMaxLevel = level;
 	}
 
 	public void setXp(long xp) {
@@ -165,6 +332,10 @@ public class ServerSetings {
 
 	public long getSessionRadius() {
 		return sessionRadius;
+	}
+	
+	public int getPlayerMaxLevel() {
+		return playerMaxLevel;
 	}
 
 	public void setSessionRadius(long sessionRadius) {
@@ -201,5 +372,125 @@ public class ServerSetings {
 
 	public void setDropTimeOut(long dropTimeOut) {
 		this.dropTimeOut = dropTimeOut;
+	}
+	
+	public float getCriticalMultiplier() {
+		return criticalMultiplier;
+	}
+
+	public void setCriticalMultiplier(float criticalMultiplier) {
+		this.criticalMultiplier = criticalMultiplier;
+	}
+	
+	public float getCriticalChance() {
+		return criticalChance;
+	}
+
+	public void setCriticalChance(float criticalChance) {
+		this.criticalChance = criticalChance;
+	}
+
+	public float getPetEquipmentCompensation() {
+		return petEquipmentCompensation;
+	}
+
+	public void setPetEquipmentCompensation(float petEquipmentCompensation) {
+		this.petEquipmentCompensation = petEquipmentCompensation;
+	}
+	
+	public int getExpPlayerMobDifference() {
+		return expPlayermMobDifference;
+	}
+
+	public void setExpPlayerMobDifference(int mobPlayerDiff) {
+		this.expPlayermMobDifference = mobPlayerDiff;
+	}
+
+	public int getExpLowerStep() {
+		return expLowerStep;
+	}
+
+	public void setExpLowerStep(int expLowerStep) {
+		this.expLowerStep = expLowerStep;
+	}
+	
+	public float getItemPlusByOne() {
+		return itemPlusByOne;
+	}
+
+	public void setItemPlusByOne(float itemPlusByOne) {
+		this.itemPlusByOne = itemPlusByOne;
+	}
+
+	public float getItemPlusByTwo() {
+		return itemPlusByTwo;
+	}
+
+	public void setItemPlusByTwo(float itemPlusByTwo) {
+		this.itemPlusByTwo = itemPlusByTwo;
+	}
+
+	public float getMobMutantChance() {
+		return mobMutantChance;
+	}
+
+	public void setMobMutantChance(float mobMutantChance) {
+		this.mobMutantChance = mobMutantChance;
+	}
+
+	public long getMobRadiusArea() {
+		return mobRadiusArea;
+	}
+
+	public void setMobRadiusArea(long mobRadiusArea) {
+		this.mobRadiusArea = mobRadiusArea;
+	}
+
+	public float getMobMutantModifier() {
+		return mobMutantModifier;
+	}
+
+	public void setMobMutantModifier(float mobMutantModifier) {
+		this.mobMutantModifier = mobMutantModifier;
+	}
+
+	public int getPetBreedTime() {
+		return petBreedTime;
+	}
+
+	public void setPetBreedTime(int petBreedTime) {
+		this.petBreedTime = petBreedTime;
+	}
+
+	public int getMobsMovement() {
+		return mobsMovement;
+	}
+
+	public void setMobsMovement(int mobsMovement) {
+		this.mobsMovement = mobsMovement;
+	}
+
+	public int getCloseAttackRadius() {
+		return closeAttackRadius;
+	}
+
+	public void setCloseAttackRadius(int closeAttackRadius) {
+		this.closeAttackRadius = closeAttackRadius;
+	}
+
+	public int getRangeAttackRadius() {
+		return rangeAttackRadius;
+	}
+
+	public void setRangeAttackRadius(int rangeAttackRadius) {
+		this.rangeAttackRadius = rangeAttackRadius;
+	}
+
+	public float getDemolitionModifier() {
+		return demolitionModifier;
+	}
+
+	public void setDemolitionModifier(float demolitionModifier) {
+		this.demolitionModifier = demolitionModifier;
 	}
 }

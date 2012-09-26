@@ -2,7 +2,8 @@ package org.reunionemu.jreunion.server;
 
 import java.nio.channels.SocketChannel;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.reunionemu.jreunion.events.Event;
 import org.reunionemu.jreunion.events.EventDispatcher;
 import org.reunionemu.jreunion.events.EventListener;
@@ -167,25 +168,33 @@ public class Client extends EventDispatcher implements EventListener, Sendable {
 		if(player!=null) {
 			buffer.append("player: ");
 			buffer.append(player);
-			buffer.append(", ");
-		}
-		if(socketChannel!=null){
-			buffer.append("socket: ");
-			//buffer.append(socketChannel);
-			buffer.append("local="+this.getSocketChannel().socket().getLocalSocketAddress()+
-					" remote="+this.getSocketChannel().socket().getRemoteSocketAddress());
-			buffer.append(", ");
+			buffer.append(Server.logger.isDebugEnabled() ? ", " : "");
 		}
 		
-		if(this.getProtocol()!=null){
-			buffer.append("encryption level: ");
-			buffer.append(getProtocol() instanceof OtherProtocol ? ((OtherProtocol)getProtocol()).getEncryptionLevel(): "Default");
-			buffer.append(", ");
-		}
-				
-		buffer.append("state: ");
-		buffer.append(getState());
+		if(getState() != State.INGAME || Server.logger.isDebugEnabled()){
+			if (socketChannel != null) {
+				buffer.append("socket: ");
+				// buffer.append(socketChannel);
+				buffer.append("local="
+						+ this.getSocketChannel().socket()
+								.getLocalSocketAddress()
+						+ " remote="
+						+ this.getSocketChannel().socket()
+								.getRemoteSocketAddress());
+				buffer.append(", ");
+			}
+
+			if (this.getProtocol() != null) {
+				buffer.append("encryption level: ");
+				buffer.append(getProtocol() instanceof OtherProtocol ? ((OtherProtocol) getProtocol())
+						.getEncryptionLevel() : "Default");
+				buffer.append(", ");
+			}
+
+			buffer.append("state: ");
+			buffer.append(getState());
 		
+		}
 		buffer.append("}");
 		return buffer.toString();
 	}
@@ -222,7 +231,7 @@ public class Client extends EventDispatcher implements EventListener, Sendable {
 			return null;
 		String packetData = outputBuffer.toString();		
 		outputBuffer.setLength(0);
-		Logger.getLogger(Network.class).info("Sending to "+this+":\n" + packetData);
+		LoggerFactory.getLogger(Network.class).info("Sending to "+this+":\n" + packetData);
 		return protocol.encryptServer(packetData);
 	}
 
@@ -240,10 +249,10 @@ public class Client extends EventDispatcher implements EventListener, Sendable {
 							this.disconnect();
 							throw new RuntimeException("Unknown Protocol");//TODO: Proper handling
 						}
-						Logger.getLogger(Client.class).info(this + " protocol discovered: "+protocol);
+						LoggerFactory.getLogger(Client.class).info(this + " protocol discovered: "+protocol);
 					}
 					String decryptedData = protocol.decryptServer(data);
-					Logger.getLogger(Client.class).info(this + " sends: \n" + decryptedData);
+					LoggerFactory.getLogger(Client.class).info(this + " sends: \n" + decryptedData);
 					
 					this.inputBuffer.append(decryptedData);
 					if(!decryptedData.endsWith("\n"))
@@ -253,7 +262,7 @@ public class Client extends EventDispatcher implements EventListener, Sendable {
 			}
 			if(event instanceof NetworkDisconnectEvent){				
 				
-				//Logger.getLogger(Client.class).debug(event);
+				//LoggerFactory.getLogger(Client.class).debug(event);
 				fireEvent(ClientDisconnectEvent.class, this);
 			}
 		}

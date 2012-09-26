@@ -1,6 +1,12 @@
 package org.reunionemu.jreunion.game;
 
-import org.apache.log4j.Logger;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.reunionemu.jreunion.game.Equipment.Slot;
 import org.reunionemu.jreunion.server.DatabaseUtils;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
@@ -23,7 +29,13 @@ public class Item<T extends ItemType> implements Entity{
 	
 	private int unknown2;
 	
+	private int unknown3;
+	
 	private ItemPosition position;
+	
+	static private ScheduledExecutorService jobService = Executors.newScheduledThreadPool(1);
+	
+	private ScheduledFuture<?> job;
 	
 	public ItemPosition getPosition() {
 		return position;
@@ -84,12 +96,13 @@ public class Item<T extends ItemType> implements Entity{
 		getType().setGemNumber(this);
 	}
 	
-	public void use(LivingObject livingObject){
+	public boolean use(LivingObject livingObject, int quickSlotBarPosition, int unknown){
 		
 		if(is(Usable.class)){
-			((Usable)getType()).use(this, livingObject);
+			return ((Usable)getType()).use(this, livingObject, quickSlotBarPosition, unknown);
 		}else{
-			Logger.getLogger(Item.class).error("Item "+this+" is not usable");
+			LoggerFactory.getLogger(Item.class).error("Item "+this+" is not usable");
+			return false;
 			//throw new IllegalArgumentException(getType()+" is not Usable");
 		}
 	}
@@ -117,6 +130,19 @@ public class Item<T extends ItemType> implements Entity{
 		player.getClient().sendPacket(Type.UPGRADE, this, slot,1);
 	}
 	
+	public void update(Player player, Slot slot){
+		Item<?> holdingItem = player.getInventory().getHoldingItem().getItem();
+		
+		if(holdingItem != null){
+			setExtraStats(getExtraStats() + holdingItem.getType().getMaxExtraStats());
+			DatabaseUtils.getDinamicInstance().deleteItem(holdingItem.getItemId());
+			player.getInventory().setHoldingItem(null);
+			player.save();
+			DatabaseUtils.getDinamicInstance().saveItem(this);
+			player.getClient().sendPacket(Type.UPDATE_ITEM, this, 1);
+		}
+	}
+	
 	public static Item<?> load(int itemId){
 			
 		return DatabaseUtils.getDinamicInstance().loadItem(itemId);
@@ -138,6 +164,14 @@ public class Item<T extends ItemType> implements Entity{
 	public void setUnknown2(int unknown2) {
 		this.unknown2 = unknown2;
 	}
+	
+	public int getUnknown3() {
+		return unknown3;
+	}
+
+	public void setUnknown3(int unknown3) {
+		this.unknown3 = unknown3;
+	}
 
 	public int getDurability() {
 		return durability;
@@ -146,7 +180,15 @@ public class Item<T extends ItemType> implements Entity{
 	public void setDurability(int durability) {
 		this.durability = durability;
 	}
-
+	
+	public void startJob(Runnable runnable, long period){
+		job = jobService.scheduleAtFixedRate(runnable, 0l, period, TimeUnit.MILLISECONDS);
+	}
+	
+	public void stopJob(){
+		job.cancel(false);
+	}
+	
 	public String toString(){
 		StringBuffer buffer = new StringBuffer();
 		buffer.append("{");

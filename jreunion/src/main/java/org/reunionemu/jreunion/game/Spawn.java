@@ -6,7 +6,9 @@ import org.reunionemu.jreunion.events.map.SpawnEvent;
 import org.reunionemu.jreunion.game.npc.Mob;
 import org.reunionemu.jreunion.server.Area;
 import org.reunionemu.jreunion.server.Area.Field;
+import org.reunionemu.jreunion.server.Client.State;
 import org.reunionemu.jreunion.server.LocalMap;
+import org.reunionemu.jreunion.server.PacketFactory.Type;
 import org.reunionemu.jreunion.server.Server;
 
 /**
@@ -70,7 +72,7 @@ public class Spawn {
 		double rotation = position.getRotation();
 		
 		if(Double.isNaN(rotation)){
-			rotation = Server.getRand().nextDouble() * Math.PI * 2;
+			rotation = Server.getRand().nextDouble() * Math.PI * 2;	
 		}
 		
 		return new Position(posX, posY, position.getZ(), map, rotation);
@@ -84,19 +86,37 @@ public class Spawn {
 		
 		// TODO: Improve the mob spawn area
 		if( entity instanceof Npc){
-			if(((Npc<?>)entity).getType() instanceof Mob){
+			Npc<?> npc = (Npc<?>)entity;
+			if(npc.getType() instanceof Mob){
+				Mob mob = (Mob)npc.getType();
+				
 				while((!entityArea.get(position.getX() / 10, position.getY() / 10,Field.MOB)) && (spawnAttempts-- > 0)){
 					position = generateSpawnPosition();
 				}
+				float mobMutantChance = Server.getInstance().getWorld().getServerSetings().getMobMutantChance();
+				
+				if(Server.getRand().nextFloat() < mobMutantChance){
+					/* Mutant mobs, by default have:
+					 * - increased hp
+					 * - increased damage
+					 * - defence resistance
+					 */
+					float mobMutantModifier = Server.getInstance().getWorld().getServerSetings().getMobMutantModifier();
+					npc.setMaxHp((long)(npc.getMaxHp()*(mobMutantModifier+1)));
+					npc.setHp(npc.getMaxHp());
+					npc.setMutantType(npc.getRandomMutantType());
+				}
 			}
 		}
-		
 		entity.setPosition(position);
+		
 		LocalMap map = position.getLocalMap();
+		
 		if(map.getEntity(entity.getEntityId())!=entity){
 			map.createEntityId(entity);
 			map.fireEvent(SpawnEvent.class, entity);
 		}
+		
 		return position;
 		
 	}

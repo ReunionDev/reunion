@@ -1,5 +1,7 @@
 package org.reunionemu.jreunion.game.items;
 
+import org.reunionemu.jreunion.game.items.etc.ReinforcingAgent;
+
 
 /**
  * @author Aidamina

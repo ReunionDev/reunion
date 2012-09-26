@@ -1,3 +1,5 @@
+import static org.junit.Assume.*;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
@@ -5,13 +7,11 @@ import java.io.ObjectOutputStream;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-//import org.reunionemu.jreunion.messages.MessageServer;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
-import com.rabbitmq.client.MessageProperties;
-import com.rabbitmq.client.QueueingConsumer;
+//import org.reunionemu.jreunion.messages.MessageServer;
 
 
 
@@ -20,25 +20,35 @@ public class MessageServerTest {
 	private Connection connection;
 	private Channel channel;
 	@Before
-	public void setUp() throws Exception {
-		
-		ConnectionFactory factory = new ConnectionFactory();
-	    factory.setHost("localhost");
-	    connection = factory.newConnection();
-	    channel = connection.createChannel();	    
-	    channel.queueDeclare(QUEUE_NAME, false, false, false, null);
-	    
+	public void setUp(){
+		try {
+			ConnectionFactory factory = new ConnectionFactory();
+			factory.setHost("localhost");
+		    connection = factory.newConnection();
+		    channel = connection.createChannel();	    
+		    channel.queueDeclare(QUEUE_NAME, false, false, false, null);
+		    //assumeTrue(connection.isOpen());
+	    } catch(Exception e) {
+		    //Assume.assumeNoException(e);
+	    	
+	    }
 	}
 
 	@After
 	public void tearDown() throws Exception {
-		channel.close();
-	    connection.close();
+		if(channel!=null){
+			channel.close();
+		}
+		if(connection!=null){
+			connection.close();
+		}
 	}
 
 	@Test
 	public void test() throws Exception {
-		
+		assumeNotNull(connection);
+	    assumeTrue(connection.isOpen());
+
 		long start = System.currentTimeMillis();
 		String message = "Hello World!";
 		

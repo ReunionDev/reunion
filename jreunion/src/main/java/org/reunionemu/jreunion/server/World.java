@@ -4,11 +4,14 @@ import java.nio.channels.SocketChannel;
 import java.util.Collection;
 import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Vector;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.reunionemu.jcommon.ParsedItem;
 import org.reunionemu.jreunion.events.Event;
 import org.reunionemu.jreunion.events.EventDispatcher;
@@ -23,7 +26,11 @@ import org.reunionemu.jreunion.events.server.ServerEvent;
 import org.reunionemu.jreunion.events.server.ServerStartEvent;
 import org.reunionemu.jreunion.events.server.ServerStopEvent;
 import org.reunionemu.jreunion.game.BulkanPlayer;
+import org.reunionemu.jreunion.game.Entity;
+import org.reunionemu.jreunion.game.Pet;
 import org.reunionemu.jreunion.game.Player;
+import org.reunionemu.jreunion.game.Pet.PetStatus;
+import org.reunionemu.jreunion.game.items.pet.PetEgg;
 import org.reunionemu.jreunion.game.skills.bulkan.RecoveryBoost;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
 
@@ -37,7 +44,7 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 
 	private PlayerManager playerManager;
 	
-	private ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
+	private ScheduledExecutorService executorService = Executors.newScheduledThreadPool(3);
 	
 	private TeleportManager teleportManager;
 	
@@ -54,6 +61,8 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 	private ItemManager itemManager;
 	
 	private NpcManager npcManager;
+	
+	private PetManager petManager;
 
 	static public ServerSetings serverSetings;
 
@@ -67,6 +76,8 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 		playerManager = new PlayerManager();
 		itemManager = new ItemManager();
 		npcManager = new NpcManager();
+		petManager = new PetManager();
+		petManager.loadPets();
 		serverHour = 4;
 		teleportManager = new TeleportManager();
 				
@@ -146,7 +157,7 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 			maps.put(mapId, map);
 		}
 		
-		executorService.scheduleAtFixedRate(new Runnable() {
+		executorService.scheduleAtFixedRate(new REHandler(new Runnable() {
 			
 			@Override
 			public void run() {
@@ -161,17 +172,19 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 					}
 				}				
 			}
-		}, 0, 60, TimeUnit.SECONDS);		
+		}), 0, 60, TimeUnit.SECONDS);		
 		
-		executorService.scheduleAtFixedRate(new Runnable() {
+		//work player stats
+		executorService.scheduleAtFixedRate(new REHandler(new Runnable() {
 			
 			@Override
 			public void run() {
 				synchronized(playerManager){
-					Iterator<Player> iter = playerManager.getPlayerListIterator();
-					while (iter.hasNext()) {
-						Player player = iter.next();
-						
+					//Iterator<Player> iter = playerManager.getPlayerListIterator();
+					//while (iter.hasNext()) {
+					//	Player player = iter.next();
+					List<Player> playersList = playerManager.getPlayerList();	
+					for(Player player : playersList){
 						synchronized(player){
 							float statusModifier = 0.1f; //increase 10% of status 
 							
@@ -200,8 +213,35 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 					}
 				}				
 			}
-		}, 0, 10, TimeUnit.SECONDS);
+		}), 0, 10, TimeUnit.SECONDS);
 	
+		// work pet stats
+		if(playerManager.getNumberOfPlayers() > 0){
+			executorService.scheduleAtFixedRate(new REHandler(new Runnable() {
+
+				@Override
+				public void run() {
+					List<Pet> petList = null;
+					synchronized (petManager) {
+						petList = new Vector<Pet>(petManager.getList());
+					}
+
+					for (Pet pet : petList) {
+						if (playerManager.isPetOwnerOnline(pet.id) && pet.getState() == 12) {
+							long petMaxHp = pet.getMaxHp();
+							long petHpModifier = (long) (petMaxHp * 0.1); // increase 10% of hp
+							pet.setHp(pet.getHp() + petHpModifier);
+							pet.setLoyalty(pet.getLoyalty());
+							pet.setSatiety(pet.getSatiety());
+
+							pet.sendStatus(PetStatus.HP);
+							pet.sendStatus(PetStatus.LOYALTY);
+							pet.sendStatus(PetStatus.SATIETY);
+						}
+					}
+				}
+			}), 0, 10, TimeUnit.SECONDS);
+		}
 	}
 
 	public void stop() {
@@ -236,7 +276,7 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 															
 				network.addEventListener(NetworkDataEvent.class, client, new NetworkEvent.NetworkFilter(socketChannel));
 				
-				Logger.getLogger(World.class).info("Got connection from {local="
+				LoggerFactory.getLogger(World.class).info("Got connection from {local="
 						+ socketChannel.socket().getLocalSocketAddress()+" remote="
 						+socketChannel.socket().getRemoteSocketAddress()+"}\n");
 				
@@ -269,6 +309,14 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 			}
 		}
 		
+	}
+
+	public PetManager getPetManager() {
+		return petManager;
+	}
+
+	public void setPetManager(PetManager petManager) {
+		this.petManager = petManager;
 	}
 
 }

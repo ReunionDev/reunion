@@ -5,6 +5,8 @@ import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.PlayerItem;
 import org.reunionemu.jreunion.server.Reference;
+import org.reunionemu.jreunion.server.Server;
+import org.reunionemu.jreunion.server.World;
 
 /**
  * @author Aidamina
@@ -234,6 +236,15 @@ public abstract class Weapon extends PlayerItem {
 	
 	public void setMagicDmg(float magicDmg) {
 		this.magicDmg = magicDmg;
+	}
+	
+	public long getDamage(Item<?> item){
+		return (long)(getMinDamage(item) + ((getMaxDamage(item)-getMinDamage(item))*Server.getRand().nextDouble()));
+	}
+	
+	public float getCritical(){
+		return (float)Server.getRand().nextFloat() < World.serverSetings.getCriticalChance() ?
+				World.serverSetings.getCriticalMultiplier() : 0;
 	}
 
 }

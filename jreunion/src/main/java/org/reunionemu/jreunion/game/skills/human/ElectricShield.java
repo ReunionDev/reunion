@@ -1,6 +1,5 @@
 package org.reunionemu.jreunion.game.skills.human;
 
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -32,6 +31,11 @@ public class ElectricShield extends Skill implements Castable, Effectable {
 	@Override
 	public int getLevelRequirement(int skillLevel) {
 		return 14+skillLevel;
+	}
+	
+	@Override
+	public int getAffectedTargets() {
+		return 1;
 	}
 	
 	public int getEffectModifier(){
@@ -156,7 +160,7 @@ public class ElectricShield extends Skill implements Castable, Effectable {
 	
 	@Override
 	//TODO: handle with DefenceBonus and DamageAbsorb
-	public boolean cast(LivingObject caster, List<LivingObject> victims) {
+	public boolean cast(LivingObject caster, LivingObject victim, String[] arguments) {
 		
 		if(caster instanceof HumanPlayer){
 			final Player player = (Player) caster;

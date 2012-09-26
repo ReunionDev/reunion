@@ -12,6 +12,11 @@ public class BeastSummonSkill extends RingWeaponMastery {
 	public int getMaxLevel() {
 		return 25;
 	}
+	
+	@Override
+	public int getAffectedTargets() {
+		return 1;
+	}
 
 	@Override
 	public int getLevelRequirement(int skillLevel) {

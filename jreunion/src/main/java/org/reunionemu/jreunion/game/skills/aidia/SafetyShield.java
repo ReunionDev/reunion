@@ -1,6 +1,5 @@
 package org.reunionemu.jreunion.game.skills.aidia;
 
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -34,6 +33,11 @@ public class SafetyShield extends Skill implements Castable, Effectable{
 		return 14+skillLevel;
 	}
 
+	@Override
+	public int getAffectedTargets() {
+		return 1;
+	}
+	
 	public int getEffectModifier(){
 		return effectModifier;
 	}
@@ -157,7 +161,7 @@ public class SafetyShield extends Skill implements Castable, Effectable{
 	@Override
 	//TODO: handle with DefenceBonus and DamageAbsorb
 	//TODO: implement damage reflection
-	public boolean cast(LivingObject caster, List<LivingObject> victims) {
+	public boolean cast(LivingObject caster, LivingObject victim, String[] arguments) {
 		
 		if(caster instanceof AidiaPlayer){
 			final Player player = (Player) caster;

@@ -3,13 +3,17 @@ package org.reunionemu.jreunion.server;
 import java.nio.channels.SocketChannel;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.reunionemu.jreunion.events.map.ItemDropEvent;
 import org.reunionemu.jreunion.game.Equipment;
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.ItemType;
 import org.reunionemu.jreunion.game.LivingObject;
+import org.reunionemu.jreunion.game.Party;
+import org.reunionemu.jreunion.game.Pet;
 import org.reunionemu.jreunion.game.Player;
+import org.reunionemu.jreunion.game.Pet.PetStatus;
 import org.reunionemu.jreunion.game.Player.Race;
 import org.reunionemu.jreunion.game.Player.Sex;
 import org.reunionemu.jreunion.game.Position;
@@ -19,6 +23,7 @@ import org.reunionemu.jreunion.game.Skill;
 import org.reunionemu.jreunion.game.Usable;
 import org.reunionemu.jreunion.game.items.equipment.SlayerWeapon;
 import org.reunionemu.jreunion.game.skills.bulkan.SecondAttack;
+import org.reunionemu.jreunion.game.skills.kailipton.TransferMagicalPower;
 import org.reunionemu.jreunion.server.Client.LoginType;
 import org.reunionemu.jreunion.server.Client.State;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
@@ -67,12 +72,12 @@ public class Command {
 		
 		//int accountId = DatabaseUtils.getDinamicInstance().Auth(username, password);
 		if (accountId == -1) {
-			Logger.getLogger(Command.class).info("Invalid Login");
+			LoggerFactory.getLogger(Command.class).info("Invalid Login");
 			client.sendPacket(Type.FAIL,"Username and password combination is invalid");
 			client.disconnect();
 		} else {
 			
-			Logger.getLogger(Command.class).info("" + client + " authed as account(" + accountId + ")");
+			LoggerFactory.getLogger(Command.class).info("" + client + " authed as account(" + accountId + ")");
 			client.setAccountId(accountId);
 			
 			java.util.Map<SocketChannel,Client> clients = world.getClients();
@@ -106,7 +111,7 @@ public class Command {
 		int charId = DatabaseUtils.getDinamicInstance().getCharId(slotNumber, accountId);
 		String charName = DatabaseUtils.getDinamicInstance().getCharName(charId);
 		
-		Logger.getLogger(Command.class).info("Player {id:"+charId+", name:"+charName+"} deleted from account {id:"
+		LoggerFactory.getLogger(Command.class).info("Player {id:"+charId+", name:"+charName+"} deleted from account {id:"
 				+accountId+"}");
 		
 		DatabaseUtils.getDinamicInstance().deleteCharSlot(charId);
@@ -120,14 +125,15 @@ public class Command {
 		
 	}
 	
-	public RoamingItem dropItem(Position position, Item<?> item) {
-
+	public RoamingItem dropItem(Position position, Item<?> item, Player player) {
+		
 		RoamingItem roamingItem = new RoamingItem(item);
 		roamingItem.setPosition(position);
 		
+		
 		LocalMap map = position.getLocalMap();
 		
-		map.fireEvent(ItemDropEvent.class, roamingItem);
+		map.fireEvent(ItemDropEvent.class, roamingItem, player);
 		
 		roamingItem.startDeleteTimer(false);
 				
@@ -168,9 +174,12 @@ public class Command {
 	/****** change map ******/
 	public void GoToWorld(Player player, Map map, int unknown) {
 		Client client = player.getClient();
+		Party party = player.getParty();
 		
 		//Disband party
-		client.sendPacket(Type.PARTY_DISBAND);
+		if(party != null){
+			party.exit(player);
+		}
 				
 		client.sendPacket(Type.JUMP, player);
 		
@@ -208,9 +217,9 @@ public class Command {
 		
 		client.sendPacket(Type.A_, "lev", player.getAdminState());
 
-		client.sendPacket(Type.WEARING, equipment);
+		client.sendPacket(Type.WEARING, equipment, player.getClient().getVersion());
 
-		client.sendPacket(PacketFactory.Type.OK);
+		//client.sendPacket(PacketFactory.Type.OK);
 
 		return player;
 	}
@@ -219,7 +228,7 @@ public class Command {
 	public void playerWeapon(Player player, int uniqueId) {
 		//Client client = player.getClient();
 
-		//Logger.getLogger(Command.class).info(uniqueId);
+		//LoggerFactory.getLogger(Command.class).info(uniqueId);
 
 		ItemType item = null;
 		//TODO: FIX
@@ -264,21 +273,26 @@ public class Command {
 		sendable.sendPacket(Type.SAY, text);
 	}
 
+	
 	/****** player1 attacks with second weapon 
 	 * @param skillid ******/
-	public void subAttack(Player player, List<LivingObject> targets, int skillId) {
+	/*
+	public void subAttack(Player player, List<LivingObject> targets, int skillId, int unknown1) {
 		Client client = player.getClient();
 		Skill skill = world.getSkillManager().getSkill(skillId);
 		
 		if(skill instanceof SecondAttack)
-			((SecondAttack)skill).cast(player, targets);
+			((SecondAttack)skill).cast(player, targets, unknown1);
 	
+		if(skill instanceof TransferMagicalPower) 
+			((TransferMagicalPower)skill).cast(player, targets, unknown1);
 		
 		//client.sendPacket(Type.ATTACK_VITAL, targets.get(0));
 		//player.getInterested().sendPacket(Type.SECONDATACK,player,targets.get(0),skillId);
 		
 	}
-	/*
+	*/
+	
 	/****** player attacks mob with Sub Attack ******/
 	public void subAttackNpc(Player player, int uniqueId) {
 		Client client = player.getClient();
@@ -307,7 +321,7 @@ public class Command {
 					+ spWeapon.getMinDamage();
 		}
 /*
-		Logger.getLogger(Command.class).info("Skill Level: "
+		LoggerFactory.getLogger(Command.class).info("Skill Level: "
 				+ player.getCharSkill().getSkill(40).getCurrLevel() + "\n");
 */
 		// Max normal attack damage * memory of the slayer * % skill (40)
@@ -373,26 +387,47 @@ public class Command {
 		}
 	*/
 	}
-
-	public boolean useItem(Player player ,Item<?> item, int slot) {
+	
+	public boolean useItem(Player player ,Item<?> item, int quickSlotBarPosition, int unknown) {
 		
 		if(Usable.class.isInstance(item.getType())){
 			
 			
-			((Usable)item.getType()).use(item, player);
+			((Usable)item.getType()).use(item, player, quickSlotBarPosition, unknown);
 			
 			player.getPosition().getLocalMap().removeEntity(item);			
-			DatabaseUtils.getDinamicInstance().deleteItem(item.getItemId());
+			//DatabaseUtils.getDinamicInstance().deleteItem(item.getItemId());
 			return true;
 			
 		}
 		else{
 			
-			Logger.getLogger(QuickSlotBar.class).error(item.getType().getName()+ " not Usable");
+			LoggerFactory.getLogger(QuickSlotBar.class).error(item.getType().getName()+ " not Usable");
 			
 		}
 		return false;
 		
 	}
 
+	public boolean useItem(Player player ,Item<?> item, int quickSlotBarPosition) {
+		
+		if(Usable.class.isInstance(item.getType())){
+			
+			
+			((Usable)item.getType()).use(item, player, quickSlotBarPosition, 0);
+			
+			player.getPosition().getLocalMap().removeEntity(item);			
+			//DatabaseUtils.getDinamicInstance().deleteItem(item.getItemId());
+			return true;
+			
+		}
+		else{
+			
+			LoggerFactory.getLogger(QuickSlotBar.class).error(item.getType().getName()+ " not Usable");
+			
+		}
+		return false;
+		
+	}
+	
 }

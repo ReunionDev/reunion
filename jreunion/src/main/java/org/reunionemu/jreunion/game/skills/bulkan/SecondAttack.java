@@ -1,22 +1,28 @@
 package org.reunionemu.jreunion.game.skills.bulkan;
 
 import java.util.List;
+import java.util.Vector;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import org.reunionemu.jreunion.game.Castable;
+import org.reunionemu.jreunion.game.Effectable;
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.LivingObject;
 import org.reunionemu.jreunion.game.Npc;
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.Skill;
 import org.reunionemu.jreunion.game.items.equipment.Axe;
+import org.reunionemu.jreunion.game.items.equipment.DemolitionWeapon;
 import org.reunionemu.jreunion.game.items.equipment.SlayerWeapon;
 import org.reunionemu.jreunion.game.npc.Mob;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
+import org.reunionemu.jreunion.server.LocalMap;
 import org.reunionemu.jreunion.server.SkillManager;
 import org.reunionemu.jreunion.server.Tools;
 
-public class SecondAttack extends Skill {
+public class SecondAttack extends Skill implements Castable, Effectable{
 	
 	
 	public SecondAttack(SkillManager skillManager,int id) {
@@ -31,6 +37,11 @@ public class SecondAttack extends Skill {
 	@Override
 	public int getLevelRequirement(int skillLevel) {
 		return 149+skillLevel;
+	}
+	
+	@Override
+	public int getAffectedTargets() {
+		return 1;
 	}
 	
 	public float getDamageModifier(){
@@ -62,8 +73,8 @@ public class SecondAttack extends Skill {
 		return modifier;
 	}
 	
-	public boolean cast(LivingObject caster, List<LivingObject> targets){
-		
+	@Override
+	public boolean cast(LivingObject caster, LivingObject victim, String[] arguments){
 		Player player = null;
 		
 		if(caster instanceof Player){
@@ -71,41 +82,52 @@ public class SecondAttack extends Skill {
 		}
 		
 		Item<?> shoulderMount = player.getEquipment().getShoulderMount();
-		shoulderMount.use(caster);
+		shoulderMount.use(caster, -1, 0);
 		
 		SlayerWeapon slayerWeapon = null;
 		
-		if(shoulderMount.getType() instanceof SlayerWeapon)
+		if(shoulderMount!=null && shoulderMount.getType() instanceof SlayerWeapon)
 			slayerWeapon = (SlayerWeapon) shoulderMount.getType();
 		
 		long bestAttack = player.getBestAttack();
 		long slayerDmg = slayerWeapon.getDamage();
 		float slayerMemoryDmg = slayerWeapon.getMemoryDmg();
 		float skillDmg = getDamageModifier(); 
-		float slayerDemolitionDmg = slayerWeapon.getMemoryDmg();
+		float slayerDemolitionDmg = slayerWeapon.getDemolitionDmg();
+		float criticalMultiplier = slayerWeapon.getCritical();
 		
 		long damage = bestAttack + slayerDmg + (long)(bestAttack*slayerMemoryDmg*skillDmg);
+		damage += (long)(damage*criticalMultiplier);
 		damage += (long)(damage*slayerDemolitionDmg);
 		
-		synchronized(targets){
-			for(LivingObject target : targets){ 
-				long newHp = Tools.between(target.getHp() - damage, 0l, target.getMaxHp());				
-				
-				if (newHp <= 0) {
-					Logger.getLogger(LivingObject.class).info("Player "+player+" killed npc "+this);
-					if(target instanceof Npc){
-						((Npc)target).kill(player);
-					}
-				} else {
-					target.setHp(newHp);
-				}
-				player.getClient().sendPacket(Type.SAV, target, shoulderMount);
-			}
+		player.setDmgType(slayerWeapon instanceof DemolitionWeapon ? 2 : (criticalMultiplier > 0 ? 1 : 0));
+		
+		synchronized(victim){
+			victim.getsAttacked(player, damage, false);
+			player.getClient().sendPacket(Type.SAV, victim,	player.getDmgType(), 0,	shoulderMount.getExtraStats(), 3);
 		}
 		
 		player.clearAttackQueue();
 		
 		
 		return true;
+	}
+	
+	@Override
+	public void effect(LivingObject source, LivingObject target, String[] arguments){
+			source.getInterested().sendPacket(Type.SECONDATTACK, source, target, getId());
+	}
+	
+	@Override
+	public List<LivingObject> getTargets(String[] arguments, LocalMap map){
+		List<LivingObject> targets = new Vector<LivingObject>();
+		targets.add(getSingleTarget(Integer.parseInt(arguments[3]), map));
+		return targets;
+	}
+
+	@Override
+	public int getEffectModifier() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }
