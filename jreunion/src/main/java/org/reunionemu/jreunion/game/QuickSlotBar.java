@@ -131,6 +131,9 @@ public class QuickSlotBar {
 
 		QuickSlotItem qsItem = getItem(slot);
 		
+		if(qsItem==null)
+			return;
+			
 		Item<?> item = qsItem.getItem();
 		
 		player.getPosition().getLocalMap().getWorld().getCommand().useItem(player, item, slot);

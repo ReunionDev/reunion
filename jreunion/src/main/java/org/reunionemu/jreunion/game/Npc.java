@@ -189,6 +189,14 @@ public class Npc<T extends NpcType> extends LivingObject {
 		session.getOwner().getClient().sendPacket(Type.OUT, this);
 	}
 	
+	public long getAttackRadius() {
+		return attackRadius;
+	}
+
+	public void setAttackRadius(long attackRadius) {
+		this.attackRadius = attackRadius;
+	}
+	
 	public void setBoss(){
 		if(this.getType() instanceof Mob){
 			Mob mob = ((Mob)this.getType());
@@ -510,11 +518,14 @@ public class Npc<T extends NpcType> extends LivingObject {
 		
 		setIsRunning(true);
 		
-		double distance = this.getPosition().distance(player.getPosition());
-		int newPosX = getNewPosX(player.getPosition(), distance);
-		int newPosY = getNewPosY(player.getPosition(), distance);
-		
 		Position newPosition = getPosition().clone();
+		double distance = this.getPosition().distance(player.getPosition());
+		int newPosX = getNewPosX(player.getPosition().clone(), distance);
+		int newPosY = getNewPosY(player.getPosition().clone(), distance);
+		
+		newPosX = (newPosX == 0) ? newPosition.getX() : newPosX;
+		newPosY = (newPosY == 0) ? newPosition.getY() : newPosY;
+		
 		newPosition.setX(newPosX);
 		newPosition.setY(newPosY);
 		
@@ -539,6 +550,9 @@ public class Npc<T extends NpcType> extends LivingObject {
 		while(distance > 0){
 			int posX = getNewPosX(position.clone(), distance);
 			int posY = getNewPosY(position.clone(), distance);
+			
+			posX = (posX == 0) ? newPos.getX() : posX;
+			posY = (posY == 0) ? newPos.getY() : posY;
 			
 			newPos.setX(posX);
 			newPos.setY(posY);
@@ -582,52 +596,52 @@ public class Npc<T extends NpcType> extends LivingObject {
 	public void work() {
 		try {
 			
-		int isMovementEnabled = Server.getInstance().getWorld().getServerSetings().getMobsMovement();
+			int isMovementEnabled = Server.getInstance().getWorld().getServerSetings().getMobsMovement();
 		
-		if(isRunning() || getHp() == 0 || isMovementEnabled == 0)
-			return;
+			if(isRunning() || getHp() == 0 || isMovementEnabled == 0)
+				return;
 		
-		Iterator<Player> iterPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayerListIterator();
-		double smallestDistance = 150;
-		Player closestPlayer = null;
-		Area mobArea = getPosition().getLocalMap().getArea(); 
-		boolean moveFree = false;
+			Iterator<Player> iterPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayerListIterator();
+			double smallestDistance = 150;
+			Player closestPlayer = null;
+			Area mobArea = getPosition().getLocalMap().getArea(); 
+			boolean moveFree = false;
 		
-		while (iterPlayer.hasNext()) {
-		//for(Player player : getPosition().getLocalMap().getPlayerList()) {
-			Player player = iterPlayer.next();
-			Position position = player.getPosition();
-			double distance = getPosition().distance(player.getPosition());
+			while (iterPlayer.hasNext()) {
+				//for(Player player : getPosition().getLocalMap().getPlayerList()) {
+				Player player = iterPlayer.next();
+				Position position = player.getPosition();
+				double distance = getPosition().distance(player.getPosition());
 			
-			if(moveFree == false){
-				moveFree = player.getSession().contains(this.getPosition()) ? true : false;
-			}
+				if(moveFree == false){
+					moveFree = player.getSession().contains(this.getPosition()) ? true : false;
+				}
 			
-			if (player.getClient() == null) {
-				continue;
-			} else if (player.getClient().getState() != Client.State.INGAME
+				if (player.getClient() == null) {
+					continue;
+				} else if (player.getClient().getState() != Client.State.INGAME
 					|| this.getPosition().getLocalMap() != player.getPosition().getLocalMap()
 					|| !player.getSession().contains(this.getPosition())
 					|| !mobArea.get(position.getX() / 10, position.getY() / 10,Field.MOB)
 					|| player.getHp() <= 0) {
-				continue;
+						player.update();
+						continue;
+				}
+				
+				if(distance < smallestDistance){
+					smallestDistance = distance;
+					closestPlayer = player;
+				}
+			
 			}
 			
-			if(distance < smallestDistance){
-				smallestDistance = distance;
-				closestPlayer = player;
-			}
-			
-		}
-			
-		// Condition that verify if the mob can move freely or not.
-		// If the distance between the mob and the player is less or equal
-		// then 150 (distance that makes the mob move to the player
-		// direction) and if the player position is a walkable position
-		// for mob then the  mob will chase or attack the player, else the mob will
-		// move freely.
+			// Condition that verify if the mob can move freely or not.
+			// If the distance between the mob and the player is less or equal
+			// then 150 (distance that makes the mob move to the player
+			// direction) and if the player position is a walkable position
+			// for mob then the  mob will chase or attack the player, else the mob will
+			// move freely.
 		
-		//try {
 			if (smallestDistance < 150) {
 				if(smallestDistance > getAttackRadius()) {
 					moveToPlayer(closestPlayer);
@@ -664,13 +678,5 @@ public class Npc<T extends NpcType> extends LivingObject {
 				
 		buffer.append("}");
 		return buffer.toString();
-	}
-
-	public long getAttackRadius() {
-		return attackRadius;
-	}
-
-	public void setAttackRadius(long attackRadius) {
-		this.attackRadius = attackRadius;
 	}
 }

@@ -136,6 +136,12 @@ public class NpcShop {
 
 		Item<?> item = itemManager.create(itemType);
 		
+		if(item == null){
+			player.getClient().sendPacket(Type.SAY, "Item not implemented!");
+			LoggerFactory.getLogger(this.getClass()).error("Item Type "+itemType+" not found.");
+			return false;
+		}
+		
 		int count = 0;
 
 		if (player.getLime() - item.getType().getPrice() * quantity < 0) {

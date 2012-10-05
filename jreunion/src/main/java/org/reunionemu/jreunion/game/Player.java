@@ -3,9 +3,9 @@ package org.reunionemu.jreunion.game;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.reunionemu.jcommon.ParsedItem;
 import org.reunionemu.jreunion.events.Event;
@@ -29,6 +29,7 @@ import org.reunionemu.jreunion.server.PacketParser;
 import org.reunionemu.jreunion.server.Reference;
 import org.reunionemu.jreunion.server.Server;
 import org.reunionemu.jreunion.server.Session;
+import org.reunionemu.jreunion.server.SessionList;
 import org.reunionemu.jreunion.server.Tools;
 
 /**
@@ -39,7 +40,7 @@ public abstract class Player extends LivingObject implements EventListener {
 	
 	private long defense = 0;
 	
-	java.util.Map<Skill,Integer> skills = new HashMap<Skill,Integer> ();
+	private Map<Skill,Integer> skills = new HashMap<Skill,Integer> ();
 
 	private long totalExp;
 
@@ -54,58 +55,6 @@ public abstract class Player extends LivingObject implements EventListener {
 	private Pet pet;
 	
 	public int playerId = -1 ; //id used for database storage
-
-	public int getPlayerId() {
-		return playerId;
-	}
-
-	public void setPlayerId(int playerId) {
-		this.playerId = playerId;
-	}
-
-	public int getSlot() {
-		return slot;
-	}
-
-	public void setSlot(int slot) {
-		this.slot = slot;
-	}
-	
-	public static enum Sex{
-		MALE, //0
-		FEMALE	//1
-	}
-	
-	public static enum Race{
-		BULKAN(0), //0
-		KAILIPTON(1), //1
-		AIDIA(2), //2
-		HUMAN(3), //3
-		HYBRIDER(4), //4
-		PET(5), //5
-		UNDEFINED(6); //6
-		
-		int value;
-		Race(int value){
-			this.value = value;
-			
-		}
-		public int value(){
-			return value;			
-		
-		}
-		
-		public static Race byValue(int raceId){
-			
-			for(Race race:Race.values())
-			{
-				if(race.value()==raceId){					
-					return race;
-				}
-			}
-			return null;
-		}		
-	}
 
 	private boolean isInCombat; // 0 - Peace Mode; 1 - Attack Mode
 
@@ -157,6 +106,84 @@ public abstract class Player extends LivingObject implements EventListener {
 	
 	private Party party;
 	
+	private long mana;
+
+	private long electricity;
+
+	private long stamina;
+	
+	private String guildName;
+	
+	private Shop shop;
+	
+	private long social;
+	
+	public Player(Client client) {
+		super();
+		this.setClient(client);
+		client.setPlayer(this);
+		inventory = new Inventory();
+		equipment = new Equipment(this);
+		quickSlotBar = new QuickSlotBar(this);
+		stash = new Stash(this);
+		exchange = new Exchange(this);
+		
+		client.addEventListener(ClientDisconnectEvent.class, this, new ClientFilter(client));
+
+	}
+	
+	public int getPlayerId() {
+		return playerId;
+	}
+
+	public void setPlayerId(int playerId) {
+		this.playerId = playerId;
+	}
+
+	public int getSlot() {
+		return slot;
+	}
+
+	public void setSlot(int slot) {
+		this.slot = slot;
+	}
+	
+	public static enum Sex{
+		MALE, //0
+		FEMALE	//1
+	}
+	
+	public static enum Race{
+		BULKAN(0), //0
+		KAILIPTON(1), //1
+		AIDIA(2), //2
+		HUMAN(3), //3
+		HYBRIDER(4), //4
+		PET(5), //5
+		UNDEFINED(6); //6
+		
+		int value;
+		Race(int value){
+			this.value = value;
+			
+		}
+		public int value(){
+			return value;			
+		
+		}
+		
+		public static Race byValue(int raceId){
+			
+			for(Race race:Race.values())
+			{
+				if(race.value()==raceId){					
+					return race;
+				}
+			}
+			return null;
+		}		
+	}
+	
 	public Client getClient() {
 		return client;
 	}
@@ -175,20 +202,6 @@ public abstract class Player extends LivingObject implements EventListener {
 	public void setGuildRequestName(String name)
 	{
 		this.requestedToGuild = name;
-	}
-	
-	public Player(Client client) {
-		super();
-		this.setClient(client);
-		client.setPlayer(this);
-		inventory = new Inventory();
-		equipment = new Equipment(this);
-		quickSlotBar = new QuickSlotBar(this);
-		stash = new Stash(this);
-		exchange = new Exchange(this);
-		
-		client.addEventListener(ClientDisconnectEvent.class, this, new ClientFilter(client));
-
 	}
 	
 	public void addAttack(long attack) {
@@ -413,14 +426,6 @@ public abstract class Player extends LivingObject implements EventListener {
 	public QuickSlotBar getQuickSlotBar() {
 		return quickSlotBar;
 	}
-	
-	private long mana;
-
-	private long electricity;
-
-	private long stamina;
-	
-	private String guildName;
 
 	public long getElectricity() {
 		return electricity;
@@ -846,6 +851,7 @@ public abstract class Player extends LivingObject implements EventListener {
 		long hp = getLevel() <= 30 ? getMaxHp() : (long)(getMaxHp()*.1);
 		setHp(hp);
 		spawn();
+		update();
 	}
 	
 	public int getSkillLevel(Skill skill){
@@ -856,10 +862,22 @@ public abstract class Player extends LivingObject implements EventListener {
 		return skills;
 	}
 
+	public List<Skill> getActiveShieldSkills(){
+		List<Skill> activeShieldSkills = new Vector<Skill>();
+		
+		//for(Skill skill : skills.get(key)){
+			
+		//}
+		
+		return activeShieldSkills;
+	}
+	
 	public void say(String text) {
 		if(text.charAt(0) != '@')
 		{
-			getInterested().sendPacket(Type.SAY, text, this);
+			SessionList<Session> list = getInterested().getSessions();
+			list.sendPacket(Type.SAY, text, this);
+			//getInterested().sendPacket(Type.SAY, text, this);
 			getClient().sendPacket(Type.SAY, text, this);
 		}
 	}
@@ -990,12 +1008,8 @@ public abstract class Player extends LivingObject implements EventListener {
 		{
 			if(lvlUpExp<=0){
 				this.setLevel(getLevel()+1);
-				if(this.getLevel() > 250) {
-					this.setStatusPoints(this.getStatusPoints()+10);
-				} else {
-					this.setStatusPoints(this.getStatusPoints()+3);
-				}
-				this.setLevelUpExp(this.getLevelUpExp()-Math.abs(lvlUpExp));
+				setStatusPoints(((this.getLevel() > 250) ? getStatusPoints()+10 : getStatusPoints()+3));
+				this.setLevelUpExp(this.getLevelUpExp());
 			}
 			else{
 				this.lvlUpExp = lvlUpExp;
@@ -1066,10 +1080,15 @@ public abstract class Player extends LivingObject implements EventListener {
 		sendStatus(Status.MANA);
 	}
 
-	public void social(long emotionId) {
+	public void setSocial(long emotionId) {
 
+		this.social = emotionId;
 		getInterested().sendPacket(Type.SOCIAL, this, emotionId);
 		
+	}
+	
+	public long getSocial(){
+		return this.social;
 	}
 
 	public void stop(Position position) {
@@ -1380,6 +1399,9 @@ public abstract class Player extends LivingObject implements EventListener {
 	@Override
 	public void enter(Session session){
 		session.getOwner().getClient().sendPacket(Type.IN_CHAR, this, false);
+		if(getShop() != null && getPosition().getLocalMap().getShop(this) != null) {
+			session.getOwner().getClient().sendPacket(Type.U_SHOP, "in", this, getShop().getDescription());
+		}
 	}
 
 	@Override
@@ -1510,5 +1532,13 @@ public abstract class Player extends LivingObject implements EventListener {
 
 	public void setPetId(int petId) {
 		this.petId = petId;
+	}
+
+	public Shop getShop() {
+		return shop;
+	}
+
+	public void setShop(Shop shop) {
+		this.shop = shop;
 	}
 }

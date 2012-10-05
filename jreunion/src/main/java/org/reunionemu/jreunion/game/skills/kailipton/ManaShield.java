@@ -9,6 +9,8 @@ import org.reunionemu.jreunion.game.KailiptonPlayer;
 import org.reunionemu.jreunion.game.LivingObject;
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.Skill;
+import org.reunionemu.jreunion.game.skills.Modifier;
+import org.reunionemu.jreunion.game.skills.Modifier.ValueType;
 import org.reunionemu.jreunion.server.SkillManager;
 import org.reunionemu.jreunion.server.Tools;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
@@ -22,6 +24,10 @@ public class ManaShield extends Skill implements Castable, Effectable {
 	
 	public ManaShield(SkillManager skillManager,int id) {
 		super(skillManager,id);
+	}
+	
+	public ValueType getValueType() {
+		return Modifier.ValueType.SHIELD;
 	}
 	
 	@Override

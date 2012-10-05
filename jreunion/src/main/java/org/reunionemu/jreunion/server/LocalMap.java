@@ -34,6 +34,7 @@ import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.PlayerSpawn;
 import org.reunionemu.jreunion.game.Position;
 import org.reunionemu.jreunion.game.RoamingItem;
+import org.reunionemu.jreunion.game.Shop;
 import org.reunionemu.jreunion.game.Spawn;
 import org.reunionemu.jreunion.game.WorldObject;
 import org.reunionemu.jreunion.game.npc.Mob;
@@ -75,6 +76,8 @@ public class LocalMap extends Map implements Runnable{
 	private List<RoamingItem> roamingItemList = new Vector<RoamingItem>();
 	
 	private List<Party> parties = new Vector<Party>();
+	
+	private List<Shop> shops = new Vector<Shop>();
 
 	public World getWorld() {
 		return world;
@@ -436,7 +439,7 @@ public class LocalMap extends Map implements Runnable{
 	}
 
 	
-public SessionList<Session> GetSessions(Position position){
+	public SessionList<Session> GetSessions(Position position){
 		
 		SessionList<Session> results = new SessionList<Session>();
 		synchronized(sessions){			
@@ -507,38 +510,39 @@ public SessionList<Session> GetSessions(Position position){
 				
 				ItemDropEvent itemDropEvent = (ItemDropEvent)event;
 				RoamingItem roamingItem = itemDropEvent.getRoamingItem();
+				//select all the players within roaming item session
 				SessionList<Session> list = GetSessions(roamingItem.getPosition());
 				Item<?> item = roamingItem.getItem();
-				Player player = itemDropEvent.getPlayer();
 				
 				synchronized(entities) {
 					createEntityId(roamingItem);
 					item.setEntityId(roamingItem.getEntityId());
 					addRoamingItem(roamingItem);
-					list.enter(roamingItem, false);	
 				}
+				list.enter(roamingItem, false);	
 				DatabaseUtils.getDinamicInstance().saveRoamingItem(roamingItem);
-				player.getClient().sendPacket(Type.DROP, roamingItem); //sent to the client owner only
-				player.getInterested().sendPacket(Type.IN_ITEM, roamingItem); //sent to other clients
+				list.sendPacket(Type.DROP, roamingItem); 
 				
 			} else
 			if(event instanceof ItemPickupEvent){
 				
 				ItemPickupEvent itemPickupEvent = (ItemPickupEvent)event;
 				RoamingItem roamingItem = itemPickupEvent.getRoamingItem();
-				SessionList<Session> list = GetSessions(roamingItem.getPosition());
-				Item<?> item = roamingItem.getItem();
 				Player player = itemPickupEvent.getPlayer();
+				// select other players within roaming item session
+				SessionList<Session> otherPlayersList = player.getInterested().getSessions();
+				Item<?> item = roamingItem.getItem();
 				
 				synchronized(entities) {
-					player.pickItem(item, -1);
 					removeRoamingItem(roamingItem);
-					list.exit(roamingItem, false);
+					removeEntity(roamingItem);
 				}
+				player.getClient().sendPacket(Type.OUT, roamingItem); //sent to the client owner only
+				player.pickItem(item, -1);	//sent to the client owner only
+				player.getClient().sendPacket(Type.PICKUP, player);
+				otherPlayersList.sendPacket(Type.PICKUP, player);
+				otherPlayersList.exit(roamingItem, true); //sent to other clients
 				DatabaseUtils.getDinamicInstance().deleteRoamingItem(item);
-				removeEntity(roamingItem);
-				player.getClient().sendPacket(Type.PICKUP, player); //sent to the client owner only
-				list.sendPacket(Type.OUT, roamingItem); //sent to other clients
 				
 			} else	
 			if(event instanceof PlayerLoginEvent){
@@ -570,29 +574,39 @@ public SessionList<Session> GetSessions(Position position){
 				
 				Pet pet = player.getPet();
 				
-				Session session = player.getSession();
-				if(session!=null){
-					session.close();
+				Session playerSession = player.getSession();
+				if(playerSession!=null){
+					playerSession.close();
 				}
 				
 				synchronized(entities) {
-					sessions.remove(session);
+					sessions.remove(playerSession);
 					entities.remove(player.getEntityId());
 					if(pet != null && pet.getState() == 12){
 						entities.remove(pet.getEntityId());
 					}
 				}	
-				SessionList<Session> list = player.getInterested().getSessions();
-				list.exit(player, false);
-				list.sendPacket(Type.OUT, player);
 				
+				//remove player from other players session
+				SessionList<Session> playerList = player.getInterested().getSessions();
+				playerList.exit(player, false);
+				playerList.sendPacket(Type.OUT, player);
+				
+				//remove pet from other players session
+				if(pet != null && pet.getState() == 12){
+					SessionList<Session> petList = pet.getInterested().getSessions();
+					petList.exit(player, false);
+					petList.sendPacket(Type.OUT, pet);
+				}
+				
+				 //remove player from party
 				if(player.getParty() != null){
 					player.getParty().exit(player);
 				}
 				
-				if(pet != null && pet.getState() == 12){
-					list.exit(pet, false);
-					list.sendPacket(Type.OUT, pet);
+				 //remove player shop from local map
+				if(player.getShop() != null){
+					player.getShop().close();
 				}
 				
 				player.save();
@@ -775,6 +789,42 @@ public SessionList<Session> GetSessions(Position position){
 			for(Player member : party.getMembers()){
 				if(member.getEntityId() == memberEntityId)
 					return party;
+			}
+		}
+		
+		return null;
+	}
+	
+	public List<Shop> getShopList() {
+		return shops;
+	}
+	
+	public void addShop(Shop shop){
+		if(!shops.contains(shop)){
+			shops.add(shop);
+		}
+	}
+	
+	public void removeShop(Shop shop){
+		while(shops.contains(shop)){
+			shops.remove(shop);
+		}
+	}
+	
+	public Shop getShop(Player player){
+		for(Shop shop : shops){
+			if(shop.getOwner() == player)
+				return shop;
+		}
+		
+		return null;
+	}
+	
+	public Shop getShopBuying(Player buyer){
+		for(Shop shop : shops){
+			for(Shop buyerShop : shop.getPlayersBuying()){
+				if(buyerShop.getOwner() == buyer)
+					return shop;
 			}
 		}
 		

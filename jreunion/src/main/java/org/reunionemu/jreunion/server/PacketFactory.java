@@ -24,6 +24,7 @@ import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.Position;
 import org.reunionemu.jreunion.game.QuickSlotItem;
 import org.reunionemu.jreunion.game.RoamingItem;
+import org.reunionemu.jreunion.game.ShopItem;
 import org.reunionemu.jreunion.game.Skill;
 import org.reunionemu.jreunion.game.StashItem;
 import org.reunionemu.jreunion.game.VendorItem;
@@ -123,7 +124,9 @@ public class PacketFactory {
 		EXCH_START,
 		EXCH_INVEN_TO,
 		EXCH_INVEN_FROM,
-		EXCH_MONEY
+		EXCH_MONEY,
+		U_SHOP,
+		PICK_EXTRA
 	}
 	
 	public static String createPacket(Type packetType, Object... args) {
@@ -189,6 +192,7 @@ public class PacketFactory {
 					warping = (Boolean)args[1];					
 				}
 				int combat = player.isInCombat() ? 1 : 0;
+				long social = player.getSocial();
 				Equipment eq = player.getEquipment();
 				
 				String packetData = warping?"appear ":"in ";
@@ -201,7 +205,9 @@ public class PacketFactory {
 						+ player.getPosition().getRotation() + " " + eq.getTypeId(Slot.HELMET) + " "
 						+ eq.getTypeId(Slot.CHEST) + " " + eq.getTypeId(Slot.PANTS) + " " + eq.getTypeId(Slot.SHOULDER) + " "
 						+ eq.getTypeId(Slot.BOOTS) + " " + eq.getTypeId(Slot.OFFHAND) + " " + eq.getTypeId(Slot.MAINHAND) + " "
-						+ player.getPercentageHp() + " " + combat + " 0 0 0 0 0 0";
+						+ player.getPercentageHp() + " " 
+						+ (social==70 ? combat : social) + " " 
+						+ "0 0 0 0 0 0";
 				// in char [UniqueID] [Name] [Race] [Gender] [HairStyle] [XPos]
 				// [YPos] [ZPos] [Rotation] [Helm] [Armor] [Pants] [ShoulderMount]
 				// [Boots] [Shield] [Weapon] [Hp%] [CombatMode] 0 0 0 [Boosted] [PKMode]
@@ -386,9 +392,10 @@ public class PacketFactory {
 		case SOCIAL:
 			if(args.length>1){
 				Player player = (Player)args[0];
-				int emotionId = (Integer)args[1];
-				return "social char " + player.getEntityId() + " "
-				+ emotionId;
+				Long emotionId = (Long)args[1];
+				return "social char "
+						+ player.getEntityId() + " "
+						+ emotionId;
 			}
 			break;
 			
@@ -1245,6 +1252,90 @@ public class PacketFactory {
 				return "exch_money "+money;
 			}
 			break;
+		case U_SHOP:
+			String uShopType = (String) args[0];
+				
+			if(uShopType.equals("open")){
+				Player player = (Player) args[1];
+				Integer tabsAmmount = (Integer) args[2];
+				return "u_shop open 1 "+(player==null ? "-1" : player.getEntityId())+" 0 "+tabsAmmount;
+			} else if(uShopType.equals("close")){
+				return "u_shop close 1 0";
+			} else if(uShopType.equals("out")){
+				LivingObject livingObject = (LivingObject) args[1];
+				return "u_shop out "
+						+ getObjectType(livingObject)+ " "
+						+ livingObject.getEntityId();
+			} else if(uShopType.equals("reg")){
+				Integer success = (Integer) args[1];
+				Integer position = (Integer) args[2];
+				Integer ammount = (Integer) args[3];
+				
+				if(success > 0){
+					ShopItem shopItem = (ShopItem) args[4];
+					int[] itemsPosition = (int[]) args[5];
+					String packet = "u_shop reg "+success+" "+position+" "+shopItem.getGoldBars()+" "+shopItem.getSilverBars()+" "
+							+shopItem.getBronzeBars()+" "+shopItem.getPrice()+" "+itemsPosition[0]+" "+ammount+" ";
+					for(int i=1; i<itemsPosition.length; i++){
+						packet += itemsPosition[i];
+						if(i<itemsPosition.length-1)
+							packet += " ";
+					}
+					return packet;
+				} else {
+					return "u_shop reg "+success+" "+position+" "+ammount;
+				}
+			} else if(uShopType.equals("unreg")){
+				Integer success = (Integer) args[1];
+				Integer position = (Integer) args[2];
+				Integer ammount = (Integer) args[3];
+				return "u_shop unreg "+success+" "+position+" "+ammount;
+			} else if(uShopType.equals("start")){
+				return "u_shop start 1";
+			} else if(uShopType.equals("in")){
+				LivingObject livingObject = (LivingObject) args[1];
+				String shopDescription = (String) args[2];
+				return "u_shop in "+getObjectType(livingObject)+" "+livingObject.getEntityId()+" 1 "+ shopDescription;
+			} else if(uShopType.equals("modify")){
+				return "u_shop modify 1";
+			} else if(uShopType.equals("list_start")){
+				return "u_shop list_start";
+			} else if(uShopType.equals("list_end")){
+				return "u_shop list_end";
+			} else if(uShopType.equals("list")){
+				ShopItem shopItem = (ShopItem) args[1];
+				Integer ammount = (Integer) args[2];
+				Item<?> item = shopItem.getItem();
+				return "u_shop list "+shopItem.getShopPosition().getSlot()+" "+item.getType().getTypeId()+" "
+						+item.getGemNumber()+" "+item.getExtraStats()+" 0 0 0 "+shopItem.getGoldBars()+" "
+						+shopItem.getSilverBars()+" "+shopItem.getBronzeBars()+" "+shopItem.getPrice()+" "+ammount;
+					//u_shop list [position] [typeId] [GemNumber] [ExtraStats] [?] [currDurability] [MaxDurability]
+					//[GoldBars] [SilverBars] [BronzeBars] [Price] [Ammount]
+			} else if(uShopType.equals("buy")){
+				Integer success = (Integer) args[1];
+				Integer position = (Integer) args[2];
+				Integer ammount = (Integer) args[3];
+				return "u_shop buy "+success+" "+position+" "+ammount;
+			} else if(uShopType.equals("sell")){
+				Integer success = (Integer) args[1];
+				Integer position = (Integer) args[2];
+				Integer ammount = (Integer) args[3];
+				ShopItem shopItem = (ShopItem) args[4];
+				Long shopLime = (Long) args[5];
+				
+				return "u_shop sell "+success+" "+position+" "+shopItem.getGoldBars()+" "+shopItem.getSilverBars()+" "
+				+shopItem.getBronzeBars()+" "+shopLime+" "+ammount;
+			}
+			break;
+		case PICK_EXTRA:
+			if(args.length==1){
+				Item<?> item = (Item<?>)args[0];
+				
+				return "pick_extra " + item.getEntityId() + " " + item.getType().getTypeId() + " " + item.getGemNumber() + " "
+						+ item.getExtraStats() + " " + item.getUnknown1() + " " + item.getUnknown2() + " "
+						+ item.getUnknown3();
+			}
+			break;
 			
 		default:			
 			throw new UnsupportedOperationException();
@@ -1257,7 +1348,7 @@ public class PacketFactory {
 			return "c";
 		}
 		else if(object instanceof RoamingItem){
-			return "i";			
+			return "item";			
 		}
 		else if (object instanceof Npc) {
 			return "n";

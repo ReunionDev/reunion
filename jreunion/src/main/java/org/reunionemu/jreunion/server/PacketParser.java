@@ -23,6 +23,7 @@ import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.LivingObject;
 import org.reunionemu.jreunion.game.Npc;
 import org.reunionemu.jreunion.game.Pet;
+import org.reunionemu.jreunion.game.Shop;
 import org.reunionemu.jreunion.game.Pet.PetStatus;
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.Player.Race;
@@ -337,6 +338,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					player.sendStatus(Status.LIME);
 					player.sendStatus(Status.PENALTYPOINTS);
 					player.setQuestState(DatabaseUtils.getDinamicInstance().loadQuestState(player));
+					player.update();
 					
 					//handle with player pet loading
 					Pet pet = world.getPetManager().getPet(player);
@@ -425,7 +427,6 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					);
 	
 					client.getPlayer().stop(position);
-					client.getPlayer().update();
 				} else if (message[0].equals("stamina")) {
 					client.getPlayer().loseStamina((Integer.parseInt(message[1]) > 0) ? Integer.parseInt(message[1]) : 2);
 				}
@@ -487,9 +488,9 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					}
 				
 				} else if (message[0].equals("combat")) {
-					client.getPlayer().setIsInCombat(Integer.parseInt(message[1])==1);
+					player.setIsInCombat(Integer.parseInt(message[1])==1);
 				} else if (message[0].equals("social")) {
-					client.getPlayer().social(Integer.parseInt(message[1]));
+					player.setSocial(Long.parseLong(message[1]));
 				} else if (message[0].equals("levelup")) {
 					Status status = Status.byValue(Integer.parseInt(message[1])+10);
 					player.addStatus(status);
@@ -945,6 +946,51 @@ public class PacketParser extends EventDispatcher implements EventListener{
 						
 						player.getExchange().request(target);
 						
+					}
+				} else if (message[0].equals("u_shop")) {	//exchange request with another player
+					if (message.length > 1) {
+						if(message[1].equals("close")){
+							if(player.getShop() != null){
+								Shop buyingFromShop = player.getPosition().getLocalMap().getShopBuying(player);
+								if(buyingFromShop != null){
+									buyingFromShop.removePlayerBuying(player.getShop());
+								}
+								player.getShop().close();
+							}
+						} else if(message[1].equals("reg")){
+							int shopPosition = Integer.parseInt(message[2]);
+							int invTab = Integer.parseInt(message[3]);
+							int goldBars =  Integer.parseInt(message[4]);
+							int silverBars =  Integer.parseInt(message[5]);
+							int bronzeBars =  Integer.parseInt(message[6]);
+							long price =  Long.parseLong(message[7]);
+							int invPosX =  Integer.parseInt(message[8]);
+							int invPosY =  Integer.parseInt(message[9]);
+							
+							player.getShop().regItem(shopPosition, invTab, goldBars, silverBars, bronzeBars, price, invPosX, invPosY);
+						} else if(message[1].equals("unreg")){
+							Integer position = Integer.parseInt(message[2]);
+							Integer ammount = Integer.parseInt(message[4]);
+							
+							player.getShop().unRegItem(position, ammount);
+						}  else if(message[1].equals("start")){
+							player.getShop().start(message);
+						} else if(message[1].equals("modify")){
+							for(Shop shop : player.getShop().getPlayersBuying()){
+								shop.getOwner().getClient().sendPacket(Type.MSG, player.getName()+" closed shop.");
+								shop.close();
+							}
+							player.getShop().getPlayersBuying().clear();
+							player.getShop().modify();
+						} else if(message[1].equals("open")){
+							int shopOwnerEntityId = Integer.parseInt(message[3]);
+							Player shopOwner = world.getPlayerManager().getPlayer(shopOwnerEntityId);
+							shopOwner.getShop().open(player);
+						} else if(message[1].equals("buy")){
+							Integer position = Integer.parseInt(message[2]);
+							Integer ammount = Integer.parseInt(message[4]);
+							player.getShop().buy(position, ammount);
+						}
 					}
 				} else if (message[0].equals("..")) {
 					//client keep alive
