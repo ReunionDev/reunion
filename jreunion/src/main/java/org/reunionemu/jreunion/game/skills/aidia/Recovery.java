@@ -1,15 +1,9 @@
 package org.reunionemu.jreunion.game.skills.aidia;
 
-
-import java.util.Iterator;
-import java.util.List;
-import java.util.Vector;
-
 import org.reunionemu.jreunion.game.Castable;
 import org.reunionemu.jreunion.game.LivingObject;
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.Skill;
-import org.reunionemu.jreunion.server.LocalMap;
 import org.reunionemu.jreunion.server.SkillManager;
 public class Recovery extends Skill implements Castable{
 

@@ -62,7 +62,13 @@ public abstract class Skill {
 	
 	public void handle(Player player, String [] arguments){
 		
-		List<LivingObject> targets = getTargets(arguments, player.getPosition().getLocalMap());
+		List<LivingObject> targets = new Vector<LivingObject>();
+		
+		if(arguments.length == 2){
+			targets.add(player);
+		} else if(arguments.length > 2) {
+			targets = getTargets(arguments, player.getPosition().getLocalMap());
+		}
 		
 		for(LivingObject target : targets){
 			if (Castable.class.isInstance(this)) {
