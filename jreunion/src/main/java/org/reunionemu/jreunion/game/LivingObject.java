@@ -171,7 +171,7 @@ public abstract class LivingObject extends WorldObject {
 		if (newHp <= 0) {
 			LoggerFactory.getLogger(LivingObject.class).info("Player "+player+" killed npc "+this);
 			if(npc != null){
-					((Npc<?>)this).kill(player);
+				npc.kill(player);
 			}
 		} else {
 			setHp(newHp);

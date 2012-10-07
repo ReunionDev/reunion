@@ -199,16 +199,16 @@ public class Npc<T extends NpcType> extends LivingObject {
 	
 	public void setBoss(){
 		if(this.getType() instanceof Mob){
-			Mob mob = ((Mob)this.getType());
+			//Mob mob = ((Mob)this.getType());
 			
 			if(!isBoss()){
 				setBoss(true);
 				setMaxHp(getMaxHp()*2);
 				setHp(getMaxHp());
-				mob.setExp(mob.getExp()*2);
-				mob.setLime(mob.getLime()*2);
-				mob.setDmg(mob.getDmg()*2);
-			}
+				//mob.setExp(mob.getExp()*2);
+				//mob.setLime(mob.getLime()*2);
+				//mob.setDmg(mob.getDmg()*2);
+			} 
 		}
 	}
 	
@@ -330,6 +330,11 @@ public class Npc<T extends NpcType> extends LivingObject {
 		if(isMutant()){
 			npcLime = (long) (npcLime * mutantModifier);
 			npcExp = (long) (npcLime * mutantModifier);
+		}
+		
+		if(isBoss()){
+			npcLime = (long) (npcLime * 2);
+			npcExp = (long) (npcLime * 2);
 		}
 		
 		npcExp = (npcExp <= 0) ? 1 : npcExp;	//check that player will receive a minimum ammount of exp
@@ -574,10 +579,22 @@ public class Npc<T extends NpcType> extends LivingObject {
 		
 		setAttacking(true);
 		
-		int npcDmg = getDamage((int)player.getDef());
-		npcDmg = (npcDmg < 1) ? 1 : npcDmg;
+		List<Skill> defensiveSkills = player.getDefensiveSkills();
 		
-		player.setHp(player.getHp() - npcDmg);
+		if(defensiveSkills.size() == 0){
+				int npcDmg = getDamage((int)player.getDef());
+				if(isBoss()){
+					npcDmg = npcDmg * 2;
+				}
+				npcDmg = (npcDmg < 1) ? 1 : npcDmg;
+				player.setHp(player.getHp() - npcDmg);
+		} else {
+			for(Skill skill : defensiveSkills){
+				if(player.getSkillLevel(skill) > 0){
+					skill.work(player, this);
+				}
+			}
+		}
 		this.getInterested().sendPacket(Type.ATTACK,this,player,0);
 		setAttacking(false);
 	}
@@ -651,7 +668,7 @@ public class Npc<T extends NpcType> extends LivingObject {
 			} else if(moveFree){
 				moveFree();
 			}
-		} catch (Throwable  e) {
+		} catch (Exception  e) {
 			LoggerFactory.getLogger(this.getClass()).info("Mob Bug "+e);
 			//TODO: Fix Mob move bug
 		}
