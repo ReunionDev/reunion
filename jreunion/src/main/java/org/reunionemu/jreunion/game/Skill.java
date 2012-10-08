@@ -147,6 +147,10 @@ public abstract class Skill {
 		
 	}
 
+	public void work(LivingObject target, LivingObject attacker){
+		
+	}
+	
 	public boolean levelUp(Player player) {
 	
 		synchronized(player){			

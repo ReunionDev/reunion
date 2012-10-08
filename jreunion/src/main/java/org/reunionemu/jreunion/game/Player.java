@@ -861,6 +861,8 @@ public abstract class Player extends LivingObject implements EventListener {
 	public java.util.Map<Skill, Integer> getSkills() {
 		return skills;
 	}
+	
+	abstract public List<Skill> getDefensiveSkills();
 
 	public List<Skill> getActiveShieldSkills(){
 		List<Skill> activeShieldSkills = new Vector<Skill>();

@@ -1,5 +1,8 @@
 package org.reunionemu.jreunion.game;
 
+import java.util.List;
+import java.util.Vector;
+
 import org.reunionemu.jreunion.server.Client;
 import org.reunionemu.jreunion.server.Tools;
 
@@ -35,5 +38,14 @@ public class AidiaPlayer extends Player {
 	public long getBaseDamage() {
 		
 		return (getLevel() / 4) + (getWisdom() / 2) + (getLeadership()/3);
+	}
+	
+	@Override
+	public List<Skill> getDefensiveSkills(){
+		List<Skill> skillList = new Vector<Skill>();
+		
+		skillList.add(getSkill(32));
+		
+		return skillList;
 	}
 }

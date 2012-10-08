@@ -1,5 +1,8 @@
 package org.reunionemu.jreunion.game;
 
+import java.util.List;
+import java.util.Vector;
+
 import org.reunionemu.jreunion.server.Client;
 import org.reunionemu.jreunion.server.Tools;
 
@@ -33,5 +36,13 @@ public class HumanPlayer extends Player {
 	@Override
 	public long getBaseDamage() {
 		return (getLevel() / 6) + (getDexterity() / 2)+ (getStrength()/3);
+	}
+	
+	@Override
+	public List<Skill> getDefensiveSkills(){
+		List<Skill> skillList = new Vector<Skill>();
+	
+		
+		return skillList;
 	}
 }

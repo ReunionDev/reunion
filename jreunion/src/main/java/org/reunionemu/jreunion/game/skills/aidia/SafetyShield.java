@@ -7,6 +7,7 @@ import org.reunionemu.jreunion.game.AidiaPlayer;
 import org.reunionemu.jreunion.game.Castable;
 import org.reunionemu.jreunion.game.Effectable;
 import org.reunionemu.jreunion.game.LivingObject;
+import org.reunionemu.jreunion.game.Npc;
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.Skill;
 import org.reunionemu.jreunion.game.skills.Modifier;
@@ -50,6 +51,10 @@ public class SafetyShield extends Skill implements Castable, Effectable{
 	
 	public void setEffectModifier(int effectModifier){
 		this.effectModifier = effectModifier;
+	}
+	
+	public boolean isActivated(){
+		return getEffectModifier()<=0;
 	}
 	
 	public float getDamageAbsorbModifier(){
@@ -210,5 +215,30 @@ public class SafetyShield extends Skill implements Castable, Effectable{
 		}
 			
 		return false;
+	}
+	
+	@Override
+	public void work(LivingObject target, LivingObject attacker){
+		if(!isActivated())
+			return;
+		
+		if(target instanceof Player){
+			Player player = (Player) target;
+			Npc<?> npc = null;
+			
+			if(attacker instanceof Npc){
+				npc = (Npc<?>)attacker;
+			} else {
+				player.getClient().sendPacket(Type.SAY, "Shield not implemented for the attacker type.");
+				return;
+			}
+			
+			long damage = npc.getDamage((int)player.getDef());
+			long manaLoss = (player.getMana() - damage < 0 ? damage - player.getMana() : damage);
+			long hpLoss = (damage == manaLoss ? 0 : damage-manaLoss);
+			player.setMana(player.getMana() - manaLoss);
+			player.setHp(player.getHp() - hpLoss);
+		}
+		
 	}
 }
