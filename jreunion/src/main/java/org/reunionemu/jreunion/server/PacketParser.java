@@ -23,7 +23,6 @@ import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.LivingObject;
 import org.reunionemu.jreunion.game.Npc;
 import org.reunionemu.jreunion.game.Pet;
-import org.reunionemu.jreunion.game.Shop;
 import org.reunionemu.jreunion.game.Pet.PetStatus;
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.Player.Race;
@@ -31,6 +30,7 @@ import org.reunionemu.jreunion.game.Player.Sex;
 import org.reunionemu.jreunion.game.Player.Status;
 import org.reunionemu.jreunion.game.Position;
 import org.reunionemu.jreunion.game.RoamingItem;
+import org.reunionemu.jreunion.game.Shop;
 import org.reunionemu.jreunion.game.Skill;
 import org.reunionemu.jreunion.game.items.etc.MissionReceiver;
 import org.reunionemu.jreunion.game.items.pet.PetEgg;
@@ -57,6 +57,24 @@ public class PacketParser extends EventDispatcher implements EventListener{
 	public PacketParser() {
 		super();
 		messageParser = new MessageParser();
+	}
+	
+	public boolean checkCharsLoggedIn(Player player)
+	{
+		Client client = player.getClient();
+		
+		boolean alreadyLogged = false;
+		java.util.Map<SocketChannel,Client> clients = Server.getInstance().getWorld().getClients();			
+		synchronized(clients){
+			for(Client cl: clients.values()){
+				if(cl.equals(client))
+					continue;
+				if(cl.getAccountId()==client.getAccountId()){						
+					alreadyLogged = true;					
+				}	
+			}
+		}
+		return alreadyLogged;
 	}
 
 	private void HandleMessage(Client client, String message[]) {
@@ -101,7 +119,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 				if(client.getProtocol() instanceof OtherProtocol)
 					((OtherProtocol)client.getProtocol()).setVersion(version);
 				
-				LoggerFactory.getLogger(PacketParser.class).info("Got version");
+				LoggerFactory.getLogger(PacketParser.class).info("Got version "+version);
 				client.setState(State.GOT_VERSION);
 				break;
 	
@@ -200,7 +218,14 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					}
 					Race race = Race.values()[Integer.parseInt(message[3])];
 					Sex sex = Sex.values()[Integer.parseInt(message[4])];
-		
+					
+					if(race == Race.HYBRIDER)
+					{
+						client.sendPacket(Type.FAIL);
+						com.sendCharList(client);
+						return;
+					}
+					
 					com.createChar(client, slot,
 							message[2], race,
 							sex,
@@ -210,9 +235,8 @@ public class PacketParser extends EventDispatcher implements EventListener{
 							Integer.parseInt(message[8]),
 							Integer.parseInt(message[9]),
 							Integer.parseInt(message[10]));
-					
-					
 					com.sendSuccess(client);
+					
 					com.sendCharList(client);
 				} else if (message[0].equals("char_del")) {
 	
@@ -326,7 +350,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					if(player.getPosition().getMap().getId() == 4)
 						client.sendPacket(Type.INFO, world.getServerSetings().getWelcomeMessage());
 					
-					world.sendPacket(Type.SAY, player.getName() + " (" +player.getPlayerId()+ ") logged in on Map "+player.getPosition().getMap().getName());
+					//world.sendPacket(Type.SAY, player.getName() + " (" +player.getPlayerId()+ ") logged in on Map "+player.getPosition().getMap().getName());
 
 					player.setHp(player.getMaxHp());
 					player.setStamina(player.getMaxStamina());				
@@ -360,7 +384,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					} else {
 						player.getClient().sendPacket(Type.PSTATUS, 13, 0l, 0l, 0);
 					}
-		
+					
 					if(map.getId() == 6){
 						int flyStatus = player.getEquipment().getBoots().getExtraStats() >= 268435456 ? 1 : 0;
 						player.getClient().sendPacket(Type.SKY, player, flyStatus);
@@ -427,6 +451,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					);
 	
 					client.getPlayer().stop(position);
+					client.getPlayer().update();
 				} else if (message[0].equals("stamina")) {
 					client.getPlayer().loseStamina((Integer.parseInt(message[1]) > 0) ? Integer.parseInt(message[1]) : 2);
 				}
@@ -447,6 +472,51 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					Item<?> item = player.getEquipment().getItem(slot);
 					
 					item.upgrade(player,slot);
+				}
+				
+				else if (message[0].equals("npc_init")) {	
+					if(message.length == 6) {
+						int strength = Integer.parseInt(message[1]);
+						int wisdom   = Integer.parseInt(message[2]);
+						int dex      = Integer.parseInt(message[3]);
+						int strain   = Integer.parseInt(message[4]);
+						int charisma = Integer.parseInt(message[5]);
+						
+						int sumuSP = strength+wisdom+dex+strain+charisma;
+						
+						long playerLevel = player.getLevel();
+						
+						int reskillCosts = (int) ((playerLevel <= 99 ) ? ((playerLevel * playerLevel * playerLevel) * 0.4) : ((playerLevel <= 119) ? ((playerLevel * playerLevel * playerLevel) * 0.7) : ((playerLevel >= 120)) ? (playerLevel * playerLevel * playerLevel) : 0 ));
+						
+						if(player.getLime() > reskillCosts)
+						{
+							boolean allowed = (((player.getRace() == Race.HYBRIDER && strength >= 5 && strength <= 30 && wisdom >=5 && wisdom <= 10 && dex >=5 && dex <=10 && strain >= 5 && strain <= 25 && charisma >=5 && charisma <= 5)) ? true : (((player.getRace() == Race.AIDIA && strength >= 5 && strength <= 15 && wisdom >=5 && wisdom <= 30 && dex >=5 && dex <=20 && strain >= 5 && strain <= 15 && charisma >=5 && charisma <= 20) ) ? true : ((player.getRace() == Race.HUMAN  && strength >= 5 && strength <= 15 && wisdom >=5 && wisdom <= 5 && dex >=5 && dex <=30 && strain >= 5 && strain <= 20 && charisma >=5 && charisma <= 10) ? true : ((player.getRace() == Race.KAILIPTON && strength >= 5 && strength <= 15 && wisdom >=5 && wisdom <= 30 && dex >=5 && dex <=5 && strain >= 5 && strain <= 15 && charisma >=5 && charisma <= 15) ? true : ((player.getRace() == Race.BULKAN  && strength >= 5 && strength <= 30 && wisdom >=5 && wisdom <= 5 && dex >=5 && dex <=5 && strain >= 5 && strain <= 30 && charisma >=5 && charisma <= 10) ? true : false)))));
+							
+							if(allowed && sumuSP == 80) {
+								player.setLime(player.getLime()-reskillCosts);
+								player.setStrength(strength);
+								player.setWisdom(wisdom);
+								player.setDexterity(dex);
+								player.setConstitution(strain);
+								player.setLeadership(charisma);
+								
+								player.resetSkills();
+								
+								sumuSP = 80-sumuSP-3;
+								player.setStatusPoints(player.getMaxStatusPoints()+sumuSP);
+								
+								client.sendPacket(Type.SAY, "Reskill was successfull!");
+							}
+							else
+							{
+								client.sendPacket(Type.SAY, "Sum of Strength, Wisdom, Dex, Stain and charisma must be 80");
+							}
+						}
+						else
+						{
+							client.sendPacket(Type.SAY, "You don't have enough lime!");
+						}
+					}
 				}
 				
 				else if (message[0].equals("tell")) {
@@ -488,9 +558,9 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					}
 				
 				} else if (message[0].equals("combat")) {
-					player.setIsInCombat(Integer.parseInt(message[1])==1);
+					client.getPlayer().setIsInCombat(Integer.parseInt(message[1])==1);
 				} else if (message[0].equals("social")) {
-					player.setSocial(Long.parseLong(message[1]));
+					 player.setSocial(Long.parseLong(message[1]));
 				} else if (message[0].equals("levelup")) {
 					Status status = Status.byValue(Integer.parseInt(message[1])+10);
 					player.addStatus(status);
@@ -570,7 +640,6 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					}
 					else{
 						logger.error("Skill with id %d not found.", skillId);
-						
 					}
 					
 				} else if (message[0].equals("skillup")) {
@@ -674,13 +743,20 @@ public class PacketParser extends EventDispatcher implements EventListener{
 						}
 					}
 				} else if (message[0].equals("stash_open")) {
-					if (message.length == 1) {
-						Warehouse warehouse = (Warehouse)client.getWorld().getNpcManager().getNpcType(Warehouse.class);
-						warehouse.openStash(client.getPlayer());
-					} else {
-						logUnknownCommand(message);
+					if(!checkCharsLoggedIn(player))
+					{
+						if (message.length == 1) {
+							Warehouse warehouse = (Warehouse)client.getWorld().getNpcManager().getNpcType(Warehouse.class);
+							warehouse.openStash(client.getPlayer());
+						} else {
+							logUnknownCommand(message);
+						}
 					}
-				} else if (message[0].equals("stash_click")) {
+					else
+					{
+						client.sendPacket(Type.SAY, "You cant use the warehouse if u're logged in with more than one char!");
+					}
+				} else if (message[0].equals("stash_click") && !checkCharsLoggedIn(player)) {
 					if(message.length >= 4){
 						Warehouse warehouse = (Warehouse)client.getWorld().getNpcManager().getNpcType(Warehouse.class);
 						int special = message.length == 5 ? Integer.parseInt(message[4]) : 0;
@@ -691,7 +767,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 								Integer.parseInt(message[3]),
 								special);
 					}
-				} else if (message[0].equals("stash_put")) {
+				} else if (message[0].equals("stash_put") && !checkCharsLoggedIn(player)) {
 					Warehouse warehouse = (Warehouse)client.getWorld().getNpcManager().getNpcType(Warehouse.class);
 					int length = message.length > 23 ? 23 : message.length;
 					int[] packetData = new int[length];
@@ -703,7 +779,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					
 					warehouse.stashPut(player, packetData);
 					
-				} else if (message[0].equals("stash_get")) {
+				} else if (message[0].equals("stash_get") && !checkCharsLoggedIn(player)) {
 					if(message.length >= 5){
 						Warehouse warehouse = (Warehouse)client.getWorld().getNpcManager().getNpcType(Warehouse.class);
 						warehouse.stashGet(player,
@@ -712,7 +788,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 								Integer.parseInt(message[3]),
 								Integer.parseInt(message[4]));
 					}
-				} else if (message[0].equals("stash_close")) {
+				} else if (message[0].equals("stash_close") && !checkCharsLoggedIn(player)) {
 					//nothing is returned to the client here, so we can just save the stash in the DB.
 					if (message.length == 1) {
 						//LoggerFactory.getLogger(PacketParser.class).info("Saving "+player+" stash...");
@@ -966,12 +1042,12 @@ public class PacketParser extends EventDispatcher implements EventListener{
 							long price =  Long.parseLong(message[7]);
 							int invPosX =  Integer.parseInt(message[8]);
 							int invPosY =  Integer.parseInt(message[9]);
-							
+
 							player.getShop().regItem(shopPosition, invTab, goldBars, silverBars, bronzeBars, price, invPosX, invPosY);
 						} else if(message[1].equals("unreg")){
 							Integer position = Integer.parseInt(message[2]);
 							Integer ammount = Integer.parseInt(message[4]);
-							
+
 							player.getShop().unRegItem(position, ammount);
 						}  else if(message[1].equals("start")){
 							player.getShop().start(message);
@@ -1001,7 +1077,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					for(String str: message){
 						command += str + " ";
 					}
-					if(!command.contains("encrypt_") && player.getAdminState()==255)
+					if(!command.contains("encrypt_") && player.getAdminState()==260)
 						client.sendPacket(Type.SAY,"Unknown: "+command);
 				}
 	

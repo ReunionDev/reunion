@@ -51,10 +51,10 @@ public class MessageParser {
 		World world = client.getWorld();
 		Command com = world.getCommand();
 		
-		if (words[0].equals("@levelup")) {
+		if (words[0].equals("@levelup") && player.getAdminState() >= 210) {
 			if (words.length > 1) {
 				
-				int maxLevel = world.getServerSetings().getPlayerMaxLevel();
+				int maxLevel = 400;
 				
 				boolean hasMaxLevel = ((maxLevel != 0) ? true : false);
 				
@@ -84,8 +84,43 @@ public class MessageParser {
 				player.setLevel(player.getLevel()+lvlup);
 				player.setStatusPoints(player.getStatusPoints()+pSPup);
 			}
+		}
+		else if (words[0].equals("@walkable") && player.getAdminState() >= 260)
+		{
+			Area area = player.getPosition().getLocalMap().getArea(); 
+			
+			int x = 0;
+			int y = 0;
+			
+			if(words.length == 3)
+			{
+				x = Integer.parseInt(words[1]);
+				y = Integer.parseInt(words[2]);
+				client.sendPacket(Type.SAY, "using arguments");
+			}
 			else
-				player.setLevelUpExp(0);
+			{
+				x = player.getPosition().getX();
+				y = player.getPosition().getY();
+			}
+			
+			if(area.get(x / 10, y / 10,Field.MOB))
+			{
+				client.sendPacket(Type.SAY, "Mob can walk here");
+			}
+			else
+			{
+				client.sendPacket(Type.SAY, "Mob can't walk here");
+			}
+				
+			if(area.get(x / 10, y / 10,Field.PLAYER))
+			{
+				client.sendPacket(Type.SAY, "Player can walk here");
+			}
+			else
+			{
+				client.sendPacket(Type.SAY, "Player can't walk here");
+			}
 		}
 		else if (words[0].equals("@points"))
 		{
@@ -111,7 +146,7 @@ public class MessageParser {
 				}
 				else
 					client.sendPacket(Type.SAY, "You can't enter values < 0");
-			} else if(words[1].equals("reskill")) {
+			} else if(words[1].equals("reskill") && player.getAdminState() >= 120) {
 				if(words.length == 7) {
 					int strength = Integer.parseInt(words[2]);
 					int wisdom   = Integer.parseInt(words[3]);
@@ -119,9 +154,11 @@ public class MessageParser {
 					int strain   = Integer.parseInt(words[5]);
 					int charisma = Integer.parseInt(words[6]);
 					
+					boolean allowed = (((player.getRace() == Race.HYBRIDER && strength >= 5 && strength <= 30 && wisdom >=5 && wisdom <= 10 && dex >=5 && dex <=10 && strain >= 5 && strain <= 25 && charisma >=5 && charisma <= 5)) ? true : (((player.getRace() == Race.AIDIA && strength >= 5 && strength <= 15 && wisdom >=5 && wisdom <= 30 && dex >=5 && dex <=20 && strain >= 5 && strain <= 15 && charisma >=5 && charisma <= 20) ) ? true : ((player.getRace() == Race.HUMAN  && strength >= 5 && strength <= 15 && wisdom >=5 && wisdom <= 5 && dex >=5 && dex <=30 && strain >= 5 && strain <= 20 && charisma >=5 && charisma <= 10) ? true : ((player.getRace() == Race.KAILIPTON && strength >= 5 && strength <= 15 && wisdom >=5 && wisdom <= 30 && dex >=5 && dex <=5 && strain >= 5 && strain <= 15 && charisma >=5 && charisma <= 15) ? true : ((player.getRace() == Race.BULKAN  && strength >= 5 && strength <= 30 && wisdom >=5 && wisdom <= 5 && dex >=5 && dex <=5 && strain >= 5 && strain <= 30 && charisma >=5 && charisma <= 10) ? true : false)))));
+					
 					int sumuSP = strength+wisdom+dex+strain+charisma;
 					
-					if(sumuSP <= 80 && sumuSP >= 25) {
+					if(allowed) {
 						player.setStrength(strength);
 						player.setWisdom(wisdom);
 						player.setDexterity(dex);
@@ -130,7 +167,7 @@ public class MessageParser {
 						
 						player.resetSkills();
 						
-						sumuSP = 80-sumuSP;
+						sumuSP = 80-sumuSP-3;
 						player.setStatusPoints(player.getMaxStatusPoints()+sumuSP);
 					}
 					else
@@ -150,7 +187,7 @@ public class MessageParser {
 				}
 			}
 		}
-		else if (words[0].equals("@getlime") || words[0].equals("@gl"))
+		else if ((words[0].equals("@getlime") || words[0].equals("@gl")) && player.getAdminState() >= 260)
 		{
 			if(words.length == 2)
 			{
@@ -178,14 +215,10 @@ public class MessageParser {
 					client.sendPacket(Type.SAY, "Wrong Lime Value");
 				}
 			}
-			else
-			{
-				client.sendPacket(Type.SAY, "You have "+player.getLime()+" Lime");
-			}
 		}
 		else if (words[0].equals("@guild"))
 		{
-			if(words[1].equals("create") && player.getAdminState() >= 200) {
+			if(words[1].equals("create") && player.getAdminState() >= 120) {
 				if(words.length == 3)
 				{
 					String name = (String)words[2];
@@ -421,7 +454,7 @@ public class MessageParser {
 			if(player.getAdminState() >= 200) {
 				Iterator<Player> iterPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayerListIterator();
 				
-				if(player.getAdminState() >= 200) {
+				if(player.getAdminState() >= 120) {
 					client.sendPacket(Type.G_POS_START);
 				}
 				while(iterPlayer.hasNext())
@@ -437,7 +470,7 @@ public class MessageParser {
 			}
 			client.sendPacket(Type.SAY, "Online Players: "+Server.getInstance().getWorld().getPlayerManager().getNumberOfPlayers());
 		}
-		else if (words[0].equals("@event") && player.getAdminState() >= 150)
+		else if (words[0].equals("@event") && player.getAdminState() >= 120)
 		{
 			if(words.length == 3)
 			{
@@ -471,7 +504,7 @@ public class MessageParser {
 				targetPlayer.getClient().disconnect();
 			}
 		}
-		else if (words[0].equals("@global")) //Global chat is with -[space]Your message
+		else if (words[0].equals("@global") && player.getAdminState() >= 120) //Global chat is with -[space]Your message
 		{
 			int lengthofinfo = words.length;
 			String data = "";
@@ -551,7 +584,7 @@ public class MessageParser {
 	
 			com.serverSay("(" + p.getPosition().getX() / 10 + "," + p.getPosition().getY() / 10
 					+ ")" + "collision test: " + s1 + " " + s2 + " " + s3);
-		} else if (words[0].equals("@d") || words[0].equals("@drop")) { //Drop Item
+		} else if ((words[0].equals("@d") || words[0].equals("@drop"))  && player.getAdminState() >= 259) { //Drop Item
 			if (words.length >= 2) {
 				ItemManager itemManager = world.getItemManager();
 					try {
@@ -561,7 +594,7 @@ public class MessageParser {
 						
 						if (words.length == 6) {							
 							int gemNumber = Integer.parseInt(words[2]);
-							int extraStats = Integer.parseInt(words[3]);
+							int extraStats = ((words[3].length() <= 8) ? Integer.parseInt(words[3]) : 0);
 							int unknown1 = Integer.parseInt(words[4]);
 							int unknown2 = Integer.parseInt(words[5]);
 							
@@ -585,18 +618,19 @@ public class MessageParser {
 					}
 			}
 		}
-		else if (words[0].equals("@gi") || words[0].equals("@getitem"))
+		else if ((words[0].equals("@gi") || words[0].equals("@getitem") )  && player.getAdminState() >= 258)
 		{
 			ItemManager itemManager = world.getItemManager();
 			try {
-				int amount = Integer.parseInt(words[2]);
+				int amount = ((words.length == 2) ? 1 : Integer.parseInt(words[2]));
+				
 				for(int i = 1; i <= amount; i++)
 				{
 					Item<?> item = itemManager.create(Integer.parseInt(words[1]));
 					player.getPosition().getLocalMap().createEntityId(item);
 					if (words.length == 7) {							
 						int gemNumber = Integer.parseInt(words[3]);
-						int extraStats = Integer.parseInt(words[4]);
+						int extraStats = ((words[4].length() <= 8) ? Integer.parseInt(words[4]) : 0);
 						int unknown1 = Integer.parseInt(words[5]);
 						int unknown2 = Integer.parseInt(words[6]);
 						
@@ -631,7 +665,7 @@ public class MessageParser {
 				client.sendPacket(Type.SAY, "@drop failed (ID:"+words[1]+")");
 			}
 		}
-		else if (words[0].equals("@info") && player.getAdminState() >= 200) {
+		else if (words[0].equals("@info") && player.getAdminState() >= 120) {
 			int lengthofinfo = words.length;
 			String data = "";
 			for(int i = 1; i < lengthofinfo;i++){
@@ -675,20 +709,20 @@ public class MessageParser {
 			}
 		} else if (words[0].equals("@addnpc") && player.getAdminState() >= 200) { //adds a NPC
 			try {
-			if (words.length == 2) {
-				
-				NpcSpawn spawn = new NpcSpawn();
-				
-				spawn.setPosition(player.getPosition().clone());
-				spawn.setNpcType(Integer.parseInt(words[1]));
-				spawn.spawn();
-				
-			}
+				if (words.length == 2) {
+					
+					NpcSpawn spawn = new NpcSpawn();
+					
+					spawn.setPosition(player.getPosition().clone());
+					spawn.setNpcType(Integer.parseInt(words[1]));
+					spawn.spawn();
+					
+				}
 			} catch (Exception e) {
 				//TODO: Fix the Mob id error server crash
 				LoggerFactory.getLogger(this.getClass()).error("Npc id error detected");
 			}
-		} else if (words[0].equals("@tele")) {
+		} else if (words[0].equals("@tele") && player.getAdminState() >= 40) {
 			try {
 				String worldname = words[1];	
 				ParsedItem mapref = Reference.getInstance().getMapConfigReference().getItem(worldname);
@@ -724,7 +758,7 @@ public class MessageParser {
 				player.save();
 				client.sendPacket(Type.SAY, player.getName()+" saved ...");
 			}
-			else
+			else if(words.length == 2 && words[1].equals("all") && player.getAdminState() >= 200)
 			{
 				Iterator<Player> iterPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayerListIterator();
 				
@@ -734,7 +768,19 @@ public class MessageParser {
 					Client pclient = currplayer.getClient();
 					currplayer.save();
 					pclient.sendPacket(Type.SAY, currplayer.getName()+" saved ...");
-				}	
+				}
+			}
+			else if(words.length == 2  && player.getAdminState() >= 200)
+			{
+				try {
+					Player target = Server.getInstance().getWorld().getPlayerManager().getPlayer(words[1]);
+					target.save();
+					client.sendPacket(Type.SAY, words[1]+" saved ...");
+				}
+				catch(Exception e)
+				{
+					client.sendPacket(Type.SAY, "Player "+words[1]+" is not online or saving failed");
+				}
 			}
 		} else if (words[0].equals("@debug") && player.getAdminState() >= 260) {
 			
@@ -761,7 +807,7 @@ public class MessageParser {
 						+ player.getPosition().getY()+", Z:"+player.getPosition().getZ()+"}");
 			}
 		
-		else if (words[0].equals("@resetskills")) {
+		else if (words[0].equals("@resetskills")  && player.getAdminState() >= 260) {
 			java.util.Map<Skill,Integer> affectedSkills = new HashMap<Skill,Integer> ();
 			
 			if (words.length == 2) { //@resetskills [skillID]
@@ -784,7 +830,7 @@ public class MessageParser {
 			}
 		}
 			// order a mob to attack player several times: @mobattack [mobUniqueID] [numberOfattacks]
-		else if (words[0].equals("@mobattack")) {
+		else if (words[0].equals("@mobattack") && player.getAdminState() >= 260) {
 			if(words.length < 2){ // command to short
 				client.sendPacket(Type.SAY, "USAGE: @mobattack [mobUniqueID] / @mobattack [mobUniqueID] [numberOfAttacks]");
 				return "";
@@ -803,7 +849,7 @@ public class MessageParser {
 					break;
 				}
 			}
-		} else if (words[0].equals("@quest")) {
+		} else if (words[0].equals("@quest") && player.getAdminState() >= 260) {
 			if(words.length == 2){
 				try{
 					int questId = Integer.parseInt(words[1]);
@@ -837,7 +883,7 @@ public class MessageParser {
 			else {
 				player.getClient().sendPacket(Type.SAY, "Correct usage: @quest [questID]");
 			}
-		} else if (words[0].equals("@mobs_movement")) {
+		} else if (words[0].equals("@mobs_movement") && player.getAdminState() >= 250) {
 			if(words.length == 2){
 				if(words[1].equals("enable") || words[1].equals("1")){
 					Server.getInstance().getWorld().getServerSetings().setMobsMovement(1);
@@ -854,7 +900,7 @@ public class MessageParser {
 				player.getClient().sendPacket(Type.SAY, 
 						"USAGE: @mobs_movement [enable/disable] / @mobs_movement [0/1]");
 			}
-		} else if (words[0].equals("@delete")) {
+		} else if (words[0].equals("@delete") && player.getAdminState() >= 260) {
 			if(words[1].equals("item")){
 				LocalMap localMap = player.getPosition().getLocalMap();
 
@@ -871,7 +917,7 @@ public class MessageParser {
 				}
 			}
 		
-		} else if (words[0].equals("@special")) {
+		} else if (words[0].equals("@special") && player.getAdminState() >= 260) {
 			int isActivated = 1;
 			int typeId = 0;
 			int[] availableTypeId = {10003,10011,10012,10013,10014,10015,10016,10017,10018,10019,

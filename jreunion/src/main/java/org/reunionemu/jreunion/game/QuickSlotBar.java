@@ -133,7 +133,7 @@ public class QuickSlotBar {
 		
 		if(qsItem==null)
 			return;
-			
+		
 		Item<?> item = qsItem.getItem();
 		
 		player.getPosition().getLocalMap().getWorld().getCommand().useItem(player, item, slot);

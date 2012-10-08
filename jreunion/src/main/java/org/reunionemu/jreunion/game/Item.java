@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.reunionemu.jreunion.game.Equipment.Slot;
 import org.reunionemu.jreunion.server.DatabaseUtils;
+import org.reunionemu.jreunion.server.Server;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
 
 public class Item<T extends ItemType> implements Entity{
@@ -121,13 +122,62 @@ public class Item<T extends ItemType> implements Entity{
 	
 	public void upgrade(Player player, Slot slot)
 	{	
-		setGemNumber(getGemNumber()+1);
-		DatabaseUtils.getDinamicInstance().saveItem(this);
-		DatabaseUtils.getDinamicInstance().deleteItem(player.getInventory().getHoldingItem().getItem().getItemId());
-		player.getInventory().setHoldingItem(null);
-		player.setDefense();
+		boolean upgrade = false;
 		
-		player.getClient().sendPacket(Type.UPGRADE, this, slot,1);
+		if(this.getType() instanceof PlayerItem){
+			PlayerItem pi = (PlayerItem) this.getType();
+			int uppamount = 0;
+			
+			int actualGemNumber = getGemNumber();
+			
+			if(pi.getLevel() < 181 && actualGemNumber < 15)
+			{
+				/*und Ruessis
++1   +12%             100%
++2   +26%              80%
++3   +44%              60%
++4   +68%              40%
++5  +100%              20% (kann auf +0 fallen)
+*/
+				//int actualLevel = getGradeLevel();
+				
+				if(actualGemNumber == 0  || actualGemNumber == 2 || actualGemNumber == 5 || actualGemNumber == 9 || actualGemNumber == 14)
+				{
+					float r = Server.getRand().nextFloat();
+					
+					upgrade = ((actualGemNumber == 0) ? true  : ((actualGemNumber == 2 && r <= .80) ? true : ((actualGemNumber == 5 && r <= .60) ? true : ((actualGemNumber == 9 && r <= .40) ? true : ((actualGemNumber == 14 && r <= .20) ? true : false)))));
+					
+					if (!upgrade)
+					{
+						uppamount = ((actualGemNumber == 2) ? -1 : ((actualGemNumber == 5) ? -2 : ((actualGemNumber == 9) ? -3 : ((actualGemNumber == 14) ? -4 : ((actualGemNumber == 14 && Server.getRand().nextFloat() <= .05) ? -14 : 0)))));
+						player.getClient().sendPacket(Type.SAY, "Upgrading of item "+ pi.getName() +" failed");
+						
+					}
+					else
+					{
+						uppamount = 1;
+						player.getClient().sendPacket(Type.SAY, "Upgrading of item "+ pi.getName() +" was successfull");
+					}
+				}
+				else
+				{
+					upgrade = true;
+					uppamount = 1;
+				}
+			}
+			else
+			{
+				player.getClient().sendPacket(Type.SAY, "Upgrading of items with bigger level than 180 is not implemented yet");
+			}
+
+			setGemNumber(getGemNumber()+uppamount);
+			DatabaseUtils.getDinamicInstance().saveItem(this);
+			DatabaseUtils.getDinamicInstance().deleteItem(player.getInventory().getHoldingItem().getItem().getItemId());
+			player.getInventory().setHoldingItem(null);
+			player.setDefense();
+			
+			player.getClient().sendPacket(Type.UPGRADE, this, slot,((upgrade) ? 1 : 0));
+		}
 	}
 	
 	public void update(Player player, Slot slot){

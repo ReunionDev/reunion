@@ -7,15 +7,15 @@ package org.reunionemu.jreunion.game;
 public class ShopItem {
 
 	private ShopPosition shopPosition;
-	
+
 	private int goldBars;
-	
+
 	private int silverBars;
-	
+
 	private int bronzeBars;
 
 	private Item<?> item;
-	
+
 	private long price;
 
 	public ShopItem(ShopPosition shopPosition, int goldBars, int silverBars, int bronzeBars, long price, Item<?> item) {
