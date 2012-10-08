@@ -195,9 +195,9 @@ public class MessageParser {
 					long playerAddLime = Long.parseLong(words[1]);
 					long newLime = player.getLime()+playerAddLime;
 					
-					if(newLime > Integer.MAX_VALUE)
+					if(newLime > Long.MAX_VALUE)
 					{
-						newLime = Integer.MAX_VALUE;
+						newLime = Long.MAX_VALUE;
 					}
 					
 					if(newLime > 0)
@@ -593,7 +593,13 @@ public class MessageParser {
 						player.getPosition().getLocalMap().createEntityId(item);
 						
 						if (words.length == 6) {							
-							int gemNumber = Integer.parseInt(words[2]);
+							int gemNumber = 0;
+							if(item.getType().isUpgradable()){
+								gemNumber = Integer.parseInt(words[2]);
+								gemNumber = gemNumber > 15 ? 15 : gemNumber;
+							} else {
+								client.sendPacket(Type.SAY,item.getType().getName() + " it's not upgradable.");
+							}
 							int extraStats = ((words[3].length() <= 8) ? Integer.parseInt(words[3]) : 0);
 							int unknown1 = Integer.parseInt(words[4]);
 							int unknown2 = Integer.parseInt(words[5]);

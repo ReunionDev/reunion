@@ -2,6 +2,7 @@ package org.reunionemu.jreunion.game;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.reunionemu.jreunion.game.Player.Race;
 import org.reunionemu.jreunion.game.Player.Status;
 import org.reunionemu.jreunion.game.npc.Mob;
 import org.reunionemu.jreunion.game.quests.ExperienceQuest;
@@ -126,6 +127,42 @@ public abstract class LivingObject extends WorldObject {
 		this.name = livingObjectName;
 	}
 	
+	// 1-short range melee; 2-magic; 3-summon; 4-long range melee;
+	public int getLastAttackType(){
+		if (this instanceof Player) {
+			Player player = (Player) this;
+
+			// as Kailipton can use magic without a weapon, we will consider all attacks as Magic attack. 
+			if (player.getRace() == Race.KAILIPTON) {
+				return 2;
+			} else {
+				Item<?> weapon = player.getEquipment().getMainHand();
+				if (weapon == null) {
+					return 1;
+				} else {
+					if (weapon.getType() instanceof MeleeWeapon) {
+						return 1;
+					} else if (weapon.getType() instanceof MagicWeapon) {
+						return 2;
+					} else if (weapon.getType() instanceof SummonWeapon) {
+						return 3;
+					} else if (weapon.getType() instanceof RangedWeapon) {
+						return 4;
+					}
+				}
+			}
+		} else if(this instanceof Pet){
+			return 1;
+		} else if(this instanceof Npc){
+			if(((Npc<?>)this).getType() instanceof Mob){
+				Mob mob = (Mob)((Npc<?>)this).getType();
+				return mob.getAttackType();
+			}
+		}
+		
+		return 0;
+	}
+	
 	public void getsAttacked(Player player, long damage, boolean addAttack){
 		
 		Npc<?> npc = null;
@@ -163,10 +200,13 @@ public abstract class LivingObject extends WorldObject {
 		}
 		
 		if(npc.isMutant()){
+			damage = (long)(damage * npc.getMutantResistance(player));
+			
 			// Damage Calculation for Mutants
 			// The Mutant which is for the player race, gets 100% resistance value
 			// All other Mutant colors getting 25% resistance value
 			
+			/*
 			float resistance = npc.getMutantResistance(player);
 			
 			// Value caps to prevent invincible mobs and other problems
@@ -203,6 +243,7 @@ public abstract class LivingObject extends WorldObject {
 				if (resistance < 0.1) { resistance = 0.1f; }		
 				damage = (long)(damage * resistance);
 			}
+			*/
 			
 		}
 		
@@ -218,7 +259,7 @@ public abstract class LivingObject extends WorldObject {
 		}
 		this.getInterested().sendPacket(Type.ATTACK_VITAL, this);
 	}
-	
+
 	public static enum AttackType {
 		
 		NO_ATTACK(-1),

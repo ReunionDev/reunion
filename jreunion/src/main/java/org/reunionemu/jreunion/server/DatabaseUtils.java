@@ -1481,6 +1481,7 @@ public class DatabaseUtils extends Service {
 			quest.setDescription(questRs.getString("name"));
 			quest.setMinLevel(questRs.getInt("minlevel"));
 			quest.setMaxLevel(questRs.getInt("maxlevel"));
+			quest.setRepeatable(questRs.getInt("repeatable")==1);
 			
 			if(!loadQuestObjectives(quest) || !loadQuestRewards(quest)){
 				return null;

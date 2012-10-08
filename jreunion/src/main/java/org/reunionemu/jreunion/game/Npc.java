@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.reunionemu.jcommon.ParsedItem;
 import org.reunionemu.jcommon.Parser;
+import org.reunionemu.jreunion.game.Player.Race;
 import org.reunionemu.jreunion.game.items.equipment.*;
 import org.reunionemu.jreunion.game.npc.Mob;
 import org.reunionemu.jreunion.game.npc.NpcShop;
@@ -242,9 +243,20 @@ public class Npc<T extends NpcType> extends LivingObject {
 		return getMutantType() == 0 ? false : true;
 	}
 	
-	public float getMutantResistance(Player player){
+	public float getMutantResistance(LivingObject livingObject){
+	
 		float mobMutantModifier = Server.getInstance().getWorld().getServerSetings().getMobMutantModifier();
-		return mobMutantModifier;
+		
+		 /*  1(red) - Resistance against short-range physical attack
+		  *  2(blue) - Resistance against magical attack
+		  *  3(green) - Resistance against summon attack
+		  *  4(yellow) - Resistance against long-range physical attack
+		  */
+		if(getMutantType() == livingObject.getLastAttackType()){
+			return (float) (1 + mobMutantModifier);
+		} else {
+			return 1.15f;
+		}
 	}
 	
 	public int getMutantGemStoneType(boolean full){
@@ -267,7 +279,7 @@ public class Npc<T extends NpcType> extends LivingObject {
 			return (full) ? 220 : 540;
 		}
 		else {
-			return 541;
+			return (full) ? 221 : 541;
 		}
 	}
 	
@@ -309,8 +321,8 @@ public class Npc<T extends NpcType> extends LivingObject {
 			npcExp = (long) (npcLime * 2);
 		}
 		
-		npcExp = (npcExp <= 0) ? 1 : npcExp;	//check that player will receive a minimum ammount of exp
-		npcLime = (npcLime <= 0) ? 1 : npcLime; //check that player will receive a minimum ammount of lime
+		npcExp = (npcExp <= 0) ? 1 : npcExp;	//check that player will receive a minimum amount of exp
+		npcLime = (npcLime <= 0) ? 1 : npcLime; //check that player will receive a minimum amount of lime
 		
 		setHp(0);
 		localMap.removeEntity(this);
@@ -368,16 +380,23 @@ public class Npc<T extends NpcType> extends LivingObject {
 			if(Integer.parseInt(parsedItem.getMemberValue("Mob")) == this.getType().getTypeId()){
 				float rate = Float.parseFloat(parsedItem.getMemberValue("Rate"));
 				if( r < rate){
-					int itemType = Integer.parseInt(parsedItem.getMemberValue("Item"));
+					int itemTypeId = Integer.parseInt(parsedItem.getMemberValue("Item"));
+					ItemType itemType = itemManager.getItemType(itemTypeId);
 					
 					float gemLuck = Server.getRand().nextFloat();
 					float itemPlusByOne = getPosition().getLocalMap().getWorld().getServerSetings().getItemPlusByOne();
 					float itemPlusByTwo = getPosition().getLocalMap().getWorld().getServerSetings().getItemPlusByTwo();
-					int gemNumber = gemLuck < itemPlusByOne ? (gemLuck < itemPlusByTwo ? 3 : 1) : 0;
+					int gemNumber = 0;
 					
-					itemList.add(itemManager.create(itemType, gemNumber,
-													itemManager.getItemType(itemType).getMaxExtraStats(),
-													itemManager.getItemType(itemType).getMaxDurability(),
+					
+					
+					if(itemType.isUpgradable() && itemType.getLevel() <= 180){
+						gemNumber = (gemLuck < itemPlusByOne ? (gemLuck < itemPlusByTwo ? 3 : 1) : 0);
+					}
+					
+					itemList.add(itemManager.create(itemTypeId, gemNumber,
+													itemType.getMaxExtraStats(),
+													itemType.getMaxDurability(),
 													0,0));
 					break;
 				}
@@ -559,13 +578,25 @@ public class Npc<T extends NpcType> extends LivingObject {
 		
 		setAttacking(true);
 		
-		int npcDmg = getDamage((int)player.getDef());
-		if(isBoss()){
-			npcDmg = npcDmg * 2;
-		}
-		npcDmg = (npcDmg < 1) ? 1 : npcDmg;
-		player.setHp(player.getHp() - npcDmg);
+		//List<Skill> defensiveSkills = player.getDefensiveSkills();
+ 	
+		//if (defensiveSkills.size() == 0) {
+			int npcDmg = getDamage((int) player.getDef());
 
+			if (isBoss()) {
+				npcDmg = npcDmg * 2;
+			}
+			npcDmg = (npcDmg < 1) ? 1 : npcDmg;
+			player.setHp(player.getHp() - npcDmg);
+	/*	
+	} else {
+			for (Skill skill : defensiveSkills) {
+				if (player.getSkillLevel(skill) > 0) {
+					skill.work(player, this);
+				}
+			}
+		}
+		*/
 		this.getInterested().sendPacket(Type.ATTACK,this,player,0);
 		setAttacking(false);
 	}
@@ -598,6 +629,11 @@ public class Npc<T extends NpcType> extends LivingObject {
 			while (iterPlayer.hasNext()) {
 				//for(Player player : getPosition().getLocalMap().getPlayerList()) {
 				Player player = iterPlayer.next();
+				
+				if(this.getPosition().getMap().getId() != player.getPosition().getMap().getId()){
+				    continue;
+				}
+				
 				Position position = player.getPosition();
 				double distance = getPosition().distance(player.getPosition());
 			

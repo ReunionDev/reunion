@@ -1,6 +1,6 @@
 #Server configuration object
 [Server]
-DataPath=data/file
+DataPath=../../reunion-data/static/file
 xp = 1				# 1=1x, 2=2x, 3=3x...
 lime = 1			# 1=1x, 2=2x, 3=3x...
 DefaultMap = 4
@@ -20,7 +20,7 @@ ItemPlusByOne = 0.05		# 0.05 = 5%
 ItemPlusByTwo = 0.01		# 0.01 = 1%
 MobMutantChance = 0.1		# 0.1 = 10%
 MobMutantModifier = 0.5		# 0.5 = 50%
-MobsMovement = 1		# 0=Disabled 1=Enabled
+MobsMovement = 0		# 0=Disabled 1=Enabled
 CloseAttackRadius = 20
 RangeAttackRadius = 100
 DemolitionModifier = 0.5	#0.5 = 50%

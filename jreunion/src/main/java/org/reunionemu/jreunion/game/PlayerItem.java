@@ -6,13 +6,7 @@ package org.reunionemu.jreunion.game;
  */
 public class PlayerItem extends ItemType {
 	
-	private int level;
 	
-	private int reqStr;
-
-	private int reqDex;
-
-	private int reqInt;
 	
 	public PlayerItem(int id) {
 		super(id);
@@ -23,35 +17,5 @@ public class PlayerItem extends ItemType {
 		super.loadFromReference(id);
 	}
 	
-	public int getLevel() {
-		return level;
-	}	
 	
-	public void setLevel(int level) {
-		this.level = level;
-	}
-	
-	public int getReqDex() {
-		return reqDex;
-	}
-
-	public int getReqInt() {
-		return reqInt;
-	}
-
-	public int getReqStr() {
-		return reqStr;
-	}
-	
-	public void setReqDex(int reqDex) {
-		this.reqDex = reqDex;
-	}
-
-	public void setReqInt(int reqInt) {
-		this.reqInt = reqInt;
-	}
-
-	public void setReqStr(int reqStr) {
-		this.reqStr = reqStr;
-	}
 }

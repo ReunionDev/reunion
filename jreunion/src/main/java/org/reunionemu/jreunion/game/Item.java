@@ -93,6 +93,8 @@ public class Item<T extends ItemType> implements Entity{
 	}
 
 	public void setGemNumber(int gemNumber) {
+		if (this.gemNumber >= 15)
+			return;
 		this.gemNumber = gemNumber;
 		getType().setGemNumber(this);
 	}
@@ -122,6 +124,10 @@ public class Item<T extends ItemType> implements Entity{
 	
 	public void upgrade(Player player, Slot slot)
 	{	
+		if(!this.getType().isUpgradable()){
+			player.getClient().sendPacket(Type.SAY, getType().getName()+" it's not upgradable.");
+			return;
+		}
 		boolean upgrade = false;
 		
 		if(this.getType() instanceof PlayerItem){
@@ -132,24 +138,39 @@ public class Item<T extends ItemType> implements Entity{
 			
 			if(pi.getLevel() < 181 && actualGemNumber < 15)
 			{
-				/*und Ruessis
-+1   +12%             100%
-+2   +26%              80%
-+3   +44%              60%
-+4   +68%              40%
-+5  +100%              20% (kann auf +0 fallen)
-*/
+				/* und Ruessis
+				 * +1   +12%             100%
+				 * +2   +26%              80%
+				 * +3   +44%              60%
+				 * +4   +68%              40%
+				 * +5  +100%              20% (chance to return to +0)
+				 */
+				
 				//int actualLevel = getGradeLevel();
 				
-				if(actualGemNumber == 0  || actualGemNumber == 2 || actualGemNumber == 5 || actualGemNumber == 9 || actualGemNumber == 14)
+				if (actualGemNumber == 0 || actualGemNumber == 2
+						|| actualGemNumber == 5 || actualGemNumber == 9
+						|| actualGemNumber == 14)
 				{
 					float r = Server.getRand().nextFloat();
 					
-					upgrade = ((actualGemNumber == 0) ? true  : ((actualGemNumber == 2 && r <= .80) ? true : ((actualGemNumber == 5 && r <= .60) ? true : ((actualGemNumber == 9 && r <= .40) ? true : ((actualGemNumber == 14 && r <= .20) ? true : false)))));
+					upgrade = ((actualGemNumber == 0) ? true
+							: ((actualGemNumber == 2 && r <= .80) ? true
+									: ((actualGemNumber == 5 && r <= .60) ? true
+											: ((actualGemNumber == 9 && r <= .40) ? true
+													: ((actualGemNumber == 14 && r <= .20) ? true
+															: false)))));
 					
 					if (!upgrade)
 					{
-						uppamount = ((actualGemNumber == 2) ? -1 : ((actualGemNumber == 5) ? -2 : ((actualGemNumber == 9) ? -3 : ((actualGemNumber == 14) ? -4 : ((actualGemNumber == 14 && Server.getRand().nextFloat() <= .05) ? -14 : 0)))));
+						uppamount = ((actualGemNumber == 2) ? -1
+								: ((actualGemNumber == 5) ? -2
+										: ((actualGemNumber == 9) ? -3
+												: ((actualGemNumber == 14) ? -4
+														: ((actualGemNumber == 14 && Server
+																.getRand()
+																.nextFloat() <= .05) ? -14
+																: 0)))));
 						player.getClient().sendPacket(Type.SAY, "Upgrading of item "+ pi.getName() +" failed");
 						
 					}
