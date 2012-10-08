@@ -24,7 +24,7 @@ public class SafetyShield extends Skill implements Castable, Effectable{
 	public SafetyShield(SkillManager skillManager,int id) {
 		super(skillManager,id);
 	}
-
+	
 	public ValueType getValueType() {
 		return Modifier.ValueType.SHIELD;
 	}

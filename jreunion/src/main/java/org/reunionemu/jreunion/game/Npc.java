@@ -244,55 +244,27 @@ public class Npc<T extends NpcType> extends LivingObject {
 	
 	public float getMutantResistance(Player player){
 		float mobMutantModifier = Server.getInstance().getWorld().getServerSetings().getMobMutantModifier();
-		Item<?> item = player.getEquipment().getMainHand();
-
-		if(item == null){
-			return 1;
-		}
-		
-		switch (getMutantType()) {
-		case 1: {
-			if (item.getType() instanceof MeleeWeapon) {
-				return mobMutantModifier + 1;
-			}
-		}
-		case 2: {
-			if (item.getType() instanceof MagicWeapon) {
-				return mobMutantModifier + 1;
-			}
-		}
-		case 3: {
-			if (item.getType() instanceof SummonWeapon) {
-				return mobMutantModifier + 1;
-			}
-		}
-		case 4: {
-			if (item.getType() instanceof RangedWeapon) {
-				return mobMutantModifier + 1;
-			}
-		}
-		default: return 1;
-		}
+		return mobMutantModifier;
 	}
 	
-	public int getMutantGemStoneType(){
-		if(getType().getLevel() < 30){
-			return 535;
+	public int getMutantGemStoneType(boolean full){
+		if(getType().getLevel() <= 30){
+			return (full) ? 215 : 535;
 		}
-		else if(getLevel() < 60){
-			return 536;
+		else if(getLevel() <= 60){
+			return (full) ? 216 : 536;
 		}
-		else if(getLevel() < 90){
-			return 537;
+		else if(getLevel() <= 90){
+			return (full) ? 217 : 537;
 		}
-		else if(getLevel() < 120){
-			return 538;
+		else if(getLevel() <= 120){
+			return (full) ? 218 : 538;
 		}
-		else if(getLevel() < 150){
-			return 539;
+		else if(getLevel() <= 150){
+			return (full) ? 219 : 539;
 		}
-		else if(getLevel() < 180){
-			return 540;
+		else if(getLevel() <= 180){
+			return (full) ? 220 : 540;
 		}
 		else {
 			return 541;
@@ -328,8 +300,8 @@ public class Npc<T extends NpcType> extends LivingObject {
 		
 		
 		if(isMutant()){
-			npcLime = (long) (npcLime * mutantModifier);
-			npcExp = (long) (npcLime * mutantModifier);
+			npcLime = (long) (npcLime * (1 + mutantModifier));
+			npcExp = (long) (npcExp * (1 + mutantModifier));
 		}
 		
 		if(isBoss()){
@@ -376,13 +348,21 @@ public class Npc<T extends NpcType> extends LivingObject {
 		
 		//Handle with the mutant Item drop
 		if(isMutant()){
-			itemList.add(itemManager.create(getMutantGemStoneType(), 0, 0, 0, 0, 0));
+			itemList.add(itemManager.create(getMutantGemStoneType(false), 0, 0, 0, 0, 0));
 		}
-			
+		
+		float r = Server.getRand().nextFloat();
+		
+		//Rough Gem Drop
+		if(r <= .1 && Server.getRand().nextFloat() <= .20)
+		{
+			itemList.add(itemManager.create(getMutantGemStoneType(true), 0, 0, 0, 0, 0));
+		}
+		
 		//Handle with the Item drop chance
 		Parser dropList = Reference.getInstance().getDropListReference();
 		Iterator<ParsedItem> iter = dropList.getItemListIterator();
-		float r = Server.getRand().nextFloat();
+		
 		while(iter.hasNext()) {			
 			ParsedItem parsedItem = iter.next();
 			if(Integer.parseInt(parsedItem.getMemberValue("Mob")) == this.getType().getTypeId()){
@@ -579,22 +559,13 @@ public class Npc<T extends NpcType> extends LivingObject {
 		
 		setAttacking(true);
 		
-		List<Skill> defensiveSkills = player.getDefensiveSkills();
-		
-		if(defensiveSkills.size() == 0){
-				int npcDmg = getDamage((int)player.getDef());
-				if(isBoss()){
-					npcDmg = npcDmg * 2;
-				}
-				npcDmg = (npcDmg < 1) ? 1 : npcDmg;
-				player.setHp(player.getHp() - npcDmg);
-		} else {
-			for(Skill skill : defensiveSkills){
-				if(player.getSkillLevel(skill) > 0){
-					skill.work(player, this);
-				}
-			}
+		int npcDmg = getDamage((int)player.getDef());
+		if(isBoss()){
+			npcDmg = npcDmg * 2;
 		}
+		npcDmg = (npcDmg < 1) ? 1 : npcDmg;
+		player.setHp(player.getHp() - npcDmg);
+
 		this.getInterested().sendPacket(Type.ATTACK,this,player,0);
 		setAttacking(false);
 	}

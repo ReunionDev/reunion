@@ -34,7 +34,7 @@ public class OverHeadBlow extends WeaponAttack implements Castable, Effectable{
 		
 			int level = player.getSkillLevel(this);
 			if(level>0){
-				modifier += (0.07+((level-1)*getDamageModifier()));			
+				modifier += (0.1+((level-1)*getDamageModifier()));			
 			}				
 		}
 		
@@ -52,7 +52,7 @@ public class OverHeadBlow extends WeaponAttack implements Castable, Effectable{
 		 * 24 = m
 		 */
 		
-		return 0.23f/(getMaxLevel()-1);		
+		return 1.9f/(getMaxLevel()-1);
 		
 	}
 	

@@ -72,7 +72,7 @@ public class Area {
 			 if (readers.hasNext()) {
 
                 ImageReader reader = readers.next();
-                reader.setInput(iis, true);                
+                reader.setInput(iis, true);
                 BufferedImage image = reader.read(0);
                 
                 if(image.getType()!=BufferedImage.TYPE_BYTE_BINARY) {
@@ -82,14 +82,13 @@ public class Area {
                 if(image.getHeight() != mapSizeY || image.getWidth() != mapSizeX) {
                 	throw new Exception("Invalid image size: "+image.getWidth()+"/"+image.getHeight()+" expected: "+mapSizeX+"/"+mapSizeY);
                 }
-                
                 for(int y = 0;y<image.getHeight();y++) {
 	                for(int x = 0;x<image.getWidth();x++)
 	                {
 	                	this.set(x, y, field, (byte)image.getRGB(x, y)!=0);
 	                }
+	                
                 }
-                
             } else {
             	throw new Exception("No valid reader found for file: " + file);            	
             }

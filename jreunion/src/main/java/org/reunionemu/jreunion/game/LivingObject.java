@@ -163,10 +163,50 @@ public abstract class LivingObject extends WorldObject {
 		}
 		
 		if(npc.isMutant()){
-			damage = (long)(damage * npc.getMutantResistance(player));
+			// Damage Calculation for Mutants
+			// The Mutant which is for the player race, gets 100% resistance value
+			// All other Mutant colors getting 25% resistance value
+			
+			float resistance = npc.getMutantResistance(player);
+			
+			// Value caps to prevent invincible mobs and other problems
+			if (resistance > 0.9) { resistance = 0.9f; }
+			if (resistance < 0.1) { resistance = 0.1f; }
+				
+			if (npc.getMutantType() == 1) {
+				if (player.getRace() == Player.Race.BULKAN ) {
+					damage = (long)(damage * resistance);
+				} else if (player.getRace() == Player.Race.HYBRIDER ) {
+					damage = (long)(damage * resistance);
+				} else if (player.getRace() == Player.Race.PET ) {
+					damage = (long)(damage * resistance);
+				}
+				
+			}
+			else if (npc.getMutantType() == 2) {
+				if (player.getRace() == Player.Race.KAILIPTON) {
+					damage = (long)(damage * resistance);
+				}
+			}
+			else if (npc.getMutantType() == 3) {
+				if (player.getRace() == Player.Race.AIDIA) {
+					damage = (long)(damage * resistance);
+				}
+			}
+			else if (npc.getMutantType() == 4) {
+				if (player.getRace() == Player.Race.HUMAN) {
+					damage = (long)(damage * resistance);
+				}
+			} else {
+				// 25% of resistant value for non class specific resistance
+				resistance = resistance / 4;
+				if (resistance < 0.1) { resistance = 0.1f; }		
+				damage = (long)(damage * resistance);
+			}
+			
 		}
 		
-		long newHp = Tools.between(getHp() - damage, 0l, getMaxHp());				
+		long newHp = getHp() - damage;
 		
 		if (newHp <= 0) {
 			LoggerFactory.getLogger(LivingObject.class).info("Player "+player+" killed npc "+this);
