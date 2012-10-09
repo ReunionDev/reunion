@@ -180,7 +180,6 @@ public class SafetyShield extends Skill implements Castable, Effectable{
 			long durationModifier = getDurationModifier(player);
 			
 			if(getEffectModifier()+durationModifier > getAccumulatedTimeModifier(player)){
-				
 				player.getClient().sendPacket(Type.SAY, "SafetyShield skill acumulated time, already at maximum.");
 				return false;
 			}

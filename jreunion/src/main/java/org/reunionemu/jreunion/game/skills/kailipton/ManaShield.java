@@ -177,8 +177,9 @@ public class ManaShield extends Skill implements Castable, Effectable {
 		if(caster instanceof KailiptonPlayer){
 			final Player player = (Player) caster;
 			long newMana = player.getMana() - getManaModifier(player);
+			long durationModifier = getDurationModifier(player);
 			
-			if(getEffectModifier() == (int)getAccumulatedTimeModifier(player)){
+			if(getEffectModifier()+durationModifier  > (int)getAccumulatedTimeModifier(player)){
 				player.getClient().sendPacket(Type.SAY, "ManaShield skill acumulated time, already at maximum.");
 				return false;
 			}
@@ -187,7 +188,7 @@ public class ManaShield extends Skill implements Castable, Effectable {
 				player.getClient().sendPacket(Type.SAY, "ManaShield skill activated.");
 			
 			player.setMana(newMana);
-			setEffectModifier(Tools.between(getEffectModifier()+(int)getDurationModifier(player), 0, (int)getAccumulatedTimeModifier(player)));
+			setEffectModifier(Tools.between(getEffectModifier()+(int)durationModifier , 0, (int)getAccumulatedTimeModifier(player)));
 			
 			if(timer != null)
 				timer.cancel();

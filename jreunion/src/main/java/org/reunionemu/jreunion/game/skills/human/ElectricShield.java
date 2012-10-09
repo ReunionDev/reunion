@@ -176,8 +176,9 @@ public class ElectricShield extends Skill implements Castable, Effectable {
 		if(caster instanceof HumanPlayer){
 			final Player player = (Player) caster;
 			long newElectric = player.getElectricity() - getElectricModifier(player);
+			long durationModifier = getDurationModifier(player);
 
-			if(getEffectModifier() == getAccumulatedTimeModifier(player)){
+			if(getEffectModifier()+durationModifier > getAccumulatedTimeModifier(player)){
 				player.getClient().sendPacket(Type.SAY, "ElectricShield skill acumulated time, already at maximum.");
 				return false;
 			}
@@ -186,7 +187,7 @@ public class ElectricShield extends Skill implements Castable, Effectable {
 				player.getClient().sendPacket(Type.SAY, "ElectricShield skill activated.");
 
 			player.setElectricity(newElectric);
-			setEffectModifier(Tools.between(getEffectModifier()+(int)getDurationModifier(player), 0, (int)getAccumulatedTimeModifier(player)));
+			setEffectModifier(Tools.between(getEffectModifier()+(int)durationModifier, 0, (int)getAccumulatedTimeModifier(player)));
 
 			if(timer != null)
 				timer.cancel();
