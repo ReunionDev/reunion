@@ -20,9 +20,9 @@ public class Item<T extends ItemType> implements Entity{
 	
 	private int itemId = -1; //for database;
 
-	private int gemNumber;
+	private long gemNumber;
 
-	private int extraStats;
+	private long extraStats;
 	
 	private int durability;
 	
@@ -71,11 +71,11 @@ public class Item<T extends ItemType> implements Entity{
 		this.entityId = entityId;
 	}
 
-	public int getExtraStats() {
+	public long getExtraStats() {
 		return extraStats;
 	}
 
-	public int getGemNumber() {
+	public long getGemNumber() {
 		return gemNumber;
 	}
 
@@ -83,7 +83,7 @@ public class Item<T extends ItemType> implements Entity{
 		this.type = type;
 	}
 	
-	public void setExtraStats(int extraStats) {
+	public void setExtraStats(long extraStats) {
 		this.extraStats = extraStats;
 		getType().setExtraStats(this);
 	}
@@ -92,9 +92,7 @@ public class Item<T extends ItemType> implements Entity{
 		return itemType.isAssignableFrom(getType().getClass());
 	}
 
-	public void setGemNumber(int gemNumber) {
-		if (this.gemNumber >= 15)
-			return;
+	public void setGemNumber(long gemNumber) {
 		this.gemNumber = gemNumber;
 		getType().setGemNumber(this);
 	}
@@ -112,7 +110,7 @@ public class Item<T extends ItemType> implements Entity{
 	
 	public int getGradeLevel(){
 		
-		int gemNumber = getGemNumber();
+		int gemNumber = (int)getGemNumber();
 		
 		if(((PlayerItem)getType()).getLevel() < 181) {
 			return (gemNumber/1>0?1:0)+(gemNumber/3>0?1:0)+(gemNumber/6>0?1:0)+(gemNumber/10>0?1:0)+(gemNumber/15>0?1:0);
@@ -134,7 +132,7 @@ public class Item<T extends ItemType> implements Entity{
 			PlayerItem pi = (PlayerItem) this.getType();
 			int uppamount = 0;
 			
-			int actualGemNumber = getGemNumber();
+			int actualGemNumber = (int)getGemNumber();
 			
 			if(pi.getLevel() < 181 && actualGemNumber < 15)
 			{

@@ -634,8 +634,14 @@ public class MessageParser {
 				{
 					Item<?> item = itemManager.create(Integer.parseInt(words[1]));
 					player.getPosition().getLocalMap().createEntityId(item);
-					if (words.length == 7) {							
-						int gemNumber = Integer.parseInt(words[3]);
+					if (words.length == 7) {					
+						int gemNumber = 0;
+						if(item.getType().isUpgradable()){
+							gemNumber = Integer.parseInt(words[3]);
+							gemNumber = gemNumber > 15 ? 15 : gemNumber;
+						} else {
+							client.sendPacket(Type.SAY,item.getType().getName() + " it's not upgradable.");
+						}
 						int extraStats = ((words[4].length() <= 8) ? Integer.parseInt(words[4]) : 0);
 						int unknown1 = Integer.parseInt(words[5]);
 						int unknown2 = Integer.parseInt(words[6]);

@@ -31,9 +31,9 @@ public class GrindStone extends WhetStone implements Usable{
 			Item<?> slayerWeapon = player.getEquipment().getItem(Slot.SHOULDER);
 			
 			//update Slayer uses remain
-			int usesRemain = slayerWeapon.getExtraStats() + this.getMaxExtraStats();
+			int usesRemain = (int)(slayerWeapon.getExtraStats() + this.getMaxExtraStats());
 			if(usesRemain > slayerWeapon.getType().getMaxExtraStats()){
-				usesRemain = slayerWeapon.getType().getMaxExtraStats();
+				usesRemain = (int)slayerWeapon.getType().getMaxExtraStats();
 			}
 			slayerWeapon.setExtraStats(usesRemain);
 			DatabaseUtils.getDinamicInstance().saveItem(slayerWeapon);

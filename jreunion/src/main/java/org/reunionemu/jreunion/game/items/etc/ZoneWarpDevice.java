@@ -36,10 +36,10 @@ public class ZoneWarpDevice extends Etc implements Usable{
 		if(user instanceof Player){
 			Player player = (Player)user;
 			World world = player.getClient().getWorld();
-			Map map = world.getMap(item.getGemNumber());
+			Map map = world.getMap((int)item.getGemNumber());
 			
 			world.getCommand().GoToWorld((Player) user, map,
-					item.getExtraStats());
+					(int)item.getExtraStats());
 
 			if (player.getClient().getVersion() >= 2000) {
 				player.getClient().sendPacket(Type.UQ_ITEM, 1,

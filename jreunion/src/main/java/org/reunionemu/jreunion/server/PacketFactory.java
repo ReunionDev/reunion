@@ -981,13 +981,11 @@ public class PacketFactory {
 				int quickSlotPosition = (Integer) args[1];
 				int equipmentPosition = (Integer) args[2];
 				Item<?> item = (Item<?>) args[3];
-				int equipmentGemNumber = item.getGemNumber();
-				int equipmentExtraStatus = item.getExtraStats();
 				
 				return "usq " + type + " " + quickSlotPosition +" "
 						+ equipmentPosition + " "
-						+ equipmentGemNumber + " "
-						+ equipmentExtraStatus;
+						+ item.getGemNumber() + " "
+						+ item.getExtraStats();
 			}
 			break;
 		case UQ_ITEM:

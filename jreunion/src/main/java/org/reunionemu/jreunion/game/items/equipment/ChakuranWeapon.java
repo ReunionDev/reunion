@@ -104,7 +104,7 @@ public class ChakuranWeapon extends SpecialWeapon implements Usable{
 			}
 			
 			//update Chakuran uses remain
-			int usesRemain = chakuranWeapon.getExtraStats() - 20;
+			int usesRemain = (int)chakuranWeapon.getExtraStats() - 20;
 			if(usesRemain < 0){
 				return false;
 			}

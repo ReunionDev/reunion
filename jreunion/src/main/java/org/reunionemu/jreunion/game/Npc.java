@@ -395,7 +395,7 @@ public class Npc<T extends NpcType> extends LivingObject {
 					}
 					
 					itemList.add(itemManager.create(itemTypeId, gemNumber,
-													itemType.getMaxExtraStats(),
+													(int)itemType.getMaxExtraStats(),
 													itemType.getMaxDurability(),
 													0,0));
 					break;
@@ -578,25 +578,25 @@ public class Npc<T extends NpcType> extends LivingObject {
 		
 		setAttacking(true);
 		
-		//List<Skill> defensiveSkills = player.getDefensiveSkills();
+		List<Skill> defensiveSkills = player.getDefensiveSkills();
+		int npcDmg = getDamage((int) player.getDef());
+		npcDmg = (isBoss() ? npcDmg*2 : npcDmg); //check if npc is boss.
+		npcDmg = (npcDmg < 1) ? 1 : npcDmg; //make sure the npc will have a minimum damage value.
  	
-		//if (defensiveSkills.size() == 0) {
-			int npcDmg = getDamage((int) player.getDef());
-
-			if (isBoss()) {
-				npcDmg = npcDmg * 2;
-			}
-			npcDmg = (npcDmg < 1) ? 1 : npcDmg;
+		if (defensiveSkills.size() == 0) {
 			player.setHp(player.getHp() - npcDmg);
-	/*	
-	} else {
+		} else {
 			for (Skill skill : defensiveSkills) {
 				if (player.getSkillLevel(skill) > 0) {
-					skill.work(player, this);
+					if(!skill.work(player, this)){
+						player.setHp(player.getHp() - npcDmg);
+					}
+				} else {
+					player.setHp(player.getHp() - npcDmg);
 				}
 			}
 		}
-		*/
+		
 		this.getInterested().sendPacket(Type.ATTACK,this,player,0);
 		setAttacking(false);
 	}

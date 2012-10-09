@@ -262,10 +262,11 @@ public abstract class LivingObject extends WorldObject {
 
 	public static enum AttackType {
 		
-		NO_ATTACK(-1),
-		CLOSE_MELEE(0),
-		RANGE_MELEE(1),
-		RANGE_MAGIC(2);
+		NO_ATTACK(0),
+		CLOSE_MELEE(1),
+		MAGIC(2),
+		SUMMON(3),
+		RANGE_MELEE(4);
 		
 		int value;
 		AttackType(int value){

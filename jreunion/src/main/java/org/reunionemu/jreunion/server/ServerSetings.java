@@ -61,6 +61,10 @@ public class ServerSetings {
 
 	private int playerMaxLevel;
 	
+	private long inventoryLimeLimit; //Maximum lime allowed on inventory
+	
+	private long warehouseLimeLimit; //Maximum lime allowed on warehouse
+	
 	public ServerSetings() {
 		loadFromReference();
 	}
@@ -100,6 +104,8 @@ public class ServerSetings {
 			setRangeAttackRadius(100);
 			setDemolitionModifier(0.5f);
 			setPlayerMaxLevel(0);
+			setInventoryLimeLimit(1200000000l);
+			setWarehouseLimeLimit(10000000000l);
 			setWelcomeMessage("Hey, welcome on the Reunion Testserver");
 		} else {
 
@@ -290,6 +296,22 @@ public class ServerSetings {
 			} else {
 				// use default
 				setPlayerMaxLevel(0);
+			}
+			
+			if (server.checkMembers(new String[] { "InventoryLimeLimit" })) {
+				// use member from file
+				setInventoryLimeLimit(Long.parseLong(server.getMemberValue("InventoryLimeLimit")));
+			} else {
+				// use default
+				setInventoryLimeLimit(1200000000l);
+			}
+			
+			if (server.checkMembers(new String[] { "WarehouseLimeLimit" })) {
+				// use member from file
+				setWarehouseLimeLimit(Long.parseLong(server.getMemberValue("WarehouseLimeLimit")));
+			} else {
+				// use default
+				setWarehouseLimeLimit(10000000000l);
 			}
 		}
 	}
@@ -492,5 +514,21 @@ public class ServerSetings {
 
 	public void setDemolitionModifier(float demolitionModifier) {
 		this.demolitionModifier = demolitionModifier;
+	}
+
+	public long getInventoryLimeLimit() {
+		return inventoryLimeLimit;
+	}
+
+	public void setInventoryLimeLimit(long inventoryLimeLimit) {
+		this.inventoryLimeLimit = inventoryLimeLimit;
+	}
+
+	public long getWarehouseLimeLimit() {
+		return warehouseLimeLimit;
+	}
+
+	public void setWarehouseLimeLimit(long warehouseLimeLimit) {
+		this.warehouseLimeLimit = warehouseLimeLimit;
 	}
 }

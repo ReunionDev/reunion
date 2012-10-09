@@ -54,7 +54,7 @@ public class SafetyShield extends Skill implements Castable, Effectable{
 	}
 	
 	public boolean isActivated(){
-		return getEffectModifier()<=0;
+		return getEffectModifier()>0;
 	}
 	
 	public float getDamageAbsorbModifier(){
@@ -177,18 +177,19 @@ public class SafetyShield extends Skill implements Castable, Effectable{
 		if(caster instanceof AidiaPlayer){
 			final Player player = (Player) caster;
 			long newMana = player.getMana() - getManaModifier(player);
+			long durationModifier = getDurationModifier(player);
 			
-			if(getEffectModifier() == getAccumulatedTimeModifier(player)){
+			if(getEffectModifier()+durationModifier > getAccumulatedTimeModifier(player)){
 				
 				player.getClient().sendPacket(Type.SAY, "SafetyShield skill acumulated time, already at maximum.");
 				return false;
 			}
-			
+		
 			if(getEffectModifier() == 0)
 				player.getClient().sendPacket(Type.SAY, "SafetyShield skill activated.");
 			
 			player.setMana(newMana);
-			setEffectModifier(Tools.between(getEffectModifier()+(int)getDurationModifier(player), 0, (int)getAccumulatedTimeModifier(player)));
+			setEffectModifier(Tools.between(getEffectModifier()+(int)durationModifier, 0, (int)getAccumulatedTimeModifier(player)));
 			
 			if(timer != null)
 				timer.cancel();
@@ -211,6 +212,8 @@ public class SafetyShield extends Skill implements Castable, Effectable{
 				      }
 				    }
 			}, 1, 1 * 1000);
+			
+			player.getClient().sendPacket(Type.SKILL, player, skill);
 			return true;
 		}
 			
@@ -218,9 +221,9 @@ public class SafetyShield extends Skill implements Castable, Effectable{
 	}
 	
 	@Override
-	public void work(LivingObject target, LivingObject attacker){
+	public boolean work(LivingObject target, LivingObject attacker){
 		if(!isActivated())
-			return;
+			return false;
 		
 		if(target instanceof Player){
 			Player player = (Player) target;
@@ -230,15 +233,16 @@ public class SafetyShield extends Skill implements Castable, Effectable{
 				npc = (Npc<?>)attacker;
 			} else {
 				player.getClient().sendPacket(Type.SAY, "Shield not implemented for the attacker type.");
-				return;
+				return false;
 			}
 			
 			long damage = npc.getDamage((int)player.getDef());
-			long manaLoss = (player.getMana() - damage < 0 ? damage - player.getMana() : damage);
-			long hpLoss = (damage == manaLoss ? 0 : damage-manaLoss);
+			long playerMana = player.getMana();
+			long manaLoss = (playerMana - damage < 0 ? 0 : damage);
+			long hpLoss = (manaLoss==0 ? damage : 0);
 			player.setMana(player.getMana() - manaLoss);
 			player.setHp(player.getHp() - hpLoss);
 		}
-		
+		return true;
 	}
 }

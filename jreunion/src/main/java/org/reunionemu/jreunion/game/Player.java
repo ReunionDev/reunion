@@ -20,6 +20,7 @@ import org.reunionemu.jreunion.game.Equipment.Slot;
 import org.reunionemu.jreunion.game.items.equipment.Armor;
 import org.reunionemu.jreunion.game.items.pet.PetEgg;
 import org.reunionemu.jreunion.game.quests.QuestState;
+import org.reunionemu.jreunion.game.quests.reward.LimeReward;
 import org.reunionemu.jreunion.server.Client;
 import org.reunionemu.jreunion.server.Client.State;
 import org.reunionemu.jreunion.server.DatabaseUtils;
@@ -996,6 +997,18 @@ public abstract class Player extends LivingObject implements EventListener {
 	}
 
 	public void setLime(long lime) {
+		//check if player inventory lime limit is reached.
+		long limeLimit = Server.getInstance().getWorld().getServerSetings().getInventoryLimeLimit();
+		if(lime > limeLimit){
+			long limeOverLimit = lime - limeLimit;
+			lime = limeLimit;
+			Item<?> item = Server.getInstance().getWorld().getItemManager().create(925); //scroll
+			getPosition().getLocalMap().createEntityId(item);
+			item.setExtraStats((int)limeOverLimit);
+			InventoryItem inventoryItem = getInventory().storeItem(item, -1);
+			getClient().sendPacket(Type.MSG, "Inventory maximum lime limit reached. A scroll as been added to inventory.");
+			client.sendPacket(Type.PICK, inventoryItem);
+		}
 		this.lime = lime;
 		this.sendStatus(Status.LIME);
 	}

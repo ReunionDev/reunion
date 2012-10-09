@@ -935,6 +935,9 @@ public class DatabaseUtils extends Service {
 			if (rs.next())
 			{				
 				int type = rs.getInt("type");
+				if(type == 1014){
+					System.out.print("");
+				}
 				ItemType itemType = Server.getInstance().getWorld().getItemManager().getItemType(type);
 				
 				if (itemType == null) {
@@ -945,8 +948,8 @@ public class DatabaseUtils extends Service {
 				Item<?> item = new Item(itemType);
 				
 				item.setItemId(itemId);
-				item.setGemNumber(rs.getInt("gemnumber"));
-				item.setExtraStats(rs.getInt("extrastats"));
+				item.setGemNumber(rs.getLong("gemnumber"));
+				item.setExtraStats(rs.getLong("extrastats"));
 				item.setDurability(rs.getInt("durability"));
 				item.setUnknown1(rs.getInt("unknown1"));
 				item.setUnknown2(rs.getInt("unknown2"));

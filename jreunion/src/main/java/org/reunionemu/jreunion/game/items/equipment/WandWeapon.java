@@ -88,7 +88,7 @@ public class WandWeapon extends SpecialWeapon implements Usable{
 			}
 
 			//update WandWeapon uses remain
-			int usesRemain = wandWeapon.getGemNumber() - 1;
+			int usesRemain = (int)wandWeapon.getGemNumber() - 1;
 			if(usesRemain < 0){
 				return false;
 			}

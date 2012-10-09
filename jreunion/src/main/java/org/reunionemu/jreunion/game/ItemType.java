@@ -19,7 +19,7 @@ public class ItemType{
 
 	private String name;
 	
-	private int maxExtraStats;
+	private long maxExtraStats;
 	
 	private int maxDurability;
 	
@@ -212,11 +212,11 @@ public class ItemType{
 		this.maxDurability = maxDurability;
 	}
 
-	public int getMaxExtraStats() {
+	public long getMaxExtraStats() {
 		return maxExtraStats;
 	}
 
-	public void setMaxExtraStats(int maxExtraStats) {
+	public void setMaxExtraStats(long maxExtraStats) {
 		this.maxExtraStats = maxExtraStats;
 	}
 

@@ -147,8 +147,8 @@ public abstract class Skill {
 		
 	}
 
-	public void work(LivingObject target, LivingObject attacker){
-		
+	public boolean work(LivingObject target, LivingObject attacker){
+		return false;
 	}
 	
 	public boolean levelUp(Player player) {
