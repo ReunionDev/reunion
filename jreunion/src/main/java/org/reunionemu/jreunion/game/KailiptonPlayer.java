@@ -42,7 +42,7 @@ public class KailiptonPlayer extends Player {
 	public List<Skill> getDefensiveSkills(){
 		List<Skill> skillList = new Vector<Skill>();
 		
-		
+		skillList.add(getSkill(7));
 		
 		return skillList;
 	}

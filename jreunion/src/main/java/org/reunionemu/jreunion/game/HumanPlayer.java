@@ -42,7 +42,9 @@ public class HumanPlayer extends Player {
 	public List<Skill> getDefensiveSkills(){
 		List<Skill> skillList = new Vector<Skill>();
 	
+		skillList.add(getSkill(30));
 		
 		return skillList;
 	}
+	
 }
