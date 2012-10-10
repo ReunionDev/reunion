@@ -11,9 +11,6 @@ import org.junit.Test;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
-//import org.reunionemu.jreunion.messages.MessageServer;
-
-
 
 public class MessageServerTest {
 	private final String QUEUE_NAME = "test";

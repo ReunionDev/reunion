@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
-	<comment>Database</comment>	
-	<entry key="db.address">localhost</entry>
-	<entry key="db.database">reunion</entry>
-	<entry key="db.user">root</entry>
-	<entry key="db.password"></entry>
+	<comment>Database</comment>
+	<entry key="jdbc.driver">com.mysql.jdbc.Driver</entry>
+	<entry key="jdbc.url">jdbc:mysql://localhost/reunion</entry>
+	<entry key="jdbc.username">root</entry>
+	<entry key="jdbc.password"></entry>
+	<entry key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</entry>	
 </properties>

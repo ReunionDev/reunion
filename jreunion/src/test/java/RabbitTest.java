@@ -10,8 +10,6 @@ import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.MessageProperties;
 import com.rabbitmq.client.QueueingConsumer;
 
-
-
 public class RabbitTest {
 	private final String QUEUE_NAME = "test";
 	private Connection connection;

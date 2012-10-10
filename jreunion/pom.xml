@@ -7,6 +7,8 @@
 	<url>http://reunionemu.org</url>
 	<properties>
 		<workspace.basedir>${project.basedir}/../../</workspace.basedir>
+		<spring.version>[3.1,3.2)</spring.version>		
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<scm>
 		<url>scm:git:git@github.com:ReunionDev/reunion.git</url>
@@ -43,14 +45,18 @@
 	</ciManagement>
 	<dependencies>
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.10</version>
-		</dependency>
+			<groupId>org.reunionemu</groupId>
+			<artifactId>jcommon</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>		
 		<dependency>
-			<groupId>org.hamcrest</groupId>
-			<artifactId>hamcrest-all</artifactId>
-			<version>1.3</version>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>jreunion-data</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+			<classifier>resources</classifier>
+			<type>zip</type>
+			<!-- Make sure this isn't included on any classpath -->
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
@@ -72,26 +78,10 @@
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>1.6.6</version>
 		</dependency>
-
-		<dependency>
-			<groupId>org.reunionemu</groupId>
-			<artifactId>jcommon</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>4.1.6.Final</version>
-		</dependency>
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-entitymanager</artifactId>
-			<version>4.1.6.Final</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context</artifactId>
-			<version>3.1.2.RELEASE</version>
+			<version>4.1.7.Final</version>
 		</dependency>
 		<dependency>
 			<groupId>com.rabbitmq</groupId>
@@ -104,39 +94,11 @@
 			<version>2.1.1.RELEASE</version>
 		</dependency>
 		<dependency>
-			<groupId>javassist</groupId>
-			<artifactId>javassist</artifactId>
-			<version>3.12.1.GA</version>
-		</dependency>
-		<dependency>
-			<groupId>com.objectdb</groupId>
-			<artifactId>objectdb</artifactId>
-			<version>2.4.3</version>
-		</dependency>
-		<dependency>
-			<groupId>${project.groupId}</groupId>
-			<artifactId>jreunion-data</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-			<classifier>resources</classifier>
-			<type>zip</type>
-			<!-- Make sure this isn't included on any classpath -->
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-jpa</artifactId>
 			<version>1.1.2.RELEASE</version>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context-support</artifactId>
-			<version>3.1.2.RELEASE</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<version>3.1.2.RELEASE</version>
-		</dependency>
+		
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
@@ -150,12 +112,12 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
-			<version>3.1.2.RELEASE</version>
+			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
-			<version>3.1.2.RELEASE</version>
+			<version>${spring.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
@@ -166,24 +128,39 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
 			<version>2.5</version>
-			<scope>test</scope>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>javax.xml.bind</groupId>
 			<artifactId>jaxb-api</artifactId>
 			<version>2.2.7</version>
 		</dependency>
-
-
-
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>2.2.8</version>
+			<scope>test</scope>
+		</dependency>     
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>[4,5)</version>
+			<scope>test</scope>	
+		</dependency>		
+		<dependency>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-all</artifactId>
+			<version>1.3</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
-	<repositories>
-		<repository>
-			<id>objectdb</id>
-			<name>ObjectDB Repository</name>
-			<url>http://m2.objectdb.com</url>
-		</repository>
-	</repositories>
+	
 	<build>
 		<plugins>
 			<plugin>
