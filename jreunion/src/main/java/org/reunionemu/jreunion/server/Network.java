@@ -16,10 +16,8 @@ import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 import java.util.Set;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import org.reunionemu.jreunion.events.Event;
+import org.reunionemu.jreunion.events.EventDispatcher;
 import org.reunionemu.jreunion.events.EventListener;
 import org.reunionemu.jreunion.events.network.NetworkAcceptEvent;
 import org.reunionemu.jreunion.events.network.NetworkDataEvent;
@@ -28,13 +26,14 @@ import org.reunionemu.jreunion.events.network.NetworkSendEvent;
 import org.reunionemu.jreunion.events.server.ServerEvent;
 import org.reunionemu.jreunion.events.server.ServerStartEvent;
 import org.reunionemu.jreunion.events.server.ServerStopEvent;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
 
-public class Network extends Service implements Runnable, EventListener{
+public class Network extends EventDispatcher implements Runnable, EventListener {
 	
 	private final ByteBuffer buffer = ByteBuffer.allocate(16384);
 	
@@ -278,7 +277,6 @@ public class Network extends Service implements Runnable, EventListener{
 
 	@Override
 	public void handleEvent(Event event) {
-		super.handleEvent(event);
 		if(event instanceof NetworkSendEvent){
 			NetworkSendEvent networkSendEvent = (NetworkSendEvent) event;
 			this.notifySend(networkSendEvent.getSocketChannel());

@@ -27,7 +27,7 @@
     Seperated the hibernateProperties from the emf in case we want to override them for the test context.
      -->
     <util:map id="hibernateProperties">    
-       <entry key="hibernate.hbm2ddl.auto" value="create"/>
+       <entry key="hibernate.hbm2ddl.auto" value="validate"/>
        <entry key="hibernate.dialect" value="${hibernate.dialect}"/>
        <entry key="hibernate.connection.pool_size" value="5"/>
        <entry key="hibernate.current_session_context_class" value="thread"/>

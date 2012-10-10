@@ -45,7 +45,7 @@ import org.reunionemu.jreunion.server.PacketFactory.Type;
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-public class DatabaseUtils extends Service {
+public class DatabaseUtils {
 	
 	private DatabaseUtils() {
 		super();

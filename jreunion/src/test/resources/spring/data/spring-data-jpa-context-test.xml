@@ -18,7 +18,7 @@
         <property name="password" value=""/>
     </bean>
     
-    <util:map id="hibernateProperties">    
+    <util:map id="hibernateProperties">
        <entry key="hibernate.hbm2ddl.auto" value="create"/>
        <entry key="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect"/>
        <entry key="hibernate.connection.pool_size" value="5"/>
