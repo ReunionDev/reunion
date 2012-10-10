@@ -13,7 +13,7 @@ import org.reunionemu.jreunion.server.ClassFactory;
 import org.reunionemu.jreunion.server.Client;
 
 public abstract class Protocol {
-	public static Pattern login = Pattern.compile("(\\d+)\\n((login|play)\\n)?((.+)\\n)?((.+)\\n)?");
+	public static Pattern login = Pattern.compile("((login|play)[\\r\\n]+)(.+[\\r\\n]+)+");
 	
 	private static List<Class<?>> protocols = new Vector<Class<?>>();
 	
