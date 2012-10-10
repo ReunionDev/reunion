@@ -24,8 +24,7 @@ public class JaxbTest {
 	@Test
 	public void test() throws Exception {
 		
-		Resource resource = 
-				context.getResource("file:data/xml/quests.xml");
+		Resource resource = context.getResource("file:data/xml/quests.xml");
 		
 		JAXBContext context = JAXBContext.newInstance(Quests.class);
 		

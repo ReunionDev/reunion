@@ -188,7 +188,7 @@
 						<goals>
 							<goal>unpack</goal>
 						</goals>
-						<phase>generate-resources</phase>
+						<phase>generate-sources</phase>
 						<configuration>
 							<outputDirectory>data</outputDirectory>
 							<artifactItems>
@@ -225,15 +225,16 @@
                 <version>1.5</version>
                 <executions>
                     <execution>
+                		<phase>generate-sources</phase>
                         <id>xjc</id>
                         <goals>
-                            <goal>xjc</goal>
+                        	<goal>xjc</goal>
                         </goals>
                     </execution>
                 </executions>
                 <configuration>
                 	<schemaDirectory>data/xml</schemaDirectory>
-                	<packageName>org.reunionemu.jreunion.generated</packageName> <!-- The name of your generated source package -->
+                	<packageName>org.reunionemu.jreunion.generated</packageName>
                 </configuration>
             </plugin>
 		</plugins>
