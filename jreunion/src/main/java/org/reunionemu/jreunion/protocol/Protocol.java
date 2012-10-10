@@ -15,7 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public abstract class Protocol {
-public static Pattern login = Pattern.compile("^(\\d+[\\r\\n]+)((login|play)[\\r\\n]+)?(.+[\\r\\n]+)?$");
+public static Pattern login = Pattern.compile("^(?:\\d+[\\r\\n]+)(?:(?:login|play)[\\r\\n]+)?(?:.+[\\r\\n]+)*$");
 	
 	private static List<Class<?>> protocols = new Vector<Class<?>>();
 	
@@ -24,11 +24,11 @@ public static Pattern login = Pattern.compile("^(\\d+[\\r\\n]+)((login|play)[\\r
 	
 	public static boolean testLogin(String input) {
 		
-		logger.info("testing protocol for:\n%s", input);
+		logger.info("testing protocol for:\n{}", input);
 		Matcher matcher = login.matcher(input);
 		return matcher.matches();
-		
 	}
+	
 	private Client client;
 	public Protocol (Client client){
 		
