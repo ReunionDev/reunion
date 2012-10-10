@@ -42,7 +42,7 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="jpaVendorAdapter" ref ="hibernateVendor"/>
 		<property name="jpaPropertyMap" ref="hibernateProperties"/>
-		<property name="packagesToScan" value="org.reunionemu.jreunion"/>
+		<property name="packagesToScan" value="org.reunionemu.jreunion.server.database.model.impl"/>
 	</bean>
 
 	<!-- Add Transaction support -->

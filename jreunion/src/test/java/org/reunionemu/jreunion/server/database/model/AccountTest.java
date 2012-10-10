@@ -7,7 +7,8 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.reunionemu.jreunion.server.database.repositories.AccountRepository;
+import org.reunionemu.jreunion.server.database.dao.AccountDao;
+import org.reunionemu.jreunion.server.database.model.impl.AccountImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
@@ -20,16 +21,16 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class AccountTest {
 
 	@Autowired 
-	AccountRepository accountRespository;
+	AccountDao<Account> accountRespository;
 	
 	@Test
 	public void test() {
 		Assert.assertNotNull(accountRespository);
-		Account account = new Account();
-		account.username = "test";
-		account.email = "test@example.com";
-		account.name = "John Doe";
-		account.password = "1234";
+		Account account = new AccountImpl();
+		account.setUsername("test");
+		account.setEmail("test@example.com");
+		account.setName("John Doe");
+		account.setPassword("1234");
 		
 		accountRespository.save(account);
 		
