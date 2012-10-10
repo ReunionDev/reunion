@@ -11,13 +11,24 @@ import org.reunionemu.jcommon.ParsedItem;
 import org.reunionemu.jcommon.Parser;
 import org.reunionemu.jreunion.server.ClassFactory;
 import org.reunionemu.jreunion.server.Client;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public abstract class Protocol {
-	public static Pattern login = Pattern.compile("^(\\d+[\\r\\n]+)((login|play)[\\r\\n]+)?(.+[\\r\\n]+)?$");
+public static Pattern login = Pattern.compile("^(\\d+[\\r\\n]+)((login|play)[\\r\\n]+)?(.+[\\r\\n]+)?$");
 	
 	private static List<Class<?>> protocols = new Vector<Class<?>>();
 	
+	private static Logger logger = LoggerFactory.getLogger(Protocol.class);
 	
+	
+	public static boolean testLogin(String input) {
+		
+		logger.info("testing protocol for:\n%s", input);
+		Matcher matcher = login.matcher(input);
+		return matcher.matches();
+		
+	}
 	private Client client;
 	public Protocol (Client client){
 		
@@ -26,14 +37,6 @@ public abstract class Protocol {
 	}
 	public Client getClient(){
 		return client;
-	}
-	
-	public static boolean testLogin(String input) {
-		
-		System.out.println(input);
-		Matcher matcher = login.matcher(input);
-		return matcher.matches();
-		
 	}
 	
 	public static Protocol find(Client client, byte [] data) {
