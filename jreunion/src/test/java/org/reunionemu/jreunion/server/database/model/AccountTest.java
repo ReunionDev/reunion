@@ -14,8 +14,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({"classpath*:/META-INF/spring/**/*-context.xml", 
-	"classpath*:/META-INF/spring/**/*-context-test.xml"})
+@ContextConfiguration({"classpath*:/spring/**/*-context.xml", 
+	"classpath*:/spring/**/*-context-test.xml"})
 @ActiveProfiles("test")
 public class AccountTest {
 

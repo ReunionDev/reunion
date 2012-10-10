@@ -55,5 +55,4 @@
 	<!-- Use @Transaction annotations for managing transactions -->
 	<tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true" />	
 	
-
 </beans:beans>

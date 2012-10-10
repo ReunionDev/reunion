@@ -24,7 +24,13 @@
 	
 	<beans:bean id="applicationProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
 		<beans:property name="ignoreResourceNotFound" value="true" />
-	    <beans:property name="locations" ref="propertiesLocations" />
+	    <beans:property name="locations">
+	    	<beans:list>
+	    		<value>classpath*:/properties/**/*.xml</value>
+	    		<value>classpath*:config/**/*.xml</value>
+	    		<value>file:config/**/*.xml</value>
+	    	</beans:list>
+	    </beans:property>
   	</beans:bean>
 	
   	<context:property-placeholder properties-ref="applicationProperties"/>  
