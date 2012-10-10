@@ -27,7 +27,7 @@
 	    <beans:property name="locations">
 	    	<beans:list>
 	    		<value>classpath*:/properties/**/*.xml</value>
-	    		<value>classpath*:config/**/*.xml</value>
+	    		<value>classpath*:/config/**/*.xml</value>
 	    		<value>file:config/**/*.xml</value>
 	    	</beans:list>
 	    </beans:property>
@@ -46,6 +46,5 @@
 	</beans:bean>
 	
 	<cache:annotation-driven />
-		
 	
 </beans:beans>

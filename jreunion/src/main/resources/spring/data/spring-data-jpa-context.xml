@@ -13,8 +13,7 @@
 
 	<jpa:repositories base-package="org.reunionemu.jreunion" />
 	
-	<beans:bean
-		class="org.springframework.orm.hibernate4.HibernateExceptionTranslator" />
+	<beans:bean	class="org.springframework.orm.hibernate4.HibernateExceptionTranslator" />
 		
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="${jdbc.driver}"/>

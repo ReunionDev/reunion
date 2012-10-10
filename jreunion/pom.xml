@@ -219,6 +219,23 @@
 					<path>/${project.build.finalName}</path>
 				</configuration>
 			</plugin>
+			 <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jaxb2-maven-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <id>xjc</id>
+                        <goals>
+                            <goal>xjc</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                	<schemaDirectory>data/xml</schemaDirectory>
+                	<packageName>org.reunionemu.jreunion.generated</packageName> <!-- The name of your generated source package -->
+                </configuration>
+            </plugin>
 		</plugins>
 
 		<pluginManagement>
