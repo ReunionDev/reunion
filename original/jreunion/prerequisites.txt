@@ -1,1 +1,0 @@
-Prerequisite jar files now go into the /trunk/lib folder rather then the project root.
