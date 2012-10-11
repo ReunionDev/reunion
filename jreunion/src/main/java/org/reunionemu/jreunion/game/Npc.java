@@ -366,7 +366,7 @@ public class Npc<T extends NpcType> extends LivingObject {
 		float r = Server.getRand().nextFloat();
 		
 		//Rough Gem Drop
-		if(r <= .1 && Server.getRand().nextFloat() <= .20)
+		if(r <= .01 && Server.getRand().nextFloat() <= .20)
 		{
 			itemList.add(itemManager.create(getMutantGemStoneType(true), 0, 0, 0, 0, 0));
 		}
@@ -374,33 +374,43 @@ public class Npc<T extends NpcType> extends LivingObject {
 		//Handle with the Item drop chance
 		Parser dropList = Reference.getInstance().getDropListReference();
 		Iterator<ParsedItem> iter = dropList.getItemListIterator();
+		List<ItemType> drawItemList = new Vector<ItemType> ();
 		
 		while(iter.hasNext()) {			
 			ParsedItem parsedItem = iter.next();
-			if(Integer.parseInt(parsedItem.getMemberValue("Mob")) == this.getType().getTypeId()){
+		
+			if(Integer.parseInt(parsedItem.getMemberValue("Mob")) == getType().getTypeId()){
 				float rate = Float.parseFloat(parsedItem.getMemberValue("Rate"));
+				
 				if( r < rate){
 					int itemTypeId = Integer.parseInt(parsedItem.getMemberValue("Item"));
-					ItemType itemType = itemManager.getItemType(itemTypeId);
-					
-					float gemLuck = Server.getRand().nextFloat();
-					float itemPlusByOne = getPosition().getLocalMap().getWorld().getServerSetings().getItemPlusByOne();
-					float itemPlusByTwo = getPosition().getLocalMap().getWorld().getServerSetings().getItemPlusByTwo();
-					int gemNumber = 0;
-					
-					
-					
-					if(itemType.isUpgradable() && itemType.getLevel() <= 180){
-						gemNumber = (gemLuck < itemPlusByOne ? (gemLuck < itemPlusByTwo ? 3 : 1) : 0);
-					}
-					
-					itemList.add(itemManager.create(itemTypeId, gemNumber,
-													(int)itemType.getMaxExtraStats(),
-													itemType.getMaxDurability(),
-													0,0));
-					break;
+					drawItemList.add(itemManager.getItemType(itemTypeId));
 				}
-			}	
+			}
+		}
+		
+		
+		int drawItemListRandomPos = drawItemList.size();
+		
+		if(drawItemList.size() == 0){
+			//randomly select one item from the item list.
+			while(drawItemListRandomPos >= drawItemList.size()){
+				drawItemListRandomPos = Server.getRand().nextInt();
+			}
+		
+			ItemType itemType = drawItemList.get(drawItemListRandomPos);
+			//handles with the luck of drop a plus item.
+			float gemLuck = Server.getRand().nextFloat();
+			float itemPlusByOne = getPosition().getLocalMap().getWorld().getServerSetings().getItemPlusByOne();
+			float itemPlusByTwo = getPosition().getLocalMap().getWorld().getServerSetings().getItemPlusByTwo();
+			int gemNumber = 0;
+		
+			if(itemType.isUpgradable() && itemType.getLevel() <= 180){
+				gemNumber = (gemLuck < itemPlusByOne ? (gemLuck < itemPlusByTwo ? 3 : 1) : 0);
+			}
+					
+			itemList.add(itemManager.create(itemType.getTypeId(), gemNumber, (int)itemType.getMaxExtraStats(),
+					itemType.getMaxDurability(), 0, 0));
 		}
 		
 		//handles the items drop command and packets.
