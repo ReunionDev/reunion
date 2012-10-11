@@ -15,7 +15,7 @@ import org.reunionemu.jreunion.server.Client;
 import org.reunionemu.jreunion.server.Reference;
 
 public abstract class Protocol {
-	public static Pattern login = Pattern.compile("(\\d+)\\n((login|play)\\n)?((.+)\\n)?((.+)\\n)?");
+	public static Pattern login = Pattern.compile("^(?:\\d+[\\r\\n]+)(?:(?:login|play)[\\r\\n]+)?(?:.+[\\r\\n]+)*$");
 	
 	private static List<Class<?>> protocols = new Vector<Class<?>>();
 	
