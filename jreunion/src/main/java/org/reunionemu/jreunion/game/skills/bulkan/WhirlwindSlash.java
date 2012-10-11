@@ -36,7 +36,7 @@ public class WhirlwindSlash extends WeaponAttack implements Castable, Effectable
 		
 			int level = player.getSkillLevel(this);
 			if(level>0){
-				modifier += (0.07+((level-1)*getDamageModifier()));			
+				modifier += (0.1+((level-1)*getDamageModifier()));	
 			}				
 		}
 		
@@ -44,17 +44,14 @@ public class WhirlwindSlash extends WeaponAttack implements Castable, Effectable
 	}
 	public float getDamageModifier(){
 		/*
-		 * lvl 1 = 7%
-		 * lvl 2 = 7%
-		 * lvl 3 = 8%
+		 * lvl 1 = 10%
+		 * lvl 2 = %
+		 * lvl 3 = %
 		 * 
-		 * lvl 25 = 30%
-		 * 
-		 * 0.23 = 30% - 7%
-		 * 24 = m
+		 * lvl 25 = 200%
 		 */
 		
-		return (float)0.23/(getMaxLevel()-1);		
+		return (float)1.9/(getMaxLevel()-1);
 	}
 	
 	public float getStaminaModifier(){

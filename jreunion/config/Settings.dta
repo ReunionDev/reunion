@@ -25,6 +25,8 @@ CloseAttackRadius = 20
 RangeAttackRadius = 100
 DemolitionModifier = 0.5	#0.5 = 50%
 PlayerMaxLevel = 500		# if 0 then unlimited lvls
+InventoryLimeLimit = 2100000000		#lime
+WarehouseLimeLimit = 2100000000		#lime
 
 #Enhanced Exp Config
 ExpPlayerMobDifference = 250

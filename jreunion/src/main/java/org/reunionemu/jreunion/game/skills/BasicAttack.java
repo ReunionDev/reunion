@@ -87,7 +87,10 @@ public class BasicAttack extends Skill implements Castable, Effectable{
 								switch(modifier.getModifierType()){
 									
 									case MULTIPLICATIVE:
+										player.getClient().sendPacket(Type.SAY, "Mastery modifier: "+modifier.getModifier(attacker));
+										player.getClient().sendPacket(Type.SAY, "Dmg before Mastery: "+damage);
 										damage *= modifier.getModifier(attacker);
+										player.getClient().sendPacket(Type.SAY, "Dmg after Mastery: "+damage);
 										break;
 									case ADDITIVE:
 										damage += modifier.getModifier(attacker);

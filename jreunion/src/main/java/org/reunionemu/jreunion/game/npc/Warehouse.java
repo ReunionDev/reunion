@@ -22,6 +22,7 @@ import org.reunionemu.jreunion.game.StashPosition;
 import org.reunionemu.jreunion.game.items.etc.Lime;
 import org.reunionemu.jreunion.server.Client;
 import org.reunionemu.jreunion.server.DatabaseUtils;
+import org.reunionemu.jreunion.server.Server;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
 
 /**
@@ -138,6 +139,9 @@ public class Warehouse extends NpcType {
 	}
 	
 	public Item<?> removeItem(Player player, StashItem stashItem){
+		if(stashItem == null) {
+			return null;
+		}
 		Item<?> item = stashItem.getItem();
 		int slot = stashItem.getStashPosition().getSlot();
 		
@@ -151,7 +155,7 @@ public class Warehouse extends NpcType {
 	}
 	
 	//storing lime on the warehouse
-	public boolean storeLime(Player player, int pos, int limeAmmount){
+	public boolean storeLime(Player player, int pos, long limeAmount){
 		StashItem stashItem = player.getStash().getItem(pos);
 		Item<?> limeItem = null;
 		
@@ -161,20 +165,29 @@ public class Warehouse extends NpcType {
 			player.getStash().addItem(stashItem);
 		} else {
 			limeItem = stashItem.getItem();
+		} 
+		
+		long limeLimit = Server.getInstance().getWorld().getServerSetings().getWarehouseLimeLimit();
+		
+		//check if warehouse lime limit is reached.
+		if((limeItem.getGemNumber() + limeAmount) > limeLimit){
+			long limeOverLimit = limeItem.getGemNumber() + limeAmount - limeLimit;
+			limeAmount = limeAmount - limeOverLimit;
+			player.getClient().sendPacket(Type.MSG, "Inventory maximum lime limit reached.");
 		}
 		
 		//synchronized(player) {
-		if ((player.getLime() - limeAmmount) >= 0)
-			player.setLime(player.getLime() - limeAmmount);
+		if ((player.getLime() - limeAmount) >= 0)
+			player.setLime(player.getLime() - limeAmount);
 		else {
 			LoggerFactory.getLogger(Warehouse.class).warn(
-					"Player " + player + " is trying to remove " + limeAmmount
+					"Player " + player + " is trying to remove " + limeAmount
 							+ " lime from character. " + "Lime available " + player.getLime());
 			return false;
 		}
 		//}
 		
-		limeItem.setGemNumber((limeItem.getGemNumber()) + limeAmmount);		
+		limeItem.setGemNumber((limeItem.getGemNumber()) + limeAmount);		
 		DatabaseUtils.getDinamicInstance().saveItem(limeItem);
 		player.getClient().sendPacket(Type.STASH_TO, stashItem, player.getStash().getQuantity(pos));
 
@@ -195,7 +208,7 @@ public class Warehouse extends NpcType {
 		}
 		
 		//synchronized(player) {
-		if ((limeItem.getGemNumber() - limeAmmount) >= 0)
+		if ((limeItem.getGemNumber() + limeAmmount) >= 0)
 			limeItem.setGemNumber(limeItem.getGemNumber() + limeAmmount);
 		else {
 			LoggerFactory.getLogger(Warehouse.class).warn(

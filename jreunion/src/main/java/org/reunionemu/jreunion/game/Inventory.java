@@ -278,7 +278,19 @@ public class Inventory {
 			
 		}
 	}
-
+	
+	public InventoryItem getItem(int tab, int itemTypeId) {
+	 	for (int x = 0; x < 8; x++) {
+	 		for (int y = 0; y < 6; y++) {
+	 			InventoryItem inventoryItem = getItem(tab, x, y);
+	 			if(inventoryItem != null && inventoryItem.getItem().getType().getTypeId() == itemTypeId){
+	 				return inventoryItem;
+	 			}
+	 		}
+	 	}
+		return null;
+	}
+	
 	public Player getPlayer(){
 		Iterator<Player> playerIter = Server.getInstance().getWorld().getPlayerManager().getPlayerListIterator();
 		

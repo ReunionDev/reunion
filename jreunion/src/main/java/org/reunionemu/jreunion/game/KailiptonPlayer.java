@@ -1,5 +1,8 @@
 package org.reunionemu.jreunion.game;
 
+import java.util.List;
+import java.util.Vector;
+
 import org.reunionemu.jreunion.server.Client;
 import org.reunionemu.jreunion.server.Tools;
 
@@ -35,4 +38,12 @@ public class KailiptonPlayer extends Player {
 		return (getLevel() / 5) + (getWisdom() / 4);
 	}
 
+	@Override
+	public List<Skill> getDefensiveSkills(){
+		List<Skill> skillList = new Vector<Skill>();
+		
+		skillList.add(getSkill(7));
+		
+		return skillList;
+	}
 }

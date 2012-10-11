@@ -44,7 +44,7 @@ public class QuestManager {
 		for(int questId: quests.keySet()){
 			Quest quest = getQuest(questId);
 			
-			if(player.getLevel() >= quest.getMinLevel() && player.getLevel() <= quest.getMaxLevel())
+			if(player.getLevel() >= quest.getMinLevel() && player.getLevel() <= quest.getMaxLevel() && quest.isRepeatable())
 				questsList.add(quest);
 		} 
 		

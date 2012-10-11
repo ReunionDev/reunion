@@ -11,7 +11,8 @@ public interface Modifier {
 		DAMAGE,
 		FIRE,
 		LIGHT,
-		EARTH
+		EARTH,
+		SHIELD
 	}
 	public enum ModifierType{
 		ADDITIVE,
