@@ -34,7 +34,8 @@ public class JaxbMarshalTest {
 		Quest quest = new QuestImpl(){
 			{
 				id = 1;
-				description = "test quest";
+				name = "test quest";
+				description = "this is a test quest";
 				
 			}
 			
@@ -44,7 +45,7 @@ public class JaxbMarshalTest {
 		{
 			ExperienceReward reward = new ExperienceRewardImpl(){
 				{
-					amount = 10;
+					experience = 10;
 					
 				}
 				
@@ -55,7 +56,7 @@ public class JaxbMarshalTest {
 		{
 			LimeReward reward = new LimeRewardImpl(){
 				{
-					amount = 10;
+					lime = 10;
 					
 				}
 				

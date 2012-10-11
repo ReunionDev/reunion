@@ -1,19 +1,19 @@
 package org.reunionemu.jreunion.data.quests.rewards.impl;
 
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlValue;
 
 import org.reunionemu.jreunion.data.quests.rewards.ExperienceReward;
 
 @XmlType(name="experience")
 public class ExperienceRewardImpl extends RewardImpl implements ExperienceReward {
 	
-	@XmlAttribute(required=true)
-	protected Integer amount;
+	@XmlValue
+	protected Integer experience;
 
 	@Override
-	public Integer getAmount() {
-		return amount;
+	public Integer getExperience() {
+		return experience;
 	}
 
 }

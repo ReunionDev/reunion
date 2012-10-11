@@ -1,7 +1,7 @@
 package org.reunionemu.jreunion.data.quests.objectives.impl;
 
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlValue;
 
 import org.reunionemu.jreunion.data.quests.objectives.ObjectiveImpl;
 import org.reunionemu.jreunion.data.quests.objectives.PointsObjective;
@@ -9,12 +9,12 @@ import org.reunionemu.jreunion.data.quests.objectives.PointsObjective;
 @XmlType(name="points")
 public class PointsObjectiveImpl extends ObjectiveImpl implements PointsObjective {
 	
-	@XmlAttribute(required=true)
-	protected Integer amount;
+	@XmlValue
+	protected Integer points;
 
 	@Override
-	public Integer getAmount() {
-		return amount;
+	public Integer getPoints() {
+		return points;
 	}
 
 }

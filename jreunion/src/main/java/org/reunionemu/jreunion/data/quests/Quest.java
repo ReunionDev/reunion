@@ -5,13 +5,14 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlType;
 
 
-@XmlType
-public interface Quest {
 
-	List<Reward> getRewards();
-	List<Objective> getObjectives();
+public interface Quest {
+	
 	int getId();
 	String getDescription();
 	String getName();
+	List<Restriction> getRestrictions();
+	List<Reward> getRewards();
+	List<Objective> getObjectives();
 
 }

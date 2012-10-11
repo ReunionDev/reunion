@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlElements;
 import javax.xml.bind.annotation.XmlType;
 
@@ -28,27 +29,29 @@ public class QuestImpl implements Quest {
 	@XmlElement(required=false)
 	protected String description;
 	
+	@XmlElementWrapper(required=false)
 	@XmlElements(value={
 		@XmlElement(type=ExperienceRewardImpl.class, name="experience"),
 		@XmlElement(type=LimeRewardImpl.class, name="lime"),
 		@XmlElement(type=ItemRewardImpl.class, name="item")
 		})
-	protected List<Reward> rewards = new LinkedList<Reward>();
+	protected List<Reward> rewards;
 	
-	
+	@XmlElementWrapper(required=false)
 	@XmlElements(value={
 			@XmlElement(type=MobObjectiveImpl.class, name="mob"),
 			@XmlElement(type=PointsObjectiveImpl.class, name="points")
 		})
 	
-	protected List<Objective> objectives = new LinkedList<Objective>();
+	protected List<Objective> objectives;
 	
+	@XmlElementWrapper(required=false)
 	@XmlElements(value={
 			@XmlElement(type=LevelRestrictionImpl.class, name="level"),
 			@XmlElement(type=RaceRestrictionImpl.class, name="race")
 		})
-	protected List<Restriction> restrictions = new LinkedList<Restriction>();
-	
+	protected List<Restriction> restrictions;
+
 	@Override
 	public int getId() {
 		return id;
@@ -66,12 +69,25 @@ public class QuestImpl implements Quest {
 
 	@Override
 	public List<Reward> getRewards(){
+		if(rewards==null){
+			rewards = new LinkedList<Reward>();
+		}
 		return rewards;
 	}
 
 	@Override
 	public List<Objective> getObjectives() {
+		if(objectives==null){
+			objectives = new LinkedList<Objective>();
+		}
 		return objectives;
+	}
+	@Override
+	public List<Restriction> getRestrictions() {
+		if(restrictions==null){
+			restrictions = new LinkedList<Restriction>();
+		}
+		return restrictions;
 	}
 
 }
