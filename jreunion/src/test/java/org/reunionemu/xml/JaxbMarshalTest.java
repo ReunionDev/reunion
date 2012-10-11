@@ -9,16 +9,16 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 import org.junit.Test;
-import org.reunionemu.jreunion.data.QuestList;
-import org.reunionemu.jreunion.data.QuestListImpl;
-import org.reunionemu.jreunion.data.quests.Quest;
-import org.reunionemu.jreunion.data.quests.QuestImpl;
-import org.reunionemu.jreunion.data.quests.rewards.ExperienceReward;
-import org.reunionemu.jreunion.data.quests.rewards.ItemReward;
-import org.reunionemu.jreunion.data.quests.rewards.LimeReward;
-import org.reunionemu.jreunion.data.quests.rewards.impl.ExperienceRewardImpl;
-import org.reunionemu.jreunion.data.quests.rewards.impl.ItemRewardImpl;
-import org.reunionemu.jreunion.data.quests.rewards.impl.LimeRewardImpl;
+import org.reunionemu.jreunion.dao.QuestList;
+import org.reunionemu.jreunion.dao.QuestListImpl;
+import org.reunionemu.jreunion.model.Quest;
+import org.reunionemu.jreunion.model.QuestImpl;
+import org.reunionemu.jreunion.model.quests.rewards.ExperienceReward;
+import org.reunionemu.jreunion.model.quests.rewards.ExperienceRewardImpl;
+import org.reunionemu.jreunion.model.quests.rewards.ItemReward;
+import org.reunionemu.jreunion.model.quests.rewards.ItemRewardImpl;
+import org.reunionemu.jreunion.model.quests.rewards.LimeReward;
+import org.reunionemu.jreunion.model.quests.rewards.LimeRewardImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 

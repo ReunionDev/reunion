@@ -9,6 +9,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
+import org.reunionemu.jreunion.dao.AccountDao;
 import org.reunionemu.jreunion.game.Equipment;
 import org.reunionemu.jreunion.game.Equipment.Slot;
 import org.reunionemu.jreunion.game.ExchangeItem;
@@ -35,10 +36,9 @@ import org.reunionemu.jreunion.game.quests.LimeQuest;
 import org.reunionemu.jreunion.game.quests.QuestState;
 import org.reunionemu.jreunion.game.quests.objective.Objective;
 import org.reunionemu.jreunion.game.quests.reward.Reward;
+import org.reunionemu.jreunion.model.Account;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
 import org.reunionemu.jreunion.server.beans.SpringApplicationContext;
-import org.reunionemu.jreunion.server.database.dao.AccountDao;
-import org.reunionemu.jreunion.server.database.model.Account;
 import org.slf4j.LoggerFactory;
 
 
