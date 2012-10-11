@@ -35,18 +35,15 @@ public class JaxbMarshalTest {
 			{
 				id = 1;
 				name = "test quest";
-				description = "this is a test quest";
-				
-			}
-			
+				description = "this is a test quest";				
+			}			
 		};
 		
 
 		{
 			ExperienceReward reward = new ExperienceRewardImpl(){
 				{
-					experience = 10;
-					
+					experience = 10;					
 				}
 				
 			};
