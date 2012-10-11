@@ -233,6 +233,7 @@
                     </execution>
                 </executions>
                 <configuration>
+                	
                 	<schemaDirectory>data/xml</schemaDirectory>
                 	<packageName>org.reunionemu.jreunion.generated</packageName>
                 </configuration>

@@ -9,8 +9,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.reunionemu.jreunion.game.Equipment;
 import org.reunionemu.jreunion.game.Equipment.Slot;
 import org.reunionemu.jreunion.game.ExchangeItem;
@@ -18,7 +16,6 @@ import org.reunionemu.jreunion.game.HandPosition;
 import org.reunionemu.jreunion.game.InventoryItem;
 import org.reunionemu.jreunion.game.InventoryPosition;
 import org.reunionemu.jreunion.game.Item;
-import org.reunionemu.jreunion.game.items.pet.PetEgg;
 import org.reunionemu.jreunion.game.ItemType;
 import org.reunionemu.jreunion.game.Pet;
 import org.reunionemu.jreunion.game.Player;
@@ -39,6 +36,10 @@ import org.reunionemu.jreunion.game.quests.QuestState;
 import org.reunionemu.jreunion.game.quests.objective.Objective;
 import org.reunionemu.jreunion.game.quests.reward.Reward;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
+import org.reunionemu.jreunion.server.beans.SpringApplicationContext;
+import org.reunionemu.jreunion.server.database.dao.AccountDao;
+import org.reunionemu.jreunion.server.database.model.Account;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -116,6 +117,8 @@ public class DatabaseUtils {
 	public int Auth(String username, String password) {
 		if (!checkDinamicDatabase())
 			return -1;
+		
+//		/<Account> dao = SpringApplicationContext.getApplicationContext().getBean(AccountDao.class);
 		
 		Statement stmt;
 		try {

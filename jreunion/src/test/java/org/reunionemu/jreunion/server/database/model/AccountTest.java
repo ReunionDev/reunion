@@ -17,7 +17,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({"classpath*:/spring/**/*-context.xml", 
 	"classpath*:/spring/**/*-context-test.xml"})
-@ActiveProfiles("test")
 public class AccountTest {
 
 	@Autowired 

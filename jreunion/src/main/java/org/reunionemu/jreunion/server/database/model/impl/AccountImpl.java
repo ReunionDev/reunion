@@ -11,7 +11,10 @@ import org.reunionemu.jreunion.server.database.model.Account;
 
 @Entity
 @Table(name="accounts",
-uniqueConstraints=@UniqueConstraint(columnNames = { "id" }))
+uniqueConstraints={
+		@UniqueConstraint(columnNames = { "id" }),
+		@UniqueConstraint(columnNames = { "username" })
+})
 public class AccountImpl implements Account{
 	private static final long serialVersionUID = 1L;
 	
@@ -24,7 +27,7 @@ public class AccountImpl implements Account{
 	@Column(nullable=false, length=28)
 	String password;
 	
-	@Column(nullable=false, name="realname")
+	@Column(nullable=false)
 	String name;
 	
 	@Column(nullable=false)
