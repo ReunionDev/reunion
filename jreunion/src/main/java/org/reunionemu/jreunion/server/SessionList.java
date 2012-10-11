@@ -64,4 +64,11 @@ public class SessionList<T extends Session> extends LinkedList<T> implements Sen
 		}
 	}
 	
+	public void update(){
+		synchronized(this){
+			for(Session session : this){
+				session.getOwner().update();
+			}				
+		}
+	}
 }

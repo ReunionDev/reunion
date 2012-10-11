@@ -87,12 +87,12 @@ public class Equipment {
 		return item == null ? -1 : item.getEntityId();
 	}
 	
-	public int getExtraStats(Slot slot){
+	public long getExtraStats(Slot slot){
 		Item<?> item = getItem(slot); 
 		return item == null ? 0 : item.getExtraStats();
 	}
 	
-	public int getGemNumber(Slot slot){
+	public long getGemNumber(Slot slot){
 		Item<?> item = getItem(slot); 
 		return item == null ? 0 : item.getGemNumber();
 	}

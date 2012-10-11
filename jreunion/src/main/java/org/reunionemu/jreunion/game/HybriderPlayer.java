@@ -1,5 +1,8 @@
 package org.reunionemu.jreunion.game;
 
+import java.util.List;
+import java.util.Vector;
+
 import org.reunionemu.jreunion.server.Client;
 import org.reunionemu.jreunion.server.Tools;
 
@@ -37,4 +40,12 @@ public class HybriderPlayer extends Player {
 		return (getLevel() / 6) + (getStrength() / 5) + (getWisdom()/ 4) + (getDexterity() / 3);
 	}
 	
+	@Override
+	public List<Skill> getDefensiveSkills(){
+		List<Skill> skillList = new Vector<Skill>();
+		
+		
+		
+		return skillList;
+	}
 }

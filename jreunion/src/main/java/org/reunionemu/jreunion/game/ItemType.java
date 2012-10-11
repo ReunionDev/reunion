@@ -19,11 +19,21 @@ public class ItemType{
 
 	private String name;
 	
-	private int maxExtraStats;
+	private long maxExtraStats;
 	
 	private int maxDurability;
 	
 	private int maxGemNumber;
+	
+	private boolean isUpgradable;
+	
+	private int level;
+	
+	private int reqStr;
+
+	private int reqDex;
+
+	private int reqInt;
 
 	public ItemType(int type) {
 		super();
@@ -55,6 +65,38 @@ public class ItemType{
 		this.type = typeId;
 	}
 	
+	public int getLevel() {
+		return level;
+	}	
+	
+	public void setLevel(int level) {
+		this.level = level;
+	}
+	
+	public int getReqDex() {
+		return reqDex;
+	}
+
+	public int getReqInt() {
+		return reqInt;
+	}
+
+	public int getReqStr() {
+		return reqStr;
+	}
+	
+	public void setReqDex(int reqDex) {
+		this.reqDex = reqDex;
+	}
+
+	public void setReqInt(int reqInt) {
+		this.reqInt = reqInt;
+	}
+
+	public void setReqStr(int reqStr) {
+		this.reqStr = reqStr;
+	}
+	
 	/*
 	public String getName(){		
 		return Reference.getInstance().getItemReference()
@@ -74,6 +116,7 @@ public class ItemType{
 			setMaxExtraStats(0);
 			setMaxDurability(0);
 			setMaxGemNumber(0);
+			setUpgradable(false);
 			setName("Unknown");
 		} else {
 
@@ -119,6 +162,13 @@ public class ItemType{
 				// use default
 				setMaxGemNumber(0);
 			}
+			if (item.checkMembers(new String[] { "Upgradable" })) {
+				// use member from file
+				setUpgradable(Integer.parseInt(item.getMemberValue("Upgradable")) == 1);
+			} else {
+				// use default
+				setUpgradable(false);
+			}
 			
 			setName(item.getName());
 			
@@ -162,11 +212,11 @@ public class ItemType{
 		this.maxDurability = maxDurability;
 	}
 
-	public int getMaxExtraStats() {
+	public long getMaxExtraStats() {
 		return maxExtraStats;
 	}
 
-	public void setMaxExtraStats(int maxExtraStats) {
+	public void setMaxExtraStats(long maxExtraStats) {
 		this.maxExtraStats = maxExtraStats;
 	}
 
@@ -176,6 +226,14 @@ public class ItemType{
 
 	public void setMaxGemNumber(int maxGemNumber) {
 		this.maxGemNumber = maxGemNumber;
+	}
+
+	public boolean isUpgradable() {
+		return isUpgradable;
+	}
+
+	public void setUpgradable(boolean isUpgradable) {
+		this.isUpgradable = isUpgradable;
 	}
 	
 }

@@ -110,7 +110,7 @@ public class SlayerWeapon extends SpecialWeapon implements Usable {
 			}
 
 			//update Slayer uses remain
-			int usesRemain = slayerWeapon.getExtraStats() - 20;
+			int usesRemain = (int)slayerWeapon.getExtraStats() - 20;
 			if(usesRemain < 0){
 				return false;
 			}

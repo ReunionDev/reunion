@@ -1,5 +1,8 @@
 package org.reunionemu.jreunion.game;
 
+import java.util.List;
+import java.util.Vector;
+
 import org.reunionemu.jreunion.server.Client;
 import org.reunionemu.jreunion.server.Tools;
 
@@ -35,5 +38,14 @@ public class BulkanPlayer extends Player {
 	@Override
 	public long getBaseDamage() {
 		return getLevel()/6+(getStrength()/4)+(getConstitution()/5)+(getDexterity()/4);
+	}
+	
+	@Override
+	public List<Skill> getDefensiveSkills(){
+		List<Skill> skillList = new Vector<Skill>();
+		
+		
+		
+		return skillList;
 	}
 }

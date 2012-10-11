@@ -213,7 +213,7 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 					}
 				}				
 			}
-		}), 0, 10, TimeUnit.SECONDS);
+		}), 0, 7, TimeUnit.SECONDS);
 	
 		// work pet stats
 		if(playerManager.getNumberOfPlayers() > 0){

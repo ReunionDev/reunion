@@ -7,8 +7,11 @@ import org.reunionemu.jreunion.game.AidiaPlayer;
 import org.reunionemu.jreunion.game.Castable;
 import org.reunionemu.jreunion.game.Effectable;
 import org.reunionemu.jreunion.game.LivingObject;
+import org.reunionemu.jreunion.game.Npc;
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.Skill;
+import org.reunionemu.jreunion.game.skills.Modifier;
+import org.reunionemu.jreunion.game.skills.Modifier.ValueType;
 import org.reunionemu.jreunion.server.SkillManager;
 import org.reunionemu.jreunion.server.Tools;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
@@ -22,7 +25,11 @@ public class SafetyShield extends Skill implements Castable, Effectable{
 	public SafetyShield(SkillManager skillManager,int id) {
 		super(skillManager,id);
 	}
-
+	
+	public ValueType getValueType() {
+		return Modifier.ValueType.SHIELD;
+	}
+	
 	@Override
 	public int getMaxLevel() {
 		return 25;
@@ -44,6 +51,10 @@ public class SafetyShield extends Skill implements Castable, Effectable{
 	
 	public void setEffectModifier(int effectModifier){
 		this.effectModifier = effectModifier;
+	}
+	
+	public boolean isActivated(){
+		return getEffectModifier()>0;
 	}
 	
 	public float getDamageAbsorbModifier(){
@@ -166,18 +177,18 @@ public class SafetyShield extends Skill implements Castable, Effectable{
 		if(caster instanceof AidiaPlayer){
 			final Player player = (Player) caster;
 			long newMana = player.getMana() - getManaModifier(player);
+			long durationModifier = getDurationModifier(player);
 			
-			if(getEffectModifier() == getAccumulatedTimeModifier(player)){
-				
+			if(getEffectModifier()+durationModifier > getAccumulatedTimeModifier(player)){
 				player.getClient().sendPacket(Type.SAY, "SafetyShield skill acumulated time, already at maximum.");
 				return false;
 			}
-			
+		
 			if(getEffectModifier() == 0)
 				player.getClient().sendPacket(Type.SAY, "SafetyShield skill activated.");
 			
 			player.setMana(newMana);
-			setEffectModifier(Tools.between(getEffectModifier()+(int)getDurationModifier(player), 0, (int)getAccumulatedTimeModifier(player)));
+			setEffectModifier(Tools.between(getEffectModifier()+(int)durationModifier, 0, (int)getAccumulatedTimeModifier(player)));
 			
 			if(timer != null)
 				timer.cancel();
@@ -200,9 +211,37 @@ public class SafetyShield extends Skill implements Castable, Effectable{
 				      }
 				    }
 			}, 1, 1 * 1000);
+			
+			player.getClient().sendPacket(Type.SKILL, player, skill);
 			return true;
 		}
 			
 		return false;
+	}
+	
+	@Override
+	public boolean work(LivingObject target, LivingObject attacker){
+		if(!isActivated())
+			return false;
+		
+		if(target instanceof Player){
+			Player player = (Player) target;
+			Npc<?> npc = null;
+			
+			if(attacker instanceof Npc){
+				npc = (Npc<?>)attacker;
+			} else {
+				player.getClient().sendPacket(Type.SAY, "Shield not implemented for the attacker type.");
+				return false;
+			}
+			
+			long damage = npc.getDamage((int)player.getDef());
+			long playerMana = player.getMana();
+			long manaLoss = (playerMana - damage < 0 ? 0 : damage);
+			long hpLoss = (manaLoss==0 ? damage : 0);
+			player.setMana(player.getMana() - manaLoss);
+			player.setHp(player.getHp() - hpLoss);
+		}
+		return true;
 	}
 }

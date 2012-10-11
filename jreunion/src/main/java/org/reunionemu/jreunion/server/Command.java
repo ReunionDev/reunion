@@ -149,7 +149,9 @@ public class Command {
 		Map currPlayer = player.getPosition().getMap();
 		
 		if(mapTargetPlayer.getId() == currPlayer.getId())
+		{
 			GoToPos(player,target.getPosition());
+		}
 		else
 			player.getClient().sendPacket(Type.SAY, "Player is on other map. You must teleport to "+mapTargetPlayer.getName());
 	}
@@ -167,7 +169,8 @@ public class Command {
 		
 		entry.enter(player, false);
 		entry.sendPacket(Type.IN_CHAR, player, true);
-		
+
+		player.update();
 		client.sendPacket(Type.GOTO, position);
 	}
 

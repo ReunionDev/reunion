@@ -2,6 +2,7 @@ package org.reunionemu.jreunion.game;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.reunionemu.jreunion.game.Player.Race;
 import org.reunionemu.jreunion.game.Player.Status;
 import org.reunionemu.jreunion.game.npc.Mob;
 import org.reunionemu.jreunion.game.quests.ExperienceQuest;
@@ -126,6 +127,42 @@ public abstract class LivingObject extends WorldObject {
 		this.name = livingObjectName;
 	}
 	
+	// 1-short range melee; 2-magic; 3-summon; 4-long range melee;
+	public int getLastAttackType(){
+		if (this instanceof Player) {
+			Player player = (Player) this;
+
+			// as Kailipton can use magic without a weapon, we will consider all attacks as Magic attack. 
+			if (player.getRace() == Race.KAILIPTON) {
+				return 2;
+			} else {
+				Item<?> weapon = player.getEquipment().getMainHand();
+				if (weapon == null) {
+					return 1;
+				} else {
+					if (weapon.getType() instanceof MeleeWeapon) {
+						return 1;
+					} else if (weapon.getType() instanceof MagicWeapon) {
+						return 2;
+					} else if (weapon.getType() instanceof SummonWeapon) {
+						return 3;
+					} else if (weapon.getType() instanceof RangedWeapon) {
+						return 4;
+					}
+				}
+			}
+		} else if(this instanceof Pet){
+			return 1;
+		} else if(this instanceof Npc){
+			if(((Npc<?>)this).getType() instanceof Mob){
+				Mob mob = (Mob)((Npc<?>)this).getType();
+				return mob.getAttackType();
+			}
+		}
+		
+		return 0;
+	}
+	
 	public void getsAttacked(Player player, long damage, boolean addAttack){
 		
 		Npc<?> npc = null;
@@ -164,27 +201,72 @@ public abstract class LivingObject extends WorldObject {
 		
 		if(npc.isMutant()){
 			damage = (long)(damage * npc.getMutantResistance(player));
+			
+			// Damage Calculation for Mutants
+			// The Mutant which is for the player race, gets 100% resistance value
+			// All other Mutant colors getting 25% resistance value
+			
+			/*
+			float resistance = npc.getMutantResistance(player);
+			
+			// Value caps to prevent invincible mobs and other problems
+			if (resistance > 0.9) { resistance = 0.9f; }
+			if (resistance < 0.1) { resistance = 0.1f; }
+				
+			if (npc.getMutantType() == 1) {
+				if (player.getRace() == Player.Race.BULKAN ) {
+					damage = (long)(damage * resistance);
+				} else if (player.getRace() == Player.Race.HYBRIDER ) {
+					damage = (long)(damage * resistance);
+				} else if (player.getRace() == Player.Race.PET ) {
+					damage = (long)(damage * resistance);
+				}
+				
+			}
+			else if (npc.getMutantType() == 2) {
+				if (player.getRace() == Player.Race.KAILIPTON) {
+					damage = (long)(damage * resistance);
+				}
+			}
+			else if (npc.getMutantType() == 3) {
+				if (player.getRace() == Player.Race.AIDIA) {
+					damage = (long)(damage * resistance);
+				}
+			}
+			else if (npc.getMutantType() == 4) {
+				if (player.getRace() == Player.Race.HUMAN) {
+					damage = (long)(damage * resistance);
+				}
+			} else {
+				// 25% of resistant value for non class specific resistance
+				resistance = resistance / 4;
+				if (resistance < 0.1) { resistance = 0.1f; }		
+				damage = (long)(damage * resistance);
+			}
+			*/
+			
 		}
 		
-		long newHp = Tools.between(getHp() - damage, 0l, getMaxHp());				
+		long newHp = getHp() - damage;
 		
 		if (newHp <= 0) {
 			LoggerFactory.getLogger(LivingObject.class).info("Player "+player+" killed npc "+this);
 			if(npc != null){
-					((Npc<?>)this).kill(player);
+				npc.kill(player);
 			}
 		} else {
 			setHp(newHp);
 		}
 		this.getInterested().sendPacket(Type.ATTACK_VITAL, this);
 	}
-	
+
 	public static enum AttackType {
 		
-		NO_ATTACK(-1),
-		CLOSE_MELEE(0),
-		RANGE_MELEE(1),
-		RANGE_MAGIC(2);
+		NO_ATTACK(0),
+		CLOSE_MELEE(1),
+		MAGIC(2),
+		SUMMON(3),
+		RANGE_MELEE(4);
 		
 		int value;
 		AttackType(int value){

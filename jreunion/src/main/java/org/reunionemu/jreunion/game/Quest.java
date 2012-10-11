@@ -22,6 +22,8 @@ public class Quest {
 	
 	private int maxLevel;
 	
+	private boolean repeatable;
+	
 	private List<Objective> objectives;
 	
 	private List<Reward> rewards;
@@ -58,6 +60,14 @@ public class Quest {
 	
 	public void setMaxLevel(int maxLevel){
 		this.maxLevel = maxLevel;
+	}
+	
+	public boolean isRepeatable() {
+		return repeatable;
+	}
+
+	public void setRepeatable(boolean repeatable) {
+		this.repeatable = repeatable;
 	}
 	
 	public String getDescrition(){

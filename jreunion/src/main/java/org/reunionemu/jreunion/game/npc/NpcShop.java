@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.reunionemu.jcommon.ParsedItem;
 import org.reunionemu.jcommon.Parser;
 import org.reunionemu.jreunion.game.Item;
+import org.reunionemu.jreunion.game.ItemType;
 import org.reunionemu.jreunion.game.Npc;
 import org.reunionemu.jreunion.game.NpcType;
 import org.reunionemu.jreunion.game.Player;
@@ -129,45 +130,43 @@ public class NpcShop {
 	
 
 	/****** Buy items from merchant shop ******/
-	public boolean buyItem(Player player, int itemType, int tab, int quantity) {
+	public boolean buyItem(Player player, int itemTypeId, int tab, int quantity) {
 
 		Client client = player.getClient();
 		ItemManager itemManager = player.getClient().getWorld().getItemManager();
 
-		Item<?> item = itemManager.create(itemType);
+		ItemType itemType = itemManager.getItemType(itemTypeId);
 		
-		int count = 0;
-
-		if (player.getLime() - item.getType().getPrice() * quantity < 0) {
-			client.sendPacket(Type.MSG, "Not enough lime.");
+		if(itemType == null){
+			player.getClient().sendPacket(Type.SAY, "Item not implemented!");
+			LoggerFactory.getLogger(this.getClass()).error("Item Type "+itemType+" not found.");
 			return false;
 		}
-
+		
 		for (int i = 0; i < quantity; i++) {
 			
-			item = itemManager.create(itemType);
+			Item<?> item = itemManager.create(itemTypeId);
 			
 			if (player.getInventory().freeSlots(tab, item) == false) {
+				DatabaseUtils.getDinamicInstance().deleteItem(item.getItemId());
 				return false;
 			}
 			
-			if (item != null) {
-				player.getPosition().getLocalMap().createEntityId(item);
-				player.pickItem(item, tab);
-				count++;
+			int cost = item.getType().getPrice() * this.getBuyRate() / 100;
+				
+			if (player.getLime() - cost < 0) {
+				client.sendPacket(Type.MSG, "Not enough lime.");
+				return false;
+			} else {
+				synchronized(player) {
+					player.setLime(player.getLime() - cost);	
+				}
 			}
-			
+
+			player.getPosition().getLocalMap().createEntityId(item);
+			player.pickItem(item, tab);
 		}
 		
-		if (item != null) {
-			int cost = item.getType().getPrice() * this.getBuyRate() / 100 * count;
-			synchronized(player) {
-				player.setLime(player.getLime()-cost);
-			
-			}
-			//player.updateStatus(10, item.getPrice() * this.getBuyRate() / 100 * -1 * count, 0);
-		
-		}
 		return true;
 	}
 

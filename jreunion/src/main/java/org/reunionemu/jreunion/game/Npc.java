@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.reunionemu.jcommon.ParsedItem;
 import org.reunionemu.jcommon.Parser;
+import org.reunionemu.jreunion.game.Player.Race;
 import org.reunionemu.jreunion.game.items.equipment.*;
 import org.reunionemu.jreunion.game.npc.Mob;
 import org.reunionemu.jreunion.game.npc.NpcShop;
@@ -189,18 +190,26 @@ public class Npc<T extends NpcType> extends LivingObject {
 		session.getOwner().getClient().sendPacket(Type.OUT, this);
 	}
 	
+	public long getAttackRadius() {
+		return attackRadius;
+	}
+
+	public void setAttackRadius(long attackRadius) {
+		this.attackRadius = attackRadius;
+	}
+	
 	public void setBoss(){
 		if(this.getType() instanceof Mob){
-			Mob mob = ((Mob)this.getType());
+			//Mob mob = ((Mob)this.getType());
 			
 			if(!isBoss()){
 				setBoss(true);
 				setMaxHp(getMaxHp()*2);
 				setHp(getMaxHp());
-				mob.setExp(mob.getExp()*2);
-				mob.setLime(mob.getLime()*2);
-				mob.setDmg(mob.getDmg()*2);
-			}
+				//mob.setExp(mob.getExp()*2);
+				//mob.setLime(mob.getLime()*2);
+				//mob.setDmg(mob.getDmg()*2);
+			} 
 		}
 	}
 	
@@ -234,60 +243,43 @@ public class Npc<T extends NpcType> extends LivingObject {
 		return getMutantType() == 0 ? false : true;
 	}
 	
-	public float getMutantResistance(Player player){
+	public float getMutantResistance(LivingObject livingObject){
+	
 		float mobMutantModifier = Server.getInstance().getWorld().getServerSetings().getMobMutantModifier();
-		Item<?> item = player.getEquipment().getMainHand();
-
-		if(item == null){
-			return 1;
-		}
 		
-		switch (getMutantType()) {
-		case 1: {
-			if (item.getType() instanceof MeleeWeapon) {
-				return mobMutantModifier + 1;
-			}
-		}
-		case 2: {
-			if (item.getType() instanceof MagicWeapon) {
-				return mobMutantModifier + 1;
-			}
-		}
-		case 3: {
-			if (item.getType() instanceof SummonWeapon) {
-				return mobMutantModifier + 1;
-			}
-		}
-		case 4: {
-			if (item.getType() instanceof RangedWeapon) {
-				return mobMutantModifier + 1;
-			}
-		}
-		default: return 1;
+		 /*  1(red) - Resistance against short-range physical attack
+		  *  2(blue) - Resistance against magical attack
+		  *  3(green) - Resistance against summon attack
+		  *  4(yellow) - Resistance against long-range physical attack
+		  */
+		if(getMutantType() == livingObject.getLastAttackType()){
+			return (float) (1 + mobMutantModifier);
+		} else {
+			return 1.15f;
 		}
 	}
 	
-	public int getMutantGemStoneType(){
-		if(getType().getLevel() < 30){
-			return 535;
+	public int getMutantGemStoneType(boolean full){
+		if(getType().getLevel() <= 30){
+			return (full) ? 215 : 535;
 		}
-		else if(getLevel() < 60){
-			return 536;
+		else if(getLevel() <= 60){
+			return (full) ? 216 : 536;
 		}
-		else if(getLevel() < 90){
-			return 537;
+		else if(getLevel() <= 90){
+			return (full) ? 217 : 537;
 		}
-		else if(getLevel() < 120){
-			return 538;
+		else if(getLevel() <= 120){
+			return (full) ? 218 : 538;
 		}
-		else if(getLevel() < 150){
-			return 539;
+		else if(getLevel() <= 150){
+			return (full) ? 219 : 539;
 		}
-		else if(getLevel() < 180){
-			return 540;
+		else if(getLevel() <= 180){
+			return (full) ? 220 : 540;
 		}
 		else {
-			return 541;
+			return (full) ? 221 : 541;
 		}
 	}
 	
@@ -320,12 +312,17 @@ public class Npc<T extends NpcType> extends LivingObject {
 		
 		
 		if(isMutant()){
-			npcLime = (long) (npcLime * mutantModifier);
-			npcExp = (long) (npcLime * mutantModifier);
+			npcLime = (long) (npcLime * (1 + mutantModifier));
+			npcExp = (long) (npcExp * (1 + mutantModifier));
 		}
 		
-		npcExp = (npcExp <= 0) ? 1 : npcExp;	//check that player will receive a minimum ammount of exp
-		npcLime = (npcLime <= 0) ? 1 : npcLime; //check that player will receive a minimum ammount of lime
+		if(isBoss()){
+			npcLime = (long) (npcLime * 2);
+			npcExp = (long) (npcLime * 2);
+		}
+		
+		npcExp = (npcExp <= 0) ? 1 : npcExp;	//check that player will receive a minimum amount of exp
+		npcLime = (npcLime <= 0) ? 1 : npcLime; //check that player will receive a minimum amount of lime
 		
 		setHp(0);
 		localMap.removeEntity(this);
@@ -363,32 +360,57 @@ public class Npc<T extends NpcType> extends LivingObject {
 		
 		//Handle with the mutant Item drop
 		if(isMutant()){
-			itemList.add(itemManager.create(getMutantGemStoneType(), 0, 0, 0, 0, 0));
+			itemList.add(itemManager.create(getMutantGemStoneType(false), 0, 0, 0, 0, 0));
 		}
-			
+		
+		float r = Server.getRand().nextFloat();
+		
+		//Rough Gem Drop
+		if(r <= .01 && Server.getRand().nextFloat() <= .20)
+		{
+			itemList.add(itemManager.create(getMutantGemStoneType(true), 0, 0, 0, 0, 0));
+		}
+		
 		//Handle with the Item drop chance
 		Parser dropList = Reference.getInstance().getDropListReference();
 		Iterator<ParsedItem> iter = dropList.getItemListIterator();
-		float r = Server.getRand().nextFloat();
+		List<ItemType> drawItemList = new Vector<ItemType> ();
+		
 		while(iter.hasNext()) {			
 			ParsedItem parsedItem = iter.next();
-			if(Integer.parseInt(parsedItem.getMemberValue("Mob")) == this.getType().getTypeId()){
+		
+			if(Integer.parseInt(parsedItem.getMemberValue("Mob")) == getType().getTypeId()){
 				float rate = Float.parseFloat(parsedItem.getMemberValue("Rate"));
+				
 				if( r < rate){
-					int itemType = Integer.parseInt(parsedItem.getMemberValue("Item"));
-					
-					float gemLuck = Server.getRand().nextFloat();
-					float itemPlusByOne = getPosition().getLocalMap().getWorld().getServerSetings().getItemPlusByOne();
-					float itemPlusByTwo = getPosition().getLocalMap().getWorld().getServerSetings().getItemPlusByTwo();
-					int gemNumber = gemLuck < itemPlusByOne ? (gemLuck < itemPlusByTwo ? 3 : 1) : 0;
-					
-					itemList.add(itemManager.create(itemType, gemNumber,
-													itemManager.getItemType(itemType).getMaxExtraStats(),
-													itemManager.getItemType(itemType).getMaxDurability(),
-													0,0));
-					break;
+					int itemTypeId = Integer.parseInt(parsedItem.getMemberValue("Item"));
+					drawItemList.add(itemManager.getItemType(itemTypeId));
 				}
-			}	
+			}
+		}
+		
+		
+		int drawItemListRandomPos = drawItemList.size();
+		
+		if(drawItemList.size() == 0){
+			//randomly select one item from the item list.
+			while(drawItemListRandomPos >= drawItemList.size()){
+				drawItemListRandomPos = Server.getRand().nextInt();
+			}
+		
+			ItemType itemType = drawItemList.get(drawItemListRandomPos);
+			//handles with the luck of drop a plus item.
+			float gemLuck = Server.getRand().nextFloat();
+			float itemPlusByOne = getPosition().getLocalMap().getWorld().getServerSetings().getItemPlusByOne();
+			float itemPlusByTwo = getPosition().getLocalMap().getWorld().getServerSetings().getItemPlusByTwo();
+			int gemNumber = 0;
+		
+			if(itemType.isUpgradable() && itemType.getLevel() <= 180){
+				gemNumber = (gemLuck < itemPlusByOne ? (gemLuck < itemPlusByTwo ? 3 : 1) : 0);
+			}
+					
+			itemList.add(itemManager.create(itemType.getTypeId(), gemNumber, (int)itemType.getMaxExtraStats(),
+					itemType.getMaxDurability(), 0, 0));
 		}
 		
 		//handles the items drop command and packets.
@@ -510,11 +532,14 @@ public class Npc<T extends NpcType> extends LivingObject {
 		
 		setIsRunning(true);
 		
-		double distance = this.getPosition().distance(player.getPosition());
-		int newPosX = getNewPosX(player.getPosition(), distance);
-		int newPosY = getNewPosY(player.getPosition(), distance);
-		
 		Position newPosition = getPosition().clone();
+		double distance = this.getPosition().distance(player.getPosition());
+		int newPosX = getNewPosX(player.getPosition().clone(), distance);
+		int newPosY = getNewPosY(player.getPosition().clone(), distance);
+		
+		newPosX = (newPosX == 0) ? newPosition.getX() : newPosX;
+		newPosY = (newPosY == 0) ? newPosition.getY() : newPosY;
+		
 		newPosition.setX(newPosX);
 		newPosition.setY(newPosY);
 		
@@ -540,6 +565,9 @@ public class Npc<T extends NpcType> extends LivingObject {
 			int posX = getNewPosX(position.clone(), distance);
 			int posY = getNewPosY(position.clone(), distance);
 			
+			posX = (posX == 0) ? newPos.getX() : posX;
+			posY = (posY == 0) ? newPos.getY() : posY;
+			
 			newPos.setX(posX);
 			newPos.setY(posY);
 			
@@ -560,10 +588,25 @@ public class Npc<T extends NpcType> extends LivingObject {
 		
 		setAttacking(true);
 		
-		int npcDmg = getDamage((int)player.getDef());
-		npcDmg = (npcDmg < 1) ? 1 : npcDmg;
+		List<Skill> defensiveSkills = player.getDefensiveSkills();
+		int npcDmg = getDamage((int) player.getDef());
+		npcDmg = (isBoss() ? npcDmg*2 : npcDmg); //check if npc is boss.
+		npcDmg = (npcDmg < 1) ? 1 : npcDmg; //make sure the npc will have a minimum damage value.
+ 	
+		if (defensiveSkills.size() == 0) {
+			player.setHp(player.getHp() - npcDmg);
+		} else {
+			for (Skill skill : defensiveSkills) {
+				if (player.getSkillLevel(skill) > 0) {
+					if(!skill.work(player, this)){
+						player.setHp(player.getHp() - npcDmg);
+					}
+				} else {
+					player.setHp(player.getHp() - npcDmg);
+				}
+			}
+		}
 		
-		player.setHp(player.getHp() - npcDmg);
 		this.getInterested().sendPacket(Type.ATTACK,this,player,0);
 		setAttacking(false);
 	}
@@ -582,52 +625,57 @@ public class Npc<T extends NpcType> extends LivingObject {
 	public void work() {
 		try {
 			
-		int isMovementEnabled = Server.getInstance().getWorld().getServerSetings().getMobsMovement();
+			int isMovementEnabled = Server.getInstance().getWorld().getServerSetings().getMobsMovement();
 		
-		if(isRunning() || getHp() == 0 || isMovementEnabled == 0)
-			return;
+			if(isRunning() || getHp() == 0 || isMovementEnabled == 0)
+				return;
 		
-		Iterator<Player> iterPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayerListIterator();
-		double smallestDistance = 150;
-		Player closestPlayer = null;
-		Area mobArea = getPosition().getLocalMap().getArea(); 
-		boolean moveFree = false;
+			Iterator<Player> iterPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayerListIterator();
+			double smallestDistance = 150;
+			Player closestPlayer = null;
+			Area mobArea = getPosition().getLocalMap().getArea(); 
+			boolean moveFree = false;
 		
-		while (iterPlayer.hasNext()) {
-		//for(Player player : getPosition().getLocalMap().getPlayerList()) {
-			Player player = iterPlayer.next();
-			Position position = player.getPosition();
-			double distance = getPosition().distance(player.getPosition());
+			while (iterPlayer.hasNext()) {
+				//for(Player player : getPosition().getLocalMap().getPlayerList()) {
+				Player player = iterPlayer.next();
+				
+				if(this.getPosition().getMap().getId() != player.getPosition().getMap().getId()){
+				    continue;
+				}
+				
+				Position position = player.getPosition();
+				double distance = getPosition().distance(player.getPosition());
 			
-			if(moveFree == false){
-				moveFree = player.getSession().contains(this.getPosition()) ? true : false;
-			}
+				if(moveFree == false){
+					moveFree = player.getSession().contains(this.getPosition()) ? true : false;
+				}
 			
-			if (player.getClient() == null) {
-				continue;
-			} else if (player.getClient().getState() != Client.State.INGAME
+				if (player.getClient() == null) {
+					continue;
+				} else if (player.getClient().getState() != Client.State.INGAME
 					|| this.getPosition().getLocalMap() != player.getPosition().getLocalMap()
 					|| !player.getSession().contains(this.getPosition())
 					|| !mobArea.get(position.getX() / 10, position.getY() / 10,Field.MOB)
 					|| player.getHp() <= 0) {
-				continue;
+						player.update();
+						continue;
+				}
+				
+				if(distance < smallestDistance){
+					smallestDistance = distance;
+					closestPlayer = player;
+				}
+			
 			}
 			
-			if(distance < smallestDistance){
-				smallestDistance = distance;
-				closestPlayer = player;
-			}
-			
-		}
-			
-		// Condition that verify if the mob can move freely or not.
-		// If the distance between the mob and the player is less or equal
-		// then 150 (distance that makes the mob move to the player
-		// direction) and if the player position is a walkable position
-		// for mob then the  mob will chase or attack the player, else the mob will
-		// move freely.
+			// Condition that verify if the mob can move freely or not.
+			// If the distance between the mob and the player is less or equal
+			// then 150 (distance that makes the mob move to the player
+			// direction) and if the player position is a walkable position
+			// for mob then the  mob will chase or attack the player, else the mob will
+			// move freely.
 		
-		//try {
 			if (smallestDistance < 150) {
 				if(smallestDistance > getAttackRadius()) {
 					moveToPlayer(closestPlayer);
@@ -637,7 +685,7 @@ public class Npc<T extends NpcType> extends LivingObject {
 			} else if(moveFree){
 				moveFree();
 			}
-		} catch (Throwable  e) {
+		} catch (Exception  e) {
 			LoggerFactory.getLogger(this.getClass()).info("Mob Bug "+e);
 			//TODO: Fix Mob move bug
 		}
@@ -664,13 +712,5 @@ public class Npc<T extends NpcType> extends LivingObject {
 				
 		buffer.append("}");
 		return buffer.toString();
-	}
-
-	public long getAttackRadius() {
-		return attackRadius;
-	}
-
-	public void setAttackRadius(long attackRadius) {
-		this.attackRadius = attackRadius;
 	}
 }

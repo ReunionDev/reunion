@@ -73,8 +73,9 @@ public class RoamingItem extends WorldObject{
 		DatabaseUtils.getDinamicInstance().deleteRoamingItem(getItem());
 		map.removeEntity(this.getItem());
 		DatabaseUtils.getDinamicInstance().deleteItem(getItem().getItemId());
-		list.exit(this, false);
-		getInterested().sendPacket(Type.OUT, this);
+		list.exit(this, true);
+		list.update();
+		//getInterested().sendPacket(Type.OUT, this);
 	}
 	
 	public void startDeleteTimer(boolean randomTime){

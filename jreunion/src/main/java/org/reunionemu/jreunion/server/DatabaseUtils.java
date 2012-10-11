@@ -667,16 +667,9 @@ public class DatabaseUtils {
 								
 			Player player = Player.createPlayer(client, race);
 			ItemManager itemManager = player.getClient().getWorld().getItemManager();
-						
-			if(race == Race.HYBRIDER)
-			{
-				player.setLevel(200);
-			}
-			else
-			{
-				player.setLevel(1);
-			}
 			
+			player.setLevel(((race == Race.HYBRIDER) ? 200 : 1));
+
 			player.setName(charName);
 			player.setSex(sex);
 			player.setHairStyle(hairStyle);
@@ -945,6 +938,9 @@ public class DatabaseUtils {
 			if (rs.next())
 			{				
 				int type = rs.getInt("type");
+				if(type == 1014){
+					System.out.print("");
+				}
 				ItemType itemType = Server.getInstance().getWorld().getItemManager().getItemType(type);
 				
 				if (itemType == null) {
@@ -955,8 +951,8 @@ public class DatabaseUtils {
 				Item<?> item = new Item(itemType);
 				
 				item.setItemId(itemId);
-				item.setGemNumber(rs.getInt("gemnumber"));
-				item.setExtraStats(rs.getInt("extrastats"));
+				item.setGemNumber(rs.getLong("gemnumber"));
+				item.setExtraStats(rs.getLong("extrastats"));
 				item.setDurability(rs.getInt("durability"));
 				item.setUnknown1(rs.getInt("unknown1"));
 				item.setUnknown2(rs.getInt("unknown2"));
@@ -1491,6 +1487,7 @@ public class DatabaseUtils {
 			quest.setDescription(questRs.getString("name"));
 			quest.setMinLevel(questRs.getInt("minlevel"));
 			quest.setMaxLevel(questRs.getInt("maxlevel"));
+			quest.setRepeatable(questRs.getInt("repeatable")==1);
 			
 			if(!loadQuestObjectives(quest) || !loadQuestRewards(quest)){
 				return null;
