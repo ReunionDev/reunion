@@ -75,7 +75,6 @@ public class Server extends EventDispatcher implements ApplicationContextAware{
 		
 		logger.info("Loading server objects...");
 		Reference.getInstance().Load();
-		network = new Network(this);
 
 		packetParser = new PacketParser();
 		
@@ -135,6 +134,7 @@ public class Server extends EventDispatcher implements ApplicationContextAware{
 		}
 	}
 
+	@Autowired
 	private Network network;
 
 	private PacketParser packetParser;

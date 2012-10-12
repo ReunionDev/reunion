@@ -16,6 +16,8 @@ import java.nio.channels.SocketChannel;
 import java.util.Iterator;
 import java.util.Set;
 
+import javax.annotation.PostConstruct;
+
 import org.reunionemu.jreunion.events.Event;
 import org.reunionemu.jreunion.events.EventDispatcher;
 import org.reunionemu.jreunion.events.EventListener;
@@ -27,12 +29,14 @@ import org.reunionemu.jreunion.events.server.ServerEvent;
 import org.reunionemu.jreunion.events.server.ServerStartEvent;
 import org.reunionemu.jreunion.events.server.ServerStopEvent;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-
+@Service
 public class Network extends EventDispatcher implements Runnable, EventListener {
 	
 	private final ByteBuffer buffer = ByteBuffer.allocate(16384);
@@ -41,8 +45,18 @@ public class Network extends EventDispatcher implements Runnable, EventListener 
 	
 	private Thread thread;
 	
-	public Network(Server server) {
+	
+	public Network(){
 		super();
+		
+	}
+	
+	@Autowired
+	Server server;
+	
+	@PostConstruct
+	public void init() {
+		
 		try {
 			server.addEventListener(ServerEvent.class, this);		
 			selector = Selector.open();
