@@ -89,7 +89,7 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 		petManager.loadPets();
 		serverHour = 4;
 		teleportManager = new TeleportManager();				
-		server.addEventListener(ServerEvent.class, this);		
+		server.addEventListener(ServerEvent.class, this);
 		
 	}
 

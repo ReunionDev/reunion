@@ -1246,17 +1246,25 @@ public class DatabaseUtils {
 			Statement stmt = dinamicDatabase.dinamicConn.createStatement();
 			stmt.execute("DELETE FROM warehouse WHERE accountid="+client.getAccountId()+";");
 			
+			String query = "INSERT INTO warehouse (accountid, pos, itemid) VALUES ";
+			String data = "";
+			
 			Iterator<StashItem> stashIter = client.getPlayer().getStash().itemListIterator();
 			
 			while(stashIter.hasNext())
 			{
 				StashItem stashItem = (StashItem) stashIter.next();
 				
-				stmt.execute("INSERT INTO warehouse (accountid, pos, itemid)" +
-						" VALUES ("+client.getAccountId()+ ","
-						+stashItem.getStashPosition().getSlot()+ ","
-						+stashItem.getItem().getItemId()+ ");");
+				data += "("+client.getAccountId()+ ","+stashItem.getStashPosition().getSlot()+","+stashItem.getItem().getItemId()+ ")";			
+					if(stashIter.hasNext())
+						data+= ", ";
+				
 			}
+						
+			if(!data.isEmpty()){
+				stmt.execute(query+data);				
+			}
+			
 			
 		} catch (SQLException e1) {
 			LoggerFactory.getLogger(this.getClass()).warn("Exception ",e1);

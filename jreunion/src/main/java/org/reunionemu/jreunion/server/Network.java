@@ -61,15 +61,12 @@ public class Network extends EventDispatcher implements Runnable, EventListener 
 	
 	@PostConstruct
 	public void init() {
-		
 	
 		server.addEventListener(ServerEvent.class, this);		
-		
 		thread = new Thread(this);
 		thread.setDaemon(true);
 		thread.setName("network");
 		thread.start();
-			
 	
 	}
 
