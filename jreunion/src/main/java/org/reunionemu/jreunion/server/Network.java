@@ -28,6 +28,7 @@ import org.reunionemu.jreunion.events.network.NetworkSendEvent;
 import org.reunionemu.jreunion.events.server.ServerEvent;
 import org.reunionemu.jreunion.events.server.ServerStartEvent;
 import org.reunionemu.jreunion.events.server.ServerStopEvent;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -41,14 +42,17 @@ import org.springframework.stereotype.Service;
 @Lazy(false)
 public class Network extends EventDispatcher implements Runnable, EventListener {
 	
+	private static Logger logger = LoggerFactory.getLogger(Network.class);
+	
 	private final ByteBuffer buffer = ByteBuffer.allocate(1024*64);
 	
 	private Selector selector;
 	
 	private Thread thread;
 	
-	public Network(){
+	public Network() throws Exception{
 		super();
+		selector = Selector.open();
 		
 	}
 	
@@ -58,21 +62,20 @@ public class Network extends EventDispatcher implements Runnable, EventListener 
 	@PostConstruct
 	public void init() {
 		
-		try {
-			server.addEventListener(ServerEvent.class, this);		
-			selector = Selector.open();
-			thread = new Thread(this);
-			thread.setDaemon(true);
-			thread.setName("network");
+	
+		server.addEventListener(ServerEvent.class, this);		
+		
+		thread = new Thread(this);
+		thread.setDaemon(true);
+		thread.setName("network");
+		thread.start();
 			
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}	
+	
 	}
 
 	@Override
 	public void run() {
-			
+			logger.info("network thread starting");
 			while (true) {
 				try {
 					// See if we've had any activity -- either an incoming connection,
