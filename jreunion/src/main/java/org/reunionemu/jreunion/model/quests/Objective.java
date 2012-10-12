@@ -1,5 +1,7 @@
 package org.reunionemu.jreunion.model.quests;
 
-public interface Objective {
+import org.reunionemu.jreunion.model.quests.objectives.ObjectiveState;
 
+public interface Objective {
+	public ObjectiveState createObjectiveState();
 }

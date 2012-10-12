@@ -4,12 +4,10 @@ import java.nio.channels.SocketChannel;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
-import org.reunionemu.jreunion.dao.AccountDao;
 import org.reunionemu.jreunion.game.Equipment;
 import org.reunionemu.jreunion.game.Equipment.Slot;
 import org.reunionemu.jreunion.game.ExchangeItem;
@@ -23,7 +21,6 @@ import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.Player.Race;
 import org.reunionemu.jreunion.game.Player.Sex;
 import org.reunionemu.jreunion.game.Position;
-import org.reunionemu.jreunion.game.Quest;
 import org.reunionemu.jreunion.game.QuickSlotItem;
 import org.reunionemu.jreunion.game.QuickSlotPosition;
 import org.reunionemu.jreunion.game.RoamingItem;
@@ -32,13 +29,6 @@ import org.reunionemu.jreunion.game.StashItem;
 import org.reunionemu.jreunion.game.StashPosition;
 import org.reunionemu.jreunion.game.items.pet.PetEquipment;
 import org.reunionemu.jreunion.game.items.pet.PetEquipment.PetSlot;
-import org.reunionemu.jreunion.game.quests.LimeQuest;
-import org.reunionemu.jreunion.game.quests.QuestState;
-import org.reunionemu.jreunion.game.quests.objective.Objective;
-import org.reunionemu.jreunion.game.quests.reward.Reward;
-import org.reunionemu.jreunion.model.Account;
-import org.reunionemu.jreunion.server.PacketFactory.Type;
-import org.reunionemu.jreunion.server.beans.SpringApplicationContext;
 import org.slf4j.LoggerFactory;
 
 
@@ -51,12 +41,9 @@ public class DatabaseUtils {
 	private DatabaseUtils() {
 		super();
 		dinamicDatabase = null;
-		staticDatabase = null;
 	}
 	
 	private Database dinamicDatabase;
-	
-	private Database staticDatabase;
 	
 	public boolean checkDinamicDatabase() {
 		if (dinamicDatabase != null)
@@ -65,12 +52,6 @@ public class DatabaseUtils {
 			return false;
 	}
 	
-	public boolean checkStaticDatabase() {
-		if (staticDatabase != null)
-			return true;
-		else
-			return false;
-	}
 	
 	
 	/**
@@ -81,11 +62,7 @@ public class DatabaseUtils {
 	public void setDinamicDatabase(Database dinamicDatabase) {
 		this.dinamicDatabase = dinamicDatabase;
 	}
-	
-	public void setStaticDatabase(Database staticDatabase) {
-		this.staticDatabase = staticDatabase;
-	}
-	
+		
 	private static DatabaseUtils _dinamicInstance = null;
 	
 	private static DatabaseUtils _staticInstance = null;
@@ -1426,7 +1403,7 @@ public class DatabaseUtils {
 		}
 		return false;
 	}
-	
+	/*
 	public java.util.Map<Integer,Quest> loadQuests(){
 		if (!checkStaticDatabase()) return null;
 		
@@ -1583,7 +1560,8 @@ public class DatabaseUtils {
 		
 		return true;
 	}
-	
+	*/
+	/*
 	public QuestState loadQuestState(Player player) {
 		
 		if (!checkDinamicDatabase()) return null;
@@ -1607,7 +1585,7 @@ public class DatabaseUtils {
 				
 				for(Objective objective: quest.getObjectives()){
 					int ammount = loadQuestObjectiveState(rs.getInt("id"), objective);
-					questState.setProgression(objective, objective.getAmmount() - ammount);
+					questState.setProgression(objective, ammount);
 					
 					if(quest instanceof LimeQuest){
 						client.sendPacket(Type.QT, "kill "+quest.getObjectiveSlot(objective.getId())+
@@ -1704,13 +1682,13 @@ public class DatabaseUtils {
 			String query = "INSERT INTO questobjectivestate (queststateid, objectiveid, ammount) VALUES ";
 			String data = "";
 			
-			Iterator<Objective> iter = quest.getObjectives().listIterator();
+			Iterator<Objective> iter = quest.getObjectives().iterator();
 			
 			while(iter.hasNext()){
 				Objective objective = (Objective)iter.next();
-				int ammount = objective.getAmmount() - questState.getProgression(objective.getId());
+				int ammount = objective.getAmmount() - questState.getProgression(objective);
 				
-				data += "('"+questStateId+"','"+objective.getId()+"','"+ammount+"')";
+				data += "('"+questStateId+"','"+objective+"','"+ammount+"')";
 					
 				if(iter.hasNext())
 					data += ", ";
@@ -1729,6 +1707,7 @@ public class DatabaseUtils {
 		
 	}
 	
+	*/
 	public int deleteQuestState(Player player) {
 		
 		if (!checkDinamicDatabase()) return 0;
@@ -1752,7 +1731,6 @@ public class DatabaseUtils {
 		}
 		return questStateId;
 	}
-	
 	public boolean deleteQuestObjectiveState(int questStateId) {
 		
 		if (!checkDinamicDatabase()) return false;

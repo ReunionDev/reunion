@@ -361,8 +361,9 @@ public class Command {
 
 				player.getInventory().storeItem(item2, -1);
 				//player.pickupItem(item);
-				player.getQuest().end(player, 669);
-				player.getQuest().eff(player);
+				//TODO: Figure out what this does:
+				//player.getQuest().end(player, 669);
+				//player.getQuest().eff(player);
 			//}
 		} else {
 			livingObject.setHp(newHp);

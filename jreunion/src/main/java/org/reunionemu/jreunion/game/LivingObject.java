@@ -1,16 +1,15 @@
 package org.reunionemu.jreunion.game;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.reunionemu.jreunion.game.Player.Race;
-import org.reunionemu.jreunion.game.Player.Status;
 import org.reunionemu.jreunion.game.npc.Mob;
 import org.reunionemu.jreunion.game.quests.ExperienceQuest;
 import org.reunionemu.jreunion.game.quests.QuestState;
-import org.reunionemu.jreunion.game.quests.objective.Objective;
-import org.reunionemu.jreunion.server.PacketFactory;
+import org.reunionemu.jreunion.model.quests.Objective;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
+import org.reunionemu.jreunion.model.Quest;
+
 import org.reunionemu.jreunion.server.Tools;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Aidamina
@@ -179,6 +178,11 @@ public abstract class LivingObject extends WorldObject {
 			player.addAttack(damage);
 		}
 		
+		/*
+		  
+		// TODO: reimplement using the new quest system
+		 
+		
 		//Cursed quest Boss packet
 		if(mob != null){
 			QuestState questState = player.getQuestState();
@@ -197,7 +201,7 @@ public abstract class LivingObject extends WorldObject {
 					}
 				}
 			}
-		}
+		}*/
 		
 		if(npc.isMutant()){
 			damage = (long)(damage * npc.getMutantResistance(player));

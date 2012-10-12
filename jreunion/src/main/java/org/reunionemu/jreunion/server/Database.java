@@ -52,32 +52,6 @@ public class Database {
 		LoggerFactory.getLogger(Database.class).info("Dinamic "+getClass().getSimpleName() + " connection established");
 
 	}
-	
-	public void connectStatic() throws Exception {
-		Parser staticDatabaseConfigParser = new Parser();
-		staticDatabaseConfigParser.Parse("config/Database_static.dta");
-		String[] requiredMembers = { "address", "database", "username",
-				"password" };
-		ParsedItem staticDatabaseConfig = staticDatabaseConfigParser.getItem("Database");
-
-		if (staticDatabaseConfig == null
-				|| !staticDatabaseConfig.checkMembers(requiredMembers)) {
-			LoggerFactory.getLogger(Database.class).info("Error loading database config");
-			return;
-		}
-		DatabaseUtils.getStaticInstance().setStaticDatabase(this); // link utils to
-															// this database
-		String userName = staticDatabaseConfig.getMemberValue("username");
-		String password = staticDatabaseConfig.getMemberValue("password");
-		String url = "jdbc:mysql://" + staticDatabaseConfig.getMemberValue("address")
-				+ "/" + staticDatabaseConfig.getMemberValue("database")
-				+ "?autoReconnect=true";
-		Driver driver = (Driver)ClassFactory.create("com.mysql.jdbc.Driver");
-		
-		staticConn = DriverManager.getConnection(url, userName, password);
-		LoggerFactory.getLogger(Database.class).info("Static "+getClass().getSimpleName() + " connection established");
-
-	}
 
 	public void start(){
 
@@ -87,12 +61,6 @@ public class Database {
 			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 		}
 		
-		try {
-			connectStatic();
-		} catch (Exception e) {
-			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
-		}
-	
 	}
 
 	public void stop() {

@@ -23,5 +23,11 @@ public class MobObjectiveImpl extends ObjectiveImpl implements MobObjective {
 	public Integer getType() {
 		return type;
 	}
+	
+	@Override
+	public ObjectiveState createObjectiveState() {
+		
+		return new CounterObjectiveState(getAmount());
+	}
 
 }

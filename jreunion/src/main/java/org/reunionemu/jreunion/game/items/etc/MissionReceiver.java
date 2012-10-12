@@ -1,18 +1,16 @@
 package org.reunionemu.jreunion.game.items.etc;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.ItemPosition;
 import org.reunionemu.jreunion.game.LivingObject;
 import org.reunionemu.jreunion.game.Player;
-import org.reunionemu.jreunion.game.Quest;
 import org.reunionemu.jreunion.game.QuickSlotPosition;
 import org.reunionemu.jreunion.game.Usable;
-import org.reunionemu.jreunion.game.items.equipment.ChakuranWeapon;
+import org.reunionemu.jreunion.model.Quest;
 import org.reunionemu.jreunion.server.Client;
 import org.reunionemu.jreunion.server.DatabaseUtils;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
+import org.slf4j.LoggerFactory;
 
 public class MissionReceiver extends Etc implements Usable{
 	

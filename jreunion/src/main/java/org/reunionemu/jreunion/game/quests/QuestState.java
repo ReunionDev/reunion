@@ -1,19 +1,23 @@
 package org.reunionemu.jreunion.game.quests;
 
-import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.reunionemu.jreunion.game.InventoryItem;
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.Npc;
 import org.reunionemu.jreunion.game.Player;
-import org.reunionemu.jreunion.game.Quest;
-import org.reunionemu.jreunion.game.quests.objective.MobObjective;
-import org.reunionemu.jreunion.game.quests.objective.Objective;
-import org.reunionemu.jreunion.game.quests.objective.PointsObjective;
-import org.reunionemu.jreunion.game.quests.reward.ExperienceReward;
-import org.reunionemu.jreunion.game.quests.reward.LimeReward;
-import org.reunionemu.jreunion.game.quests.reward.Reward;
+import org.reunionemu.jreunion.model.Quest;
+import org.reunionemu.jreunion.model.quests.Objective;
+import org.reunionemu.jreunion.model.quests.Reward;
+import org.reunionemu.jreunion.model.quests.objectives.CounterObjectiveState;
+import org.reunionemu.jreunion.model.quests.objectives.MobObjective;
+import org.reunionemu.jreunion.model.quests.objectives.ObjectiveState;
+import org.reunionemu.jreunion.model.quests.objectives.PointsObjective;
+import org.reunionemu.jreunion.model.quests.rewards.ExperienceReward;
+import org.reunionemu.jreunion.model.quests.rewards.ItemReward;
+import org.reunionemu.jreunion.model.quests.rewards.LimeReward;
 import org.reunionemu.jreunion.server.Client;
 import org.reunionemu.jreunion.server.ItemManager;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
@@ -21,42 +25,24 @@ import org.reunionemu.jreunion.server.PacketFactory.Type;
 public class QuestState {
 	
 	Quest quest;
-	Map<Objective, Integer> progression = new HashMap <Objective, Integer>();
+	Map<Objective, ObjectiveState> progression = new LinkedHashMap <Objective, ObjectiveState>();
 	
 	public QuestState(Quest quest) {
 		this.quest = quest;
-	}
-	
-	public void increase(Objective objective){
-	
-		if(!quest.getObjectives().contains(objective)){
-			throw new RuntimeException("Quest "+quest.getId()+" does not have objective "+objective.getId());
+		for(Objective objective: quest.getObjectives()){
+			progression.put(objective, objective.createObjectiveState());
 		}
-		
-		if(!progression.containsKey(objective)){
-			progression.put(objective, 0);
-			return;
-		}		
-		
-		progression.put(objective, progression.get(objective) + 1);		
 	}
 	
+	public ObjectiveState getObjectiveState(Objective objective){
+		return progression.get(objective);
+	}
+		
 	public Quest getQuest(){
 		return this.quest;
 	}
 	
-	public void setProgression(Objective objective, int ammount){
-		
-		if(objective == null)
-			return;
-		
-		progression.put(objective, ammount);
-	}
-	
-	public int getProgression(Objective objective){
-		return progression.get(objective); //if objective not found, it returns null
-	}
-	
+	/*
 	public int getProgression(int id){
 		
 		for( Objective objective: progression.keySet()){
@@ -66,41 +52,55 @@ public class QuestState {
 		}
 		
 		return 0;
-	}
+	}*/
 	
 	public void handleProgress(Npc<?> mob, Player player){
 		for(Objective objective: getQuest().getObjectives()){
 			if(objective instanceof MobObjective){
-				handleMobProgress(objective, mob, player);
-			} else {
-				if(objective instanceof PointsObjective){
-					handlePointsProgress(mob);
-				}
+				handleMobProgress((MobObjective) objective, mob, player);
 			}
+			else if(objective instanceof PointsObjective){
+					handlePointsProgress(mob);
+			}
+			
 		}
 	}
 	
-	public void handleMobProgress(Objective objective, Npc<?> mob, Player player){
+	public int getObjectiveId(Objective objective){
+		Iterator<Objective> iter = progression.keySet().iterator();
+		int count = 0;
+		while(iter.hasNext()){
+			Objective obj = iter.next();
+			if(obj==objective){
+				return count; 
+			}
+			count ++;
+		}
+		throw new RuntimeException("Objective not found");		
 		
-		int objectiveMobType = objective.getId();
+	}
+	
+	public void handleMobProgress(MobObjective objective, Npc<?> mob, Player player){
+		
+		
+		int objectiveMobType = objective.getType();		
 		
 		if(objectiveMobType == mob.getType().getTypeId()){
 			
-			if(!progression.containsKey(objective)) //we need to make sure the HashMap is not empty
-				increase(objective);
+			CounterObjectiveState state = (CounterObjectiveState) getObjectiveState(objective);
 			
-			if(progression.get(objective) < objective.getAmmount()){
+			state.decrease();
+			
+			if(!state.isComplete()){
 				
 				Client client = player.getClient();
-				if (client == null) return;
-				
-				increase(objective);
+				if (client == null) return;	
 
-				int slot = quest.getObjectiveSlot(objectiveMobType);
-				int ammountRemaining = objective.getAmmount() - progression.get(objective);
+				int slot = getObjectiveId(objective);
+				int ammountRemaining = state.getCounter();
 				
 				if(!(quest instanceof ExperienceQuest)){
-					client.sendPacket(Type.QT, "kill " + slot + " " + ammountRemaining);
+					client.sendPacket(Type.QT, "kill " + slot + " " + state.getCounter());
 				}
 				
 				if(quest instanceof ExperienceQuest){
@@ -108,9 +108,10 @@ public class QuestState {
 						client.sendPacket(Type.INFO, "Boss is near!");
 				}
 				
-				if(isComplete()){
-					endQuest(player, mob);
-				}
+				
+			}
+			if(isComplete()){
+				endQuest(player, mob);
 			}
 		}
 	}
@@ -120,16 +121,11 @@ public class QuestState {
 	}
 	
 	public boolean isComplete(){
-		if(progression.isEmpty())
-			return false;
 		
-		for(Objective objective: getQuest().getObjectives()){
+		for(Objective objective: progression.keySet()){
 			
-			if(!progression.containsKey(objective)){
-				return false;
-			}
-			
-			if(objective.getAmmount() != progression.get(objective)){
+			ObjectiveState state = getObjectiveState(objective);
+			if(!state.isComplete()){
 				return false;
 			}
 		}
@@ -146,22 +142,29 @@ public class QuestState {
 		
 		for(Reward reward: quest.getRewards()){
 			if(reward instanceof ExperienceReward){
-				player.setTotalExp(player.getTotalExp()+reward.getAmmount());
-				player.setLevelUpExp(player.getLevelUpExp()-reward.getAmmount());
-				client.sendPacket(Type.SAY, "Quest experience : "+reward.getAmmount());
-			} else {
-				Item<?> item = itemManager.create(reward.getId());
-				if(item == null) return false;
-				
-				InventoryItem inventoryItem = player.getInventory().storeItem(item, -1);
-				
-				player.getPosition().getLocalMap().createEntityId(item);
-				if(reward instanceof LimeReward){
-					item.setExtraStats(reward.getAmmount());
+				player.setTotalExp(player.getTotalExp()+((ExperienceReward)reward).getExperience());
+				player.setLevelUpExp(player.getLevelUpExp()-((ExperienceReward)reward).getExperience());
+				client.sendPacket(Type.SAY, "Quest experience : "+((ExperienceReward)reward).getExperience());
+			} else if(reward instanceof ItemReward) {
+				for(int i = 0; i < ((ItemReward)reward).getAmount();i++){
+					Item<?> item = itemManager.create(((ItemReward)reward).getType());
+					if(item == null) {
+						continue;
+					}
+					
+					InventoryItem inventoryItem = player.getInventory().storeItem(item, -1);
+					
+					player.getPosition().getLocalMap().createEntityId(item);
+	
+					client.sendPacket(Type.PICKUP, player);
+					client.sendPacket(Type.PICK, inventoryItem);	
 				}
-				client.sendPacket(Type.PICKUP, player);
-				client.sendPacket(Type.PICK, inventoryItem);
 			}
+				
+			if(reward instanceof LimeReward){
+				player.addLime(((LimeReward)reward).getLime());
+			}
+			
 		}
 		
 		client.sendPacket(Type.SAY, "Quest completed");

@@ -1,36 +1,28 @@
 package org.reunionemu.jreunion.server;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.apache.log4j.net.SocketAppender;
-
+import org.reunionemu.jcommon.ParsedItem;
 import org.reunionemu.jreunion.game.HandPosition;
 import org.reunionemu.jreunion.game.Item;
-import org.reunionemu.jreunion.game.ItemType;
 import org.reunionemu.jreunion.game.Npc;
 import org.reunionemu.jreunion.game.NpcSpawn;
-import org.reunionemu.jreunion.game.NpcType;
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.Player.Race;
 import org.reunionemu.jreunion.game.Position;
-import org.reunionemu.jreunion.game.Quest;
 import org.reunionemu.jreunion.game.RoamingItem;
 import org.reunionemu.jreunion.game.Skill;
-import org.reunionemu.jreunion.game.Player.Status;
 import org.reunionemu.jreunion.game.npc.Mob;
+import org.reunionemu.jreunion.model.Quest;
 import org.reunionemu.jreunion.server.Area.Field;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
-import org.reunionemu.jcommon.ParsedItem;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Aidamina
@@ -872,7 +864,7 @@ public class MessageParser {
 				
 					//quest = new Quest(questId); //used only to send the quest id packet
 					//quest = QuestFactory.loadQuest(questId); //load full quest from database
-					quest = DatabaseUtils.getStaticInstance().loadQuest(questId);
+					quest = Server.getInstance().getWorld().getQuestManager().getQuest(questId);
 					
 					player.setQuest(quest);	
 					

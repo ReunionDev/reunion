@@ -3,7 +3,7 @@ package org.reunionemu.jreunion.game.items.etc;
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.LivingObject;
 import org.reunionemu.jreunion.game.Player;
-import org.reunionemu.jreunion.game.Quest;
+import org.reunionemu.jreunion.model.Quest;
 import org.reunionemu.jreunion.server.DatabaseUtils;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
 

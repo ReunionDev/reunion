@@ -8,7 +8,7 @@ import javax.annotation.PostConstruct;
 
 import org.reunionemu.jreunion.dao.QuestDao;
 import org.reunionemu.jreunion.game.Player;
-import org.reunionemu.jreunion.game.Quest;
+import org.reunionemu.jreunion.model.Quest;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,11 +20,12 @@ public class QuestManager {
 	@Autowired
 	QuestDao questDao;
 
-	private java.util.Map<Integer,Quest> quests = new HashMap<Integer,Quest>();
+	//private java.util.Map<Integer,Quest> quests = new HashMap<Integer,Quest>();
 	
 	public QuestManager(){
 		
 	}
+	/*
 	
 	@PostConstruct	
 	public void loadQuests(){
@@ -35,17 +36,17 @@ public class QuestManager {
 			LoggerFactory.getLogger(QuestManager.class).error("Failed to load quests");
 		}
 	}
+	*/
 	
 	public Quest getQuest(int id){
 		
-		return quests.get(id);
-	}
-	
-	public boolean isEmpty(){
-		return quests.isEmpty();
+		return questDao.findById(1);
 	}
 	
 	public Quest getRandomQuest(Player player){
+		/*
+		 // TODO: Reimplement using the new quest classes
+		 
 		if (player == null) return null;
 		if (quests.isEmpty()) return null;
 		
@@ -71,5 +72,7 @@ public class QuestManager {
 		}
 		
 		return questsList.get(randQuestId);
+		*/
+		return questDao.findById(1);
 	}
 }

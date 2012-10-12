@@ -361,7 +361,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					player.sendStatus(Status.STATUSPOINTS);					
 					player.sendStatus(Status.LIME);
 					player.sendStatus(Status.PENALTYPOINTS);
-					player.setQuestState(DatabaseUtils.getDinamicInstance().loadQuestState(player));
+					//player.setQuestState(DatabaseUtils.getDinamicInstance().loadQuestState(player));
 					player.update();
 					
 					//handle with player pet loading

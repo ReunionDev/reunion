@@ -15,5 +15,11 @@ public class PointsObjectiveImpl extends ObjectiveImpl implements PointsObjectiv
 	public Integer getPoints() {
 		return points;
 	}
+	
+	@Override
+	public ObjectiveState createObjectiveState() {
+		
+		return new CounterObjectiveState(getPoints());
+	}
 
 }

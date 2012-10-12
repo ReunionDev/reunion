@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Vector;
 
 import org.slf4j.LoggerFactory;
+import org.reunionemu.jreunion.model.Quest;
 import org.reunionemu.jcommon.ParsedItem;
 import org.reunionemu.jreunion.events.Event;
 import org.reunionemu.jreunion.events.EventListener;
@@ -787,7 +788,7 @@ public abstract class Player extends LivingObject implements EventListener {
 				DatabaseUtils.getDinamicInstance().saveStash(getClient());
 				DatabaseUtils.getDinamicInstance().saveExchange(this);
 				DatabaseUtils.getDinamicInstance().saveQuickSlot(this);
-				DatabaseUtils.getDinamicInstance().saveQuest(this);
+				//DatabaseUtils.getDinamicInstance().saveQuest(this);
 		}
 		}catch(Exception e){
 			LoggerFactory.getLogger(this.getClass()).info("Saving of "+getName()+" failed ...");
@@ -1555,5 +1556,11 @@ public abstract class Player extends LivingObject implements EventListener {
 
 	public void setShop(Shop shop) {
 		this.shop = shop;
+	}
+
+	public void addLime(Integer lime) {
+		
+		setLime(getLime()+lime);
+		
 	}
 }
