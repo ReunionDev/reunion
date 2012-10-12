@@ -372,9 +372,9 @@ public class Npc<T extends NpcType> extends LivingObject {
 		}
 		
 		//Handle with the Item drop chance
-		Parser dropList = Reference.getInstance().getDropListReference();
-		Iterator<ParsedItem> iter = dropList.getItemListIterator();
-		List<ItemType> drawItemList = new Vector<ItemType> ();
+		Parser dropListParser = Reference.getInstance().getDropListReference();
+		Iterator<ParsedItem> iter = dropListParser.getItemListIterator();
+		List<ItemType> dropList = new Vector<ItemType> ();
 		
 		while(iter.hasNext()) {			
 			ParsedItem parsedItem = iter.next();
@@ -384,21 +384,22 @@ public class Npc<T extends NpcType> extends LivingObject {
 				
 				if( r < rate){
 					int itemTypeId = Integer.parseInt(parsedItem.getMemberValue("Item"));
-					drawItemList.add(itemManager.getItemType(itemTypeId));
+					dropList.add(itemManager.getItemType(itemTypeId));
 				}
 			}
 		}
 		
-		
-		int drawItemListRandomPos = drawItemList.size();
-		
-		if(drawItemList.size() == 0){
-			//randomly select one item from the item list.
-			while(drawItemListRandomPos >= drawItemList.size()){
-				drawItemListRandomPos = Server.getRand().nextInt();
+		if(dropList.size() > 0){
+			int dropListRandomPos = dropList.size()==1 ? 0 : dropList.size();
+			
+			if(dropListRandomPos > 0) {
+				//randomly select one item from the item list.
+				while(dropListRandomPos >= dropList.size()){
+					dropListRandomPos = Server.getRand().nextInt(dropList.size()-1);
+				}
 			}
 		
-			ItemType itemType = drawItemList.get(drawItemListRandomPos);
+			ItemType itemType = dropList.get(dropListRandomPos);
 			//handles with the luck of drop a plus item.
 			float gemLuck = Server.getRand().nextFloat();
 			float itemPlusByOne = getPosition().getLocalMap().getWorld().getServerSetings().getItemPlusByOne();
