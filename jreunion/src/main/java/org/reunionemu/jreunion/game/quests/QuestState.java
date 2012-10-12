@@ -19,6 +19,7 @@ import org.reunionemu.jreunion.model.quests.rewards.ExperienceReward;
 import org.reunionemu.jreunion.model.quests.rewards.ItemReward;
 import org.reunionemu.jreunion.model.quests.rewards.LimeReward;
 import org.reunionemu.jreunion.server.Client;
+import org.reunionemu.jreunion.server.DatabaseUtils;
 import org.reunionemu.jreunion.server.ItemManager;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
 
@@ -151,16 +152,19 @@ public class QuestState {
 					if(item == null) {
 						continue;
 					}
+					item.setExtraStats(((ItemReward)reward).getExtraStats());
 					
 					InventoryItem inventoryItem = player.getInventory().storeItem(item, -1);
 					
 					player.getPosition().getLocalMap().createEntityId(item);
+					
+					DatabaseUtils.getDinamicInstance().saveItem(item);
 	
 					client.sendPacket(Type.PICKUP, player);
 					client.sendPacket(Type.PICK, inventoryItem);	
 				}
 			}
-				
+			
 			if(reward instanceof LimeReward){
 				player.addLime(((LimeReward)reward).getLime());
 			}

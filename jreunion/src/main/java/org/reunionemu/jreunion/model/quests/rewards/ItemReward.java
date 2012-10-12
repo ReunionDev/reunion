@@ -6,4 +6,6 @@ public interface ItemReward extends Reward {
 	public Integer getAmount();
 
 	Integer getType();
+
+	Long getExtraStats();
 }

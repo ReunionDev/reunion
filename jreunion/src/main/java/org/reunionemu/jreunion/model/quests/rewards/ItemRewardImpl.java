@@ -11,8 +11,16 @@ public class ItemRewardImpl extends RewardImpl implements ItemReward {
 	@XmlAttribute(required=false)
 	protected Integer amount;
 	
+	@XmlAttribute(required=false, name="extrastats")
+	protected Integer extraStats;
+	
 	@XmlAttribute(required=true)
 	protected Integer type;
+	
+	@Override
+	public Long getExtraStats() {
+		return extraStats!=null?extraStats:0L;
+	}
 
 	@Override
 	public Integer getAmount() {
