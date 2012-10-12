@@ -41,12 +41,11 @@ import org.springframework.stereotype.Service;
 @Lazy(false)
 public class Network extends EventDispatcher implements Runnable, EventListener {
 	
-	private final ByteBuffer buffer = ByteBuffer.allocate(16384);
+	private final ByteBuffer buffer = ByteBuffer.allocate(1024*64);
 	
 	private Selector selector;
 	
 	private Thread thread;
-	
 	
 	public Network(){
 		super();
