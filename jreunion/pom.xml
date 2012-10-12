@@ -188,7 +188,7 @@
 						<goals>
 							<goal>unpack</goal>
 						</goals>
-						<phase>generate-sources</phase>
+						<phase>generate-resources</phase>
 						<configuration>
 							<outputDirectory>data</outputDirectory>
 							<artifactItems>
