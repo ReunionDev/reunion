@@ -16,6 +16,7 @@ import org.reunionemu.jreunion.model.quests.objectives.MobObjectiveImpl;
 import org.reunionemu.jreunion.model.quests.objectives.PointsObjectiveImpl;
 import org.reunionemu.jreunion.model.quests.restrictions.LevelRestrictionImpl;
 import org.reunionemu.jreunion.model.quests.restrictions.RaceRestrictionImpl;
+import org.reunionemu.jreunion.model.quests.restrictions.RepeatRestrictionImpl;
 import org.reunionemu.jreunion.model.quests.rewards.ExperienceRewardImpl;
 import org.reunionemu.jreunion.model.quests.rewards.ItemRewardImpl;
 import org.reunionemu.jreunion.model.quests.rewards.LimeRewardImpl;
@@ -28,9 +29,6 @@ public class QuestImpl implements Quest {
 
 	@XmlAttribute(required=false)
 	protected String name;
-
-	@XmlAttribute(required=false)
-	protected Boolean repeatable;
 	
 	@XmlElement(required=false)
 	protected String description;
@@ -53,7 +51,8 @@ public class QuestImpl implements Quest {
 	@XmlElementWrapper(required=false)
 	@XmlElements(value={
 			@XmlElement(type=LevelRestrictionImpl.class, name="level"),
-			@XmlElement(type=RaceRestrictionImpl.class, name="race")
+			@XmlElement(type=RaceRestrictionImpl.class, name="race"),
+			@XmlElement(type=RepeatRestrictionImpl.class, name="norepeat")
 		})
 	protected List<Restriction> restrictions;
 
@@ -72,10 +71,6 @@ public class QuestImpl implements Quest {
 		return description;
 	}
 	
-	public Boolean getRepeatable() {
-		return repeatable!=null?repeatable:true;
-	}
-
 	@Override
 	public List<Reward> getRewards(){
 		if(rewards==null){
