@@ -915,9 +915,6 @@ public class DatabaseUtils {
 			if (rs.next())
 			{				
 				int type = rs.getInt("type");
-				if(type == 1014){
-					System.out.print("");
-				}
 				ItemType itemType = Server.getInstance().getWorld().getItemManager().getItemType(type);
 				
 				if (itemType == null) {

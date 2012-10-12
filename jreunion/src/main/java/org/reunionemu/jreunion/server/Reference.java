@@ -2,6 +2,7 @@ package org.reunionemu.jreunion.server;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 
 import org.reunionemu.jcommon.Parser;
@@ -109,18 +110,24 @@ public class Reference {
 		this.skillReference = skillReference;
 	}
 
-	public void Load() throws Exception {
+	public void Load(){
 		clear();
-		serverReference.Parse("config/Settings.dta");
-		mapConfigReference.Parse("config/Maps.dta");
-
-		itemReference.Parse(getDataResource("Items.dta"));
-		mobReference.Parse(getDataResource("Mob.dta"));
-		expReference.Parse(getDataResource("ExpTable.dta"));
-		mapReference.Parse(getDataResource("Maps.dta"));
-		npcReference.Parse(getDataResource("Npc.dta"));
-		dropListReference.Parse(getDataResource("DropList.dta"));
-		skillReference.Parse(getDataResource("Skills.dta"));
+		try {
+			serverReference.Parse("config/Settings.dta");
+		
+			mapConfigReference.Parse("config/Maps.dta");
+	
+			itemReference.Parse(getDataResource("Items.dta"));
+			mobReference.Parse(getDataResource("Mob.dta"));
+			expReference.Parse(getDataResource("ExpTable.dta"));
+			mapReference.Parse(getDataResource("Maps.dta"));
+			npcReference.Parse(getDataResource("Npc.dta"));
+			dropListReference.Parse(getDataResource("DropList.dta"));
+			skillReference.Parse(getDataResource("Skills.dta"));
+		
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 
 	}
 	

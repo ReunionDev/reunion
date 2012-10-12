@@ -73,7 +73,6 @@ public class Server extends EventDispatcher implements ApplicationContextAware{
 		
 		
 		logger.info("Loading server objects...");
-		Reference.getInstance().Load();
 
 		packetParser = new PacketParser();
 		
@@ -144,6 +143,7 @@ public class Server extends EventDispatcher implements ApplicationContextAware{
 	private Database database;
 
 	private Server() {
+		Reference.getInstance().Load();
 		database = new Database(this);
 		database.start();
 
