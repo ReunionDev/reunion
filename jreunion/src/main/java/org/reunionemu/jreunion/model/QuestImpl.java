@@ -28,6 +28,9 @@ public class QuestImpl implements Quest {
 
 	@XmlAttribute(required=false)
 	protected String name;
+
+	@XmlAttribute(required=false)
+	protected Boolean repeatable;
 	
 	@XmlElement(required=false)
 	protected String description;
@@ -67,6 +70,10 @@ public class QuestImpl implements Quest {
 	@Override
 	public String getDescription() {
 		return description;
+	}
+	
+	public Boolean getRepeatable() {
+		return repeatable!=null?repeatable:true;
 	}
 
 	@Override
