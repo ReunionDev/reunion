@@ -42,7 +42,10 @@ public abstract class LivingObject extends WorldObject {
 	public int getPercentageHp() {
 		
 		double percentageHp = this.getHp() * 100 / this.getMaxHp();
-		percentageHp = Math.ceil(percentageHp);
+		if(percentageHp<1){
+			percentageHp = 1;
+		}
+			
 		return (int) percentageHp;		
 	}
 	
