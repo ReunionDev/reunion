@@ -153,13 +153,10 @@ public class Parser implements Iterable<ParsedItem> {
 						parsedItem = new ParsedItem(hobjectname);
 						addMember(parsedItem);
 
-					} else {
-						LoggerFactory.getLogger(Parser.class).info(parseError(linenr,
-								"Line can not be identified", line));
 					}
 				}
 
-				if (object.length == 2) {
+				if (line.contains("=")) {
 					if (parsedItem == null) {
 
 						LoggerFactory.getLogger(Parser.class).info(parseError(linenr,
@@ -167,7 +164,7 @@ public class Parser implements Iterable<ParsedItem> {
 						continue;
 					}
 					String name = object[0].trim();
-					String value = object[1].trim();
+					String value = object.length==2 ? object[1].trim() : null;
 					ParsedItemMember parsedItemMember = new ParsedItemMember(
 							name, value);
 					parsedItem.addMember(parsedItemMember);

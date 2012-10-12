@@ -1,6 +1,6 @@
 #Database configuration object
 [Database]
 address = 127.0.0.1
-database = reunionstatic
+database = reunionStatic
 username = root
 password = #empty password
