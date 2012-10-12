@@ -1,8 +1,12 @@
 package org.reunionemu.jreunion.server;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 
 import org.reunionemu.jcommon.Parser;
+import org.reunionemu.jreunion.server.beans.SpringApplicationContext;
+import org.springframework.context.ApplicationContext;
 
 
 /**
@@ -110,21 +114,34 @@ public class Reference {
 		serverReference.Parse("config/Settings.dta");
 		mapConfigReference.Parse("config/Maps.dta");
 
-		itemReference.Parse(getDataPathFile("Items.dta"));
-		mobReference.Parse(getDataPathFile("Mob.dta"));
-		expReference.Parse(getDataPathFile("ExpTable.dta"));
-		mapReference.Parse(getDataPathFile("Maps.dta"));
-		npcReference.Parse(getDataPathFile("Npc.dta"));
-		dropListReference.Parse(getDataPathFile("DropList.dta"));
-		skillReference.Parse(getDataPathFile("Skills.dta"));
+		itemReference.Parse(getDataResource("Items.dta"));
+		mobReference.Parse(getDataResource("Mob.dta"));
+		expReference.Parse(getDataResource("ExpTable.dta"));
+		mapReference.Parse(getDataResource("Maps.dta"));
+		npcReference.Parse(getDataResource("Npc.dta"));
+		dropListReference.Parse(getDataResource("DropList.dta"));
+		skillReference.Parse(getDataResource("Skills.dta"));
 
 	}
 	
+	public static InputStream getDataResource(String filename){
+		String dataPath = getInstance().getServerReference().getItem("Server").getMemberValue("DataPath");
+		ApplicationContext context = SpringApplicationContext.getApplicationContext();
+		String path = new File(dataPath, filename).getPath();
+		try{
+			if(context!=null){
+				return context.getResource(path).getInputStream();
+			}else{
+				return new FileInputStream(path);
+			}
+		}catch(Exception e){
+			throw new RuntimeException(e);
+		}
+	}
 	public static String getDataPathFile(String filename){
 		String dataPath = getInstance().getServerReference().getItem("Server").getMemberValue("DataPath");
-		
-		return new File(dataPath, filename).getPath();
-		
-		
+		String path = new File(dataPath, filename).getPath();
+		return path;
+	
 	}
 }

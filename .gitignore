@@ -4,3 +4,4 @@ target
 *.log
 /jreunion/logs/*
 /jreunion/data
+/jreunion/src/main/resources/data

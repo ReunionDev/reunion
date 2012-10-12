@@ -91,11 +91,8 @@ public class NpcShop {
 		setShop(parsedNpc.getMemberValue("Shop"));
 		
 		
-		try {
-			shopReference.Parse(Reference.getDataPathFile(getShop()));
-		} catch (IOException e) {
-			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
-		}
+		shopReference.Parse(Reference.getDataResource(getShop()));
+		
 		loadItemList(npc);
 	}
 

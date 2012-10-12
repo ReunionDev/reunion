@@ -1,6 +1,6 @@
 #Server configuration object
 [Server]
-DataPath=../../reunion-data/static/file
+DataPath=classpath:/data/file
 xp = 1				# 1=1x, 2=2x, 3=3x...
 lime = 1			# 1=1x, 2=2x, 3=3x...
 DefaultMap = 4

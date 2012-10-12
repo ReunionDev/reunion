@@ -419,22 +419,23 @@ public class LocalMap extends Map implements Runnable{
 
 	public void loadFromReference(int id) {
 		try{
-			playerSpawnReference.Parse(Reference.getDataPathFile(Reference.getInstance().getMapReference()
-					.getItemById(id).getMemberValue("PlayerSpawn")));		
-			mobSpawnReference.Parse(Reference.getDataPathFile(Reference.getInstance().getMapReference()
+			playerSpawnReference.Parse(Reference.getDataResource(Reference.getInstance().getMapReference()
+					.getItemById(id).getMemberValue("PlayerSpawn")));
+			//Reference.getDataResource(filename)
+			mobSpawnReference.Parse(Reference.getDataResource(Reference.getInstance().getMapReference()
 					.getItemById(id).getMemberValue("MobSpawn")));
-			npcSpawnReference.Parse(Reference.getDataPathFile(Reference.getInstance().getMapReference()
+			npcSpawnReference.Parse(Reference.getDataResource(Reference.getInstance().getMapReference()
 					.getItemById(id).getMemberValue("NpcSpawn")));
 			
 		} catch(Exception e){			
 			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);			
 		}
 		Area area = getArea();
-		area.load(Reference.getDataPathFile(Reference.getInstance().getMapReference()
+		area.load(Reference.getDataResource(Reference.getInstance().getMapReference()
 				.getItemById(id).getMemberValue("PlayerArea")),Field.PLAYER);
-		area.load(Reference.getDataPathFile(Reference.getInstance().getMapReference()
+		area.load(Reference.getDataResource(Reference.getInstance().getMapReference()
 				.getItemById(id).getMemberValue("MobArea")),Field.MOB);
-		area.load(Reference.getDataPathFile(Reference.getInstance().getMapReference()
+		area.load(Reference.getDataResource(Reference.getInstance().getMapReference()
 				.getItemById(id).getMemberValue("PvpArea")),Field.PVP);
 	}
 

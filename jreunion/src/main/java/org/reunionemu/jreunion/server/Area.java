@@ -2,6 +2,7 @@ package org.reunionemu.jreunion.server;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.InputStream;
 import java.util.Iterator;
 
 import javax.imageio.ImageIO;
@@ -59,15 +60,11 @@ public class Area {
 		return (data[nbyte] & (1 << noffset)) != 0;
 	}
 
-	public boolean load(String filename, Field field) {
-		File file = new File(filename);
-		if(!file.exists()){
-			LoggerFactory.getLogger(this.getClass()).error("File not found: "+file);
-			return false;			
-		}
+	public boolean load(InputStream inputStream, Field field) {
+	
 
 		try {
-			ImageInputStream iis = ImageIO.createImageInputStream(file);
+			ImageInputStream iis = ImageIO.createImageInputStream(inputStream);
 			Iterator<ImageReader> readers = ImageIO.getImageReaders(iis);
 			 if (readers.hasNext()) {
 
@@ -90,7 +87,7 @@ public class Area {
 	                
                 }
             } else {
-            	throw new Exception("No valid reader found for file: " + file);            	
+            	throw new Exception("No valid reader found");            	
             }
 			//LoggerFactory.getLogger(Area.class).info("done loading: " + file);
 

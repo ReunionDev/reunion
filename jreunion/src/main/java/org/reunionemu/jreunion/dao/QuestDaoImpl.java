@@ -20,13 +20,12 @@ public class QuestDaoImpl implements QuestDao {
 	
 	@Autowired
 	ApplicationContext context;
-	
+		
 	@Value("${quest.resource.location}")
-	String resourceLocation;
+	Resource resource;
 	
 	@PostConstruct
 	public void init() throws Exception{
-		Resource resource = context.getResource(resourceLocation);
 		
 		JAXBContext context = JAXBContext.newInstance(QuestListImpl.class);
 		
@@ -41,7 +40,7 @@ public class QuestDaoImpl implements QuestDao {
 				return quest;
 			}
 		}
-		throw new IllegalStateException("Quest with id: "+id+"not found");
+		throw new IllegalStateException("Quest with id: "+id+" not found");
 	}
 	
 }

@@ -2,15 +2,16 @@ package org.reunionemu.jcommon;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.Iterator;
 import java.util.List;
-import java.util.ResourceBundle;
 import java.util.Vector;
 
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
@@ -20,10 +21,20 @@ import org.slf4j.LoggerFactory;
 public class Parser implements Iterable<ParsedItem> {
 
 	private List<ParsedItem> itemList = new Vector<ParsedItem>();
+	
+	private String source;	
 
 	public Parser() {
 		super();
 
+	}
+	
+	public String getSource() {
+		return source;
+	}
+
+	public void setSource(String source) {
+		this.source = source;
 	}
 
 	public void addMember(ParsedItem item) {
@@ -109,20 +120,12 @@ public class Parser implements Iterable<ParsedItem> {
 	public int getItemListSize() {
 		return itemList.size();
 	}
-
-	public void Parse(String filename) throws IOException {
-		File file = new File(filename);
-		if (!file.exists()) {
-			LoggerFactory.getLogger(Parser.class).info("Parsing error: '" + file.getAbsolutePath()
-					+ "' does not exist");
-			throw new FileNotFoundException(file.getAbsolutePath());
-			
-		}
+	
+	public void Parse(InputStream inputStream){
 		try {
 			ParsedItem parsedItem = null;
-
-			BufferedReader input = new BufferedReader(new FileReader(file));
-
+		
+			BufferedReader input = new BufferedReader(new InputStreamReader(inputStream));
 			String line = null;
 			int linenr = 0;
 
@@ -142,7 +145,7 @@ public class Parser implements Iterable<ParsedItem> {
 								hobject.length() - 1);
 						hobjectname = hobjectname.trim();
 						if (getItem(hobjectname) != null) {
-							LoggerFactory.getLogger(Parser.class).info(parseError(filename, linenr,
+							LoggerFactory.getLogger(Parser.class).info(parseError(linenr,
 									"Object with name \"" + hobjectname
 											+ "\" already exits", line));
 							continue;
@@ -151,7 +154,7 @@ public class Parser implements Iterable<ParsedItem> {
 						addMember(parsedItem);
 
 					} else {
-						LoggerFactory.getLogger(Parser.class).info(parseError(filename, linenr,
+						LoggerFactory.getLogger(Parser.class).info(parseError(linenr,
 								"Line can not be identified", line));
 					}
 				}
@@ -159,7 +162,7 @@ public class Parser implements Iterable<ParsedItem> {
 				if (object.length == 2) {
 					if (parsedItem == null) {
 
-						LoggerFactory.getLogger(Parser.class).info(parseError(filename, linenr,
+						LoggerFactory.getLogger(Parser.class).info(parseError(linenr,
 								"Member needs an object", line));
 						continue;
 					}
@@ -170,7 +173,7 @@ public class Parser implements Iterable<ParsedItem> {
 					parsedItem.addMember(parsedItemMember);
 				}
 				if (object.length < 1 || object.length > 2) {
-					LoggerFactory.getLogger(Parser.class).info(parseError(filename, linenr,
+					LoggerFactory.getLogger(Parser.class).info(parseError(linenr,
 							"Invalid member syntax", line));
 					continue;
 				}
@@ -182,13 +185,26 @@ public class Parser implements Iterable<ParsedItem> {
 
 			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 		}
+		
+	}
+
+	public void Parse(String filename) throws IOException {
+		setSource(filename);
+		File file = new File(filename);
+		if (!file.exists()) {
+			LoggerFactory.getLogger(Parser.class).info("Parsing error: '" + file.getAbsolutePath()
+					+ "' does not exist");
+			throw new FileNotFoundException(file.getAbsolutePath());
+			
+		}
+		Parse(new FileInputStream(file));		
 
 	}
 
-	private String parseError(String filename, int linenr, String errorMessage,
+	private String parseError(int linenr, String errorMessage,
 			String line) {
 		String parseErrorMessage = new String();
-		parseErrorMessage = "Parsing error line " + linenr + " in " + filename
+		parseErrorMessage = "Parsing error line " + linenr + " in " + getSource()
 				+ " (" + errorMessage + "): \"" + line + "\"";
 		return parseErrorMessage;
 	}
