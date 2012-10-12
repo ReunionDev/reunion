@@ -70,8 +70,7 @@ public class Server extends EventDispatcher implements ApplicationContextAware{
 		
 		Protocol.load();
 		
-		database = new Database(this);
-		database.start();
+		
 		
 		logger.info("Loading server objects...");
 		Reference.getInstance().Load();
@@ -145,6 +144,8 @@ public class Server extends EventDispatcher implements ApplicationContextAware{
 	private Database database;
 
 	private Server() {
+		database = new Database(this);
+		database.start();
 
 	}
 

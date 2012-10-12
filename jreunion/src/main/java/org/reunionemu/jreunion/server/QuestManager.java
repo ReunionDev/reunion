@@ -4,12 +4,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Vector;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import javax.annotation.PostConstruct;
+
+import org.reunionemu.jreunion.dao.QuestDao;
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.Quest;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class QuestManager {
+	
+	
+	@Autowired
+	QuestDao questDao;
 
 	private java.util.Map<Integer,Quest> quests = new HashMap<Integer,Quest>();
 	
@@ -17,10 +26,13 @@ public class QuestManager {
 		
 	}
 	
+	@PostConstruct	
 	public void loadQuests(){
 		quests = DatabaseUtils.getStaticInstance().loadQuests();
 		if(quests != null){
 			LoggerFactory.getLogger(QuestManager.class).info("Loaded "+quests.size()+" quests");
+		}else{
+			LoggerFactory.getLogger(QuestManager.class).error("Failed to load quests");
 		}
 	}
 	

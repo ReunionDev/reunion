@@ -58,6 +58,7 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 
 	private SkillManager skillManager;
 	
+	@Autowired
 	private QuestManager questManager;
 	
 	private ItemManager itemManager;
@@ -81,8 +82,6 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 		serverSetings = new ServerSetings();
 		worldCommand = new Command(this);
 		skillManager = new SkillManager();
-		questManager = new QuestManager();
-		questManager.loadQuests();
 		playerManager = new PlayerManager();
 		itemManager = new ItemManager();
 		npcManager = new NpcManager();
