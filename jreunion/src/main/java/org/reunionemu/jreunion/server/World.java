@@ -10,8 +10,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import javax.annotation.PostConstruct;
+
 import org.reunionemu.jcommon.ParsedItem;
 import org.reunionemu.jreunion.events.Event;
 import org.reunionemu.jreunion.events.EventDispatcher;
@@ -26,18 +26,20 @@ import org.reunionemu.jreunion.events.server.ServerEvent;
 import org.reunionemu.jreunion.events.server.ServerStartEvent;
 import org.reunionemu.jreunion.events.server.ServerStopEvent;
 import org.reunionemu.jreunion.game.BulkanPlayer;
-import org.reunionemu.jreunion.game.Entity;
 import org.reunionemu.jreunion.game.Pet;
-import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.Pet.PetStatus;
-import org.reunionemu.jreunion.game.items.pet.PetEgg;
+import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.skills.bulkan.RecoveryBoost;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
+@Service
 public class World extends EventDispatcher implements EventListener, Sendable {
 	
 	private Command worldCommand;
@@ -65,9 +67,17 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 	private PetManager petManager;
 
 	static public ServerSetings serverSetings;
+	
+	@Autowired
+	private Server server;
 
-	public World(Server server) {
+	public World() {
 		
+	
+	}
+	
+	@PostConstruct
+	public void init(){
 		serverSetings = new ServerSetings();
 		worldCommand = new Command(this);
 		skillManager = new SkillManager();
@@ -79,9 +89,9 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 		petManager = new PetManager();
 		petManager.loadPets();
 		serverHour = 4;
-		teleportManager = new TeleportManager();
-				
-		server.addEventListener(ServerEvent.class, this);
+		teleportManager = new TeleportManager();				
+		server.addEventListener(ServerEvent.class, this);		
+		
 	}
 
 	public SkillManager getSkillManager() {

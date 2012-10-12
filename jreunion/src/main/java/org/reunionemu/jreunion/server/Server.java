@@ -12,6 +12,7 @@ import org.reunionemu.jreunion.protocol.Protocol;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.support.AbstractApplicationContext;
@@ -75,7 +76,7 @@ public class Server extends EventDispatcher implements ApplicationContextAware{
 		logger.info("Loading server objects...");
 		Reference.getInstance().Load();
 		network = new Network(this);
-		world = new World(this);
+
 		packetParser = new PacketParser();
 		
 		this.fireEvent(this.createEvent(ServerStartEvent.class, this));			
@@ -138,6 +139,7 @@ public class Server extends EventDispatcher implements ApplicationContextAware{
 
 	private PacketParser packetParser;
 
+	@Autowired
 	private World world;
 
 	private Database database;

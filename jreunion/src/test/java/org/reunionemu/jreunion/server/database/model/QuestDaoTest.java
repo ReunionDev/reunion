@@ -19,18 +19,10 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 public class QuestDaoTest {
 	
 	@Autowired
-	ApplicationContext context;
-	
-	@Autowired
 	QuestDao questDao;		
 	
 	@Test
 	public void test() throws IOException {
-		
-		Resource [] resources = context.getResources("*");
-		for(Resource resource: resources){
-			System.out.println(resource.getURL());
-		}
 		
 		Quest quest = questDao.findById(1);
 		assertNotNull(quest);

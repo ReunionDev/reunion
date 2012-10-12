@@ -21,6 +21,11 @@
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>1.6.6</version>
 		</dependency>
+		<dependency>
+			<groupId>com.turn.ttorrent</groupId>
+			<artifactId>ttorrent</artifactId>
+			<version>1.1.2</version>
+		</dependency>
 	</dependencies>
 	<parent>
 		<groupId>org.reunionemu</groupId>
@@ -28,4 +33,11 @@
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
+	<repositories>
+		<repository>
+			<id>aidamina-cloudbees</id>
+			<url>http://repository-aidamina.forge.cloudbees.com/snapshot/</url>
+			<snapshots><enabled>true</enabled></snapshots>
+		</repository>	
+	</repositories>
 </project>
