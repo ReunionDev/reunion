@@ -2,6 +2,7 @@ package org.reunionemu.jreunion.server;
 
 import java.nio.channels.SocketChannel;
 import java.util.List;
+import java.util.ListIterator;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -156,20 +157,27 @@ public class Command {
 			player.getClient().sendPacket(Type.SAY, "Player is on other map. You must teleport to "+mapTargetPlayer.getName());
 	}
 	
-	
 	public void GoToPos(Player player, Position position){
-		
 		Client client = player.getClient();
-				
+
 		SessionList<Session> exit = player.getInterested().getSessions();
 		exit.exit(player);
-		player.setPosition(position);
 		
 		SessionList<Session> entry = player.getPosition().getLocalMap().GetSessions(position);
 		
-		entry.enter(player, false);
-		entry.sendPacket(Type.IN_CHAR, player, true);
-
+		player.setPosition(position);
+		
+		ListIterator<Session> newSession = entry.listIterator();
+		while(newSession.hasNext())
+		{
+			Session newSessionObj = newSession.next();
+			
+			if(!newSessionObj.getOwner().equals(player))
+			{
+				newSessionObj.enter(player,false);
+				newSessionObj.getOwner().getClient().sendPacket(Type.IN_CHAR, player, true);
+			}
+		}
 		player.update();
 		client.sendPacket(Type.GOTO, position);
 	}

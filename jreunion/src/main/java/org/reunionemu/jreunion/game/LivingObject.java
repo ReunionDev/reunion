@@ -40,10 +40,8 @@ public abstract class LivingObject extends WorldObject {
 	}
 	
 	public int getPercentageHp() {
-		
 		double percentageHp = this.getHp() * 100 / this.getMaxHp();
-		percentageHp = Math.ceil(percentageHp);
-		return (int) percentageHp;		
+		return (int) ((percentageHp < 1 && percentageHp > 0) ? 1 : percentageHp);		
 	}
 	
 	public void walk(Position position, boolean isRuning) {
@@ -248,16 +246,14 @@ public abstract class LivingObject extends WorldObject {
 			*/
 			
 		}
-		
 		long newHp = getHp() - damage;
+		setHp(newHp);
 		
-		if (newHp <= 0) {
+		if (this.getPercentageHp() < 1) {
 			LoggerFactory.getLogger(LivingObject.class).info("Player "+player+" killed npc "+this);
 			if(npc != null){
 				npc.kill(player);
 			}
-		} else {
-			setHp(newHp);
 		}
 		this.getInterested().sendPacket(Type.ATTACK_VITAL, this);
 	}
