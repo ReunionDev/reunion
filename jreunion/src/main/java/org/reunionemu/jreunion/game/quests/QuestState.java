@@ -4,6 +4,9 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 import org.reunionemu.jreunion.game.InventoryItem;
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.Npc;
@@ -23,13 +26,17 @@ import org.reunionemu.jreunion.server.DatabaseUtils;
 import org.reunionemu.jreunion.server.ItemManager;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
 
-public class QuestState {
+public abstract class QuestState {	
+		
+	transient Quest quest;
 	
-	Quest quest;
+	private int questId;
+	
 	Map<Objective, ObjectiveState> progression = new LinkedHashMap <Objective, ObjectiveState>();
 	
 	public QuestState(Quest quest) {
 		this.quest = quest;
+		this.questId = quest.getId();
 		for(Objective objective: quest.getObjectives()){
 			progression.put(objective, objective.createObjectiveState());
 		}
@@ -42,19 +49,7 @@ public class QuestState {
 	public Quest getQuest(){
 		return this.quest;
 	}
-	
-	/*
-	public int getProgression(int id){
 		
-		for( Objective objective: progression.keySet()){
-			//LoggerFactory.getLogger(QuestState.class).debug("OBJECTIVE ID: "+objective.getId());
-			if(objective.getId() == id)
-				return getProgression(objective);
-		}
-		
-		return 0;
-	}*/
-	
 	public void handleProgress(Npc<?> mob, Player player){
 		for(Objective objective: getQuest().getObjectives()){
 			if(objective instanceof MobObjective){
@@ -176,5 +171,5 @@ public class QuestState {
 		player.setQuest(null);
 		return true;
 	}
+	
 }
-

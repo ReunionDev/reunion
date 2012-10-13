@@ -16,7 +16,7 @@ public class MobObjectiveImpl extends ObjectiveImpl implements MobObjective {
 
 	@Override
 	public Integer getAmount() {
-		return amount;
+		return amount!=null?amount:1;
 	}
 	
 	@Override

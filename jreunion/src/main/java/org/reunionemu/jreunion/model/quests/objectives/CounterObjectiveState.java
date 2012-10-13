@@ -1,7 +1,15 @@
 package org.reunionemu.jreunion.model.quests.objectives;
 
-public class CounterObjectiveState implements ObjectiveState {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
+@Entity
+public class CounterObjectiveState implements ObjectiveState {
+	
+	//@Id @GeneratedValue
+	//Long id;
+	
 	int start;
 	int left;
 	public CounterObjectiveState(int start){

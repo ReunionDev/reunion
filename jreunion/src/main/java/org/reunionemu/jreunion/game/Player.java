@@ -9,6 +9,7 @@ import java.util.Vector;
 import org.slf4j.LoggerFactory;
 import org.reunionemu.jreunion.model.Quest;
 import org.reunionemu.jcommon.ParsedItem;
+import org.reunionemu.jreunion.dao.QuestStateDao;
 import org.reunionemu.jreunion.events.Event;
 import org.reunionemu.jreunion.events.EventListener;
 import org.reunionemu.jreunion.events.client.ClientDisconnectEvent;
@@ -33,6 +34,7 @@ import org.reunionemu.jreunion.server.Server;
 import org.reunionemu.jreunion.server.Session;
 import org.reunionemu.jreunion.server.SessionList;
 import org.reunionemu.jreunion.server.Tools;
+import org.reunionemu.jreunion.server.beans.SpringApplicationContext;
 
 /**
  * @author Aidamina
@@ -1055,7 +1057,8 @@ public abstract class Player extends LivingObject implements EventListener {
 				setQuestState(null);
 			}
 		} else{
-			setQuestState(new QuestState(quest));
+			QuestStateDao dao = SpringApplicationContext.getApplicationContext().getBean(QuestStateDao.class);
+			//setQuestState(dao.create(quest));
 			client.sendPacket(Type.QT, "get " + quest.getId());
 		}		
 	}
