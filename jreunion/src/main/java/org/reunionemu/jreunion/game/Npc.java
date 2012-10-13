@@ -246,17 +246,25 @@ public class Npc<T extends NpcType> extends LivingObject {
 	public float getMutantResistance(LivingObject livingObject){
 	
 		float mobMutantModifier = Server.getInstance().getWorld().getServerSetings().getMobMutantModifier();
+		float returnvalue = 0.5f;
 		
 		 /*  1(red) - Resistance against short-range physical attack
 		  *  2(blue) - Resistance against magical attack
 		  *  3(green) - Resistance against summon attack
 		  *  4(yellow) - Resistance against long-range physical attack
 		  */
-		if(getMutantType() == livingObject.getLastAttackType()){
-			return (float) (1 + mobMutantModifier);
-		} else {
-			return 1.15f;
-		}
+		 if(getMutantType() == livingObject.getLastAttackType()){
+			 // Full resistance to specific damage type
+			 returnvalue = 1 - mobMutantModifier;	 
+		 } else {
+			 // Generally half resistance
+			 returnvalue = 1 - (mobMutantModifier / 2 );
+		 }
+		 
+		 if (returnvalue > 0.9) { returnvalue = 0.9f; }
+		 if (returnvalue < 0.1) { returnvalue = 0.1f; }
+		 
+		 return (float) (returnvalue);
 	}
 	
 	public int getMutantGemStoneType(boolean full){

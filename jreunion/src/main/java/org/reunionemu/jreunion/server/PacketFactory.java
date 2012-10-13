@@ -259,8 +259,7 @@ public class PacketFactory {
 					String text = (String)args[0];
 					Player from = (Player)args[1];
 					
-					return "say "+from.getEntityId()+" *GUILD*"+from.getName()+text;
-					
+					return "say "+from.getEntityId()+" *GUILD*"+from.getName()+" "+text+ " 0";
 				}
 				break;
 				
