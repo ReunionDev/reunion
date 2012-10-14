@@ -8,6 +8,7 @@ import javax.transaction.TransactionManager;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.reunionemu.jreunion.model.jpa.CounterObjectiveState;
 import org.reunionemu.jreunion.model.jpa.ObjectiveState;
 import org.reunionemu.jreunion.model.jpa.QuestState;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,9 +36,9 @@ public class PolymorphismTest {
 		
 		entityManager.getTransaction().begin();
 		state.setQuestId(1);
-		ObjectiveState obj = new ObjectiveState(state);
+		ObjectiveState obj = new CounterObjectiveState(state, 10);
 		entityManager.persist(obj);
-		state.objs.add(obj);
+		//state.objs.add(obj);
 		entityManager.persist(state);
 		entityManager.getTransaction().commit();
 		entityManager = emf.createEntityManager();;
