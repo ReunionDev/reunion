@@ -52,8 +52,6 @@ public class DatabaseUtils {
 			return false;
 	}
 	
-	
-	
 	/**
 	 * @param database
 	 *            The database to set.

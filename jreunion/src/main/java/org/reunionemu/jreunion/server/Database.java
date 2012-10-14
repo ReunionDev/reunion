@@ -4,10 +4,11 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.reunionemu.jcommon.ParsedItem;
 import org.reunionemu.jcommon.Parser;
+import org.reunionemu.jreunion.server.beans.SpringApplicationContext;
+import org.slf4j.LoggerFactory;
+import javax.sql.DataSource;
 
 import com.mysql.jdbc.Driver;
 
@@ -28,27 +29,11 @@ public class Database {
 	}
 
 	public void connectDinamic() throws Exception {
-		Parser dinamicDatabaseConfigParser = new Parser();
-		dinamicDatabaseConfigParser.Parse("config/Database.dta");
-		String[] requiredMembers = { "address", "database", "username",
-				"password" };
-		ParsedItem dinamicDatabaseConfig = dinamicDatabaseConfigParser.getItem("Database");
-
-		if (dinamicDatabaseConfig == null
-				|| !dinamicDatabaseConfig.checkMembers(requiredMembers)) {
-			LoggerFactory.getLogger(Database.class).info("Error loading database config");
-			return;
-		}
-		DatabaseUtils.getDinamicInstance().setDinamicDatabase(this); // link utils to
-															// this database
-		String userName = dinamicDatabaseConfig.getMemberValue("username");
-		String password = dinamicDatabaseConfig.getMemberValue("password");
-		String url = "jdbc:mysql://" + dinamicDatabaseConfig.getMemberValue("address")
-				+ "/" + dinamicDatabaseConfig.getMemberValue("database")
-				+ "?autoReconnect=true";
-		Driver driver = (Driver)ClassFactory.create("com.mysql.jdbc.Driver");
 		
-		dinamicConn = DriverManager.getConnection(url, userName, password);
+		DataSource datasource = SpringApplicationContext.getApplicationContext().getBean(DataSource.class);
+		
+		DatabaseUtils.getDinamicInstance().setDinamicDatabase(this); 
+		dinamicConn = datasource.getConnection();
 		LoggerFactory.getLogger(Database.class).info("Dinamic "+getClass().getSimpleName() + " connection established");
 
 	}
