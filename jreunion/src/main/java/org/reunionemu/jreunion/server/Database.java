@@ -47,6 +47,7 @@ public class Database {
 				LoggerFactory.getLogger(Database.class).info(getClass().getName()
 						+ " connection terminated");
 			} catch (Exception e) { /* ignore close errors */
+				
 			}
 		}
 	}

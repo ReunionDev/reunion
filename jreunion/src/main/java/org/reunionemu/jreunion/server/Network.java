@@ -39,7 +39,7 @@ import org.springframework.stereotype.Service;
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
 @Service
-@Lazy(false)
+//@Lazy(false)
 public class Network extends EventDispatcher implements Runnable, EventListener {
 	
 	private static Logger logger = LoggerFactory.getLogger(Network.class);

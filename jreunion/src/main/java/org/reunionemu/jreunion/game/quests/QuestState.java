@@ -34,6 +34,14 @@ public abstract class QuestState {
 	
 	Map<Objective, ObjectiveState> progression = new LinkedHashMap <Objective, ObjectiveState>();
 	
+	public Map<Objective, ObjectiveState> getProgression() {
+		return progression;
+	}
+
+	protected void setProgression(Map<Objective, ObjectiveState> progression) {
+		this.progression = progression;
+	}
+
 	public QuestState(Quest quest) {
 		this.quest = quest;
 		this.questId = quest.getId();
