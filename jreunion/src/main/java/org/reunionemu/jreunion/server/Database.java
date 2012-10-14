@@ -1,16 +1,11 @@
 package org.reunionemu.jreunion.server;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 
-import org.reunionemu.jcommon.ParsedItem;
-import org.reunionemu.jcommon.Parser;
-import org.reunionemu.jreunion.server.beans.SpringApplicationContext;
-import org.slf4j.LoggerFactory;
 import javax.sql.DataSource;
 
-import com.mysql.jdbc.Driver;
+import org.reunionemu.jreunion.server.beans.SpringApplicationContext;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Aidamina
@@ -22,8 +17,6 @@ public class Database {
 	
 	public Connection staticConn = null; //reunionStatic database
 	
-	private PreparedStatement statement;
-
 	public Database(Server server) {
 		
 	}
