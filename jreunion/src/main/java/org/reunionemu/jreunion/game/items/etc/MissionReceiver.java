@@ -28,8 +28,13 @@ public class MissionReceiver extends Etc implements Usable{
 	
 	@Override
 	public boolean use(Item<?> item, LivingObject user, int quickSlotPosition, int unknown) {
+		
 		if(user instanceof Player){
 			Player player = (Player)user;
+			
+			player.getClient().sendPacket(Type.SAY, "Quests are temporarily disabled.");
+			
+			/*
 			
 			//check if player have the correct level to use this item.
 			if(player.getLevel() >= 100){
@@ -55,6 +60,7 @@ public class MissionReceiver extends Etc implements Usable{
 			item.setExtraStats(item.getExtraStats()-1);
 			DatabaseUtils.getDinamicInstance().saveItem(item);
 			player.setQuest(quest);
+			*/
 			
 			return true;
 		} else {

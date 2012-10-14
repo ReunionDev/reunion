@@ -140,9 +140,15 @@ public class QuickSlotBar {
 		
 		LoggerFactory.getLogger(QuickSlotBar.class).info(player.getName()+" used item: " +item.getType().getName());
 		
-		removeItem(qsItem);
-		DatabaseUtils.getDinamicInstance().deleteQuickSlotItem(item);
-		DatabaseUtils.getDinamicInstance().deleteItem(item.getItemId());
+		// Dont remove Rough Gems - we take care of them in the cutting routine.
+		
+		Integer itemtype = item.getType().getTypeId();
+		
+		if ( !(itemtype >= 215 && itemtype <= 221) && !(itemtype == 1067)) {
+			removeItem(qsItem);
+			DatabaseUtils.getDinamicInstance().deleteQuickSlotItem(item);
+			DatabaseUtils.getDinamicInstance().deleteItem(item.getItemId());
+		} 		
 		
 	}
 }
