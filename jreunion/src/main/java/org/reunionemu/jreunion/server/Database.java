@@ -15,8 +15,6 @@ public class Database {
 
 	public Connection dinamicConn = null; //reunion database
 	
-	public Connection staticConn = null; //reunionStatic database
-	
 	public Database(Server server) {
 		
 	}
@@ -46,14 +44,6 @@ public class Database {
 		if (dinamicConn != null) {
 			try {
 				dinamicConn.close();
-				LoggerFactory.getLogger(Database.class).info(getClass().getName()
-						+ " connection terminated");
-			} catch (Exception e) { /* ignore close errors */
-			}
-		}
-		if (staticConn != null) {
-			try {
-				staticConn.close();
 				LoggerFactory.getLogger(Database.class).info(getClass().getName()
 						+ " connection terminated");
 			} catch (Exception e) { /* ignore close errors */

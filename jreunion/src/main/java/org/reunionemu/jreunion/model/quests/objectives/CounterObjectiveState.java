@@ -1,9 +1,11 @@
 package org.reunionemu.jreunion.model.quests.objectives;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 
+/**
+ * @author Aidamina
+ * @license http://reunion.googlecode.com/svn/trunk/license.txt
+ */
 @Entity
 public class CounterObjectiveState implements ObjectiveState {
 	

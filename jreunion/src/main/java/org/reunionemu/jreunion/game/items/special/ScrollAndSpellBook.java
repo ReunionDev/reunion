@@ -1,11 +1,6 @@
 package org.reunionemu.jreunion.game.items.special;
 
-import org.reunionemu.jreunion.game.Item;
-import org.reunionemu.jreunion.game.LivingObject;
-import org.reunionemu.jreunion.game.Usable;
 import org.reunionemu.jreunion.game.items.SpecialItems;
-
-
 
 /**
  * @author Aidamina

@@ -6,8 +6,6 @@ import org.reunionemu.jreunion.model.quests.Objective;
 import org.reunionemu.jreunion.model.quests.Restriction;
 import org.reunionemu.jreunion.model.quests.Reward;
 
-
-
 public interface Quest {
 	
 	int getId();
