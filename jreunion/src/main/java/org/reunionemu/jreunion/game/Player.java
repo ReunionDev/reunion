@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Vector;
 
-import org.slf4j.LoggerFactory;
-import org.reunionemu.jreunion.model.Quest;
 import org.reunionemu.jcommon.ParsedItem;
 import org.reunionemu.jreunion.dao.QuestStateDao;
 import org.reunionemu.jreunion.events.Event;
@@ -22,7 +20,7 @@ import org.reunionemu.jreunion.game.Equipment.Slot;
 import org.reunionemu.jreunion.game.items.equipment.Armor;
 import org.reunionemu.jreunion.game.items.pet.PetEgg;
 import org.reunionemu.jreunion.game.quests.QuestState;
-import org.reunionemu.jreunion.game.quests.reward.LimeReward;
+import org.reunionemu.jreunion.model.Quest;
 import org.reunionemu.jreunion.server.Client;
 import org.reunionemu.jreunion.server.Client.State;
 import org.reunionemu.jreunion.server.DatabaseUtils;
@@ -35,6 +33,7 @@ import org.reunionemu.jreunion.server.Session;
 import org.reunionemu.jreunion.server.SessionList;
 import org.reunionemu.jreunion.server.Tools;
 import org.reunionemu.jreunion.server.beans.SpringApplicationContext;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Aidamina
