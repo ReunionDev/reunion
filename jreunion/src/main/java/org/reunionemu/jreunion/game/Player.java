@@ -1070,7 +1070,8 @@ public abstract class Player extends LivingObject implements EventListener {
 	public void setQuestState(QuestState questState){
 		if(this.questState!=null){
 			questStateDao.delete(this.questState);
-		}		this.questState = questState;
+		}
+		this.questState = questState;
 	}
 
 	public void setSession(Session session) {
@@ -1109,7 +1110,6 @@ public abstract class Player extends LivingObject implements EventListener {
 	}
 
 	public void setSocial(long emotionId) {
-
 		this.social = emotionId;
 		getInterested().sendPacket(Type.SOCIAL, this, emotionId);
 
