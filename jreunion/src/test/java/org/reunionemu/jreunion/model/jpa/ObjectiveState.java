@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -35,6 +36,7 @@ public abstract class ObjectiveState {
 	}
 
 	@ManyToOne
+	@JoinColumn(name="queststate_id")
 	public QuestState getQuestState() {
 		return questState;
 	}
@@ -46,6 +48,9 @@ public abstract class ObjectiveState {
 
 	@Transient
 	public Objective getObjective() {
+		if(objective==null&&objectiveId!=null){
+			objective = questState.getQuest().getObjectives().get(objectiveId);
+		}
 		return objective;
 	}
 
@@ -54,6 +59,10 @@ public abstract class ObjectiveState {
 		this.objective = objective;
 	}
 	
+	@Transient
+	private Integer objectiveId;
+	
+	@Transient
 	@Autowired
 	QuestDao  questDao;
 	
@@ -63,11 +72,11 @@ public abstract class ObjectiveState {
 	}
 	
 	protected void setObjectiveId(Integer objectiveId) {
-		objective = questState.getQuest().getObjectives().get(objectiveId);
+		this.objectiveId = objectiveId;
+		
 	}
 
 	QuestState questState;
-	
 	
 	Objective objective;
 	
@@ -77,6 +86,7 @@ public abstract class ObjectiveState {
 	public ObjectiveState(QuestState questState, Objective objective) {
 		super();
 		this.questState = questState;
+		this.objective = objective;
 	}
 	  
 	

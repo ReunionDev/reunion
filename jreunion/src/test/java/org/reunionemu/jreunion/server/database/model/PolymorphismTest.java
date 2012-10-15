@@ -31,9 +31,7 @@ public class PolymorphismTest {
 	
 	
 	@Autowired
-	QuestDao questDao;
-	
-	
+	QuestDao questDao;	
 	
 	@Test
 	public void test() {

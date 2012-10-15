@@ -1,6 +1,7 @@
 package org.reunionemu.jreunion.server.database.model;
 
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.is;
 
 import java.util.List;
 
@@ -10,8 +11,8 @@ import org.junit.runner.RunWith;
 import org.reunionemu.jreunion.dao.AccountDao;
 import org.reunionemu.jreunion.model.Account;
 import org.reunionemu.jreunion.model.jpa.AccountImpl;
+import org.springframework.aop.aspectj.annotation.ReflectiveAspectJAdvisorFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
