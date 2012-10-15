@@ -36,10 +36,13 @@ public class QuestStateDaoTest {
 		Quest quest = questDao.findById(1);
 		assumeNotNull(quest);
 		
-		QuestState state = new QuestStateImpl(quest);
+		QuestStateImpl state = new QuestStateImpl(quest);
 		
 		assertNotNull(state);
 		questStateDao.save(state);
+		
+		QuestState qs = questStateDao.findOne(state.getId());
+		assertNotNull(qs);
 	}
 
 }

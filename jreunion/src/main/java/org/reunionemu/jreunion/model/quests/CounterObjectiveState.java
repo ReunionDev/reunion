@@ -1,8 +1,5 @@
 package org.reunionemu.jreunion.model.quests;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
 import org.reunionemu.jreunion.game.quests.QuestState;
 import org.reunionemu.jreunion.model.jpa.ObjectiveStateImpl;
 import org.reunionemu.jreunion.model.quests.objectives.ObjectiveState;
@@ -19,6 +16,10 @@ public class CounterObjectiveState extends ObjectiveStateImpl implements Objecti
 	public CounterObjectiveState(QuestState questState, Objective objective, int start) {
 		super(questState, objective);
 		this.left = start;
+	}
+	
+	public CounterObjectiveState(){
+		
 	}
 	
 	public void decrease(){

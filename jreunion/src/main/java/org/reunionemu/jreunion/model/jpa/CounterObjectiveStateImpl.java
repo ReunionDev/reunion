@@ -15,6 +15,9 @@ public class CounterObjectiveStateImpl extends CounterObjectiveState{
 	public CounterObjectiveStateImpl(QuestState questState, Objective objective, int start) {
 		super(questState, objective, start);
 	}
+	public CounterObjectiveStateImpl(){
+		
+	}
 	
 	
 	@Column

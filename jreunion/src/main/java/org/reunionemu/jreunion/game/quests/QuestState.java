@@ -28,10 +28,8 @@ public abstract class QuestState {
 	public abstract List< ObjectiveState> getObjectives();
 
 	public QuestState(Quest quest) {
-		this.quest = quest;
-		
+		this.quest = quest;		
 	}
-	
 	
 	protected QuestState(){
 		
