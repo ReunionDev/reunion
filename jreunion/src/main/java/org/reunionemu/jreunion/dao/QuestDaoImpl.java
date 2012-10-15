@@ -1,10 +1,17 @@
 package org.reunionemu.jreunion.dao;
 
 
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Vector;
+
 import javax.annotation.PostConstruct;
 import javax.xml.bind.JAXBContext;
 
+import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.model.Quest;
+import org.reunionemu.jreunion.server.Server;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
@@ -41,6 +48,36 @@ public class QuestDaoImpl implements QuestDao {
 			}
 		}
 		throw new IllegalStateException("Quest with id: "+id+" not found");
+	}
+
+	@Override
+	public Quest getRandomQuest(Player player) {
+		 
+			if (player == null){
+				throw new IllegalArgumentException("player");
+			}
+						
+			if(quests.isEmpty()){
+				throw new IllegalStateException("No quests loaded in QuestDao");
+			}
+			
+			List<Integer> attempts = new LinkedList<Integer>();
+			
+			while(true){
+				if(attempts.size()>=quests.size()){
+					throw new RuntimeException("No quests that meet the criteria are available");
+				}
+				int index = Server.getRand().nextInt(quests.size());
+				if(attempts.contains(index)){
+					continue;
+				}
+				Quest quest = quests.get(index);
+				if(quest.isAllowed(player)){
+					return quest;
+				}
+				
+				attempts.add(index);
+			}
 	}
 	
 }

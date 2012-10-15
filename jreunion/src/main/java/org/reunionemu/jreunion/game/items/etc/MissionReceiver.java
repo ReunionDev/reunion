@@ -1,5 +1,6 @@
 package org.reunionemu.jreunion.game.items.etc;
 
+import org.reunionemu.jreunion.dao.QuestDao;
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.ItemPosition;
 import org.reunionemu.jreunion.game.LivingObject;
@@ -11,8 +12,14 @@ import org.reunionemu.jreunion.server.Client;
 import org.reunionemu.jreunion.server.DatabaseUtils;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 
+@Configurable
 public class MissionReceiver extends Etc implements Usable{
+	
+	@Autowired 
+	private QuestDao questDao; 
 	
 	public MissionReceiver(int id) {
 		super(id);
@@ -34,7 +41,7 @@ public class MissionReceiver extends Etc implements Usable{
 			
 			player.getClient().sendPacket(Type.SAY, "Quests are temporarily disabled.");
 			
-			/*
+			
 			
 			//check if player have the correct level to use this item.
 			if(player.getLevel() >= 100){
@@ -49,7 +56,7 @@ public class MissionReceiver extends Etc implements Usable{
 				return false;
 			}
 			
-			Quest quest = player.getClient().getWorld().getQuestManager().getRandomQuest(player);
+			Quest quest = questDao.getRandomQuest(player);
 			
 			//check if a quest for the player level have been found.
 			if(quest == null){
@@ -60,7 +67,7 @@ public class MissionReceiver extends Etc implements Usable{
 			item.setExtraStats(item.getExtraStats()-1);
 			DatabaseUtils.getDinamicInstance().saveItem(item);
 			player.setQuest(quest);
-			*/
+			
 			
 			return true;
 		} else {

@@ -57,10 +57,7 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 	private int serverHour;
 
 	private SkillManager skillManager;
-	
-	@Autowired
-	private QuestManager questManager;
-	
+		
 	private ItemManager itemManager;
 	
 	private NpcManager npcManager;
@@ -95,10 +92,6 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 
 	public SkillManager getSkillManager() {
 		return skillManager;
-	}
-	
-	public QuestManager getQuestManager() {
-		return questManager;
 	}
 	
 	public ItemManager getItemManager() {

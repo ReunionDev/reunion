@@ -9,6 +9,7 @@ import java.util.TimerTask;
 
 import org.apache.log4j.net.SocketAppender;
 import org.reunionemu.jcommon.ParsedItem;
+import org.reunionemu.jreunion.dao.QuestDao;
 import org.reunionemu.jreunion.game.HandPosition;
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.Npc;
@@ -23,11 +24,14 @@ import org.reunionemu.jreunion.model.Quest;
 import org.reunionemu.jreunion.server.Area.Field;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
+@Configurable
 public class MessageParser {
 
 	static int spawnCounter = 0;
@@ -35,6 +39,9 @@ public class MessageParser {
 	public MessageParser() {
 		super();
 	}
+	
+	@Autowired
+	QuestDao questDao;
 
 	String parse(Player player, String text) {
 		text = text.trim();
@@ -864,7 +871,7 @@ public class MessageParser {
 				
 					//quest = new Quest(questId); //used only to send the quest id packet
 					//quest = QuestFactory.loadQuest(questId); //load full quest from database
-					quest = Server.getInstance().getWorld().getQuestManager().getQuest(questId);
+					quest = questDao.findById(questId);
 					
 					player.setQuest(quest);	
 					

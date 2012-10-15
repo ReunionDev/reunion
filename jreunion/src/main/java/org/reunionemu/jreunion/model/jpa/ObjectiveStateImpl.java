@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
 
 import org.reunionemu.jreunion.dao.QuestDao;
 import org.reunionemu.jreunion.game.quests.QuestState;
@@ -22,7 +23,10 @@ import org.springframework.beans.factory.annotation.Configurable;
 @Configurable(preConstruction=true)
 @Entity
 @Inheritance(strategy= InheritanceType.JOINED)
-@Table(name="objectivestate")
+@Table(name="objectivestate",
+uniqueConstraints={
+		@UniqueConstraint(columnNames = { "id" })
+		})
 public abstract class ObjectiveStateImpl implements ObjectiveState {
 	
 	Long id;

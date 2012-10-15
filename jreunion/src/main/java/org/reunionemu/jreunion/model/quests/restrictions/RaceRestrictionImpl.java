@@ -1,8 +1,10 @@
 package org.reunionemu.jreunion.model.quests.restrictions;
 
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
 
+import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.model.quests.RestrictionImpl;
 
 /**
@@ -20,5 +22,13 @@ public class RaceRestrictionImpl extends RestrictionImpl implements RaceRestrict
 		return id;
 	}
 
+	@Override
+	public boolean isAllowed(Player player) {
+		Integer id = getId();
+		if(id!=null && player.getRace().value() == id){
+			return false;
+		}
+		return true;
+	}
 
 }

@@ -7,8 +7,10 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlElements;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
+import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.model.quests.Objective;
 import org.reunionemu.jreunion.model.quests.Restriction;
 import org.reunionemu.jreunion.model.quests.Reward;
@@ -92,6 +94,17 @@ public class QuestImpl implements Quest {
 			restrictions = new LinkedList<Restriction>();
 		}
 		return restrictions;
+	}
+
+	
+	@Override
+	public boolean isAllowed(Player player) {
+		for(Restriction restriction: getRestrictions()){
+			if(!restriction.isAllowed(player)){
+				return false;
+			}
+		}
+		return true;
 	}
 
 }

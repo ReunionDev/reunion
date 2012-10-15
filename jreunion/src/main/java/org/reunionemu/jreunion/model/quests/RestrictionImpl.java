@@ -9,6 +9,6 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlTransient
 @XmlType(name="restriction")
-public class RestrictionImpl implements Restriction {
+public abstract class RestrictionImpl implements Restriction {
 
 }

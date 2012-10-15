@@ -2,7 +2,6 @@ package org.reunionemu.jreunion.game;
 
 import org.reunionemu.jreunion.game.Player.Race;
 import org.reunionemu.jreunion.game.npc.Mob;
-import org.reunionemu.jreunion.game.quests.ExperienceQuest;
 import org.reunionemu.jreunion.game.quests.QuestState;
 import org.reunionemu.jreunion.model.quests.Objective;
 import org.reunionemu.jreunion.server.PacketFactory.Type;

@@ -76,6 +76,7 @@ public abstract class QuestState {
 				int slot = getObjectiveId(objective);
 				int ammountRemaining = state.getCounter();
 				
+				/*
 				if(!(quest instanceof ExperienceQuest)){
 					client.sendPacket(Type.QT, "kill " + slot + " " + state.getCounter());
 				}
@@ -84,6 +85,7 @@ public abstract class QuestState {
 					if(ammountRemaining == 1)
 						client.sendPacket(Type.INFO, "Boss is near!");
 				}
+				*/
 				
 				
 			}
