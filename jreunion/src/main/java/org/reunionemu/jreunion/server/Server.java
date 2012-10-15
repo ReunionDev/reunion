@@ -68,9 +68,7 @@ public class Server extends EventDispatcher implements ApplicationContextAware{
 
 		logger.info("Server start");
 		
-		Protocol.load();
-		
-		
+		Protocol.load();		
 		
 		logger.info("Loading server objects...");
 

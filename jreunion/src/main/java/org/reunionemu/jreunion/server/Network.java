@@ -66,7 +66,7 @@ public class Network extends EventDispatcher implements Runnable, EventListener 
 		thread = new Thread(this);
 		thread.setDaemon(true);
 		thread.setName("network");
-		thread.start();
+		//thread.start();
 	
 	}
 
