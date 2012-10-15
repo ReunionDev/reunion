@@ -60,8 +60,9 @@ public abstract class ObjectiveStateImpl implements ObjectiveState {
 	
 	@Column(name="objective_id")
 	protected Integer getObjectiveId() {
-		return questState.getObjectiveId(objective);
+		return questState.getObjectiveId(getObjective());
 	}
+	
 	
 	@ManyToOne(targetEntity=QuestStateImpl.class)
 	@JoinColumn(name="queststate_id")
@@ -83,6 +84,7 @@ public abstract class ObjectiveStateImpl implements ObjectiveState {
 		this.objectiveId = objectiveId;
 		
 	}
+	
 	
 	
 	protected void setQuestState(QuestState questState) {

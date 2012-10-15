@@ -7,7 +7,7 @@ import java.io.IOException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.reunionemu.jreunion.dao.QuestDao;
-import org.reunionemu.jreunion.dao.QuestStateDao;
+import org.reunionemu.jreunion.dao.QuestStateBaseDao;
 import org.reunionemu.jreunion.game.quests.QuestState;
 import org.reunionemu.jreunion.model.Quest;
 import org.reunionemu.jreunion.model.jpa.QuestStateImpl;
@@ -27,7 +27,7 @@ public class QuestStateDaoTest {
 	QuestDao questDao;		
 	
 	@Autowired
-	QuestStateDao<QuestState> questStateDao;		
+	QuestStateBaseDao<QuestState> questStateDao;		
 	
 	@Test
 	public void test() throws IOException {
@@ -36,12 +36,13 @@ public class QuestStateDaoTest {
 		Quest quest = questDao.findById(1);
 		assumeNotNull(quest);
 		
-		QuestStateImpl state = new QuestStateImpl(quest);
+		QuestState state = questStateDao.create(quest);
+		//QuestStateImpl state = new QuestStateImpl(quest);
 		
 		assertNotNull(state);
 		questStateDao.save(state);
 		
-		QuestState qs = questStateDao.findOne(state.getId());
+		QuestState qs = questStateDao.findOne(((QuestStateImpl)state).getId());
 		assertNotNull(qs);
 	}
 

@@ -31,8 +31,7 @@ public class MobObjectiveImpl extends ObjectiveImpl implements MobObjective {
 	}
 	
 	@Override
-	public ObjectiveState createObjectiveState(QuestState state) {
-		
+	public ObjectiveState createObjectiveState(QuestState state) {		
 		return new CounterObjectiveStateImpl(state, this, getAmount());
 	}
 

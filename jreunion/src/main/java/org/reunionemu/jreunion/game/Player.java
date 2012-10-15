@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Vector;
 
 import org.reunionemu.jcommon.ParsedItem;
-import org.reunionemu.jreunion.dao.QuestStateDao;
+import org.reunionemu.jreunion.dao.QuestStateBaseDao;
 import org.reunionemu.jreunion.events.Event;
 import org.reunionemu.jreunion.events.EventListener;
 import org.reunionemu.jreunion.events.client.ClientDisconnectEvent;
@@ -34,16 +34,19 @@ import org.reunionemu.jreunion.server.SessionList;
 import org.reunionemu.jreunion.server.Tools;
 import org.reunionemu.jreunion.server.beans.SpringApplicationContext;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
+@Configurable
 public abstract class Player extends LivingObject implements EventListener {
 
 	private long defense = 0;
 
-	private Map<Skill,Integer> skills = new HashMap<Skill,Integer> ();
+	private Map<Skill, Integer> skills = new HashMap<Skill, Integer>();
 
 	private long totalExp;
 
@@ -52,6 +55,9 @@ public abstract class Player extends LivingObject implements EventListener {
 	private long lime; // Gold
 
 	private int slot;
+	
+	@Autowired
+	QuestStateBaseDao<QuestState> questStateDao;
 
 	private int petId; //used during server loading
 
@@ -1056,8 +1062,7 @@ public abstract class Player extends LivingObject implements EventListener {
 				setQuestState(null);
 			}
 		} else{
-			QuestStateDao dao = SpringApplicationContext.getApplicationContext().getBean(QuestStateDao.class);
-			//setQuestState(dao.create(quest));
+			setQuestState(questStateDao.create(quest));
 			client.sendPacket(Type.QT, "get " + quest.getId());
 		}		
 	}

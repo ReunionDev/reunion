@@ -66,7 +66,7 @@ public abstract class ObjectiveState {
 	
 	@Column(name="objective_id")
 	public Integer getObjectiveId() {
-		return questState.getObjectiveId(objective);
+		return questState.getObjectiveId(getObjective());
 	}
 	
 	protected void setObjectiveId(Integer objectiveId) {
