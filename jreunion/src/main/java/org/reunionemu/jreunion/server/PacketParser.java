@@ -86,8 +86,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 			World world = client.getWorld();
 			Command com = world.getCommand();			
 			
-			LoggerFactory.getLogger(PacketParser.class).info("Parsing " + message[0] + " command on client: "
-					+ client);
+			LoggerFactory.getLogger(PacketParser.class).debug("Parsing {} command on client: {}", message[0], client);
 			switch (client.getState()) {
 			case DISCONNECTED: {
 				break;

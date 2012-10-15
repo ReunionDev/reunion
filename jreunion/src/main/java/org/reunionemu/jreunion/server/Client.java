@@ -231,7 +231,7 @@ public class Client extends EventDispatcher implements EventListener, Sendable {
 			return null;
 		String packetData = outputBuffer.toString();		
 		outputBuffer.setLength(0);
-		LoggerFactory.getLogger(Network.class).info("Sending to "+this+":\n" + packetData);
+		LoggerFactory.getLogger(Network.class).debug("Sending to {}:{}", this, packetData);
 		return protocol.encryptServer(packetData);
 	}
 
