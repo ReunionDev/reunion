@@ -17,8 +17,10 @@
         http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
         http://www.springframework.org/schema/cache 
         http://www.springframework.org/schema/cache/spring-cache.xsd">
-	 
+	
+	<context:component-scan base-package="org.reunionemu.jreunion" />	
 	<context:annotation-config />
+	<context:spring-configured/>	
 	 
 	<mvc:annotation-driven />
 	
@@ -35,7 +37,6 @@
 	
   	<context:property-placeholder properties-ref="applicationProperties"/>  
 
-	<context:component-scan base-package="org.reunionemu.jreunion" />
 	
 	<beans:bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
 		<beans:property name="caches">

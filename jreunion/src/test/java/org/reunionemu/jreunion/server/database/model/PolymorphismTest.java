@@ -1,16 +1,19 @@
 package org.reunionemu.jreunion.server.database.model;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
+import static org.junit.Assume.*;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceContext;
-import javax.transaction.TransactionManager;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.reunionemu.jreunion.dao.QuestDao;
+import org.reunionemu.jreunion.model.Quest;
 import org.reunionemu.jreunion.model.jpa.CounterObjectiveState;
+import org.reunionemu.jreunion.model.jpa.DummyObjectiveState;
 import org.reunionemu.jreunion.model.jpa.ObjectiveState;
 import org.reunionemu.jreunion.model.jpa.QuestState;
+import org.reunionemu.jreunion.model.quests.Objective;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -27,18 +30,36 @@ public class PolymorphismTest {
 	private EntityManagerFactory emf;
 	
 	
+	@Autowired
+	QuestDao questDao;
+	
+	
 	
 	@Test
 	public void test() {
 		entityManager = emf.createEntityManager();
 		
-		QuestState state = new QuestState();
+		Quest quest = questDao.findById(1);
+		
+		assumeNotNull(quest);
+		QuestState state = new QuestState(quest);
+		
+		assertNotNull(state.questDao);		
 		
 		entityManager.getTransaction().begin();
+		
+		Objective objective = quest.getObjectives().get(0);
+		
+		assumeNotNull(objective);
+		
 		state.setQuestId(1);
-		ObjectiveState obj = new CounterObjectiveState(state, 10);
-		entityManager.persist(obj);
-		//state.objs.add(obj);
+		ObjectiveState obj1 = new CounterObjectiveState(state, objective, 10);
+		ObjectiveState obj2 = new DummyObjectiveState(state, objective, "dummy value");
+
+		//entityManager.persist(obj);
+		state.getObjectives().add(obj1);
+		state.getObjectives().add(obj2);
+
 		entityManager.persist(state);
 		entityManager.getTransaction().commit();
 		entityManager = emf.createEntityManager();;
