@@ -1068,6 +1068,9 @@ public abstract class Player extends LivingObject implements EventListener {
 	}
 
 	public void setQuestState(QuestState questState){
+		if(this.questState!=null){
+			questStateDao.delete(questState);
+		}
 		this.questState = questState;
 	}
 

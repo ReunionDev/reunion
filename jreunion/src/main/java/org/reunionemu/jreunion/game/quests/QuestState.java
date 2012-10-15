@@ -25,7 +25,7 @@ public abstract class QuestState {
 		
 	private Quest quest;
 	
-	public abstract List< ObjectiveState> getObjectives();
+	public abstract List<ObjectiveState> getObjectives();
 
 	public QuestState(Quest quest) {
 		this.quest = quest;		
