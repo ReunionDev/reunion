@@ -29,9 +29,11 @@ import org.reunionemu.jreunion.game.Player.Race;
 import org.reunionemu.jreunion.game.Player.Sex;
 import org.reunionemu.jreunion.game.Player.Status;
 import org.reunionemu.jreunion.game.Position;
+import org.reunionemu.jreunion.game.QuickSlotItem;
 import org.reunionemu.jreunion.game.RoamingItem;
 import org.reunionemu.jreunion.game.Shop;
 import org.reunionemu.jreunion.game.Skill;
+import org.reunionemu.jreunion.game.items.GemStone;
 import org.reunionemu.jreunion.game.items.etc.MissionReceiver;
 import org.reunionemu.jreunion.game.items.pet.PetEgg;
 import org.reunionemu.jreunion.game.npc.Merchant;
@@ -707,6 +709,26 @@ public class PacketParser extends EventDispatcher implements EventListener{
 				} else if (message[0].equals("use_quick")) { //2007 client
 					player.getQuickSlotBar().useQuickSlot(
 							player, Integer.parseInt(message[1]));	
+					
+					QuickSlotItem qsItem = player.getQuickSlotBar().getItem(Integer.parseInt(message[1]));
+					Item<?> item = qsItem.getItem();
+					
+					if(item.getType() instanceof GemStone){
+						int index = 2;
+
+						while (index < message.length) {
+
+							int tab = Integer.parseInt(message[index++]);
+							int posX = Integer.parseInt(message[index++]);
+							int posY = Integer.parseInt(message[index++]);
+
+							InventoryItem invItem = player.getInventory().getItem(tab, posX, posY);
+							Item<?> assemblingKit = invItem.getItem();
+						
+							player.getInventory().deleteInventoryItem(invItem);
+							player.getPosition().getLocalMap().removeEntity(assemblingKit);
+						}
+					}
 				} else if (message[0].equals("using_item")) {
 					int unknown = Integer.parseInt(message[1]);
 					int quickSlotBarPosition = Integer.parseInt(message[2]);

@@ -252,7 +252,7 @@ public class Client extends EventDispatcher implements EventListener, Sendable {
 						LoggerFactory.getLogger(Client.class).info(this + " protocol discovered: "+protocol);
 					}
 					String decryptedData = protocol.decryptServer(data);
-					LoggerFactory.getLogger(Client.class).debug("%s: \n %s", this, decryptedData);
+					LoggerFactory.getLogger(Client.class).debug("{}: \n {}", this, decryptedData);
 					
 					this.inputBuffer.append(decryptedData);
 					if(!decryptedData.endsWith("\n"))

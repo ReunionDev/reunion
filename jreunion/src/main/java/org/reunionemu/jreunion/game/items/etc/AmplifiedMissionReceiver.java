@@ -26,6 +26,9 @@ public class AmplifiedMissionReceiver extends MissionReceiver{
 		if(user instanceof Player){
 			Player player = (Player)user;
 			
+			player.getClient().sendPacket(Type.SAY, "Quests are temporarily disabled.");
+			
+			/*
 			//check if player have the correct level to use this item.
 			if(player.getLevel() < 100){
 				player.getClient().sendPacket(Type.SAY, "Your level is to low to use this item.\n" +
@@ -50,6 +53,7 @@ public class AmplifiedMissionReceiver extends MissionReceiver{
 			item.setExtraStats(item.getExtraStats()-1);
 			DatabaseUtils.getDinamicInstance().saveItem(item);
 			player.setQuest(quest);
+			*/
 			
 			return true;
 		}	

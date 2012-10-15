@@ -126,7 +126,8 @@ public class PacketFactory {
 		EXCH_INVEN_FROM,
 		EXCH_MONEY,
 		U_SHOP,
-		PICK_EXTRA
+		PICK_EXTRA,
+		WORKED
 	}
 	
 	public static String createPacket(Type packetType, Object... args) {
@@ -988,11 +989,11 @@ public class PacketFactory {
 			break;
 		case UQ_ITEM:
 			if(args.length > 0){
-					int updateResult = (Integer) args[0]; //need confirmation about this
+					int success = (Integer) args[0];
 					int quickSlotPosition = (Integer) args[1];
 					int itemEntityId = (Integer) args[2];
 					
-					String serverPacket = "uq_item " + updateResult + " " + quickSlotPosition
+					String serverPacket = "uq_item " + success + " " + quickSlotPosition
 							+ " " + itemEntityId;
 
 				if (args.length == 4) {
@@ -1330,6 +1331,20 @@ public class PacketFactory {
 				return "pick_extra " + item.getEntityId() + " " + item.getType().getTypeId() + " " + item.getGemNumber() + " "
 						+ item.getExtraStats() + " " + item.getUnknown1() + " " + item.getUnknown2() + " "
 						+ item.getUnknown3();
+			}
+			break;
+			
+		case WORKED:
+			if(args.length==4){
+				// worked [quickSlotPos] [success] [oldGemEntityId] [newGemTypeId] - this is fail
+				// worked [quickSlotPos] [success] [oldGemEntityId] [newGemEntityId] - this is success
+				
+				Integer quickSlotPos = (Integer) args[0];
+				Integer success = (Integer) args[1];
+				Integer itemId = (Integer) args[2];
+				Integer finalGemType = (Integer) args[3];
+				
+				return "worked " + quickSlotPos + " " + success+ " " + itemId + " " + finalGemType;				
 			}
 			break;
 			
