@@ -1,4 +1,4 @@
-package org.reunionemu.jreunion.model.jpa;
+package org.reunionemu.jreunion.model.jpa.test;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -30,7 +30,6 @@ public abstract class ObjectiveState {
 		return id;
 	}
 
-
 	protected void setId(Long id) {
 		this.id = id;
 	}
@@ -40,7 +39,6 @@ public abstract class ObjectiveState {
 	public QuestState getQuestState() {
 		return questState;
 	}
-
 
 	protected void setQuestState(QuestState questState) {
 		this.questState = questState;

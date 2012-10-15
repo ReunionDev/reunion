@@ -3,6 +3,7 @@ package org.reunionemu.jreunion.model.quests.objectives;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
 
+import org.reunionemu.jreunion.game.quests.QuestState;
 import org.reunionemu.jreunion.model.jpa.CounterObjectiveStateImpl;
 import org.reunionemu.jreunion.model.quests.ObjectiveImpl;
 
@@ -22,9 +23,9 @@ public class PointsObjectiveImpl extends ObjectiveImpl implements PointsObjectiv
 	}
 	
 	@Override
-	public ObjectiveState createObjectiveState() {
+	public ObjectiveState createObjectiveState(QuestState state) {
 		
-		return new CounterObjectiveStateImpl(getPoints());
+		return new CounterObjectiveStateImpl(state, this, getPoints());
 	}
 
 }

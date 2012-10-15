@@ -1,4 +1,4 @@
-package org.reunionemu.jreunion.model.jpa;
+package org.reunionemu.jreunion.model.jpa.test;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -17,13 +17,12 @@ import javax.persistence.Transient;
 import org.reunionemu.jreunion.dao.QuestDao;
 import org.reunionemu.jreunion.model.Quest;
 import org.reunionemu.jreunion.model.quests.Objective;
-import org.springframework.beans.factory.annotation.Autowire;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 
 @Table(name="testqueststate")
 @Entity
-@Configurable(preConstruction=true, autowire=Autowire.BY_TYPE)
+@Configurable
 public class QuestState {
 	
 	

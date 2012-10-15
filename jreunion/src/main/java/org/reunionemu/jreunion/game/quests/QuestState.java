@@ -1,20 +1,15 @@
 package org.reunionemu.jreunion.game.quests;
 
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.Map;
-
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import java.util.List;
 
 import org.reunionemu.jreunion.game.InventoryItem;
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.Npc;
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.model.Quest;
+import org.reunionemu.jreunion.model.quests.CounterObjectiveState;
 import org.reunionemu.jreunion.model.quests.Objective;
 import org.reunionemu.jreunion.model.quests.Reward;
-import org.reunionemu.jreunion.model.quests.objectives.CounterObjectiveState;
 import org.reunionemu.jreunion.model.quests.objectives.MobObjective;
 import org.reunionemu.jreunion.model.quests.objectives.ObjectiveState;
 import org.reunionemu.jreunion.model.quests.objectives.PointsObjective;
@@ -28,34 +23,26 @@ import org.reunionemu.jreunion.server.PacketFactory.Type;
 
 public abstract class QuestState {	
 		
-	transient Quest quest;
+	private Quest quest;
 	
-	private int questId;
-	
-	Map<Objective, ObjectiveState> progression = new LinkedHashMap <Objective, ObjectiveState>();
-	
-	public Map<Objective, ObjectiveState> getProgression() {
-		return progression;
-	}
-
-	protected void setProgression(Map<Objective, ObjectiveState> progression) {
-		this.progression = progression;
-	}
+	public abstract List< ObjectiveState> getObjectives();
 
 	public QuestState(Quest quest) {
 		this.quest = quest;
-		this.questId = quest.getId();
-		for(Objective objective: quest.getObjectives()){
-			progression.put(objective, objective.createObjectiveState());
-		}
+		
 	}
 	
-	public ObjectiveState getObjectiveState(Objective objective){
-		return progression.get(objective);
-	}
+	
+	protected QuestState(){
 		
+	}
+	
 	public Quest getQuest(){
 		return this.quest;
+	}
+	
+	protected void setQuest(Quest quest){
+		this.quest = quest;
 	}
 		
 	public void handleProgress(Npc<?> mob, Player player){
@@ -70,19 +57,7 @@ public abstract class QuestState {
 		}
 	}
 	
-	public int getObjectiveId(Objective objective){
-		Iterator<Objective> iter = progression.keySet().iterator();
-		int count = 0;
-		while(iter.hasNext()){
-			Objective obj = iter.next();
-			if(obj==objective){
-				return count; 
-			}
-			count ++;
-		}
-		throw new RuntimeException("Objective not found");		
-		
-	}
+	public abstract Integer getObjectiveId(Objective objective);
 	
 	public void handleMobProgress(MobObjective objective, Npc<?> mob, Player player){
 		
@@ -120,15 +95,16 @@ public abstract class QuestState {
 		}
 	}
 	
+	public abstract ObjectiveState getObjectiveState(Objective objective);
+
+
 	public void handlePointsProgress(Npc<?> mob){
 		
 	}
 	
 	public boolean isComplete(){
 		
-		for(Objective objective: progression.keySet()){
-			
-			ObjectiveState state = getObjectiveState(objective);
+		for(ObjectiveState state: getObjectives()){
 			if(!state.isComplete()){
 				return false;
 			}

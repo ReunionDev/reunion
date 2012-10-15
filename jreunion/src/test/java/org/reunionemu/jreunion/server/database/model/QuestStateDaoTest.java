@@ -11,6 +11,8 @@ import org.reunionemu.jreunion.dao.QuestStateDao;
 import org.reunionemu.jreunion.game.quests.QuestState;
 import org.reunionemu.jreunion.model.Quest;
 import org.reunionemu.jreunion.model.jpa.QuestStateImpl;
+import org.reunionemu.jreunion.model.jpa.test.CounterObjectiveStateEx;
+import org.reunionemu.jreunion.model.jpa.test.ObjectiveState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -35,7 +37,7 @@ public class QuestStateDaoTest {
 		assumeNotNull(quest);
 		
 		QuestState state = new QuestStateImpl(quest);
-		//QuestState state = questStateDao.create(quest);
+		
 		assertNotNull(state);
 		questStateDao.save(state);
 	}

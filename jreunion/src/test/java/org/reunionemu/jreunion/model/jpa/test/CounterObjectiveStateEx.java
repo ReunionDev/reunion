@@ -1,4 +1,4 @@
-package org.reunionemu.jreunion.model.jpa;
+package org.reunionemu.jreunion.model.jpa.test;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,17 +8,17 @@ import org.reunionemu.jreunion.model.quests.Objective;
 
 @Entity
 @Table(name="testcounterobjectivestate")
-public class CounterObjectiveState extends ObjectiveState {
+public class CounterObjectiveStateEx extends ObjectiveState {
 
 	@Column
 	Integer counter;
 	
-	public CounterObjectiveState(QuestState state, Objective objective, Integer start){
+	public CounterObjectiveStateEx(QuestState state, Objective objective, Integer start){
 		super(state, objective);
 		counter = start;
 	}
 	
-	public CounterObjectiveState(){}
+	public CounterObjectiveStateEx(){}
 
 	public Integer getCounter() {
 		return counter;

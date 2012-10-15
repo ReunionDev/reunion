@@ -12,6 +12,4 @@ import javax.xml.bind.annotation.XmlType;
 public abstract class ObjectiveImpl implements Objective {
 
 
-	
-
 }

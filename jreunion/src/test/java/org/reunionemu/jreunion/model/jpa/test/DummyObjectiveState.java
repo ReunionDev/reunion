@@ -1,4 +1,4 @@
-package org.reunionemu.jreunion.model.jpa;
+package org.reunionemu.jreunion.model.jpa.test;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

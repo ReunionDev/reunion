@@ -9,10 +9,10 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.reunionemu.jreunion.dao.QuestDao;
 import org.reunionemu.jreunion.model.Quest;
-import org.reunionemu.jreunion.model.jpa.CounterObjectiveState;
-import org.reunionemu.jreunion.model.jpa.DummyObjectiveState;
-import org.reunionemu.jreunion.model.jpa.ObjectiveState;
-import org.reunionemu.jreunion.model.jpa.QuestState;
+import org.reunionemu.jreunion.model.jpa.test.CounterObjectiveStateEx;
+import org.reunionemu.jreunion.model.jpa.test.DummyObjectiveState;
+import org.reunionemu.jreunion.model.jpa.test.ObjectiveState;
+import org.reunionemu.jreunion.model.jpa.test.QuestState;
 import org.reunionemu.jreunion.model.quests.Objective;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
@@ -51,8 +51,8 @@ public class PolymorphismTest {
 		Objective objective = quest.getObjectives().get(0);
 		assumeNotNull(objective);
 		
-		state.setQuestId(1);
-		ObjectiveState obj1 = new CounterObjectiveState(state, objective, 10);
+		
+		ObjectiveState obj1 = new CounterObjectiveStateEx(state, objective, 10);
 		ObjectiveState obj2 = new DummyObjectiveState(state, objective, "dummy value");
 
 		//entityManager.persist(obj);
