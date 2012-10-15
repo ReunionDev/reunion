@@ -26,23 +26,24 @@ public class LevelRestrictionImpl extends RestrictionImpl implements
 
 	@Override
 	public Integer getMax() {
-		return min;
+		return max;
 	}
 
 	@Override
 	public Integer getMin() {
-		return max;
+		return min;
 	}
 
 	@Override
 	public boolean isAllowed(Player player) {
 		Integer max = getMax();
-		if (max != null && max < player.getLevel()) {
+		int level = player.getLevel();
+		if (max != null && max < level) {
 			return false;
 		}
 		Integer min = getMin();
 
-		if (min != null && min > player.getLevel()) {
+		if (min != null && min > level) {
 			return false;
 		}
 		return true;

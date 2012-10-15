@@ -33,7 +33,7 @@ public class AmplifiedMissionReceiver extends MissionReceiver{
 		if(user instanceof Player){
 			Player player = (Player)user;
 			
-			player.getClient().sendPacket(Type.SAY, "Quests are temporarily disabled.");
+			//player.getClient().sendPacket(Type.SAY, "Quests are temporarily disabled.");
 			
 			
 			//check if player have the correct level to use this item.

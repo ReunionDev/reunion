@@ -65,7 +65,7 @@ public class QuestDaoImpl implements QuestDao {
 			
 			while(true){
 				if(attempts.size()>=quests.size()){
-					throw new RuntimeException("No quests that meet the criteria are available");
+					return null;
 				}
 				int index = Server.getRand().nextInt(quests.size());
 				if(attempts.contains(index)){
