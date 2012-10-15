@@ -40,6 +40,8 @@ public class PolymorphismTest {
 		Quest quest = questDao.findById(1);
 		
 		assumeNotNull(quest);
+		System.out.println("test");
+		
 		QuestState state = new QuestState(quest);
 		
 		assertNotNull(state.questDao);		
@@ -47,7 +49,6 @@ public class PolymorphismTest {
 		entityManager.getTransaction().begin();
 		
 		Objective objective = quest.getObjectives().get(0);
-		
 		assumeNotNull(objective);
 		
 		state.setQuestId(1);

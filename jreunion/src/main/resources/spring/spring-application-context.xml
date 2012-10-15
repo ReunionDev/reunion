@@ -20,9 +20,9 @@
 	<context:annotation-config />
 	<!-- <aop:aspectj-autoproxy/>  -->
 	 <context:spring-configured/>
-	 
+	 <!-- 
 	<context:load-time-weaver/>
-	
+	 -->
 	<!-- 
 	<bean class="org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator" />
 	<context:load-time-weaver />
