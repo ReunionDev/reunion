@@ -12,15 +12,13 @@ import org.reunionemu.jreunion.server.DatabaseUtils;
 import org.reunionemu.jreunion.server.Server;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
 
-public class Item<T extends ItemType> implements Entity{
+public abstract class Item<T extends ItemType> implements Entity{
 	
 	private T type;
 	
 	private int entityId = -1;
 	
 	private int itemId = -1; //for database;
-
-	private long gemNumber;
 
 	private long extraStats;
 	
@@ -75,9 +73,7 @@ public class Item<T extends ItemType> implements Entity{
 		return extraStats;
 	}
 
-	public long getGemNumber() {
-		return gemNumber;
-	}
+	public abstract long getGemNumber();
 
 	private void setType(T type) {
 		this.type = type;
@@ -93,7 +89,6 @@ public class Item<T extends ItemType> implements Entity{
 	}
 
 	public void setGemNumber(long gemNumber) {
-		this.gemNumber = gemNumber;
 		getType().setGemNumber(this);
 	}
 	
@@ -242,7 +237,7 @@ public class Item<T extends ItemType> implements Entity{
 		this.unknown3 = unknown3;
 	}
 
-	public int getDurability() {
+	public Integer getDurability() {
 		return durability;
 	}
 

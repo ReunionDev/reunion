@@ -34,17 +34,38 @@ public class ItemImpl<T extends ItemType> extends Item<T> {
     	this.id = id;
     }
     
-    Integer type;
+    Integer typeId;
 
     @Column(name="type_id")
 	public Integer getTypeId() {
-		return type;
+		return typeId;
 	}
 
-	public void setTypeId(Integer type) {
-		this.type = type;
+	public void setTypeId(Integer typeId) {
+		this.typeId = typeId;
 	}
-    
+	
+	Integer durability;
+	
+	@Column(name="durability")
+	public Integer getDurability() {
+		return durability;
+	}
 
+	public void setDurability(Integer durability) {
+		this.durability = durability;
+	}
+	
+	@Column(name="gemnumber")
+	public long getGemNumber() {
+		return gemNumber;
+	}
 
+	public void setGemNumber(Long gemNumber) {
+		this.gemNumber = gemNumber;
+	}
+
+	Long gemNumber;
+
+	
 }

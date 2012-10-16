@@ -1,6 +1,7 @@
 package org.reunionemu.jreunion.game;
 
 import org.reunionemu.jcommon.ParsedItem;
+import org.reunionemu.jreunion.model.jpa.ItemImpl;
 import org.reunionemu.jreunion.server.Reference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
@@ -195,7 +196,7 @@ public class ItemType{
 	
 	public Item<?> create(){
 		
-		Item<?> item = new Item(this);
+		Item<?> item = new ItemImpl(this);
 	
 		return item;
 	}

@@ -29,6 +29,7 @@ import org.reunionemu.jreunion.game.StashItem;
 import org.reunionemu.jreunion.game.StashPosition;
 import org.reunionemu.jreunion.game.items.pet.PetEquipment;
 import org.reunionemu.jreunion.game.items.pet.PetEquipment.PetSlot;
+import org.reunionemu.jreunion.model.jpa.ItemImpl;
 import org.slf4j.LoggerFactory;
 
 
@@ -895,7 +896,7 @@ public class DatabaseUtils {
 					itemType = new ItemType(type);;
 				} 
 				
-				Item<?> item = new Item(itemType);
+				Item<?> item = new ItemImpl(itemType);
 				
 				item.setItemId(itemId);
 				item.setGemNumber(rs.getLong("gemnumber"));
