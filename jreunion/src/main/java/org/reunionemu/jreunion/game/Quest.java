@@ -1,10 +1,5 @@
 package org.reunionemu.jreunion.game;
 
-import java.util.List;
-import java.util.Vector;
-
-import org.reunionemu.jreunion.game.quests.objective.Objective;
-import org.reunionemu.jreunion.game.quests.reward.Reward;
 import org.reunionemu.jreunion.server.Client;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
 
@@ -24,22 +19,8 @@ public class Quest {
 	
 	private boolean repeatable;
 	
-	private List<Objective> objectives;
-	
-	private List<Reward> rewards;
-
-	/*
-	public Quest(Player player, QuickSlotItem quickSlotItem) {
-		this.id = getQuest(player, quickSlotItem);
-		objectives = new Vector<Objective>();
-		rewards = new Vector<Reward>();
-	}
-	*/
-	
 	public Quest(int questId) {
 		this.id = questId;
-		objectives = new Vector<Objective>();
-		rewards = new Vector<Reward>();
 	}
 	
 	public int getId(){
@@ -77,77 +58,7 @@ public class Quest {
 	public void setDescription(String description){
 		this.description = description;
 	}
-	
-	public void addObjective(Objective objective){
-		if(objective != null)
-			this.objectives.add(objective);
-	}
-	
-	public Objective getObjective(int id){
-		for(Objective objective: objectives){
-			if(objective.getId() == id)
-				return objective;
-		}
-		return null;
-	}
-	
-	public int getObjectiveSlot(int id){
-		
-		int position = -1;
-		
-		for(Objective objective: objectives){
-			position++;
-			if(objective.getId() == id)
-				return position;
-			
-		}
-		return position;
-	}
-	
-	public List<Objective> getObjectives(){
-		return this.objectives;
-	}
-	
-	public boolean deleteObjective(int id){
-		Objective objective = getObjective(id);
-		if(objective != null)
-			return objectives.remove(objective);
-		
-		return false;
-	}
-	
-	public boolean hasObjectives(){
-		return !objectives.isEmpty();
-	}
-	
-	public void addReward(Reward reward){
-		if(reward != null)
-			this.rewards.add(reward);
-	}
-	
-	public Reward getReward(int id){
-		for(Reward reward: rewards){
-			if(reward.getId() == id)
-				return reward;
-		}
-		return null;
-	}
-	
-	public List<Reward> getRewards(){
-		return this.rewards;
-	}
-	
-	public boolean deleteReward(int id){
-		Reward reward = getReward(id);
-		if(reward != null)
-			return rewards.remove(reward);
-		
-		return false;
-	}
-	
-	public boolean hasRewards(){
-		return !rewards.isEmpty();
-	}
+
 
 	/****** Quest Points Reached Zero ********/
 	/*

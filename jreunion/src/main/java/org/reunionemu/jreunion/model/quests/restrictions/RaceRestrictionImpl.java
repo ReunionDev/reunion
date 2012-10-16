@@ -1,6 +1,5 @@
 package org.reunionemu.jreunion.model.quests.restrictions;
 
-import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
 
