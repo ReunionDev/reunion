@@ -17,7 +17,6 @@ uniqueConstraints={
 })
 public class ItemImpl<T extends ItemType> extends Item<T> {
 	Long id;
-
 	
     Integer typeId;
 	
@@ -44,7 +43,7 @@ public class ItemImpl<T extends ItemType> extends Item<T> {
 		return id;
 	}
 	
-	@Column(name="type_id")
+	@Column(name="type")
 	public Integer getTypeId() {
 		return typeId;
 	}

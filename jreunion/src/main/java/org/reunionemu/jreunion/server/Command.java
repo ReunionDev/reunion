@@ -25,6 +25,7 @@ import org.reunionemu.jreunion.server.Client.LoginType;
 import org.reunionemu.jreunion.server.Client.State;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowire;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 
@@ -32,7 +33,7 @@ import org.springframework.beans.factory.annotation.Configurable;
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-@Configurable
+@Configurable(autowire=Autowire.BY_TYPE)
 public class Command {
 
 	@Autowired
