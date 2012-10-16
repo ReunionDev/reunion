@@ -47,7 +47,7 @@ public class Client extends EventDispatcher implements EventListener, Sendable {
 
 	private SocketChannel socketChannel;
 
-	private int accountId;
+	private long accountId;
 
 	private State state;
 
@@ -94,11 +94,11 @@ public class Client extends EventDispatcher implements EventListener, Sendable {
 		this.socketChannel = socketChannel;
 	}
 
-	public int getAccountId() {
+	public long getAccountId() {
 		return accountId;
 	}
 
-	public void setAccountId(int accountId) {
+	public void setAccountId(long accountId) {
 		this.accountId = accountId;
 	}
 

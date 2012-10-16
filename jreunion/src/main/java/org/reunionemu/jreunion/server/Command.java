@@ -1,20 +1,17 @@
 package org.reunionemu.jreunion.server;
 
 import java.nio.channels.SocketChannel;
-import java.util.List;
 import java.util.ListIterator;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.reunionemu.jreunion.dao.AccountDao;
+import org.reunionemu.jreunion.dao.jpa.QuestStateDao;
 import org.reunionemu.jreunion.events.map.ItemDropEvent;
 import org.reunionemu.jreunion.game.Equipment;
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.ItemType;
 import org.reunionemu.jreunion.game.LivingObject;
 import org.reunionemu.jreunion.game.Party;
-import org.reunionemu.jreunion.game.Pet;
 import org.reunionemu.jreunion.game.Player;
-import org.reunionemu.jreunion.game.Pet.PetStatus;
 import org.reunionemu.jreunion.game.Player.Race;
 import org.reunionemu.jreunion.game.Player.Sex;
 import org.reunionemu.jreunion.game.Position;
@@ -23,18 +20,27 @@ import org.reunionemu.jreunion.game.RoamingItem;
 import org.reunionemu.jreunion.game.Skill;
 import org.reunionemu.jreunion.game.Usable;
 import org.reunionemu.jreunion.game.items.equipment.SlayerWeapon;
-import org.reunionemu.jreunion.game.skills.bulkan.SecondAttack;
-import org.reunionemu.jreunion.game.skills.kailipton.TransferMagicalPower;
+import org.reunionemu.jreunion.model.Account;
 import org.reunionemu.jreunion.server.Client.LoginType;
 import org.reunionemu.jreunion.server.Client.State;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
+@Configurable
 public class Command {
 
+	@Autowired
+	QuestStateDao questStateDao;
+	
+	@Autowired
+	AccountDao<Account> accountDao;
+	
 	private World world;
 
 	public Command(World parent) {
@@ -46,11 +52,10 @@ public class Command {
 		String username = client.getUsername();
 		String password = client.getPassword();
 		
+		Account account = accountDao.findByUsernameAndPassword(username, password);
+
 		//Handling for a client that doesn't want to behave
-		int accountId = DatabaseUtils.getDinamicInstance().Auth(username, password);
-		
-		//if(client.getVersion()==101&&client.getLoginType()!=LoginType.PLAY){
-		if (accountId == -1 && client.getLoginType()!=LoginType.PLAY) {
+		if (account == null && client.getLoginType()!=LoginType.PLAY) {
 			byte key = 0x03;
 			byte [] input = username.getBytes();
 			byte [] output = new byte[input.length];
@@ -66,27 +71,29 @@ public class Command {
 			}
 			password = new String(output);
 			
+			
 			client.setUsername(username);
 			client.setPassword(password);
-			accountId = DatabaseUtils.getDinamicInstance().Auth(username, password);
+			
+			account = accountDao.findByUsernameAndPassword(username, password);
+			
 		}
 		
-		//int accountId = DatabaseUtils.getDinamicInstance().Auth(username, password);
-		if (accountId == -1) {
+		if (account == null) {
 			LoggerFactory.getLogger(Command.class).info("Invalid Login");
 			client.sendPacket(Type.FAIL,"Username and password combination is invalid");
 			client.disconnect();
 		} else {
 			
-			LoggerFactory.getLogger(Command.class).info("" + client + " authed as account(" + accountId + ")");
-			client.setAccountId(accountId);
+			LoggerFactory.getLogger(Command.class).info("" + client + " authed as account(" + account.getId() + ")");
+			client.setAccountId(account.getId());
 			
 			java.util.Map<SocketChannel,Client> clients = world.getClients();
 			synchronized(clients){
 				for(Client cl: clients.values()){
 					if(cl.equals(client))
 						continue;					
-					if(cl.getAccountId()==client.getAccountId()){
+					if(cl.getAccountId()==account.getId()){
 						
 						if(cl.getState()==State.CHAR_LIST) {
 							client.sendPacket(Type.FAIL, "Only one client can use the charlist at the same time.");
@@ -108,7 +115,7 @@ public class Command {
 		}
 	}
 
-	public void delChar(int slotNumber, int accountId) {
+	public void delChar(int slotNumber, long accountId) {
 		int charId = DatabaseUtils.getDinamicInstance().getCharId(slotNumber, accountId);
 		String charName = DatabaseUtils.getDinamicInstance().getCharName(charId);
 		
@@ -119,7 +126,8 @@ public class Command {
 		DatabaseUtils.getDinamicInstance().deleteCharacter(charId);
 		DatabaseUtils.getDinamicInstance().deleteCharSkills(charId);
 		DatabaseUtils.getDinamicInstance().deleteCharQuickSlot(charId);
-		DatabaseUtils.getDinamicInstance().deleteCharQuestState(charId);
+		//TODO: Quest state delete
+		//questStateDao.delete(id);
 		DatabaseUtils.getDinamicInstance().deleteCharInventory(charId);
 		DatabaseUtils.getDinamicInstance().deleteCharExchange(charId);
 		DatabaseUtils.getDinamicInstance().deleteCharEquipment(charId);
@@ -208,7 +216,7 @@ public class Command {
 
 	}
 
-	public Player loginChar(int slotNumber, int accountId, Client client) {
+	public Player loginChar(int slotNumber, long accountId, Client client) {
 		
 		Player player = DatabaseUtils.getDinamicInstance().loadChar(slotNumber, accountId, client);
 		LocalMap localMap = DatabaseUtils.getDinamicInstance().getSavedPosition(player).getLocalMap();

@@ -152,7 +152,7 @@ public class DatabaseUtils {
 		if (!checkDinamicDatabase())
 			return null;
 		
-		int accountId = client.getAccountId();
+		long accountId = client.getAccountId();
 		String charlist ="";
 		int chars = 0;
 		
@@ -730,7 +730,7 @@ public class DatabaseUtils {
 		}
 	}
 	
-	public Player loadChar(int slot, int accountId, Client client) {
+	public Player loadChar(int slot, long accountId, Client client) {
 		
 		Player player=null;
 		if (!checkDinamicDatabase())
@@ -746,7 +746,6 @@ public class DatabaseUtils {
 					+ slot + ");");
 			if (rs.next()) {
 				characterId = rs.getInt("charid");
-			
 			
 				player = loadCharStatus(client, characterId);
 				player.setSlot(slot);
@@ -1557,7 +1556,7 @@ public class DatabaseUtils {
 		}
 	}
 	
-	public int getCharId(int slotNumber, int accountId) {
+	public int getCharId(int slotNumber, long accountId) {
 		if (!checkDinamicDatabase())
 			return -1;
 		
