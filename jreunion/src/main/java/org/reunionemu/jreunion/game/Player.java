@@ -1605,6 +1605,11 @@ public abstract class Player extends LivingObject implements EventListener {
 	public void addLime(Integer lime) {
 		
 		setLime(getLime()+lime);
-		
 	}
+	
+	public void addExperience(int experience){
+		setTotalExp(getTotalExp()+experience);
+		setLevelUpExp(getLevelUpExp()-experience);
+	}
+	
 }
