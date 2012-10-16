@@ -5,15 +5,19 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
+import javax.annotation.PostConstruct;
+
 import org.reunionemu.jcommon.Parser;
 import org.reunionemu.jreunion.server.beans.SpringApplicationContext;
 import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Service;
 
 
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
+@Service
 public class Reference {
 
 	private synchronized static void createInstance() {
@@ -110,6 +114,7 @@ public class Reference {
 		this.skillReference = skillReference;
 	}
 
+	@PostConstruct
 	public void Load(){
 		clear();
 		try {

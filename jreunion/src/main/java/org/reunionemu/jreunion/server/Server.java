@@ -15,6 +15,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Service;
@@ -29,7 +30,11 @@ public class Server extends EventDispatcher implements ApplicationContextAware{
 
 	private static Server _instance = null;	
 	
+	
 	private static ApplicationContext context;
+	
+	@Autowired 
+	Reference reference;
 	
 	private static Random rand = new Random(System.currentTimeMillis());
 	
@@ -59,6 +64,11 @@ public class Server extends EventDispatcher implements ApplicationContextAware{
 			}
 		}
 		return _instance;
+	}
+	
+	public static ApplicationContext getContext() {
+		
+		return context;
 	}
 	
 	@PostConstruct
