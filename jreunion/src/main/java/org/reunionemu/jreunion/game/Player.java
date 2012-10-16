@@ -783,22 +783,54 @@ public abstract class Player extends LivingObject implements EventListener {
 	/****** Manages the char Logout ******/
 	public synchronized void save() {
 
-		try {
-			if(getEntityId() != -1){
-				LoggerFactory.getLogger(this.getClass()).info("Player " + getName() + " saving...\n");
+		if(getEntityId() != -1){
+			LoggerFactory.getLogger(this.getClass()).info("Player " + getName() + " saving...\n");
+			try{
 				DatabaseUtils.getDinamicInstance().saveSkills(this);
+			}catch(Exception e){
+				LoggerFactory.getLogger(this.getClass()).warn(""+getName()+": Skills saving failed ...",e);
+			}
+			try{
 				DatabaseUtils.getDinamicInstance().saveInventory(this);
+			}catch(Exception e){
+				LoggerFactory.getLogger(this.getClass()).warn(""+getName()+": Inventory saving failed ...",e);
+			}
+			try{
 				DatabaseUtils.getDinamicInstance().savePet(this);
+			}catch(Exception e){
+				LoggerFactory.getLogger(this.getClass()).warn(""+getName()+": Pet saving failed ...",e);
+			}
+			try{
 				DatabaseUtils.getDinamicInstance().savePetEquipment(getPet());
+			}catch(Exception e){
+				LoggerFactory.getLogger(this.getClass()).warn(""+getName()+": Pet Equipment saving failed ...",e);
+			}
+			try{
 				DatabaseUtils.getDinamicInstance().saveCharacter(this);
+			}catch(Exception e){
+				LoggerFactory.getLogger(this.getClass()).warn(""+getName()+": Character saving failed ...",e);
+			}
+			try{
 				DatabaseUtils.getDinamicInstance().saveEquipment(this);
+			}catch(Exception e){
+				LoggerFactory.getLogger(this.getClass()).warn(""+getName()+": Equipment saving failed ...",e);
+			}
+			try{
 				DatabaseUtils.getDinamicInstance().saveStash(getClient());
+			}catch(Exception e){
+				LoggerFactory.getLogger(this.getClass()).warn(""+getName()+": Stash saving failed ...",e);
+			}
+			try{
 				DatabaseUtils.getDinamicInstance().saveExchange(this);
+			}catch(Exception e){
+				LoggerFactory.getLogger(this.getClass()).warn(""+getName()+": Exchange saving failed ...",e);
+			}
+			try{
 				DatabaseUtils.getDinamicInstance().saveQuickSlot(this);
-				//DatabaseUtils.getDinamicInstance().saveQuest(this);
-		}
-		}catch(Exception e){
-			LoggerFactory.getLogger(this.getClass()).info("Saving of "+getName()+" failed ...");
+			}catch(Exception e){
+				LoggerFactory.getLogger(this.getClass()).warn(""+getName()+": QuickSlot saving failed ...",e);
+			}
+			//DatabaseUtils.getDinamicInstance().saveQuest(this);
 		}
 		LoggerFactory.getLogger(this.getClass()).info("Player " + getName() + " saving complete!\n");
 	}

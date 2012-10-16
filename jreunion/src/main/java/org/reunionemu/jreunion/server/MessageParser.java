@@ -530,13 +530,8 @@ public class MessageParser {
 						while(iterPlayer.hasNext())	{
 							Player currplayer = iterPlayer.next();
 							Client pClient = currplayer.getClient();
-							try {
-								currplayer.save();
-								pClient.sendPacket(Type.SAY, currplayer.getName()+" saved ...");	
-							} catch (Exception e)
-							{
-								clientU.sendPacket(Type.SAY, "Player saving of "+ currplayer.getName()+" failed..");
-							}
+							currplayer.save();
+							pClient.sendPacket(Type.SAY, currplayer.getName()+" saved ...");	
 						}
 					}
 					else if(counter <= 0) {
