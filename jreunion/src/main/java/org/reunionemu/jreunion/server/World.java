@@ -33,12 +33,14 @@ import org.reunionemu.jreunion.game.skills.bulkan.RecoveryBoost;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Service;
 
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
+@DependsOn("database")
 @Service
 public class World extends EventDispatcher implements EventListener, Sendable {
 	

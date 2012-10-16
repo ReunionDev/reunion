@@ -15,6 +15,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -24,7 +25,8 @@ import org.springframework.stereotype.Service;
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-
+@DependsOn("database")
+@Lazy(false)
 @Service
 public class Server extends EventDispatcher implements ApplicationContextAware{
 
@@ -148,12 +150,12 @@ public class Server extends EventDispatcher implements ApplicationContextAware{
 	@Autowired
 	private World world;
 
+	@Autowired
 	private Database database;
 
 	private Server() {
-		Reference.getInstance().Load();
-		database = new Database(this);
-		database.start();
+		//Reference.getInstance().Load();
+		//database = new Database();
 
 	}
 

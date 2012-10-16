@@ -2,26 +2,34 @@ package org.reunionemu.jreunion.server;
 
 import java.sql.Connection;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.sql.DataSource;
 
-import org.reunionemu.jreunion.server.beans.SpringApplicationContext;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
+
+@Service
 public class Database {
 
 	public Connection dinamicConn = null; //reunion database
 	
-	public Database(Server server) {
+	@Autowired
+	DataSource datasource;
+	
+	public Database() {
 		
 	}
 
 	public void connectDinamic() throws Exception {
 		
-		DataSource datasource = SpringApplicationContext.getApplicationContext().getBean(DataSource.class);
+		//DataSource datasource = SpringApplicationContext.getApplicationContext().getBean(DataSource.class);
 		
 		DatabaseUtils.getDinamicInstance().setDinamicDatabase(this); 
 		dinamicConn = datasource.getConnection();
@@ -29,6 +37,7 @@ public class Database {
 
 	}
 
+	@PostConstruct
 	public void start(){
 
 		try {
@@ -39,6 +48,7 @@ public class Database {
 		
 	}
 
+	@PreDestroy
 	public void stop() {
 
 		if (dinamicConn != null) {
