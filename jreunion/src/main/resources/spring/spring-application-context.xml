@@ -18,17 +18,8 @@
 	
 	<context:component-scan base-package="org.reunionemu.jreunion" />	
 	<context:annotation-config />
-	<!-- <aop:aspectj-autoproxy/>  -->
-	 <context:spring-configured/>
-	 <!-- 
-	<context:load-time-weaver/>
-	 -->
-	<!-- 
-	<bean class="org.springframework.aop.aspectj.annotation.AnnotationAwareAspectJAutoProxyCreator" />
-	<context:load-time-weaver />
-	 -->
-
-	 
+	<context:spring-configured/>
+		 
 	<mvc:annotation-driven />
 	
 	<beans:bean id="applicationProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
