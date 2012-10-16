@@ -24,7 +24,9 @@ public class RepeatRestrictionImpl extends RestrictionImpl implements RepeatRest
 	@Override
 	public boolean isAllowed(Player player) {
 		//TODO: Implement repeatable
-		return true;
+		
+		//For now never allow player to pick up nonrepeatable classes until this is implemented.
+		return false;
 	}
 
 }
