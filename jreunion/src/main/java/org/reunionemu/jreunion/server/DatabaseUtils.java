@@ -89,30 +89,6 @@ public class DatabaseUtils {
 		return _staticInstance;
 	}
 	
-	public int Auth(String username, String password) {
-		if (!checkDinamicDatabase())
-			return -1;
-		
-//		/<Account> dao = SpringApplicationContext.getApplicationContext().getBean(AccountDao.class);
-		
-		Statement stmt;
-		try {
-			
-			stmt = dinamicDatabase.dinamicConn.createStatement();
-			ResultSet rs = stmt
-			.executeQuery("SELECT id FROM accounts WHERE username='"
-					+ username + "' and password='" + password + "'");
-			if (rs.next()) {
-				String s = rs.getString("id");
-				return Integer.parseInt(s);
-			}
-			return -1;
-		} catch (SQLException e) {
-			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
-			return -1;
-		}
-	}
-	
 	public Position getSavedPosition(Player player){
 		if (!checkDinamicDatabase())
 			return null;
