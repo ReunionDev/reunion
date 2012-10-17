@@ -61,6 +61,7 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 
 	private SkillManager skillManager;
 		
+	@Autowired
 	private ItemManager itemManager;
 	
 	private NpcManager npcManager;
@@ -83,7 +84,6 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 		worldCommand = new Command(this);
 		skillManager = new SkillManager();
 		playerManager = new PlayerManager();
-		itemManager = new ItemManager();
 		new ItemType(229);
 		npcManager = new NpcManager();
 		petManager = new PetManager();

@@ -3,7 +3,6 @@ package org.reunionemu.jreunion.dao;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Vector;
 
 import javax.annotation.PostConstruct;
 import javax.xml.bind.JAXBContext;
@@ -11,7 +10,6 @@ import javax.xml.bind.JAXBContext;
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.model.Quest;
 import org.reunionemu.jreunion.server.Server;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;

@@ -5,11 +5,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.ItemType;
+import org.reunionemu.jreunion.server.TypeLoader;
+import org.springframework.beans.factory.annotation.Configurable;
 
+@Configurable
 @Entity
 @Table(name="items",
 uniqueConstraints={
@@ -24,11 +28,20 @@ public class ItemImpl<T extends ItemType> extends Item<T> {
     
     Long gemNumber;
     
+    Long extraStats;
+    
+    private T type;
+    
     public ItemImpl(T itemType) {
-		super(itemType);
+		super();
+		setType(itemType);
 	}
 
-    @Column(name="durability")
+    protected void setType(T itemType) {
+    	this.type = itemType;
+	}
+
+	@Column(name="durability")
 	public Integer getDurability() {
 		return durability;
 	}
@@ -62,7 +75,21 @@ public class ItemImpl<T extends ItemType> extends Item<T> {
 
 	public void setTypeId(Integer typeId) {
 		this.typeId = typeId;
+		if(type==null){
+			type = new TypeLoader<T>().load(typeId);
+		}
 	}
 
+	@Transient
+	@Override
+	public T getType() {		
+		return type;
+	}
+
+	@Column(name="extrastats")
+	@Override
+	public long getExtraStats() {
+		return extraStats;
+	}
 	
 }

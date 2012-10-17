@@ -10,13 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class QuestStateDaoImpl implements QuestStateDaoCustom 
 {
-	@Autowired
-	QuestStateBaseDao<QuestState> dao;
+	//@Autowired
+	//QuestStateBaseDao<QuestState> dao;
 	
 	@Override
 	public QuestState create(Quest quest) {
 		QuestStateImpl state = new QuestStateImpl(quest);
-		dao.save(state);
+		//dao.save(state);
 		return state;
 	}
 

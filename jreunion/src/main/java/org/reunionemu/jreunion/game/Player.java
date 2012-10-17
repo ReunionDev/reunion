@@ -1094,6 +1094,8 @@ public abstract class Player extends LivingObject implements EventListener {
 				setQuestState(null);
 			}
 		} else{
+			QuestState state = questStateDao.create(quest);
+			questStateDao.save(state);
 			setQuestState(questStateDao.create(quest));
 			client.sendPacket(Type.QT, "get " + quest.getId());
 		}		

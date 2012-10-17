@@ -3,21 +3,25 @@ package org.reunionemu.jreunion.server;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import javax.annotation.PostConstruct;
+
 import org.reunionemu.jcommon.ParsedItem;
 import org.reunionemu.jcommon.Parser;
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.ItemType;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ItemManager {
 
 	private java.util.Map<Integer, ItemType> itemsList = new HashMap<Integer, ItemType>();
 	
 	public ItemManager(){
-		loadItemsList();
+		
 	}
 	
+	@PostConstruct
 	public void loadItemsList(){
 		
 		Parser parser = Reference.getInstance().getItemReference();

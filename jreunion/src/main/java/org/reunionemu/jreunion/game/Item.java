@@ -19,8 +19,6 @@ public abstract class Item<T extends ItemType> implements Entity{
 	private int entityId = -1;
 	
 	private int itemId = -1; //for database;
-
-	private long extraStats;
 	
 	private int durability;
 	
@@ -44,14 +42,11 @@ public abstract class Item<T extends ItemType> implements Entity{
 		this.position = position;
 	}
 
-	public Item(T itemType) {
+	public Item() {
 		
-		setType(itemType); 
 	}
 	
-	public T getType() {
-		return type;
-	}
+	public abstract T getType();
 	
 	public int getEntityId() {
 		return entityId;
@@ -69,18 +64,12 @@ public abstract class Item<T extends ItemType> implements Entity{
 		this.entityId = entityId;
 	}
 
-	public long getExtraStats() {
-		return extraStats;
-	}
+	public abstract long getExtraStats();
 
 	public abstract long getGemNumber();
 
-	private void setType(T type) {
-		this.type = type;
-	}
 	
 	public void setExtraStats(long extraStats) {
-		this.extraStats = extraStats;
 		getType().setExtraStats(this);
 	}
 	

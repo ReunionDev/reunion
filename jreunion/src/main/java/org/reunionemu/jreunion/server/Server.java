@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.context.annotation.DependsOn;
@@ -30,7 +31,19 @@ import org.springframework.stereotype.Service;
 @Service
 public class Server extends EventDispatcher implements ApplicationContextAware{
 
-	private static Server _instance = null;	
+	private static Server _instance = null;
+	
+	@Configurable
+	public class Test{
+		
+		@Autowired
+		Reference reference;
+		
+		public boolean test(){
+			return reference!=null;
+		}
+		
+	}
 	
 	
 	private static ApplicationContext context;
@@ -154,9 +167,6 @@ public class Server extends EventDispatcher implements ApplicationContextAware{
 	private Database database;
 
 	private Server() {
-		//Reference.getInstance().Load();
-		//database = new Database();
-
 	}
 
 	/**
