@@ -27,7 +27,7 @@ import org.springframework.stereotype.Service;
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
 @DependsOn("database")
-@Lazy(false)
+//@Lazy(false)
 @Service
 public class Server extends EventDispatcher implements ApplicationContextAware{
 

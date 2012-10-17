@@ -10,12 +10,17 @@ import org.reunionemu.jcommon.Parser;
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.ItemType;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ItemManager {
 
 	private java.util.Map<Integer, ItemType> itemsList = new HashMap<Integer, ItemType>();
+	
+	@Autowired
+	Reference reference;
 	
 	public ItemManager(){
 		
@@ -24,7 +29,7 @@ public class ItemManager {
 	@PostConstruct
 	public void loadItemsList(){
 		
-		Parser parser = Reference.getInstance().getItemReference();
+		Parser parser = reference.getItemReference();
 		Iterator<ParsedItem> iter = parser.getItemListIterator();
 		
 		while(iter.hasNext()){

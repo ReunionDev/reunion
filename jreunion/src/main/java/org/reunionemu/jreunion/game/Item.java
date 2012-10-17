@@ -5,23 +5,16 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.reunionemu.jreunion.game.Equipment.Slot;
 import org.reunionemu.jreunion.server.DatabaseUtils;
-import org.reunionemu.jreunion.server.Server;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
+import org.reunionemu.jreunion.server.Server;
+import org.slf4j.LoggerFactory;
 
 public abstract class Item<T extends ItemType> implements Entity{
 	
-	private T type;
-	
 	private int entityId = -1;
-	
-	private int itemId = -1; //for database;
-	
-	private int durability;
-	
+			
 	private int unknown1;
 	
 	private int unknown2;
@@ -52,13 +45,9 @@ public abstract class Item<T extends ItemType> implements Entity{
 		return entityId;
 	}
 	
-	public int getItemId() {
-		return itemId;
-	}
+	public abstract Long getItemId();
 	
-	public void setItemId(int itemId) {
-		this.itemId = itemId;
-	}
+	public abstract void setItemId(long itemId);
 
 	public void setEntityId(int entityId) {
 		this.entityId = entityId;
@@ -70,7 +59,9 @@ public abstract class Item<T extends ItemType> implements Entity{
 
 	
 	public void setExtraStats(long extraStats) {
-		getType().setExtraStats(this);
+		if(getType()!=null){
+			getType().setExtraStats(this);
+		}
 	}
 	
 	public boolean is(Class<?> itemType){
@@ -78,7 +69,9 @@ public abstract class Item<T extends ItemType> implements Entity{
 	}
 
 	public void setGemNumber(long gemNumber) {
-		getType().setGemNumber(this);
+		if(getType()!=null){
+			getType().setGemNumber(this);
+		}
 	}
 	
 	public boolean use(LivingObject livingObject, int quickSlotBarPosition, int unknown){
@@ -226,13 +219,9 @@ public abstract class Item<T extends ItemType> implements Entity{
 		this.unknown3 = unknown3;
 	}
 
-	public Integer getDurability() {
-		return durability;
-	}
+	public abstract Integer getDurability();
 
-	public void setDurability(int durability) {
-		this.durability = durability;
-	}
+	public abstract void setDurability(Integer durability);
 	
 	public void startJob(Runnable runnable, long period){
 		job = jobService.scheduleAtFixedRate(runnable, 0l, period, TimeUnit.MILLISECONDS);

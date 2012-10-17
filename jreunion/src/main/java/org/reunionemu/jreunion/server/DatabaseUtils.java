@@ -975,7 +975,7 @@ public class DatabaseUtils {
 		
 		saveItem(item);
 		
-		int itemId = item.getItemId();
+		long itemId = item.getItemId();
 		Statement stmt;
 		try {
 				
@@ -1004,7 +1004,7 @@ public class DatabaseUtils {
 		try {
 			stmt  = dinamicDatabase.dinamicConn.createStatement();
 			
-			int itemId = item.getItemId();
+			long itemId = item.getItemId();
 			if(itemId!=-1){
 				
 				int res = stmt.executeUpdate("UPDATE `items` SET `type`="+item.getType().getTypeId()+
@@ -1042,7 +1042,7 @@ public class DatabaseUtils {
 		
 	}
 	
-	public void deleteItem(int itemId)
+	public void deleteItem(long itemId)
 	{
 		if (itemId==-1)return;
 		if (!checkDinamicDatabase())return ;

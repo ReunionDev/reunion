@@ -13,7 +13,6 @@ import org.reunionemu.jreunion.game.ItemType;
 import org.reunionemu.jreunion.server.TypeLoader;
 import org.springframework.beans.factory.annotation.Configurable;
 
-@Configurable
 @Entity
 @Table(name="items",
 uniqueConstraints={
@@ -22,68 +21,85 @@ uniqueConstraints={
 public class ItemImpl<T extends ItemType> extends Item<T> {
 	Long id;
 	
-    Integer typeId;
+    int typeId;
 	
     Integer durability;
     
-    Long gemNumber;
+    long gemNumber;
     
-    Long extraStats;
+    long extraStats;
     
     private T type;
+    
+    public ItemImpl(){
+    	
+    }
     
     public ItemImpl(T itemType) {
 		super();
 		setType(itemType);
+		
+	}
+    
+    public void setTypeId(int typeId) {
+		this.typeId = typeId;		
 	}
 
     protected void setType(T itemType) {
     	this.type = itemType;
 	}
 
+    @Override
 	@Column(name="durability")
 	public Integer getDurability() {
 		return durability;
 	}
 
+	@Override
 	@Column(name="gemnumber")
 	public long getGemNumber() {
 		return gemNumber;
 	}
 	
+	@Override
 	@Id @GeneratedValue
-	public Long getId(){
+	@Column(name="id")
+	public Long getItemId(){
 		return id;
 	}
 	
 	@Column(name="type")
 	public Integer getTypeId() {
+		if(type!=null){
+	    	return type.getTypeId();
+		}
 		return typeId;
 	}
 
+	@Override
 	public void setDurability(Integer durability) {
 		this.durability = durability;
 	}
 	
-	public void setGemNumber(Long gemNumber) {
+	@Override
+	public void setGemNumber(long gemNumber) {
 		this.gemNumber = gemNumber;
 	}
 
-	public void setId(Long id){
+	public void setItemId(long id){
     	this.id = id;
     }
 
-	public void setTypeId(Integer typeId) {
-		this.typeId = typeId;
-		if(type==null){
-			type = new TypeLoader<T>().load(typeId);
-		}
-	}
+	
 
 	@Transient
 	@Override
-	public T getType() {		
+	public T getType() {
+		if(type==null){
+			type = new TypeLoader<T>().load(typeId);
+		}
 		return type;
+		
 	}
 
 	@Column(name="extrastats")
