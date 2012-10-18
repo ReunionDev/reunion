@@ -16,10 +16,9 @@ public class AspectJChecker {
 	Logger logger = LoggerFactory.getLogger(AspectJChecker.class);
 	
 	@Configurable
-	public class Checker{
+	public class Checker{ 
 		@Autowired
 		AspectJChecker checker;
-		
 		public boolean check(){
 			return checker != null; 
 		}
