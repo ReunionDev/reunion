@@ -90,8 +90,6 @@ public class ItemImpl<T extends ItemType> extends Item<T> {
     	this.id = id;
     }
 
-	
-
 	@Transient
 	@Override
 	public T getType() {

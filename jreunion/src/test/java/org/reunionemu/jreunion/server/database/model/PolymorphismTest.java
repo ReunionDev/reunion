@@ -22,9 +22,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration({"classpath*:/spring/**/*-context.xml", 
 "classpath*:/spring/**/*-context-test.xml"})
 public class PolymorphismTest {
-	
-	
-	private EntityManager entityManager;
+		
 	
 	@Autowired
 	private EntityManagerFactory emf;
@@ -35,7 +33,7 @@ public class PolymorphismTest {
 	
 	@Test
 	public void test() {
-		entityManager = emf.createEntityManager();
+		EntityManager entityManager = emf.createEntityManager();
 		
 		Quest quest = questDao.findById(1);
 		

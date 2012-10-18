@@ -130,9 +130,9 @@ public class Reference {
 	public void Load(){
 		clear();
 		try {
-			serverReference.Parse("config/Settings.dta");
+			serverReference.Parse(getResource("/config/Settings.dta"));
 		
-			mapConfigReference.Parse("config/Maps.dta");
+			mapConfigReference.Parse(getResource("/config/Maps.dta"));
 	
 			itemReference.Parse(getDataResourceS("Items.dta"));
 			mobReference.Parse(getDataResourceS("Mob.dta"));
@@ -142,7 +142,7 @@ public class Reference {
 			dropListReference.Parse(getDataResourceS("DropList.dta"));
 			skillReference.Parse(getDataResourceS("Skills.dta"));
 		
-		} catch (IOException e) {
+		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 	}
@@ -158,6 +158,16 @@ public class Reference {
 			}else{
 				return new FileInputStream(path);
 			}
+		}catch(Exception e){
+			throw new RuntimeException(e);
+		}
+	}
+	
+	public InputStream getResource(String path){
+		//ApplicationContext context = SpringApplicationContext.getApplicationContext();
+		try{
+			return context.getResource(path).getInputStream();
+			
 		}catch(Exception e){
 			throw new RuntimeException(e);
 		}
