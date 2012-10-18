@@ -282,7 +282,6 @@
 				 <artifactId>aspectj-maven-plugin</artifactId>
 				 <version>1.4</version>
 				 <configuration>
-                    <outxml>true</outxml>
 				   	<complianceLevel>1.6</complianceLevel>
 				   	<source>1.6</source>
     				<target>1.6</target>
@@ -290,8 +289,8 @@
 				     <aspectLibrary>
 				       <groupId>org.springframework</groupId>
 				       <artifactId>spring-aspects</artifactId>
-				   </aspectLibrary>
-				 </aspectLibraries>
+				   		</aspectLibrary>
+				 	</aspectLibraries>
 				 </configuration>
 					 <executions>
 					  <execution>

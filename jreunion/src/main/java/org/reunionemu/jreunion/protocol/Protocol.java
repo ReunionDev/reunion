@@ -1,6 +1,5 @@
 package org.reunionemu.jreunion.protocol;
 
-import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
@@ -74,10 +73,7 @@ public static Pattern login = Pattern.compile("^(?:\\d+[\\r\\n]+)(?:(?:login|pla
 			ParsedItem item = iter.next();
 			Class<?> protocolName = Class.forName(item.getMemberValue("Class"));
 			protocols.add(protocolName);				
-		}
-			
-	
-		
+		}		
 	}
 	
 	public abstract String decryptServer(byte data[]);
