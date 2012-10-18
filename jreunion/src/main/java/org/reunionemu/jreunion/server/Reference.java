@@ -130,9 +130,9 @@ public class Reference {
 	public void Load(){
 		clear();
 		try {
-			serverReference.Parse(getResource("/config/Settings.dta"));
+			serverReference.Parse(getResource("classpath:/config/Settings.dta"));
 		
-			mapConfigReference.Parse(getResource("/config/Maps.dta"));
+			mapConfigReference.Parse(getResource("classpath:/config/Maps.dta"));
 	
 			itemReference.Parse(getDataResourceS("Items.dta"));
 			mobReference.Parse(getDataResourceS("Mob.dta"));

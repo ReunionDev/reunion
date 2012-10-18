@@ -11,6 +11,7 @@ import org.reunionemu.jcommon.ParsedItem;
 import org.reunionemu.jcommon.Parser;
 import org.reunionemu.jreunion.server.ClassFactory;
 import org.reunionemu.jreunion.server.Client;
+import org.reunionemu.jreunion.server.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -63,22 +64,19 @@ public static Pattern login = Pattern.compile("^(?:\\d+[\\r\\n]+)(?:(?:login|pla
 		
 		protocols.clear();
 		Parser protocolConfig = new Parser();
-		try {
-			protocolConfig.Parse("config/Protocols.dta");
+	
+		protocolConfig.Parse(Reference.getInstance().getResource("classpath:/config/Protocols.dta"));
+		
+		Iterator<ParsedItem> iter = protocolConfig.getItemListIterator();
+		
+		while(iter.hasNext()){
 			
-			Iterator<ParsedItem> iter = protocolConfig.getItemListIterator();
-			
-			while(iter.hasNext()){
-				
-				ParsedItem item = iter.next();
-				Class<?> protocolName = Class.forName(item.getMemberValue("Class"));
-				protocols.add(protocolName);				
-			}
-			
-		} catch (IOException e) {
-
-			e.printStackTrace();
+			ParsedItem item = iter.next();
+			Class<?> protocolName = Class.forName(item.getMemberValue("Class"));
+			protocols.add(protocolName);				
 		}
+			
+	
 		
 	}
 	
