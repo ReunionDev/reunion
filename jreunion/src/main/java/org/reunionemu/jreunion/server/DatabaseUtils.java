@@ -901,7 +901,7 @@ public class DatabaseUtils {
 				item.setItemId(itemId);
 				item.setGemNumber(rs.getLong("gemnumber"));
 				item.setExtraStats(rs.getLong("extrastats"));
-				item.setDurability(rs.getInt("durability"));
+				//item.setDurability(rs.getInt("durability"));
 				item.setUnknown1(rs.getInt("unknown1"));
 				item.setUnknown2(rs.getInt("unknown2"));
 				item.setUnknown3(rs.getInt("unknown3"));

@@ -600,13 +600,13 @@ public class MessageParser {
 							
 							item.setGemNumber(gemNumber);
 							item.setExtraStats(extraStats);
-							item.setDurability(item.getType().getMaxDurability());
+							item.setDurabilityValue(1);
 							item.setUnknown1(unknown1);
 							item.setUnknown2(unknown2);
 						}else{
 							item.setGemNumber(0);
-							item.setExtraStats(item.getType().getMaxExtraStats());
-							item.setDurability(item.getType().getMaxDurability());
+							item.setExtraStats(0);
+							item.setDurabilityValue(1);
 							item.setUnknown1(0);
 							item.setUnknown2(0);
 						}
@@ -642,13 +642,13 @@ public class MessageParser {
 						
 						item.setGemNumber(gemNumber);
 						item.setExtraStats(extraStats);
-						item.setDurability(item.getType().getMaxDurability());
+						item.setDurabilityValue(1);
 						item.setUnknown1(unknown1);
 						item.setUnknown2(unknown2);
 					} else {
 						item.setGemNumber(0);
 						item.setExtraStats(item.getType().getMaxExtraStats());
-						item.setDurability(item.getType().getMaxDurability());
+						item.setDurabilityValue(1);
 						item.setUnknown1(0);
 						item.setUnknown2(0);
 					}

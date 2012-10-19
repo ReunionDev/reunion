@@ -11,7 +11,6 @@ import javax.persistence.UniqueConstraint;
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.ItemType;
 import org.reunionemu.jreunion.server.TypeLoader;
-import org.springframework.beans.factory.annotation.Configurable;
 
 @Entity
 @Table(name="items",
@@ -23,7 +22,8 @@ public class ItemImpl<T extends ItemType> extends Item<T> {
 	
     int typeId;
 	
-    Integer durability;
+    //Default value of 1 (equals MaxDurability)
+    double durability = 1;
     
     long gemNumber;
     
@@ -41,26 +41,34 @@ public class ItemImpl<T extends ItemType> extends Item<T> {
 		
 	}
     
-    public void setTypeId(int typeId) {
-		this.typeId = typeId;		
+	@Transient
+	public int getDurability() {
+		return (int)Math.ceil(durability * getType().getMaxDurability());
+	}
+	
+	@Override
+	@Column(name="durability", nullable=false)
+	public double getDurabilityValue() {
+		return durability;
+	}
+	
+	@Override
+	public void setDurabilityValue(double durability) {
+		this.durability = durability;
 	}
 
-    protected void setType(T itemType) {
-    	this.type = itemType;
+    @Column(name="extrastats", nullable=false)
+	@Override
+	public long getExtraStats() {
+		return extraStats;
 	}
 
     @Override
-	@Column(name="durability")
-	public Integer getDurability() {
-		return durability;
-	}
-
-	@Override
-	@Column(name="gemnumber")
+	@Column(name="gemnumber", nullable=false)
 	public long getGemNumber() {
 		return gemNumber;
 	}
-	
+
 	@Override
 	@Id @GeneratedValue
 	@Column(name="id")
@@ -68,28 +76,6 @@ public class ItemImpl<T extends ItemType> extends Item<T> {
 		return id;
 	}
 	
-	@Column(name="type")
-	public Integer getTypeId() {
-		if(type!=null){
-	    	return type.getTypeId();
-		}
-		return typeId;
-	}
-
-	@Override
-	public void setDurability(Integer durability) {
-		this.durability = durability;
-	}
-	
-	@Override
-	public void setGemNumber(long gemNumber) {
-		this.gemNumber = gemNumber;
-	}
-
-	public void setItemId(long id){
-    	this.id = id;
-    }
-
 	@Transient
 	@Override
 	public T getType() {
@@ -100,10 +86,29 @@ public class ItemImpl<T extends ItemType> extends Item<T> {
 		
 	}
 
-	@Column(name="extrastats")
+	@Column(name="type", nullable=false)
+	public Integer getTypeId() {
+		if(type!=null){
+	    	return type.getTypeId();
+		}
+		return typeId;
+	}
+	
 	@Override
-	public long getExtraStats() {
-		return extraStats;
+	public void setGemNumber(long gemNumber) {
+		this.gemNumber = gemNumber;
+	}
+	
+	public void setItemId(long id){
+    	this.id = id;
+    }
+
+	protected void setType(T itemType) {
+    	this.type = itemType;
+	}
+
+	public void setTypeId(int typeId) {
+		this.typeId = typeId;		
 	}
 	
 }

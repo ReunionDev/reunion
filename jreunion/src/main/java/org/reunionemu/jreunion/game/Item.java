@@ -219,9 +219,7 @@ public abstract class Item<T extends ItemType> implements Entity{
 		this.unknown3 = unknown3;
 	}
 
-	public abstract Integer getDurability();
-
-	public abstract void setDurability(Integer durability);
+	public abstract int getDurability();
 	
 	public void startJob(Runnable runnable, long period){
 		job = jobService.scheduleAtFixedRate(runnable, 0l, period, TimeUnit.MILLISECONDS);
@@ -246,5 +244,9 @@ public abstract class Item<T extends ItemType> implements Entity{
 		buffer.append("}");
 		return buffer.toString();
 	}
+
+	public abstract double getDurabilityValue();
+
+	public abstract void setDurabilityValue(double durability);
 	
 }
