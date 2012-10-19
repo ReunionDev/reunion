@@ -188,12 +188,6 @@ public abstract class Item<T extends ItemType> implements Entity{
 			player.getClient().sendPacket(Type.UPDATE_ITEM, this, 1);
 		}
 	}
-	
-	public static Item<?> load(int itemId){
-			
-		return DatabaseUtils.getDinamicInstance().loadItem(itemId);
-			
-	}
 
 	public int getUnknown1() {
 		return unknown1;

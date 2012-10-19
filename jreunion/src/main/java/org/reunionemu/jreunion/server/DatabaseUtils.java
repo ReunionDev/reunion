@@ -225,7 +225,7 @@ public class DatabaseUtils {
 			{
 				int slotId = rs.getInt("slot");
 				
-				Item<?> item = Item.load(rs.getInt("itemid"));
+				Item<?> item = loadItem(rs.getInt("itemid"));
 				
 				Slot slot = Slot.byValue(slotId);
 				equipment.setItem(slot, item);
@@ -258,7 +258,7 @@ public class DatabaseUtils {
 			{
 				int slotId = rs.getInt("slot");
 				
-				Item<?> item = Item.load(rs.getInt("itemid"));
+				Item<?> item = loadItem(rs.getInt("itemid"));
 				
 				PetSlot petSlot = PetSlot.byValue(slotId);
 				equipment.setItem(petSlot, item);
@@ -749,7 +749,7 @@ public class DatabaseUtils {
 			
 			while (invTable.next()) 
 			{
-				Item<?> item = Item.load(invTable.getInt("itemid"));	
+				Item<?> item = loadItem(invTable.getInt("itemid"));	
 				
 				if (item!=null){
 					if(invTable.getInt("tab") == -1 && invTable.getInt("x") == -1 && invTable.getInt("y") == -1){
@@ -946,7 +946,7 @@ public class DatabaseUtils {
 				while (rs.next()) 
 				{
 					int itemid = rs.getInt("itemid");
-					Item<?> item = Item.load(itemid);
+					Item<?> item = loadItem(itemid);
 					
 					if (item==null)
 						stmt.execute("DELETE FROM `roaming` WHERE itemid="+itemid);
@@ -1200,7 +1200,7 @@ public class DatabaseUtils {
 						
 			while (rs.next()) 
 			{
-				Item<?> item = Item.load(rs.getInt("itemid"));
+				Item<?> item = loadItem(rs.getInt("itemid"));
 				StashItem stashItem = new StashItem(new StashPosition(rs.getInt("pos")), item);
 				client.getPlayer().getStash().addItem(stashItem);
 			}
@@ -1258,7 +1258,7 @@ public class DatabaseUtils {
 						
 			while (exchangeTable.next()) 
 			{
-				Item<?> item = Item.load(exchangeTable.getInt("itemid"));
+				Item<?> item = loadItem(exchangeTable.getInt("itemid"));
 				ExchangeItem exchangeItem = new ExchangeItem(item,
 						exchangeTable.getInt("x"), exchangeTable.getInt("y"));
 				
@@ -1331,7 +1331,7 @@ public class DatabaseUtils {
 						
 			while (quickSlotTable.next()) 
 			{
-				Item<?> item = Item.load(quickSlotTable.getInt("itemid"));
+				Item<?> item = loadItem(quickSlotTable.getInt("itemid"));
 				QuickSlotPosition quickSlotPosition = new QuickSlotPosition(player.getQuickSlotBar(),quickSlotTable.getInt("slot"));
 				QuickSlotItem quickSlotItem = new QuickSlotItem(item,quickSlotPosition);
 				player.getQuickSlotBar().addItem(quickSlotItem);
