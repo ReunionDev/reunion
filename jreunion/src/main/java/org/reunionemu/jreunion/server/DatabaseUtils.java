@@ -64,17 +64,9 @@ public class DatabaseUtils {
 		
 	private static DatabaseUtils _dinamicInstance = null;
 	
-	private static DatabaseUtils _staticInstance = null;
-
 	private synchronized static void createDinamicInstance() {
 		if (_dinamicInstance == null) {
 			_dinamicInstance = new DatabaseUtils();
-		}
-	}
-	
-	private synchronized static void createStaticInstance() {
-		if (_staticInstance == null) {
-			_staticInstance = new DatabaseUtils();
 		}
 	}
 	
@@ -82,12 +74,6 @@ public class DatabaseUtils {
 		if (_dinamicInstance == null)
 			createDinamicInstance();
 		return _dinamicInstance;
-	}
-	
-	public static DatabaseUtils getStaticInstance() {
-		if (_staticInstance == null)
-			createStaticInstance();
-		return _staticInstance;
 	}
 	
 	public Position getSavedPosition(Player player){

@@ -5,12 +5,16 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
+import org.reunionemu.jreunion.dao.ItemDao;
 import org.reunionemu.jreunion.game.Equipment.Slot;
 import org.reunionemu.jreunion.server.DatabaseUtils;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
 import org.reunionemu.jreunion.server.Server;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 
+@Configurable
 public abstract class Item<T extends ItemType> implements Entity{
 	
 	private int entityId = -1;
@@ -22,6 +26,9 @@ public abstract class Item<T extends ItemType> implements Entity{
 	private int unknown3;
 	
 	private ItemPosition position;
+	
+	@Autowired
+	ItemDao<Item<?>> itemDao;
 	
 	static private ScheduledExecutorService jobService = Executors.newScheduledThreadPool(1);
 	
@@ -167,8 +174,10 @@ public abstract class Item<T extends ItemType> implements Entity{
 			}
 
 			setGemNumber(getGemNumber()+uppamount);
-			DatabaseUtils.getDinamicInstance().saveItem(this);
-			DatabaseUtils.getDinamicInstance().deleteItem(player.getInventory().getHoldingItem().getItem().getItemId());
+			itemDao.save(this);
+			itemDao.delete(player.getInventory().getHoldingItem().getItem());
+			//DatabaseUtils.getDinamicInstance().saveItem(this);
+			//DatabaseUtils.getDinamicInstance().deleteItem(player.getInventory().getHoldingItem().getItem().getItemId());
 			player.getInventory().setHoldingItem(null);
 			player.setDefense();
 			
@@ -181,10 +190,12 @@ public abstract class Item<T extends ItemType> implements Entity{
 		
 		if(holdingItem != null){
 			setExtraStats(getExtraStats() + holdingItem.getType().getMaxExtraStats());
-			DatabaseUtils.getDinamicInstance().deleteItem(holdingItem.getItemId());
+			itemDao.delete(holdingItem);
+			//DatabaseUtils.getDinamicInstance().deleteItem(holdingItem.getItemId());
 			player.getInventory().setHoldingItem(null);
 			player.save();
-			DatabaseUtils.getDinamicInstance().saveItem(this);
+			itemDao.save(this);
+			//DatabaseUtils.getDinamicInstance().saveItem(this);
 			player.getClient().sendPacket(Type.UPDATE_ITEM, this, 1);
 		}
 	}
