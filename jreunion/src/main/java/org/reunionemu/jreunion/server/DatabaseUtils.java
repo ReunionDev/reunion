@@ -1,12 +1,17 @@
 package org.reunionemu.jreunion.server;
 
 import java.nio.channels.SocketChannel;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.sql.DataSource;
 
 import org.reunionemu.jreunion.game.Equipment;
 import org.reunionemu.jreunion.game.Equipment.Slot;
@@ -31,37 +36,63 @@ import org.reunionemu.jreunion.game.items.pet.PetEquipment;
 import org.reunionemu.jreunion.game.items.pet.PetEquipment.PetSlot;
 import org.reunionemu.jreunion.model.jpa.ItemImpl;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.DependsOn;
+import org.springframework.stereotype.Service;
 
 
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
+@DependsOn("datasource")
+@Service
 public class DatabaseUtils {
 	
+	@Autowired
+	DataSource datasource;
+	
+	public Connection connection = null; //reunion database
+
+	
 	private DatabaseUtils() {
-		super();
-		dinamicDatabase = null;
+		_dinamicInstance = this;
 	}
 	
-	private Database dinamicDatabase;
+	@PostConstruct
+	public void start(){
+
+		try {
+			connection = datasource.getConnection();
+			LoggerFactory.getLogger(DatabaseUtils.class).info("Dinamic "+getClass().getSimpleName() + " connection established");
+
+		} catch (Exception e) {
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
+		}
+		
+	}
 	
+	@PreDestroy
+	public void stop() {
+
+		if (connection != null) {
+			try {
+				connection.close();
+				LoggerFactory.getLogger(DatabaseUtils.class).info(getClass().getName()
+						+ " connection terminated");
+			} catch (Exception e) { /* ignore close errors */
+				
+			}
+		}
+	}
+		
 	public boolean checkDinamicDatabase() {
-		if (dinamicDatabase != null)
+		if (connection != null)
 			return true;
 		else
 			return false;
 	}
-	
-	/**
-	 * @param database
-	 *            The database to set.
-	 * @uml.property name="database"
-	 */
-	public void setDinamicDatabase(Database dinamicDatabase) {
-		this.dinamicDatabase = dinamicDatabase;
-	}
-		
+			
 	private static DatabaseUtils _dinamicInstance = null;
 	
 	private synchronized static void createDinamicInstance() {
@@ -81,7 +112,7 @@ public class DatabaseUtils {
 			return null;
 		Position position = null;
 		try {
-			Statement stmt = dinamicDatabase.dinamicConn.createStatement();
+			Statement stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT `x`, `y`, `z`, `mapId` FROM `characters` WHERE `characters`.`id`="+player.getPlayerId()+" AND `mapId` IS NOT NULL AND `x` IS NOT NULL AND `y` IS NOT NULL AND `z` IS NOT NULL");
 			
 			if(rs.next()){
@@ -101,7 +132,7 @@ public class DatabaseUtils {
 		if (!checkDinamicDatabase())
 			return;
 		try {
-			Statement stmt = dinamicDatabase.dinamicConn.createStatement();
+			Statement stmt = connection.createStatement();
 			Position position = player.getPosition();
 			if(position!=null&&position.getMap()!=null)
 				stmt.execute("UPDATE `characters` SET `x`="+position.getX()+", `y`="+position.getY()+", `z`="+position.getZ()+", `mapId`="+position.getMap().getId()+" WHERE `characters`.`id`="+player.getPlayerId());
@@ -120,7 +151,7 @@ public class DatabaseUtils {
 		int chars = 0;
 		
 		try {
-			Statement stmt = dinamicDatabase.dinamicConn.createStatement();
+			Statement stmt = connection.createStatement();
 			
 			ResultSet rs = stmt.executeQuery("SELECT * FROM `characters`,`slots` WHERE `characters`.`accountid`="+accountId+" AND `characters`.`id`=`slots`.`charid` ORDER BY `slot` ASC");
 			while (rs.next()) {
@@ -205,7 +236,7 @@ public class DatabaseUtils {
 		Statement stmt;
 		
 		try {
-			stmt = dinamicDatabase.dinamicConn.createStatement();
+			stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM equipment WHERE charid="+ charid + ";");
 			while(rs.next()) 
 			{
@@ -238,7 +269,7 @@ public class DatabaseUtils {
 		Statement stmt;
 		
 		try {
-			stmt = dinamicDatabase.dinamicConn.createStatement();
+			stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM petequipment WHERE petid="+ petid + ";");
 			while(rs.next()) 
 			{
@@ -268,7 +299,7 @@ public class DatabaseUtils {
 			return null;
 		Statement stmt;		
 		try {
-			stmt = dinamicDatabase.dinamicConn.createStatement();
+			stmt = connection.createStatement();
 			ResultSet rs = stmt
 			.executeQuery("SELECT C.*,A.level AS userlevel FROM characters AS C, accounts AS A WHERE C.accountid=A.id AND C.id="
 					+ charId + ";");
@@ -326,7 +357,7 @@ public class DatabaseUtils {
 		try {
 			
 			int charId = player.getPlayerId();
-			Statement stmt = dinamicDatabase.dinamicConn.createStatement();
+			Statement stmt = connection.createStatement();
 			
 			if(charId!=-1){				
 				stmt.execute("DELETE FROM characters WHERE id="+charId+";");				
@@ -390,7 +421,7 @@ public class DatabaseUtils {
 		java.util.List<Pet> petList = new Vector<Pet>();
 		
 		try {
-			stmt = dinamicDatabase.dinamicConn.createStatement();
+			stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM pet;");
 			
 			if (rs.next()) {
@@ -413,7 +444,7 @@ public class DatabaseUtils {
 		
 		Statement stmt;		
 		try {
-			stmt = dinamicDatabase.dinamicConn.createStatement();
+			stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT * FROM pet WHERE id="+ petId + ";");
 			
 			if (rs.next()) {
@@ -456,7 +487,7 @@ public class DatabaseUtils {
 			if(pet == null)
 				return;
 			
-			Statement stmt = dinamicDatabase.dinamicConn.createStatement();
+			Statement stmt = connection.createStatement();
 			int petId = pet.getId();
 			
 			Item<?> amulet = pet.getAmulet();
@@ -505,8 +536,8 @@ public class DatabaseUtils {
 		ResultSet rs;
 		
 		try {
-			deleteStmt = dinamicDatabase.dinamicConn.createStatement();
-			selectStmt = dinamicDatabase.dinamicConn.createStatement();
+			deleteStmt = connection.createStatement();
+			selectStmt = connection.createStatement();
 			
 			//delete pet equipment from DB
 			rs = selectStmt.executeQuery("SELECT * FROM petequipment WHERE petid = "+pet.getId()+ ";");
@@ -558,7 +589,7 @@ public class DatabaseUtils {
 					
 		Statement stmt;
 		try {
-			stmt  = dinamicDatabase.dinamicConn.createStatement();
+			stmt  = connection.createStatement();
 			
 			stmt.execute("UPDATE characters SET "+status+" = '"+value+"' WHERE id='"+player.getPlayerId()+"';");
 
@@ -576,7 +607,7 @@ public class DatabaseUtils {
 			return false;
 		Statement stmt;
 		try {
-			stmt = dinamicDatabase.dinamicConn.createStatement();
+			stmt = connection.createStatement();
 			ResultSet rs = stmt
 			.executeQuery("SELECT id FROM characters WHERE name='"
 					+ charName + "';");
@@ -601,7 +632,7 @@ public class DatabaseUtils {
 		Statement stmt;
 		try {
 						
-			stmt = dinamicDatabase.dinamicConn.createStatement();			
+			stmt = connection.createStatement();			
 								
 			Player player = Player.createPlayer(client, race);
 			ItemManager itemManager = player.getClient().getWorld().getItemManager();
@@ -701,7 +732,7 @@ public class DatabaseUtils {
 		int characterId = -1;
 		Statement stmt;
 		try {
-			stmt = dinamicDatabase.dinamicConn.createStatement();
+			stmt = connection.createStatement();
 			ResultSet rs = stmt
 			.executeQuery("(SELECT charid FROM slots WHERE accountid ="
 					+ accountId
@@ -729,7 +760,7 @@ public class DatabaseUtils {
 		Statement invStmt;
 
 		try {
-			invStmt = dinamicDatabase.dinamicConn.createStatement();
+			invStmt = connection.createStatement();
 			
 			ResultSet invTable = invStmt.executeQuery("SELECT * FROM inventory WHERE charid="+player.getPlayerId()+";");
 			
@@ -762,7 +793,7 @@ public class DatabaseUtils {
 	
 		Statement stmt;
 		try {
-			stmt = dinamicDatabase.dinamicConn.createStatement();
+			stmt = connection.createStatement();
 			stmt.execute("DELETE FROM inventory WHERE charid="+player.getPlayerId()+";");
 		
 			String query = "INSERT INTO inventory (charid, itemid, tab, x, y) VALUES ";
@@ -810,7 +841,7 @@ public class DatabaseUtils {
 		}
 		Statement stmt;
 		try {
-			stmt  = dinamicDatabase.dinamicConn.createStatement();
+			stmt  = connection.createStatement();
 			
 			ResultSet rs = stmt.executeQuery("SELECT id FROM characters WHERE 1;");
 			
@@ -842,7 +873,7 @@ public class DatabaseUtils {
 				
 		Statement stmt;
 		try {
-			stmt  = dinamicDatabase.dinamicConn.createStatement();
+			stmt  = connection.createStatement();
 			
 			ResultSet rs = stmt.executeQuery("SELECT type FROM items WHERE id='"+uniqueid+"';");
 			
@@ -868,7 +899,7 @@ public class DatabaseUtils {
 		
 		Statement stmt;
 		try {
-			stmt  = dinamicDatabase.dinamicConn.createStatement();
+			stmt  = connection.createStatement();
 			
 			ResultSet rs = stmt.executeQuery("SELECT * FROM items WHERE id='"+itemId+"';");
 			
@@ -909,7 +940,7 @@ public class DatabaseUtils {
 			return false ;
 		Statement stmt;
 		try {
-			stmt  = dinamicDatabase.dinamicConn.createStatement();		
+			stmt  = connection.createStatement();		
 			return stmt.execute("DELETE FROM `roaming` WHERE `itemid`="+item.getItemId()+";");
 			
 		}catch (Exception e) {
@@ -921,35 +952,34 @@ public class DatabaseUtils {
 	public List<RoamingItem> loadRoamingItems(LocalMap map){
 		
 		List<RoamingItem> items = new Vector<RoamingItem>();
-		synchronized(dinamicDatabase) {
-		
-			Statement stmt;
-			try {
-				stmt = dinamicDatabase.dinamicConn.createStatement();
+	
+		Statement stmt;
+		try {
+			stmt = connection.createStatement();
+			
+			ResultSet rs = stmt.executeQuery("SELECT * FROM `roaming` WHERE `mapid` = "+map.getId()+";");
+			
+			while (rs.next()) 
+			{
+				int itemid = rs.getInt("itemid");
+				Item<?> item = loadItem(itemid);
 				
-				ResultSet rs = stmt.executeQuery("SELECT * FROM `roaming` WHERE `mapid` = "+map.getId()+";");
-				
-				while (rs.next()) 
-				{
-					int itemid = rs.getInt("itemid");
-					Item<?> item = loadItem(itemid);
-					
-					if (item==null)
-						stmt.execute("DELETE FROM `roaming` WHERE itemid="+itemid);
-					else{
-						RoamingItem roamingItem = new RoamingItem(item);
-						Position position = new Position(rs.getInt("x"), rs.getInt("y"), rs.getInt("z"), map, rs.getDouble("rotation"));
-						roamingItem.setPosition(position);
-						items.add(roamingItem);
-					}
+				if (item==null)
+					stmt.execute("DELETE FROM `roaming` WHERE itemid="+itemid);
+				else{
+					RoamingItem roamingItem = new RoamingItem(item);
+					Position position = new Position(rs.getInt("x"), rs.getInt("y"), rs.getInt("z"), map, rs.getDouble("rotation"));
+					roamingItem.setPosition(position);
+					items.add(roamingItem);
 				}
-				
-			} catch (SQLException e) {
-				LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
-				return null;
 			}
-		
+			
+		} catch (SQLException e) {
+			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
+			return null;
 		}
+	
+	
 		return items;		
 	}
 	
@@ -966,7 +996,7 @@ public class DatabaseUtils {
 		try {
 				
 			deleteRoamingItem(item);
-			stmt  = dinamicDatabase.dinamicConn.createStatement();
+			stmt  = connection.createStatement();
 			String q = 
 			"INSERT INTO `roaming` (`itemid`,`mapid`,`x`,`y`,`z`,`rotation`) VALUES ("+
 			itemId+","+
@@ -988,7 +1018,7 @@ public class DatabaseUtils {
 			
 		Statement stmt;
 		try {
-			stmt  = dinamicDatabase.dinamicConn.createStatement();
+			stmt  = connection.createStatement();
 			
 			long itemId = item.getItemId();
 			if(itemId!=-1){
@@ -1036,7 +1066,7 @@ public class DatabaseUtils {
 		Statement stmt;
 		
 		try {
-			stmt  = dinamicDatabase.dinamicConn.createStatement();
+			stmt  = connection.createStatement();
 			
 			stmt.execute("DELETE FROM items WHERE id='"+itemId+"';");
 				
@@ -1057,7 +1087,7 @@ public class DatabaseUtils {
 		Statement stmt;
 		
 		try {
-			stmt = dinamicDatabase.dinamicConn.createStatement();
+			stmt = connection.createStatement();
 			int playerId = player.getPlayerId();
 			stmt.execute("DELETE FROM `skills` WHERE `charid`="+playerId+";");
 
@@ -1088,7 +1118,7 @@ public class DatabaseUtils {
 			return;
 		Statement stmt;
 		try {
-			stmt = dinamicDatabase.dinamicConn.createStatement();
+			stmt = connection.createStatement();
 			ResultSet rs = stmt.executeQuery("SELECT id,level FROM skills WHERE charid="+player.getPlayerId()+";");			
 			while (rs.next()) {
 				int id = rs.getInt("id");
@@ -1112,7 +1142,7 @@ public class DatabaseUtils {
 		
 		Statement stmt;
 		try {
-			stmt = dinamicDatabase.dinamicConn.createStatement();
+			stmt = connection.createStatement();
 			stmt.execute("DELETE FROM equipment WHERE charid="+player.getPlayerId()+";");
 			Equipment eq = player.getEquipment();
 			
@@ -1147,7 +1177,7 @@ public class DatabaseUtils {
 		Statement stmt;
 		try {
 			int petId = pet.getId();
-			stmt = dinamicDatabase.dinamicConn.createStatement();
+			stmt = connection.createStatement();
 			stmt.execute("DELETE FROM petequipment WHERE petid="+petId+";");
 			
 			PetEquipment eq = pet.getEquipment();
@@ -1179,7 +1209,7 @@ public class DatabaseUtils {
 			return;
 		
 		try {
-			Statement invStmt = dinamicDatabase.dinamicConn.createStatement();
+			Statement invStmt = connection.createStatement();
 			
 			ResultSet rs = invStmt.executeQuery("SELECT * FROM warehouse WHERE accountid="+client.getAccountId()+";");
 			client.getPlayer().getStash().clearStash();
@@ -1203,7 +1233,7 @@ public class DatabaseUtils {
 			return;
 		
 		try {
-			Statement stmt = dinamicDatabase.dinamicConn.createStatement();
+			Statement stmt = connection.createStatement();
 			stmt.execute("DELETE FROM warehouse WHERE accountid="+client.getAccountId()+";");
 			
 			String query = "INSERT INTO warehouse (accountid, pos, itemid) VALUES ";
@@ -1238,7 +1268,7 @@ public class DatabaseUtils {
 			return;
 		
 		try {
-			Statement invStmt = dinamicDatabase.dinamicConn.createStatement();
+			Statement invStmt = connection.createStatement();
 			
 			ResultSet exchangeTable = invStmt.executeQuery("SELECT * FROM exchange WHERE charid="+player.getPlayerId()+";");
 						
@@ -1263,7 +1293,7 @@ public class DatabaseUtils {
 			return;
 		
 		try {
-			Statement stmt = dinamicDatabase.dinamicConn.createStatement();
+			Statement stmt = connection.createStatement();
 			stmt.execute("DELETE FROM exchange WHERE charid="+player.getPlayerId()+";");
 			
 			Iterator<ExchangeItem> exchangeIter = player.getExchange().itemListIterator();
@@ -1291,7 +1321,7 @@ public class DatabaseUtils {
 			
 		Statement stmt;
 		try {
-			stmt  = dinamicDatabase.dinamicConn.createStatement();
+			stmt  = connection.createStatement();
 			
 			stmt.execute("DELETE FROM guilds WHERE id='"+id+"';");
 			
@@ -1311,7 +1341,7 @@ public class DatabaseUtils {
 			return;
 		
 		try {
-			Statement invStmt = dinamicDatabase.dinamicConn.createStatement();
+			Statement invStmt = connection.createStatement();
 			
 			ResultSet quickSlotTable = invStmt.executeQuery("SELECT * FROM quickslot WHERE charid="+player.getPlayerId()+";");
 						
@@ -1335,7 +1365,7 @@ public class DatabaseUtils {
 			return;
 		
 		try {
-			Statement stmt = dinamicDatabase.dinamicConn.createStatement();
+			Statement stmt = connection.createStatement();
 			stmt.execute("DELETE FROM quickslot WHERE charid="+player.getPlayerId()+";");
 			
 			Iterator<QuickSlotItem> qsIter = player.getQuickSlotBar().getQuickSlotIterator();
@@ -1360,7 +1390,7 @@ public class DatabaseUtils {
 			return false ;
 		Statement stmt;
 		try {
-			stmt  = dinamicDatabase.dinamicConn.createStatement();		
+			stmt  = connection.createStatement();		
 			return stmt.execute("DELETE FROM `quickslot` WHERE `itemid`="+item.getItemId()+";");
 			
 		}catch (Exception e) {
@@ -1376,8 +1406,8 @@ public class DatabaseUtils {
 		Statement itemStmt;
 		
 		try {
-			stmt = dinamicDatabase.dinamicConn.createStatement();
-			itemStmt = dinamicDatabase.dinamicConn.createStatement();
+			stmt = connection.createStatement();
+			itemStmt = connection.createStatement();
 			
 			ResultSet rs = itemStmt.executeQuery("SELECT * FROM equipment WHERE charid = "+charId+ ";");
 			if(rs.next()){
@@ -1402,8 +1432,8 @@ public class DatabaseUtils {
 		Statement itemStmt;
 		
 		try {
-			stmt = dinamicDatabase.dinamicConn.createStatement();
-			itemStmt = dinamicDatabase.dinamicConn.createStatement();
+			stmt = connection.createStatement();
+			itemStmt = connection.createStatement();
 			
 			ResultSet rs = itemStmt.executeQuery("SELECT * FROM exchange WHERE charid = "+charId+ ";");
 			if(rs.next()){
@@ -1428,8 +1458,8 @@ public class DatabaseUtils {
 		Statement itemStmt;
 		
 		try {
-			stmt = dinamicDatabase.dinamicConn.createStatement();
-			itemStmt = dinamicDatabase.dinamicConn.createStatement();
+			stmt = connection.createStatement();
+			itemStmt = connection.createStatement();
 			
 			ResultSet rs = itemStmt.executeQuery("SELECT * FROM inventory WHERE charid = "+charId+ ";");
 			if(rs.next()){
@@ -1454,8 +1484,8 @@ public class DatabaseUtils {
 		Statement itemStmt;
 		
 		try {
-			stmt = dinamicDatabase.dinamicConn.createStatement();
-			itemStmt = dinamicDatabase.dinamicConn.createStatement();
+			stmt = connection.createStatement();
+			itemStmt = connection.createStatement();
 			
 			ResultSet rs = itemStmt.executeQuery("SELECT * FROM quickslot WHERE charid = "+charId+ ";");
 			if(rs.next()){
@@ -1478,7 +1508,7 @@ public class DatabaseUtils {
 			return;
 		Statement stmt;
 		try {
-			stmt = dinamicDatabase.dinamicConn.createStatement();
+			stmt = connection.createStatement();
 			stmt
 			.execute("DELETE FROM skills WHERE charid = "+charId+ ";");
 			
@@ -1493,7 +1523,7 @@ public class DatabaseUtils {
 			return;
 		Statement stmt;
 		try {
-			stmt = dinamicDatabase.dinamicConn.createStatement();
+			stmt = connection.createStatement();
 			stmt
 			.execute("DELETE FROM characters WHERE id = "+charId+ ";");
 			
@@ -1509,7 +1539,7 @@ public class DatabaseUtils {
 		Statement stmt;
 		
 		try {
-			stmt = dinamicDatabase.dinamicConn.createStatement();
+			stmt = connection.createStatement();
 			
 			stmt.execute("DELETE FROM slots WHERE charid = "+ charId + ";");
 			
@@ -1527,7 +1557,7 @@ public class DatabaseUtils {
 		int charId = -1;
 		
 		try {
-			stmt = dinamicDatabase.dinamicConn.createStatement();
+			stmt = connection.createStatement();
 			
 			ResultSet rs = stmt.executeQuery("SELECT charid FROM slots WHERE slot = "
 					+ slotNumber
@@ -1554,7 +1584,7 @@ public class DatabaseUtils {
 		String charName = "";
 		
 		try {
-			stmt = dinamicDatabase.dinamicConn.createStatement();
+			stmt = connection.createStatement();
 			
 			ResultSet rs = stmt.executeQuery("SELECT * FROM characters WHERE id = "+ charId	+ ";");
 			
@@ -1578,7 +1608,7 @@ public class DatabaseUtils {
 		int guildId = 0;
 		
 		try {
-			stmt = dinamicDatabase.dinamicConn.createStatement();
+			stmt = connection.createStatement();
 			
 			boolean rs = stmt.execute("INSERT INTO guilds SET Name = '"+ name+ "';");
 			

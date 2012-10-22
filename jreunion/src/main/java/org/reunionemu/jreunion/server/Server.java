@@ -113,7 +113,6 @@ public class Server extends EventDispatcher implements ApplicationContextAware{
 		logger.info("Server stop");
 		
 		EventDispatcher.shutdown();
-		this.database.stop();
 	}
 
 	/**
@@ -163,17 +162,7 @@ public class Server extends EventDispatcher implements ApplicationContextAware{
 	@Autowired
 	private World world;
 
-	@Autowired
-	private Database database;
-
 	private Server() {
-	}
-
-	/**
-	 * @return Returns the databaseModule.
-	 */
-	public Database getDatabase() {
-		return database;
 	}
 
 	/**
@@ -195,14 +184,6 @@ public class Server extends EventDispatcher implements ApplicationContextAware{
 	 */
 	public World getWorld() {
 		return world;
-	}
-
-	/**
-	 * @param databaseModule
-	 *            The databaseModule to set.
-	 */
-	public void setDatabaseModule(Database databaseModule) {
-		this.database = databaseModule;
 	}
 	
 	public static enum State{
