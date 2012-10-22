@@ -85,7 +85,14 @@ public class Warehouse extends NpcType {
 		int itemTypeId = packetData[index++];
 		int invTab = packetData[index++];
 		int stashTab = packetData[index++];
-		StashPosition stashPosition = new StashPosition(player.getStash().getItemSlot(stashTab, itemTypeId));
+		int position = player.getStash().getItemSlot(stashTab, itemTypeId);
+		
+		if(position == -1){
+			player.getClient().sendPacket(Type.SAY, "No free slots available on this Tab.");
+			return;
+		}
+		
+		StashPosition stashPosition = new StashPosition(position);
 		StashItem stashItem = null;
 		
 		while(index < packetData.length -1){
