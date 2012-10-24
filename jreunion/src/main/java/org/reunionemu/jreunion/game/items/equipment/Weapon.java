@@ -6,6 +6,7 @@ import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.PlayerItem;
 import org.reunionemu.jreunion.server.Reference;
 import org.reunionemu.jreunion.server.Server;
+import org.reunionemu.jreunion.server.ServerSettings;
 import org.reunionemu.jreunion.server.World;
 
 /**
@@ -243,8 +244,11 @@ public abstract class Weapon extends PlayerItem {
 	}
 	
 	public float getCritical(){
-		return (float)Server.getRand().nextFloat() < World.serverSetings.getCriticalChance() ?
-				World.serverSetings.getCriticalMultiplier() : 0;
+		
+		ServerSettings settings =Server.getInstance().getWorld().getServerSettings();
+		
+		return (float)Server.getRand().nextFloat() < settings.getCriticalChance() ?
+				settings.getCriticalMultiplier() : 0;
 	}
 
 }

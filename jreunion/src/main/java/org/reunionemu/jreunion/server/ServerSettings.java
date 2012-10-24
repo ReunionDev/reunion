@@ -7,7 +7,7 @@ import org.reunionemu.jcommon.ParsedItem;
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-public class ServerSetings {
+public class ServerSettings {
 
 	private long xp;
 
@@ -65,7 +65,11 @@ public class ServerSetings {
 	
 	private long warehouseLimeLimit; //Maximum lime allowed on warehouse
 	
-	public ServerSetings() {
+	private boolean preloadMaps;
+	
+	
+
+	public ServerSettings() {
 		loadFromReference();
 	}
 
@@ -313,6 +317,13 @@ public class ServerSetings {
 				// use default
 				setWarehouseLimeLimit(10000000000l);
 			}
+			if (server.checkMembers(new String[] { "PreloadMaps" })) {
+				// use member from file
+				setPreloadMaps(Boolean.parseBoolean(server.getMemberValue("PreloadMaps")));
+			} else {
+				// use default
+				setPreloadMaps(true);
+			}
 		}
 	}
 
@@ -398,6 +409,13 @@ public class ServerSetings {
 	
 	public float getCriticalMultiplier() {
 		return criticalMultiplier;
+	}
+	public boolean doPreloadMaps() {
+		return preloadMaps;
+	}
+
+	public void setPreloadMaps(boolean preloadMaps) {
+		this.preloadMaps = preloadMaps;
 	}
 
 	public void setCriticalMultiplier(float criticalMultiplier) {

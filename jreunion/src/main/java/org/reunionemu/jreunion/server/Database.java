@@ -397,7 +397,7 @@ public class Database {
 			//used when player creates a new char
 			if(player.getPosition().getMap() == null){ 
 				//TODO: better way to handle with the player default map, after char creation
-				int mapId = (int)player.getClient().getWorld().getServerSetings().getDefaultMapId();
+				int mapId = (int)player.getClient().getWorld().getServerSettings().getDefaultMapId();
 				Map map = player.getClient().getWorld().getMap(mapId);
 				Position position = new Position(7025,5225,106,map,Double.NaN);
 				player.setPosition(position);
@@ -652,7 +652,7 @@ public class Database {
 			player.setElectricity(player.getMaxElectricity());			
 			player.setStamina(player.getMaxStamina());
 			
-			player.setLime((int)client.getWorld().getServerSetings().getStartLime());
+			player.setLime((int)client.getWorld().getServerSettings().getStartLime());
 			
 			client.setPlayer(player);
 		

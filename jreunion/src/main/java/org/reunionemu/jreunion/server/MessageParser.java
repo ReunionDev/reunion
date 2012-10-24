@@ -475,19 +475,19 @@ public class MessageParser {
 			{
 				if(words[1].equals("exp"))
 				{
-					if(Server.getInstance().getWorld().getServerSetings().getXp() < Long.parseLong(words[2]))
+					if(Server.getInstance().getWorld().getServerSettings().getXp() < Long.parseLong(words[2]))
 						Server.getInstance().getWorld().sendPacket(Type.INFO, "EXP Event (x"+words[2]+") started!");
-					else if(Server.getInstance().getWorld().getServerSetings().getXp() > Long.parseLong(words[2]))
+					else if(Server.getInstance().getWorld().getServerSettings().getXp() > Long.parseLong(words[2]))
 						Server.getInstance().getWorld().sendPacket(Type.INFO, "EXP Event has ended!");
-					Server.getInstance().getWorld().getServerSetings().setXp(Long.parseLong(words[2]));
+					Server.getInstance().getWorld().getServerSettings().setXp(Long.parseLong(words[2]));
 				}
 				else if(words[1].equals("lime"))
 				{
-					if(Server.getInstance().getWorld().getServerSetings().getLime() < Long.parseLong(words[2]))
+					if(Server.getInstance().getWorld().getServerSettings().getLime() < Long.parseLong(words[2]))
 						Server.getInstance().getWorld().sendPacket(Type.INFO, "Lime Event (x"+words[2]+") started!");
-					else if(Server.getInstance().getWorld().getServerSetings().getLime() > Long.parseLong(words[2]))
+					else if(Server.getInstance().getWorld().getServerSettings().getLime() > Long.parseLong(words[2]))
 						Server.getInstance().getWorld().sendPacket(Type.INFO, "Lime Event has ended!");
-					Server.getInstance().getWorld().getServerSetings().setLime(Long.parseLong(words[2]));
+					Server.getInstance().getWorld().getServerSettings().setLime(Long.parseLong(words[2]));
 					
 				}
 			}
@@ -892,9 +892,9 @@ public class MessageParser {
 		} else if (words[0].equals("@mobs_movement") && player.getAdminState() >= 250) {
 			if(words.length == 2){
 				if(words[1].equals("enable") || words[1].equals("1")){
-					Server.getInstance().getWorld().getServerSetings().setMobsMovement(1);
+					Server.getInstance().getWorld().getServerSettings().setMobsMovement(1);
 				} else if(words[1].equals("disable") || words[1].equals("0")){
-					Server.getInstance().getWorld().getServerSetings().setMobsMovement(0);
+					Server.getInstance().getWorld().getServerSettings().setMobsMovement(0);
 				} else if(words[1].equals("restart") || words[1].equals("2")){
 					player.getPosition().getLocalMap().stopMobsAI();
 					player.getPosition().getLocalMap().startMobsAI(1000);

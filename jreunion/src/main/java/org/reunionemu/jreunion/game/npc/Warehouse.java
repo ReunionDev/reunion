@@ -179,7 +179,7 @@ public class Warehouse extends NpcType {
 			limeItem = stashItem.getItem();
 		} 
 		
-		long limeLimit = Server.getInstance().getWorld().getServerSetings().getWarehouseLimeLimit();
+		long limeLimit = Server.getInstance().getWorld().getServerSettings().getWarehouseLimeLimit();
 		
 		//check if warehouse lime limit is reached.
 		if((limeItem.getGemNumber() + limeAmount) > limeLimit){

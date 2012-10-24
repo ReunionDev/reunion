@@ -483,7 +483,7 @@ public class Pet extends LivingObject {
 	}
 	
 	public int getDefaultBreedTime(){
-		return Server.getInstance().getWorld().getServerSetings().getPetBreedTime();
+		return Server.getInstance().getWorld().getServerSettings().getPetBreedTime();
 	}
 
 	public boolean isBreeding() {

@@ -80,7 +80,7 @@ public class RoamingItem extends WorldObject{
 	}
 	
 	public void startDeleteTimer(boolean randomTime){
-		long dropTimeOut = getPosition().getLocalMap().getWorld().getServerSetings().getDropTimeOut();
+		long dropTimeOut = getPosition().getLocalMap().getWorld().getServerSettings().getDropTimeOut();
 		long extraTime = 0;
 		
 		if(randomTime){
@@ -104,7 +104,7 @@ public class RoamingItem extends WorldObject{
 	
 	public void setDropExclusivity(Player player){
 		java.util.Timer dropExclusivityTimer = new java.util.Timer();
-		long dropExclusivity = player.getClient().getWorld().getServerSetings().getDropExclusivity();
+		long dropExclusivity = player.getClient().getWorld().getServerSettings().getDropExclusivity();
 		dropExclusivityTimer.schedule(new TimerTask() {
 			@Override
 			public void run() {

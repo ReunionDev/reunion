@@ -1041,7 +1041,7 @@ public abstract class Player extends LivingObject implements EventListener {
 
 	public void setLime(long lime) {
 		//check if player inventory lime limit is reached.
-		long limeLimit = Server.getInstance().getWorld().getServerSetings().getInventoryLimeLimit();
+		long limeLimit = Server.getInstance().getWorld().getServerSettings().getInventoryLimeLimit();
 		if(lime > limeLimit){
 			long limeOverLimit = lime - limeLimit;
 			lime = limeLimit;
@@ -1058,7 +1058,7 @@ public abstract class Player extends LivingObject implements EventListener {
 
 	public void setLevelUpExp(long lvlUpExp) {
 		//synchronized(this) {
-		int maxLevel = Server.getInstance().getWorld().getServerSetings().getPlayerMaxLevel();
+		int maxLevel = Server.getInstance().getWorld().getServerSettings().getPlayerMaxLevel();
 
 		boolean hasMaxLevel = ((maxLevel != 0) ? true : false);
 
@@ -1453,7 +1453,7 @@ public abstract class Player extends LivingObject implements EventListener {
 	 */
 	public int getSessionRadius() {
 		if(Player.sessionRadius==null){
-			setSessionRadius((int)getClient().getWorld().getServerSetings().getSessionRadius());
+			setSessionRadius((int)getClient().getWorld().getServerSettings().getSessionRadius());
 		}
 		return Player.sessionRadius;
 	}

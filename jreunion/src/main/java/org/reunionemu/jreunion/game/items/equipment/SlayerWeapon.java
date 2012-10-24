@@ -81,7 +81,7 @@ public class SlayerWeapon extends SpecialWeapon implements Usable {
 	
 	public float getDemolition() {
 		return Server.getRand().nextFloat() <= this.getDemolitionDmg() ? 
-				Server.getInstance().getWorld().getServerSetings().getDemolitionModifier() : 1;
+				Server.getInstance().getWorld().getServerSettings().getDemolitionModifier() : 1;
 	}
 
 	public void setDemolitionDmg(float demolitionDmg) {

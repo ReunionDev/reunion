@@ -286,7 +286,7 @@ public class LocalMap extends Map implements Runnable{
 	}
 
 	public void load() {
-				
+		loaded.set(true);		
 		playerSpawnReference = new Parser();
 		mobSpawnReference = new Parser();
 		npcSpawnReference = new Parser();
@@ -471,8 +471,6 @@ public class LocalMap extends Map implements Runnable{
 		}
 		return results;
 	}
-	
-	private Object loaderSyncRoot = new Object();
 	
 	@Override
 	public void handleEvent(Event event) {
