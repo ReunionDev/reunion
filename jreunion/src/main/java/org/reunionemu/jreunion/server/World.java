@@ -57,6 +57,9 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 	private Hashtable<SocketChannel, Client> clients = new Hashtable<SocketChannel, Client>();
 
 	private int serverHour;
+	
+	@Autowired
+	Network network;
 
 	private SkillManager skillManager;
 		
@@ -154,11 +157,12 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 			Map map = null;
 			if(isLocal){
 				map = new LocalMap(this, mapId);
+				((LocalMap)map).register(network);
 			}
 			else {
-				map = new RemoteMap(mapId);				
+				map = new RemoteMap(mapId);
 			}
-			map.load();
+			
 			maps.put(mapId, map);
 		}
 		
