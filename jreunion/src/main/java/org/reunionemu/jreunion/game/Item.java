@@ -7,7 +7,6 @@ import java.util.concurrent.TimeUnit;
 
 import org.reunionemu.jreunion.dao.ItemDao;
 import org.reunionemu.jreunion.game.Equipment.Slot;
-import org.reunionemu.jreunion.server.Database;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
 import org.reunionemu.jreunion.server.Server;
 import org.slf4j.LoggerFactory;
@@ -174,7 +173,7 @@ public abstract class Item<T extends ItemType> implements Entity{
 			}
 
 			setGemNumber(getGemNumber()+uppamount);
-			itemDao.save(this);
+			this.save();
 			itemDao.delete(player.getInventory().getHoldingItem().getItem());
 			//DatabaseUtils.getDinamicInstance().saveItem(this);
 			//DatabaseUtils.getDinamicInstance().deleteItem(player.getInventory().getHoldingItem().getItem().getItemId());
@@ -194,7 +193,7 @@ public abstract class Item<T extends ItemType> implements Entity{
 			//DatabaseUtils.getDinamicInstance().deleteItem(holdingItem.getItemId());
 			player.getInventory().setHoldingItem(null);
 			player.save();
-			itemDao.save(this);
+			this.save();
 			//DatabaseUtils.getDinamicInstance().saveItem(this);
 			player.getClient().sendPacket(Type.UPDATE_ITEM, this, 1);
 		}
@@ -253,5 +252,10 @@ public abstract class Item<T extends ItemType> implements Entity{
 	public abstract double getDurabilityValue();
 
 	public abstract void setDurabilityValue(double durability);
+
+	public void save() {
+		itemDao.save(this);
+		
+	}
 	
 }

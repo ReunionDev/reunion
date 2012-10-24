@@ -21,6 +21,7 @@ import org.reunionemu.jreunion.server.Database;
 import org.reunionemu.jreunion.server.ItemManager;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
 
+
 public abstract class QuestState {	
 		
 	private Quest quest;
@@ -135,9 +136,7 @@ public abstract class QuestState {
 					
 					InventoryItem inventoryItem = player.getInventory().storeItem(item, -1);
 					
-					player.getPosition().getLocalMap().createEntityId(item);
-					
-					Database.getDinamicInstance().saveItem(item);
+					player.getPosition().getLocalMap().createEntityId(item);					
 	
 					client.sendPacket(Type.PICKUP, player);
 					client.sendPacket(Type.PICK, inventoryItem);	

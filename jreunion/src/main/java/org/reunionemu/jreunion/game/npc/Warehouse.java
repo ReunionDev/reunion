@@ -1,36 +1,31 @@
 package org.reunionemu.jreunion.game.npc;
 
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Vector;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import org.reunionemu.jreunion.dao.ItemDao;
 import org.reunionemu.jreunion.game.HandPosition;
 import org.reunionemu.jreunion.game.InventoryItem;
 import org.reunionemu.jreunion.game.InventoryPosition;
 import org.reunionemu.jreunion.game.Item;
-import org.reunionemu.jreunion.game.ItemType;
 import org.reunionemu.jreunion.game.NpcType;
 import org.reunionemu.jreunion.game.Player;
-import org.reunionemu.jreunion.game.Skill;
 import org.reunionemu.jreunion.game.StashItem;
 import org.reunionemu.jreunion.game.StashPosition;
-import org.reunionemu.jreunion.game.items.etc.Lime;
 import org.reunionemu.jreunion.server.Client;
-import org.reunionemu.jreunion.server.Database;
-import org.reunionemu.jreunion.server.Server;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
+import org.reunionemu.jreunion.server.Server;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
 public class Warehouse extends NpcType {
-	
+		
 	public Warehouse(int id) {
 		super(id);
 		//loadFromReference(id);
@@ -188,7 +183,7 @@ public class Warehouse extends NpcType {
 		//}
 		
 		limeItem.setGemNumber((limeItem.getGemNumber()) + limeAmount);		
-		Database.getDinamicInstance().saveItem(limeItem);
+		limeItem.save();
 		player.getClient().sendPacket(Type.STASH_TO, stashItem, player.getStash().getQuantity(pos));
 
 		return true;
@@ -219,7 +214,7 @@ public class Warehouse extends NpcType {
 		//}
 				
 		player.setLime(player.getLime() - limeAmmount);
-		Database.getDinamicInstance().saveItem(limeItem);
+		limeItem.save();
 		player.getClient().sendPacket(Type.STASH_FROM, stashItem, player.getStash().getQuantity(pos));
 
 		return true;

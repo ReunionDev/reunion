@@ -5,7 +5,6 @@ import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.LivingObject;
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.model.Quest;
-import org.reunionemu.jreunion.server.Database;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
@@ -13,7 +12,6 @@ import org.springframework.beans.factory.annotation.Configurable;
 @Configurable
 public class AmplifiedMissionReceiver extends MissionReceiver{
 
-	
 	@Autowired 
 	private QuestDao questDao; 
 	
@@ -58,7 +56,7 @@ public class AmplifiedMissionReceiver extends MissionReceiver{
 			} 
 			
 			item.setExtraStats(item.getExtraStats()-1);
-			Database.getDinamicInstance().saveItem(item);
+			item.save();
 			player.setQuest(quest);
 			
 			return true;

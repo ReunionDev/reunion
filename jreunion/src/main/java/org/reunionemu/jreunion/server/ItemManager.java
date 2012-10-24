@@ -7,11 +7,11 @@ import javax.annotation.PostConstruct;
 
 import org.reunionemu.jcommon.ParsedItem;
 import org.reunionemu.jcommon.Parser;
+import org.reunionemu.jreunion.dao.ItemDao;
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.ItemType;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,7 +21,7 @@ public class ItemManager {
 	
 	@Autowired
 	Reference reference;
-	
+		
 	public ItemManager(){
 		
 	}
@@ -76,7 +76,7 @@ public class ItemManager {
 				
 		Item<?> item = itemType.create();
 		
-		Database.getDinamicInstance().saveItem(item);
+		item.save();
 		
 		return item;
 	}

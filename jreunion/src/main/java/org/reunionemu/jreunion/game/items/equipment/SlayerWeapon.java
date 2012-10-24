@@ -115,7 +115,7 @@ public class SlayerWeapon extends SpecialWeapon implements Usable {
 				return false;
 			}
 			slayerWeapon.setExtraStats(usesRemain);
-			Database.getDinamicInstance().saveItem(slayerWeapon);
+			slayerWeapon.save();
 			
 			//update player stamina
 			long staminaRemain = player.getStamina() - getStmUsed();

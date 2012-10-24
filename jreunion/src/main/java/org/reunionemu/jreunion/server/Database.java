@@ -21,7 +21,6 @@ import org.reunionemu.jreunion.game.HandPosition;
 import org.reunionemu.jreunion.game.InventoryItem;
 import org.reunionemu.jreunion.game.InventoryPosition;
 import org.reunionemu.jreunion.game.Item;
-import org.reunionemu.jreunion.game.ItemType;
 import org.reunionemu.jreunion.game.Pet;
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.Player.Race;
@@ -35,7 +34,6 @@ import org.reunionemu.jreunion.game.StashItem;
 import org.reunionemu.jreunion.game.StashPosition;
 import org.reunionemu.jreunion.game.items.pet.PetEquipment;
 import org.reunionemu.jreunion.game.items.pet.PetEquipment.PetSlot;
-import org.reunionemu.jreunion.model.jpa.ItemImpl;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -807,7 +805,7 @@ public class Database {
 			{
 				InventoryItem invItem = iter.next();
 				Item<?> item = invItem.getItem();
-				saveItem(item);
+				item.save();
 				
 				data += "("+player.getPlayerId()+ ","+item.getItemId()+","+invItem.getPosition().getTab()+
 					","+invItem.getPosition().getPosX()+ ","+invItem.getPosition().getPosY()+ ")";			
@@ -830,67 +828,6 @@ public class Database {
 			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			return;
 		}
-	}
-	public List<Integer> getUsedIds()
-	{
-		List<Integer> idList = new Vector<Integer>();
-		if (!checkDinamicDatabase())
-		{
-			
-			return idList;
-			
-		}
-		Statement stmt;
-		try {
-			stmt  = connection.createStatement();
-			
-			ResultSet rs = stmt.executeQuery("SELECT id FROM characters WHERE 1;");
-			
-			while (rs.next())
-			{
-				idList.add(rs.getInt("id"));	
-				
-			}
-			
-			rs = stmt.executeQuery("SELECT id FROM items WHERE 1;");
-			
-			while (rs.next())
-			{
-				
-				idList.add(rs.getInt("id"));	
-			}
-				
-		} catch (SQLException e) 
-		{
-			
-			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
-			return idList;
-		}
-		return idList;
-	}
-	public int getItemType(int uniqueid)
-	{
-		if (!checkDinamicDatabase())return -1;
-				
-		Statement stmt;
-		try {
-			stmt  = connection.createStatement();
-			
-			ResultSet rs = stmt.executeQuery("SELECT type FROM items WHERE id='"+uniqueid+"';");
-			
-			if (rs.next())
-			{
-				return rs.getInt("type");
-			}
-			
-		} 
-		catch (SQLException e) 
-		{
-			
-			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
-			
-		}
-		return -1;
 	}
 		
 	public boolean deleteRoamingItem(Item<?> item){
@@ -946,9 +883,8 @@ public class Database {
 			return ;
 		Item<?> item = roamingItem.getItem();
 		Position position = roamingItem.getPosition();
-		
-		saveItem(item);
-		
+		item.save();
+
 		long itemId = item.getItemId();
 		Statement stmt;
 		try {
@@ -970,6 +906,7 @@ public class Database {
 			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 		}
 	}
+	/*
 	public synchronized void saveItem(Item<?> item){
 		if (!checkDinamicDatabase())
 			return ;
@@ -1014,7 +951,7 @@ public class Database {
 			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 		}
 		
-	}
+	}*/
 	
 	public void deleteItem(long itemId)
 	{

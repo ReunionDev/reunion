@@ -9,7 +9,6 @@ import org.reunionemu.jreunion.game.QuickSlotPosition;
 import org.reunionemu.jreunion.game.Usable;
 import org.reunionemu.jreunion.model.Quest;
 import org.reunionemu.jreunion.server.Client;
-import org.reunionemu.jreunion.server.Database;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +19,7 @@ public class MissionReceiver extends Etc implements Usable{
 	
 	@Autowired 
 	private QuestDao questDao; 
-	
+		
 	public MissionReceiver(int id) {
 		super(id);
 		
@@ -65,7 +64,7 @@ public class MissionReceiver extends Etc implements Usable{
 			} 
 			
 			item.setExtraStats(item.getExtraStats()-1);
-			Database.getDinamicInstance().saveItem(item);
+			item.save();
 			player.setQuest(quest);
 			
 			
