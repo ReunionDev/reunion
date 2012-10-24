@@ -600,7 +600,7 @@ public class Npc<T extends NpcType> extends LivingObject {
 		List<Skill> defensiveSkills = player.getDefensiveSkills();
 		int npcDmg = getDamage((int) player.getDef());
 		npcDmg = (isBoss() ? npcDmg*2 : npcDmg); //check if npc is boss.
-		npcDmg = (npcDmg < 1) ? 1 : npcDmg; //make sure the npc will have a minimum damage value.
+		//npcDmg = (npcDmg < 1) ? 1 : npcDmg; //make sure the npc will have a minimum damage value.
  	
 		if (defensiveSkills.size() == 0) {
 			player.setHp(player.getHp() - npcDmg);
@@ -627,8 +627,8 @@ public class Npc<T extends NpcType> extends LivingObject {
 		}
 		Mob mob = (Mob)this.getType();
 		float mobMutantModifier = isMutant() ? Server.getInstance().getWorld().getServerSetings().getMobMutantModifier()+1 : 1;
-			
-		return (int) ((mob.getDmg()*mobMutantModifier) - (playerDef/2 + ((playerDef/2)*Server.getRand().nextFloat())));
+		int damage = (int)((mob.getDmg()*mobMutantModifier) - (playerDef/2 + ((playerDef/2)*Server.getRand().nextFloat())));
+		return damage < 1 ? 1 : damage; 
 	}
 	
 	public void work() {
