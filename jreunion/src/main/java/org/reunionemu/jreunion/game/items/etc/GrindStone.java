@@ -8,7 +8,7 @@ import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.Usable;
 import org.reunionemu.jreunion.game.Equipment.Slot;
 import org.reunionemu.jreunion.game.items.equipment.ChakuranWeapon;
-import org.reunionemu.jreunion.server.DatabaseUtils;
+import org.reunionemu.jreunion.server.Database;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
 
 
@@ -36,7 +36,7 @@ public class GrindStone extends WhetStone implements Usable{
 				usesRemain = (int)slayerWeapon.getType().getMaxExtraStats();
 			}
 			slayerWeapon.setExtraStats(usesRemain);
-			DatabaseUtils.getDinamicInstance().saveItem(slayerWeapon);
+			Database.getDinamicInstance().saveItem(slayerWeapon);
 			
 			if(player.getClient().getVersion() < 2000){
 				player.getClient().sendPacket(Type.USQ, "remain", quickSlotPosition, Slot.SHOULDER.value(), slayerWeapon);

@@ -13,7 +13,7 @@ import org.reunionemu.jreunion.game.Equipment.Slot;
 import org.reunionemu.jreunion.game.Player.Race;
 import org.reunionemu.jreunion.game.Player.Status;
 import org.reunionemu.jreunion.game.items.pet.PetEquipment;
-import org.reunionemu.jreunion.server.DatabaseUtils;
+import org.reunionemu.jreunion.server.Database;
 import org.reunionemu.jreunion.server.Server;
 import org.reunionemu.jreunion.server.Session;
 import org.reunionemu.jreunion.server.Tools;
@@ -416,7 +416,7 @@ public class Pet extends LivingObject {
 		getOwner().getInterested().sendPacket(Type.CHAR_REMOVE, getOwner(), Slot.SHOULDER);
 		getOwner().getEquipment().setShoulderMount(null);
 		getOwner().getPosition().getLocalMap().removeEntity(egg);
-		DatabaseUtils.getDinamicInstance().deleteItem(egg.getItemId());
+		Database.getDinamicInstance().deleteItem(egg.getItemId());
 		setEquipment(new PetEquipment(getOwner()));
 		load();
 		getOwner().save();

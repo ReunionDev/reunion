@@ -21,7 +21,7 @@ import org.reunionemu.jreunion.game.StashItem;
 import org.reunionemu.jreunion.game.StashPosition;
 import org.reunionemu.jreunion.game.items.etc.Lime;
 import org.reunionemu.jreunion.server.Client;
-import org.reunionemu.jreunion.server.DatabaseUtils;
+import org.reunionemu.jreunion.server.Database;
 import org.reunionemu.jreunion.server.Server;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
 
@@ -188,7 +188,7 @@ public class Warehouse extends NpcType {
 		//}
 		
 		limeItem.setGemNumber((limeItem.getGemNumber()) + limeAmount);		
-		DatabaseUtils.getDinamicInstance().saveItem(limeItem);
+		Database.getDinamicInstance().saveItem(limeItem);
 		player.getClient().sendPacket(Type.STASH_TO, stashItem, player.getStash().getQuantity(pos));
 
 		return true;
@@ -219,7 +219,7 @@ public class Warehouse extends NpcType {
 		//}
 				
 		player.setLime(player.getLime() - limeAmmount);
-		DatabaseUtils.getDinamicInstance().saveItem(limeItem);
+		Database.getDinamicInstance().saveItem(limeItem);
 		player.getClient().sendPacket(Type.STASH_FROM, stashItem, player.getStash().getQuantity(pos));
 
 		return true;

@@ -222,7 +222,7 @@ public class MessageParser {
 				{
 					String name = (String)words[2];
 					
-					int guildId = DatabaseUtils.getDinamicInstance().addGuild(name);
+					int guildId = Database.getDinamicInstance().addGuild(name);
 					if(guildId != 0)
 					{
 						player.setGuildId(guildId);
@@ -242,7 +242,7 @@ public class MessageParser {
 				{
 					String name = (String)words[2];
 					
-					int guildId = DatabaseUtils.getDinamicInstance().addGuild(name);
+					int guildId = Database.getDinamicInstance().addGuild(name);
 					if(guildId != 0)
 					{
 						Player targetPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayer(words[3]);
@@ -327,7 +327,7 @@ public class MessageParser {
 			else if(words[1].equals("close")) {
 				if(player.getGuildId() != 0 && player.getGuildLvl() == 10)
 				{
-					DatabaseUtils.getDinamicInstance().deleteGuild((int)player.getGuildId());
+					Database.getDinamicInstance().deleteGuild((int)player.getGuildId());
 					
 					Iterator<Player> iterPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayerListIterator();
 					
@@ -660,7 +660,7 @@ public class MessageParser {
 					   } else {
 					       player.getClient().sendPacket(Type.SAY, "Inventory full. Please get some space available.");
 					       player.getPosition().getLocalMap().removeEntity(item);
-					       DatabaseUtils.getDinamicInstance().deleteItem(item.getItemId());
+					       Database.getDinamicInstance().deleteItem(item.getItemId());
 					       return null;
 					   }
 					} else {

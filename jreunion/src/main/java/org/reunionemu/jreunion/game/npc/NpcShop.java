@@ -17,7 +17,7 @@ import org.reunionemu.jreunion.game.NpcType;
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.VendorItem;
 import org.reunionemu.jreunion.server.Client;
-import org.reunionemu.jreunion.server.DatabaseUtils;
+import org.reunionemu.jreunion.server.Database;
 import org.reunionemu.jreunion.server.ItemManager;
 import org.reunionemu.jreunion.server.Reference;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
@@ -145,7 +145,7 @@ public class NpcShop {
 			Item<?> item = itemManager.create(itemTypeId);
 			
 			if (player.getInventory().freeSlots(tab, item) == false) {
-				DatabaseUtils.getDinamicInstance().deleteItem(item.getItemId());
+				Database.getDinamicInstance().deleteItem(item.getItemId());
 				return false;
 			}
 			
@@ -197,7 +197,7 @@ public class NpcShop {
 			}
 
 			player.getInventory().setHoldingItem(null);
-			DatabaseUtils.getDinamicInstance().deleteItem(item.getItemId());
+			Database.getDinamicInstance().deleteItem(item.getItemId());
 		}
 		else{
 			LoggerFactory.getLogger(Merchant.class).error("Sell failed, no item selected");			

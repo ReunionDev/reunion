@@ -4,7 +4,7 @@ import java.util.TimerTask;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.reunionemu.jreunion.server.DatabaseUtils;
+import org.reunionemu.jreunion.server.Database;
 import org.reunionemu.jreunion.server.LocalMap;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
 import org.reunionemu.jreunion.server.Session;
@@ -70,9 +70,9 @@ public class RoamingItem extends WorldObject{
 		SessionList<Session> list = map.GetSessions(getPosition());
 		
 		map.removeEntity(this);
-		DatabaseUtils.getDinamicInstance().deleteRoamingItem(getItem());
+		Database.getDinamicInstance().deleteRoamingItem(getItem());
 		map.removeEntity(this.getItem());
-		DatabaseUtils.getDinamicInstance().deleteItem(getItem().getItemId());
+		Database.getDinamicInstance().deleteItem(getItem().getItemId());
 		list.exit(this, true);
 		list.update();
 		//getInterested().sendPacket(Type.OUT, this);

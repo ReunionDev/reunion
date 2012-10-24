@@ -11,7 +11,7 @@ import org.reunionemu.jreunion.game.Usable;
 import org.reunionemu.jreunion.game.items.etc.ReinforcingAgent;
 import org.reunionemu.jreunion.game.skills.human.GemCutting;
 import org.reunionemu.jreunion.server.Client;
-import org.reunionemu.jreunion.server.DatabaseUtils;
+import org.reunionemu.jreunion.server.Database;
 import org.reunionemu.jreunion.server.ItemManager;
 import org.reunionemu.jreunion.server.Server;
 import org.reunionemu.jreunion.server.World;
@@ -97,7 +97,7 @@ public class GemStone extends ReinforcingAgent implements Usable {
 						1, item.getEntityId(), newItem.getEntityId());
 				
 				player.getPosition().getLocalMap().removeEntity(item);
-				DatabaseUtils.getDinamicInstance().deleteItem(item.getItemId());
+				Database.getDinamicInstance().deleteItem(item.getItemId());
 				return true;
 			}
 			else {

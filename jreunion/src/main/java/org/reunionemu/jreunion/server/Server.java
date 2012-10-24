@@ -26,26 +26,14 @@ import org.springframework.stereotype.Service;
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
+
 @DependsOn("database")
 //@Lazy(false)
 @Service
 public class Server extends EventDispatcher implements ApplicationContextAware{
 
 	private static Server _instance = null;
-	
-	@Configurable
-	public class Test{
 		
-		@Autowired
-		Reference reference;
-		
-		public boolean test(){
-			return reference!=null;
-		}
-		
-	}
-	
-	
 	private static ApplicationContext context;
 	
 	@Autowired 

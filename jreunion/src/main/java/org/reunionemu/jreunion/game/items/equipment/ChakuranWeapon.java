@@ -8,7 +8,7 @@ import org.reunionemu.jreunion.game.LivingObject;
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.Usable;
 import org.reunionemu.jreunion.game.items.SpecialWeapon;
-import org.reunionemu.jreunion.server.DatabaseUtils;
+import org.reunionemu.jreunion.server.Database;
 import org.reunionemu.jreunion.server.Reference;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
 
@@ -109,7 +109,7 @@ public class ChakuranWeapon extends SpecialWeapon implements Usable{
 				return false;
 			}
 			chakuranWeapon.setExtraStats(usesRemain);
-			DatabaseUtils.getDinamicInstance().saveItem(chakuranWeapon);
+			Database.getDinamicInstance().saveItem(chakuranWeapon);
 			
 			//update player stamina
 			long staminaRemain = player.getStamina() - getStmUsed();

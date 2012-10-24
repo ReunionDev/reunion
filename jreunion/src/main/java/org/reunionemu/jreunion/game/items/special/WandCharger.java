@@ -9,7 +9,7 @@ import org.reunionemu.jreunion.game.Usable;
 import org.reunionemu.jreunion.game.Equipment.Slot;
 import org.reunionemu.jreunion.game.items.equipment.ChakuranWeapon;
 import org.reunionemu.jreunion.game.items.equipment.WandWeapon;
-import org.reunionemu.jreunion.server.DatabaseUtils;
+import org.reunionemu.jreunion.server.Database;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
 
 
@@ -38,7 +38,7 @@ public class WandCharger extends ScrollAndSpellBook implements Usable{
 				}
 			}
 			wandWeapon.setGemNumber(wandWeapon.getType().getMaxGemNumber());
-			DatabaseUtils.getDinamicInstance().saveItem(wandWeapon);
+			Database.getDinamicInstance().saveItem(wandWeapon);
 			
 			if(player.getClient().getVersion() < 2000){
 				player.getClient().sendPacket(Type.USQ,"remain",quickSlotPosition,Slot.OFFHAND.value(),wandWeapon);

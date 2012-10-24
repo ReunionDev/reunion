@@ -12,7 +12,7 @@ import org.reunionemu.jreunion.game.NpcType;
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.items.equipment.Armor;
 import org.reunionemu.jreunion.server.Client;
-import org.reunionemu.jreunion.server.DatabaseUtils;
+import org.reunionemu.jreunion.server.Database;
 import org.reunionemu.jreunion.server.ItemManager;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
 
@@ -46,7 +46,7 @@ public class Trader extends NpcType {
 		while (exchangeIter.hasNext()) {
 			ExchangeItem exchangeItem = exchangeIter.next();
 			Item<?> item = exchangeItem.getItem();
-			DatabaseUtils.getDinamicInstance().deleteItem(item.getItemId());
+			Database.getDinamicInstance().deleteItem(item.getItemId());
 			player.getPosition().getLocalMap().removeEntity(item);
 		}
 
@@ -135,7 +135,7 @@ public class Trader extends NpcType {
 
 			}
 			client.sendPacket(Type.ICHANGE, oldItem, newItem);
-			DatabaseUtils.getDinamicInstance().deleteItem(oldItem.getItemId());
+			Database.getDinamicInstance().deleteItem(oldItem.getItemId());
 			player.getPosition().getLocalMap().removeEntity(oldItem);
 		}
 	}

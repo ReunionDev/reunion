@@ -76,7 +76,7 @@ public class ItemManager {
 				
 		Item<?> item = itemType.create();
 		
-		DatabaseUtils.getDinamicInstance().saveItem(item);
+		Database.getDinamicInstance().saveItem(item);
 		
 		return item;
 	}

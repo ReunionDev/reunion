@@ -41,7 +41,6 @@ import org.springframework.stereotype.Service;
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-@DependsOn("database")
 @Service
 public class World extends EventDispatcher implements EventListener, Sendable {
 	

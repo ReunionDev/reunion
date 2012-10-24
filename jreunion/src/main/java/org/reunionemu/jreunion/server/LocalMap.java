@@ -293,7 +293,7 @@ public class LocalMap extends Map implements Runnable{
 		
 		synchronized(entities){
 		
-			roamingItemList = DatabaseUtils.getDinamicInstance().loadRoamingItems(this);
+			roamingItemList = Database.getDinamicInstance().loadRoamingItems(this);
 			for(RoamingItem roamingItem : roamingItemList){
 				//TODO: A better way to manage items going in and out of the map
 				int itemEntityId = createEntityId(roamingItem);
@@ -521,7 +521,7 @@ public class LocalMap extends Map implements Runnable{
 					addRoamingItem(roamingItem);
 				}
 				list.enter(roamingItem, false);	
-				DatabaseUtils.getDinamicInstance().saveRoamingItem(roamingItem);
+				Database.getDinamicInstance().saveRoamingItem(roamingItem);
 				list.sendPacket(Type.DROP, roamingItem); 
 				
 			} else
@@ -543,7 +543,7 @@ public class LocalMap extends Map implements Runnable{
 				player.getClient().sendPacket(Type.PICKUP, player);
 				otherPlayersList.sendPacket(Type.PICKUP, player);
 				otherPlayersList.exit(roamingItem, true); //sent to other clients
-				DatabaseUtils.getDinamicInstance().deleteRoamingItem(item);
+				Database.getDinamicInstance().deleteRoamingItem(item);
 				
 			} else	
 			if(event instanceof PlayerLoginEvent){

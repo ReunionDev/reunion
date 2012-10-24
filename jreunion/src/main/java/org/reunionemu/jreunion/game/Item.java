@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.reunionemu.jreunion.dao.ItemDao;
 import org.reunionemu.jreunion.game.Equipment.Slot;
-import org.reunionemu.jreunion.server.DatabaseUtils;
+import org.reunionemu.jreunion.server.Database;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
 import org.reunionemu.jreunion.server.Server;
 import org.slf4j.LoggerFactory;

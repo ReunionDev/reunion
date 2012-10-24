@@ -6,7 +6,7 @@ import java.util.Vector;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.reunionemu.jreunion.server.DatabaseUtils;
+import org.reunionemu.jreunion.server.Database;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
 
 /**
@@ -122,8 +122,8 @@ public class QuickSlotBar {
 		LoggerFactory.getLogger(QuickSlotBar.class).info(player.getName()+" used item: " +item.getType().getName());
 		
 		removeItem(qsItem);
-		DatabaseUtils.getDinamicInstance().deleteQuickSlotItem(item);
-		DatabaseUtils.getDinamicInstance().deleteItem(item.getItemId());
+		Database.getDinamicInstance().deleteQuickSlotItem(item);
+		Database.getDinamicInstance().deleteItem(item.getItemId());
 		
 	}
 	
@@ -146,8 +146,8 @@ public class QuickSlotBar {
 		
 		if ( !(itemtype >= 215 && itemtype <= 221) && !(itemtype == 1067)) {
 			removeItem(qsItem);
-			DatabaseUtils.getDinamicInstance().deleteQuickSlotItem(item);
-			DatabaseUtils.getDinamicInstance().deleteItem(item.getItemId());
+			Database.getDinamicInstance().deleteQuickSlotItem(item);
+			Database.getDinamicInstance().deleteItem(item.getItemId());
 		} 		
 		
 	}
