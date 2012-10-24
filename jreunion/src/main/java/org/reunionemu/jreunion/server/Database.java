@@ -13,6 +13,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.sql.DataSource;
 
+import org.reunionemu.jreunion.dao.ItemDao;
 import org.reunionemu.jreunion.game.Equipment;
 import org.reunionemu.jreunion.game.Equipment.Slot;
 import org.reunionemu.jreunion.game.ExchangeItem;
@@ -37,7 +38,6 @@ import org.reunionemu.jreunion.game.items.pet.PetEquipment.PetSlot;
 import org.reunionemu.jreunion.model.jpa.ItemImpl;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Service;
 
 
@@ -52,7 +52,9 @@ public class Database {
 	DataSource datasource;
 	
 	public Connection connection = null; //reunion database
-
+		
+	@Autowired
+	ItemDao<Item<?>> itemDao;
 	
 	private Database() {
 		_dinamicInstance = this;
@@ -241,7 +243,7 @@ public class Database {
 			{
 				int slotId = rs.getInt("slot");
 				
-				Item<?> item = loadItem(rs.getInt("itemid"));
+				Item<?> item = itemDao.findOne((long)rs.getInt("itemid"));
 				
 				Slot slot = Slot.byValue(slotId);
 				equipment.setItem(slot, item);
@@ -274,7 +276,7 @@ public class Database {
 			{
 				int slotId = rs.getInt("slot");
 				
-				Item<?> item = loadItem(rs.getInt("itemid"));
+				Item<?> item = itemDao.findOne((long)rs.getInt("itemid"));
 				
 				PetSlot petSlot = PetSlot.byValue(slotId);
 				equipment.setItem(petSlot, item);
@@ -460,10 +462,10 @@ public class Database {
 				pet.setDistantAttack(rs.getInt("distantAttack"));
 				pet.setExp(rs.getLong("exp"));
 				pet.setLoyalty(rs.getInt("loyalty"));
-				pet.setAmulet(loadItem(rs.getInt("amulet")));
+				pet.setAmulet(itemDao.findOne((long)rs.getInt("amulet")));
 				pet.setName(rs.getString("name"));
 				pet.setLevel(rs.getInt("level"));
-				pet.setBasket(loadItem(rs.getInt("basket")));
+				pet.setBasket(itemDao.findOne((long)rs.getInt("basket")));
 				pet.setState(rs.getInt("state"));
 				pet.setBreederTimer(rs.getInt("breedtime"));
 				
@@ -765,7 +767,7 @@ public class Database {
 			
 			while (invTable.next()) 
 			{
-				Item<?> item = loadItem(invTable.getInt("itemid"));	
+				Item<?> item = itemDao.findOne((long)invTable.getInt("itemid"));	
 				
 				if (item!=null){
 					if(invTable.getInt("tab") == -1 && invTable.getInt("x") == -1 && invTable.getInt("y") == -1){
@@ -890,50 +892,7 @@ public class Database {
 		}
 		return -1;
 	}
-	
-	public Item<?> loadItem(int itemId )
-	{
-		if (itemId==-1)return null;
-		if (!checkDinamicDatabase())return null;
 		
-		Statement stmt;
-		try {
-			stmt  = connection.createStatement();
-			
-			ResultSet rs = stmt.executeQuery("SELECT * FROM items WHERE id='"+itemId+"';");
-			
-			if (rs.next())
-			{				
-				int type = rs.getInt("type");
-				ItemType itemType = Server.getInstance().getWorld().getItemManager().getItemType(type);
-				
-				if (itemType == null) {
-					LoggerFactory.getLogger(Database.class).error("Item type "+type+" load failed, no such item type!");
-					itemType = new ItemType(type);;
-				} 
-				
-				Item<?> item = new ItemImpl(itemType);
-				
-				item.setItemId(itemId);
-				item.setGemNumber(rs.getLong("gemnumber"));
-				item.setExtraStats(rs.getLong("extrastats"));
-				//item.setDurability(rs.getInt("durability"));
-				item.setUnknown1(rs.getInt("unknown1"));
-				item.setUnknown2(rs.getInt("unknown2"));
-				item.setUnknown3(rs.getInt("unknown3"));
-				
-				return item;
-			}
-		} 
-		catch (SQLException e) 
-		{
-			
-			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
-			
-		}
-		return null;
-	}
-	
 	public boolean deleteRoamingItem(Item<?> item){
 		if (!checkDinamicDatabase())
 			return false ;
@@ -961,7 +920,7 @@ public class Database {
 			while (rs.next()) 
 			{
 				int itemid = rs.getInt("itemid");
-				Item<?> item = loadItem(itemid);
+				Item<?> item = itemDao.findOne((long)itemid);
 				
 				if (item==null)
 					stmt.execute("DELETE FROM `roaming` WHERE itemid="+itemid);
@@ -1215,7 +1174,7 @@ public class Database {
 						
 			while (rs.next()) 
 			{
-				Item<?> item = loadItem(rs.getInt("itemid"));
+				Item<?> item = itemDao.findOne((long)rs.getInt("itemid"));
 				StashItem stashItem = new StashItem(new StashPosition(rs.getInt("pos")), item);
 				client.getPlayer().getStash().addItem(stashItem);
 			}
@@ -1273,7 +1232,7 @@ public class Database {
 						
 			while (exchangeTable.next()) 
 			{
-				Item<?> item = loadItem(exchangeTable.getInt("itemid"));
+				Item<?> item = itemDao.findOne((long)exchangeTable.getInt("itemid"));
 				ExchangeItem exchangeItem = new ExchangeItem(item,
 						exchangeTable.getInt("x"), exchangeTable.getInt("y"));
 				
@@ -1346,7 +1305,7 @@ public class Database {
 						
 			while (quickSlotTable.next()) 
 			{
-				Item<?> item = loadItem(quickSlotTable.getInt("itemid"));
+				Item<?> item = itemDao.findOne((long)quickSlotTable.getInt("itemid"));
 				QuickSlotPosition quickSlotPosition = new QuickSlotPosition(player.getQuickSlotBar(),quickSlotTable.getInt("slot"));
 				QuickSlotItem quickSlotItem = new QuickSlotItem(item,quickSlotPosition);
 				player.getQuickSlotBar().addItem(quickSlotItem);
