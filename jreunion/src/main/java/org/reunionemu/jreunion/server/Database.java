@@ -55,7 +55,7 @@ public class Database {
 	ItemDao<Item<?>> itemDao;
 	
 	private Database() {
-		_dinamicInstance = this;
+		_instance = this;
 	}
 	
 	@PostConstruct
@@ -63,7 +63,7 @@ public class Database {
 
 		try {
 			connection = datasource.getConnection();
-			LoggerFactory.getLogger(Database.class).info("Dinamic "+getClass().getSimpleName() + " connection established");
+			LoggerFactory.getLogger(Database.class).info(getClass().getSimpleName() + " connection established");
 
 		} catch (Exception e) {
 			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
@@ -85,29 +85,29 @@ public class Database {
 		}
 	}
 		
-	public boolean checkDinamicDatabase() {
+	public boolean checkDatabase() {
 		if (connection != null)
 			return true;
 		else
 			return false;
 	}
 			
-	private static Database _dinamicInstance = null;
+	private static Database _instance = null;
 	
-	private synchronized static void createDinamicInstance() {
-		if (_dinamicInstance == null) {
-			_dinamicInstance = new Database();
+	private synchronized static void createInstance() {
+		if (_instance == null) {
+			_instance = new Database();
 		}
 	}
 	
-	public static Database getDinamicInstance() {
-		if (_dinamicInstance == null)
-			createDinamicInstance();
-		return _dinamicInstance;
+	public static Database getInstance() {
+		if (_instance == null)
+			createInstance();
+		return _instance;
 	}
 	
 	public Position getSavedPosition(Player player){
-		if (!checkDinamicDatabase())
+		if (!checkDatabase())
 			return null;
 		Position position = null;
 		try {
@@ -128,7 +128,7 @@ public class Database {
 	}
 	
 	public void setSavedPosition(Player player){
-		if (!checkDinamicDatabase())
+		if (!checkDatabase())
 			return;
 		try {
 			Statement stmt = connection.createStatement();
@@ -142,7 +142,7 @@ public class Database {
 	}
 	
 	public String getCharList(Client client) {
-		if (!checkDinamicDatabase())
+		if (!checkDatabase())
 			return null;
 		
 		long accountId = client.getAccountId();
@@ -229,7 +229,7 @@ public class Database {
 	
 	public Equipment loadEquipment(Equipment equipment, int charid) {
 		
-		if (!checkDinamicDatabase())
+		if (!checkDatabase())
 			return null;
 		
 		Statement stmt;
@@ -262,7 +262,7 @@ public class Database {
 	
 	public PetEquipment loadPetEquipment(PetEquipment equipment, int petid) {
 		
-		if (!checkDinamicDatabase())
+		if (!checkDatabase())
 			return null;
 		
 		Statement stmt;
@@ -294,7 +294,7 @@ public class Database {
 	
 	public Player loadCharStatus(Client client, int charId){
 		Player player = null;
-		if (!checkDinamicDatabase())
+		if (!checkDatabase())
 			return null;
 		Statement stmt;		
 		try {
@@ -350,7 +350,7 @@ public class Database {
 		if(client == null)
 			return;
 		
-		if (!checkDinamicDatabase())
+		if (!checkDatabase())
 			return;
 			
 		try {
@@ -413,7 +413,7 @@ public class Database {
 	
 	public java.util.List<Pet> loadPets() {
 		
-		if (!checkDinamicDatabase())
+		if (!checkDatabase())
 			return null;
 		
 		Statement stmt;		
@@ -438,7 +438,7 @@ public class Database {
 	
 	public Pet loadPet(int petId){
 		
-		if (!checkDinamicDatabase())
+		if (!checkDatabase())
 			return null;
 		
 		Statement stmt;		
@@ -478,7 +478,7 @@ public class Database {
 	
 	public void savePet(Player player){
 		
-		if (!checkDinamicDatabase())
+		if (!checkDatabase())
 			return;
 			
 		try {
@@ -527,7 +527,7 @@ public class Database {
 	
 	public void deletePet(Pet pet) {
 		
-		if (!checkDinamicDatabase() || pet == null)
+		if (!checkDatabase() || pet == null)
 			return;
 		
 		Statement deleteStmt;
@@ -566,7 +566,7 @@ public class Database {
 	
 	public void updateCharStatus(Player player, int id, long value)
 	{
-		if (!checkDinamicDatabase())
+		if (!checkDatabase())
 			return;
 
 		String status = "";
@@ -602,7 +602,7 @@ public class Database {
 	}
 			
 	public boolean getCharNameFree(String charName) {
-		if (!checkDinamicDatabase())
+		if (!checkDatabase())
 			return false;
 		Statement stmt;
 		try {
@@ -626,7 +626,7 @@ public class Database {
 	public void createChar(Client client, int slot, String charName,
 			Race race, Sex sex, int hairStyle, int str, int wis, int dex, int con,
 			int lead) {
-		if (!checkDinamicDatabase())
+		if (!checkDatabase())
 			return;
 		Statement stmt;
 		try {
@@ -726,7 +726,7 @@ public class Database {
 	public Player loadChar(int slot, long accountId, Client client) {
 		
 		Player player=null;
-		if (!checkDinamicDatabase())
+		if (!checkDatabase())
 			return null;
 		int characterId = -1;
 		Statement stmt;
@@ -754,7 +754,7 @@ public class Database {
 	}
 	
 	public Player loadInventory(Player player){
-		if (!checkDinamicDatabase())
+		if (!checkDatabase())
 			return null;
 		Statement invStmt;
 
@@ -787,7 +787,7 @@ public class Database {
 	}
 		
 	public void saveInventory(Player player){
-		if (!checkDinamicDatabase())
+		if (!checkDatabase())
 			return;
 	
 		Statement stmt;
@@ -831,7 +831,7 @@ public class Database {
 	}
 		
 	public boolean deleteRoamingItem(Item<?> item){
-		if (!checkDinamicDatabase())
+		if (!checkDatabase())
 			return false ;
 		Statement stmt;
 		try {
@@ -879,7 +879,7 @@ public class Database {
 	}
 	
 	public void saveRoamingItem(RoamingItem roamingItem){
-		if (!checkDinamicDatabase())
+		if (!checkDatabase())
 			return ;
 		Item<?> item = roamingItem.getItem();
 		Position position = roamingItem.getPosition();
@@ -906,79 +906,10 @@ public class Database {
 			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 		}
 	}
-	/*
-	public synchronized void saveItem(Item<?> item){
-		if (!checkDinamicDatabase())
-			return ;
-			
-		Statement stmt;
-		try {
-			stmt  = connection.createStatement();
-			
-			long itemId = item.getItemId();
-			if(itemId!=-1){
-				
-				int res = stmt.executeUpdate("UPDATE `items` SET `type`="+item.getType().getTypeId()+
-											 ", `gemnumber`="+item.getGemNumber()+
-											 ", `extrastats`="+item.getExtraStats()+
-											 ", `durability`="+item.getDurability()+
-											 ", `unknown1`="+item.getUnknown1()+
-											 ", `unknown2`="+item.getUnknown2()+
-											 ", `unknown3`="+item.getUnknown3()+
-											 " WHERE `Id` = "+itemId);
-				if(res==0){
-					LoggerFactory.getLogger(Database.class).error("item not found: "+itemId);					
-				}
-			} else {
-				stmt.execute("INSERT INTO items (type, gemnumber, extrastats, durability, unknown1, unknown2, unknown3)" +
-						" VALUES ("+item.getType().getTypeId()+","
-								   +item.getGemNumber()+","
-								   +item.getExtraStats()+","
-								   +item.getDurability()+","
-								   +item.getUnknown1()+","
-								   +item.getUnknown2()+","
-								   +item.getUnknown3()+
-								   ");",Statement.RETURN_GENERATED_KEYS);
-				
-				ResultSet res = stmt.getGeneratedKeys();
-				if (res.next())
-					item.setItemId(res.getInt(1));
-			}
-
-			
-		} 
-		catch (Exception e) {
-			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
-		}
-		
-	}*/
-	
-	/*
-	
-	public void deleteItem(long itemId)
-	{
-		if (itemId==-1)return;
-		if (!checkDinamicDatabase())return ;
-		
-		Statement stmt;
-		
-		try {
-			stmt  = connection.createStatement();
-			
-			stmt.execute("DELETE FROM items WHERE id='"+itemId+"';");
-				
-		} 
-		catch (SQLException e) 
-		{
-			
-			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
-			
-		}
-	}*/
 	
 	public  void saveSkills(Player player) {
 		
-		if (!checkDinamicDatabase())
+		if (!checkDatabase())
 			return;
 		
 		Statement stmt;
@@ -1011,7 +942,7 @@ public class Database {
 	}
 	
 	public  void loadSkills(Player player) {
-		if (!checkDinamicDatabase())
+		if (!checkDatabase())
 			return;
 		Statement stmt;
 		try {
@@ -1033,7 +964,7 @@ public class Database {
 	}
 	
 	public void saveEquipment(Player player){
-		if (!checkDinamicDatabase())
+		if (!checkDatabase())
 			return;
 		if (player.getEquipment()==null)return;
 		
@@ -1065,7 +996,7 @@ public class Database {
 	}
 	
 	public void savePetEquipment(Pet pet){
-		if (!checkDinamicDatabase() || pet == null)
+		if (!checkDatabase() || pet == null)
 			return;
 
 		if (pet.getEquipment() == null)
@@ -1102,7 +1033,7 @@ public class Database {
 	
 	public void loadStash(Client client){
 				
-		if (!checkDinamicDatabase())
+		if (!checkDatabase())
 			return;
 		
 		try {
@@ -1126,7 +1057,7 @@ public class Database {
 	
 	public void saveStash(Client client){
 		
-		if (!checkDinamicDatabase())
+		if (!checkDatabase())
 			return;
 		
 		try {
@@ -1161,7 +1092,7 @@ public class Database {
 	
 	public void loadExchange(Player player){
 		
-		if (!checkDinamicDatabase())
+		if (!checkDatabase())
 			return;
 		
 		try {
@@ -1186,7 +1117,7 @@ public class Database {
 	
 	public void saveExchange(Player player){
 		
-		if (!checkDinamicDatabase())
+		if (!checkDatabase())
 			return;
 		
 		try {
@@ -1214,7 +1145,7 @@ public class Database {
 	
 	public void deleteGuild(int id)
 	{
-		if (!checkDinamicDatabase())return ;
+		if (!checkDatabase())return ;
 			
 		Statement stmt;
 		try {
@@ -1234,7 +1165,7 @@ public class Database {
 	
 	public void loadQuickSlot(Player player){
 		
-		if (!checkDinamicDatabase())
+		if (!checkDatabase())
 			return;
 		
 		try {
@@ -1258,7 +1189,7 @@ public class Database {
 	
 	public void saveQuickSlot(Player player){
 		
-		if (!checkDinamicDatabase())
+		if (!checkDatabase())
 			return;
 		
 		try {
@@ -1283,7 +1214,7 @@ public class Database {
 	}
 	
 	public boolean deleteQuickSlotItem(Item<?> item){
-		if (!checkDinamicDatabase())
+		if (!checkDatabase())
 			return false ;
 		Statement stmt;
 		try {
@@ -1297,7 +1228,7 @@ public class Database {
 	}
 	
 	public void deleteCharEquipment(int charId) {
-		if (!checkDinamicDatabase())
+		if (!checkDatabase())
 			return;
 		Statement stmt;
 		Statement itemStmt;
@@ -1323,7 +1254,7 @@ public class Database {
 	}
 	
 	public void deleteCharExchange(int charId) {
-		if (!checkDinamicDatabase())
+		if (!checkDatabase())
 			return;
 		Statement stmt;
 		Statement itemStmt;
@@ -1349,7 +1280,7 @@ public class Database {
 	}
 	
 	public void deleteCharInventory(int charId) {
-		if (!checkDinamicDatabase())
+		if (!checkDatabase())
 			return;
 		Statement stmt;
 		Statement itemStmt;
@@ -1376,7 +1307,7 @@ public class Database {
 	}
 		
 	public void deleteCharQuickSlot(int charId) {
-		if (!checkDinamicDatabase())
+		if (!checkDatabase())
 			return;
 		Statement stmt;
 		Statement itemStmt;
@@ -1402,7 +1333,7 @@ public class Database {
 	}
 	
 	public void deleteCharSkills(int charId) {
-		if (!checkDinamicDatabase())
+		if (!checkDatabase())
 			return;
 		Statement stmt;
 		try {
@@ -1417,7 +1348,7 @@ public class Database {
 	}
 	
 	public void deleteCharacter(int charId) {
-		if (!checkDinamicDatabase())
+		if (!checkDatabase())
 			return;
 		Statement stmt;
 		try {
@@ -1432,7 +1363,7 @@ public class Database {
 	}
 	
 	public void deleteCharSlot(int charId) {
-		if (!checkDinamicDatabase())
+		if (!checkDatabase())
 			return;
 		Statement stmt;
 		
@@ -1448,7 +1379,7 @@ public class Database {
 	}
 	
 	public int getCharId(int slotNumber, long accountId) {
-		if (!checkDinamicDatabase())
+		if (!checkDatabase())
 			return -1;
 		
 		Statement stmt;
@@ -1475,7 +1406,7 @@ public class Database {
 	}
 	
 	public String getCharName(int charId) {
-		if (!checkDinamicDatabase())
+		if (!checkDatabase())
 			return "";
 		
 		Statement stmt;
@@ -1499,7 +1430,7 @@ public class Database {
 	
 	public int addGuild (String name)
 	{
-		if (!checkDinamicDatabase())
+		if (!checkDatabase())
 			return 0;
 		
 		Statement stmt;

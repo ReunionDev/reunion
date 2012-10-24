@@ -23,7 +23,7 @@ public class PetManager {
 	}
 	
 	public void loadPets(){
-		petList = Database.getDinamicInstance().loadPets();
+		petList = Database.getInstance().loadPets();
 		if(petList != null){
 			LoggerFactory.getLogger(this.getClass()).info("Loaded "+petList.size()+" pets");
 		}

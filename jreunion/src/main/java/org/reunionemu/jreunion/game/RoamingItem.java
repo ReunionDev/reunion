@@ -71,7 +71,7 @@ public class RoamingItem extends WorldObject{
 		
 		map.removeEntity(this);
 		Item<?> item = this.getItem();
-		Database.getDinamicInstance().deleteRoamingItem(item);
+		Database.getInstance().deleteRoamingItem(item);
 		map.removeEntity(item);
 		item.delete();
 		list.exit(this, true);

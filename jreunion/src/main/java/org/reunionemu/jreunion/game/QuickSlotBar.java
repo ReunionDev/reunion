@@ -122,7 +122,7 @@ public class QuickSlotBar {
 		LoggerFactory.getLogger(QuickSlotBar.class).info(player.getName()+" used item: " +item.getType().getName());
 		
 		removeItem(qsItem);
-		Database.getDinamicInstance().deleteQuickSlotItem(item);
+		Database.getInstance().deleteQuickSlotItem(item);
 		item.delete();
 		
 	}
@@ -146,7 +146,7 @@ public class QuickSlotBar {
 		
 		if ( !(itemtype >= 215 && itemtype <= 221) && !(itemtype == 1067)) {
 			removeItem(qsItem);
-			Database.getDinamicInstance().deleteQuickSlotItem(item);
+			Database.getInstance().deleteQuickSlotItem(item);
 			item.delete();
 		} 		
 		

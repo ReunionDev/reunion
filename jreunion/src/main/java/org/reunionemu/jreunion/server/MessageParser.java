@@ -222,7 +222,7 @@ public class MessageParser {
 				{
 					String name = (String)words[2];
 					
-					int guildId = Database.getDinamicInstance().addGuild(name);
+					int guildId = Database.getInstance().addGuild(name);
 					if(guildId != 0)
 					{
 						player.setGuildId(guildId);
@@ -242,7 +242,7 @@ public class MessageParser {
 				{
 					String name = (String)words[2];
 					
-					int guildId = Database.getDinamicInstance().addGuild(name);
+					int guildId = Database.getInstance().addGuild(name);
 					if(guildId != 0)
 					{
 						Player targetPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayer(words[3]);
@@ -327,7 +327,7 @@ public class MessageParser {
 			else if(words[1].equals("close")) {
 				if(player.getGuildId() != 0 && player.getGuildLvl() == 10)
 				{
-					Database.getDinamicInstance().deleteGuild((int)player.getGuildId());
+					Database.getInstance().deleteGuild((int)player.getGuildId());
 					
 					Iterator<Player> iterPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayerListIterator();
 					
