@@ -542,7 +542,7 @@ public class Database {
 			rs = selectStmt.executeQuery("SELECT * FROM petequipment WHERE petid = "+pet.getId()+ ";");
 			if(rs.next()){
 				do {
-					deleteItem(rs.getInt("itemid"));
+					itemDao.findOne((long)rs.getInt("itemid")).delete();
 				} while(rs.next());
 				deleteStmt.execute("DELETE FROM petequipment WHERE petid = "+pet.getId()+ ";");
 			}
@@ -550,8 +550,8 @@ public class Database {
 			//delete pet from DB
 			rs = selectStmt.executeQuery("SELECT * FROM pet WHERE id = "+pet.getId()+ ";");
 			if(rs.next()){
-				deleteItem(rs.getInt("amulet"));
-				deleteItem(rs.getInt("basket"));
+				itemDao.findOne((long)rs.getInt("amulet")).delete();
+				itemDao.findOne((long)rs.getInt("basket")).delete();
 				deleteStmt.execute("DELETE FROM pet WHERE id = "+pet.getId()+ ";");
 			}
 			
@@ -953,6 +953,8 @@ public class Database {
 		
 	}*/
 	
+	/*
+	
 	public void deleteItem(long itemId)
 	{
 		if (itemId==-1)return;
@@ -972,7 +974,7 @@ public class Database {
 			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
 			
 		}
-	}
+	}*/
 	
 	public  void saveSkills(Player player) {
 		
@@ -1307,7 +1309,7 @@ public class Database {
 			ResultSet rs = itemStmt.executeQuery("SELECT * FROM equipment WHERE charid = "+charId+ ";");
 			if(rs.next()){
 				do {
-					deleteItem(rs.getInt("itemid"));
+					itemDao.findOne((long)rs.getInt("itemid")).delete();
 				} while(rs.next());
 			} else return;
 			
@@ -1333,7 +1335,7 @@ public class Database {
 			ResultSet rs = itemStmt.executeQuery("SELECT * FROM exchange WHERE charid = "+charId+ ";");
 			if(rs.next()){
 				do {
-					deleteItem(rs.getInt("itemid"));
+					itemDao.findOne((long)rs.getInt("itemid")).delete();
 				} while(rs.next());
 			} else return;
 			
@@ -1359,7 +1361,8 @@ public class Database {
 			ResultSet rs = itemStmt.executeQuery("SELECT * FROM inventory WHERE charid = "+charId+ ";");
 			if(rs.next()){
 				do {
-					deleteItem(rs.getInt("itemid"));
+					itemDao.findOne((long)rs.getInt("itemid")).delete();
+
 				} while(rs.next());
 			} else return;
 			
@@ -1385,7 +1388,7 @@ public class Database {
 			ResultSet rs = itemStmt.executeQuery("SELECT * FROM quickslot WHERE charid = "+charId+ ";");
 			if(rs.next()){
 				do {
-					deleteItem(rs.getInt("itemid"));
+					itemDao.findOne((long)rs.getInt("itemid")).delete();
 				} while(rs.next());
 			} else return;
 			

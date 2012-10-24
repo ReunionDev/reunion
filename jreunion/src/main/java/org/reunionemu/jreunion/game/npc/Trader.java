@@ -46,7 +46,7 @@ public class Trader extends NpcType {
 		while (exchangeIter.hasNext()) {
 			ExchangeItem exchangeItem = exchangeIter.next();
 			Item<?> item = exchangeItem.getItem();
-			Database.getDinamicInstance().deleteItem(item.getItemId());
+			item.delete();
 			player.getPosition().getLocalMap().removeEntity(item);
 		}
 
@@ -135,7 +135,7 @@ public class Trader extends NpcType {
 
 			}
 			client.sendPacket(Type.ICHANGE, oldItem, newItem);
-			Database.getDinamicInstance().deleteItem(oldItem.getItemId());
+			oldItem.delete();
 			player.getPosition().getLocalMap().removeEntity(oldItem);
 		}
 	}

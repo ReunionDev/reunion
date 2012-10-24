@@ -416,7 +416,7 @@ public class Pet extends LivingObject {
 		getOwner().getInterested().sendPacket(Type.CHAR_REMOVE, getOwner(), Slot.SHOULDER);
 		getOwner().getEquipment().setShoulderMount(null);
 		getOwner().getPosition().getLocalMap().removeEntity(egg);
-		Database.getDinamicInstance().deleteItem(egg.getItemId());
+		egg.delete();
 		setEquipment(new PetEquipment(getOwner()));
 		load();
 		getOwner().save();

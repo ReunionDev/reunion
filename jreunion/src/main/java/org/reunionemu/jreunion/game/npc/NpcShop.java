@@ -145,7 +145,7 @@ public class NpcShop {
 			Item<?> item = itemManager.create(itemTypeId);
 			
 			if (player.getInventory().freeSlots(tab, item) == false) {
-				Database.getDinamicInstance().deleteItem(item.getItemId());
+				item.delete();
 				return false;
 			}
 			
@@ -197,7 +197,7 @@ public class NpcShop {
 			}
 
 			player.getInventory().setHoldingItem(null);
-			Database.getDinamicInstance().deleteItem(item.getItemId());
+			item.delete();
 		}
 		else{
 			LoggerFactory.getLogger(Merchant.class).error("Sell failed, no item selected");			

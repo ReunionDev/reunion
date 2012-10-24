@@ -257,5 +257,9 @@ public abstract class Item<T extends ItemType> implements Entity{
 		itemDao.save(this);
 		
 	}
+
+	public void delete() {
+		itemDao.delete(this);
+	}
 	
 }

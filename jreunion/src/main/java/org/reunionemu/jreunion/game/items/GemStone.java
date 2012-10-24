@@ -97,7 +97,7 @@ public class GemStone extends ReinforcingAgent implements Usable {
 						1, item.getEntityId(), newItem.getEntityId());
 				
 				player.getPosition().getLocalMap().removeEntity(item);
-				Database.getDinamicInstance().deleteItem(item.getItemId());
+				item.delete();
 				return true;
 			}
 			else {

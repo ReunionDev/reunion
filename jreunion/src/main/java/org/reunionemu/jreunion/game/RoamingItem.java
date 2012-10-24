@@ -70,9 +70,10 @@ public class RoamingItem extends WorldObject{
 		SessionList<Session> list = map.GetSessions(getPosition());
 		
 		map.removeEntity(this);
-		Database.getDinamicInstance().deleteRoamingItem(getItem());
-		map.removeEntity(this.getItem());
-		Database.getDinamicInstance().deleteItem(getItem().getItemId());
+		Item<?> item = this.getItem();
+		Database.getDinamicInstance().deleteRoamingItem(item);
+		map.removeEntity(item);
+		item.delete();
 		list.exit(this, true);
 		list.update();
 		//getInterested().sendPacket(Type.OUT, this);

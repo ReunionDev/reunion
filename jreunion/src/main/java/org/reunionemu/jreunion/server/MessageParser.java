@@ -660,7 +660,7 @@ public class MessageParser {
 					   } else {
 					       player.getClient().sendPacket(Type.SAY, "Inventory full. Please get some space available.");
 					       player.getPosition().getLocalMap().removeEntity(item);
-					       Database.getDinamicInstance().deleteItem(item.getItemId());
+					       item.delete();
 					       return null;
 					   }
 					} else {

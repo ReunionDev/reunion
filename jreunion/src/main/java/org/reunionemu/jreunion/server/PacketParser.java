@@ -929,7 +929,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 						while(exchangeIter.hasNext()){
 							ExchangeItem exchangeItem = exchangeIter.next();
 							limeAmmount += exchangeItem.getItem().getExtraStats();
-							Database.getDinamicInstance().deleteItem(exchangeItem.getItem().getItemId());
+							exchangeItem.getItem().delete();
 						}
 						
 						player.getExchange().clearExchange();
