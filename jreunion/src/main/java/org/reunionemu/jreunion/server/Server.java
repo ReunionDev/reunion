@@ -28,7 +28,7 @@ import org.springframework.stereotype.Service;
  */
 
 @DependsOn("database")
-//@Lazy(false)
+@Lazy(false)
 @Service
 public class Server extends EventDispatcher implements ApplicationContextAware{
 

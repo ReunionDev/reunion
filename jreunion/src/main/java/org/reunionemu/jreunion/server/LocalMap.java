@@ -281,12 +281,13 @@ public class LocalMap extends Map implements Runnable{
 	}
 	
 	public void register(Network network){
-		LoggerFactory.getLogger(LocalMap.class).info("Loading "+getName()+"["+getId()+"]");
+		LoggerFactory.getLogger(LocalMap.class).info("Registering "+getName()+"["+getId()+"] on "+getAddress());
 		network.register(getAddress());
 	}
 
 	public void load() {
-		loaded.set(true);		
+		loaded.set(true);
+		LoggerFactory.getLogger(LocalMap.class).info("Loading "+getName()+"["+getId()+"]");
 		playerSpawnReference = new Parser();
 		mobSpawnReference = new Parser();
 		npcSpawnReference = new Parser();
