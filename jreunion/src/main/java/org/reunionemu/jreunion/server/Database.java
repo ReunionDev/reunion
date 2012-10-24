@@ -376,7 +376,7 @@ public class Database {
 								    +player.getDexterity()+ ","
 								    +player.getConstitution()+ ","
 								    +player.getLeadership()+ ","
-								    +player.getRace().ordinal()+ ","
+								    +player.getRace().value()+ ","
 								    +player.getSex().ordinal()+ ","
 								    +player.getHairStyle()+ ","								   
 								    +player.getTotalExp()+ ","
