@@ -40,7 +40,16 @@ public class Warehouse extends NpcType {
 	public void openStash(Player player) {
 
 		Client client = player.getClient();
-
+		int firstSlot = player.getStash().getTabFirstSlot(0);
+		int lastSlot = player.getStash().getTabLastSlot(2);
+		for(int pos=firstSlot; pos<=lastSlot; pos++){
+			if(!player.getStash().checkPosEmpty(pos)){
+				StashItem stashItem = player.getStash().getItem(pos);	
+				client.sendPacket(Type.STASH, stashItem, player.getStash().getQuantity(pos));
+			}
+		}
+		
+		/*
 		Iterator<StashItem> stashIter = player.getStash().itemListIterator();
 		while (stashIter.hasNext()) {
 			StashItem stashItem = stashIter.next();	
@@ -48,6 +57,7 @@ public class Warehouse extends NpcType {
 			client.sendPacket(Type.STASH, stashItem, player.getStash().getQuantity(slot));
 		
 		}
+		*/
 		client.sendPacket(Type.STASH_END);
 	}
 
