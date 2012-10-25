@@ -262,7 +262,7 @@
 			    		<buildCommand>
                             <name>org.eclipse.ajdt.core.ajbuilder</name>
                             <arguments>
-                                <aspectPath>org.sprmvningframework.aspects</aspectPath>
+                                <aspectPath>org.springframework.aspects</aspectPath>
                             </arguments>
                         </buildCommand>
                         <buildCommand>

@@ -110,28 +110,28 @@ public class Command {
 	public void createChar(Client client, int slotNumber, String charName,
 			Race race, Sex sex, int hair, int str, int intel, int dex, int con,
 			int lea) {
-		if (DatabaseUtils.getDinamicInstance().getCharNameFree(charName)) {
-			DatabaseUtils.getDinamicInstance().createChar(client, slotNumber,
+		if (Database.getInstance().getCharNameFree(charName)) {
+			Database.getInstance().createChar(client, slotNumber,
 					charName, race, sex, hair, str, intel, dex, con, lea);
 		}
 	}
 
 	public void delChar(int slotNumber, long accountId) {
-		int charId = DatabaseUtils.getDinamicInstance().getCharId(slotNumber, accountId);
-		String charName = DatabaseUtils.getDinamicInstance().getCharName(charId);
+		int charId = Database.getInstance().getCharId(slotNumber, accountId);
+		String charName = Database.getInstance().getCharName(charId);
 		
 		LoggerFactory.getLogger(Command.class).info("Player {id:"+charId+", name:"+charName+"} deleted from account {id:"
 				+accountId+"}");
 		
-		DatabaseUtils.getDinamicInstance().deleteCharSlot(charId);
-		DatabaseUtils.getDinamicInstance().deleteCharacter(charId);
-		DatabaseUtils.getDinamicInstance().deleteCharSkills(charId);
-		DatabaseUtils.getDinamicInstance().deleteCharQuickSlot(charId);
+		Database.getInstance().deleteCharSlot(charId);
+		Database.getInstance().deleteCharacter(charId);
+		Database.getInstance().deleteCharSkills(charId);
+		Database.getInstance().deleteCharQuickSlot(charId);
 		//TODO: Quest state delete
 		//questStateDao.delete(id);
-		DatabaseUtils.getDinamicInstance().deleteCharInventory(charId);
-		DatabaseUtils.getDinamicInstance().deleteCharExchange(charId);
-		DatabaseUtils.getDinamicInstance().deleteCharEquipment(charId);
+		Database.getInstance().deleteCharInventory(charId);
+		Database.getInstance().deleteCharExchange(charId);
+		Database.getInstance().deleteCharEquipment(charId);
 		
 	}
 	
@@ -219,12 +219,12 @@ public class Command {
 
 	public Player loginChar(int slotNumber, long accountId, Client client) {
 		
-		Player player = DatabaseUtils.getDinamicInstance().loadChar(slotNumber, accountId, client);
-		LocalMap localMap = DatabaseUtils.getDinamicInstance().getSavedPosition(player).getLocalMap();
-		Equipment equipment = DatabaseUtils.getDinamicInstance().loadEquipment(player);
+		Player player = Database.getInstance().loadChar(slotNumber, accountId, client);
+		LocalMap localMap = Database.getInstance().getSavedPosition(player).getLocalMap();
+		Equipment equipment = Database.getInstance().loadEquipment(player);
 		
 		world.getSkillManager().loadSkills(player);
-		DatabaseUtils.getDinamicInstance().loadSkills(player);	
+		Database.getInstance().loadSkills(player);	
 		player.loadEquipment(localMap);
 		player.loadStash(localMap);
 		player.setDefense();
@@ -270,7 +270,7 @@ public class Command {
 
 	void sendCharList(Client client) {
 
-		client.sendData(DatabaseUtils.getDinamicInstance().getCharList(client));
+		client.sendData(Database.getInstance().getCharList(client));
 
 		client.setState(Client.State.CHAR_LIST);
 		return;

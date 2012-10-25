@@ -1,36 +1,31 @@
 package org.reunionemu.jreunion.game.npc;
 
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 import java.util.Vector;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import org.reunionemu.jreunion.dao.ItemDao;
 import org.reunionemu.jreunion.game.HandPosition;
 import org.reunionemu.jreunion.game.InventoryItem;
 import org.reunionemu.jreunion.game.InventoryPosition;
 import org.reunionemu.jreunion.game.Item;
-import org.reunionemu.jreunion.game.ItemType;
 import org.reunionemu.jreunion.game.NpcType;
 import org.reunionemu.jreunion.game.Player;
-import org.reunionemu.jreunion.game.Skill;
 import org.reunionemu.jreunion.game.StashItem;
 import org.reunionemu.jreunion.game.StashPosition;
-import org.reunionemu.jreunion.game.items.etc.Lime;
 import org.reunionemu.jreunion.server.Client;
-import org.reunionemu.jreunion.server.DatabaseUtils;
-import org.reunionemu.jreunion.server.Server;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
+import org.reunionemu.jreunion.server.Server;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
 public class Warehouse extends NpcType {
-	
+		
 	public Warehouse(int id) {
 		super(id);
 		//loadFromReference(id);
@@ -40,7 +35,16 @@ public class Warehouse extends NpcType {
 	public void openStash(Player player) {
 
 		Client client = player.getClient();
-
+		int firstSlot = player.getStash().getTabFirstSlot(0);
+		int lastSlot = player.getStash().getTabLastSlot(2);
+		for(int pos=firstSlot; pos<=lastSlot; pos++){
+			if(!player.getStash().checkPosEmpty(pos)){
+				StashItem stashItem = player.getStash().getItem(pos);	
+				client.sendPacket(Type.STASH, stashItem, player.getStash().getQuantity(pos));
+			}
+		}
+		
+		/*
 		Iterator<StashItem> stashIter = player.getStash().itemListIterator();
 		while (stashIter.hasNext()) {
 			StashItem stashItem = stashIter.next();	
@@ -48,6 +52,7 @@ public class Warehouse extends NpcType {
 			client.sendPacket(Type.STASH, stashItem, player.getStash().getQuantity(slot));
 		
 		}
+		*/
 		client.sendPacket(Type.STASH_END);
 	}
 
@@ -85,7 +90,14 @@ public class Warehouse extends NpcType {
 		int itemTypeId = packetData[index++];
 		int invTab = packetData[index++];
 		int stashTab = packetData[index++];
-		StashPosition stashPosition = new StashPosition(player.getStash().getItemSlot(stashTab, itemTypeId));
+		int position = player.getStash().getItemSlot(stashTab, itemTypeId);
+		
+		if(position == -1){
+			player.getClient().sendPacket(Type.SAY, "No free slots available on this Tab.");
+			return;
+		}
+		
+		StashPosition stashPosition = new StashPosition(position);
 		StashItem stashItem = null;
 		
 		while(index < packetData.length -1){
@@ -167,7 +179,7 @@ public class Warehouse extends NpcType {
 			limeItem = stashItem.getItem();
 		} 
 		
-		long limeLimit = Server.getInstance().getWorld().getServerSetings().getWarehouseLimeLimit();
+		long limeLimit = Server.getInstance().getWorld().getServerSettings().getWarehouseLimeLimit();
 		
 		//check if warehouse lime limit is reached.
 		if((limeItem.getGemNumber() + limeAmount) > limeLimit){
@@ -188,7 +200,7 @@ public class Warehouse extends NpcType {
 		//}
 		
 		limeItem.setGemNumber((limeItem.getGemNumber()) + limeAmount);		
-		DatabaseUtils.getDinamicInstance().saveItem(limeItem);
+		limeItem.save();
 		player.getClient().sendPacket(Type.STASH_TO, stashItem, player.getStash().getQuantity(pos));
 
 		return true;
@@ -219,7 +231,7 @@ public class Warehouse extends NpcType {
 		//}
 				
 		player.setLime(player.getLime() - limeAmmount);
-		DatabaseUtils.getDinamicInstance().saveItem(limeItem);
+		limeItem.save();
 		player.getClient().sendPacket(Type.STASH_FROM, stashItem, player.getStash().getQuantity(pos));
 
 		return true;

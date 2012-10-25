@@ -1,16 +1,13 @@
 package org.reunionemu.jreunion.game.items.special;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.reunionemu.jreunion.game.Equipment.Slot;
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.LivingObject;
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.Usable;
-import org.reunionemu.jreunion.game.Equipment.Slot;
-import org.reunionemu.jreunion.game.items.equipment.ChakuranWeapon;
 import org.reunionemu.jreunion.game.items.equipment.WandWeapon;
-import org.reunionemu.jreunion.server.DatabaseUtils;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
+import org.slf4j.LoggerFactory;
 
 
 
@@ -18,6 +15,7 @@ import org.reunionemu.jreunion.server.PacketFactory.Type;
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
+
 public class WandCharger extends ScrollAndSpellBook implements Usable{
 	
 	public WandCharger(int id) {
@@ -38,7 +36,7 @@ public class WandCharger extends ScrollAndSpellBook implements Usable{
 				}
 			}
 			wandWeapon.setGemNumber(wandWeapon.getType().getMaxGemNumber());
-			DatabaseUtils.getDinamicInstance().saveItem(wandWeapon);
+			wandWeapon.save();
 			
 			if(player.getClient().getVersion() < 2000){
 				player.getClient().sendPacket(Type.USQ,"remain",quickSlotPosition,Slot.OFFHAND.value(),wandWeapon);

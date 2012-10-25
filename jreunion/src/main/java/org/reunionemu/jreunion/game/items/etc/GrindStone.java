@@ -1,15 +1,16 @@
 package org.reunionemu.jreunion.game.items.etc;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.reunionemu.jreunion.dao.ItemDao;
+import org.reunionemu.jreunion.game.Equipment.Slot;
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.LivingObject;
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.Usable;
-import org.reunionemu.jreunion.game.Equipment.Slot;
-import org.reunionemu.jreunion.game.items.equipment.ChakuranWeapon;
-import org.reunionemu.jreunion.server.DatabaseUtils;
+import org.reunionemu.jreunion.server.Database;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Configurable;
 
 
 
@@ -18,7 +19,7 @@ import org.reunionemu.jreunion.server.PacketFactory.Type;
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
 public class GrindStone extends WhetStone implements Usable{
-	
+		
 	public GrindStone(int id) {
 		super(id);
 		loadFromReference(id);
@@ -36,7 +37,7 @@ public class GrindStone extends WhetStone implements Usable{
 				usesRemain = (int)slayerWeapon.getType().getMaxExtraStats();
 			}
 			slayerWeapon.setExtraStats(usesRemain);
-			DatabaseUtils.getDinamicInstance().saveItem(slayerWeapon);
+			slayerWeapon.save();
 			
 			if(player.getClient().getVersion() < 2000){
 				player.getClient().sendPacket(Type.USQ, "remain", quickSlotPosition, Slot.SHOULDER.value(), slayerWeapon);

@@ -82,7 +82,7 @@ public class Spawn {
 	
 		Position position = generateSpawnPosition();
 		Area entityArea = getPosition().getLocalMap().getArea(); 
-		int spawnAttempts = (int)Server.getInstance().getWorld().getServerSetings().getSpawnAttempts();
+		int spawnAttempts = (int)Server.getInstance().getWorld().getServerSettings().getSpawnAttempts();
 		
 		// TODO: Improve the mob spawn area
 		if( entity instanceof Npc){
@@ -93,7 +93,7 @@ public class Spawn {
 				while((!entityArea.get(position.getX() / 10, position.getY() / 10,Field.MOB)) && (spawnAttempts-- > 0)){
 					position = generateSpawnPosition();
 				}
-				float mobMutantChance = Server.getInstance().getWorld().getServerSetings().getMobMutantChance();
+				float mobMutantChance = Server.getInstance().getWorld().getServerSettings().getMobMutantChance();
 				
 				if(Server.getRand().nextFloat() < mobMutantChance){
 					/* Mutant mobs, by default have:
@@ -101,7 +101,7 @@ public class Spawn {
 					 * - increased damage
 					 * - defence resistance
 					 */
-					float mobMutantModifier = Server.getInstance().getWorld().getServerSetings().getMobMutantModifier();
+					float mobMutantModifier = Server.getInstance().getWorld().getServerSettings().getMobMutantModifier();
 					npc.setMaxHp((long)(npc.getMaxHp()*(mobMutantModifier+1)));
 					npc.setHp(npc.getMaxHp());
 					npc.setMutantType(npc.getRandomMutantType());

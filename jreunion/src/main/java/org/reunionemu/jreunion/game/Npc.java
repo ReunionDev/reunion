@@ -63,13 +63,13 @@ public class Npc<T extends NpcType> extends LivingObject {
 		
 		setMaxHp(type.getMaxHp());
 		setHp(type.getMaxHp());
-		setAreaRadius(Server.getInstance().getWorld().getServerSetings().getMobRadiusArea());
+		setAreaRadius(Server.getInstance().getWorld().getServerSettings().getMobRadiusArea());
 		setLevel(getType().getLevel());
 		if(this.getType() instanceof Mob){
 			if(((Mob)this.getType()).getAttackType() == AttackType.CLOSE_MELEE.value){
-				setAttackRadius(Server.getInstance().getWorld().getServerSetings().getCloseAttackRadius());
+				setAttackRadius(Server.getInstance().getWorld().getServerSettings().getCloseAttackRadius());
 			} else {
-				setAttackRadius(Server.getInstance().getWorld().getServerSetings().getRangeAttackRadius());
+				setAttackRadius(Server.getInstance().getWorld().getServerSettings().getRangeAttackRadius());
 			}
 		}
 	}
@@ -245,7 +245,7 @@ public class Npc<T extends NpcType> extends LivingObject {
 	
 	public float getMutantResistance(LivingObject livingObject){
 	
-		float mobMutantModifier = Server.getInstance().getWorld().getServerSetings().getMobMutantModifier();
+		float mobMutantModifier = Server.getInstance().getWorld().getServerSettings().getMobMutantModifier();
 		float returnvalue = 0.5f;
 		
 		 /*  1(red) - Resistance against short-range physical attack
@@ -295,11 +295,11 @@ public class Npc<T extends NpcType> extends LivingObject {
 		
 		LocalMap localMap = getPosition().getLocalMap();
 		SessionList<Session> list = localMap.GetSessions(getPosition());
-		long serverXpRate = Server.getInstance().getWorld().getServerSetings().getXp();
-		long serverLimeRate = Server.getInstance().getWorld().getServerSetings().getLime();
-		float mutantModifier = Server.getInstance().getWorld().getServerSetings().getMobMutantModifier();
-		int expPlayerMobDifference = Server.getInstance().getWorld().getServerSetings().getExpPlayerMobDifference();
-		int expLowerStep = Server.getInstance().getWorld().getServerSetings().getExpLowerStep();
+		long serverXpRate = Server.getInstance().getWorld().getServerSettings().getXp();
+		long serverLimeRate = Server.getInstance().getWorld().getServerSettings().getLime();
+		float mutantModifier = Server.getInstance().getWorld().getServerSettings().getMobMutantModifier();
+		int expPlayerMobDifference = Server.getInstance().getWorld().getServerSettings().getExpPlayerMobDifference();
+		int expLowerStep = Server.getInstance().getWorld().getServerSettings().getExpLowerStep();
 		
 		long npcLime = 0;
 		long npcExp = 0;
@@ -410,8 +410,8 @@ public class Npc<T extends NpcType> extends LivingObject {
 			ItemType itemType = dropList.get(dropListRandomPos);
 			//handles with the luck of drop a plus item.
 			float gemLuck = Server.getRand().nextFloat();
-			float itemPlusByOne = getPosition().getLocalMap().getWorld().getServerSetings().getItemPlusByOne();
-			float itemPlusByTwo = getPosition().getLocalMap().getWorld().getServerSetings().getItemPlusByTwo();
+			float itemPlusByOne = getPosition().getLocalMap().getWorld().getServerSettings().getItemPlusByOne();
+			float itemPlusByTwo = getPosition().getLocalMap().getWorld().getServerSettings().getItemPlusByTwo();
 			int gemNumber = 0;
 		
 			if(itemType.isUpgradable() && itemType.getLevel() <= 180){
@@ -600,7 +600,7 @@ public class Npc<T extends NpcType> extends LivingObject {
 		List<Skill> defensiveSkills = player.getDefensiveSkills();
 		int npcDmg = getDamage((int) player.getDef());
 		npcDmg = (isBoss() ? npcDmg*2 : npcDmg); //check if npc is boss.
-		npcDmg = (npcDmg < 1) ? 1 : npcDmg; //make sure the npc will have a minimum damage value.
+		//npcDmg = (npcDmg < 1) ? 1 : npcDmg; //make sure the npc will have a minimum damage value.
  	
 		if (defensiveSkills.size() == 0) {
 			player.setHp(player.getHp() - npcDmg);
@@ -626,15 +626,15 @@ public class Npc<T extends NpcType> extends LivingObject {
 			return 0;
 		}
 		Mob mob = (Mob)this.getType();
-		float mobMutantModifier = isMutant() ? Server.getInstance().getWorld().getServerSetings().getMobMutantModifier()+1 : 1;
-			
-		return (int) ((mob.getDmg()*mobMutantModifier) - (playerDef/2 + ((playerDef/2)*Server.getRand().nextFloat())));
+		float mobMutantModifier = isMutant() ? Server.getInstance().getWorld().getServerSettings().getMobMutantModifier()+1 : 1;
+		int damage = (int)((mob.getDmg()*mobMutantModifier) - (playerDef/2 + ((playerDef/2)*Server.getRand().nextFloat())));
+		return damage < 1 ? 1 : damage; 
 	}
 	
 	public void work() {
 		try {
 			
-			int isMovementEnabled = Server.getInstance().getWorld().getServerSetings().getMobsMovement();
+			int isMovementEnabled = Server.getInstance().getWorld().getServerSettings().getMobsMovement();
 		
 			if(isRunning() || getHp() == 0 || isMovementEnabled == 0)
 				return;

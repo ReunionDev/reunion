@@ -26,26 +26,14 @@ import org.springframework.stereotype.Service;
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
+
 @DependsOn("database")
-//@Lazy(false)
+@Lazy(false)
 @Service
 public class Server extends EventDispatcher implements ApplicationContextAware{
 
 	private static Server _instance = null;
-	
-	@Configurable
-	public class Test{
 		
-		@Autowired
-		Reference reference;
-		
-		public boolean test(){
-			return reference!=null;
-		}
-		
-	}
-	
-	
 	private static ApplicationContext context;
 	
 	@Autowired 
@@ -113,7 +101,6 @@ public class Server extends EventDispatcher implements ApplicationContextAware{
 		logger.info("Server stop");
 		
 		EventDispatcher.shutdown();
-		this.database.stop();
 	}
 
 	/**
@@ -163,17 +150,7 @@ public class Server extends EventDispatcher implements ApplicationContextAware{
 	@Autowired
 	private World world;
 
-	@Autowired
-	private Database database;
-
 	private Server() {
-	}
-
-	/**
-	 * @return Returns the databaseModule.
-	 */
-	public Database getDatabase() {
-		return database;
 	}
 
 	/**
@@ -195,14 +172,6 @@ public class Server extends EventDispatcher implements ApplicationContextAware{
 	 */
 	public World getWorld() {
 		return world;
-	}
-
-	/**
-	 * @param databaseModule
-	 *            The databaseModule to set.
-	 */
-	public void setDatabaseModule(Database databaseModule) {
-		this.database = databaseModule;
 	}
 	
 	public static enum State{

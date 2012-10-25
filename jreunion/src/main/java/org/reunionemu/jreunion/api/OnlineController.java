@@ -26,7 +26,12 @@ public class OnlineController {
 		
 		Map map = server.getWorld().getMap(mapId);
 		if(map!=null && map instanceof LocalMap){
-			return ((LocalMap) map).getPlayerList().size();
+			
+			LocalMap local = (LocalMap)map;
+			if(local.isLoaded()){
+				return local.getPlayerList().size();
+			}
+			return 0;
 		}
 		throw new RuntimeException("");
 	}
@@ -42,7 +47,10 @@ public class OnlineController {
 			Map map = iter.next();
 
 			if( map instanceof LocalMap){
-				total += ((LocalMap) map).getPlayerList().size();
+				LocalMap local = (LocalMap)map;
+				if(local.isLoaded()){
+					total += local.getPlayerList().size();
+				}
 			}
 			
 		}

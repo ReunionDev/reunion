@@ -4,7 +4,7 @@ import java.util.TimerTask;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.reunionemu.jreunion.server.DatabaseUtils;
+import org.reunionemu.jreunion.server.Database;
 import org.reunionemu.jreunion.server.LocalMap;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
 import org.reunionemu.jreunion.server.Session;
@@ -70,16 +70,17 @@ public class RoamingItem extends WorldObject{
 		SessionList<Session> list = map.GetSessions(getPosition());
 		
 		map.removeEntity(this);
-		DatabaseUtils.getDinamicInstance().deleteRoamingItem(getItem());
-		map.removeEntity(this.getItem());
-		DatabaseUtils.getDinamicInstance().deleteItem(getItem().getItemId());
+		Item<?> item = this.getItem();
+		Database.getInstance().deleteRoamingItem(item);
+		map.removeEntity(item);
+		item.delete();
 		list.exit(this, true);
 		list.update();
 		//getInterested().sendPacket(Type.OUT, this);
 	}
 	
 	public void startDeleteTimer(boolean randomTime){
-		long dropTimeOut = getPosition().getLocalMap().getWorld().getServerSetings().getDropTimeOut();
+		long dropTimeOut = getPosition().getLocalMap().getWorld().getServerSettings().getDropTimeOut();
 		long extraTime = 0;
 		
 		if(randomTime){
@@ -103,7 +104,7 @@ public class RoamingItem extends WorldObject{
 	
 	public void setDropExclusivity(Player player){
 		java.util.Timer dropExclusivityTimer = new java.util.Timer();
-		long dropExclusivity = player.getClient().getWorld().getServerSetings().getDropExclusivity();
+		long dropExclusivity = player.getClient().getWorld().getServerSettings().getDropExclusivity();
 		dropExclusivityTimer.schedule(new TimerTask() {
 			@Override
 			public void run() {

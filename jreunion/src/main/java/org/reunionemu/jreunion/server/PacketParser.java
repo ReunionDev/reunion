@@ -191,7 +191,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 			case CHAR_LIST: {
 	
 				if (message[0].equals("char_exist")) {
-					if (DatabaseUtils.getDinamicInstance().getCharNameFree(message[1])) {
+					if (Database.getInstance().getCharNameFree(message[1])) {
 						com.sendSuccess(client);
 					} else {
 						client.sendPacket(Type.FAIL);
@@ -275,7 +275,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 						return;
 					}
 					
-					Position savedPosition = DatabaseUtils.getDinamicInstance().getSavedPosition(player);
+					Position savedPosition = Database.getInstance().getSavedPosition(player);
 					
 					if(savedPosition != null) {
 						Map savedMap = savedPosition.getMap();
@@ -297,10 +297,10 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					player.getPosition().setMap((LocalMap)map);
 					world.getPlayerManager().addPlayer(player);
 					
-					DatabaseUtils.getDinamicInstance().loadStash(client);
-					DatabaseUtils.getDinamicInstance().loadQuickSlot(player);
-					DatabaseUtils.getDinamicInstance().loadInventory(player);
-					DatabaseUtils.getDinamicInstance().loadExchange(player);
+					Database.getInstance().loadStash(client);
+					Database.getInstance().loadQuickSlot(player);
+					Database.getInstance().loadInventory(player);
+					Database.getInstance().loadExchange(player);
 					
 					player.loadInventory();
 					player.loadExchange();
@@ -350,7 +350,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					client.setState(Client.State.INGAME);
 					
 					if(player.getPosition().getMap().getId() == 4)
-						client.sendPacket(Type.INFO, world.getServerSetings().getWelcomeMessage());
+						client.sendPacket(Type.INFO, world.getServerSettings().getWelcomeMessage());
 					
 					//world.sendPacket(Type.SAY, player.getName() + " (" +player.getPlayerId()+ ") logged in on Map "+player.getPosition().getMap().getName());
 
@@ -374,7 +374,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 						pet.setOwner(player);
 						pet.sendStatus(PetStatus.STATE);
 						if(pet.getState() > 1){
-							pet.setEquipment(DatabaseUtils.getDinamicInstance().loadPetEquipment(player));
+							pet.setEquipment(Database.getInstance().loadPetEquipment(player));
 						
 							if(pet.getState() == 12){
 								pet.load();
@@ -929,7 +929,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 						while(exchangeIter.hasNext()){
 							ExchangeItem exchangeItem = exchangeIter.next();
 							limeAmmount += exchangeItem.getItem().getExtraStats();
-							DatabaseUtils.getDinamicInstance().deleteItem(exchangeItem.getItem().getItemId());
+							exchangeItem.getItem().delete();
 						}
 						
 						player.getExchange().clearExchange();
@@ -973,7 +973,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 						pet.getPosition().getLocalMap().removeEntity(pet);
 						world.getPetManager().removePet(pet);
 						player.setPet(null);
-						DatabaseUtils.getDinamicInstance().deletePet(pet);
+						Database.getInstance().deletePet(pet);
 						client.sendPacket(Type.MYPET, "del");
 						player.getInterested().sendPacket(Type.OUT, pet);
 						LoggerFactory.getLogger(this.getClass()).info("Player: "+player+" deleted Pet: "+pet);

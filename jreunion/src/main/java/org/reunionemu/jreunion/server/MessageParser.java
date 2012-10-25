@@ -222,7 +222,7 @@ public class MessageParser {
 				{
 					String name = (String)words[2];
 					
-					int guildId = DatabaseUtils.getDinamicInstance().addGuild(name);
+					int guildId = Database.getInstance().addGuild(name);
 					if(guildId != 0)
 					{
 						player.setGuildId(guildId);
@@ -242,7 +242,7 @@ public class MessageParser {
 				{
 					String name = (String)words[2];
 					
-					int guildId = DatabaseUtils.getDinamicInstance().addGuild(name);
+					int guildId = Database.getInstance().addGuild(name);
 					if(guildId != 0)
 					{
 						Player targetPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayer(words[3]);
@@ -327,7 +327,7 @@ public class MessageParser {
 			else if(words[1].equals("close")) {
 				if(player.getGuildId() != 0 && player.getGuildLvl() == 10)
 				{
-					DatabaseUtils.getDinamicInstance().deleteGuild((int)player.getGuildId());
+					Database.getInstance().deleteGuild((int)player.getGuildId());
 					
 					Iterator<Player> iterPlayer = Server.getInstance().getWorld().getPlayerManager().getPlayerListIterator();
 					
@@ -475,19 +475,19 @@ public class MessageParser {
 			{
 				if(words[1].equals("exp"))
 				{
-					if(Server.getInstance().getWorld().getServerSetings().getXp() < Long.parseLong(words[2]))
+					if(Server.getInstance().getWorld().getServerSettings().getXp() < Long.parseLong(words[2]))
 						Server.getInstance().getWorld().sendPacket(Type.INFO, "EXP Event (x"+words[2]+") started!");
-					else if(Server.getInstance().getWorld().getServerSetings().getXp() > Long.parseLong(words[2]))
+					else if(Server.getInstance().getWorld().getServerSettings().getXp() > Long.parseLong(words[2]))
 						Server.getInstance().getWorld().sendPacket(Type.INFO, "EXP Event has ended!");
-					Server.getInstance().getWorld().getServerSetings().setXp(Long.parseLong(words[2]));
+					Server.getInstance().getWorld().getServerSettings().setXp(Long.parseLong(words[2]));
 				}
 				else if(words[1].equals("lime"))
 				{
-					if(Server.getInstance().getWorld().getServerSetings().getLime() < Long.parseLong(words[2]))
+					if(Server.getInstance().getWorld().getServerSettings().getLime() < Long.parseLong(words[2]))
 						Server.getInstance().getWorld().sendPacket(Type.INFO, "Lime Event (x"+words[2]+") started!");
-					else if(Server.getInstance().getWorld().getServerSetings().getLime() > Long.parseLong(words[2]))
+					else if(Server.getInstance().getWorld().getServerSettings().getLime() > Long.parseLong(words[2]))
 						Server.getInstance().getWorld().sendPacket(Type.INFO, "Lime Event has ended!");
-					Server.getInstance().getWorld().getServerSetings().setLime(Long.parseLong(words[2]));
+					Server.getInstance().getWorld().getServerSettings().setLime(Long.parseLong(words[2]));
 					
 				}
 			}
@@ -600,13 +600,13 @@ public class MessageParser {
 							
 							item.setGemNumber(gemNumber);
 							item.setExtraStats(extraStats);
-							item.setDurability(item.getType().getMaxDurability());
+							item.setDurabilityValue(1);
 							item.setUnknown1(unknown1);
 							item.setUnknown2(unknown2);
 						}else{
 							item.setGemNumber(0);
-							item.setExtraStats(item.getType().getMaxExtraStats());
-							item.setDurability(item.getType().getMaxDurability());
+							item.setExtraStats(0);
+							item.setDurabilityValue(1);
 							item.setUnknown1(0);
 							item.setUnknown2(0);
 						}
@@ -642,13 +642,13 @@ public class MessageParser {
 						
 						item.setGemNumber(gemNumber);
 						item.setExtraStats(extraStats);
-						item.setDurability(item.getType().getMaxDurability());
+						item.setDurabilityValue(1);
 						item.setUnknown1(unknown1);
 						item.setUnknown2(unknown2);
 					} else {
 						item.setGemNumber(0);
 						item.setExtraStats(item.getType().getMaxExtraStats());
-						item.setDurability(item.getType().getMaxDurability());
+						item.setDurabilityValue(1);
 						item.setUnknown1(0);
 						item.setUnknown2(0);
 					}
@@ -660,7 +660,7 @@ public class MessageParser {
 					   } else {
 					       player.getClient().sendPacket(Type.SAY, "Inventory full. Please get some space available.");
 					       player.getPosition().getLocalMap().removeEntity(item);
-					       DatabaseUtils.getDinamicInstance().deleteItem(item.getItemId());
+					       item.delete();
 					       return null;
 					   }
 					} else {
@@ -892,9 +892,9 @@ public class MessageParser {
 		} else if (words[0].equals("@mobs_movement") && player.getAdminState() >= 250) {
 			if(words.length == 2){
 				if(words[1].equals("enable") || words[1].equals("1")){
-					Server.getInstance().getWorld().getServerSetings().setMobsMovement(1);
+					Server.getInstance().getWorld().getServerSettings().setMobsMovement(1);
 				} else if(words[1].equals("disable") || words[1].equals("0")){
-					Server.getInstance().getWorld().getServerSetings().setMobsMovement(0);
+					Server.getInstance().getWorld().getServerSettings().setMobsMovement(0);
 				} else if(words[1].equals("restart") || words[1].equals("2")){
 					player.getPosition().getLocalMap().stopMobsAI();
 					player.getPosition().getLocalMap().startMobsAI(1000);

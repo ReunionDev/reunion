@@ -34,14 +34,12 @@ import org.reunionemu.jreunion.game.skills.bulkan.RecoveryBoost;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Service;
 
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
-@DependsOn("database")
 @Service
 public class World extends EventDispatcher implements EventListener, Sendable {
 	
@@ -58,6 +56,9 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 	private Hashtable<SocketChannel, Client> clients = new Hashtable<SocketChannel, Client>();
 
 	private int serverHour;
+	
+	@Autowired
+	Network network;
 
 	private SkillManager skillManager;
 		
@@ -68,7 +69,7 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 	
 	private PetManager petManager;
 
-	static public ServerSetings serverSetings;
+	private ServerSettings serverSettings;
 	
 	@Autowired
 	private Server server;
@@ -80,7 +81,7 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 	
 	@PostConstruct
 	public void init(){
-		serverSetings = new ServerSetings();
+		serverSettings = new ServerSettings();
 		worldCommand = new Command(this);
 		skillManager = new SkillManager();
 		playerManager = new PlayerManager();
@@ -130,8 +131,8 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 	/**
 	 * @return Returns the serverSetings.
 	 */
-	public ServerSetings getServerSetings() {
-		return serverSetings;
+	public ServerSettings getServerSettings() {
+		return serverSettings;
 	}
 
 	/**
@@ -154,12 +155,19 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 			boolean isLocal = item.getMemberValue("Location").equalsIgnoreCase("Local");
 			Map map = null;
 			if(isLocal){
-				map = new LocalMap(this, mapId);
+				LocalMap local = new LocalMap(this, mapId); 
+				local.register(network);
+				if(getServerSettings().doPreloadMaps()){
+					local.load();
+				}				
+				map = local;
+				
 			}
 			else {
-				map = new RemoteMap(mapId);				
+				map = new RemoteMap(mapId);
+				map.load();
 			}
-			map.load();
+			
 			maps.put(mapId, map);
 		}
 		

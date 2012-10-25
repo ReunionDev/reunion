@@ -1,23 +1,23 @@
 package org.reunionemu.jreunion.game.items.equipment;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.reunionemu.jcommon.ParsedItem;
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.LivingObject;
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.Usable;
 import org.reunionemu.jreunion.game.items.SpecialWeapon;
-import org.reunionemu.jreunion.server.DatabaseUtils;
-import org.reunionemu.jreunion.server.Reference;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
+import org.reunionemu.jreunion.server.Reference;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Configurable;
 
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
+@Configurable
 public class ChakuranWeapon extends SpecialWeapon implements Usable{
-	
+		
 	private float memoryDmg;
 	
 	private float demolitionDmg;
@@ -109,7 +109,7 @@ public class ChakuranWeapon extends SpecialWeapon implements Usable{
 				return false;
 			}
 			chakuranWeapon.setExtraStats(usesRemain);
-			DatabaseUtils.getDinamicInstance().saveItem(chakuranWeapon);
+			chakuranWeapon.save();
 			
 			//update player stamina
 			long staminaRemain = player.getStamina() - getStmUsed();

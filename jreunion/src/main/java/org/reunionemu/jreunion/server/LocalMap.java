@@ -8,9 +8,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.reunionemu.jcommon.ParsedItem;
 import org.reunionemu.jcommon.Parser;
 import org.reunionemu.jreunion.events.Event;
@@ -27,7 +26,6 @@ import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.LivingObject;
 import org.reunionemu.jreunion.game.Npc;
 import org.reunionemu.jreunion.game.NpcSpawn;
-import org.reunionemu.jreunion.game.NpcType;
 import org.reunionemu.jreunion.game.Party;
 import org.reunionemu.jreunion.game.Pet;
 import org.reunionemu.jreunion.game.Player;
@@ -40,6 +38,8 @@ import org.reunionemu.jreunion.game.WorldObject;
 import org.reunionemu.jreunion.game.npc.Mob;
 import org.reunionemu.jreunion.server.Area.Field;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Aidamina
@@ -52,6 +52,8 @@ public class LocalMap extends Map implements Runnable{
 	private List<Spawn> playerSpawnList = new Vector<Spawn>();
 	
 	private Area area = new Area();
+	
+	private static Logger logger = LoggerFactory.getLogger(LocalMap.class);
 	
 	private SessionList<Session> sessions = new SessionList<Session>();
 	
@@ -73,6 +75,13 @@ public class LocalMap extends Map implements Runnable{
 
 	private World world;
 	
+	private AtomicBoolean loaded = new AtomicBoolean(false);
+	
+	public boolean isLoaded() {
+		return loaded.get();
+	}
+
+
 	private List<RoamingItem> roamingItemList = new Vector<RoamingItem>();
 	
 	private List<Party> parties = new Vector<Party>();
@@ -85,7 +94,8 @@ public class LocalMap extends Map implements Runnable{
 
 	public LocalMap(World world, int id) {
 		super(id);
-		this.world = world;
+		this.world = world;		
+		super.load();
 		
 		thread = new Thread(this);
 		thread.setDaemon(true);
@@ -96,8 +106,6 @@ public class LocalMap extends Map implements Runnable{
 		this.addEventListener(ItemDropEvent.class, this);
 		this.addEventListener(ItemPickupEvent.class, this);
 		
-		//if(world.getQuestManager().isEmpty())
-		//	world.getQuestManager().loadQuests();
 	}
 	
 	public Entity getEntity(int id) {		
@@ -271,17 +279,15 @@ public class LocalMap extends Map implements Runnable{
 	public Parser getPlayerSpawnReference() {
 		return playerSpawnReference;
 	}
+	
+	public void register(Network network){
+		LoggerFactory.getLogger(LocalMap.class).info("Registering "+getName()+"["+getId()+"] on "+getAddress());
+		network.register(getAddress());
+	}
 
 	public void load() {
-		super.load();
-		thread.setName("Map: "+getName());
-		
+		loaded.set(true);
 		LoggerFactory.getLogger(LocalMap.class).info("Loading "+getName()+"["+getId()+"]");
-		if(!Server.getInstance().getNetwork().register(getAddress())){
-			System.out.println("huh?");
-			return;
-		}
-		
 		playerSpawnReference = new Parser();
 		mobSpawnReference = new Parser();
 		npcSpawnReference = new Parser();
@@ -293,7 +299,7 @@ public class LocalMap extends Map implements Runnable{
 		
 		synchronized(entities){
 		
-			roamingItemList = DatabaseUtils.getDinamicInstance().loadRoamingItems(this);
+			roamingItemList = Database.getInstance().loadRoamingItems(this);
 			for(RoamingItem roamingItem : roamingItemList){
 				//TODO: A better way to manage items going in and out of the map
 				int itemEntityId = createEntityId(roamingItem);
@@ -329,6 +335,7 @@ public class LocalMap extends Map implements Runnable{
 		*/
 		
 		LoggerFactory.getLogger(LocalMap.class).info(getName()+" running on "+getAddress());
+		
 		
 	}
 	
@@ -468,6 +475,15 @@ public class LocalMap extends Map implements Runnable{
 	
 	@Override
 	public void handleEvent(Event event) {
+		if(!isLoaded()){
+			/*
+			 * trick so we don't have to use synchronized
+			 */
+			if(loaded.compareAndSet(false, true)){
+				load();
+			}
+		}
+		
 		//LoggerFactory.getLogger(LocalMap.class).info(event);
 		if(event instanceof MapEvent){
 			LocalMap map = ((MapEvent)event).getMap();
@@ -521,7 +537,7 @@ public class LocalMap extends Map implements Runnable{
 					addRoamingItem(roamingItem);
 				}
 				list.enter(roamingItem, false);	
-				DatabaseUtils.getDinamicInstance().saveRoamingItem(roamingItem);
+				Database.getInstance().saveRoamingItem(roamingItem);
 				list.sendPacket(Type.DROP, roamingItem); 
 				
 			} else
@@ -543,7 +559,7 @@ public class LocalMap extends Map implements Runnable{
 				player.getClient().sendPacket(Type.PICKUP, player);
 				otherPlayersList.sendPacket(Type.PICKUP, player);
 				otherPlayersList.exit(roamingItem, true); //sent to other clients
-				DatabaseUtils.getDinamicInstance().deleteRoamingItem(item);
+				Database.getInstance().deleteRoamingItem(item);
 				
 			} else	
 			if(event instanceof PlayerLoginEvent){
@@ -634,7 +650,9 @@ public class LocalMap extends Map implements Runnable{
 
 	@Override
 	public void run() {
+		thread.setName("Map: "+getName());	
 		while(true){
+			
 			try {
 				synchronized(this){				
 					this.wait();

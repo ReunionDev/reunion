@@ -8,7 +8,7 @@ import org.reunionemu.jreunion.game.LivingObject;
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.Usable;
 import org.reunionemu.jreunion.game.items.SpecialWeapon;
-import org.reunionemu.jreunion.server.DatabaseUtils;
+import org.reunionemu.jreunion.server.Database;
 import org.reunionemu.jreunion.server.Reference;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
 import org.reunionemu.jreunion.server.Server;
@@ -81,7 +81,7 @@ public class SlayerWeapon extends SpecialWeapon implements Usable {
 	
 	public float getDemolition() {
 		return Server.getRand().nextFloat() <= this.getDemolitionDmg() ? 
-				Server.getInstance().getWorld().getServerSetings().getDemolitionModifier() : 1;
+				Server.getInstance().getWorld().getServerSettings().getDemolitionModifier() : 1;
 	}
 
 	public void setDemolitionDmg(float demolitionDmg) {
@@ -115,7 +115,7 @@ public class SlayerWeapon extends SpecialWeapon implements Usable {
 				return false;
 			}
 			slayerWeapon.setExtraStats(usesRemain);
-			DatabaseUtils.getDinamicInstance().saveItem(slayerWeapon);
+			slayerWeapon.save();
 			
 			//update player stamina
 			long staminaRemain = player.getStamina() - getStmUsed();

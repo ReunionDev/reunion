@@ -1,4 +1,4 @@
-package org.reunionemu.jreunion.server.database.model;
+package org.reunionemu.jreunion.server.test.model;
 
 import static org.junit.Assume.*;
 
@@ -41,6 +41,27 @@ public class ItemTest {
 		
 		Assert.assertNotNull(item);		
 		
+	}
+	
+	
+	@Test
+	public void test2() {
+		
+		assumeNotNull(itemManager);
+		
+		int typeId = 724;
+		ItemType type = itemManager.getItemType(typeId);		
+		assumeNotNull(type);
+		
+		Item<?> item = itemManager.create(724);
+		item.save();
+		long id = item.getItemId();
+		
+		item = itemDao.findOne(id);		
+		Assert.assertNotNull(item);
+		item.delete();
+		item = itemDao.findOne(id);
+		Assert.assertNull(item);
 	}
 
 }
