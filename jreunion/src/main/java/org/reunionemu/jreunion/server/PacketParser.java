@@ -265,6 +265,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					for (Map m : Server.getInstance().getWorld().getMaps()) {
 						if (m.getAddress().equals(client.getSocketChannel().socket().getLocalSocketAddress())) {
 							map = m;
+							
 							break;
 						}
 					}
@@ -273,6 +274,10 @@ public class PacketParser extends EventDispatcher implements EventListener{
 						LoggerFactory.getLogger(Command.class).error("Invalid Map: " + map);
 						player.getClient().disconnect();
 						return;
+					}
+					if(!((LocalMap)map).isLoaded()){
+						map.load();
+						
 					}
 					
 					Position savedPosition = Database.getInstance().getSavedPosition(player);
