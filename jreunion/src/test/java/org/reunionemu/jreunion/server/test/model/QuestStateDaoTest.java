@@ -1,4 +1,4 @@
-package org.reunionemu.jreunion.server.database.model;
+package org.reunionemu.jreunion.server.test.model;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assume.assumeNotNull;
 
