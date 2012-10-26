@@ -1,6 +1,6 @@
 package org.reunionemu.jreunion.game;
 
-import java.util.TimerTask;
+import java.util.*;
 
 import org.reunionemu.jreunion.server.*;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
@@ -8,12 +8,15 @@ import org.slf4j.LoggerFactory;
 
 public abstract class RoamingItem extends WorldObject{
 
-	private Player owner;
 	private java.util.Timer deleteTimer = new java.util.Timer();
 	
 	public RoamingItem(){
 		
 	}
+	
+	public abstract Date getCreated();
+	
+	public abstract void setCreated(Date created);
 	
 	@Override
 	public Integer getEntityId() {
@@ -40,13 +43,9 @@ public abstract class RoamingItem extends WorldObject{
 	}
 	
 	
-	public void setOwner(Player owner) {
-		this.owner = owner;
-	}
+	public abstract void setOwner(Player owner);
 
-	public Player getOwner() {
-		return owner;
-	}
+	public abstract Player getOwner();
 
 	public String toString(){
 		StringBuffer buffer = new StringBuffer();

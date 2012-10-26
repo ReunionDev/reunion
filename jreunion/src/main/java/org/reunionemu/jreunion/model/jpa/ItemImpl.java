@@ -1,5 +1,7 @@
 package org.reunionemu.jreunion.model.jpa;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,7 +19,10 @@ import org.reunionemu.jreunion.server.TypeLoader;
 uniqueConstraints={
 		@UniqueConstraint(columnNames = { "id" })
 })
-public class ItemImpl<T extends ItemType> extends Item<T> {
+public class ItemImpl<T extends ItemType> extends Item<T> implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+
 	Long id;
 	
     int typeId;

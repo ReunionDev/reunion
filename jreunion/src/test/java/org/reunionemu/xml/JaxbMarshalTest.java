@@ -1,29 +1,22 @@
 package org.reunionemu.xml;
 
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
+import java.io.*;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.*;
 
 import org.junit.Test;
-import org.reunionemu.jreunion.dao.QuestList;
-import org.reunionemu.jreunion.dao.QuestListImpl;
-import org.reunionemu.jreunion.model.Quest;
-import org.reunionemu.jreunion.model.QuestImpl;
-import org.reunionemu.jreunion.model.quests.rewards.ExperienceReward;
-import org.reunionemu.jreunion.model.quests.rewards.ExperienceRewardImpl;
-import org.reunionemu.jreunion.model.quests.rewards.ItemReward;
-import org.reunionemu.jreunion.model.quests.rewards.ItemRewardImpl;
-import org.reunionemu.jreunion.model.quests.rewards.LimeReward;
-import org.reunionemu.jreunion.model.quests.rewards.LimeRewardImpl;
+import org.reunionemu.jreunion.dao.*;
+import org.reunionemu.jreunion.model.*;
+import org.reunionemu.jreunion.model.quests.rewards.*;
+import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 
 
 public class JaxbMarshalTest {
+	
+	Logger logger = LoggerFactory.getLogger(JaxbMarshalTest.class);
 	
 	@Autowired
 	ApplicationContext context;
@@ -104,11 +97,13 @@ public class JaxbMarshalTest {
 		
 		marshaller.marshal(list, baos);
 		byte [] xml = baos.toByteArray();
-		System.out.println(new String(xml));
+	
+		logger.debug(new String(xml));
 		
 		QuestList quests = (QuestList)unmarshaller.unmarshal(new ByteArrayInputStream(xml));
 		for(Quest quest: quests){
-			System.out.println(quest.getName());
+			logger.debug(quest.getName());
+		
 		}
 		
 	}

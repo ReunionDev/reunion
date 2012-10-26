@@ -1,85 +1,37 @@
 package org.reunionemu.jreunion.model.jpa;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import java.io.Serializable;
+import java.util.Date;
 
-import org.reunionemu.jreunion.game.Item;
-import org.reunionemu.jreunion.game.Position;
-import org.reunionemu.jreunion.game.RoamingItem;
-import org.reunionemu.jreunion.server.Map;
-import org.reunionemu.jreunion.server.World;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
+import javax.persistence.*;
+import javax.persistence.Entity;
+
+import org.reunionemu.jreunion.game.*;
+import org.reunionemu.jreunion.server.*;
+import org.springframework.beans.factory.annotation.*;
+
 @Entity
 @Table(name="roaming",
 uniqueConstraints={
 		@UniqueConstraint(columnNames = { "itemid" })
 })
-public class RoamingItemImpl extends RoamingItem {
-
-	protected RoamingItemImpl(){		
-	}
+public class RoamingItemImpl extends RoamingItem implements Serializable {
 	
-	public RoamingItemImpl(Item<?> item, Position position) {
-		setItem(item);
-		setPosition(position);
-	}
-
-	private Item<?> item;
+	private static final long serialVersionUID = 1L;
+	/*
+	Long itemId;	
+	
 	
 	@Id
-	@OneToOne(cascade = {}, fetch = FetchType.EAGER, optional = false, targetEntity = ItemImpl.class)
-	public Item<?> getItem() {
-		return item;
+	@Column(name = "itemid", nullable = false)
+	public Long getItemId() {
+		return itemId;
 	}
 
-	public void setItem(Item<?> item) {
-		this.item = item;
-	}
+	public void setItemId(Long itemId) {
+		this.itemId = itemId;
+	}*/
 
-	@Column
-	public int getMapId() {
-		return getPosition().getMap().getId();
-	}
-	public void setMapId(int mapId) {
-		this.setPosition(getPosition().setMap(new MapLoader().getMapFromId(mapId)));
-	}
-	@Column
-	public int getX() {
-		return getPosition().getX();
-	}
-	public void setX(int x) {
-		this.setPosition(getPosition().setX(x));
-	}
-	@Column
-	public int getY() {
-		return getPosition().getY();
-	}
-	public void setY(int y) {
-		this.setPosition(getPosition().setY(y));
-	}
-	@Column
-	public int getZ() {
-		return getPosition().getZ();
-	}
-
-	public void setZ(int z) {
-		this.setPosition(getPosition().setZ(z));
-	}
-	@Column
-	public double getRotation() {
-		return getPosition().getRotation();
-	}
-
-	public void setRotation(double rotation) {
-		this.setPosition(getPosition().setRotation(rotation));;
-	}
-	
 	@Configurable
 	private static class MapLoader {
 		@Autowired
@@ -87,8 +39,98 @@ public class RoamingItemImpl extends RoamingItem {
 		
 		public Map getMapFromId(int mapId){
 			return world.getMap(mapId);
-		}	
+		}
+	}
+	
+	Date created;
+	
+	Player owner;
+	
+	private Item<?> item;
+
+	protected RoamingItemImpl(){		
+	}
+	
+	public RoamingItemImpl(Item<?> item, Position position) {
+		setItem(item);
+		setPosition(position);
+		setCreated(new Date());
+	}
+
+	@Column
+	@Override
+	public Date getCreated() {
+		return created;
+	}	
+
+	@Id
+	@OneToOne(targetEntity=ItemImpl.class,cascade={})
+    @JoinColumn(name = "itemid")
+	public Item<?> getItem() {
+		return item;
+	}
+	
+	@Column
+	public int getMapId() {
+		if(getPosition()!=null&&getPosition().getMap()!=null){
+			return getPosition().getMap().getId();
+		}
+		return -1;
+	}
+	@Transient
+	@Override
+	public Player getOwner() {
+		return owner;
+	}
+	@Column
+	public double getRotation() {
+		return getPosition().getRotation();
+	}
+	@Column
+	public int getX() {
+		return getPosition().getX();
+	}
+	@Column
+	public int getY() {
+		return getPosition().getY();
+	}
+	@Column
+	public int getZ() {
+		return getPosition().getZ();
+	}
+
+	@Override
+	public void setCreated(Date created) {
+		this.created = created;
 		
+	}
+	public void setItem(Item<?> item) {
+		this.item = item;
+	}
+
+	public void setMapId(int mapId) {
+		this.setPosition(getPosition().setMap(new MapLoader().getMapFromId(mapId)));
+	}
+	
+	@Override
+	public void setOwner(Player owner) {
+		this.owner = owner;
+	}
+
+	public void setRotation(double rotation) {
+		this.setPosition(getPosition().setRotation(rotation));;
+	}
+
+	public void setX(int x) {
+		this.setPosition(getPosition().setX(x));
+	}
+
+	public void setY(int y) {
+		this.setPosition(getPosition().setY(y));
+	}
+
+	public void setZ(int z) {
+		this.setPosition(getPosition().setZ(z));
 	}	
 	
 }
