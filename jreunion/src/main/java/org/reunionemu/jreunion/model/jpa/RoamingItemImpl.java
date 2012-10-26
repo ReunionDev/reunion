@@ -18,10 +18,9 @@ uniqueConstraints={
 public class RoamingItemImpl extends RoamingItem implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
-	/*
-	Long itemId;	
 	
-	
+	private Long itemId;	
+		
 	@Id
 	@Column(name = "itemid", nullable = false)
 	public Long getItemId() {
@@ -30,7 +29,7 @@ public class RoamingItemImpl extends RoamingItem implements Serializable {
 
 	public void setItemId(Long itemId) {
 		this.itemId = itemId;
-	}*/
+	}
 
 	@Configurable
 	private static class MapLoader {
@@ -63,8 +62,8 @@ public class RoamingItemImpl extends RoamingItem implements Serializable {
 		return created;
 	}	
 
-	@Id
-	@OneToOne(targetEntity=ItemImpl.class,cascade={})
+	@MapsId
+	@OneToOne(targetEntity=ItemImpl.class,cascade={CascadeType.ALL})
     @JoinColumn(name = "itemid")
 	public Item<?> getItem() {
 		return item;
