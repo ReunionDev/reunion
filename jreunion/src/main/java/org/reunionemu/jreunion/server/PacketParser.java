@@ -299,7 +299,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 							
 					}
 					
-					player.getPosition().setMap((LocalMap)map);
+					player.setPosition(player.getPosition().setMap(map));
 					world.getPlayerManager().addPlayer(player);
 					
 					Database.getInstance().loadStash(client);
@@ -707,8 +707,8 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					int posy = (int) Float.parseFloat(message[2]);
 	
 					Position position = player.getPosition().clone();
-					position.setX(posx);
-					position.setY(posy);
+					position = position.setX(posx);
+					position = position.setY(posy);
 					com.GoToPos(player, position);
 					
 				} else if (message[0].equals("use_quick")) { //2007 client

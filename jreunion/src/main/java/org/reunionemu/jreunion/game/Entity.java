@@ -6,7 +6,7 @@ package org.reunionemu.jreunion.game;
  */
 public interface Entity  {
 
-	public int getEntityId();
-	public void setEntityId(int id);
+	public Integer getEntityId();
+	public void setEntityId(Integer id);
 
 }

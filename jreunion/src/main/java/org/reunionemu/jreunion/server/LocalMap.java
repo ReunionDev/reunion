@@ -91,6 +91,11 @@ public class LocalMap extends Map implements Runnable{
 	public World getWorld() {
 		return world;
 	}
+	
+	//Bogus constructor for mocking
+	public LocalMap(int id){
+		super(id);
+	}
 
 	public LocalMap(World world, int id) {
 		super(id);

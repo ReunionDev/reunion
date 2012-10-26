@@ -293,9 +293,9 @@ public class Pet extends LivingObject {
 	public void setPosition(Position position) {
 		if(position == null)
 			return;
-		this.position = position.clone();
-		this.position.setX(this.position.getX() + 10);
-		this.position.setY(this.position.getY() + 10);
+		
+		this.position = this.position.setX(position.getX() + 10);
+		this.position = this.position.setY(position.getY() + 10);
 	}
 	
 	public static enum PetStatus {

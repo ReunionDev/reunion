@@ -1,18 +1,21 @@
 package org.reunionemu.jreunion.game;
 
-import org.reunionemu.jreunion.server.LocalMap;
-import org.reunionemu.jreunion.server.Map;
+import org.reunionemu.jreunion.server.*;
 
-public class Position {
+public final class Position {
 	
-	private int x;
-	private int y;
-	private int z;	
-	private Map map;
-	private double rotation;
+	private final int x;
+	private final int y;
+	private final int z;	
+	private final Map map;
+	private final double rotation;
 	
 	public Position(){
-		
+		x = 0;
+		y = 0;
+		z = 0;
+		map = null;
+		rotation = 0;		
 	}
 
 	public Position(int x, int y, int z, Map map, double rotation) {
@@ -35,13 +38,13 @@ public class Position {
 			throw new RuntimeException("Can not calculate distance between two positions on different maps: "+this.getLocalMap()+", "+position.getLocalMap());			
 		}
 		
-		double xd =this.getX() - position.getX();
+		double xd = this.getX() - position.getX();
 				
 		double yd = this.getY() - position.getY();
 		
 		double zd = this.getZ() - position.getZ();
 		
-		return  Math.sqrt((xd * xd) + (yd * yd));
+		return  Math.sqrt((xd * xd) + (yd * yd)+ (zd * zd));
 		
 	}
 	// *within* doesn't use distance because Math.sqrt is expensive and unnecesary for this
@@ -53,7 +56,7 @@ public class Position {
 		
 		double zd = this.getZ() - position.getZ();
 		
-		return (xd * xd) + (yd * yd)  + (zd * zd) < (range*range);
+		return (xd * xd) + (yd * yd)  + (zd * zd) <= (range*range);
 		
 	}
 
@@ -86,24 +89,24 @@ public class Position {
 		return x;
 	}
 
-	public void setX(int x) {
-		this.x = x;
+	public Position setX(int x) {
+		return new Position(x, y, z, map, rotation);
 	}
 
 	public int getY() {
 		return y;
 	}
 
-	public void setY(int y) {
-		this.y = y;
+	public Position setY(int y) {
+		return new Position(x, y, z, map, rotation);
 	}
 
 	public int getZ() {
 		return z;
 	}
 
-	public void setZ(int z) {
-		this.z = z;
+	public Position setZ(int z) {
+		return new Position(x, y, z, map, rotation);
 	}
 
 	public LocalMap getLocalMap() {
@@ -114,16 +117,60 @@ public class Position {
 		return map;
 	}
 
-	public void setMap(Map map) {
-		this.map = map;
+	public Position setMap(Map map) {
+		return new Position(x, y, z, map, rotation);
 	}
 	
 	public double getRotation() {
 		return this.rotation;
 	}
 
-	public void setRotation(double rotation) {
-		this.rotation = rotation;
+	public Position setRotation(double rotation) {
+		return new Position(x, y, z, map, rotation);
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if(!(obj instanceof Position)){
+			return false;
+		}
+		if(obj==this){
+			return true;
+		}
+		Position other = (Position)obj;
+		if(getX()!=other.getX()){
+			return false;
+		}
+		if(getY()!=other.getY()){
+			return false;
+		}
+		if(getZ()!=other.getZ()){
+			return false;
+		}
+		if(getRotation()!=other.getRotation()){
+			return false;
+		}
+		if(getMap()==null&&other.getMap()!=null){
+			return false;
+		}
+		if(getMap()!=null&&other.getMap()==null){
+			return false;
+		}
+		if(getMap()!=null&&other.getMap()!=null){
+			return getMap().equals(other.getMap());
+		}
+		return true;
+	}
+	
+	@Override
+	public int hashCode() {
+		int hash = 7;
+		hash = 31 * hash + x;
+		hash = 31 * hash + y;
+		hash = 31 * hash + z;
+		hash = (int) (31 * hash + Double.doubleToLongBits(rotation));
+		hash = 31 * hash + (null == map ? 0 : map.hashCode());
+		return hash;
 	}
 	
 

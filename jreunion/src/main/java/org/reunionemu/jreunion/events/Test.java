@@ -37,8 +37,8 @@ public class Test extends EventDispatcher implements EventListener,Runnable {
 		
 		Position position1 = new Position();
 		Position position2 = new Position();
-		position2.setX(10);
-		position2.setY(10);
+		position2 = position2.setX(10);
+		position2 = position2.setY(10);
 		
 		LoggerFactory.getLogger(Test.class).info(""+position1.distance(position2));
 		LoggerFactory.getLogger(Test.class).info(""+position1.distance(position2));

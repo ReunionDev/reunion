@@ -14,8 +14,8 @@ import org.reunionemu.jreunion.server.SessionList;
  */
 public abstract class WorldObject extends EventDispatcher implements Entity {
 	
-	private int id = -1;
-	public int getEntityId() {
+	private Integer id;
+	public Integer getEntityId() {
 		return id;
 	}
 	
@@ -25,7 +25,7 @@ public abstract class WorldObject extends EventDispatcher implements Entity {
 		return interested;
 	}
 
-	public void setEntityId(int id) {
+	public void setEntityId(Integer id) {
 		this.id = id;		
 	}
 	

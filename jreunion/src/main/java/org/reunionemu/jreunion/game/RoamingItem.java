@@ -2,31 +2,33 @@ package org.reunionemu.jreunion.game;
 
 import java.util.TimerTask;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.reunionemu.jreunion.server.Database;
-import org.reunionemu.jreunion.server.LocalMap;
+import org.reunionemu.jreunion.server.*;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
-import org.reunionemu.jreunion.server.Session;
-import org.reunionemu.jreunion.server.SessionList;
+import org.slf4j.LoggerFactory;
 
-public class RoamingItem extends WorldObject{
+public abstract class RoamingItem extends WorldObject{
 
-	private Item<?> item;
 	private Player owner;
 	private java.util.Timer deleteTimer = new java.util.Timer();
 	
-	public RoamingItem(Item<?> item) {
-		this.setItem(item);
-		this.setEntityId(item.getEntityId());
-	}	
+	public RoamingItem(){
+		
+	}
 	
-	private void setItem(Item<?> item) {
-		this.item = item;
+	@Override
+	public Integer getEntityId() {
+		return getItem().getEntityId();
 	}
-	public Item<?> getItem() {
-		return item;
+	
+	@Override
+	public void setEntityId(Integer id) {
+		getItem().setEntityId(id);
 	}
+		
+	protected abstract void setItem(Item<?> item);
+	
+	public abstract Item<?> getItem();
+	
 	@Override
 	public void enter(Session session) {
 		session.getOwner().getClient().sendPacket(Type.IN_ITEM, this);

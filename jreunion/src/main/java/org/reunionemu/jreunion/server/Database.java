@@ -34,6 +34,7 @@ import org.reunionemu.jreunion.game.StashItem;
 import org.reunionemu.jreunion.game.StashPosition;
 import org.reunionemu.jreunion.game.items.pet.PetEquipment;
 import org.reunionemu.jreunion.game.items.pet.PetEquipment.PetSlot;
+import org.reunionemu.jreunion.model.jpa.RoamingItemImpl;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -862,9 +863,10 @@ public class Database {
 				if (item==null)
 					stmt.execute("DELETE FROM `roaming` WHERE itemid="+itemid);
 				else{
-					RoamingItem roamingItem = new RoamingItem(item);
+					
 					Position position = new Position(rs.getInt("x"), rs.getInt("y"), rs.getInt("z"), map, rs.getDouble("rotation"));
-					roamingItem.setPosition(position);
+					RoamingItem roamingItem = new RoamingItemImpl(item, position);
+					
 					items.add(roamingItem);
 				}
 			}

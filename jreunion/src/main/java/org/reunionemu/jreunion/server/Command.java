@@ -21,6 +21,7 @@ import org.reunionemu.jreunion.game.Skill;
 import org.reunionemu.jreunion.game.Usable;
 import org.reunionemu.jreunion.game.items.equipment.SlayerWeapon;
 import org.reunionemu.jreunion.model.Account;
+import org.reunionemu.jreunion.model.jpa.RoamingItemImpl;
 import org.reunionemu.jreunion.server.Client.LoginType;
 import org.reunionemu.jreunion.server.Client.State;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
@@ -137,9 +138,7 @@ public class Command {
 	
 	public RoamingItem dropItem(Position position, Item<?> item, Player player) {
 		
-		RoamingItem roamingItem = new RoamingItem(item);
-		roamingItem.setPosition(position);
-		
+		RoamingItem roamingItem = new RoamingItemImpl(item, position);				
 		
 		LocalMap map = position.getLocalMap();
 		

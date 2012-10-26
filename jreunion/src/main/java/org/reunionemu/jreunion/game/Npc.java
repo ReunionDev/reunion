@@ -511,8 +511,8 @@ public class Npc<T extends NpcType> extends LivingObject {
 			directionAngle = (int)(Server.getRand().nextFloat()*100);
 		}
 		
-		newPosition.setX(getRandomPosX(directionAngle));
-		newPosition.setY(getRandomPosY(directionAngle));
+		newPosition = newPosition.setX(getRandomPosX(directionAngle));
+		newPosition = newPosition.setY(getRandomPosY(directionAngle));
 		
 		return newPosition;
 	}
@@ -549,8 +549,8 @@ public class Npc<T extends NpcType> extends LivingObject {
 		newPosX = (newPosX == 0) ? newPosition.getX() : newPosX;
 		newPosY = (newPosY == 0) ? newPosition.getY() : newPosY;
 		
-		newPosition.setX(newPosX);
-		newPosition.setY(newPosY);
+		newPosition = newPosition.setX(newPosX);
+		newPosition = newPosition.setY(newPosY);
 		
 		if(!isPathWalkable(newPosition)){
 			setIsRunning(false);
@@ -577,8 +577,8 @@ public class Npc<T extends NpcType> extends LivingObject {
 			posX = (posX == 0) ? newPos.getX() : posX;
 			posY = (posY == 0) ? newPos.getY() : posY;
 			
-			newPos.setX(posX);
-			newPos.setY(posY);
+			newPos = newPos.setX(posX);
+			newPos = newPos.setY(posY);
 			
 			if(!mobArea.get(posX / 10, posY / 10,Field.MOB) || isNpcCollision(newPos)){
 				return false;

@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Configurable;
 @Configurable
 public abstract class Item<T extends ItemType> implements Entity{
 	
-	private int entityId = -1;
+	private Integer entityId;
 			
 	private int unknown1;
 	
@@ -47,7 +47,7 @@ public abstract class Item<T extends ItemType> implements Entity{
 	
 	public abstract T getType();
 	
-	public int getEntityId() {
+	public Integer getEntityId() {
 		return entityId;
 	}
 	
@@ -55,7 +55,7 @@ public abstract class Item<T extends ItemType> implements Entity{
 	
 	public abstract void setItemId(long itemId);
 
-	public void setEntityId(int entityId) {
+	public void setEntityId(Integer entityId) {
 		this.entityId = entityId;
 	}
 

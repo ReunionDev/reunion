@@ -704,8 +704,8 @@ public class MessageParser {
 				//Mob mobType = (Mob)Npc.create(Integer.parseInt(words[1]));
 				Npc<?> mob = client.getWorld().getNpcManager().create(Integer.parseInt(words[1]));
 				
-				mob.getPosition().setX(player.getPosition().getX() + 10);
-				mob.getPosition().setY(player.getPosition().getY() + 10);
+				mob.setPosition(mob.getPosition().setX(player.getPosition().getX() + 10));
+				mob.setPosition(mob.getPosition().setY(player.getPosition().getY() + 10));
 				mob.setIsRunning(true);
 				mob.setMutantType(Integer.parseInt(words[2]));
 				mob.setUnknown1(Integer.parseInt(words[3]));
