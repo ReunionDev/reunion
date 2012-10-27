@@ -49,7 +49,8 @@ public class Session extends EventDispatcher implements EventListener{
 	public boolean contains(Position position) {		
 		
 		Player owner = getOwner();
-		return owner.getPosition().distance(position)<owner.getSessionRadius();
+		return owner.getPosition().within(position, owner.getSessionRadius());
+		//return owner.getPosition().distance(position)< owner.getSessionRadius();
 
 	}
 
