@@ -16,9 +16,9 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
         http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
 	
-	<context:component-scan base-package="org.reunionemu.jreunion" />	
-	<context:annotation-config />
 	<context:spring-configured/>
+	<context:annotation-config />
+	<context:component-scan base-package="org.reunionemu.jreunion" />	
 		 
 	<mvc:annotation-driven />
 	

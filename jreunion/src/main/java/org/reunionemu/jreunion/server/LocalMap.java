@@ -478,7 +478,6 @@ public class LocalMap extends Map implements Runnable{
 				SessionList<Session> list = GetSessions(entity.getPosition());
 				
 				synchronized(entities) {
-					
 					list.enter(entity, false);
 				}
 				
@@ -502,7 +501,7 @@ public class LocalMap extends Map implements Runnable{
 					}
 				
 				} else {
-					list.sendPacket(Type.IN_NPC, entity);				
+					list.sendPacket(Type.IN_NPC, entity, true);				
 				}
 				entity.update();
 				
