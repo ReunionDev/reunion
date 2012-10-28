@@ -45,7 +45,7 @@ public class SemiAutomatic extends Skill implements Modifier{
 			if(player.getSkillLevel(this)==0)
 				return false;
 			Item<?> weapon= player.getEquipment().getMainHand();
-			return weapon!=null && getWeaponType().isInstance(weapon);			
+			return weapon!=null && weapon.getType().getClass().equals(getWeaponType());			
 		}		
 		return false;		
 	}
@@ -57,11 +57,12 @@ public class SemiAutomatic extends Skill implements Modifier{
 	
 		Item<?> weapon = player.getEquipment().getMainHand();
 		
-		if(weapon!=null&&getWeaponType().isInstance(weapon)){
+		if(weapon!=null && weapon.getType().getClass().equals(getWeaponType())){
 		
 			int level = player.getSkillLevel(this);
 			if(level>0){
 				successRate += (0.05+((level-1)*getSuccessRateModifier()));
+
 				if(Tools.successRateCalc(successRate)){//success rate of multi_shot
 					//here we test if the success rate is above 50%.
 					//if true, then player fires 3 shots, if not the player fire2 only 2 shots.
