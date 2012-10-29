@@ -39,15 +39,15 @@ public class RoamingItemTest {
 		
 		assumeNotNull(type);
 		
-		Item<?> item = itemManager.create(724);
-		item.save();
+		Item<?> old = itemManager.create(724);
+		Item<?> item = old.save();
 		assumeNotNull(item);
+		
+		assumeNotNull(item.getItemId());
 		
 		
 		RoamingItem ri = new RoamingItemImpl(item, new Position(0,0,0,map,0));
-		
-		
-		
+				
 		roamingItemDao.save(ri);
 		
 		

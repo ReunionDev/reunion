@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.persistence.*;
 import javax.persistence.Entity;
 
+import org.reunionemu.jreunion.dao.ItemDao;
 import org.reunionemu.jreunion.game.*;
 import org.reunionemu.jreunion.server.*;
 import org.springframework.beans.factory.annotation.*;
@@ -22,13 +23,13 @@ public class RoamingItemImpl extends RoamingItem implements Serializable {
 	private Long itemId;	
 		
 	@Id
-	@Column(name = "itemid", nullable = false)
+	@Column(name = "itemid", unique = true, nullable = false)
 	public Long getItemId() {
 		return itemId;
 	}
 
 	public void setItemId(Long itemId) {
-		this.itemId = itemId;
+		this.itemId = itemId;		
 	}
 
 	@Configurable
@@ -55,17 +56,22 @@ public class RoamingItemImpl extends RoamingItem implements Serializable {
 		setPosition(position);
 		setCreated(new Date());
 	}
-
+	
 	@Column
 	@Override
 	public Date getCreated() {
 		return created;
 	}	
 
-	@MapsId
-	@OneToOne(targetEntity=ItemImpl.class,cascade={CascadeType.ALL})
-    @JoinColumn(name = "itemid")
+	//@MapsId
+    //@Cascade({CascadeType.SAVE_UPDATE})
+	//@OneToOne(targetEntity=ItemImpl.class, fetch=FetchType.LAZY)
+    //@JoinColumn(name = "itemid")
+	@Transient
 	public Item<?> getItem() {
+		if(item==null&&itemId!=null){
+			item = (Item<?>) new GenericLoader().getObject(ItemDao.class).findOne(itemId);			
+		}
 		return item;
 	}
 	
@@ -105,6 +111,11 @@ public class RoamingItemImpl extends RoamingItem implements Serializable {
 	}
 	public void setItem(Item<?> item) {
 		this.item = item;
+		if(item==null){
+			this.itemId = null;
+		}else{
+			this.itemId = item.getItemId();
+		}
 	}
 
 	public void setMapId(int mapId) {

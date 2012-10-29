@@ -253,9 +253,8 @@ public abstract class Item<T extends ItemType> implements Entity{
 
 	public abstract void setDurabilityValue(double durability);
 
-	public void save() {
-		itemDao.save(this);
-		
+	public Item<T> save() {
+		return itemDao.save(this);		
 	}
 
 	public void delete() {
