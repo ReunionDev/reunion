@@ -1,6 +1,7 @@
 package org.reunionemu.jreunion.server.test.model;
 
 import static org.junit.Assume.assumeNotNull;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -39,17 +40,23 @@ public class RoamingItemTest {
 		
 		assumeNotNull(type);
 		
-		Item<?> old = itemManager.create(724);
-		Item<?> item = old.save();
+		Item<?> item = itemManager.create(724);
 		assumeNotNull(item);
 		
 		assumeNotNull(item.getItemId());
 		
 		
-		RoamingItem ri = new RoamingItemImpl(item, new Position(0,0,0,map,0));
-				
-		roamingItemDao.save(ri);
-		
+		RoamingItem ri = new RoamingItemImpl(item, new Position(0, 0, 0, map, 0));
+		assertEquals(ri.getItem().getItemId(), item.getItemId());				
+		ri = roamingItemDao.save(ri);
+		ri = roamingItemDao.findOne(item.getItemId());
+		assertNotNull(ri);
+		ri.delete();
+		ri = roamingItemDao.findOne(item.getItemId());
+		assertNull(ri);
+		item = itemDao.findOne(item.getItemId());
+		assertNotNull(ri);
+
 		
 	}
 	
