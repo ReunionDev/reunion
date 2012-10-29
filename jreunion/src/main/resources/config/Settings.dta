@@ -15,7 +15,7 @@ SpawnAttempts = 3
 CriticalMultiplier = 1		# 1 = 100%
 CriticalChance = 0.5		# 1 = 100%
 PetEquipmentCompensation = 0.3	# 0.3 = 30%
-PetBreedTime = 7200		# value in seconds = 20 hours
+PetBreedTime = 72000		# value in seconds = 20 hours
 ItemPlusByOne = 0.05		# 0.05 = 5%
 ItemPlusByTwo = 0.01		# 0.01 = 1%
 MobMutantChance = 0.1		# 0.1 = 10%

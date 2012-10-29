@@ -32,7 +32,7 @@ public class WhirlwindSlash extends WeaponAttack implements Castable, Effectable
 		
 		Item<?> weapon = player.getEquipment().getMainHand();
 		
-		if(weapon!=null&&getWeaponType().isInstance(weapon)){
+		if(weapon!=null && weapon.getType().getClass().equals(getWeaponType())){
 		
 			int level = player.getSkillLevel(this);
 			if(level>0){

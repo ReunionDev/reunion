@@ -45,7 +45,7 @@ public abstract class RingWeaponMastery extends Skill implements Modifier {
 		float modifier = 1;
 		Item<?> weapon  = player.getEquipment().getMainHand();
 			
-		if(weapon != null&&getWeaponType().isInstance(weapon.getType())){		
+		if(weapon != null && weapon.getType().getClass().equals(getWeaponType())){		
 			int level = player.getSkillLevel(this);
 			if(level>0){
 				modifier += (0.1+((level-1)*getDamageModifier()));			
@@ -61,7 +61,7 @@ public abstract class RingWeaponMastery extends Skill implements Modifier {
 			if(player.getSkillLevel(this)==0)
 				return false;
 			Item<?> weapon = player.getEquipment().getMainHand();
-			return weapon!=null && getWeaponType().isInstance(weapon);			
+			return weapon!=null && weapon.getType().getClass().equals(getWeaponType());			
 		}		
 		return false;	
 	}
