@@ -9,7 +9,7 @@ import org.reunionemu.jreunion.model.quests.ObjectiveImpl;
 
 /**
  * @author Aidamina
- * @license http://reunion.googlecode.com/svn/trunk/license.txt
+ * @license https://raw.github.com/ReunionDev/reunion/master/license.txt
  */
 @XmlType(name="points")
 public class PointsObjectiveImpl extends ObjectiveImpl implements PointsObjective {

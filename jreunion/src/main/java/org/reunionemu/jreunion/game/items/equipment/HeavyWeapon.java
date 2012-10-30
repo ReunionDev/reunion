@@ -4,7 +4,7 @@ import org.reunionemu.jreunion.game.items.SpecialWeapon;
 
 /**
  * @author Aidamina
- * @license http://reunion.googlecode.com/svn/trunk/license.txt
+ * @license https://raw.github.com/ReunionDev/reunion/master/license.txt
  */
 public class HeavyWeapon extends SpecialWeapon {
 	public HeavyWeapon(int id) {

@@ -7,7 +7,7 @@ import org.reunionemu.jreunion.model.quests.objectives.ObjectiveState;
 
 /**
  * @author Aidamina
- * @license http://reunion.googlecode.com/svn/trunk/license.txt
+ * @license https://raw.github.com/ReunionDev/reunion/master/license.txt
  */
 
 public class CounterObjectiveState extends ObjectiveStateImpl implements ObjectiveState {

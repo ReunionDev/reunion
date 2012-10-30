@@ -1,7 +1,7 @@
 package org.reunionemu.jreunion.events;
 /**
  * @author Aidamina
- * @license http://reunion.googlecode.com/svn/trunk/license.txt
+ * @license https://raw.github.com/ReunionDev/reunion/master/license.txt
  */
 public interface EventListener {
 	public void handleEvent(Event event);

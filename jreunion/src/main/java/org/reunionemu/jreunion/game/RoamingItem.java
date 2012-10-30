@@ -7,7 +7,10 @@ import org.reunionemu.jreunion.server.*;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.*;
-
+/**
+ * @author Aidamina
+ * @license https://raw.github.com/ReunionDev/reunion/master/license.txt
+ */
 @Configurable
 public abstract class RoamingItem extends WorldObject{
 	

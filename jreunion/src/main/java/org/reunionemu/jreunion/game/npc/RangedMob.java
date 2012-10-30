@@ -3,7 +3,7 @@ package org.reunionemu.jreunion.game.npc;
 
 /**
  * @author Aidamina
- * @license http://reunion.googlecode.com/svn/trunk/license.txt
+ * @license https://raw.github.com/ReunionDev/reunion/master/license.txt
  */
 public class RangedMob extends Mob {
 	public RangedMob(int type) {

@@ -4,7 +4,7 @@ import org.reunionemu.jreunion.game.Player;
 
 /**
  * @author Aidamina
- * @license http://reunion.googlecode.com/svn/trunk/license.txt
+ * @license https://raw.github.com/ReunionDev/reunion/master/license.txt
  */
 public interface Restriction {
 

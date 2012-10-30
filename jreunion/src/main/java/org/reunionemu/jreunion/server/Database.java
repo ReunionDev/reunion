@@ -1,48 +1,27 @@
 package org.reunionemu.jreunion.server;
 
 import java.nio.channels.SocketChannel;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Vector;
+import java.sql.*;
+import java.util.*;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
+import javax.annotation.*;
 import javax.sql.DataSource;
 
 import org.reunionemu.jreunion.dao.ItemDao;
-import org.reunionemu.jreunion.game.Equipment;
+import org.reunionemu.jreunion.game.*;
 import org.reunionemu.jreunion.game.Equipment.Slot;
-import org.reunionemu.jreunion.game.ExchangeItem;
-import org.reunionemu.jreunion.game.HandPosition;
-import org.reunionemu.jreunion.game.InventoryItem;
-import org.reunionemu.jreunion.game.InventoryPosition;
-import org.reunionemu.jreunion.game.Item;
-import org.reunionemu.jreunion.game.Pet;
-import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.Player.Race;
 import org.reunionemu.jreunion.game.Player.Sex;
-import org.reunionemu.jreunion.game.Position;
-import org.reunionemu.jreunion.game.QuickSlotItem;
-import org.reunionemu.jreunion.game.QuickSlotPosition;
-import org.reunionemu.jreunion.game.RoamingItem;
-import org.reunionemu.jreunion.game.Skill;
-import org.reunionemu.jreunion.game.StashItem;
-import org.reunionemu.jreunion.game.StashPosition;
-import org.reunionemu.jreunion.game.items.pet.PetEquipment;
+import org.reunionemu.jreunion.game.items.pet.*;
 import org.reunionemu.jreunion.game.items.pet.PetEquipment.PetSlot;
-import org.reunionemu.jreunion.model.jpa.RoamingItemImpl;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 /**
  * @author Aidamina
- * @license http://reunion.googlecode.com/svn/trunk/license.txt
+ * 
+ * @license https://raw.github.com/ReunionDev/reunion/master/license.txt
  */
 @Service
 public class Database {
@@ -829,41 +808,6 @@ public class Database {
 			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			return;
 		}
-	}
-	
-	public List<RoamingItem> loadRoamingItems(LocalMap map){
-		
-		List<RoamingItem> items = new Vector<RoamingItem>();
-	
-		Statement stmt;
-		try {
-			stmt = connection.createStatement();
-			
-			ResultSet rs = stmt.executeQuery("SELECT * FROM `roaming` WHERE `mapid` = "+map.getId()+";");
-			
-			while (rs.next()) 
-			{
-				int itemid = rs.getInt("itemid");
-				Item<?> item = itemDao.findOne((long)itemid);
-				
-				if (item==null)
-					stmt.execute("DELETE FROM `roaming` WHERE itemid="+itemid);
-				else{
-					
-					Position position = new Position(rs.getInt("x"), rs.getInt("y"), rs.getInt("z"), map, rs.getDouble("rotation"));
-					RoamingItem roamingItem = new RoamingItemImpl(item, position);
-					
-					items.add(roamingItem);
-				}
-			}
-			
-		} catch (SQLException e) {
-			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
-			return null;
-		}
-	
-	
-		return items;		
 	}
 		
 	public  void saveSkills(Player player) {

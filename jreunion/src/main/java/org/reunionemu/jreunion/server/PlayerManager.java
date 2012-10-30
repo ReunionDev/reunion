@@ -8,7 +8,7 @@ import org.reunionemu.jreunion.server.Client.State;
 
 /**
  * @author Aidamina
- * @license http://reunion.googlecode.com/svn/trunk/license.txt
+ * @license https://raw.github.com/ReunionDev/reunion/master/license.txt
  */
 public class PlayerManager {
 	private final java.util.List<Player> playerList = new Vector<Player>();

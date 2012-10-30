@@ -36,7 +36,7 @@ import org.springframework.stereotype.Service;
 
 /**
  * @author Aidamina
- * @license http://reunion.googlecode.com/svn/trunk/license.txt
+ * @license https://raw.github.com/ReunionDev/reunion/master/license.txt
  */
 @Service
 public class Network extends EventDispatcher implements Runnable, EventListener {

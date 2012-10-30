@@ -10,7 +10,7 @@ import org.reunionemu.jreunion.server.Session;
 import org.reunionemu.jreunion.server.SessionList;
 /**
  * @author Aidamina
- * @license http://reunion.googlecode.com/svn/trunk/license.txt
+ * @license https://raw.github.com/ReunionDev/reunion/master/license.txt
  */
 public abstract class WorldObject extends EventDispatcher implements Entity {
 	
