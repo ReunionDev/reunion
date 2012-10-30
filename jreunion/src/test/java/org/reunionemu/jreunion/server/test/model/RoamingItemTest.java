@@ -47,12 +47,9 @@ public class RoamingItemTest {
 		
 		RoamingItem ri = new RoamingItemImpl(item, new Position(0, 0, 0, map, 0));
 		assertEquals(ri.getItem().getItemId(), item.getItemId());
-		System.out.println(item.getItemId());
-		System.out.println(((RoamingItemImpl) ri).getItemId());
 
 		ri = roamingItemDao.save(ri);
-		System.out.println(((RoamingItemImpl) ri).getItemId());
-
+		
 		assertNotNull(ri);
 		ri = roamingItemDao.findOne(item.getItemId());
 		assertNotNull(ri);
