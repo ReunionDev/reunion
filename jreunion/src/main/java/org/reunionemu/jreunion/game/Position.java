@@ -10,6 +10,8 @@ public final class Position {
 	private final Map map;
 	private final double rotation;
 	
+	public final static Position ZERO = new Position(0, 0, 0, null, 0);
+	
 	public Position(){
 		x = 0;
 		y = 0;

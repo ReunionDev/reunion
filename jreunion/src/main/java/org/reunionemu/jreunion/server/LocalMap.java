@@ -1,50 +1,26 @@
 package org.reunionemu.jreunion.server;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Vector;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
+import java.util.*;
+import java.util.concurrent.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import org.reunionemu.jcommon.ParsedItem;
-import org.reunionemu.jcommon.Parser;
+import org.reunionemu.jcommon.*;
+import org.reunionemu.jreunion.dao.RoamingItemDao;
 import org.reunionemu.jreunion.events.Event;
-import org.reunionemu.jreunion.events.map.ItemDropEvent;
-import org.reunionemu.jreunion.events.map.ItemPickupEvent;
-import org.reunionemu.jreunion.events.map.MapEvent;
-import org.reunionemu.jreunion.events.map.PlayerLoginEvent;
-import org.reunionemu.jreunion.events.map.PlayerLogoutEvent;
-import org.reunionemu.jreunion.events.map.SpawnEvent;
-import org.reunionemu.jreunion.events.session.NewSessionEvent;
-import org.reunionemu.jreunion.events.session.SessionEvent;
-import org.reunionemu.jreunion.game.Entity;
-import org.reunionemu.jreunion.game.Item;
-import org.reunionemu.jreunion.game.LivingObject;
-import org.reunionemu.jreunion.game.Npc;
-import org.reunionemu.jreunion.game.NpcSpawn;
-import org.reunionemu.jreunion.game.Party;
-import org.reunionemu.jreunion.game.Pet;
-import org.reunionemu.jreunion.game.Player;
-import org.reunionemu.jreunion.game.PlayerSpawn;
-import org.reunionemu.jreunion.game.Position;
-import org.reunionemu.jreunion.game.RoamingItem;
-import org.reunionemu.jreunion.game.Shop;
-import org.reunionemu.jreunion.game.Spawn;
-import org.reunionemu.jreunion.game.WorldObject;
+import org.reunionemu.jreunion.events.map.*;
+import org.reunionemu.jreunion.events.session.*;
+import org.reunionemu.jreunion.game.*;
 import org.reunionemu.jreunion.game.npc.Mob;
 import org.reunionemu.jreunion.server.Area.Field;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.slf4j.*;
+import org.springframework.beans.factory.annotation.*;
 
 /**
  * @author Aidamina
  * @license http://reunion.googlecode.com/svn/trunk/license.txt
  */
+@Configurable
 public class LocalMap extends Map implements Runnable{
 
 	private List<Spawn> npcSpawnList = new Vector<Spawn>();
@@ -80,6 +56,9 @@ public class LocalMap extends Map implements Runnable{
 	public boolean isLoaded() {
 		return loaded.get();
 	}
+	
+	@Autowired
+	RoamingItemDao<RoamingItem> roamingItemDao;
 
 
 	private List<RoamingItem> roamingItemList = new Vector<RoamingItem>();
@@ -304,7 +283,8 @@ public class LocalMap extends Map implements Runnable{
 		
 		synchronized(entities){
 		
-			roamingItemList = Database.getInstance().loadRoamingItems(this);
+			
+			roamingItemList = roamingItemDao.findByMapId(this.getId());
 			for(RoamingItem roamingItem : roamingItemList){
 				//TODO: A better way to manage items going in and out of the map
 				int itemEntityId = createEntityId(roamingItem);
@@ -541,7 +521,7 @@ public class LocalMap extends Map implements Runnable{
 					addRoamingItem(roamingItem);
 				}
 				list.enter(roamingItem, false);	
-				Database.getInstance().saveRoamingItem(roamingItem);
+				roamingItemDao.save(roamingItem);
 				list.sendPacket(Type.DROP, roamingItem); 
 				
 			} else
@@ -563,7 +543,8 @@ public class LocalMap extends Map implements Runnable{
 				player.getClient().sendPacket(Type.PICKUP, player);
 				otherPlayersList.sendPacket(Type.PICKUP, player);
 				otherPlayersList.exit(roamingItem, true); //sent to other clients
-				Database.getInstance().deleteRoamingItem(item);
+				roamingItemDao.delete(roamingItem);
+				
 				
 			} else	
 			if(event instanceof PlayerLoginEvent){

@@ -37,7 +37,7 @@ public abstract class WorldObject extends EventDispatcher implements Entity {
 		}
 	}
 	
-	private Position position = new Position();
+	private Position position = Position.ZERO;
 
 	public Position getPosition() {
 		return position;

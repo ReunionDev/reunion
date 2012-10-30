@@ -27,7 +27,7 @@ DemolitionModifier = 0.5	#0.5 = 50%
 PlayerMaxLevel = 500		# if 0 then unlimited lvls
 InventoryLimeLimit = 2100000000		#lime
 WarehouseLimeLimit = 2100000000		#lime
-PreloadMaps = false # Set this to true if you want to load the maps (npcs, spawns, roaming items) immediatly on server start or on first connect.
+PreloadMaps = true # Set this to true if you want to load the maps (npcs, spawns, roaming items) immediatly on server start or on first connect.
 
 #Enhanced Exp Config
 ExpPlayerMobDifference = 250

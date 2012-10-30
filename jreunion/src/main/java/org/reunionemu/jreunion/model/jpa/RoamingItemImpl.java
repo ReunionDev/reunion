@@ -24,7 +24,6 @@ public class RoamingItemImpl extends RoamingItem implements Serializable {
 	private Long itemId;
 			
 	@Id
-	//@GeneratedValue
 	@Column(name = "itemid", unique = true, nullable = false)
 	public Long getItemId() {
 		return itemId;
@@ -64,14 +63,9 @@ public class RoamingItemImpl extends RoamingItem implements Serializable {
 	public Date getCreated() {
 		return created;
 	}	
-
-	//@MapsId
-    //@Cascade({CascadeType.SAVE_UPDATE})
+	@Transient
 	@OneToOne(targetEntity=ItemImpl.class,optional=false,cascade={CascadeType.MERGE})
-    //@JoinColumn(name = "itemid")
 	@PrimaryKeyJoinColumn
-
-	//@Transient
 	public Item<?> getItem() {
 		if(item==null&&itemId!=null){
 			item = (Item<?>) new GenericLoader().getObject(ItemDao.class).findOne(itemId);			

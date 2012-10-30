@@ -830,20 +830,6 @@ public class Database {
 			return;
 		}
 	}
-		
-	public boolean deleteRoamingItem(Item<?> item){
-		if (!checkDatabase())
-			return false ;
-		Statement stmt;
-		try {
-			stmt  = connection.createStatement();		
-			return stmt.execute("DELETE FROM `roaming` WHERE `itemid`="+item.getItemId()+";");
-			
-		}catch (Exception e) {
-			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
-		}
-		return false;
-	}
 	
 	public List<RoamingItem> loadRoamingItems(LocalMap map){
 		
@@ -879,36 +865,7 @@ public class Database {
 	
 		return items;		
 	}
-	
-	public void saveRoamingItem(RoamingItem roamingItem){
-		if (!checkDatabase())
-			return ;
-		Item<?> item = roamingItem.getItem();
-		Position position = roamingItem.getPosition();
-		item.save();
-
-		long itemId = item.getItemId();
-		Statement stmt;
-		try {
-				
-			deleteRoamingItem(item);
-			stmt  = connection.createStatement();
-			String q = 
-			"INSERT INTO `roaming` (`itemid`,`mapid`,`x`,`y`,`z`,`rotation`) VALUES ("+
-			itemId+","+
-			position.getLocalMap().getId()+","+
-			position.getX()+","+
-			position.getY()+","+
-			position.getZ()+","+
-			(Double.isNaN(position.getRotation()) ? 0 : position.getRotation()) + ");";
-			stmt.execute(q);
 		
-		} 
-		catch (Exception e) {
-			LoggerFactory.getLogger(this.getClass()).warn("Exception",e);
-		}
-	}
-	
 	public  void saveSkills(Player player) {
 		
 		if (!checkDatabase())

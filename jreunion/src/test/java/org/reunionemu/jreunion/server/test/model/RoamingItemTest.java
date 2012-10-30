@@ -53,6 +53,8 @@ public class RoamingItemTest {
 		assertNotNull(ri);
 		ri = roamingItemDao.findOne(item.getItemId());
 		assertNotNull(ri);
+		assertNotNull(ri.getItem());
+		assertEquals(ri.getItem().getItemId(), item.getItemId());
 		ri.delete();
 		ri = roamingItemDao.findOne(item.getItemId());
 		assertNull(ri);
