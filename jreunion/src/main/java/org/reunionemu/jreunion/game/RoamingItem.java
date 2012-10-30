@@ -2,11 +2,17 @@ package org.reunionemu.jreunion.game;
 
 import java.util.*;
 
+import org.reunionemu.jreunion.dao.RoamingItemDao;
 import org.reunionemu.jreunion.server.*;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.*;
 
+@Configurable
 public abstract class RoamingItem extends WorldObject{
+	
+	@Autowired 
+	RoamingItemDao<RoamingItem> roamingItemDao;
 
 	private java.util.Timer deleteTimer = new java.util.Timer();
 	
@@ -72,9 +78,10 @@ public abstract class RoamingItem extends WorldObject{
 		
 		map.removeEntity(this);
 		Item<?> item = this.getItem();
-		Database.getInstance().deleteRoamingItem(item);
+		roamingItemDao.delete(this);
+		//Database.getInstance().deleteRoamingItem(item);
 		map.removeEntity(item);
-		item.delete();
+		//item.delete();
 		list.exit(this, true);
 		list.update();
 		//getInterested().sendPacket(Type.OUT, this);

@@ -16,16 +16,12 @@ import org.springframework.beans.factory.annotation.*;
 uniqueConstraints={
 		@UniqueConstraint(columnNames = { "itemid" })
 })
-@Configurable
 public class RoamingItemImpl extends RoamingItem implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
 	private Long itemId;
-	
-	@Autowired
-	RoamingItemDao<RoamingItem> roamingItemDao;
-		
+			
 	@Id
 	@Column(name = "itemid", unique = true, nullable = false)
 	public Long getItemId() {

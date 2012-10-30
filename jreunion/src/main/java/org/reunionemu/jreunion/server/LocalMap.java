@@ -741,12 +741,14 @@ public class LocalMap extends Map implements Runnable{
 	}
 
 	public Entity removeEntity(Entity entity) {
-		synchronized(entities){
-			int entitiId = entity.getEntityId();
-			if(entities.containsValue(entity)){
-				Entity removedEntity = entities.remove(entitiId); 
-				return removedEntity;
-				
+		if(entity.getEntityId()!=null){
+			synchronized(entities){
+				int entitiId = entity.getEntityId();
+				if(entities.containsValue(entity)){
+					Entity removedEntity = entities.remove(entitiId); 
+					return removedEntity;
+					
+				}
 			}
 		}
 		return null;
