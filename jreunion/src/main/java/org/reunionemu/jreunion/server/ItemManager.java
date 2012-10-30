@@ -76,9 +76,9 @@ public class ItemManager {
 				
 		Item<?> item = itemType.create();
 		
-		item.save();
+		Item<?> newItem = item.save();
 		
-		return item;
+		return newItem;
 	}
 	
 	public Item<?> create(int type, int gemNumber, int extraStats, double durability, int unknown1, int unknown2) {

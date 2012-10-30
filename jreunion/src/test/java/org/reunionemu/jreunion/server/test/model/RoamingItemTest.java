@@ -43,12 +43,17 @@ public class RoamingItemTest {
 		Item<?> item = itemManager.create(724);
 		assumeNotNull(item);
 		
-		assumeNotNull(item.getItemId());
-		
+		assumeNotNull(item.getItemId());		
 		
 		RoamingItem ri = new RoamingItemImpl(item, new Position(0, 0, 0, map, 0));
-		assertEquals(ri.getItem().getItemId(), item.getItemId());				
+		assertEquals(ri.getItem().getItemId(), item.getItemId());
+		System.out.println(item.getItemId());
+		System.out.println(((RoamingItemImpl) ri).getItemId());
+
 		ri = roamingItemDao.save(ri);
+		System.out.println(((RoamingItemImpl) ri).getItemId());
+
+		assertNotNull(ri);
 		ri = roamingItemDao.findOne(item.getItemId());
 		assertNotNull(ri);
 		ri.delete();
@@ -56,7 +61,6 @@ public class RoamingItemTest {
 		assertNull(ri);
 		item = itemDao.findOne(item.getItemId());
 		assertNotNull(item);
-
 		
 	}
 	

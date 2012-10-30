@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.persistence.*;
 import javax.persistence.Entity;
 
+import org.hibernate.annotations.OnDelete;
 import org.reunionemu.jreunion.dao.*;
 import org.reunionemu.jreunion.game.*;
 import org.reunionemu.jreunion.server.*;
@@ -23,6 +24,7 @@ public class RoamingItemImpl extends RoamingItem implements Serializable {
 	private Long itemId;
 			
 	@Id
+	//@GeneratedValue
 	@Column(name = "itemid", unique = true, nullable = false)
 	public Long getItemId() {
 		return itemId;
@@ -65,9 +67,11 @@ public class RoamingItemImpl extends RoamingItem implements Serializable {
 
 	//@MapsId
     //@Cascade({CascadeType.SAVE_UPDATE})
-	//@OneToOne(targetEntity=ItemImpl.class, fetch=FetchType.LAZY)
+	@OneToOne(targetEntity=ItemImpl.class,optional=false,cascade={CascadeType.MERGE})
     //@JoinColumn(name = "itemid")
-	@Transient
+	@PrimaryKeyJoinColumn
+
+	//@Transient
 	public Item<?> getItem() {
 		if(item==null&&itemId!=null){
 			item = (Item<?>) new GenericLoader().getObject(ItemDao.class).findOne(itemId);			
