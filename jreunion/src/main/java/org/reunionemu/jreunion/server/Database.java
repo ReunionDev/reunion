@@ -20,7 +20,6 @@ import org.springframework.stereotype.Service;
 
 /**
  * @author Aidamina
- * 
  * @license https://raw.github.com/ReunionDev/reunion/master/license.txt
  */
 @Service

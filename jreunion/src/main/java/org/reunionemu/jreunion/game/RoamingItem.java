@@ -83,7 +83,7 @@ public abstract class RoamingItem extends WorldObject{
 		Item<?> item = this.getItem();
 		roamingItemDao.delete(this);
 		//Database.getInstance().deleteRoamingItem(item);
-		map.removeEntity(item);
+		
 		//item.delete();
 		list.exit(this, true);
 		list.update();
@@ -103,6 +103,11 @@ public abstract class RoamingItem extends WorldObject{
 			public void run() {
 				LoggerFactory.getLogger(RoamingItem.class).info("Server deleted roaming item {id:"
 						+getEntityId()+", item:"+getItem()+", map:"+getPosition().getLocalMap()+"}");
+
+				LocalMap map = getPosition().getLocalMap();
+				Item<?> item = getItem();
+				map.removeEntity(item);
+				item.delete();
 				delete();
 				
 			}
