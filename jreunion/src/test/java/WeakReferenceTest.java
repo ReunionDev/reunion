@@ -20,7 +20,8 @@ public class WeakReferenceTest {
 		}
 		System.out.println(ref.get());
 		
-		while(queue.poll()==null){
+		//while(queue.poll()==null)
+		{
 			
 			//System.out.println("gc");
 			System.gc();
