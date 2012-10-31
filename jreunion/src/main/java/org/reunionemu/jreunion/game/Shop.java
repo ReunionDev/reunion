@@ -197,7 +197,7 @@ public class Shop {
 				getOwner().getClient().sendPacket(Type.U_SHOP, "reg", 0, -4, 1);
 				return;
 			}
-			HandPosition holdingItem = getOwner().getInventory().getHoldingItem();
+			HandInventoryItem holdingItem = getOwner().getInventory().getHoldingItem();
 			if(holdingItem==null){
 				return;
 			} else {
@@ -261,7 +261,7 @@ public class Shop {
 
 	}
 
-	public void unRegItem(int position, int amountRequested){
+	public void unRegItem(Player player, int position, int amountRequested){
 		ShopItem shopItem = getItem(new ShopPosition(position));
 
 		if(shopItem == null)
@@ -269,7 +269,7 @@ public class Shop {
 
 		if(amountRequested == 1){ //removing a single items from shop.
 			removeItem(shopItem);
-			getOwner().getInventory().setHoldingItem(new HandPosition(shopItem.getItem()));
+			getOwner().getInventory().setHoldingItem(new HandInventoryItem(shopItem.getItem(), player));
 			getOwner().getClient().sendPacket(Type.U_SHOP, "unreg", 1, position, amountRequested);
 			getOwner().getClient().sendPacket(Type.PICK_EXTRA, shopItem.getItem());
 			LoggerFactory.getLogger(this.getClass()).info("Player "+getOwner()+" removed item "+shopItem.getItem()+" from shop.");

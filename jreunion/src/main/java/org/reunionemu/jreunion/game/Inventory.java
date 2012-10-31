@@ -14,17 +14,17 @@ public class Inventory {
 	
 	private List<InventoryItem> items = null;;
 	
-	private HandPosition holdingItem = null;
+	private HandInventoryItem holdingItem = null;
 
 	public Inventory() {
 		items = new Vector<InventoryItem>();
 	}
 	
-	public void setHoldingItem(HandPosition holdingItem) {
+	public void setHoldingItem(HandInventoryItem holdingItem) {
 		this.holdingItem = holdingItem;
 	}
 	
-	public HandPosition getHoldingItem() {
+	public HandInventoryItem getHoldingItem() {
 		return holdingItem;
 	}
 	
@@ -194,7 +194,7 @@ public class Inventory {
 	//stores an inventory item on the given position.
 	public boolean storeInventoryItem(int tab, int posX, int posY){
 		
-		HandPosition handPosition = getHoldingItem();
+		HandInventoryItem handPosition = getHoldingItem();
 		
 		if(handPosition != null){
 			InventoryItem inventoryItem = new InventoryItemImpl(handPosition.getItem(),new InventoryPosition(posX,posY,tab), getPlayer()); 
@@ -211,9 +211,9 @@ public class Inventory {
 	}
 	
 	//removes an inventory item from the given position.
-	public boolean removeInventoryItem(int tab, int posX, int posY){
+	public boolean removeInventoryItem(Player player, int tab, int posX, int posY){
 		
-		HandPosition handPosition = getHoldingItem();
+		HandInventoryItem handPosition = getHoldingItem();
 		int [] itemPosition = null;
 		InventoryItem inventoryItem = null;
 		
@@ -234,7 +234,7 @@ public class Inventory {
 		if(handPosition != null){
 			storeInventoryItem(tab,posX,posY);
 		}
-		setHoldingItem(new HandPosition(inventoryItem.getItem()));
+		setHoldingItem(new HandInventoryItem(inventoryItem.getItem(), player));
 		
 		//when removing an item from the inventory, there must be an holding item.
 		if(getHoldingItem() == null)
@@ -260,18 +260,18 @@ public class Inventory {
 	/****** Manages the Items on the Inventory ******/
 	public void handleInventory(int tab, int posX, int posY) {
 
-		HandPosition handPosition = getHoldingItem();
+		HandInventoryItem handPosition = getHoldingItem();
 
 		if(handPosition != null){
 			if(itemFit(tab,posX,posY,handPosition.getItem().getType().getSizeX(),
 					handPosition.getItem().getType().getSizeY())){
 				storeInventoryItem(tab,posX,posY);				
 			}else {
-				removeInventoryItem(tab, posX, posY);
+				removeInventoryItem(getPlayer(), tab, posX, posY);
 			}
 		}else {
 			if(!posEmpty(tab, posX, posY)){
-				removeInventoryItem(tab, posX, posY);
+				removeInventoryItem(getPlayer(), tab, posX, posY);
 			}
 			
 		}

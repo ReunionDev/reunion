@@ -1,20 +1,9 @@
 package org.reunionemu.jreunion.game;
 
-public class HandPosition extends ItemPosition {
+public class HandPosition extends InventoryPosition {
 
-	private Item<?> item = null;
 	
-	public HandPosition(Item<?> item) {
-		setItem(item);
+	public HandPosition() {
+		super(HAND_X, HAND_Y, HAND_TAB);
 	}
-
-	public Item<?> getItem() {
-		return item;
-	}
-
-	public void setItem(Item<?> item) {
-		this.item = item;
-	}
-	
-	
 }

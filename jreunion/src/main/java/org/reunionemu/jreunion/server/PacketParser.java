@@ -1075,7 +1075,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 							Integer position = Integer.parseInt(message[2]);
 							Integer ammount = Integer.parseInt(message[4]);
 
-							player.getShop().unRegItem(position, ammount);
+							player.getShop().unRegItem(player, position, ammount);
 						}  else if(message[1].equals("start")){
 							player.getShop().start(message);
 						} else if(message[1].equals("modify")){

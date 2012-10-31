@@ -7,7 +7,7 @@ import org.junit.Test;
 public class WeakReferenceTest {
 
 	@Test
-	public void test() {
+	public void test() throws InterruptedException {
 		
 		ReferenceQueue<String> queue = new ReferenceQueue<String>();
 		
@@ -22,8 +22,10 @@ public class WeakReferenceTest {
 		
 		while(queue.poll()==null){
 			
-			System.out.println("gc");
+			//System.out.println("gc");
 			System.gc();
+			Thread.sleep(0);
+			
 		}
 		
 	}

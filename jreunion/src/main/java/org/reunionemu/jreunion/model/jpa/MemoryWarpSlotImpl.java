@@ -100,8 +100,7 @@ public class MemoryWarpSlotImpl implements MemoryWarpSlot, Serializable {
 						return false;
 					}					
 				}
-				return player.getPlayerId()==otherPlayer.getPlayerId()&& getSlot()== other.getSlot();
-				
+				return player.getPlayerId()==otherPlayer.getPlayerId()&& getSlot()== other.getSlot();				
 			}
 			return false;
 		}

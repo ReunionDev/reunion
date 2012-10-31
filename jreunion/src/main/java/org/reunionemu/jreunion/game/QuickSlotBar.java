@@ -80,7 +80,7 @@ public class QuickSlotBar {
 			
 			InventoryItem invItem = new InventoryItemImpl(qsItem.getItem(), new InventoryPosition(-1,-1, -1), player);
 			
-			player.getInventory().setHoldingItem(new HandPosition(invItem.getItem()));
+			player.getInventory().setHoldingItem(new HandInventoryItem(invItem.getItem(), player));
 			
 			
 		} else {
@@ -96,7 +96,7 @@ public class QuickSlotBar {
 				removeItem(oldQuickSlotItem);
 				addItem(newQuickSlotItem);
 				invItem = new InventoryItemImpl(oldQuickSlotItem.getItem(), new InventoryPosition(0, 0,	0), player);
-				player.getInventory().setHoldingItem(new HandPosition(invItem.getItem()));
+				player.getInventory().setHoldingItem(new HandInventoryItem(invItem.getItem(), player));
 			}
 		}
 	}

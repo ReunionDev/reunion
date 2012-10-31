@@ -2,6 +2,12 @@ package org.reunionemu.jreunion.game;
 
 public class InventoryPosition extends ItemPosition {
 	
+	public static final int EXCHANGE_TAB = 3;
+	public static final int HAND_TAB = -1;
+	public static final int HAND_X = -1;
+	public static final int HAND_Y = -1;
+
+	
 	private int posX;
 	private int posY;
 	private int tab; // 1,2 or 3

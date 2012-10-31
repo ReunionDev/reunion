@@ -8,6 +8,8 @@ import org.reunionemu.jreunion.model.jpa.InventoryItemImpl;
  */
 public class ExchangeItem extends InventoryItemImpl {
 
+	private static final long serialVersionUID = 1L;
+
 	public ExchangeItem(Item<?> item, int x, int y, Player player) {
 		super(item, new ExchangePosition(x, y), player);
 	}

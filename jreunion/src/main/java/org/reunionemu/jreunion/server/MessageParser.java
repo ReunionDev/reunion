@@ -10,7 +10,7 @@ import java.util.TimerTask;
 import org.apache.log4j.net.SocketAppender;
 import org.reunionemu.jcommon.ParsedItem;
 import org.reunionemu.jreunion.dao.QuestDao;
-import org.reunionemu.jreunion.game.HandPosition;
+import org.reunionemu.jreunion.game.HandInventoryItem;
 import org.reunionemu.jreunion.game.Item;
 import org.reunionemu.jreunion.game.Npc;
 import org.reunionemu.jreunion.game.NpcSpawn;
@@ -655,7 +655,7 @@ public class MessageParser {
 					int[] tabPosition = player.getInventory().getFreeSlots(item,-1);
 					if(tabPosition == null) {
 					   if(player.getInventory().getHoldingItem() == null){
-					      player.getInventory().setHoldingItem(new HandPosition(item));
+					      player.getInventory().setHoldingItem(new HandInventoryItem(item, player));
 					      player.getClient().sendPacket(Type.EXTRA,item);
 					   } else {
 					       player.getClient().sendPacket(Type.SAY, "Inventory full. Please get some space available.");
