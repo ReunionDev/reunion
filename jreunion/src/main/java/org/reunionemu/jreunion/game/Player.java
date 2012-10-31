@@ -1,19 +1,15 @@
 package org.reunionemu.jreunion.game;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.Map;
-import java.util.Vector;
 
 import org.reunionemu.jcommon.ParsedItem;
 import org.reunionemu.jreunion.dao.QuestStateBaseDao;
-import org.reunionemu.jreunion.events.Event;
+import org.reunionemu.jreunion.events.*;
 import org.reunionemu.jreunion.events.EventListener;
-import org.reunionemu.jreunion.events.client.ClientDisconnectEvent;
+import org.reunionemu.jreunion.events.client.*;
 import org.reunionemu.jreunion.events.client.ClientEvent.ClientFilter;
-import org.reunionemu.jreunion.events.map.ItemPickupEvent;
-import org.reunionemu.jreunion.events.map.PlayerLogoutEvent;
+import org.reunionemu.jreunion.events.map.*;
 import org.reunionemu.jreunion.events.network.NetworkAcceptEvent;
 import org.reunionemu.jreunion.events.session.SessionEvent;
 import org.reunionemu.jreunion.game.Equipment.Slot;
@@ -21,21 +17,12 @@ import org.reunionemu.jreunion.game.items.equipment.Armor;
 import org.reunionemu.jreunion.game.items.pet.PetEgg;
 import org.reunionemu.jreunion.game.quests.QuestState;
 import org.reunionemu.jreunion.model.Quest;
-import org.reunionemu.jreunion.server.Client;
+import org.reunionemu.jreunion.model.jpa.InventoryItemImpl;
+import org.reunionemu.jreunion.server.*;
 import org.reunionemu.jreunion.server.Client.State;
-import org.reunionemu.jreunion.server.Database;
-import org.reunionemu.jreunion.server.LocalMap;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
-import org.reunionemu.jreunion.server.PacketParser;
-import org.reunionemu.jreunion.server.Reference;
-import org.reunionemu.jreunion.server.Server;
-import org.reunionemu.jreunion.server.Session;
-import org.reunionemu.jreunion.server.SessionList;
-import org.reunionemu.jreunion.server.Tools;
-import org.reunionemu.jreunion.server.beans.SpringApplicationContext;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.beans.factory.annotation.*;
 
 /**
  * @author Aidamina
@@ -613,14 +600,14 @@ public abstract class Player extends LivingObject implements EventListener {
 				return;
 			}
 
-			InventoryItem invItem = new InventoryItem(item.getItem(), new InventoryPosition( 0, 0, 0));
+			InventoryItem invItem = new InventoryItemImpl(item.getItem(), new InventoryPosition( 0, 0, 0), this);
 
 			getInventory().setHoldingItem(new HandPosition(invItem.getItem()));
 			getExchange().removeItem(item);
 			LoggerFactory.getLogger(Player.class).info("Item "+item.getItem()+" removed from exchange inventory of Player "+this);
 		} else { //adding exchange item
 			Item<?> item = getInventory().getHoldingItem().getItem();
-			ExchangeItem newExchangeItem = new ExchangeItem(item, posX,	posY);
+			ExchangeItem newExchangeItem = new ExchangeItem(item, posX,	posY, this);
 			ExchangeItem oldExchangeItem = null;
 			int x = 0, y = 0;
 
@@ -636,8 +623,8 @@ public abstract class Player extends LivingObject implements EventListener {
 			if (oldExchangeItem == null) {
 				getInventory().setHoldingItem(null);
 			} else { //if player is holding an item then store it at the exchange
-				InventoryItem invItem = new InventoryItem(
-						oldExchangeItem.getItem(), new InventoryPosition( 0, 0, 0));
+				InventoryItem invItem = new InventoryItemImpl(
+						oldExchangeItem.getItem(), new InventoryPosition( 0, 0, 0), this);
 				getInventory().setHoldingItem(new HandPosition(invItem.getItem()));
 				getExchange().removeItem(oldExchangeItem);
 				LoggerFactory.getLogger(Player.class).info("Item "+oldExchangeItem.getItem()+" removed from exchange inventory of Player "+this);
@@ -855,7 +842,7 @@ public abstract class Player extends LivingObject implements EventListener {
 		InventoryItem inventoryItem = getInventory().storeItem(item, neededTab);
 
 		if (inventoryItem == null) {
-			inventoryItem = new InventoryItem(item, new InventoryPosition(0, 0, 0));
+			inventoryItem = new InventoryItemImpl(item, new InventoryPosition(0, 0, 0), this);
 			getInventory().setHoldingItem(new HandPosition(inventoryItem.getItem()));
 		}
 
@@ -1418,8 +1405,8 @@ public abstract class Player extends LivingObject implements EventListener {
 		} 
 		//player is equipping an item.
 		else {
-			InventoryItem invItem = new InventoryItem(getInventory().getHoldingItem().getItem(),
-							new InventoryPosition(0,0,0));
+			InventoryItem invItem = new InventoryItemImpl(getInventory().getHoldingItem().getItem(),
+							new InventoryPosition(0,0,0), this);
 			Item<?> wearingItem = getEquipment().getItem(slot);
 
 			//check if the equipment slot is already occupied and replace it.

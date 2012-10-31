@@ -14,6 +14,7 @@ import org.reunionemu.jreunion.game.Player.Race;
 import org.reunionemu.jreunion.game.Player.Sex;
 import org.reunionemu.jreunion.game.items.pet.*;
 import org.reunionemu.jreunion.game.items.pet.PetEquipment.PetSlot;
+import org.reunionemu.jreunion.model.jpa.InventoryItemImpl;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -751,8 +752,8 @@ public class Database {
 						HandPosition handPosition = new HandPosition(item);
 						player.getInventory().setHoldingItem(handPosition);
 					} else {
-						InventoryItem inventoryItem = new InventoryItem(item,
-								new InventoryPosition(invTable.getInt("x"), invTable.getInt("y"),invTable.getInt("tab")));
+						InventoryItem inventoryItem = new InventoryItemImpl(item,
+								new InventoryPosition(invTable.getInt("x"), invTable.getInt("y"),invTable.getInt("tab")), player);
 						player.getInventory().addInventoryItem(inventoryItem);
 					}
 				}
@@ -1006,7 +1007,7 @@ public class Database {
 			{
 				Item<?> item = itemDao.findOne((long)exchangeTable.getInt("itemid"));
 				ExchangeItem exchangeItem = new ExchangeItem(item,
-						exchangeTable.getInt("x"), exchangeTable.getInt("y"));
+						exchangeTable.getInt("x"), exchangeTable.getInt("y"), player);
 				
 				player.getExchange().addItem(exchangeItem);
 			}

@@ -5,38 +5,35 @@ package org.reunionemu.jreunion.game;
  * @license https://raw.github.com/ReunionDev/reunion/master/license.txt
  * Item wrapper for Inventory
  */
-public class InventoryItem {
+public abstract class InventoryItem {
 	
-	private Item<?> item = null;
+	public InventoryItem(){
+		
+	}
 	
-	private InventoryPosition position = null;
-
-	public InventoryItem(Item<?> item, InventoryPosition position) {
+	public InventoryItem(Item<?> item, InventoryPosition position, Player player) {
 		setItem(item);
 		setPosition(position);
+		setPlayer(player);
 	}
 
-	public Item<?> getItem() {
-		return item;
-	}
+	public abstract Item<?> getItem();
 	
-	public void setItem(Item<?> item){
-		this.item = item;
-	}
+	public abstract void setItem(Item<?> item);
 
-	public InventoryPosition getPosition() {
-		return position;
-	}
+	public abstract InventoryPosition getPosition();
 	
-	public void setPosition(InventoryPosition position) {
-		this.position = position;
-	}
+	public abstract void setPosition(InventoryPosition position);
 
 	public int getSizeX() {
-		return item.getType().getSizeX();
+		return getItem().getType().getSizeX();
 	}
 
 	public int getSizeY() {
-		return item.getType().getSizeY();
+		return getItem().getType().getSizeY();
 	}
+
+	public abstract void setPlayer(Player player);
+
+	public abstract Player getPlayer();
 }

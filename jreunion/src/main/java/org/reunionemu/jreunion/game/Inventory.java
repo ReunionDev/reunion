@@ -1,12 +1,10 @@
 package org.reunionemu.jreunion.game;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Vector;
+import java.util.*;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.reunionemu.jreunion.model.jpa.InventoryItemImpl;
 import org.reunionemu.jreunion.server.Server;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Aidamina
@@ -184,8 +182,8 @@ public class Inventory {
 			int[] position = getFreeSlots(item, neededTab);
 			if(position == null)
 				return null;
-			InventoryItem inventoryItem = new InventoryItem(item,
-					new InventoryPosition(position[1],position[2],position[0]));
+			InventoryItem inventoryItem = new InventoryItemImpl(item,
+					new InventoryPosition(position[1],position[2],position[0]), getPlayer());
 			
 			addInventoryItem(inventoryItem);
 			return inventoryItem;
@@ -199,7 +197,7 @@ public class Inventory {
 		HandPosition handPosition = getHoldingItem();
 		
 		if(handPosition != null){
-			InventoryItem inventoryItem = new InventoryItem(handPosition.getItem(),new InventoryPosition(posX,posY,tab)); 
+			InventoryItem inventoryItem = new InventoryItemImpl(handPosition.getItem(),new InventoryPosition(posX,posY,tab), getPlayer()); 
 			addInventoryItem(inventoryItem);
 			
 			Item<?> item = inventoryItem.getItem();
@@ -358,7 +356,7 @@ public class Inventory {
 	@Deprecated
 	public boolean addItem(int posX, int posY, Item<?> item, int tab) {
 
-		InventoryItem inventoryItem = new InventoryItem(item, new InventoryPosition(posX, posY, tab));
+		InventoryItem inventoryItem = new InventoryItemImpl(item, new InventoryPosition(posX, posY, tab), getPlayer());
 
 		if (itemFit(tab, posX, posY, item.getType().getSizeX(), item.getType().getSizeY()) == true) {
 			items.add(inventoryItem);

@@ -59,7 +59,7 @@ public class Trader extends NpcType {
 			if(item.getEntityId() == -1)
 				player.getPosition().getLocalMap().createEntityId(item);
 			
-			ExchangeItem exchangeItem = new ExchangeItem(item, 0, 0);
+			ExchangeItem exchangeItem = new ExchangeItem(item, 0, 0, player);
 			player.getExchange().addItem(exchangeItem);
 			client.sendPacket(Type.CHIP_EXCHANGE, gemTraderType, "", item, "");
 		} else {
@@ -70,7 +70,7 @@ public class Trader extends NpcType {
 				if(item.getEntityId() == -1)
 					player.getPosition().getLocalMap().createEntityId(item);
 				
-				ExchangeItem exchangeItem = new ExchangeItem(item, 0, 0);
+				ExchangeItem exchangeItem = new ExchangeItem(item, 0, 0, player);
 				player.getExchange().addItem(exchangeItem);
 				client.sendPacket(Type.CHIP_EXCHANGE, gemTraderType, "win ", item, (Integer.toString(serverBetResult))+" ");
 			} else {
@@ -82,7 +82,7 @@ public class Trader extends NpcType {
 					if(item.getEntityId() == -1)
 						player.getPosition().getLocalMap().createEntityId(item);
 					
-					ExchangeItem exchangeItem = new ExchangeItem(item, 0, 0);
+					ExchangeItem exchangeItem = new ExchangeItem(item, 0, 0, player);
 					player.getExchange().addItem(exchangeItem);
 				}
 				client.sendPacket(Type.CHIP_EXCHANGE, gemTraderType, "lose ", item, (Integer.toString(serverBetResult))+" ");
@@ -126,7 +126,7 @@ public class Trader extends NpcType {
 				return;
 			}
 
-			ExchangeItem newExchangeItem = new ExchangeItem(newItem, 0, 0);
+			ExchangeItem newExchangeItem = new ExchangeItem(newItem, 0, 0, player);
 			player.getExchange().clearExchange();
 			player.getExchange().addItem(newExchangeItem);
 			int cost =  (int) (newItem.getType().getPrice() * 0.33328);

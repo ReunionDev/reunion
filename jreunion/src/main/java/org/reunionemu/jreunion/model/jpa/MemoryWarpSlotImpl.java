@@ -11,42 +11,62 @@ import org.reunionemu.jreunion.server.*;
 import org.springframework.beans.factory.annotation.*;
 
 @Entity
-@Table(name="memorywarpslot",
-uniqueConstraints={
-		@UniqueConstraint(columnNames = { "charid","slotid" })
-})
-public class MemoryWarpSlotImpl implements  MemoryWarpSlot, Serializable {
-	
-	private static final long serialVersionUID = 1L;
+@Table(name = "memorywarpslot", uniqueConstraints = { @UniqueConstraint(columnNames = {
+		"charid", "slotid" }) })
+public class MemoryWarpSlotImpl implements MemoryWarpSlot, Serializable {
+
+	@Configurable
+	private static class MapLoader {
+		@Autowired
+		World world;
+
+		public Map getMapFromId(int mapId) {
+			return world.getMap(mapId);
+		}
+	}
 
 	@Configurable
 	@Embeddable
 	public static class MemoryWarpSlotIdImpl implements MemoryWarpSlotId {
 
 		private static final long serialVersionUID = 1L;
-		
 
 		@Transient
 		@Autowired
 		private PlayerManager playerManager;
-		
+
 		private Player player;
-		
+
 		private Long playerId;
-		
+
 		private int slot;
-		
-		public MemoryWarpSlotIdImpl(){
-			
+
+		public MemoryWarpSlotIdImpl() {
+
 		}
-		
-		public MemoryWarpSlotIdImpl(Player player, int slot){
+
+		public MemoryWarpSlotIdImpl(Long playerId, int slot) {
+			setSlot(slot);
+			setPlayerId(playerId);
+		}
+
+		public MemoryWarpSlotIdImpl(Player player, int slot) {
 			setSlot(slot);
 			setPlayer(player);
 		}
-		public MemoryWarpSlotIdImpl(Long playerId, int slot){
-			setSlot(slot);
-			setPlayerId(playerId);
+
+		@Transient
+		@Override
+		public Player getPlayer() {
+			if (player == null && playerId != null) {
+				player = playerManager.getPlayerByDbId(playerId);
+			}
+			return player;
+		}
+
+		@Column(name = "charid", nullable = false)
+		public Long getPlayerId() {
+			return playerId;
 		}
 
 		@Column(name = "slotid", nullable = false)
@@ -54,120 +74,111 @@ public class MemoryWarpSlotImpl implements  MemoryWarpSlot, Serializable {
 			return slot;
 		}
 
-		public void setSlot(int slot) {
-			this.slot = slot;
-		}
-		
-		@Column(name = "charid", nullable = false)
-		public Long getPlayerId() {
-			return playerId;
-		}
-
-		public void setPlayerId(Long playerId) {
-			this.playerId = playerId;		
-		}
-		@Transient
-		@Override
-		public Player getPlayer() {
-			if(player==null&&playerId!=null){
-				player = playerManager.getPlayerByDbId(playerId);
-			}
-			return player;
-		}
-		
 		public void setPlayer(Player player) {
 			this.player = player;
-			if(player!=null){
-				setPlayerId((long)player.getPlayerId());
-			}else{
+			if (player != null) {
+				setPlayerId((long) player.getPlayerId());
+			} else {
 				setPlayerId(null);
 			}
 		}
-		
-		
+
+		public void setPlayerId(Long playerId) {
+			this.playerId = playerId;
+		}
+
+		public void setSlot(int slot) {
+			this.slot = slot;
+		}
+
 	}
-	
-	
-	
-	 
+
+	private static final long serialVersionUID = 1L;
+
 	MemoryWarpSlotIdImpl id = new MemoryWarpSlotIdImpl();
+
+	private Position position = Position.ZERO;
+
+	protected MemoryWarpSlotImpl() {
+	}
+
+	public MemoryWarpSlotImpl(Player player, int slot, Position position) {
+		setPlayer(player);
+		setSlot(slot);
+		setPosition(position);
+	}
 
 	@EmbeddedId
 	public MemoryWarpSlotIdImpl getId() {
 		return id;
 	}
 
+	@Column
+	public int getMapId() {
+		if (getPosition() != null && getPosition().getMap() != null) {
+			return getPosition().getMap().getId();
+		}
+		return -1;
+	}
+
+	@Transient
+	@Override
+	public Player getPlayer() {
+		return getId().getPlayer();
+	}
+
+	@Transient
+	public Position getPosition() {
+		return position;
+	}
+
+	@Column
+	public double getRotation() {
+		return getPosition().getRotation();
+	}
+
+	@Transient
+	@Override
+	public int getSlot() {
+		return getId().getSlot();
+	}
+
+	@Column
+	public int getX() {
+		return getPosition().getX();
+	}
+
+	@Column
+	public int getY() {
+		return getPosition().getY();
+	}
+
 	public void setId(MemoryWarpSlotIdImpl id) {
 		this.id = id;
 	}
 
-	
-	
-	private Position position = Position.ZERO;	
-	
+	public void setMapId(int mapId) {
+		this.setPosition(getPosition().setMap(
+				new MapLoader().getMapFromId(mapId)));
+	}
 
-			
-	@Transient
-	public Position getPosition() {
-		return position;
+	public void setPlayer(Player player) {
+		this.getId().setPlayer(player);
 	}
 
 	public void setPosition(Position position) {
 		this.position = position;
 	}
 
-
-	@Configurable
-	private static class MapLoader {
-		@Autowired
-		World world;
-		
-		public Map getMapFromId(int mapId){
-			return world.getMap(mapId);
-		}
-	}	
-	
-	protected MemoryWarpSlotImpl(){		
-	}
-	
-	public MemoryWarpSlotImpl(Player player, int slot, Position position) {
-		setPlayer(player);
-		setSlot(slot);
-		setPosition(position);
-	}
-	
-	@Column
-	public int getMapId() {
-		if(getPosition()!=null&&getPosition().getMap()!=null){
-			return getPosition().getMap().getId();
-		}
-		return -1;
-	}
-	
-	
-	@Column
-	public double getRotation() {
-		return getPosition().getRotation();
-	}
-	@Column
-	public int getX() {
-		return getPosition().getX();
-	}
-	@Column
-	public int getY() {
-		return getPosition().getY();
-	}
-	
-	public void setMapId(int mapId) {
-		this.setPosition(getPosition().setMap(new MapLoader().getMapFromId(mapId)));
-	}
-	
-	public void setPlayer(Player player) {
-		this.getId().setPlayer(player);
-	}
-
 	public void setRotation(double rotation) {
-		this.setPosition(getPosition().setRotation(rotation));;
+		this.setPosition(getPosition().setRotation(rotation));
+		;
+	}
+
+	@Override
+	public void setSlot(int slot) {
+		getId().setSlot(slot);
+
 	}
 
 	public void setX(int x) {
@@ -178,23 +189,4 @@ public class MemoryWarpSlotImpl implements  MemoryWarpSlot, Serializable {
 		this.setPosition(getPosition().setY(y));
 	}
 
-	@Transient
-	@Override
-	public Player getPlayer() {
-		return getId().getPlayer();
-	}
-	
-	@Transient
-	@Override
-	public int getSlot() {
-		return getId().getSlot();
-	}
-
-	@Override
-	public void setSlot(int slot) {
-		getId().setSlot(slot);
-		
-	}
-
-	
 }

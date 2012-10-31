@@ -1,24 +1,12 @@
 package org.reunionemu.jreunion.game.npc;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Vector;
+import java.util.*;
 
-import org.reunionemu.jreunion.dao.ItemDao;
-import org.reunionemu.jreunion.game.HandPosition;
-import org.reunionemu.jreunion.game.InventoryItem;
-import org.reunionemu.jreunion.game.InventoryPosition;
-import org.reunionemu.jreunion.game.Item;
-import org.reunionemu.jreunion.game.NpcType;
-import org.reunionemu.jreunion.game.Player;
-import org.reunionemu.jreunion.game.StashItem;
-import org.reunionemu.jreunion.game.StashPosition;
-import org.reunionemu.jreunion.server.Client;
+import org.reunionemu.jreunion.game.*;
+import org.reunionemu.jreunion.model.jpa.InventoryItemImpl;
+import org.reunionemu.jreunion.server.*;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
-import org.reunionemu.jreunion.server.Server;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
 
 /**
  * @author Aidamina
@@ -131,8 +119,8 @@ public class Warehouse extends NpcType {
 			
 			itemData = player.getInventory().getFreeSlots(item, inventoryTab); //get item inventory position
 			player.getInventory().addInventoryItem(
-					new InventoryItem(item, 
-							new InventoryPosition(itemData[1], itemData[2], itemData[0])));
+					new InventoryItemImpl(item, 
+							new InventoryPosition(itemData[1], itemData[2], itemData[0]),player));
 			itemData[0] = item.getEntityId(); //store item entity Id
 			itemList.add(itemData);
 		}

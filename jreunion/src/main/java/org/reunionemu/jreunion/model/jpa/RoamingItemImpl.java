@@ -62,7 +62,8 @@ public class RoamingItemImpl extends RoamingItem implements Serializable {
 	@Override
 	public Date getCreated() {
 		return created;
-	}	
+	}
+	
 	@Transient
 	@OneToOne(targetEntity=ItemImpl.class,optional=false,cascade={CascadeType.MERGE})
 	@PrimaryKeyJoinColumn

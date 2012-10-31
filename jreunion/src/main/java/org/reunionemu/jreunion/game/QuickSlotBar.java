@@ -1,13 +1,11 @@
 package org.reunionemu.jreunion.game;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Vector;
+import java.util.*;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.reunionemu.jreunion.server.Database;
+import org.reunionemu.jreunion.model.jpa.InventoryItemImpl;
+import org.reunionemu.jreunion.server.*;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Aidamina
@@ -80,14 +78,14 @@ public class QuickSlotBar {
 			QuickSlotItem qsItem = getItem(slot);
 			removeItem(qsItem);
 			
-			InventoryItem invItem = new InventoryItem(qsItem.getItem(), new InventoryPosition(-1,-1, -1));
+			InventoryItem invItem = new InventoryItemImpl(qsItem.getItem(), new InventoryPosition(-1,-1, -1), player);
 			
 			player.getInventory().setHoldingItem(new HandPosition(invItem.getItem()));
 			
 			
 		} else {
-			InventoryItem invItem = new InventoryItem(player.getInventory().getHoldingItem().getItem(),
-					new InventoryPosition(0,0,0));
+			InventoryItem invItem = new InventoryItemImpl(player.getInventory().getHoldingItem().getItem(),
+					new InventoryPosition(0,0,0), player);
 			QuickSlotItem newQuickSlotItem = new QuickSlotItem(
 					invItem.getItem(), new QuickSlotPosition(this, slot));
 			QuickSlotItem oldQuickSlotItem = getItem(slot);
@@ -97,7 +95,7 @@ public class QuickSlotBar {
 			} else {
 				removeItem(oldQuickSlotItem);
 				addItem(newQuickSlotItem);
-				invItem = new InventoryItem(oldQuickSlotItem.getItem(), new InventoryPosition(0, 0,	0));
+				invItem = new InventoryItemImpl(oldQuickSlotItem.getItem(), new InventoryPosition(0, 0,	0), player);
 				player.getInventory().setHoldingItem(new HandPosition(invItem.getItem()));
 			}
 		}
