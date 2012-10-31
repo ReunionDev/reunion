@@ -6,5 +6,7 @@
 	<entry key="jdbc.url">jdbc:mysql://localhost/reunion</entry>
 	<entry key="jdbc.username">root</entry>
 	<entry key="jdbc.password"></entry>
-	<entry key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</entry>	
+	<entry key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</entry>
+	<entry key="hibernate.show_sql">false</entry>
+	
 </properties>

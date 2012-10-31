@@ -126,6 +126,12 @@ public abstract class Player extends LivingObject implements EventListener {
 	private Shop shop;
 
 	private long social;
+	
+	
+	//Mocking constructor
+	public Player(){
+		
+	}
 
 	public Player(Client client) {
 		super();

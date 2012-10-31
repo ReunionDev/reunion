@@ -1,21 +1,19 @@
 package org.reunionemu.jreunion.server;
 
-import java.util.Iterator;
-import java.util.Vector;
+import java.util.*;
 
 import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.server.Client.State;
+import org.springframework.stereotype.Service;
 
 /**
  * @author Aidamina
  * @license https://raw.github.com/ReunionDev/reunion/master/license.txt
  */
+@Service
 public class PlayerManager {
 	private final java.util.List<Player> playerList = new Vector<Player>();
 
-	public PlayerManager() {
-
-	}
 
 	public void addPlayer(Player player) {
 		playerList.add(player);
@@ -51,7 +49,7 @@ public class PlayerManager {
 	 * @param id
 	 * @return Player
 	 */
-	public Player getPlayerByDbId(int id) {
+	public Player getPlayerByDbId(long id) {
 		Iterator<Player> iter = getPlayerListIterator();
 		while (iter.hasNext()) {
 			Player player = iter.next();

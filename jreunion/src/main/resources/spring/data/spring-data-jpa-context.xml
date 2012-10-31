@@ -31,7 +31,7 @@
        <entry key="hibernate.dialect" value="${hibernate.dialect}"/>
        <entry key="hibernate.connection.pool_size" value="5"/>
        <entry key="hibernate.current_session_context_class" value="thread"/>
-       <entry key="hibernate.show_sql" value="true"/>
+       <entry key="hibernate.show_sql" value="${hibernate.show_sql}"/>
        <entry key="hibernate.cglib.use_reflection_optimizer" value="true"/>
        <entry key="hibernate.cache.provider_class" value="org.hibernate.cache.EhCacheProvider"/>
        <entry key="hibernate.hibernate.cache.use_query_cache" value="true"/>            

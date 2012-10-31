@@ -109,7 +109,7 @@ public class Server extends EventDispatcher implements ApplicationContextAware{
 	 */
 	public static void main(String[] args) throws Exception {
 		
-		context = new ClassPathXmlApplicationContext("classpath*:/META-INF/spring/**/*-context.xml");
+		context = new ClassPathXmlApplicationContext("classpath*:/spring/**/*-context.xml");
 
 		((AbstractApplicationContext) context).registerShutdownHook();
 		

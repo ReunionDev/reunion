@@ -45,6 +45,7 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 	
 	private Command worldCommand;
 
+	@Autowired
 	private PlayerManager playerManager;
 	
 	private ScheduledExecutorService executorService = Executors.newScheduledThreadPool(3);
@@ -84,7 +85,6 @@ public class World extends EventDispatcher implements EventListener, Sendable {
 		serverSettings = new ServerSettings();
 		worldCommand = new Command(this);
 		skillManager = new SkillManager();
-		playerManager = new PlayerManager();
 		new ItemType(229);
 		npcManager = new NpcManager();
 		petManager = new PetManager();
