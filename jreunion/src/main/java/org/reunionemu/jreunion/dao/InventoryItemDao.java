@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface InventoryItemDao<I extends InventoryItem> extends CrudRepository<I, Long> {
 	
-	List<I> findByPlayerId(int playerId);
+	List<I> findByPlayerId(long playerId);
 	
 	I findByItemId(long itemId);
 		

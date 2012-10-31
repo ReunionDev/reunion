@@ -31,7 +31,6 @@ public class MemoryWarpSlotImpl implements MemoryWarpSlot, Serializable {
 
 		private static final long serialVersionUID = 1L;
 
-		@Transient
 		@Autowired
 		private PlayerManager playerManager;
 
@@ -89,6 +88,22 @@ public class MemoryWarpSlotImpl implements MemoryWarpSlot, Serializable {
 
 		public void setSlot(int slot) {
 			this.slot = slot;
+		}
+		@Override
+		public boolean equals(Object obj) {
+			if(obj instanceof MemoryWarpSlotId){
+				MemoryWarpSlotId other =((MemoryWarpSlotId)obj);
+				Player otherPlayer = other.getPlayer();
+				Player player = this.getPlayer();
+				if(otherPlayer==null||player==null){
+					if(!(otherPlayer==null&&this.getPlayer()==null)){
+						return false;
+					}					
+				}
+				return player.getPlayerId()==otherPlayer.getPlayerId()&& getSlot()== other.getSlot();
+				
+			}
+			return false;
 		}
 
 	}

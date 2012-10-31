@@ -62,18 +62,27 @@ public class InventoryItemDaoTest {
 		
 		assumeNotNull(type);
 		
-		Item<?> item = itemManager.create(724);
-		assumeNotNull(item);
+		Item<?> item1 = itemManager.create(724);
+		Item<?> item2 = itemManager.create(724);
+
+		assumeNotNull(item1);
+		assumeNotNull(item2);
 		
-		assumeNotNull(item.getItemId());		
+		assumeNotNull(item1.getItemId());
+		assumeNotNull(item2.getItemId());
+		assumeThat(item1.getItemId(), is(not(item2.getItemId())));
 		
 		
-		InventoryItem inventoryItem = new InventoryItemImpl(item, new InventoryPosition(0,0,0), player);
+		InventoryItem inventoryItem = new InventoryItemImpl(item1, new InventoryPosition(0,0,0), player);
 		
 		inventoryItemDao.save(inventoryItem);
-		inventoryItem = inventoryItemDao.findByItemId(item.getItemId());
+		inventoryItem = inventoryItemDao.findByItemId(item1.getItemId());
 		assertNotNull(inventoryItem);
-		
+		List<InventoryItem> inventoryItems = inventoryItemDao.findByPlayerId(playerId);
+		assertThat(inventoryItems.size(), greaterThan(0));
+		inventoryItems.get(0).getPosition().setPosX(10);
+		inventoryItems.add(new InventoryItemImpl(item2,new ExchangePosition(0, 0), player));
+		inventoryItemDao.save(inventoryItems);
 		
 	}
 	
