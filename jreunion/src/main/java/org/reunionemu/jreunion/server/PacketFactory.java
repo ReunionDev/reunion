@@ -2,33 +2,14 @@ package org.reunionemu.jreunion.server;
 
 import java.net.InetSocketAddress;
 import java.util.List;
-import java.util.Map;
 
-import org.reunionemu.jreunion.game.Effectable;
-import org.reunionemu.jreunion.game.Equipment;
+import org.reunionemu.jreunion.game.*;
 import org.reunionemu.jreunion.game.Equipment.Slot;
+import org.reunionemu.jreunion.game.items.pet.*;
+import org.reunionemu.jreunion.game.items.pet.PetEquipment.PetSlot;
+import org.reunionemu.jreunion.game.npc.NpcShop;
 //import org.reunionemu.jreunion.game.items.pet.PetEquipment;
 //import org.reunionemu.jreunion.game.items.pet.PetEquipment.PetSlot;
-import org.reunionemu.jreunion.game.items.pet.PetEquipment;
-import org.reunionemu.jreunion.game.items.pet.PetEquipment.PetSlot;
-import org.reunionemu.jreunion.game.npc.Merchant;
-import org.reunionemu.jreunion.game.npc.NpcShop;
-import org.reunionemu.jreunion.game.ExchangeItem;
-import org.reunionemu.jreunion.game.InventoryItem;
-import org.reunionemu.jreunion.game.Item;
-import org.reunionemu.jreunion.game.LivingObject;
-import org.reunionemu.jreunion.game.Npc;
-import org.reunionemu.jreunion.game.Party;
-import org.reunionemu.jreunion.game.Pet;
-import org.reunionemu.jreunion.game.Player;
-import org.reunionemu.jreunion.game.Position;
-import org.reunionemu.jreunion.game.QuickSlotItem;
-import org.reunionemu.jreunion.game.RoamingItem;
-import org.reunionemu.jreunion.game.ShopItem;
-import org.reunionemu.jreunion.game.Skill;
-import org.reunionemu.jreunion.game.StashItem;
-import org.reunionemu.jreunion.game.VendorItem;
-import org.reunionemu.jreunion.game.WorldObject;
 
 /**
  * @author Aidamina
@@ -1220,7 +1201,7 @@ public class PacketFactory {
 			break;
 		case EXCH_INVEN_TO:
 			if(args.length==1){
-				ExchangeItem exchangeItem = (ExchangeItem)args[0];
+				InventoryItem exchangeItem = (InventoryItem)args[0];
 				Item<?> item = exchangeItem.getItem();
 								
 				return "exch_inven_to " + item.getEntityId() + " "
@@ -1236,7 +1217,7 @@ public class PacketFactory {
 			break;
 		case EXCH_INVEN_FROM:
 			if(args.length==1){
-				ExchangeItem exchangeItem = (ExchangeItem)args[0];
+				InventoryItem exchangeItem = (InventoryItem)args[0];
 								
 				return "exch_inven_from " + exchangeItem.getPosition().getPosX() + " "
 										  + exchangeItem.getPosition().getPosY();

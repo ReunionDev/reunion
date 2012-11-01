@@ -2,50 +2,27 @@ package org.reunionemu.jreunion.server;
 
 import java.nio.channels.SocketChannel;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Vector;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
-import org.reunionemu.jreunion.events.Event;
-import org.reunionemu.jreunion.events.EventDispatcher;
-import org.reunionemu.jreunion.events.EventListener;
-import org.reunionemu.jreunion.events.client.ClientConnectEvent;
-import org.reunionemu.jreunion.events.client.ClientDisconnectEvent;
-import org.reunionemu.jreunion.events.client.ClientEvent;
-import org.reunionemu.jreunion.events.client.ClientReceiveEvent;
+import org.reunionemu.jreunion.events.*;
+import org.reunionemu.jreunion.events.client.*;
 import org.reunionemu.jreunion.events.map.PlayerLoginEvent;
-import org.reunionemu.jreunion.game.Equipment;
+import org.reunionemu.jreunion.game.*;
 import org.reunionemu.jreunion.game.Equipment.Slot;
-import org.reunionemu.jreunion.game.ExchangeItem;
-import org.reunionemu.jreunion.game.Inventory;
-import org.reunionemu.jreunion.game.InventoryItem;
-import org.reunionemu.jreunion.game.Item;
-import org.reunionemu.jreunion.game.LivingObject;
-import org.reunionemu.jreunion.game.Npc;
-import org.reunionemu.jreunion.game.Pet;
 import org.reunionemu.jreunion.game.Pet.PetStatus;
-import org.reunionemu.jreunion.game.Player;
 import org.reunionemu.jreunion.game.Player.Race;
 import org.reunionemu.jreunion.game.Player.Sex;
 import org.reunionemu.jreunion.game.Player.Status;
-import org.reunionemu.jreunion.game.Position;
-import org.reunionemu.jreunion.game.QuickSlotItem;
-import org.reunionemu.jreunion.game.RoamingItem;
-import org.reunionemu.jreunion.game.Shop;
-import org.reunionemu.jreunion.game.Skill;
 import org.reunionemu.jreunion.game.items.GemStone;
 import org.reunionemu.jreunion.game.items.etc.MissionReceiver;
 import org.reunionemu.jreunion.game.items.pet.PetEgg;
-import org.reunionemu.jreunion.game.npc.Merchant;
-import org.reunionemu.jreunion.game.npc.Trader;
-import org.reunionemu.jreunion.game.npc.Warehouse;
+import org.reunionemu.jreunion.game.npc.*;
 import org.reunionemu.jreunion.protocol.OtherProtocol;
 import org.reunionemu.jreunion.server.Client.LoginType;
 import org.reunionemu.jreunion.server.Client.State;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.slf4j.*;
 /**
  * @author Aidamina
  * @license https://raw.github.com/ReunionDev/reunion/master/license.txt
@@ -929,10 +906,10 @@ public class PacketParser extends EventDispatcher implements EventListener{
 						}
 						
 						int limeAmmount = 0;
-						Iterator<ExchangeItem> exchangeIter = player.getExchange().itemListIterator();
+						Iterator<InventoryItem> exchangeIter = player.getExchange().itemListIterator();
 						
 						while(exchangeIter.hasNext()){
-							ExchangeItem exchangeItem = exchangeIter.next();
+							InventoryItem exchangeItem = exchangeIter.next();
 							limeAmmount += exchangeItem.getItem().getExtraStats();
 							exchangeItem.getItem().delete();
 						}

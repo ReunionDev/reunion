@@ -1,20 +1,13 @@
 package org.reunionemu.jreunion.game.npc;
 
 import java.util.Iterator;
-import java.util.List;
-import java.util.Vector;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.reunionemu.jreunion.game.ExchangeItem;
-import org.reunionemu.jreunion.game.Item;
-import org.reunionemu.jreunion.game.NpcType;
-import org.reunionemu.jreunion.game.Player;
+import org.reunionemu.jreunion.game.*;
 import org.reunionemu.jreunion.game.items.equipment.Armor;
-import org.reunionemu.jreunion.server.Client;
-import org.reunionemu.jreunion.server.Database;
-import org.reunionemu.jreunion.server.ItemManager;
+import org.reunionemu.jreunion.model.jpa.InventoryItemImpl;
+import org.reunionemu.jreunion.server.*;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Aidamina
@@ -41,10 +34,10 @@ public class Trader extends NpcType {
 		ItemManager itemManager = client.getWorld().getItemManager();
 		int serverBetResult = (int) (Math.random() * 6);
 
-		Iterator<ExchangeItem> exchangeIter = player.getExchange().itemListIterator();
+		Iterator<InventoryItem> exchangeIter = player.getExchange().itemListIterator();
 
 		while (exchangeIter.hasNext()) {
-			ExchangeItem exchangeItem = exchangeIter.next();
+			InventoryItem exchangeItem = exchangeIter.next();
 			Item<?> item = exchangeItem.getItem();
 			item.delete();
 			player.getPosition().getLocalMap().removeEntity(item);
@@ -59,7 +52,7 @@ public class Trader extends NpcType {
 			if(item.getEntityId() == -1)
 				player.getPosition().getLocalMap().createEntityId(item);
 			
-			ExchangeItem exchangeItem = new ExchangeItem(item, 0, 0, player);
+			InventoryItem exchangeItem = new InventoryItemImpl(item, new ExchangePosition(0, 0), player);
 			player.getExchange().addItem(exchangeItem);
 			client.sendPacket(Type.CHIP_EXCHANGE, gemTraderType, "", item, "");
 		} else {
@@ -70,7 +63,7 @@ public class Trader extends NpcType {
 				if(item.getEntityId() == -1)
 					player.getPosition().getLocalMap().createEntityId(item);
 				
-				ExchangeItem exchangeItem = new ExchangeItem(item, 0, 0, player);
+				InventoryItem exchangeItem = new InventoryItemImpl(item, new ExchangePosition(0, 0), player);
 				player.getExchange().addItem(exchangeItem);
 				client.sendPacket(Type.CHIP_EXCHANGE, gemTraderType, "win ", item, (Integer.toString(serverBetResult))+" ");
 			} else {
@@ -82,7 +75,7 @@ public class Trader extends NpcType {
 					if(item.getEntityId() == -1)
 						player.getPosition().getLocalMap().createEntityId(item);
 					
-					ExchangeItem exchangeItem = new ExchangeItem(item, 0, 0, player);
+					InventoryItem exchangeItem = new InventoryItemImpl(item, new ExchangePosition(0, 0), player);
 					player.getExchange().addItem(exchangeItem);
 				}
 				client.sendPacket(Type.CHIP_EXCHANGE, gemTraderType, "lose ", item, (Integer.toString(serverBetResult))+" ");
@@ -109,8 +102,8 @@ public class Trader extends NpcType {
 		if (armorType == 0) {
 			client.sendPacket(Type.ICHANGE, null, null);
 		} else {
-			Iterator<ExchangeItem> exchangeIter = player.getExchange().itemListIterator();
-			ExchangeItem oldExchangeItem = exchangeIter.next();
+			Iterator<InventoryItem> exchangeIter = player.getExchange().itemListIterator();
+			InventoryItem oldExchangeItem = exchangeIter.next();
 			
 			Item<?> newItem = itemManager.create(armorType);
 			
@@ -126,7 +119,7 @@ public class Trader extends NpcType {
 				return;
 			}
 
-			ExchangeItem newExchangeItem = new ExchangeItem(newItem, 0, 0, player);
+			InventoryItem newExchangeItem = new InventoryItemImpl(newItem, new ExchangePosition(0, 0), player);
 			player.getExchange().clearExchange();
 			player.getExchange().addItem(newExchangeItem);
 			int cost =  (int) (newItem.getType().getPrice() * 0.33328);

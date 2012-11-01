@@ -594,21 +594,21 @@ public abstract class Player extends LivingObject implements EventListener {
 		}
 
 		if (getInventory().getHoldingItem() == null) {// removing exchange item
-			ExchangeItem item = getExchange().getItem(posX, posY);
+			InventoryItem item = getExchange().getItem(posX, posY);
 
 			if (item == null) {
 				return;
 			}
 
-			InventoryItem invItem = new InventoryItemImpl(item.getItem(), new InventoryPosition( 0, 0, 0), this);
+			//InventoryItem invItem = new InventoryItemImpl(item.getItem(), new InventoryPosition( 0, 0, 0), this);
 
-			getInventory().setHoldingItem(new HandInventoryItem(invItem.getItem(), this));
+			getInventory().setHoldingItem(new HandInventoryItem(item.getItem(), this));
 			getExchange().removeItem(item);
 			LoggerFactory.getLogger(Player.class).info("Item "+item.getItem()+" removed from exchange inventory of Player "+this);
 		} else { //adding exchange item
 			Item<?> item = getInventory().getHoldingItem().getItem();
-			ExchangeItem newExchangeItem = new ExchangeItem(item, posX,	posY, this);
-			ExchangeItem oldExchangeItem = null;
+			InventoryItem newExchangeItem = new InventoryItemImpl(item, new ExchangePosition(posX,	posY), this);
+			InventoryItem oldExchangeItem = null;
 			int x = 0, y = 0;
 
 			while (oldExchangeItem == null && x < item.getType().getSizeX()) {
@@ -623,9 +623,8 @@ public abstract class Player extends LivingObject implements EventListener {
 			if (oldExchangeItem == null) {
 				getInventory().setHoldingItem(null);
 			} else { //if player is holding an item then store it at the exchange
-				InventoryItem invItem = new InventoryItemImpl(
-						oldExchangeItem.getItem(), new InventoryPosition( 0, 0, 0), this);
-				getInventory().setHoldingItem(new HandInventoryItem(invItem.getItem(), this));
+				//InventoryItem invItem = new InventoryItemImpl(oldExchangeItem.getItem(), new InventoryPosition( 0, 0, 0), this);
+				getInventory().setHoldingItem(new HandInventoryItem(oldExchangeItem.getItem(), this));
 				getExchange().removeItem(oldExchangeItem);
 				LoggerFactory.getLogger(Player.class).info("Item "+oldExchangeItem.getItem()+" removed from exchange inventory of Player "+this);
 			}
@@ -644,13 +643,13 @@ public abstract class Player extends LivingObject implements EventListener {
 			return;
 		}
 
-		Iterator<ExchangeItem> exchangeIter = getExchange()
+		Iterator<InventoryItem> exchangeIter = getExchange()
 				.itemListIterator();
 		while (exchangeIter.hasNext()) {
-			ExchangeItem exchangeItem = exchangeIter.next();
+			InventoryItem exchangeItem = exchangeIter.next();
 			Item<?> item = exchangeItem.getItem();
 
-			if(item.getEntityId()==-1){
+			if(item.getEntityId()==null||item.getEntityId()==-1){
 				client.getPlayer().getPosition().getLocalMap().createEntityId(item);
 			}
 

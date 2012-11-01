@@ -1006,8 +1006,8 @@ public class Database {
 			while (exchangeTable.next()) 
 			{
 				Item<?> item = itemDao.findOne((long)exchangeTable.getInt("itemid"));
-				ExchangeItem exchangeItem = new ExchangeItem(item,
-						exchangeTable.getInt("x"), exchangeTable.getInt("y"), player);
+				InventoryItem exchangeItem = new InventoryItemImpl(item,
+						new ExchangePosition(exchangeTable.getInt("x"), exchangeTable.getInt("y")), player);
 				
 				player.getExchange().addItem(exchangeItem);
 			}
@@ -1027,11 +1027,11 @@ public class Database {
 			Statement stmt = connection.createStatement();
 			stmt.execute("DELETE FROM exchange WHERE charid="+player.getPlayerId()+";");
 			
-			Iterator<ExchangeItem> exchangeIter = player.getExchange().itemListIterator();
+			Iterator<InventoryItem> exchangeIter = player.getExchange().itemListIterator();
 			
 			while(exchangeIter.hasNext())
 			{
-				ExchangeItem exchangeItem = exchangeIter.next();
+				InventoryItem exchangeItem = exchangeIter.next();
 				
 				stmt.execute("INSERT INTO exchange (charid, itemid, x, y)" +
 						" VALUES ("+player.getPlayerId()+ ","

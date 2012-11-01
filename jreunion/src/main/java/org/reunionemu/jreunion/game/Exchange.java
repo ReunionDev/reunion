@@ -1,10 +1,7 @@
 package org.reunionemu.jreunion.game;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Vector;
+import java.util.*;
 
-import org.reunionemu.jreunion.game.Player.Status;
 import org.reunionemu.jreunion.game.items.etc.ScrollOfNAgen;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
 
@@ -15,7 +12,7 @@ import org.reunionemu.jreunion.server.PacketFactory.Type;
  */
 public class Exchange {
 
-	private List<ExchangeItem> itemList;
+	private List<InventoryItem> itemList;
 	
 	private Player owner;
 	
@@ -26,13 +23,16 @@ public class Exchange {
 	private boolean isAccepted;
 
 	public Exchange(Player player) {
-		itemList = new Vector<ExchangeItem>();
+		itemList = new LinkedList<InventoryItem>();
 		setOwner(player);
 		setOtherTrader(null);
 		setAccepted(false);
 	}
 
-	public void addItem(ExchangeItem item) {
+	public void addItem(InventoryItem item) {
+		if(!(item.getPosition() instanceof ExchangePosition)){
+			throw new IllegalStateException("Adding non exchange item to exchange");			
+		}
 		if (itemList.contains(item)) {
 			return;
 		}
@@ -49,11 +49,11 @@ public class Exchange {
 		itemList.clear();
 	}
 
-	public ExchangeItem getItem(int posX, int posY) {
-		Iterator<ExchangeItem> exchangeIter = itemListIterator();
+	public InventoryItem getItem(int posX, int posY) {
+		Iterator<InventoryItem> exchangeIter = itemListIterator();
 
 		while (exchangeIter.hasNext()) {
-			ExchangeItem exchangeItem = exchangeIter.next();
+			InventoryItem exchangeItem = exchangeIter.next();
 
 			for (int x = 0; x < exchangeItem.getItem().getType().getSizeX(); x++) {
 				for (int y = 0; y < exchangeItem.getItem().getType().getSizeY(); y++) {
@@ -67,15 +67,15 @@ public class Exchange {
 		return null;
 	}
 
-	public Iterator<ExchangeItem> itemListIterator() {
+	public Iterator<InventoryItem> itemListIterator() {
 		return itemList.iterator();
 	}
 	
-	public List<ExchangeItem> getItemList(){
+	public List<InventoryItem> getItemList(){
 		return this.itemList;
 	}
 
-	public void setList(List<ExchangeItem> itemList){
+	public void setList(List<InventoryItem> itemList){
 		this.itemList = itemList;
 	}
 	
@@ -83,7 +83,7 @@ public class Exchange {
 		return itemList.size();
 	}
 
-	public void removeItem(ExchangeItem item) {
+	public void removeItem(InventoryItem item) {
 		if (!itemList.contains(item)) {
 			return;
 		}
@@ -97,7 +97,7 @@ public class Exchange {
 	}
 	
 	public boolean isItemsScrolls(){
-		for(ExchangeItem exchangeItem: itemList){
+		for(InventoryItem exchangeItem: itemList){
 			Item<?> item = exchangeItem.getItem();
 			if(!(item.is(ScrollOfNAgen.class))){
 				return false;
@@ -135,12 +135,12 @@ public class Exchange {
 
 	public void acceptRequest(){
 		getOwner().getClient().sendPacket(Type.EXCH_START, getOtherTrader());
-		for(ExchangeItem exchangeItem : getOtherTrader().getExchange().getItemList()){
+		for(InventoryItem exchangeItem : getOtherTrader().getExchange().getItemList()){
 			getOwner().getClient().sendPacket(Type.EXCH_INVEN_TO, exchangeItem);
 		}
 		
 		getOtherTrader().getClient().sendPacket(Type.EXCH_START, getOwner());
-		for(ExchangeItem exchangeItem : getOwner().getExchange().getItemList()){
+		for(InventoryItem exchangeItem : getOwner().getExchange().getItemList()){
 			getOtherTrader().getClient().sendPacket(Type.EXCH_INVEN_TO, exchangeItem);
 		}
 	}
@@ -173,7 +173,7 @@ public class Exchange {
 		
 		Player otherTrader = getOtherTrader();
 		Exchange otherTraderExchange = otherTrader.getExchange();
-		List<ExchangeItem> otherTraderItemList = new Vector<ExchangeItem>(otherTraderExchange.getItemList());
+		List<InventoryItem> otherTraderItemList = new Vector<InventoryItem>(otherTraderExchange.getItemList());
 		long otherTraderMoney = otherTraderExchange.getMoney();
 		long money = getMoney();
 		
@@ -181,7 +181,7 @@ public class Exchange {
 		otherTraderExchange.setMoney(0);
 		otherTraderExchange.setAccepted(false);
 		otherTraderExchange.setOtherTrader(null);
-		otherTraderExchange.setList(new Vector<ExchangeItem>(getItemList()));
+		otherTraderExchange.setList(new Vector<InventoryItem>(getItemList()));
 		
 		//reset owner exchange
 		setMoney(0);

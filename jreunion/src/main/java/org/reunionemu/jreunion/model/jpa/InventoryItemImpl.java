@@ -125,9 +125,12 @@ public class InventoryItemImpl extends InventoryItem implements Serializable {
 	}
 
 	public void setTab(int tab) {
-		if (tab == ExchangePosition.EXCHANGE_TAB) {
+		if (tab == InventoryPosition.EXCHANGE_TAB) {
 			setPosition(new ExchangePosition(getPosition().getPosX(),
 					getPosition().getPosY()));
+		} else if(tab == InventoryPosition.EXCHANGE_TAB) {
+			setPosition(new HandPosition());
+			
 		} else {
 			getPosition().setTab(tab);
 		}
@@ -140,5 +143,5 @@ public class InventoryItemImpl extends InventoryItem implements Serializable {
 	public void setY(int y) {
 		getPosition().setPosY(y);
 	}
-
+	
 }
