@@ -769,7 +769,7 @@ public abstract class Player extends LivingObject implements EventListener {
 			if(item == null)
 				continue;
 
-			if(item.getEntityId()==-1){
+			if(getEntityId()!=null&&item.getEntityId()==-1){
 				localMap.createEntityId(item);
 			}
 		}
@@ -778,8 +778,6 @@ public abstract class Player extends LivingObject implements EventListener {
 	/****** Manages the char Logout ******/
 	public synchronized void save() {
 		
-		
-
 		if(getEntityId()!=null&&getEntityId() != -1){
 			LoggerFactory.getLogger(Player.class).info("Player " + getName() + " saving...\n");
 			
