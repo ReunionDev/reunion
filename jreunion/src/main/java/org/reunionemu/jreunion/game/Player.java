@@ -780,7 +780,7 @@ public abstract class Player extends LivingObject implements EventListener {
 		
 		
 
-		if(getEntityId() != -1){
+		if(getEntityId()!=null&&getEntityId() != -1){
 			LoggerFactory.getLogger(Player.class).info("Player " + getName() + " saving...\n");
 			
 			try{
