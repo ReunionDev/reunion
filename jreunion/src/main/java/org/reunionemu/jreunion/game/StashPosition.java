@@ -4,7 +4,7 @@ package org.reunionemu.jreunion.game;
  * @author Aidamina
  * @license https://raw.github.com/ReunionDev/reunion/master/license.txt
  */
-public class StashPosition extends ItemPosition {
+public class StashPosition implements ItemPosition{
 
 	private int slot;
 

@@ -56,13 +56,13 @@ public class Warehouse extends NpcType {
 			return;
 		}
 		
-		HandInventoryItem handPosition = player.getInventory().getHoldingItem();
+		InventoryItem handPosition = player.getInventory().getHoldingItem();
 		StashItem stashItem = null;
 
 		// Withdraw item from stash
 		if(handPosition == null){
 			stashItem = player.getStash().getItem(pos);
-			player.getInventory().setHoldingItem(new HandInventoryItem(removeItem(player, stashItem), player));
+			player.getInventory().setHoldingItem(new InventoryItemImpl(removeItem(player, stashItem), HandPosition.INSTANCE, player));
 			LoggerFactory.getLogger(Warehouse.class).info("Player "+player+" removed item "+stashItem.getItem()+" from the warehouse");
 			player.getClient().sendPacket(Type.STASH_FROM, stashItem, player.getStash().getQuantity(pos));
 		} else { //store item on stash

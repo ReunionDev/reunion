@@ -1,11 +1,10 @@
 package org.reunionemu.jreunion.game;
 
-import java.util.List;
-import java.util.Vector;
+import java.util.*;
 
-import org.reunionemu.jreunion.server.Session;
-import org.reunionemu.jreunion.server.SessionList;
+import org.reunionemu.jreunion.model.jpa.InventoryItemImpl;
 import org.reunionemu.jreunion.server.PacketFactory.Type;
+import org.reunionemu.jreunion.server.*;
 import org.slf4j.LoggerFactory;
 
 /**
@@ -197,7 +196,7 @@ public class Shop {
 				getOwner().getClient().sendPacket(Type.U_SHOP, "reg", 0, -4, 1);
 				return;
 			}
-			HandInventoryItem holdingItem = getOwner().getInventory().getHoldingItem();
+			InventoryItem holdingItem = getOwner().getInventory().getHoldingItem();
 			if(holdingItem==null){
 				return;
 			} else {
@@ -269,7 +268,7 @@ public class Shop {
 
 		if(amountRequested == 1){ //removing a single items from shop.
 			removeItem(shopItem);
-			getOwner().getInventory().setHoldingItem(new HandInventoryItem(shopItem.getItem(), player));
+			getOwner().getInventory().setHoldingItem(new InventoryItemImpl(shopItem.getItem(), HandPosition.INSTANCE, player));
 			getOwner().getClient().sendPacket(Type.U_SHOP, "unreg", 1, position, amountRequested);
 			getOwner().getClient().sendPacket(Type.PICK_EXTRA, shopItem.getItem());
 			LoggerFactory.getLogger(this.getClass()).info("Player "+getOwner()+" removed item "+shopItem.getItem()+" from shop.");

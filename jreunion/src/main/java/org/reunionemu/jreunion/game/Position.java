@@ -5,7 +5,7 @@ import org.reunionemu.jreunion.server.*;
  * @author Aidamina
  * @license https://raw.github.com/ReunionDev/reunion/master/license.txt
  */
-public final class Position {
+public final class Position implements BasePosition {
 	
 	private final int x;
 	private final int y;

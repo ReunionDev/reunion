@@ -1,15 +1,6 @@
 package org.reunionemu.jreunion.game;
 
-public class ItemPosition {
-
-	
-	public ItemPosition(){
-		
-	}
-	
-	public Class<?> getPosition() {
-		return this.getClass();
-	}
+public interface ItemPosition extends BasePosition {
 
 	
 }

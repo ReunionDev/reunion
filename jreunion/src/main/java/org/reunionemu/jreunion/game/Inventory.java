@@ -14,17 +14,17 @@ public class Inventory {
 	
 	private List<InventoryItem> items = null;;
 	
-	private HandInventoryItem holdingItem = null;
+	private InventoryItem holdingItem = null;
 
 	public Inventory() {
 		items = new Vector<InventoryItem>();
 	}
 	
-	public void setHoldingItem(HandInventoryItem holdingItem) {
+	public void setHoldingItem(InventoryItem holdingItem) {
 		this.holdingItem = holdingItem;
 	}
 	
-	public HandInventoryItem getHoldingItem() {
+	public InventoryItem getHoldingItem() {
 		return holdingItem;
 	}
 	
@@ -194,7 +194,7 @@ public class Inventory {
 	//stores an inventory item on the given position.
 	public boolean storeInventoryItem(int tab, int posX, int posY){
 		
-		HandInventoryItem handPosition = getHoldingItem();
+		InventoryItem handPosition = getHoldingItem();
 		
 		if(handPosition != null){
 			InventoryItem inventoryItem = new InventoryItemImpl(handPosition.getItem(),new InventoryPosition(posX,posY,tab), getPlayer()); 
@@ -213,7 +213,7 @@ public class Inventory {
 	//removes an inventory item from the given position.
 	public boolean removeInventoryItem(Player player, int tab, int posX, int posY){
 		
-		HandInventoryItem handPosition = getHoldingItem();
+		InventoryItem handPosition = getHoldingItem();
 		int [] itemPosition = null;
 		InventoryItem inventoryItem = null;
 		
@@ -234,7 +234,7 @@ public class Inventory {
 		if(handPosition != null){
 			storeInventoryItem(tab,posX,posY);
 		}
-		setHoldingItem(new HandInventoryItem(inventoryItem.getItem(), player));
+		setHoldingItem(new InventoryItemImpl(inventoryItem.getItem(), HandPosition.INSTANCE, player));
 		
 		//when removing an item from the inventory, there must be an holding item.
 		if(getHoldingItem() == null)
@@ -260,7 +260,7 @@ public class Inventory {
 	/****** Manages the Items on the Inventory ******/
 	public void handleInventory(int tab, int posX, int posY) {
 
-		HandInventoryItem handPosition = getHoldingItem();
+		InventoryItem handPosition = getHoldingItem();
 
 		if(handPosition != null){
 			if(itemFit(tab,posX,posY,handPosition.getItem().getType().getSizeX(),

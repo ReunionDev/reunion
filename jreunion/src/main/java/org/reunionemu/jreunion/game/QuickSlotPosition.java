@@ -4,7 +4,7 @@ package org.reunionemu.jreunion.game;
  * @author Aidamina
  * @license https://raw.github.com/ReunionDev/reunion/master/license.txt
  */
-public class QuickSlotPosition extends ItemPosition {
+public class QuickSlotPosition implements ItemPosition {
 
 	private QuickSlotBar quickSlotBar;
 	private int slot;

@@ -80,7 +80,7 @@ public class InventoryItemDaoTest {
 		assertNotNull(inventoryItem);
 		List<InventoryItem> inventoryItems = inventoryItemDao.findByPlayerId(playerId);
 		assertThat(inventoryItems.size(), greaterThan(0));
-		inventoryItems.get(0).getPosition().setPosX(10);
+		inventoryItems.get(0).setPosition(inventoryItems.get(0).getPosition().setPosX(10));
 		inventoryItems.add(new InventoryItemImpl(item2,new ExchangePosition(0, 0), player));
 		inventoryItemDao.save(inventoryItems);
 		

@@ -749,7 +749,7 @@ public class Database {
 				
 				if (item!=null){
 					if(invTable.getInt("tab") == -1 && invTable.getInt("x") == -1 && invTable.getInt("y") == -1){
-						HandInventoryItem handItem = new HandInventoryItem(item, player);
+						InventoryItem handItem = new InventoryItemImpl(item, HandPosition.INSTANCE, player);
 						player.getInventory().setHoldingItem(handItem);
 					} else {
 						InventoryItem inventoryItem = new InventoryItemImpl(item,
@@ -779,7 +779,7 @@ public class Database {
 			String data = "";
 			
 			Iterator<InventoryItem> iter = player.getInventory().getInventoryIterator();
-			HandInventoryItem handPosition = player.getInventory().getHoldingItem();
+			InventoryItem handPosition = player.getInventory().getHoldingItem();
 			
 			while(iter.hasNext())
 			{

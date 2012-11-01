@@ -78,16 +78,14 @@ public class QuickSlotBar {
 			QuickSlotItem qsItem = getItem(slot);
 			removeItem(qsItem);
 			
-			InventoryItem invItem = new InventoryItemImpl(qsItem.getItem(), new InventoryPosition(-1,-1, -1), player);
+			//InventoryItem invItem = new InventoryItemImpl(qsItem.getItem(), new InventoryPosition(-1,-1, -1), player);
 			
-			player.getInventory().setHoldingItem(new HandInventoryItem(invItem.getItem(), player));
-			
+			player.getInventory().setHoldingItem(new InventoryItemImpl(qsItem.getItem(), HandPosition.INSTANCE, player));
 			
 		} else {
-			InventoryItem invItem = new InventoryItemImpl(player.getInventory().getHoldingItem().getItem(),
-					new InventoryPosition(0,0,0), player);
+			//InventoryItem invItem = new InventoryItemImpl(player.getInventory().getHoldingItem().getItem(),	new InventoryPosition(0,0,0), player);
 			QuickSlotItem newQuickSlotItem = new QuickSlotItem(
-					invItem.getItem(), new QuickSlotPosition(this, slot));
+					player.getInventory().getHoldingItem().getItem(), new QuickSlotPosition(this, slot));
 			QuickSlotItem oldQuickSlotItem = getItem(slot);
 			if (oldQuickSlotItem == null) {
 				addItem(newQuickSlotItem);
@@ -95,8 +93,8 @@ public class QuickSlotBar {
 			} else {
 				removeItem(oldQuickSlotItem);
 				addItem(newQuickSlotItem);
-				invItem = new InventoryItemImpl(oldQuickSlotItem.getItem(), new InventoryPosition(0, 0,	0), player);
-				player.getInventory().setHoldingItem(new HandInventoryItem(invItem.getItem(), player));
+				//invItem = new InventoryItemImpl(oldQuickSlotItem.getItem(), new InventoryPosition(0, 0, 0), player);
+				player.getInventory().setHoldingItem(new InventoryItemImpl(oldQuickSlotItem.getItem(), HandPosition.INSTANCE , player));
 			}
 		}
 	}

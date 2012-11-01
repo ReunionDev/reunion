@@ -220,7 +220,7 @@ public abstract class Player extends LivingObject implements EventListener {
 	/****** Manages the Item Drop ******/
 	public void dropItem(int playerId) {
 
-		HandInventoryItem handPosition = getInventory().getHoldingItem();
+		InventoryItem handPosition = getInventory().getHoldingItem();
 
 		if (handPosition == null) {
 			LoggerFactory.getLogger(Player.class).error("Failed to get Player "+this+" holding item (HandPosition=NULL)");
@@ -602,7 +602,7 @@ public abstract class Player extends LivingObject implements EventListener {
 
 			//InventoryItem invItem = new InventoryItemImpl(item.getItem(), new InventoryPosition( 0, 0, 0), this);
 
-			getInventory().setHoldingItem(new HandInventoryItem(item.getItem(), this));
+			getInventory().setHoldingItem(new InventoryItemImpl(item.getItem(), HandPosition.INSTANCE, this));
 			getExchange().removeItem(item);
 			LoggerFactory.getLogger(Player.class).info("Item "+item.getItem()+" removed from exchange inventory of Player "+this);
 		} else { //adding exchange item
@@ -624,7 +624,7 @@ public abstract class Player extends LivingObject implements EventListener {
 				getInventory().setHoldingItem(null);
 			} else { //if player is holding an item then store it at the exchange
 				//InventoryItem invItem = new InventoryItemImpl(oldExchangeItem.getItem(), new InventoryPosition( 0, 0, 0), this);
-				getInventory().setHoldingItem(new HandInventoryItem(oldExchangeItem.getItem(), this));
+				getInventory().setHoldingItem(new InventoryItemImpl(oldExchangeItem.getItem(), HandPosition.INSTANCE, this));
 				getExchange().removeItem(oldExchangeItem);
 				LoggerFactory.getLogger(Player.class).info("Item "+oldExchangeItem.getItem()+" removed from exchange inventory of Player "+this);
 			}
@@ -842,7 +842,7 @@ public abstract class Player extends LivingObject implements EventListener {
 
 		if (inventoryItem == null) {
 			inventoryItem = new InventoryItemImpl(item, new InventoryPosition(0, 0, 0), this);
-			getInventory().setHoldingItem(new HandInventoryItem(inventoryItem.getItem(), this));
+			getInventory().setHoldingItem(new InventoryItemImpl(inventoryItem.getItem(), HandPosition.INSTANCE, this));
 		}
 
 		client.sendPacket(Type.PICK, inventoryItem);
@@ -1384,13 +1384,13 @@ public abstract class Player extends LivingObject implements EventListener {
 	public void wearSlot(Slot slot) {
 
 		int flyStatus = 0;
-		HandInventoryItem handPosition = getInventory().getHoldingItem();
+		InventoryItem handPosition = getInventory().getHoldingItem();
 		//InventoryItem invItem = new InventoryItem(getInventory().getHoldingItem().getItem(),
 		//		new InventoryPosition(0,0,0));
 
 		//player removed wearing equipment.
 		if (handPosition == null) {
-			getInventory().setHoldingItem(new HandInventoryItem(getEquipment().getItem(slot), this));
+			getInventory().setHoldingItem(new InventoryItemImpl(getEquipment().getItem(slot), HandPosition.INSTANCE ,this));
 			getEquipment().setItem(slot, null);
 			getInterested().sendPacket(Type.CHAR_REMOVE, this, slot);
 			LoggerFactory.getLogger(Player.class).info("Player "+this+" removed equipment "
@@ -1410,7 +1410,7 @@ public abstract class Player extends LivingObject implements EventListener {
 
 			//check if the equipment slot is already occupied and replace it.
 			if( (wearingItem != null) ){
-				getInventory().setHoldingItem(new HandInventoryItem(wearingItem, this));
+				getInventory().setHoldingItem(new InventoryItemImpl(wearingItem, HandPosition.INSTANCE , this));
 				getInterested().sendPacket(Type.CHAR_REMOVE, this, slot);
 				LoggerFactory.getLogger(Player.class).info("Player "+this+" removed equipment "+wearingItem);
 			} else {
