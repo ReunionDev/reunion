@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.Map;
 
 import org.reunionemu.jcommon.ParsedItem;
-import org.reunionemu.jreunion.dao.QuestStateBaseDao;
+import org.reunionemu.jreunion.dao.*;
 import org.reunionemu.jreunion.events.*;
 import org.reunionemu.jreunion.events.EventListener;
 import org.reunionemu.jreunion.events.client.*;
@@ -45,6 +45,9 @@ public abstract class Player extends LivingObject implements EventListener {
 	
 	@Autowired
 	QuestStateBaseDao<QuestState> questStateDao;
+	
+	@Autowired
+	InventoryItemDao<InventoryItem> inventoryItemDao;
 
 	private int petId; //used during server loading
 
@@ -760,7 +763,7 @@ public abstract class Player extends LivingObject implements EventListener {
 		Iterator<StashItem> stashIter = getStash().itemListIterator();
 
 		while(stashIter.hasNext()){
-			StashItem stashItem = (StashItem) stashIter.next();
+			StashItem stashItem = stashIter.next();
 			Item<?> item = stashItem.getItem();
 
 			if(item == null)
@@ -774,57 +777,72 @@ public abstract class Player extends LivingObject implements EventListener {
 
 	/****** Manages the char Logout ******/
 	public synchronized void save() {
+		
+		
 
 		if(getEntityId() != -1){
-			LoggerFactory.getLogger(this.getClass()).info("Player " + getName() + " saving...\n");
+			LoggerFactory.getLogger(Player.class).info("Player " + getName() + " saving...\n");
+			
+			try{
+				List<InventoryItem> list = new LinkedList<InventoryItem>();
+				list.addAll(getInventory().getList());
+				list.addAll(getExchange().getList());
+				
+				InventoryItem holding = getInventory().getHoldingItem();
+				if(holding==null){
+					list.add(holding);
+				}
+				inventoryItemDao.save(list);
+				
+			}catch(Exception e){
+				LoggerFactory.getLogger(Player.class).warn(""+getName()+": Inventory saving failed ...",e);
+			}
+			
+			
 			try{
 				Database.getInstance().saveSkills(this);
 			}catch(Exception e){
-				LoggerFactory.getLogger(this.getClass()).warn(""+getName()+": Skills saving failed ...",e);
+				LoggerFactory.getLogger(Player.class).warn(""+getName()+": Skills saving failed ...",e);
 			}
-			try{
-				Database.getInstance().saveInventory(this);
-			}catch(Exception e){
-				LoggerFactory.getLogger(this.getClass()).warn(""+getName()+": Inventory saving failed ...",e);
-			}
+			
 			try{
 				Database.getInstance().savePet(this);
 			}catch(Exception e){
-				LoggerFactory.getLogger(this.getClass()).warn(""+getName()+": Pet saving failed ...",e);
+				LoggerFactory.getLogger(Player.class).warn(""+getName()+": Pet saving failed ...",e);
 			}
+			
 			try{
 				Database.getInstance().savePetEquipment(getPet());
 			}catch(Exception e){
-				LoggerFactory.getLogger(this.getClass()).warn(""+getName()+": Pet Equipment saving failed ...",e);
+				LoggerFactory.getLogger(Player.class).warn(""+getName()+": Pet Equipment saving failed ...",e);
 			}
+			
 			try{
 				Database.getInstance().saveCharacter(this);
 			}catch(Exception e){
-				LoggerFactory.getLogger(this.getClass()).warn(""+getName()+": Character saving failed ...",e);
+				LoggerFactory.getLogger(Player.class).warn(""+getName()+": Character saving failed ...",e);
 			}
+			
 			try{
 				Database.getInstance().saveEquipment(this);
 			}catch(Exception e){
-				LoggerFactory.getLogger(this.getClass()).warn(""+getName()+": Equipment saving failed ...",e);
+				LoggerFactory.getLogger(Player.class).warn(""+getName()+": Equipment saving failed ...",e);
 			}
+			
 			try{
 				Database.getInstance().saveStash(getClient());
 			}catch(Exception e){
-				LoggerFactory.getLogger(this.getClass()).warn(""+getName()+": Stash saving failed ...",e);
+				LoggerFactory.getLogger(Player.class).warn(""+getName()+": Stash saving failed ...",e);
 			}
-			try{
-				Database.getInstance().saveExchange(this);
-			}catch(Exception e){
-				LoggerFactory.getLogger(this.getClass()).warn(""+getName()+": Exchange saving failed ...",e);
-			}
+			
 			try{
 				Database.getInstance().saveQuickSlot(this);
 			}catch(Exception e){
-				LoggerFactory.getLogger(this.getClass()).warn(""+getName()+": QuickSlot saving failed ...",e);
+				LoggerFactory.getLogger(Player.class).warn(""+getName()+": QuickSlot saving failed ...",e);
 			}
 			//DatabaseUtils.getDinamicInstance().saveQuest(this);
 		}
-		LoggerFactory.getLogger(this.getClass()).info("Player " + getName() + " saving complete!\n");
+		LoggerFactory.getLogger(Player.class).info("Player " + getName() + " saving complete!\n");
 	}
 
 	public void loseStamina(long ammount) {	
@@ -1604,6 +1622,28 @@ public abstract class Player extends LivingObject implements EventListener {
 	public void addExperience(int experience){
 		setTotalExp(getTotalExp()+experience);
 		setLevelUpExp(getLevelUpExp()-experience);
+	}
+	
+	
+	public void load(){
+		
+		List<InventoryItem> list = inventoryItemDao.findByPlayerId(this.getPlayerId());
+		
+		Inventory inventory = getInventory();
+		Exchange exchange = getExchange();
+		for(InventoryItem item: list){
+			InventoryPosition position = item.getPosition();
+			if(position instanceof HandPosition){
+				inventory.setHoldingItem(item);
+			}else if(position instanceof ExchangePosition){
+				exchange.addItem(item);
+			}else{
+				inventory.addInventoryItem(item);
+			}
+		}
+		loadInventory();
+		loadExchange();
+		
 	}
 	
 }

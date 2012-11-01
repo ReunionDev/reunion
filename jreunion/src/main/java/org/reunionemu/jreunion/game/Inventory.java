@@ -5,19 +5,20 @@ import java.util.*;
 import org.reunionemu.jreunion.model.jpa.InventoryItemImpl;
 import org.reunionemu.jreunion.server.Server;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Configurable;
 
 /**
  * @author Aidamina
  * @license https://raw.github.com/ReunionDev/reunion/master/license.txt
  */
+@Configurable
 public class Inventory {
-	
-	private List<InventoryItem> items = null;;
+		
+	private List<InventoryItem> items = new LinkedList<InventoryItem>();
 	
 	private InventoryItem holdingItem = null;
 
 	public Inventory() {
-		items = new Vector<InventoryItem>();
 	}
 	
 	public void setHoldingItem(InventoryItem holdingItem) {
@@ -30,6 +31,10 @@ public class Inventory {
 	
 	public Iterator<InventoryItem> getInventoryIterator() {
 		return items.iterator();
+	}
+	
+	public List<InventoryItem> getList(){
+		return items;
 	}
 	
 	public boolean posEmpty(int tab, int posX, int posY) {
@@ -388,4 +393,5 @@ public class Inventory {
 		}
 		return null;
 	}
+
 }

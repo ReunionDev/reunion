@@ -36,7 +36,6 @@ public class InventoryItemImpl extends InventoryItem implements Serializable {
 	private InventoryPosition position = new InventoryPosition(0, 0, 0);
 
 	public InventoryItemImpl() {
-
 	}
 
 	public InventoryItemImpl(Item<?> item, InventoryPosition position,

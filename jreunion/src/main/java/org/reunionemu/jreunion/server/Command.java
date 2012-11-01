@@ -117,6 +117,10 @@ public class Command {
 		}
 	}
 
+	/*
+	 * TODO: This function needs a complete rewrite
+	 * 
+	 */
 	public void delChar(int slotNumber, long accountId) {
 		int charId = Database.getInstance().getCharId(slotNumber, accountId);
 		String charName = Database.getInstance().getCharName(charId);
@@ -128,10 +132,10 @@ public class Command {
 		Database.getInstance().deleteCharacter(charId);
 		Database.getInstance().deleteCharSkills(charId);
 		Database.getInstance().deleteCharQuickSlot(charId);
-		//TODO: Quest state delete
+		//TODO: Implement/replace the following:
 		//questStateDao.delete(id);
 		Database.getInstance().deleteCharInventory(charId);
-		Database.getInstance().deleteCharExchange(charId);
+		
 		Database.getInstance().deleteCharEquipment(charId);
 		
 	}

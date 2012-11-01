@@ -14,7 +14,6 @@ import org.reunionemu.jreunion.game.Player.Race;
 import org.reunionemu.jreunion.game.Player.Sex;
 import org.reunionemu.jreunion.game.items.pet.*;
 import org.reunionemu.jreunion.game.items.pet.PetEquipment.PetSlot;
-import org.reunionemu.jreunion.model.jpa.InventoryItemImpl;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -695,8 +694,9 @@ public class Database {
 			player.getInventory().storeItem(hpPot4, -1);
 			player.getInventory().storeItem(hpPot5, -1);
 			player.getInventory().storeItem(hpPot6, -1);
-			saveInventory(player);
-						
+
+			player.save();
+			
 		} catch (SQLException e1) {
 			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
 			return;
@@ -731,83 +731,6 @@ public class Database {
 		}
 		
 		return player;
-	}
-	
-	public Player loadInventory(Player player){
-		if (!checkDatabase())
-			return null;
-		Statement invStmt;
-
-		try {
-			invStmt = connection.createStatement();
-			
-			ResultSet invTable = invStmt.executeQuery("SELECT * FROM inventory WHERE charid="+player.getPlayerId()+";");
-			
-			while (invTable.next()) 
-			{
-				Item<?> item = itemDao.findOne((long)invTable.getInt("itemid"));	
-				
-				if (item!=null){
-					if(invTable.getInt("tab") == -1 && invTable.getInt("x") == -1 && invTable.getInt("y") == -1){
-						InventoryItem handItem = new InventoryItemImpl(item, HandPosition.INSTANCE, player);
-						player.getInventory().setHoldingItem(handItem);
-					} else {
-						InventoryItem inventoryItem = new InventoryItemImpl(item,
-								new InventoryPosition(invTable.getInt("x"), invTable.getInt("y"),invTable.getInt("tab")), player);
-						player.getInventory().addInventoryItem(inventoryItem);
-					}
-				}
-			}
-			
-		} catch (SQLException e1) {
-			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
-			return null;
-		}
-		return player;
-	}
-		
-	public void saveInventory(Player player){
-		if (!checkDatabase())
-			return;
-	
-		Statement stmt;
-		try {
-			stmt = connection.createStatement();
-			stmt.execute("DELETE FROM inventory WHERE charid="+player.getPlayerId()+";");
-		
-			String query = "INSERT INTO inventory (charid, itemid, tab, x, y) VALUES ";
-			String data = "";
-			
-			Iterator<InventoryItem> iter = player.getInventory().getInventoryIterator();
-			InventoryItem handPosition = player.getInventory().getHoldingItem();
-			
-			while(iter.hasNext())
-			{
-				InventoryItem invItem = iter.next();
-				Item<?> item = invItem.getItem();
-				item.save();
-				
-				data += "("+player.getPlayerId()+ ","+item.getItemId()+","+invItem.getPosition().getTab()+
-					","+invItem.getPosition().getPosX()+ ","+invItem.getPosition().getPosY()+ ")";			
-				if(iter.hasNext())
-					data+= ", ";			
-			}
-			
-			if(handPosition != null){
-				data += ", (" + player.getPlayerId() + "," + handPosition.getItem().getItemId() + ",-1,-1,-1)"; 
-			}
-			
-			if(!data.isEmpty()){
-				stmt.execute(query+data);
-				
-			}
-			
-			//queue.add(saveInventory);
-			
-		} catch (SQLException e1) {
-			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
-			return;
-		}
 	}
 		
 	public  void saveSkills(Player player) {
@@ -993,59 +916,6 @@ public class Database {
 		  }
 	}
 	
-	public void loadExchange(Player player){
-		
-		if (!checkDatabase())
-			return;
-		
-		try {
-			Statement invStmt = connection.createStatement();
-			
-			ResultSet exchangeTable = invStmt.executeQuery("SELECT * FROM exchange WHERE charid="+player.getPlayerId()+";");
-						
-			while (exchangeTable.next()) 
-			{
-				Item<?> item = itemDao.findOne((long)exchangeTable.getInt("itemid"));
-				InventoryItem exchangeItem = new InventoryItemImpl(item,
-						new ExchangePosition(exchangeTable.getInt("x"), exchangeTable.getInt("y")), player);
-				
-				player.getExchange().addItem(exchangeItem);
-			}
-			
-		} catch (SQLException e1) {
-			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
-			return;
-		}
-	}
-	
-	public void saveExchange(Player player){
-		
-		if (!checkDatabase())
-			return;
-		
-		try {
-			Statement stmt = connection.createStatement();
-			stmt.execute("DELETE FROM exchange WHERE charid="+player.getPlayerId()+";");
-			
-			Iterator<InventoryItem> exchangeIter = player.getExchange().itemListIterator();
-			
-			while(exchangeIter.hasNext())
-			{
-				InventoryItem exchangeItem = exchangeIter.next();
-				
-				stmt.execute("INSERT INTO exchange (charid, itemid, x, y)" +
-						" VALUES ("+player.getPlayerId()+ ","
-								   +exchangeItem.getItem().getItemId()+","
-								   +exchangeItem.getPosition().getPosX()+","
-								   +exchangeItem.getPosition().getPosY()+");");
-			}
-			
-		} catch (SQLException e) {
-			LoggerFactory.getLogger(this.getClass()).warn("Exception", e);
-			return;
-		}
-	}
-	
 	public void deleteGuild(int id)
 	{
 		if (!checkDatabase())return ;
@@ -1149,32 +1019,6 @@ public class Database {
 			
 			stmt
 			.execute("DELETE FROM equipment WHERE charid = "+charId+ ";");
-			
-		} catch (SQLException e1) {
-			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
-			return;
-		}
-	}
-	
-	public void deleteCharExchange(int charId) {
-		if (!checkDatabase())
-			return;
-		Statement stmt;
-		Statement itemStmt;
-		
-		try {
-			stmt = connection.createStatement();
-			itemStmt = connection.createStatement();
-			
-			ResultSet rs = itemStmt.executeQuery("SELECT * FROM exchange WHERE charid = "+charId+ ";");
-			if(rs.next()){
-				do {
-					itemDao.findOne((long)rs.getInt("itemid")).delete();
-				} while(rs.next());
-			} else return;
-			
-			stmt
-			.execute("DELETE FROM exchange WHERE charid = "+charId+ ";");
 			
 		} catch (SQLException e1) {
 			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);

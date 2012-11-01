@@ -12,7 +12,7 @@ import org.reunionemu.jreunion.server.PacketFactory.Type;
  */
 public class Exchange {
 
-	private List<InventoryItem> itemList;
+	private List<InventoryItem> itemList = new LinkedList<InventoryItem>();
 	
 	private Player owner;
 	
@@ -23,10 +23,14 @@ public class Exchange {
 	private boolean isAccepted;
 
 	public Exchange(Player player) {
-		itemList = new LinkedList<InventoryItem>();
+
 		setOwner(player);
 		setOtherTrader(null);
 		setAccepted(false);
+	}
+	
+	public List<InventoryItem> getList(){
+		return itemList;
 	}
 
 	public void addItem(InventoryItem item) {

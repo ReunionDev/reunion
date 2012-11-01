@@ -1,20 +1,9 @@
 package org.reunionemu.jreunion.game;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.reunionemu.jreunion.game.items.SpecialWeapon;
-import org.reunionemu.jreunion.game.items.equipment.Armor;
-import org.reunionemu.jreunion.game.items.equipment.Bracelet;
-import org.reunionemu.jreunion.game.items.equipment.HeavyWeapon;
-import org.reunionemu.jreunion.game.items.equipment.Mantle;
-import org.reunionemu.jreunion.game.items.equipment.Necklace;
-import org.reunionemu.jreunion.game.items.equipment.Ring;
-import org.reunionemu.jreunion.game.items.equipment.Shield;
-import org.reunionemu.jreunion.game.items.equipment.SlayerWeapon;
-import org.reunionemu.jreunion.game.items.equipment.WandWeapon;
-import org.reunionemu.jreunion.game.items.equipment.Weapon;
-import org.reunionemu.jreunion.game.items.equipment.Wing;
+import org.reunionemu.jreunion.game.items.equipment.*;
 import org.reunionemu.jreunion.game.items.pet.PetEgg;
+import org.slf4j.LoggerFactory;
 
 
 /**

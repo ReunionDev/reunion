@@ -27,6 +27,7 @@ import org.slf4j.*;
  * @author Aidamina
  * @license https://raw.github.com/ReunionDev/reunion/master/license.txt
  */
+
 public class PacketParser extends EventDispatcher implements EventListener{
 
 	private MessageParser messageParser;
@@ -281,11 +282,9 @@ public class PacketParser extends EventDispatcher implements EventListener{
 					
 					Database.getInstance().loadStash(client);
 					Database.getInstance().loadQuickSlot(player);
-					Database.getInstance().loadInventory(player);
-					Database.getInstance().loadExchange(player);
 					
-					player.loadInventory();
-					player.loadExchange();
+					player.load(); // load inventory and exchange
+					
 					player.loadQuickSlot();
 					client.sendPacket(PacketFactory.Type.OK);
 					
