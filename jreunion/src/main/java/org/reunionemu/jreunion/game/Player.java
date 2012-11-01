@@ -730,7 +730,7 @@ public abstract class Player extends LivingObject implements EventListener {
 			QuickSlotItem qsItem = quickSlot.next();
 			Item<?> item = qsItem.getItem();
 
-			if(item.getEntityId()==-1){
+			if(getEntityId()!=null&&item.getEntityId()==-1){
 				client.getPlayer().getPosition().getLocalMap().createEntityId(item);
 			}
 			client.sendPacket(Type.QUICK, qsItem);
@@ -748,7 +748,7 @@ public abstract class Player extends LivingObject implements EventListener {
 			if(item == null)
 				continue;
 
-			if(item.getEntityId()==-1){
+			if(getEntityId()!=null&&item.getEntityId()==-1){
 				localMap.createEntityId(item);
 			}
 		}
@@ -780,7 +780,7 @@ public abstract class Player extends LivingObject implements EventListener {
 		
 		
 
-		if(getEntityId() != -1){
+		if(getEntityId()!=null&&getEntityId() != -1){
 			LoggerFactory.getLogger(Player.class).info("Player " + getName() + " saving...\n");
 			
 			try{
