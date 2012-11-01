@@ -73,7 +73,7 @@ public class Equipment {
 	
 	public int getEntityId(Slot slot){
 		Item<?> item = getItem(slot); 
-		return item == null ? -1 : item.getEntityId();
+		return item == null ? -1 : (item.getEntityId()!=null?item.getEntityId():-1);
 	}
 	
 	public long getExtraStats(Slot slot){
