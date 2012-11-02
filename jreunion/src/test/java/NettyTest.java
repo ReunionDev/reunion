@@ -33,12 +33,11 @@ public class NettyTest {
 									ChannelHandlerContext ctx, HttpRequest msg)
 									throws Exception {
 								
-						        HttpResponse response = new DefaultHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK);
-						        
+						        HttpResponse response = new DefaultHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.CREATED);
 						        
 						        ctx.write(response).addListener(ChannelFutureListener.CLOSE);
 						        
-								System.out.println(msg);
+								//System.out.println(msg);
 								//ctx.channel().write("test".getBytes());
 							}		            		 
 		            	 });
@@ -56,8 +55,6 @@ public class NettyTest {
 		        // Shut down all event loops to terminate all threads.
 		        b.shutdown();
 		    }
-			
-			fail("Not yet implemented");
 		}
 	}
 	static class Client {
@@ -82,8 +79,6 @@ public class NettyTest {
 		        // Shut down all event loops to terminate all threads.
 		        b.shutdown();
 		    }
-			
-			fail("Not yet implemented");
 		}
 	}
 
