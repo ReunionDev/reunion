@@ -19,7 +19,7 @@ public class SchedulerTest {
 	 */
 	public static void main(String[] args) throws InterruptedException, ExecutionException {
 				
-		ManualScheduledExecutor executor = new ManualScheduledExecutor();
+		final ManualScheduledExecutor executor = new ManualScheduledExecutor();
 		
 	    executor.scheduleAtFixedRate(new Runnable() {
 				
@@ -39,6 +39,23 @@ public class SchedulerTest {
 		});
 	   
 	    
+	    solution = executor.submit(new Callable<Integer>() {
+	    	
+	    	@Override
+	    	public Integer call() throws Exception {
+	    		
+	    		Future<Integer> solution = executor.submit(new Callable<Integer>() {
+	    	    	
+	    	    	@Override
+	    	    	public Integer call() throws Exception {
+	    	    		return 1337;
+	    	    	}
+	    		});
+	    		return solution.get();
+	    	}
+		});
+	    
+	    
 	    System.out.println(solution.isDone());
 	    
 	    
@@ -48,10 +65,16 @@ public class SchedulerTest {
 	    Runnable task = null;
 	    while(true){
 	    	System.out.println(solution.isDone());
-		    while((task = executor.getQueue().poll())!=null){
-		    	task.run();
+	    	if(solution.isDone()){
+		    	break;
+		    }
+		    while((task = executor.runNext())!=null){
+		    	System.out.println("run task: "+task);
+		    	//task.run();
 		    	
 		    }
+		    
+		    
 		    Thread.sleep(100);
 	    }
 	    

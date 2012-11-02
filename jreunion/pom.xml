@@ -71,7 +71,7 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aop</artifactId>
-			<version>${spring.version}</version>
+			<version>${spring.version}</version><!--$NO-MVN-MAN-VER$-->
 		</dependency>
 		<dependency>
 			 <groupId>org.springframework</groupId>
@@ -181,6 +181,12 @@
 		    <artifactId>aspectjtools</artifactId>
 		    <version>${aspectj.version}</version>
 		</dependency>
+		<dependency>
+		    <groupId>io.netty</groupId>
+		    <artifactId>netty</artifactId>
+		    <version>[3,3.9)</version>
+		    <scope>compile</scope>
+	 	</dependency>
 	</dependencies>
 
 	<build>

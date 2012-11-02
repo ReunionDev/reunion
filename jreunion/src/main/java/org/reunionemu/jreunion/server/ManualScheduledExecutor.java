@@ -181,6 +181,18 @@ public class ManualScheduledExecutor extends AbstractExecutorService implements
 			this.period = 0;
 			this.sequenceNumber = sequencer.getAndIncrement();
 		}
+		
+		
+		public V get() throws InterruptedException ,ExecutionException {
+			
+			while(!this.isDone()){
+				if(runNext()==null){
+					break;
+				}
+			}			
+			return super.get();
+			
+		}
 
 		/**
 		 * Creates a one-shot action with given nanoTime-based trigger time.
