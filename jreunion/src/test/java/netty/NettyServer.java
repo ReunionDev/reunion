@@ -1,16 +1,28 @@
 package netty;
 
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.*;
+import io.netty.channel.Channel;
+import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelFutureListener;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelInboundMessageHandlerAdapter;
+import io.netty.channel.ChannelInitializer;
+import io.netty.channel.ChannelOption;
 import io.netty.channel.socket.SocketChannel;
-import io.netty.channel.socket.nio.*;
+import io.netty.channel.socket.nio.NioEventLoopGroup;
+import io.netty.channel.socket.nio.NioServerSocketChannel;
 
-public class NettyServer implements ProtocolFactory, Protocol {
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
 
+public class NettyServer implements ProtocolFactory {
+
+	int count = 0;
 	public NettyServer() {
+		
    
 	}
-
+	OtherProtocol protocol = new OtherProtocol();
 	
 	public void start() throws Exception{
 		
@@ -33,8 +45,11 @@ public class NettyServer implements ProtocolFactory, Protocol {
 									ChannelHandlerContext ctx, String msg)
 									throws Exception {
 								System.out.println(msg);
-						        ctx.write(msg).addListener(ChannelFutureListener.CLOSE_ON_FAILURE);
-						        ctx.flush();
+								count ++;
+								if(count%4==0){
+							        ctx.write("fail no go!");
+							        ctx.flush().addListener(ChannelFutureListener.CLOSE);
+								}
 						        
 							}		            		 
 		            	 });
@@ -65,19 +80,26 @@ public class NettyServer implements ProtocolFactory, Protocol {
 
 	@Override
 	public Protocol getProtocol(Channel channel) {
-		return this;
+
+		InetAddress address = ((InetSocketAddress)channel.localAddress()).getAddress();
+		protocol.setAddress(address);
+		protocol.setMapId(4);
+		protocol.setPort(4005);
+		protocol.setVersion(100);
+		
+		return new Protocol() {
+			
+			@Override
+			public byte encode(char c) {
+				return protocol.encryptServer(c);
+			}
+			
+			@Override
+			public char decode(byte b) {
+				return protocol.decryptServer(b);
+			}
+		};
 	}
 
-
-	@Override
-	public byte encode(char c) {
-		return (byte)c;
-	}
-
-
-	@Override
-	public char decode(byte b) {
-		return (char)b;
-	}
-
+	
 }

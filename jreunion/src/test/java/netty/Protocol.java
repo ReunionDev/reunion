@@ -1,5 +1,6 @@
 package netty;
 
+
 public interface Protocol {
 	
 	public byte encode(char c);

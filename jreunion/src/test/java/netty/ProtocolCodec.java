@@ -6,15 +6,6 @@ import io.netty.handler.codec.ByteToMessageCodec;
 
 public class ProtocolCodec extends ByteToMessageCodec<String, String> {
 
-	/*
-	public byte encode(char c) {
-		return (byte) ((c ^ 0xc3) + 0x0f);
-	}
-
-	public char decode(byte b) {
-		return (char) (b - 15);
-	}*/
-
 	ProtocolFactory factory;
 
 	public ProtocolCodec(ProtocolFactory factory) {
@@ -60,5 +51,6 @@ public class ProtocolCodec extends ByteToMessageCodec<String, String> {
 		for (int i = 0; i < size; i++) {
 			buffer[i] = protocol.encode(msg.charAt(i));
 		}
+		out.writeBytes(buffer);
 	}
 }
