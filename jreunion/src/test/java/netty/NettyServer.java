@@ -32,15 +32,10 @@ public class NettyServer implements ProtocolFactory, Protocol {
 							public void messageReceived(
 									ChannelHandlerContext ctx, String msg)
 									throws Exception {
-								
 								System.out.println(msg);
-						        ctx.write("test");
+						        ctx.write(msg).addListener(ChannelFutureListener.CLOSE_ON_FAILURE);
 						        ctx.flush();
 						        
-						        //.addListener(ChannelFutureListener.CLOSE);
-						        
-								//System.out.println(msg);
-								//ctx.channel().write("test".getBytes());
 							}		            		 
 		            	 });
 		            	 
