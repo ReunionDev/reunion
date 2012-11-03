@@ -43,6 +43,13 @@
 		<system>jenkins</system>
 		<url>http://jenkins.reunionemu.org</url>
 	</ciManagement>
+	<repositories>
+		<repository>
+		 	<id>spring-snapshot</id>
+		 	<name>Spring Maven SNAPSHOT Repository</name>
+		 	<url>http://repo.springsource.org/libs-snapshot</url>
+		</repository>		
+	</repositories>
 	<dependencies>
 		<dependency>
 			<groupId>org.reunionemu</groupId>

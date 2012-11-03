@@ -323,8 +323,6 @@ public class OtherProtocol {
 				result = Math.abs(x + y - magic0);
 			}
 			return result;
-
 		}
-
 	}
 }

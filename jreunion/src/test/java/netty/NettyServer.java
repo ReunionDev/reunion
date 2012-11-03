@@ -39,7 +39,6 @@ public class NettyServer implements ProtocolFactory {
 		             public void initChannel(SocketChannel ch) throws Exception {
 		            	 ch.pipeline().addLast("codec", new ProtocolCodec(NettyServer.this));
 		            	 ch.pipeline().addLast("handler", new ChannelInboundMessageHandlerAdapter<String>(){
-
 							@Override
 							public void messageReceived(
 									ChannelHandlerContext ctx, String msg)
@@ -50,13 +49,10 @@ public class NettyServer implements ProtocolFactory {
 							        ctx.write("fail no go!");
 							        ctx.flush().addListener(ChannelFutureListener.CLOSE);
 								}
-						        
-							}		            		 
+							}
 		            	 });
-		            	 
 		             }
-		         });
-				
+		        });
 			    
 			    ChannelFuture f = b.bind().sync();
 		
