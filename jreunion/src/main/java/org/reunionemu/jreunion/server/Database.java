@@ -1013,7 +1013,10 @@ public class Database {
 			ResultSet rs = itemStmt.executeQuery("SELECT * FROM equipment WHERE charid = "+charId+ ";");
 			if(rs.next()){
 				do {
-					itemDao.findOne((long)rs.getInt("itemid")).delete();
+					Item<?> item = itemDao.findOne((long)rs.getInt("itemid"));
+					if(item!=null){
+						item.delete();
+					}
 				} while(rs.next());
 			} else return;
 			

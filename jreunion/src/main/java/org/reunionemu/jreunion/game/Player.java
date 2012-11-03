@@ -42,18 +42,18 @@ public abstract class Player extends LivingObject implements EventListener {
 	private long lime; // Gold
 
 	private int slot;
-	
+
 	@Autowired
 	QuestStateBaseDao<QuestState> questStateDao;
-	
+
 	@Autowired
 	InventoryItemDao<InventoryItem> inventoryItemDao;
 
-	private int petId; //used during server loading
+	private int petId; // used during server loading
 
 	private Pet pet;
 
-	public int playerId = -1 ; //id used for database storage
+	public int playerId = -1; // id used for database storage
 
 	private boolean isInCombat; // 0 - Peace Mode; 1 - Attack Mode
 
@@ -116,11 +116,10 @@ public abstract class Player extends LivingObject implements EventListener {
 	private Shop shop;
 
 	private long social;
-	
-	
-	//Mocking constructor
-	public Player(){
-		
+
+	// Mocking constructor
+	public Player() {
+
 	}
 
 	public Player(Client client) {
@@ -133,7 +132,8 @@ public abstract class Player extends LivingObject implements EventListener {
 		stash = new Stash(this);
 		exchange = new Exchange(this);
 
-		client.addEventListener(ClientDisconnectEvent.class, this, new ClientFilter(client));
+		client.addEventListener(ClientDisconnectEvent.class, this,
+				new ClientFilter(client));
 
 	}
 
@@ -153,40 +153,41 @@ public abstract class Player extends LivingObject implements EventListener {
 		this.slot = slot;
 	}
 
-	public static enum Sex{
-		MALE, //0
-		FEMALE	//1
+	public static enum Sex {
+		MALE, // 0
+		FEMALE // 1
 	}
 
-	public static enum Race{
-		BULKAN(0), //0
-		KAILIPTON(1), //1
-		AIDIA(2), //2
-		HUMAN(3), //3
-		HYBRIDER(4), //4
-		PET(5), //5
-		UNDEFINED(6); //6
+	public static enum Race {
+		BULKAN(0), // 0
+		KAILIPTON(1), // 1
+		AIDIA(2), // 2
+		HUMAN(3), // 3
+		HYBRIDER(4), // 4
+		PET(5), // 5
+		UNDEFINED(6); // 6
 
 		int value;
-		Race(int value){
+
+		Race(int value) {
 			this.value = value;
 
 		}
-		public int value(){
-			return value;			
+
+		public int value() {
+			return value;
 
 		}
 
-		public static Race byValue(int raceId){
+		public static Race byValue(int raceId) {
 
-			for(Race race:Race.values())
-			{
-				if(race.value()==raceId){					
+			for (Race race : Race.values()) {
+				if (race.value() == raceId) {
 					return race;
 				}
 			}
 			return null;
-		}		
+		}
 	}
 
 	public Client getClient() {
@@ -199,13 +200,11 @@ public abstract class Player extends LivingObject implements EventListener {
 
 	private static Integer sessionRadius;
 
-	public String getGuildRequestName()
-	{
+	public String getGuildRequestName() {
 		return requestedToGuild;
 	}
 
-	public void setGuildRequestName(String name)
-	{
+	public void setGuildRequestName(String name) {
 		this.requestedToGuild = name;
 	}
 
@@ -226,116 +225,117 @@ public abstract class Player extends LivingObject implements EventListener {
 		InventoryItem handPosition = getInventory().getHoldingItem();
 
 		if (handPosition == null) {
-			LoggerFactory.getLogger(Player.class).error("Failed to get Player "+this+" holding item (HandPosition=NULL)");
+			LoggerFactory.getLogger(Player.class).error(
+					"Failed to get Player " + this
+							+ " holding item (HandPosition=NULL)");
 			return;
 		}
 
 		Item<?> item = handPosition.getItem();
 
 		if (item == null) {
-			LoggerFactory.getLogger(Player.class).error("Failed to get Player "+this+" holding item (Item=NULL)");
+			LoggerFactory.getLogger(Player.class).error(
+					"Failed to get Player " + this
+							+ " holding item (Item=NULL)");
 			return;
 		}
 
 		LocalMap map = getPosition().getLocalMap();
-		RoamingItem roamingItem = map.getWorld().getCommand().dropItem(getPosition(), item, this);
-		LoggerFactory.getLogger(Player.class).info("Player "+this+" droped roaming item "+roamingItem);
+		RoamingItem roamingItem = map.getWorld().getCommand()
+				.dropItem(getPosition(), item, this);
+		LoggerFactory.getLogger(Player.class).info(
+				"Player " + this + " droped roaming item " + roamingItem);
 		getInventory().setHoldingItem(null);
 	}
-
 
 	public long getAdminState() {
 		return adminState;
 	}
 
 	@Override
-	public synchronized void setHp(long hp){
+	public synchronized void setHp(long hp) {
 		long before = this.getHp();
-		super.setHp(hp);	
-		if(before!=this.getHp())
+		super.setHp(hp);
+		if (before != this.getHp())
 			this.sendStatus(Status.HP);
 	}
 
 	public void sendStatus(Status status) {
-		if(client.getState()==State.INGAME||client.getState()==State.LOADED){
-			long min=0,max=0;
+		if (client.getState() == State.INGAME
+				|| client.getState() == State.LOADED) {
+			long min = 0, max = 0;
 			switch (status) {
-				case HP: //0
-					min = getHp();
-					max = getMaxHp();				
-					break;
-				case MANA: //1
-					min = getMana();
-					max = getMaxMana();
-					break;
-				case STAMINA: //2
-					min = getStamina();
-					max = getMaxStamina();
-					break;
-				case ELECTRICITY: //3
-					min = getElectricity();
-					max = getMaxElectricity();
-					break;
-				case LEVEL: //4
-					min = getLevel();
-					break;
-				case LIME: //10
-					min = getLime();
-					break;
-				case TOTALEXP:
-					min = getTotalExp();
-					break;
-				case LEVELUPEXP: //12
-					min = getLevelUpExp();
-					break;
-				case STATUSPOINTS: //13
-					min = getStatusPoints();
-					break;
-				case STRENGTH: //14
-					min = getStrength();
-					break;
-				case WISDOM: //15
-					min = getWisdom();
-					break;
-				case DEXTERITY: //16
-					min = getDexterity();
-					break;
-				case CONSTITUTION: //17
-					min = getConstitution();
-					break;
-				case LEADERSHIP: //18
-					min = getLeadership();
-					break;
-				case PENALTYPOINTS: //19
-					min = getPenaltyPoints();
-					break;
-				default:
-					throw new RuntimeException(status+" not implemented yet");
+			case HP: // 0
+				min = getHp();
+				max = getMaxHp();
+				break;
+			case MANA: // 1
+				min = getMana();
+				max = getMaxMana();
+				break;
+			case STAMINA: // 2
+				min = getStamina();
+				max = getMaxStamina();
+				break;
+			case ELECTRICITY: // 3
+				min = getElectricity();
+				max = getMaxElectricity();
+				break;
+			case LEVEL: // 4
+				min = getLevel();
+				break;
+			case LIME: // 10
+				min = getLime();
+				break;
+			case TOTALEXP:
+				min = getTotalExp();
+				break;
+			case LEVELUPEXP: // 12
+				min = getLevelUpExp();
+				break;
+			case STATUSPOINTS: // 13
+				min = getStatusPoints();
+				break;
+			case STRENGTH: // 14
+				min = getStrength();
+				break;
+			case WISDOM: // 15
+				min = getWisdom();
+				break;
+			case DEXTERITY: // 16
+				min = getDexterity();
+				break;
+			case CONSTITUTION: // 17
+				min = getConstitution();
+				break;
+			case LEADERSHIP: // 18
+				min = getLeadership();
+				break;
+			case PENALTYPOINTS: // 19
+				min = getPenaltyPoints();
+				break;
+			default:
+				throw new RuntimeException(status + " not implemented yet");
 
-			}			
+			}
 			client.sendPacket(Type.STATUS, status.value(), min, max);
 		}
 	}
 
-
 	public abstract long getMaxElectricity();
-
 
 	public abstract long getMaxMana();
 
-
 	public abstract long getMaxStamina();
 
-
-	public synchronized void setStamina(long stamina){
+	public synchronized void setStamina(long stamina) {
 		long before = this.stamina;
 		this.stamina = Tools.between(stamina, 0l, getMaxStamina());
-		if(before!=this.stamina)
+		if (before != this.stamina)
 			this.sendStatus(Status.STAMINA);
 	}
 
 	public abstract long getBaseDamage();
-
 
 	public List<Long> getAttackQueue() {
 		return attackQueue;
@@ -345,8 +345,8 @@ public abstract class Player extends LivingObject implements EventListener {
 
 		long bestAttack = 0;
 
-		for(long queuedAttack : getAttackQueue()){
-			if(queuedAttack > bestAttack)
+		for (long queuedAttack : getAttackQueue()) {
+			if (queuedAttack > bestAttack)
 				bestAttack = queuedAttack;
 		}
 
@@ -371,10 +371,12 @@ public abstract class Player extends LivingObject implements EventListener {
 
 	/*** Return the distance between the player and the living object ***/
 	public long getDistance(LivingObject livingObject) {
-		double xcomp = Math.pow(livingObject.getPosition().getX() - getPosition().getX(), 2);
-		double ycomp = Math.pow(livingObject.getPosition().getY() - getPosition().getY(), 2);
+		double xcomp = Math.pow(livingObject.getPosition().getX()
+				- getPosition().getX(), 2);
+		double ycomp = Math.pow(livingObject.getPosition().getY()
+				- getPosition().getY(), 2);
 		double distance = Math.sqrt(xcomp + ycomp);
-		return (long)distance;
+		return (long) distance;
 	}
 
 	public Equipment getEquipment() {
@@ -418,7 +420,7 @@ public abstract class Player extends LivingObject implements EventListener {
 	}
 
 	public Quest getQuest() {
-		if(getQuestState()!=null){
+		if (getQuestState() != null) {
 			return getQuestState().getQuest();
 		}
 		return null;
@@ -434,12 +436,11 @@ public abstract class Player extends LivingObject implements EventListener {
 
 	public long getElectricity() {
 		return electricity;
-	}	
+	}
 
 	public long getStamina() {
 		return stamina;
 	}
-
 
 	public long getMana() {
 		return mana;
@@ -448,91 +449,84 @@ public abstract class Player extends LivingObject implements EventListener {
 	public synchronized void setMana(long mana) {
 		long before = this.mana;
 		this.mana = Tools.between(mana, 0l, getMaxMana());
-		if(before!=this.mana)
+		if (before != this.mana)
 			sendStatus(Status.MANA);
 	}
 
 	public synchronized void setElectricity(long electricity) {
 		long before = this.electricity;
 		this.electricity = Tools.between(electricity, 0l, getMaxElectricity());
-		if(this.electricity!=before)
+		if (this.electricity != before)
 			sendStatus(Status.ELECTRICITY);
-	}	
+	}
 
 	public Race getRace() {
-		if(this instanceof BulkanPlayer)
+		if (this instanceof BulkanPlayer)
 			return Race.BULKAN;
-		if(this instanceof AidiaPlayer)
+		if (this instanceof AidiaPlayer)
 			return Race.AIDIA;
-		if(this instanceof KailiptonPlayer)
+		if (this instanceof KailiptonPlayer)
 			return Race.KAILIPTON;
-		if(this instanceof HumanPlayer)
+		if (this instanceof HumanPlayer)
 			return Race.HUMAN;
-		if(this instanceof HybriderPlayer)
-			return Race.HYBRIDER;		
-		throw new RuntimeException("Unknown race: "+this);
+		if (this instanceof HybriderPlayer)
+			return Race.HYBRIDER;
+		throw new RuntimeException("Unknown race: " + this);
 	}
 
 	public void spawn() {
-		//TODO: fix respawn
+		// TODO: fix respawn
 		/*
-		int defaultSpawnId = Integer.parseInt(Reference.getInstance().getMapReference().getItemById(getPosition().getMap().getId()).getMemberValue("DefaultSpawnId"));
-		ParsedItem defaultSpawn = getPosition().getMap().getPlayerSpawnReference().getItemById(defaultSpawnId);
-				
-		Parser playerSpawns = getPosition().getMap().getPlayerSpawnReference();
-		Iterator<ParsedItem> iter = playerSpawns.getItemListIterator();
+		 * int defaultSpawnId =
+		 * Integer.parseInt(Reference.getInstance().getMapReference
+		 * ().getItemById
+		 * (getPosition().getMap().getId()).getMemberValue("DefaultSpawnId"));
+		 * ParsedItem defaultSpawn =
+		 * getPosition().getMap().getPlayerSpawnReference
+		 * ().getItemById(defaultSpawnId);
+		 * 
+		 * Parser playerSpawns =
+		 * getPosition().getMap().getPlayerSpawnReference();
+		 * Iterator<ParsedItem> iter = playerSpawns.getItemListIterator();
+		 * 
+		 * while (iter.hasNext()) { ParsedItem item = iter.next();
+		 * 
+		 * if (Integer.parseInt(item.getMemberValue("Id"))!=defaultSpawnId) {
+		 * Rectangle rectangle = new Rectangle(Integer.parseInt(item
+		 * .getMemberValue("TargetX")), Integer.parseInt(item
+		 * .getMemberValue("TargetY")), Integer.parseInt(item
+		 * .getMemberValue("TargetWidth")), Integer.parseInt(item
+		 * .getMemberValue("TargetHeight")));
+		 * 
+		 * if (rectangle.contains(getPosition().getX(), getPosition().getY())) {
+		 * Server.getInstance() .getWorld() .getCommand() .GoToPos( this,
+		 * Integer.parseInt(item .getMemberValue("X")) + (int)
+		 * (Integer.parseInt(item .getMemberValue("Width")) * Math .random()),
+		 * Integer.parseInt(item .getMemberValue("Y")) + (int)
+		 * (Integer.parseInt(item .getMemberValue("Height")) * Math .random()));
+		 * return; } } }
+		 * 
+		 * int x = Integer.parseInt(defaultSpawn.getMemberValue("X")); int y =
+		 * Integer.parseInt(defaultSpawn.getMemberValue("Y")); int width =
+		 * Integer.parseInt(defaultSpawn.getMemberValue("Width")); int height =
+		 * Integer.parseInt(defaultSpawn.getMemberValue("Height"));
+		 * 
+		 * Random rand = new Random(System.currentTimeMillis()); int spawnX =
+		 * x+(width>0?rand.nextInt(width):0); int spawnY =
+		 * y+(height>0?rand.nextInt(height):0);
+		 * 
+		 * Server.getInstance() .getWorld() .getCommand()
+		 * .GoToPos(this,spawnX,spawnY);
+		 */
 
-		while (iter.hasNext()) {
-			ParsedItem item = iter.next();
+		// this.setPosition(new Position(7026, 5220, 106,
+		// this.getPosition().getLocalMap(), 0.0f));
+		// getClient().getWorld().getCommand().GoToPos(this,
+		// this.getPosition());
 
-			if (Integer.parseInt(item.getMemberValue("Id"))!=defaultSpawnId) {
-				Rectangle rectangle = new Rectangle(Integer.parseInt(item
-						.getMemberValue("TargetX")), Integer.parseInt(item
-						.getMemberValue("TargetY")), Integer.parseInt(item
-						.getMemberValue("TargetWidth")), Integer.parseInt(item
-						.getMemberValue("TargetHeight")));
-
-				if (rectangle.contains(getPosition().getX(), getPosition().getY())) {
-					Server.getInstance()
-							.getWorld()
-							.getCommand()
-							.GoToPos(
-									this,
-									Integer.parseInt(item
-											.getMemberValue("X"))
-											+ (int) (Integer.parseInt(item
-													.getMemberValue("Width")) * Math
-													.random()),
-									Integer.parseInt(item
-											.getMemberValue("Y"))
-											+ (int) (Integer.parseInt(item
-													.getMemberValue("Height")) * Math
-													.random()));
-					return;
-				}
-			}
-		}
-		
-		int x = Integer.parseInt(defaultSpawn.getMemberValue("X"));
-		int y = Integer.parseInt(defaultSpawn.getMemberValue("Y"));
-		int width = Integer.parseInt(defaultSpawn.getMemberValue("Width"));
-		int height = Integer.parseInt(defaultSpawn.getMemberValue("Height"));
-		
-		Random rand = new Random(System.currentTimeMillis());
-		int spawnX = x+(width>0?rand.nextInt(width):0);
-		int spawnY = y+(height>0?rand.nextInt(height):0);
-		
-		Server.getInstance()
-		.getWorld()
-		.getCommand()
-		.GoToPos(this,spawnX,spawnY);
-		*/
-
-		//this.setPosition(new Position(7026, 5220, 106, this.getPosition().getLocalMap(), 0.0f));
-		//getClient().getWorld().getCommand().GoToPos(this, this.getPosition());
-
-		PlayerSpawn defaultSpawn = this.getPosition().getLocalMap().getDefaultSpawn();
-		//TODO: Gracefully handle respawn
+		PlayerSpawn defaultSpawn = this.getPosition().getLocalMap()
+				.getDefaultSpawn();
+		// TODO: Gracefully handle respawn
 		defaultSpawn.spawn(this);
 	}
 
@@ -561,7 +555,8 @@ public abstract class Player extends LivingObject implements EventListener {
 	}
 
 	public long getMaxStatusPoints() {
-		return (getLevel() <= 250) ? getLevel()*3 : 250*3+(getLevel()-250)*10;
+		return (getLevel() <= 250) ? getLevel() * 3
+				: 250 * 3 + (getLevel() - 250) * 10;
 	}
 
 	public long getStrength() {
@@ -576,17 +571,23 @@ public abstract class Player extends LivingObject implements EventListener {
 		return wisdom;
 	}
 
-	public static Player createPlayer(Client client, Race race){
+	public static Player createPlayer(Client client, Race race) {
 
-		if (race == Race.BULKAN) return new BulkanPlayer(client);
-		else if (race == Race.KAILIPTON) return new KailiptonPlayer(client);
-		else if (race == Race.AIDIA) return  new AidiaPlayer(client);
-		else if (race == Race.HUMAN) return new HumanPlayer(client);
-		else if (race == Race.HYBRIDER)	return new HybriderPlayer(client);
+		if (race == Race.BULKAN)
+			return new BulkanPlayer(client);
+		else if (race == Race.KAILIPTON)
+			return new KailiptonPlayer(client);
+		else if (race == Race.AIDIA)
+			return new AidiaPlayer(client);
+		else if (race == Race.HUMAN)
+			return new HumanPlayer(client);
+		else if (race == Race.HYBRIDER)
+			return new HybriderPlayer(client);
 
-		throw new RuntimeException("Invalid race: "+race);
+		throw new RuntimeException("Invalid race: " + race);
 
 	}
+
 	/*** Manages the Items add/Remove from Trade Box ***/
 	public void itemExchange(int posX, int posY) {
 
@@ -603,14 +604,21 @@ public abstract class Player extends LivingObject implements EventListener {
 				return;
 			}
 
-			//InventoryItem invItem = new InventoryItemImpl(item.getItem(), new InventoryPosition( 0, 0, 0), this);
+			// InventoryItem invItem = new InventoryItemImpl(item.getItem(), new
+			// InventoryPosition( 0, 0, 0), this);
 
-			getInventory().setHoldingItem(new InventoryItemImpl(item.getItem(), HandPosition.INSTANCE, this));
+			getInventory().setHoldingItem(
+					new InventoryItemImpl(item.getItem(),
+							HandPosition.INSTANCE, this));
 			getExchange().removeItem(item);
-			LoggerFactory.getLogger(Player.class).info("Item "+item.getItem()+" removed from exchange inventory of Player "+this);
-		} else { //adding exchange item
+			LoggerFactory.getLogger(Player.class).info(
+					"Item " + item.getItem()
+							+ " removed from exchange inventory of Player "
+							+ this);
+		} else { // adding exchange item
 			Item<?> item = getInventory().getHoldingItem().getItem();
-			InventoryItem newExchangeItem = new InventoryItemImpl(item, new ExchangePosition(posX,	posY), this);
+			InventoryItem newExchangeItem = new InventoryItemImpl(item,
+					new ExchangePosition(posX, posY), this);
 			InventoryItem oldExchangeItem = null;
 			int x = 0, y = 0;
 
@@ -625,16 +633,26 @@ public abstract class Player extends LivingObject implements EventListener {
 
 			if (oldExchangeItem == null) {
 				getInventory().setHoldingItem(null);
-			} else { //if player is holding an item then store it at the exchange
-				//InventoryItem invItem = new InventoryItemImpl(oldExchangeItem.getItem(), new InventoryPosition( 0, 0, 0), this);
-				getInventory().setHoldingItem(new InventoryItemImpl(oldExchangeItem.getItem(), HandPosition.INSTANCE, this));
+			} else { // if player is holding an item then store it at the
+						// exchange
+				// InventoryItem invItem = new
+				// InventoryItemImpl(oldExchangeItem.getItem(), new
+				// InventoryPosition( 0, 0, 0), this);
+				getInventory().setHoldingItem(
+						new InventoryItemImpl(oldExchangeItem.getItem(),
+								HandPosition.INSTANCE, this));
 				getExchange().removeItem(oldExchangeItem);
-				LoggerFactory.getLogger(Player.class).info("Item "+oldExchangeItem.getItem()+" removed from exchange inventory of Player "+this);
+				LoggerFactory.getLogger(Player.class).info(
+						"Item " + oldExchangeItem.getItem()
+								+ " removed from exchange inventory of Player "
+								+ this);
 			}
-			//get (remove) the item from the exchange
+			// get (remove) the item from the exchange
 			getExchange().addItem(newExchangeItem);
-			LoggerFactory.getLogger(Player.class).info("Item "+newExchangeItem.getItem()+
-					" stored in Player "+this+" exchange inventory at position {x:"+x+", y:"+y+"}");
+			LoggerFactory.getLogger(Player.class).info(
+					"Item " + newExchangeItem.getItem() + " stored in Player "
+							+ this + " exchange inventory at position {x:" + x
+							+ ", y:" + y + "}");
 		}
 	}
 
@@ -646,14 +664,14 @@ public abstract class Player extends LivingObject implements EventListener {
 			return;
 		}
 
-		Iterator<InventoryItem> exchangeIter = getExchange()
-				.itemListIterator();
+		Iterator<InventoryItem> exchangeIter = getExchange().itemListIterator();
 		while (exchangeIter.hasNext()) {
 			InventoryItem exchangeItem = exchangeIter.next();
 			Item<?> item = exchangeItem.getItem();
 
-			if(item.getEntityId()==null||item.getEntityId()==-1){
-				client.getPlayer().getPosition().getLocalMap().createEntityId(item);
+			if (item.getEntityId() == null || item.getEntityId() == -1) {
+				client.getPlayer().getPosition().getLocalMap()
+						.createEntityId(item);
 			}
 
 			client.sendPacket(Type.INVEN, exchangeItem, client.getVersion());
@@ -673,14 +691,15 @@ public abstract class Player extends LivingObject implements EventListener {
 		} else {
 			if (parsedItem.checkMembers(new String[] { "Exp" })) {
 				// use member from file
-				try{
-					setLevelUpExp(Long.parseLong(parsedItem.getMemberValue("Exp")));
-				} 
-				catch(Exception NumerFormatException)
-				{
+				try {
+					setLevelUpExp(Long.parseLong(parsedItem
+							.getMemberValue("Exp")));
+				} catch (Exception NumerFormatException) {
 					setLevelUpExp(1000);
-					LoggerFactory.getLogger(Player.class).info(getName()+
-							" level up experience value, not supported by LONG");
+					LoggerFactory
+							.getLogger(Player.class)
+							.info(getName()
+									+ " level up experience value, not supported by LONG");
 				}
 			} else {
 				// use default
@@ -697,19 +716,19 @@ public abstract class Player extends LivingObject implements EventListener {
 			return;
 		}
 
-		Iterator<InventoryItem> invIter = getInventory()
-				.getInventoryIterator();
+		Iterator<InventoryItem> invIter = getInventory().getInventoryIterator();
 		while (invIter.hasNext()) {
 			InventoryItem invItem = invIter.next();
 			Item<?> item = invItem.getItem();
-			if(item.getEntityId()==-1){
-				client.getPlayer().getPosition().getLocalMap().createEntityId(item);
+			if (item.getEntityId() == null || item.getEntityId() == -1) {
+				client.getPlayer().getPosition().getLocalMap()
+						.createEntityId(item);
 			}
 			client.sendPacket(Type.INVEN, invItem, client.getVersion());
 
 		}
 
-		if(getInventory().getHoldingItem() != null){
+		if (getInventory().getHoldingItem() != null) {
 			Item<?> holdingItem = getInventory().getHoldingItem().getItem();
 			getPosition().getLocalMap().createEntityId(holdingItem);
 			getClient().sendPacket(Type.EXTRA, holdingItem);
@@ -730,8 +749,9 @@ public abstract class Player extends LivingObject implements EventListener {
 			QuickSlotItem qsItem = quickSlot.next();
 			Item<?> item = qsItem.getItem();
 
-			if(getEntityId()!=null&&item.getEntityId()==-1){
-				client.getPlayer().getPosition().getLocalMap().createEntityId(item);
+			if (getEntityId() == null || item.getEntityId() == -1) {
+				client.getPlayer().getPosition().getLocalMap()
+						.createEntityId(item);
 			}
 			client.sendPacket(Type.QUICK, qsItem);
 		}
@@ -740,15 +760,15 @@ public abstract class Player extends LivingObject implements EventListener {
 	/****** load Equipment Items ******/
 	public void loadEquipment(LocalMap localMap) {
 
-		if(localMap == null)
+		if (localMap == null)
 			return;
-		for(Equipment.Slot slot: Equipment.Slot.values()){
+		for (Equipment.Slot slot : Equipment.Slot.values()) {
 			Item<?> item = getEquipment().getItem(slot);
 
-			if(item == null)
+			if (item == null)
 				continue;
 
-			if(getEntityId()!=null&&item.getEntityId()==-1){
+			if (getEntityId() == null || item.getEntityId() == -1) {
 				localMap.createEntityId(item);
 			}
 		}
@@ -757,19 +777,19 @@ public abstract class Player extends LivingObject implements EventListener {
 	/****** load Stash Items ******/
 	public void loadStash(LocalMap localMap) {
 
-		if(localMap == null)
+		if (localMap == null)
 			return;
 
 		Iterator<StashItem> stashIter = getStash().itemListIterator();
 
-		while(stashIter.hasNext()){
+		while (stashIter.hasNext()) {
 			StashItem stashItem = stashIter.next();
 			Item<?> item = stashItem.getItem();
 
-			if(item == null)
+			if (item == null)
 				continue;
 
-			if(getEntityId()!=null&&item.getEntityId()==-1){
+			if (getEntityId() == null || item.getEntityId() == -1) {
 				localMap.createEntityId(item);
 			}
 		}
@@ -777,76 +797,85 @@ public abstract class Player extends LivingObject implements EventListener {
 
 	/****** Manages the char Logout ******/
 	public synchronized void save() {
-		
-		if(getEntityId()!=null&&getEntityId() != -1){
-			LoggerFactory.getLogger(Player.class).info("Player " + getName() + " saving...\n");
-			
-			try{
+
+		if (getEntityId() != null && getEntityId() != -1) {
+			LoggerFactory.getLogger(Player.class).info(
+					"Player " + getName() + " saving...\n");
+
+			try {
 				List<InventoryItem> list = new LinkedList<InventoryItem>();
 				list.addAll(getInventory().getList());
 				list.addAll(getExchange().getList());
-				
+
 				InventoryItem holding = getInventory().getHoldingItem();
-				if(holding==null){
+				if (holding == null) {
 					list.add(holding);
 				}
 				inventoryItemDao.save(list);
-				
-			}catch(Exception e){
-				LoggerFactory.getLogger(Player.class).warn(""+getName()+": Inventory saving failed ...",e);
+
+			} catch (Exception e) {
+				LoggerFactory.getLogger(Player.class).warn(
+						"" + getName() + ": Inventory saving failed ...", e);
 			}
-			
-			
-			try{
+
+			try {
 				Database.getInstance().saveSkills(this);
-			}catch(Exception e){
-				LoggerFactory.getLogger(Player.class).warn(""+getName()+": Skills saving failed ...",e);
+			} catch (Exception e) {
+				LoggerFactory.getLogger(Player.class).warn(
+						"" + getName() + ": Skills saving failed ...", e);
 			}
-			
-			try{
+
+			try {
 				Database.getInstance().savePet(this);
-			}catch(Exception e){
-				LoggerFactory.getLogger(Player.class).warn(""+getName()+": Pet saving failed ...",e);
+			} catch (Exception e) {
+				LoggerFactory.getLogger(Player.class).warn(
+						"" + getName() + ": Pet saving failed ...", e);
 			}
-			
-			try{
+
+			try {
 				Database.getInstance().savePetEquipment(getPet());
-			}catch(Exception e){
-				LoggerFactory.getLogger(Player.class).warn(""+getName()+": Pet Equipment saving failed ...",e);
+			} catch (Exception e) {
+				LoggerFactory.getLogger(Player.class)
+						.warn("" + getName()
+								+ ": Pet Equipment saving failed ...", e);
 			}
-			
-			try{
+
+			try {
 				Database.getInstance().saveCharacter(this);
-			}catch(Exception e){
-				LoggerFactory.getLogger(Player.class).warn(""+getName()+": Character saving failed ...",e);
+			} catch (Exception e) {
+				LoggerFactory.getLogger(Player.class).warn(
+						"" + getName() + ": Character saving failed ...", e);
 			}
-			
-			try{
+
+			try {
 				Database.getInstance().saveEquipment(this);
-			}catch(Exception e){
-				LoggerFactory.getLogger(Player.class).warn(""+getName()+": Equipment saving failed ...",e);
+			} catch (Exception e) {
+				LoggerFactory.getLogger(Player.class).warn(
+						"" + getName() + ": Equipment saving failed ...", e);
 			}
-			
-			try{
+
+			try {
 				Database.getInstance().saveStash(getClient());
-			}catch(Exception e){
-				LoggerFactory.getLogger(Player.class).warn(""+getName()+": Stash saving failed ...",e);
+			} catch (Exception e) {
+				LoggerFactory.getLogger(Player.class).warn(
+						"" + getName() + ": Stash saving failed ...", e);
 			}
-			
-			try{
+
+			try {
 				Database.getInstance().saveQuickSlot(this);
-			}catch(Exception e){
-				LoggerFactory.getLogger(Player.class).warn(""+getName()+": QuickSlot saving failed ...",e);
+			} catch (Exception e) {
+				LoggerFactory.getLogger(Player.class).warn(
+						"" + getName() + ": QuickSlot saving failed ...", e);
 			}
-			//DatabaseUtils.getDinamicInstance().saveQuest(this);
+			// DatabaseUtils.getDinamicInstance().saveQuest(this);
 		}
-		LoggerFactory.getLogger(Player.class).info("Player " + getName() + " saving complete!\n");
+		LoggerFactory.getLogger(Player.class).info(
+				"Player " + getName() + " saving complete!\n");
 	}
 
-	public void loseStamina(long ammount) {	
-		setStamina(getStamina() - ammount);		
+	public void loseStamina(long ammount) {
+		setStamina(getStamina() - ammount);
 	}
-
 
 	/****** Manages the Pick command ******/
 	// When you pick up an item, or buy something from merchant
@@ -857,8 +886,11 @@ public abstract class Player extends LivingObject implements EventListener {
 		InventoryItem inventoryItem = getInventory().storeItem(item, neededTab);
 
 		if (inventoryItem == null) {
-			inventoryItem = new InventoryItemImpl(item, new InventoryPosition(0, 0, 0), this);
-			getInventory().setHoldingItem(new InventoryItemImpl(inventoryItem.getItem(), HandPosition.INSTANCE, this));
+			inventoryItem = new InventoryItemImpl(item, new InventoryPosition(
+					0, 0, 0), this);
+			getInventory().setHoldingItem(
+					new InventoryItemImpl(inventoryItem.getItem(),
+							HandPosition.INSTANCE, this));
 		}
 
 		client.sendPacket(Type.PICK, inventoryItem);
@@ -871,14 +903,17 @@ public abstract class Player extends LivingObject implements EventListener {
 		Client client = getClient();
 		Player owner = roamingItem.getOwner();
 
-		if(owner!=null && owner!=this) {
-			client.sendPacket(Type.SAY, "This item belongs to " + owner.getName());
+		if (owner != null && owner != this) {
+			client.sendPacket(Type.SAY,
+					"This item belongs to " + owner.getName());
 			return;
 		}
 
 		roamingItem.stopDeleteTimer();
-		getPosition().getLocalMap().fireEvent(ItemPickupEvent.class, this, roamingItem);
-		LoggerFactory.getLogger(PacketParser.class).info("Player "+this+ " picked up roaming item " + roamingItem);
+		getPosition().getLocalMap().fireEvent(ItemPickupEvent.class, this,
+				roamingItem);
+		LoggerFactory.getLogger(PacketParser.class).info(
+				"Player " + this + " picked up roaming item " + roamingItem);
 		// S> pickup [CharID]
 	}
 
@@ -886,10 +921,10 @@ public abstract class Player extends LivingObject implements EventListener {
 
 		setIsRunning(running);
 
-		//synchronized(this){
-			setPosition(position);
-			setTargetPosition(position.clone());			
-		//}
+		// synchronized(this){
+		setPosition(position);
+		setTargetPosition(position.clone());
+		// }
 
 		this.getInterested().sendPacket(Type.PLACE, this, unknown);
 
@@ -897,49 +932,47 @@ public abstract class Player extends LivingObject implements EventListener {
 
 	/****** revive player when he dies ******/
 	public void revive() {
-		long hp = getLevel() <= 30 ? getMaxHp() : (long)(getMaxHp()*.1);
+		long hp = getLevel() <= 30 ? getMaxHp() : (long) (getMaxHp() * .1);
 		setHp(hp);
 		spawn();
 		update();
 	}
 
-	public int getSkillLevel(Skill skill){
+	public int getSkillLevel(Skill skill) {
 		return skills.get(skill);
 	}
 
 	public java.util.Map<Skill, Integer> getSkills() {
 		return skills;
 	}
-	
+
 	abstract public List<Skill> getDefensiveSkills();
 
-	public List<Skill> getActiveShieldSkills(){
+	public List<Skill> getActiveShieldSkills() {
 		List<Skill> activeShieldSkills = new Vector<Skill>();
 
-		//for(Skill skill : skills.get(key)){
+		// for(Skill skill : skills.get(key)){
 
-		//}
+		// }
 
 		return activeShieldSkills;
 	}
 
 	public void say(String text) {
-		if(text.charAt(0) != '@')
-		{
+		if (text.charAt(0) != '@') {
 			SessionList<Session> list = getInterested().getSessions();
 			list.sendPacket(Type.SAY, text, this);
-			//getInterested().sendPacket(Type.SAY, text, this);
+			// getInterested().sendPacket(Type.SAY, text, this);
 			getClient().sendPacket(Type.SAY, text, this);
 		}
 	}
 
-	public void resetSkills()
-	{
-		java.util.Map<Skill,Integer> playerSkills = new HashMap<Skill,Integer> ();
+	public void resetSkills() {
+		java.util.Map<Skill, Integer> playerSkills = new HashMap<Skill, Integer>();
 		playerSkills = getSkills();
 
 		// reset player skills to its minimum level
-		for(Skill skill: playerSkills.keySet()){
+		for (Skill skill : playerSkills.keySet()) {
 			skill.reset(this);
 		}
 	}
@@ -957,21 +990,21 @@ public abstract class Player extends LivingObject implements EventListener {
 		this.constitution = cons;
 		sendStatus(Status.CONSTITUTION);
 		sendStatus(Status.HP);
-		//sendStatus(Status.STAMINA);
+		// sendStatus(Status.STAMINA);
 	}
 
 	public void setDefense() {
 
 		this.defense = 0;
 
-		for(Equipment.Slot slot: Equipment.Slot.values()){
+		for (Equipment.Slot slot : Equipment.Slot.values()) {
 			Item<?> item = getEquipment().getItem(slot);
 
-			if(item==null)
+			if (item == null)
 				continue;
 
-			if(item.is(Armor.class)){
-				this.defense += ((Armor)item.getType()).getDef(item);
+			if (item.is(Armor.class)) {
+				this.defense += ((Armor) item.getType()).getDef(item);
 			}
 		}
 	}
@@ -994,35 +1027,41 @@ public abstract class Player extends LivingObject implements EventListener {
 	public void setLevel(int level) {
 		super.setLevel(level);
 		loadFromReference(level);
-		if(client.getState()==State.INGAME) {
+		if (client.getState() == State.INGAME) {
 
 			sendStatus(Status.LEVEL);
-			client.sendPacket(Type.LEVELUP, this);		
+			client.sendPacket(Type.LEVELUP, this);
 			getInterested().sendPacket(Type.LEVELUP, this);
-			
-			if(getAdminState() == 0)
-			{
-				if(getLevel() < 250 && level == 250)
-				{
-					client.sendPacket(Type.EVENTNOTICE, getName()+" reached Meta level");		
-					getInterested().sendPacket(Type.EVENTNOTICE, getName()+" reached Meta level");	
-				}
-				else if(level > 250 && level < 300 && level % 10 == 0)
-				{
-					client.sendPacket(Type.EVENTNOTICE, getName()+" reached level "+level+" of the Meta level");		
-					getInterested().sendPacket(Type.EVENTNOTICE, getName()+" reached level "+level+" of the Meta level");
-				}
-				else if(getLevel() < 300 && level == 300)
-				{
-					client.sendPacket(Type.EVENTNOTICE, getName()+" reached High-Meta level");		
-					getInterested().sendPacket(Type.EVENTNOTICE, getName()+" reached High-Meta level");
-				} else if (level > 300 &&level % 10 == 0)
-				{
-					client.sendPacket(Type.EVENTNOTICE, getName()+" reached lvl "+ level+" of the High-Meta level");		
-					getInterested().sendPacket(Type.EVENTNOTICE, getName()+" reached lvl "+ level+" of the High-Meta level");	
+
+			if (getAdminState() == 0) {
+				if (getLevel() < 250 && level == 250) {
+					client.sendPacket(Type.EVENTNOTICE, getName()
+							+ " reached Meta level");
+					getInterested().sendPacket(Type.EVENTNOTICE,
+							getName() + " reached Meta level");
+				} else if (level > 250 && level < 300 && level % 10 == 0) {
+					client.sendPacket(Type.EVENTNOTICE, getName()
+							+ " reached level " + level + " of the Meta level");
+					getInterested().sendPacket(
+							Type.EVENTNOTICE,
+							getName() + " reached level " + level
+									+ " of the Meta level");
+				} else if (getLevel() < 300 && level == 300) {
+					client.sendPacket(Type.EVENTNOTICE, getName()
+							+ " reached High-Meta level");
+					getInterested().sendPacket(Type.EVENTNOTICE,
+							getName() + " reached High-Meta level");
+				} else if (level > 300 && level % 10 == 0) {
+					client.sendPacket(Type.EVENTNOTICE, getName()
+							+ " reached lvl " + level
+							+ " of the High-Meta level");
+					getInterested().sendPacket(
+							Type.EVENTNOTICE,
+							getName() + " reached lvl " + level
+									+ " of the High-Meta level");
 				}
 			}
-			
+
 			setHp(this.getMaxHp());
 			setMana(this.getMaxHp());
 			setElectricity(this.getMaxElectricity());
@@ -1048,16 +1087,20 @@ public abstract class Player extends LivingObject implements EventListener {
 	}
 
 	public void setLime(long lime) {
-		//check if player inventory lime limit is reached.
-		long limeLimit = Server.getInstance().getWorld().getServerSettings().getInventoryLimeLimit();
-		if(lime > limeLimit){
+		// check if player inventory lime limit is reached.
+		long limeLimit = Server.getInstance().getWorld().getServerSettings()
+				.getInventoryLimeLimit();
+		if (lime > limeLimit) {
 			long limeOverLimit = lime - limeLimit;
 			lime = limeLimit;
-			Item<?> item = Server.getInstance().getWorld().getItemManager().create(925); //scroll
+			Item<?> item = Server.getInstance().getWorld().getItemManager()
+					.create(925); // scroll
 			getPosition().getLocalMap().createEntityId(item);
-			item.setExtraStats((int)limeOverLimit);
+			item.setExtraStats((int) limeOverLimit);
 			InventoryItem inventoryItem = getInventory().storeItem(item, -1);
-			getClient().sendPacket(Type.MSG, "Inventory maximum lime limit reached. A scroll as been added to inventory.");
+			getClient()
+					.sendPacket(Type.MSG,
+							"Inventory maximum lime limit reached. A scroll as been added to inventory.");
 			client.sendPacket(Type.PICK, inventoryItem);
 		}
 		this.lime = lime;
@@ -1065,24 +1108,24 @@ public abstract class Player extends LivingObject implements EventListener {
 	}
 
 	public void setLevelUpExp(long lvlUpExp) {
-		//synchronized(this) {
-		int maxLevel = Server.getInstance().getWorld().getServerSettings().getPlayerMaxLevel();
+		// synchronized(this) {
+		int maxLevel = Server.getInstance().getWorld().getServerSettings()
+				.getPlayerMaxLevel();
 
 		boolean hasMaxLevel = ((maxLevel != 0) ? true : false);
 
-		if(!hasMaxLevel || maxLevel > getLevel())
-		{
-			if(lvlUpExp<=0){
-				this.setLevel(getLevel()+1);
-				setStatusPoints(((this.getLevel() > 250) ? getStatusPoints()+10 : getStatusPoints()+3));
+		if (!hasMaxLevel || maxLevel > getLevel()) {
+			if (lvlUpExp <= 0) {
+				this.setLevel(getLevel() + 1);
+				setStatusPoints(((this.getLevel() > 250) ? getStatusPoints() + 10
+						: getStatusPoints() + 3));
 				this.setLevelUpExp(this.getLevelUpExp());
-			}
-			else{
+			} else {
 				this.lvlUpExp = lvlUpExp;
 				sendStatus(Status.LEVELUPEXP);
 			}
 		}
-		//}
+		// }
 	}
 
 	public void setPenaltyPoints(long penaltyPoints) {
@@ -1091,26 +1134,26 @@ public abstract class Player extends LivingObject implements EventListener {
 	}
 
 	public void setQuest(Quest quest) {
-		if(quest == null){
-			if (getQuestState()!=null){
-				if(getQuestState().isComplete()){
+		if (quest == null) {
+			if (getQuestState() != null) {
+				if (getQuestState().isComplete()) {
 					client.sendPacket(Type.QT, "end " + getQuest().getId());
-				}else{
+				} else {
 					client.sendPacket(Type.SAY, "Quest cancelled.");
 					client.sendPacket(Type.QT, "get -1");
 				}
 				setQuestState(null);
 			}
-		} else{
+		} else {
 			QuestState state = questStateDao.create(quest);
 			questStateDao.save(state);
 			setQuestState(questStateDao.create(quest));
 			client.sendPacket(Type.QT, "get " + quest.getId());
-		}		
+		}
 	}
 
-	public void setQuestState(QuestState questState){
-		if(this.questState!=null){
+	public void setQuestState(QuestState questState) {
+		if (this.questState != null) {
 			questStateDao.delete(this.questState);
 		}
 		this.questState = questState;
@@ -1157,16 +1200,16 @@ public abstract class Player extends LivingObject implements EventListener {
 
 	}
 
-	public long getSocial(){
+	public long getSocial() {
 		return this.social;
 	}
 
 	public void stop(Position position) {
 
-		//synchronized(this) {
-			setPosition(position);	
-			setTargetPosition(position.clone());		
-		//}
+		// synchronized(this) {
+		setPosition(position);
+		setTargetPosition(position.clone());
+		// }
 
 		this.getInterested().sendPacket(Type.S_CHAR, this);
 
@@ -1174,56 +1217,46 @@ public abstract class Player extends LivingObject implements EventListener {
 
 	public void tell(String targetName, String text) {
 
-		if(targetName.equals(getName()))
+		if (targetName.equals(getName()))
 			return;
 
 		Client client = getClient();
 
-		Player targetPlayer = client.getWorld().getPlayerManager().getPlayer(targetName);
+		Player targetPlayer = client.getWorld().getPlayerManager()
+				.getPlayer(targetName);
 
 		if (targetPlayer == null) {
-			client.sendPacket(Type.SAY, targetName+" is not online!");
+			client.sendPacket(Type.SAY, targetName + " is not online!");
 			return;
 		}
 
-		client.sendPacket(Type.WISPER, text, this ,"->Whisper*");
-		targetPlayer.getClient().sendPacket(Type.WISPER, text, this, "<-Whisper*");
+		client.sendPacket(Type.WISPER, text, this, "->Whisper*");
+		targetPlayer.getClient().sendPacket(Type.WISPER, text, this,
+				"<-Whisper*");
 	}
 
 	public static enum Status {
 
-		HP(0),
-		MANA(1),
-		STAMINA(2),
-		ELECTRICITY(3),
-		LEVEL(4),
-		LIME(10),
-		TOTALEXP(11),
-		LEVELUPEXP(12),
-		STATUSPOINTS(13), 
-		STRENGTH(14),
-		WISDOM(15),
-		DEXTERITY(16),
-		CONSTITUTION(17),
-		LEADERSHIP(18),
-		PENALTYPOINTS(19),
+		HP(0), MANA(1), STAMINA(2), ELECTRICITY(3), LEVEL(4), LIME(10), TOTALEXP(
+				11), LEVELUPEXP(12), STATUSPOINTS(13), STRENGTH(14), WISDOM(15), DEXTERITY(
+				16), CONSTITUTION(17), LEADERSHIP(18), PENALTYPOINTS(19),
 
-		//TODO: Finish this
+		// TODO: Finish this
 		;
 
 		int value;
-		Status(int value){
+
+		Status(int value) {
 			this.value = value;
 		}
 
-		public int value(){
+		public int value() {
 			return value;
 		}
 
-		public static Status byValue(int statusId){			
-			for(Status status:Status.values())
-			{
-				if(status.value()==statusId){					
+		public static Status byValue(int statusId) {
+			for (Status status : Status.values()) {
+				if (status.value() == statusId) {
 					return status;
 				}
 			}
@@ -1241,13 +1274,11 @@ public abstract class Player extends LivingObject implements EventListener {
 
 		switch (id) {
 
-
 		case 4: { // Player Level Status
-			setLevel(getLevel() + (int)curr);
+			setLevel(getLevel() + (int) curr);
 			client.sendPacket(Type.STATUS, id, getLevel(), max);
 
-			Database.getInstance()
-					.updateCharStatus(this, id, getLevel());
+			Database.getInstance().updateCharStatus(this, id, getLevel());
 
 			client.sendPacket(Type.LEVELUP, this);
 
@@ -1266,8 +1297,7 @@ public abstract class Player extends LivingObject implements EventListener {
 			setTotalExp(getTotalExp() + curr);
 			client.sendPacket(Type.STATUS, id, getTotalExp(), max);
 
-			Database.getInstance().updateCharStatus(this, id,
-					getTotalExp());
+			Database.getInstance().updateCharStatus(this, id, getTotalExp());
 			break;
 		}
 		case 12: { // Player Next Level Up Exp Status
@@ -1297,24 +1327,23 @@ public abstract class Player extends LivingObject implements EventListener {
 		case 13: { // Player Distribution Status Points
 			setStatusPoints(getStatusPoints() + curr);
 
-
-
 			client.sendPacket(Type.STATUS, id, getStatusPoints(), max);
-			Database.getInstance().updateCharStatus(this, id,
-					getStatusPoints());
+			Database.getInstance()
+					.updateCharStatus(this, id, getStatusPoints());
 			break;
 		}
 		case 14: { // Player Strenght Status
 			if (getStatusPoints() <= 0) {
 				return;
 			}
-			setStrength(getStrength() + curr);			
+			setStrength(getStrength() + curr);
 			client.sendPacket(Type.STATUS, id, getStrength(), max);
 
 			Database.getInstance().updateCharStatus(this, id, getStrength());
 
 			updateStatus(0, getHp(), getMaxHp() + (getStrength() / 50) + 1);
-			updateStatus(2, getStamina(), getMaxStamina() + (getStrength() / 60) + 1);
+			updateStatus(2, getStamina(), getMaxStamina()
+					+ (getStrength() / 60) + 1);
 			updateStatus(13, -1, 0);
 			break;
 		}
@@ -1329,7 +1358,8 @@ public abstract class Player extends LivingObject implements EventListener {
 			Database.getInstance().updateCharStatus(this, id, getWisdom());
 
 			updateStatus(1, getMana(), getMaxMana() + (getWisdom() / 50) + 2);
-			updateStatus(3, getElectricity(), getMaxElectricity() + (getWisdom() / 50) + 1);
+			updateStatus(3, getElectricity(), getMaxElectricity()
+					+ (getWisdom() / 50) + 1);
 			updateStatus(13, -1, 0);
 			break;
 		}
@@ -1344,7 +1374,8 @@ public abstract class Player extends LivingObject implements EventListener {
 			Database.getInstance().updateCharStatus(this, id, getDexterity());
 
 			updateStatus(1, getMana(), getMaxMana() + (getDexterity() / 50) + 1);
-			updateStatus(3, getElectricity(), getMaxElectricity() + (getDexterity() / 50) + 2);
+			updateStatus(3, getElectricity(), getMaxElectricity()
+					+ (getDexterity() / 50) + 2);
 			updateStatus(13, -1, 0);
 			break;
 		}
@@ -1356,10 +1387,12 @@ public abstract class Player extends LivingObject implements EventListener {
 
 			client.sendPacket(Type.STATUS, id, getConstitution(), max);
 
-			Database.getInstance().updateCharStatus(this, id, getConstitution());
+			Database.getInstance()
+					.updateCharStatus(this, id, getConstitution());
 
 			updateStatus(0, getHp(), getMaxHp() + (getConstitution() / 50) + 2);
-			updateStatus(2, getStamina(), getMaxStamina() + (getConstitution() / 50) + 1);
+			updateStatus(2, getStamina(), getMaxStamina()
+					+ (getConstitution() / 50) + 1);
 			updateStatus(13, -1, 0);
 			break;
 		}
@@ -1401,45 +1434,55 @@ public abstract class Player extends LivingObject implements EventListener {
 
 		int flyStatus = 0;
 		InventoryItem handPosition = getInventory().getHoldingItem();
-		//InventoryItem invItem = new InventoryItem(getInventory().getHoldingItem().getItem(),
-		//		new InventoryPosition(0,0,0));
+		// InventoryItem invItem = new
+		// InventoryItem(getInventory().getHoldingItem().getItem(),
+		// new InventoryPosition(0,0,0));
 
-		//player removed wearing equipment.
+		// player removed wearing equipment.
 		if (handPosition == null) {
-			getInventory().setHoldingItem(new InventoryItemImpl(getEquipment().getItem(slot), HandPosition.INSTANCE ,this));
+			getInventory().setHoldingItem(
+					new InventoryItemImpl(getEquipment().getItem(slot),
+							HandPosition.INSTANCE, this));
 			getEquipment().setItem(slot, null);
 			getInterested().sendPacket(Type.CHAR_REMOVE, this, slot);
-			LoggerFactory.getLogger(Player.class).info("Player "+this+" removed equipment "
-					+getInventory().getHoldingItem().getItem());
+			LoggerFactory.getLogger(Player.class).info(
+					"Player " + this + " removed equipment "
+							+ getInventory().getHoldingItem().getItem());
 
-			//check if the removed equipment is a PetEgg.
-			if(getInventory().getHoldingItem().getItem().getType() instanceof PetEgg){
+			// check if the removed equipment is a PetEgg.
+			if (getInventory().getHoldingItem().getItem().getType() instanceof PetEgg) {
 				getPet().setBreeding(false);
 				getPet().stopBreeding();
 			}
-		} 
-		//player is equipping an item.
+		}
+		// player is equipping an item.
 		else {
-			InventoryItem invItem = new InventoryItemImpl(getInventory().getHoldingItem().getItem(),
-							new InventoryPosition(0,0,0), this);
+			InventoryItem invItem = new InventoryItemImpl(getInventory()
+					.getHoldingItem().getItem(),
+					new InventoryPosition(0, 0, 0), this);
 			Item<?> wearingItem = getEquipment().getItem(slot);
 
-			//check if the equipment slot is already occupied and replace it.
-			if( (wearingItem != null) ){
-				getInventory().setHoldingItem(new InventoryItemImpl(wearingItem, HandPosition.INSTANCE , this));
+			// check if the equipment slot is already occupied and replace it.
+			if ((wearingItem != null)) {
+				getInventory().setHoldingItem(
+						new InventoryItemImpl(wearingItem,
+								HandPosition.INSTANCE, this));
 				getInterested().sendPacket(Type.CHAR_REMOVE, this, slot);
-				LoggerFactory.getLogger(Player.class).info("Player "+this+" removed equipment "+wearingItem);
+				LoggerFactory.getLogger(Player.class).info(
+						"Player " + this + " removed equipment " + wearingItem);
 			} else {
 				getInventory().setHoldingItem(null);
 			}
 
 			getEquipment().setItem(slot, invItem.getItem());
-			getInterested().sendPacket(Type.CHAR_WEAR, this, slot, invItem.getItem());
-			LoggerFactory.getLogger(Player.class).info("Player "+this+" equiped item "+invItem.getItem());
+			getInterested().sendPacket(Type.CHAR_WEAR, this, slot,
+					invItem.getItem());
+			LoggerFactory.getLogger(Player.class).info(
+					"Player " + this + " equiped item " + invItem.getItem());
 			flyStatus = invItem.getItem().getExtraStats() >= 268435456 ? 1 : 0;
 
-			//check if the equipped item is a PetEgg.
-			if(invItem.getItem().getType() instanceof PetEgg){
+			// check if the equipped item is a PetEgg.
+			if (invItem.getItem().getType() instanceof PetEgg) {
 				getPet().setBreeding(true);
 				getPet().startBreeding();
 			}
@@ -1449,8 +1492,10 @@ public abstract class Player extends LivingObject implements EventListener {
 		getClient().sendPacket(Type.SKY, this, flyStatus);
 		setDefense();
 	}
+
 	/**
-	 * @param sessionRadius the sessionRadius to set
+	 * @param sessionRadius
+	 *            the sessionRadius to set
 	 */
 	public void setSessionRadius(int sessionRadius) {
 		Player.sessionRadius = sessionRadius;
@@ -1460,54 +1505,61 @@ public abstract class Player extends LivingObject implements EventListener {
 	 * @return the sessionRadius
 	 */
 	public int getSessionRadius() {
-		if(Player.sessionRadius==null){
-			setSessionRadius((int)getClient().getWorld().getServerSettings().getSessionRadius());
+		if (Player.sessionRadius == null) {
+			setSessionRadius((int) getClient().getWorld().getServerSettings()
+					.getSessionRadius());
 		}
 		return Player.sessionRadius;
 	}
 
 	@Override
-	public void enter(Session session){
+	public void enter(Session session) {
 		session.getOwner().getClient().sendPacket(Type.IN_CHAR, this, false);
-		if(getShop() != null && getPosition().getLocalMap().getShop(this) != null) {
-			session.getOwner().getClient().sendPacket(Type.U_SHOP, "in", this, getShop().getDescription());
+		if (getShop() != null
+				&& getPosition().getLocalMap().getShop(this) != null) {
+			session.getOwner()
+					.getClient()
+					.sendPacket(Type.U_SHOP, "in", this,
+							getShop().getDescription());
 		}
 	}
 
 	@Override
-	public void exit(Session session){
+	public void exit(Session session) {
 		session.getOwner().getClient().sendPacket(Type.OUT, this);
 	}
 
-	public void handleEvent(Event event){
-		Server.getInstance().getNetwork().addEventListener(NetworkAcceptEvent.class, this);
-		if(event instanceof ClientDisconnectEvent){
+	public void handleEvent(Event event) {
+		Server.getInstance().getNetwork()
+				.addEventListener(NetworkAcceptEvent.class, this);
+		if (event instanceof ClientDisconnectEvent) {
 			ClientDisconnectEvent clientDisconnectEvent = (ClientDisconnectEvent) event;
-			LoggerFactory.getLogger(Player.class).debug(""+clientDisconnectEvent.getSource());
+			LoggerFactory.getLogger(Player.class).debug(
+					"" + clientDisconnectEvent.getSource());
 			Position position = getPosition();
-			if(position!=null&&position.getMap()!=null){
+			if (position != null && position.getMap() != null) {
 				LocalMap map = getPosition().getLocalMap();
 				map.fireEvent(PlayerLogoutEvent.class, this);
 			}
 		}
-		if(event instanceof SessionEvent){
+		if (event instanceof SessionEvent) {
 			SessionEvent sessionEvent = (SessionEvent) event;
 		}
 	}
 
-	public String toString(){
+	public String toString() {
 		StringBuffer buffer = new StringBuffer();
 		buffer.append("{");
 
 		buffer.append("id:");
 		buffer.append(getEntityId());
-		buffer.append("("+getPlayerId()+")");
+		buffer.append("(" + getPlayerId() + ")");
 		buffer.append(", ");
 
 		buffer.append("name:");
 		buffer.append(getName());
 
-		if(Server.logger.isDebugEnabled()){
+		if (Server.logger.isDebugEnabled()) {
 			buffer.append(", ");
 
 			buffer.append("race:");
@@ -1515,16 +1567,17 @@ public abstract class Player extends LivingObject implements EventListener {
 			buffer.append(", ");
 
 			buffer.append("level:");
-			buffer.append(getLevel());	
+			buffer.append(getLevel());
 		}
 
 		buffer.append("}");
 		return buffer.toString();
 	}
 
-	public Skill getSkill(int id){
-		Skill skill = getPosition().getLocalMap().getWorld().getSkillManager().getSkill(id);		
-		return skills.containsKey(skill)?skill:null;
+	public Skill getSkill(int id) {
+		Skill skill = getPosition().getLocalMap().getWorld().getSkillManager()
+				.getSkill(id);
+		return skills.containsKey(skill) ? skill : null;
 
 	}
 
@@ -1535,40 +1588,39 @@ public abstract class Player extends LivingObject implements EventListener {
 	}
 
 	public void addStatus(Status status) {
-		//synchronized(this){
-			long statusPoints = getStatusPoints();
-			if(getStatusPoints()>0){
+		// synchronized(this){
+		long statusPoints = getStatusPoints();
+		if (getStatusPoints() > 0) {
 
-				switch(status){
-					case STRENGTH: //14
-						setStrength(getStrength()+1);
-						break;
-					case WISDOM: //15
-						setWisdom(getWisdom()+1);
-						break;
-					case DEXTERITY: //16
-						setDexterity(getDexterity()+1);
-						break;
-					case CONSTITUTION: //17
-						setConstitution(getConstitution()+1);
-						break;
-					case LEADERSHIP: //18
-						setLeadership(getLeadership()+1);
-						break;
-					default:
-						throw new RuntimeException("Invalid Status: "+status);
-				}
-				setStatusPoints(statusPoints-1);
+			switch (status) {
+			case STRENGTH: // 14
+				setStrength(getStrength() + 1);
+				break;
+			case WISDOM: // 15
+				setWisdom(getWisdom() + 1);
+				break;
+			case DEXTERITY: // 16
+				setDexterity(getDexterity() + 1);
+				break;
+			case CONSTITUTION: // 17
+				setConstitution(getConstitution() + 1);
+				break;
+			case LEADERSHIP: // 18
+				setLeadership(getLeadership() + 1);
+				break;
+			default:
+				throw new RuntimeException("Invalid Status: " + status);
 			}
-		//}
+			setStatusPoints(statusPoints - 1);
+		}
+		// }
 	}
 
 	public void setGuildName(String name) {
 		guildName = name;
 	}
 
-	public String getGuildName()
-	{
+	public String getGuildName() {
 		return guildName;
 	}
 
@@ -1588,11 +1640,11 @@ public abstract class Player extends LivingObject implements EventListener {
 		this.party = party;
 	}
 
-	public int isMeta(){
+	public int isMeta() {
 		return (getLevel() >= 250 ? 1 : 0);
 	}
 
-	public int isHiMeta(){
+	public int isHiMeta() {
 		return (getLevel() >= 300 ? 1 : 0);
 	}
 
@@ -1613,35 +1665,35 @@ public abstract class Player extends LivingObject implements EventListener {
 	}
 
 	public void addLime(Integer lime) {
-		
-		setLime(getLime()+lime);
+
+		setLime(getLime() + lime);
 	}
-	
-	public void addExperience(int experience){
-		setTotalExp(getTotalExp()+experience);
-		setLevelUpExp(getLevelUpExp()-experience);
+
+	public void addExperience(int experience) {
+		setTotalExp(getTotalExp() + experience);
+		setLevelUpExp(getLevelUpExp() - experience);
 	}
-	
-	
-	public void load(){
-		
-		List<InventoryItem> list = inventoryItemDao.findByPlayerId(this.getPlayerId());
-		
+
+	public void load() {
+
+		List<InventoryItem> list = inventoryItemDao.findByPlayerId(this
+				.getPlayerId());
+
 		Inventory inventory = getInventory();
 		Exchange exchange = getExchange();
-		for(InventoryItem item: list){
+		for (InventoryItem item : list) {
 			InventoryPosition position = item.getPosition();
-			if(position instanceof HandPosition){
+			if (position instanceof HandPosition) {
 				inventory.setHoldingItem(item);
-			}else if(position instanceof ExchangePosition){
+			} else if (position instanceof ExchangePosition) {
 				exchange.addItem(item);
-			}else{
+			} else {
 				inventory.addInventoryItem(item);
 			}
 		}
 		loadInventory();
 		loadExchange();
-		
+
 	}
-	
+
 }
