@@ -26,7 +26,11 @@ public class ClientHandler extends ChannelInboundMessageHandlerAdapter<Packet> i
 		ctx.write(packet);
 		
 	}
-	
+	@Override
+	public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+		super.channelInactive(ctx);
+		logger.debug("connection closed");
+	}
 	
 
 	@Override

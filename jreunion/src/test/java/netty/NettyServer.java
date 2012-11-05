@@ -58,6 +58,15 @@ public class NettyServer implements ProtocolFactory, Runnable, PacketFactory, Pa
 								System.out.println("connectionn established");
 								super.channelActive(ctx);
 							}
+							
+							@Override
+							public void channelInactive(
+									ChannelHandlerContext ctx) throws Exception {
+								
+								super.channelInactive(ctx);
+								parsers.remove(ctx.channel());
+								System.out.println("connectionn closed serverside");
+							}
 		            	 });
 		             }
 		        });
@@ -118,7 +127,7 @@ public class NettyServer implements ProtocolFactory, Runnable, PacketFactory, Pa
 	
 	Map<Channel,Parser> parsers = new HashMap<Channel,Parser>();
 	@Override
-	public Parser getParser(Channel channel) {
+	public Parser getParser(final Channel channel) {
 		if(!parsers.containsKey(channel)){
 		
 			parsers.put(channel, new Parser(){
@@ -129,8 +138,7 @@ public class NettyServer implements ProtocolFactory, Runnable, PacketFactory, Pa
 				
 				String username;
 				
-				String password;
-				
+				String password;				
 				
 				@Override
 				public Packet parse(String input) {
@@ -152,8 +160,9 @@ public class NettyServer implements ProtocolFactory, Runnable, PacketFactory, Pa
 							packet = loginPacket;
 							
 						}
+					}else{
+						channel.close();
 					}
-					
 					return packet;
 				}			
 				
