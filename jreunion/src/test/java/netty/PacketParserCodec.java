@@ -6,7 +6,7 @@ import io.netty.handler.codec.MessageToMessageCodec;
 public class PacketParserCodec extends MessageToMessageCodec<String, Packet, Packet, String> {
 	ParserFactory parserFactory;
 	PacketFactory packetFactory;
-	PacketParserCodec(ParserFactory parserFactory, PacketFactory packetFactory){
+	public PacketParserCodec(ParserFactory parserFactory, PacketFactory packetFactory){
 		this.parserFactory = parserFactory;
 		this.packetFactory = packetFactory;
 		

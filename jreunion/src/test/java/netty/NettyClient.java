@@ -6,9 +6,11 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.*;
 import io.netty.handler.logging.LoggingHandler;
 
-import java.net.*;
+import java.net.InetSocketAddress;
+import java.util.*;
 
-public class NettyClient implements ProtocolFactory, Runnable {
+
+public class NettyClient implements ProtocolFactory, Runnable, ParserFactory, PacketFactory {
 
 	int count = 0;
 	private InetSocketAddress address;
@@ -32,6 +34,7 @@ public class NettyClient implements ProtocolFactory, Runnable {
 		             public void initChannel(SocketChannel ch) throws Exception {
 		            	 ch.pipeline().addLast("logger", new LoggingHandler());
 		            	 ch.pipeline().addLast("codec", new ProtocolCodec(NettyClient.this));
+		            	 ch.pipeline().addLast("parser", new PacketParserCodec(NettyClient.this, NettyClient.this));
 		            	 ch.pipeline().addLast("handler", new ClientHandler());
 		             }
 		             
@@ -80,6 +83,33 @@ public class NettyClient implements ProtocolFactory, Runnable {
 				return protocol.decryptClient(b);
 			}
 		};
+	}
+	@Override
+	public String build(Packet msg) {
+		if(msg instanceof LoginPacket){
+			LoginPacket packet = (LoginPacket)msg;
+			return packet.getVersion()+"\nlogin\n"+packet.getUsername()+"\n"+packet.getPassword();
+		}
+		return null;
+	}
+	
+	Map<Channel,Parser> parsers = new HashMap<Channel,Parser>();
+	@Override
+	public Parser getParser(Channel channel) {
+		if(!parsers.containsKey(channel)){
+		
+			parsers.put(channel, new Parser(){
+				
+				@Override
+				public Packet parse(String input) {
+					return new FailPacket(input.split(" ")[1]);
+				}
+				
+				
+			});
+			
+		}
+		return parsers.get(channel);
 	}
 
 	

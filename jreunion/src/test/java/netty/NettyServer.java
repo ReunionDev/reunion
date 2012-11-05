@@ -7,10 +7,11 @@ import io.netty.channel.socket.nio.*;
 import io.netty.handler.logging.LoggingHandler;
 
 import java.net.*;
+import java.util.*;
 
 import org.slf4j.*;
 
-public class NettyServer implements ProtocolFactory, Runnable {
+public class NettyServer implements ProtocolFactory, Runnable, PacketFactory, ParserFactory {
 
 	
 	Logger logger = LoggerFactory.getLogger(NettyServer.class);
@@ -40,17 +41,16 @@ public class NettyServer implements ProtocolFactory, Runnable {
 		             public void initChannel(SocketChannel ch) throws Exception {
 		            	 ch.pipeline().addLast("logger", new LoggingHandler());
 		            	 ch.pipeline().addLast("codec", new ProtocolCodec(NettyServer.this));
-		            	 ch.pipeline().addLast("handler", new ChannelInboundMessageHandlerAdapter<String>(){
+		            	 ch.pipeline().addLast("parser", new PacketParserCodec(NettyServer.this, NettyServer.this));
+		            	 ch.pipeline().addLast("handler", new ChannelInboundMessageHandlerAdapter<Packet>(){
 							@Override
 							public void messageReceived(
-									ChannelHandlerContext ctx, String msg)
+									ChannelHandlerContext ctx, Packet msg)
 									throws Exception {
 								System.out.println(msg);
-								count ++;
-								if(count%4==0){
-							        ctx.write("fail no go!");
-							        ctx.flush().addListener(ChannelFutureListener.CLOSE);
-								}
+						        ctx.write(new FailPacket("No go!"));
+						        ctx.flush().addListener(ChannelFutureListener.CLOSE);
+							
 							}
 							@Override
 							public void channelActive(ChannelHandlerContext ctx)
@@ -105,6 +105,62 @@ public class NettyServer implements ProtocolFactory, Runnable {
 				return protocol.decryptServer(b);
 			}
 		};
+	}
+	
+	@Override
+	public String build(Packet msg) {
+		if(msg instanceof FailPacket){
+			FailPacket packet = (FailPacket)msg;
+			return "fail "+packet.getMessage();
+		}
+		return null;
+	}
+	
+	Map<Channel,Parser> parsers = new HashMap<Channel,Parser>();
+	@Override
+	public Parser getParser(Channel channel) {
+		if(!parsers.containsKey(channel)){
+		
+			parsers.put(channel, new Parser(){
+				
+				Integer version;				
+
+				String login;
+				
+				String username;
+				
+				String password;
+				
+				
+				@Override
+				public Packet parse(String input) {
+					
+					Packet packet = null;
+					if(version==null){
+						version = Integer.parseInt(input);
+					}else if(login==null){
+						login = input;
+					}else if(username==null){
+						username = input;
+					}else if(password==null) {
+						password = input;
+						if(login.equals("login")){
+							LoginPacket loginPacket = new LoginPacket();
+							loginPacket.setVersion(version);
+							loginPacket.setUsername(username);
+							loginPacket.setPassword(password);
+							packet = loginPacket;
+							
+						}
+					}
+					
+					return packet;
+				}			
+				
+			});
+			
+		}
+		return parsers.get(channel);
 	}
 
 	

@@ -4,7 +4,7 @@ import io.netty.channel.*;
 
 import org.slf4j.*;
 
-public class ClientHandler extends ChannelInboundMessageHandlerAdapter<String> implements ChannelStateHandler{
+public class ClientHandler extends ChannelInboundMessageHandlerAdapter<Packet> implements ChannelStateHandler{
 
 	private static Logger logger = LoggerFactory.getLogger(ClientHandler.class);
 	
@@ -18,21 +18,27 @@ public class ClientHandler extends ChannelInboundMessageHandlerAdapter<String> i
 		
 		logger.debug("Sending login request");
 		
-		ctx.write("100");
-		ctx.write("login");
-		ctx.write("admin");
-		ctx.write("admin");
-	
+		LoginPacket packet = new LoginPacket();
+		packet.setVersion(100);
+		packet.setUsername("admin");
+		packet.setPassword("admin");
+		
+		ctx.write(packet);
 		
 	}
 	
 	
 
 	@Override
-	public void messageReceived(ChannelHandlerContext ctx, String msg)
+	public void messageReceived(ChannelHandlerContext ctx, Packet msg)
 			throws Exception {
 		
 		logger.debug("Received: "+ msg);
+		if(msg instanceof FailPacket){
+			FailPacket packet = (FailPacket)msg;
+			System.out.println("fail: "+ packet.getMessage());
+			
+		}
 		
 	}
 	
