@@ -22,7 +22,7 @@ public class ClientHandler extends ChannelInboundMessageHandlerAdapter<String> i
 		ctx.write("login");
 		ctx.write("admin");
 		ctx.write("admin");
-		//ctx.flush();
+	
 		
 	}
 	
