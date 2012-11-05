@@ -1,42 +1,44 @@
 package netty;
 
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelFutureListener;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundMessageHandlerAdapter;
-import io.netty.channel.ChannelInitializer;
-import io.netty.channel.ChannelOption;
+import io.netty.channel.*;
 import io.netty.channel.socket.SocketChannel;
-import io.netty.channel.socket.nio.NioEventLoopGroup;
-import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.channel.socket.nio.*;
+import io.netty.handler.logging.LoggingHandler;
 
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
+import java.net.*;
 
-public class NettyServer implements ProtocolFactory {
+import org.slf4j.*;
 
+public class NettyServer implements ProtocolFactory, Runnable {
+
+	
+	Logger logger = LoggerFactory.getLogger(NettyServer.class);
+	
 	int count = 0;
-	public NettyServer() {
-		
+
+	private InetSocketAddress address;
+	public NettyServer(InetSocketAddress address) {
+		this.address = address;
    
 	}
 	OtherProtocol protocol = new OtherProtocol();
 	
-	public void start() throws Exception{
+	public void run(){
 		
 		 ServerBootstrap b = new ServerBootstrap();
 			
 		    try{
+		    	logger.debug("Server starting"); 
 			    b.group(new NioEventLoopGroup(), new NioEventLoopGroup())
 			  //  .channel(new NioServerSocketChannel())
 			    .channel(NioServerSocketChannel.class)
 		        .option(ChannelOption.SO_BACKLOG, 100)
-			    .localAddress(4005)
+			    .localAddress(address)
 			    .childHandler(new ChannelInitializer<SocketChannel>() {
 		             @Override
 		             public void initChannel(SocketChannel ch) throws Exception {
+		            	 ch.pipeline().addLast("logger", new LoggingHandler());
 		            	 ch.pipeline().addLast("codec", new ProtocolCodec(NettyServer.this));
 		            	 ch.pipeline().addLast("handler", new ChannelInboundMessageHandlerAdapter<String>(){
 							@Override
@@ -50,6 +52,12 @@ public class NettyServer implements ProtocolFactory {
 							        ctx.flush().addListener(ChannelFutureListener.CLOSE);
 								}
 							}
+							@Override
+							public void channelActive(ChannelHandlerContext ctx)
+									throws Exception {
+								System.out.println("connectionn established");
+								super.channelActive(ctx);
+							}
 		            	 });
 		             }
 		        });
@@ -59,9 +67,12 @@ public class NettyServer implements ProtocolFactory {
 		        // Wait until the server socket is closed.
 		        f.channel().closeFuture().sync();
 		        
-		    } finally {
+		    } catch (InterruptedException e) {
+				
+			} finally {
 		        // Shut down all event loops to terminate all threads.
 		        b.shutdown();
+		    	logger.debug("Server stopped"); 
 		    }
 		
 		
@@ -70,17 +81,16 @@ public class NettyServer implements ProtocolFactory {
 	 * @param args
 	 */
 	public static void main(String[] args) throws Exception {
-		new NettyServer().start();
+		new NettyServer(new InetSocketAddress("127.0.0.1", 4005)).run();
 
 	}
 
 	@Override
 	public Protocol getProtocol(Channel channel) {
 
-		InetAddress address = ((InetSocketAddress)channel.localAddress()).getAddress();
-		protocol.setAddress(address);
+		protocol.setAddress(address.getAddress());
 		protocol.setMapId(4);
-		protocol.setPort(4005);
+		protocol.setPort(address.getPort());
 		protocol.setVersion(100);
 		
 		return new Protocol() {
