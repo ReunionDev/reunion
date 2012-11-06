@@ -216,107 +216,44 @@ public class OtherProtocol {
 	}
 
 	int getMagicKey(int x, int y, int z, int rotation, boolean isPlacePacket) {
-		int magic;
-		int version;
-		int v12;
-		int v13;
-		int v14;
-		int v15;
-		int v16;
+
 		int result;
 		boolean v19;
-		int v20;
 
-		magic = rotation + x + y + z;
-
-		if (isPlacePacket) {
-			version = 100;
-		} else {
-			version = 2000;// version
-
-		}
-		v13 = version - mapId + magic;
-		v12 = v13;
-		if (v13 < 0)
-			v12 = -v13;
+		int magic = rotation + x + y + z;
+	
+		int v13 = (isPlacePacket?100:2000) - mapId + magic;
+		int v12 = Math.abs(v13);
+		
+		int modulo3ofv12 = v12 % 3;
+		
 
 		if (isPlacePacket) {
-			v14 = v12 % 3;
-			if (v14 == 0) {
-				v15 = z;
+			if (modulo3ofv12 == 0) {
 				if (v13 < 0) {
-					// continue LABEL_10;
-					{
-						v16 = v15 + 1;
-					}
+					z++;				
 				} else {
-					LABEL_21: v16 = v15 - 1;
+					z--;
 				}
-				// continue LABEL_11;
-				{
-					z = v16;
-					// continue LABEL_12;
-					{
-						if (isPlacePacket) {
-							result = magic1 + x + y - z;
-						} else {
-							result = Math.abs(x + y - magic0);
-						}
-						return result;
-					}
-				}
+				return magic1 + x + y - z;
+								
 			}
-			v19 = v14 == 1;
+			v19 = modulo3ofv12 == 1;
 		} else {
-			v20 = v12 % 3;
-			if (v20 == 2) {
-				v15 = z;
+			if (modulo3ofv12 == 2) {
+				
 				if (v13 >= 0) {
-					v16 = v15 - 1;
+					z--;
 				} else {
-					LABEL_10: v16 = v15 + 1;
-				}
-				LABEL_11: z = v16;
-				// continue LABEL_12;
-				{
-					if (isPlacePacket) {
-						result = magic1 + x + y - z;
-					} else {
-						result = Math.abs(x + y - magic0);
-					}
-					return result;
-				}
+					z++;
+				}				
+				return Math.abs(x + y - magic0);
+				
+				
 			}
-			v19 = v20 == 0;
+			v19 = modulo3ofv12 == 0;
 		}
 		if (!v19) {
-			LABEL_12: if (isPlacePacket) {
-				result = magic1 + x + y - z;
-			} else {
-				result = Math.abs(x + y - magic0);
-			}
-			return result;
-		}
-		v15 = z;
-		if (v13 >= 0) {
-			// continue LABEL_10;
-			{
-				v16 = v15 + 1;
-				z = v16;
-				if (isPlacePacket) {
-					result = magic1 + x + y - z;
-				} else {
-					result = Math.abs(x + y - magic0);
-				}
-				return result;
-
-			}
-		}
-		// continue LABEL_21;
-		{
-			v16 = v15 - 1;
-			z = v16;
-
 			if (isPlacePacket) {
 				result = magic1 + x + y - z;
 			} else {
@@ -324,5 +261,19 @@ public class OtherProtocol {
 			}
 			return result;
 		}
+		
+		if (v13 >= 0) {			
+			z++;
+		}else{
+			
+			z--;			
+		}
+		if (isPlacePacket) {
+			result = magic1 + x + y - z;
+		} else {
+			result = Math.abs(x + y - magic0);
+		}
+		return result;
+
 	}
 }

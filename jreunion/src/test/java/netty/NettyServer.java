@@ -16,10 +16,8 @@ import org.slf4j.*;
 public class NettyServer implements ProtocolFactory, Runnable, PacketFactory, ParserFactory {
 
 	
-	Logger logger = LoggerFactory.getLogger(NettyServer.class);
+	private static final Logger logger = LoggerFactory.getLogger(NettyServer.class);
 	
-	int count = 0;
-
 	private InetSocketAddress address;
 	public NettyServer(InetSocketAddress address) {
 		this.address = address;
@@ -57,6 +55,7 @@ public class NettyServer implements ProtocolFactory, Runnable, PacketFactory, Pa
 							@Override
 							public void channelActive(ChannelHandlerContext ctx)
 									throws Exception {
+								connections.put(ctx.channel(), new Connection(ctx.channel()));								
 								System.out.println("connectionn established");
 								super.channelActive(ctx);
 							}
@@ -64,9 +63,8 @@ public class NettyServer implements ProtocolFactory, Runnable, PacketFactory, Pa
 							@Override
 							public void channelInactive(
 									ChannelHandlerContext ctx) throws Exception {
-								
 								super.channelInactive(ctx);
-								parsers.remove(ctx.channel());
+								connections.remove(ctx.channel());
 								System.out.println("connectionn closed serverside");
 							}
 		            	 });
@@ -98,24 +96,9 @@ public class NettyServer implements ProtocolFactory, Runnable, PacketFactory, Pa
 
 	@Override
 	public Protocol getProtocol(Channel channel) {
-
-		protocol.setAddress(address.getAddress());
-		protocol.setMapId(4);
-		protocol.setPort(address.getPort());
-		protocol.setVersion(100);
 		
-		return new Protocol() {
-			
-			@Override
-			public byte encode(char c) {
-				return protocol.encryptServer(c);
-			}
-			
-			@Override
-			public char decode(byte b) {
-				return protocol.decryptServer(b);
-			}
-		};
+		return connections.get(channel).getProtocol();
+		
 	}
 	
 	@Override
@@ -123,15 +106,12 @@ public class NettyServer implements ProtocolFactory, Runnable, PacketFactory, Pa
 		return msg.toString();
 	}
 	
-	Map<Channel,Parser> parsers = new HashMap<Channel,Parser>();
+	Map<Channel,Connection> connections = new HashMap<Channel, Connection>();
 	@Override
-	public Parser getParser(final Channel channel) {
-		if(!parsers.containsKey(channel)){
+	public Parser getParser(Channel channel) {
 		
-			parsers.put(channel, new LoginParser());
-			
-		}
-		return parsers.get(channel);
+		return connections.get(channel).getParser();
+		
 	}
 
 	

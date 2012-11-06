@@ -10,8 +10,9 @@ public class ClientHandler extends ChannelInboundMessageHandlerAdapter<Packet> i
 
 	private static Logger logger = LoggerFactory.getLogger(ClientHandler.class);
 	
-	public ClientHandler() {
-		// TODO Auto-generated constructor stub
+	int version;
+	public ClientHandler(int version) {
+		this.version = version;
 	}
 	
 	@Override
@@ -21,7 +22,7 @@ public class ClientHandler extends ChannelInboundMessageHandlerAdapter<Packet> i
 		logger.debug("Sending login request");
 		
 		LoginPacket packet = new LoginPacket();
-		packet.setVersion(100);
+		packet.setVersion(version);
 		packet.setUsername("admin");
 		packet.setPassword("admin");
 		

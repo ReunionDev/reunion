@@ -14,7 +14,7 @@ import netty.packets.FailPacket;
 
 public class NettyClient implements ProtocolFactory, Runnable, ParserFactory, PacketFactory {
 
-	int count = 0;
+	int version = 101;
 	private InetSocketAddress address;
 	public NettyClient(InetSocketAddress address) {
 		this.address = address;
@@ -37,7 +37,7 @@ public class NettyClient implements ProtocolFactory, Runnable, ParserFactory, Pa
 		            	 ch.pipeline().addLast("logger", new LoggingHandler());
 		            	 ch.pipeline().addLast("codec", new ProtocolCodec(NettyClient.this));
 		            	 ch.pipeline().addLast("parser", new PacketParserCodec(NettyClient.this, NettyClient.this));
-		            	 ch.pipeline().addLast("handler", new ClientHandler());
+		            	 ch.pipeline().addLast("handler", new ClientHandler(version));
 		             }
 		             
 		        });
@@ -71,7 +71,7 @@ public class NettyClient implements ProtocolFactory, Runnable, ParserFactory, Pa
 		protocol.setAddress(address.getAddress());
 		protocol.setMapId(4);
 		protocol.setPort(address.getPort());
-		protocol.setVersion(100);
+		protocol.setVersion(version);
 		
 		return new Protocol() {
 			
@@ -111,5 +111,4 @@ public class NettyClient implements ProtocolFactory, Runnable, ParserFactory, Pa
 		return parsers.get(channel);
 	}
 
-	
 }
