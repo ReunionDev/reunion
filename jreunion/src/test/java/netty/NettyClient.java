@@ -9,6 +9,8 @@ import io.netty.handler.logging.LoggingHandler;
 import java.net.InetSocketAddress;
 import java.util.*;
 
+import netty.packets.FailPacket;
+
 
 public class NettyClient implements ProtocolFactory, Runnable, ParserFactory, PacketFactory {
 
@@ -86,11 +88,7 @@ public class NettyClient implements ProtocolFactory, Runnable, ParserFactory, Pa
 	}
 	@Override
 	public String build(Packet msg) {
-		if(msg instanceof LoginPacket){
-			LoginPacket packet = (LoginPacket)msg;
-			return packet.getVersion()+"\nlogin\n"+packet.getUsername()+"\n"+packet.getPassword();
-		}
-		return null;
+		return msg.toString();
 	}
 	
 	Map<Channel,Parser> parsers = new HashMap<Channel,Parser>();
@@ -98,13 +96,14 @@ public class NettyClient implements ProtocolFactory, Runnable, ParserFactory, Pa
 	public Parser getParser(Channel channel) {
 		if(!parsers.containsKey(channel)){
 		
-			parsers.put(channel, new Parser(){
-				
+			parsers.put(channel, new Parser(){				
 				@Override
 				public Packet parse(String input) {
-					return new FailPacket(input.split(" ")[1]);
-				}
-				
+					if(input.startsWith("fail")){
+						return new FailPacket(input.substring(6));
+					}
+					return null;
+				}		
 				
 			});
 			

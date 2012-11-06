@@ -1,4 +1,6 @@
-package netty;
+package netty.packets;
+
+import netty.Packet;
 
 public class FailPacket implements Packet {
 	
@@ -15,5 +17,11 @@ public class FailPacket implements Packet {
 
 	public void setMessage(String message) {
 		this.message = message;
+	}
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("fail "+getMessage());
+		return builder.toString();
 	}
 }

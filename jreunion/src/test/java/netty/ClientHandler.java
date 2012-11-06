@@ -2,6 +2,8 @@ package netty;
 
 import io.netty.channel.*;
 
+import netty.packets.*;
+
 import org.slf4j.*;
 
 public class ClientHandler extends ChannelInboundMessageHandlerAdapter<Packet> implements ChannelStateHandler{

@@ -9,6 +9,8 @@ import io.netty.handler.logging.LoggingHandler;
 import java.net.*;
 import java.util.*;
 
+import netty.packets.*;
+
 import org.slf4j.*;
 
 public class NettyServer implements ProtocolFactory, Runnable, PacketFactory, ParserFactory {
@@ -118,11 +120,7 @@ public class NettyServer implements ProtocolFactory, Runnable, PacketFactory, Pa
 	
 	@Override
 	public String build(Packet msg) {
-		if(msg instanceof FailPacket){
-			FailPacket packet = (FailPacket)msg;
-			return "fail "+packet.getMessage();
-		}
-		return null;
+		return msg.toString();
 	}
 	
 	Map<Channel,Parser> parsers = new HashMap<Channel,Parser>();
@@ -130,43 +128,7 @@ public class NettyServer implements ProtocolFactory, Runnable, PacketFactory, Pa
 	public Parser getParser(final Channel channel) {
 		if(!parsers.containsKey(channel)){
 		
-			parsers.put(channel, new Parser(){
-				
-				Integer version;				
-
-				String login;
-				
-				String username;
-				
-				String password;				
-				
-				@Override
-				public Packet parse(String input) {
-					
-					Packet packet = null;
-					if(version==null){
-						version = Integer.parseInt(input);
-					}else if(login==null){
-						login = input;
-					}else if(username==null){
-						username = input;
-					}else if(password==null) {
-						password = input;
-						if(login.equals("login")){
-							LoginPacket loginPacket = new LoginPacket();
-							loginPacket.setVersion(version);
-							loginPacket.setUsername(username);
-							loginPacket.setPassword(password);
-							packet = loginPacket;
-							
-						}
-					}else{
-						channel.close();
-					}
-					return packet;
-				}			
-				
-			});
+			parsers.put(channel, new LoginParser());
 			
 		}
 		return parsers.get(channel);
