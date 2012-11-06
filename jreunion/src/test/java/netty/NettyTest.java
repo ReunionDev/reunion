@@ -20,13 +20,14 @@ public class NettyTest {
 
 		logger.debug("Starting netty tests");
 		
-		int port = 4005;		
+		int port = 4005;
+		int version = 101;
 		
 		InetSocketAddress address = new InetSocketAddress("127.0.0.1", port);
 		
 		NettyServer server = new NettyServer(address);
 		
-		NettyClient client = new NettyClient(address);
+		NettyClient client = new NettyClient(address, version);
 		
 		Thread serverThread = new Thread(server);
 		serverThread.start();

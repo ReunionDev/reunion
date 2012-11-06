@@ -43,8 +43,7 @@ public class ClientHandler extends ChannelInboundMessageHandlerAdapter<Packet> i
 		logger.debug("Received: "+ msg);
 		if(msg instanceof FailPacket){
 			FailPacket packet = (FailPacket)msg;
-			System.out.println("fail: "+ packet.getMessage());
-			
+			System.out.println("fail: "+ packet.getMessage());			
 		}
 		
 	}

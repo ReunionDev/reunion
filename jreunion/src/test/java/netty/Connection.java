@@ -31,7 +31,6 @@ public class Connection {
 		encryption.setAddress(address.getAddress());
 		encryption.setMapId(4);
 		encryption.setPort(address.getPort());
-		encryption.setVersion(100);
 		
 		protocol = new Protocol() {
 			

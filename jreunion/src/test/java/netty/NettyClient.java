@@ -9,15 +9,21 @@ import io.netty.handler.logging.LoggingHandler;
 import java.net.InetSocketAddress;
 import java.util.*;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import netty.packets.FailPacket;
 
 
 public class NettyClient implements ProtocolFactory, Runnable, ParserFactory, PacketFactory {
 
-	int version = 101;
+	private static Logger logger = LoggerFactory.getLogger(NettyClient.class);
+
+	int version;
 	private InetSocketAddress address;
-	public NettyClient(InetSocketAddress address) {
+	public NettyClient(InetSocketAddress address,int version) {
 		this.address = address;
+		this.version = version;
    
 	}
 	OtherProtocol protocol = new OtherProtocol();
@@ -39,9 +45,7 @@ public class NettyClient implements ProtocolFactory, Runnable, ParserFactory, Pa
 		            	 ch.pipeline().addLast("parser", new PacketParserCodec(NettyClient.this, NettyClient.this));
 		            	 ch.pipeline().addLast("handler", new ClientHandler(version));
 		             }
-		             
 		        });
-			    
 			    ChannelFuture f = b.connect().sync();			    
 		
 		        // Wait until the server socket is closed.
@@ -60,7 +64,7 @@ public class NettyClient implements ProtocolFactory, Runnable, ParserFactory, Pa
 	 * @param args
 	 */
 	public static void main(String[] args) throws Exception {
-		new NettyClient(new InetSocketAddress("127.0.0.1", 4005)).run();
+		new NettyClient(new InetSocketAddress("127.0.0.1", 4005), 101).run();
 
 	}
 
@@ -87,7 +91,8 @@ public class NettyClient implements ProtocolFactory, Runnable, ParserFactory, Pa
 	}
 	@Override
 	public String build(Packet msg) {
-		return msg.toString();
+		String packet = msg.toString();
+		return packet;
 	}
 	
 	Map<Channel,Parser> parsers = new HashMap<Channel,Parser>();
@@ -100,7 +105,12 @@ public class NettyClient implements ProtocolFactory, Runnable, ParserFactory, Pa
 				public Packet parse(String input) {
 					if(input.startsWith("fail")){
 						return new FailPacket(input.substring(5));
+					}else{
+						logger.debug("Received: "+ input);
+
 					}
+					
+					
 					return null;
 				}		
 				
