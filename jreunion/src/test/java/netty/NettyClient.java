@@ -55,7 +55,6 @@ public class NettyClient implements ProtocolFactory, Runnable, ParserFactory, Pa
 		        b.shutdown();
 		    }
 		
-		
 	}
 	/**
 	 * @param args
@@ -100,7 +99,7 @@ public class NettyClient implements ProtocolFactory, Runnable, ParserFactory, Pa
 				@Override
 				public Packet parse(String input) {
 					if(input.startsWith("fail")){
-						return new FailPacket(input.substring(6));
+						return new FailPacket(input.substring(5));
 					}
 					return null;
 				}		
