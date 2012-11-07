@@ -1,8 +1,12 @@
 package netty;
 import static org.junit.Assert.assertNotNull;
+import io.netty.channel.*;
 import io.netty.logging.*;
 
 import java.net.InetSocketAddress;
+
+import netty.packets.LoginPacket;
+import netty.parsers.FailParser;
 
 import org.junit.Test;
 import org.slf4j.*;
@@ -10,6 +14,7 @@ import org.slf4j.*;
 public class NettyTest {
 	
 	private static final Logger logger = LoggerFactory.getLogger(NettyTest.class);
+
 
 	
 	@Test
@@ -21,28 +26,41 @@ public class NettyTest {
 		logger.debug("Starting netty tests");
 		
 		int port = 4005;
-		int version = 101;
+		final int version = 101;
 		
 		InetSocketAddress address = new InetSocketAddress("127.0.0.1", port);
 		
 		NettyServer server = new NettyServer(address);
 		
-		NettyClient client = new NettyClient(address, version);
+
+		final ClientsideParser parser = new ClientsideParser();
+		parser.add(new FailParser());
+		
+		
+		NettyClient client = new NettyClient(address, version, new ParserFactory() {
+			
+			@Override
+			public Parser getParser(Channel channel) {
+				return parser;
+			}
+		});
+		
 		
 		Thread serverThread = new Thread(server);
 		serverThread.start();
-		Thread clientThread = new Thread(client);
-		clientThread.start();
-		
-		clientThread.join();
+		client.connect().addListener(new ChannelFutureListener() {
+			
+			@Override
+			public void operationComplete(ChannelFuture future) throws Exception {
+				LoginPacket packet = new LoginPacket();
+				packet.setVersion(version);
+				packet.setUsername("admin");
+				packet.setPassword("admin");				
+				future.channel().write(packet);
+			}
+		}).channel().closeFuture().sync();
 		
 		serverThread.interrupt();	
-		
-	}
-	
-	public static void main(String []args) throws InterruptedException{
-
-		new NettyTest().test();
 		
 	}
 

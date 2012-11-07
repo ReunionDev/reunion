@@ -20,14 +20,14 @@ public class ClientHandler extends ChannelInboundMessageHandlerAdapter<Packet> i
 		super.channelActive(ctx);
 		
 		logger.debug("Sending login request");
-		
+		/*
 		LoginPacket packet = new LoginPacket();
 		packet.setVersion(version);
 		packet.setUsername("admin");
 		packet.setPassword("admin");
 		
 		ctx.write(packet);
-		
+		*/
 	}
 	@Override
 	public void channelInactive(ChannelHandlerContext ctx) throws Exception {

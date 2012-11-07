@@ -21,7 +21,8 @@ public class FailPacket implements Packet {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("fail "+getMessage());
+		builder.append("fail ");
+		builder.append(getMessage());
 		return builder.toString();
 	}
 }
