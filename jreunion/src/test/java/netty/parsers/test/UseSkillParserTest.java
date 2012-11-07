@@ -19,8 +19,7 @@ public class UseSkillParserTest {
 		
 		String msg = "use_skill 113 npc 1100 a b c";
 		Matcher matcher = pattern.matcher(msg);
-		assertTrue(matcher.matches());
-	
+		assertTrue(matcher.matches());	
 		
 		Packet packet = parser.parse(matcher, msg);
 		assertNotNull(packet);

@@ -4,6 +4,11 @@ import netty.Packet;
 
 public class FailPacket implements Packet {
 	
+	
+	public FailPacket(){
+		
+		
+	}
 	public FailPacket(String message){
 		
 		this.message = message;
