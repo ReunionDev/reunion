@@ -24,9 +24,11 @@ public class UseSkillParserTest {
 		
 		Packet packet = parser.parse(matcher, msg);
 		assertNotNull(packet);
-		assertTrue(packet instanceof UseSkillPacket);
-		
+		assertTrue(packet instanceof UseSkillPacket);	
+		assertEquals(msg, packet.toString());		
 		
 	}
+	
+
 
 }

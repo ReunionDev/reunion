@@ -43,8 +43,7 @@ public class NettyTest {
 			public Parser getParser(Channel channel) {
 				return parser;
 			}
-		});
-		
+		});		
 		
 		Thread serverThread = new Thread(server);
 		serverThread.start();

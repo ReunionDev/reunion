@@ -29,6 +29,7 @@ public class FailParserTest {
 		assertNotNull(packet);
 		assertTrue(packet instanceof FailPacket);
 		assertEquals(msg,((FailPacket)packet).getMessage());
+		assertEquals(failMsg, packet.toString());
 		
 		
 		
