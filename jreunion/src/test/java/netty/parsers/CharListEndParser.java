@@ -28,6 +28,5 @@ public class CharListEndParser implements PacketParser {
 		packet.setAccountId(Integer.parseInt(match.group(2)));		
 		return packet;
 	}
-	
 
 }

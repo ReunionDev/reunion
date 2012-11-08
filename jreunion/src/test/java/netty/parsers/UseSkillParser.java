@@ -25,9 +25,10 @@ public class UseSkillParser implements PacketParser {
 	@Override
 	public Packet parse(Matcher match, String input) {
 		UseSkillPacket packet = new UseSkillPacket();
-		packet.setSkillId(Integer.parseInt(match.group(1)));
+		int n = 0;
+		packet.setSkillId(Integer.parseInt(match.group(++n)));
 		
-		String targetType = match.group(2);
+		String targetType = match.group(++n);
 		if(targetType!=null){
 			if(targetType.equals("npc")){
 				packet.setTargetType(TargetType.NPC);
@@ -35,37 +36,19 @@ public class UseSkillParser implements PacketParser {
 				packet.setTargetType(TargetType.CHAR);
 			}
 		}
-		String targetId = match.group(3);
+		String targetId = match.group(++n);
 		if(targetId!=null){
 			packet.setTargetId(Integer.parseInt(targetId));			
 			
 		}
-		for(int n=4; n<=match.groupCount();n++){
+		while(++n<=match.groupCount()){
 			String arg = match.group(n);
 			if(arg!=null){
 				packet.getArguments().add(arg);
 			}
-		}
-		
-		
+		}		
 		return packet;
-	} 
-	
-	public static void main(String []args){
-		Matcher matcher = regex.matcher("use_skill 113 npc 1100 a b c");
-		
-		
-		
-		if(matcher.matches()){	 	
-			for(int groupN =0; groupN<=matcher.groupCount(); groupN++){
-				System.out.println(matcher.group(groupN));
-				
-			}
-		}
-		
-		
 	}
-	
 	
 
 }
