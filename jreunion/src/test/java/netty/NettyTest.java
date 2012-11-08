@@ -43,6 +43,14 @@ public class NettyTest {
 			public Parser getParser(Channel channel) {
 				return parser;
 			}
+		},new ChannelInboundMessageHandlerAdapter<Packet>() {
+			
+			@Override
+			public void messageReceived(ChannelHandlerContext ctx, Packet msg)
+					throws Exception {
+				
+				
+			}
 		});		
 		
 		Thread serverThread = new Thread(server);

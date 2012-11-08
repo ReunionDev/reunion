@@ -7,12 +7,8 @@ import io.netty.channel.socket.nio.*;
 import io.netty.handler.logging.LoggingHandler;
 
 import java.net.InetSocketAddress;
-import java.util.*;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import netty.packets.FailPacket;
+import org.slf4j.*;
 
 
 public class NettyClient implements ProtocolFactory, PacketFactory {
@@ -22,7 +18,8 @@ public class NettyClient implements ProtocolFactory, PacketFactory {
 	private ChannelFuture channel;
 	int version;
 	private InetSocketAddress address;
-	public NettyClient(InetSocketAddress address,final int version, final ParserFactory parserFactory) {
+	
+	public NettyClient(InetSocketAddress address,final int version, final ParserFactory parserFactory, final ChannelInboundMessageHandlerAdapter<Packet> handler) {
 		this.address = address;
 		this.version = version;
 		bootstrap = new Bootstrap();
@@ -38,7 +35,8 @@ public class NettyClient implements ProtocolFactory, PacketFactory {
 	            	 ch.pipeline().addLast("logger", new LoggingHandler());
 	            	 ch.pipeline().addLast("codec", new ProtocolCodec(NettyClient.this));
 	            	 ch.pipeline().addLast("parser", new PacketParserCodec(parserFactory, NettyClient.this));
-	            	 ch.pipeline().addLast("handler", new ClientHandler(version));
+	            	 //ch.pipeline().addLast("handler", new ClientHandler(version));
+	            	 ch.pipeline().addLast("handler", handler);
 	             }
 	        });
    

@@ -4,7 +4,7 @@ import io.netty.channel.*;
 
 import java.net.InetSocketAddress;
 
-import netty.packets.LoginPacket;
+import netty.packets.*;
 import netty.parsers.*;
 
 import org.junit.Test;
@@ -22,12 +22,28 @@ public class LunarTest {
 		final ClientsideParser parser = new ClientsideParser();
 		parser.add(new FailParser());
 		parser.add(new CharListEndParser());
+		parser.add(new SuccessParser());
 		
 		NettyClient client = new NettyClient(address, version, new ParserFactory() {
 			
 			@Override
 			public Parser getParser(Channel channel) {
 				return parser;
+			}
+		},new ChannelInboundMessageHandlerAdapter<Packet>() {
+			
+			@Override
+			public void messageReceived(ChannelHandlerContext ctx, Packet msg)
+					throws Exception {
+					if(msg instanceof CharListEndPacket){
+						ctx.channel().write(new CharExistPacket("testname"));
+						
+					}
+					if(msg instanceof SuccessPacket){
+						System.out.println("success");
+					}
+				
+				
 			}
 		});
 		ChannelFuture connect = client.connect();
