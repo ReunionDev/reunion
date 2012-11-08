@@ -6,15 +6,15 @@ public class CombatPacket implements Packet {
 	
 	private static final long serialVersionUID = 1L;
 
-	long id;
+	Long id;
 	
 	boolean inCombat;
 	
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -30,8 +30,11 @@ public class CombatPacket implements Packet {
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("combat ");
-		builder.append(getId());	
-		builder.append(' ');
+		Long id = getId();
+		if(id!=null){
+			builder.append(getId());	
+			builder.append(' ');
+		}
 		builder.append(isInCombat()?1:0);
 		return builder.toString();
 	}
