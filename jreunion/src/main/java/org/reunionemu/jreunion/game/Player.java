@@ -154,8 +154,26 @@ public abstract class Player extends LivingObject implements EventListener {
 	}
 
 	public static enum Sex {
-		MALE, // 0
-		FEMALE // 1
+		MALE(0), // 0
+		FEMALE(1); // 1
+		int value;
+
+		Sex(int value) {
+			this.value = value;
+		}
+
+		public int value() {
+			return value;
+		}
+		public static Sex byValue(int sexId) {
+
+			for (Sex sex : Sex.values()) {
+				if (sex.value() == sexId) {
+					return sex;
+				}
+			}
+			throw new IllegalStateException("Unknown sex id: "+ sexId);
+		}
 	}
 
 	public static enum Race {
@@ -171,12 +189,10 @@ public abstract class Player extends LivingObject implements EventListener {
 
 		Race(int value) {
 			this.value = value;
-
 		}
 
 		public int value() {
 			return value;
-
 		}
 
 		public static Race byValue(int raceId) {
@@ -186,7 +202,7 @@ public abstract class Player extends LivingObject implements EventListener {
 					return race;
 				}
 			}
-			return null;
+			throw new IllegalStateException("Unknown race id: "+ raceId);
 		}
 	}
 

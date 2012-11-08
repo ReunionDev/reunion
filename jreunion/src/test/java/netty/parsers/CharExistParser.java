@@ -4,17 +4,17 @@ import java.util.regex.*;
 
 import netty.Packet;
 import netty.packets.CharExistPacket;
-import netty.parsers.PacketParser.Server;
+import netty.parsers.PacketParser.*;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 @Service
 @Scope("prototype")
-@Server
+@Client
 public class CharExistParser implements PacketParser {
 
-	static final Pattern regex = Pattern.compile("^char_exist (.*)$"); 
+	static final Pattern regex = Pattern.compile("^char_exist ([^ ]+)$"); 
 	
 	@Override
 	public Pattern getPattern() {
