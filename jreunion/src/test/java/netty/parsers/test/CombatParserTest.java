@@ -28,11 +28,11 @@ public class CombatParserTest {
 		
 		CombatPacket newChar = (CombatPacket)packet;
 		assertEquals(2, (long)newChar.getId());
-		assertTrue(newChar.isInCombat());		
+		assertTrue(newChar.isInCombat());
 		
 		msg = "combat 0";
 		matcher = pattern.matcher(msg);
-		assertTrue(matcher.matches());	
+		assertTrue(matcher.matches());
 		
 		packet = parser.parse(matcher, msg);
 		assertNotNull(packet);
@@ -42,7 +42,7 @@ public class CombatParserTest {
 		newChar = (CombatPacket)packet;
 		assertNull(newChar.getId());
 		
-		assertFalse(newChar.isInCombat());		
+		assertFalse(newChar.isInCombat());
 
 	}
 
