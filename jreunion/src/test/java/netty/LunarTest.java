@@ -17,6 +17,8 @@ public class LunarTest {
 	
 	private final static Logger logger = LoggerFactory.getLogger(LunarTest.class);
 
+	String testCharName = "test";
+	
 	@Test
 	public void test() throws InterruptedException {
 		logger.debug("starting test");
@@ -36,91 +38,14 @@ public class LunarTest {
 				return parser;
 			}
 		});		
-		
-		final List<CharsExistPacket> chars = new LinkedList<CharsExistPacket>();
-		
-		client.setHandler(new ChannelInboundMessageHandlerAdapter<Packet>() {
-
-			@Override
-			public void messageReceived(ChannelHandlerContext ctx, Packet msg)
-					throws Exception {
 				
-					if(msg instanceof FailPacket){
-						logger.info("Unable to log in: "+ ((FailPacket)msg).getMessage());
-						
-					}
-					if(msg instanceof CharsExistPacket){
-						chars.add((CharsExistPacket)msg);
-						
-					}
-					if(msg instanceof CharListEndPacket){
-						logger.info("successful login ("+chars.size()+" chars)");
-						if(chars.size()==0){
-						ctx.channel().write(new CharExistPacket("testchar"));
-						client.setHandler(new ChannelInboundMessageHandlerAdapter<Packet>() {
-
-							@Override
-							public void messageReceived(
-									ChannelHandlerContext ctx, Packet msg)
-									throws Exception {
-								if(msg instanceof SuccessPacket){
-									System.out.println("success");
-									CharNewPacket packet = new CharNewPacket();
-									packet.setSlot(0);
-									packet.setName("testchar");
-									packet.setSex(Sex.MALE);
-									packet.setRace(Race.BULKAN);
-									packet.setHair(0);
-									packet.setStrength(30);
-									packet.setIntellect(30);
-									packet.setDexterity(30);
-									packet.setConstitution(30);
-									packet.setLeadership(30);									
-									ctx.channel().write(packet);
-									client.setHandler(new ChannelInboundMessageHandlerAdapter<Packet>() {
-										
-										@Override
-										public void messageReceived(ChannelHandlerContext ctx, Packet msg)
-												throws Exception {
-											
-											if(msg instanceof SuccessPacket){
-												
-												
-											}
-											if(msg instanceof FailPacket){
-												
-												
-											}
-											ctx.channel().disconnect();
-											
-										}
-									});
-								}
-								if(msg instanceof FailPacket){
-									ctx.channel().disconnect();
-	
-									
-								}
-							}
-						
-						});
-						
-						}else{
-							
-							// log in
-						}
-						
-					}
-				
-			}
-		});
+		client.setHandler(new CharListHandler(client));
 		ChannelFuture connect = client.connect();
 		connect.addListener(new ChannelFutureListener() {
 			
 			@Override
 			public void operationComplete(ChannelFuture future) throws Exception {
 				if(future.isSuccess()){
-					chars.clear();
 					LoginPacket packet = new LoginPacket();
 					packet.setVersion(version);
 					packet.setUsername("admin");
@@ -133,6 +58,97 @@ public class LunarTest {
 		});		
 		
 		connect.channel().closeFuture().sync();
+		
+		
+		
+	}
+	
+	class CharListHandler extends ChannelInboundMessageHandlerAdapter<Packet>{
+		final List<CharsExistPacket> chars = new LinkedList<CharsExistPacket>();
+		
+		final NettyClient client;
+		public CharListHandler(NettyClient client){
+			this.client = client;
+			
+		}
+
+		@Override
+		public void messageReceived(ChannelHandlerContext ctx, Packet msg)
+				throws Exception {
+			
+			if(msg instanceof FailPacket){
+				logger.info("Unable to log in: "+ ((FailPacket)msg).getMessage());
+				
+			}
+			if(msg instanceof CharsExistPacket){
+				chars.add((CharsExistPacket)msg);
+				
+			}
+			
+			if(msg instanceof CharListEndPacket){
+				logger.info("successful login ("+chars.size()+" chars found)");
+				if(chars.size()==0){
+					logger.debug("No characters found, checking if '"+testCharName + "' exists");
+					ctx.channel().write(new CharExistPacket("testchar"));
+					client.setHandler(new ChannelInboundMessageHandlerAdapter<Packet>() {
+
+						@Override
+						public void messageReceived(
+								ChannelHandlerContext ctx, Packet msg)
+								throws Exception {
+							if(msg instanceof SuccessPacket){
+								logger.debug("No '"+testCharName + "' found, so attempting to create");
+
+								CharNewPacket packet = new CharNewPacket();
+								packet.setSlot(0);
+								packet.setName("testchar");
+								packet.setSex(Sex.MALE);
+								packet.setRace(Race.BULKAN);
+								packet.setHair(0);
+								packet.setStrength(30);
+								packet.setIntellect(30);
+								packet.setDexterity(30);
+								packet.setConstitution(30);
+								packet.setLeadership(30);									
+								ctx.channel().write(packet);
+								client.setHandler(new ChannelInboundMessageHandlerAdapter<Packet>() {
+									
+									@Override
+									public void messageReceived(ChannelHandlerContext ctx, Packet msg)
+											throws Exception {
+										
+										if(msg instanceof SuccessPacket){
+											logger.debug("'"+testCharName + "' succesfully created, back to charlist");
+											client.setHandler(CharListHandler.this);
+										}
+										if(msg instanceof FailPacket){
+											logger.debug("'"+testCharName + "' failed to be created("+((FailPacket)msg).getMessage()+"), disconnecting");
+											ctx.channel().disconnect();
+											
+										}
+										
+										
+									}
+								});
+							}
+							if(msg instanceof FailPacket){
+								logger.debug("Character '"+testCharName + "' already exists so cant be created, disconnected");
+								ctx.channel().disconnect();
+								
+							}
+						}
+					
+					});
+				
+				}else{
+					
+					// log in
+				}
+				
+			}
+			
+		}
+		
 		
 		
 		
