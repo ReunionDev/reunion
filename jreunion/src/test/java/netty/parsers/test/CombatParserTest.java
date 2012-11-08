@@ -5,30 +5,30 @@ import static org.junit.Assert.*;
 import java.util.regex.*;
 
 import netty.Packet;
-import netty.packets.StartPacket;
-import netty.parsers.StartParser;
+import netty.packets.CombatPacket;
+import netty.parsers.CombatParser;
 
 import org.junit.Test;
 
-public class StartParserTest {
+public class CombatParserTest {
 
 	@Test
 	public void test() {
-		StartParser parser = new StartParser();
+		CombatParser parser = new CombatParser();
 		Pattern pattern = parser.getPattern();
 		
-		String msg = "start 1 2";
+		String msg = "combat 2 1";
 		Matcher matcher = pattern.matcher(msg);
 		assertTrue(matcher.matches());	
 		
 		Packet packet = parser.parse(matcher, msg);
 		assertNotNull(packet);
-		assertTrue(packet instanceof StartPacket);
+		assertTrue(packet instanceof CombatPacket);
 		assertEquals(msg, packet.toString());
 		
-		StartPacket newChar = (StartPacket)packet;
-		assertEquals(1, newChar.getSlot());
-		assertEquals(2, newChar.getZone());		
+		CombatPacket newChar = (CombatPacket)packet;
+		assertEquals(2, newChar.getId());
+		assertTrue(newChar.isInCombat());		
 	}
 
 }
