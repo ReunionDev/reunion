@@ -5,7 +5,7 @@ import io.netty.channel.*;
 import java.net.InetSocketAddress;
 
 import netty.packets.LoginPacket;
-import netty.parsers.FailParser;
+import netty.parsers.*;
 
 import org.junit.Test;
 import org.slf4j.*;
@@ -21,6 +21,7 @@ public class LunarTest {
 		final InetSocketAddress address = new InetSocketAddress("127.0.0.1", 4005);
 		final ClientsideParser parser = new ClientsideParser();
 		parser.add(new FailParser());
+		parser.add(new CharListEndParser());
 		
 		NettyClient client = new NettyClient(address, version, new ParserFactory() {
 			
