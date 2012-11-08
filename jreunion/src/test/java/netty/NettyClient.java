@@ -19,7 +19,19 @@ public class NettyClient implements ProtocolFactory, PacketFactory {
 	int version;
 	private InetSocketAddress address;
 	
-	public NettyClient(InetSocketAddress address,final int version, final ParserFactory parserFactory, final ChannelInboundMessageHandlerAdapter<Packet> handler) {
+	ChannelInboundMessageHandlerAdapter<Packet> handler;
+	
+	public ChannelInboundMessageHandlerAdapter<Packet> getHandler() {
+		return handler;
+	}
+
+
+	public void setHandler(ChannelInboundMessageHandlerAdapter<Packet> handler) {
+		this.handler = handler;
+	}
+
+
+	public NettyClient(InetSocketAddress address,final int version, final ParserFactory parserFactory) {
 		this.address = address;
 		this.version = version;
 		bootstrap = new Bootstrap();
@@ -36,7 +48,17 @@ public class NettyClient implements ProtocolFactory, PacketFactory {
 	            	 ch.pipeline().addLast("codec", new ProtocolCodec(NettyClient.this));
 	            	 ch.pipeline().addLast("parser", new PacketParserCodec(parserFactory, NettyClient.this));
 	            	 //ch.pipeline().addLast("handler", new ClientHandler(version));
-	            	 ch.pipeline().addLast("handler", handler);
+	            	 ch.pipeline().addLast("handler", new ChannelInboundMessageHandlerAdapter<Packet>(){
+						@Override
+						public void messageReceived(ChannelHandlerContext ctx,
+								Packet msg) throws Exception {
+							ChannelInboundMessageHandlerAdapter<Packet> handler = getHandler();
+							if(handler!=null){
+								handler.messageReceived(ctx, msg);
+							}							
+						}
+	            		 
+	            	 });
 	             }
 	        });
    

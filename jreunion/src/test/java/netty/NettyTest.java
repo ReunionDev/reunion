@@ -43,7 +43,8 @@ public class NettyTest {
 			public Parser getParser(Channel channel) {
 				return parser;
 			}
-		},new ChannelInboundMessageHandlerAdapter<Packet>() {
+		});		
+		client.setHandler(new ChannelInboundMessageHandlerAdapter<Packet>() {
 			
 			@Override
 			public void messageReceived(ChannelHandlerContext ctx, Packet msg)
@@ -51,7 +52,7 @@ public class NettyTest {
 				
 				
 			}
-		});		
+		});
 		
 		Thread serverThread = new Thread(server);
 		serverThread.start();

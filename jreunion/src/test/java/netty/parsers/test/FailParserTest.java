@@ -20,12 +20,13 @@ public class FailParserTest {
 		String msg = "this is a fail message!";
 		String failMsg = "fail "+msg;
 		Matcher matcher = pattern.matcher(failMsg);
-		assertTrue(matcher.matches());		
+		assertTrue(matcher.matches());
+		assertTrue(pattern.matcher("fail").matches());
 		assertFalse(pattern.matcher(msg).matches());
 		assertFalse(pattern.matcher("fail"+msg).matches());
 	
 		
-		Packet packet = parser.parse(matcher, msg);
+		Packet packet = parser.parse(matcher, failMsg);
 		assertNotNull(packet);
 		assertTrue(packet instanceof FailPacket);
 		assertEquals(msg,((FailPacket)packet).getMessage());
