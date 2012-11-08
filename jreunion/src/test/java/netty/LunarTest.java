@@ -1,8 +1,6 @@
 package netty;
 
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelFutureListener;
+import io.netty.channel.*;
 
 import java.net.InetSocketAddress;
 
@@ -10,14 +8,17 @@ import netty.packets.LoginPacket;
 import netty.parsers.FailParser;
 
 import org.junit.Test;
+import org.slf4j.*;
 
 public class LunarTest {
+	
+	private final static Logger logger = LoggerFactory.getLogger(LunarTest.class);
 
 	@Test
 	public void test() throws InterruptedException {
 		final int version = 2052;
-		InetSocketAddress address = new InetSocketAddress("202.183.192.22", 4105);
-		
+		//final InetSocketAddress address = new InetSocketAddress("202.183.192.22", 4105);
+		final InetSocketAddress address = new InetSocketAddress("127.0.0.1", 4005);
 		final ClientsideParser parser = new ClientsideParser();
 		parser.add(new FailParser());
 		
@@ -33,11 +34,15 @@ public class LunarTest {
 			
 			@Override
 			public void operationComplete(ChannelFuture future) throws Exception {
-				LoginPacket packet = new LoginPacket();
-				packet.setVersion(version);
-				packet.setUsername("admin");
-				packet.setPassword("admin");				
-				future.channel().write(packet);
+				if(future.isSuccess()){
+					LoginPacket packet = new LoginPacket();
+					packet.setVersion(version);
+					packet.setUsername("admin");
+					packet.setPassword("admin");				
+					future.channel().write(packet);
+				}else{
+					logger.error("Unable to connect to "+address);
+				}
 			}
 		});		
 		
