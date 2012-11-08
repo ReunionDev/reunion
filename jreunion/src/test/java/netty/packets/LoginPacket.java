@@ -4,6 +4,8 @@ import netty.Packet;
 
 public class LoginPacket implements Packet {
 
+	private static final long serialVersionUID = 1L;
+	
 	String username;
 	String password;
 	int version;

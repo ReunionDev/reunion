@@ -8,7 +8,6 @@ public class CharExistPacket implements Packet {
 
 	public CharExistPacket(){
 		
-		
 	}
 	public CharExistPacket(String name){
 		

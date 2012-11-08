@@ -1,7 +1,5 @@
 package netty.packets;
 
-import java.util.*;
-
 import netty.Packet;
 
 public class CharListEndPacket implements Packet {

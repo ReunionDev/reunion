@@ -24,39 +24,6 @@ public class CharsExistParser implements PacketParser {
 	public Pattern getPattern() {
 		return regex;
 	}
-	
-	/*
-	 * 
-	 * 
-	 *charlist += "chars_exist " + slot + " "
-				+ (client.getVersion() >= 2000 ? rs.getString("id") + " " : "") // nga client have this extra value in the packet
-				+ rs.getString("name") + " "
-				+ rs.getString("race") + " "
-				+ rs.getString("sex") + " "
-				+ rs.getString("hair") + " "
-				+ rs.getString("level") + " "
-				+ 1 + " " //hp
-				+ 1 + " " //hp max
-				+ 1 + " " //mana
-				+ 1 + " " //mana max
-				+ 1 + " " //stamina
-				+ 1 + " " //stamina max
-				+ 1 + " " //electricity
-				+ 1 + " " //electricity max
-				+ rs.getString("strength") + " " 
-				+ rs.getString("wisdom") + " " 
-				+ rs.getString("dexterity") + " "
-				+ rs.getString("constitution") + " " 
-				+ rs.getString("leadership") + " "
-				+ "0" + " " // unknown value
-				+ eq.getTypeId(Slot.HELMET) + " " 
-				+ eq.getTypeId(Slot.CHEST) + " " 
-				+ eq.getTypeId(Slot.PANTS) + " " 
-				+ eq.getTypeId(Slot.SHOULDER)	+ " "
-				+ eq.getTypeId(Slot.BOOTS) + " " 
-				+ eq.getTypeId(Slot.OFFHAND) 
-				+ " 0\n"; //unknown value
-	 */
 
 	@Override
 	public Packet parse(Matcher match, String input) {
@@ -117,8 +84,6 @@ public class CharsExistParser implements PacketParser {
 		packet.setOffhandTypeId(Integer.parseInt(match.group(++n)));
 		
 		packet.setUnknown2(Integer.parseInt(match.group(++n)));
-
-		
 		
 		return packet;
 	}

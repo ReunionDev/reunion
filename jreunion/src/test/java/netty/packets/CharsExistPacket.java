@@ -61,6 +61,220 @@ public class CharsExistPacket implements Packet {
 	
 	int unknown2;
 	
+	public int getBootsTypeId() {
+		return bootsTypeId;
+	}
+	
+	public int getChestTypeId() {
+		return chestTypeId;
+	}
+
+	public int getConstitution() {
+		return constitution;
+	}
+
+	public int getDexterity() {
+		return dexterity;
+	}
+
+	public int getElectricity() {
+		return electricity;
+	}
+
+	public int getHair() {
+		return hair;
+	}
+
+	public int getHelmetTypeId() {
+		return helmetTypeId;
+	}
+
+	public int getHp() {
+		return hp;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public int getIntellect() {
+		return intellect;
+	}
+
+	public int getLeadership() {
+		return leadership;
+	}
+
+	public int getLevel() {
+		return level;
+	}
+
+	public int getMana() {
+		return mana;
+	}
+	
+	public int getMaxElectricity() {
+		return maxElectricity;
+	}
+
+	public int getMaxHp() {
+		return maxHp;
+	}
+
+	public int getMaxMana() {
+		return maxMana;
+	}
+
+	public int getMaxStamina() {
+		return maxStamina;
+	}
+	
+	public String getName() {
+		return name;
+	}
+
+	public int getOffhandTypeId() {
+		return offhandTypeId;
+	}
+
+	public int getPantsTypeId() {
+		return pantsTypeId;
+	}
+
+	public Race getRace() {
+		return race;
+	}
+
+	public Sex getSex() {
+		return sex;
+	}
+
+	public int getShoulderTypeId() {
+		return shoulderTypeId;
+	}
+
+	public int getSlot() {
+		return slot;
+	}
+
+	public int getStamina() {
+		return stamina;
+	}
+
+	public int getStrength() {
+		return strength;
+	}
+
+	public int getUnknown1() {
+		return unknown1;
+	}
+
+	public int getUnknown2() {
+		return unknown2;
+	}
+
+	public void setBootsTypeId(int bootsTypeId) {
+		this.bootsTypeId = bootsTypeId;
+	}
+
+	public void setChestTypeId(int chestTypeId) {
+		this.chestTypeId = chestTypeId;
+	}
+
+	public void setConstitution(int constitution) {
+		this.constitution = constitution;
+	}
+
+	public void setDexterity(int dexterity) {
+		this.dexterity = dexterity;
+	}
+
+	public void setElectricity(int electricity) {
+		this.electricity = electricity;
+	}
+
+	public void setHair(int hair) {
+		this.hair = hair;
+	}
+
+	public void setHelmetTypeId(int helmetTypeId) {
+		this.helmetTypeId = helmetTypeId;
+	}
+
+	public void setHp(int hp) {
+		this.hp = hp;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setIntellect(int intellect) {
+		this.intellect = intellect;
+	}
+
+	public void setLeadership(int leadership) {
+		this.leadership = leadership;
+	}
+
+	public void setLevel(int level) {
+		this.level = level;
+	}
+
+	public void setMana(int mana) {
+		this.mana = mana;
+	}
+
+	public void setMaxElectricity(int maxElectricity) {
+		this.maxElectricity = maxElectricity;
+	}
+
+	public void setMaxHp(int maxHp) {
+		this.maxHp = maxHp;
+	}
+
+	public void setMaxMana(int maxMana) {
+		this.maxMana = maxMana;
+	}
+
+	public void setMaxStamina(int maxStamina) {
+		this.maxStamina = maxStamina;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	public void setOffhandTypeId(int offhandTypeId) {
+		this.offhandTypeId = offhandTypeId;
+	}
+	public void setPantsTypeId(int pantsTypeId) {
+		this.pantsTypeId = pantsTypeId;
+	}
+	public void setRace(Race race) {
+		this.race = race;
+	}
+	public void setSex(Sex sex) {
+		this.sex = sex;
+	}
+	public void setShoulderTypeId(int shoulderTypeId) {
+		this.shoulderTypeId = shoulderTypeId;
+	}
+	public void setSlot(int slot) {
+		this.slot = slot;
+	}
+	public void setStamina(int stamina) {
+		this.stamina = stamina;
+	}
+	public void setStrength(int strength) {
+		this.strength = strength;
+	}
+	public void setUnknown1(int unknown1) {
+		this.unknown1 = unknown1;
+	}
+	public void setUnknown2(int unknown2) {
+		this.unknown2 = unknown2;
+	}
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -123,219 +337,5 @@ public class CharsExistPacket implements Packet {
 		builder.append(getUnknown2());
 		return builder.toString();
 		
-	}
-	
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public int getSlot() {
-		return slot;
-	}
-
-	public void setSlot(int slot) {
-		this.slot = slot;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Race getRace() {
-		return race;
-	}
-
-	public void setRace(Race race) {
-		this.race = race;
-	}
-
-	public Sex getSex() {
-		return sex;
-	}
-
-	public void setSex(Sex sex) {
-		this.sex = sex;
-	}
-
-	public int getHair() {
-		return hair;
-	}
-
-	public void setHair(int hair) {
-		this.hair = hair;
-	}
-	
-	public int getLevel() {
-		return level;
-	}
-
-	public void setLevel(int level) {
-		this.level = level;
-	}
-
-	public int getStrength() {
-		return strength;
-	}
-
-	public void setStrength(int strength) {
-		this.strength = strength;
-	}
-	
-	public int getHp() {
-		return hp;
-	}
-
-	public void setHp(int hp) {
-		this.hp = hp;
-	}
-
-	public int getMaxHp() {
-		return maxHp;
-	}
-
-	public void setMaxHp(int maxHp) {
-		this.maxHp = maxHp;
-	}
-
-	public int getMana() {
-		return mana;
-	}
-
-	public void setMana(int mana) {
-		this.mana = mana;
-	}
-
-	public int getMaxMana() {
-		return maxMana;
-	}
-
-	public void setMaxMana(int maxMana) {
-		this.maxMana = maxMana;
-	}
-
-	public int getStamina() {
-		return stamina;
-	}
-
-	public void setStamina(int stamina) {
-		this.stamina = stamina;
-	}
-
-	public int getMaxStamina() {
-		return maxStamina;
-	}
-
-	public void setMaxStamina(int maxStamina) {
-		this.maxStamina = maxStamina;
-	}
-
-	public int getElectricity() {
-		return electricity;
-	}
-
-	public void setElectricity(int electricity) {
-		this.electricity = electricity;
-	}
-
-	public int getMaxElectricity() {
-		return maxElectricity;
-	}
-
-	public void setMaxElectricity(int maxElectricity) {
-		this.maxElectricity = maxElectricity;
-	}
-
-	public int getUnknown1() {
-		return unknown1;
-	}
-
-	public void setUnknown1(int unknown1) {
-		this.unknown1 = unknown1;
-	}
-
-	public int getUnknown2() {
-		return unknown2;
-	}
-
-	public void setUnknown2(int unknown2) {
-		this.unknown2 = unknown2;
-	}
-
-	public int getIntellect() {
-		return intellect;
-	}
-
-	public void setIntellect(int intellect) {
-		this.intellect = intellect;
-	}
-
-	public int getDexterity() {
-		return dexterity;
-	}
-
-	public void setDexterity(int dexterity) {
-		this.dexterity = dexterity;
-	}
-
-	public int getConstitution() {
-		return constitution;
-	}
-
-	public void setConstitution(int constitution) {
-		this.constitution = constitution;
-	}
-
-	public int getLeadership() {
-		return leadership;
-	}
-
-	public void setLeadership(int leadership) {
-		this.leadership = leadership;
-	}
-
-
-	public int getHelmetTypeId() {
-		return helmetTypeId;
-	}
-	public void setHelmetTypeId(int helmetTypeId) {
-		this.helmetTypeId = helmetTypeId;
-	}
-	public int getChestTypeId() {
-		return chestTypeId;
-	}
-	public void setChestTypeId(int chestTypeId) {
-		this.chestTypeId = chestTypeId;
-	}
-	public int getPantsTypeId() {
-		return pantsTypeId;
-	}
-	public void setPantsTypeId(int pantsTypeId) {
-		this.pantsTypeId = pantsTypeId;
-	}
-	public int getShoulderTypeId() {
-		return shoulderTypeId;
-	}
-	public void setShoulderTypeId(int shoulderTypeId) {
-		this.shoulderTypeId = shoulderTypeId;
-	}
-	public int getBootsTypeId() {
-		return bootsTypeId;
-	}
-	public void setBootsTypeId(int bootsTypeId) {
-		this.bootsTypeId = bootsTypeId;
-	}
-	public int getOffhandTypeId() {
-		return offhandTypeId;
-	}
-	public void setOffhandTypeId(int offhandTypeId) {
-		this.offhandTypeId = offhandTypeId;
 	}
 }

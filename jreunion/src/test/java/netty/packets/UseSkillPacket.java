@@ -6,6 +6,8 @@ import netty.Packet;
 
 public class UseSkillPacket implements Packet {
 	
+	private static final long serialVersionUID = 1L;
+
 	int skillId;
 		
 	TargetType targetType;
