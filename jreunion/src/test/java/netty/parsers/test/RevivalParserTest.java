@@ -16,15 +16,15 @@ public class RevivalParserTest {
 	public void test() {
 		RevivalParser parser = new RevivalParser();
 		Pattern pattern = parser.getPattern();
-		
+
 		String msg = "revival";
 		Matcher matcher = pattern.matcher(msg);
 		assertTrue(matcher.matches());
-		
+
 		Packet packet = parser.parse(matcher, msg);
 		assertNotNull(packet);
 		assertTrue(packet instanceof RevivalPacket);
-		assertEquals(msg, packet.toString());		
-		
+		assertEquals(msg, packet.toString());
+
 	}
 }

@@ -16,18 +16,16 @@ public class UseSkillParserTest {
 	public void test() {
 		UseSkillParser parser = new UseSkillParser();
 		Pattern pattern = parser.getPattern();
-		
+
 		String msg = "use_skill 113 npc 1100 a b c";
 		Matcher matcher = pattern.matcher(msg);
-		assertTrue(matcher.matches());	
-		
+		assertTrue(matcher.matches());
+
 		Packet packet = parser.parse(matcher, msg);
 		assertNotNull(packet);
-		assertTrue(packet instanceof UseSkillPacket);	
-		assertEquals(msg, packet.toString());		
-		
-	}
-	
+		assertTrue(packet instanceof UseSkillPacket);
+		assertEquals(msg, packet.toString());
 
+	}
 
 }

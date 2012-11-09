@@ -16,21 +16,20 @@ public class HourParserTest {
 	public void test() {
 		HourParser parser = new HourParser();
 		Pattern pattern = parser.getPattern();
-		
+
 		int hour = 3;
-		String msg = "hour "+hour;
+		String msg = "hour " + hour;
 		Matcher matcher = pattern.matcher(msg);
 		assertTrue(matcher.matches());
 		assertFalse(pattern.matcher("hour").matches());
-		assertFalse(pattern.matcher(""+hour).matches());
-		assertFalse(pattern.matcher("hour"+hour).matches());
-	
-		
+		assertFalse(pattern.matcher("" + hour).matches());
+		assertFalse(pattern.matcher("hour" + hour).matches());
+
 		Packet packet = parser.parse(matcher, msg);
 		assertNotNull(packet);
 		assertTrue(packet instanceof HourPacket);
-		assertEquals(hour, ((HourPacket)packet).getHour());		
-		
+		assertEquals(hour, ((HourPacket) packet).getHour());
+
 	}
 
 }

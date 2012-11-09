@@ -18,17 +18,17 @@ public class CharNewParserTest {
 	public void test() {
 		CharNewParser parser = new CharNewParser();
 		Pattern pattern = parser.getPattern();
-		
+
 		String msg = "char_new 1 myname 2 1 4 5 6 7 8 9";
 		Matcher matcher = pattern.matcher(msg);
-		assertTrue(matcher.matches());	
-		
+		assertTrue(matcher.matches());
+
 		Packet packet = parser.parse(matcher, msg);
 		assertNotNull(packet);
 		assertTrue(packet instanceof CharNewPacket);
 		assertEquals(msg, packet.toString());
-		
-		CharNewPacket newChar = (CharNewPacket)packet;
+
+		CharNewPacket newChar = (CharNewPacket) packet;
 		assertEquals(1, newChar.getSlot());
 		assertEquals("myname", newChar.getName());
 		assertEquals(Race.byValue(2), newChar.getRace());
@@ -39,10 +39,7 @@ public class CharNewParserTest {
 		assertEquals(7, newChar.getDexterity());
 		assertEquals(8, newChar.getConstitution());
 		assertEquals(9, newChar.getLeadership());
-		
-		
-	}
-	
 
+	}
 
 }

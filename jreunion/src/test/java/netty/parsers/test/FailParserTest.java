@@ -16,22 +16,21 @@ public class FailParserTest {
 	public void test() {
 		FailParser parser = new FailParser();
 		Pattern pattern = parser.getPattern();
-		
+
 		String msg = "this is a fail message!";
-		String failMsg = "fail "+msg;
+		String failMsg = "fail " + msg;
 		Matcher matcher = pattern.matcher(failMsg);
 		assertTrue(matcher.matches());
 		assertTrue(pattern.matcher("fail").matches());
 		assertFalse(pattern.matcher(msg).matches());
-		assertFalse(pattern.matcher("fail"+msg).matches());
-	
-		
+		assertFalse(pattern.matcher("fail" + msg).matches());
+
 		Packet packet = parser.parse(matcher, failMsg);
 		assertNotNull(packet);
 		assertTrue(packet instanceof FailPacket);
-		assertEquals(msg,((FailPacket)packet).getMessage());
-		assertEquals(failMsg, packet.toString());		
-		
+		assertEquals(msg, ((FailPacket) packet).getMessage());
+		assertEquals(failMsg, packet.toString());
+
 	}
 
 }

@@ -16,20 +16,20 @@ public class SkillUpParserTest {
 	public void test() {
 		SkillUpParser parser = new SkillUpParser();
 		Pattern pattern = parser.getPattern();
-		
+
 		int skillId = 1;
-		String msg = "skillup "+skillId;
+		String msg = "skillup " + skillId;
 		Matcher matcher = pattern.matcher(msg);
 		assertTrue(matcher.matches());
-		assertFalse(pattern.matcher("skillup"+skillId).matches());
+		assertFalse(pattern.matcher("skillup" + skillId).matches());
 		assertFalse(pattern.matcher("skillup").matches());
-	
+
 		Packet packet = parser.parse(matcher, msg);
 		assertNotNull(packet);
 		assertTrue(packet instanceof SkillUpPacket);
-		assertEquals(skillId,((SkillUpPacket)packet).getId());
-		assertEquals(msg, packet.toString());		
-		
+		assertEquals(skillId, ((SkillUpPacket) packet).getId());
+		assertEquals(msg, packet.toString());
+
 	}
 
 }

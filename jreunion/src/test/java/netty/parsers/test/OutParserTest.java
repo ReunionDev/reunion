@@ -17,22 +17,20 @@ public class OutParserTest {
 	public void test() {
 		OutParser parser = new OutParser();
 		Pattern pattern = parser.getPattern();
-		
+
 		String msg = "out item 10";
 		Matcher matcher = pattern.matcher(msg);
-		assertTrue(matcher.matches());	
-		
+		assertTrue(matcher.matches());
+
 		Packet packet = parser.parse(matcher, msg);
 		assertNotNull(packet);
 		assertTrue(packet instanceof OutPacket);
-		
+
 		assertEquals(msg, packet.toString());
-		OutPacket outPacket = (OutPacket)packet;
+		OutPacket outPacket = (OutPacket) packet;
 		assertEquals(10, outPacket.getId());
 		assertEquals(EntityType.ITEM, outPacket.getEntityType());
-		
-	}
-	
 
+	}
 
 }

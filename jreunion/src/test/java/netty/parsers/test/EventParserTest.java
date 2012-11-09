@@ -16,22 +16,21 @@ public class EventParserTest {
 	public void test() {
 		EventParser parser = new EventParser();
 		Pattern pattern = parser.getPattern();
-		
+
 		String msg = "this is an info message!";
-		String eventMsg = "event "+msg;
+		String eventMsg = "event " + msg;
 		Matcher matcher = pattern.matcher(eventMsg);
 		assertTrue(matcher.matches());
 		assertFalse(pattern.matcher("event").matches());
 		assertFalse(pattern.matcher(msg).matches());
-		assertFalse(pattern.matcher("event"+msg).matches());
-	
-		
+		assertFalse(pattern.matcher("event" + msg).matches());
+
 		Packet packet = parser.parse(matcher, eventMsg);
 		assertNotNull(packet);
 		assertTrue(packet instanceof EventPacket);
-		assertEquals(msg,((EventPacket)packet).getMessage());
-		assertEquals(eventMsg, packet.toString());		
-		
+		assertEquals(msg, ((EventPacket) packet).getMessage());
+		assertEquals(eventMsg, packet.toString());
+
 	}
 
 }

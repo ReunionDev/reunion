@@ -17,20 +17,20 @@ public class LevelUpParserTest {
 	public void test() {
 		LevelUpParser parser = new LevelUpParser();
 		Pattern pattern = parser.getPattern();
-		
+
 		int statusId = Status.DEXTERITY.value() - 10;
-		String msg = "levelup "+statusId;
+		String msg = "levelup " + statusId;
 		Matcher matcher = pattern.matcher(msg);
 		assertTrue(matcher.matches());
-		assertFalse(pattern.matcher("levelup"+statusId).matches());
+		assertFalse(pattern.matcher("levelup" + statusId).matches());
 		assertFalse(pattern.matcher("levelup").matches());
-	
+
 		Packet packet = parser.parse(matcher, msg);
 		assertNotNull(packet);
 		assertTrue(packet instanceof LevelUpPacket);
-		assertEquals(Status.DEXTERITY,((LevelUpPacket)packet).getStatusType());
-		assertEquals(msg, packet.toString());		
-		
+		assertEquals(Status.DEXTERITY, ((LevelUpPacket) packet).getStatusType());
+		assertEquals(msg, packet.toString());
+
 	}
 
 }

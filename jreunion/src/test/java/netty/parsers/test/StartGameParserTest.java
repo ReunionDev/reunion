@@ -16,16 +16,16 @@ public class StartGameParserTest {
 	public void test() {
 		StartGameParser parser = new StartGameParser();
 		Pattern pattern = parser.getPattern();
-		
+
 		String msg = "start_game";
 		Matcher matcher = pattern.matcher(msg);
 		assertTrue(matcher.matches());
-		
+
 		Packet packet = parser.parse(matcher, msg);
 		assertNotNull(packet);
 		assertTrue(packet instanceof StartGamePacket);
-		assertEquals(msg, packet.toString());		
-		
+		assertEquals(msg, packet.toString());
+
 	}
 
 }

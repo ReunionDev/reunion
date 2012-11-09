@@ -16,16 +16,16 @@ public class SuccessParserTest {
 	public void test() {
 		SuccessParser parser = new SuccessParser();
 		Pattern pattern = parser.getPattern();
-		
+
 		String msg = "success";
 		Matcher matcher = pattern.matcher(msg);
 		assertTrue(matcher.matches());
-		
+
 		Packet packet = parser.parse(matcher, msg);
 		assertNotNull(packet);
 		assertTrue(packet instanceof SuccessPacket);
-		assertEquals(msg, packet.toString());		
-		
+		assertEquals(msg, packet.toString());
+
 	}
 
 }
