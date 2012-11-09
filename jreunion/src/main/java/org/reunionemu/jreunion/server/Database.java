@@ -602,11 +602,11 @@ public class Database {
 	
 
 	
-	public void createChar(Client client, int slot, String charName,
+	public boolean createChar(Client client, int slot, String charName,
 			Race race, Sex sex, int hairStyle, int str, int wis, int dex, int con,
 			int lead) {
 		if (!checkDatabase())
-			return;
+			return false;
 		Statement stmt;
 		try {
 						
@@ -696,10 +696,11 @@ public class Database {
 			player.getInventory().storeItem(hpPot6, -1);
 
 			player.save();
+			return true;
 			
 		} catch (SQLException e1) {
 			LoggerFactory.getLogger(this.getClass()).warn("Exception",e1);
-			return;
+			return false;
 		}
 	}
 	

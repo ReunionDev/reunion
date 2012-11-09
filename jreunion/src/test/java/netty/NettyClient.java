@@ -30,7 +30,6 @@ public class NettyClient implements ProtocolFactory, PacketFactory {
 		this.handler = handler;
 	}
 
-
 	public NettyClient(InetSocketAddress address,final int version, final ParserFactory parserFactory) {
 		this.address = address;
 		this.version = version;

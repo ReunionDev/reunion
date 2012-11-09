@@ -206,7 +206,7 @@ public class PacketParser extends EventDispatcher implements EventListener{
 						return;
 					}
 					
-					com.createChar(client, slot,
+					if(com.createChar(client, slot,
 							message[2], race,
 							sex,
 							Integer.parseInt(message[5]),
@@ -214,8 +214,12 @@ public class PacketParser extends EventDispatcher implements EventListener{
 							Integer.parseInt(message[7]),
 							Integer.parseInt(message[8]),
 							Integer.parseInt(message[9]),
-							Integer.parseInt(message[10]));
-					com.sendSuccess(client);
+							Integer.parseInt(message[10]))){
+						com.sendSuccess(client);
+					}else{
+						client.sendPacket(Type.FAIL);
+					}
+					
 					
 					com.sendCharList(client);
 				} else if (message[0].equals("char_del")) {

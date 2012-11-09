@@ -89,7 +89,7 @@ public class LunarTest {
 				logger.info("successful login ("+chars.size()+" chars found)");
 				if(chars.size()==0){
 					logger.debug("No characters found, checking if '"+testCharName + "' exists");
-					ctx.channel().write(new CharExistPacket("testchar"));
+					ctx.channel().write(new CharExistPacket(testCharName));
 					client.setHandler(new ChannelInboundMessageHandlerAdapter<Packet>() {
 
 						@Override
@@ -141,6 +141,10 @@ public class LunarTest {
 					});
 				
 				}else{
+					StartPacket start = new StartPacket();
+					start.setSlot(chars.get(0).getSlot());
+					ctx.channel().write(start);
+
 					
 					// log in
 				}

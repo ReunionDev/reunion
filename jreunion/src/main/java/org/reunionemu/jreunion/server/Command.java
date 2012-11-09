@@ -108,13 +108,14 @@ public class Command {
 		}
 	}	
 
-	public void createChar(Client client, int slotNumber, String charName,
+	public boolean createChar(Client client, int slotNumber, String charName,
 			Race race, Sex sex, int hair, int str, int intel, int dex, int con,
 			int lea) {
 		if (Database.getInstance().getCharNameFree(charName)) {
-			Database.getInstance().createChar(client, slotNumber,
+			return Database.getInstance().createChar(client, slotNumber,
 					charName, race, sex, hair, str, intel, dex, con, lea);
 		}
+		return false;
 	}
 
 	/*
