@@ -4,14 +4,14 @@ import java.util.regex.*;
 
 import netty.Packet;
 import netty.packets.StartGamePacket;
-import netty.parsers.PacketParser.Server;
+import netty.parsers.PacketParser.Client;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 @Service
 @Scope("prototype")
-@Server
+@Client
 public class StartGameParser implements PacketParser {
 
 	static final Pattern regex = Pattern.compile("^start_game$"); 

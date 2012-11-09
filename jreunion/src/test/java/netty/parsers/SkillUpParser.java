@@ -3,8 +3,8 @@ package netty.parsers;
 import java.util.regex.*;
 
 import netty.Packet;
-import netty.packets.*;
-import netty.parsers.PacketParser.Server;
+import netty.packets.SkillUpPacket;
+import netty.parsers.PacketParser.Client;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
@@ -12,9 +12,9 @@ import org.springframework.stereotype.Service;
 @Service
 @Scope("prototype")
 @Client
-public class TellParser implements PacketParser {
+public class SkillUpParser implements PacketParser {
 
-	static final Pattern regex = Pattern.compile("^tell ([^ ]+) (.+)$"); 
+	static final Pattern regex = Pattern.compile("^skillup (\\d+)$"); 
 	
 	@Override
 	public Pattern getPattern() {
@@ -23,14 +23,7 @@ public class TellParser implements PacketParser {
 
 	@Override
 	public Packet parse(Matcher match, String input) {
-		TellPacket packet = new TellPacket();
-		int n = 0;
-		
-		packet.setName(match.group(++n));
-		
-		packet.setMessage(match.group(++n));
-		
-		return packet;
+		return new SkillUpPacket(Integer.parseInt(match.group(1)));
 	}
 
 }

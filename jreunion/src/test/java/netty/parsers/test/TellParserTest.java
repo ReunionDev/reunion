@@ -17,13 +17,13 @@ public class TellParserTest {
 		TellParser parser = new TellParser();
 		Pattern pattern = parser.getPattern();
 		
-		String msg = "this is a say message";
+		String msg = "this is a tell message";
 		String tellMsg = "tell me " + msg;
 		Matcher matcher = pattern.matcher(tellMsg);
 		assertTrue(matcher.matches());
-		assertFalse(pattern.matcher("say").matches());
+		assertFalse(pattern.matcher("tell").matches());
 		assertFalse(pattern.matcher(""+msg).matches());
-		assertFalse(pattern.matcher("say"+msg).matches());
+		assertFalse(pattern.matcher("tell"+msg).matches());
 	
 		
 		Packet packet = parser.parse(matcher, tellMsg);
