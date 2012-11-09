@@ -2,20 +2,20 @@ package netty.packets;
 
 import netty.Packet;
 
-public class InfoPacket implements Packet {
+public class EventPacket implements Packet {
 	
 	private static final long serialVersionUID = 1L;
+	
+	String message;
 
-	public InfoPacket(){
-		
+	public EventPacket(){
 		
 	}
-	public InfoPacket(String message){
+	
+	public EventPacket(String message){
 		
 		this.message = message;
 	}
-
-	String message;
 
 	public String getMessage() {
 		return message;
@@ -24,10 +24,11 @@ public class InfoPacket implements Packet {
 	public void setMessage(String message) {
 		this.message = message;
 	}
+	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("info ");
+		builder.append("event ");
 		builder.append(getMessage());
 		return builder.toString();
 	}
