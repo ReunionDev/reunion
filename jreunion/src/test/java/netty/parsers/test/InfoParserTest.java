@@ -21,9 +21,9 @@ public class InfoParserTest {
 		String infoMsg = "info "+msg;
 		Matcher matcher = pattern.matcher(infoMsg);
 		assertTrue(matcher.matches());
-		assertFalse(pattern.matcher("fail").matches());
+		assertFalse(pattern.matcher("infp").matches());
 		assertFalse(pattern.matcher(msg).matches());
-		assertFalse(pattern.matcher("fail"+msg).matches());
+		assertFalse(pattern.matcher("info"+msg).matches());
 	
 		
 		Packet packet = parser.parse(matcher, infoMsg);

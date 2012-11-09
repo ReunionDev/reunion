@@ -21,9 +21,9 @@ public class EventParserTest {
 		String eventMsg = "event "+msg;
 		Matcher matcher = pattern.matcher(eventMsg);
 		assertTrue(matcher.matches());
-		assertFalse(pattern.matcher("fail").matches());
+		assertFalse(pattern.matcher("event").matches());
 		assertFalse(pattern.matcher(msg).matches());
-		assertFalse(pattern.matcher("fail"+msg).matches());
+		assertFalse(pattern.matcher("event"+msg).matches());
 	
 		
 		Packet packet = parser.parse(matcher, eventMsg);
