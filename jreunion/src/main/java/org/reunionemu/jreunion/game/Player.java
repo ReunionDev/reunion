@@ -1276,7 +1276,8 @@ public abstract class Player extends LivingObject implements EventListener {
 					return status;
 				}
 			}
-			return null;
+			throw new IllegalStateException("Unknown status id: "+ statusId);
+
 		}
 	}
 
