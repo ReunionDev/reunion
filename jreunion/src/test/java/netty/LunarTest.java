@@ -101,7 +101,7 @@ public class LunarTest {
 
 								CharNewPacket packet = new CharNewPacket();
 								packet.setSlot(0);
-								packet.setName("testchar");
+								packet.setName(testCharName);
 								packet.setSex(Sex.MALE);
 								packet.setRace(Race.BULKAN);
 								packet.setHair(0);
