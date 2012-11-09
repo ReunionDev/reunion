@@ -15,10 +15,12 @@ import org.springframework.stereotype.Service;
 @Server
 public class GoToParser implements PacketParser {
 
-	private static final Logger logger = LoggerFactory.getLogger(GoToParser.class);
-	
-	static final Pattern regex = Pattern.compile("^goto (\\d+) (\\d+) (\\d+) (\\d+(?:\\.\\d+)?)$"); 
-	
+	private static final Logger logger = LoggerFactory
+			.getLogger(GoToParser.class);
+
+	static final Pattern regex = Pattern
+			.compile("^goto (\\d+) (\\d+) (\\d+) (\\d+(?:\\.\\d+)?)$");
+
 	@Override
 	public Pattern getPattern() {
 		return regex;
@@ -35,9 +37,8 @@ public class GoToParser implements PacketParser {
 		packet.setZ(Integer.parseInt(match.group(++n)));
 
 		packet.setRotation(Double.parseDouble(match.group(++n)));
-		
+
 		return packet;
 	}
-	
 
 }

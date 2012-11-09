@@ -17,8 +17,9 @@ import org.springframework.stereotype.Service;
 @Client
 public class CharNewParser implements PacketParser {
 
-	static final Pattern regex = Pattern.compile("^char_new (\\d+) ([^ ]+) (\\d+) (\\d+) (\\d+) (\\d+) (\\d+) (\\d+) (\\d+) (\\d+)$"); 
-	
+	static final Pattern regex = Pattern
+			.compile("^char_new (\\d+) ([^ ]+) (\\d+) (\\d+) (\\d+) (\\d+) (\\d+) (\\d+) (\\d+) (\\d+)$");
+
 	@Override
 	public Pattern getPattern() {
 		return regex;
@@ -29,27 +30,26 @@ public class CharNewParser implements PacketParser {
 		CharNewPacket packet = new CharNewPacket();
 		int n = 0;
 		packet.setSlot(Integer.parseInt(match.group(++n)));
-		
+
 		packet.setName(match.group(++n));
-		
+
 		packet.setRace(Race.byValue(Integer.parseInt(match.group(++n))));
-		
+
 		packet.setSex(Sex.byValue(Integer.parseInt(match.group(++n))));
-		
+
 		packet.setHair(Integer.parseInt(match.group(++n)));
-		
+
 		packet.setStrength(Integer.parseInt(match.group(++n)));
 
 		packet.setIntellect(Integer.parseInt(match.group(++n)));
-		
+
 		packet.setDexterity(Integer.parseInt(match.group(++n)));
 
 		packet.setConstitution(Integer.parseInt(match.group(++n)));
-		
+
 		packet.setLeadership(Integer.parseInt(match.group(++n)));
 
 		return packet;
 	}
-	
 
 }

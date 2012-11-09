@@ -3,13 +3,13 @@ package netty.packets;
 import netty.Packet;
 
 public class CharListEndPacket implements Packet {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	int unknown;
-	
+
 	int accountId;
-	
+
 	public int getUnknown() {
 		return unknown;
 	}
@@ -32,11 +32,11 @@ public class CharListEndPacket implements Packet {
 		builder.append("chars_end ");
 
 		builder.append(getUnknown());
-		
+
 		builder.append(' ');
-		
+
 		builder.append(getAccountId());
-		
+
 		return builder.toString();
 	}
 }

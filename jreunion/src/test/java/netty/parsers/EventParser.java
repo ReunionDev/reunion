@@ -14,8 +14,8 @@ import org.springframework.stereotype.Service;
 @Server
 public class EventParser implements PacketParser {
 
-	static final Pattern regex = Pattern.compile("^event (.+)$"); 
-	
+	static final Pattern regex = Pattern.compile("^event (.+)$");
+
 	@Override
 	public Pattern getPattern() {
 		return regex;

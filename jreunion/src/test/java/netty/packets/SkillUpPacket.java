@@ -3,28 +3,28 @@ package netty.packets;
 import netty.Packet;
 
 public class SkillUpPacket implements Packet {
-	
+
 	private static final long serialVersionUID = 1L;
 
-	public SkillUpPacket(){
-		
+	public SkillUpPacket() {
+
 	}
-	
-	public SkillUpPacket(int id){
-		
+
+	public SkillUpPacket(int id) {
+
 		this.id = id;
 	}
 
 	int id;
-	
+
 	public int getId() {
 		return id;
 	}
-	
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
@@ -32,5 +32,5 @@ public class SkillUpPacket implements Packet {
 		builder.append(getId());
 		return builder.toString();
 	}
-	
+
 }

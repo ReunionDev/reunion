@@ -16,10 +16,12 @@ import org.springframework.stereotype.Service;
 @Server
 public class GoWorldParser implements PacketParser {
 
-	private static final Logger logger = LoggerFactory.getLogger(GoWorldParser.class);
-	
-	static final Pattern regex = Pattern.compile("^go_world (\\d+\\.\\d+\\.\\d+\\.\\d+) (\\d+) (\\d+) (\\d+)$"); 
-	
+	private static final Logger logger = LoggerFactory
+			.getLogger(GoWorldParser.class);
+
+	static final Pattern regex = Pattern
+			.compile("^go_world (\\d+\\.\\d+\\.\\d+\\.\\d+) (\\d+) (\\d+) (\\d+)$");
+
 	@Override
 	public Pattern getPattern() {
 		return regex;
@@ -30,19 +32,19 @@ public class GoWorldParser implements PacketParser {
 		GoWorldPacket packet = new GoWorldPacket();
 		int n = 0;
 		try {
-			packet.setAddress((Inet4Address)Inet4Address.getByName(match.group(++n)));
+			packet.setAddress((Inet4Address) Inet4Address.getByName(match
+					.group(++n)));
 		} catch (UnknownHostException e) {
 			logger.warn(e.getMessage(), e);
 		}
-		
+
 		packet.setPort(Integer.parseInt(match.group(++n)));
-		
+
 		packet.setMapId(Integer.parseInt(match.group(++n)));
-		
-		packet.setUnknown(Integer.parseInt(match.group(++n)));		
-		
+
+		packet.setUnknown(Integer.parseInt(match.group(++n)));
+
 		return packet;
 	}
-	
 
 }

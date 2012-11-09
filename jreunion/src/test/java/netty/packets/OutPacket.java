@@ -3,14 +3,13 @@ package netty.packets;
 import netty.Packet;
 
 public class OutPacket implements Packet {
-	
+
 	private static final long serialVersionUID = 1L;
 
-
 	EntityType entityType;
-	
+
 	long id;
-	
+
 	public EntityType getEntityType() {
 		return entityType;
 	}
@@ -31,8 +30,8 @@ public class OutPacket implements Packet {
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("out ");
-		if(entityType!=null){
-			switch(getEntityType()){
+		if (entityType != null) {
+			switch (getEntityType()) {
 			case CHAR:
 				builder.append('c');
 				break;
@@ -52,11 +51,8 @@ public class OutPacket implements Packet {
 
 		return builder.toString();
 	}
-	
-	public enum EntityType{
-		NPC,
-		CHAR,
-		ITEM,
-		PET
+
+	public enum EntityType {
+		NPC, CHAR, ITEM, PET
 	}
 }

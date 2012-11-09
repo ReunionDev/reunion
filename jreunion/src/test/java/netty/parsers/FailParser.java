@@ -14,8 +14,8 @@ import org.springframework.stereotype.Service;
 @Server
 public class FailParser implements PacketParser {
 
-	static final Pattern regex = Pattern.compile("^fail(?: (.+))?$"); 
-	
+	static final Pattern regex = Pattern.compile("^fail(?: (.+))?$");
+
 	@Override
 	public Pattern getPattern() {
 		return regex;

@@ -14,8 +14,8 @@ import org.springframework.stereotype.Service;
 @Client
 public class TellParser implements PacketParser {
 
-	static final Pattern regex = Pattern.compile("^tell ([^ ]+) (.+)$"); 
-	
+	static final Pattern regex = Pattern.compile("^tell ([^ ]+) (.+)$");
+
 	@Override
 	public Pattern getPattern() {
 		return regex;
@@ -25,11 +25,11 @@ public class TellParser implements PacketParser {
 	public Packet parse(Matcher match, String input) {
 		TellPacket packet = new TellPacket();
 		int n = 0;
-		
+
 		packet.setName(match.group(++n));
-		
+
 		packet.setMessage(match.group(++n));
-		
+
 		return packet;
 	}
 

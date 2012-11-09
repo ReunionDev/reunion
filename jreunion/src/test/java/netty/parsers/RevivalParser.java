@@ -14,8 +14,8 @@ import org.springframework.stereotype.Service;
 @Server
 public class RevivalParser implements PacketParser {
 
-	static final Pattern regex = Pattern.compile("^revival$"); 
-	
+	static final Pattern regex = Pattern.compile("^revival$");
+
 	@Override
 	public Pattern getPattern() {
 		return regex;

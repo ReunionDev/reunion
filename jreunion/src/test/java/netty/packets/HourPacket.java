@@ -3,20 +3,20 @@ package netty.packets;
 import netty.Packet;
 
 public class HourPacket implements Packet {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	int hour;
 
-	public HourPacket(){
-		
+	public HourPacket() {
+
 	}
-	
-	public HourPacket(int hour){
-		
+
+	public HourPacket(int hour) {
+
 		this.hour = hour;
 	}
-	
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

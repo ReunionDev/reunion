@@ -15,8 +15,9 @@ import org.springframework.stereotype.Service;
 @Server
 public class StatusParser implements PacketParser {
 
-	static final Pattern regex = Pattern.compile("^status (\\d+) (\\d+) (\\d+)$"); 
-	
+	static final Pattern regex = Pattern
+			.compile("^status (\\d+) (\\d+) (\\d+)$");
+
 	@Override
 	public Pattern getPattern() {
 		return regex;

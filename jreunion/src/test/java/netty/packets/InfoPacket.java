@@ -3,15 +3,15 @@ package netty.packets;
 import netty.Packet;
 
 public class InfoPacket implements Packet {
-	
+
 	private static final long serialVersionUID = 1L;
 
-	public InfoPacket(){
-		
-		
+	public InfoPacket() {
+
 	}
-	public InfoPacket(String message){
-		
+
+	public InfoPacket(String message) {
+
 		this.message = message;
 	}
 
@@ -24,6 +24,7 @@ public class InfoPacket implements Packet {
 	public void setMessage(String message) {
 		this.message = message;
 	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

@@ -3,19 +3,19 @@ package netty.packets;
 import netty.Packet;
 
 public class GoToPacket implements Packet {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	int x;
 	int y;
 	int z;
 	double rotation;
-	
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("goto ");
-		builder.append(getX());		
+		builder.append(getX());
 		builder.append(' ');
 		builder.append(getY());
 		builder.append(' ');

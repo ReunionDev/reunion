@@ -5,12 +5,12 @@ import netty.Packet;
 public class LoginPacket implements Packet {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	String username;
 	String password;
 	int version;
 	boolean reconnect;
-	
+
 	public boolean isReconnect() {
 		return reconnect;
 	}
@@ -42,17 +42,17 @@ public class LoginPacket implements Packet {
 	public void setVersion(int version) {
 		this.version = version;
 	}
-	
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append(getVersion());
 		builder.append("\n");
-		builder.append(isReconnect()?"play":"login");
+		builder.append(isReconnect() ? "play" : "login");
 		builder.append("\n");
 		builder.append(getUsername());
 		builder.append("\n");
-		builder.append(getPassword());		
+		builder.append(getPassword());
 		return builder.toString();
 	}
 

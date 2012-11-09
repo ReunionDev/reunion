@@ -14,8 +14,8 @@ import org.springframework.stereotype.Service;
 @Server
 public class HourParser implements PacketParser {
 
-	static final Pattern regex = Pattern.compile("^hour (\\d+)$"); 
-	
+	static final Pattern regex = Pattern.compile("^hour (\\d+)$");
+
 	@Override
 	public Pattern getPattern() {
 		return regex;

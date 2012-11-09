@@ -14,8 +14,8 @@ import org.springframework.stereotype.Service;
 @Server
 public class SuccessParser implements PacketParser {
 
-	static final Pattern regex = Pattern.compile("^success$"); 
-	
+	static final Pattern regex = Pattern.compile("^success$");
+
 	@Override
 	public Pattern getPattern() {
 		return regex;

@@ -14,8 +14,8 @@ import org.springframework.stereotype.Service;
 @Client
 public class StartGameParser implements PacketParser {
 
-	static final Pattern regex = Pattern.compile("^start_game$"); 
-	
+	static final Pattern regex = Pattern.compile("^start_game$");
+
 	@Override
 	public Pattern getPattern() {
 		return regex;

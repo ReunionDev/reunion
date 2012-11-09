@@ -14,8 +14,8 @@ import org.springframework.stereotype.Service;
 @Server
 public class PartyDisbandParser implements PacketParser {
 
-	static final Pattern regex = Pattern.compile("^party disband$"); 
-	
+	static final Pattern regex = Pattern.compile("^party disband$");
+
 	@Override
 	public Pattern getPattern() {
 		return regex;

@@ -14,8 +14,8 @@ import org.springframework.stereotype.Service;
 @Client
 public class CharDeleteParser implements PacketParser {
 
-	static final Pattern regex = Pattern.compile("^char_del (\\d+)$"); 
-	
+	static final Pattern regex = Pattern.compile("^char_del (\\d+)$");
+
 	@Override
 	public Pattern getPattern() {
 		return regex;

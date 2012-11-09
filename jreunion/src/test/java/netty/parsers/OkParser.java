@@ -14,8 +14,8 @@ import org.springframework.stereotype.Service;
 @Server
 public class OkParser implements PacketParser {
 
-	static final Pattern regex = Pattern.compile("^OK$"); 
-	
+	static final Pattern regex = Pattern.compile("^OK$");
+
 	@Override
 	public Pattern getPattern() {
 		return regex;

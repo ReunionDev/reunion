@@ -14,8 +14,8 @@ import org.springframework.stereotype.Service;
 @Server
 public class CharListEndParser implements PacketParser {
 
-	static final Pattern regex = Pattern.compile("^chars_end (\\d+) (\\d+)$"); 
-	
+	static final Pattern regex = Pattern.compile("^chars_end (\\d+) (\\d+)$");
+
 	@Override
 	public Pattern getPattern() {
 		return regex;
@@ -25,7 +25,7 @@ public class CharListEndParser implements PacketParser {
 	public Packet parse(Matcher match, String input) {
 		CharListEndPacket packet = new CharListEndPacket();
 		packet.setUnknown(Integer.parseInt(match.group(1)));
-		packet.setAccountId(Integer.parseInt(match.group(2)));		
+		packet.setAccountId(Integer.parseInt(match.group(2)));
 		return packet;
 	}
 

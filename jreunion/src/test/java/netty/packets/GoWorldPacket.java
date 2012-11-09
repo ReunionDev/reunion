@@ -5,22 +5,22 @@ import java.net.Inet4Address;
 import netty.Packet;
 
 public class GoWorldPacket implements Packet {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	Inet4Address address;
-	
+
 	int port;
-	
+
 	int mapId;
-	
+
 	int unknown;
-	
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("go_world ");
-		builder.append(getAddress().getHostAddress());		
+		builder.append(getAddress().getHostAddress());
 		builder.append(' ');
 		builder.append(getPort());
 		builder.append(' ');
@@ -61,5 +61,5 @@ public class GoWorldPacket implements Packet {
 	public void setUnknown(int unknown) {
 		this.unknown = unknown;
 	}
-	
+
 }

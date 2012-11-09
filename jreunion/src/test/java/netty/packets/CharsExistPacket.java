@@ -6,65 +6,65 @@ import org.reunionemu.jreunion.game.Player.Race;
 import org.reunionemu.jreunion.game.Player.Sex;
 
 public class CharsExistPacket implements Packet {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	int slot;
-	
+
 	int id;
-	
+
 	String name;
-		
+
 	Race race;
-	
+
 	Sex sex;
-	
+
 	int hair;
-	
+
 	int level;
-	
+
 	int hp;
 	int maxHp;
-	
+
 	int mana;
 	int maxMana;
-	
+
 	int stamina;
 	int maxStamina;
-	
+
 	int electricity;
-	int maxElectricity;	
+	int maxElectricity;
 
 	int strength;
-	
+
 	int intellect;
-	
-	int dexterity; 
-	
+
+	int dexterity;
+
 	int constitution;
-	
-	int leadership;	
-	
+
+	int leadership;
+
 	int unknown1;
-	
+
 	int helmetTypeId;
-	
+
 	int chestTypeId;
-	
+
 	int pantsTypeId;
-	
+
 	int shoulderTypeId;
-	
+
 	int bootsTypeId;
-	
+
 	int offhandTypeId;
-	
+
 	int unknown2;
-	
+
 	public int getBootsTypeId() {
 		return bootsTypeId;
 	}
-	
+
 	public int getChestTypeId() {
 		return chestTypeId;
 	}
@@ -112,7 +112,7 @@ public class CharsExistPacket implements Packet {
 	public int getMana() {
 		return mana;
 	}
-	
+
 	public int getMaxElectricity() {
 		return maxElectricity;
 	}
@@ -128,7 +128,7 @@ public class CharsExistPacket implements Packet {
 	public int getMaxStamina() {
 		return maxStamina;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
@@ -241,46 +241,56 @@ public class CharsExistPacket implements Packet {
 		this.maxStamina = maxStamina;
 	}
 
-
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public void setOffhandTypeId(int offhandTypeId) {
 		this.offhandTypeId = offhandTypeId;
 	}
+
 	public void setPantsTypeId(int pantsTypeId) {
 		this.pantsTypeId = pantsTypeId;
 	}
+
 	public void setRace(Race race) {
 		this.race = race;
 	}
+
 	public void setSex(Sex sex) {
 		this.sex = sex;
 	}
+
 	public void setShoulderTypeId(int shoulderTypeId) {
 		this.shoulderTypeId = shoulderTypeId;
 	}
+
 	public void setSlot(int slot) {
 		this.slot = slot;
 	}
+
 	public void setStamina(int stamina) {
 		this.stamina = stamina;
 	}
+
 	public void setStrength(int strength) {
 		this.strength = strength;
 	}
+
 	public void setUnknown1(int unknown1) {
 		this.unknown1 = unknown1;
 	}
+
 	public void setUnknown2(int unknown2) {
 		this.unknown2 = unknown2;
 	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		
+
 		builder.append("chars_exist ");
-		builder.append(getSlot());		
+		builder.append(getSlot());
 		builder.append(' ');
 		builder.append(getId());
 		builder.append(' ');
@@ -336,6 +346,6 @@ public class CharsExistPacket implements Packet {
 		builder.append(' ');
 		builder.append(getUnknown2());
 		return builder.toString();
-		
+
 	}
 }

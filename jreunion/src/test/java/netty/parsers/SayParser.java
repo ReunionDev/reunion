@@ -14,8 +14,8 @@ import org.springframework.stereotype.Service;
 @Server
 public class SayParser implements PacketParser {
 
-	static final Pattern regex = Pattern.compile("^say (-?\\d+) (.*)$"); 
-	
+	static final Pattern regex = Pattern.compile("^say (-?\\d+) (.*)$");
+
 	@Override
 	public Pattern getPattern() {
 		return regex;
@@ -25,11 +25,11 @@ public class SayParser implements PacketParser {
 	public Packet parse(Matcher match, String input) {
 		SayPacket packet = new SayPacket();
 		int n = 0;
-		
+
 		packet.setId(Integer.parseInt(match.group(++n)));
-		
+
 		packet.setMessage(match.group(++n));
-		
+
 		return packet;
 	}
 

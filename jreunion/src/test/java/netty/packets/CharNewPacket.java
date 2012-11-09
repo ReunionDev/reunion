@@ -6,34 +6,34 @@ import org.reunionemu.jreunion.game.Player.Race;
 import org.reunionemu.jreunion.game.Player.Sex;
 
 public class CharNewPacket implements Packet {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	int slot;
-	
+
 	String name;
-		
+
 	Race race;
-	
+
 	Sex sex;
-	
+
 	int hair;
-	
+
 	int strength;
-	
+
 	int intellect;
-	
-	int dexterity; 
-	
+
+	int dexterity;
+
 	int constitution;
-	
-	int leadership;	
-	
+
+	int leadership;
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("char_new ");
-		builder.append(getSlot());		
+		builder.append(getSlot());
 		builder.append(' ');
 		builder.append(getName());
 		builder.append(' ');
@@ -54,7 +54,7 @@ public class CharNewPacket implements Packet {
 		builder.append(getLeadership());
 		return builder.toString();
 	}
-	
+
 	public int getSlot() {
 		return slot;
 	}

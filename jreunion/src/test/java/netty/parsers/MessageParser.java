@@ -14,8 +14,8 @@ import org.springframework.stereotype.Service;
 @Server
 public class MessageParser implements PacketParser {
 
-	static final Pattern regex = Pattern.compile("^msg (.+)$"); 
-	
+	static final Pattern regex = Pattern.compile("^msg (.+)$");
+
 	@Override
 	public Pattern getPattern() {
 		return regex;

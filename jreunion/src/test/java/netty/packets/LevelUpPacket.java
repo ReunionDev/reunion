@@ -5,21 +5,20 @@ import netty.Packet;
 import org.reunionemu.jreunion.game.Player.Status;
 
 public class LevelUpPacket implements Packet {
-	
+
 	private static final long serialVersionUID = 1L;
 
-	public LevelUpPacket(){
-		
+	public LevelUpPacket() {
+
 	}
-	
-	public LevelUpPacket(Status statusType){
-		
+
+	public LevelUpPacket(Status statusType) {
+
 		this.statusType = statusType;
 	}
 
 	Status statusType;
-	
-	
+
 	public Status getStatusType() {
 		return statusType;
 	}
@@ -35,5 +34,5 @@ public class LevelUpPacket implements Packet {
 		builder.append(getStatusType().value() - 10);
 		return builder.toString();
 	}
-	
+
 }

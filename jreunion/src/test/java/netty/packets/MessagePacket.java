@@ -3,17 +3,17 @@ package netty.packets;
 import netty.Packet;
 
 public class MessagePacket implements Packet {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	String message;
 
-	public MessagePacket(){
-		
+	public MessagePacket() {
+
 	}
-	
-	public MessagePacket(String message){
-		
+
+	public MessagePacket(String message) {
+
 		this.message = message;
 	}
 
@@ -24,7 +24,7 @@ public class MessagePacket implements Packet {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

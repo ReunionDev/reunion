@@ -14,8 +14,8 @@ import org.springframework.stereotype.Service;
 @Client
 public class SkillUpParser implements PacketParser {
 
-	static final Pattern regex = Pattern.compile("^skillup (\\d+)$"); 
-	
+	static final Pattern regex = Pattern.compile("^skillup (\\d+)$");
+
 	@Override
 	public Pattern getPattern() {
 		return regex;

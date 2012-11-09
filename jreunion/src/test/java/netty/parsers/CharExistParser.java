@@ -14,8 +14,8 @@ import org.springframework.stereotype.Service;
 @Client
 public class CharExistParser implements PacketParser {
 
-	static final Pattern regex = Pattern.compile("^char_exist ([^ ]+)$"); 
-	
+	static final Pattern regex = Pattern.compile("^char_exist ([^ ]+)$");
+
 	@Override
 	public Pattern getPattern() {
 		return regex;

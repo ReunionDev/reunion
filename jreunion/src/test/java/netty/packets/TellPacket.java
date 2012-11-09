@@ -3,13 +3,13 @@ package netty.packets;
 import netty.Packet;
 
 public class TellPacket implements Packet {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	String name;
-	
+
 	String message;
-	
+
 	public String getName() {
 		return name;
 	}
@@ -26,17 +26,17 @@ public class TellPacket implements Packet {
 		this.message = message;
 	}
 
-	public TellPacket(){
-		
+	public TellPacket() {
+
 	}
-	
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("tell ");
 		builder.append(getName());
 		builder.append(' ');
-		builder.append(getMessage());		
+		builder.append(getMessage());
 		return builder.toString();
 	}
 

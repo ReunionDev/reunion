@@ -3,15 +3,15 @@ package netty.packets;
 import netty.Packet;
 
 public class FailPacket implements Packet {
-	
+
 	private static final long serialVersionUID = 1L;
 
-	public FailPacket(){
-		
-		
+	public FailPacket() {
+
 	}
-	public FailPacket(String message){
-		
+
+	public FailPacket(String message) {
+
 		this.message = message;
 	}
 
@@ -24,12 +24,13 @@ public class FailPacket implements Packet {
 	public void setMessage(String message) {
 		this.message = message;
 	}
+
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("fail");
 		String message = getMessage();
-		if(message!=null){
+		if (message != null) {
 			builder.append(' ');
 			builder.append(message);
 		}

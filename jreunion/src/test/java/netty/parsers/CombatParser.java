@@ -16,8 +16,8 @@ import org.springframework.stereotype.Service;
 @Client
 public class CombatParser implements PacketParser {
 
-	static final Pattern regex = Pattern.compile("^combat(?: (\\d+))? (1|0)$"); 
-	
+	static final Pattern regex = Pattern.compile("^combat(?: (\\d+))? (1|0)$");
+
 	@Override
 	public Pattern getPattern() {
 		return regex;
@@ -28,13 +28,12 @@ public class CombatParser implements PacketParser {
 		CombatPacket packet = new CombatPacket();
 		int n = 0;
 		String id = match.group(++n);
-		if(id!=null){
-			packet.setId(Long.parseLong(id));			
-		}		
+		if (id != null) {
+			packet.setId(Long.parseLong(id));
+		}
 		packet.setInCombat(match.group(++n).equals("1"));
 
 		return packet;
 	}
-	
 
 }

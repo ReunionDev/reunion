@@ -16,8 +16,8 @@ import org.springframework.stereotype.Service;
 @Server
 public class OutParser implements PacketParser {
 
-	static final Pattern regex = Pattern.compile("^out (n|c|item|p) (\\d+)$"); 
-	
+	static final Pattern regex = Pattern.compile("^out (n|c|item|p) (\\d+)$");
+
 	@Override
 	public Pattern getPattern() {
 		return regex;
@@ -28,21 +28,20 @@ public class OutParser implements PacketParser {
 		OutPacket packet = new OutPacket();
 		int n = 0;
 		String type = match.group(++n);
-		if(type!=null){
-			if(type.equals("n")){
+		if (type != null) {
+			if (type.equals("n")) {
 				packet.setEntityType(EntityType.NPC);
-			}else if(type.equals("c")){
+			} else if (type.equals("c")) {
 				packet.setEntityType(EntityType.CHAR);
-			}else if(type.equals("item")){
+			} else if (type.equals("item")) {
 				packet.setEntityType(EntityType.ITEM);
-			}else if(type.equals("p")){
+			} else if (type.equals("p")) {
 				packet.setEntityType(EntityType.PET);
 			}
-		}		
+		}
 		packet.setId(Long.parseLong(match.group(++n)));
-		
+
 		return packet;
 	}
-	
 
 }

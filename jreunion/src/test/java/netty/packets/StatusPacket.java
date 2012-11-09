@@ -5,15 +5,15 @@ import netty.Packet;
 import org.reunionemu.jreunion.game.Player.Status;
 
 public class StatusPacket implements Packet {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	Status statusType;
-	
+
 	long value;
 
 	long max;
-	
+
 	public Status getStatusType() {
 		return statusType;
 	}
@@ -44,15 +44,15 @@ public class StatusPacket implements Packet {
 		builder.append("status ");
 
 		builder.append(getStatusType().value());
-		
+
 		builder.append(' ');
-		
+
 		builder.append(getValue());
-		
+
 		builder.append(' ');
-		
+
 		builder.append(getMax());
-		
+
 		return builder.toString();
 	}
 }

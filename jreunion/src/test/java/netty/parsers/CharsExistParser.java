@@ -18,8 +18,9 @@ import org.springframework.stereotype.Service;
 @Client
 public class CharsExistParser implements PacketParser {
 
-	static final Pattern regex = Pattern.compile("^chars_exist (\\d+) (\\d+) ([^ ]+) (\\d+) (\\d+) (\\d+) (\\d+) (\\d+) (\\d+) (\\d+) (\\d+) (\\d+) (\\d+) (\\d+) (\\d+) (\\d+) (\\d+) (\\d+) (\\d+) (\\d+) (\\d+) (-?\\d+) (-?\\d+) (-?\\d+) (-?\\d+) (-?\\d+) (-?\\d+) (\\d+)$"); 
-	
+	static final Pattern regex = Pattern
+			.compile("^chars_exist (\\d+) (\\d+) ([^ ]+) (\\d+) (\\d+) (\\d+) (\\d+) (\\d+) (\\d+) (\\d+) (\\d+) (\\d+) (\\d+) (\\d+) (\\d+) (\\d+) (\\d+) (\\d+) (\\d+) (\\d+) (\\d+) (-?\\d+) (-?\\d+) (-?\\d+) (-?\\d+) (-?\\d+) (-?\\d+) (\\d+)$");
+
 	@Override
 	public Pattern getPattern() {
 		return regex;
@@ -30,63 +31,62 @@ public class CharsExistParser implements PacketParser {
 		CharsExistPacket packet = new CharsExistPacket();
 		int n = 0;
 		packet.setSlot(Integer.parseInt(match.group(++n)));
-		
+
 		packet.setId(Integer.parseInt(match.group(++n)));
-		
+
 		packet.setName(match.group(++n));
-		
+
 		packet.setRace(Race.byValue(Integer.parseInt(match.group(++n))));
-		
+
 		packet.setSex(Sex.byValue(Integer.parseInt(match.group(++n))));
-		
+
 		packet.setHair(Integer.parseInt(match.group(++n)));
-		
+
 		packet.setLevel(Integer.parseInt(match.group(++n)));
-		
+
 		packet.setHp(Integer.parseInt(match.group(++n)));
-		
+
 		packet.setMaxHp(Integer.parseInt(match.group(++n)));
-		
+
 		packet.setMana(Integer.parseInt(match.group(++n)));
-		
+
 		packet.setMaxMana(Integer.parseInt(match.group(++n)));
-		
+
 		packet.setStamina(Integer.parseInt(match.group(++n)));
-		
+
 		packet.setMaxStamina(Integer.parseInt(match.group(++n)));
-		
+
 		packet.setElectricity(Integer.parseInt(match.group(++n)));
-		
+
 		packet.setMaxElectricity(Integer.parseInt(match.group(++n)));
-		
+
 		packet.setStrength(Integer.parseInt(match.group(++n)));
 
 		packet.setIntellect(Integer.parseInt(match.group(++n)));
-		
+
 		packet.setDexterity(Integer.parseInt(match.group(++n)));
 
 		packet.setConstitution(Integer.parseInt(match.group(++n)));
-		
+
 		packet.setLeadership(Integer.parseInt(match.group(++n)));
-		
+
 		packet.setUnknown1(Integer.parseInt(match.group(++n)));
-		
+
 		packet.setHelmetTypeId(Integer.parseInt(match.group(++n)));
-		
+
 		packet.setChestTypeId(Integer.parseInt(match.group(++n)));
-		
+
 		packet.setPantsTypeId(Integer.parseInt(match.group(++n)));
-		
+
 		packet.setShoulderTypeId(Integer.parseInt(match.group(++n)));
-		
+
 		packet.setBootsTypeId(Integer.parseInt(match.group(++n)));
-		
+
 		packet.setOffhandTypeId(Integer.parseInt(match.group(++n)));
-		
+
 		packet.setUnknown2(Integer.parseInt(match.group(++n)));
-		
+
 		return packet;
 	}
-	
 
 }
