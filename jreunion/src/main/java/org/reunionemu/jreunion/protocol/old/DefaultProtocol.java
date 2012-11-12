@@ -1,4 +1,4 @@
-package org.reunionemu.jreunion.protocol;
+package org.reunionemu.jreunion.protocol.old;
 
 import org.reunionemu.jreunion.server.Client;
 

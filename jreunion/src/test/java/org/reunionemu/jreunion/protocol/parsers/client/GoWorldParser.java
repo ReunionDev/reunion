@@ -4,8 +4,10 @@ import java.net.*;
 import java.util.regex.*;
 
 
+
 import org.reunionemu.jreunion.protocol.*;
 import org.reunionemu.jreunion.protocol.PacketParser.Server;
+import org.reunionemu.jreunion.protocol.old.*;
 import org.reunionemu.jreunion.protocol.packets.server.GoWorldPacket;
 import org.slf4j.*;
 import org.springframework.context.annotation.Scope;

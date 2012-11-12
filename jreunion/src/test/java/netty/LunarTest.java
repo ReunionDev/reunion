@@ -5,13 +5,10 @@ import io.netty.channel.*;
 import java.net.InetSocketAddress;
 import java.util.*;
 
-import netty.packets.*;
-import netty.parsers.*;
-
 import org.junit.Test;
 import org.reunionemu.jreunion.game.Player.Race;
 import org.reunionemu.jreunion.game.Player.Sex;
-import org.reunionemu.jreunion.protocol.Packet;
+import org.reunionemu.jreunion.protocol.*;
 import org.reunionemu.jreunion.protocol.packets.client.*;
 import org.reunionemu.jreunion.protocol.packets.server.*;
 import org.reunionemu.jreunion.protocol.parsers.client.*;

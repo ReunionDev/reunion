@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
 
-import org.reunionemu.jreunion.protocol.OtherProtocol;
+import org.reunionemu.jreunion.protocol.old.OtherProtocol;
 
 
 public class Capture extends Thread{

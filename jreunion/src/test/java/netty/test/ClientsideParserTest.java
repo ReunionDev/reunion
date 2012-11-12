@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.Arrays;
 
-import netty.ClientsideParser;
+import netty.*;
 
 import org.junit.Test;
 import org.reunionemu.jreunion.protocol.PacketParser;

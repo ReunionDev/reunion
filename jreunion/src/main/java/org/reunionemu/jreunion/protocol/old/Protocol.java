@@ -1,18 +1,11 @@
-package org.reunionemu.jreunion.protocol;
+package org.reunionemu.jreunion.protocol.old;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Vector;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.*;
+import java.util.regex.*;
 
-import org.reunionemu.jcommon.ParsedItem;
-import org.reunionemu.jcommon.Parser;
-import org.reunionemu.jreunion.server.ClassFactory;
-import org.reunionemu.jreunion.server.Client;
-import org.reunionemu.jreunion.server.Reference;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.reunionemu.jcommon.*;
+import org.reunionemu.jreunion.server.*;
+import org.slf4j.*;
 
 public abstract class Protocol {
 public static Pattern login = Pattern.compile("^(?:\\d+[\\r\\n]+)(?:(?:login|play)[\\r\\n]+)?(?:.+[\\r\\n]+)*$");

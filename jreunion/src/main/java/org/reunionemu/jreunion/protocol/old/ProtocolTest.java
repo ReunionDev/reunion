@@ -1,4 +1,4 @@
-package org.reunionemu.jreunion.protocol;
+package org.reunionemu.jreunion.protocol.old;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;

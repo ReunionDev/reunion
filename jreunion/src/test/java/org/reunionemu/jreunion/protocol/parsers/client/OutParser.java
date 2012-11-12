@@ -3,8 +3,10 @@ package org.reunionemu.jreunion.protocol.parsers.client;
 import java.util.regex.*;
 
 
+
 import org.reunionemu.jreunion.protocol.*;
 import org.reunionemu.jreunion.protocol.PacketParser.Server;
+import org.reunionemu.jreunion.protocol.old.*;
 import org.reunionemu.jreunion.protocol.packets.server.*;
 import org.reunionemu.jreunion.protocol.packets.server.OutPacket.EntityType;
 import org.springframework.context.annotation.Scope;

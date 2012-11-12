@@ -3,10 +3,12 @@ package org.reunionemu.jreunion.protocol.parsers.client;
 import java.util.regex.*;
 
 
+
 import org.reunionemu.jreunion.game.Player.Race;
 import org.reunionemu.jreunion.game.Player.Sex;
 import org.reunionemu.jreunion.protocol.*;
 import org.reunionemu.jreunion.protocol.PacketParser.Client;
+import org.reunionemu.jreunion.protocol.old.*;
 import org.reunionemu.jreunion.protocol.packets.server.CharsExistPacket;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;

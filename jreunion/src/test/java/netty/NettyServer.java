@@ -6,12 +6,10 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.*;
 import io.netty.handler.logging.LoggingHandler;
 
-import java.net.*;
+import java.net.InetSocketAddress;
 import java.util.*;
 
-import netty.packets.*;
-
-import org.reunionemu.jreunion.protocol.Packet;
+import org.reunionemu.jreunion.protocol.*;
 import org.reunionemu.jreunion.protocol.packets.server.FailPacket;
 import org.slf4j.*;
 

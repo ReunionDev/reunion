@@ -4,6 +4,7 @@ import java.util.*;
 
 import org.reunionemu.jreunion.protocol.PacketParser.Server;
 
+
 public class ClientsideParser extends FilteredParser {
 
 	private static final long serialVersionUID = 1L;

@@ -2,24 +2,17 @@ package org.reunionemu.jreunion.server;
 
 import java.util.Random;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
+import javax.annotation.*;
 
 import org.reunionemu.jreunion.events.EventDispatcher;
-import org.reunionemu.jreunion.events.server.ServerStartEvent;
-import org.reunionemu.jreunion.events.server.ServerStopEvent;
-import org.reunionemu.jreunion.protocol.Protocol;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.reunionemu.jreunion.events.server.*;
+import org.reunionemu.jreunion.protocol.old.Protocol;
+import org.slf4j.*;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;
-import org.springframework.context.annotation.DependsOn;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.context.support.AbstractApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.*;
+import org.springframework.context.annotation.*;
+import org.springframework.context.support.*;
 import org.springframework.stereotype.Service;
 
 /**

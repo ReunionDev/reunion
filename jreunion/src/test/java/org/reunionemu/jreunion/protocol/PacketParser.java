@@ -4,6 +4,7 @@ import java.lang.annotation.*;
 import java.util.regex.*;
 
 
+
 public interface PacketParser {
 	public Pattern getPattern();
 

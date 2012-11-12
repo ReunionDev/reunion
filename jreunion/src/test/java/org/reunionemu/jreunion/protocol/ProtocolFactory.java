@@ -1,4 +1,5 @@
-package netty;
+package org.reunionemu.jreunion.protocol;
+
 
 import io.netty.channel.Channel;
 

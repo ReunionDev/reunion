@@ -2,22 +2,12 @@ package org.reunionemu.jreunion.server;
 
 import java.nio.channels.SocketChannel;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.reunionemu.jreunion.events.Event;
-import org.reunionemu.jreunion.events.EventDispatcher;
-import org.reunionemu.jreunion.events.EventListener;
-import org.reunionemu.jreunion.events.client.ClientDisconnectEvent;
-import org.reunionemu.jreunion.events.client.ClientEvent;
-import org.reunionemu.jreunion.events.client.ClientReceiveEvent;
-import org.reunionemu.jreunion.events.client.ClientSendEvent;
-import org.reunionemu.jreunion.events.network.NetworkDataEvent;
-import org.reunionemu.jreunion.events.network.NetworkDisconnectEvent;
-import org.reunionemu.jreunion.events.network.NetworkEvent;
-import org.reunionemu.jreunion.events.network.NetworkSendEvent;
+import org.reunionemu.jreunion.events.*;
+import org.reunionemu.jreunion.events.client.*;
+import org.reunionemu.jreunion.events.network.*;
 import org.reunionemu.jreunion.game.Player;
-import org.reunionemu.jreunion.protocol.OtherProtocol;
-import org.reunionemu.jreunion.protocol.Protocol;
+import org.reunionemu.jreunion.protocol.old.*;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author Aidamina

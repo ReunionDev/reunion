@@ -18,7 +18,7 @@ import org.reunionemu.jreunion.game.items.GemStone;
 import org.reunionemu.jreunion.game.items.etc.MissionReceiver;
 import org.reunionemu.jreunion.game.items.pet.PetEgg;
 import org.reunionemu.jreunion.game.npc.*;
-import org.reunionemu.jreunion.protocol.OtherProtocol;
+import org.reunionemu.jreunion.protocol.old.OtherProtocol;
 import org.reunionemu.jreunion.server.Client.LoginType;
 import org.reunionemu.jreunion.server.Client.State;
 import org.reunionemu.jreunion.server.PacketFactory.Type;

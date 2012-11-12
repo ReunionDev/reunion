@@ -1,24 +1,10 @@
-package org.reunionemu.jreunion.protocol;
+package org.reunionemu.jreunion.protocol.old;
 
-import java.io.BufferedOutputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-import java.util.Date;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.net.*;
+import java.util.regex.*;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import org.reunionemu.jreunion.server.ClassFactory;
-import org.reunionemu.jreunion.server.Client;
-import org.reunionemu.jreunion.server.Map;
-import org.reunionemu.jreunion.server.PacketFactory.Type;
-import org.reunionemu.jreunion.server.Reference;
-import org.reunionemu.jreunion.server.Server;
+import org.reunionemu.jreunion.server.*;
 
 public class OtherProtocol extends Protocol {
 

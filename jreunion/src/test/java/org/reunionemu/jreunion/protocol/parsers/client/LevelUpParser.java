@@ -2,8 +2,10 @@ package org.reunionemu.jreunion.protocol.parsers.client;
 
 import java.util.regex.*;
 
+
 import org.reunionemu.jreunion.protocol.*;
 import org.reunionemu.jreunion.protocol.PacketParser.Server;
+import org.reunionemu.jreunion.protocol.old.*;
 import org.reunionemu.jreunion.protocol.packets.server.LevelUpPacket;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;

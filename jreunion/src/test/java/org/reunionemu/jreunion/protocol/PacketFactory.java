@@ -1,6 +1,6 @@
-package netty;
+package org.reunionemu.jreunion.protocol;
 
-import org.reunionemu.jreunion.protocol.Packet;
+
 
 public interface PacketFactory {
 
