@@ -4,6 +4,7 @@ import io.netty.channel.*;
 
 import netty.packets.*;
 
+import org.reunionemu.jreunion.protocol.Packet;
 import org.reunionemu.jreunion.protocol.packets.server.FailPacket;
 import org.slf4j.*;
 

@@ -1,13 +1,14 @@
-package org.reunionemu.jreunion.protocol.parsers.client.test;
+package org.reunionemu.jreunion.protocol.parsers.server.test;
 
 import static org.junit.Assert.*;
 
 import java.util.regex.*;
 
+
 import org.junit.Test;
 import org.reunionemu.jreunion.protocol.Packet;
-import org.reunionemu.jreunion.protocol.packets.server.CombatPacket;
-import org.reunionemu.jreunion.protocol.parsers.client.CombatParser;
+import org.reunionemu.jreunion.protocol.packets.client.CombatPacket;
+import org.reunionemu.jreunion.protocol.parsers.server.CombatParser;
 
 public class CombatParserTest {
 
@@ -16,7 +17,7 @@ public class CombatParserTest {
 		CombatParser parser = new CombatParser();
 		Pattern pattern = parser.getPattern();
 
-		String msg = "combat 2 1";
+		String msg = "combat 1";
 		Matcher matcher = pattern.matcher(msg);
 		assertTrue(matcher.matches());
 
@@ -26,10 +27,9 @@ public class CombatParserTest {
 		assertEquals(msg, packet.toString());
 
 		CombatPacket newChar = (CombatPacket) packet;
-		assertEquals(2, (long) newChar.getId());
 		assertTrue(newChar.isInCombat());
 
-		msg = "combat 3 0";
+		msg = "combat 0";
 		matcher = pattern.matcher(msg);
 		assertTrue(matcher.matches());
 
@@ -39,7 +39,6 @@ public class CombatParserTest {
 		assertEquals(msg, packet.toString());
 
 		newChar = (CombatPacket) packet;
-		assertNotNull(newChar.getId());
 
 		assertFalse(newChar.isInCombat());
 

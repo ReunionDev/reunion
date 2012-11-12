@@ -2,7 +2,8 @@ package org.reunionemu.jreunion.protocol.packets.server;
 
 import java.net.Inet4Address;
 
-import netty.Packet;
+import org.reunionemu.jreunion.protocol.Packet;
+
 
 public class GoWorldPacket implements Packet {
 

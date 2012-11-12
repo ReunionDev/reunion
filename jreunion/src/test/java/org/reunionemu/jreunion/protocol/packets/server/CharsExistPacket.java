@@ -1,9 +1,9 @@
 package org.reunionemu.jreunion.protocol.packets.server;
 
-import netty.Packet;
 
 import org.reunionemu.jreunion.game.Player.Race;
 import org.reunionemu.jreunion.game.Player.Sex;
+import org.reunionemu.jreunion.protocol.Packet;
 
 public class CharsExistPacket implements Packet {
 

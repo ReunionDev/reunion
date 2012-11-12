@@ -1,4 +1,4 @@
-package netty;
+package org.reunionemu.jreunion.protocol;
 
 import java.io.Serializable;
 

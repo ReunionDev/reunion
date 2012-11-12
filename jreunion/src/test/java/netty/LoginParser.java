@@ -2,6 +2,7 @@ package netty;
 
 import java.util.regex.Pattern;
 
+import org.reunionemu.jreunion.protocol.Packet;
 import org.reunionemu.jreunion.protocol.packets.client.LoginPacket;
 
 

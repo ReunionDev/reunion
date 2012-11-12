@@ -2,7 +2,6 @@ package org.reunionemu.jreunion.protocol.parsers.client;
 
 import java.util.regex.*;
 
-import netty.Packet;
 
 import org.reunionemu.jreunion.game.Player.Status;
 import org.reunionemu.jreunion.protocol.*;

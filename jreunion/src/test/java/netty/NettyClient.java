@@ -8,6 +8,7 @@ import io.netty.handler.logging.LoggingHandler;
 
 import java.net.InetSocketAddress;
 
+import org.reunionemu.jreunion.protocol.Packet;
 import org.slf4j.*;
 
 

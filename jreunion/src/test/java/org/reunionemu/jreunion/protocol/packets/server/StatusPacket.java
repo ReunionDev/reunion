@@ -1,8 +1,8 @@
 package org.reunionemu.jreunion.protocol.packets.server;
 
-import netty.Packet;
 
 import org.reunionemu.jreunion.game.Player.Status;
+import org.reunionemu.jreunion.protocol.Packet;
 
 public class StatusPacket implements Packet {
 

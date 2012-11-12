@@ -4,9 +4,9 @@ import static org.junit.Assert.*;
 
 import java.util.regex.*;
 
-import netty.Packet;
 
 import org.junit.Test;
+import org.reunionemu.jreunion.protocol.Packet;
 import org.reunionemu.jreunion.protocol.packets.server.HourPacket;
 import org.reunionemu.jreunion.protocol.parsers.client.HourParser;
 

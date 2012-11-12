@@ -7,6 +7,7 @@ import java.net.InetSocketAddress;
 
 
 import org.junit.Test;
+import org.reunionemu.jreunion.protocol.Packet;
 import org.reunionemu.jreunion.protocol.packets.client.LoginPacket;
 import org.reunionemu.jreunion.protocol.parsers.client.FailParser;
 import org.slf4j.*;

@@ -1,5 +1,7 @@
 package netty;
 
+import org.reunionemu.jreunion.protocol.Packet;
+
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToMessageCodec;
 

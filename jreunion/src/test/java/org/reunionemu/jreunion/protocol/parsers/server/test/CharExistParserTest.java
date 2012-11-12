@@ -4,10 +4,10 @@ import static org.junit.Assert.*;
 
 import java.util.regex.*;
 
-import netty.Packet;
 import netty.packets.*;
 
 import org.junit.Test;
+import org.reunionemu.jreunion.protocol.Packet;
 import org.reunionemu.jreunion.protocol.packets.client.CharExistPacket;
 import org.reunionemu.jreunion.protocol.parsers.server.CharExistParser;
 

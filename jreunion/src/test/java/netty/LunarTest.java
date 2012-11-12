@@ -11,6 +11,7 @@ import netty.parsers.*;
 import org.junit.Test;
 import org.reunionemu.jreunion.game.Player.Race;
 import org.reunionemu.jreunion.game.Player.Sex;
+import org.reunionemu.jreunion.protocol.Packet;
 import org.reunionemu.jreunion.protocol.packets.client.*;
 import org.reunionemu.jreunion.protocol.packets.server.*;
 import org.reunionemu.jreunion.protocol.parsers.client.*;

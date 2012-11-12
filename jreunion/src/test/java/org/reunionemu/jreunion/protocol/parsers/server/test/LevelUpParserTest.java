@@ -4,10 +4,10 @@ import static org.junit.Assert.*;
 
 import java.util.regex.*;
 
-import netty.Packet;
 
 import org.junit.Test;
 import org.reunionemu.jreunion.game.Player.Status;
+import org.reunionemu.jreunion.protocol.Packet;
 import org.reunionemu.jreunion.protocol.packets.client.LevelUpPacket;
 import org.reunionemu.jreunion.protocol.parsers.server.LevelUpParser;
 

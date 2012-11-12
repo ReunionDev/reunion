@@ -3,7 +3,6 @@ package org.reunionemu.jreunion.protocol;
 import java.lang.annotation.*;
 import java.util.regex.*;
 
-import netty.Packet;
 
 public interface PacketParser {
 	public Pattern getPattern();

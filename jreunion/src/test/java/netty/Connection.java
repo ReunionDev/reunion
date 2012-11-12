@@ -4,6 +4,7 @@ import java.net.InetSocketAddress;
 
 import io.netty.channel.Channel;
 
+import org.reunionemu.jreunion.protocol.Packet;
 import org.reunionemu.jreunion.protocol.packets.client.LoginPacket;
 import org.slf4j.*;
 

@@ -1,6 +1,6 @@
 package org.reunionemu.jreunion.protocol.packets.server;
 
-import netty.Packet;
+import org.reunionemu.jreunion.protocol.Packet;
 
 public class InfoPacket implements Packet {
 

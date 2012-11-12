@@ -3,7 +3,6 @@ package org.reunionemu.jreunion.protocol.parsers.client;
 import java.net.*;
 import java.util.regex.*;
 
-import netty.Packet;
 
 import org.reunionemu.jreunion.protocol.*;
 import org.reunionemu.jreunion.protocol.PacketParser.Server;
