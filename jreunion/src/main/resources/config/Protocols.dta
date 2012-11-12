@@ -1,1 +1,1 @@
-[OtherProtocol]Class = org.reunionemu.jreunion.protocol.OtherProtocolMinVersion = 0MaxVersion = 10000[DefaultProtocol]Class = org.reunionemu.jreunion.protocol.DefaultProtocolMinVersion = 0MaxVersion = 10000
+[OtherProtocol]Class = org.reunionemu.jreunion.protocol.old.OtherProtocolMinVersion = 0MaxVersion = 10000[DefaultProtocol]Class = org.reunionemu.jreunion.protocol.old.DefaultProtocolMinVersion = 0MaxVersion = 10000
