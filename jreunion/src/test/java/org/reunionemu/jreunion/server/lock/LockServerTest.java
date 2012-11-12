@@ -2,7 +2,7 @@ package org.reunionemu.jreunion.server.lock;
 
 import static org.junit.Assert.*;
 
-import java.util.Collections;
+import java.util.*;
 
 import org.junit.Test;
 import org.reunionemu.jreunion.server.lock.LockServer.Condition;
@@ -23,17 +23,21 @@ public class LockServerTest {
 				return con.isOpen();
 			}
 		};
+		List<Condition> conditions = Collections.singletonList(condition);
 		
 		con.setOpen(true);
 		Item item1 = new Item(1L);
 		Item item2 = new Item(2L);
-		assertTrue(server.aquire(Item.class, item1.getId(), Collections.singletonList(condition)));
+		assertTrue(server.aquire(Item.class, item1.getId(), conditions));
 		
-		assertFalse(server.aquire(Item.class, item1.getId(), Collections.singletonList(condition)));
+		assertFalse(server.aquire(Item.class, item1.getId(), conditions));
 		con.setOpen(false);
-		assertTrue(server.aquire(Item.class, item1.getId(), Collections.singletonList(condition)));
+		assertTrue(server.aquire(Item.class, item1.getId(), conditions));
+		con.setOpen(true);
+		assertFalse(server.aquire(Item.class, item1.getId(), conditions));
+		server.release(Item.class, item1.getId());
+		assertTrue(server.aquire(Item.class, item1.getId(), conditions));
 
-		
 	}
 	
 	
