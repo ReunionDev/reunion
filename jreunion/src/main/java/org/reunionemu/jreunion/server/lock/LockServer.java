@@ -5,7 +5,7 @@ import java.util.*;
 
 public class LockServer {
 	
-	HashMap<Class<?>, HashMap<Serializable,List<Condition>>> locks = new HashMap<Class<?>, HashMap<Serializable,List<Condition>>>();
+	private HashMap<Class<?>, HashMap<Serializable,List<Condition>>> locks = new HashMap<Class<?>, HashMap<Serializable,List<Condition>>>();
 	
 	public HashMap<Serializable,List<Condition>> getMapForType(Class<?> clz){
 		
