@@ -2,7 +2,7 @@ package netty;
 
 import java.util.*;
 
-import netty.parsers.PacketParser.Server;
+import org.reunionemu.jreunion.protocol.PacketParser.Server;
 
 public class ClientsideParser extends FilteredParser {
 

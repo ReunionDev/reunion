@@ -4,6 +4,7 @@ import io.netty.channel.*;
 
 import netty.packets.*;
 
+import org.reunionemu.jreunion.protocol.packets.server.FailPacket;
 import org.slf4j.*;
 
 public class ClientHandler extends ChannelInboundMessageHandlerAdapter<Packet> implements ChannelStateHandler{

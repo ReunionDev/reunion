@@ -3,8 +3,8 @@ package netty;
 import java.net.InetSocketAddress;
 
 import io.netty.channel.Channel;
-import netty.packets.LoginPacket;
 
+import org.reunionemu.jreunion.protocol.packets.client.LoginPacket;
 import org.slf4j.*;
 
 public class Connection {

@@ -2,7 +2,8 @@ package netty;
 
 import java.util.regex.Pattern;
 
-import netty.packets.LoginPacket;
+import org.reunionemu.jreunion.protocol.packets.client.LoginPacket;
+
 
 public class LoginParser implements Parser{
 	private Integer version;				

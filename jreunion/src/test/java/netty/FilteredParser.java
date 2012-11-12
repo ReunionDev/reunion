@@ -4,9 +4,7 @@ import java.lang.annotation.Annotation;
 import java.util.*;
 import java.util.regex.*;
 
-import netty.parsers.*;
-import netty.parsers.PacketParser.Client;
-
+import org.reunionemu.jreunion.protocol.PacketParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;

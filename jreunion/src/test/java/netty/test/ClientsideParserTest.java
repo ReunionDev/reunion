@@ -1,13 +1,15 @@
 package netty.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.util.Arrays;
 
 import netty.ClientsideParser;
-import netty.parsers.*;
 
 import org.junit.Test;
+import org.reunionemu.jreunion.protocol.PacketParser;
+import org.reunionemu.jreunion.protocol.parsers.client.FailParser;
+import org.reunionemu.jreunion.protocol.parsers.server.UseSkillParser;
 
 public class ClientsideParserTest {
 
