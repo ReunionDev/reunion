@@ -2,12 +2,9 @@ package org.reunionemu.jreunion.protocol.parsers.server;
 
 import java.util.regex.*;
 
-
-
 import org.reunionemu.jreunion.game.Player.Status;
 import org.reunionemu.jreunion.protocol.*;
 import org.reunionemu.jreunion.protocol.PacketParser.Client;
-import org.reunionemu.jreunion.protocol.old.*;
 import org.reunionemu.jreunion.protocol.packets.client.LevelUpPacket;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
