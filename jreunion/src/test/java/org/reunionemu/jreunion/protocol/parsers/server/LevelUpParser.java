@@ -7,9 +7,9 @@ import org.reunionemu.jreunion.protocol.*;
 import org.reunionemu.jreunion.protocol.PacketParser.Client;
 import org.reunionemu.jreunion.protocol.packets.client.LevelUpPacket;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.*;
 
-@Service
+@Component("serverLevelUpParser")
 @Scope("prototype")
 @Client
 public class LevelUpParser implements PacketParser {

@@ -6,9 +6,9 @@ import org.reunionemu.jreunion.protocol.*;
 import org.reunionemu.jreunion.protocol.PacketParser.Server;
 import org.reunionemu.jreunion.protocol.packets.client.SayPacket;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.*;
 
-@Service
+@Component("serverSayParser")
 @Scope("prototype")
 @Server
 public class SayParser implements PacketParser {

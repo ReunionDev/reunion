@@ -9,9 +9,9 @@ import org.reunionemu.jreunion.protocol.PacketParser.*;
 import org.reunionemu.jreunion.protocol.old.*;
 import org.reunionemu.jreunion.protocol.packets.client.CombatPacket;
 import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.*;
 
-@Service
+@Component("serverCombatParser")
 @Scope("prototype")
 @Client
 public class CombatParser implements PacketParser {
